@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Abated</fullName>
+        <default>false</default>
+        <label>Abated</label>
+    </customValue>
+    <customValue>
+        <fullName>Acquitted</fullName>
+        <default>false</default>
+        <label>Acquitted</label>
+    </customValue>
+    <customValue>
+        <fullName>Adjournment in Contemplation of Dismissal</fullName>
+        <default>false</default>
+        <label>Adjournment in Contemplation of Dismissal</label>
+    </customValue>
+    <customValue>
+        <fullName>Convicted - pleaded to lesser charge (See Notes)</fullName>
+        <default>false</default>
+        <label>Convicted - pleaded to lesser charge (See Notes)</label>
+    </customValue>
+    <customValue>
+        <fullName>Convicted - pled guilty</fullName>
+        <default>false</default>
+        <label>Convicted - pled guilty</label>
+    </customValue>
+    <customValue>
+        <fullName>Convicted - trial</fullName>
+        <default>false</default>
+        <label>Convicted - trial</label>
+    </customValue>
+    <customValue>
+        <fullName>Dismissal</fullName>
+        <default>false</default>
+        <label>Dismissal</label>
+    </customValue>
+    <customValue>
+        <fullName>Grand Jury - Indicted</fullName>
+        <default>false</default>
+        <label>Grand Jury - Indicted</label>
+    </customValue>
+    <customValue>
+        <fullName>Grand Jury - No Bill</fullName>
+        <default>false</default>
+        <label>Grand Jury - No Bill</label>
+    </customValue>
+    <customValue>
+        <fullName>Nolle prosequi</fullName>
+        <default>false</default>
+        <label>Nolle prosequi</label>
+    </customValue>
+    <masterLabel>Court Disposition</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X2050_scene_loc_blank</fullName>
+    <columns>NAME</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>Type_of_Animal__c</columns>
+    <columns>Animal_Status__c</columns>
+    <columns>Scene_Location__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Case__c</field>
+        <operation>contains</operation>
+        <value>2050</value>
+    </filters>
+    <filters>
+        <field>NAME</field>
+        <operation>startsWith</operation>
+        <value>2050</value>
+    </filters>
+    <filters>
+        <field>Type_of_Animal__c</field>
+        <operation>equals</operation>
+        <value>Fowl</value>
+    </filters>
+    <filters>
+        <field>Scene_Location__c</field>
+        <operation>notContain</operation>
+        <value>a</value>
+    </filters>
+    <label>2050 Scene Location is Blank</label>
+</ListView>
