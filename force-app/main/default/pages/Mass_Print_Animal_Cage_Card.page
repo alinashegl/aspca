@@ -1,13 +1,13 @@
 <apex:page standardController="Animal__c" recordSetVar="animals" showHeader="false" renderas="pdf" >
 <c:setValue from="1704" to="{!PageSize}"/>
 
-<apex:repeat var="a" value="{!animals}">
-    <head>
+    <apex:repeat var="a" value="{!animals}">
+             <head>
         <style type="text/css"> 
             @page {size:landscape;margin-top: 10px;margin-left: 20px;}
         </style>
     </head>
-    <div id="div1" style="page-break-before: always;">       
+<div id="div1" style="page-break-before: always;">       
         <table cellspacing="5" cellpadding="0" border="2" width="100%" style="border-style: solid;" valign="top">
             <tr>
                 <td>
@@ -123,7 +123,7 @@
                 </td>
             </tr>
         </table>
-    </div>
+        </div>
     </apex:repeat>
 
 </apex:page>
