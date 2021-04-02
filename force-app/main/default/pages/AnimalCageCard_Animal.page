@@ -1,68 +1,65 @@
-<apex:page standardController="Animal__c" recordSetVar="animals" showHeader="false" renderas="pdf" >
-<c:setValue from="1704" to="{!PageSize}"/>
-
-<apex:repeat var="a" value="{!animals}">
+<apex:page controller="ClsVetReferralForm_Animal"  renderAs="pdf"    >
     <head>
         <style type="text/css"> 
             @page {size:landscape;margin-top: 10px;margin-left: 20px;}
         </style>
     </head>
-    <div id="div1" style="page-break-before: always;">       
+       
         <table cellspacing="5" cellpadding="0" border="2" width="100%" style="border-style: solid;" valign="top">
             <tr>
                 <td>
                     <table width="100%" border="0" style="border-bottom: solid;">
                         <tr>
                             <td rowspan="2">
-                                <b>Collar ID #:</b> {!a.name}
+                                <b>Collar ID #:</b> {!objAnimal.Name}
                             </td>
                             <td align="middle">
-                                <b>{!if(a.Designated_Handler__c,'* DESIGNATED *',null)} </b>
+                                <b>{!if(objAnimal.Designated_Handler__c,'* DESIGNATED *',null)} </b>
                             </td>
                             <td align="right" rowspan="2">
-                                {!a.Animal_Name__c}
+                                {!objAnimal.Animal_Name__c}
                             </td>
                         </tr>
                         <tr>
                             <td align="middle">
-                                <b>&nbsp;&nbsp;&nbsp;&nbsp;{!if(a.Designated_Handler__c,'*HANDLER *',null)} </b>
+                                <b>&nbsp;&nbsp;&nbsp;&nbsp;{!if(objAnimal.Designated_Handler__c,'*HANDLER *',null)} </b>
                             </td>
                         </tr>
                     </table>
                     <table width="100%" border="0" cellspacing="0" cellpadding="10">
                         <tr>
                             <td>
-                                <b>Species:</b> {!a.Type_of_Animal__c}
+                                <b>Species:</b> {!objAnimal.Type_of_Animal__c}
                             </td>
                             <td align="center">
                                 <b>Intake Date: </b>
                                 <apex:outputtext value="{0,date,MM/dd/yyyy}">
-                                                <apex:param value="{!a.Intake_Date_Time__c}" />
+                                                <apex:param value="{!objAnimal.Intake_Date_Time__c}" />
                                   </apex:outputtext>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <b>Breed:</b> {!a.Breed__c}
+                                <b>Breed: </b> {!objAnimal.Breed__c}
                             </td>
                             <td rowspan="4" align="center">
-                                <!-- apex:image width="220px" height="150px" url="{!a.Photo__c}"><apex:image -->
-                                <apex:image width="220px" height="150px" value="/servlet/servlet.FileDownload?file={!a.Photo_Document_Id__c}"></apex:image>                                
+                                <!-- apex:image width="220px" height="150px" url="{!objAnimal.Photo__c}"><apex:image -->
+                                <apex:image width="220px" height="150px" value="/servlet/servlet.FileDownload?file={!objAnimal.Photo_Document_Id__c}"></apex:image>                                
                             </td>
                         </tr>
                         <tr>
                             <td colsapn="2">
-                                <b>Color:</b> {!a.Color__c}
+                                <b>Color:</b> {!objAnimal.Color__c}
                             </td>
                         </tr>
                         <tr>
                             <td colsapn="2">
-                                <b>Sex:</b> {!a.Gender__c}
+                                <b>Sex:</b> {!objAnimal.Gender__c}
                             </td>
                         </tr>
                         <tr>
                             <td colsapn="2">
-                                <b>Age:</b> {!a.Age__c}
+                                <b>Age:</b> {!objAnimal.Age__c}
                             </td>
                         </tr>
                     </table>
@@ -70,41 +67,10 @@
             </tr>
         </table>
         <br />
-         <table width="50%" border="0" cellspacing="0" cellpadding="5">
-           <!--  <tr>
-                <td>
-                    <apex:outputPanel rendered="{!a.Type_of_Animal__c =='Dog'}">
-                        <b>Heartworm:</b> (not available)
-                    </apex:outputPanel> 
-                </td>
-                <td>
-                    <apex:outputPanel rendered="{!a.Type_of_Animal__c =='Dog'}">
-                        <b>Babesia:</b> (not available)
-                   </apex:outputPanel>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <apex:outputPanel rendered="{!a.Type_of_Animal__c =='Cat'}">
-                        <b>FeLV:</b> (not available)
-                    </apex:outputPanel>
-                </td>
-                <td>
-                    <apex:outputPanel rendered="{!a.Type_of_Animal__c =='Cat'}">
-                        <b>FIV:</b> (not available)
-                    </apex:outputPanel>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <apex:outputPanel rendered="{!AND(a.Type_of_Animal__c !='Dog',a.Type_of_Animal__c !='Cat')}">
-                    <br></br>
-                    </apex:outputPanel>
-                </td>
-            </tr> -->
+        <table width="50%" border="0" cellspacing="0" cellpadding="5">
             <tr>
                 <td colspan="2">
-                    <b>Notes:</b>
+                    <b>Notes: </b>
                     <br />
                     _______________________________________________________________________________________
                     _______________________________________________________________________________________
@@ -118,12 +84,9 @@
             <tr>
                 <td align="center" colspan="2">
                     <h2>
-                        {!if(a.Designated_Handler__c,'* DESIGNATED HANDLER *',null)}
+                        {!if(objAnimal.Designated_Handler__c,'* DESIGNATED HANDLER *',null)}
                     </h2>
                 </td>
             </tr>
         </table>
-    </div>
-    </apex:repeat>
-
-</apex:page>
+ </apex:page>
