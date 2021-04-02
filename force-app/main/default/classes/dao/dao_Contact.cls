@@ -23,8 +23,6 @@ public with sharing class dao_Contact extends sql_Dao {
 		addField(Contact.OtherPhone);
 		addField(Contact.Phone);
 		addField(Contact.Title);
-		addField(Contact.Alternate_Email__c);
-		addField(Contact.Cases);
     }
 
     public Contact findOne(String id) {
