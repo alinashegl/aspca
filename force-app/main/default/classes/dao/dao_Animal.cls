@@ -15,10 +15,19 @@ public with sharing class dao_Animal extends sql_Dao{
         addField(Animal__c.Behavior_Case_Worker__c);//returns CaseWorker Id = sObjectType = Contact
         addField(Animal__c.Animal_Name__c);
         addField(Animal__c.Animal_Owner__c);//Returns OwnerId - sObjectType = User
+        addField(Animal__c.Behavior_Concerns__c);
     }
 
     public List<Animal__c> findAll() {
         return (List<Animal__c>)getAll();
+    }
+
+    public Animal__c findOne(String id) {
+        List<Animal__c> animals =  getWhere(sql_Criteria.Equals(Animal__c.Id, id));
+
+        if (animals.isEmpty()) { return null; }
+
+        return animals[0];
     }
 
 }
