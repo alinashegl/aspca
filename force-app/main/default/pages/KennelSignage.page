@@ -1,0 +1,25 @@
+<!--
+ - Created by barne on 4/6/2021.
+ -->
+
+<apex:page id="KennelSignage" controller="KennelSignageController">
+    <apex:pageBlock tabStyle="margin">
+        <apex:pageBlockSection>
+            <apex:pageBlockTable>
+            </apex:pageBlockTable>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection>
+            <apex:pageBlockTable columns="3">
+                <apex:column>
+                    <apex:inputCheckbox value=""/><!-- Put Behavior Concerns here -->
+                </apex:column>
+                <apex:column>
+                    <apex:inputCheckbox value=""/><!-- Put Walking Equipment here -->
+                </apex:column>
+                <apex:column>
+                    <apex:inputCheckbox value=""/><!-- put walking status here -->
+                </apex:column>
+            </apex:pageBlockTable>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:page>
