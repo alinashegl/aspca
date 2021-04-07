@@ -25,6 +25,8 @@ public with sharing class KennelSignageController {
     }
 
     public List<SelectOption> getBehaviorOptions() {
+        Schema.DescribeFieldResult fieldresult = animal.Behavior_Concern__c.getDescribe();
+        List<Schema.PicklistEntry> pList = fieldresult.getPicklistValues();
 
     }
 
