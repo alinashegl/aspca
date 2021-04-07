@@ -5,40 +5,6 @@
 # Salesforce cache
 .sfdx/
 .localdevserver/
-package.json
-package-lock.json
-.VSCode
-
-#ManagedPackage Class, Pages, and Triggers
-
-classes/Loop__*
-pages/Loop__*
-triggers/Loop__*
-
-classes/APXT_BPM__*
-pages/APXT_BPM__*
-triggers/APXT_BPM__*
-
-classes/SFGA__*
-pages/SFGA__*
-triggers/SFGA__*
-
-classes/sf_chttr_apps__*
-pages/sf_chttr_apps__*
-triggers/sf_chttr_apps__*
-
-classes/Domo_Inc__*
-pages/Domo_Inc__*
-triggers/Domo_Inc__*
-
-classes/ANH__*
-pages/ANH__*
-triggers/ANH__*
-
-classes/analyticsengine__*
-pages/analyticsengine__*
-triggers/analyticsengine__*
-
 
 # LWC VSCode autocomplete
 **/lwc/jsconfig.json
@@ -70,8 +36,3 @@ Thumbs.db
 ehthumbs.db
 [Dd]esktop.ini
 $RECYCLE.BIN/
-
-aspca/.eslintignore
-aspca/.prettierignore
-aspca/scripts/apex/hello.apex
-aspca/scripts/soql/account.soql
