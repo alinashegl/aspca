@@ -16,5 +16,17 @@
         <members>Contact.Contact_Type__c</members>
         <name>CustomField</name>
     </types>
+    <types>
+        <members>Animal__c.Behavior_Concern__c</members>
+        <name>CustomField</name>
+    </types>
+    <types>
+        <members>Case.ExternalId__c</members>
+        <name>CustomField</name>
+    </types>
+    <types>
+        <members>Animal__c.ExternalId__c</members>
+        <name>CustomField</name>
+    </types>
     <version>51.0</version>
 </Package>
