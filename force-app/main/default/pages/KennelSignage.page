@@ -3,5 +3,31 @@
  -->
 
 <apex:page id="KennelSignage" controller="KennelSignageController" renderAs="pdf">
+    <table cellspacing="5" cellpadding="0" width="100%" style="border-style: solid; " valign="top">
+        <tr>
+            <td>
+                <table>
+                    <tr>
+                        <td align="left"> <b>Name : </b> &nbsp; {!animalName}</td>
+                        <td align="middle"> <b>Id # : </b> {!animalId} </td>
+                    </tr>
+                    <tr>
+                        <td align="left"> <b> Breed: </b> {!animalBreed}</td>
+                        <td align="middle"> <b> Age: </b> {!animalAge}  </td>
+                        <td align="right"> <b>Animal Sex : </b> {!animalSex} </td>
+                    </tr>
+                    <tr>
+                        <td align="left"> <b> Color: </b> {!animalColor}</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table>
 
+                </table>
+            </td>
+        </tr>
+    </table>
 </apex:page>

@@ -16,6 +16,12 @@ public with sharing class dao_Animal extends sql_Dao{
         addField(Animal__c.Animal_Name__c);
         addField(Animal__c.Animal_Owner__c);//Returns OwnerId - sObjectType = User
         addField(Animal__c.Behavior_Concerns__c);
+        addField(Animal__c.Animal_Field_ID__c);
+        addField(Animal__c.Type_of_Animal__c); //Species
+        addField(Animal__c.Breed__c);
+        addField(Animal__c.Color__c);
+        addField(Animal__c.Age__c);
+        addField(Animal__c.Gender__c);
     }
 
     public List<Animal__c> findAll() {

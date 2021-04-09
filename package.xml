@@ -2,10 +2,14 @@
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
         <members>Behavior_Reports/Animals_by_BehaviorCaseOwner_HsG</members>
+        <members>Behavior_Reports/Animal_by_Case_Worker_XVR</members>
         <name>Report</name>
     </types>
     <types>
         <members>Contact.External_Id__c</members>
+        <members>Case.ExternalId__c</members>
+        <members>Animal__c.ExternalId__c</members>
+        <members>Animal__c.Behavior_Concern__c</members>
         <name>CustomField</name>
     </types>
     <types>
@@ -13,20 +17,14 @@
         <name>PermissionSet</name>
     </types>
     <types>
-        <members>Contact.Contact_Type__c</members>
-        <name>CustomField</name>
+        <members>KennelSignage</members>
+        <name>ApexPage</name>
     </types>
-    <types>
-        <members>Animal__c.Behavior_Concern__c</members>
-        <name>CustomField</name>
-    </types>
-    <types>
-        <members>Case.ExternalId__c</members>
-        <name>CustomField</name>
-    </types>
-    <types>
-        <members>Animal__c.ExternalId__c</members>
-        <name>CustomField</name>
-    </types>
+    <type>
+        <members>KenelSignageController</members>
+        <members>dao_Animal</members>
+        <members>ControllerHelper</members>
+        <name>ApexClass</name>
+    </type>
     <version>51.0</version>
 </Package>
