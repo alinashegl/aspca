@@ -4,5 +4,29 @@
         <members>Behavior_Reports/Animals_by_BehaviorCaseOwner_HsG</members>
         <name>Report</name>
     </types>
+    <types>
+        <members>Contact.External_Id__c</members>
+        <name>CustomField</name>
+    </types>
+    <types>
+        <members>Set_Audit_Field</members>
+        <name>PermissionSet</name>
+    </types>
+    <types>
+        <members>Contact.Contact_Type__c</members>
+        <name>CustomField</name>
+    </types>
+    <types>
+        <members>Animal__c.Behavior_Concern__c</members>
+        <name>CustomField</name>
+    </types>
+    <types>
+        <members>Case.ExternalId__c</members>
+        <name>CustomField</name>
+    </types>
+    <types>
+        <members>Animal__c.ExternalId__c</members>
+        <name>CustomField</name>
+    </types>
     <version>51.0</version>
 </Package>
