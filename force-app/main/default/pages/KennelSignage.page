@@ -3,23 +3,31 @@
  -->
 
 <apex:page id="KennelSignage" controller="KennelSignageController" renderAs="pdf">
-    <apex:pageBlock tabStyle="margin">
-        <apex:pageBlockSection>
-            <apex:pageBlockTable style="vertical-align: top;">
-            </apex:pageBlockTable>
-        </apex:pageBlockSection>
-        <apex:pageBlockSection>
-            <apex:pageBlockTable columns="3" style="vertical-align: top;">
-                <apex:column>
-                    <apex:inputCheckbox value=""/><!-- Put Behavior Concerns here -->
-                </apex:column>
-                <apex:column>
-                    <apex:inputCheckbox value=""/><!-- Put Walking Equipment here -->
-                </apex:column>
-                <apex:column>
-                    <apex:inputCheckbox value=""/><!-- put walking status here -->
-                </apex:column>
-            </apex:pageBlockTable>
-        </apex:pageBlockSection>
-    </apex:pageBlock>
+    <table cellspacing="5" cellpadding="0" width="100%" style="border-style: solid; " valign="top">
+        <tr>
+            <td>
+                <table>
+                    <tr>
+                        <td align="left"> <b>Name : </b> &nbsp; {!animalName}</td>
+                        <td align="middle"> <b>Id # : </b> {!animalId} </td>
+                    </tr>
+                    <tr>
+                        <td align="left"> <b> Breed: </b> {!animalBreed}</td>
+                        <td align="middle"> <b> Age: </b> {!animalAge}  </td>
+                        <td align="right"> <b>Animal Sex : </b> {!animalSex} </td>
+                    </tr>
+                    <tr>
+                        <td align="left"> <b> Color: </b> {!animalColor}</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table>
+
+                </table>
+            </td>
+        </tr>
+    </table>
 </apex:page>
