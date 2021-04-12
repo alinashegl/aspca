@@ -1,4 +1,6 @@
 trigger AnimalTrigger on Animal__c (after insert, after update, before insert, before update) {
+
+    AnimalTriggerHandler.Execute();
     
      
     if (trigger.isInsert && trigger.isAfter){
@@ -6,8 +8,8 @@ trigger AnimalTrigger on Animal__c (after insert, after update, before insert, b
     }
     
     if (trigger.isInsert && trigger.isBefore){
-        //AnimalTriggerHandler.insertHandlerBefore();
-        //ANH.AutoNumberHelper.OnBeforeInsert(Trigger.new);
+        AnimalTriggerHandler.insertHandlerBefore();
+        ANH.AutoNumberHelper.OnBeforeInsert(Trigger.new);
 
     }
     
