@@ -23,7 +23,7 @@ public class AnimalTriggerHandler {
 
         }  
     }
-    
+
     public static void insertHandlerBefore(){
         string initials = '';
         for (Animal__c a : (List<Animal__c>)Trigger.new){
@@ -47,6 +47,8 @@ public class AnimalTriggerHandler {
      
         }  
     }
+
+
     
     public static void updateHandler(List<Animal__c> anms, Map<Id, Animal__c> oldAnms){
         CaseContactRole conrole = new CaseContactRole();
