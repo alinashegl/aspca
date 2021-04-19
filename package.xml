@@ -10,6 +10,9 @@
         <members>Case.ExternalId__c</members>
         <members>Animal__c.ExternalId__c</members>
         <members>Animal__c.Behavior_Concern__c</members>
+        <members>Animal__c.Walking_Equipment__c</members>
+        <members>Animail__c.Walking_Status__c</members>
+        <members>Animal__c.Volunteer_Reading_Okay__c</members>
         <name>CustomField</name>
     </types>
     <types>
@@ -20,11 +23,30 @@
         <members>KennelSignage</members>
         <name>ApexPage</name>
     </types>
-    <type>
-        <members>KenelSignageController</members>
+    <types>
+        <members>KennelSignageController</members>
         <members>dao_Animal</members>
+        <members>dao_EmailTemplate</members>
+        <members>dao_Contact</members>
         <members>ControllerHelper</members>
         <name>ApexClass</name>
-    </type>
+    </types>
+    <types>
+        <members>Contact-Contact Layout</members>
+        <name>Layout</name>
+    </types>
+    <types>
+        <members>Animal__c</members>
+        <name>Workflow</name>
+    </types>
+    <types>
+        <members>unfiled$public/Behavior_CaseWorker_Assignmen_Email</members>
+        <name>EmailTemplate</name>
+    </types>
+    <types>
+        <members>dbChecked</members>
+        <members>dbUnchecked</members>
+        <name>StaticResource</name>
+    </types>
     <version>51.0</version>
 </Package>

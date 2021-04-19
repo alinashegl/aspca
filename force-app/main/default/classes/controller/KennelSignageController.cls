@@ -27,8 +27,9 @@ public with sharing class KennelSignageController {
         m_animalColor();
         m_animalBreed();
         m_animalAge();
-        iBehaviorConcernOptions();
-        iBehaviorConcerns();
+        m_VolunteerReadingOkay();
+        //iBehaviorConcerns();
+
 
     }
 
@@ -107,45 +108,115 @@ public with sharing class KennelSignageController {
     /**********************  Body Properties **************************************************************************/
     /******************************************************************************************************************/
 
-    public List<SelectOption> behaviorConcerns { get; set; }
-    public List<String> behaviorConcernOptions { get; set; }
+    public class behaviorConcern {
+        public String value { get; set; }
+        public Boolean isSelected { get; set; }
 
-    public List<SelectOption> iBehaviorConcerns() {
-        Schema.DescribeFieldResult fieldResult = Animal__c.Behavior_Concerns__c.getDescribe();
-        List<PicklistEntry> options = fieldResult.getPicklistValues();
 
-        ControllerHelper controllerHelper = new ControllerHelper();
-
-        behaviorConcerns = controllerHelper.getPicklist(options);
-
+        public behaviorConcern(String value, Boolean isSelected) {
+            this.value = value;
+            this.isSelected = isSelected;
+        }
+    }
+    List<behaviorConcern> behaviorConcerns { get; set; }
+    public List<behaviorConcern> getBehaviorConcerns() {
+        behaviorConcerns = new List<KennelSignageController.behaviorConcern>();
+        DescribeFieldResult fieldResult = Animal__c.Behavior_Concerns__c.getDescribe();
+        List< PicklistEntry> entries = fieldResult.getPicklistValues();
+        String[] values = currentAnimal.Behavior_Concerns__c.split(';');
+        System.debug('*******************Picklist Values*************' + values);
+        for (PicklistEntry entry : entries) {
+            String label = entry.label;
+            Boolean isSelected = false;
+            if (values.contains(entry.label)) {
+                isSelected = true;
+            }
+            behaviorConcerns.add(new behaviorConcern(label, isSelected));
+            System.debug('Entry isActive value =====> ' + isSelected);
+        }
         return behaviorConcerns;
     }
-
-    public List<String> iBehaviorConcernOptions() {
-        Schema.DescribeFieldResult fieldResult = Animal__c.Behavior_Concerns__c.getDescribe();
-        List<PicklistEntry> options = fieldResult.getPicklistValues();
-
-        ControllerHelper controllerHelper = new ControllerHelper();
-
-        behaviorConcernOptions = controllerHelper.getOptions(options);
-
-        return behaviorConcernOptions;
-    }
-
-    public List<SelectOption> iwalkingEquipment() {
+    public PageReference showBC() {
+        for (behaviorConcern concerns : behaviorConcerns) {
+            System.debug(concerns.value + '========>' + concerns.isSelected);
+        }
         return null;
     }
 
-    public List<SelectOption> iwalkingStatus() {
+    public class walkingEquipment {
+        public String value { get; set; }
+        public Boolean isSelected { get; set; }
+
+
+        public walkingEquipment(String value, Boolean isSelected) {
+            this.value = value;
+            this.isSelected = isSelected;
+        }
+    }
+
+    public List<walkingEquipment> walkingEquipments { get; set; }
+    public List<walkingEquipment> getWalkingEquipment() {
+        walkingEquipments = new List<KennelSignageController.walkingEquipment>();
+        DescribeFieldResult fieldResult = Animal__c.Walking_Equipment__c.getDescribe();
+        List< PicklistEntry> entries = fieldResult.getPicklistValues();
+        String[] values = currentAnimal.Walking_Equipment__c.split(';');
+        for (PicklistEntry entry : entries) {
+            String label = entry.label;
+            Boolean isSelected = false;
+            if (values.contains(entry.label)) {
+                isSelected = true;
+            }
+            System.debug('Walking Equipment -> ' + entry);
+            walkingEquipments.add(new walkingEquipment(label, isSelected));
+        }
+        return walkingEquipments;
+    }
+    public PageReference showWE() {
+        for (walkingEquipment equipment : walkingEquipments) {
+            System.debug(equipment.value + '=======>' + equipment.isSelected);
+        }
         return null;
     }
 
-    public List<SelectOption> ivolunteerLevel() {
+    public class walkingStatus {
+        public String value { get; set; }
+        public Boolean isSelected { get; set; }
+
+
+        public walkingStatus(String value, Boolean isSelected) {
+            this.value = value;
+            this.isSelected = isSelected;
+        }
+    }
+
+    public List<walkingStatus> walkingStatuses { get; set; }
+    public List<walkingStatus> getWalkingStatus() {
+        walkingStatuses = new List<KennelSignageController.walkingStatus>();
+        DescribeFieldResult fieldResult = Animal__c.Walking_Status__c.getDescribe();
+        List< PicklistEntry> entries = fieldResult.getPicklistValues();
+        String[] values = currentAnimal.Walking_Status__c.split(';');
+        for (PicklistEntry entry : entries) {
+            String label = entry.label;
+            Boolean isSelected = false;
+            if (values.contains(entry.label)) {
+                isSelected = true;
+            }
+            walkingStatuses.add(new walkingStatus(label, isSelected));
+        }
+        return walkingStatuses;
+    }
+    public PageReference showWS() {
+        for (walkingStatus status : walkingStatuses) {
+            System.debug(status.value + '=======>' + status.isSelected);
+        }
         return null;
     }
 
-    public List<SelectOption> itrainingProtocols() {
-        return null;
+    public Boolean volunteerReadingOkay{ get; set; }
+    public Boolean m_VolunteerReadingOkay() {
+        Boolean level = currentAnimal.Volunteer_Reading_Okay__c;
+        volunteerReadingOkay = level;
+        return volunteerReadingOkay;
     }
 
     /******************************************************************************************************/

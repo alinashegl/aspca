@@ -2,36 +2,90 @@
  - Created by barne on 4/6/2021.
  -->
 
-<apex:page id="KennelSignage" controller="KennelSignageController" renderAs="pdf">
-    <table cellspacing="5" cellpadding="0" width="100%" style="border-style: solid; " valign="top">
-        <tr>
-            <td>
-                <table>
-                    <tr>
-                        <td align="left"> <b>Name : </b> &nbsp; {!animalName}</td>
-                        <td align="middle"> <b>Id # : </b> {!animalId} </td>
-                    </tr>
-                    <tr>
-                        <td align="left"> <b> Breed: </b> {!animalBreed}</td>
-                        <td align="middle"> <b> Age: </b> {!animalAge}  </td>
-                        <td align="right"> <b>Animal Sex : </b> {!animalSex} </td>
-                    </tr>
-                    <tr>
-                        <td align="left"> <b> Color: </b> {!animalColor}</td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <table>
+<apex:page id="KennelSignage" controller="KennelSignageController" showHeader="false" applyHtmlTag="true" applyBodyTag="true" renderAs="advanced_pdf">
+    <head>
 
-                </table>
-            </td>
-        </tr>
-    </table>
-<<<<<<< HEAD
+    </head>
+    <body>
+        <apex:form >
+            <apex:variable value="{!$Resource.dbUnchecked}" var="uncheked"/>
+            <apex:variable value="{!$Resource.dbChecked}" var="checked"/>
+            <apex:panelGrid border="1" width="100%" columns="1">
+                <apex:panelGroup >
+                    <apex:panelGrid columns="3" width="100%" cellSpacing="5">
+                        <!--apex:outputLabel style="width: 33%" value="Name: {!animalName}"/-->
+                        <apex:outputText style="width: 33%" value="Name: {!animalName}"/>
+                        <apex:outputLabel style="width: 33%" value="Id# : {!animalId}"/>
+                        <apex:outputLabel style="width: 33%" value=" "/>
+                    </apex:panelGrid>
+                </apex:panelGroup>
+                <apex:panelGroup >
+                    <apex:panelGrid width="100%" columns="3" cellSpacing="5">
+                        <apex:outputLabel style="width: 33%" value="Breed: {!animalBreed} "/>
+                        <apex:outputLabel style="width: 33%" value="Age: {!animalAge} "/>
+                        <apex:outputLabel style="width: 33%" value="Animal Sex : {!animalSex}"/>
+                    </apex:panelGrid>
+                </apex:panelGroup>
+                <apex:panelGroup >
+                    <apex:panelGrid width="100%" columns="3">
+                        <apex:outputLabel value="Color: {!animalColor} "/>
+                        <apex:outputLabel value=" "/>
+                        <apex:outputLabel value=" "/>
+                    </apex:panelGrid>
+                </apex:panelGroup>
+                <apex:panelGroup >
+                    <apex:panelGrid columns="3" border="1" width="100%">
+                        <apex:panelGroup >Behavior Concerns</apex:panelGroup>
+                        <apex:panelGroup >Walking Equipment </apex:panelGroup>
+                        <apex:panelGroup >Walking Status </apex:panelGroup>
+                            <apex:dataTable value="{!behaviorConcerns}" var="b">
+                                <apex:column >
+                                    <apex:inputCheckbox value="{!b.isSelected}" label="{!b.value}" rendered="true">
+                                        <apex:image value="{!IF(B.isSelected == true , checked, uncheked)}" width="25" height="12" style="float: left"/>
+                                        &nbsp;
+                                        {!b.value}
+                                    </apex:inputCheckbox>
+                                </apex:column>
+                            </apex:dataTable>
+                            <apex:dataTable value="{!walkingEquipment}" var="e" style="margin-top: 10px">
+                                <apex:column style="vertical-align: left">
+                                    <apex:inputCheckbox value="{!e.isSelected}" label="{!e.value}" rendered="true">
+                                        <apex:image value="{!IF(E.isSelected == true , checked, uncheked)}" width="25" height="12" style="float:left"/>
+                                        &nbsp;
+                                        {!e.value}
+                                    </apex:inputCheckbox>
+                                </apex:column>
+                            </apex:dataTable>
+                            <apex:dataTable value="{!walkingStatus}" var="s">
+                                <apex:column >
+                                    <apex:inputCheckbox value="{!s.isSelected}" label="{!s.value}" rendered="true">
+                                        <apex:image value="{!IF(S.isSelected == true , checked, uncheked)}" width="25" height="12" style="float:left"/>
+                                        &nbsp;
+                                        {!s.value}
+                                    </apex:inputCheckbox>
+                                </apex:column>
+                            </apex:dataTable>
+                    </apex:panelGrid>
+                </apex:panelGroup>
+                <apex:panelGroup >
+                    <apex:panelGrid width="100%" columns="2">
+                            <apex:outputText value="Volunteer Reading Okay">
+                                <apex:image value="{!IF(volunteerReadingOkay == true , checked , uncheked)}" width="25" height="12" style="float: left"/>
+                            </apex:outputText>
+                    </apex:panelGrid>
+                </apex:panelGroup>
+                <apex:panelGroup style="text-align: center">
+                    <apex:outputText style="text-align: center">
+                        _____________________________________________________________________________________
+                        ______________________________Evaluations Placeholder____________________________________
+                        _____________________________________________________________________________________
+                        _____________________________________________________________________________________
+                        _____________________________________________________________________________________
+                        _____________________________________________________________________________________
+                        _____________________________________________________________________________________
+                    </apex:outputText>
+                </apex:panelGroup>
+            </apex:panelGrid>
+        </apex:form>
+    </body>
 </apex:page>
-=======
-</apex:page>
->>>>>>> 3241e74d479dfdf03c9e11588dac02859ae943d0
