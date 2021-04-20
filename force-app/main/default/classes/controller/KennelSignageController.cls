@@ -128,7 +128,7 @@ public with sharing class KennelSignageController {
         for (PicklistEntry entry : entries) {
             String label = entry.label;
             Boolean isSelected = false;
-            if (values.contains(entry.label)) {
+            if (values.contains(entry.label) && !values.isEmpty()) {
                 isSelected = true;
             }
             behaviorConcerns.add(new behaviorConcern(label, isSelected));
@@ -163,7 +163,7 @@ public with sharing class KennelSignageController {
         for (PicklistEntry entry : entries) {
             String label = entry.label;
             Boolean isSelected = false;
-            if (values.contains(entry.label)) {
+            if (values.contains(entry.label)  && !values.isEmpty()) {
                 isSelected = true;
             }
             System.debug('Walking Equipment -> ' + entry);
@@ -198,7 +198,7 @@ public with sharing class KennelSignageController {
         for (PicklistEntry entry : entries) {
             String label = entry.label;
             Boolean isSelected = false;
-            if (values.contains(entry.label)) {
+            if (values.contains(entry.label) && !values.isEmpty()) {
                 isSelected = true;
             }
             walkingStatuses.add(new walkingStatus(label, isSelected));

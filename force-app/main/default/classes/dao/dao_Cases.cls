@@ -11,9 +11,7 @@ public with sharing class dao_Cases extends sql_Dao {
         addField(Case.Id);
         addField(Case.AccountId);
         addField(Case.Contact);
-        addField(Case.Case_Contact_Roles__r);
         addField(Case.Agency_Name__c);
-        addField(Case.Animals__r);
         addField(Case.Intelligence_Report__c);
         addField(Case.Case_Subtype__c);
         addField(Case.Total_Animals__c);
@@ -21,7 +19,6 @@ public with sharing class dao_Cases extends sql_Dao {
         addField(Case.Total_Animals_Rescued__c);
         addField(Case.OwnerId);
         addField(Case.RecordTypeId);
-        addField(Case.RecordType);
         addField(Case.Type);
     }
 

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
+        <members>KennelSignage</members>
+        <name>ApexPage</name>
+    </types>
+    <types>
         <members>Behavior_Reports/Animals_by_BehaviorCaseOwner_HsG</members>
         <members>Behavior_Reports/Animal_by_Case_Worker_XVR</members>
         <name>Report</name>
@@ -17,11 +21,12 @@
     </types>
     <types>
         <members>Set_Audit_Field</members>
+        <members>Behavior_Team</members>
         <name>PermissionSet</name>
     </types>
     <types>
-        <members>KennelSignage</members>
-        <name>ApexPage</name>
+        <members>Add_Case_Worker_Email</members>
+        <name>ValidationRule</name>
     </types>
     <types>
         <members>KennelSignageController</members>

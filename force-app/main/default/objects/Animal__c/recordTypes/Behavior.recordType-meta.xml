@@ -290,6 +290,10 @@
             <default>false</default>
         </values>
         <values>
+            <fullName>None Specified</fullName>
+            <default>true</default>
+        </values>
+        <values>
             <fullName>Novelty</fullName>
             <default>false</default>
         </values>
@@ -311,6 +315,17 @@
         </values>
         <values>
             <fullName>Women</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Behavior_Play_Pause__c</picklist>
+        <values>
+            <fullName>Aggression</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Low Energy</fullName>
             <default>false</default>
         </values>
     </picklistValues>
@@ -477,6 +492,25 @@
         </values>
         <values>
             <fullName>No Evaluation</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Decline_Reason__c</picklist>
+        <values>
+            <fullName>Dog Aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Space</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Offensively Aggressive to Human</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
             <default>false</default>
         </values>
     </picklistValues>
@@ -1173,6 +1207,21 @@
         </values>
     </picklistValues>
     <picklistValues>
+        <picklist>Legal_Status__c</picklist>
+        <values>
+            <fullName>Done</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Legal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Waiting</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
         <picklist>MRC_Status__c</picklist>
         <values>
             <fullName>MRC Accepted</fullName>
@@ -1624,6 +1673,61 @@
         </values>
     </picklistValues>
     <picklistValues>
+        <picklist>Treatment_Bundles__c</picklist>
+        <values>
+            <fullName>Anxiety</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dangerous Dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dog%2FObject%2FPerson Reactivity</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Handling Sensitivities</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>High Arousal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>High Energy Dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Low Energy Dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Medium Energy Dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Normal Puppy %280-8 weeks%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Normal Puppy %282-6 months%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Resource Guarding</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Typical Juvenile</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
         <picklist>Type_of_Animal__c</picklist>
         <values>
             <fullName>Avian</fullName>
@@ -1701,6 +1805,10 @@
             <default>false</default>
         </values>
         <values>
+            <fullName>None Specified</fullName>
+            <default>true</default>
+        </values>
+        <values>
             <fullName>Prong</fullName>
             <default>false</default>
         </values>
@@ -1734,6 +1842,10 @@
         <values>
             <fullName>No Walks</fullName>
             <default>false</default>
+        </values>
+        <values>
+            <fullName>None Specified</fullName>
+            <default>true</default>
         </values>
         <values>
             <fullName>Ok to take the Stairs</fullName>
