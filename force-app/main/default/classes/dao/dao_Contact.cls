@@ -1,49 +1,26 @@
 /**
- * Class description
- *
- * @author Dmytro Mytsko
- * @author Oleg Pasenchuk
+ * Created by barne on 4/9/2021.
  */
-public with sharing class dao_Contact extends sql_Dao {
+
+public with sharing class dao_Contact extends sql_Dao{
     public dao_Contact() {
-        setSObject(Contact.sObjectType);
+        setSObject(Contact.SObjectType);
 
+        addField(Contact.Name);
         addField(Contact.Id);
-		addField(Contact.Name);
-		addField(Contact.AccountId);
-		addField(Contact.Email);
-		addField(Contact.FirstName);
-		addField(Contact.HomePhone);
-		addField(Contact.LastName);
-		addField(Contact.MailingCity);
-		addField(Contact.MailingPostalCode);
-		addField(Contact.MailingState);
-		addField(Contact.MailingStreet);
-		addField(Contact.MobilePhone);
-		addField(Contact.OtherPhone);
-		addField(Contact.Phone);
-		addField(Contact.Title);
-		addField(Contact.Alternate_Email__c);
-		addField(Contact.Cases);
-    }
-
-    public Contact findOne(String id) {
-        List<Contact> contacts = getWhere(sql_Criteria.Equals(Contact.Id, id));
-        
-        if(contacts.isEmpty()) {
-            return null;
-        }
-
-        return contacts[0];
+        addField(Contact.Email);
+        addField(Contact.Phone);
     }
 
     public List<Contact> findAll() {
         return (List<Contact>)getAll();
     }
 
-    //TODO:UNIT TEST:ADD UNIT TEST
-    public List<Contact> findContactsByEmails(Set<String> emails)
-	{
-		return (List<Contact>) getWhere(sql_Criteria.ValueIn(Contact.Email, emails));
-	}
+    public Contact findOne(String id) {
+        List<Contact> contacts = getWhere(sql_Criteria.Equals(Contact.Id, id));
+
+        if (contacts.isEmpty()) { return null; }
+
+        return contacts[0];
+    }
 }

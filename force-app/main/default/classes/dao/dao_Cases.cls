@@ -1,8 +1,10 @@
 /**
- * Created by barne on 4/2/2021.
+ * Class description
+ * @author Lamar Barnett
+ * @version 1.0.0
  */
 
-public with sharing class dao_Cases extends sql_Dao{
+public with sharing class dao_Cases extends sql_Dao {
     public dao_Cases() {
         setSObject(Case.SObjectType);
 
