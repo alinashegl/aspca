@@ -1,18 +1,57 @@
-# Salesforce DX Project: Next Steps
+#Frameworks
+Documentation on Frameworks built into this Package
+## CQ-Lite
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+NEW Framework to streamline Request-Response and Trigger handling. Will Deprecate all other Framework files
+##FQ Data Access Layer
+Provides access to Tooling API
 
-## How Do You Plan to Deploy Your Changes?
+## Services
+Allows for Request-Response pattern design in APEX. Create .cls that extends service_Base
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
+EXAMPLE
+```apex
+public with sharing class service_Contact extends service_Base {
+    public override void Process(service_Request request, service_Response response) {
+        switch on (String) request.Parameters.get('action') {
+            when 'methodOne' {
+                methodOne(request, response);
+            }
+        }
+    }
+    
+    public void methodOne(service_Request request, service_Response response) {
+        String id = (String) request.Parameters.get('recordId');
+        dao_Contact daoContact = new dao_Contact();
+        Contact c = daoContact.findOne(recordId);
+        System.debug(c);
+        
+        //DO LOGIC HERE
+        //WHEN LOGIC IS COMPLETE ADD NEW RECORDS TO RESPONSE
+        
+        response.Parameters.put('item', c);
+    }
+}
+```
+##Trigger
+Allows for Triggers to be executed by Services class
 
-## Configure Your Salesforce DX Project
-
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
-
-## Read All About It
-
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+EXAMPLE
+```apex
+public with sharing class trigger_Contact extends trigger_Domain {
+    public override void beforeInsert(List<SObject> newRecords) {
+        service_Request request = new service_Request();
+        request.Parameters.put('contacts', newRecords);
+        request.Parameters.put('action', 'beforeInsert');
+        service_Response response = service_Controller.process(Services.Contact, request);
+    }
+    
+    public override void afterUpdate(List<SObject> newRecords, List<SObject> oldRecords) {
+        service_Request request = new service_Request();
+        request.Parameters.put('newContacts' , newRecords);
+        request.Parameters.put('oldContacts' , oldRecords);
+        request.Parameters.put('action' , 'afterUpdate');
+        service_Response response = service_Controller.process(Services.Contact, request);
+    }
+}
+```

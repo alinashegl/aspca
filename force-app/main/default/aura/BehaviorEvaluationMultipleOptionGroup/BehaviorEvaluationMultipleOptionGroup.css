@@ -1,0 +1,35 @@
+/**
+ * Created by barne on 6/1/2021.
+ */
+
+.THIS .eachField.narrowRegion{
+    width:100%;
+}
+.THIS .eachField{
+    width:50%;
+    display:inline-block;
+}
+
+.THIS tr.spaceUnder>td {
+    padding: 5px;
+  }
+
+.THIS table.format>lightning:tab {
+    padding: 5px;
+    width: 100%;
+}
+
+.THIS .grid-container {
+  display: inline-grid;
+  grid-template-columns: auto auto auto auto;
+  background-color: #FFFFFF;
+  padding: 5px;
+  border: 0px white;
+  border-collapse: collapse;
+}
+.THIS .grid-item {
+  background-color: #FFFFFF;
+  border: 1px solid;
+  padding: 5px;
+  text-align: left;
+}

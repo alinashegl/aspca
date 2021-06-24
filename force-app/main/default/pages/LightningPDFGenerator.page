@@ -1,0 +1,42 @@
+<!--
+ - Created by barne on 4/16/2021.
+ -->
+
+<apex:page id="LightningPDFGenerator" controller="DataDisplayController" showHeader="false">
+    <apex:includeLightning />
+
+    <p>Some Test</p>
+    <apex:form>
+                <apex:inputHidden id="hidData" value="{!PDFDData}"/>
+        <apex:actionFunction name="jsGeneratePDF" action="{!downloadPDF}" />
+
+        <div id="lightning"/>
+
+        <script>
+            function saveData(data, callback) {
+                var hidData = document.getElementById('{!$Component.hidData}');
+                hidData.value = JSON.stringify(data);
+
+                //jsGeneratePDF();
+
+                if(typeof callback == 'function') callback();
+            }
+
+            function loadComponents() {
+                console.log("Loading lightning component: DataProcessor");
+
+                $Lightning.use("c:LightningGeneratorApp", function() {
+                    $Lightning.createComment("c:DataProcessor",
+                    {
+                        sendData : saveData
+                    },
+                        "lightning",
+                        function(cmp) {
+
+                        });
+                });
+            }
+                loadComponents();
+        </script>
+    </apex:form>
+</apex:page>

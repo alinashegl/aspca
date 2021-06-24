@@ -19,7 +19,7 @@ public with sharing class service_Animal extends service_Base {
         List<Animal__c> animalToUpdate = new List<Animal__c>();
     }
 
-    public void afterUpdate (service_Request request, service_Response response) {
+    public void afterUpdate(service_Request request, service_Response response) {
         List<Animal__c> oldAnimals = (List<Animal__c>) request.Parameters.get('oldAnimals');
         List<Animal__c> newAnimals = (List<Animal__c>) request.Parameters.get('newAnimals');
 
@@ -36,27 +36,25 @@ public with sharing class service_Animal extends service_Base {
             for (Animal__c nAnimal : newAnimals) {
                 Contact nCaseWorker = daoContact.findOne(oAnimal.Behavior_Case_Worker__c);
 
-                    if (oCaseWorker != nCaseWorker) {
-                        EmailTemplate emailTemplate = daoEmailTemplate.findOneByDeveloperName('Behavior_CaseWorker_Assignmen_Email');
+                if (oCaseWorker != nCaseWorker) {
+                    EmailTemplate emailTemplate = daoEmailTemplate.findOneByDeveloperName('Behavior_CaseWorker_Assignmen_Email');
 
-                        Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+                    Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
 
-                        mail.setTemplateId(emailTemplate.Id);
-                        mail.setSubject(emailTemplate.Subject);
-                        mail.setTargetObjectId(nCaseWorker.Id);
-                        mail.setWhatId(oAnimal.Id);
-                        mail.setSaveAsActivity(false);
-                        mail.setUseSignature(false);
+                    mail.setTemplateId(emailTemplate.Id);
+                    mail.setSubject(emailTemplate.Subject);
+                    mail.setTargetObjectId(nCaseWorker.Id);
+                    mail.setWhatId(oAnimal.Id);
+                    mail.setSaveAsActivity(false);
+                    mail.setUseSignature(false);
 
-                        messages.add(mail);
-                    }
+                    messages.add(mail);
+                }
             }
-            toUpdate.add(newAnimals);
+            toUpdate.addAll(newAnimals);
         }
         response.Parameters.put('list', toUpdate);
 
-        afterUpdate(
-                request,
-                response
-        );
+        afterUpdate(request, response);
     }
+}

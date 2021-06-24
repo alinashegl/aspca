@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Pulled away</fullName>
+        <default>false</default>
+        <label>Pulled away</label>
+    </customValue>
+    <customValue>
+        <fullName>Jerked away</fullName>
+        <default>false</default>
+        <label>Jerked away</label>
+    </customValue>
+    <customValue>
+        <fullName>Did not pull away</fullName>
+        <default>false</default>
+        <label>Did not pull away</label>
+    </customValue>
+    <customValue>
+        <fullName>Not possible to deliver the pinch</fullName>
+        <default>false</default>
+        <label>Not possible to deliver the pinch</label>
+    </customValue>
+    <customValue>
+        <fullName>Accepted contact-relaxed</fullName>
+        <default>false</default>
+        <label>Accepted contact-relaxed</label>
+    </customValue>
+    <customValue>
+        <fullName>Tolerated handling-not relaxed</fullName>
+        <default>false</default>
+        <label>Tolerated handling-not relaxed</label>
+    </customValue>
+    <customValue>
+        <fullName>Unmanageable</fullName>
+        <default>false</default>
+        <label>Unmanageable</label>
+    </customValue>
+    <customValue>
+        <fullName>Oriented to tester&apos;s hand-mouthy</fullName>
+        <default>false</default>
+        <label>Oriented to tester&apos;s hand-mouthy</label>
+    </customValue>
+    <customValue>
+        <fullName>Moderately fearful</fullName>
+        <default>false</default>
+        <label>Moderately fearful</label>
+    </customValue>
+    <customValue>
+        <fullName>Unmanageable-frenetic or escape behavior</fullName>
+        <default>false</default>
+        <label>Unmanageable-frenetic or escape behavior</label>
+    </customValue>
+    <customValue>
+        <fullName>Tense</fullName>
+        <default>false</default>
+        <label>Tense</label>
+    </customValue>
+    <customValue>
+        <fullName>Became aggressive</fullName>
+        <default>false</default>
+        <label>Became aggressive</label>
+    </customValue>
+    <customValue>
+        <fullName>Stiff</fullName>
+        <default>false</default>
+        <label>Stiff</label>
+    </customValue>
+    <customValue>
+        <fullName>Rear Flank pinched instead</fullName>
+        <default>false</default>
+        <label>Rear Flank pinched instead</label>
+    </customValue>
+    <masterLabel>Unpleasant Touch</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

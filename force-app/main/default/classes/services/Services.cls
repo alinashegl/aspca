@@ -10,5 +10,6 @@ public enum Services {
     User,
     Contact,
     Animal,
-    Treatment
+    Treatment ,
+    BehaviorEvaluation
 }

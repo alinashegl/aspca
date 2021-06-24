@@ -1,0 +1,9 @@
+<!--
+ - Created by barne on 4/16/2021.
+ -->
+
+<aura:component description="DataProcessor" access="global" implements="flexipage:availableForAllPageTypes">
+    <aura:attribute name="sendData" type="object"/>
+
+    <lightning:button label="Download Document" onclick="{!c.downloadDocument}"/>
+</aura:component>
