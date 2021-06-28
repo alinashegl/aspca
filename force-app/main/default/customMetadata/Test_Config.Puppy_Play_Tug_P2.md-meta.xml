@@ -7,12 +7,20 @@
         <value xsi:nil="true"/>
     </values>
     <values>
+        <field>Comment_Reference__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>IsPuppy__c</field>
         <value xsi:type="xsd:boolean">true</value>
     </values>
     <values>
         <field>Is_Child__c</field>
         <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>Object_Reference__c</field>
+        <value xsi:nil="true"/>
     </values>
     <values>
         <field>Parent_Test_Api_Name__c</field>
@@ -24,7 +32,7 @@
     </values>
     <values>
         <field>Test_Comment_Field_Name__c</field>
-        <value xsi:type="xsd:string">Puppy_Comments_Play_Tug_P2__c</value>
+        <value xsi:type="xsd:string">Comments_Play_Tug_P2__c</value>
     </values>
     <values>
         <field>Test_Description__c</field>
@@ -32,10 +40,10 @@
     </values>
     <values>
         <field>Test_Display_Order__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">6</value>
     </values>
     <values>
         <field>Test_Skip_Reason_Field__c</field>
-        <value xsi:type="xsd:string">Puppy_Skipped_Play_Tug_P2__c</value>
+        <value xsi:type="xsd:string">Skipped_Play_Tug_P2__c</value>
     </values>
 </CustomMetadata>

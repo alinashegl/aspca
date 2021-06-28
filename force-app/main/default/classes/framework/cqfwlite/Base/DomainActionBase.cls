@@ -8,6 +8,7 @@
 
 public inherited sharing abstract class DomainActionBase implements iDomainAction {
     public ServiceResponse Execute(ServiceRequest request) {
+        //System.debug('@@ EXECUTING SERVICE REQUEST' + request);
         ServiceResponse response = new ServiceResponse(request);
         try {
             TriggerRequest triggerRequest = TriggerRequest.FromSvcRequest(request);

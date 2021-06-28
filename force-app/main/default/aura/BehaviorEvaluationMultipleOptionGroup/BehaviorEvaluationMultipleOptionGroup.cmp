@@ -23,7 +23,7 @@
             <div> {!v.col1API}</div>
                 <div class="grid-item" >
                     <aura:iteration items="{!v.options}" var="options" indexVar="{!v.index}">
-                        <tr align="left">
+                        <tr class="spaceUnder" align="left">
                             <td class="float slds-theme_shade">
                                 <lightning:input name="{!v.col1API}" label="{!options.label}"
                                                  type="checkbox"

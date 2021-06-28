@@ -25,13 +25,13 @@ public with sharing  class service_BehaviorEvaluation extends service_Base{
     }
 
     public void updateComments(service_Request request, service_Response response) {
-        System.debug('#### Executing updateComments service!');
-        System.debug('#### Service Request =====> ' + request);
-        System.debug('#### Accepted Service Response ====> ' + response);
+        //System.debug('#### Executing updateComments service!');
+        //System.debug('#### Service Request =====> ' + request);
+        //System.debug('#### Accepted Service Response ====> ' + response);
         String recordId = (String) request.Parameters.get('recordId');
         dao_BehaviorEvaluations daoBehaviorEvaluations = new dao_BehaviorEvaluations();
         Behavior_Evaluation__c evaluation = daoBehaviorEvaluations.findOne(recordId);
-        System.debug('@@@ Selected Evaluation ===> ' + evaluation );
+        //System.debug('@@@ Selected Evaluation ===> ' + evaluation );
         String apiName = (String) request.Parameters.get('apiName');
         String values = (String) request.Parameters.get('values');
         Map<String, String> fieldValueMap = new Map<String, String>{
@@ -39,7 +39,7 @@ public with sharing  class service_BehaviorEvaluation extends service_Base{
         };
         Map<String, Schema.SObjectField> behaviorEvalFieldMap = SObjectFieldMapHelper.fieldMap('Behavior_Evaluation__c');
         for (String key : fieldValueMap.keySet()) {
-            System.debug('@@## Current Key ===> ' +  key);
+            //System.debug('@@## Current Key ===> ' +  key);
             if (behaviorEvalFieldMap.containsKey(key)) {
                 Schema.SObjectField field = behaviorEvalFieldMap.get(key);
                 evaluation.put(field, fieldValueMap.get(key));
@@ -47,8 +47,17 @@ public with sharing  class service_BehaviorEvaluation extends service_Base{
         }
         List<Behavior_Evaluation__c> behaviorEvaluations = new List<Behavior_Evaluation__c>();
         behaviorEvaluations.add(evaluation);
-        update behaviorEvaluations;
-
+        //update behaviorEvaluations;
+        TriggerRequest beforeUpdateRequest = new TriggerRequest(Behavior_Evaluation__c.getSObjectType())
+                .SetBefore(true)
+                .SetUpdate(true)
+                .SetNewRecords(behaviorEvaluations)
+                .SetOldRecords(new List<Behavior_Evaluation__c>());
+        ServiceRequest req = new ServiceRequest().withParams('TriggerRequest', beforeUpdateRequest);
+        BehaviorEvaluationDomain evaluationDomain = new BehaviorEvaluationDomain();
+        ServiceResponse rep = evaluationDomain.Execute(req);
+        rep.Data = beforeUpdateRequest.newRecords;
+        System.debug('CQFWLITE Service Response ===> ' + rep);
         response.Parameters.put('item' , behaviorEvaluations);
     }
 
@@ -130,6 +139,8 @@ public with sharing  class service_BehaviorEvaluation extends service_Base{
         dao_BehaviorEvaluations daoBehaviorEvaluations = new dao_BehaviorEvaluations();
         Behavior_Evaluation__c evaluation = daoBehaviorEvaluations.findOne((String) request.Parameters.get('key'));
         Map<String, Object> errorMessages = new Map<String, Object>();
+        String err = 'Result:';
+        String ref = '#';
         Map<String, Object> messages = new Map<String, Object>();
         List<SObjectField> testFields = getTestFields(evaluation.Evaluation_Subtype__c);
         System.debug(testFields);
@@ -140,9 +151,12 @@ public with sharing  class service_BehaviorEvaluation extends service_Base{
                     String skipField = MetadataUtil.skipField(String.valueOf(field));
                     if(String.valueOf(evaluation.get(field)) == null) {
                         if (String.valueOf(evaluation.get(skipField)) == null) {
-                            errorMessages.put(field.getDescribe().label, String.valueOf('NO ENTRY SELECTED => ' + field
+                            errorMessages.put(field.getDescribe().label, String.valueOf('No entry Selected for  ' + field
                                     .getDescribe()
-                                    .label));
+                                    .label) +
+                                    '-------------> ');
+                            err = err + ' No entry Selected for ' + field.getDescribe().label +
+                                    '----->';
                         }
                     }
                 }
@@ -153,7 +167,7 @@ public with sharing  class service_BehaviorEvaluation extends service_Base{
             }
         }
         if (!errorMessages.equals(null)) {
-            response.Parameters.put('item', errorMessages.values());
+            response.Parameters.put('item', err);
         }else {
             response.Parameters.put('item', 'SUCCESS');
         }

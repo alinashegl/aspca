@@ -14,6 +14,7 @@
     <aura:attribute name="recordId" type="String" />
 
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <lightning:notificationsLibrary aura:id="lib" />
 
     <table>
         <tr>
@@ -27,15 +28,17 @@
                         <option> {!reason.label}</option>
                     </aura:iteration>
                 </lightning:select>
-                <lightning:checkboxGroup name="Skip Reason"
-                                         label="Select Skip Reasons"
-                                         options="{!v.skipReasons}"
-                                         value="{!v.sReasons}"/>
                 <!--
-                {!v.testName.id}
-                &nbsp;
-                {!v.skipVal.id}
-                -->
+                                <lightning:checkboxGroup name="Skip Reason"
+                                                         label="Select Skip Reasons"
+                                                         options="{!v.skipReasons}"
+                                                         value="{!v.sReasons}"
+                                                         onchange="{!c.handleNewSkip}" aura:id="newReasons"/>
+
+                                {!v.testName.id}
+                                &nbsp;
+                                {!v.skipVal.id}
+                                -->
             </aura:set>
             <aura:set attribute="footer">
                 <lightning:button variant="neutral" label="Cancel" onclick="{!c.handleCancel}" />

@@ -82,6 +82,8 @@
     <aura:handler name="select" value="{!v.selection}" action="{!c.handleSelection}" />
     <aura:method name="handleClick"  action="{!c.handleClick}" access="public" />
 
+    <lightning:notificationsLibrary aura:id="lib" />
+
 
 
 
@@ -128,7 +130,7 @@
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
-                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
+                                        <c:BehaviorEvaluationOptionGroup options="{#variable.mAlertOptions}"
                                                                          index="{!index}"  recordId="{!v.recordId}">
                                             <aura:set attribute="image">
                                                 <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
@@ -1135,7 +1137,7 @@
                                     <tr>
                                         <td style="padding-right: 30px;"><input type="radio" id="Muzzled" name="Muzzled" value="Muzzled"></input>
                                             <strong><label for="Muzzled"> Muzzled</label></strong></td>
-                                        <td><input type="radio" id="NotMuzzled" name="Muzzled" value="Not Muzzled" checked="yes"></input>
+                                        <td><input type="radio" id="NotMuzzled" name="Muzzled" value="Not Muzzled" checked="true"></input>
                                             <strong><label for="NotMuzzled"> Not Muzzled</label></strong></td>
                                     </tr>
                                 </table>

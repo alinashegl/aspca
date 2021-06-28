@@ -31,14 +31,18 @@ public with sharing class SObjectDomain implements iSObjectDomain{
         List<Domain_Action_Binding__mdt> bindings = cq.App.DomainActionBindings().GetForTrigger(request.targetSObject.getDescribe().getName(), request.action, request.process);
         for (Domain_Action_Binding__mdt binding : bindings) {
             String actionName = binding.DomainActionImplementation__c;
+            //System.debug('Domain Action Bindings ==> ' + actionName);
             if (String.isBlank(actionName)) { continue; }
             Type actionType = Type.forName(actionName);
+            //System.debug('Action Type ==> ' + actionType);
             if (actionType instanceOf iDomainAction) {
                 iDomainAction dynamicAction = (iDomainAction) actionType.newInstance();
+                //System.debug('Domain Action ==> ' + dynamicAction);
                 ServiceResponse response = dynamicAction.Execute(
                         new ServiceRequest(actionName, request.process + ' ' + request.action).WithParams
                                 ('TriggerRequest', request)
                 );
+                //System.debug(response);
                 if (response.Status == RequestStatus.ERROR) {
                     LogHandler.Instance.Error(response.ThrownException);
                 }

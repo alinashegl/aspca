@@ -43,6 +43,10 @@ public with sharing class BehaviorEvaluationPageController {
     private static EvaluationWrapper newWrapper(SObjectField field, Behavior_Evaluation__c evaluation) {
         ControllerHelper.Properties prop = ControllerHelper.getFieldProperties(field);
         List<Picklist_Description_Config__mdt> sConfigs = MetadataUtil.getFieldValues(prop.id);
+        Map<String, Integer> hashMap = new Map<String, Integer>();
+        for (Picklist_Description_Config__mdt config : sConfigs) {
+            hashMap.put(config.DeveloperName, sConfigs.indexOf(config));
+        }
         EvaluationWrapper.FieldContents commentField = new EvaluationWrapper.FieldContents();
         commentField.id = MetadataUtil.commentField(prop.id);
         if (evaluation.get(commentField.id) != null) {
@@ -57,8 +61,7 @@ public with sharing class BehaviorEvaluationPageController {
         }else {
             skipField.value = '';
         }
-
-
+        List<PicklistEntry> entries = field.getDescribe().getPicklistValues();
 
         List<EvaluationWrapper.Options> zeroOption = new List<EvaluationWrapper.Options>();
         List<EvaluationWrapper.Options> nOptions = new List<EvaluationWrapper.Options>();
@@ -67,29 +70,41 @@ public with sharing class BehaviorEvaluationPageController {
         List<EvaluationWrapper.Options> iOptions = new List<EvaluationWrapper.Options>();
 
         List<String> strings = new List<String>();
+        Integer index = 0;
         if (evaluation.get(field) != null) { strings = evaluation.get(field).toString().split(';'); }
-        System.debug(strings);
-        for (Picklist_Description_Config__mdt config : sConfigs) {
-            EvaluationWrapper.Options options = new EvaluationWrapper.Options();
-            options.label = config.Field_Value__c;
-            options.pleApiName = config.Field_API_Name__c;
-            options.longDesc = config.Field_Description__c;
-            if (config.Value_Category__c.equals('0')) {
-                zeroOption.add(options);
-            }else if (config.Value_Category__c.equals('1')) {
-                nOptions.add(options);
-            }else if (config.Value_Category__c.equals('2')) {
-                rOptions.add(options);
-            }else if (config.Value_Category__c.equals('3')) {
-                aOptions.add(options);
-            }else if (config.Value_Category__c.equals('4')) {
-                iOptions.add(options);
-            }
-            if (!strings.isEmpty()) {
-                if (strings.contains(options.label)) {
-                    options.IsSelected = true;
-                }else if(!strings.contains(options.label)) {
-                    options.IsSelected = false;
+        for (PicklistEntry entry : prop.fieldResult.picklistValues) {
+            String key = '';
+            for (Picklist_Description_Config__mdt config : sConfigs) {
+                if (config.Field_API_Name__c == field.getDescribe().name) {
+                    if (config.Field_Value__c == entry.label) {
+                        key = config.DeveloperName;
+                        Integer i = hashMap.get(key);
+                        Picklist_Description_Config__mdt iConfig = sConfigs[i];
+                        System.debug(iConfig);
+
+                        EvaluationWrapper.Options options = new EvaluationWrapper.Options();
+                        options.label = iConfig.Field_Value__c != null ? iConfig.Field_Value__c : entry.label;
+                        options.pleApiName = iConfig.Field_API_Name__c != null ? iConfig.Field_API_Name__c : field.getDescribe().name;
+                        options.longDesc = iConfig.Field_Description__c != null ? iConfig.Field_Description__c : 'NONE FOUND';
+                        if (iConfig.Value_Category__c.equals('0')) {
+                            zeroOption.add(options);
+                        }else if (iConfig.Value_Category__c.equals('1')) {
+                            nOptions.add(options);
+                        }else if (iConfig.Value_Category__c.equals('2')) {
+                            rOptions.add(options);
+                        }else if (iConfig.Value_Category__c.equals('3')) {
+                            aOptions.add(options);
+                        }else if (iConfig.Value_Category__c.equals('4')) {
+                            iOptions.add(options);
+                        }
+                        if (!strings.isEmpty()) {
+                            if (strings.contains(options.label)) {
+                                options.IsSelected = true;
+                            }else if(!strings.contains(options.label)) {
+                                options.IsSelected = false;
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -102,8 +117,8 @@ public with sharing class BehaviorEvaluationPageController {
          */
 
         EvaluationWrapper wrapper = new EvaluationWrapper();
-        wrapper.id = prop.id;
-        wrapper.label = prop.label;
+        wrapper.id = field.getDescribe().name;
+        wrapper.label = field.getDescribe().label;
         wrapper.mZeroOptions = zeroOption;
         wrapper.mNotConcerningOptions = nOptions;
         wrapper.mRedFlagOptions = rOptions;
@@ -564,7 +579,7 @@ public with sharing class BehaviorEvaluationPageController {
                 'values' => values ,
                 'recordId' => recordId
         };
-        System.debug(params);
+        System.debug('INCOMING PARAMATERS' + params);
 
         Map<String, Object> request = new Map<String, Object>{
                 'service' => Services.BehaviorEvaluation ,

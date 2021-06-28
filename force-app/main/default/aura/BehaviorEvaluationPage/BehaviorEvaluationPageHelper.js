@@ -325,15 +325,24 @@
                     var result = response[status];
                     m_item = result['data'];
                     console.log('Items', m_item);
-                    if(m_item.length == 0) {
-                        confirm('SUCCESS');
+                    if(m_item['item'].endsWith(':')) {
+                        cmp.find('lib').showToast({
+                            'title': 'Success' ,
+                            'message': 'Evaluation has been completed successfully' ,
+                            'variant': 'success'
+                        });
                     }else {
                         console.log('Result',result);
                         var data = result['data'];
                         console.log('Data',data);
                         var item = data['item'];
                         console.log('Item', item);
-                        confirm(JSON.stringify(item));
+                        //confirm(JSON.stringify(item));
+                        cmp.find('lib').showToast({
+                            'title': 'ERROR' ,
+                            'message': item,
+                            'variant': 'error'
+                        });
                     }
 
                 }
@@ -390,9 +399,7 @@
         if(data != null) {
             this.processingProcess(cmp, 'loadTabs');
             this.processingProcess(cmp, 'loadPuppyTabs');
-
         }
-
     } ,
 
     loadBehaviorInKennel : function(cmp, event) {
@@ -830,12 +837,15 @@
     handleNextTab : function(cmp, event, button) {
         var c = cmp.get('v.tabId');
         var x = this.tablist[c];
-        if(cmp.get('v.IsDogFighting')==false) {
-            if(c == 'spt2') {
-                x = c['nextTab'];
+        var i_DogFight = cmp.get('v.IsDogFighting');
+        if(i_DogFight == false || i_DogFight == undefined) {
+            if(x['nextTab'] == 'fdit') {
+                x = this.tablist['fdit'];
             }
+            cmp.set('v.tabId' , x['nextTab']);
         }
-        cmp.set('v.tabId' , x['nextTab']);
+        //console.log(i_DogFight);
+        //console.log(i_IsAdult);
         if((x['nextTab'] == 'ssdt1')&& (cmp.get('v.UseCaution') == true))  {
             confirm('USE EXTRA CAUTION FOR REAL DOG');
         }
@@ -847,7 +857,14 @@
     handlePrevTab: function(cmp, event, button) {
         var c = cmp.get('v.tabId');
         var x = this.tablist[c];
+        var i_DogFight = cmp.get('v.IsDogFighting');
         cmp.set('v.tabId', x['lastTab']);
+        if(i_DogFight == false || i_DogFight == undefined) {
+            if(x['lastTab'] == 'fdit') {
+                x = this.tablist['fdit'];
+            }
+            cmp.set('v.tabId' , x['lastTab']);
+        }
         if((x['lastTab'] == 'ssdt1')&& (cmp.get('v.UseCaution') == true)) {
                     confirm('USE CAUTION');
                 }

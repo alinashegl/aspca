@@ -26,27 +26,37 @@
 
     selectOption : function(cmp, event) {
         var options = cmp.find('opts');
-        console.log(options);
-        var p = options[0].get('v.name');
+        console.log('Options',options);
+        console.log('Options Params', cmp.get('v.options'));
+        var p =  ''; //options[0].get('v.name');
         var recordid = cmp.get('v.recordId');
 
         //alert(p);
         var result = [];
-        if(Array.isArray(options)) {
+        if(options.length > 1) {
+            p = options[0].get('v.name');
             for(var i=0; i<options.length; i++){
-                var r = {
-                        label: options[i].get('v.label') ,
-                        isSelected: options[i].get('v.checked')
-                    };
-                    result.push(JSON.stringify(r));
+               var r = {
+                   label: options[i].get('v.label') ,
+                    isSelected: options[i].get('v.checked')
+               };
+               try {
+                 result.push(JSON.stringify(r));
+               }catch(err) {
+                   console.log(err);
+               }
             }
         }else {
             var r = {
-                label: options.get('v.label') ,
-                isSelected: options.get('v.checked')
+                label: options[0].get('v.label') ,
+                isSelected: options[0].get('v.checked')
             };
-            result.push(JSON.stringify(r));
+            var s = cmp.get('v.options');
+            ps = s[0];
+            console.log('Opt Param 1 ',ps);
+            //p = options.get('v.name');
         }
+
         console.log(p + ' ===>' + result);
         this.putSelections(cmp, p, result, recordid);
         $A.get('e.force:refreshView').fire();

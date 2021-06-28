@@ -17,6 +17,7 @@ public with sharing class ServiceRequest {
         this.Name = name;
         this.Action = action;
         this.Parameters = new Map<String, Object>();
+        System.debug('@@ServiceRequest With Name and Action ==> ' +  this);
     }
 
     public ServiceRequest(String name, String action, Map<String, Object> params) {
@@ -25,11 +26,13 @@ public with sharing class ServiceRequest {
         this.Parameters = params;
         if (params != null) return;
         this.Parameters = new Map<string, Object>();
+        System.debug('@@ServiceRequest With Params==> ' +  this);
     }
 
     public ServiceRequest withParams(String key, Object value) {
         if (Parameters == null) { Parameters = new Map<String, Object>(); }
         Parameters.put(key, value);
+        System.debug('@@withParams ==> ' +  this);
         return this;
     }
 }

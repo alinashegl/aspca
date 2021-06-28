@@ -25,7 +25,8 @@
             'handleSave' : 'putSkipReason' ,
             'handleModal' : 'handleModal' ,
             'refresh' : 'refresh' ,
-            'handleChange': 'handleChange'
+            'handleChange': 'handleChange' ,
+            'handleNewSkip': 'handleNewSkip'
         };
 
         if(process[currentProcess] == 'init')
@@ -54,6 +55,9 @@
         }else if(process[currentProcess] == 'handleChange')
         {
             this.handleChange(cmp, event);
+        }else if(process[currentProcess] == 'handleNewSkip')
+        {
+            this.handleNewSkip
         }
         else
         {
@@ -83,6 +87,11 @@
     {
         cmp.set('v.IsSkipped', false);
         this.processingProcess(cmp, 'handleModal');
+    } ,
+    handleNewSkip: function(cmp, event)
+    {
+        var reason = cmp.find('newReasons');
+        console.log(reason);
     } ,
     putSkipReason : function(cmp, event)
     {
@@ -191,6 +200,13 @@
         .then(
             function(response) {
                 console.log('PROMISE RESPONSE', response[a.id]);
+                $A.get('e.force:refreshView').fire();
+                cmp.find('lib').showToast({
+                            'title': 'Success' ,
+                            'message': 'Test Comments Were Saved Successfully, Proceed to the Next Tab to see the' +
+                            ' Change' ,
+                            'variant': 'success'
+                        });
             }
         ).catch(
             function(error) {
