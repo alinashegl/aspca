@@ -1,0 +1,158 @@
+<apex:page standardController="Behavior_Evaluation__c"
+           extensions="BehEvalPdfController,BehaviorEvaluationMatrixController"
+           renderAs="pdf" applyBodyTag="false"
+           showHeader="false">
+    <head>
+        <style type="text/css"> 
+            table, th {
+            border: 1px solid black;
+            padding: 5px;
+            vertical-align:Top;
+            font-size: small;
+            } 
+            .grid-container {
+            display: inline-grid;
+            grid-template-columns: auto auto auto auto;
+            background-color: #FF6300;
+            padding: 5px;
+            }
+            .grid-item {
+            background-color: #FFFFFF;
+            border: 1px solid;
+            padding: 5px;
+            text-align: left;
+            }
+        </style>
+    </head>
+    <body>
+    <apex:variable value="{!$Resource.dbChecked}" var="checked"/>
+    <apex:variable value="{!$Resource.dbUnchecked}" var="unchecked" />
+        <div style="page-break-after:always;">
+            <table width="100%">
+                <apex:repeat var="anim" value="{!behEval}">
+                    <tr style="font:24px;">
+                        <td width="40%" >Behavior Report: Canine</td>
+                        <th width="60%" >ASPCA Shelter: {!anim.Facility_Outcome__c}</th>
+                    </tr>
+                </apex:repeat>
+            </table>
+            <br/>
+            <table width="100%">
+                <apex:repeat var="anim" value="{!behEval}">
+                    <tr>
+                        <td>Name:</td>
+                        <td>{!anim.Animal_Name__c}</td>
+                        <td>ID #:</td>
+                        <td>{!anim.Animal_ID__c}</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Breed:</td>
+                        <td>{!anim.Animal_Breed__c}</td>
+                        <td>Age:</td>
+                        <td>{!anim.Animal_Age__c}</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Color:</td>
+                        <td>{!anim.Animal_Color__c}</td>
+                        <td>Sex:</td>
+                        <td>{!anim.Animal_Sex__c}</td>
+                        <td>Date:</td>
+                        <td>{!anim.Evaluation_Date__c}</td>
+                    </tr>
+                    <tr>
+                        <td>Case #:</td>
+                        <td>{!anim.Case_Number__c}</td>
+                        <td>Location:</td>
+                        <td>{!anim.Facility_Outcome__c}</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </apex:repeat>
+            </table>
+            <br/>
+            <table width="100%">
+                <tr style="font-weight:900;">
+                    <th bgcolor="#66B132" width="22%" align="center">A<br/>No<br/>Concerns</th>
+                    <td width="4%"></td>
+                    <th bgcolor="#FFFF01" width="22%" align="center">B<br/>Mild<br/>Concern(s)</th>
+                    <td width="4%"></td>
+                    <th bgcolor="#FE0000" width="22%" align="center">C<br/>Moderate<br/>Concern(s)</th>
+                    <td width="4%"></td>
+                    <th bgcolor="#006C92" width="22%" align="center">D<br/>Severe<br/>Concern(s)</th>
+                </tr>
+                <tr>
+                    <th bgcolor="#66B132" width="22%" align="center"><img src="/img/checkbox_unchecked.gif"/></th>
+                    <td width="4%"></td>
+                    <th bgcolor="#FFFF01" width="22%" align="center"><apex:image value="{!IF(bMildConcerns, checked,unchecked)}"/> </th>
+                    <td width="4%"></td>
+                    <th bgcolor="#FE0000" width="22%" align="center"><input type="checkbox" class="largerCheckbox"/></th>
+                    <td width="4%"></td>
+                    <th bgcolor="#006C92" width="22%" align="center"><output type="checkbox" class="largerCheckbox"/></th>
+                </tr>
+            </table>
+            <br/>
+            <table width="100%">
+                <apex:repeat var="anim" value="{!behEval}">
+                    <tr style="font-weight:900;">
+                        <td>Potential behavior issue(s):</td>
+                    </tr>
+                    <tr>
+                        <td>{!anim.Potential_Behavior_Issues__c}</td>
+                    </tr>
+                    <tr>
+                        <td>{!anim.Potential_Beh_Iss_Other__c}</td>
+                    </tr>
+                </apex:repeat>
+            </table>
+            <br/>
+            <table width="100%">
+                <apex:repeat var="anim" value="{!behEval}">
+                    <tr style="font-weight:900;">
+                        <td>BEHAVIOR SUMMARY:</td>
+                    </tr>
+                    <tr>
+                        <td><apex:outputText value="{!anim.Behavior_Evaluation_Summary__c}" escape="false"/></td>
+                    </tr>
+                </apex:repeat>
+            </table>
+        </div>
+        
+        <div style="page-break-after:always;">
+            <table style="border-collapse: collapse;" border="1" width="100%">
+                <tr><th width="28%"></th><th width="18%">Not Concerning</th><th width="18%">Red Flag</th><th width="18%">Alert</th><th width="18%">Inconclusive</th></tr>
+                <apex:repeat value="{!finalTestAndDisplayValues}" var="subtestName">
+                    <tr>
+                        <th>{!subtestName[0]}</th>
+                        <th>{!subtestName[1]}</th>
+                        <th>{!subtestName[2]}</th>
+                        <th>{!subtestName[3]}</th>
+                        <th>{!subtestName[4]}</th>
+                    </tr>
+                </apex:repeat>
+            </table>
+        </div>        
+        
+        <div style="page-break-after:always;">
+            <table bgcolor="#777777" width="100%">
+                <tr style="font:24px; color:white; height:80px;">
+                    <td align="center">Behavior in Kennel</td>
+                </tr>
+            </table>
+            <br/>
+            <table>
+                <apex:repeat var="anim" value="{!behEval}">
+                    <tr>
+                        <th></th>
+                        <td></td>
+                    </tr>
+                </apex:repeat>
+            </table>
+            <br/>
+        </div>
+        
+    </body>
+</apex:page>

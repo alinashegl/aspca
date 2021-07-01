@@ -32,9 +32,9 @@ public with sharing class EvaluationWrapper {
     }
     public class FieldContents {
         @AuraEnabled public String id;
-        @AuraEnabled public String value;
+        @AuraEnabled public Object value;
 
-        public FieldContents (String id, String value) {
+        public FieldContents (String id, Object value) {
             this.id = id;
             this.value = value;
         }

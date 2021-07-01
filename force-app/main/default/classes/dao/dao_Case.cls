@@ -25,14 +25,5 @@ public with sharing class dao_Case extends sql_Dao {
         addField(Case.Secondary_Case_Type__c);
     }
 
-    public List<Case> findAll() {
-        return getAll();
-    }
-
-    public Case findOne(String id) {
-        List<Case> cases = getWhere(sql_Criteria.Equals(Case.Id, id));
-
-        return cases.isEmpty() ? null : cases[0];
-    }
 
 }

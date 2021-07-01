@@ -73,26 +73,26 @@
 
     setTestType: function(cmp, event) {
         var t = cmp.get('v.type');
-        console.log(this.testType[t].colOne);
-        if(this.testType[t] == 'resourceGuardingOne' ) {
+        console.log('Test Type: ',this.testType[t].colOne);
+        if(this.testType[t] == 'Resource_Guarding_P1_Touch_Body__c' ) {
             cmp.set('v.col1API', this.testType[t].colOne);
             cmp.set('v.col2API', this.testType[t].colTwo);
             cmp.set('v.col3API', this.testType[t].colThree);
             cmp.set('v.col4API', this.testType[t].colFour);
-        } else if(this.testType[t] == 'resourceGuardingTwo' ) {
+        } else if(this.testType[t] == 'Resource_Guarding_P2_Touch_Body__c' ) {
             cmp.set('v.col1API', this.testType[t].colOne);
             cmp.set('v.col2API', this.testType[t].colTwo);
             cmp.set('v.col3API', this.testType[t].colThree);
             cmp.set('v.col4API', this.testType[t].colFour);
-        } else if(this.testType[t] == 'unpleasantTouch' ) {
+        } else if(this.testType[t] == 'Unpleasant_Touch_1st__c' ) {
             cmp.set('v.col1API', this.testType[t].colOne);
             cmp.set('v.col2API', this.testType[t].colTwo);
-        } else if(this.testType[t] == 'puppyResourceGuardingOne') {
+        } else if(this.testType[t] == 'Puppy_Resource_Guarding_P1_Touch_Body__c') {
             cmp.set('v.col1API', this.testType[t].colOne);
             cmp.set('v.col2API', this.testType[t].colTwo);
             cmp.set('v.col3API', this.testType[t].colThree);
             cmp.set('v.col4API', this.testType[t].colFour);
-        }  else if(this.testType[t] == 'puppyResourceGuardingTwo') {
+        }  else if(this.testType[t] == 'Puppy_Resource_Guarding_P2_Touch_Body__c') {
             cmp.set('v.col1API', this.testType[t].colOne);
             cmp.set('v.col2API', this.testType[t].colTwo);
             cmp.set('v.col3API', this.testType[t].colThree);

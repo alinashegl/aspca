@@ -26,5 +26,9 @@
     handleChange: function(cmp, event, helper)
     {
         helper.processingProcess(cmp, 'handleChange');
+    } ,
+    handleNewSkip: function(cmp, event, helper)
+    {
+        helper.processingProcess(cmp, 'handleNewSkip');
     }
 });

@@ -13,6 +13,8 @@ public with sharing  class service_BehaviorEvaluation extends service_Base{
                 updateComments(request, response);
             } when 'checkValidity' {
                 checkValidity(request, response);
+            } when 'putBoolean' {
+                putBoolean(request, response);
             }
         }
     }
@@ -25,13 +27,13 @@ public with sharing  class service_BehaviorEvaluation extends service_Base{
     }
 
     public void updateComments(service_Request request, service_Response response) {
-        System.debug('#### Executing updateComments service!');
-        System.debug('#### Service Request =====> ' + request);
-        System.debug('#### Accepted Service Response ====> ' + response);
+        //System.debug('#### Executing updateComments service!');
+        //System.debug('#### Service Request =====> ' + request);
+        //System.debug('#### Accepted Service Response ====> ' + response);
         String recordId = (String) request.Parameters.get('recordId');
         dao_BehaviorEvaluations daoBehaviorEvaluations = new dao_BehaviorEvaluations();
         Behavior_Evaluation__c evaluation = daoBehaviorEvaluations.findOne(recordId);
-        System.debug('@@@ Selected Evaluation ===> ' + evaluation );
+        //System.debug('@@@ Selected Evaluation ===> ' + evaluation );
         String apiName = (String) request.Parameters.get('apiName');
         String values = (String) request.Parameters.get('values');
         Map<String, String> fieldValueMap = new Map<String, String>{
@@ -39,16 +41,25 @@ public with sharing  class service_BehaviorEvaluation extends service_Base{
         };
         Map<String, Schema.SObjectField> behaviorEvalFieldMap = SObjectFieldMapHelper.fieldMap('Behavior_Evaluation__c');
         for (String key : fieldValueMap.keySet()) {
-            System.debug('@@## Current Key ===> ' +  key);
+            //System.debug('@@## Current Key ===> ' +  key);
             if (behaviorEvalFieldMap.containsKey(key)) {
                 Schema.SObjectField field = behaviorEvalFieldMap.get(key);
                 evaluation.put(field, fieldValueMap.get(key));
+
             }
         }
         List<Behavior_Evaluation__c> behaviorEvaluations = new List<Behavior_Evaluation__c>();
         behaviorEvaluations.add(evaluation);
-        update behaviorEvaluations;
-
+        //update behaviorEvaluations;
+        TriggerRequest beforeUpdateRequest = new TriggerRequest(Behavior_Evaluation__c.getSObjectType())
+                .SetBefore(true)
+                .SetUpdate(true)
+                .SetNewRecords(behaviorEvaluations)
+                .SetOldRecords(new List<Behavior_Evaluation__c>());
+        ServiceRequest req = new ServiceRequest().withParams('TriggerRequest', beforeUpdateRequest);
+        BehaviorEvaluationDomain evaluationDomain = new BehaviorEvaluationDomain();
+        ServiceResponse rep = evaluationDomain.Execute(req);
+        rep.Data = beforeUpdateRequest.newRecords;
         response.Parameters.put('item' , behaviorEvaluations);
     }
 
@@ -60,7 +71,7 @@ public with sharing  class service_BehaviorEvaluation extends service_Base{
         String recordId = (String) request.Parameters.get('recordId');
         dao_BehaviorEvaluations daoBehaviorEvaluations = new dao_BehaviorEvaluations();
         Behavior_Evaluation__c evaluation = daoBehaviorEvaluations.findOne(recordId);
-        System.debug('@@@ Selected Evaluation ===> ' + evaluation );
+        //System.debug('@@@ Selected Evaluation ===> ' + evaluation );
         String message = '';
         String apiName = (String) request.Parameters.get('apiName');
         List<String> values = (List<String>) request.Parameters.get('values');
@@ -78,18 +89,19 @@ public with sharing  class service_BehaviorEvaluation extends service_Base{
                     List<String> nEntries = new List<String>();
                     List<String> rEntries = new List<String>();
                     Map<String, PicklistEntry> entriesByStrings = SObjectFieldMapHelper.entriesByStrings(field.getDescribe());
+                    System.debug('@@@KEY SET => ' + entriesByStrings.keySet());
                     List<String> mStrings = fieldValueMap.get(key);
-                    System.debug('MSTRINGS ====> ' + mStrings);
+                    System.debug('@@@MSTRINGS ====> ' + mStrings);
                     for (String str : mStrings) {
                         System.debug(str);
                         Map<String, Object> objectMap = (Map<String, Object>) JSON.deserializeUntyped(str);
-                        System.debug(objectMap);
+                        System.debug('@@@@@@OBJECT MAP' + objectMap);
                         if (objectMap.get('isSelected')==true) {
                             nEntries.add(entriesByStrings.get(String.valueOf(objectMap.get('label'))).value);
                         }else if (objectMap.get('isSelected')==false) {
                             rEntries.add(entriesByStrings.get(String.valueOf(objectMap.get('label'))).value);
                         }else {
-                            System.debug('ERROR OCCURED WITH FIELD');
+                            System.debug('ERROR OCCURED WITH FIELD' + str);
                         }
                         message = 'FIELD IS EMPTY - UPDATED FIELD';
                     }
@@ -130,19 +142,27 @@ public with sharing  class service_BehaviorEvaluation extends service_Base{
         dao_BehaviorEvaluations daoBehaviorEvaluations = new dao_BehaviorEvaluations();
         Behavior_Evaluation__c evaluation = daoBehaviorEvaluations.findOne((String) request.Parameters.get('key'));
         Map<String, Object> errorMessages = new Map<String, Object>();
+        String err = 'Result:';
+        String ref = '#';
         Map<String, Object> messages = new Map<String, Object>();
         List<SObjectField> testFields = getTestFields(evaluation.Evaluation_Subtype__c);
         System.debug(testFields);
         for (SObjectField field : testFields) {
             Map<String, SObjectField> fieldMap = SObjectFieldMapHelper.fieldMap('Behavior_Evaluation__c');
             try {
+                System.debug(evaluation.get(field));
                 if (MetadataUtil.skipField(String.valueOf(field)) != null) {
                     String skipField = MetadataUtil.skipField(String.valueOf(field));
+                    System.debug('###Skip Field ===> ' + skipField );
+                    System.debug(evaluation.get(skipField));
                     if(String.valueOf(evaluation.get(field)) == null) {
                         if (String.valueOf(evaluation.get(skipField)) == null) {
-                            errorMessages.put(field.getDescribe().label, String.valueOf('NO ENTRY SELECTED => ' + field
+                            errorMessages.put(field.getDescribe().label, String.valueOf('No entry Selected for  ' + field
                                     .getDescribe()
-                                    .label));
+                                    .label) +
+                                    '-------------> ');
+                            err = err + ' No entry Selected for ' + field.getDescribe().label +
+                                    '----->';
                         }
                     }
                 }
@@ -153,13 +173,35 @@ public with sharing  class service_BehaviorEvaluation extends service_Base{
             }
         }
         if (!errorMessages.equals(null)) {
-            response.Parameters.put('item', errorMessages.values());
+            response.Parameters.put('item', err);
         }else {
             response.Parameters.put('item', 'SUCCESS');
         }
         System.debug('###### ERROR MESSAGES === ' + errorMessages.values() );
 
 
+    }
+
+    public void putBoolean(service_Request request, service_Response response) {
+        dao_BehaviorEvaluations daoBehaviorEvaluations = new dao_BehaviorEvaluations();
+        Behavior_Evaluation__c eval = daoBehaviorEvaluations.findOne((String) request.Parameters.get('recordId'));
+        Map<String, SObjectField> fieldMap = SObjectFieldMapHelper.fieldMap('Behavior_Evaluation__c');
+        SObjectField field = fieldMap.get((String) request.Parameters.get('apiName'));
+        Boolean val = (Boolean) request.Parameters.get('values');
+        System.debug('PUT BOOL SOBJECT FIELD ==> ' + field + '===>' + val);
+        eval.put(field, val);
+        List<Behavior_Evaluation__c> evaluations = new List<Behavior_Evaluation__c>();
+        evaluations.add(eval);
+        TriggerRequest beforeUpdateRequest = new TriggerRequest(Behavior_Evaluation__c.getSObjectType())
+                .SetBefore(true)
+                .SetUpdate(true)
+                .SetNewRecords(evaluations)
+                .SetOldRecords(new List<Behavior_Evaluation__c>());
+        ServiceRequest req = new ServiceRequest().withParams('TriggerRequest', beforeUpdateRequest);
+        BehaviorEvaluationDomain domain = new BehaviorEvaluationDomain();
+        ServiceResponse resp = domain.Execute(req);
+        resp.Data = beforeUpdateRequest.newRecords;
+        response.Parameters.put('item', val);
     }
 
     /*
@@ -185,7 +227,7 @@ public with sharing  class service_BehaviorEvaluation extends service_Base{
             fields.add(Behavior_Evaluation__c.Resource_Guarding_P2_Touch_Face__c);
             fields.add(Behavior_Evaluation__c.Resource_Guarding_P2_Push_Face__c);
             fields.add(Behavior_Evaluation__c.Puppy_Child_Doll_P1__c);
-            //fields.add(Behavior_Evaluation__c.Puppy_Child_Doll_P2__c);
+            fields.add(Behavior_Evaluation__c.Puppy_Child_Doll_P2__c);
             fields.add(Behavior_Evaluation__c.Puppy_Dog_Interaction_P1__c);
             fields.add(Behavior_Evaluation__c.Puppy_Dog_Interaction_P2__c);
             fields.add(Behavior_Evaluation__c.Puppy_Dog_Interaction_P3__c);

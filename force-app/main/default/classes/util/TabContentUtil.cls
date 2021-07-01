@@ -22,6 +22,7 @@ public with sharing class TabContentUtil {
     @AuraEnabled public Boolean IsDogFighting { get; set; }
     @AuraEnabled public Boolean UseCaution { get; set; }
     @AuraEnabled public Boolean IsMuzzled { get; set; }
+    @AuraEnabled public EvaluationWrapper.FieldContents Caution { get; set; }
 
     public TabContentUtil(
             String id,
@@ -42,7 +43,8 @@ public with sharing class TabContentUtil {
             Boolean IsPuppy,
             Boolean IsDogFighting,
             Boolean UseCaution,
-            Boolean IsMuzzled
+            Boolean IsMuzzled ,
+            EvaluationWrapper.FieldContents Caution
     ) {
         this.id = id;
         this.label = label;
@@ -63,6 +65,7 @@ public with sharing class TabContentUtil {
         this.IsDogFighting = IsDogFighting;
         this.UseCaution = UseCaution;
         this.IsMuzzled = IsMuzzled;
+        this.Caution = Caution;
 
     }
 

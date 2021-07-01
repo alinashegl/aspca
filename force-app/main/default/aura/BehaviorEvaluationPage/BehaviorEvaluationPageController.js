@@ -33,6 +33,9 @@
     handleSelect: function(cmp, event, helper){
         helper.processingProcess(cmp, 'handleSelect');
     } ,
+    handleCaution: function(cmp, event, helper){
+        helper.processingProcess(cmp, 'handleCaution');
+    } ,
     onRender: function (cmp, event, helper){
         helper.processingProcess(cmp, 'render')
     } ,

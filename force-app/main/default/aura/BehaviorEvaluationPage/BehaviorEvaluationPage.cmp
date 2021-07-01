@@ -82,6 +82,8 @@
     <aura:handler name="select" value="{!v.selection}" action="{!c.handleSelection}" />
     <aura:method name="handleClick"  action="{!c.handleClick}" access="public" />
 
+    <lightning:notificationsLibrary aura:id="lib" />
+    <lightning:overlayLibrary aura:id="overlayLib" />
 
 
 
@@ -128,7 +130,7 @@
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
-                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
+                                        <c:BehaviorEvaluationOptionGroup options="{#variable.mAlertOptions}"
                                                                          index="{!index}"  recordId="{!v.recordId}">
                                             <aura:set attribute="image">
                                                 <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
@@ -388,6 +390,20 @@
                                     <p class="tabDesc">Pinch webbing between toes twice</p>
                                 </div>
                                 <br></br>
+                                <table class="slds-box slds-p-top_medium" width="100%">
+                                    <div class="grid-container">
+                                        <div class="grid-item"></div>
+                                        <div class="grid-item" align="left" >
+                                            <tr width="100%">
+                                                <td width="33%"></td>
+                                                <td width="6%">1st</td>
+                                                <td width="6%">2nd</td>
+                                                <td width="55%"></td>
+                                            </tr>
+                                        </div>
+                                    </div>
+                                </table>
+
                                 <aura:iteration items="{!v.unpleasantTouchTest}" var="variable">
                                     <aura:if isTrue="{!not(empty(variable.mZeroOptions))}">
                                         <c:BehaviorEvaluationMultipleOptionGroup colNumber="2" type="unpleasantTouch"
@@ -592,6 +608,29 @@
                                                 <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
+                                        &nbsp;
+                                        <!--
+                                        <table class="slds-box slds-p-top_medium" width="100%">
+                                            <div class="grid-container">
+                                                <div class="grid-item">
+                                                    <img src="{!$Resource.Beh_Eval_No_Entry}" />
+                                                </div>
+                                            </div>
+                                            <div class="grid-item" align="left">
+                                                <tr class="spaceUnder" align="left">
+                                                    <td class="float">
+                                                        <lightning:input name="{!variable.mInconclusiveOptions[0].pleApiName}" label="{!variable.mInconclusiveOptions[0].label}" type="checkbox" variant="label-hidden" onchange="{!c.handleSelect}" checked="{!variable.mInconclusiveOptions[0].IsSelected}" />
+                                                    </td>
+                                                    <td align="left">
+                                                        <strong>{!variable.mInconclusiveOptions[0].label}</strong>
+                                                        <aura:if isTrue="{!variable.mInconclusiveOptions[0].longDesc
+                                                        != null}">{!variable.mInconclusiveOptions[0].longDesc}</aura:if>
+                                                    </td>
+                                                </tr>
+                                            </div>
+                                        </table>
+                                        -->
+
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
@@ -601,6 +640,7 @@
                                                 </aura:set>
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
+
                                     </table>
                                 </aura:iteration>
                             </lightning:layoutItem>
@@ -626,6 +666,33 @@
                                     <p class="tabDesc">Food bowl</p>
                                 </div>
                                 <br></br>
+                                <table class="slds-box slds-p-top_medium" width="100%">
+                                    <div class="grid-container">
+                                        <div class="grid-item"></div>
+                                        <div class="grid-item" align="left" >
+                                            <tr width="100%">
+                                                <td width="25%"></td>
+                                                <td width="6%"></td>
+                                                <td width="6%"></td>
+                                                <td width="6%"></td>
+                                                <td width="6%"></td>
+                                                <td width="10%"></td>
+                                                <td width="22%">TB = Touch Body</td>
+                                                <td width="22%">TN = Touch Neck</td>
+                                            </tr>
+                                            <tr width="100%">
+                                                <td width="25%"></td>
+                                                <td width="6%"><strong>TB</strong></td>
+                                                <td width="6%"><strong>TN</strong></td>
+                                                <td width="6%"><strong>TF</strong></td>
+                                                <td width="6%"><strong>PF</strong></td>
+                                                <td width="10%"></td>
+                                                <td width="22%">TF = Touch Face</td>
+                                                <td width="22%">PF = Push Face</td>
+                                            </tr>
+                                        </div>
+                                    </div>
+                                </table>
                                 <aura:iteration items="{!v.resourceGuardingTestPart1}" var="variable">
                                     <table>
                                         <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingOne" colNumber="4" options="{!variable.mNotConcerningOptions}"
@@ -682,6 +749,34 @@
                                     <p class="tabDesc">Chewy</p>
                                 </div>
                                 <br></br>
+                                <table class="slds-box slds-p-top_medium" width="100%">
+                                    <div class="grid-container">
+                                        <div class="grid-item"></div>
+                                        <div class="grid-item" align="left" >
+                                            <tr width="100%">
+                                                <td width="25%"></td>
+                                                <td width="6%"></td>
+                                                <td width="6%"></td>
+                                                <td width="6%"></td>
+                                                <td width="6%"></td>
+                                                <td width="10%"></td>
+                                                <td width="22%">TB = Touch Body</td>
+                                                <td width="22%">TN = Touch Neck</td>
+                                            </tr>
+                                            <tr width="100%">
+                                                <td width="25%"></td>
+                                                <td width="6%"><strong>TB</strong></td>
+                                                <td width="6%"><strong>TN</strong></td>
+                                                <td width="6%"><strong>TF</strong></td>
+                                                <td width="6%"><strong>PF</strong></td>
+                                                <td width="10%"></td>
+                                                <td width="22%">TF = Touch Face</td>
+                                                <td width="22%">PF = Push Face</td>
+                                            </tr>
+                                        </div>
+                                    </div>
+                                </table>
+
                                 <aura:iteration items="{!v.resourceGuardingTestPart2}" var="variable">
                                     <table>
                                         <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingTwo" colNumber="4" options="{!variable.mNotConcerningOptions}"
@@ -872,6 +967,8 @@
                                                 <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
+                                        &nbsp;
+
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
@@ -953,7 +1050,7 @@
                         </lightning:layout>
                     </lightning:tab>
                     <aura:if isTrue="{!v.IsDogFighting}">
-                        <lightning:tab label="Fake Dog Interaction " id="fdit">
+                        <lightning:tab label="Model Dog Interaction " id="fdit">
                             <lightning:layout multipleRows="true">
                                 <lightning:layoutItem size="12">
                                     <div class="slds-align_absolute-center" style="height:3rem">
@@ -983,7 +1080,14 @@
                                                     <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
                                                 </aura:set>
                                             </c:BehaviorEvaluationOptionGroup>
-                                            <lightning:inputField class="slds-align_absolute-center" fieldName="Caution__c" />
+                                            &nbsp;
+                                            <div>
+                                                <lightning:input type="checkbox"
+                                                                 label="Use Caution for Real Dog Test"
+                                                                 onchange="{!c.handleCaution}"
+                                                                aura:id="cautionInput"/>
+                                            </div>
+                                            &nbsp;
                                             <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
                                                 <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                                  index="{!index}"
@@ -1135,7 +1239,7 @@
                                     <tr>
                                         <td style="padding-right: 30px;"><input type="radio" id="Muzzled" name="Muzzled" value="Muzzled"></input>
                                             <strong><label for="Muzzled"> Muzzled</label></strong></td>
-                                        <td><input type="radio" id="NotMuzzled" name="Muzzled" value="Not Muzzled" checked="yes"></input>
+                                        <td><input type="radio" id="NotMuzzled" name="Muzzled" value="Not Muzzled" checked="true"></input>
                                             <strong><label for="NotMuzzled"> Not Muzzled</label></strong></td>
                                     </tr>
                                 </table>
@@ -1369,7 +1473,7 @@
                         <lightning:layout multipleRows="true">
                             <lightning:layoutItem size="12">
                                 <div class="slds-align_absolute-center" style="height:3rem">
-                                    <h1 class="tabHeader">Behavior On Leash</h1>
+                                    <h1 class="tabHeader">Behavior In Kennel</h1>
                                 </div>
                                 <div class="slds-align_absolute-center">
                                     <p class="tabDesc">Approach kennel at normal walking speed. Observe dog's reaction to your approach. Then remove puppy using a slip lead or by picking dog up (as necessary). Observe puppy's behavior while being removed from kennel</p>
@@ -1816,6 +1920,179 @@
                             </lightning:layoutItem>
                         </lightning:layout>
                     </lightning:tab>
+                    <lightning:tab label="Resource Guarding One" id="prg1">
+                        <lightning:layout multipleRows="true">
+                            <lightning:layoutItem size="12">
+                                <div class="slds-align_absolute-center" style="height:3rem">
+                                    <h1 class="tabHeader">Resource Guarding - Part 1: Food Bowl</h1>
+                                </div>
+                                <div class="slds-align_absolute-center">
+                                    <p class="tabDesc">Have assistant hold puppy's leash, or tether puppy. Place bowl of food (kibble + canned food mix) in front of puppy Once puppy is engaged in eating, approach then:
+                                        <br></br>1. Stroke puppy's back and say curiously, "Hey, whatcha got there?
+                                        <br></br>2. Touch collar and say curiously, "Hey, whatcha got there?"
+                                        <br></br>3. Touch puppy's muzzle while he's eating and say, "Hey, whatcha got there?"
+                                        <br></br>4. Firmly push puppy's muzzle out of the food bowl and say sternly, "OK get out of there!"
+                                    </p>                                </div>
+                                <br></br>
+                                <table class="slds-box slds-p-top_medium" width="100%">
+                                    <div class="grid-container">
+                                        <div class="grid-item"></div>
+                                        <div class="grid-item" align="left" >
+                                            <tr width="100%">
+                                                <td width="25%"></td>
+                                                <td width="6%"></td>
+                                                <td width="6%"></td>
+                                                <td width="6%"></td>
+                                                <td width="6%"></td>
+                                                <td width="10%"></td>
+                                                <td width="22%">TB = Touch Body</td>
+                                                <td width="22%">TN = Touch Neck</td>
+                                            </tr>
+                                            <tr width="100%">
+                                                <td width="25%"></td>
+                                                <td width="6%"><strong>TB</strong></td>
+                                                <td width="6%"><strong>TN</strong></td>
+                                                <td width="6%"><strong>TF</strong></td>
+                                                <td width="6%"><strong>PF</strong></td>
+                                                <td width="10%"></td>
+                                                <td width="22%">TF = Touch Face</td>
+                                                <td width="22%">PF = Push Face</td>
+                                            </tr>
+                                        </div>
+                                    </div>
+                                </table>
+
+                                <aura:iteration items="{!v.puppyResourceGuardingPart1}" var="variable">
+                                    <table>
+                                        <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingOne" colNumber="4" options="{!variable.mNotConcerningOptions}"
+                                                                                 index="{!index}" recordId="{!v.recordId}" >
+                                            <aura:set attribute="image">
+                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
+                                            </aura:set>
+                                        </c:BehaviorEvaluationMultipleOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingOne" colNumber="4" options="{!variable.mRedFlagOptions}"
+                                                                                 index="{!index}" recordId="{!v.recordId}" >
+                                            <aura:set attribute="image">
+                                                <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100" />
+                                            </aura:set>
+                                        </c:BehaviorEvaluationMultipleOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingOne" colNumber="4" options="{!variable.mAlertOptions}"
+                                                                                 index="{!index}"  recordId="{!v.recordId}">
+                                            <aura:set attribute="image">
+                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
+                                            </aura:set>
+                                        </c:BehaviorEvaluationMultipleOptionGroup>
+                                        <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
+                                            <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingOne" colNumber="4" options="{!variable.mInconclusiveOptions}"
+                                                                                     index="{!index}"
+                                                                                     recordId="{!v.recordId}">
+                                                <aura:set attribute="image">
+                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
+                                                </aura:set>
+                                            </c:BehaviorEvaluationMultipleOptionGroup>
+                                        </aura:if>
+                                    </table>
+                                </aura:iteration>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem size="12" padding="around-small">
+                                <lightning:layout >
+                                    <aura:iteration items="{!v.puppyResourceGuardingPart1}" var="variable">
+                                        <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       skipVal="{!variable.skipField}"/>
+                                    </aura:iteration>&nbsp; &nbsp;
+                                </lightning:layout>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </lightning:tab>
+                    <lightning:tab label="Resource Guarding Two" id="prg2">
+                        <lightning:layout multipleRows="true">
+                            <lightning:layoutItem size="12">
+                                <div class="slds-align_absolute-center" style="height:3rem">
+                                    <h1 class="tabHeader">Resource Guarding - Part 2: Chew</h1>
+                                </div>
+                                <div class="slds-align_absolute-center">
+                                    <p class="tabDesc">Assistant continues to hold leash. Give puppy a pig's ear. Once dog is engaged in chewing approach then
+                                        <br></br>1. Stroke puppy's back and say curiously, "Hey, whatcha got there?"
+                                        <br></br>2. Touch collar and say curiously, "Hey, whatcha got there?"
+                                        <br></br>3. Touch puppy's muzzle and say curiously, "Hey, whatcha got there?"
+                                        <br></br>4. Firmly push puppy's muzzle as though to grasp chewy and say sternly, "Hey get out of there!"
+                                    </p>                                </div>
+                                <br></br>
+                                <table class="slds-box slds-p-top_medium" width="100%">
+                                    <div class="grid-container">
+                                        <div class="grid-item"></div>
+                                        <div class="grid-item" align="left" >
+                                            <tr width="100%">
+                                                <td width="25%"></td>
+                                                <td width="6%"></td>
+                                                <td width="6%"></td>
+                                                <td width="6%"></td>
+                                                <td width="6%"></td>
+                                                <td width="10%"></td>
+                                                <td width="22%">TB = Touch Body</td>
+                                                <td width="22%">TN = Touch Neck</td>
+                                            </tr>
+                                            <tr width="100%">
+                                                <td width="25%"></td>
+                                                <td width="6%"><strong>TB</strong></td>
+                                                <td width="6%"><strong>TN</strong></td>
+                                                <td width="6%"><strong>TF</strong></td>
+                                                <td width="6%"><strong>PF</strong></td>
+                                                <td width="10%"></td>
+                                                <td width="22%">TF = Touch Face</td>
+                                                <td width="22%">PF = Push Face</td>
+                                            </tr>
+                                        </div>
+                                    </div>
+                                </table>
+                                <aura:iteration items="{!v.puppyResourceGuardingPart2}" var="variable">
+                                    <table>
+                                        <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingTwo" colNumber="4" options="{!variable.mNotConcerningOptions}"
+                                                                                 index="{!index}" recordId="{!v.recordId}" >
+                                            <aura:set attribute="image">
+                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
+                                            </aura:set>
+                                        </c:BehaviorEvaluationMultipleOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingTwo" colNumber="4" options="{!variable.mRedFlagOptions}"
+                                                                                 index="{!index}" recordId="{!v.recordId}" >
+                                            <aura:set attribute="image">
+                                                <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100" />
+                                            </aura:set>
+                                        </c:BehaviorEvaluationMultipleOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingTwo" colNumber="4" options="{!variable.mAlertOptions}"
+                                                                                 index="{!index}"  recordId="{!v.recordId}">
+                                            <aura:set attribute="image">
+                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
+                                            </aura:set>
+                                        </c:BehaviorEvaluationMultipleOptionGroup>
+                                        <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
+                                            <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingTwo" colNumber="4" options="{!variable.mInconclusiveOptions}"
+                                                                                     index="{!index}"
+                                                                                     recordId="{!v.recordId}">
+                                                <aura:set attribute="image">
+                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
+                                                </aura:set>
+                                            </c:BehaviorEvaluationMultipleOptionGroup>
+                                        </aura:if>
+                                    </table>
+                                </aura:iteration>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem size="12" padding="around-small">
+                                <lightning:layout >
+                                    <aura:iteration items="{!v.puppyResourceGuardingPart2}" var="variable">
+                                        <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       skipVal="{!variable.skipField}"/>
+                                    </aura:iteration>&nbsp; &nbsp;
+                                </lightning:layout>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </lightning:tab>
                     <lightning:tab label="Child Doll One" id="pcd1">
                         <lightning:layout multipleRows="true">
                             <lightning:layoutItem size="12">
@@ -1918,124 +2195,6 @@
                             <lightning:layoutItem size="12" padding="around-small">
                                 <lightning:layout >
                                     <aura:iteration items="{!v.puppyChildDollPart2}" var="variable">
-                                        <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
-                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
-                                                                       skipVal="{!variable.skipField}"/>
-                                    </aura:iteration>&nbsp; &nbsp;
-                                </lightning:layout>
-                            </lightning:layoutItem>
-                        </lightning:layout>
-                    </lightning:tab>
-                    <lightning:tab label="Resource Guarding One" id="prg1">
-                        <lightning:layout multipleRows="true">
-                            <lightning:layoutItem size="12">
-                                <div class="slds-align_absolute-center" style="height:3rem">
-                                    <h1 class="tabHeader">Resource Guarding - Part 1: Food Bowl</h1>
-                                </div>
-                                <div class="slds-align_absolute-center">
-                                    <p class="tabDesc">Have assistant hold puppy's leash, or tether puppy. Place bowl of food (kibble + canned food mix) in front of puppy Once puppy is engaged in eating, approach then:
-                                        <br></br>1. Stroke puppy's back and say curiously, "Hey, whatcha got there?
-                                        <br></br>2. Touch collar and say curiously, "Hey, whatcha got there?"
-                                        <br></br>3. Touch puppy's muzzle while he's eating and say, "Hey, whatcha got there?"
-                                        <br></br>4. Firmly push puppy's muzzle out of the food bowl and say sternly, "OK get out of there!"
-                                    </p>                                </div>
-                                <br></br>
-                                <aura:iteration items="{!v.puppyResourceGuardingPart1}" var="variable">
-                                    <table>
-                                        <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingOne" colNumber="4" options="{!variable.mNotConcerningOptions}"
-                                                                                 index="{!index}" recordId="{!v.recordId}" >
-                                            <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
-                                            </aura:set>
-                                        </c:BehaviorEvaluationMultipleOptionGroup>
-                                        &nbsp;
-                                        <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingOne" colNumber="4" options="{!variable.mRedFlagOptions}"
-                                                                                 index="{!index}" recordId="{!v.recordId}" >
-                                            <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100" />
-                                            </aura:set>
-                                        </c:BehaviorEvaluationMultipleOptionGroup>
-                                        &nbsp;
-                                        <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingOne" colNumber="4" options="{!variable.mAlertOptions}"
-                                                                                 index="{!index}"  recordId="{!v.recordId}">
-                                            <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
-                                            </aura:set>
-                                        </c:BehaviorEvaluationMultipleOptionGroup>
-                                        <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
-                                            <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingOne" colNumber="4" options="{!variable.mInconclusiveOptions}"
-                                                                                     index="{!index}"
-                                                                                     recordId="{!v.recordId}">
-                                                <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
-                                                </aura:set>
-                                            </c:BehaviorEvaluationMultipleOptionGroup>
-                                        </aura:if>
-                                    </table>
-                                </aura:iteration>
-                            </lightning:layoutItem>
-                            <lightning:layoutItem size="12" padding="around-small">
-                                <lightning:layout >
-                                    <aura:iteration items="{!v.puppyResourceGuardingPart1}" var="variable">
-                                        <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
-                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
-                                                                       skipVal="{!variable.skipField}"/>
-                                    </aura:iteration>&nbsp; &nbsp;
-                                </lightning:layout>
-                            </lightning:layoutItem>
-                        </lightning:layout>
-                    </lightning:tab>
-                    <lightning:tab label="Resource Guarding Two" id="prg2">
-                        <lightning:layout multipleRows="true">
-                            <lightning:layoutItem size="12">
-                                <div class="slds-align_absolute-center" style="height:3rem">
-                                    <h1 class="tabHeader">Resource Guarding - Part 2: Chew</h1>
-                                </div>
-                                <div class="slds-align_absolute-center">
-                                    <p class="tabDesc">Assistant continues to hold leash. Give puppy a pig's ear. Once dog is engaged in chewing approach then
-                                        <br></br>1. Stroke puppy's back and say curiously, "Hey, whatcha got there?"
-                                        <br></br>2. Touch collar and say curiously, "Hey, whatcha got there?"
-                                        <br></br>3. Touch puppy's muzzle and say curiously, "Hey, whatcha got there?"
-                                        <br></br>4. Firmly push puppy's muzzle as though to grasp chewy and say sternly, "Hey get out of there!"
-                                    </p>                                </div>
-                                <br></br>
-                                <aura:iteration items="{!v.puppyResourceGuardingPart2}" var="variable">
-                                    <table>
-                                        <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingTwo" colNumber="4" options="{!variable.mNotConcerningOptions}"
-                                                                                 index="{!index}" recordId="{!v.recordId}" >
-                                            <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
-                                            </aura:set>
-                                        </c:BehaviorEvaluationMultipleOptionGroup>
-                                        &nbsp;
-                                        <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingTwo" colNumber="4" options="{!variable.mRedFlagOptions}"
-                                                                                 index="{!index}" recordId="{!v.recordId}" >
-                                            <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100" />
-                                            </aura:set>
-                                        </c:BehaviorEvaluationMultipleOptionGroup>
-                                        &nbsp;
-                                        <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingTwo" colNumber="4" options="{!variable.mAlertOptions}"
-                                                                                 index="{!index}"  recordId="{!v.recordId}">
-                                            <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
-                                            </aura:set>
-                                        </c:BehaviorEvaluationMultipleOptionGroup>
-                                        <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
-                                            <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingTwo" colNumber="4" options="{!variable.mInconclusiveOptions}"
-                                                                                     index="{!index}"
-                                                                                     recordId="{!v.recordId}">
-                                                <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
-                                                </aura:set>
-                                            </c:BehaviorEvaluationMultipleOptionGroup>
-                                        </aura:if>
-                                    </table>
-                                </aura:iteration>
-                            </lightning:layoutItem>
-                            <lightning:layoutItem size="12" padding="around-small">
-                                <lightning:layout >
-                                    <aura:iteration items="{!v.puppyResourceGuardingPart2}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
                                                                        skipVal="{!variable.skipField}"/>

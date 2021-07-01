@@ -11,7 +11,7 @@
 }
 
 .THIS tr.spaceUnder>td {
-    padding: 5px;
+    padding-left: 5px;
   }
 
 .THIS table.format>lightning:tab {
@@ -24,12 +24,10 @@
   grid-template-columns: auto auto auto auto;
   background-color: #FFFFFF;
   padding: 5px;
-  border: 0px white;
-  border-collapse: collapse;
 }
 .THIS .grid-item {
   background-color: #FFFFFF;
-  border: 1px solid;
+  border: 0px white;
   padding: 5px;
   text-align: left;
 }

@@ -26,27 +26,44 @@
 
     selectOption : function(cmp, event) {
         var options = cmp.find('opts');
-        console.log(options);
-        var p = options[0].get('v.name');
+        //console.log('Options',options);
+        //console.log('Options Params', cmp.get('v.options'));
+        var variable = cmp.get('v.options');
+        var p =  ''; //options[0].get('v.name');
         var recordid = cmp.get('v.recordId');
 
         //alert(p);
         var result = [];
-        if(Array.isArray(options)) {
+        if(options.length > 1) {
+            p = options[0].get('v.name');
             for(var i=0; i<options.length; i++){
-                var r = {
-                        label: options[i].get('v.label') ,
-                        isSelected: options[i].get('v.checked')
-                    };
-                    result.push(JSON.stringify(r));
+               var r = {
+                   label: options[i].get('v.label') ,
+                    isSelected: options[i].get('v.checked')
+               };
+               try {
+                 result.push(JSON.stringify(r));
+               }catch(err) {
+                   console.log(err);
+               }
             }
         }else {
-            var r = {
-                label: options.get('v.label') ,
-                isSelected: options.get('v.checked')
+
+            var s = cmp.get('v.options');
+            //ps = s[0];
+            console.log('Opt Param 1 ',s[0]);
+            p = s[0].pleApiName;
+            var x = {
+                label: s[0].label ,
+                isSelected: s[0].IsSelected
             };
-            result.push(JSON.stringify(r));
+            try {
+                result.push(JSON.stringify(x));
+            }catch(err){
+                alert(err);
+            }
         }
+
         console.log(p + ' ===>' + result);
         this.putSelections(cmp, p, result, recordid);
         $A.get('e.force:refreshView').fire();
@@ -77,6 +94,12 @@
             var result = response.getReturnValue();
             if(state == 'SUCCESS') {
                 return result;
+                cmp.find('lib').showToast({
+                            'title': 'Success' ,
+                            'message': 'Saved Successfully, Proceed to the Next Tab to see the' +
+                            ' Change' ,
+                            'variant': 'success'
+                        });
             }else if (state == 'ERROR') {
                 let err = response.getError();
                 console.log('###### Error message =====> ' + JSON.stringify(err));

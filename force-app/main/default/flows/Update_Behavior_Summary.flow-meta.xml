@@ -1,8 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Get_Test_Names_and_Responses</name>
+        <label>Get Test Names and Responses</label>
+        <locationX>176</locationX>
+        <locationY>431</locationY>
+        <actionName>BehaviorEvalMetadataCollection</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>Check_Fields_for_Updates</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>EvalId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <outputParameters>
+            <assignToReference>EvalFields</assignToReference>
+            <name>output</name>
+        </outputParameters>
+    </actionCalls>
     <apiVersion>52.0</apiVersion>
     <assignments>
-        <description>Writes first subtest comment to EvalSummary without any delimiters.</description>
         <name>Add_First_Test_to_Eval_Summary</name>
         <label>Add First Test to Eval Summary</label>
         <locationX>264</locationX>
@@ -19,7 +40,6 @@
         </connector>
     </assignments>
     <assignments>
-        <description>Writes each subsequent subtest comments to EvalSummary with a preceding line break.</description>
         <name>Add_Test_to_Eval_Summary</name>
         <label>Add Test to Eval Summary</label>
         <locationX>704</locationX>
@@ -43,381 +63,6 @@
         </connector>
     </assignments>
     <assignments>
-        <description>Assign all comment and skipped fields to a collection, prefixed with their subtest names.</description>
-        <name>Create_Field_Collection</name>
-        <label>Create Field Collection</label>
-        <locationX>176</locationX>
-        <locationY>431</locationY>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Behavior in Kennel: {!$Record.Skipped_BIK__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Behavior in Kennel: {!$Record.Comments_BIK__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Behavior on Leash: {!$Record.Skipped_BOL__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Behavior on Leash: {!$Record.Comments_BOL__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Social Behavior - Part 1: {!$Record.Skipped_SB_P1__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Social Behavior - Part 1: {!$Record.Comments_SB_P1__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Social Behavior - Part 2: {!$Record.Skipped_SB_P2__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Pleasant Touch: {!$Record.Skipped_Pleasant_Touch__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Pleasant Touch: {!$Record.Comments_Pleasant_Touch__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Unpleasant Touch - 1st: {!$Record.Skipped_UT_1st__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Unpleasant Touch - 1st: {!$Record.Comments_UT_1st__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Unpleasant Touch - 2nd: {!$Record.Skipped_UT_2nd__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Unpleasant Touch - 2nd: {!$Record.Comments_UT_2nd__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Play - Tug Part 1: {!$Record.Skipped_Play_Tug_P1__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Play - Tug Part 1: {!$Record.Comments_Play_Tug_P1__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Play - Tug Part 2: {!$Record.Skipped_Play_Tug_P2__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Play - Tug Part 2: {!$Record.Comments_Play_Tug_P2__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Tag: {!$Record.Skipped_Tag__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Tag: {!$Record.Comments_Tag__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Resource Guarding - Part 1 - TB: {!$Record.Skipped_RG_P1_TB__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Resource Guarding - Part 1 - TN: {!$Record.Skipped_RG_P1_TN__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Resource Guarding - Part 1 - TF: {!$Record.Skipped_RG_P1_TF__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Resource Guarding - Part 1 - PF: {!$Record.Skipped_RG_P1_PF__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Resource Guarding - Part 1 Comments: {!$Record.Comments_RG_P1__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Resource Guarding - Part 2 - TB: {!$Record.Skipped_RG_P2_TB__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Resource Guarding - Part 2 - TN: {!$Record.Skipped_RG_P2_TN__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Resource Guarding - Part 2 - TF: {!$Record.Skipped_RG_P2_TF__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Resource Guarding - Part 2 - PF: {!$Record.Skipped_RG_P2_PF__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Resource Guarding - Part 2 Comments: {!$Record.Comments_RG_P2__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Toddler Doll - Part 1: {!$Record.Skipped_TD_P1__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Toddler Doll - Part 1: {!$Record.Comments_TD_P1__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Toddler Doll - Part 2: {!$Record.Skipped_TD_P2__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Toddler Doll - Part 2: {!$Record.Comments_TD_P2__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Scolding Person - Part 1: {!$Record.Skipped_SP_P1__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Scolding Person - Part 1: {!$Record.Comments_SP_P1__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Scolding Person - Part 2: {!$Record.Skipped_SP_P2__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Scolding Person - Part 2: {!$Record.Comments_SP_P2__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Fake Dog Interaction: {!$Record.Skipped_FD__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Fake Dog Interaction: {!$Record.Comments_FD__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Same Sex Dog - Part 1: {!$Record.Skipped_SSD_P1__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Same Sex Dog - Part 1: {!$Record.Comments_SSD_P1__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Same Sex Dog - Part 2: {!$Record.Skipped_SSD_P2__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Same Sex Dog - Part 2: {!$Record.Comments_SSD_P2__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Same Sex Dog - Part 3: {!$Record.Skipped_SSD_P3__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Same Sex Dog - Part 3: {!$Record.Comments_SSD_P3__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Opposite Sex Dog - Part 1: {!$Record.Skipped_OSD_P1__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Opposite Sex Dog - Part 1: {!$Record.Comments_OSD_P1__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Opposite Sex Dog - Part 2: {!$Record.Skipped_OSD_P2__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Opposite Sex Dog - Part 2: {!$Record.Comments_OSD_P2__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Opposite Sex Dog - Part 3: {!$Record.Skipped_OSD_P3__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Opposite Sex Dog - Part 3: {!$Record.Comments_OSD_P3__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>EvalFields</assignToReference>
-            <operator>Add</operator>
-            <value>
-                <stringValue>Social Behavior - Part 2: {!$Record.Comments_SB_P2__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <connector>
-            <targetReference>Check_Fields_for_Updates</targetReference>
-        </connector>
-    </assignments>
-    <assignments>
-        <description>Assign current state of Behavior Evaluation Summary to EvalSummary variable.</description>
         <name>Evaluation_Summary</name>
         <label>Evaluation Summary</label>
         <locationX>176</locationX>
@@ -426,15 +71,14 @@
             <assignToReference>EvalSummary</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>$Record.Evaluation_Behavior_Summary__c</elementReference>
+                <elementReference>$Record.Behavior_Evaluation_Summary__c</elementReference>
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Create_Field_Collection</targetReference>
+            <targetReference>Get_Test_Names_and_Responses</targetReference>
         </connector>
     </assignments>
     <decisions>
-        <description>Check if current version of EvalSummary is blank, and current field value in loop is not blank. If so, writes current subtest comments or skipped reason to EvalSummary. Checks if EvalSummary already contains the current subtest name or the subtest comments are blank. If so, exits the loop. Otherwise, writes the subtest comments to EvalSummary.</description>
         <name>Check_if_Eval_Summary_Contains_Test</name>
         <label>Check if Eval Summary Contains Test</label>
         <locationX>484</locationX>
@@ -445,7 +89,7 @@
         <defaultConnectorLabel>Summary Not Blank and Doesn&apos;t Contain Test</defaultConnectorLabel>
         <rules>
             <name>Summary_Blank</name>
-            <conditionLogic>1 AND 2</conditionLogic>
+            <conditionLogic>and</conditionLogic>
             <conditions>
                 <leftValueReference>EvalSummary</leftValueReference>
                 <operator>IsNull</operator>
@@ -467,7 +111,7 @@
         </rules>
         <rules>
             <name>Summary_Contains_Test</name>
-            <conditionLogic>1 OR 2 OR 3</conditionLogic>
+            <conditionLogic>or</conditionLogic>
             <conditions>
                 <leftValueReference>EvalSummary</leftValueReference>
                 <operator>Contains</operator>
@@ -482,24 +126,16 @@
                     <booleanValue>true</booleanValue>
                 </rightValue>
             </conditions>
-            <conditions>
-                <leftValueReference>TestComments</leftValueReference>
-                <operator>Contains</operator>
-                <rightValue>
-                    <stringValue>Skipped not necessary</stringValue>
-                </rightValue>
-            </conditions>
             <connector>
                 <targetReference>Check_Fields_for_Updates</targetReference>
             </connector>
             <label>Summary Contains Test</label>
         </rules>
     </decisions>
-    <description>Flow to iterate through all Comments and Skipped fields on a Behavior Evaluation, and write their values to the Behavior Evaluation Summary field each time an Evaluation is created or edited.</description>
     <formulas>
         <name>FormattedTestComment</name>
         <dataType>String</dataType>
-        <expression>&lt;b&gt;{!TestName}&lt;/b&gt;&amp;&apos;: &apos;&amp;{!TestComments}</expression>
+        <expression>&apos;&lt;html&gt;&lt;b&gt;&apos;&amp;{!TestName}&amp;&apos;: &lt;/b&gt;&apos;&amp;{!TestComments}&amp;&apos;&lt;br/&gt;&lt;/html&gt;&apos;</expression>
     </formulas>
     <formulas>
         <name>LineBreak</name>
@@ -552,13 +188,12 @@
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
     <recordUpdates>
-        <description>Updates Behavior Evaluation Summary field on the Evaluation with the updated EvalSummary value.</description>
         <name>Update_Behavior_Summary</name>
         <label>Update Behavior Summary</label>
         <locationX>176</locationX>
         <locationY>1103</locationY>
         <inputAssignments>
-            <field>Evaluation_Behavior_Summary__c</field>
+            <field>Behavior_Evaluation_Summary__c</field>
             <value>
                 <elementReference>EvalSummary</elementReference>
             </value>
@@ -575,7 +210,14 @@
         <recordTriggerType>CreateAndUpdate</recordTriggerType>
         <triggerType>RecordAfterSave</triggerType>
     </start>
-    <status>InvalidDraft</status>
+    <status>Active</status>
+    <variables>
+        <name>EvalField</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
     <variables>
         <name>EvalFields</name>
         <dataType>String</dataType>

@@ -17,9 +17,7 @@ public without sharing class TriggerRequest {
     public List<SObject> oldRecords { get; set; }
     public Map<Id, SObject> newRecordMap { get; set; }
     public Map<Id, SObject> oldRecordMap { get; set; }
-
     public String action { get { return isBefore ? 'Before' : 'After'; } }
-
     public String process {
         get {
             return isInsert ? 'Insert'
@@ -28,6 +26,8 @@ public without sharing class TriggerRequest {
                                     : 'Unknown';
         }
     }
+
+
     /**
      * TODO: Implement ENUMS for TriggerProcess
      <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
@@ -72,6 +72,7 @@ public without sharing class TriggerRequest {
     public TriggerRequest SetNewRecordMap(Map<Id, SObject> data) { newRecordMap = data; return this; }
     public TriggerRequest SetOldRecords(List<SObject> data) { oldRecords = data; return this; }
     public TriggerRequest SetOldRecordMap(Map<Id, SObject> data) { oldRecordMap = data; return this; }
+
 
     public static TriggerRequest FromSvcRequest(ServiceRequest svc) {
         if (!svc.Parameters.containsKey('TriggerRequest')) { return null; }

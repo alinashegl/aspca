@@ -129,28 +129,28 @@
             lastTab: 'ppt2'
         } ,
         pr: {
-            nextTab: 'pcd1',
-            lastTab: 'ppt'
-        } ,
-        pcd1: {
-            nextTab: 'pcd2',
-            lastTab: 'pr'
-        } ,
-        pcd2: {
             nextTab: 'prg1',
-            lastTab: 'pcd1'
+            lastTab: 'ppt'
         } ,
         prg1: {
             nextTab: 'prg2',
-            lastTab: 'pcd2'
+            lastTab: 'pr'
         } ,
         prg2: {
-            nextTab: 'pdi1' ,
+            nextTab: 'pcd1' ,
             lastTab: 'prg1'
+        } ,
+        pcd1: {
+            nextTab: 'pcd2',
+            lastTab: 'prg2'
+        } ,
+        pcd2: {
+            nextTab: 'pdi1',
+            lastTab: 'pcd1'
         } ,
         pdi1: {
             nextTab: 'pdi2' ,
-            lastTab: 'prg2'
+            lastTab: 'pcd2'
         } ,
         pdi2: {
             nextTab: 'pdi3',
@@ -167,7 +167,8 @@
                 'init': 'init' ,
                 'handleSelect' : 'handleSelect' ,
                 'loadPuppyTabs' : 'loadPuppyTabs' ,
-                'render' : 'render'
+                'render' : 'render' ,
+                'handleCaution' : 'handleCaution'
             };
 
             if(process[currentProcess] == 'init') {
@@ -180,6 +181,8 @@
                 this.loadPuppyTabs(cmp, event);
             }else if(process[currentProcess] == 'render') {
                 this.render(cmp, event);
+            }else if(process[currentProcess] == 'handleCaution') {
+                this.handleCaution(cmp, event);
             }
             else {
                 console.log('Unexpected Error occured ');
@@ -189,7 +192,35 @@
         cmp.set('v.testTypes', this.testType);
         this.loadBehaviorReport(cmp, event);
     } ,
+    handleCaution: function(cmp, event) {
+        var rid = cmp.get('v.recordId');
+        var apiName = 'Caution__c';
+        var ref = cmp.find('cautionInput');
+        var state = ref.get('v.checked')
+        var status = 'status'
+        var t;
 
+        var params = {
+            apiName: apiName ,
+            values: state ,
+            recordId : rid
+        };
+        this.sendPromise(cmp, 'c.putBoolean', params, status)
+        .then(
+            function(response) {
+                if(response[status] != 'SUCCESS') {
+                    var item = response[status];
+                    var data = item['data'];
+                    var dataitem = data['item'];
+                    cmp.set('v.UseCaution', dataitem);
+                }
+            }
+        ).catch(
+          function(error) {
+              console.log('Error Message', error);
+          }
+        );
+    } ,
     render: function (cmp, event) {
         console.log('AFTER RENDER');
     } ,
@@ -325,15 +356,24 @@
                     var result = response[status];
                     m_item = result['data'];
                     console.log('Items', m_item);
-                    if(m_item.length == 0) {
-                        confirm('SUCCESS');
+                    if(m_item['item'].endsWith(':')) {
+                        cmp.find('lib').showToast({
+                            'title': 'Success' ,
+                            'message': 'Evaluation has been completed successfully' ,
+                            'variant': 'success'
+                        });
                     }else {
                         console.log('Result',result);
                         var data = result['data'];
                         console.log('Data',data);
                         var item = data['item'];
                         console.log('Item', item);
-                        confirm(JSON.stringify(item));
+                        //confirm(JSON.stringify(item));
+                        cmp.find('lib').showToast({
+                            'title': 'ERROR' ,
+                            'message': item,
+                            'variant': 'error'
+                        });
                     }
 
                 }
@@ -359,7 +399,7 @@
             key: cmp.get('v.recordId')
         };
         var attr = 'behaviorReport';
-        var data = [];
+        var data;
         this.sendPromise(cmp, 'c.getBehaviorReport', params, attr)
         .then(
             function(response, data) {
@@ -368,17 +408,20 @@
                 if(response[attr].IsAdult == true) {
                     cmp.set('v.IsAdult', true);
                     console.log('IS ADULT TEST');
-
                     if(response[attr].IsDogFighting == true) {
                         cmp.set('v.IsDogFighting', true);
                         console.log('Is Dog Fighting?', response[attr].IsDogFighting);
                     }
                     cmp.set('v.tabId', 'behaveInKennel');
+                    data = 'Adult';
+                    this.processingProcess(cmp, 'loadTabs');
                 }
                 if(response[attr].IsPuppy == true) {
                     cmp.set('v.IsPuppy', true);
                     console.log('IS PUPPY TEST');
                     cmp.set('v.tabId', 'pbik');
+                    data = 'Puppy'
+                    this.processingProcess(cmp, 'loadPuppyTabs');
                 }
 
             }
@@ -387,12 +430,17 @@
                 console.log('Error Message',error);
             }
         );
-        if(data != null) {
+        console.log('Data', data);
+        if(data == undefined) {
+            if (data == 'Adult') {
+
+            }
+            if (data == 'Puppy') {
+
+            }
             this.processingProcess(cmp, 'loadTabs');
             this.processingProcess(cmp, 'loadPuppyTabs');
-
         }
-
     } ,
 
     loadBehaviorInKennel : function(cmp, event) {
@@ -470,7 +518,6 @@
         };
         var attr = 'resourceGuardingTestPart1';
         this.sendRequest(cmp, 'c.getResourceGuardingOnePF', params, attr);
-        console.log(cmp.get('v.resourceGuardingTestPart1'));
 
     } ,
     loadResourceTF : function (cmp, event) {
@@ -656,7 +703,7 @@
         .then(
             function(response) {
                 cmp.set('v.oppositeSexDogTestPart3', response[attr]);
-                cmp.set('v.tabId', 'behaveInKennel');
+                //cmp.set('v.tabId', 'behaveInKennel');
             }
         ).catch(
             function(error) {
@@ -728,28 +775,28 @@
         var params = {
             key: cmp.get('v.recordId')
         };
-        var attr = 'puppyResourceGuardingPart1';
+        var attr = 'puppyChildDollPart1';
         this.sendRequest(cmp, 'c.getPuppyChildDollOne', params, attr);
     } ,
     loadPuppyChildDollTwo: function (cmp, event) {
         var params = {
             key: cmp.get('v.recordId')
         };
-        var attr = 'puppyResourceGuardingPart2';
+        var attr = 'puppyChildDollPart2';
         this.sendRequest(cmp, 'c.getPuppyChildDollTwo', params, attr);
     } ,
     loadPuppyResourceGuardingOne: function (cmp, event) {
         var params = {
             key: cmp.get('v.recordId')
         };
-        var attr = 'puppyChildDollPart1';
+        var attr = 'puppyResourceGuardingPart1';
         this.sendRequest(cmp, 'c.getPuppyResourceGuardingPartOne', params, attr);
     } ,
     loadPuppyResourceGuardingTwo: function (cmp, event) {
         var params = {
             key: cmp.get('v.recordId')
         };
-        var attr = 'puppyChildDollPart2';
+        var attr = 'puppyResourceGuardingPart2';
         this.sendRequest(cmp, 'c.getPuppyResourceGuardingPartTwo', params, attr);
     } ,
     loadPuppyDogInteractionOne: function (cmp, event) {
@@ -777,7 +824,9 @@
             function(response) {
                 console.log('End of Puppy', response[attr]);
                 cmp.set('v.puppyDogInteractionPart3', response[attr]);
-                cmp.set('v.tabId', 'pbik');
+                if(cmp.get('v.IsPuppy')) {
+                    cmp.set('v.tabId', 'pbik');
+                }
             }
         ).catch(
             function(error) {
@@ -803,7 +852,7 @@
         this.loadPuppyDogInteractionOne(cmp, event);
         this.loadPuppyDogInteractionTwo(cmp, event);
         this.loadPuppyDogInteractionThree(cmp, event);
-        //cmp.set('v.tabId', 'pbik');
+
     } ,
 
     buttonAction : function(cmp, event, button) {
@@ -830,29 +879,70 @@
     handleNextTab : function(cmp, event, button) {
         var c = cmp.get('v.tabId');
         var x = this.tablist[c];
-        if(cmp.get('v.IsDogFighting')==false) {
-            if(c == 'spt2') {
-                x = c['nextTab'];
-            }
-        }
-        cmp.set('v.tabId' , x['nextTab']);
+        var i_DogFight = cmp.get('v.IsDogFighting');
+        //console.log(i_DogFight);
+        //console.log(i_IsAdult);
         if((x['nextTab'] == 'ssdt1')&& (cmp.get('v.UseCaution') == true))  {
-            confirm('USE EXTRA CAUTION FOR REAL DOG');
+            cmp.find('lib').showToast({
+                'title': 'CAUTION' ,
+                'message': 'USE CAUTION FOR REAL DOG TEST',
+                'variant': 'error'
+            });
+            /*
+            cmp.find('overlayLib').showCustomModal({
+                header: 'CAUTION',
+                body: 'USE CAUTION FOR REAL DOG TEST',
+                showCloseButton: true
+            });
+            */
+            confirm('Use Caution for Real Dog Test');
         }
         if((x['nextTab'] == 'osdt1')&& (cmp.get('v.UseCaution') == true)) {
-             confirm('USE EXTRA CAUTION FOR REAL DOG');
+             cmp.find('lib').showToast({
+                'title': 'CAUTION' ,
+                'message': 'USE CAUTION FOR REAL DOG TEST',
+                'variant': 'error'
+             });
+             confirm('Use Caution for Real Dog Test');
         }
+        if(i_DogFight == false || i_DogFight == undefined) {
+                    if(x['nextTab'] == 'fdit') {
+                        x = this.tablist['fdit'];
+                    }
+                    cmp.set('v.tabId' , x['nextTab']);
+                }else {
+                    cmp.set('v.tabId' , x['nextTab']);
+                }
         $A.get('e.force:refreshView').fire();
     } ,
     handlePrevTab: function(cmp, event, button) {
         var c = cmp.get('v.tabId');
         var x = this.tablist[c];
+        var i_DogFight = cmp.get('v.IsDogFighting');
         cmp.set('v.tabId', x['lastTab']);
+        if(i_DogFight == false || i_DogFight == undefined) {
+            if(x['lastTab'] == 'fdit') {
+                x = this.tablist['fdit'];
+            }
+            cmp.set('v.tabId' , x['lastTab']);
+        }else {
+            cmp.set('v.tabId' , x['lastTab']);
+        }
         if((x['lastTab'] == 'ssdt1')&& (cmp.get('v.UseCaution') == true)) {
-                    confirm('USE CAUTION');
+                    cmp.find('lib').showToast({
+                        'title': 'CAUTION' ,
+                        'message': 'USE CAUTION FOR REAL DOG TEST',
+                        'variant': 'error'
+                    });
+                    confirm('Use Caution for Real Dog Test');
                 }
         if((x['lastTab'] == 'osdt1')&& (cmp.get('v.UseCaution') == true)) {
-                    confirm('USE CAUTION');
+                    cmp.find('lib').showToast({
+                        'title': 'CAUTION' ,
+                        'message': 'USE CAUTION FOR REAL DOG TEST',
+                        'variant': 'error'
+                    });
+                    confirm('Use Caution for Real Dog Test');
                 }
         $A.get('e.force:refreshView').fire();
     } ,
@@ -866,21 +956,19 @@
             cmp.set('v.IsAdult', true);
             cmp.set('v.iShowModal',false);
             this.processingProcess(cmp, 'loadTabs');
-            $A.get('e.force:refreshView').fire();
+            //$A.get('e.force:refreshView').fire();
         }else if(test =='Puppy') {
             cmp.set('v.IsPuppy', true);
             cmp.set('v.iShowModal', false);
             this.processingProcess(cmp, 'loadPuppyTabs');
-            $A.get('e.force:refreshView').fire();
+            //$A.get('e.force:refreshView').fire();
         }else if(test =='Dog Fighting') {
            cmp.set('v.IsAdult', true);
            cmp.set('v.IsDogFighting', true);
            cmp.set('v.iShowModal',false);
            this.processingProcess(cmp, 'loadTabs');
            console.log('DOG FIGHTING CASE');
-           $A.get('e.force:refreshView').fire();
+           //$A.get('e.force:refreshView').fire();
         }
     }
-
-
 });

@@ -12,12 +12,6 @@ public with sharing class BehaviorEvaluationPageController {
     public static Behavior_Evaluation__c m_behaviorEvaluation = new Behavior_Evaluation__c();
 
 
-    @AuraEnabled(Cacheable=true)
-    public static List<Behavior_Evaluation__c> getBehaviorEvalsByAnimal (String key) {
-        List<Behavior_Evaluation__c> behaviorEvaluations = daoBehaviorEvaluations.getAllByAnimalIdString(key);
-        if (behaviorEvaluations.isEmpty()) {return null ; }
-        return behaviorEvaluations;
-    }
     @AuraEnabled
     public static Behavior_Evaluation__c getOne (String key) {
         Behavior_Evaluation__c behaviorEvaluation = daoBehaviorEvaluations.findOne(key);
@@ -25,24 +19,17 @@ public with sharing class BehaviorEvaluationPageController {
         m_behaviorEvaluation = behaviorEvaluation;
         return behaviorEvaluation;
     }
-    @AuraEnabled
-    public static Behavior_Evaluation__c getOneByAnimalId (String key) {
-        Behavior_Evaluation__c behaviorEvaluation = daoBehaviorEvaluations.getOneByAnimalIdString(key);
-        if( behaviorEvaluation.Name.isWhitespace() ) { return null ; }
-        return behaviorEvaluation;
-    }
-    @AuraEnabled
-    public static String getAnimalId(String key) {
-        Behavior_Evaluation__c behaviorEvaluation = daoBehaviorEvaluations.getOneByAnimalId(key);
-        String m_id = behaviorEvaluation.Animal__c;
-        return  m_id;
-    }
+
     /*
     * Private Methods
      */
     private static EvaluationWrapper newWrapper(SObjectField field, Behavior_Evaluation__c evaluation) {
         ControllerHelper.Properties prop = ControllerHelper.getFieldProperties(field);
         List<Picklist_Description_Config__mdt> sConfigs = MetadataUtil.getFieldValues(prop.id);
+        Map<String, Integer> hashMap = new Map<String, Integer>();
+        for (Picklist_Description_Config__mdt config : sConfigs) {
+            hashMap.put(config.DeveloperName, sConfigs.indexOf(config));
+        }
         EvaluationWrapper.FieldContents commentField = new EvaluationWrapper.FieldContents();
         commentField.id = MetadataUtil.commentField(prop.id);
         if (evaluation.get(commentField.id) != null) {
@@ -57,8 +44,7 @@ public with sharing class BehaviorEvaluationPageController {
         }else {
             skipField.value = '';
         }
-
-
+        List<PicklistEntry> entries = field.getDescribe().getPicklistValues();
 
         List<EvaluationWrapper.Options> zeroOption = new List<EvaluationWrapper.Options>();
         List<EvaluationWrapper.Options> nOptions = new List<EvaluationWrapper.Options>();
@@ -67,29 +53,46 @@ public with sharing class BehaviorEvaluationPageController {
         List<EvaluationWrapper.Options> iOptions = new List<EvaluationWrapper.Options>();
 
         List<String> strings = new List<String>();
+        Integer index = 0;
         if (evaluation.get(field) != null) { strings = evaluation.get(field).toString().split(';'); }
-        System.debug(strings);
-        for (Picklist_Description_Config__mdt config : sConfigs) {
-            EvaluationWrapper.Options options = new EvaluationWrapper.Options();
-            options.label = config.Field_Value__c;
-            options.pleApiName = config.Field_API_Name__c;
-            options.longDesc = config.Field_Description__c;
-            if (config.Value_Category__c.equals('0')) {
-                zeroOption.add(options);
-            }else if (config.Value_Category__c.equals('1')) {
-                nOptions.add(options);
-            }else if (config.Value_Category__c.equals('2')) {
-                rOptions.add(options);
-            }else if (config.Value_Category__c.equals('3')) {
-                aOptions.add(options);
-            }else if (config.Value_Category__c.equals('4')) {
-                iOptions.add(options);
-            }
-            if (!strings.isEmpty()) {
-                if (strings.contains(options.label)) {
-                    options.IsSelected = true;
-                }else if(!strings.contains(options.label)) {
-                    options.IsSelected = false;
+        for (PicklistEntry entry : prop.fieldResult.picklistValues) {
+            String key = '';
+            for (Picklist_Description_Config__mdt config : sConfigs) {
+                if (config.Field_API_Name__c == field.getDescribe().name) {
+                    if (config.Field_Value__c == entry.label) {
+                        key = config.DeveloperName;
+                        Integer i = hashMap.get(key);
+                        Picklist_Description_Config__mdt iConfig = sConfigs[i];
+                        System.debug(iConfig);
+
+                        EvaluationWrapper.Options options = new EvaluationWrapper.Options();
+                        options.label = entry.label;
+                        options.pleApiName = iConfig.Field_API_Name__c != null ? iConfig.Field_API_Name__c : field.getDescribe().name;
+                        options.longDesc = iConfig.Field_Description__c != null ? '- ' + iConfig.Field_Description__c : '';
+                        try {
+                            if (iConfig.Value_Category__c.equals('0')) {
+                                zeroOption.add(options);
+                            }else if (iConfig.Value_Category__c.equals('1')) {
+                                nOptions.add(options);
+                            }else if (iConfig.Value_Category__c.equals('2')) {
+                                rOptions.add(options);
+                            }else if (iConfig.Value_Category__c.equals('3')) {
+                                aOptions.add(options);
+                            }else if (iConfig.Value_Category__c.equals('4')) {
+                                iOptions.add(options);
+                            }
+                            if (!strings.isEmpty()) {
+                                if (strings.contains(options.label)) {
+                                    options.IsSelected = true;
+                                }else if(!strings.contains(options.label)) {
+                                    options.IsSelected = false;
+                                }
+                            }
+                        }catch(Exception e) {
+                            System.debug(e);
+                        }
+
+                    }
                 }
             }
         }
@@ -102,8 +105,8 @@ public with sharing class BehaviorEvaluationPageController {
          */
 
         EvaluationWrapper wrapper = new EvaluationWrapper();
-        wrapper.id = prop.id;
-        wrapper.label = prop.label;
+        wrapper.id = field.getDescribe().name;
+        wrapper.label = field.getDescribe().label;
         wrapper.mZeroOptions = zeroOption;
         wrapper.mNotConcerningOptions = nOptions;
         wrapper.mRedFlagOptions = rOptions;
@@ -111,7 +114,7 @@ public with sharing class BehaviorEvaluationPageController {
         wrapper.mInconclusiveOptions = iOptions;
         wrapper.testComments = commentField;
         wrapper.skipField = skipField;
-        wrapper.isSkipped = !skipField.value.isWhitespace() ? true : false ;
+        //wrapper.isSkipped = skipField.value ? true : false ;
 
         return wrapper;
     }
@@ -144,25 +147,6 @@ public with sharing class BehaviorEvaluationPageController {
         List<TabContentUtil> tabConentUtils = new List<TabContentUtil>();
         TabContentUtil utils = new TabContentUtil();
         Behavior_Evaluation__c behaviorEvaluation = daoBehaviorEvaluations.findOne(key);
-        //String aid = behaviorEvaluation.Animal__c;
-        //Animal__c cAnimal = daoAnimal.findOne(aid);
-        //Case aCase = daoCase.findOne(String.valueOf(cAnimal.Case__c));
-        //utils.id = String.isNotEmpty(cAnimal.Id) ? 'Behavior Report' : iId;
-        //utils.label = String.isNotEmpty(cAnimal.Id) ? 'Behavior Report' : iLabel;
-        //utils.name = String.isNotEmpty(cAnimal.Name) ? cAnimal.Name : iName;
-        //utils.breed = String.isNotEmpty(cAnimal.Breed__c) ? cAnimal.Breed__c : iBreed;
-        //utils.color = String.isNotEmpty(cAnimal.Color__c) ? cAnimal.Color__c : iColor;
-        //utils.caseNumber = String.isNotEmpty(aCase.Id) ? aCase.Id : iCaseNumber;
-        //utils.animalId = String.isNotEmpty(cAnimal.Animal_Field_ID__c) ? cAnimal.Animal_Field_ID__c : iAnimalId;
-        //utils.animalAge = String.isNotEmpty(cAnimal.Age__c) ? cAnimal.Age__c : iAnimalId;
-        //utils.animalSex = String.isNotEmpty(cAnimal.Gender__c) ? cAnimal.Gender__c : iAnimalId;
-        //utils.location = String.isNotEmpty(cAnimal.Animal_Field_ID__c) ? cAnimal.Animal_Field_ID__c : iAnimalId;
-        //utils.currentDate = Date.today();
-        // TODO: refactor after potentialBehaviorIssues and placementRecommendation fields are defined
-        //utils.potentialBehaviorIssues = (List<Object>) iPotBehavIssues.add(dVals);
-        //utils.placementRecommendations =  (List<Object>) iPlReccs.add(dVals);
-        //TODO: refactor after Behavior Summary field and process id defined
-        //utils.behaviorSummary = iBehSummary;
         utils.IsMuzzled = behaviorEvaluation.Is_Muzzled__c;
         utils.UseCaution = behaviorEvaluation.Caution__c;
         utils.IsAdult = behaviorEvaluation.Evaluation_Subtype__c == 'Adult Animal' ? true : false;
@@ -173,7 +157,10 @@ public with sharing class BehaviorEvaluationPageController {
         }else {
             utils.IsDogFighting = false;
         }
-
+        EvaluationWrapper.FieldContents contents = new EvaluationWrapper.FieldContents();
+        contents.id = Behavior_Evaluation__c.Caution__c.getDescribe().name;
+        contents.value = behaviorEvaluation.Caution__c;
+        utils.Caution = contents;
 
 
         return utils;
@@ -558,13 +545,12 @@ public with sharing class BehaviorEvaluationPageController {
      */
 
     @AuraEnabled
-    public static Map<String, Object> updateEval(String apiName,String values, String recordId) {
+    public static Map<String, Object> updateEval(String apiName, Object values, String recordId) {
         Map<String, Object> params = new Map<String, Object>{
                 'apiName' => apiName ,
                 'values' => values ,
                 'recordId' => recordId
         };
-        System.debug(params);
 
         Map<String, Object> request = new Map<String, Object>{
                 'service' => Services.BehaviorEvaluation ,
@@ -675,6 +661,137 @@ public with sharing class BehaviorEvaluationPageController {
                 }
         };
 
+        List<String> relatedVals = new List<String>();
+        if (apiName == 'Skipped_OSD_P1__c') {
+            relatedVals.add('Skipped_OSD_P2__c');
+            relatedVals.add('Skipped_OSD_P3__c');
+        }else if (apiName == 'Skipped_SSD_P1__c') {
+            System.debug('IS SAME SEX DOG');
+            relatedVals.add('Skipped_SSD_P2__c');
+            relatedVals.add('Skipped_SSD_P3__c');
+        }else if (apiName == 'Puppy_Skipped_DI_P1__c') {
+            relatedVals.add('Puppy_Skipped_DI_P2__c');
+            relatedVals.add('Puppy_Skipped_DI_P3__c');
+        }
+
+        for (String nApiName : relatedVals) {
+            System.debug('RELATED RECORD API NAME ===> ' + nApiName);
+            Map<String, Object> params1 = new Map<String, Object>{
+                    'apiName' => nApiName ,
+                    'values' => values ,
+                    'recordId' => recordId
+            };
+            Map<String, Object> request1 = new Map<String, Object>{
+                    'service' => Services.BehaviorEvaluation ,
+                    'action' => 'updatePicklist' ,
+                    'params' => params1 ,
+                    'fields' => new List<Map<String, Object>>{
+                            new Map<String, Object>{
+                                    'name' => 'apiName' ,
+                                    'type' => 'string' ,
+                                    'required' => true,
+                                    'errors' => new Map<String, Object>{
+                                            'ValidationError' => new Map<String, String>{
+                                                    'message' => 'Parameter {0} is empty'
+                                            }
+                                    }
+                            } ,
+                            new Map<String, Object>{
+                                    'name' => 'values' ,
+                                    'type' => 'list' ,
+                                    'required' => true,
+                                    'errors' => new Map<String, Object>{
+                                            'ValidationError' => new Map<String, String>{
+                                                    'message' => 'Parameter {0} is empty'
+                                            }
+                                    }
+                            } ,
+                            new Map<String, Object>{
+                                    'name' => 'recordId' ,
+                                    'type' => 'string' ,
+                                    'required' => true ,
+                                    'errors' => new Map<String, Object>{
+                                            'ValidationError' => new Map<String, String>{
+                                                    'message' => 'Parameter {0} is empty'
+                                            }
+                                    }
+                            }
+                    } ,
+                    'response' => new List<Map<String, Object>>{
+                            new Map<String, Object>{
+                                    'name' => 'item',
+                                    'type' => 'object',
+                                    'required' => true,
+                                    'apiName' => 'item',
+                                    'errors' => new Map<String, Object> {}
+                            }
+                    }
+            };
+            Map<String, Object> response1 = new Map<String, Object>();
+            service_Validation.proccessRequest(request1, response1);
+            System.debug('INDEX OF RELATED FIELD ====>  ' +  String.valueOf(relatedVals.indexOf(nApiName)) +
+                    response1.values());
+        }
+        Map<String, Object> response = new Map<String, Object>();
+
+        service_Validation.proccessRequest(request, response);
+        return response;
+    }
+
+    @AuraEnabled
+    public static Map<String, Object> putBoolean(String apiName, Boolean values, String recordId) {
+        Map<String, Object> params = new Map<String, Object>{
+                'apiName' => apiName ,
+                'values' => values ,
+                'recordId' => recordId
+        };
+        System.debug('PUT BOOL PARAMS' + params);
+        Map<String, Object> request = new Map<String, Object>{
+                'service' => Services.BehaviorEvaluation ,
+                'action' => 'putBoolean' ,
+                'params' => params ,
+                'fields' => new List<Map<String, Object>>{
+                        new Map<String, Object>{
+                                'name' => 'apiName' ,
+                                'type' => 'string' ,
+                                'required' => true,
+                                'errors' => new Map<String, Object>{
+                                        'ValidationError' => new Map<String, String>{
+                                                'message' => 'Parameter {0} is empty'
+                                        }
+                                }
+                        } ,
+                        new Map<String, Object>{
+                                'name' => 'values' ,
+                                'type' => 'boolean' ,
+                                'required' => true,
+                                'errors' => new Map<String, Object>{
+                                        'ValidationError' => new Map<String, String>{
+                                                'message' => 'Parameter {0} is empty'
+                                        }
+                                }
+                        } ,
+                        new Map<String, Object>{
+                                'name' => 'recordId' ,
+                                'type' => 'string' ,
+                                'required' => true ,
+                                'errors' => new Map<String, Object>{
+                                        'ValidationError' => new Map<String, String>{
+                                                'message' => 'Parameter {0} is empty'
+                                        }
+                                }
+                        }
+                } ,
+                'response' => new List<Map<String, Object>>{
+                        new Map<String, Object>{
+                                'name' => 'item',
+                                'type' => 'object',
+                                'required' => true,
+                                'apiName' => 'item',
+                                'errors' => new Map<String, Object> {}
+                        }
+                }
+        };
         Map<String, Object> response = new Map<String, Object>();
 
         service_Validation.proccessRequest(request, response);

@@ -39,9 +39,11 @@ public inherited sharing virtual class cq {
     // START: SELECTOR BINDINGS
 
     public virtual DomainActionBindingSelector DomainActionBindings() {
-        return (DomainActionBindingSelector) bindingFor(
-                Domain_Action_Binding__mdt.SObjectType
-                , DomainActionBindingSelector.class);
+        return (DomainActionBindingSelector) bindingFor(Domain_Action_Binding__mdt.SObjectType, DomainActionBindingSelector.class);
+    }
+
+    public virtual BehaviorEvaluationDomain BehaviorEvaluationDomainBindings() {
+        return (BehaviorEvaluationDomain) bindingFor(Behavior_Evaluation__c.SObjectType, BehaviorEvaluationDomain.class);
     }
 
     // END::: SELECTOR BINDINGS

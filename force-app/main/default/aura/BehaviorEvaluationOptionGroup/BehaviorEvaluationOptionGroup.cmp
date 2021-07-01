@@ -9,6 +9,8 @@
     <aura:attribute name="recordId" type="String" />
     <aura:attribute name="image" type="Aura.Component[]" />
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <lightning:notificationsLibrary aura:id="lib" />
+    <lightning:overlayLibrary aura:id="overlayLib" />
 
     <table class="slds-box slds-p-top_medium" width="100%">
         <div class="grid-container">
@@ -22,7 +24,7 @@
                             </td>
                             <td align="left">
                                 <strong> {!options.label}</strong>
-                                <aura:if isTrue="{!options.longDesc != null }"> - {!options.longDesc}</aura:if>
+                                <aura:if isTrue="{!options.longDesc != null }"> &nbsp;{!options.longDesc}</aura:if>
                             </td>
                         </tr>
                     </aura:iteration>
