@@ -86,25 +86,34 @@ public with sharing  class service_BehaviorEvaluation extends service_Base{
                 Schema.SObjectField field = behaviorEvalFieldMap.get(key);
                 if (field.getDescribe().isRestrictedPicklist()) {
                     List<PicklistEntry> entries = field.getDescribe().getPicklistValues();
+                    Map<String, Integer> entriesHashMap = new Map<String, Integer>();
+                    for (PicklistEntry e : entries) {
+                        entriesHashMap.put(e.label, entries.indexOf(e));
+                    }
                     List<String> nEntries = new List<String>();
                     List<String> rEntries = new List<String>();
                     Map<String, PicklistEntry> entriesByStrings = SObjectFieldMapHelper.entriesByStrings(field.getDescribe());
-                    System.debug('@@@KEY SET => ' + entriesByStrings.keySet());
+                    //System.debug('@@@KEY SET => ' + entriesByStrings.keySet());
                     List<String> mStrings = fieldValueMap.get(key);
                     System.debug('@@@MSTRINGS ====> ' + mStrings);
                     for (String str : mStrings) {
                         System.debug(str);
                         Map<String, Object> objectMap = (Map<String, Object>) JSON.deserializeUntyped(str);
-                        System.debug('@@@@@@OBJECT MAP' + objectMap);
+                        String lbl = (String) objectMap.get('label');
+                        Integer k = entriesHashMap.get(lbl);
+                        PicklistEntry e = entries.get(k);
+                        System.debug('@@@@@@ OBJECT MAP' + objectMap);
+                        System.debug('@@@ OBJ VAL=====> ' + lbl);
                         if (objectMap.get('isSelected')==true) {
-                            nEntries.add(entriesByStrings.get(String.valueOf(objectMap.get('label'))).value);
+                            nEntries.add(e.label);
                         }else if (objectMap.get('isSelected')==false) {
-                            rEntries.add(entriesByStrings.get(String.valueOf(objectMap.get('label'))).value);
+                            rEntries.add(e.label);
                         }else {
                             System.debug('ERROR OCCURED WITH FIELD' + str);
                         }
                         message = 'FIELD IS EMPTY - UPDATED FIELD';
                     }
+
                     //String j = String.join(values, ';');
                     if (evaluation.get(field) == null) {
                         evaluation.put(field, String.join(nEntries, ';'));

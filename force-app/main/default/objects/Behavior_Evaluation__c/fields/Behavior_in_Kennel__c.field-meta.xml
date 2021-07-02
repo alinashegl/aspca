@@ -41,11 +41,6 @@
                 <label>Hyperaroused</label>
             </value>
             <value>
-                <fullName>Did not approach the tester-Moderately fearful</fullName>
-                <default>false</default>
-                <label>Did not approach the tester-Moderately fearful</label>
-            </value>
-            <value>
                 <fullName>Aggressive in cage only</fullName>
                 <default>false</default>
                 <label>Aggressive in cage only</label>
@@ -68,8 +63,13 @@
             <value>
                 <fullName>Moderately fearful</fullName>
                 <default>false</default>
-                <isActive>false</isActive>
                 <label>Moderately fearful</label>
+            </value>
+            <value>
+                <fullName>Did not approach the tester-Moderately fearful</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Did not approach the tester-Moderately fearful</label>
             </value>
             <value>
                 <fullName>Threatens</fullName>

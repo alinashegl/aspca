@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Report_for_realted_cases_and_Contact_Roles</fullName>
+    <availability>online</availability>
+    <description>This custom button can provide quick access to a report of any cases and contact role detail for a given contact.</description>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>Case &amp; Contact Role Report</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <url>https://na15.salesforce.com/00Oi00000055LAZ?pv0={!Contact.Name}</url>
+</WebLink>

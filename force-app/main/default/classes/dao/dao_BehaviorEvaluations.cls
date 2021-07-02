@@ -67,7 +67,6 @@ public with sharing class dao_BehaviorEvaluations extends sql_Dao{
         addField(Behavior_Evaluation__c.Comments_Pleasant_Touch__c);
         addField(Behavior_Evaluation__c.Comments_SB_P1__c);
         addField(Behavior_Evaluation__c.Comments_SB_P2__c);
-        addField(Behavior_Evaluation__c.RecordTypeId);
         addField(Behavior_Evaluation__c.Evaluation_Subtype__c);
         addField(Behavior_Evaluation__c.Behavior_in_Kennel__c);
         addField(Behavior_Evaluation__c.Comments_BIK__c);
