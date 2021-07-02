@@ -6,7 +6,7 @@
  */
 
 public with sharing class BehaviorEvaluationPageController {
-    public static dao_BehaviorEvaluations daoBehaviorEvaluations = new dao_BehaviorEvaluations();
+    public static BehaviorEvaluationsSelector selector = new BehaviorEvaluationsSelector();
     public static dao_Animal daoAnimal = new dao_Animal();
     public static dao_Case daoCase = new dao_Case();
     public static Behavior_Evaluation__c m_behaviorEvaluation = new Behavior_Evaluation__c();
@@ -14,7 +14,8 @@ public with sharing class BehaviorEvaluationPageController {
 
     @AuraEnabled
     public static Behavior_Evaluation__c getOne (String key) {
-        Behavior_Evaluation__c behaviorEvaluation = daoBehaviorEvaluations.findOne(key);
+        //Behavior_Evaluation__c behaviorEvaluation = daoBehaviorEvaluations.findOne(key);
+        Behavior_Evaluation__c behaviorEvaluation = selector.GetOneById(Id.valueOf(key));
         if (behaviorEvaluation == null) { return null;}
         m_behaviorEvaluation = behaviorEvaluation;
         return behaviorEvaluation;
@@ -146,7 +147,7 @@ public with sharing class BehaviorEvaluationPageController {
         String iBehSummary = 'none defined';
         List<TabContentUtil> tabConentUtils = new List<TabContentUtil>();
         TabContentUtil utils = new TabContentUtil();
-        Behavior_Evaluation__c behaviorEvaluation = daoBehaviorEvaluations.findOne(key);
+        Behavior_Evaluation__c behaviorEvaluation = selector.GetOneById(Id.valueOf(key));
         utils.IsMuzzled = behaviorEvaluation.Is_Muzzled__c;
         utils.UseCaution = behaviorEvaluation.Caution__c;
         utils.IsAdult = behaviorEvaluation.Evaluation_Subtype__c == 'Adult Animal' ? true : false;
@@ -534,7 +535,7 @@ public with sharing class BehaviorEvaluationPageController {
 
     @AuraEnabled
     public static Boolean getCautionStatus(String key) {
-        Behavior_Evaluation__c evaluation = daoBehaviorEvaluations.findOne(key);
+        Behavior_Evaluation__c evaluation = selector.GetOneById(Id.valueOf(key));
         Boolean bool;
         bool = evaluation.Caution__c ? true : false;
         return bool;

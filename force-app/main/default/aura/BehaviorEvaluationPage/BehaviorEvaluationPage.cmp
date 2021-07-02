@@ -212,14 +212,14 @@
                             </lightning:layoutItem>
                         </lightning:layout>
                     </lightning:tab>
-                    <lightning:tab label="Social Behavior Part 1" id="sbt1">
+                    <lightning:tab label="Social Behavior - Part 1" id="sbt1">
                         <lightning:layout multipleRows="true">
                             <lightning:layoutItem size="12">
                                 <div class="slds-align_absolute-center" style="height:3rem">
                                     <h1 class="tabHeader">Social Behavior - Part 1</h1>
                                 </div>
                                 <div class="slds-align_absolute-center">
-                                    <p class="tabDesc">Part 1: Loose in Room, No Interaction invited</p>
+                                    <p class="tabDesc">Loose in Room, No Interaction invited</p>
                                 </div>
                                 <br></br>
                                 <aura:iteration items="{!v.socialBehaviorTestPart1}" var="variable">
@@ -268,14 +268,14 @@
                             </lightning:layoutItem>
                         </lightning:layout>
                     </lightning:tab>
-                    <lightning:tab label="Social Behavior Part 2" id="sbt2">
+                    <lightning:tab label="Social Behavior - Part 2" id="sbt2">
                         <lightning:layout multipleRows="true">
                             <lightning:layoutItem size="12">
                                 <div class="slds-align_absolute-center" style="height:3rem">
                                     <h1 class="tabHeader">Social Behavior - Part 2</h1>
                                 </div>
                                 <div class="slds-align_absolute-center">
-                                    <p class="tabDesc">Part 2: Loose in room, tester solicits interaction</p>
+                                    <p class="tabDesc">Loose in room, tester solicits interaction</p>
                                 </div>
                                 <br></br>
                                 <aura:iteration items="{!v.socialBehaviorTestPart2}" var="variable">
@@ -520,11 +520,11 @@
                             </lightning:layoutItem>
                         </lightning:layout>
                     </lightning:tab>
-                    <lightning:tab label="Play Tug Part 2" id="pt2">
+                    <lightning:tab label="Play Tug - Part 2" id="pt2">
                         <lightning:layout multipleRows="true">
                             <lightning:layoutItem size="12">
                                 <div class="slds-align_absolute-center" style="height:3rem">
-                                    <h1 class="tabHeader">Play Tug Part 2</h1>
+                                    <h1 class="tabHeader">Play Tug - Part 2</h1>
                                 </div>
                                 <div class="slds-align_absolute-center">
                                     <p class="tabDesc">Tester dropped toy</p>
@@ -935,7 +935,7 @@
                             </lightning:layoutItem>
                         </lightning:layout>
                     </lightning:tab>
-                    <lightning:tab label="Scolding Person Part 1" id="spt1">
+                    <lightning:tab label="Scolding Person - Part 1" id="spt1">
                         <lightning:layout multipleRows="true">
                             <lightning:layoutItem size="12">
                                 <div class="slds-align_absolute-center" style="height:3rem">
@@ -993,11 +993,11 @@
                             </lightning:layoutItem>
                         </lightning:layout>
                     </lightning:tab>
-                    <lightning:tab label="Scolding Person  - Part 2" id="spt2">
+                    <lightning:tab label="Scolding Person - Part 2" id="spt2">
                         <lightning:layout multipleRows="true">
                             <lightning:layoutItem size="12">
                                 <div class="slds-align_absolute-center" style="height:3rem">
-                                    <h1 class="tabHeader">Scolding Person - Part 2 Touch</h1>
+                                    <h1 class="tabHeader">Scolding Person - Part 2</h1>
                                 </div>
                                 <div class="slds-align_absolute-center">
                                     <p class="tabDesc">Apologized - switched to friendly behavior</p>
@@ -1050,7 +1050,7 @@
                         </lightning:layout>
                     </lightning:tab>
                     <aura:if isTrue="{!v.IsDogFighting}">
-                        <lightning:tab label="Model Dog Interaction " id="fdit">
+                        <lightning:tab label="Model Dog Interaction" id="fdit">
                             <lightning:layout multipleRows="true">
                                 <lightning:layoutItem size="12">
                                     <div class="slds-align_absolute-center" style="height:3rem">
@@ -1113,7 +1113,7 @@
                             </lightning:layout>
                         </lightning:tab>
                     </aura:if>
-                    <lightning:tab label="Same Sex Dog  - Part 1" id="ssdt1">
+                    <lightning:tab label="Same Sex Dog - Part 1" id="ssdt1">
                         <lightning:layout multipleRows="true">
                             <lightning:layoutItem size="12">
                                 <div class="slds-align_absolute-center" style="height:3rem">
@@ -1169,11 +1169,11 @@
                             </lightning:layoutItem>
                         </lightning:layout>
                     </lightning:tab>
-                    <lightning:tab label="Same Sex Dog  - Part 2" id="ssdt2">
+                    <lightning:tab label="Same Sex Dog - Part 2" id="ssdt2">
                         <lightning:layout multipleRows="true">
                             <lightning:layoutItem size="12">
                                 <div class="slds-align_absolute-center" style="height:3rem">
-                                    <h1 class="tabHeader">Same Sex Dog Part 2</h1>
+                                    <h1 class="tabHeader">Same Sex Dog - Part 2</h1>
                                     </div>
                                     <div class="slds-align_absolute-center">
                                         <p class="tabDesc">At a distance</p>
@@ -1225,7 +1225,7 @@
                             </lightning:layoutItem>
                         </lightning:layout>
                     </lightning:tab>
-                    <lightning:tab label="Same Sex Dog  - Part 3" id="ssdt3">
+                    <lightning:tab label="Same Sex Dog - Part 3" id="ssdt3">
                         <lightning:layout multipleRows="true">
                             <lightning:layoutItem size="12">
                                 <div class="slds-align_absolute-center" style="height:3rem">
@@ -1346,7 +1346,7 @@
                             </lightning:layoutItem>
                         </lightning:layout>
                     </lightning:tab>
-                    <lightning:tab label="Opposite Sex Dog  - Part 2" id="osdt2">
+                    <lightning:tab label="Opposite Sex Dog - Part 2" id="osdt2">
                         <lightning:layout multipleRows="true">
                             <lightning:layoutItem size="12">
                                 <div class="slds-align_absolute-center" style="height:3rem">
@@ -1406,7 +1406,7 @@
                         <lightning:layout multipleRows="true">
                             <lightning:layoutItem size="12">
                                 <div class="slds-align_absolute-center" style="height:3rem">
-                                    <h1 class="tabHeader">Opposite Sex Dog Part 3</h1>
+                                    <h1 class="tabHeader">Opposite Sex Dog - Part 3</h1>
                                     </div>
                                     <div class="slds-align_absolute-center">
                                         <p class="tabDesc">Greeting</p>
@@ -1533,7 +1533,7 @@
                             </lightning:layoutItem>
                         </lightning:layout>
                     </lightning:tab>
-                    <lightning:tab label="Behavior On leash" id="pbol">
+                    <lightning:tab label="Behavior On Leash" id="pbol">
                         <lightning:layout multipleRows="true">
                             <lightning:layoutItem size="12">
                                 <div class="slds-align_absolute-center" style="height:3rem">
@@ -1588,7 +1588,7 @@
                             </lightning:layoutItem>
                         </lightning:layout>
                     </lightning:tab>
-                    <lightning:tab label="Social Behavior Part One" id="psb1">
+                    <lightning:tab label="Social Behavior - Part 1" id="psb1">
                         <lightning:layout multipleRows="true">
                             <lightning:layoutItem size="12">
                                 <div class="slds-align_absolute-center" style="height:3rem">
@@ -1643,7 +1643,7 @@
                             </lightning:layoutItem>
                         </lightning:layout>
                     </lightning:tab>
-                    <lightning:tab label="Social Behavior Part Two" id="psb2">
+                    <lightning:tab label="Social Behavior - Part 2" id="psb2">
                         <lightning:layout multipleRows="true">
                             <lightning:layoutItem size="12">
                                 <div class="slds-align_absolute-center" style="height:3rem">
@@ -1698,7 +1698,7 @@
                             </lightning:layoutItem>
                         </lightning:layout>
                     </lightning:tab>
-                    <lightning:tab label="Play Tug One" id="ppt1">
+                    <lightning:tab label="Play Tug - Part 1" id="ppt1">
                         <lightning:layout multipleRows="true">
                             <lightning:layoutItem size="12">
                                 <div class="slds-align_absolute-center" style="height:3rem">
@@ -1755,7 +1755,7 @@
                             </lightning:layoutItem>
                         </lightning:layout>
                     </lightning:tab>
-                    <lightning:tab label="Play Tug Two" id="ppt2">
+                    <lightning:tab label="Play Tug - Part 2" id="ppt2">
                         <lightning:layout multipleRows="true">
                             <lightning:layoutItem size="12">
                                 <div class="slds-align_absolute-center" style="height:3rem">
@@ -1920,7 +1920,7 @@
                             </lightning:layoutItem>
                         </lightning:layout>
                     </lightning:tab>
-                    <lightning:tab label="Resource Guarding One" id="prg1">
+                    <lightning:tab label="Resource Guarding - Part 1" id="prg1">
                         <lightning:layout multipleRows="true">
                             <lightning:layoutItem size="12">
                                 <div class="slds-align_absolute-center" style="height:3rem">
@@ -2007,7 +2007,7 @@
                             </lightning:layoutItem>
                         </lightning:layout>
                     </lightning:tab>
-                    <lightning:tab label="Resource Guarding Two" id="prg2">
+                    <lightning:tab label="Resource Guarding - Part 2" id="prg2">
                         <lightning:layout multipleRows="true">
                             <lightning:layoutItem size="12">
                                 <div class="slds-align_absolute-center" style="height:3rem">
@@ -2093,7 +2093,7 @@
                             </lightning:layoutItem>
                         </lightning:layout>
                     </lightning:tab>
-                    <lightning:tab label="Child Doll One" id="pcd1">
+                    <lightning:tab label="Child Doll - Part 1" id="pcd1">
                         <lightning:layout multipleRows="true">
                             <lightning:layoutItem size="12">
                                 <div class="slds-align_absolute-center" style="height:3rem">
@@ -2148,7 +2148,7 @@
                             </lightning:layoutItem>
                         </lightning:layout>
                     </lightning:tab>
-                    <lightning:tab label="Child Doll Two" id="pcd2">
+                    <lightning:tab label="Child Doll - Part 2" id="pcd2">
                         <lightning:layout multipleRows="true">
                             <lightning:layoutItem size="12">
                                 <div class="slds-align_absolute-center" style="height:3rem">
@@ -2203,11 +2203,11 @@
                             </lightning:layoutItem>
                         </lightning:layout>
                     </lightning:tab>
-                    <lightning:tab label="Dog Interaction One" id="pdi1">
+                    <lightning:tab label="Dog Interaction - Part 1" id="pdi1">
                         <lightning:layout multipleRows="true">
                             <lightning:layoutItem size="12">
                                 <div class="slds-align_absolute-center" style="height:3rem">
-                                    <h1 class="tabHeader">Dog Interaction Part 1: Interaction with Littermate</h1>
+                                    <h1 class="tabHeader">Dog Interaction - Part 1: Interaction with Littermate</h1>
                                 </div>
                                 <div class="slds-align_absolute-center">
                                     <p class="tabDesc">Placed another puppy from the same litter in the center of the testing space. Observe interactions for 2 minutes</p>
@@ -2267,11 +2267,11 @@
                             </lightning:layoutItem>
                         </lightning:layout>
                     </lightning:tab>
-                    <lightning:tab label="Dog Interaction Two" id="pdi2">
+                    <lightning:tab label="Dog Interaction - Part 2" id="pdi2">
                         <lightning:layout multipleRows="true">
                             <lightning:layoutItem size="12">
                                 <div class="slds-align_absolute-center" style="height:3rem">
-                                    <h1 class="tabHeader">Dog Interaction Part 2: Interaction with Unfamiliar Playmate</h1>
+                                    <h1 class="tabHeader">Dog Interaction - Part 2: Interaction with Unfamiliar Playmate</h1>
                                 </div>
                                 <div class="slds-align_absolute-center">
                                     <p class="tabDesc">Place unfamiliar puppy in the center of the testing space. Observed interactions for 2 minutes.</p>
@@ -2322,11 +2322,11 @@
                             </lightning:layoutItem>
                         </lightning:layout>
                     </lightning:tab>
-                    <lightning:tab label="Dog Interaction Three" id="pdi3">
+                    <lightning:tab label="Dog Interaction - Part 3" id="pdi3">
                         <lightning:layout multipleRows="true">
                             <lightning:layoutItem size="12">
                                 <div class="slds-align_absolute-center" style="height:3rem">
-                                    <h1 class="tabHeader">Dog Interaction Part 3: Interaction with Adult Dog</h1>
+                                    <h1 class="tabHeader">Dog Interaction - Part 3: Interaction with Adult Dog</h1>
                                 </div>
                                 <div class="slds-align_absolute-center">
                                     <p class="tabDesc">Bring an unfamiliar adult dog on leash into the testing space. Observe the interactions for 2-5 minutes.</p>

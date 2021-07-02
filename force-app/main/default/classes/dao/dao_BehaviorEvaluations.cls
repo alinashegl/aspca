@@ -83,6 +83,7 @@ public with sharing class dao_BehaviorEvaluations extends sql_Dao{
         addField(Behavior_Evaluation__c.Resource_Guarding_P1_Touch_Face__c);
         addField(Behavior_Evaluation__c.Resource_Guarding_P1_Touch_Neck__c);
         addField(Behavior_Evaluation__c.Comments_RG_P1__c);
+        addField(Behavior_Evaluation__c.Puppy_Child_Doll_P2__c);
         addField(Behavior_Evaluation__c.Resource_Guarding_P2_Push_Face__c);
         addField(Behavior_Evaluation__c.Resource_Guarding_P2_Touch_Body__c);
         addField(Behavior_Evaluation__c.Resource_Guarding_P2_Touch_Face__c);
@@ -144,6 +145,10 @@ public with sharing class dao_BehaviorEvaluations extends sql_Dao{
         addField(Behavior_Evaluation__c.Comments_UT__c);
         addField(Behavior_Evaluation__c.Comments_Play_Tug_P1__c);
         addField(Behavior_Evaluation__c.Comments_Play_Tug_P2__c);
+        addField(Behavior_Evaluation__c.CreatedById);
+        addField(Behavior_Evaluation__c.CreatedDate);
+        addField(Behavior_Evaluation__c.LastModifiedDate);
+        addField(Behavior_Evaluation__c.LastModifiedById);
     }
 
     public List<Behavior_Evaluation__c> findAll() {
