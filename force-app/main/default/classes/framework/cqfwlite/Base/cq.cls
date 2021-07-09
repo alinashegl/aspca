@@ -46,6 +46,10 @@ public inherited sharing virtual class cq {
         return (BehaviorEvaluationDomain) bindingFor(Behavior_Evaluation__c.SObjectType, BehaviorEvaluationDomain.class);
     }
 
+    public virtual TreatmentPlanDomain TreatmentPlanDomainBindings() {
+        return (TreatmentPlanDomain) bindingFor(Opportunity.SObjectType, TreatmentPlanDomain.class);
+    }
+
     // END::: SELECTOR BINDINGS
 
     private Map<Schema.SObjectType, Object> selector_mappings = new Map<Schema.SObjectType, Object>();

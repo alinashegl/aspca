@@ -6,6 +6,8 @@ trigger behaviorEvaluationTrigger on Behavior_Evaluation__c (before insert, befo
 
     Trigger_Config__c config = Trigger_Config__c.getInstance();
     if ( config.Disable_Triggers__c == false) {
-        //BehaviorEvaluationDomain.Execute();
+        TriggerRequest request = new TriggerRequest(Behavior_Evaluation__c.SObjectType);
+        TreatmentPlanDomain domain = new TreatmentPlanDomain();
+        domain.ProcessAction(request);
     }
 }

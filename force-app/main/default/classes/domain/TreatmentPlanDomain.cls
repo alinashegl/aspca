@@ -29,9 +29,15 @@ public with sharing class TreatmentPlanDomain extends DomainActionBase{
 
         Map<Id, Opportunity> newRecordMap = (Map<Id, Opportunity>) request.newRecordMap;
 
-        if (newRecords != null) { update newRecords; }
+        for (Opportunity plan : newRecords) {
+            Animal__c animal = [SELECT Id, Case__c, Discharged_to_Agency__c  FROM Animal__c WHERE Id =: plan.Animal__c];
+            plan.AccountId = animal.Discharged_to_Agency__c != null ? animal.Discharged_to_Agency__c : null;
+            if (plan.AccountId == null) { System.debug('No AGENCY FOUND'); }
+        }
 
-        if (newRecordMap != null) { update newRecordMap.values(); }
+        //if (newRecords != null) { update newRecords; }
+
+        //if (newRecordMap != null) { update newRecordMap.values(); }
 
     }
     public void beforeUpdate(TriggerRequest request) {
