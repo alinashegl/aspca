@@ -168,7 +168,7 @@ public with sharing class BehaviorEvaluationsSelector extends SObjectSelector {
         return queryById(idSet);
     }
 
-    public List<Behavior_Evaluation__c> GetById(String name){
+    public List<Behavior_Evaluation__c> GetByName(String name){
         return queryByName(name);
     }
 

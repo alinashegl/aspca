@@ -89,7 +89,7 @@
         <defaultConnectorLabel>Summary Not Blank and Doesn&apos;t Contain Test</defaultConnectorLabel>
         <rules>
             <name>Summary_Blank</name>
-            <conditionLogic>and</conditionLogic>
+            <conditionLogic>1 AND 2 AND (NOT 3)</conditionLogic>
             <conditions>
                 <leftValueReference>EvalSummary</leftValueReference>
                 <operator>IsNull</operator>
@@ -102,6 +102,13 @@
                 <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>TestComments</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <stringValue>Skipped not necessary</stringValue>
                 </rightValue>
             </conditions>
             <connector>
@@ -124,6 +131,13 @@
                 <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>TestComments</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <stringValue>Skipped not necessary</stringValue>
                 </rightValue>
             </conditions>
             <connector>
