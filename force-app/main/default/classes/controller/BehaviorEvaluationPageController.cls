@@ -152,6 +152,10 @@ public with sharing class BehaviorEvaluationPageController {
         utils.UseCaution = behaviorEvaluation.Caution__c;
         utils.IsAdult = behaviorEvaluation.Evaluation_Subtype__c == 'Adult Animal' ? true : false;
         utils.IsPuppy = behaviorEvaluation.Evaluation_Subtype__c == 'Puppy' ? true : false;
+
+        utils.UnpleasantTouch1stFlank = behaviorEvaluation.Unpleasant_Touch_1st_Flank__c;
+        utils.UnpleasantTouch2ndFlank = behaviorEvaluation.Unpleasant_Touch_2nd_Flank__c;
+
         if (behaviorEvaluation.Evaluation_Subtype__c == 'Dog Fighting') {
             utils.IsDogFighting = true;
             utils.IsAdult = true;

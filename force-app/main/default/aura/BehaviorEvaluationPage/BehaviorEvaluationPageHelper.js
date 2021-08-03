@@ -161,14 +161,15 @@
             lastTab: 'pdi2'
         }
     } ,
-    processingProcess: function(cmp, currentProcess) {
+    processingProcess: function(cmp, currentProcess,event) {
             let process = {
                 'loadTabs': 'loadTabs' ,
                 'init': 'init' ,
                 'handleSelect' : 'handleSelect' ,
                 'loadPuppyTabs' : 'loadPuppyTabs' ,
                 'render' : 'render' ,
-                'handleCaution' : 'handleCaution'
+                'handleCaution' : 'handleCaution',
+                'handleUnpleasantTouch' : 'handleUnpleasantTouch'
             };
 
             if(process[currentProcess] == 'init') {
@@ -183,6 +184,8 @@
                 this.render(cmp, event);
             }else if(process[currentProcess] == 'handleCaution') {
                 this.handleCaution(cmp, event);
+            }else if(process[currentProcess] == 'handleUnpleasantTouch') {
+                this.handleUnpleasantTouch(cmp, event);
             }
             else {
                 console.log('Unexpected Error occured ');
@@ -213,6 +216,45 @@
                     var data = item['data'];
                     var dataitem = data['item'];
                     cmp.set('v.UseCaution', dataitem);
+                }
+            }
+        ).catch(
+          function(error) {
+              console.log('Error Message', error);
+          }
+        );
+    } ,
+
+    handleUnpleasantTouch: function(cmp, event) {
+        var auraId = event.getSource().getLocalId();
+        var isFirstTouch = (auraId == 'UnpleasantTouch1stFlankInput') ? true : false;
+        console.log('upleasantTouch: ', auraId);
+
+
+        var rid = cmp.get('v.recordId');
+        var apiName = (isFirstTouch) ? 'Unpleasant_Touch_1st_Flank__c' : 'Unpleasant_Touch_2nd_Flank__c';
+        var ref = cmp.find(auraId);
+        var state = ref.get('v.checked')
+        var status = 'status'
+        var t;
+
+        var params = {
+            apiName: apiName ,
+            values: state ,
+            recordId : rid
+        };
+        this.sendPromise(cmp, 'c.putBoolean', params, status)
+        .then(
+            function(response) {
+                if(response[status] != 'SUCCESS') {
+                    var item = response[status];
+                    var data = item['data'];
+                    var dataitem = data['item'];
+                    if(isFirstTouch){
+                        cmp.set('v.UnpleasantTouch1stFlank', dataitem);
+                    } else {
+                        cmp.set('v.UnpleasantTouch2ndFlank', dataitem);
+                    }
                 }
             }
         ).catch(
@@ -405,6 +447,12 @@
             function(response, data) {
                 console.log('PROMISE RESPONSE', response[attr]);
                 cmp.set('v.UseCaution', response[attr].UseCaution);
+
+                console.log('1st Touch = ', response[attr].UnpleasantTouch1stFlank);
+                console.log('2nd Touch = ', response[attr].UnpleasantTouch2ndFlank);
+                cmp.set('v.UnpleasantTouch1stFlank', response[attr].UnpleasantTouch1stFlank);
+                cmp.set('v.UnpleasantTouch2ndFlank', response[attr].UnpleasantTouch2ndFlank);
+
                 if(response[attr].IsAdult == true) {
                     cmp.set('v.IsAdult', true);
                     console.log('IS ADULT TEST');
@@ -423,7 +471,6 @@
                     data = 'Puppy'
                     this.processingProcess(cmp, 'loadPuppyTabs');
                 }
-
             }
         ).catch(
             function(error) {
