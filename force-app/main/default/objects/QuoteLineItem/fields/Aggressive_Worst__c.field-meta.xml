@@ -1,39 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Overall_Evaluation_Grade__c</fullName>
+    <fullName>Aggressive_Worst__c</fullName>
     <externalId>false</externalId>
-    <label>Overall Evaluation Grade</label>
+    <label>Aggressive - Worst</label>
     <required>false</required>
-    <trackTrending>false</trackTrending>
     <type>Picklist</type>
     <valueSet>
         <restricted>true</restricted>
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>A - No Concerns</fullName>
+                <fullName>1. None observed</fullName>
                 <default>false</default>
-                <label>A - No Concerns</label>
+                <label>1. None observed</label>
             </value>
             <value>
-                <fullName>B - Mild Concern(s)</fullName>
+                <fullName>2. Hard stare, whale eye, rigid, freezes</fullName>
                 <default>false</default>
-                <label>B - Mild Concern(s)</label>
+                <label>2. Hard stare, whale eye, rigid, freezes</label>
             </value>
             <value>
-                <fullName>C - Moderate Concern(s)</fullName>
+                <fullName>3. Head whips, lifts lip, growls or alarm barks</fullName>
                 <default>false</default>
-                <label>C - Moderate Concern(s)</label>
+                <label>3. Head whips, lifts lip, growls or alarm barks</label>
             </value>
             <value>
-                <fullName>D - Severe Concern(s)</fullName>
+                <fullName>4. Air snaps or muzzle punches</fullName>
                 <default>false</default>
-                <label>D - Severe Concern(s)</label>
+                <label>4. Air snaps or muzzle punches</label>
             </value>
             <value>
-                <fullName>D - Dog Aggression</fullName>
+                <fullName>5. Tries to bite or bites</fullName>
                 <default>false</default>
-                <label>D - Dog Aggression</label>
+                <label>5. Tries to bite or bites</label>
             </value>
         </valueSetDefinition>
     </valueSet>

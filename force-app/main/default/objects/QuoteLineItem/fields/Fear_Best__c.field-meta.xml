@@ -1,39 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Overall_Evaluation_Grade__c</fullName>
+    <fullName>Fear_Best__c</fullName>
     <externalId>false</externalId>
-    <label>Overall Evaluation Grade</label>
+    <label>Fear - Best</label>
     <required>false</required>
-    <trackTrending>false</trackTrending>
     <type>Picklist</type>
     <valueSet>
         <restricted>true</restricted>
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>A - No Concerns</fullName>
+                <fullName>1. Excited, playful, interested</fullName>
                 <default>false</default>
-                <label>A - No Concerns</label>
+                <label>1. Excited, playful, interested</label>
             </value>
             <value>
-                <fullName>B - Mild Concern(s)</fullName>
+                <fullName>2. Neutral</fullName>
                 <default>false</default>
-                <label>B - Mild Concern(s)</label>
+                <label>2. Neutral</label>
             </value>
             <value>
-                <fullName>C - Moderate Concern(s)</fullName>
+                <fullName>2. Mildly fearful</fullName>
                 <default>false</default>
-                <label>C - Moderate Concern(s)</label>
+                <label>2. Mildly fearful</label>
             </value>
             <value>
-                <fullName>D - Severe Concern(s)</fullName>
+                <fullName>3. Moderately fearful</fullName>
                 <default>false</default>
-                <label>D - Severe Concern(s)</label>
+                <label>3. Moderately fearful</label>
             </value>
             <value>
-                <fullName>D - Dog Aggression</fullName>
+                <fullName>4. Extremely fearful</fullName>
                 <default>false</default>
-                <label>D - Dog Aggression</label>
+                <label>4. Extremely fearful</label>
             </value>
         </valueSetDefinition>
     </valueSet>

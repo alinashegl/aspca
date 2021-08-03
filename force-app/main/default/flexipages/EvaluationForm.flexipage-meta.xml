@@ -64,6 +64,18 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldItem>Record.Proceed_w_Real_Dog_Testing__c</fieldItem>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!Record.Overall_Evaluation_Grade__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>D - Dog Aggression</rightValue>
+                    </criteria>
+                </visibilityRule>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
                 <fieldItem>Record.Caution__c</fieldItem>
             </fieldInstance>
         </itemInstances>
@@ -96,32 +108,25 @@
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>required</value>
-                </fieldInstanceProperties>
+                <fieldItem>Record.Evaluation_Subtype__c</fieldItem>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Handler_Initials__c</fieldItem>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
                 <fieldItem>Record.Scribe_Initials__c</fieldItem>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>required</value>
-                </fieldInstanceProperties>
                 <fieldItem>Record.Tester_Initials__c</fieldItem>
             </fieldInstance>
         </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>required</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Handler_Initials__c</fieldItem>
-            </fieldInstance>
-        </itemInstances>
-        <name>Facet-8862fbf2-948e-4a80-b05f-b8ab232cb550</name>
+        <name>Facet-ce95cac0-ea75-47a9-bc40-5f2db29399f2</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -129,38 +134,12 @@
             <componentInstance>
                 <componentInstanceProperties>
                     <name>body</name>
-                    <value>Facet-8862fbf2-948e-4a80-b05f-b8ab232cb550</value>
+                    <value>Facet-ce95cac0-ea75-47a9-bc40-5f2db29399f2</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:column</componentName>
             </componentInstance>
         </itemInstances>
-        <name>Facet-6f8de509-73db-4211-a1c9-7e2584d63fd4</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>required</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Evaluation_Subtype__c</fieldItem>
-            </fieldInstance>
-        </itemInstances>
-        <name>Facet-3d8ad3f0-530e-4f1c-89f1-b6445a5e7da3</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>body</name>
-                    <value>Facet-3d8ad3f0-530e-4f1c-89f1-b6445a5e7da3</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:column</componentName>
-            </componentInstance>
-        </itemInstances>
-        <name>Facet-0f7e98ce-24e8-4a28-b3a9-adcf28d51d79</name>
+        <name>Facet-12cc36a5-ba3f-42e1-a142-962e99bb12e4</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -198,19 +177,6 @@
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
-                    <name>columns</name>
-                    <value>Facet-6f8de509-73db-4211-a1c9-7e2584d63fd4</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>label</name>
-                    <value>Initials</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:fieldSection</componentName>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
                     <name>height</name>
                     <value>400</value>
                 </componentInstanceProperties>
@@ -229,31 +195,13 @@
             <componentInstance>
                 <componentInstanceProperties>
                     <name>columns</name>
-                    <value>Facet-0f7e98ce-24e8-4a28-b3a9-adcf28d51d79</value>
+                    <value>Facet-12cc36a5-ba3f-42e1-a142-962e99bb12e4</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>label</name>
-                    <value>Evaluation Type</value>
+                    <value>Evaluation Details</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:fieldSection</componentName>
-                <visibilityRule>
-                    <booleanFilter>1 OR 2 OR 3</booleanFilter>
-                    <criteria>
-                        <leftValue>{!Record.Evaluation_Subtype__c}</leftValue>
-                        <operator>NE</operator>
-                        <rightValue>Puppy</rightValue>
-                    </criteria>
-                    <criteria>
-                        <leftValue>{!Record.Evaluation_Subtype__c}</leftValue>
-                        <operator>NE</operator>
-                        <rightValue>Dog Fighting</rightValue>
-                    </criteria>
-                    <criteria>
-                        <leftValue>{!Record.Evaluation_Subtype__c}</leftValue>
-                        <operator>NE</operator>
-                        <rightValue>Adult Animal</rightValue>
-                    </criteria>
-                </visibilityRule>
             </componentInstance>
         </itemInstances>
         <name>sidebar</name>
