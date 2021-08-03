@@ -4,141 +4,240 @@
 */
 public class BehEvalPdfController {
     
-/*    public Animal__c objAnimal{get;set;}*/
+    /*    public Animal__c objAnimal{get;set;}*/
     public Behavior_Evaluation__c behEval{get;set;}
-    public String aNoConcernEvalGrade { get; set; }
-    public Boolean bMildConcerns { get; set; }
-
+    public List<Test_Config__mdt> testMetadata{get;set;}
+    public List<Picklist_Description_Config__mdt> picklistMetadata{get;set;}
+    public Boolean aNoConcern { get; set; }
+    public Boolean bMildConcern { get; set; }
+    public Boolean cModerateConcern { get; set; }
+    public Boolean dSevereConcern { get; set; }
+    public List<String> potentBehIssue { get; set; }
+    public Map<String,String> testDescriptions {get; set;}
+    public Map<String,String> picklistDescriptions {get; set;}
 
     public BehEvalPdfController(ApexPages.StandardController controller){
         
-        behEval = [SELECT 
-Id,
-Animal__c, 
-Animal_Age__c, 
-Animal_Breed__c, 
-Animal_Color__c, 
-Animal_ID__c, 
-Animal_Name__c, 
-Animal_Sex__c,
-                Name,
-Behavior_in_Kennel__c, 
-Behavior_on_Leash__c, 
-Case_Number__c, 
-Caution__c, 
-Comments_BIK__c, 
-Comments_BOL__c, 
-Comments_FD__c, 
-Comments_OSD_P1__c, 
-Comments_OSD_P2__c, 
-Comments_OSD_P3__c, 
-Comments_Play_Tug_P1__c, 
-Comments_Play_Tug_P2__c, 
-Comments_Pleasant_Touch__c, 
-Comments_RG_P1__c, 
-Comments_RG_P2__c, 
-Comments_SB_P1__c, 
-Comments_SB_P2__c, 
-Comments_SP_P1__c, 
-Comments_SP_P2__c, 
-Comments_SSD_P1__c, 
-Comments_SSD_P2__c, 
-Comments_SSD_P3__c, 
-Comments_Tag__c, 
-Comments_TD_P1__c, 
-Comments_TD_P2__c, 
-Comments_UT__c, 
-Comments_UT_1st__c, 
-Comments_UT_2nd__c, 
-Behavior_Evaluation_Summary__c, 
-Evaluation_Date__c, 
-Evaluation_Subtype__c, 
-Fake_Dog__c, 
-Handler_Initials__c, 
-Is_Muzzled__c, 
-Muzzled_OSD_P3__c, 
-Muzzled_SSD_P3__c, 
-Opposite_Sex_P1__c, 
-Opposite_Sex_P2__c, 
-Opposite_Sex_P3__c, 
-Overall_Evaluation_Grade__c,
-Play_Test_P1__c, 
-Play_Test_P2__c, 
-Play_Test_Tug_P1__c, 
-Play_Test_Tug_P2__c, 
-Pleasant_Touch__c, 
-Pleasant_Touch_Test__c, 
-Resource_Guarding_P1_Push_Face__c, 
-Resource_Guarding_P1_Touch_Body__c, 
-Resource_Guarding_P1_Touch_Face__c, 
-Resource_Guarding_P1_Touch_Neck__c, 
-Resource_Guarding_P2_Push_Face__c, 
-Resource_Guarding_P2_Touch_Body__c, 
-Resource_Guarding_P2_Touch_Face__c, 
-Resource_Guarding_P2_Touch_Neck__c, 
-Same_Sex_P1__c, 
-Same_Sex_P2__c, 
-Same_Sex_P3__c, 
-Scolding_Person_P1__c, 
-Scolding_Person_P2__c, 
-Scribe_Initials__c, 
-Is_Skipped__c, 
-Skipped_BIK__c, 
-Skipped_BOL__c, 
-Skipped_FD__c, 
-Skipped_OSD_P1__c, 
-Skipped_OSD_P2__c, 
-Skipped_OSD_P3__c, 
-Skipped_Play_Tug_P1__c, 
-Skipped_Play_Tug_P2__c, 
-Skipped_Pleasant__c, 
-Skipped_Pleasant_Touch__c, 
-Skipped_RG_P1__c, 
-Skipped_RG_P1_PF__c, 
-Skipped_RG_P1_TB__c, 
-Skipped_RG_P1_TF__c, 
-Skipped_RG_P1_TN__c, 
-Skipped_RG_P2__c, 
-Skipped_RG_P2_PF__c, 
-Skipped_RG_P2_TB__c, 
-Skipped_RG_P2_TF__c, 
-Skipped_RG_P2_TN__c, 
-Skipped_SB_P1__c, 
-Skipped_SB_P2__c, 
-Skipped_SP_P1__c, 
-Skipped_SP_P2__c, 
-Skipped_SSD_P1__c, 
-Skipped_SSD_P2__c, 
-Skipped_SSD_P3__c, 
-Skipped_Tag__c, 
-Skipped_TD_P1__c, 
-Skipped_TD_P2__c, 
-Skipped_UT_1st__c, 
-Skipped_UT_2nd__c, 
-Social_Behavior_P1__c, 
-Social_Behavior_P2_2__c, 
-Social_Behavior_Test_P1__c, 
-Social_Behavior_P2__c, 
-Summary_Test__c, 
-Tag_Test__c, 
-Tester_Initials__c, 
-Toddler_Doll_P1__c, 
-Toddler_Doll_P2__c, 
-Unpleasant_Touch_1st__c, 
-Unpleasant_Touch_2nd__c,
-Potential_Behavior_Issues__c,
-Potential_Beh_Iss_Other__c,
-Facility_Outcome__c
-                  FROM Behavior_Evaluation__c /*Limit 1)*/
-                                       WHERE Id = :ApexPages.currentPage().getparameters().get('Id')];
-/*                  FROM Animal__c WHERE Name = 'ARC-46813685'];*/
-/*                     WHERE Id = :ApexPages.currentPage().getparameters().get('Id')  ];*/
+        behEval = [SELECT Id
+                  , ANIMAL_AGE__C
+                  , ANIMAL_BREED__C
+                  , ANIMAL_COLOR__C
+                  , ANIMAL_ID__C
+                  , ANIMAL_NAME__C
+                  , ANIMAL_SEX__C
+                  , ANIMAL__C
+                  , BEHAVIOR_EVALUATION_SUMMARY__C
+                  , BEHAVIOR_IN_KENNEL__C
+                  , BEHAVIOR_ON_LEASH__C
+                  , CASE_NUMBER__C
+                  , CAUTION__C
+                  , COMMENTS_BIK__C
+                  , COMMENTS_BOL__C
+                  , COMMENTS_FD__C
+                  , COMMENTS_OSD_P1__C
+                  , COMMENTS_OSD_P2__C
+                  , COMMENTS_OSD_P3__C
+                  , COMMENTS_PLAY_TUG_P1__C
+                  , COMMENTS_PLAY_TUG_P2__C
+                  , COMMENTS_PLEASANT_TOUCH__C
+                  , COMMENTS_RG_P1__C
+                  , COMMENTS_RG_P2__C
+                  , COMMENTS_SB_P1__C
+                  , COMMENTS_SB_P2__C
+                  , COMMENTS_SP_P1__C
+                  , COMMENTS_SP_P2__C
+                  , COMMENTS_SSD_P1__C
+                  , COMMENTS_SSD_P2__C
+                  , COMMENTS_SSD_P3__C
+                  , COMMENTS_TD_P1__C
+                  , COMMENTS_TD_P2__C
+                  , COMMENTS_TAG__C
+                  , COMMENTS_UT_1ST__C
+                  , COMMENTS_UT_2ND__C
+                  , COMMENTS_UT__C
+                  , CREATEDBYID
+                  , CREATEDDATE
+                  , EVALUATION_BEHAVIOR_SUMMARY__C
+                  , EVALUATION_DATE__C
+                  , EVALUATION_SUBTYPE__C
+                  , FACILITY_OUTCOME__C
+                  , FAKE_DOG__C
+                  , HANDLER_INITIALS__C
+                  , ISDELETED
+                  , IS_MUZZLED__C
+                  , IS_SKIPPED__C
+                  , LASTMODIFIEDBYID
+                  , LASTMODIFIEDDATE
+                  , MUZZLED_OSD_P3__C
+                  , MUZZLED_SSD_P3__C
+                  , NAME
+                  , OPPOSITE_SEX_P1__C
+                  , OPPOSITE_SEX_P2__C
+                  , OPPOSITE_SEX_P3__C
+                  , OVERALL_EVALUATION_GRADE__C
+                  , PLAY_TEST_P1__C
+                  , PLAY_TEST_P2__C
+                  , PLAY_TEST_TUG_P1__C
+                  , PLAY_TEST_TUG_P2__C
+                  , PLEASANT_TOUCH_TEST__C
+                  , PLEASANT_TOUCH__C
+                  , POTENTIAL_BEH_ISS_OTHER__C
+                  , POTENTIAL_BEHAVIOR_ISSUES__C
+                  , PUPPY_BIK_HOUSING__C
+                  , PUPPY_BEHAVIOR_IN_KENNEL__C
+                  , PUPPY_BEHAVIOR_ON_LEASH__C
+                  , PUPPY_CHILD_DOLL_P1__C
+                  , PUPPY_CHILD_DOLL_P2__C
+                  , PUPPY_COMMENTS_BIK__C
+                  , PUPPY_COMMENTS_BOL__C
+                  , PUPPY_COMMENTS_CD_P1__C
+                  , PUPPY_COMMENTS_CD_P2__C
+                  , PUPPY_COMMENTS_DI_P1__C
+                  , PUPPY_COMMENTS_DI_P2__C
+                  , PUPPY_COMMENTS_DI_P3__C
+                  , PUPPY_COMMENTS_PLAY_TAG__C
+                  , PUPPY_COMMENTS_PLAY_TUG_P1__C
+                  , PUPPY_COMMENTS_PLAY_TUG_P2__C
+                  , PUPPY_COMMENTS_RG_P1__C
+                  , PUPPY_COMMENTS_RG_P2__C
+                  , PUPPY_COMMENTS_RESTRAINT__C
+                  , PUPPY_COMMENTS_SB_P1__C
+                  , PUPPY_COMMENTS_SB_P2__C
+                  , PUPPY_DOG_INTERACTION_P1__C
+                  , PUPPY_DOG_INTERACTION_P2__C
+                  , PUPPY_DOG_INTERACTION_P3__C
+                  , PUPPY_MUZZLED_DI_P1__C
+                  , PUPPY_MUZZLED_DI_P2__C
+                  , PUPPY_MUZZLED_DI_P3__C
+                  , PUPPY_PLAY_TAG__C
+                  , PUPPY_PLAY_TUG_P1__C
+                  , PUPPY_PLAY_TUG_P2__C
+                  , PUPPY_RESOURCE_GUARDING_P1_PUSH_FACE__C
+                  , PUPPY_RESOURCE_GUARDING_P1_TOUCH_BODY__C
+                  , PUPPY_RESOURCE_GUARDING_P1_TOUCH_FACE__C
+                  , PUPPY_RESOURCE_GUARDING_P1_TOUCH_NECK__C
+                  , PUPPY_RESOURCE_GUARDING_P2_PUSH_FACE__C
+                  , PUPPY_RESOURCE_GUARDING_P2_TOUCH_BODY__C
+                  , PUPPY_RESOURCE_GUARDING_P2_TOUCH_FACE__C
+                  , PUPPY_RESOURCE_GUARDING_P2_TOUCH_NECK__C
+                  , PUPPY_RESTRAINT__C
+                  , PUPPY_SKIPPED_BIK__C
+                  , PUPPY_SKIPPED_BOL__C
+                  , PUPPY_SKIPPED_CD_P1__C
+                  , PUPPY_SKIPPED_CD_P2__C
+                  , PUPPY_SKIPPED_DI_P1__C
+                  , PUPPY_SKIPPED_DI_P2__C
+                  , PUPPY_SKIPPED_DI_P3__C
+                  , PUPPY_SKIPPED_PLAY_TAG__C
+                  , PUPPY_SKIPPED_PLAY_TUG_P1__C
+                  , PUPPY_SKIPPED_PLAY_TUG_P2__C
+                  , PUPPY_SKIPPED_RG_P1_PF__C
+                  , PUPPY_SKIPPED_RG_P1_TB__C
+                  , PUPPY_SKIPPED_RG_P1_TF__C
+                  , PUPPY_SKIPPED_RG_P1_TN__C
+                  , PUPPY_SKIPPED_RG_P1__C
+                  , PUPPY_SKIPPED_RG_P2_PF__C
+                  , PUPPY_SKIPPED_RG_P2_TB__C
+                  , PUPPY_SKIPPED_RG_P2_TF__C
+                  , PUPPY_SKIPPED_RG_P2_TN__C
+                  , PUPPY_SKIPPED_RG_P2__C
+                  , PUPPY_SKIPPED_RESTRAINT__C
+                  , PUPPY_SKIPPED_SB_P1__C
+                  , PUPPY_SKIPPED_SB_P2__C
+                  , PUPPY_SOCIAL_BEHAVIOR_P1__C
+                  , PUPPY_SOCIAL_BEHAVIOR_P2__C
+                  , RESOURCE_GUARDING_P1_PUSH_FACE__C
+                  , RESOURCE_GUARDING_P1_TOUCH_BODY__C
+                  , RESOURCE_GUARDING_P1_TOUCH_FACE__C
+                  , RESOURCE_GUARDING_P1_TOUCH_NECK__C
+                  , RESOURCE_GUARDING_P2_PUSH_FACE__C
+                  , RESOURCE_GUARDING_P2_TOUCH_BODY__C
+                  , RESOURCE_GUARDING_P2_TOUCH_FACE__C
+                  , RESOURCE_GUARDING_P2_TOUCH_NECK__C
+                  , SAME_SEX_P1__C
+                  , SAME_SEX_P2__C
+                  , SAME_SEX_P3__C
+                  , SCOLDING_PERSON_P1__C
+                  , SCOLDING_PERSON_P2__C
+                  , SCRIBE_INITIALS__C
+                  , SKIPPED_BIK__C
+                  , SKIPPED_BOL__C
+                  , SKIPPED_FD__C
+                  , SKIPPED_OSD_P1__C
+                  , SKIPPED_OSD_P2__C
+                  , SKIPPED_OSD_P3__C
+                  , SKIPPED_PLAY_TUG_P1__C
+                  , SKIPPED_PLAY_TUG_P2__C
+                  , SKIPPED_PLEASANT_TOUCH__C
+                  , SKIPPED_PLEASANT__C
+                  , SKIPPED_RG_P1_PF__C
+                  , SKIPPED_RG_P1_TB__C
+                  , SKIPPED_RG_P1_TF__C
+                  , SKIPPED_RG_P1_TN__C
+                  , SKIPPED_RG_P1__C
+                  , SKIPPED_RG_P2_PF__C
+                  , SKIPPED_RG_P2_TB__C
+                  , SKIPPED_RG_P2_TF__C
+                  , SKIPPED_RG_P2_TN__C
+                  , SKIPPED_RG_P2__C
+                  , SKIPPED_SB_P1__C
+                  , SKIPPED_SB_P2__C
+                  , SKIPPED_SP_P1__C
+                  , SKIPPED_SP_P2__C
+                  , SKIPPED_SSD_P1__C
+                  , SKIPPED_SSD_P2__C
+                  , SKIPPED_SSD_P3__C
+                  , SKIPPED_TD_P1__C
+                  , SKIPPED_TD_P2__C
+                  , SKIPPED_TAG__C
+                  , SKIPPED_UT_1ST__C
+                  , SKIPPED_UT_2ND__C
+                  , SOCIAL_BEHAVIOR_P1__C
+                  , SOCIAL_BEHAVIOR_P2_2__C
+                  , SOCIAL_BEHAVIOR_P2__C
+                  , SOCIAL_BEHAVIOR_TEST_P1__C
+                  , SUMMARY_TEST__C
+                  , SYSTEMMODSTAMP
+                  , TAG_TEST__C
+                  , TESTER_INITIALS__C
+                  , TODDLER_DOLL_P1__C
+                  , TODDLER_DOLL_P2__C
+                  , UNPLEASANT_TOUCH_1ST_FLANK__C
+                  , UNPLEASANT_TOUCH_1ST__C
+                  , UNPLEASANT_TOUCH_2ND_FLANK__C
+                  , UNPLEASANT_TOUCH_2ND__C
+                   FROM Behavior_Evaluation__c
+                   WHERE Id = :ApexPages.currentPage().getparameters().get('Id')];
 
+        //Breaks up Potential Behavior Issues multi-select into potentBehIssue list
+        if(behEval.Potential_Behavior_Issues__c != null){
+            system.debug('in the if statement');
+            potentBehIssue = behEval.Potential_Behavior_Issues__c.split(';');
+        }
 
-        if (behEval.Overall_Evaluation_Grade__c == 'A - No Concerns') {
-            aNoConcernEvalGrade = 'X';
-        }else {
-            aNoConcernEvalGrade = '';
+        aNoConcern = behEval.Overall_Evaluation_Grade__c == 'A - No Concerns' ? true : false;
+
+        bMildConcern = behEval.Overall_Evaluation_Grade__c == 'B - Mild Concern(s)' ? true : false;
+
+        cModerateConcern = behEval.Overall_Evaluation_Grade__c == 'C - Moderate Concern(s)' ? true : false;
+
+        dSevereConcern = behEval.Overall_Evaluation_Grade__c == 'D - Severe Concern(s)' ? true : false;
+
+        Boolean evalType = False;
+        if (behEval.Evaluation_Subtype__c == 'Puppy'){
+            evalType = True;
+        }
+
+        picklistMetadata = new List<Picklist_Description_Config__mdt>();
+        picklistDescriptions = new Map<String, String>();
+        picklistMetadata = [SELECT Test_Config__r.MasterLabel,Test_Config__r.Test_Name__c,Test_Config__r.IsPuppy__c,Field_API_Name__c,Value_Category__c,Field_Value__c, Field_Description__c
+                            FROM Picklist_Description_Config__mdt WHERE Field_Description__c!= null AND Test_Config__r.IsPuppy__c =: evalType];
+        if(picklistMetadata != null){
+            for (Picklist_Description_Config__mdt plm : picklistMetadata){
+                //system.debug(plm.Test_Config__r.Test_Name__c + ': ' + plm.Field_Value__c + ' '+ plm.Field_Description__c);
+                picklistDescriptions.put(plm.Test_Config__r.Test_Name__c + ': ' + plm.Field_Value__c, plm.Field_Description__c);
+
+            }
         }
 
         bMildConcerns = behEval.Overall_Evaluation_Grade__c == 'B - Mild Concern(s)' ? true : false;

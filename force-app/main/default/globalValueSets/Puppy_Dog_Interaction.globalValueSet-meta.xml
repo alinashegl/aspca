@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
     <customValue>
-        <fullName>Greeted-plays</fullName>
+        <fullName>Greeted-played</fullName>
         <default>false</default>
-        <label>Greeted-plays</label>
+        <label>Greeted-played</label>
     </customValue>
     <customValue>
         <fullName>Greeted-hung out or explored with other puppy</fullName>
@@ -21,14 +21,14 @@
         <label>Preferred to socialize with tester</label>
     </customValue>
     <customValue>
-        <fullName>Greeted, mildly fearful</fullName>
+        <fullName>Greeted-mildly fearful</fullName>
         <default>false</default>
-        <label>Greeted, mildly fearful</label>
+        <label>Greeted-mildly fearful</label>
     </customValue>
     <customValue>
-        <fullName>Pushy-relaxes</fullName>
+        <fullName>Pushy-relaxed</fullName>
         <default>false</default>
-        <label>Pushy-relaxes</label>
+        <label>Pushy-relaxed</label>
     </customValue>
     <customValue>
         <fullName>Defensive</fullName>

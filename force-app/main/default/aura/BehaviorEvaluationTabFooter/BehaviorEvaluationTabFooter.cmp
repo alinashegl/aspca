@@ -19,7 +19,10 @@
 
     <table>
         <tr>
-        <lightning:input type="checkbox" name="Skip" label="Skip?" checked="{!v.IsSkipped}" onchange="{!c.handleSkip}"/>
+        <label  style="font-weight:900;">Skip?</label>
+        <lightning:input type="checkbox-button" name="Skip" label="Skip?" checked="{!v.IsSkipped}" onchange="{!c.handleSkip}"/>
+        </tr>
+        <tr>
         <c:BehaviorEvaluationModal title="Select Skip Reason" isActive="{!v.showModal}"  recordId="{!v.recordId}">
             <aura:set attribute="body">
                 <lightning:select label="Select a Skip Reasons" name="skipReason"

@@ -23,6 +23,8 @@ public with sharing class TabContentUtil {
     @AuraEnabled public Boolean UseCaution { get; set; }
     @AuraEnabled public Boolean IsMuzzled { get; set; }
     @AuraEnabled public EvaluationWrapper.FieldContents Caution { get; set; }
+    @AuraEnabled public Boolean UnpleasantTouch1stFlank { get; set; }
+    @AuraEnabled public Boolean UnpleasantTouch2ndFlank { get; set; }
 
     public TabContentUtil(
             String id,
@@ -44,7 +46,9 @@ public with sharing class TabContentUtil {
             Boolean IsDogFighting,
             Boolean UseCaution,
             Boolean IsMuzzled ,
-            EvaluationWrapper.FieldContents Caution
+            EvaluationWrapper.FieldContents Caution,
+            Boolean UnpleasantTouch1stFlank,
+            Boolean UnpleasantTouch2ndFlank
     ) {
         this.id = id;
         this.label = label;
@@ -66,6 +70,8 @@ public with sharing class TabContentUtil {
         this.UseCaution = UseCaution;
         this.IsMuzzled = IsMuzzled;
         this.Caution = Caution;
+        this.UnpleasantTouch1stFlank = UnpleasantTouch1stFlank;
+        this.UnpleasantTouch2ndFlank = UnpleasantTouch2ndFlank;
 
     }
 

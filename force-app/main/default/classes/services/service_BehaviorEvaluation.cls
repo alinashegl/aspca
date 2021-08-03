@@ -201,11 +201,14 @@ public with sharing  class service_BehaviorEvaluation extends service_Base{
         eval.put(field, val);
         List<Behavior_Evaluation__c> evaluations = new List<Behavior_Evaluation__c>();
         evaluations.add(eval);
+
+
         TriggerRequest beforeUpdateRequest = new TriggerRequest(Behavior_Evaluation__c.getSObjectType())
                 .SetBefore(true)
                 .SetUpdate(true)
                 .SetNewRecords(evaluations)
                 .SetOldRecords(new List<Behavior_Evaluation__c>());
+
         ServiceRequest req = new ServiceRequest().withParams('TriggerRequest', beforeUpdateRequest);
         BehaviorEvaluationDomain domain = new BehaviorEvaluationDomain();
         ServiceResponse resp = domain.Execute(req);

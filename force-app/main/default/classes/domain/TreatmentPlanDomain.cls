@@ -49,18 +49,10 @@ public with sharing class TreatmentPlanDomain extends DomainActionBase{
         Map<Id, Behavior_Evaluation__c> newRecordMap = (Map<Id, Behavior_Evaluation__c>) request.newRecordMap;
         Map<Id, Behavior_Evaluation__c> oldRecordMap = (Map<Id, Behavior_Evaluation__c>) request.oldRecordMap;
 
-        if (newRecords != null) {
-            update newRecords;
-        }
-        if (oldRecords != null) {
-
-        }
-        if(newRecordMap != null) {
-            update newRecordMap.values();
-        }
-        if (oldRecordMap != null) {
-
-        }
+        if (newRecords != null) { update newRecords; }
+        if (oldRecords != null) { }
+        if(newRecordMap != null) { update newRecordMap.values(); }
+        if (oldRecordMap != null) { }
 
     }
     public void beforeDelete(TriggerRequest request) {
