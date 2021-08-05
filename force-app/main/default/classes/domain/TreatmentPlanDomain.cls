@@ -43,24 +43,25 @@ public with sharing class TreatmentPlanDomain extends DomainActionBase{
     public void beforeUpdate(TriggerRequest request) {
 
         System.debug('Before Update is Executing');
-        List<Behavior_Evaluation__c> newRecords = request.newRecords;
-        List<Behavior_Evaluation__c> oldRecords = request.oldRecords;
+        List<Opportunity> newRecords = request.newRecords;
+        List<Opportunity> oldRecords = request.oldRecords;
 
-        Map<Id, Behavior_Evaluation__c> newRecordMap = (Map<Id, Behavior_Evaluation__c>) request.newRecordMap;
-        Map<Id, Behavior_Evaluation__c> oldRecordMap = (Map<Id, Behavior_Evaluation__c>) request.oldRecordMap;
+        Map<Id, Opportunity> newRecordMap = (Map<Id, Opportunity>) request.newRecordMap;
+        Map<Id, Opportunity> oldRecordMap = (Map<Id, Opportunity>) request.oldRecordMap;
 
+        if (oldRecords != null) {
+
+        }
         if (newRecords != null) {
             update newRecords;
         }
-        if (oldRecords != null) {
+        if (oldRecordMap != null) {
 
         }
         if(newRecordMap != null) {
             update newRecordMap.values();
         }
-        if (oldRecordMap != null) {
 
-        }
 
     }
     public void beforeDelete(TriggerRequest request) {
@@ -71,8 +72,29 @@ public with sharing class TreatmentPlanDomain extends DomainActionBase{
     }
     public void afterUpdate(TriggerRequest request) {
         System.debug('After Update is Executing');
+        List<Opportunity> newRecords = request.newRecords;
+        List<Opportunity> oldRecords = request.oldRecords;
+
+        Map<Id, Opportunity> newRecordMap = (Map<Id, Opportunity>) request.newRecordMap;
+        Map<Id, Opportunity> oldRecordMap = (Map<Id, Opportunity>) request.oldRecordMap;
+        Map<Id, OpportunityLineItem> oldLineItems = new Map<Id, OpportunityLineItem>();
+        if (oldRecords != null) { }
+        if (newRecords != null) {   }
+        if (oldRecordMap != null) { }
+        if(newRecordMap != null) { }
     }
     public void afterDelete(TriggerRequest request) {
         System.debug('After Delete is Executing');
+    }
+
+    private static Map<Id, OpportunityLineItem> getPlanProtocol(Id opp) {
+        PlanProtocolSelector selector = new PlanProtocolSelector();
+
+        List<OpportunityLineItem> lineItems = selector.GetByOpp(opp);
+        Map<Id, OpportunityLineItem> idOpportunityLineItemMap  = new Map<Id, OpportunityLineItem>();
+        for (OpportunityLineItem item : lineItems) {
+            idOpportunityLineItemMap.put(item.Id, item);
+        }
+        return idOpportunityLineItemMap;
     }
 }
