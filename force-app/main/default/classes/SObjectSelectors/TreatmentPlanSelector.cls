@@ -22,7 +22,8 @@ public with sharing class TreatmentPlanSelector extends SObjectSelector {
                 Opportunity.IsPrivate ,
                 Opportunity.StageName ,
                 Opportunity.Type ,
-                Opportunity.Id
+                Opportunity.Id ,
+                Opportunity.Assigned_Treatment_Bundle__c
         };
     }
 

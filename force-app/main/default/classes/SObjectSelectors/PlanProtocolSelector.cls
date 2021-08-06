@@ -19,7 +19,8 @@ public with sharing class PlanProtocolSelector extends SObjectSelector{
                 OpportunityLineItem.LastModifiedById ,
                 OpportunityLineItem.Product2Id ,
                 OpportunityLineItem.PricebookEntryId ,
-                OpportunityLineItem.OpportunityId
+                OpportunityLineItem.OpportunityId ,
+                OpportunityLineItem.Id
         };
     }
 

@@ -49,15 +49,6 @@ public with sharing class TreatmentPlanDomain extends DomainActionBase{
         Map<Id, Opportunity> newRecordMap = (Map<Id, Opportunity>) request.newRecordMap;
         Map<Id, Opportunity> oldRecordMap = (Map<Id, Opportunity>) request.oldRecordMap;
 
-        if (oldRecords != null) {
-
-        }
-        if (newRecords != null) {
-            update newRecords;
-        }
-        if (oldRecordMap != null) {
-
-        }
         if(newRecordMap != null) {
             update newRecordMap.values();
         }
@@ -72,16 +63,22 @@ public with sharing class TreatmentPlanDomain extends DomainActionBase{
     }
     public void afterUpdate(TriggerRequest request) {
         System.debug('After Update is Executing');
+        TreatmentBundleSelector bundleSelector = new TreatmentBundleSelector();
         List<Opportunity> newRecords = request.newRecords;
         List<Opportunity> oldRecords = request.oldRecords;
 
         Map<Id, Opportunity> newRecordMap = (Map<Id, Opportunity>) request.newRecordMap;
         Map<Id, Opportunity> oldRecordMap = (Map<Id, Opportunity>) request.oldRecordMap;
         Map<Id, OpportunityLineItem> oldLineItems = new Map<Id, OpportunityLineItem>();
-        if (oldRecords != null) { }
-        if (newRecords != null) {   }
-        if (oldRecordMap != null) { }
-        if(newRecordMap != null) { }
+
+        for (Opportunity opportunity : newRecordMap.values()) {
+            if (!opportunity.Assigned_Treatment_Bundle__c.equals(null)) {
+                Opportunity oldOpp = oldRecordMap.get(opportunity.Id);
+                Map<Id, Product2> bundle = (Map<Id, Product2>) bundleSelector.GetById((Set<Id>) opportunity.Assigned_Treatment_Bundle__c);
+                Map<Id, OpportunityLineItem> oldLineItems = getPlanProtocol(oldOpp.Id);
+                Map<Id, OpportunityLineItem> newLineItems = getPlanProtocol(opportunity.Id);
+            }
+        }
     }
     public void afterDelete(TriggerRequest request) {
         System.debug('After Delete is Executing');
@@ -92,9 +89,29 @@ public with sharing class TreatmentPlanDomain extends DomainActionBase{
 
         List<OpportunityLineItem> lineItems = selector.GetByOpp(opp);
         Map<Id, OpportunityLineItem> idOpportunityLineItemMap  = new Map<Id, OpportunityLineItem>();
-        for (OpportunityLineItem item : lineItems) {
-            idOpportunityLineItemMap.put(item.Id, item);
-        }
+        idOpportunityLineItemMap.putAll(lineItems);
         return idOpportunityLineItemMap;
+    }
+    private static Map<Id, Product2> GetProtocolsByLineItem(List<OpportunityLineItem> val) {
+        ProtocolSelector selector = new ProtocolSelector();
+        Map<Id, Product2> protocolmap = new Map<Id, Product2>();
+        Set<Id> keys = new Set<Id>();
+        for (OpportunityLineItem item : val) {
+            keys.add(item.Product2Id);
+        }
+        List<Product2> product2s = selector.GetById(keys);
+        protocolmap.putAll(product2s);
+        return protocolmap;
+    }
+
+    private static Opportunity protocolChecker(Opportunity object, Map<Id, OpportunityLineItem> oldMap, Map<Id, OpportunityLineItem>
+            newMap, Map<Id, Product2> bundleMap) {
+        try {
+            Integer count = bundleMap.size();
+            Integer index = 0;
+
+        }catch (Exception e) {
+            System.debug(e);
+        }
     }
 }
