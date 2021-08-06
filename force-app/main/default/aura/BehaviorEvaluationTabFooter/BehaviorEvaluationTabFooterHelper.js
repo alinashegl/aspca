@@ -178,6 +178,7 @@
         .then(
           function(response) {
               console.log('SENT VALUES RESPONSE', response);
+              $A.get('e.force:refreshView').fire();
           }
         ).catch(
             function(error) {

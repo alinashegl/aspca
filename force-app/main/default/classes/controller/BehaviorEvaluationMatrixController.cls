@@ -13,7 +13,8 @@ public class BehaviorEvaluationMatrixController {
         dao_BehaviorEvaluations daoBehaviorEvaluations = new dao_BehaviorEvaluations();
         m_behaviorEval = daoBehaviorEvaluations.findOne(ApexPages.currentPage().getparameters().get('Id'));
         behaviorEvaluation = [select 
-                              Name,Puppy_Dog_Interaction_P3__c,
+                              Name,
+                              Puppy_Dog_Interaction_P3__c,
                               Puppy_Dog_Interaction_P2__c,
                               Puppy_Dog_Interaction_P1__c,
                               Puppy_Social_Behavior_P2__c,
@@ -61,6 +62,7 @@ public class BehaviorEvaluationMatrixController {
                               Puppy_Play_Tug_P2__c,
                               Puppy_Play_Tug_P1__c,
                               Puppy_Child_Doll_P1__c,
+                              Puppy_Child_Doll_P2__c,
                               Puppy_Behavior_on_Leash__c,
                               Puppy_Behavior_in_Kennel__c,
                               Skipped_UT_2nd__c,
@@ -161,14 +163,20 @@ public class BehaviorEvaluationMatrixController {
             //Iterate through Skipped fields to pull out skip reason
             if (fieldName.contains('Skipped')){
                 //system.debug('SKIPPED VALUE: '+behaviors+ ' ' + fieldName);
-                for (Test_Config__mdt testMetadata : [SELECT Test_Skip_Reason_Field__c,MasterLabel,IsPuppy__c FROM Test_Config__mdt
+                for (Test_Config__mdt testMetadata : [SELECT Test_Skip_Reason_Field__c,MasterLabel,IsPuppy__c,Test_Name__c,Overall_Test_Display_Name__c FROM Test_Config__mdt
                                                       WHERE Test_Skip_Reason_Field__c = :fieldName AND IsPuppy__c = :evalType LIMIT 1 ]){
-                                                          
-                                                          String testName = testMetadata.MasterLabel;
-                                                          if (testName.contains('Puppy')){
-                                                              testName = testName.substring(6);
+                                                          String testName = '';
+                                                          if (testMetadata.Overall_Test_Display_Name__c != null){
+                                                              testName = testMetadata.Overall_Test_Display_Name__c;
                                                           }
-                                                          
+                                                          else{
+                                                              testName = testMetadata.Test_Name__c;
+                                                          }
+                                                          //String testName = testMetadata.MasterLabel;
+                                                          //if (testName.contains('Puppy')){
+                                                          //    testName = testName.substring(6);
+                                                          //}
+
                                                           if(behaviors.contains('not necessary') || behaviors.contains('appropriate helper dog')){
                                                               testAndDisplayValues.put(testName, new List<String>{'---','---','---','---'});
                                                           } else{
@@ -188,18 +196,18 @@ public class BehaviorEvaluationMatrixController {
                 //Iterate through array to categorize each selection into a numeric value, based on Value Category
                 for (String beh : behArray){
                     
-                    for (Picklist_Description_Config__mdt picklistMetadata : [SELECT Test_Config__r.MasterLabel,Field_API_Name__c,Value_Category__c,Field_Value__c FROM Picklist_Description_Config__mdt
+                    for (Picklist_Description_Config__mdt picklistMetadata : [SELECT Test_Config__r.MasterLabel,Test_Config__r.Test_Name__c,Field_API_Name__c,Value_Category__c,Field_Value__c FROM Picklist_Description_Config__mdt
                                                                               WHERE Field_API_Name__c = :fieldName AND Field_Value__c = :beh LIMIT 1 ]){
                                                                                   //Assign Value Category String value to Integer
                                                                                   Integer valueCategory = Integer.valueOf(picklistMetadata.Value_Category__c);
                                                                                   
                                                                                   //If testAndValues map does not contain current subtest, create new key-value set for Subtest name and Value Category
-                                                                                  if(!testAndValues.containsKey(picklistMetadata.Test_Config__r.MasterLabel)){
-                                                                                      testAndValues.put(picklistMetadata.Test_Config__r.MasterLabel, new Set<Integer>{valueCategory});
+                                                                                  if(!testAndValues.containsKey(picklistMetadata.Test_Config__r.Test_Name__c)){
+                                                                                      testAndValues.put(picklistMetadata.Test_Config__r.Test_Name__c, new Set<Integer>{valueCategory});
                                                                                   }
                                                                                   //If testAndValues map already contains current subtest, add Value Category to the corresponding key
                                                                                   else{
-                                                                                      testAndValues.get(picklistMetadata.Test_Config__r.MasterLabel).add(valueCategory);
+                                                                                      testAndValues.get(picklistMetadata.Test_Config__r.Test_Name__c).add(valueCategory);
                                                                                       
                                                                                   }
                                                                                   
@@ -237,11 +245,18 @@ public class BehaviorEvaluationMatrixController {
         // Add subtest and order combinations into testOrder Map
         for (String subtest : testAndDisplayValues.keySet()){
             //system.debug('SUBTEST ============' + subtest);
-            for (Test_Config__mdt testMetadata : [SELECT MasterLabel,Test_Display_Order__c FROM Test_Config__mdt
-                                                  WHERE MasterLabel = :subtest LIMIT 1 ]){
-                                                      system.debug('testMetadata.MasterLabel ============' + testMetadata.MasterLabel);
-                                                      testOrder.put(Integer.valueOf(testMetadata.Test_Display_Order__c), testMetadata.MasterLabel);
-                                                  } 
+            List<Test_Config__mdt> testMetadata = [SELECT MasterLabel,Test_Display_Order__c,Test_Name__c,IsPuppy__c FROM Test_Config__mdt
+                                                   WHERE Test_Name__c = :subtest AND IsPuppy__c =:evalType LIMIT 1 ];
+            //system.debug('testMetadata.MasterLabel ============' + testMetadata.Test_Name__c);
+            if(testMetadata.size() != 0){
+                testOrder.put(Integer.valueOf(testMetadata[0].Test_Display_Order__c), testMetadata[0].Test_Name__c);
+            }
+            else{
+                List<Test_Config__mdt> overallTestMetadata = [SELECT MasterLabel,Test_Display_Order__c,Test_Name__c,Overall_Test_Display_Name__c,IsPuppy__c FROM Test_Config__mdt
+                                                              WHERE Overall_Test_Display_Name__c = :subtest AND IsPuppy__c =:evalType LIMIT 1 ];
+                testOrder.put(Integer.valueOf(overallTestMetadata[0].Test_Display_Order__c), overallTestMetadata[0].Overall_Test_Display_Name__c);
+            }
+
         }
         
         

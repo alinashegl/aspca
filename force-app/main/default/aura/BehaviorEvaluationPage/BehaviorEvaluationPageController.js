@@ -46,6 +46,9 @@
     refresh: function (cmp, event, helper) {
         helper.checkValidity(cmp, event);
         $A.get('e.force:refreshView').fire();
-    }
+    } ,
+    handleUnpleasantTouch: function(cmp, event, helper){
+        helper.processingProcess(cmp, 'handleUnpleasantTouch', event);
+    } ,
 
 });
