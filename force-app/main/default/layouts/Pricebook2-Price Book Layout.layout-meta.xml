@@ -40,6 +40,8 @@
         <detailHeading>false</detailHeading>
         <editHeading>false</editHeading>
         <layoutColumns/>
+        <layoutColumns/>
+        <layoutColumns/>
         <style>CustomLinks</style>
     </layoutSections>
     <relatedLists>
@@ -53,6 +55,13 @@
         <fields>ACCOUNT.NAME</fields>
         <fields>OPPORTUNITY.CLOSE_DATE</fields>
         <relatedList>Opportunity.Assigned_Treatment_Bundle__c</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <fields>NAME</fields>
+        <fields>Animal__c</fields>
+        <fields>Enrichment_Coordinator__c</fields>
+        <fields>DE_Date__c</fields>
+        <relatedList>Daily_Enrichment__c.Treatment_Bundle__c</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>

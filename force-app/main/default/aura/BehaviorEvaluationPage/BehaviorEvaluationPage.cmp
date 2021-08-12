@@ -72,8 +72,6 @@
     <aura:attribute name="IsPuppy" type="Boolean" default="false" />
     <aura:attribute name="IsDogFighting" type="Boolean" />
     <aura:attribute name="UseCaution" type="Boolean" />
-    <aura:attribute name="UnpleasantTouch1stFlank" type="Boolean" />
-    <aura:attribute name="UnpleasantTouch2ndFlank" type="Boolean" />
 
 
     <!-- attribute for component attributes -->
@@ -121,30 +119,29 @@
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Flag}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{#variable.mAlertOptions}"
                                                                          index="{!index}"  recordId="{!v.recordId}">
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
-                                        &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
                                                                              recordId="{!v.recordId}">
                                                 <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="60" height="60" />
+                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
                                                 </aura:set>
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
@@ -174,30 +171,29 @@
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Flag}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
                                                                          index="{!index}"  recordId="{!v.recordId}">
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
-                                        &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
                                                                              recordId="{!v.recordId}">
                                                 <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="60" height="60" />
+                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
                                                 </aura:set>
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
@@ -231,30 +227,29 @@
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Flag}" width="60" height="60"/>
+                                                <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100"/>
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
                                                                          index="{!index}"  recordId="{!v.recordId}">
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
-                                        &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
                                                                              recordId="{!v.recordId}">
                                                 <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="60" height="60" />
+                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
                                                 </aura:set>
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
@@ -288,30 +283,29 @@
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Flag}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
                                                                          index="{!index}"  recordId="{!v.recordId}">
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
-                                        &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
                                                                              recordId="{!v.recordId}">
                                                 <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="60" height="60" />
+                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
                                                 </aura:set>
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
@@ -345,30 +339,29 @@
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Flag}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
                                                                          index="{!index}"  recordId="{!v.recordId}">
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
-                                        &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
                                                                              recordId="{!v.recordId}">
                                                 <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="60" height="60" />
+                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
                                                 </aura:set>
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
@@ -401,62 +394,33 @@
                                     <div class="grid-container">
                                         <div class="grid-item"></div>
                                         <div class="grid-item" align="left" >
-                                            <tr class="spaceUnder" width="100%">
-                                                <td width="12%"></td>
+                                            <tr width="100%">
+                                                <td width="33%"></td>
                                                 <td width="6%">1st</td>
                                                 <td width="6%">2nd</td>
-                                                <td width="76%"></td>
+                                                <td width="55%"></td>
                                             </tr>
                                         </div>
                                     </div>
                                 </table>
-                                        &nbsp;
-                                <table class="slds-box slds-p-top_medium" width="100%">
-                                    <div class="grid-container">
-                                        <div class="grid-item"></div>
-                                        <div class="grid-item" align="left" >
-                                            <tr class="spaceUnder" width="100%">
-                                                <td width="8%"></td>
-                                                <td width="6%">
-                                                    <lightning:input
-                                                        type="checkbox-button"
-                                                        onchange="{!c.handleUnpleasantTouch}"
-                                                        aura:id="UnpleasantTouch1stFlankInput"
-                                                        checked="{!v.UnpleasantTouch1stFlank}"
-                                                    />
-                                                </td>
-                                                <td width="6%">
-                                                    <lightning:input
-                                                        type="checkbox-button"
-                                                        onchange="{!c.handleUnpleasantTouch}"
-                                                        aura:id="UnpleasantTouch2ndFlankInput"
-                                                        checked="{!v.UnpleasantTouch2ndFlank}"
-                                                    />
-                                                </td>
-                                                <td width="80%" style="font-weight:900;">Rear flank pinch instead</td>
-                                            </tr>
-                                        </div>
-                                    </div>
-                                </table>
-                                        &nbsp;
+
                                 <aura:iteration items="{!v.unpleasantTouchTest}" var="variable">
-                                    <table>
                                     <aura:if isTrue="{!not(empty(variable.mZeroOptions))}">
                                         <c:BehaviorEvaluationMultipleOptionGroup colNumber="2" type="unpleasantTouch"
                                                                                  options="{!variable.mZeroOptions}"
                                                                                  index="{!index}"
                                                                                  recordId="{!v.recordId}">
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Box}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Box}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationMultipleOptionGroup>
                                     </aura:if>
-                                        &nbsp;
+                                    <table>
                                         <c:BehaviorEvaluationMultipleOptionGroup type="unpleasantTouch" colNumber="2"
                                                                                  options="{!variable.mNotConcerningOptions}"
                                                                                  index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationMultipleOptionGroup>
                                         &nbsp;
@@ -464,7 +428,7 @@
                                                                                  options="{!variable.mRedFlagOptions}"
                                                                                  index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Flag}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationMultipleOptionGroup>
                                         &nbsp;
@@ -472,17 +436,16 @@
                                                                                  options="{!variable.mAlertOptions}"
                                                                                  index="{!index}"  recordId="{!v.recordId}">
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationMultipleOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
-                                        &nbsp;
                                             <c:BehaviorEvaluationMultipleOptionGroup type="unpleasantTouch" colNumber="2"
                                                                                      options="{!variable.mInconclusiveOptions}"
                                                                                      index="{!index}"
                                                                                      recordId="{!v.recordId}">
                                                 <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="60" height="60" />
+                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
                                                 </aura:set>
                                             </c:BehaviorEvaluationMultipleOptionGroup>
                                         </aura:if>
@@ -516,30 +479,29 @@
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Flag}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
                                                                          index="{!index}"  recordId="{!v.recordId}">
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
-                                        &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
                                                                              recordId="{!v.recordId}">
                                                 <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="60" height="60" />
+                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
                                                 </aura:set>
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
@@ -573,30 +535,29 @@
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Flag}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
                                                                          index="{!index}"  recordId="{!v.recordId}">
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="60" height="60"  />
+                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100"  />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
-                                        &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
                                                                              recordId="{!v.recordId}">
                                                 <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="60" height="60" />
+                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
                                                 </aura:set>
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
@@ -630,21 +591,21 @@
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Flag}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
                                                                          index="{!index}"  recordId="{!v.recordId}">
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
@@ -671,12 +632,11 @@
                                         -->
 
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
-                                        &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
                                                                              recordId="{!v.recordId}">
                                                 <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="60" height="60" />
+                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
                                                 </aura:set>
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
@@ -738,30 +698,29 @@
                                         <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingOne" colNumber="4" options="{!variable.mNotConcerningOptions}"
                                                                                  index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationMultipleOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingOne" colNumber="4" options="{!variable.mRedFlagOptions}"
                                                                                  index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Flag}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationMultipleOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingOne" colNumber="4" options="{!variable.mAlertOptions}"
                                                                                  index="{!index}"  recordId="{!v.recordId}">
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationMultipleOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
-                                        &nbsp;
                                             <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingOne" colNumber="4" options="{!variable.mInconclusiveOptions}"
                                                                                      index="{!index}"
                                                                                      recordId="{!v.recordId}">
                                                 <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="60" height="60" />
+                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
                                                 </aura:set>
                                             </c:BehaviorEvaluationMultipleOptionGroup>
                                         </aura:if>
@@ -823,30 +782,29 @@
                                         <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingTwo" colNumber="4" options="{!variable.mNotConcerningOptions}"
                                                                                  index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationMultipleOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingTwo" colNumber="4" options="{!variable.mRedFlagOptions}"
                                                                                  index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Flag}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationMultipleOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingTwo" colNumber="4" options="{!variable.mAlertOptions}"
                                                                                  index="{!index}"  recordId="{!v.recordId}">
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationMultipleOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
-                                        &nbsp;
                                             <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingTwo" colNumber="4" options="{!variable.mInconclusiveOptions}"
                                                                                      index="{!index}"
                                                                                      recordId="{!v.recordId}">
                                                 <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="60" height="60" />
+                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
                                                 </aura:set>
                                             </c:BehaviorEvaluationMultipleOptionGroup>
                                         </aura:if>
@@ -880,30 +838,29 @@
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Flag}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
                                                                          index="{!index}"  recordId="{!v.recordId}">
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
-                                        &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
                                                                              recordId="{!v.recordId}">
                                                 <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="60" height="60" />
+                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
                                                 </aura:set>
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
@@ -937,30 +894,29 @@
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Flag}" width="60" height="60"  />
+                                                <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100"  />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
                                                                          index="{!index}"  recordId="{!v.recordId}">
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
-                                        &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
                                                                              recordId="{!v.recordId}">
                                                 <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="60" height="60" />
+                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
                                                 </aura:set>
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
@@ -994,32 +950,31 @@
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Flag}" width="60" height="60"  />
+                                                <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100"  />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
                                                                          index="{!index}"  recordId="{!v.recordId}">
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
 
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
-                                        &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
                                                                              recordId="{!v.recordId}">
                                                 <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="60" height="60" />
+                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
                                                 </aura:set>
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
@@ -1053,30 +1008,29 @@
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Flag}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
                                                                          index="{!index}"  recordId="{!v.recordId}">
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
-                                        &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
                                                                              recordId="{!v.recordId}">
                                                 <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="60" height="60" />
+                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
                                                 </aura:set>
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
@@ -1109,43 +1063,37 @@
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
                                                                              index="{!index}" recordId="{!v.recordId}" >
                                                 <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="60" height="60" />
+                                                    <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
                                                 </aura:set>
                                             </c:BehaviorEvaluationOptionGroup>
                                             &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
                                                                              index="{!index}" recordId="{!v.recordId}" >
                                                 <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_Flag}" width="60" height="60" />
+                                                    <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100" />
                                                 </aura:set>
                                             </c:BehaviorEvaluationOptionGroup>
                                             &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
                                                                              index="{!index}"  recordId="{!v.recordId}">
                                                 <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="60" height="60" />
+                                                    <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
                                                 </aura:set>
                                             </c:BehaviorEvaluationOptionGroup>
                                             &nbsp;
-                                            <div style="font-weight:900; -webkit-text-fill-color:#FF0000; ">
-                                            <table>
-                                                <tr>
-                                                <td><lightning:input type="checkbox-button"
+                                            <div>
+                                                <lightning:input type="checkbox"
                                                                  label="Use Caution for Real Dog Test"
                                                                  onchange="{!c.handleCaution}"
-                                                                aura:id="cautionInput"/></td>
-                                                <td><label>Use Caution for Real Dog Test</label></td>
-                                                </tr>
-                                            </table>
+                                                                aura:id="cautionInput"/>
                                             </div>
                                             &nbsp;
                                             <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
-                                        &nbsp;
                                                 <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                                  index="{!index}"
                                                                                  recordId="{!v.recordId}">
                                                     <aura:set attribute="image">
-                                                        <img src="{!$Resource.Beh_Eval_No_Entry}"  width="60" height="60" />
+                                                        <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
                                                     </aura:set>
                                                 </c:BehaviorEvaluationOptionGroup>
                                             </aura:if>
@@ -1180,30 +1128,29 @@
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Flag}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
                                                                          index="{!index}"  recordId="{!v.recordId}">
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
-                                        &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
                                                                              recordId="{!v.recordId}">
                                                 <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="60" height="60" />
+                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
                                                 </aura:set>
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
@@ -1237,30 +1184,29 @@
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Flag}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
                                                                          index="{!index}"  recordId="{!v.recordId}">
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
-                                        &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
                                                                              recordId="{!v.recordId}">
                                                 <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="60" height="60" />
+                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
                                                 </aura:set>
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
@@ -1303,30 +1249,29 @@
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Flag}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
                                                                          index="{!index}"  recordId="{!v.recordId}">
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
-                                        &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
                                                                              recordId="{!v.recordId}">
                                                 <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="60" height="60" />
+                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
                                                 </aura:set>
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
@@ -1360,30 +1305,29 @@
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Flag}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
                                                                          index="{!index}"  recordId="{!v.recordId}">
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
-                                        &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
                                                                              recordId="{!v.recordId}">
                                                 <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="60" height="60" />
+                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
                                                 </aura:set>
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
@@ -1417,30 +1361,29 @@
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Flag}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
                                                                          index="{!index}"  recordId="{!v.recordId}">
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
-                                        &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
                                                                              recordId="{!v.recordId}">
                                                 <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="60" height="60" />
+                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
                                                 </aura:set>
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
@@ -1483,30 +1426,29 @@
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Flag}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
                                                                          index="{!index}"  recordId="{!v.recordId}">
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}"  width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}"  width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
-                                        &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
                                                                              recordId="{!v.recordId}">
                                                 <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="60" height="60" />
+                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
                                                 </aura:set>
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
@@ -1551,30 +1493,29 @@
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Flag}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
                                                                          index="{!index}"  recordId="{!v.recordId}">
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
-                                        &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
                                                                              recordId="{!v.recordId}">
                                                 <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="60" height="60" />
+                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
                                                 </aura:set>
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
@@ -1607,30 +1548,29 @@
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Flag}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
                                                                          index="{!index}"  recordId="{!v.recordId}">
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
-                                        &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
                                                                              recordId="{!v.recordId}">
                                                 <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="60" height="60" />
+                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
                                                 </aura:set>
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
@@ -1663,30 +1603,29 @@
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Flag}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
                                                                          index="{!index}"  recordId="{!v.recordId}">
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
-                                        &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
                                                                              recordId="{!v.recordId}">
                                                 <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="60" height="60" />
+                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
                                                 </aura:set>
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
@@ -1719,30 +1658,29 @@
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Flag}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
                                                                          index="{!index}"  recordId="{!v.recordId}">
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
-                                        &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
                                                                              recordId="{!v.recordId}">
                                                 <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="60" height="60" />
+                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
                                                 </aura:set>
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
@@ -1777,30 +1715,29 @@
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Flag}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
                                                                          index="{!index}"  recordId="{!v.recordId}">
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
-                                        &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
                                                                              recordId="{!v.recordId}">
                                                 <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="60" height="60" />
+                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
                                                 </aura:set>
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
@@ -1833,30 +1770,29 @@
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Flag}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
                                                                          index="{!index}"  recordId="{!v.recordId}">
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
-                                        &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
                                                                              recordId="{!v.recordId}">
                                                 <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="60" height="60" />
+                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
                                                 </aura:set>
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
@@ -1889,30 +1825,29 @@
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Flag}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
                                                                          index="{!index}"  recordId="{!v.recordId}">
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
-                                        &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
                                                                              recordId="{!v.recordId}">
                                                 <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="60" height="60" />
+                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
                                                 </aura:set>
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
@@ -1945,30 +1880,29 @@
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Flag}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
                                                                          index="{!index}"  recordId="{!v.recordId}">
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
-                                        &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
                                                                              recordId="{!v.recordId}">
                                                 <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="60" height="60" />
+                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
                                                 </aura:set>
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
@@ -2033,30 +1967,29 @@
                                         <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingOne" colNumber="4" options="{!variable.mNotConcerningOptions}"
                                                                                  index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationMultipleOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingOne" colNumber="4" options="{!variable.mRedFlagOptions}"
                                                                                  index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Flag}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationMultipleOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingOne" colNumber="4" options="{!variable.mAlertOptions}"
                                                                                  index="{!index}"  recordId="{!v.recordId}">
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationMultipleOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
-                                        &nbsp;
                                             <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingOne" colNumber="4" options="{!variable.mInconclusiveOptions}"
                                                                                      index="{!index}"
                                                                                      recordId="{!v.recordId}">
                                                 <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="60" height="60" />
+                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
                                                 </aura:set>
                                             </c:BehaviorEvaluationMultipleOptionGroup>
                                         </aura:if>
@@ -2120,30 +2053,29 @@
                                         <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingTwo" colNumber="4" options="{!variable.mNotConcerningOptions}"
                                                                                  index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationMultipleOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingTwo" colNumber="4" options="{!variable.mRedFlagOptions}"
                                                                                  index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Flag}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationMultipleOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingTwo" colNumber="4" options="{!variable.mAlertOptions}"
                                                                                  index="{!index}"  recordId="{!v.recordId}">
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationMultipleOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
-                                        &nbsp;
                                             <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingTwo" colNumber="4" options="{!variable.mInconclusiveOptions}"
                                                                                      index="{!index}"
                                                                                      recordId="{!v.recordId}">
                                                 <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="60" height="60" />
+                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
                                                 </aura:set>
                                             </c:BehaviorEvaluationMultipleOptionGroup>
                                         </aura:if>
@@ -2176,30 +2108,29 @@
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Flag}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
                                                                          index="{!index}"  recordId="{!v.recordId}">
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
-                                        &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
                                                                              recordId="{!v.recordId}">
                                                 <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="60" height="60" />
+                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
                                                 </aura:set>
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
@@ -2232,30 +2163,29 @@
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Flag}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
                                                                          index="{!index}"  recordId="{!v.recordId}">
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
-                                        &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
                                                                              recordId="{!v.recordId}">
                                                 <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="60" height="60" />
+                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
                                                 </aura:set>
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
@@ -2273,7 +2203,7 @@
                             </lightning:layoutItem>
                         </lightning:layout>
                     </lightning:tab>
-                    <lightning:tab label="Dog Interaction - Littermate" id="pdi1">
+                    <lightning:tab label="Dog Interaction - Part 1" id="pdi1">
                         <lightning:layout multipleRows="true">
                             <lightning:layoutItem size="12">
                                 <div class="slds-align_absolute-center" style="height:3rem">
@@ -2297,30 +2227,29 @@
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Flag}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
                                                                          index="{!index}"  recordId="{!v.recordId}">
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
-                                        &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
                                                                              recordId="{!v.recordId}">
                                                 <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="60" height="60" />
+                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
                                                 </aura:set>
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
@@ -2338,7 +2267,7 @@
                             </lightning:layoutItem>
                         </lightning:layout>
                     </lightning:tab>
-                    <lightning:tab label="Dog Interaction - Unfamiliar" id="pdi2">
+                    <lightning:tab label="Dog Interaction - Part 2" id="pdi2">
                         <lightning:layout multipleRows="true">
                             <lightning:layoutItem size="12">
                                 <div class="slds-align_absolute-center" style="height:3rem">
@@ -2353,30 +2282,29 @@
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Flag}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
                                                                          index="{!index}"  recordId="{!v.recordId}">
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
-                                        &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
                                                                              recordId="{!v.recordId}">
                                                 <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="60" height="60" />
+                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
                                                 </aura:set>
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
@@ -2394,7 +2322,7 @@
                             </lightning:layoutItem>
                         </lightning:layout>
                     </lightning:tab>
-                    <lightning:tab label="Dog Interaction - Adult" id="pdi3">
+                    <lightning:tab label="Dog Interaction - Part 3" id="pdi3">
                         <lightning:layout multipleRows="true">
                             <lightning:layoutItem size="12">
                                 <div class="slds-align_absolute-center" style="height:3rem">
@@ -2409,30 +2337,29 @@
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Plus_Sign}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
                                                                          index="{!index}" recordId="{!v.recordId}" >
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Flag}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Flag}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
                                                                          index="{!index}"  recordId="{!v.recordId}">
                                             <aura:set attribute="image">
-                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="60" height="60" />
+                                                <img src="{!$Resource.Beh_Eval_Exclamation_Point}" width="100" height="100" />
                                             </aura:set>
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
-                                        &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
                                                                              recordId="{!v.recordId}">
                                                 <aura:set attribute="image">
-                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="60" height="60" />
+                                                    <img src="{!$Resource.Beh_Eval_No_Entry}"  width="100" height="100" />
                                                 </aura:set>
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
@@ -2468,7 +2395,7 @@
                         </aura:set>
                     </c:BehaviorEvaluationModal>
                 </lightning:buttonGroup>
-                <lightning:button class="slds-float_right" type="submit" label="Save and Complete Evaluation" variant="brand" onclick="{!c.refresh}" />
+                <lightning:button class="slds-float_right" type="submit" label="Finalize" variant="brand" onclick="{!c.refresh}" />
             </lightning:recordEditForm>
         </lightning:tabset>
 

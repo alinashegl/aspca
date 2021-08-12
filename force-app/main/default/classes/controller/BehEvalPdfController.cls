@@ -15,7 +15,7 @@ public class BehEvalPdfController {
     public List<String> potentBehIssue { get; set; }
     public Map<String,String> testDescriptions {get; set;}
     public Map<String,String> picklistDescriptions {get; set;}
-    
+
     public BehEvalPdfController(ApexPages.StandardController controller){
         
         behEval = [SELECT Id
@@ -208,51 +208,51 @@ public class BehEvalPdfController {
                   , UNPLEASANT_TOUCH_2ND__C
                    FROM Behavior_Evaluation__c
                    WHERE Id = :ApexPages.currentPage().getparameters().get('Id')];
-        
+
         //Breaks up Potential Behavior Issues multi-select into potentBehIssue list
         if(behEval.Potential_Behavior_Issues__c != null){
             system.debug('in the if statement');
             potentBehIssue = behEval.Potential_Behavior_Issues__c.split(';');
         }
-        
+
         aNoConcern = behEval.Overall_Evaluation_Grade__c == 'A - No Concerns' ? true : false;
-        
+
         bMildConcern = behEval.Overall_Evaluation_Grade__c == 'B - Mild Concern(s)' ? true : false;
-        
+
         cModerateConcern = behEval.Overall_Evaluation_Grade__c == 'C - Moderate Concern(s)' ? true : false;
-        
+
         dSevereConcern = behEval.Overall_Evaluation_Grade__c == 'D - Severe Concern(s)' ? true : false;
-        
+
         Boolean evalType = False;
         if (behEval.Evaluation_Subtype__c == 'Puppy'){
             evalType = True;
         }
-        
+
         picklistMetadata = new List<Picklist_Description_Config__mdt>();
         picklistDescriptions = new Map<String, String>();
         picklistMetadata = [SELECT Test_Config__r.MasterLabel,Test_Config__r.Test_Name__c,Test_Config__r.IsPuppy__c,Field_API_Name__c,Value_Category__c,Field_Value__c, Field_Description__c
                             FROM Picklist_Description_Config__mdt WHERE Field_Description__c!= null AND Test_Config__r.IsPuppy__c =: evalType];
         if(picklistMetadata != null){
-            for (Picklist_Description_Config__mdt plm : picklistMetadata){          
+            for (Picklist_Description_Config__mdt plm : picklistMetadata){
                 //system.debug(plm.Test_Config__r.Test_Name__c + ': ' + plm.Field_Value__c + ' '+ plm.Field_Description__c);
                 picklistDescriptions.put(plm.Test_Config__r.Test_Name__c + ': ' + plm.Field_Value__c, plm.Field_Description__c);
-                
+
             }
         }
-        
+
         testMetadata = new List<Test_Config__mdt>();
         testDescriptions = new Map<String, String>();
         testMetadata = [SELECT Test_Name__c, Test_Description__c, IsPuppy__c FROM Test_Config__mdt
                        WHERE IsPuppy__c =: evalType];
         if(testMetadata != null){
-            for (Test_Config__mdt tm : testMetadata){          
+            for (Test_Config__mdt tm : testMetadata){
                 //system.debug(plm.Test_Config__r.Test_Name__c + ': ' + plm.Field_Value__c + ' '+ plm.Field_Description__c);
                 testDescriptions.put(tm.Test_Name__c,tm.Test_Description__c);
-                
+
             }
         }
-        
-        
+
+
         system.debug(picklistDescriptions);
     }
 }

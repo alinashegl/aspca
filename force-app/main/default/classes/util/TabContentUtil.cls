@@ -46,9 +46,7 @@ public with sharing class TabContentUtil {
             Boolean IsDogFighting,
             Boolean UseCaution,
             Boolean IsMuzzled ,
-            EvaluationWrapper.FieldContents Caution,
-            Boolean UnpleasantTouch1stFlank,
-            Boolean UnpleasantTouch2ndFlank
+            EvaluationWrapper.FieldContents Caution
     ) {
         this.id = id;
         this.label = label;
@@ -70,8 +68,6 @@ public with sharing class TabContentUtil {
         this.UseCaution = UseCaution;
         this.IsMuzzled = IsMuzzled;
         this.Caution = Caution;
-        this.UnpleasantTouch1stFlank = UnpleasantTouch1stFlank;
-        this.UnpleasantTouch2ndFlank = UnpleasantTouch2ndFlank;
 
     }
 

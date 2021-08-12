@@ -26,27 +26,27 @@
                         <tr class="spaceUnder" align="left">
                             <td class="float slds-theme_shade">
                                 <lightning:input name="{!v.col1API}" label="{!options.label}"
-                                                 type="checkbox-button"
+                                                 type="checkbox"
                                                  variant="label-hidden" aura:id="opts" onchange="{!c.handleSelect}" checked="{!options.IsSelected}"/>
                             </td>
                             <aura:if isTrue="{!v.colNumber >= 2}">
                             <td class="float slds-theme_shade">
                                 <lightning:input name="{!v.col2API}" label="{!options.label}"
-                                                 type="checkbox-button"
+                                                 type="checkbox"
                                                  variant="label-hidden" aura:id="opts2" onchange="{!c.handleSelect2}" />
                             </td>
                             </aura:if>
                             <aura:if isTrue="{!v.colNumber >= 3}">
                             <td class="float slds-theme_shade">
                                 <lightning:input name="{!v.col3API}" label="{!options.label}"
-                                                 type="checkbox-button"
+                                                 type="checkbox"
                                                  variant="label-hidden" aura:id="opts3" onchange="{!c.handleSelect3}" />
                             </td>
                             </aura:if>
                             <aura:if isTrue="{!v.colNumber >= 4}">
                             <td class="float slds-theme_shade">
                                 <lightning:input name="{!v.col4API}" label="{!options.label}"
-                                                 type="checkbox-button"
+                                                 type="checkbox"
                                                  variant="label-hidden" aura:id="opts4" onchange="{!c.handleSelect4}"/>
                             </td>
                             </aura:if>

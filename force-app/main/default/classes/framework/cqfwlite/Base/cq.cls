@@ -50,6 +50,10 @@ public inherited sharing virtual class cq {
         return (TreatmentPlanDomain) bindingFor(Opportunity.SObjectType, TreatmentPlanDomain.class);
     }
 
+    public virtual PlanProtocolDomain PlanProtocolDomainBindings() {
+        return (PlanProtocolDomain) bindingFor(OpportunityLineItem.SObjectType, PlanProtocolDomain.class);
+    }
+
     // END::: SELECTOR BINDINGS
 
     private Map<Schema.SObjectType, Object> selector_mappings = new Map<Schema.SObjectType, Object>();

@@ -22,7 +22,6 @@ private class test_BehaviorEvaluationPageController {
         evaluation.Tester_Initials__c = initials;
         evaluation.Handler_Initials__c = initials;
         evaluation.Comments_BIK__c = 'AAAAAAAAAAAAAAAAAAA';
-        evaluation.Evaluation_Subtype__c = 'Puppy';
         insert evaluation;
         BehaviorEvaluationPageController controller = new BehaviorEvaluationPageController();
         Behavior_Evaluation__c testGetter = BehaviorEvaluationPageController.getOne(evaluation.Id);
@@ -89,47 +88,4 @@ private class test_BehaviorEvaluationPageController {
         System.assertNotEquals(validityTest, null);
         Test.stopTest();
     }
-
-    @IsTest
-    static void adultCoverage() {
-        Test.startTest();
-        String initials = 'LB';
-        Behavior_Evaluation__c evaluation = new Behavior_Evaluation__c();
-        evaluation.Behavior_in_Kennel__c = 'Social';
-        evaluation.Animal__c = Id.valueOf('a077j000001VVm6AAG');
-        evaluation.Scribe_Initials__c = initials;
-        evaluation.Tester_Initials__c = initials;
-        evaluation.Handler_Initials__c = initials;
-        evaluation.Comments_BIK__c = 'AAAAAAAAAAAAAAAAAAA';
-        evaluation.Evaluation_Subtype__c = 'Adult Animal';
-        insert evaluation;
-        BehaviorEvaluationPageController controller = new BehaviorEvaluationPageController();
-        Behavior_Evaluation__c testGetter = BehaviorEvaluationPageController.getOne(evaluation.Id);
-
-        Map<String,Object> validityTest = BehaviorEvaluationPageController.handleValidity(String.valueOf(evaluation.Id));
-        Test.stopTest();
-
-    }
-    @IsTest
-    static void dogFightingCoverage() {
-        Test.startTest();
-        String initials = 'LB';
-        Behavior_Evaluation__c evaluation = new Behavior_Evaluation__c();
-        evaluation.Behavior_in_Kennel__c = 'Social';
-        evaluation.Animal__c = Id.valueOf('a077j000001VVm6AAG');
-        evaluation.Scribe_Initials__c = initials;
-        evaluation.Tester_Initials__c = initials;
-        evaluation.Handler_Initials__c = initials;
-        evaluation.Comments_BIK__c = 'AAAAAAAAAAAAAAAAAAA';
-        evaluation.Evaluation_Subtype__c = 'Dog Fighting';
-        insert evaluation;
-        BehaviorEvaluationPageController controller = new BehaviorEvaluationPageController();
-        Behavior_Evaluation__c testGetter = BehaviorEvaluationPageController.getOne(evaluation.Id);
-
-        Map<String,Object> validityTest = BehaviorEvaluationPageController.handleValidity(String.valueOf(evaluation.Id));
-        Test.stopTest();
-
-    }
-
-
 }

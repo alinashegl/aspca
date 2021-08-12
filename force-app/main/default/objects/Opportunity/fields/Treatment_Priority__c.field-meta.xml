@@ -5,6 +5,7 @@
     <label>Treatment Priority</label>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
     <trackTrending>false</trackTrending>
     <type>Picklist</type>
     <valueSet>
@@ -27,14 +28,9 @@
                 <label>Medium ( 4 days / wk)</label>
             </value>
             <value>
-                <fullName>Low ( 3 days / wk)</fullName>
+                <fullName>Low ( 2 days / wk)</fullName>
                 <default>false</default>
-                <label>Low ( 3 days / wk)</label>
-            </value>
-            <value>
-                <fullName>No Treatment</fullName>
-                <default>false</default>
-                <label>No Treatment</label>
+                <label>Low ( 2 days / wk)</label>
             </value>
         </valueSetDefinition>
     </valueSet>
