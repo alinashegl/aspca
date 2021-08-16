@@ -24,7 +24,7 @@ public with sharing class TreatmentPlanDomain extends DomainActionBase{
     }
 
     public void beforeInsert(TriggerRequest request) {
-        System.debug('Before Insert is Executing');
+        //System.debug('Before Insert is Executing');
         List<Opportunity> newRecords = request.newRecords;
 
         Map<Id, Opportunity> newRecordMap = (Map<Id, Opportunity>) request.newRecordMap;
@@ -44,14 +44,24 @@ public with sharing class TreatmentPlanDomain extends DomainActionBase{
     }
     public static void beforeUpdate(TriggerRequest request) {
 
-        System.debug(' Treatment Plan Before Update is Executing');
+        //System.debug(' Treatment Plan Before Update is Executing');
+
+
+    }
+    public void beforeDelete(TriggerRequest request) {
+        //System.debug('Before Delete is Executing');
+    }
+    public void afterInsert(TriggerRequest request) {
+        //System.debug('After Insert is Executing');
+    }
+    public static void afterUpdate(TriggerRequest request) {
         List<Opportunity> newRecords = request.newRecords;
         List<Opportunity> oldRecords = request.oldRecords;
 
         Map<Id, Opportunity> newRecordMap = (Map<Id, Opportunity>) request.newRecordMap;
         Map<Id, Opportunity> oldRecordMap = (Map<Id, Opportunity>) request.oldRecordMap;
         List<ServiceRequest> requests = new List<ServiceRequest>();
-        TreatmentPlanService service = new TreatmentPlanService();
+        //TreatmentPlanService service = new TreatmentPlanService();
 
         List<OpportunityLineItem> lineItems = new List<OpportunityLineItem>();
         for (Opportunity opportunity : newRecordMap.values()) {
@@ -62,68 +72,39 @@ public with sharing class TreatmentPlanDomain extends DomainActionBase{
                 //System.debug('#### OLD OPP ====> ' + oldOpp);
                 String oldVal = oldOpp.Assigned_Treatment_Bundle__c;
                 System.debug(oldVal);
-                if (oldVal != null) {
+                if (oldVal != null && oldVal != newVal) {
                     System.debug('Old Value Is NOT Null');
                     ServiceRequest serviceRequest = new ServiceRequest();
                     serviceRequest.Name = 'Bundle Assignment Change';
                     serviceRequest.Action = 'bundleAssignmentChanged';
                     serviceRequest.withParams('old', oldOpp);
+                    serviceRequest.withParams('oldBundleId', oldVal);
                     serviceRequest.withParams('new', opportunity);
-                    System.debug('Sending Request for: ' + opportunity.Name + ' ====> ' + serviceRequest);
-
+                    serviceRequest.withParams('newBundleId', newVal);
+                    //System.debug('Sending Request for: ' + opportunity.Name + ' ====> ' + serviceRequest);
                     requests.add(serviceRequest);
                 }
-                else {
-                    System.debug('OLD VALUE IS NULL');
-                    Pricebook2 book = [SELECT Id, Name from Pricebook2 where id =: opportunity
-                            .Assigned_Treatment_Bundle__c];
-                    Pricebook2 standard = [SELECT Id, Name, IsStandard from Pricebook2 where IsStandard = TRUE];
-                    Map<Id, Id> standardMap = new Map<Id, Id>();
-                    List<PricebookEntry> sEntries = [SELECT Id, Product2Id, Pricebook2Id FROM PricebookEntry
-                    WHERE Pricebook2Id =: standard.Id];
-                    for (PricebookEntry entry : sEntries) {
-                        standardMap.put(entry.Product2Id, entry.Id);
-                    }
-                    List<PricebookEntry> entries = [SELECT id, Product2Id, Pricebook2Id from PricebookEntry WHERE
-                            Pricebook2Id
-                                    =: book.Id];
-                    Set<Id> keyset = new Set<Id>();
-
-                    for (PricebookEntry entry : entries) {
-                        OpportunityLineItem item = new OpportunityLineItem();
-                        item.OpportunityId = opportunity.Id;
-                        item.Product2Id = entry.Product2Id;
-                        item.PricebookEntryId = standardMap.get(entry.Product2Id);
-                        item.UnitPrice = 0.0;
-                        item.Discount = 0.0;
-                        item.Quantity = 1.0;
-                        lineItems.add(item);
-                    }
-                    TriggerRequest req = new TriggerRequest(OpportunityLineItem.getSObjectType())
-                            .SetBefore(true)
-                            .SetInsert(true)
-                            .SetNewRecords(lineItems);
-                    ServiceRequest nRequest = new ServiceRequest().withParams('TriggerRequest', req);
-                    System.debug(nRequest);
-                    PlanProtocolDomain domain = new PlanProtocolDomain();
-                    ServiceResponse response = domain.Execute(nRequest);
-                    response.Data = req.newRecords;
-                    System.debug(' Sending Request for: ' + response);
+                else if (newVal == oldVal) {
+                    continue;
+                }{
+                    ServiceRequest serviceRequest = new ServiceRequest();
+                    serviceRequest.Name = 'New Bundle Assignment';
+                    serviceRequest.Action = 'newBundleAssigned';
+                    serviceRequest.withParams('old', oldOpp);
+                    serviceRequest.withParams('new', opportunity);
+                    serviceRequest.withParams('newBundleId', newVal);
+                    requests.add(serviceRequest);
 
                 }
             }
         }
-        for (ServiceRequest serviceRequest : requests) {
-            service.process(serviceRequest);
+        if (requests.size() > 0) {
+            List<ServiceResponse> responses = TreatmentPlanService.executeAll(requests);
+            for (ServiceResponse response : responses) {
+                System.debug(responses);
+            }
         }
-    }
-    public void beforeDelete(TriggerRequest request) {
-        //System.debug('Before Delete is Executing');
-    }
-    public void afterInsert(TriggerRequest request) {
-        //System.debug('After Insert is Executing');
-    }
-    public static void afterUpdate(TriggerRequest request) {
+
         //System.debug('After Update is Executing');
     }
     public void afterDelete(TriggerRequest request) {
