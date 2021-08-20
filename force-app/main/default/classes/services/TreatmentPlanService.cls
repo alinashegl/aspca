@@ -58,87 +58,57 @@ public with sharing class TreatmentPlanService {
                 Pricebook2Id =: oldBundle.Id];
         List<PricebookEntry> newEntries = [SELECT Id, Product2Id, Pricebook2Id, Name FROM PricebookEntry WHERE
                 Pricebook2Id =: newBundle.Id];
-        Set<Id> oldProtocolIds = new Set<Id>();
-        for (PricebookEntry entry : oldEntries) { oldProtocolIds.add(entry.Product2Id); }
-        Set<Id> newProtocolId = new Set<Id>();
-        for (PricebookEntry entry : newEntries) { newProtocolId.add(entry.Product2Id); }
+        Map<Id, PricebookEntry> newProtocols = new Map<Id, PricebookEntry>();
+        for (PricebookEntry entry : newEntries) {
+            newProtocols.put(entry.Product2Id, entry);
+        }
         Map<Id, OpportunityLineItem> currentLineItems = getPlanProtocol(newOpp.Id);
-        Map<Id, OpportunityLineItem> oldLineItems = getPlanProtocol(oldOpp.Id);
-
-        Set<Id> netNewVals = new Set<Id>();
-        for (Id n : newProtocolId) {
-            if (!oldProtocolIds.contains(n)) {
-                netNewVals.add(n);
-            }
-        }
-        Set<Id> toDelete = new Set<Id>();
-        for (Id n : oldProtocolIds) {
-            if(!newProtocolId.contains(n)) {
-                toDelete.add(n);
-            }
-        }
         List<OpportunityLineItem> lineItemsToDelete = new List<OpportunityLineItem>();
-        Set<OpportunityLineItem> deDuplicate = new Set<OpportunityLineItem>();
         for (OpportunityLineItem item : currentLineItems.values()) {
-            if (toDelete.contains(item.Product2Id)) {
-                deDuplicate.add(item);
+            if(newProtocols.keySet().contains(item.Product2Id) != false) {
+                lineItemsToDelete.add(item);
             }
         }
-        List<OpportunityLineItem> lineItemsToCreate = new List<OpportunityLineItem>();
-        for (PricebookEntry entry : standardEntries) {
-            if (netNewVals.contains(entry.Product2Id)) {
-                OpportunityLineItem item = new OpportunityLineItem();
-                String key = standardMap.get(entry.Product2Id);
-                PricebookEntry sEntry = standardEntryMap.get(key);
-                item.OpportunityId = newOpp.Id;
-                item.Product2Id = entry.Product2Id;
-                item.PricebookEntryId = sEntry.Id;
-                item.Quantity = 1;
-                item.UnitPrice = 0.0;
-                lineItemsToCreate.add(item);
+        Set<PricebookEntry> entrySet = new Set<PricebookEntry>();
+        for (OpportunityLineItem item : currentLineItems.values()) {
+            for (PricebookEntry entry : newProtocols.values()) {
+                if (entry.Product2Id != item.Product2Id) {
+                    entrySet.add(entry);
+                }
             }
         }
+        List<OpportunityLineItem> toCreate = new List<OpportunityLineItem>();
+        for (PricebookEntry entry : entrySet) {
+            OpportunityLineItem item = new OpportunityLineItem();
+            item.PricebookEntry = standardEntryMap.get(entry.Product2Id);
+            item.OpportunityId = newOpp.Id;
+            item.Product2Id = entry.Product2Id;
+            item.UnitPrice = 0.0;
+            toCreate.add(item);
+        }
+        if (toCreate.size() > 0) {
+            try {
+                insert toCreate;
+            }catch(Exception e) {
+                System.debug(e);
+            }
+        }
+        if (lineItemsToDelete.size() > 1) {
+            try {
+                delete lineItemsToDelete;
+            }catch (Exception e) {
+                System.debug(e);
+            }
 
-        for (Integer n = 0 ; n < currentLineItems.size() ; n++) {
-            OpportunityLineItem item = currentLineItems.values().get(n);
-            OpportunityLineItem item2 = currentLineItems.values().get(currentLineItems.size() - 1);
-            if (item.Name == item2.Name) {
-                deDuplicate.add(item);
-                currentLineItems.remove(item.Id);
-            }
         }
-        for (Integer n = 0 ; n < oldLineItems.size() ; n++) {
-            OpportunityLineItem item = oldLineItems.values().get(n);
-            OpportunityLineItem item2 = oldLineItems.values().get(currentLineItems.size() - 1);
-            if (item.Name == item2.Name) {
-                deDuplicate.add(item);
-                oldLineItems.remove(item.Id);
-            }
-        }
-        for (OpportunityLineItem item : lineItemsToDelete) {
-            deDuplicate.add(item);
-        }
-
-        lineItemsToDelete.addAll(deDuplicate);
         Map<String, Object> Data = new Map<String, Object>();
-        Map<String, Object> ERR = new Map<String, Object>();
-        Data.put('Inserted', lineItemsToCreate);
+        Data.put('Created', toCreate);
         Data.put('Deleted', lineItemsToDelete);
         response.Data = Data;
-        TriggerRequest triggerRequest = new TriggerRequest(OpportunityLineItem.getSObjectType())
-                .SetAfter(true)
-                .SetUpdate(true)
-                .SetNewRecords(lineItemsToCreate)
-                .SetOldRecords(new List<OpportunityLineItem>());
-        ServiceRequest serviceRequest = new ServiceRequest().withParams('TriggerRequest',triggerRequest);
-        PlanProtocolDomain domain = new PlanProtocolDomain();
-        ServiceResponse rep = domain.Execute(serviceRequest);
-
-        delete lineItemsToDelete;
-
         return response;
     }
     private static ServiceResponse newBundleAssigned(ServiceRequest request) {
+        System.debug('NEW BUNDLE ASSIGNMENT IS EXECUTING');
         ServiceResponse response = new ServiceResponse(request);
         Opportunity opportunity = (Opportunity) request.Parameters.get('new');
         String newBundleId = (String) request.Parameters.get('newBundleId');

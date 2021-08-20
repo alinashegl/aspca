@@ -24,7 +24,7 @@ public with sharing class TreatmentPlanDomain extends DomainActionBase{
     }
 
     public void beforeInsert(TriggerRequest request) {
-        //System.debug('Before Insert is Executing');
+        System.debug('Before Insert is Executing');
         List<Opportunity> newRecords = request.newRecords;
 
         Map<Id, Opportunity> newRecordMap = (Map<Id, Opportunity>) request.newRecordMap;
@@ -84,9 +84,7 @@ public with sharing class TreatmentPlanDomain extends DomainActionBase{
                     //System.debug('Sending Request for: ' + opportunity.Name + ' ====> ' + serviceRequest);
                     requests.add(serviceRequest);
                 }
-                else if (newVal == oldVal) {
-                    continue;
-                }{
+                if(oldVal == null){
                     ServiceRequest serviceRequest = new ServiceRequest();
                     serviceRequest.Name = 'New Bundle Assignment';
                     serviceRequest.Action = 'newBundleAssigned';
