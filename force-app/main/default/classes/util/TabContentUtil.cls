@@ -25,6 +25,12 @@ public with sharing class TabContentUtil {
     @AuraEnabled public EvaluationWrapper.FieldContents Caution { get; set; }
     @AuraEnabled public Boolean UnpleasantTouch1stFlank { get; set; }
     @AuraEnabled public Boolean UnpleasantTouch2ndFlank { get; set; }
+    @AuraEnabled public String puppyHousing { get; set; }
+    @AuraEnabled public Boolean puppyMuzzledDogInteraction1 { get; set; }
+    @AuraEnabled public Boolean puppyMuzzledDogInteraction2 { get; set; }
+    @AuraEnabled public Boolean puppyMuzzledDogInteraction3 { get; set; }
+    @AuraEnabled public Boolean muzzledSameSexDog3 { get; set; }
+    @AuraEnabled public Boolean muzzledOppositeSexDog3 { get; set; }
 
     public TabContentUtil(
             String id,
@@ -48,7 +54,13 @@ public with sharing class TabContentUtil {
             Boolean IsMuzzled ,
             EvaluationWrapper.FieldContents Caution,
             Boolean UnpleasantTouch1stFlank,
-            Boolean UnpleasantTouch2ndFlank
+            Boolean UnpleasantTouch2ndFlank,
+            String puppyHousing,
+            Boolean puppyMuzzledDogInteraction1,
+            Boolean puppyMuzzledDogInteraction2,
+            Boolean puppyMuzzledDogInteraction3,
+            Boolean muzzledSameSexDog3,
+            Boolean muzzledOppositeSexDog3
     ) {
         this.id = id;
         this.label = label;
@@ -72,7 +84,12 @@ public with sharing class TabContentUtil {
         this.Caution = Caution;
         this.UnpleasantTouch1stFlank = UnpleasantTouch1stFlank;
         this.UnpleasantTouch2ndFlank = UnpleasantTouch2ndFlank;
-
+        this.puppyHousing = puppyHousing;
+        this.puppyMuzzledDogInteraction1 = puppyMuzzledDogInteraction1;
+        this.puppyMuzzledDogInteraction2 = puppyMuzzledDogInteraction2;
+        this.puppyMuzzledDogInteraction3 = puppyMuzzledDogInteraction3;
+        this.muzzledSameSexDog3 = muzzledSameSexDog3;
+        this.muzzledOppositeSexDog3 = muzzledOppositeSexDog3;
     }
 
     public TabContentUtil() {}

@@ -65,7 +65,7 @@ public with sharing class EvaluationWrapper {
     @AuraEnabled public FieldContents skipField { get; set; }
 
 
-    public void EvaluationWrapper(
+    public EvaluationWrapper(
             String id,
             String label,
             Boolean isSkipped,

@@ -149,6 +149,12 @@ public with sharing class BehaviorEvaluationPageController {
         TabContentUtil utils = new TabContentUtil();
         Behavior_Evaluation__c behaviorEvaluation = selector.GetOneById(Id.valueOf(key));
         utils.IsMuzzled = behaviorEvaluation.Is_Muzzled__c;
+        utils.puppyHousing = behaviorEvaluation.Puppy_BIK_Housing__c;
+        utils.puppyMuzzledDogInteraction1 = behaviorEvaluation.Puppy_Muzzled_DI_P1__c;
+        utils.puppyMuzzledDogInteraction2 = behaviorEvaluation.Puppy_Muzzled_DI_P2__c;
+        utils.puppyMuzzledDogInteraction3 = behaviorEvaluation.Puppy_Muzzled_DI_P3__c;
+        utils.muzzledSameSexDog3 = behaviorEvaluation.Muzzled_SSD_P3__c;
+        utils.muzzledOppositeSexDog3 = behaviorEvaluation.Muzzled_OSD_P3__c;
         utils.UseCaution = behaviorEvaluation.Caution__c;
         utils.IsAdult = behaviorEvaluation.Evaluation_Subtype__c == 'Adult Animal' ? true : false;
         utils.IsPuppy = behaviorEvaluation.Evaluation_Subtype__c == 'Puppy' ? true : false;
@@ -844,5 +850,63 @@ public with sharing class BehaviorEvaluationPageController {
 
     }
 
+    @AuraEnabled
+    public static Map<String, Object> putSelection(String apiName, String values, String recordId) {
+        Map<String, Object> params = new Map<String, Object>{
+                'apiName' => apiName ,
+                'values' => values ,
+                'recordId' => recordId
+        };
 
+        Map<String, Object> request = new Map<String, Object>{
+                'service' => Services.BehaviorEvaluation ,
+                'action' => 'updatePick' ,
+                'params' => params ,
+                'fields' => new List<Map<String, Object>>{
+                        new Map<String, Object>{
+                                'name' => 'apiName' ,
+                                'type' => 'string' ,
+                                'required' => true,
+                                'errors' => new Map<String, Object>{
+                                        'ValidationError' => new Map<String, String>{
+                                                'message' => 'Parameter {0} is empty'
+                                        }
+                                }
+                        } ,
+                        new Map<String, Object>{
+                                'name' => 'values' ,
+                                'type' => 'string' ,
+                                'required' => true,
+                                'errors' => new Map<String, Object>{
+                                        'ValidationError' => new Map<String, String>{
+                                                'message' => 'Parameter {0} is empty'
+                                        }
+                                }
+                        } ,
+                        new Map<String, Object>{
+                                'name' => 'recordId' ,
+                                'type' => 'string' ,
+                                'required' => true ,
+                                'errors' => new Map<String, Object>{
+                                        'ValidationError' => new Map<String, String>{
+                                                'message' => 'Parameter {0} is empty'
+                                        }
+                                }
+                        }
+                } ,
+                'response' => new List<Map<String, Object>>{
+                        new Map<String, Object>{
+                                'name' => 'item',
+                                'type' => 'object',
+                                'required' => true,
+                                'apiName' => 'item',
+                                'errors' => new Map<String, Object> {}
+                        }
+                }
+        };
+        Map<String, Object> response = new Map<String, Object>();
+
+        service_Validation.proccessRequest(request, response);
+        return response;
+    }
 }
