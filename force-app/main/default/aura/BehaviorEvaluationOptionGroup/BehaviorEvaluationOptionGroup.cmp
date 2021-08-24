@@ -18,11 +18,11 @@
             <div class="grid-item" align="left" >
                     <aura:iteration items="{!v.options}" var="options" indexVar="{!v.index}">
                         <tr class="spaceUnder" align="left">
-                            <td class="float">
-                                <lightning:input name="{!options.pleApiName}" label="{!options.label}" type="checkbox"
+                            <td  class="float slds-theme_shade">
+                                <lightning:input name="{!options.pleApiName}" label="{!options.label}" type="checkbox-button"
                                                  variant="label-hidden" aura:id="opts" onchange="{!c.handleSelect}" checked="{!options.IsSelected}"/>
                             </td>
-                            <td align="left">
+                            <td  style="vertical-align: top" align="left">
                                 <strong> {!options.label}</strong>
                                 <aura:if isTrue="{!options.longDesc != null }"> &nbsp;{!options.longDesc}</aura:if>
                             </td>
