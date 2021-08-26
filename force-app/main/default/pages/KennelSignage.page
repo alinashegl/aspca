@@ -15,7 +15,7 @@
                     <apex:panelGrid columns="3" width="100%" cellSpacing="5">
                         <!--apex:outputLabel style="width: 33%" value="Name: {!animalName}"/-->
                         <apex:outputText style="width: 33%" value="Name: {!animalName}"/>
-                        <apex:outputLabel style="width: 33%" value="Id# : {!animalId}"/>
+                        <apex:outputText style="width: 33%, text-align: left" value="Id# : {!animalId}"/>
                         <apex:outputLabel style="width: 33%" value=" "/>
                     </apex:panelGrid>
                 </apex:panelGroup>

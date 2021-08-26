@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Scolding_Person_P2__c</fullName>
+    <externalId>false</externalId>
+    <label>Scolding Person P2</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Approached-friendly</fullName>
+                <default>false</default>
+                <label>Approached-friendly</label>
+            </value>
+            <value>
+                <fullName>Approached-mildly fearful</fullName>
+                <default>false</default>
+                <label>Approached-mildly fearful</label>
+            </value>
+            <value>
+                <fullName>Did not approach-friendly or neutral</fullName>
+                <default>false</default>
+                <label>Did not approach-friendly or neutral</label>
+            </value>
+            <value>
+                <fullName>Unresponsive</fullName>
+                <default>false</default>
+                <label>Unresponsive</label>
+            </value>
+            <value>
+                <fullName>Moderately fearful</fullName>
+                <default>false</default>
+                <label>Moderately fearful</label>
+            </value>
+            <value>
+                <fullName>Extremely fearful</fullName>
+                <default>false</default>
+                <label>Extremely fearful</label>
+            </value>
+            <value>
+                <fullName>Became aggressive</fullName>
+                <default>false</default>
+                <label>Became aggressive</label>
+            </value>
+            <value>
+                <fullName>Too fearful-subtest not done</fullName>
+                <default>false</default>
+                <label>Too fearful-subtest not done</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

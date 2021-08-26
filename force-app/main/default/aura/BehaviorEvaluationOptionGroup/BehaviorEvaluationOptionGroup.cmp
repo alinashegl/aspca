@@ -1,0 +1,35 @@
+<!--
+ - Created by barne on 5/20/2021.
+ -->
+
+<aura:component description="BehaviorEvaluationOptionGroup" controller="BehaviorEvaluationPageController">
+    <aura:attribute name="options" type="Object[]" default="[]"/>
+    <aura:attribute name="index" type="Integer" />
+    <aura:attribute name="selections" type="String" />
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="image" type="Aura.Component[]" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <lightning:notificationsLibrary aura:id="lib" />
+    <lightning:overlayLibrary aura:id="overlayLib" />
+
+    <table class="slds-box slds-p-top_medium" width="100%">
+        <div class="grid-container">
+            <div class="grid-item">{!v.image}</div>
+            <div class="grid-item" align="left" >
+                    <aura:iteration items="{!v.options}" var="options" indexVar="{!v.index}">
+                        <tr class="spaceUnder" align="left">
+                            <td  class="float slds-theme_shade">
+                                <lightning:input name="{!options.pleApiName}" label="{!options.label}" type="checkbox-button"
+                                                 variant="label-hidden" aura:id="opts" onchange="{!c.handleSelect}" checked="{!options.IsSelected}"/>
+                            </td>
+                            <td  style="vertical-align: top" align="left">
+                                <strong> {!options.label}</strong>
+                                <aura:if isTrue="{!options.longDesc != null }"> &nbsp;{!options.longDesc}</aura:if>
+                            </td>
+                        </tr>
+                    </aura:iteration>
+
+            </div>
+        </div>
+    </table>
+</aura:component>

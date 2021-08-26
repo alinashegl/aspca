@@ -12,15 +12,4 @@ public with sharing class dao_Contact extends sql_Dao{
         addField(Contact.Phone);
     }
 
-    public List<Contact> findAll() {
-        return (List<Contact>)getAll();
-    }
-
-    public Contact findOne(String id) {
-        List<Contact> contacts = getWhere(sql_Criteria.Equals(Contact.Id, id));
-
-        if (contacts.isEmpty()) { return null; }
-
-        return contacts[0];
-    }
 }

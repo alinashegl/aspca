@@ -16,12 +16,5 @@ public with sharing class dao_EmailTemplate extends sql_Dao{
 
     }
 
-    public EmailTemplate findOneByDeveloperName(String developerName) {
-        List<EmailTemplate> templates = getWhere((String) sql_Criteria.Equals(EmailTemplate.DeveloperName, developerName));
-
-        if (templates.isEmpty()) { return null; }
-
-        return templates[0];
-    }
 
 }

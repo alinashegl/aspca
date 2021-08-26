@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Intelligence_Report__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>This is the intelligence report the contact record was created from</description>
+    <externalId>false</externalId>
+    <label>Intelligence Report</label>
+    <referenceTo>Tips_Intel__c</referenceTo>
+    <relationshipLabel>Contacts</relationshipLabel>
+    <relationshipName>Contacts</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Lookup</type>
+</CustomField>
