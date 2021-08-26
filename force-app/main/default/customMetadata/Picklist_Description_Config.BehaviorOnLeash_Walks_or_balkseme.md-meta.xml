@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>BehaviorOnLeash_Walks_or_balkseme</label>
+    <protected>false</protected>
+    <values>
+        <field>Field_API_Name__c</field>
+        <value xsi:type="xsd:string">Behavior_on_Leash__c</value>
+    </values>
+    <values>
+        <field>Field_Description__c</field>
+        <value xsi:type="xsd:string">Did not walk or crawled along ground, body tense and crouched. May have attempted to return to kennel or hide underneath things. May have sat or laid down and refused to move. Appeared very fearful (ears back, tail tucked/down, trembled, eyes wide).</value>
+    </values>
+    <values>
+        <field>Field_Value__c</field>
+        <value xsi:type="xsd:string">Walked or balked-extremely fearful</value>
+    </values>
+    <values>
+        <field>Object_API_Name__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Picklist_Order__c</field>
+        <value xsi:type="xsd:string">7</value>
+    </values>
+    <values>
+        <field>Test_Config__c</field>
+        <value xsi:type="xsd:string">Behavior_on_Leash</value>
+    </values>
+    <values>
+        <field>Value_Category__c</field>
+        <value xsi:type="xsd:string">3</value>
+    </values>
+</CustomMetadata>
