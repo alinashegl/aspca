@@ -2,8 +2,8 @@
     
 
     
-    <table align="center" border="1" width="100%">
-        <tr style="font-weight:900;"><td width="28%"></td><td width="18%">Not Concerning</td><td width="18%">Red Flag</td><td width="18%">Alert</td><td width="18%">Inconclusive</td></tr>
+    <table border="1" width="100%">
+        <tr><td width="28%"></td><td width="18%">Not Concerning</td><td width="18%">Red Flag</td><td width="18%">Alert</td><td width="18%">Inconclusive</td></tr>
         
         <apex:repeat value="{!finalTestAndDisplayValues}" var="subtestName">
             <tr>
@@ -12,7 +12,10 @@
                 <td>{!subtestName[2]}</td>
                 <td>{!subtestName[3]}</td>
                 <td>{!subtestName[4]}</td>
-  
+
+                
+                
+                
             </tr>
         </apex:repeat>
     </table>
