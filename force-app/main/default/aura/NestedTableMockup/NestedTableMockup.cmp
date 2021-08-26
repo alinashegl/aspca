@@ -1,0 +1,22 @@
+<!--
+ - Page Description
+ - 
+ - @author barne
+ -->
+
+<aura:component
+        description="NestedTableMockup"
+        implements="flexipage:availableForAllPageTypes, force:hasRecordId"
+        access="public"
+        controller="MockupController">
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="gridColumns" type="List" />
+    <aura:attribute name="gridData" type="Object" />
+    <aura:attribute name="gridExpandedRows" type="List" />
+    <lightning:treeGrid
+        columns="{! v.gridColumns}"
+        data="{!v.gridData}"
+        expandedRows="{!v.gridExpandedRows}"
+        keyField="name"
+        aura:id="tree"/>
+</aura:component>

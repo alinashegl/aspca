@@ -33,6 +33,8 @@ public with sharing class TreatmentPlanDomain extends DomainActionBase{
             Animal__c animal = [SELECT Id, Case__c, Discharged_to_Agency__c  FROM Animal__c WHERE Id =: plan.Animal__c];
             plan.AccountId = animal.Discharged_to_Agency__c != null ? animal.Discharged_to_Agency__c : null;
             if (plan.AccountId == null) { System.debug('No AGENCY FOUND'); }
+            Pricebook2 standard = [SELECT Id, Name, IsStandard from Pricebook2 where IsStandard = TRUE];
+            plan.Pricebook2Id = standard.Id;
         }
 
         //if (newRecords != null) { update newRecords; }
@@ -40,51 +42,71 @@ public with sharing class TreatmentPlanDomain extends DomainActionBase{
         //if (newRecordMap != null) { update newRecordMap.values(); }
 
     }
-    public void beforeUpdate(TriggerRequest request) {
+    public static void beforeUpdate(TriggerRequest request) {
 
-        System.debug('Before Update is Executing');
-        List<Opportunity> newRecords = request.newRecords;
-        List<Opportunity> oldRecords = request.oldRecords;
-
-        Map<Id, Opportunity> newRecordMap = (Map<Id, Opportunity>) request.newRecordMap;
-        Map<Id, Opportunity> oldRecordMap = (Map<Id, Opportunity>) request.oldRecordMap;
-
-        if (oldRecords != null) {
-
-        }
-        if (newRecords != null) {
-            update newRecords;
-        }
-        if (oldRecordMap != null) {
-
-        }
-        if(newRecordMap != null) {
-            update newRecordMap.values();
-        }
+        //System.debug(' Treatment Plan Before Update is Executing');
 
 
     }
     public void beforeDelete(TriggerRequest request) {
-        System.debug('Before Delete is Executing');
+        //System.debug('Before Delete is Executing');
     }
     public void afterInsert(TriggerRequest request) {
-        System.debug('After Insert is Executing');
+        //System.debug('After Insert is Executing');
     }
-    public void afterUpdate(TriggerRequest request) {
-        System.debug('After Update is Executing');
+    public static void afterUpdate(TriggerRequest request) {
         List<Opportunity> newRecords = request.newRecords;
         List<Opportunity> oldRecords = request.oldRecords;
 
         Map<Id, Opportunity> newRecordMap = (Map<Id, Opportunity>) request.newRecordMap;
         Map<Id, Opportunity> oldRecordMap = (Map<Id, Opportunity>) request.oldRecordMap;
-        Map<Id, OpportunityLineItem> oldLineItems = new Map<Id, OpportunityLineItem>();
-        if (oldRecords != null) { }
-        if (newRecords != null) {   }
-        if (oldRecordMap != null) { }
-        if(newRecordMap != null) { }
+        List<ServiceRequest> requests = new List<ServiceRequest>();
+        //TreatmentPlanService service = new TreatmentPlanService();
+
+        List<OpportunityLineItem> lineItems = new List<OpportunityLineItem>();
+        for (Opportunity opportunity : newRecordMap.values()) {
+            String newVal = opportunity.Assigned_Treatment_Bundle__c;
+            System.debug(newVal);
+            if ( newVal != null ){
+                Opportunity oldOpp = oldRecordMap.get(opportunity.Id);
+                //System.debug('#### OLD OPP ====> ' + oldOpp);
+                String oldVal = oldOpp.Assigned_Treatment_Bundle__c;
+                System.debug(oldVal);
+                if (oldVal != null && oldVal != newVal) {
+                    System.debug('Old Value Is NOT Null');
+                    ServiceRequest serviceRequest = new ServiceRequest();
+                    serviceRequest.Name = 'Bundle Assignment Change';
+                    serviceRequest.Action = 'bundleAssignmentChanged';
+                    serviceRequest.withParams('old', oldOpp);
+                    serviceRequest.withParams('oldBundleId', oldVal);
+                    serviceRequest.withParams('new', opportunity);
+                    serviceRequest.withParams('newBundleId', newVal);
+                    //System.debug('Sending Request for: ' + opportunity.Name + ' ====> ' + serviceRequest);
+                    requests.add(serviceRequest);
+                }
+                if(oldVal == null){
+                    ServiceRequest serviceRequest = new ServiceRequest();
+                    serviceRequest.Name = 'New Bundle Assignment';
+                    serviceRequest.Action = 'newBundleAssigned';
+                    serviceRequest.withParams('old', oldOpp);
+                    serviceRequest.withParams('new', opportunity);
+                    serviceRequest.withParams('newBundleId', newVal);
+                    requests.add(serviceRequest);
+
+                }
+            }
+        }
+        if (requests.size() > 0) {
+            List<ServiceResponse> responses = TreatmentPlanService.executeAll(requests);
+            for (ServiceResponse response : responses) {
+                System.debug(responses);
+            }
+        }
+
+        //System.debug('After Update is Executing');
     }
     public void afterDelete(TriggerRequest request) {
-        System.debug('After Delete is Executing');
+        //System.debug('After Delete is Executing');
     }
 
     private static Map<Id, OpportunityLineItem> getPlanProtocol(Id opp) {
@@ -92,9 +114,18 @@ public with sharing class TreatmentPlanDomain extends DomainActionBase{
 
         List<OpportunityLineItem> lineItems = selector.GetByOpp(opp);
         Map<Id, OpportunityLineItem> idOpportunityLineItemMap  = new Map<Id, OpportunityLineItem>();
-        for (OpportunityLineItem item : lineItems) {
-            idOpportunityLineItemMap.put(item.Id, item);
-        }
+        idOpportunityLineItemMap.putAll(lineItems);
         return idOpportunityLineItemMap;
+    }
+    private static Map<Id, Product2> GetProtocolsByLineItem(List<OpportunityLineItem> val) {
+        ProtocolSelector selector = new ProtocolSelector();
+        Map<Id, Product2> protocolmap = new Map<Id, Product2>();
+        Set<Id> keys = new Set<Id>();
+        for (OpportunityLineItem item : val) {
+            keys.add(item.Product2Id);
+        }
+        List<Product2> product2s = selector.GetById(keys);
+        protocolmap.putAll(product2s);
+        return protocolmap;
     }
 }

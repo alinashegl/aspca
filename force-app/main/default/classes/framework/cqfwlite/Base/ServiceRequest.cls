@@ -24,7 +24,7 @@ public with sharing class ServiceRequest {
         this.Action = action;
         this.Parameters = params;
         if (params != null) return;
-        this.Parameters = new Map<string, Object>();
+        this.Parameters = new Map<String, Object>();
     }
 
     public ServiceRequest withParams(String key, Object value) {
