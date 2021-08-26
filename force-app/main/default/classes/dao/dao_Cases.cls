@@ -10,7 +10,7 @@ public with sharing class dao_Cases extends sql_Dao {
 
         addField(Case.Id);
         addField(Case.AccountId);
-        addField(Case.Contact);
+        addField(Case.ContactId);
         addField(Case.Agency_Name__c);
         addField(Case.Intelligence_Report__c);
         addField(Case.Case_Subtype__c);
