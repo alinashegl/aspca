@@ -26,9 +26,22 @@ public with sharing class TreatmentPlanDomain extends DomainActionBase{
     public void beforeInsert(TriggerRequest request) {
         System.debug('Before Insert is Executing');
 
-        //if (newRecords != null) { update newRecords; }
+        List<Treatment_Plan__c> treatmentPlans = request.newRecords;
 
-        //if (newRecordMap != null) { update newRecordMap.values(); }
+        Treatment_Bundle__c bundle = [SELECT id, IsMaster__c from Treatment_Bundle__c WHERE IsMaster__c = TRUE LIMIT
+                1 ];
+        List<Exception> exceptions = new List<Exception>();
+        for (Treatment_Plan__c plan : treatmentPlans) {
+            try {
+                plan.MasterTreatmentBundleId__c = bundle.Id;
+            }catch (Exception e) {
+                exceptions.add(e);
+            }
+            System.debug(plan.MasterTreatmentBundleId__c);
+        }
+        if(exceptions.size() > 0) {
+            System.debug('EXCEPTIONS FOUND: ' + exceptions);
+        }
 
     }
     public static void beforeUpdate(TriggerRequest request) {
