@@ -8,7 +8,7 @@
 
 public with sharing class PlanProtocolDomain extends DomainActionBase {
     public override void ProcessAction(TriggerRequest request) {
-        if (request.targetSObject == OpportunityLineItem.SObjectType) {
+        if (request.targetSObject == Plan_Protocol__c.SObjectType) {
             String triggerAction = request.action + request.process;
 
             switch on triggerAction {
@@ -23,7 +23,24 @@ public with sharing class PlanProtocolDomain extends DomainActionBase {
         return;
     }
 
-    public void beforeInsert (TriggerRequest request) {System.debug('PLAN PROTOCOL BEFORE INSERT IS EXECUTING'); }
+    public void beforeInsert (TriggerRequest request) {
+        System.debug('PLAN PROTOCOL BEFORE INSERT IS EXECUTING');
+        Map<Id, Plan_Protocol__c> planProtocolMap = (Map<Id, Plan_Protocol__c>) request.newRecordMap;
+
+        Set<Id> bundleEntryIds = new Set<Id>();
+        for(Plan_Protocol__c protocol : planProtocolMap.values()) {
+            bundleEntryIds.add(protocol.Bundle_Entry__c);
+        }
+
+        List<Bundle_Entry__c> entries = [SELECT id, Protocol__c from Bundle_Entry__c where id =: bundleEntryIds];
+        Map<Id, Bundle_Entry__c> bundleEntriesByIds = new Map<Id, Bundle_Entry__c>(entries);
+
+        for (Plan_Protocol__c protocol : planProtocolMap.values()) {
+            Bundle_Entry__c entry = bundleEntriesByIds.get(protocol.Bundle_Entry__c);
+            protocol.Protocol__c = entry.Protocol__c;
+        }
+
+    }
     public void beforeUpdate (TriggerRequest request) {
         //System.debug('PLAN PROTOCOL BEFORE UPDATE IS EXECUTING === > ' + request.newRecords);
 
@@ -32,15 +49,15 @@ public with sharing class PlanProtocolDomain extends DomainActionBase {
     public void beforeDelete (TriggerRequest request) { System.debug('PLAN PROTOCOL BEFORE DELETE IS EXECUTING'); }
     public void afterInsert (TriggerRequest request) {
         System.debug('PLAN PROTOCOL AFTER INSERT IS EXECUTING');
-        Map<Id, OpportunityLineItem> itemMap = (Map<Id, OpportunityLineItem>) request.newRecordMap;
-        List<OpportunityLineItem> toDelete = new List<OpportunityLineItem>();
+        Map<Id, Plan_Protocol__c> itemMap = (Map<Id, Plan_Protocol__c>) request.newRecordMap;
+        List<Plan_Protocol__c> toDelete = new List<Plan_Protocol__c>();
         Map<String, Id> uniqueNames = new Map<String, Id>();
-        for (OpportunityLineItem item : itemMap.values()) {
+        for (Plan_Protocol__c item : itemMap.values()) {
             uniqueNames.put(item.Name, item.Id);
         }
         for (Id un : uniqueNames.values()) {
-            OpportunityLineItem item = itemMap.get(un);
-            for (OpportunityLineItem nItem : itemMap.values()) {
+            Plan_Protocol__c item = itemMap.get(un);
+            for (Plan_Protocol__c nItem : itemMap.values()) {
                 if (nItem.Id != un) {
                     toDelete.add(nItem);
                 }
@@ -50,21 +67,21 @@ public with sharing class PlanProtocolDomain extends DomainActionBase {
     }
     public void afterUpdate (TriggerRequest request) {
         System.debug('PLAN PROTOCOL AFTER UPDATE IS EXECUTING');
-        Map<Id, OpportunityLineItem> itemMap = (Map<Id, OpportunityLineItem>) request.newRecordMap;
-        List<OpportunityLineItem> toDelete = new List<OpportunityLineItem>();
+        Map<Id, Plan_Protocol__c> itemMap = (Map<Id, Plan_Protocol__c>) request.newRecordMap;
+        List<Plan_Protocol__c> toDelete = new List<Plan_Protocol__c>();
         Map<String, Id> uniqueNames = new Map<String, Id>();
-        for (OpportunityLineItem item : itemMap.values()) {
+        for (Plan_Protocol__c item : itemMap.values()) {
             uniqueNames.put(item.Name, item.Id);
         }
         List<String> strings = new List<String>(uniqueNames.keySet());
         for (String str : strings) {
             Id key = uniqueNames.get(str);
-            for (OpportunityLineItem item : itemMap.values()) {
+            for (Plan_Protocol__c item : itemMap.values()) {
                 if (item.id != key) {
                     toDelete.add(item);
                 }
             }
-            for (OpportunityLineItem dItem : toDelete) {
+            for (Plan_Protocol__c dItem : toDelete) {
                 if (dItem.Id == key) {
                     Integer k = toDelete.indexOf(dItem);
                     toDelete.remove(k);

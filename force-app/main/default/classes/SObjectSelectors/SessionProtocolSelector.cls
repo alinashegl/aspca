@@ -8,38 +8,33 @@
 
 public with sharing class SessionProtocolSelector extends SObjectSelector {
     public SessionProtocolSelector() {
-        super(QuoteLineItem.SObjectType);
+        super(Session_Protocol__c.SObjectType);
     }
 
     public override Set<SObjectField> GetDefaultFields() {
         return new Set<SObjectField> {
-                QuoteLineItem.Id,
-                QuoteLineItem.PricebookEntryId,
-                QuoteLineItem.CreatedById,
-                QuoteLineItem.CreatedDate,
-                QuoteLineItem.LastModifiedById,
-                QuoteLineItem.LastModifiedDate,
-                QuoteLineItem.UnitPrice,
-                QuoteLineItem.Fear_Best__c,
-                QuoteLineItem.Fear_Worst__c,
-                QuoteLineItem.Aggressive_Worst__c,
-                QuoteLineItem.Arousal_Best__c,
-                QuoteLineItem.Arousal_Worst__c,
-                QuoteLineItem.Social_Best__c,
-                QuoteLineItem.Overall_Score__c,
-                QuoteLineItem.Novel_Person_Notes__c,
-                QuoteLineItem.Novel_Person__c,
-                QuoteLineItem.Protocol_Skipped__c,
-                QuoteLineItem.Protocol_Notes__c,
-                QuoteLineItem.Protocol_Box_Link__c,
-                QuoteLineItem.IsSkipped__c,
-                QuoteLineItem.IsRemoved__c,
-                QuoteLineItem.ListPrice,
-                QuoteLineItem.LineNumber,
-                QuoteLineItem.Quantity,
-                QuoteLineItem.IsDeleted ,
-                QuoteLineItem.Product2Id ,
-                QuoteLineItem.QuoteId
+                Session_Protocol__c.Id,
+                Session_Protocol__c.Bundle_Entry__c,
+                Session_Protocol__c.CreatedById,
+                Session_Protocol__c.CreatedDate,
+                Session_Protocol__c.LastModifiedById,
+                Session_Protocol__c.LastModifiedDate,
+                Session_Protocol__c.Fear_Best__c,
+                Session_Protocol__c.Fear_Worst__c,
+                Session_Protocol__c.Aggressive_Worst__c,
+                Session_Protocol__c.Arousal_Best__c,
+                Session_Protocol__c.Arousal_Worst__c,
+                Session_Protocol__c.Social_Best__c,
+                Session_Protocol__c.Overall_Score__c,
+                Session_Protocol__c.Novel_Person_Notes__c,
+                Session_Protocol__c.Novel_Person__c,
+                Session_Protocol__c.Protocol_Notes__c,
+                Session_Protocol__c.Protocol_Box_Link__c,
+                Session_Protocol__c.IsSkipped__c,
+                Session_Protocol__c.IsRemoved__c,
+                Session_Protocol__c.IsDeleted ,
+                Session_Protocol__c.ProtocolId__c ,
+                Session_Protocol__c.TreatmentSessionId__c
         };
     }
     public override List<iOrderBy> GetDefaultOrderBy() {
@@ -49,12 +44,13 @@ public with sharing class SessionProtocolSelector extends SObjectSelector {
         };
     }
 
-    public List<QuoteLineItem> GetByIds(Set<Id> ids) {
+    public List<Session_Protocol__c> GetByIds(Set<Id> ids) {
         return queryById(ids);
     }
 
-    public List<QuoteLineItem> GetByQuote(Id key) {
-        List<QuoteLineItem> lineItems = GetQueryFactory().WithCriteria(Criteria.Equals(QuoteLineItem.QuoteId, key))
+    public List<Session_Protocol__c> GetByQuote(Id key) {
+        List<Session_Protocol__c> lineItems = GetQueryFactory().WithCriteria(Criteria.Equals(Session_Protocol__c.TreatmentSessionId__c,
+                key))
                 .Execute();
         return lineItems;
     }

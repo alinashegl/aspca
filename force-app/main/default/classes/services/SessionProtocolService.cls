@@ -47,15 +47,15 @@ public with sharing class SessionProtocolService {
         String success = 'SUCCESS';
         if (quote != null) {
             SessionProtocolSelector selector = new SessionProtocolSelector();
-            List<QuoteLineItem> lineItems = selector.GetByQuote(quote.Id);
+            List<Session_Protocol__c> lineItems = selector.GetByQuote(quote.Id);
             System.debug(lineItems);
             ProtocolSelector protocolSelector = new ProtocolSelector();
 
-            for (QuoteLineItem item : lineItems) {
+            for (Session_Protocol__c item : lineItems) {
                 Map<String, String> result = new Map<String, String>();
                 Set<Id> idset = new Set<Id>();
-                idset.add(item.Product2Id);
-                Product2 product2 = protocolSelector.GetById(idset)[0];
+                idset.add(item.ProtocolId__c);
+                Protocol__c product2 = protocolSelector.GetById(idset)[0];
                 String invalid = 'INVALID';
                 String none = 'None';
                 try {

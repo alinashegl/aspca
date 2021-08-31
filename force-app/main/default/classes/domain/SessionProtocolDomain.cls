@@ -8,7 +8,7 @@
 
 public with sharing class SessionProtocolDomain extends DomainActionBase {
     public override void ProcessAction(TriggerRequest request) {
-        if (request.targetSObject == QuoteLineItem.SObjectType) {
+        if (request.targetSObject == Session_Protocol__c.SObjectType) {
             String triggerAction = request.action + request.process;
 
             switch on triggerAction {
