@@ -8,33 +8,40 @@
 
 public with sharing class PlanProtocolSelector extends SObjectSelector{
     public PlanProtocolSelector() {
-        super(Plan_Protocol__c.SObjectType);
+        super(OpportunityLineItem.SObjectType);
     }
     public override Set<SObjectField> GetDefaultFields() {
         return new Set<SObjectField> {
-                Plan_Protocol__c.Name,
-                Plan_Protocol__c.CreatedById ,
-                Plan_Protocol__c.CreatedDate ,
-                Plan_Protocol__c.LastModifiedById ,
-                Plan_Protocol__c.Protocol__c ,
-                Plan_Protocol__c.Bundle_Entry__c ,
-                Plan_Protocol__c.Treatment_Plan__c ,
-                Plan_Protocol__c.Id
+                OpportunityLineItem.Name,
+                OpportunityLineItem.CreatedById ,
+                OpportunityLineItem.CreatedDate ,
+                OpportunityLineItem.Description ,
+                OpportunityLineItem.LastModifiedById ,
+                OpportunityLineItem.Product2Id ,
+                OpportunityLineItem.PricebookEntryId ,
+                OpportunityLineItem.OpportunityId ,
+                OpportunityLineItem.Id
         };
     }
 
     public override List<iOrderBy> GetDefaultOrderBy() {
         return new List<iOrderBy> {
-                OrderBy.Ascending(Plan_Protocol__c.Name) ,
-                OrderBy.Ascending(Plan_Protocol__c.Id)
+                OrderBy.Ascending(OpportunityLineItem.Name) ,
+                OrderBy.Ascending(OpportunityLineItem.Id)
         };
     }
 
-    public List<Plan_Protocol__c> GetById(Set<Id> ids) {
+    public List<OpportunityLineItem> GetById(Set<Id> ids) {
         return queryById(ids);
     }
 
-    public List<Plan_Protocol__c> GetByName(String name) {
+    public List<OpportunityLineItem> GetByName(String name) {
         return queryByName(name);
     }
+
+    public List<OpportunityLineItem> GetByOpp(Id key) {
+        List<OpportunityLineItem> lineItems = GetQueryFactory().WithCriteria(Criteria.Equals(OpportunityLineItem.OpportunityId, key)).Execute();
+        return lineItems;
+    }
+
 }

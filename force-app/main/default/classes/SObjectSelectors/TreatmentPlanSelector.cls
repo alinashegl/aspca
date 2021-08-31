@@ -8,29 +8,29 @@
 
 public with sharing class TreatmentPlanSelector extends SObjectSelector {
     public TreatmentPlanSelector() {
-        super(Treatment_Plan__c.SObjectType);
+        super(Opportunity.SObjectType);
     }
 
     public override Set<SObjectField> GetDefaultFields() {
         return new Set<SObjectField> {
-                Treatment_Plan__c.Name ,
-                Treatment_Plan__c.CreatedById ,
-                Treatment_Plan__c.CreatedDate ,
-                Treatment_Plan__c.Preferred_Motivators__c ,
-                Treatment_Plan__c.LastModifiedById ,
-                Treatment_Plan__c.Plan_Notes__c ,
-                Treatment_Plan__c.IsActive__c ,
-                Treatment_Plan__c.Animal__c ,
-                Treatment_Plan__c.AssignedTreatmentBundleId__c ,
-                Treatment_Plan__c.Id ,
-                Treatment_Plan__c.MasterTreatmentBundleId__c
+                Opportunity.Name ,
+                Opportunity.CreatedById ,
+                Opportunity.CreatedDate ,
+                Opportunity.Description ,
+                Opportunity.LastModifiedById ,
+                Opportunity.Pricebook2Id ,
+                Opportunity.IsPrivate ,
+                Opportunity.StageName ,
+                Opportunity.Type ,
+                Opportunity.Id ,
+                Opportunity.Assigned_Treatment_Bundle__c
         };
     }
 
     public override List<iOrderBy> GetDefaultOrderBy() {
         return new List<iOrderBy> {
-                OrderBy.Ascending(Treatment_Plan__c.Name) ,
-                OrderBy.Ascending(Treatment_Plan__c.Id)
+                OrderBy.Ascending(Opportunity.Name) ,
+                OrderBy.Ascending(Opportunity.Id)
         };
     }
 

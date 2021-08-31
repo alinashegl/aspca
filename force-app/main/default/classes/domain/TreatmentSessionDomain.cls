@@ -8,7 +8,7 @@
 
 public with sharing class TreatmentSessionDomain extends DomainActionBase {
     public override void ProcessAction(TriggerRequest request) {
-        if (request.targetSObject == Treatment_Session__c.SObjectType) {
+        if (request.targetSObject == Quote.SObjectType) {
             String triggerAction = request.action + request.process;
 
             switch on triggerAction {

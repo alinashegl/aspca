@@ -46,8 +46,8 @@ public with sharing class TreatmentSessionService {
         Set<Id> keys = new Set<Id>();
         keys.add(recordId);
         TreatmentSessionSelector selector = new TreatmentSessionSelector();
-        List<Treatment_Session__c> quotes = selector.GetByIds(keys);
-        Treatment_Session__c quote = quotes[0];
+        List<Quote> quotes = selector.GetByIds(keys);
+        Quote quote = quotes[0];
         Map<String, String> result = new Map<String, String>();
         ServiceRequest serviceRequest = new ServiceRequest();
         serviceRequest.Action = 'validateSession';

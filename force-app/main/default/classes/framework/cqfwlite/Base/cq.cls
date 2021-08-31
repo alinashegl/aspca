@@ -47,11 +47,11 @@ public inherited sharing virtual class cq {
     }
 
     public virtual TreatmentPlanDomain TreatmentPlanDomainBindings() {
-        return (TreatmentPlanDomain) bindingFor(Treatment_Plan__c.SObjectType, TreatmentPlanDomain.class);
+        return (TreatmentPlanDomain) bindingFor(Opportunity.SObjectType, TreatmentPlanDomain.class);
     }
 
     public virtual PlanProtocolDomain PlanProtocolDomainBindings() {
-        return (PlanProtocolDomain) bindingFor(Plan_Protocol__c.SObjectType, PlanProtocolDomain.class);
+        return (PlanProtocolDomain) bindingFor(OpportunityLineItem.SObjectType, PlanProtocolDomain.class);
     }
 
     // END::: SELECTOR BINDINGS

@@ -8,17 +8,17 @@
 
 public with sharing class TreatmentBundleSelector extends SObjectSelector{
     public TreatmentBundleSelector() {
-        super(Treatment_Bundle__c.SObjectType);
+        super(Pricebook2.SObjectType);
     }
     public override Set<SObjectField> GetDefaultFields() {
         return new Set<SObjectField> {
-                Treatment_Bundle__c.Name,
-                Treatment_Bundle__c.CreatedById ,
-                Treatment_Bundle__c.CreatedDate ,
-                Treatment_Bundle__c.Description__c ,
-                Treatment_Bundle__c.LastModifiedById ,
-                Treatment_Bundle__c.Id ,
-                Treatment_Bundle__c.IsActive__c
+                Pricebook2.Name,
+                Pricebook2.CreatedById ,
+                Pricebook2.CreatedDate ,
+                Pricebook2.Description ,
+                Pricebook2.LastModifiedById ,
+                Pricebook2.Id ,
+                Pricebook2.IsActive
         };
     }
     public override List<iOrderBy> GetDefaultOrderBy() {
@@ -27,11 +27,11 @@ public with sharing class TreatmentBundleSelector extends SObjectSelector{
                 OrderBy.Ascending(Pricebook2.Id)
         };
     }
-    public List<Treatment_Bundle__c> GetById(Set<Id> ids) {
+    public List<Pricebook2> GetById(Set<Id> ids) {
         return queryById(ids);
     }
 
-    public List<Treatment_Bundle__c> GetByName(String name) {
+    public List<Pricebook2> GetByName(String name) {
         return queryByName(name);
     }
 

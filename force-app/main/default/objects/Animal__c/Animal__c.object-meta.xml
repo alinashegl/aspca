@@ -129,8 +129,16 @@
     <actionOverrides>
         <actionName>View</actionName>
         <comment>Action override created by Lightning App Builder during activation.</comment>
-        <content>Animal_Record_Page1</content>
+        <content>Dog_Database_Animal_Page_Layout</content>
         <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Dog_Database_Animal_Page_Layout</content>
+        <formFactor>Small</formFactor>
         <skipRecordTypeSelect>false</skipRecordTypeSelect>
         <type>Flexipage</type>
     </actionOverrides>
@@ -138,13 +146,8 @@
         <actionName>View</actionName>
         <type>Default</type>
     </actionOverrides>
-    <actionOverrides>
-        <actionName>View</actionName>
-        <formFactor>Small</formFactor>
-        <type>Default</type>
-    </actionOverrides>
     <allowInChatterGroups>false</allowInChatterGroups>
-    <compactLayoutAssignment>Animal_Compact_Layout</compactLayoutAssignment>
+    <compactLayoutAssignment>Behavior_Compact_Layout</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
     <description>This object will house all the details related to animals related to a case</description>
     <enableActivities>true</enableActivities>
@@ -180,7 +183,6 @@
         <listViewButtons>Mass_Print_Cage_Cards</listViewButtons>
         <listViewButtons>Mass_Update</listViewButtons>
         <listViewButtons>Create_Animal_ID_Labels</listViewButtons>
-        <listViewButtons>Mass_Generate_Kennel_Card</listViewButtons>
         <lookupDialogsAdditionalFields>Type_of_Animal__c</lookupDialogsAdditionalFields>
         <lookupDialogsAdditionalFields>Breed__c</lookupDialogsAdditionalFields>
         <lookupDialogsAdditionalFields>Animal_Age__c</lookupDialogsAdditionalFields>

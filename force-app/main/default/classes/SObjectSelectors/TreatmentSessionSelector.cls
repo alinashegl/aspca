@@ -8,20 +8,22 @@
 
 public with sharing class TreatmentSessionSelector extends SObjectSelector {
     public TreatmentSessionSelector() {
-        super(Treatment_Session__c.SObjectType);
+        super(Quote.SObjectType);
     }
 
     public override Set<SObjectField> GetDefaultFields() {
         return new Set<SObjectField> {
-                Treatment_Session__c.Name,
-                Treatment_Session__c.Id,
-                Treatment_Session__c.Treatment_Plan__c,
-                Treatment_Session__c.Animal__c,
-                Treatment_Session__c.CreatedById,
-                Treatment_Session__c.CreatedDate,
-                Treatment_Session__c.LastModifiedById,
-                Treatment_Session__c.LastModifiedDate,
-                Treatment_Session__c.Session_Notes__c
+                Quote.Name,
+                Quote.Id,
+                Quote.OpportunityId,
+                Quote.Pricebook2Id,
+                Quote.Animal__c,
+                Quote.CreatedById,
+                Quote.CreatedDate,
+                Quote.LastModifiedById,
+                Quote.LastModifiedDate,
+                Quote.Session_Notes__c,
+                Quote.Status
         };
     }
 
@@ -32,11 +34,11 @@ public with sharing class TreatmentSessionSelector extends SObjectSelector {
         };
     }
 
-    public List<Treatment_Session__c> GetByIds(Set<Id> ids) {
+    public List<Quote> GetByIds(Set<Id> ids) {
         return queryById(ids);
     }
 
-    public List<Treatment_Session__c> GetByName(String name) {
+    public List<Quote> GetByName(String name) {
         return queryByName(name);
     }
 
