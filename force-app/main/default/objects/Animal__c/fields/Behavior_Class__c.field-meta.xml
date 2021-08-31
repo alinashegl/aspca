@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Behavior_Class__c</fullName>
+    <externalId>false</externalId>
+    <label>Behavior Class</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Aggressive - See Note</fullName>
+                <default>false</default>
+                <label>Aggressive - See Note</label>
+            </value>
+            <value>
+                <fullName>Agressive to Cats - See Note</fullName>
+                <default>false</default>
+                <label>Agressive to Cats - See Note</label>
+            </value>
+            <value>
+                <fullName>Friendly</fullName>
+                <default>false</default>
+                <label>Friendly</label>
+            </value>
+            <value>
+                <fullName>Frightened - See Note</fullName>
+                <default>false</default>
+                <label>Frightened - See Note</label>
+            </value>
+            <value>
+                <fullName>Has Bitten - See Note</fullName>
+                <default>false</default>
+                <label>Has Bitten - See Note</label>
+            </value>
+            <value>
+                <fullName>Has Scratched - See Note</fullName>
+                <default>false</default>
+                <label>Has Scratched - See Note</label>
+            </value>
+            <value>
+                <fullName>High Energy</fullName>
+                <default>false</default>
+                <label>High Energy</label>
+            </value>
+            <value>
+                <fullName>Unspecified</fullName>
+                <default>false</default>
+                <label>Unspecified</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Thumbnail__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+CONTAINS(Photo_Document_Id__c,&quot;amazonaws&quot;),
+(IF(NOT(ISBLANK(Photo_Document_Id__c)),IMAGE(Photo_Document_Id__c, &apos;Image&apos;, 40, 50),&quot;No Image Is Captured&quot;)),
+(IMAGE(&quot;/servlet/servlet.FileDownload?file=&quot;&amp;Photo_Document_Id__c,&quot;Photo Unavailable&quot;,40,50)))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Thumbnail</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>
