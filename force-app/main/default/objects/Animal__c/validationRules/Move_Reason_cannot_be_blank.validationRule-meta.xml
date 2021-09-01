@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Move_Reason_cannot_be_blank</fullName>
+    <active>false</active>
+    <description>Move Reason cannot be blank if Kennel Location is filled out</description>
+    <errorConditionFormula>AND( ISBLANK( Move_Reason__c ) ,  ISCHANGED( Shelter_Location__c ) )</errorConditionFormula>
+    <errorDisplayField>Move_Reason__c</errorDisplayField>
+    <errorMessage>Please enter a move reason if changing a kennel location.</errorMessage>
+</ValidationRule>

@@ -154,7 +154,9 @@ public with sharing class BehaviorEvaluationsSelector extends SObjectSelector {
                 Behavior_Evaluation__c.CreatedById,
                 Behavior_Evaluation__c.CreatedDate,
                 Behavior_Evaluation__c.LastModifiedById,
-                Behavior_Evaluation__c.LastModifiedDate
+                Behavior_Evaluation__c.LastModifiedDate ,
+                Behavior_Evaluation__c.Unpleasant_Touch_1st_Flank__c ,
+                Behavior_Evaluation__c.Unpleasant_Touch_2nd_Flank__c
         };
     }
     public override List<iOrderBy> GetDefaultOrderBy() {

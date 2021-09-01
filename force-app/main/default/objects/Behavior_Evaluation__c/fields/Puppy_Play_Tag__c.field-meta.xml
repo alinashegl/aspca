@@ -60,6 +60,18 @@
                 <default>false</default>
                 <label>Too fearful-subtest not done</label>
             </value>
+            <value>
+                <fullName>Did not play but followed</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Did not play but followed</label>
+            </value>
+            <value>
+                <fullName>Watched tester-did not follow</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Watched tester-did not follow</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
     <visibleLines>4</visibleLines>

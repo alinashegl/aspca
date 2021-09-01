@@ -164,7 +164,8 @@ public class BehaviorEvaluationMatrixController {
             if (fieldName.contains('Skipped')){
                 //system.debug('SKIPPED VALUE: '+behaviors+ ' ' + fieldName);
                 for (Test_Config__mdt testMetadata : [SELECT Test_Skip_Reason_Field__c,MasterLabel,IsPuppy__c,Test_Name__c,Overall_Test_Display_Name__c FROM Test_Config__mdt
-                                                      WHERE Test_Skip_Reason_Field__c = :fieldName AND IsPuppy__c = :evalType LIMIT 1 ]){
+                                                      WHERE Test_Skip_Reason_Field__c = :fieldName
+                                                      AND IsPuppy__c = :evalType LIMIT 1 ]){
                                                           String testName = '';
                                                           if (testMetadata.Overall_Test_Display_Name__c != null){
                                                               testName = testMetadata.Overall_Test_Display_Name__c;
@@ -196,7 +197,8 @@ public class BehaviorEvaluationMatrixController {
                 //Iterate through array to categorize each selection into a numeric value, based on Value Category
                 for (String beh : behArray){
                     
-                    for (Picklist_Description_Config__mdt picklistMetadata : [SELECT Test_Config__r.MasterLabel,Test_Config__r.Test_Name__c,Field_API_Name__c,Value_Category__c,Field_Value__c FROM Picklist_Description_Config__mdt
+                    for (Picklist_Description_Config__mdt picklistMetadata : [SELECT Test_Config__r.MasterLabel,Test_Config__r.Test_Name__c,Field_API_Name__c,Value_Category__c,Field_Value__c FROM
+                            Picklist_Description_Config__mdt
                                                                               WHERE Field_API_Name__c = :fieldName AND Field_Value__c = :beh LIMIT 1 ]){
                                                                                   //Assign Value Category String value to Integer
                                                                                   Integer valueCategory = Integer.valueOf(picklistMetadata.Value_Category__c);

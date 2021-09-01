@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pod__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+ (OR(
+      LEFT(Shelter_Location__c, 3)=&apos;Med&apos;,
+      LEFT(Shelter_Location__c, 3)=&apos;CAT&apos;)), 
+      &apos;Medical/Cats&apos;, 
+      IF(
+   LEFT(Shelter_Location__c, 3)=&apos;MRC&apos;, &apos;MRC&apos;, 
+      IF((OR(
+       LEFT(Shelter_Location__c, 1)=&apos;A&apos;,
+       LEFT(Shelter_Location__c, 1)=&apos;B&apos;,
+       LEFT(Shelter_Location__c, 1)=&apos;C&apos;,
+       LEFT(Shelter_Location__c, 1)=&apos;D&apos;,
+       LEFT(Shelter_Location__c, 1)=&apos;E&apos;,
+       LEFT(Shelter_Location__c, 1)=&apos;F&apos;)), 
+      &apos;Section 1&apos;, 
+        IF((OR(
+      LEFT(Shelter_Location__c, 1)=&apos;G&apos;,
+      LEFT(Shelter_Location__c, 1)=&apos;H&apos;,
+      LEFT(Shelter_Location__c, 1)=&apos;I&apos;,
+      LEFT(Shelter_Location__c, 1)=&apos;J&apos;)), 
+      &apos;Section 2&apos;, 
+      IF(
+      (OR(
+      LEFT(Shelter_Location__c, 1)=&apos;M&apos;,
+      LEFT(Shelter_Location__c, 1)=&apos;N&apos;,
+      LEFT(Shelter_Location__c, 1)=&apos;O&apos;,
+      LEFT(Shelter_Location__c, 1)=&apos;P&apos;,
+      LEFT(Shelter_Location__c, 1)=&apos;R&apos;,
+      LEFT(Shelter_Location__c, 1)=&apos;T&apos;
+)), 
+      &apos;Section 3&apos;, 
+      &apos;Other&apos;
+)
+)
+)
+)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Pod</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

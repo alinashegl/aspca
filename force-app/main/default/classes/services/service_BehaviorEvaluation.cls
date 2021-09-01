@@ -15,6 +15,8 @@ public with sharing  class service_BehaviorEvaluation extends service_Base{
                 checkValidity(request, response);
             } when 'putBoolean' {
                 putBoolean(request, response);
+            } when 'updatePick' {
+                updatePick(request, response);
             }
         }
     }
@@ -211,6 +213,19 @@ public with sharing  class service_BehaviorEvaluation extends service_Base{
         ServiceResponse resp = domain.Execute(req);
         resp.Data = beforeUpdateRequest.newRecords;
         response.Parameters.put('item', val);
+    }
+
+    public void updatePick(service_Request request, service_Response response) {
+        dao_BehaviorEvaluations daoBehaviorEvaluations = new dao_BehaviorEvaluations();
+        Behavior_Evaluation__c eval = daoBehaviorEvaluations.findOne((String) request.Parameters.get('recordId'));
+        Map<String, SObjectField> fieldMap = SObjectFieldMapHelper.fieldMap('Behavior_Evaluation__c');
+        SObjectField field = fieldMap.get((String) request.Parameters.get('apiName'));
+        String val = (String) request.Parameters.get('values');
+        eval.put(field, val);
+        List<Behavior_Evaluation__c> evaluations = new List<Behavior_Evaluation__c>();
+        evaluations.add(eval);
+        update evaluations;
+        response.Parameters.put('item', evaluations);
     }
 
     /*

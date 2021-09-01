@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CD_Cage_1491_NC</fullName>
+    <booleanFilter>1 AND 2 AND (3 OR 4 or 5) and 6</booleanFilter>
+    <columns>Case__c</columns>
+    <columns>NAME</columns>
+    <columns>Image__c</columns>
+    <columns>Type_of_Animal__c</columns>
+    <columns>Breed__c</columns>
+    <columns>Shelter_Location__c</columns>
+    <columns>Gender__c</columns>
+    <columns>Color__c</columns>
+    <columns>Animal_Age__c</columns>
+    <columns>Feeding_Amount_Inactive__c</columns>
+    <columns>Photo2__c</columns>
+    <columns>Intake_Date_Time__c</columns>
+    <columns>Discharge_Date_Time__c</columns>
+    <columns>Discharge_Type__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Case__c</field>
+        <operation>contains</operation>
+        <value>1491</value>
+    </filters>
+    <filters>
+        <field>Type_of_Animal__c</field>
+        <operation>equals</operation>
+        <value>Dog,Cat</value>
+    </filters>
+    <filters>
+        <field>Shelter_Location__c</field>
+        <operation>startsWith</operation>
+        <value>K0</value>
+    </filters>
+    <filters>
+        <field>Shelter_Location__c</field>
+        <operation>startsWith</operation>
+        <value>K4</value>
+    </filters>
+    <filters>
+        <field>Gender__c</field>
+        <operation>startsWith</operation>
+        <value>K5</value>
+    </filters>
+    <filters>
+        <field>Gender__c</field>
+        <operation>startsWith</operation>
+        <value>F</value>
+    </filters>
+    <label>Cat and Dog Cage Cards Case 1491 (NC)</label>
+</ListView>

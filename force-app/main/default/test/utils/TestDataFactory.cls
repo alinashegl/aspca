@@ -5,7 +5,7 @@
  * @author barne
  * @version 1.0.0
  */
-
+@isTest
 public without sharing class TestDataFactory {
 
     public static final String DATE_FORMAT = 'yyyy-MM-dd';
@@ -475,5 +475,72 @@ public without sharing class TestDataFactory {
     public static String convertDateToString(Datetime d) {
         DateTime dt = DateTime.newInstanceGMT(d.year(), d.month(), d.day());
         return dt.formatGmt(TestDataFactory.DATE_FORMAT);
+    }
+
+    public static Case createCase() {
+        Case c = new Case(Case_Type__c = 'Other',
+                            Category__c = 'Sheltering Services',
+                            Type = 'Problem');
+        insert c;
+        return c;
+    }
+
+    public static Animal__c createAnimal() {
+        Case c = createCase();
+        Animal__c a = new Animal__c(
+                    Name = 'Doggo',
+                    Case__c = c.Id,
+                    Type_of_Animal__c = 'Dog',
+                    Color__c = 'Black',
+                    Age__c = 'Unknown At Intake',
+                    Breed__c = 'Mix',
+                    Animal_Age__c = 8,
+                    Gender__c = 'MN',
+                    Animal_Name__c = 'Doggo123',
+                    Shelter_Location2__c = 'MRC'
+        );
+        insert a;
+        return a;
+    }
+
+    public static Behavior_Evaluation__c createPuppyBehaviorEvaluation() {
+        Animal__c a = createAnimal();
+        Behavior_Evaluation__c be = new Behavior_Evaluation__c(
+            Puppy_Behavior_in_Kennel__c = 'Social;Excited',
+            Puppy_Behavior_on_Leash__c = 'Mildly fearful;Panicked',
+            Animal__c = a.Id,
+            Scribe_Initials__c = 'SI',
+            Tester_Initials__c = 'TI',
+            Handler_Initials__c = 'HI',
+            Comments_BIK__c = 'Test Comments for Unit Test',
+            Comments_BOL__c = 'Other Test Comments for Unit Test',
+            Puppy_Skipped_DI_P1__c = 'Skipped not necessary',
+            Puppy_Skipped_DI_P2__c = 'Skipped not necessary',
+            Puppy_Skipped_DI_P3__c = 'Skipped not necessary',
+            Evaluation_Subtype__c = 'Puppy',
+            Potential_Behavior_Issues__c = 'Aggression to People;Other'
+        );
+        insert be;
+        return be;
+    }
+
+    public static Behavior_Evaluation__c createAdultBehaviorEvaluation(Boolean isDogFighting) {
+        Animal__c a = createAnimal();
+        Behavior_Evaluation__c be = new Behavior_Evaluation__c(
+            Behavior_in_Kennel__c = 'Social;Excited',
+            Behavior_on_Leash__c = 'Mildly fearful;Panicked',
+            Same_Sex_P1__c = 'Friendly;Neutral;Tense/assertive',
+            Animal__c = a.Id,
+            Scribe_Initials__c = 'SI',
+            Tester_Initials__c = 'TI',
+            Handler_Initials__c = 'HI',
+            Comments_BIK__c = 'Test Comments for Unit Test',
+            Comments_BOL__c = 'Other Test Comments for Unit Test',
+            Comments_SSD_P1__c = 'Goodish dog',
+            Evaluation_Subtype__c = isDogFighting ? 'Dog Fighting' : 'Adult Animal',
+            Potential_Behavior_Issues__c = 'Aggression to People;Other'
+        );
+        insert be;
+        return be;
     }
 }
