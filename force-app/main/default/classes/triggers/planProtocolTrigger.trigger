@@ -6,7 +6,7 @@
  * @version 1.0.0
  */
 
-trigger planProtocolTrigger on OpportunityLineItem (before insert, before update, before delete, after insert, after update, after
+trigger planProtocolTrigger on Plan_Protocol__c (before insert, before update, before delete, after insert, after update, after
         delete, after undelete) {
     Trigger_Config__c config = Trigger_Config__c.getInstance();
     if (!config.Disable_Triggers__c) {

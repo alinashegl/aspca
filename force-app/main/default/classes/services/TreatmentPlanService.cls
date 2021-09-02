@@ -38,52 +38,52 @@ public with sharing class TreatmentPlanService {
     private static ServiceResponse bundleAssignmentChanged(ServiceRequest request) {
         System.debug('Bundle Assignment Helper Is Executing');
         ServiceResponse response = new ServiceResponse(request);
-        Opportunity newOpp = (Opportunity) request.Parameters.get('new');
-        Opportunity oldOpp = (Opportunity) request.Parameters.get('old');
+        Treatment_Plan__c newOpp = (Treatment_Plan__c) request.Parameters.get('new');
+        Treatment_Plan__c oldOpp = (Treatment_Plan__c) request.Parameters.get('old');
 
-        Pricebook2 standard = [SELECT Id, Name, IsStandard FROM Pricebook2 WHERE IsStandard = TRUE];
-        List<PricebookEntry> standardEntries = [SELECT Id, Product2Id, Pricebook2Id, Name
-                                                FROM PricebookEntry
-                                                WHERE Pricebook2Id =: standard.Id];
-        Map<Id, PricebookEntry> standardEntryMap = new Map<Id, PricebookEntry>(standardEntries);
+        Treatment_Bundle__c standard = [SELECT Id, Name,  IsMaster__c FROM Treatment_Bundle__c WHERE IsMaster__c = TRUE];
+        List<Bundle_Entry__c> standardEntries = [SELECT Id, Treatment_Bundle__c, Protocol__c, Name
+                                                FROM Bundle_Entry__c
+                                                WHERE Treatment_Bundle__c =: standard.Id];
+        Map<Id, Bundle_Entry__c> standardEntryMap = new Map<Id, Bundle_Entry__c>(standardEntries);
         Map<Id, Id> standardMap = new Map<Id, Id>();
-        for (PricebookEntry entry : standardEntries) {
-            standardMap.put(entry.Product2Id, entry.Id);
+        for (Bundle_Entry__c entry : standardEntries) {
+            standardMap.put(entry.Protocol__c, entry.Id);
         }
         String oldBundleId = (String) request.Parameters.get('oldBundleId');
         String newBundleId = (String) request.Parameters.get('newBundleId');
-        Pricebook2 oldBundle = [SELECT Id FROM Pricebook2 WHERE Id =: oldBundleId];
-        Pricebook2 newBundle = [SELECT Id FROM Pricebook2 WHERE Id =: newBundleId];
-        List<PricebookEntry> oldEntries = [SELECT Id, Product2Id, Pricebook2Id, Name  FROM PricebookEntry WHERE
-                Pricebook2Id =: oldBundle.Id];
-        List<PricebookEntry> newEntries = [SELECT Id, Product2Id, Pricebook2Id, Name FROM PricebookEntry WHERE
-                Pricebook2Id =: newBundle.Id];
-        Map<Id, PricebookEntry> newProtocols = new Map<Id, PricebookEntry>();
-        for (PricebookEntry entry : newEntries) {
-            newProtocols.put(entry.Product2Id, entry);
+        Treatment_Bundle__c oldBundle = [SELECT Id FROM Treatment_Bundle__c WHERE Id =: oldBundleId];
+        Treatment_Bundle__c newBundle = [SELECT Id FROM Treatment_Bundle__c WHERE Id =: newBundleId];
+        List<Bundle_Entry__c> oldEntries = [SELECT Id, Protocol__c, Treatment_Bundle__c, Name  FROM Bundle_Entry__c WHERE
+                Treatment_Bundle__c =: oldBundle.Id];
+        List<Bundle_Entry__c> newEntries = [SELECT Id, Protocol__c, Treatment_Bundle__c, Name FROM Bundle_Entry__c WHERE
+                Treatment_Bundle__c =: newBundle.Id];
+        Map<Id, Bundle_Entry__c> newProtocols = new Map<Id, Bundle_Entry__c>();
+        for (Bundle_Entry__c entry : newEntries) {
+            newProtocols.put(entry.Protocol__c, entry);
         }
-        Map<Id, OpportunityLineItem> currentLineItems = getPlanProtocol(newOpp.Id);
-        List<OpportunityLineItem> lineItemsToDelete = new List<OpportunityLineItem>();
-        for (OpportunityLineItem item : currentLineItems.values()) {
-            if(newProtocols.keySet().contains(item.Product2Id) != false) {
+        Map<Id, Plan_Protocol__c> currentLineItems = getPlanProtocol(newOpp.Id);
+        List<Plan_Protocol__c> lineItemsToDelete = new List<Plan_Protocol__c>();
+        for (Plan_Protocol__c item : currentLineItems.values()) {
+            if(newProtocols.keySet().contains(item.Protocol__c) != false) {
                 lineItemsToDelete.add(item);
             }
         }
-        Set<PricebookEntry> entrySet = new Set<PricebookEntry>();
-        for (OpportunityLineItem item : currentLineItems.values()) {
-            for (PricebookEntry entry : newProtocols.values()) {
-                if (entry.Product2Id != item.Product2Id) {
+        Set<Bundle_Entry__c> entrySet = new Set<Bundle_Entry__c>();
+        for (Plan_Protocol__c item : currentLineItems.values()) {
+            for (Bundle_Entry__c entry : newProtocols.values()) {
+                if (entry.Protocol__c != item.Protocol__c) {
                     entrySet.add(entry);
                 }
             }
         }
-        List<OpportunityLineItem> toCreate = new List<OpportunityLineItem>();
-        for (PricebookEntry entry : entrySet) {
-            OpportunityLineItem item = new OpportunityLineItem();
-            item.PricebookEntry = standardEntryMap.get(entry.Product2Id);
-            item.OpportunityId = newOpp.Id;
-            item.Product2Id = entry.Product2Id;
-            item.UnitPrice = 0.0;
+        List<Plan_Protocol__c> toCreate = new List<Plan_Protocol__c>();
+        for (Bundle_Entry__c entry : entrySet) {
+            Plan_Protocol__c item = new Plan_Protocol__c();
+            Bundle_Entry__c bundleEntry = standardEntryMap.get(entry.Protocol__c);
+            item.Bundle_Entry__c = bundleEntry.Id;
+            item.Treatment_Plan__c = newOpp.Id;
+            item.Protocol__c = entry.Protocol__c;
             toCreate.add(item);
         }
         if (toCreate.size() > 0) {
@@ -110,35 +110,36 @@ public with sharing class TreatmentPlanService {
     private static ServiceResponse newBundleAssigned(ServiceRequest request) {
         System.debug('NEW BUNDLE ASSIGNMENT IS EXECUTING');
         ServiceResponse response = new ServiceResponse(request);
-        Opportunity opportunity = (Opportunity) request.Parameters.get('new');
+        Treatment_Plan__c opportunity = (Treatment_Plan__c) request.Parameters.get('new');
         String newBundleId = (String) request.Parameters.get('newBundleId');
 
-        Pricebook2 standard = [SELECT Id, Name, IsStandard FROM Pricebook2 WHERE IsStandard = TRUE];
-        List<PricebookEntry> standardEntries = [SELECT Id, Product2Id, Pricebook2Id, Name FROM PricebookEntry WHERE Pricebook2Id =: standard.Id];
-        Map<Id, PricebookEntry> standardEntryMap = new Map<Id, PricebookEntry>(standardEntries);
+        Treatment_Bundle__c standard = [SELECT Id, Name,  IsMaster__c FROM Treatment_Bundle__c WHERE IsMaster__c = TRUE];
+        List<Bundle_Entry__c> standardEntries = [SELECT Id, Treatment_Bundle__c, Protocol__c, Name
+        FROM Bundle_Entry__c
+        WHERE Treatment_Bundle__c =: standard.Id];
+        Map<Id, Bundle_Entry__c> standardEntryMap = new Map<Id, Bundle_Entry__c>(standardEntries);
         Map<Id, Id> standardMap = new Map<Id, Id>();
-        for (PricebookEntry entry : standardEntries) {
-            standardMap.put(entry.Product2Id, entry.Id);
+        for (Bundle_Entry__c entry : standardEntries) {
+            standardMap.put(entry.Protocol__c, entry.Id);
         }
-        Pricebook2 book = [SELECT Id from Pricebook2 WHERE Id =: newBundleId];
-        List<PricebookEntry> entries = [SELECT Id, Product2Id, Pricebook2Id, Name FROM PricebookEntry WHERE
-                Pricebook2Id =: book.Id];
-        List<OpportunityLineItem> newLineItems = new List<OpportunityLineItem>();
-        for (PricebookEntry entry : entries) {
-            String key = standardMap.get(entry.Product2Id);
-            PricebookEntry sEntry = standardEntryMap.get(key);
-            OpportunityLineItem item = new OpportunityLineItem();
-            item.OpportunityId = opportunity.Id;
-            item.Product2Id = key;
-            item.PricebookEntryId = sEntry.Id;
-            item.UnitPrice = 0.0;
+        Treatment_Bundle__c book = [SELECT Id from Treatment_Bundle__c WHERE Id =: newBundleId];
+        List<Bundle_Entry__c> entries = [SELECT Id, Protocol__c, Treatment_Bundle__c, Name FROM Bundle_Entry__c WHERE
+                Treatment_Bundle__c =: book.Id];
+        List<Plan_Protocol__c> newLineItems = new List<Plan_Protocol__c>();
+        for (Bundle_Entry__c entry : entries) {
+            String key = standardMap.get(entry.Protocol__c);
+            Bundle_Entry__c sEntry = standardEntryMap.get(key);
+            Plan_Protocol__c item = new Plan_Protocol__c();
+            item.Treatment_Plan__c = opportunity.Id;
+            item.Protocol__c = entry.Protocol__c;
+            item.Bundle_Entry__c = sEntry.Id;
             newLineItems.add(item);
         }
-        TriggerRequest triggerRequest = new TriggerRequest(OpportunityLineItem.getSObjectType())
+        TriggerRequest triggerRequest = new TriggerRequest(Plan_Protocol__c.getSObjectType())
                 .SetBefore(true)
                 .SetUpdate(true)
                 .SetNewRecords(newLineItems)
-                .SetOldRecords(new List<OpportunityLineItem>());
+                .SetOldRecords(new List<Plan_Protocol__c>());
         ServiceRequest serviceRequest = new ServiceRequest().withParams('TriggerRequest',triggerRequest);
         PlanProtocolDomain domain = new PlanProtocolDomain();
         ServiceResponse rep = domain.Execute(serviceRequest);
@@ -146,13 +147,13 @@ public with sharing class TreatmentPlanService {
 
         return rep;
     }
-    private static Map<Id, OpportunityLineItem> getPlanProtocol(Id opp) {
+    private static Map<Id, Plan_Protocol__c> getPlanProtocol(Id opp) {
         PlanProtocolSelector selector = new PlanProtocolSelector();
 
-        List<OpportunityLineItem> lineItems = selector.GetByOpp(opp);
-        if (lineItems.isEmpty()) {System.debug('NO LINE ITEMS FOUND'); return new Map<Id, OpportunityLineItem>(); }
+        List<Plan_Protocol__c> lineItems = selector.GetByOpp(opp);
+        if (lineItems.isEmpty()) {System.debug('NO LINE ITEMS FOUND'); return new Map<Id, Plan_Protocol__c>(); }
         else {
-            Map<Id, OpportunityLineItem> idOpportunityLineItemMap  = new Map<Id, OpportunityLineItem>();
+            Map<Id, Plan_Protocol__c> idOpportunityLineItemMap  = new Map<Id, Plan_Protocol__c>();
             idOpportunityLineItemMap.putAll(lineItems);
             return idOpportunityLineItemMap;
         }
