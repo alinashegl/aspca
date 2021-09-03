@@ -8,37 +8,35 @@
 
 public with sharing class TreatmentPlanSelector extends SObjectSelector {
     public TreatmentPlanSelector() {
-        super(Opportunity.SObjectType);
+        super(Treatment_Plan__c.SObjectType);
     }
 
     public override Set<SObjectField> GetDefaultFields() {
         return new Set<SObjectField> {
-                Opportunity.Name ,
-                Opportunity.CreatedById ,
-                Opportunity.CreatedDate ,
-                Opportunity.Description ,
-                Opportunity.LastModifiedById ,
-                Opportunity.Pricebook2Id ,
-                Opportunity.IsPrivate ,
-                Opportunity.StageName ,
-                Opportunity.Type ,
-                Opportunity.Id ,
-                Opportunity.Assigned_Treatment_Bundle__c
+                Treatment_Plan__c.Name ,
+                Treatment_Plan__c.CreatedById ,
+                Treatment_Plan__c.CreatedDate ,
+                Treatment_Plan__c.LastModifiedById ,
+                Treatment_Plan__c.AssignedTreatmentBundleId__c,
+                Treatment_Plan__c.MasterTreatmentBundleId__c ,
+                Treatment_Plan__c.Description__c ,
+                Treatment_Plan__c.Id ,
+                Treatment_Plan__c.Plan_Notes__c
         };
     }
 
     public override List<iOrderBy> GetDefaultOrderBy() {
         return new List<iOrderBy> {
-                OrderBy.Ascending(Opportunity.Name) ,
-                OrderBy.Ascending(Opportunity.Id)
+                OrderBy.Ascending(Treatment_Plan__c.Name) ,
+                OrderBy.Ascending(Treatment_Plan__c.Id)
         };
     }
 
-    public List<Opportunity> GetById(Set<Id> ids) {
+    public List<Treatment_Plan__c> GetById(Set<Id> ids) {
         return queryById(ids);
     }
 
-    public List<Opportunity> GetByName(String name) {
+    public List<Treatment_Plan__c> GetByName(String name) {
         return queryByName(name);
     }
 
