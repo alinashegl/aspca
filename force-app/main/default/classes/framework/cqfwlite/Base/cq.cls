@@ -58,6 +58,10 @@ public inherited sharing virtual class cq {
         return (SessionProtocolDomain) bindingFor(Session_Protocol__c.SObjectType, SessionProtocolDomain.class);
     }
 
+    public virtual TreatmentSessionDomain treatmentSessionDomainBindings() {
+        return (TreatmentSessionDomain) bindingFor(Treatment_Session__c.SObjectType, TreatmentSessionDomain.class);
+    }
+
     // END::: SELECTOR BINDINGS
 
     private Map<Schema.SObjectType, Object> selector_mappings = new Map<Schema.SObjectType, Object>();

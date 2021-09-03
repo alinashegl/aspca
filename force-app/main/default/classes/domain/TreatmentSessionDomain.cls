@@ -33,6 +33,7 @@ public with sharing class TreatmentSessionDomain extends DomainActionBase {
             idsToQuery.add(session.Treatment_Plan__c);
         }
         Map<Id, Treatment_Plan__c> treatmentPlanMap = new Map<Id, Treatment_Plan__c>(planSelector.GetById(idsToQuery));
+
         for(Treatment_Session__c sess : newRecords) {
             Treatment_Plan__c plan = treatmentPlanMap.get(sess.Treatment_Plan__c);
             sess.Animal__c = plan.Animal__c;
@@ -43,7 +44,31 @@ public with sharing class TreatmentSessionDomain extends DomainActionBase {
 
     public void beforeUpdate (TriggerRequest request)  {System.debug('TREATMENT SESSION BEFORE INSERT IS EXECUTING'); }
     public void beforeDelete (TriggerRequest request)  {System.debug('TREATMENT SESSION BEFORE INSERT IS EXECUTING'); }
-    public void afterInsert (TriggerRequest request) {System.debug('TREATMENT SESSION BEFORE INSERT IS EXECUTING'); }
+    public void afterInsert (TriggerRequest request) {
+        System.debug('TREATMENT SESSION BEFORE INSERT IS EXECUTING');
+        List<ServiceRequest> requestToSend = new List<ServiceRequest>();
+        List<Treatment_Session__c> newRecords =  request.newRecords;
+        TreatmentPlanSelector planSelector = new TreatmentPlanSelector();
+        Set<Id> idsToQuery = new Set<Id>();
+        for (Treatment_Session__c session : newRecords) {
+            idsToQuery.add(session.Treatment_Plan__c);
+        }
+        Map<Id, Treatment_Plan__c> treatmentPlanMap = new Map<Id, Treatment_Plan__c>(planSelector.GetById(idsToQuery));
+        for(Treatment_Session__c sess : newRecords) {
+            Treatment_Plan__c plan = treatmentPlanMap.get(sess.Treatment_Plan__c);
+            ServiceRequest serviceRequest = new ServiceRequest();
+            serviceRequest.Name = 'Create New Session Protocols';
+            serviceRequest.Action = 'beforeInsertHandler';
+            serviceRequest.withParams('plan', plan);
+            serviceRequest.withParams('session', sess);
+            requestToSend.add(serviceRequest);
+        }
+        List<ServiceResponse> responses = SessionProtocolService.processRequest(requestToSend);
+        for (ServiceResponse response : responses) {
+            System.debug(response);
+        }
+    }
+
     public void afterUpdate (TriggerRequest request)  {System.debug('TREATMENT SESSION BEFORE INSERT IS EXECUTING'); }
     public void afterDelete (TriggerRequest request)  {System.debug('TREATMENT SESSION BEFORE INSERT IS EXECUTING'); }
 
