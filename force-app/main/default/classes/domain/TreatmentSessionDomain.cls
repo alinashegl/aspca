@@ -23,11 +23,28 @@ public with sharing class TreatmentSessionDomain extends DomainActionBase {
         return;
     }
 
-    public void beforeInsert (TriggerRequest request) {System.debug('PLAN PROTOCOL BEFORE INSERT IS EXECUTING'); }
-    public void beforeUpdate (TriggerRequest request) { System.debug('PLAN PROTOCOL BEFORE UPDATE IS EXECUTING'); }
-    public void beforeDelete (TriggerRequest request) { System.debug('PLAN PROTOCOL BEFORE DELETE IS EXECUTING'); }
-    public void afterInsert (TriggerRequest request) { System.debug('PLAN PROTOCOL AFTER INSERT IS EXECUTING'); }
-    public void afterUpdate (TriggerRequest request) { System.debug('PLAN PROTOCOL AFTER INSERT IS EXECUTING'); }
-    public void afterDelete (TriggerRequest request) { System.debug('PLAN PROTOCOL AFTER INSERT IS EXECUTING'); }
+    public void beforeInsert (TriggerRequest request) {
+        System.debug('TREATMENT SESSION BEFORE INSERT IS EXECUTING');
+
+        List<Treatment_Session__c> newRecords =  request.newRecords;
+        TreatmentPlanSelector planSelector = new TreatmentPlanSelector();
+        Set<Id> idsToQuery = new Set<Id>();
+        for (Treatment_Session__c session : newRecords) {
+            idsToQuery.add(session.Treatment_Plan__c);
+        }
+        Map<Id, Treatment_Plan__c> treatmentPlanMap = new Map<Id, Treatment_Plan__c>(planSelector.GetById(idsToQuery));
+        for(Treatment_Session__c sess : newRecords) {
+            Treatment_Plan__c plan = treatmentPlanMap.get(sess.Treatment_Plan__c);
+            sess.Animal__c = plan.Animal__c;
+        }
+
+    }
+
+
+    public void beforeUpdate (TriggerRequest request)  {System.debug('TREATMENT SESSION BEFORE INSERT IS EXECUTING'); }
+    public void beforeDelete (TriggerRequest request)  {System.debug('TREATMENT SESSION BEFORE INSERT IS EXECUTING'); }
+    public void afterInsert (TriggerRequest request) {System.debug('TREATMENT SESSION BEFORE INSERT IS EXECUTING'); }
+    public void afterUpdate (TriggerRequest request)  {System.debug('TREATMENT SESSION BEFORE INSERT IS EXECUTING'); }
+    public void afterDelete (TriggerRequest request)  {System.debug('TREATMENT SESSION BEFORE INSERT IS EXECUTING'); }
 
 }

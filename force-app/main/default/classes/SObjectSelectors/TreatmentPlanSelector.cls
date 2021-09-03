@@ -21,7 +21,8 @@ public with sharing class TreatmentPlanSelector extends SObjectSelector {
                 Treatment_Plan__c.MasterTreatmentBundleId__c ,
                 Treatment_Plan__c.Description__c ,
                 Treatment_Plan__c.Id ,
-                Treatment_Plan__c.Plan_Notes__c
+                Treatment_Plan__c.Plan_Notes__c ,
+                Treatment_Plan__c.Animal__c
         };
     }
 
