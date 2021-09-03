@@ -507,7 +507,7 @@ public with sharing class BehaviorEvaluationPageController {
     @AuraEnabled(Cacheable=true)
     public static EvaluationWrapper getPuppyChildDollTwo(String key) {
         Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Puppy_Child_Doll_P1__c, evaluation);
+        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Puppy_Child_Doll_P2__c, evaluation);
         return wrapper;
     }
     @AuraEnabled(Cacheable=true)
