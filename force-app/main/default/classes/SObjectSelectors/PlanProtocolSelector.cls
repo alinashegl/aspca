@@ -20,7 +20,9 @@ public with sharing class PlanProtocolSelector extends SObjectSelector{
                 Plan_Protocol__c.Protocol__c ,
                 Plan_Protocol__c.Bundle_Entry__c ,
                 Plan_Protocol__c.Treatment_Plan__c ,
-                Plan_Protocol__c.Id
+                Plan_Protocol__c.Id ,
+                Plan_Protocol__c.IsRemoved__c,
+                Plan_Protocol__c.IsDeleted
         };
     }
 

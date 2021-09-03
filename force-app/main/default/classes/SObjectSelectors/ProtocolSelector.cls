@@ -8,19 +8,17 @@
 
 public with sharing class ProtocolSelector extends SObjectSelector{
     public ProtocolSelector() {
-        super(Product2.SObjectType);
+        super(Protocol__c.SObjectType);
     }
     public override Set<SObjectField> GetDefaultFields() {
         return new Set<SObjectField> {
-                Product2.Name,
-                Product2.CreatedById ,
-                Product2.CreatedDate ,
-                Product2.Description ,
-                Product2.LastModifiedById ,
-                Product2.Id ,
-                Product2.Family ,
-                Product2.IsActive ,
-                Product2.ExternalId
+                Protocol__c.Name,
+                Protocol__c.CreatedById ,
+                Protocol__c.CreatedDate ,
+                Protocol__c.Description__c ,
+                Protocol__c.LastModifiedById ,
+                Protocol__c.Id ,
+                Protocol__c.IsActive__c
         };
     }
 
@@ -31,16 +29,16 @@ public with sharing class ProtocolSelector extends SObjectSelector{
         };
     }
 
-    public List<Product2> GetById(Set<Id> ids) {
+    public List<Protocol__c> GetById(Set<Id> ids) {
         return queryById(ids);
     }
 
-    public List<Product2> GetByName(String name) {
+    public List<Protocol__c> GetByName(String name) {
         return queryByName(name);
     }
 
-    public List<Product2> GetByExternalId(String key) {
-        List<Product2> lineItems = GetQueryFactory().WithCriteria(Criteria.Equals(Product2.ExternalId, key)).Execute();
+    public List<Protocol__c> GetByExternalId(String key) {
+        List<Protocol__c> lineItems = GetQueryFactory().WithCriteria(Criteria.Equals(Product2.ExternalId, key)).Execute();
         return lineItems;
     }
 

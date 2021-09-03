@@ -8,7 +8,7 @@
 
 public with sharing class SessionProtocolDomain extends DomainActionBase {
     public override void ProcessAction(TriggerRequest request) {
-        if (request.targetSObject == QuoteLineItem.SObjectType) {
+        if (request.targetSObject == Session_Protocol__c.SObjectType) {
             String triggerAction = request.action + request.process;
 
             switch on triggerAction {
@@ -24,7 +24,22 @@ public with sharing class SessionProtocolDomain extends DomainActionBase {
     }
 
     public void beforeInsert (TriggerRequest request) {System.debug('PLAN PROTOCOL BEFORE INSERT IS EXECUTING'); }
-    public void beforeUpdate (TriggerRequest request) { System.debug('PLAN PROTOCOL BEFORE UPDATE IS EXECUTING'); }
+    public void beforeUpdate (TriggerRequest request) {
+        System.debug('PLAN PROTOCOL BEFORE UPDATE IS EXECUTING');
+        Map<Id, Session_Protocol__c> newRecordMap = (Map<Id, Session_Protocol__c>) request.newRecordMap;
+
+        for (Session_Protocol__c protocol : newRecordMap.values()) {
+            if(protocol.IsSkipped__c == true) {
+                protocol.Preferred_Motivators__c = '';
+                protocol.Arousal_Best__c = 'None';
+                protocol.Arousal_Worst__c = 'None';
+                protocol.Fear_Best__c = 'None';
+                protocol.Fear_Worst__c = 'None';
+                protocol.Social_Best__c = 'None';
+                protocol.Aggressive_Worst__c = 'None';
+            }
+        }
+    }
     public void beforeDelete (TriggerRequest request) { System.debug('PLAN PROTOCOL BEFORE DELETE IS EXECUTING'); }
     public void afterInsert (TriggerRequest request) { System.debug('PLAN PROTOCOL AFTER INSERT IS EXECUTING'); }
     public void afterUpdate (TriggerRequest request) { System.debug('PLAN PROTOCOL AFTER INSERT IS EXECUTING'); }
