@@ -5,7 +5,7 @@
  -->
 
 <aura:component description="SessionProtocolsListView"
-                implements="flexipage:availableForAllPageTypes, force:hasRecordId" access="public" controller="RecordIDCmpController">
+                implements="flexipage:availableForAllPageTypes,force:hasRecordId" access="public" controller="RecordIDCmpController">
 
     <aura:attribute name="recordId" type="String" />
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />

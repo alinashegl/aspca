@@ -18,6 +18,10 @@
                 <behavior>Edit</behavior>
                 <field>Protocol__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Entry_Label__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns/>
         <style>TwoColumnsTopToBottom</style>
