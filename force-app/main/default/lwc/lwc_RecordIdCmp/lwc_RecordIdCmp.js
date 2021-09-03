@@ -7,6 +7,6 @@
  */
 import { LightningElement } from 'lwc';
 
-export default class LwcDynamicRelatedList extends LightningElement {
-
+export default class LwcRecordIdCmp extends LightningElement {
+    @api recordId;
 }
