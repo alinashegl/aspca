@@ -1,0 +1,20 @@
+<!--
+ - Page Description
+ - 
+ - @author barne
+ -->
+
+<aura:component description="TreatmentToDoList"
+                implements="flexipage:availableForAllPageTypes, force:hasRecordId, flexipage:availableForRecordHome" access="public"
+                controller="TreatmentToDoListController">
+    <aura:attribute name="data" type="Object" />
+    <aura:attribute name="columns" type="List" />
+    <aura:handler name="init" value="{! this}" action="{! c.init}" />
+    <div class="c-container">
+        <th>MRC Treatment Priority TODO List</th>
+    &nbsp;
+        <lightning:datatable keyField="name" data="{! v.data}" columns= "{! v.columns}" hideCheckboxColumn="true"
+                             class="slds-max-medium-table_stacked" />
+    </div>
+
+</aura:component>

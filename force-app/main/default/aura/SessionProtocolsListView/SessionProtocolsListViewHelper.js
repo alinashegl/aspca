@@ -29,7 +29,7 @@
         this.sendPromise(cmp, 'c.renderView', params)
         .then(
             function(response) {
-              console.log('Response'. response);
+              console.log('Response', response);
               $A.get('e.force:refreshView').fire();
             }
         ).catch(
