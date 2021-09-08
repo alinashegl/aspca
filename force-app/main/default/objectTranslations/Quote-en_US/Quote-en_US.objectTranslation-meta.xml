@@ -1,31 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
-    <caseValues>
-        <plural>false</plural>
-        <value>Treatment Session</value>
-    </caseValues>
-    <caseValues>
-        <plural>true</plural>
-        <value>Treatment Sessions</value>
-    </caseValues>
     <layouts>
         <layout>Treatment Session</layout>
         <sections>
-            <label><!-- Custom Links --></label>
+            <label></label>
             <section>Custom Links</section>
         </sections>
         <sections>
-            <label><!-- Fields --></label>
+            <label></label>
             <section>Fields</section>
         </sections>
         <sections>
-            <label><!-- Session Details --></label>
+            <label></label>
             <section>Session Details</section>
         </sections>
     </layouts>
     <quickActions>
-        <label><!-- SendEmail --></label>
+        <label></label>
         <name>SendEmail</name>
     </quickActions>
-    <startsWith>Consonant</startsWith>
+    <quickActions>
+        <label></label>
+        <name>Validate_Session</name>
+    </quickActions>
 </CustomObjectTranslation>

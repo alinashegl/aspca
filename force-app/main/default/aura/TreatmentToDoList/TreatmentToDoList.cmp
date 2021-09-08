@@ -10,11 +10,43 @@
     <aura:attribute name="data" type="Object" />
     <aura:attribute name="columns" type="List" />
     <aura:handler name="init" value="{! this}" action="{! c.init}" />
-    <div class="c-container">
-        <th>MRC Treatment Priority TODO List</th>
+    <div class="grid-container" >
+        <h1>MRC Treatment Priority TODO List</h1>
     &nbsp;
-        <lightning:datatable keyField="name" data="{! v.data}" columns= "{! v.columns}" hideCheckboxColumn="true"
-                             class="slds-max-medium-table_stacked" />
+        <table bgcolor="white" class="grid-item slds-box">
+            <tr class="spaceUnder">
+                <th>Animal</th>
+                <th>Treatment Priority</th>
+                <th>Bundle Assignment</th>
+                <th>Treatment Count</th>
+                <th>Shelter Color Code</th>
+            </tr>
+            <aura:iteration var="line" items="{!v.data}">
+                <tr class="spaceUnder">
+                    <td>
+                        {!line.animal.Name}
+                    </td>
+                    <td>{!line.priority}</td>
+                    <td>{!line.assignment}</td>
+                    <td>{!line.treatmentcount}</td>
+                    <td>{!line.colorCode}</td>
+                    <td>
+                        <lightning:buttonMenu alternativeText="Show menu" menuAlignment="auto">
+                            <lightning:menuItem value="EditPlan" label="Edit Plan" />
+                            <lightning:menuItem value="AddProtocols" label="Add Protocols" />
+                            <lightning:menuItem value="Create New Plan" label="Create New Plan" disabled="true" />
+                        </lightning:buttonMenu>
+                    </td>
+                </tr>
+                <aura:if isTrue="{!not(empty(line.selections))}">
+                    <tr>
+                        <c:TreatmentProtocolList data="{!line.selections}" />
+                    </tr>
+                </aura:if>
+            </aura:iteration>
+
+        </table>
+
     </div>
 
 </aura:component>

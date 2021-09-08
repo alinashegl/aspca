@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
-    <label><!-- Overall Score --></label>
+    <label></label>
     <name>Overall_Score__c</name>
     <picklistValues>
         <masterLabel>1. Beginning / Acquisition</masterLabel>
-        <translation><!-- 1. Beginning / Acquisition --></translation>
+        <translation></translation>
     </picklistValues>
     <picklistValues>
         <masterLabel>2. Catching On / Fluency</masterLabel>
-        <translation><!-- 2. Catching On / Fluency --></translation>
+        <translation></translation>
     </picklistValues>
     <picklistValues>
         <masterLabel>3. Almost There / Generalization</masterLabel>
-        <translation><!-- 3. Almost There / Generalization --></translation>
+        <translation></translation>
     </picklistValues>
     <picklistValues>
         <masterLabel>4. Maintenance</masterLabel>
-        <translation><!-- 4. Maintenance --></translation>
+        <translation></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>None</masterLabel>
+        <translation></translation>
     </picklistValues>
 </CustomFieldTranslation>

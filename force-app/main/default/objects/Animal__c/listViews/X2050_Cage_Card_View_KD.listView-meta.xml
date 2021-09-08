@@ -20,6 +20,16 @@
         <value>2050</value>
     </filters>
     <filters>
+        <field>Type_of_Animal__c</field>
+        <operation>equals</operation>
+        <value>Fowl</value>
+    </filters>
+    <filters>
+        <field>Discharge_Type__c</field>
+        <operation>notEqual</operation>
+        <value>Deceased</value>
+    </filters>
+    <filters>
         <field>Discharge_Type__c</field>
         <operation>notEqual</operation>
         <value>Euthanized</value>

@@ -4,6 +4,15 @@
     <deleteConstraint>SetNull</deleteConstraint>
     <externalId>false</externalId>
     <label>Assigned Treatment Bundle</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Treatment_Bundle__c.IsMaster__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
     <referenceTo>Treatment_Bundle__c</referenceTo>
     <relationshipLabel>Treatment Plans (Assigned Treatment Bundle)</relationshipLabel>
     <relationshipName>Assigned_Treatment_Plans</relationshipName>

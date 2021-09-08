@@ -15,6 +15,7 @@
                 console.log('Response', response);
                 var data = response;
                 cmp.set('v.data', response);
+                console.log('Response Value', response);
             }
         ).catch(
             function(error) {

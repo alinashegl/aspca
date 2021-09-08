@@ -1,0 +1,30 @@
+<!--
+ - Page Description
+ - 
+ - @author barne
+ -->
+
+<aura:component description="TreatmentProtocolList" controller="TreatmentToDoListController">
+    <aura:attribute name="data" type="List" />
+    <aura:handler name="init" value="{! this}" action="{! c.init}" />
+    <table class="grid-item slds-box">
+        <aura:iteration var="data" items="{!v.data}">
+            <tr class="spaceUnder">
+                <td class="float slds-theme_shade">
+                    <lightning:input label="{!data.name}" name="{!data.idVal}" type="checkbox" variant="label-hidden"
+                                     checked="{!data.inPlan}" />
+                </td>
+                <aura:if isTrue="{!data.inPlan}">
+                    <td>
+                       <strong> {!data.name}</strong>
+                    </td>
+                </aura:if>
+                <aura:if isTrue="{!not(data.inPlan)}">
+                    <td>
+                        {!data.name}
+                    </td>
+                </aura:if>
+            </tr>
+        </aura:iteration>
+    </table>
+</aura:component>
