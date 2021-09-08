@@ -210,6 +210,25 @@
         </values>
     </picklistValues>
     <picklistValues>
+        <picklist>BRC_Decline_Reason__c</picklist>
+        <values>
+            <fullName>Dog Aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Space</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Offensively Aggressive to Human</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
         <picklist>BRC_Status__c</picklist>
         <values>
             <fullName>BRC Accepted</fullName>
@@ -1218,6 +1237,25 @@
         </values>
         <values>
             <fullName>Waiting</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>MRC_Decline_Reason__c</picklist>
+        <values>
+            <fullName>Dog Aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Space</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Offensively Aggressive to Human</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
             <default>false</default>
         </values>
     </picklistValues>

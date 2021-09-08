@@ -79,7 +79,7 @@ public with sharing class KennelSignageController {
     }
 
     public String m_animalAge() {
-        String defaultAge = 'Unkown';
+        String defaultAge = 'Unknown';
 
         animalAge = currentAnimal.Age__c;
         if (animalAge == null) { animalAge = defaultAge ;}
@@ -108,6 +108,8 @@ public with sharing class KennelSignageController {
     /**********************  Body Properties **************************************************************************/
     /******************************************************************************************************************/
 
+    public String defaultPicklst = 'None Specified';
+    //public String[] values = (String[]) '';
     public class behaviorConcern {
         public String value { get; set; }
         public Boolean isSelected { get; set; }
@@ -123,13 +125,17 @@ public with sharing class KennelSignageController {
         behaviorConcerns = new List<KennelSignageController.behaviorConcern>();
         DescribeFieldResult fieldResult = Animal__c.Behavior_Concerns__c.getDescribe();
         List< PicklistEntry> entries = fieldResult.getPicklistValues();
-        String[] values = currentAnimal.Behavior_Concerns__c.split(';');
+        String value = '';
+        if (!String.isEmpty(currentAnimal.Behavior_Concerns__c)) { value = currentAnimal.Behavior_Concerns__c; }
+        List<String> values = (List<String>) value.split(';');
         System.debug('*******************Picklist Values*************' + values);
         for (PicklistEntry entry : entries) {
             String label = entry.label;
             Boolean isSelected = false;
-            if (values.contains(entry.label) && !values.isEmpty()) {
-                isSelected = true;
+            if (!values.isEmpty()) {
+                if(values.contains(entry.label)) {
+                    isSelected = true;
+                }
             }
             behaviorConcerns.add(new behaviorConcern(label, isSelected));
             System.debug('Entry isActive value =====> ' + isSelected);
@@ -159,14 +165,19 @@ public with sharing class KennelSignageController {
         walkingEquipments = new List<KennelSignageController.walkingEquipment>();
         DescribeFieldResult fieldResult = Animal__c.Walking_Equipment__c.getDescribe();
         List< PicklistEntry> entries = fieldResult.getPicklistValues();
-        String[] values = currentAnimal.Walking_Equipment__c.split(';');
+        String value = '';
+        if (!String.isEmpty(currentAnimal.Walking_Equipment__c)) { value = currentAnimal.Walking_Equipment__c; }
+        List<String> values = (List<String>) value.split(';');
+        //System.debug('Walking Equipment Selected Values ======> ' + values);
         for (PicklistEntry entry : entries) {
             String label = entry.label;
             Boolean isSelected = false;
-            if (values.contains(entry.label)  && !values.isEmpty()) {
-                isSelected = true;
+            if (!values.isEmpty()) {
+                if(values.contains(entry.label)) {
+                    isSelected = true;
+                }
             }
-            System.debug('Walking Equipment -> ' + entry);
+            //System.debug('Walking Equipment -> ' + entry);
             walkingEquipments.add(new walkingEquipment(label, isSelected));
         }
         return walkingEquipments;
@@ -194,13 +205,19 @@ public with sharing class KennelSignageController {
         walkingStatuses = new List<KennelSignageController.walkingStatus>();
         DescribeFieldResult fieldResult = Animal__c.Walking_Status__c.getDescribe();
         List< PicklistEntry> entries = fieldResult.getPicklistValues();
-        String[] values = currentAnimal.Walking_Status__c.split(';');
+        String value = '';
+        if (!String.isEmpty(currentAnimal.Walking_Status__c)) { value = currentAnimal.Walking_Status__c; }
+        List<String> values = (List<String>) value.split(';');
+
         for (PicklistEntry entry : entries) {
             String label = entry.label;
             Boolean isSelected = false;
-            if (values.contains(entry.label) && !values.isEmpty()) {
-                isSelected = true;
+            if (!values.isEmpty()) {
+                if(values.contains(entry.label)) {
+                    isSelected = true;
+                }
             }
+            System.debug('Walking Status -> ' + entry);
             walkingStatuses.add(new walkingStatus(label, isSelected));
         }
         return walkingStatuses;

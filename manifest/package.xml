@@ -31,6 +31,7 @@
         <members>trigger_Animal</members>
         <members>trigger_Controller</members>
         <members>trigger_Domain</members>
+        <members>TestDataFactory.cls-meta.xml</members>
         <name>ApexClass</name>
     </types>
     <types>
@@ -56,9 +57,6 @@
         <members>Quote</members>
         <members>QuoteLineItem</members>
         <name>CustomObject</name>
-    </types>
-    <types>
-        <name>CompactLayout</name>
     </types>
     <types>
         <members>Case.ExternalId__c</members>
@@ -90,9 +88,6 @@
         <name>Layout</name>
     </types>
     <types>
-        <name>ListView</name>
-    </types>
-    <types>
         <members>Behavior_Team</members>
         <members>Set_Audit_Field</members>
         <name>PermissionSet</name>
@@ -100,9 +95,6 @@
     <types>
         <members>Quote.Validate_Session</members>
         <name>QuickAction</name>
-    </types>
-    <types>
-        <name>RecordType</name>
     </types>
     <types>
         <members>Behavior_Reports</members>
@@ -114,12 +106,6 @@
         <members>dbChecked</members>
         <members>dbUnchecked</members>
         <name>StaticResource</name>
-    </types>
-    <types>
-        <name>ValidationRule</name>
-    </types>
-    <types>
-        <name>WebLink</name>
     </types>
     <types>
         <members>Animal__c.Alert_to_Behavior_Case_Worker</members>
@@ -286,6 +272,10 @@
         <members>Animal__c.X4Dx_Test</members>
         <members>Animal__c.X4Dx_Test_6_Months</members>
         <name>WorkflowTask</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>CustomMetadata</name>
     </types>
     <version>52.0</version>
 </Package>

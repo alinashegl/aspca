@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Loop__LOOPlus</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <height>500</height>
+    <linkType>url</linkType>
+    <masterLabel>Run DDP</masterLabel>
+    <openType>sidebar</openType>
+    <protected>false</protected>
+    <url>/apex/loop__looplus?eid={!Opportunity.Id}&amp;accountId={!Opportunity.AccountId}&amp;sessionId={!$Api.Session_ID}</url>
+</WebLink>

@@ -1,13 +1,4 @@
 public class AnimalTriggerHandler {
-
-    public static void Execute() {
-        if (!Trigger.isExecuting) { return; }
-        Trigger_Config__c config = Trigger_Config__c.getInstance();
-        if (config != null  && config.Animal_Trigger_Enabled__c == false) { return; }
-        System.debug('#### Running Animal Trigger');
-        trigger_Controller.getInstance().process(Animal__c.SObjectType);
-
-    }
     
     public static void insertHandler(){
         CaseContactRole conrole = new CaseContactRole();
@@ -32,7 +23,7 @@ public class AnimalTriggerHandler {
 
         }  
     }
-
+    
     public static void insertHandlerBefore(){
         string initials = '';
         for (Animal__c a : (List<Animal__c>)Trigger.new){
@@ -40,9 +31,9 @@ public class AnimalTriggerHandler {
                 a.Gender__c = 'Unknown';
             }
             
-            if (a.Age__c == null){
-                a.Age__c = 'Unknown At Intake';
-            }
+//            if (a.Age__c == null){
+//                a.Age__c = 'Unknown At Intake';
+//            }
             
             if (a.Color__c == null){
                 a.Color__c = 'Unspecified';
@@ -56,8 +47,6 @@ public class AnimalTriggerHandler {
      
         }  
     }
-
-
     
     public static void updateHandler(List<Animal__c> anms, Map<Id, Animal__c> oldAnms){
         CaseContactRole conrole = new CaseContactRole();

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Shelter_Color_Coding__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>Shelter handling color code for the animal</inlineHelpText>
+    <label>Shelter Color Coding</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>Shelter_Color_Coding</valueSetName>
+    </valueSet>
+</CustomField>
