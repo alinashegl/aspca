@@ -11,19 +11,57 @@
         <aura:iteration var="data" items="{!v.data}">
             <tr class="spaceUnder">
                 <td class="float slds-theme_shade">
-                    <lightning:input label="{!data.name}" name="{!data.idVal}" type="checkbox" variant="label-hidden"
-                                     checked="{!data.inPlan}" />
+                    <lightning:input label="{!data.selectionOne.name}" name="{!data.selectionOne.idVal}"
+                                     type="checkbox"
+                                     variant="label-hidden"
+                                     checked="{!data.selectionOne.inPlan}" />
                 </td>
-                <aura:if isTrue="{!data.inPlan}">
+                <aura:if isTrue="{!data.selectionOne.inPlan}">
                     <td>
-                       <strong> {!data.name}</strong>
+                       <strong> {!data.selectionOne.name}</strong>
                     </td>
                 </aura:if>
-                <aura:if isTrue="{!not(data.inPlan)}">
+                <aura:if isTrue="{!not(data.selectionOne.inPlan)}">
                     <td>
-                        {!data.name}
+                        {!data.selectionOne.name}
                     </td>
                 </aura:if>
+
+                <aura:if isTrue="{!not(data.selectionTwo.name == 'EMPTY')}">
+                    <td class="float slds-theme_shade">
+                        <lightning:input label="{!data.selectionTwo.name}" name="{!data.selectionTwo.idVal}"
+                                         type="checkbox"
+                                         variant="label-hidden"
+                                         checked="{!data.selectionTwo.inPlan}" />
+                    </td>
+                    <aura:if isTrue="{!data.selectionTwo.inPlan}">
+                        <td>
+                            <strong> {!data.selectionTwo.name}</strong>
+                        </td>
+                    </aura:if>
+                    <aura:if isTrue="{!not(data.selectionTwo.inPlan)}">
+                        <td>
+                            {!data.selectionTwo.name}
+                        </td>
+                    </aura:if>
+                </aura:if>
+                <td class="float slds-theme_shade">
+                    <lightning:input label="{!data.selectionThree.name}" name="{!data.selectionThree.idVal}"
+                                     type="checkbox"
+                                     variant="label-hidden"
+                                     checked="{!data.selectionThree.inPlan}" />
+                </td>
+                <aura:if isTrue="{!data.selectionThree.inPlan}">
+                    <td>
+                        <strong> {!data.selectionThree.name}</strong>
+                    </td>
+                </aura:if>
+                <aura:if isTrue="{!not(data.selectionThree.inPlan)}">
+                    <td>
+                        {!data.selectionThree.name}
+                    </td>
+                </aura:if>
+
             </tr>
         </aura:iteration>
     </table>

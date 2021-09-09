@@ -17,15 +17,21 @@ public with sharing class TreatmentToDoListController {
         @AuraEnabled public String colorCode;
         @AuraEnabled public Boolean hasProtocols;
         @AuraEnabled public List<BundleSelection> selections;
+        @AuraEnabled public List<RowSelection> rowSelections;
+        @AuraEnabled public Boolean displayProtocols;
 
         public TreatmentToDoListData(String name, String priority, String assignment, Integer treatmentCount, String
-                colorCode, Boolean hasProtocols, List<BundleSelection> selections) {
+                colorCode, Boolean hasProtocols, List<BundleSelection> selections, List<RowSelection> rowSelections,
+                Boolean displayProtocols) {
             this.name = name;
             this.priority = priority;
             this.assignment = assignment;
             this.treatmentcount = treatmentCount;
             this.colorCode = colorCode;
             this.hasProtocols = hasProtocols;
+            this.selections = selections;
+            this.rowSelections = rowSelections;
+            this.displayProtocols = displayProtocols;
         }
 
         public TreatmentToDoListData() { }
@@ -120,12 +126,13 @@ public with sharing class TreatmentToDoListController {
                 planToPlanProtocolsMap.put(plan.Id, planProtocols);
             }
         }
-        List<RowSelection> rowSelections = new List<TreatmentToDoListController.RowSelection>();
+
         for(Treatment_Plan__c plan : treatmentPlans) {
             Animal__c animal = animalsByIds.get(plan.Animal__c);
             TreatmentToDoListData item = new TreatmentToDoListData();
             item.name = animal.Name == null ? 'None Found' : animal.Name;
             item.priority = plan.Treatment_Priority__c == null ? 'None Found' : plan.Treatment_Priority__c;
+            List<RowSelection> rowSelections = new List<TreatmentToDoListController.RowSelection>();
 
             Treatment_Bundle__c bundle = new Treatment_Bundle__c();
             if(plan.AssignedTreatmentBundleId__c != null) { bundle = [SELECT Name, Id FROM Treatment_Bundle__c WHERE Id =: plan
@@ -136,6 +143,7 @@ public with sharing class TreatmentToDoListController {
             item.treatmentcount = 5;
             item.animal = animal;
             item.plan = plan;
+            item.displayProtocols = false;
 
             List<BundleSelection> selections = new List<TreatmentToDoListController.BundleSelection>();
             List<Plan_Protocol__c> lPlanProtocols = planToPlanProtocolsMap.get(plan.Id);
@@ -149,7 +157,7 @@ public with sharing class TreatmentToDoListController {
 
             Map<Id, Protocol__c> sProtocols = new Map<Id, Protocol__c>(protocolSelector.GetById(idset));
             Integer countOfEntries = entries.size();
-            Integer index = countOfEntries - 1;
+            //Integer index = countOfEntries - 1;
             for(Bundle_Entry__c entry : entries) {
                 BundleSelection iSelection = new BundleSelection();
                 iSelection.idVal = entry.Protocol__c;
@@ -164,60 +172,53 @@ public with sharing class TreatmentToDoListController {
                 }
                 selections.add(iSelection);
             }
-            /*
-            while (index <= countOfEntries) {
-                Integer index2 = index - 1;
-                Integer index3 = index - 2;
-                Bundle_Entry__c entry = entries[index];
-                Bundle_Entry__c entry2 = entries[index2];
-                Bundle_Entry__c entry3 = entries[index3];
-                BundleSelection iSelection = new BundleSelection();
-                BundleSelection aSelection = new BundleSelection();
-                BundleSelection dSelection = new BundleSelection();
-                if(sProtocols.keySet().contains(entry.Protocol__c)) {
-                    Protocol__c protocol = sProtocols.get(entry.Protocol__c);
-                    iSelection.inPlan = true;
-                    iSelection.name = protocol.Name;
-                }else if(!sProtocols.keySet().contains(entry.Protocol__c)) {
-                    Protocol__c protocol = masterProtocols.get(entry.Protocol__c);
-                    iSelection.inPlan = false;
-                    iSelection.name = protocol.Name;
-                }
-
-                if(sProtocols.keySet().contains(entry2.Protocol__c)) {
-                    Protocol__c protocol = sProtocols.get(entry2.Protocol__c);
-                    aSelection.inPlan = true;
-                    aSelection.name = protocol.Name;
-                }else if(!sProtocols.keySet().contains(entry2.Protocol__c)) {
-                    Protocol__c protocol = masterProtocols.get(entry2.Protocol__c);
-                    aSelection.inPlan = false;
-                    aSelection.name = protocol.Name;
-                }
-
-                if(sProtocols.keySet().contains(entry3.Protocol__c)) {
-                    Protocol__c protocol = sProtocols.get(entry3.Protocol__c);
-                    dSelection.inPlan = true;
-                    dSelection.name = protocol.Name;
-                }else if(!sProtocols.keySet().contains(entry3.Protocol__c)) {
-                    Protocol__c protocol = masterProtocols.get(entry3.Protocol__c);
-                    dSelection.inPlan = false;
-                    dSelection.name = protocol.Name;
-                }
+            System.debug(selections.size());
+            Integer variable = selections.size();
+            Integer tener = 0;
+            while(variable >= 3) {
 
                 RowSelection selection = new RowSelection();
-                selection.selectionOne = iSelection != null ? iSelection : new BundleSelection() ;
-                selection.selectionTwo = aSelection != null ? aSelection : new BundleSelection() ;
-                selection.selectionThree = dSelection != null ? dSelection : new BundleSelection() ;
-
-                index = index3 - 1;
-
+                selection.selectionOne =  selections[variable - 1];
+                selection.selectionTwo =  selections[variable - 2];
+                selection.selectionThree =  selections[variable - 3];
+                variable = variable - 4;
                 rowSelections.add(selection);
             }
-            */
+
+            if (variable == 3) {
+                RowSelection selection = new RowSelection();
+                selection.selectionOne = selections[0];
+                selection.selectionTwo = selections[1];
+                selection.selectionThree = selections[3];
+                rowSelections.add(selection);
+            }
+            if (variable == 2) {
+                RowSelection selection = new RowSelection();
+                selection.selectionOne = selections[0];
+                selection.selectionTwo = selections[1];
+                BundleSelection opt = new BundleSelection();
+                opt.name = 'EMPTY';
+                selection.selectionThree = opt;
+                rowSelections.add(selection);
+            }
+
+            if (variable == 1) {
+                RowSelection selection = new RowSelection();
+                selection.selectionOne = selections[0];
+                BundleSelection opt = new BundleSelection();
+                opt.name = 'EMPTY';
+                selection.selectionThree = opt;
+                selection.selectionTwo = opt;
+                rowSelections.add(selection);
+            }
+
+
             item.selections = selections;
+            System.debug('Row Selections ===> ' + rowSelections);
+            item.rowSelections = rowSelections;
             data.add(item);
         }
-        System.debug(rowSelections);
+
         System.debug(data);
         return data;
     }

@@ -16,5 +16,9 @@
             { label: 'Button Placeholder', fieldName: 'animal' , type: 'text' }
         ]);
         helper.fetchData(cmp, event);
+    },
+    handleClick : function(cmp, event, helper) {
+        var button = event.getSource().get('v.name');
+        helper.buttonAction(cmp, event, button);
     }
 });

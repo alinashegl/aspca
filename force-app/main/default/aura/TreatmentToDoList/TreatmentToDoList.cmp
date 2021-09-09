@@ -10,6 +10,7 @@
     <aura:attribute name="data" type="Object" />
     <aura:attribute name="columns" type="List" />
     <aura:handler name="init" value="{! this}" action="{! c.init}" />
+    <aura:method name="handleClick"  action="{!c.handleClick}" access="public" />
     <div class="grid-container" >
         <h1>MRC Treatment Priority TODO List</h1>
     &nbsp;
@@ -21,28 +22,31 @@
                 <th>Treatment Count</th>
                 <th>Shelter Color Code</th>
             </tr>
-            <aura:iteration var="line" items="{!v.data}">
-                <tr class="spaceUnder">
-                    <td>
-                        {!line.animal.Name}
-                    </td>
-                    <td>{!line.priority}</td>
-                    <td>{!line.assignment}</td>
-                    <td>{!line.treatmentcount}</td>
-                    <td>{!line.colorCode}</td>
-                    <td>
-                        <lightning:buttonMenu alternativeText="Show menu" menuAlignment="auto">
-                            <lightning:menuItem value="EditPlan" label="Edit Plan" />
-                            <lightning:menuItem value="AddProtocols" label="Add Protocols" />
-                            <lightning:menuItem value="Create New Plan" label="Create New Plan" disabled="true" />
-                        </lightning:buttonMenu>
-                    </td>
-                </tr>
-                <aura:if isTrue="{!not(empty(line.selections))}">
-                    <tr>
-                        <c:TreatmentProtocolList data="{!line.selections}" />
+            <aura:iteration var="line" items="{!v.data}" >
+                <div>
+                    <tr class="spaceUnder" id="{!line.plan.id}">
+                        <td>
+                            {!line.animal.Name}
+                        </td>
+                        <td>{!line.priority}</td>
+                        <td>{!line.assignment}</td>
+                        <td>{!line.treatmentcount}</td>
+                        <td>{!line.colorCode}</td>
+                        <td>
+                            <lightning:button name="showProtocols" label="Show Protocol" onclick="{!c.handleClick}"
+                                              class="float"/>
+                        </td>
                     </tr>
-                </aura:if>
+                </div>
+                <div>
+                    <aura:if isTrue="{!line.displayProtocols}">
+                        <aura:if isTrue="{!not(empty(line.rowSelections))}">
+                            <tr>
+                                <c:TreatmentProtocolList data="{!line.rowSelections}" />
+                            </tr>
+                        </aura:if>
+                    </aura:if>
+                </div>
             </aura:iteration>
 
         </table>

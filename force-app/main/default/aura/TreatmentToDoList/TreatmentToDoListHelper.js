@@ -51,5 +51,16 @@
                 });
                 $A.enqueueAction(action);
             }));
+        } ,
+        buttonAction : function(cmp, event, button) {
+        if(button == 'showProtocols') {
+            this.showProtocols(cmp, event, button);
         }
+    } ,
+
+    showProtocols : function (cmp, event, button) {
+        console.log('SHOW PROTOCOLS');
+
+    }
+
 });
