@@ -54,7 +54,96 @@ public without sharing class TestDataFactory {
     public static List<Map<String, Object>> contacts = new List<Map<String, Object>>();
 
 
+    public static final Integer PRODUCTS_COUNT = 10;//300
+    public static final String PRODUCT_NAME_PATTERN = 'development%';
+    public static final Map<String, Object> PRODUCT_PATTERN = new Map<String, Object>{
+            'name' => 'Development',
+            'isActive' => true
+    };
+    public static List<Map<String, Object>> products = new List<Map<String, Object>>();
 
+
+    public static final Integer PRICEBOOKS_COUNT = 10;//300
+    public static final String PRICEBOOK_NAME_PATTERN = 'pricebook%';
+    public static final Map<String, Object> PRICEBOOK_PATTERN = new Map<String, Object>{
+            'name' => 'pricebook',
+            'isActive' => true,
+            'isStandart' => false
+    };
+    public static List<Map<String, Object>> pricebooks = new List<Map<String, Object>>();
+
+
+    public static final Integer PRICEBOOK_ENTRIES_COUNT = 10;//300
+    public static final Decimal PRICEBOOK_ENTRY_UNIT_PRICE = 50.00;
+    public static final Map<String, Object> PRICEBOOK_ENTRY_PATTERN = new Map<String, Object>{
+            'isActive' => true,
+            'unitPrice' => PRICEBOOK_ENTRY_UNIT_PRICE,
+            'pricebook2Id' => null,
+            'product2Id' => null,
+            'useStandardPrice' => false
+    };
+    public static List<Map<String, Object>> pricebookEntries = new List<Map<String, Object>>();
+
+    public static final Integer CONTRACTS_COUNT = 10;//300
+    public static final String CONTRACT_NAME_PATTERN = 'contract%';
+    public static final String CONTRACT_STATUS_IN_Approval_Process = 'In Approval Process';
+    public static final String CONTRACT_STATUS_DRAFT = 'Draft';
+    public static final String CONTRACT_STATUS_ACTIVED = 'Activated';
+    public static final Map<String, Object> CONTRACT_PATTERN = new Map<String, Object>{
+            'accountId' => null,
+            'status' => CONTRACT_STATUS_DRAFT,
+            'startDate' => null,
+            'contractTerm' => null,
+            'pricebook2Id' => null,
+            'name' => 'contract'
+    };
+    public static List<Map<String, Object>> contracts = new List<Map<String, Object>>{
+            new Map<String, Object> {
+                    'count' => 3,//100
+                    'useParentId' => true,
+                    'useDiffParentId' => true,
+                    'contractTerm' => 8,
+                    'starDate' => Datetime.newInstance(2019, 6, 1)
+            },
+            new Map<String, Object> {
+                    'count' => 6,//150
+                    'useParentId' => true,
+                    'useDiffParentId' => true,
+                    'contractTerm' => 4,
+                    'startDate' => Datetime.newInstance(2019, 11, 1)
+            },
+            new Map<String, Object> {
+                    'count' => 1,//50
+                    'useParentId' => true,
+                    'useDiffParentId' => false,
+                    'contractTerm' => 1,
+                    'startDate' => Datetime.newInstance(2019, 12, 1)
+            }
+    };
+
+    public static final Map<String, Object> TIMESHEET_ENTRY_PATTERN = new Map<String, Object>{
+            'contractResource' => null,//String:Contract_Resource__c
+            'product' => null,//String:Product__c
+            'date' => null,//Date:Date__c
+            'minutes' => null,//Decimal:Minutes__c
+            'employee' => null,//String:Employee__c
+            'approved' => null//Boolean:Is_Approved__c
+    };
+    public static List<Map<String, Object>> timesheetEntries = new List<Map<String, Object>>{};
+
+    public static final String TIMESHEET_STATUS_NEW = 'New';
+    public static final String TIMESHEET_STATUS_PENDING = 'Pending';
+    public static final String TIMESHEET_STATUS_APPROVED = 'Approved';
+    public static final String TIMESHEET_STATUS_PAID = 'Paid';
+
+    public static final String TIME_REPORTS_STATUS_APPROVED = 'Approved';
+    public static final String TIME_REPORTS_STATUS_NEW = 'New';
+    public static final String TIME_REPORTS_STATUS_UNLOCKED = 'unlocked';
+
+    public static final String EXPENSE_TYPE_AIRFARE = 'Airfare';
+    public static final String EXPENSE_TYPE_HOTEL_ROOM = 'Hotel Room';
+    public static final String EXPENSE_TYPE_MEAL = 'Meal';
+    public static final String EXPENSE_TYPE_RENTAL_CAR = 'Rental Car';
 
     public static final Map<String, Object> configDateRanges = new Map<String, Object>{
             /*'2019-06-03_2019-06-09' => new Map<String, Object>{

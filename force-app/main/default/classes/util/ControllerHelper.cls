@@ -29,5 +29,4 @@ public with sharing class ControllerHelper {
 
         return prop;
     }
-
 }
