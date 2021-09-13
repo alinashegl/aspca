@@ -371,10 +371,6 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>Brindle</fullName>
-            <default>false</default>
-        </values>
-        <values>
             <fullName>Brown</fullName>
             <default>false</default>
         </values>
@@ -384,10 +380,6 @@
         </values>
         <values>
             <fullName>Buff</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Calico</fullName>
             <default>false</default>
         </values>
         <values>
@@ -411,10 +403,6 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>Golden</fullName>
-            <default>false</default>
-        </values>
-        <values>
             <fullName>Green</fullName>
             <default>false</default>
         </values>
@@ -424,10 +412,6 @@
         </values>
         <values>
             <fullName>Grulla</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Hairless</fullName>
             <default>false</default>
         </values>
         <values>
@@ -463,19 +447,7 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>Sorrel</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Tabby</fullName>
-            <default>false</default>
-        </values>
-        <values>
             <fullName>Tan</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Tortoise shell</fullName>
             <default>false</default>
         </values>
         <values>
@@ -997,10 +969,6 @@
     </picklistValues>
     <picklistValues>
         <picklist>Gender__c</picklist>
-        <values>
-            <fullName>%28Unknown%29</fullName>
-            <default>false</default>
-        </values>
         <values>
             <fullName>Colt %28%3C3 years%29</fullName>
             <default>false</default>
@@ -1819,14 +1787,6 @@
             <fullName>Sheep</fullName>
             <default>false</default>
         </values>
-        <values>
-            <fullName>Unknown</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Wildlife</fullName>
-            <default>false</default>
-        </values>
     </picklistValues>
     <picklistValues>
         <picklist>Walking_Equipment__c</picklist>
@@ -1844,7 +1804,7 @@
         </values>
         <values>
             <fullName>None Specified</fullName>
-            <default>true</default>
+            <default>false</default>
         </values>
         <values>
             <fullName>Prong</fullName>
@@ -1883,7 +1843,7 @@
         </values>
         <values>
             <fullName>None Specified</fullName>
-            <default>true</default>
+            <default>false</default>
         </values>
         <values>
             <fullName>Ok to take the Stairs</fullName>

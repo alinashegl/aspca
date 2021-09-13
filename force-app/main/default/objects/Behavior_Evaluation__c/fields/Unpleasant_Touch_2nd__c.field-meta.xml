@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Unpleasant_Touch_2nd__c</fullName>
+    <externalId>false</externalId>
+    <label>Unpleasant Touch 2nd</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>Unpleasant_Touch</valueSetName>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

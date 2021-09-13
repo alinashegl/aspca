@@ -1,4 +1,15 @@
-public class AnimalTriggerHandler {
+public with sharing class AnimalTriggerHandler {
+
+    public static void Execute() {
+        if (!Trigger.isExecuting) { return; }
+        Trigger_Config__c config = Trigger_Config__c.getInstance();
+        if (config != null  && config.Animal_Trigger_Enabled__c == false) { return; }
+        //System.debug('#### Running Animal Trigger');
+        //trigger_Controller.getInstance().process(Animal__c.SObjectType);
+        if (Trigger.isUpdate && Trigger.isBefore ) {
+            beforeUpdateHandler();
+        }
+    }
     
     public static void insertHandler(){
         CaseContactRole conrole = new CaseContactRole();
@@ -47,6 +58,12 @@ public class AnimalTriggerHandler {
      
         }  
     }
+
+    public static void beforeUpdateHandler() {
+        Map<Id, SObject> toUpdate = Trigger.newMap;
+
+    }
+
     
     public static void updateHandler(List<Animal__c> anms, Map<Id, Animal__c> oldAnms){
         CaseContactRole conrole = new CaseContactRole();

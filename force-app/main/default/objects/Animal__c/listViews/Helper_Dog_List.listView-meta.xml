@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ListView xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Helper_Dog_List</fullName>
-    <booleanFilter>1 OR 2</booleanFilter>
     <columns>NAME</columns>
     <columns>Animal_Name__c</columns>
-    <columns>Shelter_Location__c</columns>
-    <columns>Play_Category__c</columns>
-    <columns>Gender__c</columns>
+    <columns>Potential_Helper_Dog__c</columns>
+    <columns>Confirmed_Helper_Dog__c</columns>
     <filterScope>Everything</filterScope>
     <filters>
-        <field>Potential_Helper_Dog__c</field>
+        <field>Confirmed_Helper_Dog__c</field>
         <operation>equals</operation>
         <value>1</value>
     </filters>
     <filters>
-        <field>Confirmed_Helper_Dog__c</field>
+        <field>Potential_Helper_Dog__c</field>
         <operation>equals</operation>
         <value>1</value>
     </filters>

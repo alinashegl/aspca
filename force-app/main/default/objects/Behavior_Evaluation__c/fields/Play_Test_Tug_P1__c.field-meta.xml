@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Play_Test_Tug_P1__c</fullName>
+    <externalId>false</externalId>
+    <label>Play Test Tug P1</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Played with toy and/or tester</fullName>
+                <default>false</default>
+                <label>Played with toy and/or tester</label>
+            </value>
+            <value>
+                <fullName>Curious but not playful</fullName>
+                <default>false</default>
+                <label>Curious but not playful</label>
+            </value>
+            <value>
+                <fullName>Sought interaction with tester</fullName>
+                <default>false</default>
+                <label>Sought interaction with tester</label>
+            </value>
+            <value>
+                <fullName>Unresponsive</fullName>
+                <default>false</default>
+                <label>Unresponsive</label>
+            </value>
+            <value>
+                <fullName>Moderately fearful</fullName>
+                <default>false</default>
+                <label>Moderately fearful</label>
+            </value>
+            <value>
+                <fullName>Highly aroused</fullName>
+                <default>false</default>
+                <label>Highly aroused</label>
+            </value>
+            <value>
+                <fullName>Extremely fearful</fullName>
+                <default>false</default>
+                <label>Extremely fearful</label>
+            </value>
+            <value>
+                <fullName>Became aggressive</fullName>
+                <default>false</default>
+                <label>Became aggressive</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

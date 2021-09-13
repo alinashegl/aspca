@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Skipped to safeguard welfare of the animal</fullName>
+        <default>false</default>
+        <label>Skipped to safeguard welfare of the animal</label>
+    </customValue>
+    <customValue>
+        <fullName>Skipped due to risk to the handler</fullName>
+        <default>false</default>
+        <label>Skipped due to risk to the handler</label>
+    </customValue>
+    <customValue>
+        <fullName>Skipped for medical reason</fullName>
+        <default>false</default>
+        <label>Skipped for medical reason</label>
+    </customValue>
+    <customValue>
+        <fullName>Skipped due to not having an appropriate helper dog</fullName>
+        <default>false</default>
+        <label>Skipped due to not having an appropriate helper dog</label>
+    </customValue>
+    <customValue>
+        <fullName>Skipped due to risk to the helper dog</fullName>
+        <default>false</default>
+        <label>Skipped due to risk to the helper dog</label>
+    </customValue>
+    <customValue>
+        <fullName>Skipped not necessary</fullName>
+        <default>false</default>
+        <label>Skipped not necessary</label>
+    </customValue>
+    <masterLabel>Skip Reason</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

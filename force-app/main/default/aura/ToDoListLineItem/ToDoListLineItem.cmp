@@ -1,0 +1,58 @@
+<!--
+ - Page Description
+ - 
+ - @author barne
+ -->
+
+<aura:component description="ToDoListLineItem">
+    <aura:attribute type="String" name="Name" />
+    <aura:attribute type="String" name="Priority" />
+    <aura:attribute type="String" name="Assignment" />
+    <aura:attribute type="String" name="TreatmentCount" />
+    <aura:attribute type="String" name="ColorCode" />
+    <aura:attribute type="Integer" name="IndexVar" />
+    <aura:attribute type="List" name="Data" />
+    <aura:attribute type="List" name="NotPresentData" />
+    <aura:attribute type="Boolean" name="RenderNotPresentData" />
+    <aura:attribute type="Boolean" name="RenderProtocols" />
+    <aura:attribute type="String" name="PlanId" />
+
+    <aura:method name="handleClick"  action="{!c.handleClick}" access="public" />
+    <table bgcolor="white" class="slds-box grid-container">
+        <tr class="grid-item">
+            <td class="grid-item">{!v.Name}</td>
+            <td class="grid-item">{!v.Priority}</td>
+            <td class="grid-item">{!v.Assignment}</td>
+            <td class="grid-item">{!v.TreatmentCount}</td>
+            <td class="grid-item">{!v.ColorCode}</td>
+            <td class="grid-item">
+                <lightning:buttonGroup >
+                    <lightning:button name="showProtocols" label="Show Protocol" onclick="{!c.handleClick}"
+                                      class="float"  aura:id="{!v.IndexVar}"/>
+                    <lightning:button name="showNotPresent" label="Show Not Present" onclick="{!c.handleClick}"
+                                      class="float" />
+                    <lightning:button name="updatePlanProtocols" label="Save Changes" class="float" />
+                </lightning:buttonGroup>
+
+            </td>
+        </tr>
+    </table>
+    <table bgcolor="white" class="grid-item slds-box">
+        <aura:if isTrue="{!v.RenderProtocols}">
+            &nbsp;
+            <thead align="center-absolute">Protocols in Plan</thead>
+            <tr>
+                <c:TreatmentProtocolList data="{!v.Data}" />
+            </tr>
+        </aura:if>
+    </table>
+    <table bgcolor="white" class="grid-item slds-box">
+        <aura:if isTrue="{!v.RenderNotPresentData}">
+            &nbsp;
+            <thead align="center-absolute">Protocols Not In Plan</thead>
+            <tr>
+                <c:TreatmentProtocolList data="{!v.NotPresentData}" />
+            </tr>
+        </aura:if>
+    </table>
+</aura:component>

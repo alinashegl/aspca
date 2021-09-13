@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DomainActionImplementation__c</fullName>
+    <description>What cq_IDomainAction class to .Execute</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>What cq_IDomainAction class to .Execute</inlineHelpText>
+    <label>DomainActionImplementation</label>
+    <length>128</length>
+    <required>true</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

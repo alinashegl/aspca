@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Puppy_Social_Behavior_P2__c</fullName>
+    <externalId>false</externalId>
+    <label>Puppy Social Behavior P2</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Followed tester readily-friendly</fullName>
+                <default>false</default>
+                <label>Followed tester readily-friendly</label>
+            </value>
+            <value>
+                <fullName>Followed tester readily—submissive</fullName>
+                <default>false</default>
+                <label>Followed tester readily—submissive</label>
+            </value>
+            <value>
+                <fullName>Followed tester—but distracted by the environment</fullName>
+                <default>false</default>
+                <label>Followed tester—but distracted by the environment</label>
+            </value>
+            <value>
+                <fullName>Followed tester-mildly fearful</fullName>
+                <default>false</default>
+                <label>Followed tester-mildly fearful</label>
+            </value>
+            <value>
+                <fullName>Did not follow a tester-mildly fearful</fullName>
+                <default>false</default>
+                <label>Did not follow a tester-mildly fearful</label>
+            </value>
+            <value>
+                <fullName>Did not follow a tester-distracted environment</fullName>
+                <default>false</default>
+                <label>Did not follow a tester-distracted environment</label>
+            </value>
+            <value>
+                <fullName>Did not follow the tester—moderately fearful</fullName>
+                <default>false</default>
+                <label>Did not follow the tester—moderately fearful</label>
+            </value>
+            <value>
+                <fullName>Did not follow tester-extremely fearful</fullName>
+                <default>false</default>
+                <label>Did not follow tester-extremely fearful</label>
+            </value>
+            <value>
+                <fullName>Became aggressive</fullName>
+                <default>false</default>
+                <label>Became aggressive</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>
