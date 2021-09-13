@@ -9,48 +9,25 @@
                 controller="TreatmentToDoListController">
     <aura:attribute name="data" type="Object" />
     <aura:attribute name="columns" type="List" />
+    <aura:attribute name="currentIndex" type="Integer" />
     <aura:handler name="init" value="{! this}" action="{! c.init}" />
     <aura:method name="handleClick"  action="{!c.handleClick}" access="public" />
-    <div class="grid-container" >
-        <h1>MRC Treatment Priority TODO List</h1>
-    &nbsp;
+    <div class="grid-container">
         <table bgcolor="white" class="grid-item slds-box">
+            <tr><h1>MRC Treatment Priority TODO List</h1></tr>
             <tr class="spaceUnder">
-                <th>Animal</th>
-                <th>Treatment Priority</th>
-                <th>Bundle Assignment</th>
-                <th>Treatment Count</th>
-                <th>Shelter Color Code</th>
+                <td><strong>Animal</strong></td>
+                <td><strong>Treatment Priority</strong></td>
+                <td><strong>Bundle Assignment</strong></td>
+                <td><strong>Treatment Count</strong></td>
+                <td><strong>Shelter Color Code</strong></td>
             </tr>
-            <aura:iteration var="line" items="{!v.data}" >
-                <div>
-                    <tr class="spaceUnder" id="{!line.plan.id}">
-                        <td>
-                            {!line.animal.Name}
-                        </td>
-                        <td>{!line.priority}</td>
-                        <td>{!line.assignment}</td>
-                        <td>{!line.treatmentcount}</td>
-                        <td>{!line.colorCode}</td>
-                        <td>
-                            <lightning:button name="showProtocols" label="Show Protocol" onclick="{!c.handleClick}"
-                                              class="float"/>
-                        </td>
-                    </tr>
-                </div>
-                <div>
-                    <aura:if isTrue="{!line.displayProtocols}">
-                        <aura:if isTrue="{!not(empty(line.rowSelections))}">
-                            <tr>
-                                <c:TreatmentProtocolList data="{!line.rowSelections}" />
-                            </tr>
-                        </aura:if>
-                    </aura:if>
-                </div>
-            </aura:iteration>
-
         </table>
+        <aura:iteration var="line" items="{!v.data}" indexVar="indexVar" aura:id="dataList">
+            <table>
+                <c:ToDoListLineItem Name="{!line.animal.Name}" Priority="{!line.priority}" Assignment="{!line.assignment}" TreatmentCount="{!line.treatmentcount}" ColorCode="{!line.colorCode}" Data="{!line.rowSelections}" IndexVar="{!line.indexVar}" RenderProtocols="{!line.displayProtocols}" NotPresentData="{!line.notPresentSelections}" RenderNotPresentData="{!line.displayNotPresent}" />
+            </table>
 
+        </aura:iteration>
     </div>
-
 </aura:component>

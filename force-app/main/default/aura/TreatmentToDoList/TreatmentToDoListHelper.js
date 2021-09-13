@@ -6,6 +6,8 @@
  * @version 1.0.0
  */
 ({
+
+
     fetchData : function(cmp, event) {
         var loc = 'MRC';
         var params = { key: loc };
@@ -59,7 +61,9 @@
     } ,
 
     showProtocols : function (cmp, event, button) {
-        console.log('SHOW PROTOCOLS');
+        //console.log('SHOW PROTOCOLS');
+        var cor = cmp.find('dataList').get('v.items');
+        console.log('Component', cor);
 
     }
 

@@ -18,11 +18,15 @@ public with sharing class TreatmentToDoListController {
         @AuraEnabled public Boolean hasProtocols;
         @AuraEnabled public List<BundleSelection> selections;
         @AuraEnabled public List<RowSelection> rowSelections;
+        @AuraEnabled public List<RowSelection> notPresentSelections;
         @AuraEnabled public Boolean displayProtocols;
+        @AuraEnabled public Integer indexVar;
+        @AuraEnabled public Boolean displayNotPresent;
 
         public TreatmentToDoListData(String name, String priority, String assignment, Integer treatmentCount, String
                 colorCode, Boolean hasProtocols, List<BundleSelection> selections, List<RowSelection> rowSelections,
-                Boolean displayProtocols) {
+                Boolean displayProtocols, Boolean displayNotPresent, Integer indexVar, List<RowSelection>
+                        notPresentSelections) {
             this.name = name;
             this.priority = priority;
             this.assignment = assignment;
@@ -32,6 +36,9 @@ public with sharing class TreatmentToDoListController {
             this.selections = selections;
             this.rowSelections = rowSelections;
             this.displayProtocols = displayProtocols;
+            this.indexVar = indexVar;
+            this.notPresentSelections = notPresentSelections;
+            this.displayNotPresent = displayNotPresent;
         }
 
         public TreatmentToDoListData() { }
@@ -128,6 +135,7 @@ public with sharing class TreatmentToDoListController {
         }
 
         for(Treatment_Plan__c plan : treatmentPlans) {
+            List<RowSelection> notPresentRow = new List<TreatmentToDoListController.RowSelection>();
             Animal__c animal = animalsByIds.get(plan.Animal__c);
             TreatmentToDoListData item = new TreatmentToDoListData();
             item.name = animal.Name == null ? 'None Found' : animal.Name;
@@ -146,6 +154,7 @@ public with sharing class TreatmentToDoListController {
             item.displayProtocols = false;
 
             List<BundleSelection> selections = new List<TreatmentToDoListController.BundleSelection>();
+            List<BundleSelection> notPresentSelections = new List<TreatmentToDoListController.BundleSelection>();
             List<Plan_Protocol__c> lPlanProtocols = planToPlanProtocolsMap.get(plan.Id);
             Set<Id> idset = new Set<Id>();
             if(lPlanProtocols != null) {
@@ -165,16 +174,17 @@ public with sharing class TreatmentToDoListController {
                     Protocol__c protocol = sProtocols.get(entry.Protocol__c);
                     iSelection.inPlan = true;
                     iSelection.name = protocol.Name;
+                    selections.add(iSelection);
                 }else {
                     Protocol__c protocol = masterProtocols.get(entry.Protocol__c);
                     iSelection.inPlan = false;
                     iSelection.name = protocol.Name;
+                    notPresentSelections.add(iSelection);
                 }
-                selections.add(iSelection);
+
             }
-            System.debug(selections.size());
+            //System.debug(selections.size());
             Integer variable = selections.size();
-            Integer tener = 0;
             while(variable >= 3) {
 
                 RowSelection selection = new RowSelection();
@@ -201,7 +211,6 @@ public with sharing class TreatmentToDoListController {
                 selection.selectionThree = opt;
                 rowSelections.add(selection);
             }
-
             if (variable == 1) {
                 RowSelection selection = new RowSelection();
                 selection.selectionOne = selections[0];
@@ -212,11 +221,53 @@ public with sharing class TreatmentToDoListController {
                 rowSelections.add(selection);
             }
 
+            Integer variable2 = notPresentSelections.size();
+            if(variable2 > 3) {
+                while(variable2 >= 3) {
 
+                    RowSelection selection = new RowSelection();
+                    selection.selectionOne =  notPresentSelections[variable2 - 1];
+                    selection.selectionTwo =  notPresentSelections[variable2 - 2];
+                    selection.selectionThree =  notPresentSelections[variable2 - 3];
+                    variable2 = variable2 - 4;
+                    notPresentRow.add(selection);
+                }
+            }
+
+            if (variable2 == 3) {
+                RowSelection selection = new RowSelection();
+                selection.selectionOne = notPresentSelections[0];
+                selection.selectionTwo = notPresentSelections[1];
+                selection.selectionThree = notPresentSelections[3];
+                notPresentRow.add(selection);
+            }
+            if (variable2 == 2) {
+                RowSelection selection = new RowSelection();
+                selection.selectionOne = notPresentSelections[0];
+                selection.selectionTwo = notPresentSelections[1];
+                BundleSelection opt = new BundleSelection();
+                opt.name = 'EMPTY';
+                selection.selectionThree = opt;
+                notPresentRow.add(selection);
+            }
+            if (variable2 == 1) {
+                RowSelection selection = new RowSelection();
+                selection.selectionOne = notPresentSelections[0];
+                BundleSelection opt = new BundleSelection();
+                opt.name = 'EMPTY';
+                selection.selectionThree = opt;
+                selection.selectionTwo = opt;
+                notPresentRow.add(selection);
+            }
+            item.notPresentSelections = notPresentRow;
             item.selections = selections;
             System.debug('Row Selections ===> ' + rowSelections);
             item.rowSelections = rowSelections;
             data.add(item);
+        }
+        for(TreatmentToDoListData item : data) {
+            Integer i = data.indexOf(item);
+            item.indexVar = i;
         }
 
         System.debug(data);

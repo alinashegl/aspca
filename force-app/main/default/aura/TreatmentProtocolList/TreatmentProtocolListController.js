@@ -7,6 +7,9 @@
  */
 ({
     init: function(cmp, event, helper) {
-
+        helper.processingProcess(cmp, 'init');
+    } ,
+    handleSelect : function(cmp, event, helper) {
+        helper.processingProcess(cmp, 'handleSelect');
     }
 });

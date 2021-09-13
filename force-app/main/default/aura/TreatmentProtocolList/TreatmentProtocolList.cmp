@@ -6,62 +6,64 @@
 
 <aura:component description="TreatmentProtocolList" controller="TreatmentToDoListController">
     <aura:attribute name="data" type="List" />
+
     <aura:handler name="init" value="{! this}" action="{! c.init}" />
     <table class="grid-item slds-box">
         <aura:iteration var="data" items="{!v.data}">
-            <tr class="spaceUnder">
-                <td class="float slds-theme_shade">
+            <tr class="spaceUnder grid-item">
+                <td class="input-style slds-theme_shade">
                     <lightning:input label="{!data.selectionOne.name}" name="{!data.selectionOne.idVal}"
                                      type="checkbox"
                                      variant="label-hidden"
-                                     checked="{!data.selectionOne.inPlan}" />
+                                     checked="{!data.selectionOne.inPlan}"
+                                     onchange="{!c.handleSelect}"
+                                    aura:id="optsOne"/>
                 </td>
                 <aura:if isTrue="{!data.selectionOne.inPlan}">
-                    <td>
+                    <td class="grid-item column-style">
                        <strong> {!data.selectionOne.name}</strong>
                     </td>
                 </aura:if>
                 <aura:if isTrue="{!not(data.selectionOne.inPlan)}">
-                    <td>
+                    <td class="grid-item column-style">
                         {!data.selectionOne.name}
                     </td>
                 </aura:if>
-
                 <aura:if isTrue="{!not(data.selectionTwo.name == 'EMPTY')}">
-                    <td class="float slds-theme_shade">
+                    <td class="slds-theme_shade input-style">
                         <lightning:input label="{!data.selectionTwo.name}" name="{!data.selectionTwo.idVal}"
                                          type="checkbox"
                                          variant="label-hidden"
-                                         checked="{!data.selectionTwo.inPlan}" />
+                                         checked="{!data.selectionTwo.inPlan}"
+                                         aura:id="optsTwo"/>
                     </td>
                     <aura:if isTrue="{!data.selectionTwo.inPlan}">
-                        <td>
+                        <td class="grid-item column-style">
                             <strong> {!data.selectionTwo.name}</strong>
                         </td>
                     </aura:if>
                     <aura:if isTrue="{!not(data.selectionTwo.inPlan)}">
-                        <td>
+                        <td class="grid-item column-style">
                             {!data.selectionTwo.name}
                         </td>
                     </aura:if>
                 </aura:if>
-                <td class="float slds-theme_shade">
+                <td class="float slds-theme_shade input-style">
                     <lightning:input label="{!data.selectionThree.name}" name="{!data.selectionThree.idVal}"
                                      type="checkbox"
                                      variant="label-hidden"
-                                     checked="{!data.selectionThree.inPlan}" />
+                                     checked="{!data.selectionThree.inPlan}" aura:id="optsThree"/>
                 </td>
                 <aura:if isTrue="{!data.selectionThree.inPlan}">
-                    <td>
+                    <td class="grid-item column-style">
                         <strong> {!data.selectionThree.name}</strong>
                     </td>
                 </aura:if>
                 <aura:if isTrue="{!not(data.selectionThree.inPlan)}">
-                    <td>
+                    <td class="grid-item">
                         {!data.selectionThree.name}
                     </td>
                 </aura:if>
-
             </tr>
         </aura:iteration>
     </table>
