@@ -1,0 +1,33 @@
+<!--
+ - Page Description
+ - 
+ - @author barne
+ -->
+
+<aura:component description="TreatmentToDoList"
+                implements="flexipage:availableForAllPageTypes, force:hasRecordId, flexipage:availableForRecordHome" access="public"
+                controller="TreatmentToDoListController">
+    <aura:attribute name="data" type="Object" />
+    <aura:attribute name="columns" type="List" />
+    <aura:attribute name="currentIndex" type="Integer" />
+    <aura:handler name="init" value="{! this}" action="{! c.init}" />
+    <aura:method name="handleClick"  action="{!c.handleClick}" access="public" />
+    <div class="grid-container">
+        <table bgcolor="white" class="grid-item slds-box">
+            <tr><h1>MRC Treatment Priority TODO List</h1></tr>
+            <tr class="spaceUnder">
+                <td><strong>Animal</strong></td>
+                <td><strong>Treatment Priority</strong></td>
+                <td><strong>Bundle Assignment</strong></td>
+                <td><strong>Treatment Count</strong></td>
+                <td><strong>Shelter Color Code</strong></td>
+            </tr>
+        </table>
+        <aura:iteration var="line" items="{!v.data}" indexVar="indexVar" aura:id="dataList">
+            <table>
+                <c:ToDoListLineItem Name="{!line.animal.Name}" Priority="{!line.priority}" Assignment="{!line.assignment}" TreatmentCount="{!line.treatmentcount}" ColorCode="{!line.colorCode}" Data="{!line.rowSelections}" IndexVar="{!line.indexVar}" RenderProtocols="{!line.displayProtocols}" NotPresentData="{!line.notPresentSelections}" RenderNotPresentData="{!line.displayNotPresent}" />
+            </table>
+
+        </aura:iteration>
+    </div>
+</aura:component>

@@ -210,7 +210,6 @@ public with sharing  class service_BehaviorEvaluation extends service_Base{
                 .SetUpdate(true)
                 .SetNewRecords(evaluations)
                 .SetOldRecords(new List<Behavior_Evaluation__c>());
-
         ServiceRequest req = new ServiceRequest().withParams('TriggerRequest', beforeUpdateRequest);
         BehaviorEvaluationDomain domain = new BehaviorEvaluationDomain();
         ServiceResponse resp = domain.Execute(req);

@@ -12,13 +12,27 @@ public with sharing class BehaviorEvaluationPageController {
     public static Behavior_Evaluation__c m_behaviorEvaluation = new Behavior_Evaluation__c();
 
 
-    @AuraEnabled
+    @AuraEnabled(Cacheable=true)
     public static Behavior_Evaluation__c getOne (String key) {
         //Behavior_Evaluation__c behaviorEvaluation = daoBehaviorEvaluations.findOne(key);
         Behavior_Evaluation__c behaviorEvaluation = selector.GetOneById(Id.valueOf(key));
         if (behaviorEvaluation == null) { return null;}
         m_behaviorEvaluation = behaviorEvaluation;
         return behaviorEvaluation;
+    }
+
+    public static List<EvaluationWrapper> allTabContent(String key) {
+        Behavior_Evaluation__c evaluation = selector.GetOneById(key);
+        Set<SObjectField> fieldList = getTestFields(evaluation.Evaluation_Subtype__c);
+
+        List<EvaluationWrapper> wrappers = new List<EvaluationWrapper>();
+
+        for(SObjectField field : fieldList) {
+            EvaluationWrapper wrapper = newWrapper(field, evaluation);
+            wrappers.add(wrapper);
+        }
+
+        return wrappers;
     }
 
     /*
@@ -118,6 +132,93 @@ public with sharing class BehaviorEvaluationPageController {
         //wrapper.isSkipped = skipField.value ? true : false ;
 
         return wrapper;
+    }
+
+    private static Set<SObjectField> getTestFields (String type) {
+        Set<SObjectField> fields = new Set<SObjectField>();
+        if (type == 'Puppy') {
+            fields.add(Behavior_Evaluation__c.Puppy_Behavior_in_Kennel__c);
+            fields.add(Behavior_Evaluation__c.Puppy_Behavior_on_Leash__c);
+            fields.add(Behavior_Evaluation__c.Puppy_Social_Behavior_P1__c);
+            fields.add(Behavior_Evaluation__c.Puppy_Social_Behavior_P2__c);
+            fields.add(Behavior_Evaluation__c.Puppy_Play_Tug_P1__c);
+            fields.add(Behavior_Evaluation__c.Puppy_Play_Tug_P2__c);
+            fields.add(Behavior_Evaluation__c.Puppy_Play_Tag__c);
+            fields.add(Behavior_Evaluation__c.Resource_Guarding_P1_Touch_Body__c);
+            fields.add(Behavior_Evaluation__c.Resource_Guarding_P1_Touch_Neck__c);
+            fields.add(Behavior_Evaluation__c.Resource_Guarding_P1_Touch_Face__c);
+            fields.add(Behavior_Evaluation__c.Resource_Guarding_P1_Push_Face__c);
+            fields.add(Behavior_Evaluation__c.Resource_Guarding_P2_Touch_Body__c);
+            fields.add(Behavior_Evaluation__c.Resource_Guarding_P2_Touch_Neck__c);
+            fields.add(Behavior_Evaluation__c.Resource_Guarding_P2_Touch_Face__c);
+            fields.add(Behavior_Evaluation__c.Resource_Guarding_P2_Push_Face__c);
+            fields.add(Behavior_Evaluation__c.Puppy_Child_Doll_P1__c);
+            fields.add(Behavior_Evaluation__c.Puppy_Child_Doll_P2__c);
+            fields.add(Behavior_Evaluation__c.Puppy_Dog_Interaction_P1__c);
+            fields.add(Behavior_Evaluation__c.Puppy_Dog_Interaction_P2__c);
+            fields.add(Behavior_Evaluation__c.Puppy_Dog_Interaction_P3__c);
+        }else if (type == 'Dog Fighting') {
+            fields.add(Behavior_Evaluation__c.Behavior_in_Kennel__c);
+            fields.add(Behavior_Evaluation__c.Behavior_on_Leash__c);
+            fields.add(Behavior_Evaluation__c.Social_Behavior_P1__c);
+            fields.add(Behavior_Evaluation__c.Social_Behavior_P2_2__c);
+            fields.add(Behavior_Evaluation__c.Pleasant_Touch__c);
+            fields.add(Behavior_Evaluation__c.Unpleasant_Touch_1st__c);
+            fields.add(Behavior_Evaluation__c.Play_Test_Tug_P1__c);
+            fields.add(Behavior_Evaluation__c.Play_Test_Tug_P2__c);
+            fields.add(Behavior_Evaluation__c.Tag_Test__c);
+            fields.add(Behavior_Evaluation__c.Resource_Guarding_P1_Push_Face__c);
+            fields.add(Behavior_Evaluation__c.Resource_Guarding_P1_Touch_Face__c);
+            fields.add(Behavior_Evaluation__c.Resource_Guarding_P1_Touch_Neck__c);
+            fields.add(Behavior_Evaluation__c.Resource_Guarding_P1_Touch_Body__c);
+            fields.add(Behavior_Evaluation__c.Resource_Guarding_P2_Push_Face__c);
+            fields.add(Behavior_Evaluation__c.Resource_Guarding_P2_Touch_Face__c);
+            fields.add(Behavior_Evaluation__c.Resource_Guarding_P2_Touch_Neck__c);
+            fields.add(Behavior_Evaluation__c.Resource_Guarding_P2_Touch_Body__c);
+            fields.add(Behavior_Evaluation__c.Toddler_Doll_P1__c);
+            fields.add(Behavior_Evaluation__c.Toddler_Doll_P2__c);
+            fields.add(Behavior_Evaluation__c.Scolding_Person_P1__c);
+            fields.add(Behavior_Evaluation__c.Scolding_Person_P2__c);
+            fields.add(Behavior_Evaluation__c.Fake_Dog__c);
+            fields.add(Behavior_Evaluation__c.Same_Sex_P1__c);
+            fields.add(Behavior_Evaluation__c.Same_Sex_P2__c);
+            fields.add(Behavior_Evaluation__c.Same_Sex_P3__c);
+            fields.add(Behavior_Evaluation__c.Opposite_Sex_P1__c);
+            fields.add(Behavior_Evaluation__c.Opposite_Sex_P2__c);
+            fields.add(Behavior_Evaluation__c.Opposite_Sex_P3__c);
+        }else if (type == 'Adult Animal') {
+            fields.add(Behavior_Evaluation__c.Behavior_in_Kennel__c);
+            fields.add(Behavior_Evaluation__c.Behavior_on_Leash__c);
+            fields.add(Behavior_Evaluation__c.Social_Behavior_P1__c);
+            fields.add(Behavior_Evaluation__c.Social_Behavior_P2_2__c);
+            fields.add(Behavior_Evaluation__c.Pleasant_Touch__c);
+            fields.add(Behavior_Evaluation__c.Unpleasant_Touch_1st__c);
+            fields.add(Behavior_Evaluation__c.Play_Test_Tug_P1__c);
+            fields.add(Behavior_Evaluation__c.Play_Test_Tug_P2__c);
+            fields.add(Behavior_Evaluation__c.Tag_Test__c);
+            fields.add(Behavior_Evaluation__c.Resource_Guarding_P1_Push_Face__c);
+            fields.add(Behavior_Evaluation__c.Resource_Guarding_P1_Touch_Face__c);
+            fields.add(Behavior_Evaluation__c.Resource_Guarding_P1_Touch_Neck__c);
+            fields.add(Behavior_Evaluation__c.Resource_Guarding_P1_Touch_Body__c);
+            fields.add(Behavior_Evaluation__c.Resource_Guarding_P2_Push_Face__c);
+            fields.add(Behavior_Evaluation__c.Resource_Guarding_P2_Touch_Face__c);
+            fields.add(Behavior_Evaluation__c.Resource_Guarding_P2_Touch_Neck__c);
+            fields.add(Behavior_Evaluation__c.Resource_Guarding_P2_Touch_Body__c);
+            fields.add(Behavior_Evaluation__c.Toddler_Doll_P1__c);
+            fields.add(Behavior_Evaluation__c.Toddler_Doll_P2__c);
+            fields.add(Behavior_Evaluation__c.Scolding_Person_P1__c);
+            fields.add(Behavior_Evaluation__c.Scolding_Person_P2__c);
+            fields.add(Behavior_Evaluation__c.Same_Sex_P1__c);
+            fields.add(Behavior_Evaluation__c.Same_Sex_P2__c);
+            fields.add(Behavior_Evaluation__c.Same_Sex_P3__c);
+            fields.add(Behavior_Evaluation__c.Opposite_Sex_P1__c);
+            fields.add(Behavior_Evaluation__c.Opposite_Sex_P2__c);
+            fields.add(Behavior_Evaluation__c.Opposite_Sex_P3__c);
+        }else {
+            System.debug('FIELD IS NOT VALID');
+        }
+
+        return fields;
     }
     /*
     * Behavior Report Properties

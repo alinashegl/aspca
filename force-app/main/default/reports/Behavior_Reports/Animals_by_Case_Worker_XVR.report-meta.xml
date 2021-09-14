@@ -19,11 +19,20 @@
         <aggregateTypes>Sum</aggregateTypes>
         <field>Animal__c.Animal_Age__c</field>
     </columns>
+    <filter>
+        <criteriaItems>
+            <column>Animal__c.Behavior_Case_Worker__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value></value>
+        </criteriaItems>
+    </filter>
     <format>Summary</format>
     <groupingsDown>
         <dateGranularity>Day</dateGranularity>
         <field>Animal__c.Behavior_Case_Worker__c</field>
-        <sortOrder>Asc</sortOrder>
+        <sortOrder>Desc</sortOrder>
     </groupingsDown>
     <name>Animals by Case Worker</name>
     <params>

@@ -8,7 +8,7 @@
 
 public with sharing class TreatmentPlanDomain extends DomainActionBase{
     public override void ProcessAction(TriggerRequest request) {
-        if (request.targetSObject == Opportunity.SObjectType) {
+        if (request.targetSObject == Treatment_Plan__c.SObjectType) {
             String triggerAction = request.action + request.process;
 
             switch on triggerAction {
@@ -25,14 +25,12 @@ public with sharing class TreatmentPlanDomain extends DomainActionBase{
 
     public void beforeInsert(TriggerRequest request) {
         System.debug('Before Insert is Executing');
-        List<Opportunity> newRecords = request.newRecords;
+        List<Treatment_Plan__c> newRecords = request.newRecords;
 
-        Map<Id, Opportunity> newRecordMap = (Map<Id, Opportunity>) request.newRecordMap;
-
-        for (Opportunity plan : newRecords) {
-            Animal__c animal = [SELECT Id, Case__c, Discharged_to_Agency__c  FROM Animal__c WHERE Id =: plan.Animal__c];
-            plan.AccountId = animal.Discharged_to_Agency__c != null ? animal.Discharged_to_Agency__c : null;
-            if (plan.AccountId == null) { System.debug('No AGENCY FOUND'); }
+        Map<Id, Treatment_Plan__c> newRecordMap = (Map<Id, Treatment_Plan__c>) request.newRecordMap;
+        Treatment_Bundle__c standard = [SELECT Id, Name, IsMaster__c from Treatment_Bundle__c where IsMaster__c = TRUE];
+        for (Treatment_Plan__c plan : newRecords) {
+            plan.MasterTreatmentBundleId__c = standard.Id;
         }
 
         //if (newRecords != null) { update newRecords; }
@@ -40,61 +38,70 @@ public with sharing class TreatmentPlanDomain extends DomainActionBase{
         //if (newRecordMap != null) { update newRecordMap.values(); }
 
     }
-    public void beforeUpdate(TriggerRequest request) {
+    public static void beforeUpdate(TriggerRequest request) {
 
-        System.debug('Before Update is Executing');
-        List<Opportunity> newRecords = request.newRecords;
-        List<Opportunity> oldRecords = request.oldRecords;
-
-        Map<Id, Opportunity> newRecordMap = (Map<Id, Opportunity>) request.newRecordMap;
-        Map<Id, Opportunity> oldRecordMap = (Map<Id, Opportunity>) request.oldRecordMap;
-
-        if (oldRecords != null) {
-
-        }
-        if (newRecords != null) {
-            update newRecords;
-        }
-        if (oldRecordMap != null) {
-
-        }
-        if(newRecordMap != null) {
-            update newRecordMap.values();
-        }
+        //System.debug(' Treatment Plan Before Update is Executing');
 
 
     }
     public void beforeDelete(TriggerRequest request) {
-        System.debug('Before Delete is Executing');
+        //System.debug('Before Delete is Executing');
     }
     public void afterInsert(TriggerRequest request) {
-        System.debug('After Insert is Executing');
+        //System.debug('After Insert is Executing');
     }
-    public void afterUpdate(TriggerRequest request) {
-        System.debug('After Update is Executing');
-        List<Opportunity> newRecords = request.newRecords;
-        List<Opportunity> oldRecords = request.oldRecords;
+    public static void afterUpdate(TriggerRequest request) {
+        List<Treatment_Plan__c> newRecords = request.newRecords;
+        List<Treatment_Plan__c> oldRecords = request.oldRecords;
 
-        Map<Id, Opportunity> newRecordMap = (Map<Id, Opportunity>) request.newRecordMap;
-        Map<Id, Opportunity> oldRecordMap = (Map<Id, Opportunity>) request.oldRecordMap;
-        Map<Id, OpportunityLineItem> oldLineItems = new Map<Id, OpportunityLineItem>();
-        if (oldRecords != null) { }
-        if (newRecords != null) {   }
-        if (oldRecordMap != null) { }
-        if(newRecordMap != null) { }
+        Map<Id, Treatment_Plan__c> newRecordMap = (Map<Id, Treatment_Plan__c>) request.newRecordMap;
+        Map<Id, Treatment_Plan__c> oldRecordMap = (Map<Id, Treatment_Plan__c>) request.oldRecordMap;
+        List<ServiceRequest> requests = new List<ServiceRequest>();
+        //TreatmentPlanService service = new TreatmentPlanService();
+
+        List<Plan_Protocol__c> lineItems = new List<Plan_Protocol__c>();
+        for (Treatment_Plan__c opportunity : newRecordMap.values()) {
+            String newVal = opportunity.AssignedTreatmentBundleId__c;
+            System.debug(newVal);
+            if ( newVal != null ){
+                Treatment_Plan__c oldOpp = oldRecordMap.get(opportunity.Id);
+                //System.debug('#### OLD OPP ====> ' + oldOpp);
+                String oldVal = oldOpp.AssignedTreatmentBundleId__c;
+                System.debug(oldVal);
+                if (oldVal != null && oldVal != newVal) {
+                    System.debug('Old Value Is NOT Null');
+                    ServiceRequest serviceRequest = new ServiceRequest();
+                    serviceRequest.Name = 'Bundle Assignment Change';
+                    serviceRequest.Action = 'bundleAssignmentChanged';
+                    serviceRequest.withParams('old', oldOpp);
+                    serviceRequest.withParams('oldBundleId', oldVal);
+                    serviceRequest.withParams('new', opportunity);
+                    serviceRequest.withParams('newBundleId', newVal);
+                    //System.debug('Sending Request for: ' + opportunity.Name + ' ====> ' + serviceRequest);
+                    requests.add(serviceRequest);
+                }
+                if(oldVal == null){
+                    ServiceRequest serviceRequest = new ServiceRequest();
+                    serviceRequest.Name = 'New Bundle Assignment';
+                    serviceRequest.Action = 'newBundleAssigned';
+                    serviceRequest.withParams('old', oldOpp);
+                    serviceRequest.withParams('new', opportunity);
+                    serviceRequest.withParams('newBundleId', newVal);
+                    requests.add(serviceRequest);
+
+                }
+            }
+        }
+        if (requests.size() > 0) {
+            List<ServiceResponse> responses = TreatmentPlanService.executeAll(requests);
+            for (ServiceResponse response : responses) {
+                System.debug(responses);
+            }
+        }
+
+        //System.debug('After Update is Executing');
     }
     public void afterDelete(TriggerRequest request) {
-        System.debug('After Delete is Executing');
-    }
-
-    private static Map<Id, OpportunityLineItem> getPlanProtocol(Id opp) {
-        PlanProtocolSelector selector = new PlanProtocolSelector();
-
-        List<OpportunityLineItem> lineItems = selector.GetByOpp(opp);
-        Map<Id, OpportunityLineItem> idOpportunityLineItemMap  = new Map<Id, OpportunityLineItem>();
-        for (OpportunityLineItem item : lineItems) {
-            idOpportunityLineItemMap.put(item.Id, item);
-        }
-        return idOpportunityLineItemMap;
+        //System.debug('After Delete is Executing');
     }
 }

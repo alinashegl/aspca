@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Enrichment_Activities__c</fullName>
+    <externalId>false</externalId>
+    <label>Enrichment Activities</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>1 on 1</fullName>
+                <default>false</default>
+                <label>1 on 1</label>
+            </value>
+            <value>
+                <fullName>Backyard</fullName>
+                <default>false</default>
+                <label>Backyard</label>
+            </value>
+            <value>
+                <fullName>Ball/rock pit (foraging)</fullName>
+                <default>false</default>
+                <label>Ball/rock pit (foraging)</label>
+            </value>
+            <value>
+                <fullName>Basic Training</fullName>
+                <default>false</default>
+                <label>Basic Training</label>
+            </value>
+            <value>
+                <fullName>Dig pit</fullName>
+                <default>false</default>
+                <label>Dig pit</label>
+            </value>
+            <value>
+                <fullName>Fetch with rules</fullName>
+                <default>false</default>
+                <label>Fetch with rules</label>
+            </value>
+            <value>
+                <fullName>Foster overnights</fullName>
+                <default>false</default>
+                <label>Foster overnights</label>
+            </value>
+            <value>
+                <fullName>Four on the Floor for Leash</fullName>
+                <default>false</default>
+                <label>Four on the Floor for Leash</label>
+            </value>
+            <value>
+                <fullName>Gym</fullName>
+                <default>false</default>
+                <label>Gym</label>
+            </value>
+            <value>
+                <fullName>IPY</fullName>
+                <default>false</default>
+                <label>IPY</label>
+            </value>
+            <value>
+                <fullName>Kennel Presence</fullName>
+                <default>false</default>
+                <label>Kennel Presence</label>
+            </value>
+            <value>
+                <fullName>LLW</fullName>
+                <default>false</default>
+                <label>LLW</label>
+            </value>
+            <value>
+                <fullName>Nose Work</fullName>
+                <default>false</default>
+                <label>Nose Work</label>
+            </value>
+            <value>
+                <fullName>Outside ExPen</fullName>
+                <default>false</default>
+                <label>Outside ExPen</label>
+            </value>
+            <value>
+                <fullName>Office Time</fullName>
+                <default>false</default>
+                <label>Office Time</label>
+            </value>
+            <value>
+                <fullName>Offsite Trips</fullName>
+                <default>false</default>
+                <label>Offsite Trips</label>
+            </value>
+            <value>
+                <fullName>OPY</fullName>
+                <default>false</default>
+                <label>OPY</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>Outside Walks</fullName>
+                <default>false</default>
+                <label>Outside Walks</label>
+            </value>
+            <value>
+                <fullName>PC Tug</fullName>
+                <default>false</default>
+                <label>PC Tug</label>
+            </value>
+            <value>
+                <fullName>Puppy Enrichment/Socialization</fullName>
+                <default>false</default>
+                <label>Puppy Enrichment/Socialization</label>
+            </value>
+            <value>
+                <fullName>Puppy Handling</fullName>
+                <default>false</default>
+                <label>Puppy Handling</label>
+            </value>
+            <value>
+                <fullName>Quiet Time</fullName>
+                <default>false</default>
+                <label>Quiet Time</label>
+            </value>
+            <value>
+                <fullName>Real-Life Room</fullName>
+                <default>false</default>
+                <label>Real-Life Room</label>
+            </value>
+            <value>
+                <fullName>Shelter Notes</fullName>
+                <default>false</default>
+                <label>Shelter Notes</label>
+            </value>
+            <value>
+                <fullName>Snuffle mat</fullName>
+                <default>false</default>
+                <label>Snuffle mat</label>
+            </value>
+            <value>
+                <fullName>Trick Training</fullName>
+                <default>false</default>
+                <label>Trick Training</label>
+            </value>
+            <value>
+                <fullName>Tug pully</fullName>
+                <default>false</default>
+                <label>Tug pully</label>
+            </value>
+            <value>
+                <fullName>Tug with rules</fullName>
+                <default>false</default>
+                <label>Tug with rules</label>
+            </value>
+            <value>
+                <fullName>Walk</fullName>
+                <default>false</default>
+                <label>Walk</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>10</visibleLines>
+</CustomField>
