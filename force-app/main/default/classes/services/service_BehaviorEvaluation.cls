@@ -52,8 +52,8 @@ public with sharing  class service_BehaviorEvaluation extends service_Base{
         }
         List<Behavior_Evaluation__c> behaviorEvaluations = new List<Behavior_Evaluation__c>();
         behaviorEvaluations.add(evaluation);
-        //update behaviorEvaluations;
-        TriggerRequest beforeUpdateRequest = new TriggerRequest(Behavior_Evaluation__c.getSObjectType())
+        update behaviorEvaluations;
+        /*TriggerRequest beforeUpdateRequest = new TriggerRequest(Behavior_Evaluation__c.getSObjectType())
                 .SetBefore(true)
                 .SetUpdate(true)
                 .SetNewRecords(behaviorEvaluations)
@@ -61,7 +61,7 @@ public with sharing  class service_BehaviorEvaluation extends service_Base{
         ServiceRequest req = new ServiceRequest().withParams('TriggerRequest', beforeUpdateRequest);
         BehaviorEvaluationDomain evaluationDomain = new BehaviorEvaluationDomain();
         ServiceResponse rep = evaluationDomain.Execute(req);
-        rep.Data = beforeUpdateRequest.newRecords;
+        rep.Data = beforeUpdateRequest.newRecords;*/
         response.Parameters.put('item' , behaviorEvaluations);
     }
 
@@ -203,7 +203,9 @@ public with sharing  class service_BehaviorEvaluation extends service_Base{
         eval.put(field, val);
         List<Behavior_Evaluation__c> evaluations = new List<Behavior_Evaluation__c>();
         evaluations.add(eval);
-        TriggerRequest beforeUpdateRequest = new TriggerRequest(Behavior_Evaluation__c.getSObjectType())
+        update evaluations;
+
+        /*TriggerRequest beforeUpdateRequest = new TriggerRequest(Behavior_Evaluation__c.getSObjectType())
                 .SetBefore(true)
                 .SetUpdate(true)
                 .SetNewRecords(evaluations)
@@ -211,7 +213,7 @@ public with sharing  class service_BehaviorEvaluation extends service_Base{
         ServiceRequest req = new ServiceRequest().withParams('TriggerRequest', beforeUpdateRequest);
         BehaviorEvaluationDomain domain = new BehaviorEvaluationDomain();
         ServiceResponse resp = domain.Execute(req);
-        resp.Data = beforeUpdateRequest.newRecords;
+        resp.Data = beforeUpdateRequest.newRecords;*/
         response.Parameters.put('item', val);
     }
 

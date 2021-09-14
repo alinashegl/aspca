@@ -8,33 +8,158 @@
 
 @IsTest
 private class test_BehaviorEvaluationTrigger {
-    @IsTest
-    static void testBehavior() {
-        User u = [SELECT Id, Email, Name FROM User WHERE Email = 'lbarnett@meetveracity.com'];
-        String initials = 'LB';
-        System.runAs(u){
-            Case cs = new Case();
-            insert cs;
 
-            Animal__c anim = new Animal__c(
-                    Name = 'Test',
-                    Case__c=cs.Id,
-                    Type_of_Animal__c='Dog',
-                    Color__c = 'Black',
-                    Age__c='Unknown At Intake'
-            );
-            insert anim;
-            Behavior_Evaluation__c evaluation = new Behavior_Evaluation__c(
-                    Behavior_in_Kennel__c = 'Social',
-                    Animal__c = anim.Id,
-                    Scribe_Initials__c = initials,
-                    Tester_Initials__c = initials,
-                    Handler_Initials__c = initials,
-                    Comments_BIK__c = 'Test Comments for Unit Test',
-                    Evaluation_Subtype__c = 'Adult Animal'
-            );
-            insert evaluation;
+    @isTest
+    static void behaviorEvaluationInsert() {
+        Test.startTest();
+        List<Behavior_Evaluation__c> evaluations = TestDataFactory.createMultipleBehaviorEvaluation(5, 'Puppy');
+        Test.stopTest();
+        System.assertEquals(5, evaluations.size());
+        List<Behavior_Evaluation__c> afterInsert = [SELECT Id, Behavior_Evaluation_Summary__c FROM Behavior_Evaluation__c WHERE Evaluation_Subtype__c = 'Puppy'];
+        System.assertEquals(5, afterInsert.size());
+        for (Behavior_Evaluation__c b : afterInsert) {
+            System.assert(b.Behavior_Evaluation_Summary__c != null);
         }
-        System.debug('@@@ RUNNING AS USER ==> ' + u.Name);
+    }
+
+    @isTest
+    static void behaviorEvaluationUpdateSummary() {
+        List<Behavior_Evaluation__c> evaluations = TestDataFactory.createMultipleBehaviorEvaluation(2, 'Dog Fighting');
+        Test.startTest();
+        evaluations[0].Comments_BIK__c = 'Comment added for kennel';
+        evaluations[1].Comments_BOL__c = 'Comment added for leash';
+        update evaluations;
+        Test.stopTest();
+        Behavior_Evaluation__c afterUpdate1 = [SELECT Id, Behavior_Evaluation_Summary__c, Comments_BIK__c FROM Behavior_Evaluation__c WHERE Id = :evaluations[0].Id LIMIT 1];
+        Behavior_Evaluation__c afterUpdate2 = [SELECT Id, Behavior_Evaluation_Summary__c, Comments_BOL__c FROM Behavior_Evaluation__c WHERE Id = :evaluations[1].Id LIMIT 1];
+        System.assertEquals('Comment added for kennel', afterUpdate1.Comments_BIK__c);
+        System.assertEquals('Comment added for leash', afterUpdate2.Comments_BOL__c);
+        System.assert(afterUpdate1.Behavior_Evaluation_Summary__c.contains('<p><b>Behavior in Kennel:</b> Comment added for kennel</p>'));
+        System.assert(afterUpdate2.Behavior_Evaluation_Summary__c.contains('<p><b>Behavior on Leash:</b> Comment added for leash</p>'));
+    }
+    
+    @isTest
+    static void behaviorEvaluationUpdateNoSummary() {
+        List<Behavior_Evaluation__c> evaluations = TestDataFactory.createMultipleBehaviorEvaluation(2, 'Dog Fighting');
+        Test.startTest();
+        evaluations[0].Behavior_Evaluation_Summary__c = null;
+        evaluations[1].Behavior_Evaluation_Summary__c = ' ';
+        update evaluations;
+        evaluations[0].Comments_BIK__c = 'Comment added for kennel';
+        evaluations[1].Comments_BOL__c = 'Comment added for leash';
+        update evaluations;
+        Test.stopTest();
+        Behavior_Evaluation__c afterUpdate1 = [SELECT Id, Behavior_Evaluation_Summary__c, Comments_BIK__c FROM Behavior_Evaluation__c WHERE Id = :evaluations[0].Id LIMIT 1];
+        Behavior_Evaluation__c afterUpdate2 = [SELECT Id, Behavior_Evaluation_Summary__c, Comments_BOL__c FROM Behavior_Evaluation__c WHERE Id = :evaluations[1].Id LIMIT 1];
+        System.assertEquals('Comment added for kennel', afterUpdate1.Comments_BIK__c);
+        System.assertEquals('Comment added for leash', afterUpdate2.Comments_BOL__c);
+        System.assert(afterUpdate1.Behavior_Evaluation_Summary__c.contains('<p><b>Behavior in Kennel:</b> Comment added for kennel</p>'));
+        System.assert(afterUpdate2.Behavior_Evaluation_Summary__c.contains('<p><b>Behavior on Leash:</b> Comment added for leash</p>'));
+    }
+
+    @isTest
+    static void behaviorEvaluationUpdateAggression() {
+        List<Behavior_Evaluation__c> evaluations = TestDataFactory.createMultipleBehaviorEvaluation(1, 'Dog Fighting');
+        Test.startTest();
+        evaluations[0].Overall_Evaluation_Grade__c = 'D - Dog Aggression';
+        update evaluations;
+        Test.stopTest();
+        Behavior_Evaluation__c afterUpdate = [SELECT Id, Behavior_Evaluation_Summary__c, Skipped_OSD_P1__c, Skipped_OSD_P2__c, Skipped_OSD_P3__c, Skipped_SSD_P1__c, Skipped_SSD_P2__c, Skipped_SSD_P3__c FROM Behavior_Evaluation__c WHERE Id = :evaluations[0].Id LIMIT 1];
+        System.assertEquals('Skipped due to risk to the helper dog', afterUpdate.Skipped_OSD_P1__c);
+        System.assertEquals('Skipped due to risk to the helper dog', afterUpdate.Skipped_OSD_P2__c);
+        System.assertEquals('Skipped due to risk to the helper dog', afterUpdate.Skipped_OSD_P3__c);
+        System.assertEquals('Skipped due to risk to the helper dog', afterUpdate.Skipped_SSD_P1__c);
+        System.assertEquals('Skipped due to risk to the helper dog', afterUpdate.Skipped_SSD_P2__c);
+        System.assertEquals('Skipped due to risk to the helper dog', afterUpdate.Skipped_SSD_P3__c);
+        System.assert(afterUpdate.Behavior_Evaluation_Summary__c.contains('<p><b>Same Sex:</b> Skipped due to risk to the helper dog Skipped due to risk to the helper dog Skipped due to risk to the helper dog</p>'));
+        System.assert(afterUpdate.Behavior_Evaluation_Summary__c.contains('<p><b>Opposite Sex:</b> Skipped due to risk to the helper dog Skipped due to risk to the helper dog Skipped due to risk to the helper dog</p>'));
+    }
+
+    @isTest
+    static void behaviorEvaluationUpdateHighValue() {
+        List<Behavior_Evaluation__c> evaluations = TestDataFactory.createMultipleBehaviorEvaluation(1, 'Adult Animal');
+        Test.startTest();
+        evaluations[0].Tag_Test__c = 'Played with tester;Too fearful-subtest not done';
+        evaluations[0].Behavior_on_Leash__c = 'Too fearful-subtest not done';
+        evaluations[0].Resource_Guarding_P1_Push_Face__c = 'Too fearful';
+        update evaluations;
+        Test.stopTest();
+        Behavior_Evaluation__c afterUpdate = [SELECT Id, Behavior_Evaluation_Summary__c, Tag_Test__c, Behavior_on_Leash__c, Resource_Guarding_P1_Push_Face__c FROM Behavior_Evaluation__c WHERE Id = :evaluations[0].Id LIMIT 1];
+        System.assertEquals('Played with tester;Too fearful-subtest not done', afterUpdate.Tag_Test__c);
+        System.assertEquals('Too fearful-subtest not done', afterUpdate.Behavior_on_Leash__c);
+        System.assertEquals('Too fearful', afterUpdate.Resource_Guarding_P1_Push_Face__c);
+        System.assert(afterUpdate.Behavior_Evaluation_Summary__c.contains('<p><b>Tag:</b> Too fearful-subtest not done</p>'));
+        System.assert(afterUpdate.Behavior_Evaluation_Summary__c.contains('<p><b>Behavior on Leash:</b> Too fearful-subtest not done</p>'));
+        System.assert(afterUpdate.Behavior_Evaluation_Summary__c.contains('<p><b>Resource Guarding:</b> </p>'));
+    }
+
+    @isTest
+    static void behaviorEvaluationUpdateDoubleHighValue() {
+        List<Behavior_Evaluation__c> evaluations = TestDataFactory.createMultipleBehaviorEvaluation(1, 'Adult Animal');
+        Test.startTest();
+        evaluations[0].Tag_Test__c = 'Played with tester;Too fearful-subtest not done';
+        update evaluations;
+        evaluations[0].Tag_Test__c = 'Played with tester';
+        update evaluations;
+        evaluations[0].Tag_Test__c = 'Played with tester;Too fearful-subtest not done';
+        update evaluations;
+        Test.stopTest();
+        Behavior_Evaluation__c afterUpdate = [SELECT Id, Behavior_Evaluation_Summary__c, Tag_Test__c, Behavior_on_Leash__c, Resource_Guarding_P1_Push_Face__c FROM Behavior_Evaluation__c WHERE Id = :evaluations[0].Id LIMIT 1];
+        System.assertEquals('Played with tester;Too fearful-subtest not done', afterUpdate.Tag_Test__c);
+        System.assert(afterUpdate.Behavior_Evaluation_Summary__c.contains('<p><b>Tag:</b> Too fearful-subtest not done</p>'));
+    }
+
+    @isTest
+    static void behaviorEvaluationUpdateNoType() {
+        List<Behavior_Evaluation__c> evaluations = TestDataFactory.createMultipleBehaviorEvaluation(1, 'Adult Animal');
+        Test.startTest();
+        evaluations[0].Behavior_in_Kennel__c = 'Social';
+        evaluations[0].Behavior_Evaluation_Summary__c = null;
+        update evaluations;
+        Test.stopTest();
+        Behavior_Evaluation__c afterUpdate = [SELECT Id, Behavior_Evaluation_Summary__c, Behavior_in_Kennel__c FROM Behavior_Evaluation__c WHERE Id = :evaluations[0].Id LIMIT 1];
+        Map<String, String> summary = BehaviorEvaluationSummaryUtil.getSummaryTemplate();
+        System.assertEquals(summary.get('Adult Animal'), afterUpdate.Behavior_Evaluation_Summary__c);
+        System.assertEquals('Social', afterUpdate.Behavior_in_Kennel__c);
+    }
+
+    @isTest
+    static void classWrapperTest() {
+        Test.startTest();
+        SummaryWrapper sw1 = new SummaryWrapper();
+        sw1.labelOrder = 3;
+        sw1.labelValue = 'Third';
+        SummaryWrapper sw2 = new SummaryWrapper();
+        sw2.labelOrder = 1;
+        sw2.labelValue = 'First';
+        SummaryWrapper sw3 = new SummaryWrapper(2, 'Second');
+        List<SummaryWrapper> swList = new List<SummaryWrapper>{sw1, sw2, sw3};
+        swList.sort();
+        CommentSkipWrapper csw1 = new CommentSkipWrapper();
+        csw1.testName = 'Test1';
+        csw1.commentField = 'Comment1';
+        csw1.skipField = 'Skip1';
+        CommentSkipWrapper csw2 = new CommentSkipWrapper('Test2', 'Comment2', 'Skip2');
+        HighValueCategoryWrapper hvcw1 = new HighValueCategoryWrapper();
+        hvcw1.fieldApiName = 'Name1';
+        hvcw1.fieldValue = 'Value1';
+        hvcw1.testName = 'Test1';
+        HighValueCategoryWrapper hvcw2 = new HighValueCategoryWrapper('Name2', 'Value2', 'Test2');
+        Test.stopTest();
+        for (Integer i = 0; i < swList.size(); i++) {
+            System.assertEquals(i + 1, swList[i].labelOrder);
+        }
+        System.assertEquals('Test1', csw1.testName);
+        System.assertEquals('Comment1', csw1.commentField);
+        System.assertEquals('Skip1', csw1.skipField);
+        System.assertEquals('Test2', csw2.testName);
+        System.assertEquals('Comment2', csw2.commentField);
+        System.assertEquals('Skip2', csw2.skipField);
+        System.assertEquals('Name1', hvcw1.fieldApiName);
+        System.assertEquals('Value1', hvcw1.fieldValue);
+        System.assertEquals('Test1', hvcw1.testName);
+        System.assertEquals('Name2', hvcw2.fieldApiName);
+        System.assertEquals('Value2', hvcw2.fieldValue);
+        System.assertEquals('Test2', hvcw2.testName);
     }
 }

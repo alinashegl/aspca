@@ -544,6 +544,23 @@ public without sharing class TestDataFactory {
         return be;
     }
 
+    public static List<Behavior_Evaluation__c> createMultipleBehaviorEvaluation(Integer numRecords, String type) {
+        Animal__c a = createAnimal();
+        List<Behavior_Evaluation__c> evalList = new List<Behavior_Evaluation__c>();
+        for (Integer i = 0; i < numRecords; i++) {
+            Behavior_Evaluation__c be = new Behavior_Evaluation__c(
+                Animal__c = a.Id,
+                Scribe_Initials__c = 'S'+String.valueOf(i),
+                Tester_Initials__c = 'T'+String.valueOf(i),
+                Handler_Initials__c = 'H'+String.valueOf(i),
+                Evaluation_Subtype__c = type
+            );
+            evalList.add(be);
+        }
+        insert evalList;
+        return evalList;
+    }
+
     private static final Integer PROTOCOLCOUNT = 10;
     private static final String PROTCOLNAMEPATTERN = 'Protocol ';
 

@@ -26,7 +26,7 @@ public with sharing class BehaviorEvaluationDomain extends DomainActionBase {
     public void beforeUpdate(TriggerRequest request) {
 
         System.debug('Before Update is Executing');
-        List<Behavior_Evaluation__c> newRecords = request.newRecords;
+        /*List<Behavior_Evaluation__c> newRecords = request.newRecords;
         List<Behavior_Evaluation__c> oldRecords = request.oldRecords;
 
         Map<Id, Behavior_Evaluation__c> newRecordMap = (Map<Id, Behavior_Evaluation__c>) request.newRecordMap;
@@ -43,7 +43,7 @@ public with sharing class BehaviorEvaluationDomain extends DomainActionBase {
         }
         if (oldRecordMap != null) {
 
-        }
+        }*/
 
     }
     public void beforeDelete(TriggerRequest request) {
