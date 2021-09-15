@@ -202,7 +202,8 @@ public class BehaviorEvaluationMatrixController {
                 //Iterate through array to categorize each selection into a numeric value, based on Value Category
                 for (String beh : behArray){
                     
-                    for (Picklist_Description_Config__mdt picklistMetadata : [SELECT Test_Config__r.MasterLabel,Test_Config__r.Test_Name__c,Field_API_Name__c,Value_Category__c,Field_Value__c FROM Picklist_Description_Config__mdt
+                    for (Picklist_Description_Config__mdt picklistMetadata : [SELECT Test_Config__r.MasterLabel,Test_Config__r.Test_Name__c,Field_API_Name__c,Value_Category__c,Field_Value__c FROM
+                            Picklist_Description_Config__mdt
                                                                               WHERE Field_API_Name__c = :fieldName AND Field_Value__c = :beh LIMIT 1 ]){
                         //Assign Value Category String value to Integer
                         Integer valueCategory = Integer.valueOf(picklistMetadata.Value_Category__c);

@@ -798,11 +798,19 @@
             <default>false</default>
         </values>
         <values>
+            <fullName>Greeted%2C mildly fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
             <fullName>Greeted-explored separately from other puppy</fullName>
             <default>false</default>
         </values>
         <values>
             <fullName>Greeted-hung out or explored with other puppy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Greeted-plays</fullName>
             <default>false</default>
         </values>
         <values>
@@ -827,6 +835,10 @@
         </values>
         <values>
             <fullName>Pushy-did not relax</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pushy-relaxes</fullName>
             <default>false</default>
         </values>
     </picklistValues>
@@ -849,11 +861,19 @@
             <default>false</default>
         </values>
         <values>
+            <fullName>Greeted%2C mildly fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
             <fullName>Greeted-explored separately from other puppy</fullName>
             <default>false</default>
         </values>
         <values>
             <fullName>Greeted-hung out or explored with other puppy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Greeted-plays</fullName>
             <default>false</default>
         </values>
         <values>
@@ -878,6 +898,10 @@
         </values>
         <values>
             <fullName>Pushy-did not relax</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pushy-relaxes</fullName>
             <default>false</default>
         </values>
     </picklistValues>
@@ -1076,6 +1100,10 @@
             <default>false</default>
         </values>
         <values>
+            <fullName>Became stiff%2Frigid%E2%80%94bit</fullName>
+            <default>false</default>
+        </values>
+        <values>
             <fullName>Became stiff%2Frigid-no escalation</fullName>
             <default>false</default>
         </values>
@@ -1112,6 +1140,10 @@
         <picklist>Puppy_Resource_Guarding_P1_Touch_Body__c</picklist>
         <values>
             <fullName>Ate but seemed nervous</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid%E2%80%94bit</fullName>
             <default>false</default>
         </values>
         <values>
@@ -1154,6 +1186,10 @@
             <default>false</default>
         </values>
         <values>
+            <fullName>Became stiff%2Frigid%E2%80%94bit</fullName>
+            <default>false</default>
+        </values>
+        <values>
             <fullName>Became stiff%2Frigid-no escalation</fullName>
             <default>false</default>
         </values>
@@ -1193,6 +1229,10 @@
             <default>false</default>
         </values>
         <values>
+            <fullName>Became stiff%2Frigid%E2%80%94bit</fullName>
+            <default>false</default>
+        </values>
+        <values>
             <fullName>Became stiff%2Frigid-no escalation</fullName>
             <default>false</default>
         </values>
@@ -1227,6 +1267,10 @@
     </picklistValues>
     <picklistValues>
         <picklist>Puppy_Resource_Guarding_P2_Push_Face__c</picklist>
+        <values>
+            <fullName>Became stiff rigid%E2%80%94no escalation</fullName>
+            <default>false</default>
+        </values>
         <values>
             <fullName>Became stiff%2Frigid-bit</fullName>
             <default>false</default>
@@ -1267,6 +1311,10 @@
     <picklistValues>
         <picklist>Puppy_Resource_Guarding_P2_Touch_Body__c</picklist>
         <values>
+            <fullName>Became stiff rigid%E2%80%94no escalation</fullName>
+            <default>false</default>
+        </values>
+        <values>
             <fullName>Became stiff%2Frigid-bit</fullName>
             <default>false</default>
         </values>
@@ -1306,6 +1354,10 @@
     <picklistValues>
         <picklist>Puppy_Resource_Guarding_P2_Touch_Face__c</picklist>
         <values>
+            <fullName>Became stiff rigid%E2%80%94no escalation</fullName>
+            <default>false</default>
+        </values>
+        <values>
             <fullName>Became stiff%2Frigid-bit</fullName>
             <default>false</default>
         </values>
@@ -1344,6 +1396,10 @@
     </picklistValues>
     <picklistValues>
         <picklist>Puppy_Resource_Guarding_P2_Touch_Neck__c</picklist>
+        <values>
+            <fullName>Became stiff rigid%E2%80%94no escalation</fullName>
+            <default>false</default>
+        </values>
         <values>
             <fullName>Became stiff%2Frigid-bit</fullName>
             <default>false</default>
@@ -2126,6 +2182,10 @@
             <default>false</default>
         </values>
         <values>
+            <fullName>Became stiff%2Frigid%E2%80%94bit</fullName>
+            <default>false</default>
+        </values>
+        <values>
             <fullName>Became stiff%2Frigid-no escalation</fullName>
             <default>false</default>
         </values>
@@ -2162,6 +2222,10 @@
         <picklist>Resource_Guarding_P1_Touch_Body__c</picklist>
         <values>
             <fullName>Ate but seemed nervous</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid%E2%80%94bit</fullName>
             <default>false</default>
         </values>
         <values>
@@ -2204,6 +2268,10 @@
             <default>false</default>
         </values>
         <values>
+            <fullName>Became stiff%2Frigid%E2%80%94bit</fullName>
+            <default>false</default>
+        </values>
+        <values>
             <fullName>Became stiff%2Frigid-no escalation</fullName>
             <default>false</default>
         </values>
@@ -2243,6 +2311,10 @@
             <default>false</default>
         </values>
         <values>
+            <fullName>Became stiff%2Frigid%E2%80%94bit</fullName>
+            <default>false</default>
+        </values>
+        <values>
             <fullName>Became stiff%2Frigid-no escalation</fullName>
             <default>false</default>
         </values>
@@ -2277,6 +2349,10 @@
     </picklistValues>
     <picklistValues>
         <picklist>Resource_Guarding_P2_Push_Face__c</picklist>
+        <values>
+            <fullName>Became stiff rigid%E2%80%94no escalation</fullName>
+            <default>false</default>
+        </values>
         <values>
             <fullName>Became stiff%2Frigid-bit</fullName>
             <default>false</default>
@@ -2317,6 +2393,10 @@
     <picklistValues>
         <picklist>Resource_Guarding_P2_Touch_Body__c</picklist>
         <values>
+            <fullName>Became stiff rigid%E2%80%94no escalation</fullName>
+            <default>false</default>
+        </values>
+        <values>
             <fullName>Became stiff%2Frigid-bit</fullName>
             <default>false</default>
         </values>
@@ -2356,6 +2436,10 @@
     <picklistValues>
         <picklist>Resource_Guarding_P2_Touch_Face__c</picklist>
         <values>
+            <fullName>Became stiff rigid%E2%80%94no escalation</fullName>
+            <default>false</default>
+        </values>
+        <values>
             <fullName>Became stiff%2Frigid-bit</fullName>
             <default>false</default>
         </values>
@@ -2394,6 +2478,10 @@
     </picklistValues>
     <picklistValues>
         <picklist>Resource_Guarding_P2_Touch_Neck__c</picklist>
+        <values>
+            <fullName>Became stiff rigid%E2%80%94no escalation</fullName>
+            <default>false</default>
+        </values>
         <values>
             <fullName>Became stiff%2Frigid-bit</fullName>
             <default>false</default>

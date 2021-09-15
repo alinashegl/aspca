@@ -579,4 +579,48 @@ public without sharing class TestDataFactory {
         insert evalList;
         return evalList;
     }
+
+    private static final Integer PROTOCOLCOUNT = 10;
+    private static final String PROTCOLNAMEPATTERN = 'Protocol ';
+
+    public static Treatment_Plan__c createPlan(){
+        Treatment_Plan__c plan = new Treatment_Plan__c(IsActive__c = true, Description__c = 'Test');
+        insert plan;
+        return plan;
+    }
+
+    public static Treatment_Session__c createSession(){
+        Treatment_Session__c session = new Treatment_Session__c();
+        Treatment_Plan__c plan = createPlan();
+        session.Treatment_Plan__c = plan.Id;
+        insert session;
+        return session;
+    }
+
+    public static List<Protocol__c> createProtocols() {
+        List<Protocol__c> protocols = new List<Protocol__c>();
+        Integer i = 0;
+        while(i != 9) {
+            Protocol__c protocol = new Protocol__c();
+            protocol.Name = 'Test Protocol ' + i;
+            protocol.IsActive__c = true;
+            protocols.add(protocol);
+            i++;
+        }
+        insert protocols;
+        return protocols;
+    }
+    public static List<Session_Protocol__c> createSessionProtocols() {
+        List<Protocol__c> protocols = createProtocols();
+        Treatment_Session__c session = createSession();
+        List<Session_Protocol__c> sessionProtocols = new List<Session_Protocol__c>();
+        for (Protocol__c protocol : protocols) {
+            Session_Protocol__c sessionProtocol = new Session_Protocol__c();
+            sessionProtocol.TreatmentSessionId__c = session.Id;
+            sessionProtocol.ProtocolId__c = protocol.Id;
+            sessionProtocols.add(sessionProtocol);
+        }
+        insert sessionProtocols;
+        return sessionProtocols;
+    }
 }

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Intake_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Intake Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>ASPCA HLE</fullName>
+                <default>false</default>
+                <label>ASPCA HLE</label>
+            </value>
+            <value>
+                <fullName>Born on Site</fullName>
+                <default>false</default>
+                <label>Born on Site</label>
+            </value>
+            <value>
+                <fullName>Found</fullName>
+                <default>false</default>
+                <label>Found</label>
+            </value>
+            <value>
+                <fullName>Owner Requested</fullName>
+                <default>false</default>
+                <label>Owner Requested</label>
+            </value>
+            <value>
+                <fullName>Remote Intake</fullName>
+                <default>false</default>
+                <label>Remote Intake</label>
+            </value>
+            <value>
+                <fullName>Rescued by ASPCA</fullName>
+                <default>false</default>
+                <label>Rescued by ASPCA</label>
+            </value>
+            <value>
+                <fullName>Seized</fullName>
+                <default>true</default>
+                <label>Seized</label>
+            </value>
+            <value>
+                <fullName>Shelter Transfer</fullName>
+                <default>false</default>
+                <label>Shelter Transfer</label>
+            </value>
+            <value>
+                <fullName>Unspecified</fullName>
+                <default>false</default>
+                <label>Unspecified</label>
+            </value>
+            <value>
+                <fullName>Vet/Boarding Clinic</fullName>
+                <default>false</default>
+                <label>Vet/Boarding Clinic</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Diet_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Diet Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>119 Special</fullName>
+                <default>false</default>
+                <label>119 Special</label>
+            </value>
+            <value>
+                <fullName>123 Special</fullName>
+                <default>false</default>
+                <label>123 Special</label>
+            </value>
+            <value>
+                <fullName>308 Special</fullName>
+                <default>false</default>
+                <label>308 Special</label>
+            </value>
+            <value>
+                <fullName>406 Special</fullName>
+                <default>false</default>
+                <label>406 Special</label>
+            </value>
+            <value>
+                <fullName>411 Special</fullName>
+                <default>false</default>
+                <label>411 Special</label>
+            </value>
+            <value>
+                <fullName>413 Special</fullName>
+                <default>false</default>
+                <label>413 Special</label>
+            </value>
+            <value>
+                <fullName>416 Special</fullName>
+                <default>false</default>
+                <label>416 Special</label>
+            </value>
+            <value>
+                <fullName>Adult Mix</fullName>
+                <default>false</default>
+                <label>Adult Mix</label>
+            </value>
+            <value>
+                <fullName>Chicken Diet</fullName>
+                <default>false</default>
+                <label>Chicken Diet</label>
+            </value>
+            <value>
+                <fullName>Not Assigned</fullName>
+                <default>false</default>
+                <label>Not Assigned</label>
+            </value>
+            <value>
+                <fullName>Puppy Mix</fullName>
+                <default>false</default>
+                <label>Puppy Mix</label>
+            </value>
+            <value>
+                <fullName>Sci Diet AD</fullName>
+                <default>false</default>
+                <label>Sci Diet AD</label>
+            </value>
+            <value>
+                <fullName>Sci Diet ID</fullName>
+                <default>false</default>
+                <label>Sci Diet ID</label>
+            </value>
+            <value>
+                <fullName>Special Diet</fullName>
+                <default>false</default>
+                <label>Special Diet</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

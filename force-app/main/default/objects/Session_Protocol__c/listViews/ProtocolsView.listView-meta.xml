@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ProtocolsView</fullName>
+    <columns>ProtocolId__c</columns>
+    <columns>NAME</columns>
+    <columns>Fear_Best__c</columns>
+    <columns>Fear_Worst__c</columns>
+    <columns>Aggressive_Worst__c</columns>
+    <columns>Arousal_Best__c</columns>
+    <columns>Arousal_Worst__c</columns>
+    <columns>Social_Best__c</columns>
+    <columns>Overall_Score__c</columns>
+    <columns>Needs_Review__c</columns>
+    <columns>IsSkipped__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>InView__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <label>Protocols View</label>
+</ListView>

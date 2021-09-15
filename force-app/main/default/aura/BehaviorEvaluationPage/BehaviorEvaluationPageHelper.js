@@ -161,15 +161,14 @@
             lastTab: 'pdi2'
         }
     } ,
-    processingProcess: function(cmp, currentProcess,event) {
+    processingProcess: function(cmp, currentProcess) {
             let process = {
                 'loadTabs': 'loadTabs' ,
                 'init': 'init' ,
                 'handleSelect' : 'handleSelect' ,
                 'loadPuppyTabs' : 'loadPuppyTabs' ,
                 'render' : 'render' ,
-                'handleCaution' : 'handleCaution',
-                'handleUnpleasantTouch' : 'handleUnpleasantTouch'
+                'handleCaution' : 'handleCaution'
             };
 
             if(process[currentProcess] == 'init') {
@@ -184,8 +183,6 @@
                 this.render(cmp, event);
             }else if(process[currentProcess] == 'handleCaution') {
                 this.handleCaution(cmp, event);
-            }else if(process[currentProcess] == 'handleUnpleasantTouch') {
-                this.handleUnpleasantTouch(cmp, event);
             }
             else {
                 console.log('Unexpected Error occured ');
@@ -199,8 +196,8 @@
         var rid = cmp.get('v.recordId');
         var apiName = 'Caution__c';
         var ref = cmp.find('cautionInput');
-        var state = ref.get('v.checked');
-        var status = 'status';
+        var state = ref.get('v.checked')
+        var status = 'status'
         var t;
 
         var params = {
@@ -216,45 +213,6 @@
                     var data = item['data'];
                     var dataitem = data['item'];
                     cmp.set('v.UseCaution', dataitem);
-                }
-            }
-        ).catch(
-          function(error) {
-              console.log('Error Message', error);
-          }
-        );
-    } ,
-
-    handleUnpleasantTouch: function(cmp, event) {
-        var auraId = event.getSource().getLocalId();
-        var isFirstTouch = (auraId == 'UnpleasantTouch1stFlankInput') ? true : false;
-        console.log('upleasantTouch: ', auraId);
-
-
-        var rid = cmp.get('v.recordId');
-        var apiName = (isFirstTouch) ? 'Unpleasant_Touch_1st_Flank__c' : 'Unpleasant_Touch_2nd_Flank__c';
-        var ref = cmp.find(auraId);
-        var state = ref.get('v.checked');
-        var status = 'status';
-        var t;
-
-        var params = {
-            apiName: apiName ,
-            values: state ,
-            recordId : rid
-        };
-        this.sendPromise(cmp, 'c.putBoolean', params, status)
-        .then(
-            function(response) {
-                if(response[status] != 'SUCCESS') {
-                    var item = response[status];
-                    var data = item['data'];
-                    var dataitem = data['item'];
-                    if(isFirstTouch){
-                        cmp.set('v.UnpleasantTouch1stFlank', dataitem);
-                    } else {
-                        cmp.set('v.UnpleasantTouch2ndFlank', dataitem);
-                    }
                 }
             }
         ).catch(
@@ -350,9 +308,9 @@
 
                 resolve(result);
               } else if(state === 'ERROR') {
-                reject(action.getError());
+                reject(action.getError())
               } else {
-                reject(action.getError());
+                reject(action.getError())
               }
             });
             $A.enqueueAction(action);
@@ -479,6 +437,7 @@
                     data = 'Puppy';
                     this.processingProcess(cmp, 'loadPuppyTabs');
                 }
+
             }
         ).catch(
             function(error) {
@@ -1024,90 +983,5 @@
            console.log('DOG FIGHTING CASE');
            //$A.get('e.force:refreshView').fire();
         }
-    },
-    setHousing: function(cmp, event) {
-        var rid = cmp.get('v.recordId');
-        var apiName = 'Puppy_BIK_Housing__c';
-        var clicked = event.target.value;
-        var state = clicked == 'singly' ? 'Singly-housed' : 'Co-housed';
-        var status = 'status';
-
-        var params = {
-            apiName: apiName ,
-            values: state ,
-            recordId : rid
-        };
-        this.sendPromise(cmp, 'c.putSelection', params, status)
-        .then(
-            function(response) {
-                if(response[status].status != 'success') {
-                    cmp.set('v.PuppySingly', state == 'Singly-housed' ? false : true);
-                    cmp.set('v.PuppyCoHoused', state == 'Co-housed' ? false : true);
-                }
-            }
-        ).catch(
-          function(error) {
-              console.log('Error Message', error);
-          }
-        );
-    },
-    setMuzzle: function(cmp, event) {
-        var rid = cmp.get('v.recordId');
-        var cmpId = event.target.id;
-        var status = 'status';
-        var apiName;
-        var cmpAttr;
-        switch(cmpId) {
-            case 'PMuzzled1':
-            case 'PNotMuzzled1':
-                apiName = 'Puppy_Muzzled_DI_P1__c';
-                cmpAttr = 'v.PuppyMuzzle1';
-                break;
-            case 'PMuzzled2':
-            case 'PNotMuzzled2':
-                apiName = 'Puppy_Muzzled_DI_P2__c';
-                cmpAttr = 'v.PuppyMuzzle2';
-                break;
-            case 'PMuzzled3':
-            case 'PNotMuzzled3':
-                apiName = 'Puppy_Muzzled_DI_P3__c';
-                cmpAttr = 'v.PuppyMuzzle3';
-                break;
-            case 'SMuzzled3':
-            case 'SNotMuzzled3':
-                apiName = 'Muzzled_SSD_P3__c';
-                cmpAttr = 'v.MuzzleSSD3';
-                break;
-            case 'OMuzzled3':
-            case 'ONotMuzzled3':
-                apiName = 'Muzzled_OSD_P3__c';
-                cmpAttr = 'v.MuzzleOSD3';
-                break;
-            default:
-                console.log(`Field not mapped for ${cmpId}.`);
-                return;
-        }
-        var value = cmp.get(cmpAttr);
-
-        var params = {
-            apiName: apiName,
-            values: !value,
-            recordId : rid
-        };
-        this.sendPromise(cmp, 'c.putBoolean', params, status)
-        .then(
-            function(response) {
-                if(response[status].status != 'success') {
-                    cmp.set(cmpAttr, value);
-                }
-                else {
-                    cmp.set(cmpAttr, !value);
-                }
-            }
-        ).catch(
-          function(error) {
-              console.log('Error Message', error);
-          }
-        );
     }
 });

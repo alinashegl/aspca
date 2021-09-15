@@ -34,7 +34,7 @@ public with sharing class AnimalTriggerHandler {
 
         }  
     }
-
+    
     public static void insertHandlerBefore(){
         string initials = '';
         for (Animal__c a : (List<Animal__c>)Trigger.new){
@@ -42,9 +42,9 @@ public with sharing class AnimalTriggerHandler {
                 a.Gender__c = 'Unknown';
             }
             
-            if (a.Age__c == null){
-                a.Age__c = 'Unknown At Intake';
-            }
+//            if (a.Age__c == null){
+//                a.Age__c = 'Unknown At Intake';
+//            }
             
             if (a.Color__c == null){
                 a.Color__c = 'Unspecified';
