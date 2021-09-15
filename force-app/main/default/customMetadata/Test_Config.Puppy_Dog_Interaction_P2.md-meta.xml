@@ -15,6 +15,18 @@
         <value xsi:nil="true"/>
     </values>
     <values>
+        <field>IsAdult__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>IsDogFighting__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>IsDogOnly__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
         <field>IsPuppy__c</field>
         <value xsi:type="xsd:boolean">true</value>
     </values>
@@ -44,18 +56,30 @@
     </values>
     <values>
         <field>Test_Description__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Dog Interaction - Part 2: Interaction with Unfamiliar Playmate</value>
     </values>
     <values>
         <field>Test_Display_Order__c</field>
         <value xsi:type="xsd:string">20</value>
     </values>
     <values>
+        <field>Test_Header_Description__c</field>
+        <value xsi:type="xsd:string">&lt;div style=&quot;text-align: center;&quot;&gt;Place unfamiliar puppy in the center of the testing space. Observed interactions for 2 minutes.&lt;/div&gt;</value>
+    </values>
+    <values>
         <field>Test_Name__c</field>
         <value xsi:type="xsd:string">Dog Interaction P2</value>
     </values>
     <values>
+        <field>Test_Optional_Field__c</field>
+        <value xsi:type="xsd:string">Puppy_Muzzled_DI_P2__c</value>
+    </values>
+    <values>
         <field>Test_Skip_Reason_Field__c</field>
         <value xsi:type="xsd:string">Puppy_Skipped_DI_P2__c</value>
+    </values>
+    <values>
+        <field>Test_Type_Description__c</field>
+        <value xsi:nil="true"/>
     </values>
 </CustomMetadata>

@@ -15,6 +15,18 @@
         <value xsi:nil="true"/>
     </values>
     <values>
+        <field>IsAdult__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>IsDogFighting__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>IsDogOnly__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
         <field>IsPuppy__c</field>
         <value xsi:type="xsd:boolean">true</value>
     </values>
@@ -44,18 +56,30 @@
     </values>
     <values>
         <field>Test_Description__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Resource Guarding - Part 1: Food Bowl</value>
     </values>
     <values>
         <field>Test_Display_Order__c</field>
         <value xsi:type="xsd:string">9</value>
     </values>
     <values>
+        <field>Test_Header_Description__c</field>
+        <value xsi:type="xsd:string">&lt;div&gt;Have assistant hold puppy&apos;s leash, or tether puppy. Place bowl of food (kibble + canned food mix) in front of puppy Once puppy is engaged in eating, approach then:&lt;br/&gt;1. Stroke puppy&apos;s back and say curiously, &quot;Hey, whatcha got there?&lt;br/&gt;2. Touch collar and say curiously, &quot;Hey, whatcha got there?&quot;&lt;br/&gt;3. Touch puppy&apos;s muzzle while he&apos;s eating and say, &quot;Hey, whatcha got there?&quot;&lt;br/&gt;4. Firmly push puppy&apos;s muzzle out of the food bowl and say sternly, &quot;OK get out of there!&quot;&lt;/div&gt;</value>
+    </values>
+    <values>
         <field>Test_Name__c</field>
         <value xsi:type="xsd:string">Resource Guarding P1 - TB</value>
     </values>
     <values>
+        <field>Test_Optional_Field__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>Test_Skip_Reason_Field__c</field>
         <value xsi:type="xsd:string">Skipped_RG_P1__c</value>
+    </values>
+    <values>
+        <field>Test_Type_Description__c</field>
+        <value xsi:type="xsd:string">TB = Touch Body</value>
     </values>
 </CustomMetadata>
