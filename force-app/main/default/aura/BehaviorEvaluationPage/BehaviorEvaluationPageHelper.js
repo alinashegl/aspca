@@ -459,23 +459,24 @@
                 cmp.set('v.PuppyMuzzle3', response[attr].puppyMuzzledDogInteraction3);
                 cmp.set('v.MuzzleSSD3', response[attr].muzzledSameSexDog3);
                 cmp.set('v.MuzzleOSD3', response[attr].muzzledOppositeSexDog3);
+                cmp.set('v.IsAdult', response[attr].IsAdult);
+                cmp.set('v.IsDogFighting', response[attr].IsDogFighting);
+                cmp.set('v.IsDogOnly', response[attr].IsDogOnly);
+                cmp.set('v.IsPuppy', response[attr].IsPuppy);
 
-                if(response[attr].IsAdult == true) {
-                    cmp.set('v.IsAdult', true);
-                    console.log('IS ADULT TEST');
-                    if(response[attr].IsDogFighting == true) {
-                        cmp.set('v.IsDogFighting', true);
-                        console.log('Is Dog Fighting?', response[attr].IsDogFighting);
+                if (response[attr].IsAdult) {
+                    if (response[attr].IsDogOnly) {
+                        cmp.set('v.tabId', 'ssdt1');
                     }
-                    cmp.set('v.tabId', 'behaveInKennel');
+                    else {
+                        cmp.set('v.tabId', 'behaveInKennel');
+                    }
                     data = 'Adult';
                     this.processingProcess(cmp, 'loadTabs');
                 }
-                if(response[attr].IsPuppy == true) {
-                    cmp.set('v.IsPuppy', true);
-                    console.log('IS PUPPY TEST');
+                else if (response[attr].IsPuppy) {
                     cmp.set('v.tabId', 'pbik');
-                    data = 'Puppy'
+                    data = 'Puppy';
                     this.processingProcess(cmp, 'loadPuppyTabs');
                 }
             }
@@ -933,7 +934,9 @@
     handleNextTab : function(cmp, event, button) {
         var c = cmp.get('v.tabId');
         var x = this.tablist[c];
+        var i_Adult = cmp.get('v.IsAdult');
         var i_DogFight = cmp.get('v.IsDogFighting');
+        var i_DogOnly = cmp.get('v.IsDogOnly');
         //console.log(i_DogFight);
         //console.log(i_IsAdult);
         if((x['nextTab'] == 'ssdt1')&& (cmp.get('v.UseCaution') == true))  {
@@ -959,29 +962,26 @@
              });
              confirm('Use Caution for Real Dog Test');
         }
-        if(i_DogFight == false || i_DogFight == undefined) {
-                    if(x['nextTab'] == 'fdit') {
-                        x = this.tablist['fdit'];
-                    }
-                    cmp.set('v.tabId' , x['nextTab']);
-                }else {
-                    cmp.set('v.tabId' , x['nextTab']);
-                }
+        if ((i_Adult && !i_DogFight && !i_DogOnly && x['nextTab'] == 'fdit') || (i_DogOnly && x['nextTab'] == 'behaveInKennel')) {
+            x = this.tablist['fdit'];
+        }
+        cmp.set('v.tabId' , x['nextTab']);
         $A.get('e.force:refreshView').fire();
     } ,
     handlePrevTab: function(cmp, event, button) {
         var c = cmp.get('v.tabId');
         var x = this.tablist[c];
+        var i_Adult = cmp.get('v.IsAdult');
         var i_DogFight = cmp.get('v.IsDogFighting');
+        var i_DogOnly = cmp.get('v.IsDogOnly');
         cmp.set('v.tabId', x['lastTab']);
-        if(i_DogFight == false || i_DogFight == undefined) {
-            if(x['lastTab'] == 'fdit') {
-                x = this.tablist['fdit'];
-            }
-            cmp.set('v.tabId' , x['lastTab']);
-        }else {
-            cmp.set('v.tabId' , x['lastTab']);
+        if (i_Adult && !i_DogFight && !i_DogOnly && x['lastTab'] == 'fdit') {
+            x = this.tablist['fdit'];
         }
+        else if (i_DogOnly && x['lastTab'] == 'fdit') {
+            x = this.tablist['behaveInKennel'];
+        }
+        cmp.set('v.tabId' , x['lastTab']);
         if((x['lastTab'] == 'ssdt1')&& (cmp.get('v.UseCaution') == true)) {
                     cmp.find('lib').showToast({
                         'title': 'CAUTION' ,

@@ -178,7 +178,7 @@ private class test_BehaviorEvaluationPageController {
             eWOL, eWOL, eWOL, eWFC2, 1, false, 'parentTestApiName', eW1, eW1, eW1, eW1);
         TabContentUtil tCU2 = new TabContentUtil('id', 'label', 'name', 'breed', 'color', 'caseNumber',
             'animalId', 'animalAge', 'animalSex', 'location', System.today(), eWOL, eWOL, 'behaviorSummary',
-            true, false, false, false, false, eWFC2, false, false, 'puppyHousing', false, false, false, false, false);
+            true, false, false, false, false, false, eWFC2, false, false, 'puppyHousing', false, false, false, false, false);
         Test.stopTest();
     }
 }

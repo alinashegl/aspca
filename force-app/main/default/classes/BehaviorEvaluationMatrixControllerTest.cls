@@ -30,6 +30,24 @@ private class BehaviorEvaluationMatrixControllerTest{
         System.assertEquals(5, objBehMatrix.finalTestAndDisplayValues.size());
         //system.debug(objBehMatrix.finalTestAndDisplayValues.size());
         
+        //Dog Fighting Evaluation Test
+        Behavior_Evaluation__c dogFightingBehEval = new Behavior_Evaluation__c(Animal__c = objAnimal.Id, Evaluation_Subtype__c	= 'Dog Fighting', Handler_Initials__c = 'Test', Scribe_Initials__c = 'Test', Tester_Initials__c = 'Test', 
+                Behavior_in_Kennel__c = 'Social;Hyperaroused', Skipped_BOL__c = 'Skipped to safeguard welfare of the animal', Skipped_SB_P1__c = 'Skipped not necessary', Resource_Guarding_P1_Push_Face__c = 'Remained relaxed', Comments_BOL__c='test test test', Tag_Test__c='Too fearful-subtest not done', Skipped_RG_P2_PF__c	= 'Skipped for medical reason');
+        insert dogFightingBehEval;
+
+        PageReference dogFightingPageRef = Page.BehaviorEvaluationMatrix;
+        Test.setCurrentPage(dogFightingPageRef);
+        apexpages.currentpage().getparameters().put('Id' , dogFightingBehEval.id);
+
+
+
+        BehaviorEvaluationMatrixController dogFightingObjBehMatrix  = new BehaviorEvaluationMatrixController (new ApexPages.StandardController(dogFightingBehEval));
+
+        //Expected result:        
+        //((Behavior in Kennel, ✔, ✔,  ,  ), (Behavior on Leash, ❌, ❌, ❌, ❌), (Social Behavior P1, ---, ---, ---, ---), (Resource Guarding P1 - PF, ✔,  ,  ,  ))
+
+        System.assertEquals(5, dogFightingObjBehMatrix.finalTestAndDisplayValues.size());
+        
         //Puppy Evaluation Test
         Behavior_Evaluation__c puppyBehEval = new Behavior_Evaluation__c(Animal__c = objAnimal.Id, Evaluation_Subtype__c = 'Puppy', Handler_Initials__c = 'Test', Scribe_Initials__c = 'Test', Tester_Initials__c = 'Test', Puppy_Behavior_in_Kennel__c = 'Social;Hyperaroused', Skipped_BOL__c = 'Skipped to safeguard welfare of the animal', Skipped_SB_P1__c = 'Skipped not necessary', Puppy_Resource_Guarding_P1_Push_Face__c = 'Remained relaxed');
         insert puppyBehEval;

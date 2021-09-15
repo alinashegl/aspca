@@ -2,12 +2,16 @@ public class BehaviorEvaluationSummaryUtil {
     public static Map<String, String> getSummaryTemplate() {
         Set<String> puppySet = new Set<String>();
         Set<String> adultSet = new Set<String>();
+        Set<String> fightingSet = new Set<String>();
+        Set<String> dogOnlySet = new Set<String>();
         List<SummaryWrapper> puppySummary = new List<SummaryWrapper>();
         List<SummaryWrapper> adultSummary = new List<SummaryWrapper>();
         List<SummaryWrapper> fightingSummary = new List<SummaryWrapper>();
+        List<SummaryWrapper> dogOnlySummary = new List<SummaryWrapper>();
         String puppyString = '';
         String adultString = '';
         String fightingString = '';
+        String dogOnlyString = '';
         Map<String, String> result = new Map<String, String>();
         List<Test_Config__mdt> testConfig = Test_Config__mdt.getAll().values();
         for (Test_Config__mdt t : testConfig) {
@@ -20,16 +24,22 @@ public class BehaviorEvaluationSummaryUtil {
                         puppySummary.add(new SummaryWrapper(Integer.valueOf(t.Test_Display_Order__c), '<p><b>' + testName + ':</b> </p>'));
                     }
                 }
-                else {
+                if (t.IsAdult__c) {
                     if (!adultSet.contains(testName)) {
                         adultSet.add(testName);
-                        if (t.Picklist_API_Name__c == 'Fake_Dog__c') {
-                            fightingSummary.add(new SummaryWrapper(Integer.valueOf(t.Test_Display_Order__c), '<p><b>' + testName + ':</b> </p>'));
-                        }
-                        else {
-                            fightingSummary.add(new SummaryWrapper(Integer.valueOf(t.Test_Display_Order__c), '<p><b>' + testName + ':</b> </p>'));
-                            adultSummary.add(new SummaryWrapper(Integer.valueOf(t.Test_Display_Order__c), '<p><b>' + testName + ':</b> </p>'));
-                        }
+                        adultSummary.add(new SummaryWrapper(Integer.valueOf(t.Test_Display_Order__c), '<p><b>' + testName + ':</b> </p>'));
+                    }
+                }
+                if (t.IsDogFighting__c) {
+                    if (!fightingSet.contains(testName)) {
+                        fightingSet.add(testName);
+                        fightingSummary.add(new SummaryWrapper(Integer.valueOf(t.Test_Display_Order__c), '<p><b>' + testName + ':</b> </p>'));
+                    }
+                }
+                if (t.IsDogOnly__c) {
+                    if (!dogOnlySet.contains(testName)) {
+                        dogOnlySet.add(testName);
+                        dogOnlySummary.add(new SummaryWrapper(Integer.valueOf(t.Test_Display_Order__c), '<p><b>' + testName + ':</b> </p>'));
                     }
                 }
             }
@@ -37,6 +47,7 @@ public class BehaviorEvaluationSummaryUtil {
         puppySummary.sort();
         adultSummary.sort();
         fightingSummary.sort();
+        dogOnlySummary.sort();
         for (SummaryWrapper s : puppySummary) {
             puppyString += s.labelValue;
         }
@@ -46,10 +57,13 @@ public class BehaviorEvaluationSummaryUtil {
         for (SummaryWrapper s : fightingSummary) {
             fightingString += s.labelValue;
         }
+        for (SummaryWrapper s : dogOnlySummary) {
+            dogOnlyString += s.labelValue;
+        }
         result.put('Puppy', puppyString);
         result.put('Adult Animal', adultString);
         result.put('Dog Fighting', fightingString);
-        //result.put('Dog/Dog Only', dogString);
+        result.put('Dog/Dog Only', dogOnlyString);
         return result;
     }
 
