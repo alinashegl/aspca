@@ -530,6 +530,8 @@ public without sharing class TestDataFactory {
             Behavior_in_Kennel__c = 'Social;Excited',
             Behavior_on_Leash__c = 'Mildly fearful;Panicked',
             Same_Sex_P1__c = 'Friendly;Neutral;Tense/assertive',
+            Resource_Guarding_P1_Push_Face__c = 'Remained relaxed;Ate but seemed nervous',
+            Resource_Guarding_P1_Touch_Body__c = 'Remained relaxed',
             Animal__c = a.Id,
             Scribe_Initials__c = 'SI',
             Tester_Initials__c = 'TI',
@@ -538,6 +540,23 @@ public without sharing class TestDataFactory {
             Comments_BOL__c = 'Other Test Comments for Unit Test',
             Comments_SSD_P1__c = 'Goodish dog',
             Evaluation_Subtype__c = isDogFighting ? 'Dog Fighting' : 'Adult Animal',
+            Muzzled_SSD_P3__c = isDogFighting,
+            Potential_Behavior_Issues__c = 'Aggression to People;Other'
+        );
+        insert be;
+        return be;
+    }
+
+    public static Behavior_Evaluation__c createDogOnlyBehaviorEvaluation() {
+        Animal__c a = createAnimal();
+        Behavior_Evaluation__c be = new Behavior_Evaluation__c(
+            Same_Sex_P1__c = 'Friendly;Neutral;Tense/assertive',
+            Animal__c = a.Id,
+            Scribe_Initials__c = 'SI',
+            Tester_Initials__c = 'TI',
+            Handler_Initials__c = 'HI',
+            Comments_SSD_P1__c = 'Goodish dog',
+            Evaluation_Subtype__c = 'Dog/Dog Only',
             Potential_Behavior_Issues__c = 'Aggression to People;Other'
         );
         insert be;

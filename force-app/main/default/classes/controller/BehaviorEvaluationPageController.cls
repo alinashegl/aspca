@@ -269,6 +269,13 @@ public with sharing class BehaviorEvaluationPageController {
         }else {
             utils.IsDogFighting = false;
         }
+
+        if (behaviorEvaluation.Evaluation_Subtype__c == 'Dog/Dog Only') {
+            utils.IsDogOnly = true;
+            utils.IsAdult = true;
+        }else {
+            utils.IsDogOnly = false;
+        }
         EvaluationWrapper.FieldContents contents = new EvaluationWrapper.FieldContents();
         contents.id = Behavior_Evaluation__c.Caution__c.getDescribe().name;
         contents.value = behaviorEvaluation.Caution__c;
