@@ -584,6 +584,8 @@ public without sharing class TestDataFactory {
     private static final String PROTCOLNAMEPATTERN = 'Protocol ';
 
     public static Treatment_Plan__c createPlan(){
+        Treatment_Bundle__c bundle = new Treatment_Bundle__c(Name = 'Master', IsActive__c = true, IsMaster__c = true, Description__c = 'Master bundle');
+        insert bundle;
         Treatment_Plan__c plan = new Treatment_Plan__c(IsActive__c = true, Description__c = 'Test');
         insert plan;
         return plan;
