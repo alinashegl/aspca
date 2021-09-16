@@ -150,3 +150,55 @@ public with sharing class AccountSelector extends SObjectSelector {
 ```
 
 ## Domain
+
+Domain classes handle trigger logic for a specific sObject. Current itteration of Trigger Framework requires a 
+domain calss to be structure like so.
+
+```apex
+public with sharing class AccountDomain extends DomainActionBase{
+    public override void ProcessAction(TriggerRequest request) {
+        if (request.targetSObject == Treatment_Plan__c.SObjectType) {
+            String triggerAction = request.action + request.process;
+
+            switch on triggerAction {
+                when 'BeforeInsert' { beforeInsert(request); }
+                when 'BeforeUpdate' { beforeUpdate(request); }
+                when 'BeforeDelete' { beforeDelete(request);}
+                when 'AfterInsert' { afterInsert(request);}
+                when 'AfterUpdate' { afterUpdate(request);}
+                when 'AfterDelete' { afterDelete(request);}
+            }
+        }
+        return;
+    }
+    
+    public void beforeInsert(TriggerRequest request) {
+        List<Account> accounts = request.newRecords;
+        
+        for(Account account : accounts) {
+            //ADD LOGIC FOR BEFORE INSERT HERE
+        }
+        
+    }
+}
+```
+The Trigger for the Account sObject will look like this:
+
+```apex
+trigger accountTrigger on Acount(before insert, before update, before delete, after insert, after update, after 
+        delete, after undelete) {
+    Trigger_Confic__c config = Trigger_Config__c.getInstance();
+    if(!config.Disable_Triggers__c) {
+        TriggerRequest request = new TriggerRequest(Account.SObjectType);
+        AccountDomain domain = new AccountDomain();
+        domain.ProcessAction(request);
+    }
+}
+```
+
+The Domain class inherits the `ProcessAction` method which is overriden in the `ProcessAction` method in 
+AccountDomain. A Custom setting exist called `Trigger_Config__c` that can be used to disable and enable Triggers in 
+the org. So long as all Triggers look for this setting prior to executing all Triggers can be turned on and off from 
+Setup.
+
+Anytime a 'before insert'

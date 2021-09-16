@@ -882,10 +882,42 @@
             this.chooseEvalType(cmp, event, button);
         }else if(button = 'cancel') {
             this.closeModal(cmp, event, button);
+        }else if(button = 'createPlan') {
+            this.handleFlow(cmp, event, button);
         }
+    } ,
+    executeFlow : function (cmp, event) {
+        var flow = cmp.find('flowData');
+        var rid = cmp.get('v.recordId');
+        var inputVariables = [
+            {
+                name: 'recordId' ,
+                type: 'String' ,
+                value: rid
+            }
+        ];
+        return inputVariables;
+    } ,
+    handleFlow : function (cmp, event, button) {
+        cmp.set('v.showPlanModal', true);
+        /*
+        return new Promise(this.executeFlow(cmp, event))
+        .then(
+            function(response) {
+                var result = response;
+                console.log('Result', result);
+            }
+        ).catch(
+          function(error) {
+              console.log('Error Message', error);
+          }
+        );
+        */
+
     } ,
     closeModal : function(cmp, event, button) {
         cmp.set('v.showModal', false);
+        cmp.set('v.showPlanModal', false);
     } ,
     showHelperDog : function(cmp, event, button) {
         cmp.set('v.showModal', true);

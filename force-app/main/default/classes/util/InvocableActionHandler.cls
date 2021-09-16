@@ -47,6 +47,12 @@ global with sharing class InvocableActionHandler{
                         resp = quoteRequest(request);
                     }
                 }
+            }when 'Treatment_Plan__c' {
+                switch on request.action {
+                    when 'assignPlan' {
+
+                    }
+                }
             }
         }
         return resp;
@@ -78,5 +84,22 @@ global with sharing class InvocableActionHandler{
         }
         response.ResponseValue = resp;
         return response;
+    }
+
+    private static InvocableActionResponse assignPlanFromEval(InvocableActionRequest request) {
+        //TreatmentPlanService service = new TreatmentPlanService();
+
+        ServiceRequest serviceRequest = new ServiceRequest();
+        serviceRequest.Action = 'assignPlan';
+        serviceRequest.withParams('recordId', request.recordId);
+        serviceRequest.Name = 'AssignPlanFlow';
+        ServiceResponse serviceResponse = TreatmentPlanService.process(serviceRequest);
+
+        InvocableActionResponse response = new InvocableActionResponse();
+        response.RequestName = request.name;
+        response.ResponseValue = (String) serviceResponse.Data;
+
+        return response;
+
     }
 }

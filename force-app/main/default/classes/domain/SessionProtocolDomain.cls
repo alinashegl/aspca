@@ -28,6 +28,7 @@ public with sharing class SessionProtocolDomain extends DomainActionBase {
         System.debug('SESSION PROTOCOL BEFORE UPDATE IS EXECUTING');
         Map<Id, Session_Protocol__c> newRecordMap = (Map<Id, Session_Protocol__c>) request.newRecordMap;
 
+        List<Session_Protocol__c> sessionProtocolsForProcessing = new List<Session_Protocol__c>();
         for (Session_Protocol__c protocol : newRecordMap.values()) {
             if(protocol.IsSkipped__c == true) {
                 protocol.Preferred_Motivators__c = '';
@@ -38,11 +39,29 @@ public with sharing class SessionProtocolDomain extends DomainActionBase {
                 protocol.Social_Best__c = 'None';
                 protocol.Aggressive_Worst__c = 'None';
             }
+            if (protocol.Add_to_Plan__c == true) {
+                sessionProtocolsForProcessing.add(protocol);
+            }
         }
+        ServiceRequest serviceRequest = new ServiceRequest();
+        if (sessionProtocolsForProcessing.size() > 1 ) {
+
+            serviceRequest.Action = 'beforeUpdateHandler';
+            serviceRequest.withParams('protocols', sessionProtocolsForProcessing);
+
+            ServiceResponse serviceResponse = SessionProtocolService.processReq(serviceRequest);
+            System.debug(serviceResponse);
+        }
+
+
     }
     public void beforeDelete (TriggerRequest request) { System.debug('SESSION PROTOCOL BEFORE DELETE IS EXECUTING'); }
     public void afterInsert (TriggerRequest request) { System.debug('SESSION PROTOCOL AFTER INSERT IS EXECUTING'); }
-    public void afterUpdate (TriggerRequest request) { System.debug('SESSION PROTOCOL AFTER INSERT IS EXECUTING'); }
+    public void afterUpdate (TriggerRequest request) {
+        System.debug('SESSION PROTOCOL AFTER INSERT IS EXECUTING');
+        Map<Id, Session_Protocol__c> newRecordMap = (Map<Id, Session_Protocol__c>) request.newRecordMap;
+
+    }
     public void afterDelete (TriggerRequest request) { System.debug('SESSION PROTOCOL AFTER INSERT IS EXECUTING'); }
 
 }
