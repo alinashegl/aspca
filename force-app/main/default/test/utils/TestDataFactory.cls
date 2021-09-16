@@ -530,6 +530,8 @@ public without sharing class TestDataFactory {
             Behavior_in_Kennel__c = 'Social;Excited',
             Behavior_on_Leash__c = 'Mildly fearful;Panicked',
             Same_Sex_P1__c = 'Friendly;Neutral;Tense/assertive',
+            Resource_Guarding_P1_Push_Face__c = 'Remained relaxed;Ate but seemed nervous',
+            Resource_Guarding_P1_Touch_Body__c = 'Remained relaxed',
             Animal__c = a.Id,
             Scribe_Initials__c = 'SI',
             Tester_Initials__c = 'TI',
@@ -538,16 +540,52 @@ public without sharing class TestDataFactory {
             Comments_BOL__c = 'Other Test Comments for Unit Test',
             Comments_SSD_P1__c = 'Goodish dog',
             Evaluation_Subtype__c = isDogFighting ? 'Dog Fighting' : 'Adult Animal',
+            Muzzled_SSD_P3__c = isDogFighting,
             Potential_Behavior_Issues__c = 'Aggression to People;Other'
         );
         insert be;
         return be;
     }
 
+    public static Behavior_Evaluation__c createDogOnlyBehaviorEvaluation() {
+        Animal__c a = createAnimal();
+        Behavior_Evaluation__c be = new Behavior_Evaluation__c(
+            Same_Sex_P1__c = 'Friendly;Neutral;Tense/assertive',
+            Animal__c = a.Id,
+            Scribe_Initials__c = 'SI',
+            Tester_Initials__c = 'TI',
+            Handler_Initials__c = 'HI',
+            Comments_SSD_P1__c = 'Goodish dog',
+            Evaluation_Subtype__c = 'Dog/Dog Only',
+            Potential_Behavior_Issues__c = 'Aggression to People;Other'
+        );
+        insert be;
+        return be;
+    }
+
+    public static List<Behavior_Evaluation__c> createMultipleBehaviorEvaluation(Integer numRecords, String type) {
+        Animal__c a = createAnimal();
+        List<Behavior_Evaluation__c> evalList = new List<Behavior_Evaluation__c>();
+        for (Integer i = 0; i < numRecords; i++) {
+            Behavior_Evaluation__c be = new Behavior_Evaluation__c(
+                Animal__c = a.Id,
+                Scribe_Initials__c = 'S'+String.valueOf(i),
+                Tester_Initials__c = 'T'+String.valueOf(i),
+                Handler_Initials__c = 'H'+String.valueOf(i),
+                Evaluation_Subtype__c = type
+            );
+            evalList.add(be);
+        }
+        insert evalList;
+        return evalList;
+    }
+
     private static final Integer PROTOCOLCOUNT = 10;
     private static final String PROTCOLNAMEPATTERN = 'Protocol ';
 
     public static Treatment_Plan__c createPlan(){
+        Treatment_Bundle__c bundle = new Treatment_Bundle__c(Name = 'Master', IsActive__c = true, IsMaster__c = true, Description__c = 'Master bundle');
+        insert bundle;
         Treatment_Plan__c plan = new Treatment_Plan__c(IsActive__c = true, Description__c = 'Test');
         insert plan;
         return plan;

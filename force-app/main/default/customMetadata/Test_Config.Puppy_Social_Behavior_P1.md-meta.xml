@@ -15,6 +15,18 @@
         <value xsi:nil="true"/>
     </values>
     <values>
+        <field>IsAdult__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>IsDogFighting__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>IsDogOnly__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
         <field>IsPuppy__c</field>
         <value xsi:type="xsd:boolean">true</value>
     </values>
@@ -44,18 +56,30 @@
     </values>
     <values>
         <field>Test_Description__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Social Behavior - Part 1: Tester Solicits Interaction</value>
     </values>
     <values>
         <field>Test_Display_Order__c</field>
         <value xsi:type="xsd:string">3</value>
     </values>
     <values>
+        <field>Test_Header_Description__c</field>
+        <value xsi:type="xsd:string">&lt;div&gt;Place the puppy in the center of testing space and walk 4-5 feet away. Kneel down or sit on the floor. Call the puppy in a friendly voice and gently clap your hands or tap floor to entice the puppy to come. If the puppy comes to you, praise and touch the puppy. If the puppy does not come keep calling. Continue for 1 minute.&lt;/div&gt;</value>
+    </values>
+    <values>
         <field>Test_Name__c</field>
         <value xsi:type="xsd:string">Social Behavior P1</value>
     </values>
     <values>
+        <field>Test_Optional_Field__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>Test_Skip_Reason_Field__c</field>
         <value xsi:type="xsd:string">Skipped_SB_P1__c</value>
+    </values>
+    <values>
+        <field>Test_Type_Description__c</field>
+        <value xsi:nil="true"/>
     </values>
 </CustomMetadata>

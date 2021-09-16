@@ -66,6 +66,15 @@
                 <componentName>force:relatedListSingleContainer</componentName>
             </componentInstance>
         </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>recordCount</name>
+                    <value>5</value>
+                </componentInstanceProperties>
+                <componentName>lwc_lastTreatments</componentName>
+            </componentInstance>
+        </itemInstances>
         <mode>Replace</mode>
         <name>main</name>
         <type>Region</type>

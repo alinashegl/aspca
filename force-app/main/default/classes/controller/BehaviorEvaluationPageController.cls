@@ -269,6 +269,13 @@ public with sharing class BehaviorEvaluationPageController {
         }else {
             utils.IsDogFighting = false;
         }
+
+        if (behaviorEvaluation.Evaluation_Subtype__c == 'Dog/Dog Only') {
+            utils.IsDogOnly = true;
+            utils.IsAdult = true;
+        }else {
+            utils.IsDogOnly = false;
+        }
         EvaluationWrapper.FieldContents contents = new EvaluationWrapper.FieldContents();
         contents.id = Behavior_Evaluation__c.Caution__c.getDescribe().name;
         contents.value = behaviorEvaluation.Caution__c;
@@ -608,7 +615,7 @@ public with sharing class BehaviorEvaluationPageController {
     @AuraEnabled(Cacheable=true)
     public static EvaluationWrapper getPuppyChildDollTwo(String key) {
         Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Puppy_Child_Doll_P1__c, evaluation);
+        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Puppy_Child_Doll_P2__c, evaluation);
         return wrapper;
     }
     @AuraEnabled(Cacheable=true)

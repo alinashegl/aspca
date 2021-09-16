@@ -20,6 +20,7 @@ public with sharing class TabContentUtil {
     @AuraEnabled public Boolean IsAdult { get; set; }
     @AuraEnabled public Boolean IsPuppy { get; set; }
     @AuraEnabled public Boolean IsDogFighting { get; set; }
+    @AuraEnabled public Boolean IsDogOnly { get; set; }
     @AuraEnabled public Boolean UseCaution { get; set; }
     @AuraEnabled public Boolean IsMuzzled { get; set; }
     @AuraEnabled public EvaluationWrapper.FieldContents Caution { get; set; }
@@ -50,6 +51,7 @@ public with sharing class TabContentUtil {
             Boolean IsAdult,
             Boolean IsPuppy,
             Boolean IsDogFighting,
+            Boolean IsDogOnly,
             Boolean UseCaution,
             Boolean IsMuzzled ,
             EvaluationWrapper.FieldContents Caution,
@@ -79,6 +81,7 @@ public with sharing class TabContentUtil {
         this.IsAdult = IsAdult;
         this.IsPuppy = IsPuppy;
         this.IsDogFighting = IsDogFighting;
+        this.IsDogOnly = IsDogOnly;
         this.UseCaution = UseCaution;
         this.IsMuzzled = IsMuzzled;
         this.Caution = Caution;

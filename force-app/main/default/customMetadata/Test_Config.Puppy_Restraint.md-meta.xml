@@ -15,6 +15,18 @@
         <value xsi:nil="true"/>
     </values>
     <values>
+        <field>IsAdult__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>IsDogFighting__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>IsDogOnly__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
         <field>IsPuppy__c</field>
         <value xsi:type="xsd:boolean">true</value>
     </values>
@@ -44,18 +56,30 @@
     </values>
     <values>
         <field>Test_Description__c</field>
-        <value xsi:nil="true"/>
+        <value xsi:type="xsd:string">Restraint</value>
     </values>
     <values>
         <field>Test_Display_Order__c</field>
         <value xsi:type="xsd:string">8</value>
     </values>
     <values>
+        <field>Test_Header_Description__c</field>
+        <value xsi:type="xsd:string">&lt;div&gt;Sit on the floor with legs outstretched. Pick up puppy and hold puppy in one of two ways (a) so they are reclined against your torso, supported between your body and your arm and facing away from you or (b) so they are lying on their back, supported between your legs, with rear legs next to your body and their head farthest away. If sitting up, support their rear with the hand of the arm cradling them and their torso with your opposite hand. If lying down, place one hand on either shoulder to provide balance and to keep them from getting up. Hold the puppy in this position for 3 minutes. If they struggle, hold more firmly, re-position if necessary. If they are relaxed, talk soothingly to them and use your fingers to massage them gently. Briefly handle the body (foot cars, tail, belly, genitalia). Only release when they are relaxed, and at least not actively struggling. If puppy becomes uncontrollably frightened or aggressive, discontinue.&lt;/div&gt;</value>
+    </values>
+    <values>
         <field>Test_Name__c</field>
         <value xsi:type="xsd:string">Restraint</value>
     </values>
     <values>
+        <field>Test_Optional_Field__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>Test_Skip_Reason_Field__c</field>
         <value xsi:type="xsd:string">Puppy_Skipped_Restraint__c</value>
+    </values>
+    <values>
+        <field>Test_Type_Description__c</field>
+        <value xsi:nil="true"/>
     </values>
 </CustomMetadata>
