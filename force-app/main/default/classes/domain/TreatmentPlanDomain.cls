@@ -28,9 +28,10 @@ public with sharing class TreatmentPlanDomain extends DomainActionBase{
         List<Treatment_Plan__c> newRecords = request.newRecords;
 
         Map<Id, Treatment_Plan__c> newRecordMap = (Map<Id, Treatment_Plan__c>) request.newRecordMap;
-        Treatment_Bundle__c standard = [SELECT Id, Name, IsMaster__c from Treatment_Bundle__c where IsMaster__c = TRUE];
+        List<Treatment_Bundle__c> standard = [SELECT Id, Name, IsMaster__c from Treatment_Bundle__c where IsMaster__c =
+                TRUE LIMIT 1];
         for (Treatment_Plan__c plan : newRecords) {
-            plan.MasterTreatmentBundleId__c = standard.Id;
+            plan.MasterTreatmentBundleId__c = standard[0].Id;
         }
 
         //if (newRecords != null) { update newRecords; }
