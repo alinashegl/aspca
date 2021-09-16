@@ -34,7 +34,8 @@ public with sharing class SessionProtocolSelector extends SObjectSelector {
                 Session_Protocol__c.IsRemoved__c,
                 Session_Protocol__c.IsDeleted ,
                 Session_Protocol__c.ProtocolId__c ,
-                Session_Protocol__c.TreatmentSessionId__c
+                Session_Protocol__c.TreatmentSessionId__c ,
+                Session_Protocol__c.Add_to_Plan__c
         };
     }
     public override List<iOrderBy> GetDefaultOrderBy() {

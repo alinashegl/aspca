@@ -34,7 +34,8 @@ public with sharing class TreatmentPlanService {
         ServiceResponse response = new ServiceResponse(request);
         return response;
     }
-    //TODO: Correct Duplication of Records when bundle assignment is changed.
+    //TODO: Correct Duplication of Records when bundle assignment is changed. This was originally done using the
+    // PricebookEntry object, and the move to new sObjects created this bug. Should be able to fix it from here
     private static ServiceResponse bundleAssignmentChanged(ServiceRequest request) {
         System.debug('Bundle Assignment Helper Is Executing');
         ServiceResponse response = new ServiceResponse(request);
