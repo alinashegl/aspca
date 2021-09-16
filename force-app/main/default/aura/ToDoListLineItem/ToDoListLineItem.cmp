@@ -18,18 +18,22 @@
     <aura:attribute type="String" name="PlanId" />
 
     <aura:method name="handleClick"  action="{!c.handleClick}" access="public" />
-    <table bgcolor="white" class="slds-box grid-container">
-        <tr class="grid-item">
-            <td class="grid-item">{!v.Name}</td>
-            <td class="grid-item">{!v.Priority}</td>
-            <td class="grid-item">{!v.Assignment}</td>
-            <td class="grid-item">{!v.TreatmentCount}</td>
-            <td class="grid-item">{!v.ColorCode}</td>
-            <td class="grid-item">
+    <table bgcolor="white" class="line">
+        <tr class="spaceUnder">
+            <td class="width">{!v.Name}</td>
+            <td class="width">{!v.Priority}</td>
+            <td class="width">{!v.Assignment}</td>
+            <td class="width">{!v.TreatmentCount}</td>
+            <td class="width">{!v.ColorCode}</td>
+        </tr>
+    </table>
+    <table bgcolor="white">
+        <tr>
+            <td>
                 <lightning:buttonGroup >
-                    <lightning:button name="showProtocols" label="Show Protocol" onclick="{!c.handleClick}"
+                    <lightning:button name="showProtocols" label="Assigned Protocols" onclick="{!c.handleClick}"
                                       class="float"  aura:id="{!v.IndexVar}"/>
-                    <lightning:button name="showNotPresent" label="Show Not Present" onclick="{!c.handleClick}"
+                    <lightning:button name="showNotPresent" label="Unassigned Protocols" onclick="{!c.handleClick}"
                                       class="float" />
                     <lightning:button name="updatePlanProtocols" label="Save Changes" class="float" />
                 </lightning:buttonGroup>
@@ -37,20 +41,18 @@
             </td>
         </tr>
     </table>
-    <table bgcolor="white" class="grid-item slds-box">
+    <table bgcolor="white">
         <aura:if isTrue="{!v.RenderProtocols}">
-            &nbsp;
-            <thead align="center-absolute">Protocols in Plan</thead>
-            <tr>
+            <thead><strong>Assigned Protocols</strong></thead>
+            <tr class="small">
                 <c:TreatmentProtocolList data="{!v.Data}" />
             </tr>
         </aura:if>
     </table>
-    <table bgcolor="white" class="grid-item slds-box">
+    <table bgcolor="white">
         <aura:if isTrue="{!v.RenderNotPresentData}">
-            &nbsp;
-            <thead align="center-absolute">Protocols Not In Plan</thead>
-            <tr>
+            <thead><strong>Unassigned Protocols</strong></thead>
+            <tr class="small">
                 <c:TreatmentProtocolList data="{!v.NotPresentData}" />
             </tr>
         </aura:if>
