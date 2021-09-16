@@ -62,6 +62,25 @@ public with sharing class TreatmentToDoListController {
         @AuraEnabled public BundleSelection selectionOne;
         @AuraEnabled public BundleSelection selectionTwo;
         @AuraEnabled public BundleSelection selectionThree;
+        @AuraEnabled public BundleSelection selectionFour;
+        @AuraEnabled public BundleSelection selectionFive;
+
+        public RowSelection(BundleSelection selectionOne, BundleSelection selectionTwo, BundleSelection
+                selectionThree, BundleSelection selectionFour, BundleSelection selectionFive) {
+            this.selectionOne = selectionOne;
+            this.selectionTwo = selectionTwo;
+            this.selectionThree = selectionThree;
+            this.selectionFour = selectionFour;
+            this.selectionFive = selectionFive;
+        }
+
+        public RowSelection(BundleSelection selectionOne, BundleSelection selectionTwo, BundleSelection
+                selectionThree, BundleSelection selectionFour) {
+            this.selectionOne = selectionOne;
+            this.selectionTwo = selectionTwo;
+            this.selectionThree = selectionThree;
+            this.selectionFour = selectionFour;
+        }
 
         public RowSelection(BundleSelection selectionOne, BundleSelection selectionTwo, BundleSelection
                 selectionThree) {
@@ -185,21 +204,39 @@ public with sharing class TreatmentToDoListController {
             }
             //System.debug(selections.size());
             Integer variable = selections.size();
-            while(variable >= 3) {
+            while(variable >= 5) {
 
                 RowSelection selection = new RowSelection();
                 selection.selectionOne =  selections[variable - 1];
                 selection.selectionTwo =  selections[variable - 2];
                 selection.selectionThree =  selections[variable - 3];
+                selection.selectionFour = selections[variable -4];
+                selection.selectionFive = selections[variable -5];
                 variable = variable - 4;
                 rowSelections.add(selection);
             }
 
+
+            if (variable == 4) {
+                RowSelection selection = new RowSelection();
+                selection.selectionOne = selections[0];
+                selection.selectionTwo = selections[1];
+                selection.selectionThree = selections[2];
+                selection.selectionFour = selections[3];
+                BundleSelection opt = new BundleSelection();
+                opt.name = 'EMPTY';
+                selection.selectionFive = opt;
+                rowSelections.add(selection);
+            }
             if (variable == 3) {
                 RowSelection selection = new RowSelection();
                 selection.selectionOne = selections[0];
                 selection.selectionTwo = selections[1];
-                selection.selectionThree = selections[3];
+                selection.selectionThree = selections[2];
+                BundleSelection opt = new BundleSelection();
+                opt.name = 'EMPTY';
+                selection.selectionFour = opt;
+                selection.selectionFive = opt;
                 rowSelections.add(selection);
             }
             if (variable == 2) {
@@ -209,6 +246,8 @@ public with sharing class TreatmentToDoListController {
                 BundleSelection opt = new BundleSelection();
                 opt.name = 'EMPTY';
                 selection.selectionThree = opt;
+                selection.selectionFour = opt;
+                selection.selectionFive = opt;
                 rowSelections.add(selection);
             }
             if (variable == 1) {
@@ -216,22 +255,37 @@ public with sharing class TreatmentToDoListController {
                 selection.selectionOne = selections[0];
                 BundleSelection opt = new BundleSelection();
                 opt.name = 'EMPTY';
+                selection.selectionFour = opt;
+                selection.selectionFive = opt;
                 selection.selectionThree = opt;
                 selection.selectionTwo = opt;
                 rowSelections.add(selection);
             }
 
             Integer variable2 = notPresentSelections.size();
-            if(variable2 > 3) {
-                while(variable2 >= 3) {
+            if(variable2 > 5) {
+                while(variable2 >= 5) {
 
                     RowSelection selection = new RowSelection();
                     selection.selectionOne =  notPresentSelections[variable2 - 1];
                     selection.selectionTwo =  notPresentSelections[variable2 - 2];
                     selection.selectionThree =  notPresentSelections[variable2 - 3];
+                    selection.selectionFour = notPresentSelections[variable2 -4];
+                    selection.selectionFive = notPresentSelections[variable2 -5];
                     variable2 = variable2 - 4;
                     notPresentRow.add(selection);
                 }
+            }
+            if (variable2 == 4) {
+                RowSelection selection = new RowSelection();
+                selection.selectionOne = notPresentSelections[0];
+                selection.selectionTwo = notPresentSelections[1];
+                selection.selectionThree = notPresentSelections[2];
+                selection.selectionFour = notPresentSelections[3];
+                BundleSelection opt = new BundleSelection();
+                opt.name = 'EMPTY';
+                selection.selectionFive = opt;
+                notPresentRow.add(selection);
             }
 
             if (variable2 == 3) {
@@ -239,6 +293,10 @@ public with sharing class TreatmentToDoListController {
                 selection.selectionOne = notPresentSelections[0];
                 selection.selectionTwo = notPresentSelections[1];
                 selection.selectionThree = notPresentSelections[3];
+                BundleSelection opt = new BundleSelection();
+                opt.name = 'EMPTY';
+                selection.selectionFive = opt;
+                selection.selectionFour = opt;
                 notPresentRow.add(selection);
             }
             if (variable2 == 2) {
@@ -247,6 +305,8 @@ public with sharing class TreatmentToDoListController {
                 selection.selectionTwo = notPresentSelections[1];
                 BundleSelection opt = new BundleSelection();
                 opt.name = 'EMPTY';
+                selection.selectionFive = opt;
+                selection.selectionFour = opt;
                 selection.selectionThree = opt;
                 notPresentRow.add(selection);
             }
@@ -255,6 +315,8 @@ public with sharing class TreatmentToDoListController {
                 selection.selectionOne = notPresentSelections[0];
                 BundleSelection opt = new BundleSelection();
                 opt.name = 'EMPTY';
+                selection.selectionFive = opt;
+                selection.selectionFour = opt;
                 selection.selectionThree = opt;
                 selection.selectionTwo = opt;
                 notPresentRow.add(selection);
@@ -272,5 +334,15 @@ public with sharing class TreatmentToDoListController {
 
         System.debug(data);
         return data;
+    }
+
+    @AuraEnabled
+    public static ServiceResponse saveChanges(String planId, List<String> presentProtocols, List<String>
+            removedProtocols) {
+
+        ServiceRequest request = new ServiceRequest();
+
+        ServiceResponse response = new ServiceResponse(request);
+        return response;
     }
 }

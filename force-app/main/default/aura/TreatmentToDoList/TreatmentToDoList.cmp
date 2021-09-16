@@ -25,7 +25,7 @@
         </table>
         <aura:iteration var="line" items="{!v.data}" indexVar="indexVar" aura:id="dataList">
             <table>
-                <c:ToDoListLineItem Name="{!line.animal.Name}" Priority="{!line.priority}" Assignment="{!line.assignment}" TreatmentCount="{!line.treatmentcount}" ColorCode="{!line.colorCode}" Data="{!line.rowSelections}" IndexVar="{!line.indexVar}" RenderProtocols="{!line.displayProtocols}" NotPresentData="{!line.notPresentSelections}" RenderNotPresentData="{!line.displayNotPresent}" />
+                <c:ToDoListLineItem Name="{!line.animal.Name}" Priority="{!line.priority}" Assignment="{!line.assignment}" TreatmentCount="{!line.treatmentcount}" ColorCode="{!line.colorCode}" Data="{!line.rowSelections}" IndexVar="{!line.indexVar}" RenderProtocols="{!line.displayProtocols}" NotPresentData="{!line.notPresentSelections}" RenderNotPresentData="{!line.displayNotPresent}" AnimalId="{!line.animal.Id}" PlanId="{!line.plan.Id}" />
             </table>
 
         </aura:iteration>
