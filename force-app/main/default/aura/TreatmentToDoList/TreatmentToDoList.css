@@ -5,6 +5,13 @@
  * @author barne
  * @version 1.0.0
  */
+.THIS h1.large {
+  font-size: 1.5em;
+  background-color: #FFFFFF;
+  padding: 5px;
+  text-align:center;  
+  font-weight: bold;
+}
 .THIS.c-container {
     border: 1px solid #d8dde6;
     margin: 10px 0 20px 0;
@@ -24,4 +31,9 @@
 .THIS tr.spaceUnder>td {
     padding: 5px;
 }
-
+.THIS .line{
+	border-top: 2px solid #8c8b8b;
+}
+.THIS td.width {
+    width: 20%;
+}
