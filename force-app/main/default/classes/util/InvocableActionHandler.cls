@@ -38,7 +38,8 @@ global with sharing class InvocableActionHandler{
         return responses;
     }
 
-    private static InvocableActionResponse process(InvocableActionRequest request) {
+    public static InvocableActionResponse process(InvocableActionRequest request) {
+        System.debug(request);
         InvocableActionResponse resp = new InvocableActionResponse();
         switch on request.targetSObject {
             when 'Quote' {
@@ -50,7 +51,7 @@ global with sharing class InvocableActionHandler{
             }when 'Treatment_Plan__c' {
                 switch on request.action {
                     when 'assignPlan' {
-
+                        resp = assignPlanFromEval(request);
                     }
                 }
             }
@@ -96,9 +97,11 @@ global with sharing class InvocableActionHandler{
         ServiceResponse serviceResponse = TreatmentPlanService.process(serviceRequest);
 
         InvocableActionResponse response = new InvocableActionResponse();
+        System.debug(request);
         response.RequestName = request.name;
         response.ResponseValue = (String) serviceResponse.Data;
 
+        System.debug(response);
         return response;
 
     }

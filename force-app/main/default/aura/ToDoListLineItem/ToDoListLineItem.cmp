@@ -26,9 +26,16 @@
     <aura:handler name="change" value="{!v.PlanId}" action="{!c.onPlanChange}" />
     <table bgcolor="white" class="line">
         <tr class="spaceUnder">
-            <td class="width"><lightning:formattedUrl value="{!v.AnimalUrlPath}" label="{!v.Name}" /></td>
+            <td class="width"><lightning:formattedUrl value="{!'/' + v.AnimalId}" label="{!v.Name}" /></td>
             <td class="width">{!v.Priority}</td>
-            <td class="width">{!v.Assignment}</td>
+            <td class="width">
+                <aura:if isTrue="{!not(empty(v.Assignment))}">
+                    <lightning:formattedUrl value="{!'/' + v.plan.AssignedTreatmentBundleId__c}" label="{!v.Assignment}" />
+                </aura:if>
+                <aura:if isTrue="{!empty(v.Assignment)}">
+                    {!v.Assignment}
+                </aura:if>
+                </td>
             <td class="width">{!v.TreatmentCount}</td>
             <td class="width">{!v.ColorCode}</td>
         </tr>

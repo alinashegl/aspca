@@ -27,6 +27,7 @@ public with sharing class SessionProtocolDomain extends DomainActionBase {
     public void beforeUpdate (TriggerRequest request) {
         System.debug('SESSION PROTOCOL BEFORE UPDATE IS EXECUTING');
         Map<Id, Session_Protocol__c> newRecordMap = (Map<Id, Session_Protocol__c>) request.newRecordMap;
+        Map<Id, Session_Protocol__c> oldRecordMap = (Map<Id, Session_Protocol__c>) request.oldRecordMap;
 
         List<Session_Protocol__c> sessionProtocolsForProcessing = new List<Session_Protocol__c>();
         for (Session_Protocol__c protocol : newRecordMap.values()) {
@@ -38,9 +39,16 @@ public with sharing class SessionProtocolDomain extends DomainActionBase {
                 protocol.Fear_Worst__c = 'None';
                 protocol.Social_Best__c = 'None';
                 protocol.Aggressive_Worst__c = 'None';
+                protocol.Overall_Score__c = 'None';
             }
             if (protocol.Add_to_Plan__c == true) {
+                if () {
+
+                }
                 sessionProtocolsForProcessing.add(protocol);
+            }
+            if(protocol.IsRemoved__c == true) {
+
             }
         }
         ServiceRequest serviceRequest = new ServiceRequest();

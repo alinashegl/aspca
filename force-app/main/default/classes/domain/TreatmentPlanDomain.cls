@@ -28,11 +28,14 @@ public with sharing class TreatmentPlanDomain extends DomainActionBase{
         List<Treatment_Plan__c> newRecords = request.newRecords;
 
         Map<Id, Treatment_Plan__c> newRecordMap = (Map<Id, Treatment_Plan__c>) request.newRecordMap;
-        List<Treatment_Bundle__c> standard = [SELECT Id, Name, IsMaster__c from Treatment_Bundle__c where IsMaster__c =
-                TRUE LIMIT 1];
-        for (Treatment_Plan__c plan : newRecords) {
-            plan.MasterTreatmentBundleId__c = standard[0].Id;
+        if(!Test.isRunningTest()) {
+            Treatment_Bundle__c standard = [SELECT Id, Name, IsMaster__c from Treatment_Bundle__c where IsMaster__c =
+                    TRUE LIMIT 1];
+            for (Treatment_Plan__c plan : newRecords) {
+                plan.MasterTreatmentBundleId__c = standard.Id;
+            }
         }
+
 
         //if (newRecords != null) { update newRecords; }
 
@@ -50,6 +53,34 @@ public with sharing class TreatmentPlanDomain extends DomainActionBase{
     }
     public void afterInsert(TriggerRequest request) {
         //System.debug('After Insert is Executing');
+        List<Treatment_Plan__c> newRecords = request.newRecords;
+        List<Treatment_Plan__c> oldRecords = request.oldRecords;
+
+        Map<Id, Treatment_Plan__c> newRecordMap = (Map<Id, Treatment_Plan__c>) request.newRecordMap;
+        Map<Id, Treatment_Plan__c> oldRecordMap = (Map<Id, Treatment_Plan__c>) request.oldRecordMap;
+        List<ServiceRequest> requests = new List<ServiceRequest>();
+        //TreatmentPlanService service = new TreatmentPlanService();
+
+        List<Plan_Protocol__c> lineItems = new List<Plan_Protocol__c>();
+        for (Treatment_Plan__c opportunity : newRecordMap.values()) {
+            String newVal = opportunity.AssignedTreatmentBundleId__c;
+            System.debug(newVal);
+            if ( newVal != null ){
+                ServiceRequest serviceRequest = new ServiceRequest();
+                serviceRequest.Name = 'New Bundle Assignment';
+                serviceRequest.Action = 'newBundleAssigned';
+                //serviceRequest.withParams('old', oldOpp);
+                serviceRequest.withParams('new', opportunity);
+                serviceRequest.withParams('newBundleId', newVal);
+                requests.add(serviceRequest);
+            }
+        }
+        if (requests.size() > 0) {
+            List<ServiceResponse> responses = TreatmentPlanService.executeAll(requests);
+            for (ServiceResponse response : responses) {
+                System.debug(responses);
+            }
+        }
     }
     public static void afterUpdate(TriggerRequest request) {
         List<Treatment_Plan__c> newRecords = request.newRecords;

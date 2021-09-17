@@ -10,20 +10,8 @@
 private class test_BehaviorEvaluationPageController {
     @IsTest
     static void regressionCoverage() {
-
-
+        Behavior_Evaluation__c evaluation = TestDataFactory.createPuppyBehaviorEvaluation();
         Test.startTest();
-        //Animal__c A = [SELECT Id, name from Animal__c WHERE Id = 'a077j000001VVm6AAG'];
-        String initials = 'LB';
-        Behavior_Evaluation__c evaluation = new Behavior_Evaluation__c();
-        evaluation.Behavior_in_Kennel__c = 'Social';
-        evaluation.Animal__c = Id.valueOf('a077j000001VVm6AAG');
-        evaluation.Scribe_Initials__c = initials;
-        evaluation.Tester_Initials__c = initials;
-        evaluation.Handler_Initials__c = initials;
-        evaluation.Comments_BIK__c = 'AAAAAAAAAAAAAAAAAAA';
-        insert evaluation;
-        BehaviorEvaluationPageController controller = new BehaviorEvaluationPageController();
         Behavior_Evaluation__c testGetter = BehaviorEvaluationPageController.getOne(evaluation.Id);
         List<EvaluationWrapper> allWrappers = new List<EvaluationWrapper>();
         allWrappers.add(BehaviorEvaluationPageController.getBehaviorInKennel(evaluation.Id));
@@ -76,10 +64,10 @@ private class test_BehaviorEvaluationPageController {
         Boolean status = BehaviorEvaluationPageController.getCautionStatus(evaluation.Id);
 
         Map<String, Object> updateEvalTest = BehaviorEvaluationPageController.updateEval('Comments_BIK__c',
-                'Social', String.valueOf(evaluation.Id));
+                'Social', evaluation.Id);
         Map<String, Object> selectionsTest = BehaviorEvaluationPageController.putSelections('Behavior_In_Kennel__c',
-                String.valueOf('Social, Not Social').split(','), String.valueOf(evaluation.Id));
-        Map<String,Object> validityTest = BehaviorEvaluationPageController.handleValidity(String.valueOf(evaluation.Id));
+                new List<String>{'{"label":"Social","isSelected":true}, {"label":"Not Social","isSelected":true}'}, evaluation.Id);
+        Map<String,Object> validityTest = BehaviorEvaluationPageController.handleValidity(evaluation.Id);
         List<EvaluationWrapper.ListItems> items = BehaviorEvaluationPageController.getSkipReasons(1);
         Test.stopTest();
         System.assertEquals('success', selectionsTest.get('status'));
@@ -87,11 +75,6 @@ private class test_BehaviorEvaluationPageController {
         System.assertEquals('success', validityTest.get('status'));
         System.assertEquals(Behavior_Evaluation__c.Skipped_BIK__c.getDescribe().getPicklistValues().size(), items.size());
         System.assertEquals(45, allWrappers.size());
-        System.assertNotEquals(items, null);
-        System.assertNotEquals(allWrappers, null);
-        System.assertNotEquals(updateEvalTest, null);
-        System.assertNotEquals(selectionsTest, null);
-        System.assertNotEquals(validityTest, null);
     }
 
     @IsTest

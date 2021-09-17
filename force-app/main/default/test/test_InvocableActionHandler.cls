@@ -55,4 +55,22 @@ private class test_InvocableActionHandler {
 
         Test.stopTest();
     }
+    @IsTest
+    static void validateAssignPlanAction() {
+        Behavior_Evaluation__c evaluation = TestDataFactory.createAdultBehaviorEvaluation(false);
+
+        InvocableActionHandler.InvocableActionRequest actionRequest = new InvocableActionHandler.InvocableActionRequest();
+        actionRequest.recordId = evaluation.Id;
+        actionRequest.targetSObject = 'Treatment_Plan__c';
+        actionRequest.name = 'assignPlanFromEval';
+        actionRequest.action = 'assignPlan';
+        List<InvocableActionHandler.InvocableActionRequest> invocableActionRequests = new List<InvocableActionHandler.InvocableActionRequest>();
+        invocableActionRequests.add(actionRequest);
+        List<InvocableActionHandler.InvocableActionResponse> invocableActionResponses = InvocableActionHandler.invocableAction(invocableActionRequests);
+
+        Test.startTest();
+
+        System.debug(invocableActionRequests);
+        Test.stopTest();
+    }
 }
