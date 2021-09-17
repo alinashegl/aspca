@@ -11,7 +11,12 @@
                 this.showProtocols(cmp, event, button);
             }else if(button == 'showNotPresent') {
                 this.showNotPresent(cmp, event, button);
+            }else if(button == 'updatePlanProtocols') {
+                this.updatePlanProtocols(cmp, event, button);
             }
+        } ,
+        updatePlanProtocols : function (cmp, event, button) {
+
         } ,
         showProtocols : function (cmp, event, button) {
                //console.log('SHOW PROTOCOLS');

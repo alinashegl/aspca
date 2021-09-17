@@ -149,6 +149,7 @@
         <members>SummaryWrapper</members>
         <members>test_BehEvalPdfController</members>
         <members>test_LastTreatmentsController</members>
+        <members>NavItemController</members>
         <name>ApexClass</name>
     </types>
     <types>
@@ -494,6 +495,10 @@
     <types>
         <members>*</members>
         <name>CustomMetadata</name>
+    </types>
+    <types>
+        <members>Instance_URL</members>
+        <name>CustomLabel</name>
     </types>
     <version>52.0</version>
 </Package>
