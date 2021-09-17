@@ -22,7 +22,8 @@ public with sharing class TreatmentPlanSelector extends SObjectSelector {
                 Treatment_Plan__c.Description__c ,
                 Treatment_Plan__c.Id ,
                 Treatment_Plan__c.Plan_Notes__c ,
-                Treatment_Plan__c.Animal__c
+                Treatment_Plan__c.Animal__c ,
+                Treatment_Plan__c.Preferred_Motivators__c
         };
     }
 

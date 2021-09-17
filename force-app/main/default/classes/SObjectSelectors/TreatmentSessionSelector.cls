@@ -21,7 +21,8 @@ public with sharing class TreatmentSessionSelector extends SObjectSelector {
                 Treatment_Session__c.CreatedDate,
                 Treatment_Session__c.LastModifiedById,
                 Treatment_Session__c.LastModifiedDate,
-                Treatment_Session__c.Session_Notes__c
+                Treatment_Session__c.Session_Notes__c ,
+                Treatment_Session__c.Preferred_Motivators__c
         };
     }
 
