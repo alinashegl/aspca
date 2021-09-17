@@ -158,9 +158,7 @@ public with sharing class TreatmentPlanService {
         Treatment_Plan__c plan = new Treatment_Plan__c();
         if(!Test.isRunningTest()) {
             try {
-                plan =  [SELECT id, Animal__c from Treatment_Plan__c WHERE
-                        Animal__c =: sEvaluation
-                                .Animal__c LIMIT  1];
+                plan =  [SELECT id, Animal__c from Treatment_Plan__c WHERE Animal__c =: sEvaluation.Animal__c LIMIT  1];
                 System.debug('QUERIED PLAN ==> ' + plan );
             }catch (Exception e) {
                 System.debug(e);

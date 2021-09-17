@@ -56,21 +56,39 @@ private class test_InvocableActionHandler {
         Test.stopTest();
     }
     @IsTest
-    static void validateAssignPlanAction() {
+    static void validateAssignPlanActionWithNoPlan() {
         Behavior_Evaluation__c evaluation = TestDataFactory.createAdultBehaviorEvaluation(false);
+
 
         InvocableActionHandler.InvocableActionRequest actionRequest = new InvocableActionHandler.InvocableActionRequest();
         actionRequest.recordId = evaluation.Id;
         actionRequest.targetSObject = 'Treatment_Plan__c';
         actionRequest.name = 'assignPlanFromEval';
         actionRequest.action = 'assignPlan';
-        List<InvocableActionHandler.InvocableActionRequest> invocableActionRequests = new List<InvocableActionHandler.InvocableActionRequest>();
-        invocableActionRequests.add(actionRequest);
-        List<InvocableActionHandler.InvocableActionResponse> invocableActionResponses = InvocableActionHandler.invocableAction(invocableActionRequests);
+        InvocableActionHandler.InvocableActionResponse actionResponse = InvocableActionHandler.process(actionRequest);
+        Test.startTest();
+        System.assertEquals('NO PLAN FOUND', actionResponse.ResponseValue);
+        System.debug(actionResponse);
+        Test.stopTest();
+    }
+    @IsTest
+    static void validateAssignPlanActionWithPlan() {
+        Behavior_Evaluation__c evaluation = TestDataFactory.createAdultBehaviorEvaluation(false);
+        Treatment_Plan__c plan = new Treatment_Plan__c();
+        plan.Animal__c = evaluation.Animal__c;
+        plan.IsActive__c = true;
+        insert plan;
+
+        InvocableActionHandler.InvocableActionRequest actionRequest = new InvocableActionHandler.InvocableActionRequest();
+        actionRequest.recordId = evaluation.Id;
+        actionRequest.targetSObject = 'Treatment_Plan__c';
+        actionRequest.name = 'assignPlanFromEval';
+        actionRequest.action = 'assignPlan';
+        InvocableActionHandler.InvocableActionResponse actionResponse = InvocableActionHandler.process(actionRequest);
 
         Test.startTest();
+        System.debug(actionResponse);
 
-        System.debug(invocableActionRequests);
         Test.stopTest();
     }
 }

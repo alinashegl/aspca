@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <actionCalls>
         <name>Assign_Plan</name>
         <label>Assign Plan</label>
-        <locationX>176</locationX>
+        <locationX>182</locationX>
         <locationY>158</locationY>
         <actionName>InvocableActionHandler</actionName>
         <actionType>apex</actionType>
@@ -38,10 +38,56 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </actionCalls>
     <apiVersion>53.0</apiVersion>
+    <assignments>
+        <name>Assign_Plan_Values</name>
+        <label>Assign Plan Values</label>
+        <locationX>50</locationX>
+        <locationY>758</locationY>
+        <assignmentItems>
+            <assignToReference>newTreatmentPlan.Animal__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>New_Get_Current_Animal.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>newTreatmentPlan.Treatment_Priority__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>inputPriority</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>newTreatmentPlan.IsActive__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Create_Plan</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>AssignBundle</name>
+        <label>AssignBundle</label>
+        <locationX>50</locationX>
+        <locationY>998</locationY>
+        <assignmentItems>
+            <assignToReference>newTreatmentPlan.AssignedTreatmentBundleId__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>selectedBundleOutput</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>UpdatePlan</targetReference>
+        </connector>
+    </assignments>
     <decisions>
         <name>ResponseCheck</name>
         <label>ResponseCheck</label>
-        <locationX>176</locationX>
+        <locationX>182</locationX>
         <locationY>278</locationY>
         <defaultConnector>
             <targetReference>Get_Evaluation</targetReference>
@@ -57,9 +103,40 @@
                     <stringValue>NO PLAN FOUND</stringValue>
                 </rightValue>
             </conditions>
+            <connector>
+                <targetReference>Create_New_Plan_Screen</targetReference>
+            </connector>
             <label>No Plan Found</label>
         </rules>
     </decisions>
+    <description>New Version</description>
+    <dynamicChoiceSets>
+        <name>inputBundle</name>
+        <dataType>String</dataType>
+        <displayField>Name</displayField>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>IsMaster__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <object>Treatment_Bundle__c</object>
+        <outputAssignments>
+            <assignToReference>selectedBundleOutput</assignToReference>
+            <field>Id</field>
+        </outputAssignments>
+        <valueField>Name</valueField>
+    </dynamicChoiceSets>
+    <dynamicChoiceSets>
+        <name>treatmentPriority</name>
+        <dataType>Picklist</dataType>
+        <displayField xsi:nil="true"/>
+        <object xsi:nil="true"/>
+        <picklistField>Treatment_Priority__c</picklistField>
+        <picklistObject>Treatment_Plan__c</picklistObject>
+    </dynamicChoiceSets>
     <interviewLabel>AssignPlan {!$Flow.CurrentDateTime}</interviewLabel>
     <label>AssignPlan</label>
     <processMetadataValues>
@@ -81,10 +158,20 @@
         </value>
     </processMetadataValues>
     <processType>Flow</processType>
+    <recordCreates>
+        <name>Create_Plan</name>
+        <label>Create Plan</label>
+        <locationX>50</locationX>
+        <locationY>878</locationY>
+        <connector>
+            <targetReference>AssignBundle</targetReference>
+        </connector>
+        <inputReference>newTreatmentPlan</inputReference>
+    </recordCreates>
     <recordLookups>
         <name>Get_Current_Animal</name>
         <label>Get Current Animal</label>
-        <locationX>308</locationX>
+        <locationX>314</locationX>
         <locationY>518</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -105,7 +192,7 @@
     <recordLookups>
         <name>Get_Evaluation</name>
         <label>Get Evaluation</label>
-        <locationX>308</locationX>
+        <locationX>314</locationX>
         <locationY>398</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -126,7 +213,7 @@
     <recordLookups>
         <name>Get_Treatment_Plan</name>
         <label>Get Treatment Plan</label>
-        <locationX>308</locationX>
+        <locationX>314</locationX>
         <locationY>638</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -156,10 +243,89 @@
         <sortOrder>Asc</sortOrder>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
+    <recordLookups>
+        <name>New_Get_Current_Animal</name>
+        <label>Get Current Animal</label>
+        <locationX>50</locationX>
+        <locationY>638</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Assign_Plan_Values</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_Evaluation.Animal__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Animal__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>New_Get_Evaluation</name>
+        <label>Get Evaluation</label>
+        <locationX>50</locationX>
+        <locationY>518</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>New_Get_Current_Animal</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Behavior_Evaluation__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>UpdatePlan</name>
+        <label>UpdatePlan</label>
+        <locationX>50</locationX>
+        <locationY>1118</locationY>
+        <inputReference>newTreatmentPlan</inputReference>
+    </recordUpdates>
+    <screens>
+        <name>Create_New_Plan_Screen</name>
+        <label>Create New Plan Screen</label>
+        <locationX>50</locationX>
+        <locationY>398</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>New_Get_Evaluation</targetReference>
+        </connector>
+        <fields>
+            <name>inputPriority</name>
+            <choiceReferences>treatmentPriority</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Select Treatment Priority</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>inputTreatmentBundleScreen</name>
+            <choiceReferences>inputBundle</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Select Bundle Assignment</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
     <screens>
         <name>ErrorScreen</name>
         <label>Error</label>
-        <locationX>572</locationX>
+        <locationX>578</locationX>
         <locationY>758</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
@@ -175,7 +341,7 @@
     <screens>
         <name>Go_to_Treatment_Plan</name>
         <label>Go to Treatment Plan</label>
-        <locationX>308</locationX>
+        <locationX>314</locationX>
         <locationY>758</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
@@ -210,18 +376,33 @@
         <showHeader>true</showHeader>
     </screens>
     <start>
-        <locationX>50</locationX>
+        <locationX>56</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Assign_Plan</targetReference>
         </connector>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
+    <variables>
+        <name>newTreatmentPlan</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Treatment_Plan__c</objectType>
+    </variables>
     <variables>
         <name>recordId</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>selectedBundleOutput</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
         <isOutput>false</isOutput>
     </variables>
 </Flow>

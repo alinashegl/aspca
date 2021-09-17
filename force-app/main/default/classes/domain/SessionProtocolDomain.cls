@@ -31,6 +31,7 @@ public with sharing class SessionProtocolDomain extends DomainActionBase {
 
         List<Session_Protocol__c> sessionProtocolsForProcessing = new List<Session_Protocol__c>();
         for (Session_Protocol__c protocol : newRecordMap.values()) {
+            Session_Protocol__c oldProtocol = oldRecordMap.get(protocol.Id);
             if(protocol.IsSkipped__c == true) {
                 protocol.Preferred_Motivators__c = '';
                 protocol.Arousal_Best__c = 'None';
@@ -42,13 +43,15 @@ public with sharing class SessionProtocolDomain extends DomainActionBase {
                 protocol.Overall_Score__c = 'None';
             }
             if (protocol.Add_to_Plan__c == true) {
-                if () {
+
+                if (oldProtocol.Add_to_Plan__c == false) {
 
                 }
-                sessionProtocolsForProcessing.add(protocol);
             }
             if(protocol.IsRemoved__c == true) {
-
+                if (oldProtocol.IsRemoved__c == false) {
+                    sessionProtocolsForProcessing.add(protocol);
+                }
             }
         }
         ServiceRequest serviceRequest = new ServiceRequest();

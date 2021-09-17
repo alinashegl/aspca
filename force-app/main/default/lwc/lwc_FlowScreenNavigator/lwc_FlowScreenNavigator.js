@@ -6,15 +6,18 @@
  * @version 1.0.0
  */
 import { LightningElement, api } from 'lwc';
-import { NavigationMixin } from 'lightning/navigation';
+//import { NavigationMixin } from 'lightning/navigation';
+import { getString}  from '@salesforce/apex/NavItemController.getUrl';
 
-export default class LwcFlowScreenNavigator extends NavigationMixin(LightningElement) {
+export default class LwcFlowScreenNavigator extends LightningElement {
     @api buttonName;
     @api recordId;
     @api apiName
 
+    @wire(getString, { recordId : 'recordId' })
     recordURL;
 
+    /*
     connectedCallback() {
         this[NavigationMixin.GenerateUrl]({
            type: 'standard_recordPage' ,
@@ -32,6 +35,7 @@ export default class LwcFlowScreenNavigator extends NavigationMixin(LightningEle
         evt.stopPropagation();
         this[NavigationMixin.Navigate](this.connectedCallback);
     }
+    */
 
 
 
