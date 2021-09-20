@@ -22,11 +22,12 @@ public with sharing class TreatmentToDoListController {
         @AuraEnabled public Boolean displayProtocols;
         @AuraEnabled public Integer indexVar;
         @AuraEnabled public Boolean displayNotPresent;
+        @AuraEnabled public List<String> shelterLocation;
 
         public TreatmentToDoListData(String name, String priority, String assignment, Integer treatmentCount, String
                 colorCode, Boolean hasProtocols, List<BundleSelection> selections, List<RowSelection> rowSelections,
                 Boolean displayProtocols, Boolean displayNotPresent, Integer indexVar, List<RowSelection>
-                        notPresentSelections) {
+                        notPresentSelections, List<String> shelterLocation) {
             this.name = name;
             this.priority = priority;
             this.assignment = assignment;
@@ -39,6 +40,7 @@ public with sharing class TreatmentToDoListController {
             this.indexVar = indexVar;
             this.notPresentSelections = notPresentSelections;
             this.displayNotPresent = displayNotPresent;
+            this.shelterLocation = shelterLocation;
         }
 
         public TreatmentToDoListData() { }
@@ -100,6 +102,30 @@ public with sharing class TreatmentToDoListController {
         public RowSelection() { }
     }
 
+    public class SelectOption {
+        @AuraEnabled public String name;
+        @AuraEnabled public String label;
+
+        public SelectOption(String name, String label) {
+            this.name = name;
+            this.label = label;
+        }
+
+        public SelectOption() { }
+    }
+
+    @AuraEnabled
+    public static List<SelectOption> selectOPT(String key) {
+        List<SelectOption> options = new List<SelectOption>();
+        for(PicklistEntry entry : Animal__c.Shelter_Location2__c.getDescribe().getPicklistValues()) {
+            SelectOption opt = new SelectOption();
+            opt.name = entry.label;
+            opt.label = entry.label;
+
+            options.add(opt);
+        }
+        return options;
+    }
     @AuraEnabled
     public static List<TreatmentToDoListData> listData(String key) {
         List<Animal__c> animals = [SELECT Id, Name, Location__c, Shelter_Location2__c FROM Animal__c WHERE
@@ -129,6 +155,7 @@ public with sharing class TreatmentToDoListController {
         Treatment_Bundle__c master = [SELECT Id, IsMaster__c from Treatment_Bundle__c LIMIT 1];
         List<Bundle_Entry__c> entries = [SELECT Id, Protocol__c, Treatment_Bundle__c FROM Bundle_Entry__c WHERE
                 Treatment_Bundle__c =: master.Id];
+        System.debug(entries.size());
 
         ProtocolSelector protocolSelector = new ProtocolSelector();
         Set<Id> masterSet = new Set<Id>();
@@ -162,8 +189,11 @@ public with sharing class TreatmentToDoListController {
             List<RowSelection> rowSelections = new List<TreatmentToDoListController.RowSelection>();
 
             Treatment_Bundle__c bundle = new Treatment_Bundle__c();
-            if(plan.AssignedTreatmentBundleId__c != null) { bundle = [SELECT Name, Id FROM Treatment_Bundle__c WHERE Id =: plan
-                    .AssignedTreatmentBundleId__c]; }
+            if(plan.AssignedTreatmentBundleId__c != null) {
+                bundle = [SELECT Name, Id FROM Treatment_Bundle__c WHERE Id =: plan.AssignedTreatmentBundleId__c];
+            }
+
+
             item.assignment = bundle == null ? 'None Found' : bundle.Name;
             item.colorCode = plan.Shelter_Color_Code__c == null ? 'None Found' : plan.Shelter_Color_Code__c;
             List<Treatment_Session__c> sessions = idToTreatmentSessionMap.get(plan.Id);
@@ -171,6 +201,7 @@ public with sharing class TreatmentToDoListController {
             item.animal = animal;
             item.plan = plan;
             item.displayProtocols = false;
+
 
             List<BundleSelection> selections = new List<TreatmentToDoListController.BundleSelection>();
             List<BundleSelection> notPresentSelections = new List<TreatmentToDoListController.BundleSelection>();
@@ -185,6 +216,7 @@ public with sharing class TreatmentToDoListController {
 
             Map<Id, Protocol__c> sProtocols = new Map<Id, Protocol__c>(protocolSelector.GetById(idset));
             Integer countOfEntries = entries.size();
+            System.debug(countOfEntries);
             //Integer index = countOfEntries - 1;
             for(Bundle_Entry__c entry : entries) {
                 BundleSelection iSelection = new BundleSelection();
@@ -194,13 +226,16 @@ public with sharing class TreatmentToDoListController {
                     iSelection.inPlan = true;
                     iSelection.name = protocol.Name;
                     selections.add(iSelection);
-                }else {
+                }else if(masterProtocols.keySet().contains(entry.Protocol__c)) {
                     Protocol__c protocol = masterProtocols.get(entry.Protocol__c);
                     iSelection.inPlan = false;
                     iSelection.name = protocol.Name;
                     notPresentSelections.add(iSelection);
+                }else {
+                    iSelection.inPlan = false;
+                    iSelection.name = entry.Entry_Label__c;
+                    notPresentSelections.add(iSelection);
                 }
-
             }
             //System.debug(selections.size());
             Integer variable = selections.size();
@@ -212,7 +247,7 @@ public with sharing class TreatmentToDoListController {
                 selection.selectionThree =  selections[variable - 3];
                 selection.selectionFour = selections[variable -4];
                 selection.selectionFive = selections[variable -5];
-                variable = variable - 4;
+                variable = variable - 5;
                 rowSelections.add(selection);
             }
 
@@ -272,7 +307,7 @@ public with sharing class TreatmentToDoListController {
                     selection.selectionThree =  notPresentSelections[variable2 - 3];
                     selection.selectionFour = notPresentSelections[variable2 -4];
                     selection.selectionFive = notPresentSelections[variable2 -5];
-                    variable2 = variable2 - 4;
+                    variable2 = variable2 - 5;
                     notPresentRow.add(selection);
                 }
             }
@@ -332,13 +367,14 @@ public with sharing class TreatmentToDoListController {
             item.indexVar = i;
         }
 
+
+
         System.debug(data);
         return data;
     }
 
     @AuraEnabled
-    public static ServiceResponse saveChanges(String planId, List<String> presentProtocols, List<String>
-            removedProtocols) {
+    public static ServiceResponse saveChanges(String planId, Map<String, Object> data) {
 
         ServiceRequest request = new ServiceRequest();
 

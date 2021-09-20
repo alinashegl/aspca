@@ -4,7 +4,7 @@
  - @author barne
  -->
 
-<aura:component description="ToDoListLineItem">
+<aura:component description="ToDoListLineItem" controller="TreatmentToDoListController">
     <aura:attribute type="String" name="Name" />
     <aura:attribute type="String" name="AnimalId" />
     <aura:attribute type="String" name="PlanId" />

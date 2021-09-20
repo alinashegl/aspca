@@ -36,21 +36,9 @@ public with sharing class TreatmentPlanDomain extends DomainActionBase{
             }
         }
 
-
-        //if (newRecords != null) { update newRecords; }
-
-        //if (newRecordMap != null) { update newRecordMap.values(); }
-
     }
-    public static void beforeUpdate(TriggerRequest request) {
-
-        //System.debug(' Treatment Plan Before Update is Executing');
-
-
-    }
-    public void beforeDelete(TriggerRequest request) {
-        //System.debug('Before Delete is Executing');
-    }
+    public static void beforeUpdate(TriggerRequest request) { }
+    public void beforeDelete(TriggerRequest request) { System.debug('Before Delete is Executing'); }
     public void afterInsert(TriggerRequest request) {
         //System.debug('After Insert is Executing');
         List<Treatment_Plan__c> newRecords = request.newRecords;
@@ -133,7 +121,5 @@ public with sharing class TreatmentPlanDomain extends DomainActionBase{
 
         //System.debug('After Update is Executing');
     }
-    public void afterDelete(TriggerRequest request) {
-        //System.debug('After Delete is Executing');
-    }
+    public void afterDelete(TriggerRequest request) { /* System.debug('After Delete is Executing'); */ }
 }

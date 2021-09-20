@@ -8,10 +8,26 @@
                 controller="TreatmentToDoListController">
     <aura:attribute name="data" type="Object" />
     <aura:attribute name="columns" type="List" />
+    <aura:attribute name="ShelterLocation" type="Object" />
+    <aura:attribute name="Location" type="String" default="MRC" />
     <aura:attribute name="currentIndex" type="Integer" />
     <aura:handler name="init" value="{! this}" action="{! c.init}" />
     <aura:method name="handleClick"  action="{!c.handleClick}" access="public" />
-<div><h1 class="large">Treatment Priority To Do List</h1></div>
+    <div>
+        <h1 class="large">Treatment Priority To Do List</h1>
+    </div>
+    <!--
+    The below Section will be used to make the page Dynamic based on the current Location
+    <div>
+        <lightning:select label="Choose Location to View" name="shelterLocation" value="{!v.Location}"
+                          aura:id="shelterLoc">
+            <aura:iteration items="{!v.ShelterLocation}" var="location">
+                <option>{!location.label}</option>
+            </aura:iteration>
+        </lightning:select>
+        <lightning:button value="Refresh" label="Refresh" onclick="{!c.handleClick}" class="button3" name="refreshView"/>
+    </div>
+    -->
     <table bgcolor="white" class="slds-box">
             <thead></thead>
             <br/>
