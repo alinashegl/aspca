@@ -25,27 +25,11 @@ public with sharing class SessionProtocolDomain extends DomainActionBase {
 
     @SuppressWarnings('ApexUnresolvableReference')
     public void beforeInsert(TriggerRequest request) {
-        /*
+
         System.debug('SESSION PROTOCOL BEFORE INSERT IS EXECUTING');
 
-        Map<Id, Session_Protocol__c> newRecordMap = (Map<Id, Session_Protocol__c>) request.newRecordMap;
-        Set<Id> idsToQuery = new Set<Id>();
-        for (Session_Protocol__c sessionProtocol : newRecordMap.values()) {
-            idsToQuery.add(sessionProtocol.TreatmentSessionId__c);
-        }
-        TreatmentSessionSelector sessionSelector = new TreatmentSessionSelector();
-        Map<Id, Treatment_Session__c> treatmentSessionMap =  new Map<Id, Treatment_Session__c>();
-        List<Treatment_Session__c> sesslist = sessionSelector.queryById(idsToQuery);
-        treatmentSessionMap.putAll(sesslist);
 
-        for (Session_Protocol__c protocol : newRecordMap.values()) {
-            Treatment_Session__c session = treatmentSessionMap.get(protocol.TreatmentSessionId__c);
 
-            if (session.Preferred_Motivators__c != null) {
-                protocol.Preferred_Motivators__c = session.Preferred_Motivators__c;
-            }
-        }
-         */
     }
     public void beforeUpdate (TriggerRequest request) {
         System.debug('SESSION PROTOCOL BEFORE UPDATE IS EXECUTING');
@@ -90,7 +74,35 @@ public with sharing class SessionProtocolDomain extends DomainActionBase {
 
     }
     public void beforeDelete (TriggerRequest request) { System.debug('SESSION PROTOCOL BEFORE DELETE IS EXECUTING'); }
-    public void afterInsert (TriggerRequest request) { System.debug('SESSION PROTOCOL AFTER INSERT IS EXECUTING'); }
+    @SuppressWarnings('ApexUnresolvableReference')
+    public void afterInsert(TriggerRequest request) {
+        System.debug('SESSION PROTOCOL AFTER INSERT IS EXECUTING');
+
+        Map<Id, Session_Protocol__c> newRecordMap = (Map<Id, Session_Protocol__c>) request.newRecordMap;
+        Set<Id> idsToQuery = new Set<Id>();
+        for (Session_Protocol__c sessionProtocol : newRecordMap.values()) {
+            idsToQuery.add(sessionProtocol.TreatmentSessionId__c);
+        }
+
+        //BUGFIX Code HERE
+
+        SessionProtocolSelector selector = new SessionProtocolSelector();
+        List<Session_Protocol__c> sessionProtocols = selector.queryById(request.newRecordMap.keySet());
+        //Bugfix COde Stops Here
+
+        TreatmentSessionSelector sessionSelector = new TreatmentSessionSelector();
+        Map<Id, Treatment_Session__c> treatmentSessionMap = new Map<Id, Treatment_Session__c>();
+        List<Treatment_Session__c> sesslist = sessionSelector.queryById(idsToQuery);
+        treatmentSessionMap.putAll(sesslist);
+
+        for (Session_Protocol__c protocol : sessionProtocols) {
+            Treatment_Session__c session = treatmentSessionMap.get(protocol.TreatmentSessionId__c);
+
+            if (session.Preferred_Motivators__c != null) {
+                protocol.Preferred_Motivators__c = session.Preferred_Motivators__c;
+            }
+        }
+    }
     public void afterUpdate (TriggerRequest request) {
         System.debug('SESSION PROTOCOL AFTER INSERT IS EXECUTING');
         Map<Id, Session_Protocol__c> newRecordMap = (Map<Id, Session_Protocol__c>) request.newRecordMap;

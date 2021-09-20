@@ -44,6 +44,7 @@ public with sharing class TreatmentPlanService {
         Treatment_Plan__c newOpp = (Treatment_Plan__c) request.Parameters.get('new');
         Treatment_Plan__c oldOpp = (Treatment_Plan__c) request.Parameters.get('old');
 
+
         Treatment_Bundle__c standard = [SELECT Id, Name,  IsMaster__c FROM Treatment_Bundle__c WHERE IsMaster__c = TRUE];
         List<Bundle_Entry__c> standardEntries = [SELECT Id, Treatment_Bundle__c, Protocol__c, Name
                                                 FROM Bundle_Entry__c

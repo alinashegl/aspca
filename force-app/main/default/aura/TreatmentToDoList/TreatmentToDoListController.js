@@ -20,9 +20,9 @@
     handleClick : function(cmp, event, helper) {
         var button = event.getSource().get('v.name');
         helper.buttonAction(cmp, event, button);
-    }
+    } ,
 
     handleChange : function(cmp, event) {
-        var opt = cmp.event.gets
-    }
+        //change handler
+        }
 });

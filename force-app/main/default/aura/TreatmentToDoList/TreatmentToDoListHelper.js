@@ -21,6 +21,9 @@
         }
     } ,
     doInit : function (cmp, event) {
+        //Line 25 will need to be removed for dynamic page rendering. Currently there for current version
+        this.fetchData(cmp, event);
+        /*
         var params = {key : 'ley'};
         var result;
         this.sendPromise(cmp, 'c.selectOPT', params)
@@ -36,17 +39,19 @@
                     console.log('Error Message', error);
                 }
             );
-
-
-
+            */
     } ,
 
 
     fetchData : function(cmp, event) {
+        /*
         var loc = cmp.get('v.Location');
         if(loc === undefined) {
             loc = 'MRC';
         }
+
+        */
+        var loc = 'MRC';
         var params = { key: loc };
         this.sendPromise(cmp, 'c.listData', params)
         .then(

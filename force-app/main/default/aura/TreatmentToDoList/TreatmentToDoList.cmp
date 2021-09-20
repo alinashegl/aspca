@@ -16,6 +16,8 @@
     <div>
         <h1 class="large">Treatment Priority To Do List</h1>
     </div>
+    <!--
+    The below Section will be used to make the page Dynamic based on the current Location
     <div>
         <lightning:select label="Choose Location to View" name="shelterLocation" value="{!v.Location}"
                           aura:id="shelterLoc">
@@ -25,6 +27,7 @@
         </lightning:select>
         <lightning:button value="Refresh" label="Refresh" onclick="{!c.handleClick}" class="button3" name="refreshView"/>
     </div>
+    -->
     <table bgcolor="white" class="slds-box">
             <thead></thead>
             <br/>

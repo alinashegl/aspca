@@ -28,13 +28,11 @@
     <types>
         <members>KenelSignageController</members>
         <members>dao_Animal</members>
-        <members>ControllerHelper</members>
         <members>AppConfig</members>
         <members>BehEvalPdfController</members>
         <members>BehaviorEvalMetadataCollection</members>
         <members>BehaviorEvalPDFController</members>
         <members>BehaviorEvaluationDomain</members>
-        <members>BehaviorEvaluationMatrixController</members>
         <members>BehaviorEvaluationMatrixControllerTest</members>
         <members>BehaviorEvaluationMetadataTest</members>
         <members>BehaviorEvaluationPageController</members>
@@ -132,6 +130,21 @@
         <members>trigger_Domain</members>
         <members>ExceptionHelper</members>
         <members>SObjectFieldMapHelper</members>
+        <members>LogHandler</members>
+        <members>AnimalSelector</members>
+        <members>AnimalTriggerTest</members>
+        <members>BehaviorEvaluationSummaryUtil</members>
+        <members>CaseTriggerTest</members>
+        <members>CommentSkipWrapper</members>
+        <members>HighValueCategoryWrapper</members>
+        <members>LastTreatmentsController</members>
+        <members>NavItemController</members>
+        <members>RecordIDCmpController</members>
+        <members>SummaryWrapper</members>
+        <members>TreatmentToDoListController</members>
+        <members>test_BehEvalPdfController</members>
+        <members>test_LastTreatmentsController</members>
+        <members>test_RecordIdController</members>
         <name>ApexClass</name>
     </types>
     <types>
@@ -145,6 +158,10 @@
         <members>BehaviorEvaluationPage</members>
         <members>OverallEvaluationGrade</members>
         <members>BehaviorEvaluationTabFooter</members>
+        <members>SessionProtocolsListView</members>
+        <members>ToDoListLineItem</members>
+        <members>TreatmentProtocolList</members>
+        <members>TreatmentToDoList</members>
         <name>AuraDefinitionBundle</name>
     </types>
     <types>
@@ -157,6 +174,8 @@
         <members>Update_Animal_Location_End_Dates</members>
         <members>Update_Behavior_Evaluation_Date_on_Animal</members>
         <members>Contact_TEST</members>
+        <members>AssignPlan</members>
+        <members>Select_Treatment_Bundle</members>
         <name>Flow</name>
     </types>
     <types>
@@ -258,6 +277,15 @@
     <types>
         <members>Dog_Database_Animal_Page_Layout</members>
         <members>EvaluationForm</members>
+        <members>Demo_Home_Page_Default</members>
+        <members>Session_Protocol_Contact_Record_Page</members>
+        <members>Session_Protocol_Record_Page</members>
+        <members>Session_Protocol_Record_Page_Custom</members>
+        <members>TreatmentPlan_Record_Page</members>
+        <members>Treatment_Bundle_Record_Page</members>
+        <members>Treatment_Session_Record_Page1</members>
+        <members>Treatment_Session_Record_Page_Complete</members>
+        <members>Treatment_Session_Record_Page_Custom</members>
         <name>FlexiPage</name>
     </types>
     <types>
@@ -265,6 +293,31 @@
         <members>ASPCA - Behavior %28CRC%29</members>
         <members>Admin</members>
         <name>Profile</name>
+    </types>
+    <types>
+        <members>Instance_URL</members>
+        <name>CustomLabel</name>
+    </types>
+    <types>
+        <name>CompactLayout</name>
+    </types>
+    <types>
+        <members>Protocol__c</members>
+        <members>Session_Protocol__c</members>
+        <members>Treatment_Bundle__c</members>
+        <members>Treatment_Plan__c</members>
+        <name>CustomTab</name>
+    </types>
+    <types>
+        <members>lwc_FlowScreenNavigator</members>
+        <members>lwc_lastTreatments</members>
+        <name>LightningComponentBundle</name>
+    </types>
+    <types>
+        <name>ListView</name>
+    </types>
+    <types>
+        <name>WebLink</name>
     </types>
     <version>51.0</version>
 </Package>
