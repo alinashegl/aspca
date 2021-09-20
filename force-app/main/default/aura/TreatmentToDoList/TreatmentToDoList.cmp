@@ -17,6 +17,7 @@
             <br/>
             <tr class="spaceUnder">
                 <td class="width"><strong>Animal</strong></td>
+                <td class="width"><strong>ASPCA Name</strong></td>
                 <td class="width"><strong>Treatment Priority</strong></td>
                 <td class="width"><strong>Bundle Assignment</strong></td>
                 <td class="width"><strong>Treatment Count</strong></td>
@@ -25,7 +26,7 @@
         </table>
         <aura:iteration var="line" items="{!v.data}" indexVar="indexVar" aura:id="dataList">
             <table>
-                <c:ToDoListLineItem Name="{!line.animal.Name}" Priority="{!line.priority}" Assignment="{!line.assignment}" TreatmentCount="{!line.treatmentcount}" ColorCode="{!line.colorCode}" Data="{!line.rowSelections}" IndexVar="{!line.indexVar}" RenderProtocols="{!line.displayProtocols}" NotPresentData="{!line.notPresentSelections}" RenderNotPresentData="{!line.displayNotPresent}" AnimalId="{!line.animal.Id}" PlanId="{!line.plan.Id}" />
+                <c:ToDoListLineItem Name="{!line.animal.Name}" ASPCAName="{!line.aspcaname}" Priority="{!line.priority}" Assignment="{!line.assignment}" TreatmentCount="{!line.treatmentcount}" ColorCode="{!line.colorCode}" Data="{!line.rowSelections}" IndexVar="{!line.indexVar}" RenderProtocols="{!line.displayProtocols}" NotPresentData="{!line.notPresentSelections}" RenderNotPresentData="{!line.displayNotPresent}" AnimalId="{!line.animal.Id}" PlanId="{!line.plan.Id}" />
             </table>
 
         </aura:iteration>

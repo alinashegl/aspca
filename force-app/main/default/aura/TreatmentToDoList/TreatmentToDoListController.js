@@ -9,6 +9,7 @@
     init : function(cmp , event, helper) {
         cmp.set('v.columns', [
             { label: 'Animal', fieldName: 'name' , type: 'text' } ,
+            { label: 'ASPCA Name', fieldName: 'aspcaname' , type: 'text' } ,
             { label: 'Treatment Priority', fieldName: 'priority', type: 'text'} ,
             { label: 'Bundle Assignment' , fieldName: 'assignment',type: 'text' } ,
             { label: 'Treatment Count', fieldName: 'treatmentcount', type: 'text' } ,
