@@ -11,7 +11,29 @@
                 this.showProtocols(cmp, event, button);
             }else if(button == 'showNotPresent') {
                 this.showNotPresent(cmp, event, button);
+            }else if(button == 'updatePlanProtocols') {
+                this.updatePlanProtocols(cmp, event, button);
             }
+        } ,
+        updatePlanProtocols : function (cmp, event, button) {
+            var data = cmp.get('v.Data');
+            var rid = cmp.get('v.PlanId');
+
+            var params = {
+                planId : rid ,
+                data : data
+            };
+
+            this.sendPromise(cmp, 'c.saveChanges', params)
+            .then(
+                function(response) {
+                    console.log('Response', response);
+                }
+            ).catch(
+                function(error) {
+                    console.log('Error Message', error);
+                }
+            );
         } ,
         showProtocols : function (cmp, event, button) {
                //console.log('SHOW PROTOCOLS');
@@ -32,5 +54,34 @@
                 cmp.set('v.RenderNotPresentData', true);
             }
             //console.log('Component', cor);
-        }
+        } ,
+        sendPromise : function(cmp, methodName, params, category) {
+            return new Promise($A.getCallback(function(resolve, reject) {
+            let action = cmp.get(methodName);
+
+            action.setParams(params);
+
+            action.setCallback(self, function(res) {
+              let state = res.getState();
+
+              if(state === 'SUCCESS') {
+                let result = {};
+
+
+                if(typeof category == 'undefined') {
+                    result = res.getReturnValue();
+                } else {
+                    result[category] = res.getReturnValue();
+                }
+
+                resolve(result);
+              } else if(state === 'ERROR') {
+                reject(action.getError());
+              } else {
+                reject(action.getError());
+              }
+            });
+            $A.enqueueAction(action);
+        }));
+    }
 });

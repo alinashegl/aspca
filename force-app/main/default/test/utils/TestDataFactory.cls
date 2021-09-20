@@ -625,4 +625,49 @@ public without sharing class TestDataFactory {
         insert sessionProtocols;
         return sessionProtocols;
     }
+
+    public static Treatment_Bundle__c createTreatmentBundle() {
+        Treatment_Bundle__c bundle = new Treatment_Bundle__c();
+        bundle.Name = 'Test';
+        bundle.IsActive__c = true;
+        insert bundle;
+        return bundle;
+    }
+
+    public static Treatment_Bundle__c createMasterBundle() {
+        Treatment_Bundle__c bundle = new Treatment_Bundle__c();
+        bundle.Name = 'Test';
+        bundle.IsActive__c = true;
+        bundle.IsMaster__c = true;
+        insert bundle;
+        return bundle;
+    }
+
+    public static List<Protocol__c> createProtocols(Integer count) {
+        Integer i = 0;
+        List<Protocol__c> protocols = new List<Protocol__c>();
+        while (i != count) {
+            Protocol__c protocol = new Protocol__c();
+            protocol.Name = 'Test ' + i;
+            protocol.IsActive__c = true;
+            protocol.Description__c = 'This is a Test Protocol';
+            protocols.add(protocol);
+            i++;
+        }
+        insert protocols;
+        return protocols;
+    }
+
+    public static List<Bundle_Entry__c> assignEntries(Treatment_Bundle__c bundle, List<Protocol__c> protocols) {
+        List<Bundle_Entry__c> entries = new List<Bundle_Entry__c>();
+        for (Protocol__c pro : protocols) {
+            Bundle_Entry__c entry = new Bundle_Entry__c();
+            entry.Treatment_Bundle__c = bundle.Id;
+            entry.Protocol__c = pro.Id;
+            entries.add(entry);
+        }
+        insert entries;
+        return entries;
+    }
+
 }
