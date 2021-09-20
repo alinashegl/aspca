@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Case_Type__c</fullName>
+    <fullName>Walks_on_a_Leash_Notes__c</fullName>
     <externalId>false</externalId>
-    <label>Case Type</label>
-    <length>100</length>
-    <required>false</required>
+    <label>Walks on a Leash Notes</label>
+    <length>2768</length>
     <trackFeedHistory>false</trackFeedHistory>
     <trackHistory>false</trackHistory>
-    <type>Text</type>
-    <unique>false</unique>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
 </CustomField>
