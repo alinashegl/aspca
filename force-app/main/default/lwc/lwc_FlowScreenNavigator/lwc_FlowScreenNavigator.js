@@ -5,14 +5,14 @@
  * @author barne
  * @version 1.0.0
  */
-import { LightningElement, api } from 'lwc';
+import { LightningElement, wire, api } from 'lwc';
 //import { NavigationMixin } from 'lightning/navigation';
-import { getString}  from '@salesforce/apex/NavItemController.getUrl';
+import getString  from '@salesforce/apex/NavItemController.getUrl';
 
 export default class LwcFlowScreenNavigator extends LightningElement {
     @api buttonName;
     @api recordId;
-    @api apiName
+    @api apiName;
 
     @wire(getString, { recordId : 'recordId' })
     recordURL;
