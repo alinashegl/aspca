@@ -15,10 +15,14 @@
             { label: 'Shelter Color Code', fieldName: 'colorCode', type: 'text' } ,
             { label: 'Button Placeholder', fieldName: 'animal' , type: 'text' }
         ]);
-        helper.fetchData(cmp, event);
+        helper.processingProcess(cmp, 'init', event);
     },
     handleClick : function(cmp, event, helper) {
         var button = event.getSource().get('v.name');
         helper.buttonAction(cmp, event, button);
+    }
+
+    handleChange : function(cmp, event) {
+        var opt = cmp.event.gets
     }
 });

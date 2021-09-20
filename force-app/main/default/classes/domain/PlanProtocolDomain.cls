@@ -27,7 +27,7 @@ public with sharing class PlanProtocolDomain extends DomainActionBase {
     public void beforeUpdate (TriggerRequest request) {
         //System.debug('PLAN PROTOCOL BEFORE UPDATE IS EXECUTING === > ' + request.newRecords);
 
-        insert request.newRecords;
+        //insert request.newRecords;
     }
     public void beforeDelete (TriggerRequest request) { System.debug('PLAN PROTOCOL BEFORE DELETE IS EXECUTING'); }
     public void afterInsert (TriggerRequest request) {
