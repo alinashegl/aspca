@@ -154,7 +154,7 @@ public with sharing class TreatmentToDoListController {
 
         List<TreatmentToDoListData> data = new List<TreatmentToDoListData>();
         Map<Id, List<Plan_Protocol__c>> planToPlanProtocolsMap = new Map<Id, List<Plan_Protocol__c>>();
-        Treatment_Bundle__c master = [SELECT Id, IsMaster__c from Treatment_Bundle__c LIMIT 1];
+        Treatment_Bundle__c master = [SELECT Id, IsMaster__c from Treatment_Bundle__c WHERE IsActive__c = true AND IsMaster__c = true LIMIT 1];
         List<Bundle_Entry__c> entries = [SELECT Id, Protocol__c, Treatment_Bundle__c FROM Bundle_Entry__c WHERE
                 Treatment_Bundle__c =: master.Id];
         System.debug(entries.size());
