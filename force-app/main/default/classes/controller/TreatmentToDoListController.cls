@@ -11,6 +11,7 @@ public with sharing class TreatmentToDoListController {
         @AuraEnabled public String name;
         @AuraEnabled public Animal__c animal;
         @AuraEnabled public Treatment_Plan__c plan;
+        @AuraEnabled public String aspcaname;
         @AuraEnabled public String priority;
         @AuraEnabled public String assignment;
         @AuraEnabled public Integer treatmentcount;
@@ -24,11 +25,12 @@ public with sharing class TreatmentToDoListController {
         @AuraEnabled public Boolean displayNotPresent;
         @AuraEnabled public List<String> shelterLocation;
 
-        public TreatmentToDoListData(String name, String priority, String assignment, Integer treatmentCount, String
+        public TreatmentToDoListData(String name, String aspcaname, String priority, String assignment, Integer treatmentCount, String
                 colorCode, Boolean hasProtocols, List<BundleSelection> selections, List<RowSelection> rowSelections,
                 Boolean displayProtocols, Boolean displayNotPresent, Integer indexVar, List<RowSelection>
                         notPresentSelections, List<String> shelterLocation) {
             this.name = name;
+            this.aspcaname = aspcaname;
             this.priority = priority;
             this.assignment = assignment;
             this.treatmentcount = treatmentCount;
@@ -128,7 +130,7 @@ public with sharing class TreatmentToDoListController {
     }
     @AuraEnabled
     public static List<TreatmentToDoListData> listData(String key) {
-        List<Animal__c> animals = [SELECT Id, Name, Location__c, Shelter_Location2__c FROM Animal__c WHERE
+        List<Animal__c> animals = [SELECT Id, Animal_Name__c, Name, Location__c, Shelter_Location2__c FROM Animal__c WHERE
                 Shelter_Location2__c =: key];
         List<Treatment_Plan__c> treatmentPlans = [SELECT Id, Name, Treatment_Priority__c, Animal__c, IsActive__c,
                 AssignedTreatmentBundleId__c, Shelter_Color_Code__c FROM Treatment_Plan__c WHERE Animal__c =: animals
@@ -185,6 +187,7 @@ public with sharing class TreatmentToDoListController {
             Animal__c animal = animalsByIds.get(plan.Animal__c);
             TreatmentToDoListData item = new TreatmentToDoListData();
             item.name = animal.Name == null ? 'None Found' : animal.Name;
+            item.aspcaname = animal.Animal_Name__c == null ? 'None Found' : animal.Animal_Name__c;
             item.priority = plan.Treatment_Priority__c == null ? 'None Found' : plan.Treatment_Priority__c;
             List<RowSelection> rowSelections = new List<TreatmentToDoListController.RowSelection>();
 

@@ -338,6 +338,21 @@
         </values>
     </picklistValues>
     <picklistValues>
+        <picklist>Behavior_Play_Pause_Options__c</picklist>
+        <values>
+            <fullName>Recheck in 1 month</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Recheck in 2 months</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Recheck in 2 weeks</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
         <picklist>Behavior_Play_Pause__c</picklist>
         <values>
             <fullName>Aggression</fullName>
@@ -1030,6 +1045,17 @@
         </values>
     </picklistValues>
     <picklistValues>
+        <picklist>Handler__c</picklist>
+        <values>
+            <fullName>Red %28designated%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yellow</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
         <picklist>Injury_Type__c</picklist>
         <values>
             <fullName>Both</fullName>
@@ -1412,6 +1438,65 @@
         </values>
     </picklistValues>
     <picklistValues>
+        <picklist>Play_Category__c</picklist>
+        <values>
+            <fullName>Assigned Play Partner</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Big Active</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Big Mellow</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DO NOT PLAY</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Juvenile</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New%2FUnknown</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PG Re-Eval</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Puppy %3C 5 mo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Shy %2F Fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Small Active</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Small Mellow</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tricky Adult</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tricky Puppy %3C 5 mo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unevaluated</fullName>
+            <default>true</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
         <picklist>Play_Pause__c</picklist>
         <values>
             <fullName>No</fullName>
@@ -1419,6 +1504,36 @@
         </values>
         <values>
             <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Play_Rating__c</picklist>
+        <values>
+            <fullName>Green</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Red</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yellow</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Playgroup_Priority_Level__c</picklist>
+        <values>
+            <fullName>Daily %E2%80%93 7 days</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>High %E2%80%93 4 days</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Low %E2%80%93 2 days</fullName>
             <default>false</default>
         </values>
     </picklistValues>
