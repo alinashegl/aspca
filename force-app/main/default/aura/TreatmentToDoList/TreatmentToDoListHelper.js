@@ -6,9 +6,51 @@
  * @version 1.0.0
  */
 ({
+    processingProcess: function(cmp, currentProcess, event) {
+        let process = {
+            'init' : 'init' ,
+            'fetchData ' : 'fetchData'
+        };
+
+        if(process[currentProcess] == 'init') {
+            this.doInit(cmp, event);
+        }else if(process[currentProcess] == 'fetchData') {
+            this.fetchData(cmp, event);
+        }else {
+            console.log('Unexpected Error occured with  ' + currentProcess);
+        }
+    } ,
+    doInit : function (cmp, event) {
+        //Line 25 will need to be removed for dynamic page rendering. Currently there for current version
+        this.fetchData(cmp, event);
+        /*
+        var params = {key : 'ley'};
+        var result;
+        this.sendPromise(cmp, 'c.selectOPT', params)
+        .then(
+            function(response) {
+                var data = response
+                console.log('Response', response);
+                cmp.set('v.ShelterLocation', data);
+                result = 'fetchData';
+            }
+            ).catch(
+                function(error) {
+                    console.log('Error Message', error);
+                }
+            );
+            */
+    } ,
 
 
     fetchData : function(cmp, event) {
+        /*
+        var loc = cmp.get('v.Location');
+        if(loc === undefined) {
+            loc = 'MRC';
+        }
+
+        */
         var loc = 'MRC';
         var params = { key: loc };
         this.sendPromise(cmp, 'c.listData', params)
@@ -57,6 +99,8 @@
         buttonAction : function(cmp, event, button) {
         if(button == 'showProtocols') {
             this.showProtocols(cmp, event, button);
+        }if(button == 'refreshView') {
+            this.refreshView(cmp, event, button);
         }
     } ,
 
@@ -65,6 +109,10 @@
         var cor = cmp.find('dataList').get('v.items');
         console.log('Component', cor);
 
+    } ,
+    refreshView : function (cmp, event, button) {
+        this.fetchData();
+        $A.get('e.force:refreshView').fire();
     }
 
 });

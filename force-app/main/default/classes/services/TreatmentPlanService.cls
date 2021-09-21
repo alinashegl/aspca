@@ -23,6 +23,8 @@ public with sharing class TreatmentPlanService {
                 return bundleAssignmentChanged(req);
             } when 'newBundleAssigned' {
                 return newBundleAssigned(req);
+            }when 'assignPlan' {
+                return assignPlan(req);
             }when else {
                 return null;
             }
@@ -34,12 +36,14 @@ public with sharing class TreatmentPlanService {
         ServiceResponse response = new ServiceResponse(request);
         return response;
     }
-    //TODO: Correct Duplication of Records when bundle assignment is changed.
+    //TODO: Correct Duplication of Records when bundle assignment is changed. This was originally done using the
+    // PricebookEntry object, and the move to new sObjects created this bug. Should be able to fix it from here
     private static ServiceResponse bundleAssignmentChanged(ServiceRequest request) {
         System.debug('Bundle Assignment Helper Is Executing');
         ServiceResponse response = new ServiceResponse(request);
         Treatment_Plan__c newOpp = (Treatment_Plan__c) request.Parameters.get('new');
         Treatment_Plan__c oldOpp = (Treatment_Plan__c) request.Parameters.get('old');
+
 
         Treatment_Bundle__c standard = [SELECT Id, Name,  IsMaster__c FROM Treatment_Bundle__c WHERE IsMaster__c = TRUE];
         List<Bundle_Entry__c> standardEntries = [SELECT Id, Treatment_Bundle__c, Protocol__c, Name
@@ -81,7 +85,7 @@ public with sharing class TreatmentPlanService {
         for (Bundle_Entry__c entry : entrySet) {
             Plan_Protocol__c item = new Plan_Protocol__c();
             Bundle_Entry__c bundleEntry = standardEntryMap.get(entry.Protocol__c);
-            item.Bundle_Entry__c = bundleEntry.Id;
+            //item.Bundle_Entry__c = bundleEntry.Id;
             item.Treatment_Plan__c = newOpp.Id;
             item.Protocol__c = entry.Protocol__c;
             toCreate.add(item);
@@ -109,11 +113,12 @@ public with sharing class TreatmentPlanService {
     }
     private static ServiceResponse newBundleAssigned(ServiceRequest request) {
         System.debug('NEW BUNDLE ASSIGNMENT IS EXECUTING');
-        ServiceResponse response = new ServiceResponse(request);
+
         Treatment_Plan__c opportunity = (Treatment_Plan__c) request.Parameters.get('new');
         String newBundleId = (String) request.Parameters.get('newBundleId');
 
-        Treatment_Bundle__c standard = [SELECT Id, Name,  IsMaster__c FROM Treatment_Bundle__c WHERE IsMaster__c = TRUE];
+        Treatment_Bundle__c standard = [SELECT Id, Name,  IsMaster__c FROM Treatment_Bundle__c WHERE IsMaster__c =
+                TRUE LIMIT 1 ];
         List<Bundle_Entry__c> standardEntries = [SELECT Id, Treatment_Bundle__c, Protocol__c, Name
         FROM Bundle_Entry__c
         WHERE Treatment_Bundle__c =: standard.Id];
@@ -132,20 +137,46 @@ public with sharing class TreatmentPlanService {
             Plan_Protocol__c item = new Plan_Protocol__c();
             item.Treatment_Plan__c = opportunity.Id;
             item.Protocol__c = entry.Protocol__c;
-            item.Bundle_Entry__c = sEntry.Id;
+            //item.Bundle_Entry__c = sEntry.Id;
             newLineItems.add(item);
         }
-        TriggerRequest triggerRequest = new TriggerRequest(Plan_Protocol__c.getSObjectType())
-                .SetBefore(true)
-                .SetUpdate(true)
-                .SetNewRecords(newLineItems)
-                .SetOldRecords(new List<Plan_Protocol__c>());
-        ServiceRequest serviceRequest = new ServiceRequest().withParams('TriggerRequest',triggerRequest);
-        PlanProtocolDomain domain = new PlanProtocolDomain();
-        ServiceResponse rep = domain.Execute(serviceRequest);
-        rep.Data = triggerRequest.newRecords;
+        insert newLineItems;
+        ServiceResponse response = new ServiceResponse(request);
 
-        return rep;
+
+        return response;
+    }
+
+    private static ServiceResponse assignPlan(ServiceRequest request) {
+
+        Set<Id> keysetIds = new Set<Id>();
+        keysetIds.add((String) request.Parameters.get('recordId'));
+        BehaviorEvaluationsSelector selector = new BehaviorEvaluationsSelector();
+        Behavior_Evaluation__c sEvaluation = selector.GetById(keysetIds)[0];
+        //TreatmentPlanSelector planSelector = new TreatmentPlanSelector();
+        //TODO: Card 320 - Change Query to LIMIT to one record
+
+        Treatment_Plan__c plan = new Treatment_Plan__c();
+        if(!Test.isRunningTest()) {
+            try {
+                plan =  [SELECT id, Animal__c from Treatment_Plan__c WHERE Animal__c =: sEvaluation.Animal__c LIMIT  1];
+                System.debug('QUERIED PLAN ==> ' + plan );
+            }catch (Exception e) {
+                System.debug(e);
+                plan = null;
+            }
+
+        }else {
+            plan = null;
+        }
+
+        ServiceResponse response = new ServiceResponse(request);
+        if(plan == null) {
+            response.Data = 'NO PLAN FOUND';
+        }else {
+            response.Data = 'SUCCESS';
+        }
+        return response;
     }
     private static Map<Id, Plan_Protocol__c> getPlanProtocol(Id opp) {
         PlanProtocolSelector selector = new PlanProtocolSelector();
@@ -158,6 +189,13 @@ public with sharing class TreatmentPlanService {
             return idOpportunityLineItemMap;
         }
 
+    }
+
+    private static ServiceResponse updatePlanFromToDoList(ServiceRequest request) {
+
+
+        ServiceResponse response = new ServiceResponse(request);
+        return response;
     }
 
 

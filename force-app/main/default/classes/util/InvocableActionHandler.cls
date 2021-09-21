@@ -38,13 +38,20 @@ global with sharing class InvocableActionHandler{
         return responses;
     }
 
-    private static InvocableActionResponse process(InvocableActionRequest request) {
+    public static InvocableActionResponse process(InvocableActionRequest request) {
+        System.debug(request);
         InvocableActionResponse resp = new InvocableActionResponse();
         switch on request.targetSObject {
             when 'Quote' {
                 switch on request.action {
                     when 'validateSession' {
                         resp = quoteRequest(request);
+                    }
+                }
+            }when 'Treatment_Plan__c' {
+                switch on request.action {
+                    when 'assignPlan' {
+                        resp = assignPlanFromEval(request);
                     }
                 }
             }
@@ -78,5 +85,24 @@ global with sharing class InvocableActionHandler{
         }
         response.ResponseValue = resp;
         return response;
+    }
+
+    private static InvocableActionResponse assignPlanFromEval(InvocableActionRequest request) {
+        //TreatmentPlanService service = new TreatmentPlanService();
+
+        ServiceRequest serviceRequest = new ServiceRequest();
+        serviceRequest.Action = 'assignPlan';
+        serviceRequest.withParams('recordId', request.recordId);
+        serviceRequest.Name = 'AssignPlanFlow';
+        ServiceResponse serviceResponse = TreatmentPlanService.process(serviceRequest);
+
+        InvocableActionResponse response = new InvocableActionResponse();
+        System.debug(request);
+        response.RequestName = request.name;
+        response.ResponseValue = (String) serviceResponse.Data;
+
+        System.debug(response);
+        return response;
+
     }
 }
