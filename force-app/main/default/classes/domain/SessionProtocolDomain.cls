@@ -102,9 +102,11 @@ public with sharing class SessionProtocolDomain extends DomainActionBase {
                 protocol.Preferred_Motivators__c = session.Preferred_Motivators__c;
             }
         }
+        update sessionProtocols;
     }
+
     public void afterUpdate (TriggerRequest request) {
-        System.debug('SESSION PROTOCOL AFTER INSERT IS EXECUTING');
+        System.debug('SESSION PROTOCOL AFTER UPDATE IS EXECUTING');
         Map<Id, Session_Protocol__c> newRecordMap = (Map<Id, Session_Protocol__c>) request.newRecordMap;
 
     }
