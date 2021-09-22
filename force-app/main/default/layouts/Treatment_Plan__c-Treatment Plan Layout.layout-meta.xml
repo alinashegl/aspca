@@ -81,6 +81,14 @@
         <layoutColumns/>
         <style>CustomLinks</style>
     </layoutSections>
+    <quickActionList>
+        <quickActionListItems>
+            <quickActionName>Treatment_Plan__c.Create_Session</quickActionName>
+        </quickActionListItems>
+        <quickActionListItems>
+            <quickActionName>FeedItem.MobileSmartActions</quickActionName>
+        </quickActionListItems>
+    </quickActionList>
     <relatedLists>
         <relatedList>RelatedContentNoteList</relatedList>
     </relatedLists>
@@ -103,6 +111,8 @@
         <relatedList>Plan_Protocol__c.Treatment_Plan__c</relatedList>
     </relatedLists>
     <relatedLists>
+        <excludeButtons>MassChangeOwner</excludeButtons>
+        <excludeButtons>New</excludeButtons>
         <fields>NAME</fields>
         <fields>Session_Notes__c</fields>
         <fields>Treatment_BundleId__c</fields>
