@@ -18,10 +18,7 @@ public with sharing class BehaviorEvalPDFController {
 
         animal = daoAnimal.findOne(String.valueOf(behaviorEvaluation.Animal__c));
         getBik_NotConcOptions();
-
-
     }
-
 
     /*******************************************************************************************************************/
     /************************* Behavior In Kennel Properties    *******************************************************/
