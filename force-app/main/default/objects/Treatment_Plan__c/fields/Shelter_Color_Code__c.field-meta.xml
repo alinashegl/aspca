@@ -2,30 +2,12 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Shelter_Color_Code__c</fullName>
     <externalId>false</externalId>
+    <formula>TEXT(Animal__r.Shelter_Color_Coding__c)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
     <label>Shelter Color Code</label>
     <required>false</required>
     <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>
-    <type>Picklist</type>
-    <valueSet>
-        <restricted>true</restricted>
-        <valueSetDefinition>
-            <sorted>false</sorted>
-            <value>
-                <fullName>Green</fullName>
-                <default>false</default>
-                <label>Green</label>
-            </value>
-            <value>
-                <fullName>Yellow</fullName>
-                <default>false</default>
-                <label>Yellow</label>
-            </value>
-            <value>
-                <fullName>Red</fullName>
-                <default>false</default>
-                <label>Red</label>
-            </value>
-        </valueSetDefinition>
-    </valueSet>
+    <type>Text</type>
+    <unique>false</unique>
 </CustomField>
