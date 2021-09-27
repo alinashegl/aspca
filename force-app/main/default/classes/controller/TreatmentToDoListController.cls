@@ -130,42 +130,24 @@ public with sharing class TreatmentToDoListController {
     }
     @AuraEnabled
     public static List<TreatmentToDoListData> listData(String key) {
-        List<Animal__c> animals = [SELECT Id, Animal_Name__c, Name, Location__c, Shelter_Location2__c FROM Animal__c WHERE
-                Shelter_Location2__c =: key];
         List<Treatment_Plan__c> treatmentPlans = [SELECT Id, Name, Treatment_Priority__c, Animal__c, IsActive__c,
-                AssignedTreatmentBundleId__c, Shelter_Color_Code__c FROM Treatment_Plan__c WHERE Animal__c =: animals
+                Animal__r.Animal_Name__c, Animal__r.Name, Animal__r.Location__c, Animal__r.Shelter_Location2__c, Animal__r.Number_of_Treatments__c,
+                AssignedTreatmentBundleId__c, Shelter_Color_Code__c FROM Treatment_Plan__c WHERE Animal__r.Shelter_Location2__c =: key
                 AND IsActive__c = TRUE];
-        Map<Id, Animal__c> animalsByIds = new Map<Id, Animal__c>(animals);
-        Map<Id, Treatment_Plan__c> treatmentPlansByIds = new Map<Id, Treatment_Plan__c>(treatmentPlans);
-
-        Map<Id, Treatment_Session__c> sessionsByIds = new Map<Id, Treatment_Session__c>([SELECT Id,
-                Treatment_Plan__c, CreatedDate
-                FROM Treatment_Session__c WHERE Treatment_Plan__c =: treatmentPlans]);
-        Map<Id, List<Treatment_Session__c>> idToTreatmentSessionMap = new Map<Id, List<Treatment_Session__c>>();
-        for(Treatment_Plan__c plan : treatmentPlans) {
-            List<Treatment_Session__c> sessions = new List<Treatment_Session__c>();
-            for(Treatment_Session__c session : sessionsByIds.values()) {
-                if (plan.Id == session.Treatment_Plan__c) {
-                    sessions.add(session);
-                }
-            }
-            idToTreatmentSessionMap.put(plan.id, sessions);
-        }
 
         List<TreatmentToDoListData> data = new List<TreatmentToDoListData>();
         Map<Id, List<Plan_Protocol__c>> planToPlanProtocolsMap = new Map<Id, List<Plan_Protocol__c>>();
         Treatment_Bundle__c master = [SELECT Id, IsMaster__c from Treatment_Bundle__c WHERE IsActive__c = true AND IsMaster__c = true LIMIT 1];
-        List<Bundle_Entry__c> entries = [SELECT Id, Protocol__c, Treatment_Bundle__c FROM Bundle_Entry__c WHERE
-                Treatment_Bundle__c =: master.Id];
+        List<Bundle_Entry__c> entries = [SELECT Id, Protocol__c, Protocol__r.Name, Treatment_Bundle__c FROM Bundle_Entry__c WHERE
+                Treatment_Bundle__c =: master.Id ORDER BY Protocol__r.Name DESC];
         System.debug(entries.size());
 
-        ProtocolSelector protocolSelector = new ProtocolSelector();
         Set<Id> masterSet = new Set<Id>();
         for(Bundle_Entry__c entry : entries) {
             masterSet.add(entry.Protocol__c);
         }
-        Map<Id, Protocol__c> masterProtocols = new Map<Id, Protocol__c>(protocolSelector.GetById(masterSet));
-        Map<Id, Plan_Protocol__c> protocols = new Map<Id, Plan_Protocol__c>([SELECT Id, Treatment_Plan__c, Protocol__c FROM Plan_Protocol__c]);
+        Map<Id, Protocol__c> masterProtocols = new Map<Id, Protocol__c>([SELECT Id, Name FROM Protocol__c WHERE Id IN :masterSet]);
+        Map<Id, Plan_Protocol__c> protocols = new Map<Id, Plan_Protocol__c>([SELECT Id, Treatment_Plan__c, Protocol__c, IsRemoved__c FROM Plan_Protocol__c]);
 
         for(Treatment_Plan__c plan : treatmentPlans) {
             List<Plan_Protocol__c> planProtocols = new List<Plan_Protocol__c>();
@@ -184,7 +166,7 @@ public with sharing class TreatmentToDoListController {
 
         for(Treatment_Plan__c plan : treatmentPlans) {
             List<RowSelection> notPresentRow = new List<TreatmentToDoListController.RowSelection>();
-            Animal__c animal = animalsByIds.get(plan.Animal__c);
+            Animal__c animal = plan.Animal__r;
             TreatmentToDoListData item = new TreatmentToDoListData();
             item.name = animal.Name == null ? 'None Found' : animal.Name;
             item.aspcaname = animal.Animal_Name__c == null ? 'None Found' : animal.Animal_Name__c;
@@ -199,8 +181,7 @@ public with sharing class TreatmentToDoListController {
 
             item.assignment = bundle == null ? 'None Found' : bundle.Name;
             item.colorCode = plan.Shelter_Color_Code__c == null ? 'None Found' : plan.Shelter_Color_Code__c;
-            List<Treatment_Session__c> sessions = idToTreatmentSessionMap.get(plan.Id);
-            item.treatmentcount = 5;
+            item.treatmentcount = animal.Number_of_Treatments__c == null ? 0 : Integer.valueOf(animal.Number_of_Treatments__c);
             item.animal = animal;
             item.plan = plan;
             item.displayProtocols = false;
@@ -210,31 +191,34 @@ public with sharing class TreatmentToDoListController {
             List<BundleSelection> notPresentSelections = new List<TreatmentToDoListController.BundleSelection>();
             List<Plan_Protocol__c> lPlanProtocols = planToPlanProtocolsMap.get(plan.Id);
             Set<Id> idset = new Set<Id>();
+            Set<Id> removedIdSet = new Set<Id>();
             if(lPlanProtocols != null) {
                 for(Plan_Protocol__c protocol : lPlanProtocols) {
-                    idset.add(protocol.Protocol__c);
+                    if (protocol.IsRemoved__c) {
+                        removedIdSet.add(protocol.Protocol__c);
+                    }
+                    else {
+                        idset.add(protocol.Protocol__c);
+                    }
                 }
             }
 
-
-            Map<Id, Protocol__c> sProtocols = new Map<Id, Protocol__c>(protocolSelector.GetById(idset));
-            Integer countOfEntries = entries.size();
-            System.debug(countOfEntries);
-            //Integer index = countOfEntries - 1;
             for(Bundle_Entry__c entry : entries) {
                 BundleSelection iSelection = new BundleSelection();
                 iSelection.idVal = entry.Protocol__c;
-                if(sProtocols.keySet().contains(entry.Protocol__c)) {
-                    Protocol__c protocol = sProtocols.get(entry.Protocol__c);
+                if(idset.contains(entry.Protocol__c)) {
                     iSelection.inPlan = true;
-                    iSelection.name = protocol.Name;
+                    iSelection.name = entry.Protocol__r.Name;
                     selections.add(iSelection);
-                }else if(masterProtocols.keySet().contains(entry.Protocol__c)) {
-                    Protocol__c protocol = masterProtocols.get(entry.Protocol__c);
+                } else if(removedIdSet.contains(entry.Protocol__c)) {
                     iSelection.inPlan = false;
-                    iSelection.name = protocol.Name;
+                    iSelection.name = entry.Protocol__r.Name;
+                    selections.add(iSelection);
+                } else if(masterProtocols.keySet().contains(entry.Protocol__c)) {
+                    iSelection.inPlan = false;
+                    iSelection.name = entry.Protocol__r.Name;
                     notPresentSelections.add(iSelection);
-                }else {
+                } else {
                     iSelection.inPlan = false;
                     iSelection.name = entry.Entry_Label__c;
                     notPresentSelections.add(iSelection);
@@ -377,11 +361,22 @@ public with sharing class TreatmentToDoListController {
     }
 
     @AuraEnabled
-    public static ServiceResponse saveChanges(String planId, Map<String, Object> data) {
-
-        ServiceRequest request = new ServiceRequest();
-
-        ServiceResponse response = new ServiceResponse(request);
-        return response;
+    public static Integer saveChanges(String planId, List<ToDoListModWrapper> assigned, List<ToDoListModWrapper> unassigned) {
+        List<Plan_Protocol__c> protocolMod = new List<Plan_Protocol__c>();
+        List<Plan_Protocol__c> existing = [SELECT Id, Treatment_Plan__c, Protocol__c, IsRemoved__c FROM Plan_Protocol__c WHERE Treatment_Plan__c = :planId];
+        for (ToDoListModWrapper assignedProtocol : assigned) {
+            for (Plan_Protocol__c existingProtocol : existing) {
+                if (existingProtocol.Protocol__c == assignedProtocol.protocolId) {
+                    existingProtocol.IsRemoved__c = !assignedProtocol.checked;
+                    protocolMod.add(existingProtocol);
+                }
+            }
+        }
+        for (ToDoListModWrapper unassignedProtocol : unassigned) {
+            Plan_Protocol__c newProtocol = new Plan_Protocol__c(Treatment_Plan__c = planId, Protocol__c = unassignedProtocol.protocolId);
+            protocolMod.add(newProtocol);
+        }
+        upsert protocolMod;
+        return protocolMod.size();
     }
 }
