@@ -1,0 +1,60 @@
+<template>
+    <div class="slds-p-left_medium">
+        <lightning-button variant="base" label={protocolName} title={protocolName} onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
+        <lightning-icon icon-name="utility:success" alternative-text="Success!" variant="success" title="success variant x-small" size="x-small"></lightning-icon>
+        <lightning-icon icon-name="utility:warning" alternative-text="Warning!" variant="warning" title="warning variant x-small" size="x-small"></lightning-icon>
+        <lightning-icon icon-name="utility:error" alternative-text="Error!" variant="error" title="error variant x-small" size="x-small"></lightning-icon>
+    </div>
+    <template if:false={showPicklist}>
+        <template if:true={toggleForm}>
+            <lightning-card>
+                <lightning-button variant="Neutral" label="Skip" title="startSession" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
+                <lightning-button variant="Neutral" label="Skip and Remove from Plan" title="modifySession" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
+                <lightning-card title="Fear - Best">
+                    <template if:true={fearBestField}>
+                        <div class="slds-var-m-around_medium">
+                            <lightning-radio-group
+                                options={fearBestField.picklistValues}
+                                value={fearBestField.currentSelection}
+                                type="radio"
+                                onchange={handleRadioChange}>
+                            >
+                            </lightning-radio-group>
+                        </div>
+                    </template>
+                </lightning-card>
+                <lightning-card title="Fear - Worst">
+                    <template if:true={fearWorstField}>
+                        <div class="slds-var-m-around_medium">
+                            <lightning-radio-group
+                                options={fearWorstField.picklistValues}
+                                value={fearWorstField.currentSelection}
+                                type="radio"
+                                onchange={handleRadioChange}>
+                            >
+                            </lightning-radio-group>
+                        </div>
+                    </template>
+                </lightning-card>                
+            </lightning-card>
+        </template>
+    </template>
+
+    <!-- ****************** shoing picklists ******************** -->
+    <template if:true={showPicklist}>
+        <template if:true={toggleForm}>
+            <div class="slds-p-left-small">
+                <lightning-card>
+                    <lightning-record-form
+                        object-api-name="Session_Protocol__c"
+                        record-id={recordId}
+                        layout-type="Full"
+                        density="comfy"
+                        mode="edit"
+                        >
+                    </lightning-record-form>
+                </lightning-card>
+            </div>
+        </template>
+    </template>
+</template>
