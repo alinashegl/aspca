@@ -752,6 +752,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Animal__c.Play_Category__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Animal__c.Play_Pause_Reason__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -1022,6 +1027,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Behavior_Evaluation__c.Behavior_Evaluation_Summary__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Behavior_Evaluation__c.Behavior_in_Kennel__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -1206,6 +1216,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Behavior_Evaluation__c.Facility_Outcome__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Behavior_Evaluation__c.Fake_Dog__c</field>
         <readable>true</readable>
@@ -1297,7 +1312,17 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Behavior_Evaluation__c.Potential_Beh_Iss_Other__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Behavior_Evaluation__c.Potential_Behavior_Issues__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Behavior_Evaluation__c.Proceed_w_Real_Dog_Testing__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1318,6 +1343,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Behavior_Evaluation__c.Puppy_Child_Doll_P1__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Behavior_Evaluation__c.Puppy_Child_Doll_P2__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1907,7 +1937,17 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Behavior_Evaluation__c.Unpleasant_Touch_1st_Flank__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Behavior_Evaluation__c.Unpleasant_Touch_1st__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Behavior_Evaluation__c.Unpleasant_Touch_2nd_Flank__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
