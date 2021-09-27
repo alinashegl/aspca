@@ -584,9 +584,10 @@ public without sharing class TestDataFactory {
     private static final String PROTCOLNAMEPATTERN = 'Protocol ';
 
     public static Treatment_Plan__c createPlan(){
-        Treatment_Bundle__c bundle = new Treatment_Bundle__c(Name = 'Master', IsActive__c = true, IsMaster__c = true, Description__c = 'Master bundle');
-        insert bundle;
-        Treatment_Plan__c plan = new Treatment_Plan__c(IsActive__c = true, Description__c = 'Test');
+        Animal__c a = createAnimal();
+        Treatment_Bundle__c masterbundle = createMasterBundle();
+        Treatment_Bundle__c planBundle = createTreatmentBundle();
+        Treatment_Plan__c plan = new Treatment_Plan__c(IsActive__c = true, Description__c = 'Test', Animal__c = a.Id, AssignedTreatmentBundleId__c = planBundle.Id);
         insert plan;
         return plan;
     }
@@ -669,5 +670,16 @@ public without sharing class TestDataFactory {
         insert entries;
         return entries;
     }
-
+    
+    public static List<Plan_Protocol__c> createPlanProtocols(Integer numRecords) {
+        List<Plan_Protocol__c> planProtocolList = new List<Plan_Protocol__c>();
+        Treatment_Plan__c plan = createPlan();
+        List<Protocol__c> protocolList = createProtocols(numRecords);
+        for (Integer i = 0; i < numRecords; i++) {
+            Plan_Protocol__c newProtocol = new Plan_Protocol__c(Treatment_Plan__c = plan.Id, Protocol__c = protocolList[i].Id, IsRemoved__c = Math.mod(i, 2) != 0);
+            planProtocolList.add(newProtocol);
+        }
+        insert planProtocolList;
+        return planProtocolList;
+    }
 }

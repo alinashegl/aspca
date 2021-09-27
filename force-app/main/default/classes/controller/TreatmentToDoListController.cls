@@ -8,27 +8,26 @@
 
 public with sharing class TreatmentToDoListController {
     public class TreatmentToDoListData{
-        @AuraEnabled public String name;
-        @AuraEnabled public Animal__c animal;
-        @AuraEnabled public Treatment_Plan__c plan;
-        @AuraEnabled public String aspcaname;
-        @AuraEnabled public String priority;
-        @AuraEnabled public String assignment;
-        @AuraEnabled public Integer treatmentcount;
-        @AuraEnabled public String colorCode;
-        @AuraEnabled public Boolean hasProtocols;
-        @AuraEnabled public List<BundleSelection> selections;
-        @AuraEnabled public List<RowSelection> rowSelections;
-        @AuraEnabled public List<RowSelection> notPresentSelections;
-        @AuraEnabled public Boolean displayProtocols;
-        @AuraEnabled public Integer indexVar;
-        @AuraEnabled public Boolean displayNotPresent;
-        @AuraEnabled public List<String> shelterLocation;
+        @AuraEnabled public String name { get; set; }
+        @AuraEnabled public Animal__c animal { get; set; }
+        @AuraEnabled public Treatment_Plan__c plan { get; set; }
+        @AuraEnabled public String aspcaname { get; set; }
+        @AuraEnabled public String priority { get; set; }
+        @AuraEnabled public String assignment { get; set; }
+        @AuraEnabled public Integer treatmentcount { get; set; }
+        @AuraEnabled public String colorCode { get; set; }
+        @AuraEnabled public Boolean hasProtocols { get; set; }
+        @AuraEnabled public List<BundleSelection> selections { get; set; }
+        @AuraEnabled public List<RowSelection> rowSelections { get; set; }
+        @AuraEnabled public List<RowSelection> notPresentSelections { get; set; }
+        @AuraEnabled public Boolean displayProtocols { get; set; }
+        @AuraEnabled public Integer indexVar { get; set; }
+        @AuraEnabled public Boolean displayNotPresent { get; set; }
+        @AuraEnabled public List<String> shelterLocation { get; set; }
 
-        public TreatmentToDoListData(String name, String aspcaname, String priority, String assignment, Integer treatmentCount, String
-                colorCode, Boolean hasProtocols, List<BundleSelection> selections, List<RowSelection> rowSelections,
-                Boolean displayProtocols, Boolean displayNotPresent, Integer indexVar, List<RowSelection>
-                        notPresentSelections, List<String> shelterLocation) {
+        public TreatmentToDoListData(String name, String aspcaname, String priority, String assignment, Integer treatmentCount, String colorCode,
+            Boolean hasProtocols, List<BundleSelection> selections, List<RowSelection> rowSelections, Boolean displayProtocols,
+            Boolean displayNotPresent, Integer indexVar, List<RowSelection> notPresentSelections, List<String> shelterLocation) {
             this.name = name;
             this.aspcaname = aspcaname;
             this.priority = priority;
@@ -39,19 +38,19 @@ public with sharing class TreatmentToDoListController {
             this.selections = selections;
             this.rowSelections = rowSelections;
             this.displayProtocols = displayProtocols;
+            this.displayNotPresent = displayNotPresent;
             this.indexVar = indexVar;
             this.notPresentSelections = notPresentSelections;
-            this.displayNotPresent = displayNotPresent;
             this.shelterLocation = shelterLocation;
         }
 
         public TreatmentToDoListData() { }
     }
 
-    public class  BundleSelection {
-        @AuraEnabled public String name;
-        @AuraEnabled public String idVal;
-        @AuraEnabled public Boolean inPlan;
+    public class BundleSelection {
+        @AuraEnabled public String name { get; set; }
+        @AuraEnabled public String idVal { get; set; }
+        @AuraEnabled public Boolean inPlan { get; set; }
 
         public BundleSelection(String name, String idval, Boolean inPlan) {
             this.name = name;
@@ -63,11 +62,11 @@ public with sharing class TreatmentToDoListController {
     }
 
     public class RowSelection {
-        @AuraEnabled public BundleSelection selectionOne;
-        @AuraEnabled public BundleSelection selectionTwo;
-        @AuraEnabled public BundleSelection selectionThree;
-        @AuraEnabled public BundleSelection selectionFour;
-        @AuraEnabled public BundleSelection selectionFive;
+        @AuraEnabled public BundleSelection selectionOne { get; set; }
+        @AuraEnabled public BundleSelection selectionTwo { get; set; }
+        @AuraEnabled public BundleSelection selectionThree { get; set; }
+        @AuraEnabled public BundleSelection selectionFour { get; set; }
+        @AuraEnabled public BundleSelection selectionFive { get; set; }
 
         public RowSelection(BundleSelection selectionOne, BundleSelection selectionTwo, BundleSelection
                 selectionThree, BundleSelection selectionFour, BundleSelection selectionFive) {
@@ -105,8 +104,8 @@ public with sharing class TreatmentToDoListController {
     }
 
     public class SelectOption {
-        @AuraEnabled public String name;
-        @AuraEnabled public String label;
+        @AuraEnabled public String name { get; set; }
+        @AuraEnabled public String label { get; set; }
 
         public SelectOption(String name, String label) {
             this.name = name;
@@ -156,12 +155,7 @@ public with sharing class TreatmentToDoListController {
                     planProtocols.add(protocol);
                 }
             }
-            if(planProtocols != null) {
-                planToPlanProtocolsMap.put(plan.Id, planProtocols);
-            }else {
-                System.debug('NO PROTOCOLS FOUND FOR => ' + plan.Name);
-                planToPlanProtocolsMap.put(plan.Id, planProtocols);
-            }
+            planToPlanProtocolsMap.put(plan.Id, planProtocols);
         }
 
         for(Treatment_Plan__c plan : treatmentPlans) {
@@ -210,17 +204,15 @@ public with sharing class TreatmentToDoListController {
                     iSelection.inPlan = true;
                     iSelection.name = entry.Protocol__r.Name;
                     selections.add(iSelection);
-                } else if(removedIdSet.contains(entry.Protocol__c)) {
+                }
+                else if(removedIdSet.contains(entry.Protocol__c)) {
                     iSelection.inPlan = false;
                     iSelection.name = entry.Protocol__r.Name;
                     selections.add(iSelection);
-                } else if(masterProtocols.keySet().contains(entry.Protocol__c)) {
+                }
+                else if (masterProtocols.keySet().contains(entry.Protocol__c)) {
                     iSelection.inPlan = false;
                     iSelection.name = entry.Protocol__r.Name;
-                    notPresentSelections.add(iSelection);
-                } else {
-                    iSelection.inPlan = false;
-                    iSelection.name = entry.Entry_Label__c;
                     notPresentSelections.add(iSelection);
                 }
             }
@@ -314,7 +306,7 @@ public with sharing class TreatmentToDoListController {
                 RowSelection selection = new RowSelection();
                 selection.selectionOne = notPresentSelections[0];
                 selection.selectionTwo = notPresentSelections[1];
-                selection.selectionThree = notPresentSelections[3];
+                selection.selectionThree = notPresentSelections[2];
                 BundleSelection opt = new BundleSelection();
                 opt.name = 'EMPTY';
                 selection.selectionFive = opt;
