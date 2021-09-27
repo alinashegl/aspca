@@ -37,14 +37,14 @@ public with sharing class SessionProtocolDomain extends DomainActionBase {
         for (Session_Protocol__c protocol : newRecordMap.values()) {
             Session_Protocol__c oldProtocol = oldRecordMap.get(protocol.Id);
             if(protocol.IsSkipped__c == true) {
-                protocol.Preferred_Motivators__c = '';
-                protocol.Arousal_Best__c = 'None';
-                protocol.Arousal_Worst__c = 'None';
-                protocol.Fear_Best__c = 'None';
-                protocol.Fear_Worst__c = 'None';
-                protocol.Social_Best__c = 'None';
-                protocol.Aggressive_Worst__c = 'None';
-                protocol.Overall_Score__c = 'None';
+                protocol.Preferred_Motivators__c = null;
+                protocol.Arousal_Best__c = null;
+                protocol.Arousal_Worst__c = null;
+                protocol.Fear_Best__c = null;
+                protocol.Fear_Worst__c = null;
+                protocol.Social_Best__c = null;
+                protocol.Aggressive_Worst__c = null;
+                protocol.Overall_Score__c = null;
             }
             if (protocol.Add_to_Plan__c == true) {
 
