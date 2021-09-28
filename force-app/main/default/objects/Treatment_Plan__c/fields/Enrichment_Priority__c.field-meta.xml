@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Arousal_Best__c</fullName>
+    <fullName>Enrichment_Priority__c</fullName>
     <externalId>false</externalId>
-    <label>Arousal - Best</label>
+    <label>Enrichment Priority</label>
     <required>false</required>
+    <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>
     <type>Picklist</type>
     <valueSet>
@@ -11,24 +12,19 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>1. Low/Neutral</fullName>
+                <fullName>Daily – 7 days</fullName>
                 <default>false</default>
-                <label>1. Low/Neutral</label>
+                <label>Daily – 7 days</label>
             </value>
             <value>
-                <fullName>2. Mild</fullName>
+                <fullName>High – 5 days</fullName>
                 <default>false</default>
-                <label>2. Mild</label>
+                <label>High – 5 days</label>
             </value>
             <value>
-                <fullName>3. Moderate</fullName>
+                <fullName>Low – 3 days</fullName>
                 <default>false</default>
-                <label>3. Moderate</label>
-            </value>
-            <value>
-                <fullName>4. Extreme</fullName>
-                <default>false</default>
-                <label>4. Extreme</label>
+                <label>Low – 3 days</label>
             </value>
         </valueSetDefinition>
     </valueSet>

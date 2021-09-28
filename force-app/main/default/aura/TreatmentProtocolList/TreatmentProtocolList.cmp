@@ -6,17 +6,19 @@
 
 <aura:component description="TreatmentProtocolList" controller="TreatmentToDoListController">
     <aura:attribute name="data" type="List" />
+    <aura:attribute name="sectionType" type="String" />
+    <aura:registerEvent name="protocolSelectEvent" type="c:treatmentProtocolSelectEvent"/>
 
-    <aura:handler name="init" value="{! this}" action="{! c.init}" />
     <table class="grid-item slds-box">
         <aura:iteration var="data" items="{!v.data}">
             <tr class="spaceUnder grid-item">
                 <td class="input-style slds-theme_shade">
-                    <lightning:input label="{!data.selectionOne.name}" name="{!data.selectionOne.idVal}"
-                                     type="checkbox"
-                                     variant="label-hidden"
-                                     checked="{!data.selectionOne.inPlan}"
-                                     onchange="{!c.handleSelect}"
+                    <lightning:input label="{!data.selectionOne.name}"
+                                    name="{!data.selectionOne.idVal}"
+                                    type="checkbox"
+                                    variant="label-hidden"
+                                    checked="{!data.selectionOne.inPlan}"
+                                    onchange="{!c.handleSelect}"
                                     aura:id="optsOne"/>
                 </td>
                 <aura:if isTrue="{!data.selectionOne.inPlan}">
@@ -31,11 +33,13 @@
                 </aura:if>
                 <aura:if isTrue="{!not(data.selectionTwo.name == 'EMPTY')}">
                     <td class="slds-theme_shade input-style">
-                        <lightning:input label="{!data.selectionTwo.name}" name="{!data.selectionTwo.idVal}"
-                                         type="checkbox"
-                                         variant="label-hidden"
-                                         checked="{!data.selectionTwo.inPlan}"
-                                         aura:id="optsTwo"/>
+                        <lightning:input label="{!data.selectionTwo.name}"
+                                        name="{!data.selectionTwo.idVal}"
+                                        type="checkbox"
+                                        variant="label-hidden"
+                                        checked="{!data.selectionTwo.inPlan}"
+                                        onchange="{!c.handleSelect}"
+                                        aura:id="optsTwo"/>
                     </td>
                     <aura:if isTrue="{!data.selectionTwo.inPlan}">
                         <td class="grid-item column-style">
@@ -50,10 +54,13 @@
                 </aura:if>
                 <aura:if isTrue="{!not(data.selectionThree.name == 'EMPTY')}">
                     <td class="float slds-theme_shade input-style">
-                        <lightning:input label="{!data.selectionThree.name}" name="{!data.selectionThree.idVal}"
-                                         type="checkbox"
-                                         variant="label-hidden"
-                                         checked="{!data.selectionThree.inPlan}" aura:id="optsThree"/>
+                        <lightning:input label="{!data.selectionThree.name}"
+                                        name="{!data.selectionThree.idVal}"
+                                        type="checkbox"
+                                        variant="label-hidden"
+                                        checked="{!data.selectionThree.inPlan}"
+                                        onchange="{!c.handleSelect}"
+                                        aura:id="optsThree"/>
                     </td>
                     <aura:if isTrue="{!data.selectionThree.inPlan}">
                         <td class="grid-item column-style">
@@ -68,10 +75,13 @@
                 </aura:if>
                 <aura:if isTrue="{!not(data.selectionFour.name == 'EMPTY')}">
                     <td class="float slds-theme_shade input-style">
-                        <lightning:input label="{!data.selectionFour.name}" name="{!data.selectionFour.idVal}"
-                                         type="checkbox"
-                                         variant="label-hidden"
-                                         checked="{!data.selectionFour.inPlan}" aura:id="optsThree"/>
+                        <lightning:input label="{!data.selectionFour.name}"
+                                        name="{!data.selectionFour.idVal}"
+                                        type="checkbox"
+                                        variant="label-hidden"
+                                        checked="{!data.selectionFour.inPlan}"
+                                        onchange="{!c.handleSelect}"
+                                        aura:id="optsFour"/>
                     </td>
                     <aura:if isTrue="{!data.selectionFour.inPlan}">
                         <td class="grid-item column-style">
@@ -86,10 +96,13 @@
                 </aura:if>
                 <aura:if isTrue="{!not(data.selectionFive.name == 'EMPTY')}">
                     <td class="float slds-theme_shade input-style">
-                        <lightning:input label="{!data.selectionFive.name}" name="{!data.selectionFive.idVal}"
-                                         type="checkbox"
-                                         variant="label-hidden"
-                                         checked="{!data.selectionFive.inPlan}" aura:id="optsThree"/>
+                        <lightning:input label="{!data.selectionFive.name}"
+                                        name="{!data.selectionFive.idVal}"
+                                        type="checkbox"
+                                        variant="label-hidden"
+                                        checked="{!data.selectionFive.inPlan}"
+                                        onchange="{!c.handleSelect}"
+                                        aura:id="optsFive"/>
                     </td>
                     <aura:if isTrue="{!data.selectionFive.inPlan}">
                         <td class="grid-item column-style">
