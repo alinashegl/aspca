@@ -29,7 +29,7 @@ export default class TreatmentSessionMain extends LightningElement {
         getActiveProtocols({'sessionId' : this.recordId})
         .then(result => {
             if (result) {
-                window.console.log('active Protocols: ', JSON.stringify(result));
+                // window.console.log('active Protocols: ', JSON.stringify(result));
                 this.activeProtocols = result;
             }
         })
@@ -42,7 +42,15 @@ export default class TreatmentSessionMain extends LightningElement {
         });
     }
 
-    handleClick(){
+    handleStartSession(){
         this.activeSession = !this.activeSession;
+    }
+
+    handleModifySession(){
+
+    }
+
+    get startSessionLabel(){
+        return this.activeSession ? 'Exit Session' : 'Start Session';
     }
 }

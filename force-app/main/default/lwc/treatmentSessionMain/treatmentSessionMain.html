@@ -11,8 +11,8 @@
                 <lightning-icon icon-name="custom:custom63" alternative-text="Protocol" title="Protocol"></lightning-icon>
                 <div class="slds-p-left_small">
                 Session Protocols ({activeProtocols.length})
-                <lightning-button variant="Neutral" label="Start Session" title="startSession" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
-                <lightning-button variant="Neutral" label="Modify Session" title="modifySession" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
+                <lightning-button variant="Neutral" label={startSessionLabel} title="startSession" onclick={handleStartSession} class="slds-m-left_x-small"></lightning-button>
+                <lightning-button variant="Neutral" label="Modify Session" title="modifySession" onclick={handleModifySession} class="slds-m-left_x-small"></lightning-button>
                 </div>
             </h2>
         </div>
@@ -43,7 +43,7 @@
     </lightning-card>
 <!-- </template> -->
 
-</br>
+<!-- </br>
     <lightning-card>
         <template if:true={loading}>
             <lightning-spinner
@@ -86,7 +86,7 @@
                 </template>
             </div>
         </template>
-    </lightning-card>
+    </lightning-card> -->
 </template>
 
 <!-- <div class="slds-page-header slds-page-header_joined slds-page-header_bleed slds-shrink-none test-headerRegion slds-is-relative slds-page-header--object-home">

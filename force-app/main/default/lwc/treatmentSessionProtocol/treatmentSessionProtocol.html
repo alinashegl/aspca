@@ -1,11 +1,98 @@
 <template>
     <div class="slds-p-left_medium">
-        <lightning-button variant="base" label={protocolName} title={protocolName} onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
-        <lightning-icon icon-name="utility:success" alternative-text="Success!" variant="success" title="success variant x-small" size="x-small"></lightning-icon>
-        <lightning-icon icon-name="utility:warning" alternative-text="Warning!" variant="warning" title="warning variant x-small" size="x-small"></lightning-icon>
-        <lightning-icon icon-name="utility:error" alternative-text="Error!" variant="error" title="error variant x-small" size="x-small"></lightning-icon>
+        <lightning-button variant="base" label={protocolName} title={protocolName} onclick={handleClick} disabled={protocolButtonStatus} class="slds-m-left_x-small"></lightning-button>
+        <template if:true={protocolInfo}>
+            <lightning-icon icon-name={iconName} alternative-text={iconText} variant={iconVariant} title="success variant x-small" size="x-small"></lightning-icon>
+        </template>
     </div>
-    <template if:false={showPicklist}>
+    <template if:true={showModal}>
+        <!-- Modal/Popup Box LWC starts here -->
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- Modal/Popup Box LWC header here -->
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                        <lightning-icon icon-name="utility:close"
+                            alternative-text="close"
+                            variant="inverse"
+                            size="small" ></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">{protocolInfo.name}</h2>
+                    <lightning-icon icon-name={iconName} alternative-text={iconText} variant={iconVariant} title="success variant x-small" size="medium"></lightning-icon>
+                </header>
+                <!-- Modal/Popup Box LWC body starts here -->
+                <template if:true={loading}>
+                    <lightning-spinner
+                        alternative-text="Loading session data"
+                        variant="brand"
+                    ></lightning-spinner>
+                </template>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <lightning-button variant="Neutral" label={skipButtonLabel} title="skipProtocol" onclick={handleSkip} class="slds-m-left_x-small"></lightning-button>
+                    <lightning-button variant="Neutral" label="Skip and Remove from Plan" title="skipAndRemove" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
+                    <lightning-card>
+                        <div>
+                            <template for:each={protocolInfo.picklistFields} for:item="field">
+                                <div key={field.name} class="slds-p-top_medium"> 
+                                    <h2 class="slds-card__header-title">{field.name}</h2>
+                                    <lightning-radio-group
+                                        options={field.options}
+                                        value={field.currentValue}
+                                        type="radio"
+                                        onchange={handleRadioChange}
+                                        disabled={protocolInfo.isSkipped}
+                                        data-fname={field.apiName}
+                                        >
+                                    >
+                                    </lightning-radio-group>
+                                </div>
+                            </template>
+                            <div class="slds-card__header-title slds-p-top_medium">
+                                Needs Review
+                                <lightning-input class="slds-p-left_medium" type="checkbox" name="needsReview" checked={protocolInfo.needsReview}></lightning-input>
+                            </div>
+                        </div>
+                    </lightning-card>
+                </div>
+                <!-- Modal/Popup Box LWC footer starts here -->
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick={closeModal} title="Cancel">Close Without Updating</button>
+                    <button class="slds-button slds-button_brand" onclick={handleSubmit} title="OK">Update and Close</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+    <!-- <template if:false={showPicklist}>
+        <template if:true={toggleForm}>
+            <lightning-card>
+                <lightning-button variant="Neutral" label="Skip" title="skipProtocol" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
+                <lightning-button variant="Neutral" label="Skip and Remove from Plan" title="skipAndRemove" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
+                    <lightning-card title={protocolInfo.name}>
+                            <div class="slds-var-m-around_medium">
+                                <template for:each={protocolInfo.picklistFields} for:item="field">
+                                    <div key={field.name}> 
+                                        <h3  >{field.name}</h3>
+                                        <lightning-radio-group
+                                            options={field.options}
+                                            value={field.currentValue}
+                                            type="radio"
+                                            onchange={handleRadioChange}>
+                                        >
+                                        </lightning-radio-group>
+                                    </div>
+                                </template>
+                            </div>
+                    </lightning-card>
+            </lightning-card>
+        </template>
+    </template> -->
+
+
+    <!-- Old Display -->
+    <!-- <template if:false={showPicklist}>
         <template if:true={toggleForm}>
             <lightning-card>
                 <lightning-button variant="Neutral" label="Skip" title="startSession" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
@@ -38,10 +125,10 @@
                 </lightning-card>                
             </lightning-card>
         </template>
-    </template>
+    </template> -->
 
-    <!-- ****************** shoing picklists ******************** -->
-    <template if:true={showPicklist}>
+    <!-- ****************** showing picklists ******************** -->
+    <!-- <template if:true={showPicklist}>
         <template if:true={toggleForm}>
             <div class="slds-p-left-small">
                 <lightning-card>
@@ -56,5 +143,5 @@
                 </lightning-card>
             </div>
         </template>
-    </template>
+    </template> -->
 </template>
