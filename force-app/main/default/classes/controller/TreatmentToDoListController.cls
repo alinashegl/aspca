@@ -224,8 +224,8 @@ public with sharing class TreatmentToDoListController {
                 selection.selectionOne =  selections[variable - 1];
                 selection.selectionTwo =  selections[variable - 2];
                 selection.selectionThree =  selections[variable - 3];
-                selection.selectionFour = selections[variable -4];
-                selection.selectionFive = selections[variable -5];
+                selection.selectionFour = selections[variable - 4];
+                selection.selectionFive = selections[variable - 5];
                 variable = variable - 5;
                 rowSelections.add(selection);
             }
@@ -233,10 +233,10 @@ public with sharing class TreatmentToDoListController {
 
             if (variable == 4) {
                 RowSelection selection = new RowSelection();
-                selection.selectionOne = selections[0];
-                selection.selectionTwo = selections[1];
-                selection.selectionThree = selections[2];
-                selection.selectionFour = selections[3];
+                selection.selectionOne = selections[3];
+                selection.selectionTwo = selections[2];
+                selection.selectionThree = selections[1];
+                selection.selectionFour = selections[0];
                 BundleSelection opt = new BundleSelection();
                 opt.name = 'EMPTY';
                 selection.selectionFive = opt;
@@ -244,9 +244,9 @@ public with sharing class TreatmentToDoListController {
             }
             if (variable == 3) {
                 RowSelection selection = new RowSelection();
-                selection.selectionOne = selections[0];
+                selection.selectionOne = selections[2];
                 selection.selectionTwo = selections[1];
-                selection.selectionThree = selections[2];
+                selection.selectionThree = selections[0];
                 BundleSelection opt = new BundleSelection();
                 opt.name = 'EMPTY';
                 selection.selectionFour = opt;
@@ -255,8 +255,8 @@ public with sharing class TreatmentToDoListController {
             }
             if (variable == 2) {
                 RowSelection selection = new RowSelection();
-                selection.selectionOne = selections[0];
-                selection.selectionTwo = selections[1];
+                selection.selectionOne = selections[1];
+                selection.selectionTwo = selections[0];
                 BundleSelection opt = new BundleSelection();
                 opt.name = 'EMPTY';
                 selection.selectionThree = opt;
@@ -284,18 +284,18 @@ public with sharing class TreatmentToDoListController {
                     selection.selectionOne =  notPresentSelections[variable2 - 1];
                     selection.selectionTwo =  notPresentSelections[variable2 - 2];
                     selection.selectionThree =  notPresentSelections[variable2 - 3];
-                    selection.selectionFour = notPresentSelections[variable2 -4];
-                    selection.selectionFive = notPresentSelections[variable2 -5];
+                    selection.selectionFour = notPresentSelections[variable2 - 4];
+                    selection.selectionFive = notPresentSelections[variable2 - 5];
                     variable2 = variable2 - 5;
                     notPresentRow.add(selection);
                 }
             }
             if (variable2 == 4) {
                 RowSelection selection = new RowSelection();
-                selection.selectionOne = notPresentSelections[0];
-                selection.selectionTwo = notPresentSelections[1];
-                selection.selectionThree = notPresentSelections[2];
-                selection.selectionFour = notPresentSelections[3];
+                selection.selectionOne = notPresentSelections[3];
+                selection.selectionTwo = notPresentSelections[2];
+                selection.selectionThree = notPresentSelections[1];
+                selection.selectionFour = notPresentSelections[0];
                 BundleSelection opt = new BundleSelection();
                 opt.name = 'EMPTY';
                 selection.selectionFive = opt;
@@ -304,9 +304,9 @@ public with sharing class TreatmentToDoListController {
 
             if (variable2 == 3) {
                 RowSelection selection = new RowSelection();
-                selection.selectionOne = notPresentSelections[0];
+                selection.selectionOne = notPresentSelections[2];
                 selection.selectionTwo = notPresentSelections[1];
-                selection.selectionThree = notPresentSelections[2];
+                selection.selectionThree = notPresentSelections[0];
                 BundleSelection opt = new BundleSelection();
                 opt.name = 'EMPTY';
                 selection.selectionFive = opt;
@@ -315,8 +315,8 @@ public with sharing class TreatmentToDoListController {
             }
             if (variable2 == 2) {
                 RowSelection selection = new RowSelection();
-                selection.selectionOne = notPresentSelections[0];
-                selection.selectionTwo = notPresentSelections[1];
+                selection.selectionOne = notPresentSelections[1];
+                selection.selectionTwo = notPresentSelections[0];
                 BundleSelection opt = new BundleSelection();
                 opt.name = 'EMPTY';
                 selection.selectionFive = opt;
