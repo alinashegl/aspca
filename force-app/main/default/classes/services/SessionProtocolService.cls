@@ -142,15 +142,16 @@ public with sharing class SessionProtocolService {
     private static ServiceResponse beforeInsertHandler(ServiceRequest request) {
         Treatment_Plan__c plan = (Treatment_Plan__c) request.Parameters.get('plan');
         Treatment_Session__c session = (Treatment_Session__c) request.Parameters.get('session');
-
         PlanProtocolSelector planProtocolSelector = new PlanProtocolSelector();
         List<Plan_Protocol__c> planProtocols = planProtocolSelector.GetByOpp(plan.Id);
         List<Session_Protocol__c> protocols = new List<Session_Protocol__c>();
+        
         for (Plan_Protocol__c lPlanProtocol : planProtocols) {
             Session_Protocol__c protocol = new Session_Protocol__c();
             protocol.TreatmentSessionId__c = session.Id;
             protocol.ProtocolId__c = lPlanProtocol.Protocol__c;
             protocol.Bundle_Entry__c = lPlanProtocol.Bundle_Entry__c;
+            protocol.Preferred_Motivators__c = session.Preferred_Motivators__c;
             protocols.add(protocol);
         }
         insert protocols;
