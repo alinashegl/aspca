@@ -22,10 +22,14 @@
     <aura:attribute type="String" name="TreatmentPlanURLPath" />
     <aura:attribute type="String" name="AssignedBundleId" />
 
-    <aura:method name="handleClick"  action="{!c.handleClick}" access="public" />
-    <aura:handler name="init" value="{! this}" action="{!c.init}" />
-    <aura:handler name="change" value="{!v.AnimalId}" action="{!c.onAnimalChange}"/>
-    <aura:handler name="change" value="{!v.PlanId}" action="{!c.onPlanChange}" />
+    <aura:handler name="protocolSelectEvent" event="c:treatmentProtocolSelectEvent" action="{!c.handleSelectEvent}"/>
+    <aura:registerEvent name="protocolSaveEvent" type="c:treatmentProtocolSaveEvent"/>
+    <aura:handler name="protocolSaveEvent" event="c:treatmentProtocolSaveEvent" action="{!c.handleSaveEvent}"/>
+    <aura:html tag="style">
+        .toastMessage.forceActionsText{
+            white-space : pre-line !important;
+        }
+    </aura:html>
     <table bgcolor="white" class="line">
         <tr class="spaceUnder">
             <td class="width"><lightning:formattedUrl value="{!'/' + v.AnimalId}" label="{!v.Name}" /></td>
@@ -51,7 +55,7 @@
                                       class="float"  aura:id="{!v.IndexVar}"/>
                     <lightning:button name="showNotPresent" label="Unassigned Protocols" onclick="{!c.handleClick}"
                                       class="float" />
-                    <lightning:button name="updatePlanProtocols" label="Save Changes" class="float" />
+                    <lightning:button name="updatePlanProtocols" label="Save Changes" class="float" onclick="{!c.handleClick}" />
                 </lightning:buttonGroup>
 
             </td>
@@ -61,7 +65,7 @@
         <aura:if isTrue="{!v.RenderProtocols}">
             <thead><strong>Assigned Protocols</strong></thead>
             <tr class="small">
-                <c:TreatmentProtocolList data="{!v.Data}" />
+                <c:TreatmentProtocolList data="{!v.Data}" sectionType="assigned" />
             </tr>
         </aura:if>
     </table>
@@ -69,7 +73,7 @@
         <aura:if isTrue="{!v.RenderNotPresentData}">
             <thead><strong>Unassigned Protocols</strong></thead>
             <tr class="small">
-                <c:TreatmentProtocolList data="{!v.NotPresentData}" />
+                <c:TreatmentProtocolList data="{!v.NotPresentData}" sectionType="unassigned" />
             </tr>
         </aura:if>
     </table>
