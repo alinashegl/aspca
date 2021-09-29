@@ -30,7 +30,9 @@
                 </template>
                 <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
                     <lightning-button variant="Neutral" label={skipButtonLabel} title="skipProtocol" onclick={handleSkip} class="slds-m-left_x-small"></lightning-button>
-                    <lightning-button variant="Neutral" label="Skip and Remove from Plan" title="skipAndRemove" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
+                    <template if:true={canRemoveProtocol}>
+                        <lightning-button variant="Neutral" label={removeButtonLabel} title="skipAndRemove" onclick={handleSkipAndRemove} class="slds-m-left_x-small"></lightning-button>
+                    </template>
                     <lightning-card>
                         <div>
                             <template for:each={protocolInfo.picklistFields} for:item="field">
@@ -48,9 +50,14 @@
                                     </lightning-radio-group>
                                 </div>
                             </template>
-                            <div class="slds-card__header-title slds-p-top_medium">
-                                Needs Review
-                                <lightning-input class="slds-p-left_medium" type="checkbox" name="needsReview" checked={protocolInfo.needsReview}></lightning-input>
+                            <div>
+                                <h2 class="slds-p-top_large slds-card__header-title">Needs Review
+                                    <lightning-input class="slds-p-left_medium" data-name="needsReview" type="checkbox" name="needsReview" checked={protocolInfo.needsReview}></lightning-input>
+                                </h2>
+                                <h2 class="slds-p-top_large slds-card__header-title">Preferred Motivators</h2>
+                                <lightning-input class="slds-p-left_medium" data-name="preferredMotivators" type="text" name="preferredMotivators" value={protocolInfo.preferredMotivators}></lightning-input>
+                                <h2 class="slds-p-top_large slds-card__header-title">Protocol Notes</h2>
+                                <lightning-textarea class="slds-p-left_medium" data-name="protocolNotes" type="text" name="protocolNotes" value={protocolInfo.protocolNotes}></lightning-textarea>
                             </div>
                         </div>
                     </lightning-card>
@@ -64,7 +71,7 @@
         </section>
         <div class="slds-backdrop slds-backdrop_open"></div>
     </template>
-
+</template>
     <!-- <template if:false={showPicklist}>
         <template if:true={toggleForm}>
             <lightning-card>
@@ -144,4 +151,3 @@
             </div>
         </template>
     </template> -->
-</template>

@@ -1,8 +1,16 @@
 import { LightningElement, api } from 'lwc';
 import getActiveProtocols from '@salesforce/apex/TreatmentSessionLWCController.getActiveProtocols';
+import hasRemoveFromPlanPermission from '@salesforce/customPermission/Remove_Protocol_From_Plan';
 
 const columns = [
-    { label: 'Name', fieldName: 'Protocol_Name__c' },
+    { label: 'Name', fieldName: 'protoUrl', type:'url',
+        typeAttributes: {
+            label: { 
+                fieldName: 'Protocol_Name__c' 
+            },
+            target : '_blank'
+        }
+    },
     { label: 'Fear - Best', fieldName: 'Fear_Best__c' },
     { label: 'Fear - Worst', fieldName: 'Fear_Worst__c' },
     { label: 'Agressive - Worst', fieldName: 'Aggressive_Worst__c' },
@@ -29,15 +37,19 @@ export default class TreatmentSessionMain extends LightningElement {
         getActiveProtocols({'sessionId' : this.recordId})
         .then(result => {
             if (result) {
-                // window.console.log('active Protocols: ', JSON.stringify(result));
-                this.activeProtocols = result;
+                let baseUrl = 'https://'+location.host+'/';
+                result.forEach(protoRec => {
+                    protoRec.protoUrl = baseUrl+protoRec.Id;
+                });
             }
+            this.activeProtocols = result;
         })
         .catch(error => {
             window.console.log('connectedCallback: -------error-------------'+error);
             window.console.log(error);
         })
         .finally(() => {
+            // window.console.log('activeProtocols: ', JSON.stringify(this.activeProtocols));
             this.loading = false;
         });
     }
@@ -52,5 +64,9 @@ export default class TreatmentSessionMain extends LightningElement {
 
     get startSessionLabel(){
         return this.activeSession ? 'Exit Session' : 'Start Session';
+    }
+
+    get canRemoveProtocol() {
+        return hasRemoveFromPlanPermission;
     }
 }

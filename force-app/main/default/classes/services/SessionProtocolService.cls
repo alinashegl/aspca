@@ -200,6 +200,7 @@ public with sharing class SessionProtocolService {
             }
 
         }
+        System.debug('planProtocolList to update: ' + planProtocolList);
         update planProtocolList;
         ServiceResponse response = new ServiceResponse(request);
 
