@@ -45,7 +45,8 @@ public with sharing class TreatmentSessionLWCController {
                     Protocol_Notes__c,
                     Novel_Person_Notes__c,
                     Manager_Review_Notes__c,
-                    Preferred_Motivators__c
+                    Preferred_Motivators__c,
+                    (SELECT Id, Contact__c, Novel_Not_Novel__c FROM Session_Protocol_Contacts__r)
                 FROM Session_Protocol__c 
                 WHERE Id =: protocolId
                 AND IsRemoved__c = false
