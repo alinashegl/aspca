@@ -33,34 +33,34 @@
                     <template if:true={canRemoveProtocol}>
                         <lightning-button variant="Neutral" label={removeButtonLabel} title="skipAndRemove" onclick={handleSkipAndRemove} class="slds-m-left_x-small"></lightning-button>
                     </template>
-                    <lightning-card>
-                        <div>
-                            <template for:each={protocolInfo.picklistFields} for:item="field">
-                                <div key={field.name} class="slds-p-top_medium"> 
-                                    <h2 class="slds-card__header-title">{field.name}</h2>
-                                    <lightning-radio-group
-                                        options={field.options}
-                                        value={field.currentValue}
-                                        type="radio"
-                                        onchange={handleRadioChange}
-                                        disabled={protocolInfo.isSkipped}
-                                        data-fname={field.apiName}
-                                        >
-                                    >
-                                    </lightning-radio-group>
-                                </div>
-                            </template>
+                    <template if:false={protocolInfo.isSkipped}>
+                        <lightning-card>
                             <div>
-                                <h2 class="slds-p-top_large slds-card__header-title">Needs Review
-                                    <lightning-input class="slds-p-left_medium" data-name="needsReview" type="checkbox" name="needsReview" checked={protocolInfo.needsReview}></lightning-input>
-                                </h2>
-                                <h2 class="slds-p-top_large slds-card__header-title">Preferred Motivators</h2>
-                                <lightning-input class="slds-p-left_medium" data-name="preferredMotivators" type="text" name="preferredMotivators" value={protocolInfo.preferredMotivators}></lightning-input>
-                                <h2 class="slds-p-top_large slds-card__header-title">Protocol Notes</h2>
-                                <lightning-textarea class="slds-p-left_medium" data-name="protocolNotes" type="text" name="protocolNotes" value={protocolInfo.protocolNotes}></lightning-textarea>
+                                <template for:each={protocolInfo.picklistFields} for:item="field">
+                                    <div key={field.name} class="slds-p-top_medium"> 
+                                        <h2 class="slds-card__header-title">{field.name}</h2>
+                                        <lightning-radio-group
+                                            options={field.options}
+                                            value={field.currentValue}
+                                            type="radio"
+                                            onchange={handleRadioChange}
+                                            data-fname={field.apiName}
+                                            >
+                                        </lightning-radio-group>
+                                    </div>
+                                </template>
+                                <div>
+                                    <h2 class="slds-p-top_large slds-card__header-title">Needs Review
+                                        <lightning-input class="slds-p-left_medium" data-name="needsReview" type="checkbox" name="needsReview" checked={protocolInfo.needsReview}></lightning-input>
+                                    </h2>
+                                    <h2 class="slds-p-top_large slds-card__header-title">Preferred Motivators</h2>
+                                    <lightning-input class="slds-p-left_medium" data-name="preferredMotivators" type="text" name="preferredMotivators" value={protocolInfo.preferredMotivators}></lightning-input>
+                                    <h2 class="slds-p-top_large slds-card__header-title">Protocol Notes</h2>
+                                    <lightning-textarea class="slds-p-left_medium" data-name="protocolNotes" type="text" name="protocolNotes" value={protocolInfo.protocolNotes}></lightning-textarea>
+                                </div>
                             </div>
-                        </div>
-                    </lightning-card>
+                        </lightning-card>
+                    </template>
                 </div>
                 <!-- Modal/Popup Box LWC footer starts here -->
                 <footer class="slds-modal__footer">

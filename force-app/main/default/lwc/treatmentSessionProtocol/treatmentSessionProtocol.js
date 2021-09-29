@@ -76,7 +76,10 @@ export default class TreatmentSessionProtocol extends LightningElement {
         if(this.protocolInfo.isSkipped == true){
             this.resetProtocol('skip');
         } else {
-            this.prepProtocolFields();
+            const fields = {};
+            fields[PROTOCOL_ID_FIELD.fieldApiName] = this.recordId;
+            fields[IS_SKIPPED_FIELD.fieldApiName] = this.protocolInfo.isSkipped;
+            this.updateProtocol(fields);
         }
     }
 
@@ -130,19 +133,6 @@ export default class TreatmentSessionProtocol extends LightningElement {
         fields[PREFERRED_MOTIVATORS_FIELD.fieldApiName] = this.template.querySelector("lightning-input[data-name=preferredMotivators]").value;
 
         this.updateProtocol(fields);
-    }
-
-    getFieldValue(fieldName){
-        window.console.log('found it: ', this.protocolInfo.picklistFields.name.find(fieldName));
-
-        // let value = '';
-        // this.protocolInfo.picklistFields.forEach(element => {
-        //     window.console.log('current element: ', element);
-        //     if(element.name === fieldName){
-        //         window.console.log('match: ', fieldName, ' : ', element.currentValue);
-        //         return element.currentValue;
-        //     }
-        // });
     }
 
     updateProtocol(fields){
