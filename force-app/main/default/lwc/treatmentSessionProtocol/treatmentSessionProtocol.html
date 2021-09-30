@@ -61,12 +61,21 @@
                                     object-api='Session_Protocol_Contact__c'
                                 >
                                 </c-treatment-session-child-list>
-
+                            </div>
+                            <div class="slds-p-top_large">
                                 <c-treatment-session-child-list
                                     protocol-id={recordId}
                                     object-api='Additional_Dog_Present__c'
                                 >
                                 </c-treatment-session-child-list>
+                            </div>
+                            <div class="slds-p-top_large">
+                                <c-lwc_last-treatments
+                                    record-id={recordId}
+                                    object-api-name='Session_Protocol__c'
+                                    record-count=5
+                                >
+                                </c-lwc_last-treatments>
                             </div>
                         </lightning-card>
                     </template>

@@ -56,6 +56,10 @@ export default class TreatmentSessionChild extends LightningElement {
         return !this.hasChanged;
     }
 
+    get saveButtonVariant(){
+        return this.hasChanged ? 'brand' : 'border-filled';
+    }
+
     get addNewLabel(){
         return this.isContactList ? 'Save New Contact' : 'Save New Dog';
     }
@@ -63,4 +67,5 @@ export default class TreatmentSessionChild extends LightningElement {
     get parentFieldName(){
         return this.isContactList ? 'Contact__c' : 'Additional_Dog__c';
     }
+
 }
