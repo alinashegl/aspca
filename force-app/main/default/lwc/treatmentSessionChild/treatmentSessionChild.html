@@ -1,0 +1,91 @@
+<template>
+    <template if:true={record}>
+        <lightning-record-edit-form
+            object-api-name={objectApi}
+            record-id={record.Id}
+            onsuccess={handleSuccess}>
+            <lightning-messages>
+            </lightning-messages>
+            <div class="slds-grid">
+                <div class="slds-col slds-size_3-of-8 ">
+                    <lightning-input-field
+                        variant="label-hidden"
+                        field-name={parentFieldName}
+                        onchange={enableSaveButton}>
+                    </lightning-input-field>
+                </div>
+                <template if:true={isContactList}>
+                    <div class="slds-col slds-size_3-of-8 slds-p-left_small">
+                        <lightning-input-field
+                            variant="label-hidden"
+                            field-name="Novel_Not_Novel__c"
+                            onchange={enableSaveButton}>
+                        </lightning-input-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-8 slds-p-left_small">
+                        <lightning-button
+                        variant="brand"
+                        type="submit"
+                        label="Save"
+                        disabled={buttonStatus}
+                        >
+                        </lightning-button>
+                    </div>                    
+                </template>
+                <div class="slds-col slds-size_1-of-8 slds-p-left_small">
+                    <lightning-button label="Remove" onclick={handleRemoveRecord}></lightning-button>
+                </div>
+            </div>
+        </lightning-record-edit-form>
+    </template>
+    <template if:false={record}>
+        <lightning-record-edit-form
+            object-api-name={objectApi}
+            onsuccess={handleSuccess}>
+            <lightning-messages>
+            </lightning-messages>
+            <div class="slds-grid">
+                <div class="slds-col slds-size_3-of-8">
+                    <lightning-input-field
+                        variant="label-hidden"
+                        field-name={parentFieldName}
+                        onchange={enableButton}>
+                    </lightning-input-field>
+                </div>
+                <template if:true={isContactList}>
+                    <div class="slds-col slds-size_3-of-8 slds-p-left_small">
+                        <lightning-input-field
+                            variant="label-hidden"
+                            field-name="Novel_Not_Novel__c"
+                            onchange={enableButton}>
+                        </lightning-input-field>
+                    </div>
+                </template>
+                <div class="slds-col slds-size_2-of-8 slds-p-left_small">
+                    <lightning-input-field
+                        variant="label-hidden"
+                        field-name="Session_Protocol__c"
+                        disabled=true
+                        value={protocolId}
+                        >
+                    </lightning-input-field>
+                </div>
+            </div>
+            <div class="slds-p-top_small">
+                <lightning-button
+                    variant="brand"
+                    type="submit"
+                    label={addNewLabel}
+                    >
+                </lightning-button>
+                <lightning-button
+                    class="slds-p-left_small"
+                    variant="brand"
+                    onclick={cancelAddNew}
+                    label="Cancel Add New"
+                    >
+                </lightning-button>
+            </div>
+        </lightning-record-edit-form>
+    </template>
+</template>

@@ -17,8 +17,7 @@ public with sharing class TreatmentSessionLWCController {
                     Needs_Review__c,
                     Protocol_Name__c
                 FROM Session_Protocol__c 
-                WHERE TreatmentSessionId__c =: sessionId 
-                AND IsRemoved__c = false
+                WHERE TreatmentSessionId__c =: sessionId
                 ORDER BY Protocol_Name__c ASC
             ];
         } catch (Exception e) {
@@ -28,29 +27,54 @@ public with sharing class TreatmentSessionLWCController {
 
     private static Session_Protocol__c getProtocol(Id protocolId){
         return [
-                SELECT 
-                    Id, 
-                    ProtocolId__r.Name,
-                    Aggressive_Worst__c,
-                    Arousal_Best__c,
-                    Arousal_Worst__c,
-                    Fear_Best__c,
-                    Fear_Worst__c,
-                    IsSkipped__c,
-                    IsRemoved__c,
-                    Social_Best__c,
-                    Overall_Score__c,
-                    Needs_Review__c,
-                    Protocol_Name__c,
-                    Protocol_Notes__c,
-                    Novel_Person_Notes__c,
-                    Manager_Review_Notes__c,
-                    Preferred_Motivators__c,
-                    (SELECT Id, Contact__c, Novel_Not_Novel__c FROM Session_Protocol_Contacts__r)
-                FROM Session_Protocol__c 
-                WHERE Id =: protocolId
-                AND IsRemoved__c = false
-            ];
+            SELECT 
+                Id, 
+                ProtocolId__r.Name,
+                Aggressive_Worst__c,
+                Arousal_Best__c,
+                Arousal_Worst__c,
+                Fear_Best__c,
+                Fear_Worst__c,
+                IsSkipped__c,
+                IsRemoved__c,
+                Social_Best__c,
+                Overall_Score__c,
+                Needs_Review__c,
+                Protocol_Name__c,
+                Protocol_Notes__c,
+                Novel_Person_Notes__c,
+                Manager_Review_Notes__c,
+                Preferred_Motivators__c
+            FROM Session_Protocol__c 
+            WHERE Id =: protocolId
+            AND IsRemoved__c = false
+        ];
+    }
+
+    @AuraEnabled
+    public static sObject[] getChildList(Id protocolId, String objectApi){
+        try {
+            sObject[] childList = new sObject[0];
+            if(objectApi == 'Session_Protocol_Contact__c'){
+                childList = getProtocolContacts(protocolId);
+            }
+            else if(objectApi == 'Additional_Dog_Present__c'){
+                childList = getDogsPresent(protocolId);
+            }
+            return childList;
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
+
+    @AuraEnabled
+    public static Session_Protocol_Contact__c[] getProtocolContacts(Id protocolId){
+        return [SELECT Id, Contact__c, Contact__r.Name, Novel_Not_Novel__c FROM Session_Protocol_Contact__c WHERE Session_Protocol__c =: protocolId];
+    }
+
+    @AuraEnabled
+    public static Additional_Dog_Present__c[] getDogsPresent(Id protocolId){
+        return [SELECT Id, Additional_Dog__c FROM Additional_Dog_Present__c WHERE Session_Protocol__c =: protocolId];
     }
 
     @AuraEnabled

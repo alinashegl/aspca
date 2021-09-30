@@ -56,8 +56,17 @@
                             <h2 class="slds-p-top_large slds-card__header-title">Protocol Notes</h2>
                             <lightning-textarea class="slds-p-left_medium" data-name="protocolNotes" type="text" name="protocolNotes" value={protocolInfo.protocolNotes}></lightning-textarea>
                             <div class="slds-p-top_large">
-                                
+                                <c-treatment-session-child-list
+                                    protocol-id={recordId}
+                                    object-api='Session_Protocol_Contact__c'
+                                >
+                                </c-treatment-session-child-list>
 
+                                <c-treatment-session-child-list
+                                    protocol-id={recordId}
+                                    object-api='Additional_Dog_Present__c'
+                                >
+                                </c-treatment-session-child-list>
                             </div>
                         </lightning-card>
                     </template>

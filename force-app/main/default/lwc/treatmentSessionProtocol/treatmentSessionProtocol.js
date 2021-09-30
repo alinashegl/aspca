@@ -16,6 +16,8 @@ import PROTOCOL_NOTES_FIELD from '@salesforce/schema/Session_Protocol__c.Protoco
 import PREFERRED_MOTIVATORS_FIELD from '@salesforce/schema/Session_Protocol__c.Preferred_Motivators__c';
 
 import getActiveProtocolsAndFields from '@salesforce/apex/TreatmentSessionLWCController.getActiveProtocolAndFieldsNew';
+import getDogsPresent from '@salesforce/apex/TreatmentSessionLWCController.getDogsPresent';
+import getProtocolContacts from '@salesforce/apex/TreatmentSessionLWCController.getProtocolContacts';
 
 import SystemModstamp from '@salesforce/schema/Account.SystemModstamp';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
@@ -31,6 +33,8 @@ export default class TreatmentSessionProtocol extends LightningElement {
 
     fieldValues = [];
     tempFieldValues = [];
+    dogsPresent = [];
+    contacts = [];
 
     protocolInfo;
     loading = false;
@@ -41,16 +45,9 @@ export default class TreatmentSessionProtocol extends LightningElement {
     connectedCallback(){
         this.loading = true;
         this.fieldValues = [];
+
         getActiveProtocolsAndFields({'protocolId': this.recordId})
-        .then(result => {
-            if (result) {
-                this.protocolInfo = result;
-                this.protocolInfo.picklistFields.forEach(element => {
-                    this.fieldValues.push({name: element.apiName, value: element.currentValue});
-                    this.tempFieldValues.push({name: element.apiName, value: element.currentValue});
-                });
-            }
-        })
+        .then(result => (this.returnedProtocols(result)))
         .catch(error => {
             window.console.log('connectedCallback: -------error-------------'+error);
             window.console.log('error: ', error);
@@ -58,6 +55,54 @@ export default class TreatmentSessionProtocol extends LightningElement {
         .finally(() => {
             this.loading = false;
         });
+
+        // getActiveProtocolsAndFields({'protocolId': this.recordId})
+        // .then((result) => ((this.returnedProtocols(result)), getDogsPresent({'protocolId': this.recordId})))
+        // .then((result) => ((this.dogsPresent = result), getProtocolContacts({'protocolId': this.recordId})))
+        // .then((result) => ((this.contacts = result))
+        // .catch(error => {
+        //     window.console.log('connectedCallback: -------error-------------'+error);
+        //     window.console.log('error: ', error);
+        // })
+        // .finally(() => {
+        //     this.loading = false;
+        // });
+
+
+        // getActiveProtocolsAndFields({'protocolId': this.recordId})
+        // .then(result => ({
+        //     if (result) {
+        //         this.protocolInfo = result;
+        //         this.protocolInfo.picklistFields.forEach(element => {
+        //             this.fieldValues.push({name: element.apiName, value: element.currentValue});
+        //             this.tempFieldValues.push({name: element.apiName, value: element.currentValue});
+        //         });
+        //     }
+        // }),
+        // getDogsPresent({'protocolId': this.recordId})
+        // .then(result => {
+        //     if (result)
+        // }))
+        // .then(
+        // .then
+        // )
+        // .catch(error => {
+        //     window.console.log('connectedCallback: -------error-------------'+error);
+        //     window.console.log('error: ', error);
+        // })
+        // .finally(() => {
+        //     this.loading = false;
+        // });
+    }
+
+    returnedProtocols(result){
+        if (result) {
+            this.protocolInfo = result;
+            this.protocolInfo.picklistFields.forEach(element => {
+                this.fieldValues.push({name: element.apiName, value: element.currentValue});
+                this.tempFieldValues.push({name: element.apiName, value: element.currentValue});
+            });
+        }
     }
 
     handleClick(){

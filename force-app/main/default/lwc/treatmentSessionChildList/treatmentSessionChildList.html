@@ -1,0 +1,36 @@
+<template>
+    <template if:true={recordList}>
+        <h2 class="slds-card__header-title">{tableName}</h2>
+        <div class="slds-box slds-theme_default">
+            <template for:each={recordList} for:item="record">
+                <div key={record.Id} class="slds-p-bottom_small">
+                    <c-treatment-session-child
+                        record={record}
+                        object-api={objectApi}
+                        ondeletechild={handleDeleteChild}
+                    >
+                    </c-treatment-session-child>
+                </div>
+            </template>
+            <div>
+                <template if:false={addNewRecord}>
+                    <lightning-button
+                        variant="brand"
+                        type="addNew"
+                        label="Add New"
+                        onclick={handleAddNew}>
+                    </lightning-button>
+                </template>
+                <template if:true={addNewRecord}>
+                    <c-treatment-session-child
+                        object-api={objectApi}
+                        protocol-id={protocolId}
+                        onrefreshlist={handleUpdateList}
+                    >
+                    </c-treatment-session-child>
+                </template>
+            </div>
+        </div>
+    </template>
+    
+</template>
