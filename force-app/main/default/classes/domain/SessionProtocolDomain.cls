@@ -59,7 +59,7 @@ public with sharing class SessionProtocolDomain extends DomainActionBase {
             }
         }
         ServiceRequest serviceRequest = new ServiceRequest();
-        if (sessionProtocolsForProcessing.size() > 1 ) {
+        if (!sessionProtocolsForProcessing.isEmpty()) {
 
             System.debug('sessionProtocolsForProcessing: ' + sessionProtocolsForProcessing);
 

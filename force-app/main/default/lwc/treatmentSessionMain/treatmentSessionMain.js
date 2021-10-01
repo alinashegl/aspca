@@ -56,6 +56,9 @@ export default class TreatmentSessionMain extends LightningElement {
 
     handleStartSession(){
         this.activeSession = !this.activeSession;
+        if(!this.activeSession){
+            this.connectedCallback();
+        }
     }
 
     handleModifySession(){
