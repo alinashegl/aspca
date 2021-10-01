@@ -30,8 +30,6 @@ export default class TreatmentSessionMain extends LightningElement {
     activeProtocols = [];
     activeSession = false;
 
-    showPicklist = true;
-
     connectedCallback(){
         this.loading = true;
         getActiveProtocols({'sessionId' : this.recordId})

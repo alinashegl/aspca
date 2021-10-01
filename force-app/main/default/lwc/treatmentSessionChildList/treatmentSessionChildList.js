@@ -4,20 +4,12 @@ import getChildList from '@salesforce/apex/TreatmentSessionLWCController.getChil
 import { deleteRecord } from 'lightning/uiRecordApi';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
-const contactColumns = [
-    { label: 'Name', fieldName: 'name'},
-    { label: 'Novel Not Novel', fieldName: 'novel'}
-];
-
-
 export default class TreatmentSessionChildList extends LightningElement {
     @api protocolId;
     @api objectApi;
 
     loading = false;
     recordList = [];
-    contactColumns = contactColumns;
-
     addNewRecord = false;
 
     connectedCallback(){

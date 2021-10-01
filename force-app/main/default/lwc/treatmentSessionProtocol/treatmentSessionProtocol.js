@@ -16,8 +16,6 @@ import PROTOCOL_NOTES_FIELD from '@salesforce/schema/Session_Protocol__c.Protoco
 import PREFERRED_MOTIVATORS_FIELD from '@salesforce/schema/Session_Protocol__c.Preferred_Motivators__c';
 
 import getActiveProtocolsAndFields from '@salesforce/apex/TreatmentSessionLWCController.getActiveProtocolAndFieldsNew';
-import getDogsPresent from '@salesforce/apex/TreatmentSessionLWCController.getDogsPresent';
-import getProtocolContacts from '@salesforce/apex/TreatmentSessionLWCController.getProtocolContacts';
 
 import SystemModstamp from '@salesforce/schema/Account.SystemModstamp';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
@@ -30,17 +28,10 @@ export default class TreatmentSessionProtocol extends LightningElement {
     @api canRemoveProtocol = false;
 
     showModal = false;
-
     fieldValues = [];
     tempFieldValues = [];
-    dogsPresent = [];
-    contacts = [];
-
     protocolInfo;
     loading = false;
-
-    protocolStatus = 'NotStarted';
-    inputval;
 
     connectedCallback(){
         this.loading = true;
@@ -55,44 +46,6 @@ export default class TreatmentSessionProtocol extends LightningElement {
         .finally(() => {
             this.loading = false;
         });
-
-        // getActiveProtocolsAndFields({'protocolId': this.recordId})
-        // .then((result) => ((this.returnedProtocols(result)), getDogsPresent({'protocolId': this.recordId})))
-        // .then((result) => ((this.dogsPresent = result), getProtocolContacts({'protocolId': this.recordId})))
-        // .then((result) => ((this.contacts = result))
-        // .catch(error => {
-        //     window.console.log('connectedCallback: -------error-------------'+error);
-        //     window.console.log('error: ', error);
-        // })
-        // .finally(() => {
-        //     this.loading = false;
-        // });
-
-
-        // getActiveProtocolsAndFields({'protocolId': this.recordId})
-        // .then(result => ({
-        //     if (result) {
-        //         this.protocolInfo = result;
-        //         this.protocolInfo.picklistFields.forEach(element => {
-        //             this.fieldValues.push({name: element.apiName, value: element.currentValue});
-        //             this.tempFieldValues.push({name: element.apiName, value: element.currentValue});
-        //         });
-        //     }
-        // }),
-        // getDogsPresent({'protocolId': this.recordId})
-        // .then(result => {
-        //     if (result)
-        // }))
-        // .then(
-        // .then
-        // )
-        // .catch(error => {
-        //     window.console.log('connectedCallback: -------error-------------'+error);
-        //     window.console.log('error: ', error);
-        // })
-        // .finally(() => {
-        //     this.loading = false;
-        // });
     }
 
     returnedProtocols(result){
@@ -209,7 +162,6 @@ export default class TreatmentSessionProtocol extends LightningElement {
     closeModal() {
         this.fieldValues = this.tempFieldValues;
         this.showModal = false;
-        // this.connectedCallback();
     }
 
     get iconName(){
@@ -253,41 +205,3 @@ export default class TreatmentSessionProtocol extends LightningElement {
         return this.protocolInfo.isSkipped? "Cancel Skip and Remove from Plan" : "Skip and Remove from Plan";
     }
 }
-
-
-
-    // toggleForm = false;
-    // @wire(getPicklistValues, {
-    //     recordTypeId: '',
-    //     fieldApiName: FEAR_BEST_FIELD
-    // })
-    // fearBestField;
-
-    // @wire(getPicklistValues, {
-    //     recordTypeId: '',
-    //     fieldApiName: FEAR_WORST_FIELD
-    // })
-    // fearWorstField;
-
-    // connectedCallback_old(){
-    //     this.loading = true;
-    //     getActiveProtocolsAndFields({'sessionId': this.sessionId})
-    //     .then(result => {
-    //         if (result) {
-    //             this.activeProtocols = result.protocols;
-    //             this.fearBestField = result.fearBestField;
-    //             this.fearWorstField = result.fearWorstField;
-    //         }
-
-    //         window.console.log('activeProtocols: ', JSON.stringify(this.activeProtocols));
-    //         window.console.log('fearBestField: ', this.fearBestField);
-    //         window.console.log('fearWorstField: ', this.fearWorstField);
-    //     })
-    //     .catch(error => {
-    //         // this.showLogs('connectedCallback: -------error-------------'+error);
-    //         window.console.log('error: ', error);
-    //     })
-    //     .finally(() => {
-    //         this.loading = false;
-    //     });
-    // }
