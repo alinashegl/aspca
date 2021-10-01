@@ -1,6 +1,4 @@
 import { LightningElement, api } from 'lwc';
-import { deleteRecord } from 'lightning/uiRecordApi';
-import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 export default class TreatmentSessionChild extends LightningElement {
     @api record;
