@@ -74,6 +74,7 @@ private class test_InvocableActionHandler {
     @IsTest
     static void validateAssignPlanActionWithPlan() {
         Behavior_Evaluation__c evaluation = TestDataFactory.createAdultBehaviorEvaluation(false);
+        Treatment_Bundle__c masterbundle = TestDataFactory.createMasterBundle();
         Treatment_Plan__c plan = new Treatment_Plan__c();
         plan.Animal__c = evaluation.Animal__c;
         plan.IsActive__c = true;
