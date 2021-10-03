@@ -1,15 +1,15 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement, api, wire } from 'lwc';
+import { NavigationMixin } from "lightning/navigation";
 import getActiveProtocols from '@salesforce/apex/TreatmentSessionLWCController.getActiveProtocols';
 import hasRemoveFromPlanPermission from '@salesforce/customPermission/Remove_Protocol_From_Plan';
+import FORM_FACTOR from '@salesforce/client/formFactor'
+import { refreshApex } from '@salesforce/apex';
+
 
 const columns = [
-    { label: 'Name', fieldName: 'protoUrl', type:'url',
-        typeAttributes: {
-            label: { 
-                fieldName: 'Protocol_Name__c' 
-            },
-            target : '_blank'
-        }
+    {   label: "Name",
+        type: "button",
+        typeAttributes: { label: { fieldName: "Protocol_Name__c" }, name: "gotoProtocol", variant: "base" }
     },
     { label: 'Fear - Best', fieldName: 'Fear_Best__c' },
     { label: 'Fear - Worst', fieldName: 'Fear_Worst__c' },
@@ -22,45 +22,82 @@ const columns = [
     { label: 'Skip Protocol', fieldName: 'IsSkipped__c', type: 'boolean'}
 ];
 
-export default class TreatmentSessionMain extends LightningElement {
+const limitedColumns = [
+    {   label: "Name",
+        type: "button",
+        typeAttributes: { label: { fieldName: "Protocol_Name__c" }, name: "gotoProtocol", variant: "base" }
+    },
+    { label: 'Overall Score', fieldName: 'Overall_Score__c'},
+    { label: 'Needs Review', fieldName: 'Needs_Review__c', type: 'boolean'},
+    { label: 'Skip Protocol', fieldName: 'IsSkipped__c', type: 'boolean'}
+];
+
+export default class TreatmentSessionMain extends NavigationMixin(LightningElement) {
     @api recordId;
 
     columns = columns;
     loading = false;
     activeProtocols = [];
     activeSession = false;
+    allColumns = FORM_FACTOR == 'Large' ? true : false;
+    wireResponse;
 
-    connectedCallback(){
-        this.loading = true;
-        getActiveProtocols({'sessionId' : this.recordId})
-        .then(result => {
-            if (result) {
-                let baseUrl = 'https://'+location.host+'/';
-                result.forEach(protoRec => {
-                    protoRec.protoUrl = baseUrl+protoRec.Id;
-                });
-            }
-            this.activeProtocols = result;
-        })
-        .catch(error => {
-            window.console.log('connectedCallback: -------error-------------'+error);
-            window.console.log(error);
-        })
-        .finally(() => {
-            // window.console.log('activeProtocols: ', JSON.stringify(this.activeProtocols));
-            this.loading = false;
-        });
+    // deviceSize = FORM_FACTOR;
+
+    @wire(getActiveProtocols, {sessionId: '$recordId'})
+    response(result){
+        this.wireResponse = result;
+        if(result.data){
+            this.activeProtocols = result.data;
+        }
     }
+
+    // connectedCallback(){
+    //     this.loading = true;
+    //     getActiveProtocols({'sessionId' : this.recordId})
+    //     .then(result => {
+    //         if (result) {
+    //             this.activeProtocols = result;
+    //         }
+    //     })
+    //     .catch(error => {
+    //         window.console.log('connectedCallback: -------error-------------'+error);
+    //         window.console.log(error);
+    //     })
+    //     .finally(() => {
+    //         this.allColumns = this.deviceSize == 'Large' ? true : false;
+    //         this.loading = false;
+    //     });
+    // }
 
     handleStartSession(){
         this.activeSession = !this.activeSession;
         if(!this.activeSession){
-            this.connectedCallback();
+            return refreshApex(this.wireResponse);
+
+            // this.connectedCallback();
         }
     }
 
     handleModifySession(){
 
+    }
+
+    handleToggleFields(){
+        this.allColumns = !this.allColumns;
+    }
+
+    handleRowAction(event) {
+        if (event.detail.action.name === "gotoProtocol") {
+            this[NavigationMixin.Navigate]({
+                type: 'standard__recordPage',
+                attributes: {
+                    recordId: event.detail.row.Id,
+                    objectApiName: 'Session_Protocol__c',
+                    actionName: 'view'
+                }
+            });
+        }
     }
 
     get startSessionLabel(){
@@ -70,4 +107,14 @@ export default class TreatmentSessionMain extends LightningElement {
     get canRemoveProtocol() {
         return hasRemoveFromPlanPermission;
     }
+
+    get tableClass(){
+        return this.allColumns ? "slds-max-medium-table_stacked" : '' ;
+    }
+
+    get tableColumns(){
+        return this.allColumns ? columns : limitedColumns;
+    }
+
+    recordPageUrl
 }

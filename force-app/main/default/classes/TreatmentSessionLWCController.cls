@@ -1,5 +1,5 @@
 public with sharing class TreatmentSessionLWCController {
-    @AuraEnabled
+    @AuraEnabled (cacheable=true)
     public static Session_Protocol__c[] getActiveProtocols(Id sessionId){
         try {
             return [
@@ -25,7 +25,9 @@ public with sharing class TreatmentSessionLWCController {
         }
     }
 
+    @testVisible
     private static Session_Protocol__c getProtocol(Id protocolId){
+        if(protocolId == null) return null;
         return [
             SELECT 
                 Id, 
@@ -47,12 +49,13 @@ public with sharing class TreatmentSessionLWCController {
                 Preferred_Motivators__c
             FROM Session_Protocol__c 
             WHERE Id =: protocolId
-            AND IsRemoved__c = false
         ];
+        // AND IsRemoved__c = false
     }
 
-    @AuraEnabled
+    @AuraEnabled (cacheable=true)
     public static sObject[] getChildList(Id protocolId, String objectApi){
+        if(protocolId == null || objectApi == null) return null;
         try {
             sObject[] childList = new sObject[0];
             if(objectApi == 'Session_Protocol_Contact__c'){
@@ -77,11 +80,12 @@ public with sharing class TreatmentSessionLWCController {
         return [SELECT Id, Additional_Dog__c FROM Additional_Dog_Present__c WHERE Session_Protocol__c =: protocolId];
     }
 
-    @AuraEnabled
-    public static protocolNew getActiveProtocolAndFieldsNew(Id protocolId){
+    @AuraEnabled (cacheable=true)
+    public static protocolInfo getActiveProtocolAndFields(Id protocolId){
+        if(protocolId == null) return null;
         try {
             Session_Protocol__c sessionProtocol = getProtocol(protocolId);
-            ProtocolNew protocolInfo = new ProtocolNew(sessionProtocol);
+            ProtocolInfo protocolInfo = new ProtocolInfo(sessionProtocol);
 
             System.debug('protocolInfo = ' + protocolInfo);
             return protocolInfo;
@@ -90,7 +94,7 @@ public with sharing class TreatmentSessionLWCController {
         }
     } 
 
-    public class ProtocolNew{
+    public class ProtocolInfo{
         @AuraEnabled public String id { get; set; }
         @AuraEnabled public String name { get; set; }
         @AuraEnabled public String nameUrl {get; set;}
@@ -104,7 +108,7 @@ public with sharing class TreatmentSessionLWCController {
         @AuraEnabled public String managerReviewNotes { get; set; }
 
 
-        ProtocolNew(Session_Protocol__c sp){
+        ProtocolInfo(Session_Protocol__c sp){
             this.id = sp.Id;
             this.name = sp.Protocol_Name__c;
             this.nameUrl = '/' + sp.Id;
@@ -138,12 +142,14 @@ public with sharing class TreatmentSessionLWCController {
         @AuraEnabled public String name { get; set; }
         @AuraEnabled public String apiName { get; set; }
         @AuraEnabled public String currentValue { get; set; }
+        @AuraEnabled public String initialValue { get; set; }
         @AuraEnabled public selectionOption[] options { get; set; }
 
         PicklistField(String fieldAPI, String currentValue){
             this.apiName = fieldAPI;
             String objectAPI = 'Session_Protocol__c';
             this.currentValue = currentValue;
+            this.initialValue = currentValue;
             this.name = String.valueOf(Schema.getGlobalDescribe().get(ObjectApi).getDescribe().fields.getMap().get(FieldApi).getDescribe().getLabel());
 
             Schema.SObjectField fieldInfo = SchemaHelper.DetermineSObjectFieldByLabel(objectAPI, name);            

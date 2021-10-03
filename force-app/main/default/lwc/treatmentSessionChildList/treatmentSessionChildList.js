@@ -1,8 +1,9 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement, api, wire } from 'lwc';
 
 import getChildList from '@salesforce/apex/TreatmentSessionLWCController.getChildList';
 import { deleteRecord } from 'lightning/uiRecordApi';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import { refreshApex } from '@salesforce/apex';
 
 export default class TreatmentSessionChildList extends LightningElement {
     @api protocolId;
@@ -12,20 +13,25 @@ export default class TreatmentSessionChildList extends LightningElement {
     recordList = [];
     addNewRecord = false;
 
-    connectedCallback(){
-        this.loading = true;
-        this.recordList = [];
-        getChildList({'protocolId': this.protocolId, 'objectApi': this.objectApi})
-        .then(result => (this.recordList = result))
-        .catch(error => {
-            window.console.log('connectedCallback: -------error-------------'+error);
-            window.console.log('error: ', error);
-        })
-        .finally(() => {
-            window.console.log('recordList = ', JSON.stringify(this.recordList));
-            this.loading = false;
-        });
+    @wire(getChildList, {protocolId: '$protocolId', objectApi: '$objectApi'})
+    records(result){
+        this.recordList = result;
     }
+
+    // connectedCallback(){
+    //     this.loading = true;
+    //     this.recordList = [];
+    //     getChildList({'protocolId': this.protocolId, 'objectApi': this.objectApi})
+    //     .then(result => (this.recordList = result))
+    //     .catch(error => {
+    //         window.console.log('connectedCallback: -------error-------------'+error);
+    //         window.console.log('error: ', error);
+    //     })
+    //     .finally(() => {
+    //         window.console.log('recordList = ', JSON.stringify(this.recordList));
+    //         this.loading = false;
+    //     });
+    // }
 
     handleAddNew(){
         this.addNewRecord = true;
@@ -39,7 +45,8 @@ export default class TreatmentSessionChildList extends LightningElement {
     handleUpdateList(event){
         window.console.log('updating list', event.detail);
         this.addNewRecord = false;
-        this.connectedCallback();
+        return refreshApex(this.recordList);
+        // this.connectedCallback();
     }
 
     deleteRecord(recordId){
@@ -63,7 +70,8 @@ export default class TreatmentSessionChildList extends LightningElement {
             );
         })
         .finally(() => {
-            this.connectedCallback();
+            return refreshApex(this.recordList);
+            // this.connectedCallback();
         });
     }
 

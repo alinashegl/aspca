@@ -7,10 +7,6 @@ export default class TreatmentSessionChild extends LightningElement {
 
     hasChanged = false;
 
-    connectedCallback(){
-        window.console.log('objectApi = ', this.objectApi);
-    }
-
     handleSuccess(){
         window.console.log('successfully updated');
         this.hasChanged = false;

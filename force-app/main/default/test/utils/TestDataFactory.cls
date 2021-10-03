@@ -682,4 +682,39 @@ public without sharing class TestDataFactory {
         insert planProtocolList;
         return planProtocolList;
     }
+
+    public static Session_Protocol_Contact__c[] createSessionProtocolContact(){
+      Session_Protocol__c[] protocolList = createSessionProtocols();
+        Session_Protocol_Contact__c[] sContacts = new Session_Protocol_Contact__c[0];
+        Contact con = new Contact(
+          LastName = 'Foo'
+        );
+        insert con;
+        for(Session_Protocol__c protocol : protocolList){
+          Session_Protocol_Contact__c sCon = new Session_Protocol_Contact__c(
+            Session_Protocol__c = protocol.Id,
+            Contact__c = con.Id
+          );
+          sContacts.add(sCon);
+        }
+        insert sContacts;
+        return sContacts;
+    }
+
+    public static Additional_Dog_Present__c[] createAdditionalDogs(){
+      Session_Protocol__c[] protocolList = createSessionProtocols();
+      Additional_Dog_Present__c[] aDogs = new Additional_Dog_Present__c[0];
+        Animal__c dog = [SELECT Id FROM Animal__c LIMIT 1];
+        dog.Potential_Helper_Dog__c = true;
+        update dog;
+        for(Session_Protocol__c protocol : protocolList){
+          Additional_Dog_Present__c aDog = new Additional_Dog_Present__c(
+            Session_Protocol__c = protocol.Id,
+            Additional_Dog__c = dog.Id
+          );
+          aDogs.add(aDog);
+        }
+        insert aDogs;
+        return aDogs;
+    }
 }

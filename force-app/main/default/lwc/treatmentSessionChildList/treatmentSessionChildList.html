@@ -2,7 +2,7 @@
     <template if:true={recordList}>
         <h2 class="slds-card__header-title">{tableName}</h2>
         <div class="slds-box slds-theme_default">
-            <template for:each={recordList} for:item="record">
+            <template for:each={recordList.data} for:item="record">
                 <div key={record.Id} class="slds-p-bottom_small">
                     <c-treatment-session-child
                         record={record}

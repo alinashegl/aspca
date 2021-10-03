@@ -4,6 +4,7 @@
  *
  * @author barne
  * @version 1.0.0
+ * Tests: test_InvocableActionHandler, Test_SessionProtocolDomain
  */
 
 public with sharing class SessionProtocolService {
@@ -48,14 +49,15 @@ public with sharing class SessionProtocolService {
         return response;
     }
 
+    @testVisible
     private static ServiceResponse handleValidity(ServiceRequest request) {
-        Treatment_Session__c quote = (Treatment_Session__c) request.Parameters.get('treatmentSession');
+        Treatment_Session__c treatmentSession = (Treatment_Session__c) request.Parameters.get('treatmentSession');
 
         Map<String,Map<String,String>> resultMap = new Map<String, Map<String, String>>();
         String success = 'SUCCESS';
-        if (quote != null) {
+        if (treatmentSession != null) {
             SessionProtocolSelector selector = new SessionProtocolSelector();
-            List<Session_Protocol__c> lineItems = selector.GetByQuote(quote.Id);
+            List<Session_Protocol__c> lineItems = selector.GetByQuote(treatmentSession.Id);
             System.debug(lineItems);
             ProtocolSelector protocolSelector = new ProtocolSelector();
 
@@ -63,36 +65,35 @@ public with sharing class SessionProtocolService {
                 Map<String, String> result = new Map<String, String>();
                 Set<Id> idset = new Set<Id>();
                 idset.add(item.ProtocolId__c);
-                Protocol__c product2 = protocolSelector.GetById(idset)[0];
+                Protocol__c protocol = protocolSelector.GetById(idset)[0];
                 String invalid = 'INVALID';
-                String none = 'None';
                 try {
-                    if (item.Fear_Best__c == none) {
+                    if (item.Fear_Best__c == null) {
                         result.put('Fear Best', invalid);
                     }
-                    if (item.Fear_Worst__c == none) {
+                    if (item.Fear_Worst__c == null) {
                         result.put('Fear Worst', invalid);
                     }
-                    if (item.Arousal_Best__c == none) {
+                    if (item.Arousal_Best__c == null) {
                         result.put('AROUSAL BEST', invalid);
                     }
-                    if(item.Arousal_Worst__c == none) {
+                    if(item.Arousal_Worst__c == null) {
                         result.put('AROUSAL WORST', invalid);
                     }
-                    if (item.Social_Best__c == none) {
+                    if (item.Social_Best__c == null) {
                         result.put('SOCIAL BEST', invalid);
                     }
-                    if (item.Aggressive_Worst__c == none) {
+                    if (item.Aggressive_Worst__c == null) {
                         result.put('AGGRESSIVE WORST', invalid);
                     }
-                    if (item.Overall_Score__c == none) {
+                    if (item.Overall_Score__c == null) {
                         result.put('OVERALL SCORE', invalid);
                     }
                 }catch (Exception e) {
                     System.debug(e);
                     result.put('ERROR', String.valueOf(e));
                 }
-                resultMap.put(product2.Name, result);
+                resultMap.put(protocol.Name, result);
             }
         }
         ServiceResponse response = new ServiceResponse(request);

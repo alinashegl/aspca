@@ -2,23 +2,17 @@ import { LightningElement, api, wire } from 'lwc';
 import { updateRecord } from 'lightning/uiRecordApi';
 
 import PROTOCOL_ID_FIELD from '@salesforce/schema/Session_Protocol__c.Id';
-import FEAR_BEST_FIELD from '@salesforce/schema/Session_Protocol__c.Fear_Best__c';
-import FEAR_WORST_FIELD from '@salesforce/schema/Session_Protocol__c.Fear_Worst__c';
-import AGGRESIVE_WORST_FIELD from '@salesforce/schema/Session_Protocol__c.Aggressive_Worst__c';
-import AROUSAL_BEST_FIELD from '@salesforce/schema/Session_Protocol__c.Arousal_Best__c';
-import AROUSAL_WORST_FIELD from '@salesforce/schema/Session_Protocol__c.Arousal_Worst__c';
-import SOCIAL_BEST_FIELD from '@salesforce/schema/Session_Protocol__c.Social_Best__c';
-import OVERALL_SCORE_FIELD from '@salesforce/schema/Session_Protocol__c.Overall_Score__c';
 import IS_SKIPPED_FIELD from '@salesforce/schema/Session_Protocol__c.IsSkipped__c';
 import IS_REMOVED_FIELD from '@salesforce/schema/Session_Protocol__c.IsRemoved__c';
 import NEEDS_REVIEW_FIELD from '@salesforce/schema/Session_Protocol__c.Needs_Review__c';
 import PROTOCOL_NOTES_FIELD from '@salesforce/schema/Session_Protocol__c.Protocol_Notes__c';
 import PREFERRED_MOTIVATORS_FIELD from '@salesforce/schema/Session_Protocol__c.Preferred_Motivators__c';
 
-import getActiveProtocolsAndFields from '@salesforce/apex/TreatmentSessionLWCController.getActiveProtocolAndFieldsNew';
+import getActiveProtocolsAndFields from '@salesforce/apex/TreatmentSessionLWCController.getActiveProtocolAndFields';
 
 import SystemModstamp from '@salesforce/schema/Account.SystemModstamp';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import { refreshApex } from '@salesforce/apex';
 
 export default class TreatmentSessionProtocol extends LightningElement {
     @api recordId;
@@ -28,34 +22,38 @@ export default class TreatmentSessionProtocol extends LightningElement {
     @api canRemoveProtocol = false;
 
     showModal = false;
+    wireResponse;
+
     fieldValues = [];
-    tempFieldValues = [];
     protocolInfo;
-    loading = false;
+    error;
+    loading = true;
+    isSkipped = false;
+    isRemoved = false;
 
-    connectedCallback(){
-        this.loading = true;
-        this.fieldValues = [];
-
-        getActiveProtocolsAndFields({'protocolId': this.recordId})
-        .then(result => (this.returnedProtocols(result)))
-        .catch(error => {
-            window.console.log('connectedCallback: -------error-------------'+error);
-            window.console.log('error: ', error);
-        })
-        .finally(() => {
+    @wire(getActiveProtocolsAndFields, {protocolId: '$recordId'})
+    response(result) {
+        this.wireResponse = result;
+        if (result.data) {
+            this.protocolInfo = result.data;
+            this.error = undefined;
+            this.setFieldValues(result.data);
+        } else if (result.error) {
+            this.error = result.error;
+            this.protocolInfo = undefined;
             this.loading = false;
-        });
+        }
     }
 
-    returnedProtocols(result){
-        if (result) {
-            this.protocolInfo = result;
-            this.protocolInfo.picklistFields.forEach(element => {
-                this.fieldValues.push({name: element.apiName, value: element.currentValue});
-                this.tempFieldValues.push({name: element.apiName, value: element.currentValue});
-            });
-        }
+    setFieldValues(data){
+        window.console.log('setFieldValues');
+        this.fieldValues = [];
+        data.picklistFields.forEach(element => {
+            this.fieldValues.push({name: element.apiName, value: element.currentValue});
+        });
+        this.isSkipped = data.isSkipped;
+        this.isRemoved = data.isRemoved;
+        this.loading = false;
     }
 
     handleClick(){
@@ -70,21 +68,21 @@ export default class TreatmentSessionProtocol extends LightningElement {
 
     handleSkip(){
         this.loading = true;
-        this.protocolInfo.isSkipped = !this.protocolInfo.isSkipped;
-        if(this.protocolInfo.isSkipped == true){
+        this.isSkipped = !this.isSkipped;
+        if(this.isSkipped == true){
             this.resetProtocol('skip');
         } else {
             const fields = {};
             fields[PROTOCOL_ID_FIELD.fieldApiName] = this.recordId;
-            fields[IS_SKIPPED_FIELD.fieldApiName] = this.protocolInfo.isSkipped;
+            fields[IS_SKIPPED_FIELD.fieldApiName] = this.isSkipped;
             this.updateProtocol(fields);
         }
     }
 
     handleSkipAndRemove(){
         this.loading = true;
-        this.protocolInfo.isSkipped = true;
-        this.protocolInfo.isRemoved = true;
+        this.isSkipped = true;
+        this.isRemoved = true;
         this.resetProtocol('remove');
         this.showModal = false;
     }
@@ -105,10 +103,10 @@ export default class TreatmentSessionProtocol extends LightningElement {
     resetProtocol(action){
         const fields = {};
         fields[PROTOCOL_ID_FIELD.fieldApiName] = this.recordId;
-        fields[IS_SKIPPED_FIELD.fieldApiName] = this.protocolInfo.isSkipped;
+        fields[IS_SKIPPED_FIELD.fieldApiName] = this.isSkipped;
 
         if(action==='remove'){
-            fields[IS_REMOVED_FIELD.fieldApiName] = this.protocolInfo.isRemoved;
+            fields[IS_REMOVED_FIELD.fieldApiName] = this.isRemoved;
         }
 
         this.updateProtocol(fields);
@@ -117,19 +115,17 @@ export default class TreatmentSessionProtocol extends LightningElement {
     prepProtocolFields(){
         const fields = {};
         fields[PROTOCOL_ID_FIELD.fieldApiName] = this.recordId;
-        fields[IS_SKIPPED_FIELD.fieldApiName] = this.protocolInfo.isSkipped;
-        fields[IS_REMOVED_FIELD.fieldApiName] = this.protocolInfo.isRemoved;
+        fields[IS_SKIPPED_FIELD.fieldApiName] = this.isSkipped;
+        fields[IS_REMOVED_FIELD.fieldApiName] = this.isRemoved;
         fields[NEEDS_REVIEW_FIELD.fieldApiName] = this.template.querySelector("lightning-input[data-name=needsReview]").checked;
-        fields[FEAR_BEST_FIELD.fieldApiName] = this.fieldValues.find(field => field.name == FEAR_BEST_FIELD.fieldApiName).value;
-        fields[FEAR_WORST_FIELD.fieldApiName] = this.fieldValues.find(field => field.name == FEAR_WORST_FIELD.fieldApiName).value;
-        fields[AGGRESIVE_WORST_FIELD.fieldApiName] = this.fieldValues.find(field => field.name == AGGRESIVE_WORST_FIELD.fieldApiName).value;
-        fields[AROUSAL_BEST_FIELD.fieldApiName] = this.fieldValues.find(field => field.name == AROUSAL_BEST_FIELD.fieldApiName).value;
-        fields[AROUSAL_WORST_FIELD.fieldApiName] = this.fieldValues.find(field => field.name == AROUSAL_WORST_FIELD.fieldApiName).value;
-        fields[SOCIAL_BEST_FIELD.fieldApiName] = this.fieldValues.find(field => field.name == SOCIAL_BEST_FIELD.fieldApiName).value;
-        fields[OVERALL_SCORE_FIELD.fieldApiName] = this.fieldValues.find(field => field.name == OVERALL_SCORE_FIELD.fieldApiName).value;
         fields[PROTOCOL_NOTES_FIELD.fieldApiName] = this.template.querySelector("lightning-textarea[data-name=protocolNotes]").value;
         fields[PREFERRED_MOTIVATORS_FIELD.fieldApiName] = this.template.querySelector("lightning-input[data-name=preferredMotivators]").value;
+        
+        this.fieldValues.forEach(element => {
+            fields[element.name] = element.value;
+        });
 
+        window.console.log('fields =', JSON.stringify(fields));
         this.updateProtocol(fields);
     }
 
@@ -155,17 +151,17 @@ export default class TreatmentSessionProtocol extends LightningElement {
             );
         })
         .finally(() => {
-            this.connectedCallback();
+            return refreshApex(this.wireResponse);
+            // this.connectedCallback();
         });
     }
 
     closeModal() {
-        this.fieldValues = this.tempFieldValues;
         this.showModal = false;
     }
 
     get iconName(){
-        if(this.protocolInfo.isSkipped){
+        if(this.isSkipped){
             return 'utility:error';
         }
         else if(this.isComplete){
@@ -177,7 +173,7 @@ export default class TreatmentSessionProtocol extends LightningElement {
     }
 
     get iconVariant(){
-        if(this.protocolInfo.isSkipped){
+        if(this.isSkipped){
             return 'error';
         }
         else if(this.isComplete){
@@ -191,6 +187,7 @@ export default class TreatmentSessionProtocol extends LightningElement {
     get isComplete(){
         const incompleteField = this.fieldValues.find(field => field.value == null);
         return  incompleteField == null;
+
     }
 
     get protocolButtonStatus(){
@@ -198,10 +195,10 @@ export default class TreatmentSessionProtocol extends LightningElement {
     }
 
     get skipButtonLabel(){
-        return this.protocolInfo.isSkipped? "Cancel Skip" : "Skip";
+        return this.isSkipped? "Cancel Skip" : "Skip";
     }
 
     get removeButtonLabel(){
-        return this.protocolInfo.isSkipped? "Cancel Skip and Remove from Plan" : "Skip and Remove from Plan";
+        return this.isSkipped? "Cancel Skip and Remove from Plan" : "Skip and Remove from Plan";
     }
 }
