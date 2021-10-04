@@ -1,9 +1,9 @@
 <template>
     <div class="slds-p-left_medium">
         <lightning-button variant="base" label={protocolName} title={protocolName} onclick={handleClick} disabled={protocolButtonStatus} class="slds-m-left_x-small"></lightning-button>
-        <template if:true={protocolInfo}>
-            <lightning-icon icon-name={iconName} alternative-text={iconText} variant={iconVariant} title="success variant x-small" size="x-small"></lightning-icon>
-        </template>
+        <!-- <template if:true={protocolInfo}> -->
+            <lightning-icon icon-name={sessionStatusIconName} alternative-text={sessionStatusIconText} variant={sessionStatusIconVariant} title="success variant x-small" size="x-small"></lightning-icon>
+        <!-- </template> -->
     </div>
     <template if:true={showModal}>
         <!-- Modal/Popup Box LWC starts here -->

@@ -15,33 +15,31 @@
                     </lightning-input-field>
                 </div>
                 <template if:true={isContactList}>
-                    <div class="slds-col slds-size_3-of-8 slds-p-left_small">
+                    <div class="slds-col slds-size_3-of-8 slds-p-left_x-small">
                         <lightning-input-field
                             variant="label-hidden"
                             field-name="Novel_Not_Novel__c"
                             onchange={enableSaveButton}>
                         </lightning-input-field>
                     </div>
-                    <div class="slds-col slds-size_1-of-8 slds-p-left_small">
+                    <div class="slds-col slds-size_1-of-8 slds-p-left_x-small">
                         <lightning-button-icon 
                             icon-name="action:approval" 
                             alternative-text="Save" 
                             type="submit"
-                            class="slds-m-left_small" 
                             title="Save"
                             disabled={buttonStatus}
                             variant={saveButtonVariant}>
                         </lightning-button-icon>
                     </div>                    
                 </template>
-                <div class="slds-col slds-size_1-of-8 slds-p-left_small">
+                <div class="slds-col slds-size_1-of-8 slds-p-left_x-small">
                     <lightning-button-icon 
                         icon-name="action:delete" 
                         alternative-text="Delete" 
                         onclick={handleRemoveRecord} 
-                        class="slds-m-left_small" 
                         title="Delete"
-                        variant="brand">
+                        variant="border-filled">
                     </lightning-button-icon>
                 </div>
             </div>
@@ -62,7 +60,7 @@
                     </lightning-input-field>
                 </div>
                 <template if:true={isContactList}>
-                    <div class="slds-col slds-size_3-of-8 slds-p-left_small">
+                    <div class="slds-col slds-size_3-of-8 slds-p-left_x-small">
                         <lightning-input-field
                             variant="label-hidden"
                             field-name="Novel_Not_Novel__c"
@@ -70,7 +68,7 @@
                         </lightning-input-field>
                     </div>
                 </template>
-                <div class="slds-col slds-size_2-of-8 slds-p-left_small">
+                <div class="slds-col slds-size_2-of-8 slds-p-left_x-small">
                     <lightning-input-field
                         variant="label-hidden"
                         field-name="Session_Protocol__c"
@@ -88,8 +86,8 @@
                     >
                 </lightning-button>
                 <lightning-button
-                    class="slds-p-left_small"
-                    variant="brand"
+                    class="slds-p-left_x-small"
+                    variant="neutral"
                     onclick={cancelAddNew}
                     label="Cancel Add New"
                     >

@@ -51,7 +51,7 @@ export default class TreatmentSessionChild extends LightningElement {
     }
 
     get saveButtonVariant(){
-        return this.hasChanged ? 'brand' : 'border-filled';
+        return this.hasChanged ? 'border-filled' : 'border';
     }
 
     get addNewLabel(){

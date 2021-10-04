@@ -168,8 +168,11 @@ export default class TreatmentSessionProtocol extends LightningElement {
         this.showModal = false;
     }
 
-    get iconName(){
-        if(this.isSkipped){
+    get sessionStatusIconName(){
+        if(this.protocolInfo == undefined){
+            return 'utility:spinner'
+        }
+        else if(this.isSkipped){
             return 'utility:error';
         }
         else if(this.isComplete){
@@ -180,8 +183,26 @@ export default class TreatmentSessionProtocol extends LightningElement {
         }
     }
 
-    get iconVariant(){
-        if(this.isSkipped){
+    get sessionStatusIconVariant(){
+        if(this.protocolInfo == undefined){
+            return ''
+        }
+        else if(this.isSkipped){
+            return 'error';
+        }
+        else if(this.isComplete){
+            return 'success';
+        }
+        else {
+            return 'warning';
+        }
+    }
+
+    get sessionStatusIconText(){
+        if(this.protocolInfo == undefined){
+            return ''
+        }
+        else if(this.isSkipped){
             return 'error';
         }
         else if(this.isComplete){
