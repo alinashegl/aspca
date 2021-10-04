@@ -5,7 +5,6 @@ import hasRemoveFromPlanPermission from '@salesforce/customPermission/Remove_Pro
 import FORM_FACTOR from '@salesforce/client/formFactor'
 import { refreshApex } from '@salesforce/apex';
 
-
 const columns = [
     {   label: "Name",
         type: "button",
@@ -41,6 +40,7 @@ export default class TreatmentSessionMain extends NavigationMixin(LightningEleme
     activeSession = false;
     allColumns = FORM_FACTOR == 'Large' ? true : false;
     wireResponse;
+    showModifySession = true;
 
     @wire(getActiveProtocols, {sessionId: '$recordId'})
     response(result){
@@ -52,13 +52,14 @@ export default class TreatmentSessionMain extends NavigationMixin(LightningEleme
 
     handleStartSession(){
         this.activeSession = !this.activeSession;
+        this.showModifySession = false;
         if(!this.activeSession){
             return refreshApex(this.wireResponse);
         }
     }
 
     handleModifySession(){
-
+        this.showModifySession = !this.showModifySession;
     }
 
     handleToggleFields(){
@@ -78,6 +79,10 @@ export default class TreatmentSessionMain extends NavigationMixin(LightningEleme
         }
     }
 
+    get showTogglefields(){
+        return this.activeSession || this.showModifySession ?  true : false;
+    }
+
     get startSessionLabel(){
         return this.activeSession ? 'Exit Session' : 'Start Session';
     }
@@ -94,5 +99,7 @@ export default class TreatmentSessionMain extends NavigationMixin(LightningEleme
         return this.allColumns ? columns : limitedColumns;
     }
 
-    recordPageUrl
+    get modifySessionLabel(){
+        return this.showModifySession ? 'Protocol List' : 'Modify Session';
+    }
 }

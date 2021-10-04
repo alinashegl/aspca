@@ -52,6 +52,11 @@ public with sharing class TreatmentSessionLWCController {
         ];
     }
 
+    private static Session_Protocol__c[] getAssignedProtocols(Id sessionId){
+        if(sessionId == null) return null;
+        return [SELECT Id, ProtocolId__c, Protocol_Name__c, IsSkipped__c, IsRemoved__c FROM Session_Protocol__c WHERE TreatmentSessionId__c =: sessionId];
+    }
+
     @AuraEnabled (cacheable=true)
     public static sObject[] getChildList(Id protocolId, String objectApi){
         if(protocolId == null || objectApi == null) return null;
@@ -91,7 +96,29 @@ public with sharing class TreatmentSessionLWCController {
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }
-    } 
+    }
+
+    @AuraEnabled (cacheable=true)
+    public static protocolAssignment getProtocolLists(Id sessionId){
+        protocolAssignment assignments = new protocolAssignment();
+        assignments.assignedProtocols = getAssignedProtocols(sessionId);
+        assignments.unassignedProtocols = getUnassignedProtocols(assignments.assignedProtocols);
+        return assignments;
+    }
+
+    private static Protocol__c[] getUnassignedProtocols(Session_Protocol__c[] assignedProtocols){
+        Set<Id> assignedIds = new Set<Id>();
+        for(Session_Protocol__c sp : assignedProtocols){
+            assignedIds.add(sp.ProtocolId__c);
+        }
+        return [SELECT Id, Name FROM Protocol__c WHERE Id NOT IN :(assignedIds)];
+
+    }
+
+    public class protocolAssignment {
+        @AuraEnabled public Session_Protocol__c[] assignedProtocols { get; set; }
+        @AuraEnabled public Protocol__c[] unassignedProtocols { get; set; }
+    }
 
     public class ProtocolInfo{
         @AuraEnabled public String id { get; set; }

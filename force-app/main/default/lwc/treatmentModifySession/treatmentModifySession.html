@@ -1,6 +1,20 @@
 <template>
-    AddNew
-
-    assingedList
-    unassignedList
+    <template if:true={assignedProtocols}>
+        <div>
+            <lightning-card>
+            <h1 slot="title" style="font-style:normal; font-family:'Candara';">
+                <lightning-layout multiple-rows="false" >
+                    <template for:each={assignedProtocols} for:item="protocol">
+                        <lightning-layout-item size="3" key={protocol.Id} >
+                            <p>{protocol.Protocol_Name__c}</p>
+                            <p>{protocol.isSkipped__c}</p>
+                            <p>{protocol.isRemoved__c}</p>
+                        </lightning-layout-item>
+                    </template>
+                </lightning-layout>
+            </h1>
+            <!-- <div class="map-root" lwc:dom="manual"></div> -->
+            </lightning-card>
+        </div>
+    </template>
 </template>
