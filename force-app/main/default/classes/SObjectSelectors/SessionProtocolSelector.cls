@@ -55,5 +55,4 @@ public with sharing class SessionProtocolSelector extends SObjectSelector {
                 .Execute();
         return lineItems;
     }
-
 }

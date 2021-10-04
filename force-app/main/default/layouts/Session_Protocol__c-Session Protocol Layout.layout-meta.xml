@@ -90,6 +90,10 @@
                 <behavior>Edit</behavior>
                 <field>IsSkipped__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Novel_Person__c</field>
+            </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
     </layoutSections>
@@ -144,6 +148,11 @@
         <fields>Contact__c</fields>
         <fields>Novel_Not_Novel__c</fields>
         <relatedList>Session_Protocol_Contact__c.Session_Protocol__c</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <fields>NAME</fields>
+        <fields>Additional_Dog__c</fields>
+        <relatedList>Additional_Dog_Present__c.Session_Protocol__c</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>

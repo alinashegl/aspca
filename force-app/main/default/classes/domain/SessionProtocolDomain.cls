@@ -4,6 +4,7 @@
  *
  * @author barne
  * @version 1.0.0
+ * Tests: test_InvocableActionHandler, Test_SessionProtocolDomain
  */
 
 public with sharing class SessionProtocolDomain extends DomainActionBase {
@@ -57,9 +58,17 @@ public with sharing class SessionProtocolDomain extends DomainActionBase {
                     sessionProtocolsForProcessing.add(protocol);
                 }
             }
+
+            if(protocol.IsRemoved__c == false) {
+                if (oldProtocol.IsRemoved__c == true) {
+                    sessionProtocolsForProcessing.add(protocol);
+                }
+            }            
         }
         ServiceRequest serviceRequest = new ServiceRequest();
-        if (sessionProtocolsForProcessing.size() > 1 ) {
+        if (!sessionProtocolsForProcessing.isEmpty()) {
+
+            System.debug('sessionProtocolsForProcessing: ' + sessionProtocolsForProcessing);
 
             serviceRequest.Action = 'beforeUpdateHandler';
             serviceRequest.withParams('protocols', sessionProtocolsForProcessing);
