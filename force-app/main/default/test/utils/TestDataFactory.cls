@@ -617,14 +617,7 @@ public without sharing class TestDataFactory {
     public static List<Session_Protocol__c> createSessionProtocols() {
         List<Protocol__c> protocols = createProtocols();
         Treatment_Session__c session = createSession();
-        List<Session_Protocol__c> sessionProtocols = new List<Session_Protocol__c>();
-        for (Protocol__c protocol : protocols) {
-            Session_Protocol__c sessionProtocol = new Session_Protocol__c();
-            sessionProtocol.TreatmentSessionId__c = session.Id;
-            sessionProtocol.ProtocolId__c = protocol.Id;
-            sessionProtocols.add(sessionProtocol);
-        }
-        insert sessionProtocols;
+        Session_Protocol__c[] sessionProtocols = [SELECT Id, TreatmentSessionId__c, ProtocolId__c FROM Session_Protocol__c WHERE TreatmentSessionId__c =: session.Id];
         return sessionProtocols;
     }
 

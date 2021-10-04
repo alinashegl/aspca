@@ -67,7 +67,7 @@ private class test_SessionProtocolDomain {
             update sp;
         Test.stopTest();
 
-        Plan_Protocol__c pr = [SELECT Id, Protocol__c FROM Plan_Protocol__c WHERE Treatment_Plan__c =: session.Treatment_Plan__c LIMIT 1];
+        Plan_Protocol__c pr = [SELECT Id, Protocol__c FROM Plan_Protocol__c WHERE Treatment_Plan__c =: session.Treatment_Plan__c AND Protocol__c =: protocol.Id LIMIT 1];
 
         System.assert(pr != null, 'a Plan Protocol should have been returned');
         System.assertEquals(protocol.Id, pr.Protocol__c);
