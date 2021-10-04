@@ -111,7 +111,7 @@ public with sharing class test_TreatmentToDoListController {
         List<Plan_Protocol__c> endPlans = [SELECT Id FROM Plan_Protocol__c WHERE Treatment_Plan__c = :startPlans[0].Treatment_Plan__c];
         List<Plan_Protocol__c> removedPlans = [SELECT Id FROM Plan_Protocol__c WHERE Treatment_Plan__c = :startPlans[0].Treatment_Plan__c AND IsRemoved__c = true];
         System.assertEquals(5, numChanges);
-        System.assertEquals(8, endPlans.size());
+        System.assertEquals(12, endPlans.size());
         System.assertEquals(4, removedPlans.size());
     }
 
