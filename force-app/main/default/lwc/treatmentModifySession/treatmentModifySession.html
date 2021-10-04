@@ -3,7 +3,7 @@
         <div>
             <lightning-card>
             <h1 slot="title" style="font-style:normal; font-family:'Candara';">
-                <lightning-layout multiple-rows="false" >
+                <!-- <lightning-layout multiple-rows="false" >
                     <template for:each={assignedProtocols} for:item="protocol">
                         <lightning-layout-item size="3" key={protocol.Id} >
                             <p>{protocol.Protocol_Name__c}</p>
@@ -11,10 +11,43 @@
                             <p>{protocol.isRemoved__c}</p>
                         </lightning-layout-item>
                     </template>
-                </lightning-layout>
+                </lightning-layout> -->
+                <template for:each={assignedProtocols} for:item='protocol'>
+                    <lightning-card key={protocol.Id}>
+                        <div class="slds-border_bottom">
+                            <lightning-layout multiple-rows>
+                                <lightning-layout-item size="12" small-device-size="4" medium-device-size="2" large-device-size="2" padding="horizontal-small">
+                                    <div class="slds-form-element">
+                                        <label class="slds-form-element__label">Protocol Name</label>
+                                        <div class="slds-form-element__static">
+                                            {protocol.Protocol_Name__c}
+                                        </div>
+                                    </div>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="12" small-device-size="8" medium-device-size="8" large-device-size="6" padding="horizontal-small">
+                                    <div class="slds-form-element">
+                                        <label class="slds-form-element__label">Skipped</label>
+                                        <div class="slds-form-element__static">
+                                            {protocol.IsSkipped__c}
+                                        </div>
+                                    </div>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="12" small-device-size="6" medium-device-size="2" large-device-size="2" padding="horizontal-small">
+                                    <div class="slds-form-element">
+                                        <label class="slds-form-element__label">Removed</label>
+                                        <div class="slds-form-element__static">
+                                            {protocol.IsRemoved}
+                                        </div>
+                                    </div>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </div>
+                    </lightning-card>
+                </template>
             </h1>
-            <!-- <div class="map-root" lwc:dom="manual"></div> -->
             </lightning-card>
         </div>
     </template>
 </template>
+
+
