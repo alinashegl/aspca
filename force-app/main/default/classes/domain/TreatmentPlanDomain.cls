@@ -73,14 +73,14 @@ public with sharing class TreatmentPlanDomain extends DomainActionBase{
         List<ServiceRequest> requests = new List<ServiceRequest>();
 
         List<Plan_Protocol__c> lineItems = new List<Plan_Protocol__c>();
-        for (Treatment_Plan__c opportunity : newRecordMap.values()) {
-            String newVal = opportunity.AssignedTreatmentBundleId__c;
+        for (Treatment_Plan__c plan : newRecordMap.values()) {
+            String newVal = plan.AssignedTreatmentBundleId__c;
             System.debug(newVal);
             if ( newVal != null ){
                 ServiceRequest serviceRequest = new ServiceRequest();
                 serviceRequest.Name = 'New Bundle Assignment';
                 serviceRequest.Action = 'newBundleAssigned';
-                serviceRequest.withParams('new', opportunity);
+                serviceRequest.withParams('new', plan);
                 serviceRequest.withParams('newBundleId', newVal);
                 requests.add(serviceRequest);
             }
@@ -102,11 +102,11 @@ public with sharing class TreatmentPlanDomain extends DomainActionBase{
         //TreatmentPlanService service = new TreatmentPlanService();
 
         List<Plan_Protocol__c> lineItems = new List<Plan_Protocol__c>();
-        for (Treatment_Plan__c opportunity : newRecordMap.values()) {
-            String newVal = opportunity.AssignedTreatmentBundleId__c;
+        for (Treatment_Plan__c plan : newRecordMap.values()) {
+            String newVal = plan.AssignedTreatmentBundleId__c;
             System.debug(newVal);
             if ( newVal != null ){
-                Treatment_Plan__c oldOpp = oldRecordMap.get(opportunity.Id);
+                Treatment_Plan__c oldOpp = oldRecordMap.get(plan.Id);
                 //System.debug('#### OLD OPP ====> ' + oldOpp);
                 String oldVal = oldOpp.AssignedTreatmentBundleId__c;
                 System.debug(oldVal);
@@ -115,16 +115,15 @@ public with sharing class TreatmentPlanDomain extends DomainActionBase{
                     ServiceRequest serviceRequest = new ServiceRequest();
                     serviceRequest.Name = 'Bundle Assignment Change';
                     serviceRequest.Action = 'bundleAssignmentChanged';
-                    serviceRequest.withParams('new', opportunity);
+                    serviceRequest.withParams('new', plan);
                     serviceRequest.withParams('newBundleId', newVal);
-                    //System.debug('Sending Request for: ' + opportunity.Name + ' ====> ' + serviceRequest);
                     requests.add(serviceRequest);
                 }
                 if(oldVal == null){
                     ServiceRequest serviceRequest = new ServiceRequest();
                     serviceRequest.Name = 'New Bundle Assignment';
                     serviceRequest.Action = 'newBundleAssigned';
-                    serviceRequest.withParams('new', opportunity);
+                    serviceRequest.withParams('new', plan);
                     serviceRequest.withParams('newBundleId', newVal);
                     requests.add(serviceRequest);
 

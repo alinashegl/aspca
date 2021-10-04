@@ -87,7 +87,7 @@ public with sharing class TreatmentPlanService {
     private static ServiceResponse newBundleAssigned(ServiceRequest request) {
         System.debug('NEW BUNDLE ASSIGNMENT IS EXECUTING');
 
-        Treatment_Plan__c opportunity = (Treatment_Plan__c) request.Parameters.get('new');
+        Treatment_Plan__c plan = (Treatment_Plan__c) request.Parameters.get('new');
         String newBundleId = (String) request.Parameters.get('newBundleId');
         
         List<Bundle_Entry__c> entries = [SELECT Id, Protocol__c, Treatment_Bundle__c, Name FROM Bundle_Entry__c WHERE
@@ -95,7 +95,7 @@ public with sharing class TreatmentPlanService {
         List<Plan_Protocol__c> newLineItems = new List<Plan_Protocol__c>();
         for (Bundle_Entry__c entry : entries) {
             Plan_Protocol__c item = new Plan_Protocol__c();
-            item.Treatment_Plan__c = opportunity.Id;
+            item.Treatment_Plan__c = plan.Id;
             item.Protocol__c = entry.Protocol__c;
             newLineItems.add(item);
         }
