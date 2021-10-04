@@ -2,25 +2,31 @@
 private class test_TreatmentSessionLWCController {
     @isTest
     static void getActiveProtocols_hasProtocols(){
-        Session_Protocol__c[] protocolList = TestDataFactory.createSessionProtocols();
-        Id treatmentSessionId = protocolList[0].TreatmentSessionId__c;
+        Treatment_Session__c session = TestDataFactory.createSession();
+        Session_Protocol__c[] sessionProtocols = [SELECT Id, TreatmentSessionId__c FROM Session_Protocol__c WHERE TreatmentSessionId__c =: session.Id];
 
         Test.startTest();
-            Session_Protocol__c[] returnedList = TreatmentSessionLWCController.getActiveProtocols(treatmentSessionId);
+            Session_Protocol__c[] returnedList = TreatmentSessionLWCController.getActiveProtocols(session.Id);
         Test.stopTest();
 
-        System.assertEquals(returnedList.size(), protocolList.size());
+        System.assertEquals(sessionProtocols.size(), returnedList.size());
     }
 
     @isTest
     static void getActiveProtocols_noProtocols(){
-        Treatment_Session__c treatmentSession = TestDataFactory.createSession();
+        Treatment_Plan__c plan = new Treatment_Plan__c();
+        insert plan;
+
+        Treatment_Session__c session = new Treatment_Session__c(
+            Treatment_Plan__c = plan.Id
+        );
+        insert session;
 
         Test.startTest();
-            Session_Protocol__c[] returnedList = TreatmentSessionLWCController.getActiveProtocols(treatmentSession.Id);
+            Session_Protocol__c[] returnedList = TreatmentSessionLWCController.getActiveProtocols(session.Id);
         Test.stopTest();
 
-        System.assert(returnedList.isEmpty());
+        System.assert(returnedList.isEmpty(), 'list should have been empty: ' + returnedList);
     }
 
     @isTest
