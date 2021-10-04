@@ -339,11 +339,12 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
+        <fields>IsActive__c</fields>
         <fields>CREATED_DATE</fields>
         <fields>Treatment_Priority__c</fields>
         <fields>AssignedTreatmentBundleId__c</fields>
-        <fields>Plan_Notes__c</fields>
-        <fields>IsActive__c</fields>
+        <fields>Enrichment_Priority__c</fields>
+        <fields>Enrichment_Activities__c</fields>
         <relatedList>Treatment_Plan__c.Animal__c</relatedList>
         <sortField>CREATED_DATE</sortField>
         <sortOrder>Desc</sortOrder>
@@ -377,7 +378,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h7j000000S2F2</masterLabel>
+        <masterLabel>00h75000000UzLY</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>
