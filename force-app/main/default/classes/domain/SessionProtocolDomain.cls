@@ -58,6 +58,12 @@ public with sharing class SessionProtocolDomain extends DomainActionBase {
                     sessionProtocolsForProcessing.add(protocol);
                 }
             }
+
+            if(protocol.IsRemoved__c == false) {
+                if (oldProtocol.IsRemoved__c == true) {
+                    sessionProtocolsForProcessing.add(protocol);
+                }
+            }            
         }
         ServiceRequest serviceRequest = new ServiceRequest();
         if (!sessionProtocolsForProcessing.isEmpty()) {

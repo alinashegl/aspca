@@ -81,10 +81,19 @@ export default class TreatmentSessionProtocol extends LightningElement {
 
     handleSkipAndRemove(){
         this.loading = true;
-        this.isSkipped = true;
-        this.isRemoved = true;
-        this.resetProtocol('remove');
-        this.showModal = false;
+        this.isSkipped = !this.isRemoved;
+        this.isRemoved = !this.isRemoved;
+        if(this.isRemoved == true){
+            this.resetProtocol('remove');
+            this.showModal = false;
+        } else {
+            const fields = {};
+            fields[PROTOCOL_ID_FIELD.fieldApiName] = this.recordId;
+            fields[IS_SKIPPED_FIELD.fieldApiName] = this.isSkipped;
+            fields[IS_REMOVED_FIELD.fieldApiName] = this.isRemoved;
+            this.updateProtocol(fields);
+        }
+        
     }
 
     handleRadioChange(event) {
@@ -152,7 +161,6 @@ export default class TreatmentSessionProtocol extends LightningElement {
         })
         .finally(() => {
             return refreshApex(this.wireResponse);
-            // this.connectedCallback();
         });
     }
 
@@ -187,7 +195,10 @@ export default class TreatmentSessionProtocol extends LightningElement {
     get isComplete(){
         const incompleteField = this.fieldValues.find(field => field.value == null);
         return  incompleteField == null;
+    }
 
+    get showSkipButton(){
+        return !this.isRemoved;
     }
 
     get protocolButtonStatus(){
@@ -199,6 +210,6 @@ export default class TreatmentSessionProtocol extends LightningElement {
     }
 
     get removeButtonLabel(){
-        return this.isSkipped? "Cancel Skip and Remove from Plan" : "Skip and Remove from Plan";
+        return this.isRemoved? "Cancel Skip and Remove from Plan" : "Skip and Remove from Plan";
     }
 }

@@ -50,7 +50,6 @@ public with sharing class TreatmentSessionLWCController {
             FROM Session_Protocol__c 
             WHERE Id =: protocolId
         ];
-        // AND IsRemoved__c = false
     }
 
     @AuraEnabled (cacheable=true)

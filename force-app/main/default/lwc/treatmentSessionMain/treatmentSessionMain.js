@@ -42,8 +42,6 @@ export default class TreatmentSessionMain extends NavigationMixin(LightningEleme
     allColumns = FORM_FACTOR == 'Large' ? true : false;
     wireResponse;
 
-    // deviceSize = FORM_FACTOR;
-
     @wire(getActiveProtocols, {sessionId: '$recordId'})
     response(result){
         this.wireResponse = result;
@@ -52,30 +50,10 @@ export default class TreatmentSessionMain extends NavigationMixin(LightningEleme
         }
     }
 
-    // connectedCallback(){
-    //     this.loading = true;
-    //     getActiveProtocols({'sessionId' : this.recordId})
-    //     .then(result => {
-    //         if (result) {
-    //             this.activeProtocols = result;
-    //         }
-    //     })
-    //     .catch(error => {
-    //         window.console.log('connectedCallback: -------error-------------'+error);
-    //         window.console.log(error);
-    //     })
-    //     .finally(() => {
-    //         this.allColumns = this.deviceSize == 'Large' ? true : false;
-    //         this.loading = false;
-    //     });
-    // }
-
     handleStartSession(){
         this.activeSession = !this.activeSession;
         if(!this.activeSession){
             return refreshApex(this.wireResponse);
-
-            // this.connectedCallback();
         }
     }
 

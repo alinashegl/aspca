@@ -18,21 +18,6 @@ export default class TreatmentSessionChildList extends LightningElement {
         this.recordList = result;
     }
 
-    // connectedCallback(){
-    //     this.loading = true;
-    //     this.recordList = [];
-    //     getChildList({'protocolId': this.protocolId, 'objectApi': this.objectApi})
-    //     .then(result => (this.recordList = result))
-    //     .catch(error => {
-    //         window.console.log('connectedCallback: -------error-------------'+error);
-    //         window.console.log('error: ', error);
-    //     })
-    //     .finally(() => {
-    //         window.console.log('recordList = ', JSON.stringify(this.recordList));
-    //         this.loading = false;
-    //     });
-    // }
-
     handleAddNew(){
         this.addNewRecord = true;
     }
@@ -46,7 +31,6 @@ export default class TreatmentSessionChildList extends LightningElement {
         window.console.log('updating list', event.detail);
         this.addNewRecord = false;
         return refreshApex(this.recordList);
-        // this.connectedCallback();
     }
 
     deleteRecord(recordId){
@@ -71,7 +55,6 @@ export default class TreatmentSessionChildList extends LightningElement {
         })
         .finally(() => {
             return refreshApex(this.recordList);
-            // this.connectedCallback();
         });
     }
 

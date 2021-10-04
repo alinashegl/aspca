@@ -4,7 +4,7 @@
  *
  * @author barne
  * @version 1.0.0
- * Tests: test_InvocableActionHandler, Test_SessionProtocolDomain
+ * Tests: test_InvocableActionHandler, test_SessionProtocolDomain,test_SessionProtocolService
  */
 
 public with sharing class SessionProtocolService {
@@ -36,8 +36,8 @@ public with sharing class SessionProtocolService {
         switch on request.Action {
             when 'validateSession' {
                 response = handleValidity(request);
-            } when 'handleSession' {
-                response = handleSession(request);
+            // } when 'handleSession' {
+                // response = handleSession(request);
             } when 'beforeInsertHandler' {
                 response = beforeInsertHandler(request);
             }when 'beforeUpdateHandler' {
@@ -104,39 +104,41 @@ public with sharing class SessionProtocolService {
         return response;
     }
 
-    private static ServiceResponse handleSession(ServiceRequest request) {
-        Map<String, Map<String, Object>> resultMap = new Map<String, Map<String, Object>>();
+    // @testVisible
+    // private static ServiceResponse handleSession(ServiceRequest request) {
+    //     Map<String, Map<String, Object>> resultMap = new Map<String, Map<String, Object>>();
 
-        TreatmentSessionSelector treatmentSessionSelector = new TreatmentSessionSelector();
-        Set<Id> idset = new Set<Id>();
-        idset.add((Id) request.Parameters.get('record'));
-        List<Treatment_Session__c> treatmentSessions = new List<Treatment_Session__c>();
-        treatmentSessions = treatmentSessionSelector.GetByIds(idset);
-        Treatment_Session__c session = treatmentSessions[0];
-        SessionProtocolSelector sessionProtocolSelector = new SessionProtocolSelector();
-        List<Session_Protocol__c> sessionProtocols = new List<Session_Protocol__c>();
-        sessionProtocols = [SELECT Id, TreatmentSessionId__c, InView__c from Session_Protocol__c];
-        List<Session_Protocol__c> partOfView = new List<Session_Protocol__c>();
-        List<Session_Protocol__c> NotPartOfView = new List<Session_Protocol__c>();
+    //     TreatmentSessionSelector treatmentSessionSelector = new TreatmentSessionSelector();
+    //     Set<Id> idset = new Set<Id>();
+    //     idset.add((Id) request.Parameters.get('record'));
+    //     List<Treatment_Session__c> treatmentSessions = new List<Treatment_Session__c>();
+    //     treatmentSessions = treatmentSessionSelector.GetByIds(idset);
+    //     Treatment_Session__c session = treatmentSessions[0];
+    //     SessionProtocolSelector sessionProtocolSelector = new SessionProtocolSelector();
+    //     List<Session_Protocol__c> sessionProtocols = new List<Session_Protocol__c>();
+    //     sessionProtocols = [SELECT Id, TreatmentSessionId__c, InView__c from Session_Protocol__c];
+    //     // sessionProtocols = [SELECT Id, TreatmentSessionId__c, InView__c from Session_Protocol__c WHERE TreatmentSessionId__c IN: idset];
+    //     List<Session_Protocol__c> partOfView = new List<Session_Protocol__c>();
+    //     List<Session_Protocol__c> NotPartOfView = new List<Session_Protocol__c>();
 
-        for (Session_Protocol__c protocol : sessionProtocols) {
-            if (protocol.TreatmentSessionId__c == session.Id) {
-                partOfView.add(protocol);
-                protocol.InView__c = true;
-            }else {
-                NotPartOfView.add(protocol);
-                protocol.InView__c = false;
-            }
-        }
-        update partOfView;
-        update NotPartOfView;
+    //     for (Session_Protocol__c protocol : sessionProtocols) {
+    //         if (protocol.TreatmentSessionId__c == session.Id) {
+    //             partOfView.add(protocol);
+    //             protocol.InView__c = true;
+    //         }else {
+    //             NotPartOfView.add(protocol);
+    //             protocol.InView__c = false;
+    //         }
+    //     }
+    //     update partOfView;
+    //     update NotPartOfView;
 
-        ServiceResponse response = new ServiceResponse(request);
-        resultMap.put('PART OF VIEW', new Map<String, Object>{'IN VIEW' => partOfView});
-        resultMap.put('NOT IN VIEW', new Map<String, Object>{'NOT IN VIEW' => NotPartOfView});
-        response.Data = resultMap;
-        return response;
-    }
+    //     ServiceResponse response = new ServiceResponse(request);
+    //     resultMap.put('PART OF VIEW', new Map<String, Object>{'IN VIEW' => partOfView});
+    //     resultMap.put('NOT IN VIEW', new Map<String, Object>{'NOT IN VIEW' => NotPartOfView});
+    //     response.Data = resultMap;
+    //     return response;
+    // }
 
     private static ServiceResponse beforeInsertHandler(ServiceRequest request) {
         Treatment_Plan__c plan = (Treatment_Plan__c) request.Parameters.get('plan');
@@ -206,10 +208,8 @@ public with sharing class SessionProtocolService {
         Session_Protocol__c[] sProtocolsToRemove = new Session_Protocol__c[0];
         Set<Id> treatmentSessionIds = new Set<Id>();
         for(Session_Protocol__c sp : sessionProtocols){
-            if(sp.IsRemoved__c){
-                sProtocolsToRemove.add(sp);
-                treatmentSessionIds.add(sp.TreatmentSessionId__c);
-            }
+            sProtocolsToRemove.add(sp);
+            treatmentSessionIds.add(sp.TreatmentSessionId__c);
         }
 
         Map<Id, Plan_Protocol__c> protocolIdToPlanProtocolMap = getProtocolIdToPlanProtocolMap(treatmentSessionIds);
@@ -219,7 +219,7 @@ public with sharing class SessionProtocolService {
             Plan_Protocol__c protocol2 = new Plan_Protocol__c();
             if(protocolIdToPlanProtocolMap.keySet().contains(sp.ProtocolId__c)) {
                 protocol2 = protocolIdToPlanProtocolMap.get(sp.ProtocolId__c);
-                protocol2.IsRemoved__c = true;
+                protocol2.IsRemoved__c = sp.IsRemoved__c;
                 pProtocols.add(protocol2);
             }
         }
