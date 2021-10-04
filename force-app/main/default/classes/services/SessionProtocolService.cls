@@ -4,6 +4,7 @@
  *
  * @author barne
  * @version 1.0.0
+ * Tests: test_InvocableActionHandler, test_SessionProtocolDomain,test_SessionProtocolService
  */
 
 public with sharing class SessionProtocolService {
@@ -35,14 +36,12 @@ public with sharing class SessionProtocolService {
         switch on request.Action {
             when 'validateSession' {
                 response = handleValidity(request);
-            } when 'handleSession' {
-                response = handleSession(request);
+            // } when 'handleSession' {
+                // response = handleSession(request);
             } when 'beforeInsertHandler' {
                 response = beforeInsertHandler(request);
             }when 'beforeUpdateHandler' {
                 response = beforeUpdateHandler(request);
-            }when 'removeHandler' {
-                response = removeHandler(request);
             }when else {
                 return null;
             }
@@ -50,14 +49,15 @@ public with sharing class SessionProtocolService {
         return response;
     }
 
+    @testVisible
     private static ServiceResponse handleValidity(ServiceRequest request) {
-        Treatment_Session__c quote = (Treatment_Session__c) request.Parameters.get('treatmentSession');
+        Treatment_Session__c treatmentSession = (Treatment_Session__c) request.Parameters.get('treatmentSession');
 
         Map<String,Map<String,String>> resultMap = new Map<String, Map<String, String>>();
         String success = 'SUCCESS';
-        if (quote != null) {
+        if (treatmentSession != null) {
             SessionProtocolSelector selector = new SessionProtocolSelector();
-            List<Session_Protocol__c> lineItems = selector.GetByQuote(quote.Id);
+            List<Session_Protocol__c> lineItems = selector.GetByQuote(treatmentSession.Id);
             System.debug(lineItems);
             ProtocolSelector protocolSelector = new ProtocolSelector();
 
@@ -65,36 +65,35 @@ public with sharing class SessionProtocolService {
                 Map<String, String> result = new Map<String, String>();
                 Set<Id> idset = new Set<Id>();
                 idset.add(item.ProtocolId__c);
-                Protocol__c product2 = protocolSelector.GetById(idset)[0];
+                Protocol__c protocol = protocolSelector.GetById(idset)[0];
                 String invalid = 'INVALID';
-                String none = 'None';
                 try {
-                    if (item.Fear_Best__c == none) {
+                    if (item.Fear_Best__c == null) {
                         result.put('Fear Best', invalid);
                     }
-                    if (item.Fear_Worst__c == none) {
+                    if (item.Fear_Worst__c == null) {
                         result.put('Fear Worst', invalid);
                     }
-                    if (item.Arousal_Best__c == none) {
+                    if (item.Arousal_Best__c == null) {
                         result.put('AROUSAL BEST', invalid);
                     }
-                    if(item.Arousal_Worst__c == none) {
+                    if(item.Arousal_Worst__c == null) {
                         result.put('AROUSAL WORST', invalid);
                     }
-                    if (item.Social_Best__c == none) {
+                    if (item.Social_Best__c == null) {
                         result.put('SOCIAL BEST', invalid);
                     }
-                    if (item.Aggressive_Worst__c == none) {
+                    if (item.Aggressive_Worst__c == null) {
                         result.put('AGGRESSIVE WORST', invalid);
                     }
-                    if (item.Overall_Score__c == none) {
+                    if (item.Overall_Score__c == null) {
                         result.put('OVERALL SCORE', invalid);
                     }
                 }catch (Exception e) {
                     System.debug(e);
                     result.put('ERROR', String.valueOf(e));
                 }
-                resultMap.put(product2.Name, result);
+                resultMap.put(protocol.Name, result);
             }
         }
         ServiceResponse response = new ServiceResponse(request);
@@ -105,39 +104,41 @@ public with sharing class SessionProtocolService {
         return response;
     }
 
-    private static ServiceResponse handleSession(ServiceRequest request) {
-        Map<String, Map<String, Object>> resultMap = new Map<String, Map<String, Object>>();
+    // @testVisible
+    // private static ServiceResponse handleSession(ServiceRequest request) {
+    //     Map<String, Map<String, Object>> resultMap = new Map<String, Map<String, Object>>();
 
-        TreatmentSessionSelector treatmentSessionSelector = new TreatmentSessionSelector();
-        Set<Id> idset = new Set<Id>();
-        idset.add((Id) request.Parameters.get('record'));
-        List<Treatment_Session__c> treatmentSessions = new List<Treatment_Session__c>();
-        treatmentSessions = treatmentSessionSelector.GetByIds(idset);
-        Treatment_Session__c session = treatmentSessions[0];
-        SessionProtocolSelector sessionProtocolSelector = new SessionProtocolSelector();
-        List<Session_Protocol__c> sessionProtocols = new List<Session_Protocol__c>();
-        sessionProtocols = [SELECT Id, TreatmentSessionId__c, InView__c from Session_Protocol__c];
-        List<Session_Protocol__c> partOfView = new List<Session_Protocol__c>();
-        List<Session_Protocol__c> NotPartOfView = new List<Session_Protocol__c>();
+    //     TreatmentSessionSelector treatmentSessionSelector = new TreatmentSessionSelector();
+    //     Set<Id> idset = new Set<Id>();
+    //     idset.add((Id) request.Parameters.get('record'));
+    //     List<Treatment_Session__c> treatmentSessions = new List<Treatment_Session__c>();
+    //     treatmentSessions = treatmentSessionSelector.GetByIds(idset);
+    //     Treatment_Session__c session = treatmentSessions[0];
+    //     SessionProtocolSelector sessionProtocolSelector = new SessionProtocolSelector();
+    //     List<Session_Protocol__c> sessionProtocols = new List<Session_Protocol__c>();
+    //     sessionProtocols = [SELECT Id, TreatmentSessionId__c, InView__c from Session_Protocol__c];
+    //     // sessionProtocols = [SELECT Id, TreatmentSessionId__c, InView__c from Session_Protocol__c WHERE TreatmentSessionId__c IN: idset];
+    //     List<Session_Protocol__c> partOfView = new List<Session_Protocol__c>();
+    //     List<Session_Protocol__c> NotPartOfView = new List<Session_Protocol__c>();
 
-        for (Session_Protocol__c protocol : sessionProtocols) {
-            if (protocol.TreatmentSessionId__c == session.Id) {
-                partOfView.add(protocol);
-                protocol.InView__c = true;
-            }else {
-                NotPartOfView.add(protocol);
-                protocol.InView__c = false;
-            }
-        }
-        update partOfView;
-        update NotPartOfView;
+    //     for (Session_Protocol__c protocol : sessionProtocols) {
+    //         if (protocol.TreatmentSessionId__c == session.Id) {
+    //             partOfView.add(protocol);
+    //             protocol.InView__c = true;
+    //         }else {
+    //             NotPartOfView.add(protocol);
+    //             protocol.InView__c = false;
+    //         }
+    //     }
+    //     update partOfView;
+    //     update NotPartOfView;
 
-        ServiceResponse response = new ServiceResponse(request);
-        resultMap.put('PART OF VIEW', new Map<String, Object>{'IN VIEW' => partOfView});
-        resultMap.put('NOT IN VIEW', new Map<String, Object>{'NOT IN VIEW' => NotPartOfView});
-        response.Data = resultMap;
-        return response;
-    }
+    //     ServiceResponse response = new ServiceResponse(request);
+    //     resultMap.put('PART OF VIEW', new Map<String, Object>{'IN VIEW' => partOfView});
+    //     resultMap.put('NOT IN VIEW', new Map<String, Object>{'NOT IN VIEW' => NotPartOfView});
+    //     response.Data = resultMap;
+    //     return response;
+    // }
 
     private static ServiceResponse beforeInsertHandler(ServiceRequest request) {
         Treatment_Plan__c plan = (Treatment_Plan__c) request.Parameters.get('plan');
@@ -168,8 +169,8 @@ public with sharing class SessionProtocolService {
         for(Session_Protocol__c oProtocol : protocols) {
             idstoQuery.add(oProtocol.TreatmentSessionId__c);
         }
-        List<Plan_Protocol__c> planProtocolList = new List<Plan_Protocol__c>();
         Map<Id, Treatment_Session__c> sessionMap = new Map<Id, Treatment_Session__c>(sessionSelector.GetByIds(idstoQuery));
+
         List<Plan_Protocol__c> planProtocols = new List<Plan_Protocol__c>();
         for (Session_Protocol__c protocol : protocols) {
             if(protocol.Add_to_Plan__c = true) {
@@ -187,20 +188,12 @@ public with sharing class SessionProtocolService {
                     planProtocols.add(planProtocol);
                 }
             }
-
-            if (protocol.IsRemoved__c = true) {
-                ServiceRequest serviceRequest = new ServiceRequest();
-                serviceRequest.withParams('record', protocol);
-                serviceRequest.Action = 'removeHandler';
-                serviceRequest.Name = 'removeHandler';
-                ServiceResponse serviceResponse = SessionProtocolService.processReq(serviceRequest);
-                Plan_Protocol__c protocol2 = (Plan_Protocol__c) serviceResponse.Data;
-                protocol2.IsRemoved__c = true;
-                planProtocolList.add(protocol2);
-            }
-
         }
-        update planProtocolList;
+
+        Plan_Protocol__c[] planProtocolsToRemove = removeHandler(protocols);
+
+        System.debug('planProtocolsToRemove: ' + planProtocolsToRemove);
+        update planProtocolsToRemove;
         ServiceResponse response = new ServiceResponse(request);
 
 
@@ -211,24 +204,42 @@ public with sharing class SessionProtocolService {
 
     }
 
-    private static ServiceResponse removeHandler(ServiceRequest request) {
-        Session_Protocol__c protocol = (Session_Protocol__c) request.Parameters.get('record');
+    private static Plan_Protocol__c[] removeHandler(Session_Protocol__c[] sessionProtocols) {
+        Session_Protocol__c[] sProtocolsToRemove = new Session_Protocol__c[0];
+        Set<Id> treatmentSessionIds = new Set<Id>();
+        for(Session_Protocol__c sp : sessionProtocols){
+            sProtocolsToRemove.add(sp);
+            treatmentSessionIds.add(sp.TreatmentSessionId__c);
+        }
 
-        Treatment_Session__c plan = [SELECT Id FROM Treatment_Session__c WHERE Id =: protocol.TreatmentSessionId__c ];
+        Map<Id, Plan_Protocol__c> protocolIdToPlanProtocolMap = getProtocolIdToPlanProtocolMap(treatmentSessionIds);
 
-        Map<Id, Plan_Protocol__c> planProtocolMap = new Map<Id, Plan_Protocol__c>([SELECT Id, Treatment_Plan__c,
-                Protocol__c FROM Plan_Protocol__c WHERE Treatment_Plan__c =: plan.Id]);
+        Plan_Protocol__c[] pProtocols = new Plan_Protocol__c[0];
+        for(Session_Protocol__c sp : sProtocolsToRemove){
+            Plan_Protocol__c protocol2 = new Plan_Protocol__c();
+            if(protocolIdToPlanProtocolMap.keySet().contains(sp.ProtocolId__c)) {
+                protocol2 = protocolIdToPlanProtocolMap.get(sp.ProtocolId__c);
+                protocol2.IsRemoved__c = sp.IsRemoved__c;
+                pProtocols.add(protocol2);
+            }
+        }
+
+        System.debug('removeHandler response: ' + pProtocols);
+        return pProtocols;
+    }
+
+    private static Map<Id, Plan_Protocol__c> getProtocolIdToPlanProtocolMap(Set<Id> treatmentSessionIds){
+        Set<Id> treatmentPlanIds = new Set<Id>();
+        for(Treatment_Session__c treatmentSession : [SELECT Id, Treatment_Plan__c FROM Treatment_Session__c WHERE Id IN : treatmentSessionIds ]){
+            treatmentPlanIds.add(treatmentSession.Treatment_Plan__c);
+        }
 
         Map<Id, Plan_Protocol__c> protocolIdToPlanProtocolMap = new Map<Id, Plan_Protocol__c>();
-        for (Plan_Protocol__c planProtocol : planProtocolMap.values()) {
+
+        for (Plan_Protocol__c planProtocol : [SELECT Id, Treatment_Plan__c, Protocol__c FROM Plan_Protocol__c WHERE Treatment_Plan__c IN : treatmentPlanIds]) {
             protocolIdToPlanProtocolMap.put(planProtocol.Protocol__c, planProtocol);
         }
-        Plan_Protocol__c protocol2 = new Plan_Protocol__c();
-        if(protocolIdToPlanProtocolMap.keySet().contains(protocol.ProtocolId__c)) {
-            protocol2 = protocolIdToPlanProtocolMap.get(protocol.ProtocolId__c);
-        }
-        ServiceResponse response = new ServiceResponse(request);
-        response.Data = protocol2;
-        return response;
+
+        return protocolIdToPlanProtocolMap;
     }
 }
