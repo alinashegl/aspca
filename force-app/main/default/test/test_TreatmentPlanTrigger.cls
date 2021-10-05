@@ -25,8 +25,9 @@ private class test_TreatmentPlanTrigger {
         inactivePlan.IsActive__c = true;
         update inactivePlan;
         Test.stopTest();
-        List<Treatment_Plan__c> afterPlans = [SELECT Id, IsActive__c FROM Treatment_Plan__c WHERE IsActive__c = true];
+        List<Treatment_Plan__c> afterPlans = [SELECT Id, IsActive__c, Enrichment_Activities__c FROM Treatment_Plan__c WHERE IsActive__c = true];
         System.assertEquals(1, afterPlans.size());
         System.assertEquals(inactivePlan.Id, afterPlans[0].Id);
+        System.assertEquals('Nose Work;Snuffle mat;Tug pully', afterPlans[0].Enrichment_Activities__c);
     }
 }
