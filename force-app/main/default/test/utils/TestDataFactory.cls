@@ -625,6 +625,7 @@ public without sharing class TestDataFactory {
         Treatment_Bundle__c bundle = new Treatment_Bundle__c();
         bundle.Name = 'Test';
         bundle.IsActive__c = true;
+        bundle.Enrichment_Activities__c = 'Nose Work;Snuffle mat;Tug pully';
         insert bundle;
         return bundle;
     }
