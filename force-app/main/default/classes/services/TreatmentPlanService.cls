@@ -138,4 +138,15 @@ public with sharing class TreatmentPlanService {
         }
         update activePlans;
     }
+
+    public static void assignBundleEnrichments(List<Treatment_Plan__c> assignedBundles) {
+        Set<Id> bundleIds = new Set<Id>();
+        for (Treatment_Plan__c p : assignedBundles) {
+            bundleIds.add(p.AssignedTreatmentBundleId__c);
+        }
+        Map<Id, Treatment_Bundle__c> bundleMap = new Map<Id, Treatment_Bundle__c>([SELECT Id, Enrichment_Activities__c FROM Treatment_Bundle__c WHERE Id IN :bundleIds]);
+        for (Treatment_Plan__c p : assignedBundles) {
+            p.Enrichment_Activities__c = bundleMap.get(p.AssignedTreatmentBundleId__c).Enrichment_Activities__c;
+        }
+    }
 }
