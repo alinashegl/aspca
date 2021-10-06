@@ -31,9 +31,13 @@ public with sharing class TreatmentPlanDomain extends DomainActionBase{
         List<Treatment_Bundle__c> standard = [SELECT Id, Name, IsMaster__c from Treatment_Bundle__c where IsMaster__c =
                 TRUE LIMIT 1];
         Set<Id> planAnimals = new Set<Id>();
+        List<Treatment_Plan__c> assignedBundles = new List<Treatment_Plan__c>();
         for (Treatment_Plan__c plan : newRecords) {
             if (standard.size() > 0) {
                 plan.MasterTreatmentBundleId__c = standard[0].Id;
+            }
+            if (plan.AssignedTreatmentBundleId__c != null) {
+                assignedBundles.add(plan);
             }
             if (plan.Animal__c != null) {
                 planAnimals.add(plan.Animal__c);
@@ -41,6 +45,9 @@ public with sharing class TreatmentPlanDomain extends DomainActionBase{
         }
         if (!planAnimals.isEmpty()) {
             TreatmentPlanService.deactivateAnimalPlans(planAnimals);
+        }
+        if (!assignedBundles.isEmpty()) {
+            TreatmentPlanService.assignBundleEnrichments(assignedBundles);
         }
     }
     public static void beforeUpdate(TriggerRequest request) {
@@ -50,6 +57,7 @@ public with sharing class TreatmentPlanDomain extends DomainActionBase{
         Map<Id, Treatment_Plan__c> newRecordMap = (Map<Id, Treatment_Plan__c>) request.newRecordMap;
         Map<Id, Treatment_Plan__c> oldRecordMap = (Map<Id, Treatment_Plan__c>) request.oldRecordMap;
         Set<Id> planAnimals = new Set<Id>();
+        List<Treatment_Plan__c> assignedBundles = new List<Treatment_Plan__c>();
         for (Treatment_Plan__c p : newRecords) {
             Treatment_Plan__c oldValue = oldRecordMap.get(p.Id);
             if (p.IsActive__c && !oldValue.IsActive__c) {
@@ -57,9 +65,15 @@ public with sharing class TreatmentPlanDomain extends DomainActionBase{
                     planAnimals.add(p.Animal__c);
                 }
             }
+            if (p.AssignedTreatmentBundleId__c != null && oldValue.AssignedTreatmentBundleId__c != p.AssignedTreatmentBundleId__c) {
+                assignedBundles.add(p);
+            }
         }
         if (!planAnimals.isEmpty()) {
             TreatmentPlanService.deactivateAnimalPlans(planAnimals);
+        }
+        if (!assignedBundles.isEmpty()) {
+            TreatmentPlanService.assignBundleEnrichments(assignedBundles);
         }
     }
     public void beforeDelete(TriggerRequest request) { System.debug('Before Delete is Executing'); }
