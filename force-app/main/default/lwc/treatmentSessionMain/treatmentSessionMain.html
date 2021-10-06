@@ -1,51 +1,55 @@
 <template>
     <lightning-card>
-        <template if:true={loading}>
-            <lightning-spinner
-                alternative-text="Loading session data"
-                variant="brand"
-            ></lightning-spinner>
-        </template>
         <template if:true={activeProtocols}>
             <div class="slds-page-header slds-page-header_joined slds-page-header_bleed slds-shrink-none test-headerRegion slds-is-relative slds-page-header--object-home">
                 <h2 class="slds-card__header-title">
                     <lightning-icon icon-name="custom:custom63" alternative-text="Protocol" title="Protocol"></lightning-icon>
                     <div class="slds-p-left_small">
                     Session Protocols ({activeProtocols.length})
-                    <lightning-button variant="Neutral" label={startSessionLabel} title="startSession" onclick={handleStartSession} class="slds-m-left_x-small"></lightning-button>
-                    <lightning-button variant="Neutral" label="Modify Session" title="modifySession" onclick={handleModifySession} class="slds-m-left_x-small"></lightning-button>
-                    <template if:false={activeSession}>
-                        <lightning-button variant="Neutral" label="Toggle Fields" title="toggleFields" onclick={handleToggleFields} class="slds-m-left_x-small"></lightning-button>
+                    <lightning-button variant="Neutral" label={startSessionLabel} title="Start Session" onclick={handleStartSession} class="slds-m-left_x-small"></lightning-button>
+                    <lightning-button variant="Neutral" label={modifySessionLabel} title="Modify Session" onclick={handleModifySession} class="slds-m-left_x-small"></lightning-button>
+                    <template if:true={showTogglefields}>
+                        <lightning-button variant="Neutral" label="Toggle Fields" title="Toggle Fields" onclick={handleToggleFields} class="slds-m-left_x-small"></lightning-button>
                     </template>    
                 </div>
                 </h2>
             </div>
-            <template if:true={activeProtocols}>
-                <div class="slds-p-top_x-small">
-                    <template if:false={activeSession}>
-                        <lightning-datatable
-                            key-field="Id"
-                            data={activeProtocols}
-                            columns={tableColumns}
-                            hide-checkbox-column
-                            class={tableClass}
-                            onrowaction={handleRowAction}
-                        >
-                        </lightning-datatable>
-                    </template> 
-                    <template if:true={activeSession}>
-                        <template for:each={activeProtocols} for:item="protocol">
-                            <c-treatment-session-protocol
-                                key={protocol.Id}
-                                record-id={protocol.Id}
-                                session-id={recordId}
-                                protocol-name={protocol.ProtocolId__r.Name}
-                                can-remove-protocol={canRemoveProtocol}
-                                >
-                            </c-treatment-session-protocol>
+            <template if:true={showModifySession}>
+                <c-treatment-modify-session
+                    session-id={recordId}
+                    onrefreshevent={handleRefreshEvent}
+                >
+                </c-treatment-modify-session>
+            </template>
+            <template if:false={showModifySession}>
+                <template if:true={activeProtocols}>
+                    <div class="slds-p-top_x-small">
+                        <template if:false={activeSession}>
+                            <lightning-datatable
+                                key-field="Id"
+                                data={activeProtocols}
+                                columns={tableColumns}
+                                hide-checkbox-column
+                                class={tableClass}
+                                onrowaction={handleRowAction}
+                            >
+                            </lightning-datatable>
+                        </template> 
+                        <template if:true={activeSession}>
+                            <template for:each={activeProtocols} for:item="protocol">
+                                <c-treatment-session-protocol
+                                    key={protocol.Id}
+                                    record-id={protocol.Id}
+                                    session-id={recordId}
+                                    protocol-name={protocol.ProtocolId__r.Name}
+                                    can-remove-protocol={canRemoveProtocol}
+                                    refresh={refresh}
+                                    >
+                                </c-treatment-session-protocol>
+                            </template>
                         </template>
-                    </template>
-                </div>
+                    </div>
+                </template>
             </template>
         </template>
     </lightning-card>

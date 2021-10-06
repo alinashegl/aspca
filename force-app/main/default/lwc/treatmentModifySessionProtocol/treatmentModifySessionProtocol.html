@@ -1,0 +1,44 @@
+<template>
+    <div class="slds-box slds-grid">
+        <div class="slds-col slds-size_4-of-6 slds-medium-size_8-of-12 slds-large-size_8-of-12">
+            <div class="ptitle">
+                {protocolName}
+            </div>
+        </div>
+        <template if:true={isAssignedType}>
+            <div class="slds-col slds-size_1-of-6 slds-medium-size_2-of-12 slds-large-size_2-of-12">
+                <lightning-input type="toggle"
+                    checked={notSkipped}
+                    message-toggle-active='Active'
+                    message-toggle-inactive='Skipped'
+                    onchange={toggleIsSkipped}
+                    disabled={isDisabled}
+                    >
+                </lightning-input>
+            </div>
+            <div class="slds-col slds-size_1-of-6 slds-medium-size_2-of-12 slds-large-size_2-of-12">
+                <template if:true={canRemoveProtocol}>
+                    <lightning-input type="toggle"
+                        checked={notRemoved}
+                        message-toggle-active='Assigned'
+                        message-toggle-inactive='Removed'
+                        onchange={toggleIsRemoved}
+                        >
+                    </lightning-input>
+                </template>
+            </div>
+        </template>
+        <template if:false={isAssignedType}>
+            <div class="slds-col slds-size_1-of-6 slds-medium-size_2-of-12 slds-large-size_2-of-12"></div>
+            <div class="slds-col slds-size_1-of-6 slds-medium-size_2-of-12 slds-large-size_2-of-12">
+                <lightning-input type="toggle"
+                    checked={addToPlan}
+                    message-toggle-active='Add'
+                    message-toggle-inactive='Unassigned'
+                    onchange={toggleAddToPlan}
+                    >
+                </lightning-input>
+            </div>
+        </template>
+    </div>
+</template>
