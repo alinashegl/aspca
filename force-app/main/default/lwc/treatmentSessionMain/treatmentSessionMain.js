@@ -35,31 +35,65 @@ export default class TreatmentSessionMain extends NavigationMixin(LightningEleme
     @api recordId;
 
     columns = columns;
-    loading = false;
+    loading = true;
     activeProtocols = [];
     activeSession = false;
     allColumns = FORM_FACTOR == 'Large' ? true : false;
     wireResponse;
-    showModifySession = true;
+    showModifySession = false;
+    refresh = false;
 
-    @wire(getActiveProtocols, {sessionId: '$recordId'})
+    @wire(getActiveProtocols, {sessionId: '$recordId', refresh: '$refresh'})
     response(result){
         this.wireResponse = result;
+        this.activeProtocols = [];
         if(result.data){
             this.activeProtocols = result.data;
+            window.console.log('getActiveProtocols.length: ', result.data.length);
+            this.loading = false;
+        } else {
+            this.loading = false;
         }
+    }
+
+    handleRefresh(){
+        getActiveProtocols({sessionId: this.recordId, refresh: !this.refresh})
+        .then((result) => {
+            this.activeProtocols = [];
+            window.console.log('handleRefresh.length: ', result.length);
+            this.activeProtocols = result;
+            this.loading = false;
+        })
+    }
+
+    handleRefreshEvent(){
+        window.console.log('inhandleRefreshEvent');
+        this.refresh = !this.refresh;
     }
 
     handleStartSession(){
+        window.console.log('handleStartSession');
         this.activeSession = !this.activeSession;
         this.showModifySession = false;
-        if(!this.activeSession){
-            return refreshApex(this.wireResponse);
-        }
+        // if(!this.activeSession){
+            this.loading = true;
+            // this.handleRefresh();
+            // this.refresh = !this.refresh;
+            refreshApex(this.wireResponse);
+        // }
     }
 
     handleModifySession(){
+        window.console.log('handleModifySession');
+        // this.activeProtocols = [];
         this.showModifySession = !this.showModifySession;
+        // if(this.showModifySession == false){
+            this.loading = true;
+            // this.handleRefresh();
+            // this.refresh = !this.refresh;
+            refreshApex(this.wireResponse);
+        // }
+        
     }
 
     handleToggleFields(){
@@ -80,7 +114,7 @@ export default class TreatmentSessionMain extends NavigationMixin(LightningEleme
     }
 
     get showTogglefields(){
-        return this.activeSession || this.showModifySession ?  true : false;
+        return !this.activeSession && !this.showModifySession ?  true : false;
     }
 
     get startSessionLabel(){

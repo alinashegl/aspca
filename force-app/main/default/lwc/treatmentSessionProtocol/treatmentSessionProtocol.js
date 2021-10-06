@@ -8,7 +8,7 @@ import NEEDS_REVIEW_FIELD from '@salesforce/schema/Session_Protocol__c.Needs_Rev
 import PROTOCOL_NOTES_FIELD from '@salesforce/schema/Session_Protocol__c.Protocol_Notes__c';
 import PREFERRED_MOTIVATORS_FIELD from '@salesforce/schema/Session_Protocol__c.Preferred_Motivators__c';
 
-import getActiveProtocolsAndFields from '@salesforce/apex/TreatmentSessionLWCController.getActiveProtocolAndFields';
+import getActiveProtocolAndFields from '@salesforce/apex/TreatmentSessionLWCController.getActiveProtocolAndFields';
 
 import SystemModstamp from '@salesforce/schema/Account.SystemModstamp';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
@@ -31,7 +31,16 @@ export default class TreatmentSessionProtocol extends LightningElement {
     isSkipped = false;
     isRemoved = false;
 
-    @wire(getActiveProtocolsAndFields, {protocolId: '$recordId'})
+    _refresh;
+    @api
+    get refresh() {
+        return this._refresh;
+    }
+    set refresh(value) {
+        this._refresh = value;
+    }
+
+    @wire(getActiveProtocolAndFields, {protocolId: '$recordId', refresh: '$refresh'})
     response(result) {
         this.wireResponse = result;
         if (result.data) {

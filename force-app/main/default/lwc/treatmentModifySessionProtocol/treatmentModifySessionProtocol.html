@@ -1,0 +1,41 @@
+<template>
+    <div class="slds-border_bottom slds-grid slds-wrap">
+        <div class="slds-col slds-size_4-of-6 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+            <div class="slds-text-title_caps">
+                {protocolName}
+            </div>
+        </div>
+        <template if:true={isAssignedType}>
+            <div class="slds-col slds-size_1-of-6 slds-medium-size_3-of-12 slds-large-size_3-of-12">
+                <lightning-input type="toggle"
+                    checked={notSkipped}
+                    message-toggle-active='Active'
+                    message-toggle-inactive='Skipped'
+                    onchange={toggleIsSkipped}
+                    disabled={isDisabled}
+                    >
+                </lightning-input>
+            </div>
+            <div class="slds-col slds-size_1-of-6 slds-medium-size_3-of-12 slds-large-size_3-of-12">
+                <lightning-input type="toggle"
+                    checked={notRemoved}
+                    message-toggle-active='Assigned'
+                    message-toggle-inactive='Removed'
+                    onchange={toggleIsRemoved}
+                    >
+                </lightning-input>
+            </div>
+        </template>
+        <template if:false={isAssignedType}>
+            <div class="slds-col slds-size_1-of-6 slds-medium-size_3-of-12 slds-large-size_3-of-12">
+                <lightning-input type="toggle"
+                    checked={addToPlan}
+                    message-toggle-active='Add'
+                    message-toggle-inactive='Unassigned'
+                    onchange={toggleAddToPlan}
+                    >
+                </lightning-input>
+            </div>
+        </template>
+      </div>
+</template>

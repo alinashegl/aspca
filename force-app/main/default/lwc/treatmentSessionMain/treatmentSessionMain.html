@@ -1,11 +1,11 @@
 <template>
     <lightning-card>
-        <template if:true={loading}>
+        <!-- <template if:true={loading}>
             <lightning-spinner
                 alternative-text="Loading session data"
                 variant="brand"
             ></lightning-spinner>
-        </template>
+        </template> -->
         <template if:true={activeProtocols}>
             <div class="slds-page-header slds-page-header_joined slds-page-header_bleed slds-shrink-none test-headerRegion slds-is-relative slds-page-header--object-home">
                 <h2 class="slds-card__header-title">
@@ -14,7 +14,7 @@
                     Session Protocols ({activeProtocols.length})
                     <lightning-button variant="Neutral" label={startSessionLabel} title="startSession" onclick={handleStartSession} class="slds-m-left_x-small"></lightning-button>
                     <lightning-button variant="Neutral" label={modifySessionLabel} title="modifySession" onclick={handleModifySession} class="slds-m-left_x-small"></lightning-button>
-                    <template if:false={showTogglefields}>
+                    <template if:true={showTogglefields}>
                         <lightning-button variant="Neutral" label="Toggle Fields" title="toggleFields" onclick={handleToggleFields} class="slds-m-left_x-small"></lightning-button>
                     </template>    
                 </div>
@@ -23,6 +23,7 @@
             <template if:true={showModifySession}>
                 <c-treatment-modify-session
                     session-id={recordId}
+                    onrefreshevent={handleRefreshEvent}
                 >
                 </c-treatment-modify-session>
             </template>
@@ -48,6 +49,7 @@
                                     session-id={recordId}
                                     protocol-name={protocol.ProtocolId__r.Name}
                                     can-remove-protocol={canRemoveProtocol}
+                                    refresh={refresh}
                                     >
                                 </c-treatment-session-protocol>
                             </template>
