@@ -6,18 +6,11 @@ import updateProtocolAssignments from '@salesforce/apex/TreatmentSessionLWCContr
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { refreshApex } from '@salesforce/apex';
 
-// import PROTOCOL_IS_ACTIVE_FIELD from '@salesforce/schema/Protocol__c.IsActive__c';
-// import PROTOCOL_DESCRIPTION_FIELD from '@salesforce/schema/Protocol__c.Description__c';
-// import PROTOCOL_NAME_FIELD from '@salesforce/schema/Protocol__c.Name';
 import SESSION_PROTOCOL_OBJECT from "@salesforce/schema/Session_Protocol__c";
 import SESSION_PROTOCOL_ADD_TO_PLAN_FIELD from '@salesforce/schema/Session_Protocol__c.Add_to_Plan__c';
-// import SESSION_PROTOCOL_NEEDS_REVIEW_FIELD from '@salesforce/schema/Session_Protocol__c.Needs_Review__c';
-// import SESSION_PROTOCOL_PREFERRED_MOTIVATORS_FIELD from '@salesforce/schema/Session_Protocol__c.Preferred_Motivators__c';
 import SESSION_PROTOCOL_PROTOCOL_ID_FIELD from '@salesforce/schema/Session_Protocol__c.ProtocolId__c';
 import SESSION_PROTOCOL_TREATMENT_SESSION_FIELD from '@salesforce/schema/Session_Protocol__c.TreatmentSessionId__c';
-// import SESSION_PROTOCOL_IS_SKIPPED_FIELD from '@salesforce/schema/Session_Protocol__c.IsSkipped__c';
-// import SESSION_PROTOCOL_IS_REMOVED_FIELD from '@salesforce/schema/Session_Protocol__c.IsRemoved__c';
-
+import SESSION_PROTOCOL_NEEDS_REVIEW_FIELD from '@salesforce/schema/Session_Protocol__c.Needs_Review__c';
 
 export default class TreatmentModifySession extends LightningElement {
     @api sessionId;
@@ -30,6 +23,8 @@ export default class TreatmentModifySession extends LightningElement {
 
     isLoading = true;
     addNewProtocol = false;
+
+    isUpdateButtonDisabled = true;
 
     @wire(getProtocolLists, {sessionId : '$sessionId' } )
     response(result){
@@ -65,6 +60,7 @@ export default class TreatmentModifySession extends LightningElement {
                 this.assignedProtocolUpdates.push(prUpdate);
             }
             window.console.log('assignedProtocolUpdates: ' + JSON.stringify(this.assignedProtocolUpdates));
+            window.console.log('assignedProtocolUpdates.length: ' + this.assignedProtocolUpdates.length);
         }
         else if(protocol.type == 'unassigned'){
             let index = this.protocolsToAssign.indexOf(protocol.id);
@@ -74,7 +70,9 @@ export default class TreatmentModifySession extends LightningElement {
                 this.protocolsToAssign.push(protocol.id);
             }
             window.console.log('protocolsToAssign: ' + JSON.stringify(this.protocolsToAssign));
-        }        
+            window.console.log('protocolsToAssign.length: ' + this.protocolsToAssign.length);
+        }
+        this.isUpdateButtonDisabled = (this.assignedProtocolUpdates.length > 0 || this.protocolsToAssign.length > 0) ? false : true;
     }
 
     handleProtocolAssignmentUpdates(){
@@ -95,8 +93,11 @@ export default class TreatmentModifySession extends LightningElement {
                 this.handleToastEvent("Error updating protocols", error, "error");
             })
             .finally(() =>{
-                this.handleRefreshEvent();
+                this.assignedProtocolUpdates = [];
+                this.protocolsToAssign = [];
+                this.isUpdateButtonDisabled = true;
                 refreshApex(this.wireResponse);
+                this.handleRefreshEvent();
             })
     }
 
@@ -108,6 +109,7 @@ export default class TreatmentModifySession extends LightningElement {
         fields[SESSION_PROTOCOL_PROTOCOL_ID_FIELD.fieldApiName] = protocolId;
         fields[SESSION_PROTOCOL_TREATMENT_SESSION_FIELD.fieldApiName] = this.sessionId;
         fields[SESSION_PROTOCOL_ADD_TO_PLAN_FIELD.fieldApiName] = true;
+        fields[SESSION_PROTOCOL_NEEDS_REVIEW_FIELD.fieldApiName] = true;
 
         const recordInput = { apiName: SESSION_PROTOCOL_OBJECT.objectApiName, fields };
 
@@ -115,23 +117,9 @@ export default class TreatmentModifySession extends LightningElement {
             .then((response) => {
                 window.console.log('sessionProtocolId = ', response)
                 this.handleToastEvent('Success', 'Session Protocol created successfully!', 'success' );
-                // this.dispatchEvent(
-                //     new ShowToastEvent({
-                //         title: "Success",
-                //         message: "Session Protocol created successfully!",
-                //         variant: "success"
-                //     })
-                // );
             })
             .catch((error) => {
                 this.handleToastEvent("Error creating record", error, "error");
-                // this.dispatchEvent(
-                //     new ShowToastEvent({
-                //         title: "Error creating record",
-                //         message: reduceErrors(error).join(", "),
-                //         variant: "error"
-                //     })
-                // );
             })
             .finally(() => {
                 this.addNewProtocol = false;
@@ -139,6 +127,14 @@ export default class TreatmentModifySession extends LightningElement {
                 this.handleRefreshEvent();
                 refreshApex(this.wireResponse);
             });
+    }
+
+    handleSubmitProtocol(event){
+        event.preventDefault();
+        const fields = event.detail.fields;
+        fields.Name = 'Other ' + fields.Name
+        this.template
+        .querySelector('lightning-record-edit-form').submit(fields);
     }
 
     handleRefreshEvent(){
@@ -156,9 +152,5 @@ export default class TreatmentModifySession extends LightningElement {
                 variant: variant
             })
         );
-    }
-
-    get addNewLabel(){
-        return this.addNewRecord ? 'Submit' : 'Add New Protocol';
     }
 }

@@ -169,7 +169,7 @@ export default class TreatmentSessionProtocol extends LightningElement {
             );
         })
         .finally(() => {
-            return refreshApex(this.wireResponse);
+            refreshApex(this.wireResponse);
         });
     }
 

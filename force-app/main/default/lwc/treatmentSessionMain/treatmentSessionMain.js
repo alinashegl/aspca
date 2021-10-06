@@ -35,7 +35,6 @@ export default class TreatmentSessionMain extends NavigationMixin(LightningEleme
     @api recordId;
 
     columns = columns;
-    loading = true;
     activeProtocols = [];
     activeSession = false;
     allColumns = FORM_FACTOR == 'Large' ? true : false;
@@ -50,50 +49,34 @@ export default class TreatmentSessionMain extends NavigationMixin(LightningEleme
         if(result.data){
             this.activeProtocols = result.data;
             window.console.log('getActiveProtocols.length: ', result.data.length);
-            this.loading = false;
-        } else {
-            this.loading = false;
         }
     }
 
     handleRefresh(){
-        getActiveProtocols({sessionId: this.recordId, refresh: !this.refresh})
+        getActiveProtocols({sessionId: this.recordId})
         .then((result) => {
             this.activeProtocols = [];
             window.console.log('handleRefresh.length: ', result.length);
             this.activeProtocols = result;
-            this.loading = false;
-        })
+        });
     }
 
     handleRefreshEvent(){
         window.console.log('inhandleRefreshEvent');
-        this.refresh = !this.refresh;
+        refreshApex(this.wireResponse);
     }
 
     handleStartSession(){
         window.console.log('handleStartSession');
         this.activeSession = !this.activeSession;
         this.showModifySession = false;
-        // if(!this.activeSession){
-            this.loading = true;
-            // this.handleRefresh();
-            // this.refresh = !this.refresh;
-            refreshApex(this.wireResponse);
-        // }
+        refreshApex(this.wireResponse);
     }
 
     handleModifySession(){
         window.console.log('handleModifySession');
-        // this.activeProtocols = [];
         this.showModifySession = !this.showModifySession;
-        // if(this.showModifySession == false){
-            this.loading = true;
-            // this.handleRefresh();
-            // this.refresh = !this.refresh;
-            refreshApex(this.wireResponse);
-        // }
-        
+        refreshApex(this.wireResponse);
     }
 
     handleToggleFields(){
@@ -118,7 +101,9 @@ export default class TreatmentSessionMain extends NavigationMixin(LightningEleme
     }
 
     get startSessionLabel(){
-        return this.activeSession ? 'Exit Session' : 'Start Session';
+        return this.activeSession ? 
+        (this.showModifySession ? 'Protocol List' : 'Exit Session' )
+        : 'Start Session';
     }
 
     get canRemoveProtocol() {
@@ -134,6 +119,8 @@ export default class TreatmentSessionMain extends NavigationMixin(LightningEleme
     }
 
     get modifySessionLabel(){
-        return this.showModifySession ? 'Protocol List' : 'Modify Session';
+        return this.showModifySession ? 
+        (this.activeSession ? 'Return to Session' :'Protocol List')
+        : 'Modify Session';
     }
 }

@@ -6,7 +6,7 @@ private class test_TreatmentSessionLWCController {
         Session_Protocol__c[] sessionProtocols = [SELECT Id, TreatmentSessionId__c FROM Session_Protocol__c WHERE TreatmentSessionId__c =: session.Id];
 
         Test.startTest();
-            Session_Protocol__c[] returnedList = TreatmentSessionLWCController.getActiveProtocols(session.Id, false);
+            Session_Protocol__c[] returnedList = TreatmentSessionLWCController.getActiveProtocols(session.Id);
         Test.stopTest();
 
         System.assertEquals(sessionProtocols.size(), returnedList.size());
@@ -23,7 +23,7 @@ private class test_TreatmentSessionLWCController {
         insert session;
 
         Test.startTest();
-            Session_Protocol__c[] returnedList = TreatmentSessionLWCController.getActiveProtocols(session.Id, false);
+            Session_Protocol__c[] returnedList = TreatmentSessionLWCController.getActiveProtocols(session.Id);
         Test.stopTest();
 
         System.assert(returnedList.isEmpty(), 'list should have been empty: ' + returnedList);

@@ -1,6 +1,6 @@
 public with sharing class TreatmentSessionLWCController {
     @AuraEnabled (cacheable=true)
-    public static Session_Protocol__c[] getActiveProtocols(Id sessionId, Boolean refresh){
+    public static Session_Protocol__c[] getActiveProtocols(Id sessionId){
         try {
             return [
                 SELECT 

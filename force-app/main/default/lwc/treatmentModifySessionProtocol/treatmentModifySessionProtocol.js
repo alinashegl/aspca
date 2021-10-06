@@ -1,4 +1,5 @@
 import { LightningElement, api } from 'lwc';
+import hasRemoveFromPlanPermission from '@salesforce/customPermission/Remove_Protocol_From_Plan';
 
 export default class TreatmentModifySessionProtocol extends LightningElement {
     @api protocol;
@@ -6,6 +7,7 @@ export default class TreatmentModifySessionProtocol extends LightningElement {
     notSkipped = false;
     notRemoved = false;
     addToPlan = false;
+
 
     connectedCallback(){
         if(this.protocol){
@@ -57,5 +59,9 @@ export default class TreatmentModifySessionProtocol extends LightningElement {
 
     get protocolName(){
         return this.type == 'assigned' ? this.protocol.Protocol_Name__c : this.protocol.Name;
+    }
+
+    get canRemoveProtocol(){
+        return hasRemoveFromPlanPermission;
     }
 }
