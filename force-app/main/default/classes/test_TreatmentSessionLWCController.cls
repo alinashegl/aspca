@@ -6,7 +6,7 @@ private class test_TreatmentSessionLWCController {
         Session_Protocol__c[] sessionProtocols = [SELECT Id, TreatmentSessionId__c FROM Session_Protocol__c WHERE TreatmentSessionId__c =: session.Id];
 
         Test.startTest();
-            Session_Protocol__c[] returnedList = TreatmentSessionLWCController.getActiveProtocols(session.Id);
+            Session_Protocol__c[] returnedList = TreatmentSessionLWCController.getActiveProtocols(session.Id, false);
         Test.stopTest();
 
         System.assertEquals(sessionProtocols.size(), returnedList.size());
@@ -23,7 +23,7 @@ private class test_TreatmentSessionLWCController {
         insert session;
 
         Test.startTest();
-            Session_Protocol__c[] returnedList = TreatmentSessionLWCController.getActiveProtocols(session.Id);
+            Session_Protocol__c[] returnedList = TreatmentSessionLWCController.getActiveProtocols(session.Id, false);
         Test.stopTest();
 
         System.assert(returnedList.isEmpty(), 'list should have been empty: ' + returnedList);
@@ -102,7 +102,7 @@ private class test_TreatmentSessionLWCController {
         Session_Protocol__c[] protocolList = TestDataFactory.createSessionProtocols();
 
         Test.startTest();
-        TreatmentSessionLWCController.ProtocolInfo protocolInfo = TreatmentSessionLWCController.getActiveProtocolAndFields(protocolList[0].Id);
+        TreatmentSessionLWCController.ProtocolInfo protocolInfo = TreatmentSessionLWCController.getActiveProtocolAndFields(protocolList[0].Id, false);
         Test.stopTest();
 
         System.assert(protocolInfo != null);
@@ -113,7 +113,7 @@ private class test_TreatmentSessionLWCController {
         Treatment_Session__c treatmentSession = TestDataFactory.createSession();
 
         Test.startTest();
-        TreatmentSessionLWCController.ProtocolInfo protocolInfo = TreatmentSessionLWCController.getActiveProtocolAndFields(null);
+        TreatmentSessionLWCController.ProtocolInfo protocolInfo = TreatmentSessionLWCController.getActiveProtocolAndFields(null, false);
         Test.stopTest();
 
         System.assert(protocolInfo == null);

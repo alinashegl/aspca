@@ -148,6 +148,7 @@ public with sharing class SessionProtocolService {
         List<Session_Protocol__c> protocols = new List<Session_Protocol__c>();
         
         for (Plan_Protocol__c lPlanProtocol : planProtocols) {
+            if(lPlanProtocol.IsRemoved__c) continue;
             Session_Protocol__c protocol = new Session_Protocol__c();
             protocol.TreatmentSessionId__c = session.Id;
             protocol.ProtocolId__c = lPlanProtocol.Protocol__c;
