@@ -52,6 +52,11 @@ public with sharing class TreatmentSessionLWCController {
         ];
     }
 
+    private static Session_Protocol__c[] getAssignedProtocols(Id sessionId){
+        if(sessionId == null) return null;
+        return [SELECT Id, ProtocolId__c, Protocol_Name__c, IsSkipped__c, IsRemoved__c FROM Session_Protocol__c WHERE TreatmentSessionId__c =: sessionId ORDER BY Protocol_Name__c ASC];
+    }
+
     @AuraEnabled (cacheable=true)
     public static sObject[] getChildList(Id protocolId, String objectApi){
         if(protocolId == null || objectApi == null) return null;
@@ -80,7 +85,7 @@ public with sharing class TreatmentSessionLWCController {
     }
 
     @AuraEnabled (cacheable=true)
-    public static protocolInfo getActiveProtocolAndFields(Id protocolId){
+    public static protocolInfo getActiveProtocolAndFields(Id protocolId, Boolean refresh){
         if(protocolId == null) return null;
         try {
             Session_Protocol__c sessionProtocol = getProtocol(protocolId);
@@ -91,7 +96,59 @@ public with sharing class TreatmentSessionLWCController {
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }
-    } 
+    }
+
+    @AuraEnabled (cacheable=true)
+    public static protocolAssignment getProtocolLists(Id sessionId){
+        protocolAssignment assignments = new protocolAssignment();
+        assignments.assignedProtocols = getAssignedProtocols(sessionId);
+        assignments.unassignedProtocols = getUnassignedProtocols(assignments.assignedProtocols);
+        return assignments;
+    }
+
+    private static Protocol__c[] getUnassignedProtocols(Session_Protocol__c[] assignedProtocols){
+        Set<Id> assignedIds = new Set<Id>();
+        for(Session_Protocol__c sp : assignedProtocols){
+            assignedIds.add(sp.ProtocolId__c);
+        }
+        return [SELECT Id, Name FROM Protocol__c WHERE IsActive__c = true AND Id NOT IN :assignedIds ORDER BY Name ASC];
+
+    }
+
+    @AuraEnabled
+    public static String updateProtocolAssignments(Session_Protocol__c[] protocolsToUpdate, String[] protocolIds, String sessionId){
+        try{
+            update protocolsToUpdate;
+            addNewProtocolsToPlan(protocolIds, sessionId);
+            return 'success';
+        } catch (Exception e){
+            return 'Error occured: ' + e.getMessage();
+        }
+        
+    }
+
+    public static void addNewProtocolsToPlan(String[] protocolIds, String sessionId){
+        Treatment_Session__c session = [SELECT Id, Preferred_Motivators__c FROM Treatment_Session__c WHERE Id =: sessionId LIMIT 1];
+        Session_Protocol__c[] newSProtocols = new Session_Protocol__c[0];
+
+        for(String pId : protocolIds){
+            Session_Protocol__c sp = new Session_Protocol__c(
+                ProtocolId__c = pId,
+                TreatmentSessionId__c = sessionId,
+                Add_to_Plan__c = true,
+                Preferred_Motivators__c = session.Preferred_Motivators__c,
+                Session_Date__c = date.today()
+            );
+            newSProtocols.add(sp);
+        }
+
+        insert newSProtocols;
+    }
+
+    public class protocolAssignment {
+        @AuraEnabled public Session_Protocol__c[] assignedProtocols { get; set; }
+        @AuraEnabled public Protocol__c[] unassignedProtocols { get; set; }
+    }
 
     public class ProtocolInfo{
         @AuraEnabled public String id { get; set; }

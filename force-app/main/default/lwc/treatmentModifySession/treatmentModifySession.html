@@ -1,0 +1,110 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner
+            alternative-text="Loading session data"
+            variant="brand"
+        ></lightning-spinner>
+    </template>
+    <template if:true={assignedProtocols}>
+        <lightning-card>
+            <lightning-button variant="Neutral" label="Update Protocol Assignments" title="Update Protocol Assignment" onclick={handleProtocolAssignmentUpdates} class="slds-m-left_small" disabled={isUpdateButtonDisabled}></lightning-button>
+        </lightning-card>
+        <lightning-card>
+            <h1 slot="title">Assigned Protocols
+                <lightning-layout multiple-rows horizontal-align={horizontalAlign}>
+                    <template for:each={assignedProtocols} for:item='protocol'>
+                        <lightning-layout-item flexibility="auto" key={protocol.Id} size="12" small-device-size="12" medium-device-size="3" large-device-size="3" class="slds-p-around_xx-small">
+                            <div class="slds-form-element">
+                                <div class="slds-form-element__static">
+                                    <c-treatment-modify-session-protocol
+                                        type="assigned"
+                                        protocol={protocol}
+                                        onprotocolassignment={handleProtocolAssignmentEvent}
+                                    >
+                                    </c-treatment-modify-session-protocol>
+                                </div>
+                            </div>
+                        </lightning-layout-item>
+                    </template>
+                </lightning-layout>
+            </h1>
+        </lightning-card>
+        <lightning-card>
+            <h1 slot="title">Unassigned Protocols
+                <lightning-layout multiple-rows horizontal-align={horizontalAlign}>
+                    <template for:each={unassignedProtocols} for:item='protocol'>
+                        <lightning-layout-item flexibility="auto" key={protocol.Id} size="12" small-device-size="12" medium-device-size="3" large-device-size="3" class="slds-p-around_xx-small">
+                            <div class="slds-form-element">
+                                <div class="slds-form-element__static">
+                                    <c-treatment-modify-session-protocol
+                                        type="unassigned"
+                                        protocol={protocol}
+                                        onprotocolassignment={handleProtocolAssignmentEvent}
+                                    >
+                                    </c-treatment-modify-session-protocol>
+                                </div>
+                            </div>
+                        </lightning-layout-item>
+                    </template>
+                </lightning-layout>
+            </h1>
+        </lightning-card>
+        <lightning-card>
+            <lightning-button variant="Neutral" label="Update Protocol Assignments" title="Update Protocol Assignment" onclick={handleProtocolAssignmentUpdates} class="slds-m-left_small" disabled={isUpdateButtonDisabled}></lightning-button>
+        </lightning-card>
+    </template>
+    <lightning-card>
+        <template if:false={addNewProtocol}>
+            <lightning-button
+                class="slds-m-left_small"
+                variant="brand"
+                type="addNew"
+                label="Other"
+                onclick={toggleAddNewProtocol}>
+            </lightning-button>
+        </template>
+        <template if:true={addNewProtocol}>
+            <div class="slds-box">
+                <lightning-record-edit-form
+                    object-api-name='Protocol__c'
+                    onsuccess={handleInsertProtocolResponse}
+                    onsubmit={handleSubmitProtocol}
+                    >
+                    <lightning-messages>
+                    </lightning-messages>
+                    <div class="slds-grid">
+                        <div class="slds-col slds-size_3-of-8">
+                            <lightning-input-field
+                                field-name="Name"
+                            >
+                            </lightning-input-field>
+                        </div>
+                        <div class="slds-col slds-size_2-of-8 slds-p-left_x-small">
+                            <lightning-input-field
+                                field-name="Description__c"
+                                >
+                            </lightning-input-field>
+                        </div>
+                    </div>
+                    <div class="slds-p-top_small">
+                        <lightning-button
+                            variant="brand"
+                            type="submit"
+                            label="Submit"
+                            >
+                        </lightning-button>
+                        <lightning-button
+                            class="slds-p-left_x-small"
+                            variant="neutral"
+                            onclick={toggleAddNewProtocol}
+                            label="Cancel"
+                            >
+                        </lightning-button>
+                    </div>
+                </lightning-record-edit-form>
+            </div>
+        </template>
+    </lightning-card>
+</template>
+
+
