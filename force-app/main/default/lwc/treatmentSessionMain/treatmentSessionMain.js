@@ -5,7 +5,6 @@ import hasRemoveFromPlanPermission from '@salesforce/customPermission/Remove_Pro
 import FORM_FACTOR from '@salesforce/client/formFactor'
 import { refreshApex } from '@salesforce/apex';
 
-
 const columns = [
     {   label: "Name",
         type: "button",
@@ -36,29 +35,48 @@ export default class TreatmentSessionMain extends NavigationMixin(LightningEleme
     @api recordId;
 
     columns = columns;
-    loading = false;
     activeProtocols = [];
     activeSession = false;
     allColumns = FORM_FACTOR == 'Large' ? true : false;
     wireResponse;
+    showModifySession = false;
+    refresh = false;
 
-    @wire(getActiveProtocols, {sessionId: '$recordId'})
+    @wire(getActiveProtocols, {sessionId: '$recordId', refresh: '$refresh'})
     response(result){
         this.wireResponse = result;
+        this.activeProtocols = [];
         if(result.data){
             this.activeProtocols = result.data;
+            window.console.log('getActiveProtocols.length: ', result.data.length);
         }
+    }
+
+    handleRefresh(){
+        getActiveProtocols({sessionId: this.recordId})
+        .then((result) => {
+            this.activeProtocols = [];
+            window.console.log('handleRefresh.length: ', result.length);
+            this.activeProtocols = result;
+        });
+    }
+
+    handleRefreshEvent(){
+        window.console.log('inhandleRefreshEvent');
+        refreshApex(this.wireResponse);
     }
 
     handleStartSession(){
+        window.console.log('handleStartSession');
         this.activeSession = !this.activeSession;
-        if(!this.activeSession){
-            return refreshApex(this.wireResponse);
-        }
+        this.showModifySession = false;
+        refreshApex(this.wireResponse);
     }
 
     handleModifySession(){
-
+        window.console.log('handleModifySession');
+        this.showModifySession = !this.showModifySession;
+        refreshApex(this.wireResponse);
     }
 
     handleToggleFields(){
@@ -78,8 +96,14 @@ export default class TreatmentSessionMain extends NavigationMixin(LightningEleme
         }
     }
 
+    get showTogglefields(){
+        return !this.activeSession && !this.showModifySession ?  true : false;
+    }
+
     get startSessionLabel(){
-        return this.activeSession ? 'Exit Session' : 'Start Session';
+        return this.activeSession ? 
+        (this.showModifySession ? 'Protocol List' : 'Exit Session' )
+        : 'Start Session';
     }
 
     get canRemoveProtocol() {
@@ -94,5 +118,9 @@ export default class TreatmentSessionMain extends NavigationMixin(LightningEleme
         return this.allColumns ? columns : limitedColumns;
     }
 
-    recordPageUrl
+    get modifySessionLabel(){
+        return this.showModifySession ? 
+        (this.activeSession ? 'Return to Session' :'Protocol List')
+        : 'Modify Session';
+    }
 }
