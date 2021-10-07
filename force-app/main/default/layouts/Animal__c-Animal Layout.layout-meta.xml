@@ -741,6 +741,11 @@
     <platformActionList>
         <actionListContext>Record</actionListContext>
         <platformActionListItems>
+            <actionName>SendEmail</actionName>
+            <actionType>QuickAction</actionType>
+            <sortOrder>1</sortOrder>
+        </platformActionListItems>
+        <platformActionListItems>
             <actionName>Generate_Kennel_Card</actionName>
             <actionType>CustomButton</actionType>
             <sortOrder>2</sortOrder>
@@ -749,11 +754,6 @@
             <actionName>LCC_LogACall_RT_General_Task</actionName>
             <actionType>QuickAction</actionType>
             <sortOrder>3</sortOrder>
-        </platformActionListItems>
-        <platformActionListItems>
-            <actionName>Create_Animal_Cage_Card</actionName>
-            <actionType>CustomButton</actionType>
-            <sortOrder>12</sortOrder>
         </platformActionListItems>
         <platformActionListItems>
             <actionName>LCC_LogACall_RT_LAM_Task</actionName>
@@ -798,19 +798,23 @@
         <platformActionListItems>
             <actionName>Exercise_Report</actionName>
             <actionType>CustomButton</actionType>
-            <sortOrder>13</sortOrder>
+            <sortOrder>12</sortOrder>
         </platformActionListItems>
         <platformActionListItems>
             <actionName>Medical_Discharge</actionName>
             <actionType>CustomButton</actionType>
             <sortOrder>0</sortOrder>
         </platformActionListItems>
-        <platformActionListItems>
-            <actionName>SendEmail</actionName>
-            <actionType>QuickAction</actionType>
-            <sortOrder>1</sortOrder>
-        </platformActionListItems>
     </platformActionList>
+    <relatedLists>
+        <fields>NAME</fields>
+        <fields>Playgroup_Session__c</fields>
+        <fields>Play_Rating__c</fields>
+        <fields>Playgroup_Individual_Notes__c</fields>
+        <relatedList>Animal_Playgroup__c.Animal__c</relatedList>
+        <sortField>NAME</sortField>
+        <sortOrder>Desc</sortOrder>
+    </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
         <relatedList>Facility_Outcome__c.Animal__c</relatedList>
@@ -1046,7 +1050,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h01000000RrJ9</masterLabel>
+        <masterLabel>00hi0000001hcpU</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>

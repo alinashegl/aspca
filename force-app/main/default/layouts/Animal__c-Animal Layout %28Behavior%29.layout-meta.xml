@@ -372,6 +372,15 @@
         <fields>NAME</fields>
         <relatedList>Additional_Dog_Present__c.Additional_Dog__c</relatedList>
     </relatedLists>
+    <relatedLists>
+        <fields>NAME</fields>
+        <fields>Playgroup_Session__c</fields>
+        <fields>Play_Rating__c</fields>
+        <fields>Playgroup_Individual_Notes__c</fields>
+        <relatedList>Animal_Playgroup__c.Animal__c</relatedList>
+        <sortField>NAME</sortField>
+        <sortOrder>Desc</sortOrder>
+    </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>
     <showInteractionLogPanel>false</showInteractionLogPanel>
