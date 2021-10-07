@@ -4,9 +4,8 @@
     <deleteConstraint>SetNull</deleteConstraint>
     <externalId>false</externalId>
     <label>Playgroup</label>
-    <referenceTo>Playgroup__c</referenceTo>
-    <relationshipLabel>Playgroup Novel Contacts</relationshipLabel>
-    <relationshipName>Playgroup_Novel_Contacts</relationshipName>
+    <referenceTo>Animal_Playgroup__c</referenceTo>
+    <relationshipName>Playgroup_Contacts</relationshipName>
     <required>false</required>
     <trackTrending>false</trackTrending>
     <type>Lookup</type>
