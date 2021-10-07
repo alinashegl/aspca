@@ -1,6 +1,5 @@
 import { LightningElement, api, wire } from 'lwc';
 import { createRecord } from 'lightning/uiRecordApi';
-import FORM_FACTOR from '@salesforce/client/formFactor'
 import getProtocolLists from '@salesforce/apex/TreatmentSessionLWCController.getProtocolLists';
 import updateProtocolAssignments from '@salesforce/apex/TreatmentSessionLWCController.updateProtocolAssignments';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
@@ -17,27 +16,28 @@ export default class TreatmentModifySession extends LightningElement {
     wireResponse;
     assignedProtocols = [];
     unassignedProtocols = [];
-
     assignedProtocolUpdates = [];
     protocolsToAssign = [];
-
-    isLoading = true;
     addNewProtocol = false;
-
     isUpdateButtonDisabled = true;
 
-    @wire(getProtocolLists, {sessionId : '$sessionId' } )
+    _refresh;
+    @api
+    get refresh() {
+        return this._refresh;
+    }
+    set refresh(value) {
+        this._refresh = value;
+    }
+
+    @wire(getProtocolLists, {sessionId : '$sessionId'} )
     response(result){
         this.wireResponse = result;
         if(result.data){
             this.assignedProtocols = result.data.assignedProtocols;
             this.unassignedProtocols = result.data.unassignedProtocols;
-            this.isLoading = false;
-        } else {
-            this.isLoading = false;
         }
-        
-    }
+    }    
 
     toggleAddNewProtocol(){
         this.addNewProtocol = !this.addNewProtocol;
@@ -77,7 +77,6 @@ export default class TreatmentModifySession extends LightningElement {
 
     handleProtocolAssignmentUpdates(){
         window.console.log('in handleProtocolAssignmentUpdates');
-        this.isLoading = true;
         updateProtocolAssignments({protocolsToUpdate: this.assignedProtocolUpdates, protocolIds: this.protocolsToAssign, sessionId: this.sessionId})
             .then((response) => {
                 if(response == 'success'){
@@ -97,12 +96,18 @@ export default class TreatmentModifySession extends LightningElement {
                 this.protocolsToAssign = [];
                 this.isUpdateButtonDisabled = true;
                 refreshApex(this.wireResponse);
-                this.handleRefreshEvent();
+                this.refreshProtocolView();
             })
     }
 
+    refreshProtocolView() {
+        window.console.log('refreshProtocolView', this.template.querySelector("c-treatment-modify-session-protocol"));
+        if(this.template.querySelector("c-treatment-modify-session-protocol")){
+            this.template.querySelector("c-treatment-modify-session-protocol").refreshProtocol();
+        }
+    }
+
     handleInsertProtocolResponse(event){
-        this.isLoading = true;
         let protocolId = event.detail.id;
         window.console.log('newProtocolId: ', protocolId);
         const fields = {};
@@ -123,8 +128,6 @@ export default class TreatmentModifySession extends LightningElement {
             })
             .finally(() => {
                 this.addNewProtocol = false;
-                this.isLoading = false;
-                this.handleRefreshEvent();
                 refreshApex(this.wireResponse);
             });
     }
@@ -135,13 +138,6 @@ export default class TreatmentModifySession extends LightningElement {
         fields.Name = 'Other ' + fields.Name
         this.template
         .querySelector('lightning-record-edit-form').submit(fields);
-    }
-
-    handleRefreshEvent(){
-        window.console.log('in handleRefreshEvent')
-
-        const event = new CustomEvent('refreshevent', {  });
-        this.dispatchEvent(event);
     }
 
     handleToastEvent(title, message, variant){

@@ -52,6 +52,11 @@ public with sharing class TreatmentSessionLWCController {
         ];
     }
 
+    @AuraEnabled
+    public static Session_Protocol__c getProtocolSkippedInfo(Id protocolId){
+        return [SELECT Id, IsSkipped__c, IsRemoved__c, Add_to_Plan__c FROM Session_Protocol__c WHERE Id =: protocolId LIMIT 1];
+    }
+
     private static Session_Protocol__c[] getAssignedProtocols(Id sessionId){
         if(sessionId == null) return null;
         return [SELECT Id, ProtocolId__c, Protocol_Name__c, IsSkipped__c, IsRemoved__c FROM Session_Protocol__c WHERE TreatmentSessionId__c =: sessionId ORDER BY Protocol_Name__c ASC];
@@ -84,8 +89,8 @@ public with sharing class TreatmentSessionLWCController {
         return [SELECT Id, Additional_Dog__c FROM Additional_Dog_Present__c WHERE Session_Protocol__c =: protocolId];
     }
 
-    @AuraEnabled (cacheable=true)
-    public static protocolInfo getActiveProtocolAndFields(Id protocolId, Boolean refresh){
+    @AuraEnabled
+    public static protocolInfo getActiveProtocolAndFields(Id protocolId){
         if(protocolId == null) return null;
         try {
             Session_Protocol__c sessionProtocol = getProtocol(protocolId);

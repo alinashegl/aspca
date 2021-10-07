@@ -41,6 +41,9 @@ export default class TreatmentSessionMain extends NavigationMixin(LightningEleme
     wireResponse;
     showModifySession = false;
     refresh = false;
+    refereshProtocolStatus = false;
+    refreshProtocolLists = false;
+    sessionListRefresh = false;
 
     @wire(getActiveProtocols, {sessionId: '$recordId', refresh: '$refresh'})
     response(result){
@@ -48,22 +51,9 @@ export default class TreatmentSessionMain extends NavigationMixin(LightningEleme
         this.activeProtocols = [];
         if(result.data){
             this.activeProtocols = result.data;
+            this.refereshProtocolStatus = !this.refereshProtocolStatus;
             window.console.log('getActiveProtocols.length: ', result.data.length);
         }
-    }
-
-    handleRefresh(){
-        getActiveProtocols({sessionId: this.recordId})
-        .then((result) => {
-            this.activeProtocols = [];
-            window.console.log('handleRefresh.length: ', result.length);
-            this.activeProtocols = result;
-        });
-    }
-
-    handleRefreshEvent(){
-        window.console.log('inhandleRefreshEvent');
-        refreshApex(this.wireResponse);
     }
 
     handleStartSession(){
@@ -71,12 +61,14 @@ export default class TreatmentSessionMain extends NavigationMixin(LightningEleme
         this.activeSession = !this.activeSession;
         this.showModifySession = false;
         refreshApex(this.wireResponse);
+        this.refreshProtocolLists = this.activeSession ? !this.refreshProtocolLists : this.refreshProtocolLists;
     }
 
     handleModifySession(){
         window.console.log('handleModifySession');
         this.showModifySession = !this.showModifySession;
         refreshApex(this.wireResponse);
+        this.sessionListRefresh = (this.showModifySession) ? !this.sessionListRefresh : this.sessionListRefresh;
     }
 
     handleToggleFields(){
