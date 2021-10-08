@@ -102,7 +102,7 @@ private class test_TreatmentSessionLWCController {
         Session_Protocol__c[] protocolList = TestDataFactory.createSessionProtocols();
 
         Test.startTest();
-        TreatmentSessionLWCController.ProtocolInfo protocolInfo = TreatmentSessionLWCController.getActiveProtocolAndFields(protocolList[0].Id, false);
+        TreatmentSessionLWCController.ProtocolInfo protocolInfo = TreatmentSessionLWCController.getActiveProtocolAndFields(protocolList[0].Id);
         Test.stopTest();
 
         System.assert(protocolInfo != null);
@@ -113,7 +113,7 @@ private class test_TreatmentSessionLWCController {
         Treatment_Session__c treatmentSession = TestDataFactory.createSession();
 
         Test.startTest();
-        TreatmentSessionLWCController.ProtocolInfo protocolInfo = TreatmentSessionLWCController.getActiveProtocolAndFields(null, false);
+        TreatmentSessionLWCController.ProtocolInfo protocolInfo = TreatmentSessionLWCController.getActiveProtocolAndFields(null);
         Test.stopTest();
 
         System.assert(protocolInfo == null);

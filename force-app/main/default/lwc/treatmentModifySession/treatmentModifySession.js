@@ -13,6 +13,7 @@ import SESSION_PROTOCOL_NEEDS_REVIEW_FIELD from '@salesforce/schema/Session_Prot
 
 export default class TreatmentModifySession extends LightningElement {
     @api sessionId;
+    @api recordId;
     wireResponse;
     assignedProtocols = [];
     unassignedProtocols = [];
@@ -37,7 +38,7 @@ export default class TreatmentModifySession extends LightningElement {
             this.assignedProtocols = result.data.assignedProtocols;
             this.unassignedProtocols = result.data.unassignedProtocols;
         }
-    }    
+    }
 
     toggleAddNewProtocol(){
         this.addNewProtocol = !this.addNewProtocol;

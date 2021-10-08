@@ -18,14 +18,13 @@ export default class TreatmentSessionProtocol extends LightningElement {
     @api showPicklist = false;
     @api canRemoveProtocol = false;
 
-    showModal = false;
-
     fieldValues = [];
     protocolInfo;
     error;
     loading = true;
     isSkipped = false;
     isRemoved = false;
+    toggleView = false;
 
     _refresh;
     @api
@@ -69,14 +68,9 @@ export default class TreatmentSessionProtocol extends LightningElement {
         this.loading = false;
     }
 
-    handleClick(){
-        this.showModal = true;
-        window.console.log(this.protocolName, 'has been clicked');
-    }
-
     handleSubmit(){
         this.prepProtocolFields();
-        this.showModal = false;
+        this.toggleView = !this.toggleView;
     }
 
     handleSkip(){
@@ -98,7 +92,7 @@ export default class TreatmentSessionProtocol extends LightningElement {
         this.isRemoved = !this.isRemoved;
         if(this.isRemoved == true){
             this.resetProtocol('remove');
-            this.showModal = false;
+            this.toggleView = !this.toggleView;
         } else {
             const fields = {};
             fields[PROTOCOL_ID_FIELD.fieldApiName] = this.recordId;
@@ -178,8 +172,12 @@ export default class TreatmentSessionProtocol extends LightningElement {
         });
     }
 
-    closeModal() {
-        this.showModal = false;
+    handleToggleView(){
+        this.toggleView = !this.toggleView;
+    }
+
+    get toggleButtonIconName(){
+        return this.toggleView ? 'utility:chevrondown' : 'utility:chevronright';
     }
 
     get sessionStatusIconName(){
