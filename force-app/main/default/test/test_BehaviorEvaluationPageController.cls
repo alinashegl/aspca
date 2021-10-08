@@ -14,54 +14,10 @@ private class test_BehaviorEvaluationPageController {
         Test.startTest();
         Behavior_Evaluation__c testGetter = BehaviorEvaluationPageController.getOne(evaluation.Id);
         List<EvaluationWrapper> allWrappers = new List<EvaluationWrapper>();
-        allWrappers.add(BehaviorEvaluationPageController.getBehaviorInKennel(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getBehaviorOnLeash(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getSocialBehaviorTestOne(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getSocialBehaviorTestTwo(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getPleasantTouchTest(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getUnpleasantTouchTestOne(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getPlayTestPartOne(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getPlayTestPartTwo(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getTagTest(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getResourceGuardingOnePF(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getResourceGuardingOneTF(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getResourceGuardingOneTN(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getResourceGuardingOneTB(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getResourceGuardingTwo(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getResourceGuardingTF(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getResourceGuardingTwoTB(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getResourceGuardingTwoTN(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getToddlerDollTestOne(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getToddlerDollTestTwo(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getScoldingPersonTestOne(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getScoldingPersonTestTwo(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getFakeDogTest(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getSameSexDogTestOne(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getSameSexDogTestTwo(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getSameSexDogTestThree(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getOppositeSexDogTestOne(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getOppositeSexDogTestTwo(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getOppositeSexDogTestThree(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getPuppyBehaviorInKennel(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getPuppyBehaviorOnLeash(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getPuppyChildDollOne(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getPuppyChildDollTwo(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getPuppySocialBehaviorPart1(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getPuppySocialBehaviorPart2(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getPuppyPlayTestTugTug(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getPuppyPlayTestTugP1(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getPuppyPlayTestTugP2(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getPuppyRestraint(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getPuppyResourceGuardingPartOne(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getPuppyResourceGuardingPartTwo(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getPuppyChildDollTwo(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getPuppyChildDollTwo(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getPuppyDogInteractionOne(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getPuppyDogInteractionTwo(evaluation.Id));
-        allWrappers.add(BehaviorEvaluationPageController.getPuppyDogInteractionThree(evaluation.Id));
-
-        evaluation.Caution__c = true;
-        Boolean status = BehaviorEvaluationPageController.getCautionStatus(evaluation.Id);
+        List<EvaluationWrapper> puppyWrappers = BehaviorEvaluationPageController.getPuppyEvaluation(evaluation);
+        List<EvaluationWrapper> adultWrappers = BehaviorEvaluationPageController.getAdultEvaluation(evaluation);
+        allWrappers.addAll(puppyWrappers);
+        allWrappers.addAll(adultWrappers);
 
         Map<String, Object> updateEvalTest = BehaviorEvaluationPageController.updateEval('Comments_BIK__c',
                 'Social', evaluation.Id);
@@ -74,7 +30,7 @@ private class test_BehaviorEvaluationPageController {
         System.assertEquals('success', updateEvalTest.get('status'));
         System.assertEquals('success', validityTest.get('status'));
         System.assertEquals(Behavior_Evaluation__c.Skipped_BIK__c.getDescribe().getPicklistValues().size(), items.size());
-        System.assertEquals(45, allWrappers.size());
+        System.assertEquals(37, allWrappers.size());
     }
 
     @IsTest
@@ -104,10 +60,10 @@ private class test_BehaviorEvaluationPageController {
     static void getBehaviorReportPuppy() {
         Behavior_Evaluation__c evaluation = TestDataFactory.createPuppyBehaviorEvaluation();
         Test.startTest();
-        TabContentUtil behRep = BehaviorEvaluationPageController.getBehaviorReport(evaluation.Id);
+        TabContentUtil behRep = BehaviorEvaluationPageController.getBehaviorReport(evaluation);
         Test.stopTest();
         System.assertEquals(evaluation.Is_Muzzled__c, behRep.IsMuzzled);
-        System.assertEquals('Co-housed', behRep.puppyHousing);
+        System.assertEquals(null, behRep.puppyHousing);
         System.assertEquals(evaluation.Puppy_Muzzled_DI_P1__c, behRep.puppyMuzzledDogInteraction1);
         System.assertEquals(evaluation.Puppy_Muzzled_DI_P2__c, behRep.puppyMuzzledDogInteraction2);
         System.assertEquals(evaluation.Puppy_Muzzled_DI_P3__c, behRep.puppyMuzzledDogInteraction3);
@@ -125,10 +81,9 @@ private class test_BehaviorEvaluationPageController {
     static void getBehaviorReportDogFighting() {
         Behavior_Evaluation__c evaluation = TestDataFactory.createAdultBehaviorEvaluation(true);
         Test.startTest();
-        TabContentUtil behRep = BehaviorEvaluationPageController.getBehaviorReport(evaluation.Id);
+        TabContentUtil behRep = BehaviorEvaluationPageController.getBehaviorReport(evaluation);
         Test.stopTest();
         System.assertEquals(evaluation.Is_Muzzled__c, behRep.IsMuzzled);
-        System.assertEquals('Co-housed', behRep.puppyHousing);
         System.assertEquals(evaluation.Puppy_Muzzled_DI_P1__c, behRep.puppyMuzzledDogInteraction1);
         System.assertEquals(evaluation.Puppy_Muzzled_DI_P2__c, behRep.puppyMuzzledDogInteraction2);
         System.assertEquals(evaluation.Puppy_Muzzled_DI_P3__c, behRep.puppyMuzzledDogInteraction3);
