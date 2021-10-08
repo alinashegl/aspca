@@ -13,10 +13,6 @@
         <label>Information</label>
         <layoutColumns>
             <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>Name</field>
-            </layoutItems>
-            <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Animal__c</field>
             </layoutItems>
@@ -26,11 +22,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Treatment_Priority__c</field>
+                <field>Preferred_Motivators__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Enrichment_Priority__c</field>
+                <field>Plan_Notes__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -40,15 +36,15 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Preferred_Motivators__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Plan_Notes__c</field>
+                <field>Treatment_Priority__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>
                 <field>Shelter_Color_Code__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Enrichment_Priority__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -85,10 +81,12 @@
         </quickActionListItems>
     </quickActionList>
     <relatedLists>
-        <fields>NAME</fields>
         <fields>Protocol__c</fields>
+        <fields>NAME</fields>
         <fields>IsRemoved__c</fields>
         <relatedList>Plan_Protocol__c.Treatment_Plan__c</relatedList>
+        <sortField>Protocol__c</sortField>
+        <sortOrder>Asc</sortOrder>
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
@@ -96,6 +94,8 @@
         <fields>Session_Contact__c</fields>
         <fields>Session_Notes__c</fields>
         <relatedList>Treatment_Session__c.Treatment_Plan__c</relatedList>
+        <sortField>Session_Date__c</sortField>
+        <sortOrder>Desc</sortOrder>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>
@@ -103,7 +103,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h7h000000yb6p</masterLabel>
+        <masterLabel>00h21000002IV6I</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>
