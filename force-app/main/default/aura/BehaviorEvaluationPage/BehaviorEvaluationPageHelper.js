@@ -3,12 +3,6 @@
  */
 
 ({
-    testType: [
-        {label: 'Adult', value: 'Adult' } ,
-        {label: 'Puppy', value: 'Puppy' } ,
-        { label: 'Dog Fighting', value: 'Dog Fighting' }
-    ] ,
-
     tablist: {
         behaveInKennel: {
             nextTab: 'bol' ,
@@ -162,37 +156,34 @@
         }
     } ,
     processingProcess: function(cmp, currentProcess,event) {
-            let process = {
-                'loadTabs': 'loadTabs' ,
-                'init': 'init' ,
-                'handleSelect' : 'handleSelect' ,
-                'loadPuppyTabs' : 'loadPuppyTabs' ,
-                'render' : 'render' ,
-                'handleCaution' : 'handleCaution',
-                'handleUnpleasantTouch' : 'handleUnpleasantTouch'
-            };
+        let process = {
+            'loadTabs': 'loadTabs' ,
+            'init': 'init' ,
+            'handleSelect' : 'handleSelect' ,
+            'loadPuppyTabs' : 'loadPuppyTabs' ,
+            'handleCaution' : 'handleCaution',
+            'handleUnpleasantTouch' : 'handleUnpleasantTouch'
+        };
 
-            if(process[currentProcess] == 'init') {
-                this.init(cmp, event);
-            }else if(process[currentProcess] == 'handleSelect') {
-                this.setEvalType(cmp, event);
-            }else if(process[currentProcess] == 'loadTabs'){
-                this.loadTabs(cmp, event);
-            }else if(process[currentProcess] == 'loadPuppyTabs') {
-                this.loadPuppyTabs(cmp, event);
-            }else if(process[currentProcess] == 'render') {
-                this.render(cmp, event);
-            }else if(process[currentProcess] == 'handleCaution') {
-                this.handleCaution(cmp, event);
-            }else if(process[currentProcess] == 'handleUnpleasantTouch') {
-                this.handleUnpleasantTouch(cmp, event);
-            }
-            else {
-                console.log('Unexpected Error occured ');
-            }
-        } ,
+        if(process[currentProcess] == 'init') {
+            this.init(cmp, event);
+        }else if(process[currentProcess] == 'handleSelect') {
+            this.setEvalType(cmp, event);
+        }else if(process[currentProcess] == 'loadTabs'){
+            this.loadTabs(cmp, event);
+        }else if(process[currentProcess] == 'loadPuppyTabs') {
+            this.loadPuppyTabs(cmp, event);
+        }else if(process[currentProcess] == 'handleCaution') {
+            this.handleCaution(cmp, event);
+        }else if(process[currentProcess] == 'handleUnpleasantTouch') {
+            this.handleUnpleasantTouch(cmp, event);
+        }
+        else {
+            console.log('Unexpected Error occured ');
+        }
+    } ,
     init : function(cmp, event) {
-        cmp.set('v.testTypes', this.testType);
+        cmp.set("v.spinner", true);
         this.loadBehaviorReport(cmp, event);
     } ,
     handleCaution: function(cmp, event) {
@@ -228,15 +219,12 @@
     handleUnpleasantTouch: function(cmp, event) {
         var auraId = event.getSource().getLocalId();
         var isFirstTouch = (auraId == 'UnpleasantTouch1stFlankInput') ? true : false;
-        console.log('upleasantTouch: ', auraId);
-
 
         var rid = cmp.get('v.recordId');
         var apiName = (isFirstTouch) ? 'Unpleasant_Touch_1st_Flank__c' : 'Unpleasant_Touch_2nd_Flank__c';
         var ref = cmp.find(auraId);
         var state = ref.get('v.checked');
         var status = 'status';
-        var t;
 
         var params = {
             apiName: apiName ,
@@ -263,64 +251,9 @@
           }
         );
     } ,
-    render: function (cmp, event) {
-        console.log('AFTER RENDER');
-    } ,
 
     loadTabs : function (cmp, event) {
-        /*
-        var data = {};
-        var tabs = [];
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var bik = 'behaviorInKennelTest';
-        this.sendRequest(cmp, 'c.getBehaviorInKennel', params, bik)
-        .then(bik => {
-            console.log('BIK Tab result:', JSON.stringify(bik));
-            tabs.push(bik);
-            cmp.set('v.tabs', tabs);
-        })
-        .catch(errors => {
-           console.log('BIK TAB ERRORS', errors);
-        });
-
-        //console.log('$$$$$$$$$$$BIK DATA $$$$$$$$$$ => ', JSON.stringify(bik));
-        //tabs.push(data);
-
-        //console.log('############# TAB DATA ################', JSON.stringify(tabs));
-        */
-        //this.loadBehaviorReport(cmp, event);
-        this.loadBehaviorInKennel(cmp, event);
-        this.loadBehaviorOnLeash(cmp, event);
-        this.loadSocialPartOne(cmp, event);
-        this.loadSocialPartTwo(cmp, event);
-        this.loadPleasantTouch(cmp, event);
-        this.loadUnpleasantTouch(cmp, event);
-        this.loadPlayTestPartOne(cmp, event);
-        this.loadPlayTestPartTwo(cmp, event);
-        this.loadTagTest(cmp, event);
-        this.loadResource(cmp, event);
-        this.loadResourceTF(cmp, event);
-        this.loadResourceTB(cmp, event);
-        this.loadResourceTN(cmp, event);
-        this.loadResourceTwo(cmp, event);
-        this.loadToddlerOne(cmp, event);
-        this.loadToddlerTwo(cmp, event);
-        this.loadScoldingPersonOne(cmp, event);
-        this.loadScoldingPersonTwo(cmp, event);
-        this.loadFakeDog(cmp, event);
-        this.loadSameSexOne(cmp, event);
-        this.loadSameSexTwo(cmp, event);
-        this.loadSameSexThree(cmp, event);
-        this.loadOppositeSexOne(cmp, event);
-        this.loadOppositeSexTwo(cmp, event);
-        this.loadOppositeSexThree(cmp, event);
-        this.loadResourceTwoTF(cmp, event);
-        this.loadResourceTwoTN(cmp, event);
-        this.loadResourceTwoTB(cmp, event);
-        //cmp.set('v.tabId', 'behaveInKennel');
-
+        this.loadAdultBehaviorData(cmp);
     } ,
     getVal : function(cmp, attr) {
         return cmp.get('v.' + attr);
@@ -357,31 +290,6 @@
             });
             $A.enqueueAction(action);
         }));
-    } ,
-
-
-    sendRequest : function(cmp, methodName, params, attr, setValue) {
-            var action = cmp.get(methodName);
-            action.setParams(params);
-            action.setCallback(this, function(response) {
-                var state = response.getState();
-                var result = response.getReturnValue();
-                console.log(result);
-                if(state == 'SUCCESS') {
-
-                    if(setValue == false) {
-                    }else {
-                    this.setVal(cmp, attr, result);
-                    }
-                    //console.log(result.skipField);
-                    //console.log(methodName + '@@@RETURNED VALUE ===>   ' + JSON.stringify(result));
-                    return result;
-                }else if (state == 'ERROR') {
-                    let err = response.getError();
-                    console.log('###### Error message =====> ' + JSON.stringify(err));
-                }
-            });
-            $A.enqueueAction(action);
     } ,
 
     checkValidity: function(cmp,event) {
@@ -437,19 +345,25 @@
     } ,
 
     loadBehaviorReport : function (cmp, event) {
-        var params = {
+        var params1 = {
             key: cmp.get('v.recordId')
         };
-        var attr = 'behaviorReport';
-        var data;
-        this.sendPromise(cmp, 'c.getBehaviorReport', params, attr)
-        .then(
-            function(response, data) {
-                console.log('PROMISE RESPONSE', response[attr]);
-                cmp.set('v.UseCaution', response[attr].UseCaution);
+        var self = this;
 
-                console.log('1st Touch = ', response[attr].UnpleasantTouch1stFlank);
-                console.log('2nd Touch = ', response[attr].UnpleasantTouch2ndFlank);
+        var attr = 'behaviorReport';
+        self.sendPromise(cmp, 'c.getOne', params1)
+        .then(
+            function(response) {
+                cmp.set('v.behaviorRecord', response);
+                var params2 = {
+                    behaviorEvaluation: response
+                }
+                return self.sendPromise(cmp, 'c.getBehaviorReport', params2, attr)
+            }
+        )
+        .then(
+            function(response) {
+                cmp.set('v.UseCaution', response[attr].UseCaution);
                 cmp.set('v.UnpleasantTouch1stFlank', response[attr].UnpleasantTouch1stFlank);
                 cmp.set('v.UnpleasantTouch2ndFlank', response[attr].UnpleasantTouch2ndFlank);
                 cmp.set('v.PuppySingly', response[attr].puppyHousing == 'Singly-housed' ? true : false);
@@ -471,443 +385,205 @@
                     else {
                         cmp.set('v.tabId', 'behaveInKennel');
                     }
-                    data = 'Adult';
-                    this.processingProcess(cmp, 'loadTabs');
+                    self.processingProcess(cmp, 'loadTabs');
                 }
                 else if (response[attr].IsPuppy) {
                     cmp.set('v.tabId', 'pbik');
-                    data = 'Puppy';
-                    this.processingProcess(cmp, 'loadPuppyTabs');
+                    self.processingProcess(cmp, 'loadPuppyTabs');
                 }
             }
-        ).catch(
-            function(error) {
-                console.log('Error Message',error);
-            }
-        );
-        console.log('Data', data);
-        if(data == undefined) {
-            if (data == 'Adult') {
-
-            }
-            if (data == 'Puppy') {
-
-            }
-            this.processingProcess(cmp, 'loadTabs');
-            this.processingProcess(cmp, 'loadPuppyTabs');
-        }
-    } ,
-
-    loadBehaviorInKennel : function(cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'behaviorInKennelTest';
-        this.sendRequest(cmp, 'c.getBehaviorInKennel', params, attr);
-
-    } ,
-
-    loadBehaviorOnLeash : function(cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'behaviorOnLeashTest';
-        this.sendRequest(cmp, 'c.getBehaviorOnLeash', params, attr);
-    } ,
-    loadSocialPartOne : function(cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'socialBehaviorTestPart1';
-        this.sendRequest(cmp, 'c.getSocialBehaviorTestOne', params, attr);
-
-    } ,
-    loadSocialPartTwo : function(cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'socialBehaviorTestPart2';
-        this.sendRequest(cmp, 'c.getSocialBehaviorTestTwo', params, attr);
-
-    } ,
-    loadPleasantTouch : function(cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'pleasantTouchTest';
-        this.sendRequest(cmp, 'c.getPleasantTouchTest', params, attr);
-
-    } ,
-    loadUnpleasantTouch : function(cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'unpleasantTouchTest';
-        this.sendRequest(cmp, 'c.getUnpleasantTouchTestOne', params, attr);
-    } ,
-
-    loadPlayTestPartOne : function (cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'playTestPart1';
-        this.sendRequest(cmp, 'c.getPlayTestPartOne', params, attr);
-    } ,
-    loadPlayTestPartTwo : function (cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'playTestPart2';
-        this.sendRequest(cmp, 'c.getPlayTestPartTwo', params, attr);
-    } ,
-    loadTagTest : function (cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'tagTest';
-        this.sendRequest(cmp, 'c.getTagTest', params, attr);
-    } ,
-    loadResource : function (cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'resourceGuardingTestPart1';
-        this.sendRequest(cmp, 'c.getResourceGuardingOnePF', params, attr);
-
-    } ,
-    loadResourceTF : function (cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'resourceGuardingTestPart1TF';
-        this.sendRequest(cmp, 'c.getResourceGuardingOneTF', params, attr);
-    } ,
-    loadResourceTN : function (cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'resourceGuardingTestPart1TN';
-        this.sendRequest(cmp, 'c.getResourceGuardingOneTN', params, attr);
-    } ,
-    loadResourceTB : function (cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'resourceGuardingTestPart1TB';
-        this.sendRequest(cmp, 'c.getResourceGuardingOneTB', params, attr);
-    } ,
-    loadResourceTwo : function (cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'resourceGuardingTestPart2';
-        this.sendRequest(cmp, 'c.getResourceGuardingTwo', params, attr);
-    } ,
-    loadResourceTwoTF : function (cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'resourceGuardingTestPart2TF';
-        this.sendRequest(cmp, 'c.getResourceGuardingTF', params, attr);
-    } ,
-    loadResourceTwoTN : function (cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'resourceGuardingTestPart2TN';
-        this.sendRequest(cmp, 'c.getResourceGuardingTwoTN', params, attr);
-    } ,
-    loadResourceTwoTB : function (cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'resourceGuardingTestPart2TB';
-        this.sendRequest(cmp, 'c.getResourceGuardingTwoTB', params, attr);
-    } ,
-    loadToddlerOne : function (cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'toddlerDollTestPart1';
-        this.sendRequest(cmp, 'c.getToddlerDollTestOne', params, attr);
-    } ,
-    loadToddlerTwo : function (cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'toddlerDollTestP2';
-        this.sendRequest(cmp, 'c.getToddlerDollTestTwo', params, attr);
-    } ,
-    loadScoldingPersonOne : function (cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'scoldingPersonTestP1';
-        this.sendRequest(cmp, 'c.getScoldingPersonTestOne', params, attr);
-
-    } ,
-    loadScoldingPersonTwo : function (cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'scoldingPersonTestP2';
-        this.sendRequest(cmp, 'c.getScoldingPersonTestTwo', params, attr);
-    } ,
-    loadFakeDog : function (cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'fakeDogInteractionTest';
-        this.sendPromise(cmp, 'c.getFakeDogTest', params, attr)
-        .then(
-            function(response) {
-                cmp.set('v.fakeDogInteractionTest', response[attr]);
-            }
-        ).catch(
+        )
+        .catch(
             function(error) {
                 console.log('Error Message',error);
             }
         );
     } ,
-    loadSameSexOne : function (cmp, event) {
+    loadAdultBehaviorData : function(cmp) {
         var params = {
-            key: cmp.get('v.recordId')
+            evaluation: cmp.get('v.behaviorRecord')
         };
-        var attr = 'sameSexDogTestPart1';
-        this.sendPromise(cmp, 'c.getSameSexDogTestOne', params, attr)
+        this.sendPromise(cmp, 'c.getAdultEvaluation', params)
         .then(
             function(response) {
-                cmp.set('v.sameSexDogTestPart1', response[attr]);
-            }
-        ).catch(
-            function(error) {
-                console.log('Error Message',error);
-            }
-        );
-    } ,
-    loadSameSexTwo : function (cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'sameSexDogTestPart2';
-        this.sendPromise(cmp, 'c.getSameSexDogTestTwo', params, attr)
-        .then(
-            function(response) {
-                cmp.set('v.sameSexDogTestPart2', response[attr]);
-            }
-        ).catch(
-            function(error) {
-                console.log('Error Message',error);
-            }
-        );
-    } ,
-    loadSameSexThree : function (cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'sameSexDogTestPart3';
-        this.sendPromise(cmp, 'c.getSameSexDogTestThree', params, attr)
-        .then(
-            function(response) {
-                cmp.set('v.sameSexDogTestPart3', response[attr]);
-            }
-        ).catch(
-            function(error) {
-                console.log('Error Message',error);
-            }
-        );
-    } ,
-    loadOppositeSexOne : function (cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'oppositeSexDogTestPart1';
-        this.sendPromise(cmp, 'c.getOppositeSexDogTestOne', params, attr)
-        .then(
-            function(response) {
-                cmp.set('v.oppositeSexDogTestPart1', response[attr]);;
-            }
-        ).catch(
-            function(error) {
-                console.log('Error Message',error);
-            }
-        );
-    } ,
-    loadOppositeSexTwo : function (cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'oppositeSexDogTestPart2';
-        this.sendPromise(cmp, 'c.getOppositeSexDogTestTwo', params, attr)
-        .then(
-            function(response) {
-                cmp.set('v.oppositeSexDogTestPart2', response[attr]);
-            }
-        ).catch(
-            function(error) {
-                console.log('Error Message',error);
-            }
-        );
-    } ,
-    loadOppositeSexThree : function (cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'oppositeSexDogTestPart3';
-        this.sendPromise(cmp, 'c.getOppositeSexDogTestThree', params, attr)
-        .then(
-            function(response) {
-                cmp.set('v.oppositeSexDogTestPart3', response[attr]);
-                //cmp.set('v.tabId', 'behaveInKennel');
-            }
-        ).catch(
-            function(error) {
-                console.log('Error Message',error);
-            }
-        );
-    } ,
-    /*******************************************************************************************************************/
-    /************** Puppy Properties ***********************************************************************************/
-    /******************************************************************************************************************/
-
-    loadPuppyBIK: function (cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'puppyBehaviorInKennel';
-        this.sendRequest(cmp, 'c.getPuppyBehaviorInKennel', params, attr);
-    } ,
-    loadPuppyBOL: function (cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'puppyBehaviorOnLeash';
-        this.sendRequest(cmp, 'c.getPuppyBehaviorOnLeash', params, attr);
-    } ,
-    loadPuppySB1: function (cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'puppySocialBehaviorPart1';
-        this.sendRequest(cmp, 'c.getPuppySocialBehaviorPart1', params, attr);
-    } ,
-    loadPuppySB2: function (cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'puppySocialBehaviorPart2';
-        this.sendRequest(cmp, 'c.getPuppySocialBehaviorPart2', params, attr);
-    } ,
-    loadPuppyPTug1: function (cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'puppyPlayTestTugPart1';
-        this.sendRequest(cmp, 'c.getPuppyPlayTestTugP1', params, attr);
-    } ,
-    loadPuppyPTug2: function (cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'puppyPlayTestTugPart2';
-        this.sendRequest(cmp, 'c.getPuppyPlayTestTugP2', params, attr);
-    } ,
-    loadPuppyPT: function (cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'puppyPlayTestTag';
-        this.sendRequest(cmp, 'c.getPuppyPlayTestTugTug', params, attr);
-    } ,
-    loadPuppyRestraint: function (cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'puppyRestraint';
-        this.sendRequest(cmp, 'c.getPuppyRestraint', params, attr);
-    } ,
-    loadPuppyChildDollOne: function (cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'puppyChildDollPart1';
-        this.sendRequest(cmp, 'c.getPuppyChildDollOne', params, attr);
-    } ,
-    loadPuppyChildDollTwo: function (cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'puppyChildDollPart2';
-        this.sendRequest(cmp, 'c.getPuppyChildDollTwo', params, attr);
-    } ,
-    loadPuppyResourceGuardingOne: function (cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'puppyResourceGuardingPart1';
-        this.sendRequest(cmp, 'c.getPuppyResourceGuardingPartOne', params, attr);
-    } ,
-    loadPuppyResourceGuardingTwo: function (cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'puppyResourceGuardingPart2';
-        this.sendRequest(cmp, 'c.getPuppyResourceGuardingPartTwo', params, attr);
-    } ,
-    loadPuppyDogInteractionOne: function (cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'puppyDogInteractionPart1';
-        this.sendRequest(cmp, 'c.getPuppyDogInteractionOne', params, attr);
-    } ,
-    loadPuppyDogInteractionTwo: function (cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'puppyDogInteractionPart2';
-        this.sendRequest(cmp, 'c.getPuppyDogInteractionTwo', params, attr);
-    } ,
-    loadPuppyDogInteractionThree: function (cmp, event) {
-        var params = {
-            key: cmp.get('v.recordId')
-        };
-        var attr = 'puppyDogInteractionPart3';
-        var result = [];
-        this.sendPromise(cmp, 'c.getPuppyDogInteractionThree', params, attr)
-        .then(
-            function(response) {
-                console.log('End of Puppy', response[attr]);
-                cmp.set('v.puppyDogInteractionPart3', response[attr]);
-                if(cmp.get('v.IsPuppy')) {
-                    cmp.set('v.tabId', 'pbik');
+                cmp.set('v.behaviorInKennelTest', response[0]);
+                cmp.set('v.behaviorOnLeashTest', response[1]);
+                cmp.set('v.socialBehaviorTestPart1', response[2]);
+                cmp.set('v.socialBehaviorTestPart2', response[3]);
+                cmp.set('v.pleasantTouchTest', response[4]);
+                //Gather multi-column data by value category
+                let ut = response[5];
+                let utvc0 = new Array();
+                for (let i = 0; i < ut.wrapper1.mZeroOptions.length; i++) {
+                    utvc0.push({"column1": ut.wrapper1.mZeroOptions[i], "column2": ut.wrapper2.mZeroOptions[i]});
                 }
+                let utvc1 = new Array();
+                for (let i = 0; i < ut.wrapper1.mNotConcerningOptions.length; i++) {
+                    utvc1.push({"column1": ut.wrapper1.mNotConcerningOptions[i], "column2": ut.wrapper2.mNotConcerningOptions[i]});
+                }
+                let utvc2 = new Array();
+                for (let i = 0; i < ut.wrapper1.mRedFlagOptions.length; i++) {
+                    utvc2.push({"column1": ut.wrapper1.mRedFlagOptions[i], "column2": ut.wrapper2.mRedFlagOptions[i]});
+                }
+                let utvc3 = new Array();
+                for (let i = 0; i < ut.wrapper1.mAlertOptions.length; i++) {
+                    utvc3.push({"column1": ut.wrapper1.mAlertOptions[i], "column2": ut.wrapper2.mAlertOptions[i]});
+                }
+                let utvc4 = new Array();
+                for (let i = 0; i < ut.wrapper1.mInconclusiveOptions.length; i++) {
+                    utvc4.push({"column1": ut.wrapper1.mInconclusiveOptions[i], "column2": ut.wrapper2.mInconclusiveOptions[i]});
+                }
+                ut.VC0 = utvc0;
+                ut.VC1 = utvc1;
+                ut.VC2 = utvc2;
+                ut.VC3 = utvc3;
+                ut.VC4 = utvc4;
+                cmp.set('v.unpleasantTouchTest', ut);
+                cmp.set('v.playTestPart1', response[6]);
+                cmp.set('v.playTestPart2', response[7]);
+                cmp.set('v.tagTest', response[8]);
+                //Gather multi-column data by value category
+                let rg1 = response[9];
+                let rg1vc1 = new Array();
+                for (let i = 0; i < rg1.wrapper1.mNotConcerningOptions.length; i++) {
+                    rg1vc1.push({"column1": rg1.wrapper1.mNotConcerningOptions[i], "column2": rg1.wrapper2.mNotConcerningOptions[i], "column3": rg1.wrapper3.mNotConcerningOptions[i], "column4": rg1.wrapper4.mNotConcerningOptions[i]});
+                }
+                let rg1vc2 = new Array();
+                for (let i = 0; i < rg1.wrapper1.mRedFlagOptions.length; i++) {
+                    rg1vc2.push({"column1": rg1.wrapper1.mRedFlagOptions[i], "column2": rg1.wrapper2.mRedFlagOptions[i], "column3": rg1.wrapper3.mRedFlagOptions[i], "column4": rg1.wrapper4.mRedFlagOptions[i]});
+                }
+                let rg1vc3 = new Array();
+                for (let i = 0; i < rg1.wrapper1.mAlertOptions.length; i++) {
+                    rg1vc3.push({"column1": rg1.wrapper1.mAlertOptions[i], "column2": rg1.wrapper2.mAlertOptions[i], "column3": rg1.wrapper3.mAlertOptions[i], "column4": rg1.wrapper4.mAlertOptions[i]});
+                }
+                let rg1vc4 = new Array();
+                for (let i = 0; i < rg1.wrapper1.mInconclusiveOptions.length; i++) {
+                    rg1vc4.push({"column1": rg1.wrapper1.mInconclusiveOptions[i], "column2": rg1.wrapper2.mInconclusiveOptions[i], "column3": rg1.wrapper3.mInconclusiveOptions[i], "column4": rg1.wrapper4.mInconclusiveOptions[i]});
+                }
+                rg1.VC1 = rg1vc1;
+                rg1.VC2 = rg1vc2;
+                rg1.VC3 = rg1vc3;
+                rg1.VC4 = rg1vc4;
+                cmp.set('v.resourceGuardingTestPart1', rg1);
+                //Gather multi-column data by value category
+                let rg2 = response[10];
+                let rg2vc1 = new Array();
+                for (let i = 0; i < rg2.wrapper1.mNotConcerningOptions.length; i++) {
+                    rg2vc1.push({"column1": rg2.wrapper1.mNotConcerningOptions[i], "column2": rg2.wrapper2.mNotConcerningOptions[i], "column3": rg2.wrapper3.mNotConcerningOptions[i], "column4": rg2.wrapper4.mNotConcerningOptions[i]});
+                }
+                let rg2vc2 = new Array();
+                for (let i = 0; i < rg2.wrapper1.mRedFlagOptions.length; i++) {
+                    rg2vc2.push({"column1": rg2.wrapper1.mRedFlagOptions[i], "column2": rg2.wrapper2.mRedFlagOptions[i], "column3": rg2.wrapper3.mRedFlagOptions[i], "column4": rg2.wrapper4.mRedFlagOptions[i]});
+                }
+                let rg2vc3 = new Array();
+                for (let i = 0; i < rg2.wrapper1.mAlertOptions.length; i++) {
+                    rg2vc3.push({"column1": rg2.wrapper1.mAlertOptions[i], "column2": rg2.wrapper2.mAlertOptions[i], "column3": rg2.wrapper3.mAlertOptions[i], "column4": rg2.wrapper4.mAlertOptions[i]});
+                }
+                let rg2vc4 = new Array();
+                for (let i = 0; i < rg2.wrapper1.mInconclusiveOptions.length; i++) {
+                    rg2vc4.push({"column1": rg2.wrapper1.mInconclusiveOptions[i], "column2": rg2.wrapper2.mInconclusiveOptions[i], "column3": rg2.wrapper3.mInconclusiveOptions[i], "column4": rg2.wrapper4.mInconclusiveOptions[i]});
+                }
+                rg2.VC1 = rg2vc1;
+                rg2.VC2 = rg2vc2;
+                rg2.VC3 = rg2vc3;
+                rg2.VC4 = rg2vc4;
+                cmp.set('v.resourceGuardingTestPart2', rg2);
+                cmp.set('v.toddlerDollTestPart1', response[11]);
+                cmp.set('v.toddlerDollTestP2', response[12]);
+                cmp.set('v.scoldingPersonTestP1', response[13]);
+                cmp.set('v.scoldingPersonTestP2', response[14]);
+                cmp.set('v.fakeDogInteractionTest', response[15]);
+                cmp.set('v.sameSexDogTestPart1', response[16]);
+                cmp.set('v.sameSexDogTestPart2', response[17]);
+                cmp.set('v.sameSexDogTestPart3', response[18]);
+                cmp.set('v.oppositeSexDogTestPart1', response[19]);
+                cmp.set('v.oppositeSexDogTestPart2', response[20]);
+                cmp.set('v.oppositeSexDogTestPart3', response[21]);
+                cmp.set("v.spinner", false);
             }
         ).catch(
             function(error) {
                 console.log('Error Message',error);
             }
         );
-    } ,
-
+    },
+    loadPuppyBehaviorData : function(cmp) {
+        var params = {
+            evaluation: cmp.get('v.behaviorRecord')
+        };
+        this.sendPromise(cmp, 'c.getPuppyEvaluation', params)
+        .then(
+            function(response) {
+                cmp.set('v.puppyBehaviorInKennel', response[0]);
+                cmp.set('v.puppyBehaviorOnLeash', response[1]);
+                cmp.set('v.puppySocialBehaviorPart1', response[2]);
+                cmp.set('v.puppySocialBehaviorPart2', response[3]);
+                cmp.set('v.puppyPlayTestTugPart1', response[4]);
+                cmp.set('v.puppyPlayTestTugPart2', response[5]);
+                cmp.set('v.puppyPlayTestTag', response[6]);
+                cmp.set('v.puppyRestraint', response[7]);
+                cmp.set('v.puppyChildDollPart1', response[8]);
+                cmp.set('v.puppyChildDollPart2', response[9]);
+                //Gather multi-column data by value category
+                let rg1 = response[10];
+                let rg1vc1 = new Array();
+                for (let i = 0; i < rg1.wrapper1.mNotConcerningOptions.length; i++) {
+                    rg1vc1.push({"column1": rg1.wrapper1.mNotConcerningOptions[i], "column2": rg1.wrapper2.mNotConcerningOptions[i], "column3": rg1.wrapper3.mNotConcerningOptions[i], "column4": rg1.wrapper4.mNotConcerningOptions[i]});
+                }
+                let rg1vc2 = new Array();
+                for (let i = 0; i < rg1.wrapper1.mRedFlagOptions.length; i++) {
+                    rg1vc2.push({"column1": rg1.wrapper1.mRedFlagOptions[i], "column2": rg1.wrapper2.mRedFlagOptions[i], "column3": rg1.wrapper3.mRedFlagOptions[i], "column4": rg1.wrapper4.mRedFlagOptions[i]});
+                }
+                let rg1vc3 = new Array();
+                for (let i = 0; i < rg1.wrapper1.mAlertOptions.length; i++) {
+                    rg1vc3.push({"column1": rg1.wrapper1.mAlertOptions[i], "column2": rg1.wrapper2.mAlertOptions[i], "column3": rg1.wrapper3.mAlertOptions[i], "column4": rg1.wrapper4.mAlertOptions[i]});
+                }
+                let rg1vc4 = new Array();
+                for (let i = 0; i < rg1.wrapper1.mInconclusiveOptions.length; i++) {
+                    rg1vc4.push({"column1": rg1.wrapper1.mInconclusiveOptions[i], "column2": rg1.wrapper2.mInconclusiveOptions[i], "column3": rg1.wrapper3.mInconclusiveOptions[i], "column4": rg1.wrapper4.mInconclusiveOptions[i]});
+                }
+                rg1.VC1 = rg1vc1;
+                rg1.VC2 = rg1vc2;
+                rg1.VC3 = rg1vc3;
+                rg1.VC4 = rg1vc4;
+                cmp.set('v.puppyResourceGuardingPart1', rg1);
+                //Gather multi-column data by value category
+                let rg2 = response[11];
+                let rg2vc1 = new Array();
+                for (let i = 0; i < rg2.wrapper1.mNotConcerningOptions.length; i++) {
+                    rg2vc1.push({"column1": rg2.wrapper1.mNotConcerningOptions[i], "column2": rg2.wrapper2.mNotConcerningOptions[i], "column3": rg2.wrapper3.mNotConcerningOptions[i], "column4": rg2.wrapper4.mNotConcerningOptions[i]});
+                }
+                let rg2vc2 = new Array();
+                for (let i = 0; i < rg2.wrapper1.mRedFlagOptions.length; i++) {
+                    rg2vc2.push({"column1": rg2.wrapper1.mRedFlagOptions[i], "column2": rg2.wrapper2.mRedFlagOptions[i], "column3": rg2.wrapper3.mRedFlagOptions[i], "column4": rg2.wrapper4.mRedFlagOptions[i]});
+                }
+                let rg2vc3 = new Array();
+                for (let i = 0; i < rg2.wrapper1.mAlertOptions.length; i++) {
+                    rg2vc3.push({"column1": rg2.wrapper1.mAlertOptions[i], "column2": rg2.wrapper2.mAlertOptions[i], "column3": rg2.wrapper3.mAlertOptions[i], "column4": rg2.wrapper4.mAlertOptions[i]});
+                }
+                let rg2vc4 = new Array();
+                for (let i = 0; i < rg2.wrapper1.mInconclusiveOptions.length; i++) {
+                    rg2vc4.push({"column1": rg2.wrapper1.mInconclusiveOptions[i], "column2": rg2.wrapper2.mInconclusiveOptions[i], "column3": rg2.wrapper3.mInconclusiveOptions[i], "column4": rg2.wrapper4.mInconclusiveOptions[i]});
+                }
+                rg2.VC1 = rg2vc1;
+                rg2.VC2 = rg2vc2;
+                rg2.VC3 = rg2vc3;
+                rg2.VC4 = rg2vc4;
+                cmp.set('v.puppyResourceGuardingPart2', rg2);
+                cmp.set('v.puppyDogInteractionPart1', response[12]);
+                cmp.set('v.puppyDogInteractionPart2', response[13]);
+                cmp.set('v.puppyDogInteractionPart3', response[14]);
+                cmp.set("v.spinner", false);
+            }
+        ).catch(
+            function(error) {
+                console.log('Error Message',error);
+            }
+        );
+    },
 
     loadPuppyTabs : function (cmp, event) {
-        this.loadPuppyBIK(cmp, event);
-        this.loadPuppyBOL(cmp, event);
-        this.loadPuppySB1(cmp, event);
-        this.loadPuppySB2(cmp, event);
-        this.loadPuppyPTug1(cmp, event);
-        this.loadPuppyPTug2(cmp, event);
-        this.loadPuppyPT(cmp, event);
-        this.loadPuppyRestraint(cmp, event);
-        this.loadPuppyChildDollOne(cmp, event);
-        this.loadPuppyChildDollTwo(cmp, event);
-        this.loadPuppyResourceGuardingOne(cmp, event);
-        this.loadPuppyResourceGuardingTwo(cmp, event);
-        this.loadPuppyDogInteractionOne(cmp, event);
-        this.loadPuppyDogInteractionTwo(cmp, event);
-        this.loadPuppyDogInteractionThree(cmp, event);
-
+        this.loadPuppyBehaviorData(cmp);
     } ,
 
     buttonAction : function(cmp, event, button) {
