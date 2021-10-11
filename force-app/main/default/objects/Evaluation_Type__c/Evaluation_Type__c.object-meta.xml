@@ -128,37 +128,42 @@
     </actionOverrides>
     <actionOverrides>
         <actionName>View</actionName>
-        <type>Default</type>
-    </actionOverrides>
-    <actionOverrides>
-        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Evaluation_Type_Record_Page</content>
         <formFactor>Large</formFactor>
-        <type>Default</type>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
     </actionOverrides>
     <actionOverrides>
         <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Evaluation_Type_Record_Page</content>
         <formFactor>Small</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
         <type>Default</type>
     </actionOverrides>
     <allowInChatterGroups>false</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
-    <enableActivities>true</enableActivities>
+    <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableFeeds>false</enableFeeds>
     <enableHistory>false</enableHistory>
     <enableLicensing>false</enableLicensing>
-    <enableReports>true</enableReports>
+    <enableReports>false</enableReports>
     <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
-    <label>Playgroup Novel Contact</label>
+    <label>Evaluation Type</label>
     <nameField>
-        <displayFormat>{0000}</displayFormat>
-        <label>Playgroup Novel Contact ID</label>
-        <type>AutoNumber</type>
+        <label>Evaluation Type Name</label>
+        <type>Text</type>
     </nameField>
-    <pluralLabel>Playgroup Novel Contacts</pluralLabel>
+    <pluralLabel>Evaluation Types</pluralLabel>
     <searchLayouts></searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>

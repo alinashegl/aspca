@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
-    <excludeButtons>ChangeOwnerOne</excludeButtons>
-    <excludeButtons>ChangeRecordType</excludeButtons>
-    <excludeButtons>IsotopeSubscription</excludeButtons>
     <excludeButtons>Submit</excludeButtons>
     <layoutSections>
         <customLabel>false</customLabel>
@@ -11,30 +8,30 @@
         <label>Information</label>
         <layoutColumns>
             <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Session_Date__c</field>
+                <behavior>Readonly</behavior>
+                <field>Name</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Required</behavior>
-                <field>Treatment_Plan__c</field>
+                <field>Animal__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Animal__c</field>
+                <behavior>Readonly</behavior>
+                <field>Animal_Name__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Session_Contact__c</field>
+                <field>Play_Rating__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Preferred_Motivators__c</field>
+                <field>Playgroup_Individual_Notes__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Session_Notes__c</field>
+                <field>Playgroup_Session__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
@@ -59,10 +56,39 @@
         <style>CustomLinks</style>
     </layoutSections>
     <relatedLists>
+        <fields>TASK.SUBJECT</fields>
+        <fields>TASK.WHO_NAME</fields>
+        <fields>ACTIVITY.TASK</fields>
+        <fields>TASK.DUE_DATE</fields>
+        <fields>TASK.STATUS</fields>
+        <fields>TASK.PRIORITY</fields>
+        <fields>CORE.USERS.FULL_NAME</fields>
+        <relatedList>RelatedActivityList</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <fields>TASK.SUBJECT</fields>
+        <fields>TASK.WHO_NAME</fields>
+        <fields>ACTIVITY.TASK</fields>
+        <fields>TASK.DUE_DATE</fields>
+        <fields>CORE.USERS.FULL_NAME</fields>
+        <fields>TASK.LAST_UPDATE</fields>
+        <relatedList>RelatedHistoryList</relatedList>
+    </relatedLists>
+    <relatedLists>
         <fields>NAME</fields>
-        <fields>ProtocolId__c</fields>
-        <fields>IsSkipped__c</fields>
-        <relatedList>Session_Protocol__c.TreatmentSessionId__c</relatedList>
+        <fields>Contact__c</fields>
+        <fields>Novel_Not_Novel__c</fields>
+        <relatedList>Playgroup_Contact__c.Playgroup__c</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <fields>NAME</fields>
+        <fields>Playgroup_Date_Time__c</fields>
+        <fields>Playgroup_Leader__c</fields>
+        <fields>Playgroup_Location__c</fields>
+        <fields>Playgroup_Notes__c</fields>
+        <relatedList>Playgroup_Session__c.Animal_Playgroup__c</relatedList>
+        <sortField>NAME</sortField>
+        <sortOrder>Desc</sortOrder>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>
@@ -70,7 +96,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h21000002IV6c</masterLabel>
+        <masterLabel>00h75000000UzFo</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>

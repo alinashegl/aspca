@@ -128,16 +128,22 @@
     </actionOverrides>
     <actionOverrides>
         <actionName>View</actionName>
-        <type>Default</type>
-    </actionOverrides>
-    <actionOverrides>
-        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Playgroup_Session_Record_Page</content>
         <formFactor>Large</formFactor>
-        <type>Default</type>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
     </actionOverrides>
     <actionOverrides>
         <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Playgroup_Session_Record_Page</content>
         <formFactor>Small</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
         <type>Default</type>
     </actionOverrides>
     <allowInChatterGroups>false</allowInChatterGroups>
@@ -146,19 +152,20 @@
     <enableActivities>true</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableFeeds>false</enableFeeds>
-    <enableHistory>false</enableHistory>
+    <enableHistory>true</enableHistory>
     <enableLicensing>false</enableLicensing>
     <enableReports>true</enableReports>
     <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
-    <label>Playgroup Familiar Contact</label>
+    <label>Playgroup Session</label>
     <nameField>
         <displayFormat>{0000}</displayFormat>
-        <label>Playgroup Familiar Contact ID</label>
+        <label>Playgroup Session Id</label>
+        <trackHistory>false</trackHistory>
         <type>AutoNumber</type>
     </nameField>
-    <pluralLabel>Playgroup Familiar Contacts</pluralLabel>
+    <pluralLabel>Playgroup Sessions</pluralLabel>
     <searchLayouts></searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>

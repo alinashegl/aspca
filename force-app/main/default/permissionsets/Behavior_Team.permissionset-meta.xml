@@ -2,6 +2,16 @@
 <PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
     <fieldPermissions>
         <editable>true</editable>
+        <field>Animal_Playgroup__c.Play_Rating__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Animal_Playgroup__c.Playgroup_Individual_Notes__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Animal__c.AAH_ID__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -2237,57 +2247,12 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Playgroup_Familiar_Contact__c.Contact__c</field>
+        <field>Playgroup_Contact__c.Contact__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Playgroup_Familiar_Contact__c.Playgroup__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Playgroup_Novel_Contact__c.Contact__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Playgroup_Novel_Contact__c.Playgroup__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Playgroup__c.Animal__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Playgroup__c.Did_Not_Attend_Playgroup__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Playgroup__c.Playgroup_Color_Code__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Playgroup__c.Playgroup_Date_Time__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Playgroup__c.Playgroup_Individual_Notes__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Playgroup__c.Playgroup_Location__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Playgroup__c.Playgroup_Notes_Text__c</field>
+        <field>Playgroup_Contact__c.Playgroup__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -2431,7 +2396,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Session_Protocol_Contact__c.Session_Protocol__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -2620,11 +2585,6 @@
         <field>Treatment_Session__c.Session_Notes__c</field>
         <readable>true</readable>
     </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Treatment_Session__c.Treatment_BundleId__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
     <hasActivationRequired>false</hasActivationRequired>
     <label>Behavior Team</label>
     <objectPermissions>
@@ -2670,6 +2630,15 @@
         <allowRead>true</allowRead>
         <modifyAllRecords>false</modifyAllRecords>
         <object>Animal_Exam_Sheet__c</object>
+        <viewAllRecords>false</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>false</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>false</modifyAllRecords>
+        <object>Animal_Playgroup__c</object>
         <viewAllRecords>false</viewAllRecords>
     </objectPermissions>
     <objectPermissions>
@@ -2984,25 +2953,7 @@
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>false</modifyAllRecords>
-        <object>Playgroup_Familiar_Contact__c</object>
-        <viewAllRecords>false</viewAllRecords>
-    </objectPermissions>
-    <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>false</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>false</modifyAllRecords>
-        <object>Playgroup_Novel_Contact__c</object>
-        <viewAllRecords>false</viewAllRecords>
-    </objectPermissions>
-    <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>false</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>false</modifyAllRecords>
-        <object>Playgroup__c</object>
+        <object>Playgroup_Contact__c</object>
         <viewAllRecords>false</viewAllRecords>
     </objectPermissions>
     <objectPermissions>
@@ -3034,7 +2985,7 @@
     </objectPermissions>
     <objectPermissions>
         <allowCreate>true</allowCreate>
-        <allowDelete>false</allowDelete>
+        <allowDelete>true</allowDelete>
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>false</modifyAllRecords>
