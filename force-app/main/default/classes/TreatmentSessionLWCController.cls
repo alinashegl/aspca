@@ -52,7 +52,13 @@ public with sharing class TreatmentSessionLWCController {
         ];
     }
 
-    private static Session_Protocol__c[] getAssignedProtocols(Id sessionId){
+    @AuraEnabled
+    public static Session_Protocol__c getProtocolSkippedInfo(Id protocolId){
+        Session_Protocol__c[] protocols = [SELECT Id, IsSkipped__c, IsRemoved__c, Add_to_Plan__c FROM Session_Protocol__c WHERE Id =: protocolId LIMIT 1];
+        return !protocols.isEmpty() ? protocols[0] : null;
+    }
+
+    private static Session_Protocol__c[] getAssignedSessionProtocols(Id sessionId){
         if(sessionId == null) return null;
         return [SELECT Id, ProtocolId__c, Protocol_Name__c, IsSkipped__c, IsRemoved__c FROM Session_Protocol__c WHERE TreatmentSessionId__c =: sessionId ORDER BY Protocol_Name__c ASC];
     }
@@ -84,8 +90,8 @@ public with sharing class TreatmentSessionLWCController {
         return [SELECT Id, Additional_Dog__c FROM Additional_Dog_Present__c WHERE Session_Protocol__c =: protocolId];
     }
 
-    @AuraEnabled (cacheable=true)
-    public static protocolInfo getActiveProtocolAndFields(Id protocolId, Boolean refresh){
+    @AuraEnabled
+    public static protocolInfo getActiveProtocolAndFields(Id protocolId){
         if(protocolId == null) return null;
         try {
             Session_Protocol__c sessionProtocol = getProtocol(protocolId);
@@ -99,35 +105,90 @@ public with sharing class TreatmentSessionLWCController {
     }
 
     @AuraEnabled (cacheable=true)
-    public static protocolAssignment getProtocolLists(Id sessionId){
-        protocolAssignment assignments = new protocolAssignment();
-        assignments.assignedProtocols = getAssignedProtocols(sessionId);
-        assignments.unassignedProtocols = getUnassignedProtocols(assignments.assignedProtocols);
+    public static protocolAssignment getProtocolLists(Id sessionId, Id planId){
+        protocolAssignment assignments = new protocolAssignment();   
+        if(sessionId != null)     {
+            assignments.assignedSessionProtocols = getAssignedSessionProtocols(sessionId);
+            assignments.unassignedProtocols = getUnassignedProtocolsFromSessionProtocols(assignments.assignedSessionProtocols);
+            assignments.preferredMotivators = getSessionPreferredMotivator(sessionId);
+        }
+        else if(planId != null){
+            assignments.assignedPlanProtocols = getAssignedPlanProtocols(planId);
+            assignments.unassignedProtocols = getUnassignedProtocolsFromPlanProtocols(assignments.assignedPlanProtocols);
+        }
+        
         return assignments;
     }
 
-    private static Protocol__c[] getUnassignedProtocols(Session_Protocol__c[] assignedProtocols){
+    private static String getSessionPreferredMotivator(Id sessionId){
+        return [SELECT Preferred_Motivators__c FROM Treatment_Session__c WHERE Id =: sessionId LIMIT 1].Preferred_Motivators__c;
+    }
+
+    private static Plan_Protocol__c[] getAssignedPlanProtocols(Id planId){
+        return [SELECT Id, Protocol__c, Protocol__r.Name, Protocol_Description__c, IsRemoved__c FROM Plan_Protocol__c WHERE Treatment_Plan__c =: planId ORDER BY Protocol__r.Name ASC];
+    }
+
+    private static Protocol__c[] getUnassignedProtocolsFromPlanProtocols(Plan_Protocol__c[] assignedProtocols){
+        Set<Id> assignedIds = new Set<Id>();
+        for(Plan_Protocol__c sp : assignedProtocols){
+            assignedIds.add(sp.Protocol__c);
+        }
+        return getUnassignedProtocols(assignedIds);
+    }
+
+    private static Protocol__c[] getUnassignedProtocolsFromSessionProtocols(Session_Protocol__c[] assignedProtocols){
         Set<Id> assignedIds = new Set<Id>();
         for(Session_Protocol__c sp : assignedProtocols){
             assignedIds.add(sp.ProtocolId__c);
         }
-        return [SELECT Id, Name FROM Protocol__c WHERE IsActive__c = true AND Id NOT IN :assignedIds ORDER BY Name ASC];
+        return getUnassignedProtocols(assignedIds);
+    }
 
+    private static Protocol__c[] getUnassignedProtocols(Set<Id> protocolIdsToExclude){
+        return [SELECT Id, Name FROM Protocol__c WHERE IsActive__c = true AND Id NOT IN :protocolIdsToExclude ORDER BY Name ASC];
     }
 
     @AuraEnabled
-    public static String updateProtocolAssignments(Session_Protocol__c[] protocolsToUpdate, String[] protocolIds, String sessionId){
+    public static String updateProtocolAssignments(Session_Protocol__c[] protocolsToUpdate, String[] protocolIds, String[] planProtocolIds, String sessionId, String planId){
         try{
-            update protocolsToUpdate;
-            addNewProtocolsToPlan(protocolIds, sessionId);
+            if(sessionId != null){
+                update protocolsToUpdate;
+                addNewProtocolsToSessionAndPlan(protocolIds, sessionId);
+            } 
+            else if(planId != null){
+                updatePlanProtocols(planProtocolIds);
+                addNewProtocolsToPlan(protocolIds, planId);
+            }
             return 'success';
         } catch (Exception e){
             return 'Error occured: ' + e.getMessage();
         }
-        
     }
 
-    public static void addNewProtocolsToPlan(String[] protocolIds, String sessionId){
+    private static void updatePlanProtocols(String[] planProtocolIds){
+        Plan_Protocol__c[] pProtocols = [SELECT Id, IsRemoved__c FROM Plan_Protocol__c WHERE Id IN: planProtocolIds];
+        for(Plan_Protocol__c p : pProtocols){
+            p.IsRemoved__c = !p.IsRemoved__c;
+        }
+        update pProtocols;
+    }
+
+    private static void addNewProtocolsToPlan(String[] protocolIds, String planId){
+        // Treatment_Plan__c tPlan = [SELECT Id, Preferred_Motivators__c FROM Treatment_Plan__c WHERE Id =: planId LIMIT 1];
+        Plan_Protocol__c[] newPProtocols = new Plan_Protocol__c[0];
+
+        for(String pId : protocolIds){
+            Plan_Protocol__c pp = new Plan_Protocol__c(
+                Protocol__c = pId,
+                Treatment_Plan__c = planId
+            );
+            newPProtocols.add(pp);
+        }
+
+        insert newPProtocols;
+    }
+
+    public static void addNewProtocolsToSessionAndPlan(String[] protocolIds, String sessionId){
         Treatment_Session__c session = [SELECT Id, Preferred_Motivators__c FROM Treatment_Session__c WHERE Id =: sessionId LIMIT 1];
         Session_Protocol__c[] newSProtocols = new Session_Protocol__c[0];
 
@@ -146,8 +207,10 @@ public with sharing class TreatmentSessionLWCController {
     }
 
     public class protocolAssignment {
-        @AuraEnabled public Session_Protocol__c[] assignedProtocols { get; set; }
+        @AuraEnabled public Session_Protocol__c[] assignedSessionProtocols { get; set; }
+        @AuraEnabled public Plan_Protocol__c[] assignedPlanProtocols { get; set; }
         @AuraEnabled public Protocol__c[] unassignedProtocols { get; set; }
+        @AuraEnabled public String preferredMotivators;
     }
 
     public class ProtocolInfo{
