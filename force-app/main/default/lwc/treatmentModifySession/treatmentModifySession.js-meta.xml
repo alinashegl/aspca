@@ -2,8 +2,8 @@
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>52.0</apiVersion>
     <isExposed>true</isExposed>
-    <masterLabel>Modify Treatment Session</masterLabel>
-    <description>Lets user modify the assigned/skipped protocols for the treatment session</description>
+    <masterLabel>Modify Treatment Plan</masterLabel>
+    <description>Lets user modify the assigned/skipped protocols for the treatment plan</description>
     <targets>
         <target>lightning__RecordPage</target>
     </targets>
@@ -14,7 +14,7 @@
                 <supportedFormFactor type="Large" />
             </supportedFormFactors>
             <objects>
-                <object>Treatment_Session__c</object>
+                <object>Treatment_Plan__c</object>
             </objects>
         </targetConfig>
     </targetConfigs>

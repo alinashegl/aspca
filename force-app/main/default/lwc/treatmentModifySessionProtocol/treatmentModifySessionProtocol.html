@@ -11,15 +11,17 @@
         <template if:false={showLoading}>
             <template if:true={isAssignedType}>
                 <div class="slds-col slds-size_1-of-6 slds-medium-size_2-of-12 slds-large-size_2-of-12">
-                    <lightning-input 
-                        type="toggle"
-                        checked={notSkippedValue}
-                        message-toggle-active='Active'
-                        message-toggle-inactive='Skipped'
-                        onchange={toggleIsSkipped}
-                        disabled={isDisabled}
-                        >
-                    </lightning-input>
+                    <template if:true={isSessionProtocol}>
+                        <lightning-input 
+                            type="toggle"
+                            checked={notSkippedValue}
+                            message-toggle-active='Active'
+                            message-toggle-inactive='Skipped'
+                            onchange={toggleIsSkipped}
+                            disabled={isDisabled}
+                            >
+                        </lightning-input>
+                    </template>
                 </div>
                 <div class="slds-col slds-size_1-of-6 slds-medium-size_2-of-12 slds-large-size_2-of-12">
                     <template if:true={canRemoveProtocol}>
