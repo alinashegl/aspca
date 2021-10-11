@@ -37,8 +37,7 @@ private class test_TreatmentSessionLWCController {
             SObject[] returnedContacts = TreatmentSessionLWCController.getChildList(sContacts[0].Session_Protocol__c, 'Session_Protocol_Contact__c');
         Test.stopTest();
 
-        System.assertEquals(1, returnedContacts.size());
-
+        System.assertEquals(2, returnedContacts.size());
     }
 
     @isTest
