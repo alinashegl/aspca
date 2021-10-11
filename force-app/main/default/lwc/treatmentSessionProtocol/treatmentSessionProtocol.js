@@ -1,4 +1,4 @@
-import { LightningElement, api, wire } from 'lwc';
+import { LightningElement, api } from 'lwc';
 import { updateRecord } from 'lightning/uiRecordApi';
 
 import PROTOCOL_ID_FIELD from '@salesforce/schema/Session_Protocol__c.Id';
@@ -9,10 +9,7 @@ import PROTOCOL_NOTES_FIELD from '@salesforce/schema/Session_Protocol__c.Protoco
 import PREFERRED_MOTIVATORS_FIELD from '@salesforce/schema/Session_Protocol__c.Preferred_Motivators__c';
 
 import getActiveProtocolAndFields from '@salesforce/apex/TreatmentSessionLWCController.getActiveProtocolAndFields';
-
-import SystemModstamp from '@salesforce/schema/Account.SystemModstamp';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
-import { refreshApex } from '@salesforce/apex';
 
 export default class TreatmentSessionProtocol extends LightningElement {
     @api recordId;
@@ -21,15 +18,13 @@ export default class TreatmentSessionProtocol extends LightningElement {
     @api showPicklist = false;
     @api canRemoveProtocol = false;
 
-    showModal = false;
-    wireResponse;
-
     fieldValues = [];
     protocolInfo;
     error;
     loading = true;
     isSkipped = false;
     isRemoved = false;
+    toggleView = false;
 
     _refresh;
     @api
@@ -38,20 +33,28 @@ export default class TreatmentSessionProtocol extends LightningElement {
     }
     set refresh(value) {
         this._refresh = value;
+        this.getProtocolInfo();
     }
 
-    @wire(getActiveProtocolAndFields, {protocolId: '$recordId', refresh: '$refresh'})
-    response(result) {
-        this.wireResponse = result;
-        if (result.data) {
-            this.protocolInfo = result.data;
-            this.error = undefined;
-            this.setFieldValues(result.data);
-        } else if (result.error) {
-            this.error = result.error;
-            this.protocolInfo = undefined;
+    useRefreshedData = true;
+
+    getProtocolInfo(){
+        window.console.log('in getProtocolInfo');
+        this.protocolInfo = null;
+        getActiveProtocolAndFields({protocolId: this.recordId})
+        .then((result) => {
+            if (result) {
+                this.protocolInfo = result;
+                this.error = undefined;
+                this.setFieldValues(result);
+            } else if (result.error) {
+                this.error = result.error;
+                this.protocolInfo = undefined;
+            }
+        })
+        .finally(() => {
             this.loading = false;
-        }
+        });
     }
 
     setFieldValues(data){
@@ -65,14 +68,9 @@ export default class TreatmentSessionProtocol extends LightningElement {
         this.loading = false;
     }
 
-    handleClick(){
-        this.showModal = true;
-        window.console.log(this.protocolName, 'has been clicked');
-    }
-
     handleSubmit(){
         this.prepProtocolFields();
-        this.showModal = false;
+        this.toggleView = !this.toggleView;
     }
 
     handleSkip(){
@@ -94,7 +92,7 @@ export default class TreatmentSessionProtocol extends LightningElement {
         this.isRemoved = !this.isRemoved;
         if(this.isRemoved == true){
             this.resetProtocol('remove');
-            this.showModal = false;
+            this.toggleView = !this.toggleView;
         } else {
             const fields = {};
             fields[PROTOCOL_ID_FIELD.fieldApiName] = this.recordId;
@@ -116,6 +114,7 @@ export default class TreatmentSessionProtocol extends LightningElement {
     updateProtocolInfo(selectedOption, fieldName){
         this.fieldValues.find(field => field.name == fieldName).value = selectedOption;
         window.console.log('this.fieldValues: ', this.fieldValues);
+
     }
 
     resetProtocol(action){
@@ -169,12 +168,16 @@ export default class TreatmentSessionProtocol extends LightningElement {
             );
         })
         .finally(() => {
-            refreshApex(this.wireResponse);
+            this.getProtocolInfo();
         });
     }
 
-    closeModal() {
-        this.showModal = false;
+    handleToggleView(){
+        this.toggleView = !this.toggleView;
+    }
+
+    get toggleButtonIconName(){
+        return this.toggleView ? 'utility:chevrondown' : 'utility:chevronright';
     }
 
     get sessionStatusIconName(){
@@ -236,10 +239,14 @@ export default class TreatmentSessionProtocol extends LightningElement {
     }
 
     get skipButtonLabel(){
-        return this.isSkipped? "Cancel Skip" : "Skip";
+        return this.isSkipped ? "Cancel Skip" : "Skip";
     }
 
     get removeButtonLabel(){
-        return this.isRemoved? "Cancel Skip and Remove from Plan" : "Skip and Remove from Plan";
+        return this.isRemoved ? "Cancel Skip and Remove from Plan" : "Skip and Remove from Plan";
+    }
+
+    get closeButtonLabel(){
+        return this.isSkipped ? 'Close' : 'Close Without Saving';
     }
 }
