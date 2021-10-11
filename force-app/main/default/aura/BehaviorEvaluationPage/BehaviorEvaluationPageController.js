@@ -7,21 +7,17 @@
     doInit : function (cmp, event, helper)
     {
         helper.processingProcess(cmp, 'init');
-        const empApi = cmp.find('empApi');
-
-
     } ,
-
     handleChange : function(cmp) {
-            var selected = cmp.get("v.tabId");
-            cmp.find('tabs').set('v.selectedTabId', selected);
-            console.log('Selected Tab Id ====> ' + cmp.get('v.tabId'));
+        var selected = cmp.get("v.tabId");
+        cmp.find('tabs').set('v.selectedTabId', selected);
+        console.log('Selected Tab Id ====> ' + cmp.get('v.tabId'));
 
-            var selectedSubtab = cmp.get('v.subTabId');
-            if(selectedSubtab == !undefined ) {
-                this.handleSubtabs(cmp, event, selectedSubtab);
-                //alert('ITS WORKING');
-            }
+        var selectedSubtab = cmp.get('v.subTabId');
+        if(selectedSubtab == !undefined ) {
+            this.handleSubtabs(cmp, event, selectedSubtab);
+            //alert('ITS WORKING');
+        }
     } ,
     handleClick : function(cmp, event, helper) {
         var button = event.getSource().get('v.name');
@@ -35,9 +31,6 @@
     } ,
     handleCaution: function(cmp, event, helper){
         helper.processingProcess(cmp, 'handleCaution');
-    } ,
-    onRender: function (cmp, event, helper){
-        helper.processingProcess(cmp, 'render')
     } ,
     activetab: function (cmp, event) {
         var a = cmp.get('v.UseCaution');

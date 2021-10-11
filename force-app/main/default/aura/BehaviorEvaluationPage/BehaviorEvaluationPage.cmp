@@ -11,6 +11,7 @@
     <aura:attribute name="recordId" type="String" />
     <aura:attribute name="animalId" type="String" />
     <aura:attribute name="tabs" type="Object[]" /> <!-- TODO: Remove this - try and Refactor -->
+    <aura:attribute name="behaviorRecord" type="Object"/>
     <aura:attribute name="behaviorReport" type="Object[]"/>
     <!-- ADULT ANIMAL PROPERTIES -->
     <aura:attribute name="behaviorInKennelTest" type="Object[]" />
@@ -63,8 +64,6 @@
     <aura:attribute name="tabId" type="String" default="behaveInKennel" />
     <aura:attribute name="subTabId" type="String" />
     <aura:attribute name="selection" type="String" />
-    <aura:attribute name="testTypes" type="List" default="Adult" />
-    <aura:attribute name="testType" type="String" />
     <aura:attribute name="showModal" type="Boolean" default="false" />
     <aura:attribute name="iShowModal" type="Boolean" default="false" />
     <aura:attribute name="fShowModal" type="Boolean" default="false" />
@@ -82,6 +81,7 @@
     <aura:attribute name="PuppyMuzzle3" type="Boolean" />
     <aura:attribute name="MuzzleSSD3" type="Boolean" />
     <aura:attribute name="MuzzleOSD3" type="Boolean" />
+    <aura:attribute name="spinner" type="boolean" default="false"/>
 
 
     <!-- attribute for component attributes -->
@@ -91,6 +91,18 @@
     <aura:handler name="change" value="{!v.tabId}" action="{!c.handleChange}" />
     <aura:handler name="select" value="{!v.selection}" action="{!c.handleSelection}" />
     <aura:method name="handleClick"  action="{!c.handleClick}" access="public" />
+     
+    <!--loading spinner start-->
+    <aura:if isTrue="{!v.spinner}">
+        <div aura:id="spinnerId" class="slds-spinner_container">
+            <div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+                <span class="slds-assistive-text">Loading...</span>
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+    </aura:if>
+    <!-- Loading spinner end-->
 
     <lightning:notificationsLibrary aura:id="lib" />
     <lightning:overlayLibrary aura:id="overlayLib" />
@@ -394,32 +406,32 @@
                                             &nbsp;
                                     <aura:iteration items="{!v.unpleasantTouchTest}" var="variable">
                                         <table>
-                                        <aura:if isTrue="{!not(empty(variable.mZeroOptions))}">
+                                        <aura:if isTrue="{!not(empty(variable.VC0))}">
                                             <c:BehaviorEvaluationMultipleOptionGroup colNumber="2" type="unpleasantTouch"
-                                                                                    options="{!variable.mZeroOptions}"
+                                                                                    options="{!variable.VC0}"
                                                                                     index="{!index}"
                                                                                     recordId="{!v.recordId}">
                                             </c:BehaviorEvaluationMultipleOptionGroup>
                                         </aura:if>
                                             &nbsp;
                                             <c:BehaviorEvaluationMultipleOptionGroup type="unpleasantTouch" colNumber="2"
-                                                                                    options="{!variable.mNotConcerningOptions}"
+                                                                                    options="{!variable.VC1}"
                                                                                     index="{!index}" recordId="{!v.recordId}" >
                                             </c:BehaviorEvaluationMultipleOptionGroup>
                                             &nbsp;
                                             <c:BehaviorEvaluationMultipleOptionGroup type="unpleasantTouch" colNumber="2"
-                                                                                    options="{!variable.mRedFlagOptions}"
+                                                                                    options="{!variable.VC2}"
                                                                                     index="{!index}" recordId="{!v.recordId}" >
                                             </c:BehaviorEvaluationMultipleOptionGroup>
                                             &nbsp;
                                             <c:BehaviorEvaluationMultipleOptionGroup type="unpleasantTouch" colNumber="2"
-                                                                                    options="{!variable.mAlertOptions}"
+                                                                                    options="{!variable.VC3}"
                                                                                     index="{!index}"  recordId="{!v.recordId}">
                                             </c:BehaviorEvaluationMultipleOptionGroup>
-                                            <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
+                                            <aura:if isTrue="{!not(empty(variable.VC4))}">
                                             &nbsp;
                                                 <c:BehaviorEvaluationMultipleOptionGroup type="unpleasantTouch" colNumber="2"
-                                                                                        options="{!variable.mInconclusiveOptions}"
+                                                                                        options="{!variable.VC4}"
                                                                                         index="{!index}"
                                                                                         recordId="{!v.recordId}">
                                                 </c:BehaviorEvaluationMultipleOptionGroup>
@@ -615,20 +627,20 @@
                                     </table>
                                     <aura:iteration items="{!v.resourceGuardingTestPart1}" var="variable">
                                         <table>
-                                            <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingOne" colNumber="4" options="{!variable.mNotConcerningOptions}"
+                                            <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingOne" colNumber="4" options="{!variable.VC1}"
                                                                                     index="{!index}" recordId="{!v.recordId}" >
                                             </c:BehaviorEvaluationMultipleOptionGroup>
                                             &nbsp;
-                                            <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingOne" colNumber="4" options="{!variable.mRedFlagOptions}"
+                                            <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingOne" colNumber="4" options="{!variable.VC2}"
                                                                                     index="{!index}" recordId="{!v.recordId}" >
                                             </c:BehaviorEvaluationMultipleOptionGroup>
                                             &nbsp;
-                                            <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingOne" colNumber="4" options="{!variable.mAlertOptions}"
+                                            <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingOne" colNumber="4" options="{!variable.VC3}"
                                                                                     index="{!index}"  recordId="{!v.recordId}">
                                             </c:BehaviorEvaluationMultipleOptionGroup>
-                                            <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
+                                            <aura:if isTrue="{!not(empty(variable.VC4))}">
                                             &nbsp;
-                                                <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingOne" colNumber="4" options="{!variable.mInconclusiveOptions}"
+                                                <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingOne" colNumber="4" options="{!variable.VC4}"
                                                                                         index="{!index}"
                                                                                         recordId="{!v.recordId}">
                                                 </c:BehaviorEvaluationMultipleOptionGroup>
@@ -688,20 +700,20 @@
 
                                     <aura:iteration items="{!v.resourceGuardingTestPart2}" var="variable">
                                         <table>
-                                            <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingTwo" colNumber="4" options="{!variable.mNotConcerningOptions}"
+                                            <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingTwo" colNumber="4" options="{!variable.VC1}"
                                                                                     index="{!index}" recordId="{!v.recordId}" >
                                             </c:BehaviorEvaluationMultipleOptionGroup>
                                             &nbsp;
-                                            <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingTwo" colNumber="4" options="{!variable.mRedFlagOptions}"
+                                            <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingTwo" colNumber="4" options="{!variable.VC2}"
                                                                                     index="{!index}" recordId="{!v.recordId}" >
                                             </c:BehaviorEvaluationMultipleOptionGroup>
                                             &nbsp;
-                                            <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingTwo" colNumber="4" options="{!variable.mAlertOptions}"
+                                            <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingTwo" colNumber="4" options="{!variable.VC3}"
                                                                                     index="{!index}"  recordId="{!v.recordId}">
                                             </c:BehaviorEvaluationMultipleOptionGroup>
-                                            <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
+                                            <aura:if isTrue="{!not(empty(variable.VC4))}">
                                             &nbsp;
-                                                <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingTwo" colNumber="4" options="{!variable.mInconclusiveOptions}"
+                                                <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingTwo" colNumber="4" options="{!variable.VC4}"
                                                                                         index="{!index}"
                                                                                         recordId="{!v.recordId}">
                                                 </c:BehaviorEvaluationMultipleOptionGroup>
@@ -932,6 +944,7 @@
                                                     <td width="3%"></td>
                                                     <td width="7%"><lightning:input type="checkbox-button"
                                                                     label="Use Caution for Real Dog Test"
+                                                                    checked="{!v.UseCaution}"
                                                                     onchange="{!c.handleCaution}"
                                                                     aura:id="cautionInput"/></td>
                                                     <td width="90%"><label>Use Caution for Real Dog Test</label></td>
@@ -1660,20 +1673,20 @@
 
                                 <aura:iteration items="{!v.puppyResourceGuardingPart1}" var="variable">
                                     <table>
-                                        <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingOne" colNumber="4" options="{!variable.mNotConcerningOptions}"
+                                        <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingOne" colNumber="4" options="{!variable.VC1}"
                                                                                  index="{!index}" recordId="{!v.recordId}" >
                                         </c:BehaviorEvaluationMultipleOptionGroup>
                                         &nbsp;
-                                        <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingOne" colNumber="4" options="{!variable.mRedFlagOptions}"
+                                        <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingOne" colNumber="4" options="{!variable.VC2}"
                                                                                  index="{!index}" recordId="{!v.recordId}" >
                                         </c:BehaviorEvaluationMultipleOptionGroup>
                                         &nbsp;
-                                        <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingOne" colNumber="4" options="{!variable.mAlertOptions}"
+                                        <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingOne" colNumber="4" options="{!variable.VC3}"
                                                                                  index="{!index}"  recordId="{!v.recordId}">
                                         </c:BehaviorEvaluationMultipleOptionGroup>
-                                        <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
+                                        <aura:if isTrue="{!not(empty(variable.VC4))}">
                                         &nbsp;
-                                            <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingOne" colNumber="4" options="{!variable.mInconclusiveOptions}"
+                                            <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingOne" colNumber="4" options="{!variable.VC4}"
                                                                                      index="{!index}"
                                                                                      recordId="{!v.recordId}">
                                             </c:BehaviorEvaluationMultipleOptionGroup>
@@ -1735,20 +1748,20 @@
                                 </table>
                                 <aura:iteration items="{!v.puppyResourceGuardingPart2}" var="variable">
                                     <table>
-                                        <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingTwo" colNumber="4" options="{!variable.mNotConcerningOptions}"
+                                        <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingTwo" colNumber="4" options="{!variable.VC1}"
                                                                                  index="{!index}" recordId="{!v.recordId}" >
                                         </c:BehaviorEvaluationMultipleOptionGroup>
                                         &nbsp;
-                                        <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingTwo" colNumber="4" options="{!variable.mRedFlagOptions}"
+                                        <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingTwo" colNumber="4" options="{!variable.VC2}"
                                                                                  index="{!index}" recordId="{!v.recordId}" >
                                         </c:BehaviorEvaluationMultipleOptionGroup>
                                         &nbsp;
-                                        <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingTwo" colNumber="4" options="{!variable.mAlertOptions}"
+                                        <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingTwo" colNumber="4" options="{!variable.VC3}"
                                                                                  index="{!index}"  recordId="{!v.recordId}">
                                         </c:BehaviorEvaluationMultipleOptionGroup>
-                                        <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
+                                        <aura:if isTrue="{!not(empty(variable.VC4))}">
                                         &nbsp;
-                                            <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingTwo" colNumber="4" options="{!variable.mInconclusiveOptions}"
+                                            <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingTwo" colNumber="4" options="{!variable.VC4}"
                                                                                      index="{!index}"
                                                                                      recordId="{!v.recordId}">
                                             </c:BehaviorEvaluationMultipleOptionGroup>

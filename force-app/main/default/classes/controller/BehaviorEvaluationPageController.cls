@@ -6,19 +6,46 @@
  */
 
 public with sharing class BehaviorEvaluationPageController {
-    public static BehaviorEvaluationsSelector selector = new BehaviorEvaluationsSelector();
-    public static dao_Animal daoAnimal = new dao_Animal();
-    public static dao_Case daoCase = new dao_Case();
-    public static Behavior_Evaluation__c m_behaviorEvaluation = new Behavior_Evaluation__c();
 
-
-    @AuraEnabled(Cacheable=true)
+    @AuraEnabled(cacheable=true)
     public static Behavior_Evaluation__c getOne (String key) {
-        //Behavior_Evaluation__c behaviorEvaluation = daoBehaviorEvaluations.findOne(key);
-        Behavior_Evaluation__c behaviorEvaluation = selector.GetOneById(Id.valueOf(key));
-        if (behaviorEvaluation == null) { return null;}
-        m_behaviorEvaluation = behaviorEvaluation;
-        return behaviorEvaluation;
+        List<Behavior_Evaluation__c> behaviorEvaluation = [SELECT Animal__c, Animal_Age__c, Animal_Breed__c, Animal_ID__c,
+                Animal_Sex__c, Animal_Name__c, Name, Id, Caution__c, Muzzled_SSD_P3__c, Muzzled_OSD_P3__c, Is_Muzzled__c,
+                Puppy_Muzzled_DI_P3__c, Puppy_Muzzled_DI_P2__c, Puppy_Muzzled_DI_P1__c, Puppy_Skipped_DI_P1__c,
+                Puppy_Skipped_DI_P2__c, Puppy_Skipped_DI_P3__c, Puppy_Comments_DI_P1__c, Puppy_Comments_DI_P2__c,
+                Puppy_Comments_DI_P3__c, Puppy_Dog_Interaction_P1__c, Puppy_Dog_Interaction_P2__c, Puppy_Dog_Interaction_P3__c,
+                Puppy_BIK_Housing__c, Puppy_Behavior_in_Kennel__c, Puppy_Behavior_on_Leash__c, Puppy_Social_Behavior_P1__c,
+                Puppy_Social_Behavior_P2__c, Puppy_Play_Tug_P1__c, Puppy_Skipped_Play_Tug_P1__c, Puppy_Play_Tug_P2__c,
+                Puppy_Skipped_Play_Tug_P2__c, Puppy_Play_Tag__c, Puppy_Comments_Play_Tag__c, Puppy_Restraint__c,
+                Puppy_Comments_Restraint__c, Puppy_Skipped_Restraint__c, Puppy_Child_Doll_P1__c, Puppy_Comments_CD_P1__c,
+                Puppy_Skipped_CD_P1__c, Puppy_Resource_Guarding_P1_Push_Face__c, Puppy_Resource_Guarding_P1_Touch_Body__c,
+                Puppy_Resource_Guarding_P1_Touch_Neck__c, Puppy_Resource_Guarding_P1_Touch_Face__c, Puppy_Resource_Guarding_P2_Push_Face__c,
+                Puppy_Resource_Guarding_P2_Touch_Body__c, Puppy_Resource_Guarding_P2_Touch_Neck__c, Puppy_Resource_Guarding_P2_Touch_Face__c,
+                Social_Behavior_P1__c, Social_Behavior_P2_2__c, Play_Test_P1__c, Play_Test_Tug_P1__c, Play_Test_Tug_P2__c,
+                Play_Test_P2__c, Pleasant_Touch__c, Pleasant_Touch_Test__c, Comments_Pleasant_Touch__c, Comments_SB_P1__c,
+                Comments_SB_P2__c, Evaluation_Subtype__c, Behavior_in_Kennel__c,  Comments_BIK__c, Behavior_on_Leash__c,
+                Comments_BOL__c, Unpleasant_Touch_1st__c, Unpleasant_Touch_2nd__c, Comments_UT_1st__c, Comments_UT_2nd__c,
+                Tag_Test__c, Comments_Tag__c, Resource_Guarding_P1_Push_Face__c, Resource_Guarding_P1_Touch_Body__c,
+                Resource_Guarding_P1_Touch_Face__c, Resource_Guarding_P1_Touch_Neck__c, Comments_RG_P1__c, Puppy_Child_Doll_P2__c,
+                Resource_Guarding_P2_Push_Face__c, Resource_Guarding_P2_Touch_Body__c, Resource_Guarding_P2_Touch_Face__c,
+                Resource_Guarding_P2_Touch_Neck__c, Comments_RG_P2__c, Toddler_Doll_P1__c, Comments_TD_P1__c, Toddler_Doll_P2__c,
+                Comments_TD_P2__c, Scolding_Person_P1__c, Comments_SP_P1__c, Scolding_Person_P2__c, Comments_SP_P2__c, Fake_Dog__c,
+                Comments_FD__c, Same_Sex_P1__c, Comments_SSD_P1__c, Same_Sex_P2__c, Comments_SSD_P2__c, Same_Sex_P3__c,
+                Comments_SSD_P3__c, Opposite_Sex_P1__c, Comments_OSD_P1__c, Opposite_Sex_P2__c, Comments_OSD_P2__c, Opposite_Sex_P3__c,
+                Comments_OSD_P3__c, Skipped_BIK__c, Skipped_BOL__c, Skipped_FD__c, Skipped_OSD_P1__c, Skipped_OSD_P2__c, Skipped_OSD_P3__c,
+                Skipped_RG_P1__c, Skipped_RG_P1_PF__c, Skipped_RG_P2__c, Skipped_RG_P1_TB__c, Skipped_RG_P1_TF__c, Skipped_RG_P1_TN__c,
+                Skipped_RG_P2_PF__c, Skipped_RG_P2_TB__c, Skipped_RG_P2_TF__c, Skipped_RG_P2_TN__c, Skipped_UT_1st__c, Skipped_UT_2nd__c,
+                Skipped_TD_P1__c, Skipped_TD_P2__c, Skipped_Tag__c, Skipped_SSD_P1__c, Skipped_SSD_P2__c, Skipped_SSD_P3__c, Skipped_Pleasant__c,
+                Skipped_SB_P1__c, Skipped_SB_P2__c, Skipped_SP_P1__c, Skipped_SP_P2__c, Skipped_Play_Tug_P1__c, Skipped_Play_Tug_P2__c,
+                Comments_UT__c, Comments_Play_Tug_P1__c, Comments_Play_Tug_P2__c, Unpleasant_Touch_1st_Flank__c, Unpleasant_Touch_2nd_Flank__c
+            FROM Behavior_Evaluation__c
+            WHERE Id =: key LIMIT 1];
+        if (behaviorEvaluation.size() > 0) {
+            return behaviorEvaluation[0];
+        }
+        else {
+            return null;
+        }
     }
 
     /*
@@ -92,18 +119,11 @@ public with sharing class BehaviorEvaluationPageController {
                         }catch(Exception e) {
                             System.debug(e);
                         }
-
+                        break;
                     }
                 }
             }
         }
-        /*
-        if (!strings.isEmpty()) {
-            for ()
-
-        }
-
-         */
 
         EvaluationWrapper wrapper = new EvaluationWrapper();
         wrapper.id = field.getDescribe().name;
@@ -115,10 +135,11 @@ public with sharing class BehaviorEvaluationPageController {
         wrapper.mInconclusiveOptions = iOptions;
         wrapper.testComments = commentField;
         wrapper.skipField = skipField;
-        //wrapper.isSkipped = skipField.value ? true : false ;
+        wrapper.isSkipped = !String.isBlank((String)skipField.value);
 
         return wrapper;
     }
+
     /*
     * Behavior Report Properties
     * @Param: key => Behavior Evaluation
@@ -126,7 +147,7 @@ public with sharing class BehaviorEvaluationPageController {
     * @description: sets behavior report values. Constructor is TabContentUtil custom class
      */
     @AuraEnabled
-    public static TabContentUtil getBehaviorReport(String key) {
+    public static TabContentUtil getBehaviorReport(Behavior_Evaluation__c behaviorEvaluation) {
         String iId = 'none defined';
         String iLabel = 'none defined';
         String iName = 'none defined';
@@ -147,7 +168,6 @@ public with sharing class BehaviorEvaluationPageController {
         String iBehSummary = 'none defined';
         List<TabContentUtil> tabConentUtils = new List<TabContentUtil>();
         TabContentUtil utils = new TabContentUtil();
-        Behavior_Evaluation__c behaviorEvaluation = selector.GetOneById(Id.valueOf(key));
         utils.IsMuzzled = behaviorEvaluation.Is_Muzzled__c;
         utils.puppyHousing = behaviorEvaluation.Puppy_BIK_Housing__c;
         utils.puppyMuzzledDogInteraction1 = behaviorEvaluation.Puppy_Muzzled_DI_P1__c;
@@ -183,357 +203,167 @@ public with sharing class BehaviorEvaluationPageController {
 
         return utils;
     }
-    /*
-    *  Behavior in Kennel Properties
-    *   @Description: Method generates properties for the 'Behavior in Kennel' test on the Evaluation page. All methods follow
-    *    this pattern. Recreate additional methods using the below pattern
-    *   @TODO: Find out how to define helper text in the Database so the longDesc values are not hard coded
-     */
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getBehaviorInKennel(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Behavior_in_Kennel__c, evaluation);
 
-        return wrapper;
-    }
-    /*
-    * Behavior on Leash Properties
-     */
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getBehaviorOnLeash(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Behavior_on_Leash__c, evaluation);
-        return wrapper;
-    }
-    /*
-    * Social Behavior Test Properties - Part 1
-     */
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getSocialBehaviorTestOne(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Social_Behavior_P1__c, evaluation);
-        return wrapper;
-    }
-    /*
-    * Social Behavior Test Properties - Part 2
-     */
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getSocialBehaviorTestTwo(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Social_Behavior_P2_2__c, evaluation);
-        System.debug(wrapper.testComments);
-        return wrapper;
-    }
-    /*
-    * Pleasant Touch Test
-     */
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getPleasantTouchTest(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Pleasant_Touch__c, evaluation);
-        return wrapper;
-    }
-    /*
-    * Unpleasant Touch Test Two Properties
-     */
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getUnpleasantTouchTestOne(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Unpleasant_Touch_1st__c, evaluation);
-        return wrapper;
-    }
-    /*
-    *
-    * Play Test Part 1 Properties
-    *
-     */
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getPlayTestPartOne(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Play_Test_Tug_P1__c, evaluation);
-        return wrapper;
-    }
-    /*
-    * Play Test Part 2 Properties
-     */
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getPlayTestPartTwo(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Play_Test_Tug_P2__c, evaluation);
-        return wrapper;
-    }
-    /*
-    * Tag Test Properties
-     */
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getTagTest(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Tag_Test__c, evaluation);
-        return wrapper;
-    }
-    /*
-    * Resource Guarding Test Part 1 Properties
-     */
-
-    /*
     @AuraEnabled
-    public static EvaluationWrapper getResourceGuardingOne(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = new EvaluationWrapper();
-        wrapper.wrapper1 = newWrapper(Behavior_Evaluation__c.Resource_Guarding_P1_Push_Face__c, evaluation);
-        wrapper.wrapper2 = newWrapper(Behavior_Evaluation__c.Resource_Guarding_P1_Touch_Face__c, evaluation);
-        wrapper.wrapper3 = newWrapper(Behavior_Evaluation__c.Resource_Guarding_P1_Touch_Neck__c, evaluation);
-        wrapper.wrapper4 = newWrapper(Behavior_Evaluation__c.Resource_Guarding_P1_Touch_Body__c, evaluation);
-        System.debug(wrapper);
-        return wrapper;
-
-    }
-    */
-
-
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getResourceGuardingOnePF(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Resource_Guarding_P1_Push_Face__c, evaluation);
-        return wrapper;
-    }
-
-
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getResourceGuardingOneTF(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Resource_Guarding_P1_Touch_Face__c, evaluation);
-        return wrapper;
-    }
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getResourceGuardingOneTN(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Resource_Guarding_P1_Touch_Neck__c, evaluation);
-        return wrapper;
-    }
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getResourceGuardingOneTB(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Resource_Guarding_P1_Touch_Body__c, evaluation);
-        return wrapper;
-    }
-
-
-    /*
-    * Resource Guarding Test Part 2 Properties
-     */
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getResourceGuardingTwo(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Resource_Guarding_P2_Push_Face__c, evaluation);
-        return wrapper;
-    }
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getResourceGuardingTF(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Resource_Guarding_P2_Touch_Face__c, evaluation);
-        return wrapper;
-    }
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getResourceGuardingTwoTN(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Resource_Guarding_P2_Touch_Neck__c, evaluation);
-        return wrapper;
-    }@AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getResourceGuardingTwoTB(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Resource_Guarding_P2_Touch_Body__c, evaluation);
-        return wrapper;
-    }
-    /*
-    * Toddler Doll Test Part 1 Properties
-     */
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getToddlerDollTestOne(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Toddler_Doll_P1__c, evaluation);
-        return wrapper;
-    }
-    /*
-    * Toddler Doll Test Part 2 Properties
-     */
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getToddlerDollTestTwo(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Toddler_Doll_P2__c, evaluation);
-        return wrapper;
-    }
-    /*
-    * Scolding Person Test Part 1 Properties Scolding_Person_P1__c
-     */
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getScoldingPersonTestOne(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Scolding_Person_P1__c, evaluation);
-        return wrapper;
-    }
-    /*
-    * Scolding Person Test Part 2 Properties Scolding_Person_P2__c
-     */
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getScoldingPersonTestTwo(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Scolding_Person_P2__c, evaluation);
-        return wrapper;
-    }
-    /*
-    * Fake Dog Interaction Test Properties Fake_Dog__c
-     */
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getFakeDogTest(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Fake_Dog__c, evaluation);
-        return wrapper;
-    }
-    /*
-    * Same Sex Dog Test Part 1 Properties Same_Sex_P1__c
-     */
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getSameSexDogTestOne(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Same_Sex_P1__c, evaluation);
-        return wrapper;
-    }
-    /*
-    * Same Sex Dog Test Part 2 Properties
-     */
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getSameSexDogTestTwo(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Same_Sex_P2__c, evaluation);
-        return wrapper;
-    }
-    /*
-    * Same Sex Dog Test Part 3 Properties
-     */
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getSameSexDogTestThree(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Same_Sex_P3__c, evaluation);
-        return wrapper;
-    }
-    /*
-    * Opposite Sex Dog Test Part 1 Properties Opposite_Sex_P1__c
-     */
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getOppositeSexDogTestOne(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Opposite_Sex_P1__c, evaluation);
-        return wrapper;
-    }
-    /*
-    * Opposite Sex Dog Test Part 2 Properties
-     */
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getOppositeSexDogTestTwo(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Opposite_Sex_P2__c, evaluation);
-        return wrapper;
-    }
-    /*
-    * Opposite Sex Dog Test Part 3 Properties
-     */
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getOppositeSexDogTestThree(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Opposite_Sex_P3__c, evaluation);
-        return wrapper;
+    public static List<EvaluationWrapper> getAdultEvaluation(Behavior_Evaluation__c evaluation) {
+        List<EvaluationWrapper> evalList = new List<EvaluationWrapper>();
+        evalList.add(newWrapper(Behavior_Evaluation__c.Behavior_in_Kennel__c, evaluation));
+        evalList.add(newWrapper(Behavior_Evaluation__c.Behavior_on_Leash__c, evaluation));
+        evalList.add(newWrapper(Behavior_Evaluation__c.Social_Behavior_P1__c, evaluation));
+        evalList.add(newWrapper(Behavior_Evaluation__c.Social_Behavior_P2_2__c, evaluation));
+        evalList.add(newWrapper(Behavior_Evaluation__c.Pleasant_Touch__c, evaluation));
+        EvaluationWrapper ut1 = newWrapper(Behavior_Evaluation__c.Unpleasant_Touch_1st__c, evaluation);
+        EvaluationWrapper ut2 = newWrapper(Behavior_Evaluation__c.Unpleasant_Touch_2nd__c, evaluation);
+        evalList.add(new EvaluationWrapper(
+            'Unpleasant Touch',
+            'Unpleasant Touch',
+            ut1.isSkipped,
+            ut1.testComments,
+            new List<EvaluationWrapper.Options>(),
+            new List<EvaluationWrapper.Options>(),
+            new List<EvaluationWrapper.Options>(),
+            new List<EvaluationWrapper.Options>(),
+            new List<EvaluationWrapper.Options>(),
+            new List<EvaluationWrapper.Options>(),
+            ut1.skipField,
+            ut1.index,
+            ut1.isParent,
+            ut1.parentTestApiName,
+            ut1,
+            ut2,
+            new EvaluationWrapper(),
+            new EvaluationWrapper())
+        );
+        evalList.add(newWrapper(Behavior_Evaluation__c.Play_Test_Tug_P1__c, evaluation));
+        evalList.add(newWrapper(Behavior_Evaluation__c.Play_Test_Tug_P2__c, evaluation));
+        evalList.add(newWrapper(Behavior_Evaluation__c.Tag_Test__c, evaluation));
+        EvaluationWrapper rg1TB = newWrapper(Behavior_Evaluation__c.Resource_Guarding_P1_Touch_Body__c, evaluation);
+        EvaluationWrapper rg1TN = newWrapper(Behavior_Evaluation__c.Resource_Guarding_P1_Touch_Neck__c, evaluation);
+        EvaluationWrapper rg1TF = newWrapper(Behavior_Evaluation__c.Resource_Guarding_P1_Touch_Face__c, evaluation);
+        EvaluationWrapper rg1PF = newWrapper(Behavior_Evaluation__c.Resource_Guarding_P1_Push_Face__c, evaluation);
+        evalList.add(new EvaluationWrapper(
+            'Resource Guarding P1',
+            'Resource Guarding P1',
+            rg1TB.isSkipped,
+            rg1TB.testComments,
+            new List<EvaluationWrapper.Options>(),
+            new List<EvaluationWrapper.Options>(),
+            new List<EvaluationWrapper.Options>(),
+            new List<EvaluationWrapper.Options>(),
+            new List<EvaluationWrapper.Options>(),
+            new List<EvaluationWrapper.Options>(),
+            rg1TB.skipField,
+            rg1TB.index,
+            rg1TB.isParent,
+            rg1TB.parentTestApiName,
+            rg1TB,
+            rg1TN,
+            rg1TF,
+            rg1PF)
+        );
+        EvaluationWrapper rg2TB = newWrapper(Behavior_Evaluation__c.Resource_Guarding_P2_Touch_Body__c, evaluation);
+        EvaluationWrapper rg2TN = newWrapper(Behavior_Evaluation__c.Resource_Guarding_P2_Touch_Neck__c, evaluation);
+        EvaluationWrapper rg2TF = newWrapper(Behavior_Evaluation__c.Resource_Guarding_P2_Touch_Face__c, evaluation);
+        EvaluationWrapper rg2PF = newWrapper(Behavior_Evaluation__c.Resource_Guarding_P2_Push_Face__c, evaluation);
+        evalList.add(new EvaluationWrapper(
+            'Resource Guarding P2',
+            'Resource Guarding P2',
+            rg2TB.isSkipped,
+            rg2TB.testComments,
+            new List<EvaluationWrapper.Options>(),
+            new List<EvaluationWrapper.Options>(),
+            new List<EvaluationWrapper.Options>(),
+            new List<EvaluationWrapper.Options>(),
+            new List<EvaluationWrapper.Options>(),
+            new List<EvaluationWrapper.Options>(),
+            rg2TB.skipField,
+            rg2TB.index,
+            rg2TB.isParent,
+            rg2TB.parentTestApiName,
+            rg2TB,
+            rg2TN,
+            rg2TF,
+            rg2PF)
+        );
+        evalList.add(newWrapper(Behavior_Evaluation__c.Toddler_Doll_P1__c, evaluation));
+        evalList.add(newWrapper(Behavior_Evaluation__c.Toddler_Doll_P2__c, evaluation));
+        evalList.add(newWrapper(Behavior_Evaluation__c.Scolding_Person_P1__c, evaluation));
+        evalList.add(newWrapper(Behavior_Evaluation__c.Scolding_Person_P2__c, evaluation));
+        evalList.add(newWrapper(Behavior_Evaluation__c.Fake_Dog__c, evaluation));
+        evalList.add(newWrapper(Behavior_Evaluation__c.Same_Sex_P1__c, evaluation));
+        evalList.add(newWrapper(Behavior_Evaluation__c.Same_Sex_P2__c, evaluation));
+        evalList.add(newWrapper(Behavior_Evaluation__c.Same_Sex_P3__c, evaluation));
+        evalList.add(newWrapper(Behavior_Evaluation__c.Opposite_Sex_P1__c, evaluation));
+        evalList.add(newWrapper(Behavior_Evaluation__c.Opposite_Sex_P2__c, evaluation));
+        evalList.add(newWrapper(Behavior_Evaluation__c.Opposite_Sex_P3__c, evaluation));
+        return evalList;
     }
 
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getPuppyBehaviorInKennel(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Puppy_Behavior_in_Kennel__c, evaluation);
-        return wrapper;
-    }
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getPuppyBehaviorOnLeash(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Puppy_Behavior_on_Leash__c, evaluation);
-        return wrapper;
-    }
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getPuppySocialBehaviorPart1(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Puppy_Social_Behavior_P1__c, evaluation);
-        return wrapper;
-    }
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getPuppySocialBehaviorPart2(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Puppy_Social_Behavior_P2__c, evaluation);
-        return wrapper;
-    }
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getPuppyPlayTestTugP1(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Puppy_Play_Tug_P1__c, evaluation);
-        return wrapper;
-    }
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getPuppyPlayTestTugP2(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Puppy_Play_Tug_P2__c, evaluation);
-        return wrapper;
-    }
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getPuppyPlayTestTugTug(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Puppy_Play_Tag__c, evaluation);
-        return wrapper;
-    }
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getPuppyRestraint(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Puppy_Restraint__c, evaluation);
-        return wrapper;
-    }
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getPuppyResourceGuardingPartOne(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Puppy_Resource_Guarding_P1_Push_Face__c, evaluation);
-        return wrapper;
-    }
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getPuppyResourceGuardingPartTwo(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Puppy_Resource_Guarding_P2_Push_Face__c, evaluation);
-        return wrapper;
-    }
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getPuppyChildDollOne(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Puppy_Child_Doll_P1__c, evaluation);
-        return wrapper;
-    }
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getPuppyChildDollTwo(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Puppy_Child_Doll_P2__c, evaluation);
-        return wrapper;
-    }
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getPuppyDogInteractionOne(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Puppy_Dog_Interaction_P1__c, evaluation);
-        return wrapper;
-    }
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getPuppyDogInteractionTwo(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Puppy_Dog_Interaction_P2__c, evaluation);
-        return wrapper;
-    }
-    @AuraEnabled(Cacheable=true)
-    public static EvaluationWrapper getPuppyDogInteractionThree(String key) {
-        Behavior_Evaluation__c evaluation = getOne(key);
-        EvaluationWrapper wrapper = newWrapper(Behavior_Evaluation__c.Puppy_Dog_Interaction_P3__c, evaluation);
-        return wrapper;
+    @AuraEnabled
+    public static List<EvaluationWrapper> getPuppyEvaluation(Behavior_Evaluation__c evaluation) {
+        List<EvaluationWrapper> evalList = new List<EvaluationWrapper>();
+        evalList.add(newWrapper(Behavior_Evaluation__c.Puppy_Behavior_in_Kennel__c, evaluation));
+        evalList.add(newWrapper(Behavior_Evaluation__c.Puppy_Behavior_on_Leash__c, evaluation));
+        evalList.add(newWrapper(Behavior_Evaluation__c.Puppy_Social_Behavior_P1__c, evaluation));
+        evalList.add(newWrapper(Behavior_Evaluation__c.Puppy_Social_Behavior_P2__c, evaluation));
+        evalList.add(newWrapper(Behavior_Evaluation__c.Puppy_Play_Tug_P1__c, evaluation));
+        evalList.add(newWrapper(Behavior_Evaluation__c.Puppy_Play_Tug_P2__c, evaluation));
+        evalList.add(newWrapper(Behavior_Evaluation__c.Puppy_Play_Tag__c, evaluation));
+        evalList.add(newWrapper(Behavior_Evaluation__c.Puppy_Restraint__c, evaluation));
+        evalList.add(newWrapper(Behavior_Evaluation__c.Puppy_Child_Doll_P1__c, evaluation));
+        evalList.add(newWrapper(Behavior_Evaluation__c.Puppy_Child_Doll_P2__c, evaluation));
+        EvaluationWrapper rg1TB = newWrapper(Behavior_Evaluation__c.Puppy_Resource_Guarding_P1_Touch_Body__c, evaluation);
+        EvaluationWrapper rg1TN = newWrapper(Behavior_Evaluation__c.Puppy_Resource_Guarding_P1_Touch_Neck__c, evaluation);
+        EvaluationWrapper rg1TF = newWrapper(Behavior_Evaluation__c.Puppy_Resource_Guarding_P1_Touch_Face__c, evaluation);
+        EvaluationWrapper rg1PF = newWrapper(Behavior_Evaluation__c.Puppy_Resource_Guarding_P1_Push_Face__c, evaluation);
+        evalList.add(new EvaluationWrapper(
+            'Resource Guarding P1',
+            'Resource Guarding P1',
+            rg1TB.isSkipped,
+            rg1TB.testComments,
+            new List<EvaluationWrapper.Options>(),
+            new List<EvaluationWrapper.Options>(),
+            new List<EvaluationWrapper.Options>(),
+            new List<EvaluationWrapper.Options>(),
+            new List<EvaluationWrapper.Options>(),
+            new List<EvaluationWrapper.Options>(),
+            rg1TB.skipField,
+            rg1TB.index,
+            rg1TB.isParent,
+            rg1TB.parentTestApiName,
+            rg1TB,
+            rg1TN,
+            rg1TF,
+            rg1PF)
+        );
+        EvaluationWrapper rg2TB = newWrapper(Behavior_Evaluation__c.Puppy_Resource_Guarding_P2_Touch_Body__c, evaluation);
+        EvaluationWrapper rg2TN = newWrapper(Behavior_Evaluation__c.Puppy_Resource_Guarding_P2_Touch_Neck__c, evaluation);
+        EvaluationWrapper rg2TF = newWrapper(Behavior_Evaluation__c.Puppy_Resource_Guarding_P2_Touch_Face__c, evaluation);
+        EvaluationWrapper rg2PF = newWrapper(Behavior_Evaluation__c.Puppy_Resource_Guarding_P2_Push_Face__c, evaluation);
+        evalList.add(new EvaluationWrapper(
+            'Resource Guarding P2',
+            'Resource Guarding P2',
+            rg2TB.isSkipped,
+            rg2TB.testComments,
+            new List<EvaluationWrapper.Options>(),
+            new List<EvaluationWrapper.Options>(),
+            new List<EvaluationWrapper.Options>(),
+            new List<EvaluationWrapper.Options>(),
+            new List<EvaluationWrapper.Options>(),
+            new List<EvaluationWrapper.Options>(),
+            rg2TB.skipField,
+            rg2TB.index,
+            rg2TB.isParent,
+            rg2TB.parentTestApiName,
+            rg2TB,
+            rg2TN,
+            rg2TF,
+            rg2PF)
+        );
+        evalList.add(newWrapper(Behavior_Evaluation__c.Puppy_Dog_Interaction_P1__c, evaluation));
+        evalList.add(newWrapper(Behavior_Evaluation__c.Puppy_Dog_Interaction_P2__c, evaluation));
+        evalList.add(newWrapper(Behavior_Evaluation__c.Puppy_Dog_Interaction_P3__c, evaluation));
+        return evalList;
     }
 
     @AuraEnabled(Cacheable=true)
@@ -548,14 +378,6 @@ public with sharing class BehaviorEvaluationPageController {
         }
 
         return listItems;
-    }
-
-    @AuraEnabled
-    public static Boolean getCautionStatus(String key) {
-        Behavior_Evaluation__c evaluation = selector.GetOneById(Id.valueOf(key));
-        Boolean bool;
-        bool = evaluation.Caution__c ? true : false;
-        return bool;
     }
 
     /*
