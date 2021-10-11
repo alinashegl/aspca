@@ -71,7 +71,6 @@ private class test_TreatmentSessionLWCController {
         Test.stopTest();
 
         System.assert(returnedContacts.isEmpty());
-
     }
 
     @isTest
