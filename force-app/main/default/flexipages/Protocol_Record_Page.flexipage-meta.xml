@@ -32,15 +32,6 @@
                 <componentName>force:detailPanel</componentName>
             </componentInstance>
         </itemInstances>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>relatedListComponentOverride</name>
-                    <value>GRID</value>
-                </componentInstanceProperties>
-                <componentName>force:relatedListContainer</componentName>
-            </componentInstance>
-        </itemInstances>
         <mode>Replace</mode>
         <name>detailTabContent</name>
         <type>Facet</type>
@@ -81,9 +72,9 @@
         <name>main</name>
         <type>Region</type>
     </flexiPageRegions>
-    <masterLabel>Treatment Bundle Record Page</masterLabel>
+    <masterLabel>Protocol Record Page</masterLabel>
     <parentFlexiPage>force__Default_rec_simple</parentFlexiPage>
-    <sobjectType>Treatment_Bundle__c</sobjectType>
+    <sobjectType>Protocol__c</sobjectType>
     <template>
         <name>flexipage:recordHomeSimpleViewTemplate</name>
     </template>

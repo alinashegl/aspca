@@ -309,16 +309,6 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
-        <fields>Concern_Date__c</fields>
-        <fields>Concern_Reported_By__c</fields>
-        <fields>Concern_Reported__c</fields>
-        <fields>Behavior_Response__c</fields>
-        <relatedList>Concern__c.Animal__c</relatedList>
-        <sortField>Concern_Date__c</sortField>
-        <sortOrder>Desc</sortOrder>
-    </relatedLists>
-    <relatedLists>
-        <fields>NAME</fields>
         <fields>Capture_Date__c</fields>
         <fields>Initials__c</fields>
         <fields>Behavior_Foster_Note__c</fields>
