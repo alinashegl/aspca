@@ -1,0 +1,91 @@
+<template>
+    <article class='slds-card_boundary slds-m-left_xxx-small slds-m-right_xxx-small slds-m-top_small'>
+        <lightning-card class='card-border' variant="Narrow"  title={titleLabel} icon-name="standard:account">
+            <lightning-button label={footerButtonLabel} slot="actions" onclick={toggleViewAll}></lightning-button>
+            <lightning-button label={newButtonLabel} slot="actions" onclick={handleNew} class="slds-m-left_x-small"></lightning-button>
+            
+            <p slot="footer">
+                <lightning-button variant="base" label={footerButtonLabel} title="View All" onclick={toggleViewAll} ></lightning-button>
+            </p>
+            <template if:true={observationList}>
+                <table class="slds-table slds-table_cell-buffer slds-no-row-hover slds-table_bordered slds-table_fixed-layout" role="grid" aria-label="Example table in a Card">
+                    <thead>
+                        <tr class="slds-line-height_reset">
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="Name">Name</div>
+                            </th>
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="ObservationReported">Observation Reported</div>
+                            </th>
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="Initials">Initials</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={observationList} for:item="row">
+                            <tr key={row.Id} class="slds-hint-parent">
+                                <td scope="row">
+                                    <div class="slds-truncate">
+                                        {row.Observation_Date__c}
+                                    </div>
+                                </td>
+                                <td role="gridcell">
+                                    <div class="slds-truncate">
+                                        {row.Observation_Notes__c}
+                                    </div>
+                                </td>
+                                <td role="gridcell">
+                                    <div class="slds-truncate">
+                                        {row.Observation_Reported_By__c}
+                                    </div>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </template>
+        </lightning-card>
+    </article>
+</template>
+
+
+<!-- ********************* original ******** -->
+<!-- <div class="slds-p-around_small lgc-bg list_view_and_table_container">
+    <div class="sectionTitle">
+        <lightning-icon slot="media" icon-name="standard:orders" size="medium" class="icon_custom_class slds-m-right_x-small"></lightning-icon>
+        {titleLabel}
+    </div>
+</div>
+<lightning-card>
+     <table class="slds-table slds-table_bordered slds-border_left slds-border_right">
+        <thead>
+        <tr class="slds-line-height_reset">
+            <th class="" scope="col">
+            <div class="slds-truncate" title="Name">Date</div>
+            </th>
+            <th class="" scope="col">
+            <div class="slds-truncate" title="Some Custom Column">Observation Reported</div>
+            </th>
+            <th class="" scope="col">
+                <div class="slds-truncate" title="Some Custom Column">Initials</div>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <template for:each={observationList} for:item="row">
+            <tr key={row.Id} class="slds-line-height_reset">
+                <th class="" scope="col">
+                {row.Observation_Date__c}
+                </th>
+                <th class="" scope="col">
+                    {row.Observation_Notes__c}
+                </th>
+                <th class="" scope="col">
+                    {row.Observation_Reported_By__c}
+                </th>
+            </tr>
+        </template>
+        </tbody>
+    </table> 
+</lightning-card> -->
