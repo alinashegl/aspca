@@ -46,7 +46,8 @@ public with sharing class TreatmentSessionLWCController {
                 Protocol_Notes__c,
                 Novel_Person_Notes__c,
                 Manager_Review_Notes__c,
-                Preferred_Motivators__c
+                Preferred_Motivators__c,
+                ProtocolId__r.Protocol_Box_Link__c
             FROM Session_Protocol__c 
             WHERE Id =: protocolId
         ];
@@ -225,6 +226,7 @@ public with sharing class TreatmentSessionLWCController {
         @AuraEnabled public String novelPersonNotes { get; set; }
         @AuraEnabled public String protocolNotes { get; set; }
         @AuraEnabled public String managerReviewNotes { get; set; }
+        @AuraEnabled public String boxLink {get; set;}
 
 
         ProtocolInfo(Session_Protocol__c sp){
@@ -239,6 +241,7 @@ public with sharing class TreatmentSessionLWCController {
             this.novelPersonNotes = sp.Novel_Person_Notes__c;
             this.protocolNotes = sp.Protocol_Notes__c;
             this.managerReviewNotes = sp.Manager_Review_Notes__c;
+            this.boxLink = sp.ProtocolId__r.Protocol_Box_Link__c;
 
             String[] fieldList = new String[]{
                 'Aggressive_Worst__c',

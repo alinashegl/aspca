@@ -1,5 +1,6 @@
 import { LightningElement, api } from 'lwc';
 import { updateRecord } from 'lightning/uiRecordApi';
+import { NavigationMixin } from "lightning/navigation";
 
 import PROTOCOL_ID_FIELD from '@salesforce/schema/Session_Protocol__c.Id';
 import IS_SKIPPED_FIELD from '@salesforce/schema/Session_Protocol__c.IsSkipped__c';
@@ -11,7 +12,7 @@ import PREFERRED_MOTIVATORS_FIELD from '@salesforce/schema/Session_Protocol__c.P
 import getActiveProtocolAndFields from '@salesforce/apex/TreatmentSessionLWCController.getActiveProtocolAndFields';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
-export default class TreatmentSessionProtocol extends LightningElement {
+export default class TreatmentSessionProtocol extends NavigationMixin(LightningElement) {
     @api recordId;
     @api sessionId;
     @api protocolName;
@@ -174,6 +175,20 @@ export default class TreatmentSessionProtocol extends LightningElement {
 
     handleToggleView(){
         this.toggleView = !this.toggleView;
+    }
+
+    handleBoxLink(){
+        const config = {
+            type: 'standard__webPage',
+            attributes: {
+                url: this.protocolInfo.boxLink
+            }
+        };
+        this[NavigationMixin.Navigate](config);
+    }
+
+    get displayBoxLink(){
+        return this.protocolInfo && this.protocolInfo.boxLink;
     }
 
     get toggleButtonIconName(){
