@@ -712,4 +712,16 @@ public without sharing class TestDataFactory {
         insert aDogs;
         return aDogs;
     }
+
+    public static Daily_Enrichment__c createEnrichment() {
+        Animal__c a = createAnimal();
+        Daily_Enrichment__c enrichment = new Daily_Enrichment__c(
+            Animal__c = a.Id,
+            Notes__c = 'Test notes for test data factory',
+            DE_Date__c = System.today(),
+            Enrichment_Coordinator__c = 'Hailey Kohl'
+        );
+        insert enrichment;
+        return enrichment;
+    }
 }
