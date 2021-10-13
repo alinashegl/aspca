@@ -712,4 +712,21 @@ public without sharing class TestDataFactory {
         insert aDogs;
         return aDogs;
     }
+
+    public static Observation__c[] createObservations(){
+      Animal__c animal = createAnimal();
+      String[] observationTypes = new String[]{'Happy Tail', 'Observation', 'Concern'};
+      Observation__c[] newObservations = new Observation__c[0];
+      for(String type : observationTypes){
+        Observation__c observation = new Observation__c(
+          Animal__c = animal.Id,
+          Observation_Type__c = type,
+          Observation_Notes__c = 'test Notes',
+          Observation_Reported_By__c = 'TN'
+        );
+        newObservations.add(observation);
+      }
+      insert newObservations;
+      return newObservations;
+    }
 }
