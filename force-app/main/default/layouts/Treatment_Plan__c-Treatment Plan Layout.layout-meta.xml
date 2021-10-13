@@ -81,6 +81,7 @@
         </quickActionListItems>
     </quickActionList>
     <relatedLists>
+        <excludeButtons>MassChangeOwner</excludeButtons>
         <fields>Protocol__c</fields>
         <fields>NAME</fields>
         <fields>IsRemoved__c</fields>
@@ -89,6 +90,8 @@
         <sortOrder>Asc</sortOrder>
     </relatedLists>
     <relatedLists>
+        <excludeButtons>MassChangeOwner</excludeButtons>
+        <excludeButtons>New</excludeButtons>
         <fields>NAME</fields>
         <fields>Session_Date__c</fields>
         <fields>Session_Contact__c</fields>
