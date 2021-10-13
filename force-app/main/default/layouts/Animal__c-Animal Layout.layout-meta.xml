@@ -791,6 +791,11 @@
             <sortOrder>10</sortOrder>
         </platformActionListItems>
         <platformActionListItems>
+            <actionName>Medical_Discharge</actionName>
+            <actionType>CustomButton</actionType>
+            <sortOrder>0</sortOrder>
+        </platformActionListItems>
+        <platformActionListItems>
             <actionName>Diagnostics_report</actionName>
             <actionType>CustomButton</actionType>
             <sortOrder>11</sortOrder>
@@ -799,11 +804,6 @@
             <actionName>Exercise_Report</actionName>
             <actionType>CustomButton</actionType>
             <sortOrder>12</sortOrder>
-        </platformActionListItems>
-        <platformActionListItems>
-            <actionName>Medical_Discharge</actionName>
-            <actionType>CustomButton</actionType>
-            <sortOrder>0</sortOrder>
         </platformActionListItems>
     </platformActionList>
     <relatedLists>
@@ -1043,6 +1043,10 @@
     <relatedLists>
         <fields>NAME</fields>
         <relatedList>Treatment_Session__c.Animal__c</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <fields>NAME</fields>
+        <relatedList>Observation__c.Animal__c</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>
