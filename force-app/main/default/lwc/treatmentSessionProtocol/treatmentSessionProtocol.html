@@ -41,6 +41,9 @@
                     <template if:true={canRemoveProtocol}>
                         <lightning-button variant="Neutral" label={removeButtonLabel} title="skipAndRemove" onclick={handleSkipAndRemove} class="slds-m-left_x-small"></lightning-button>
                     </template>
+                    <template if:true={displayBoxLink}>
+                        <lightning-button variant="Neutral" label="Box Link" title="Box Link" onclick={handleBoxLink} class="slds-m-left_x-small"></lightning-button>
+                    </template>
                     <template if:true={protocolInfo}>
                         <template if:false={protocolInfo.isSkipped}>
                             <lightning-card>
