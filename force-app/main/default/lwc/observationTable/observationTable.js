@@ -1,5 +1,6 @@
 import { LightningElement, api, wire } from 'lwc';
 import FORM_FACTOR from '@salesforce/client/formFactor'
+import { NavigationMixin } from "lightning/navigation";
 import { createRecord } from 'lightning/uiRecordApi';
 import { refreshApex } from '@salesforce/apex';
 import getObservations from '@salesforce/apex/ObservationController.getObservations';
@@ -14,12 +15,16 @@ import OBSERVATION_ANIMAL_FIELD from '@salesforce/schema/Observation__c.Animal__
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 const columns = [
-    { label: 'Date', fieldName: 'Observation_Date__c', type:'date'},
+    { label: 'View',
+        type: 'button',
+      typeAttributes: { label: "View", name: "goToObservation", variant: "base"}
+    },
+    { label: 'Date', fieldName: 'Observation_Date__c', type:'date-local'},
     { label: 'Notes', fieldName: 'Observation_Notes__c' },
     { label: 'Initials', fieldName: 'Observation_Reported_By__c' }
 ];
 
-export default class ObservationTable extends LightningElement {
+export default class ObservationTable extends NavigationMixin(LightningElement) {
     @api recordId;
     @api observationType;
     count = 5;
@@ -35,6 +40,19 @@ export default class ObservationTable extends LightningElement {
         this.wireResponse = result;
         this.returnedList = result.data;
         this.updateActiveList();
+    }
+
+    handleRowAction(event) {
+        if (event.detail.action.name === "goToObservation") {
+            this[NavigationMixin.Navigate]({
+                type: 'standard__recordPage',
+                attributes: {
+                    recordId: event.detail.row.Id,
+                    objectApiName: 'Observation__c',
+                    actionName: 'view'
+                }
+            });
+        }
     }
 
     updateActiveList(){

@@ -58,8 +58,10 @@
                     data={observationList}
                     class="slds-max-medium-table_stacked"
                     columns={columns}
+                    column-widths-mode='auto'
                     hide-checkbox-column
                     show-row-number-column
+                    onrowaction={handleRowAction}
                 >
                 </lightning-datatable>
             </template>
