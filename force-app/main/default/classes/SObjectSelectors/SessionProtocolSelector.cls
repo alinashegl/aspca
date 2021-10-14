@@ -26,6 +26,7 @@ public with sharing class SessionProtocolSelector extends SObjectSelector {
                 Session_Protocol__c.Arousal_Worst__c,
                 Session_Protocol__c.Social_Best__c,
                 Session_Protocol__c.Overall_Score__c,
+                Session_Protocol__c.Novel_Person__c,
                 Session_Protocol__c.Novel_Person_Notes__c,
                 Session_Protocol__c.Protocol_Notes__c,
                 Session_Protocol__c.Protocol_Box_Link__c,
