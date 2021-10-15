@@ -1,10 +1,10 @@
 import { LightningElement, api, wire } from 'lwc';
 import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
-import TREATMENT_SESSION_ID_FIELD from '@salesforce/schema/Session_Protocol__c.TreatmentSessionId__c';
+import TREATMENT_PLAN_ID_FIELD from '@salesforce/schema/Session_Protocol__c.TreatmentSessionId__r.Treatment_Plan__c';
 import PROTOCOL_ID_FIELD from '@salesforce/schema/Session_Protocol__c.ProtocolId__c';
 import getLastTreatments from '@salesforce/apex/LastTreatmentsController.getLastTreatments';
 
-const fields = [TREATMENT_SESSION_ID_FIELD, PROTOCOL_ID_FIELD];
+const fields = [TREATMENT_PLAN_ID_FIELD, PROTOCOL_ID_FIELD];
 
 export default class Lwc_lastTreatments extends LightningElement {
     @api recordId;
@@ -19,15 +19,15 @@ export default class Lwc_lastTreatments extends LightningElement {
     @wire(getRecord, { recordId: '$recordId', fields })
     sessionProtocol;
 
-    get treatmentSessionId() {
-        return getFieldValue(this.sessionProtocol.data, TREATMENT_SESSION_ID_FIELD);
+    get treatmentPlanId() {
+        return getFieldValue(this.sessionProtocol.data, TREATMENT_PLAN_ID_FIELD);
     }
 
     get protocolId() {
         return getFieldValue(this.sessionProtocol.data, PROTOCOL_ID_FIELD);
     }
 
-    @wire(getLastTreatments, { treatmentSessionId: '$treatmentSessionId', protocolId: '$protocolId', recordCount: '$recordCount'})
+    @wire(getLastTreatments, { treatmentPlanId: '$treatmentPlanId', protocolId: '$protocolId', recordCount: '$recordCount'})
     lastTreatments;
 
     handleToggle() {
