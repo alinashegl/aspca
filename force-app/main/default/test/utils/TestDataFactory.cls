@@ -593,10 +593,18 @@ public without sharing class TestDataFactory {
         return plan;
     }
 
+    public static Contact createContact() {
+        Contact c = new Contact(FirstName = 'Test', LastName = 'Contact');
+        insert c;
+        return c;
+    }
+
     public static Treatment_Session__c createSession(){
         Treatment_Session__c session = new Treatment_Session__c();
         Treatment_Plan__c plan = createPlan();
+        Contact contact = createContact();
         session.Treatment_Plan__c = plan.Id;
+        session.Session_Contact__c = contact.Id;
         insert session;
         return session;
     }
@@ -617,7 +625,7 @@ public without sharing class TestDataFactory {
     public static List<Session_Protocol__c> createSessionProtocols() {
         List<Protocol__c> protocols = createProtocols();
         Treatment_Session__c session = createSession();
-        Session_Protocol__c[] sessionProtocols = [SELECT Id, TreatmentSessionId__c, ProtocolId__c FROM Session_Protocol__c WHERE TreatmentSessionId__c =: session.Id];
+        Session_Protocol__c[] sessionProtocols = [SELECT Id, TreatmentSessionId__c, TreatmentSessionId__r.Treatment_Plan__c, ProtocolId__c FROM Session_Protocol__c WHERE TreatmentSessionId__c =: session.Id];
         return sessionProtocols;
     }
 
