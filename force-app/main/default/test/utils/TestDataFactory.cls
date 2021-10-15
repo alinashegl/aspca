@@ -593,10 +593,18 @@ public without sharing class TestDataFactory {
         return plan;
     }
 
+    public static Contact createContact() {
+        Contact c = new Contact(FirstName = 'Test', LastName = 'Contact');
+        insert c;
+        return c;
+    }
+
     public static Treatment_Session__c createSession(){
         Treatment_Session__c session = new Treatment_Session__c();
         Treatment_Plan__c plan = createPlan();
+        Contact contact = createContact();
         session.Treatment_Plan__c = plan.Id;
+        session.Session_Contact__c = contact.Id;
         insert session;
         return session;
     }
@@ -617,7 +625,7 @@ public without sharing class TestDataFactory {
     public static List<Session_Protocol__c> createSessionProtocols() {
         List<Protocol__c> protocols = createProtocols();
         Treatment_Session__c session = createSession();
-        Session_Protocol__c[] sessionProtocols = [SELECT Id, TreatmentSessionId__c, ProtocolId__c FROM Session_Protocol__c WHERE TreatmentSessionId__c =: session.Id];
+        Session_Protocol__c[] sessionProtocols = [SELECT Id, TreatmentSessionId__c, TreatmentSessionId__r.Treatment_Plan__c, ProtocolId__c FROM Session_Protocol__c WHERE TreatmentSessionId__c =: session.Id];
         return sessionProtocols;
     }
 
@@ -711,5 +719,34 @@ public without sharing class TestDataFactory {
         }
         insert aDogs;
         return aDogs;
+    }
+
+    public static Observation__c[] createObservations(){
+      Animal__c animal = createAnimal();
+      String[] observationTypes = new String[]{'Happy Tail', 'Observation', 'Concern'};
+      Observation__c[] newObservations = new Observation__c[0];
+      for(String type : observationTypes){
+        Observation__c observation = new Observation__c(
+          Animal__c = animal.Id,
+          Observation_Type__c = type,
+          Observation_Notes__c = 'test Notes',
+          Observation_Reported_By__c = 'TN'
+        );
+        newObservations.add(observation);
+      }
+      insert newObservations;
+      return newObservations;
+    }
+
+    public static Daily_Enrichment__c createEnrichment() {
+        Animal__c a = createAnimal();
+        Daily_Enrichment__c enrichment = new Daily_Enrichment__c(
+            Animal__c = a.Id,
+            Notes__c = 'Test notes for test data factory',
+            DE_Date__c = System.today(),
+            Enrichment_Coordinator__c = 'Hailey Kohl'
+        );
+        insert enrichment;
+        return enrichment;
     }
 }

@@ -61,4 +61,8 @@ export default class TreatmentSessionChildList extends LightningElement {
     get tableName(){
         return this.objectApi == 'Additional_Dog_Present__c' ? 'Dogs Present' : 'Protocol Contacts';
     }
+
+    get addNewButtonLabel(){
+        return this.objectApi == 'Additional_Dog_Present__c' ? 'Add New Dog' : 'Add New Contact';
+    }
 }

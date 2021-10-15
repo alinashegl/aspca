@@ -1,0 +1,24 @@
+<aura:component controller="ObservationQuickCreateController"
+    implements="force:lightningQuickActionWithoutHeader,force:hasRecordId">
+
+    <aura:attribute name="enrichment" type="Daily_Enrichment__c" />
+    <aura:attribute name="newObservation" type="Observation__c"
+        default="{ 'sobjectType': 'Observation__c' }" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <div class="slds-page-header" role="banner">
+        <h1 class="slds-page-header__title slds-var-m-right_small slds-truncate">Create New Happy Tail</h1>
+    </div>
+
+     <lightning:input aura:id="observationField" name="reportedby" label="Initials"
+                      value="{!v.newObservation.Observation_Reported_By__c}" required="true"/>
+            
+    <lightning:textarea aura:id="observationField" name="notes" label="Notes"
+                        value="{!v.newObservation.Observation_Notes__c}" />
+        
+    <lightning:button label="Cancel" onclick="{!c.handleCancel}" class="slds-var-m-top_medium" />
+    <lightning:button label="Save Happy Tail" onclick="{!c.handleSaveObservation}"
+               variant="brand" class="slds-var-m-top_medium"/>
+    
+</aura:component>
