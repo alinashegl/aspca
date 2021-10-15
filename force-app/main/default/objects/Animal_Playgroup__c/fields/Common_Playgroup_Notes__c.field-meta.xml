@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Common_Playgroup_Notes__c</fullName>
+    <externalId>false</externalId>
+    <label>Common Playgroup Notes</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Greeted – tense</fullName>
+                <default>false</default>
+                <label>Greeted – tense</label>
+            </value>
+            <value>
+                <fullName>Greeted – politely</fullName>
+                <default>false</default>
+                <label>Greeted – politely</label>
+            </value>
+            <value>
+                <fullName>Greeted – rude but playful</fullName>
+                <default>false</default>
+                <label>Greeted – rude but playful</label>
+            </value>
+            <value>
+                <fullName>Greeted – playful</fullName>
+                <default>false</default>
+                <label>Greeted – playful</label>
+            </value>
+            <value>
+                <fullName>Greeted – no greeting</fullName>
+                <default>false</default>
+                <label>Greeted – no greeting</label>
+            </value>
+            <value>
+                <fullName>Greeted – rude, aroused, not social</fullName>
+                <default>false</default>
+                <label>Greeted – rude, aroused, not social</label>
+            </value>
+            <value>
+                <fullName>Disengaged - remained tense</fullName>
+                <default>false</default>
+                <label>Disengaged - remained tense</label>
+            </value>
+            <value>
+                <fullName>Disengaged – relaxed some</fullName>
+                <default>false</default>
+                <label>Disengaged – relaxed some</label>
+            </value>
+            <value>
+                <fullName>Disengaged – relaxed and milled</fullName>
+                <default>false</default>
+                <label>Disengaged – relaxed and milled</label>
+            </value>
+            <value>
+                <fullName>Played – chase</fullName>
+                <default>false</default>
+                <label>Played – chase</label>
+            </value>
+            <value>
+                <fullName>Played – wrestle</fullName>
+                <default>false</default>
+                <label>Played – wrestle</label>
+            </value>
+            <value>
+                <fullName>Played – rude</fullName>
+                <default>false</default>
+                <label>Played – rude</label>
+            </value>
+            <value>
+                <fullName>Played – roughly</fullName>
+                <default>false</default>
+                <label>Played – roughly</label>
+            </value>
+            <value>
+                <fullName>Played – boxed</fullName>
+                <default>false</default>
+                <label>Played – boxed</label>
+            </value>
+            <value>
+                <fullName>Played – arousal escalated</fullName>
+                <default>false</default>
+                <label>Played – arousal escalated</label>
+            </value>
+            <value>
+                <fullName>Aggressed</fullName>
+                <default>false</default>
+                <label>Aggressed</label>
+            </value>
+            <value>
+                <fullName>Took breaks</fullName>
+                <default>false</default>
+                <label>Took breaks</label>
+            </value>
+            <value>
+                <fullName>Unresponsive to dogs’ correction</fullName>
+                <default>false</default>
+                <label>Unresponsive to dogs’ correction</label>
+            </value>
+            <value>
+                <fullName>Tolerated play solicitations</fullName>
+                <default>false</default>
+                <label>Tolerated play solicitations</label>
+            </value>
+            <value>
+                <fullName>Tolerated rude behavior</fullName>
+                <default>false</default>
+                <label>Tolerated rude behavior</label>
+            </value>
+            <value>
+                <fullName>Appropriately corrected rude behavior</fullName>
+                <default>false</default>
+                <label>Appropriately corrected rude behavior</label>
+            </value>
+            <value>
+                <fullName>Overcorrected rude approach</fullName>
+                <default>false</default>
+                <label>Overcorrected rude approach</label>
+            </value>
+            <value>
+                <fullName>Defensive</fullName>
+                <default>false</default>
+                <label>Defensive</label>
+            </value>
+            <value>
+                <fullName>Responded to handler correction</fullName>
+                <default>false</default>
+                <label>Responded to handler correction</label>
+            </value>
+            <value>
+                <fullName>Unresponsive to handler correction</fullName>
+                <default>false</default>
+                <label>Unresponsive to handler correction</label>
+            </value>
+            <value>
+                <fullName>Requires drag for TO</fullName>
+                <default>false</default>
+                <label>Requires drag for TO</label>
+            </value>
+            <value>
+                <fullName>Requires Muzzle</fullName>
+                <default>false</default>
+                <label>Requires Muzzle</label>
+            </value>
+            <value>
+                <fullName>Requires handler to crate breaks in play</fullName>
+                <default>false</default>
+                <label>Requires handler to crate breaks in play</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>
