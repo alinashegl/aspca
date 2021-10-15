@@ -26,6 +26,10 @@
                 <behavior>Edit</behavior>
                 <field>Description__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Protocol_Box_Link__c</field>
+            </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
     </layoutSections>
@@ -50,6 +54,7 @@
     </layoutSections>
     <relatedLists>
         <fields>NAME</fields>
+        <fields>Treatment_Plan__c</fields>
         <relatedList>Plan_Protocol__c.Protocol__c</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
