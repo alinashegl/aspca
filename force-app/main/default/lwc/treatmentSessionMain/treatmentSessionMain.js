@@ -38,6 +38,7 @@ export default class TreatmentSessionMain extends NavigationMixin(LightningEleme
     activeProtocols = [];
     activeSession = false;
     allColumns = FORM_FACTOR == 'Large' ? true : false;
+    isLargeDisplay = FORM_FACTOR == 'Large' ? true : false;
     wireResponse;
     showModifySession = false;
     refresh = false;

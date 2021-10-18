@@ -28,21 +28,30 @@
                 </template>
         </lightning-card>
         <lightning-card>
-            <p class="sectionTitle">Unassigned Protocols</p>
-            <template if:true={unassignedProtocols}>
+            <p class="sectionTitle">
+                Unassigned Protocols
+                <lightning-button-icon 
+                    icon-name={toggleButtonIconName} 
+                    alternative-text="open" 
+                    onclick={handleToggleView} 
+                    title="Open"
+                    variant="bare"
+                    size="small"
+                    class="slds-m-left_x-small"
+                >
+                </lightning-button-icon>
+            </p>
+
+            <template if:true={showUnassignedProtocols}>
                 <lightning-layout multiple-rows>
                     <template for:each={unassignedProtocols} for:item='protocol'>
                         <lightning-layout-item key={protocol.Id} size="12" small-device-size="12" medium-device-size="3" large-device-size="3" class="slds-p-around_xx-small">
-                            <div class="slds-form-element">
-                                <div class="slds-form-element__static">
-                                    <c-treatment-modify-session-protocol
-                                        type="unassigned"
-                                        protocol={protocol}
-                                        onprotocolassignment={handleProtocolAssignmentEvent}
-                                    >
-                                    </c-treatment-modify-session-protocol>
-                                </div>
-                            </div>
+                            <c-treatment-modify-session-protocol
+                                type="unassigned"
+                                protocol={protocol}
+                                onprotocolassignment={handleProtocolAssignmentEvent}
+                            >
+                            </c-treatment-modify-session-protocol>
                         </lightning-layout-item>
                     </template>
                 </lightning-layout>
