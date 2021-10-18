@@ -48,7 +48,7 @@
                     $A.get("e.force:refreshView").fire();
                 }
                 else if (state === "ERROR") {
-                    console.log('Problem saving contact, response state: ' + state);
+                    console.log('Problem saving observation, response state: ' + state);
                 }
                 else {
                     console.log('Unknown problem, response state: ' + state);

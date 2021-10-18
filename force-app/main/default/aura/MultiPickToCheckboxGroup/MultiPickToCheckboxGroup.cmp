@@ -1,0 +1,14 @@
+<aura:component controller="MultiPickToCheckboxGroupController">
+    <aura:attribute name="objectName" type="String" />
+    <aura:attribute name="fieldName" type="String" />
+    <aura:attribute name="fieldLabel" type="String" />
+    <aura:attribute name="required" type="Boolean" />
+    <aura:attribute name="selectedValues" type="List" />
+    <aura:attribute name="options" type="List" />
+    <aura:attribute name="outputValues" type="String" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:method name="doValidityCheck" action="{!c.doValidityCheck}" />
+    <div class="multiSelect">
+        <lightning:checkboxGroup aura:id="inputCmp" name="{!v.fieldName}" label="{!v.fieldLabel}" options="{!v.options}" value="{!v.selectedValues}" required="{!v.required}" onchange="{!c.handleChange}" />
+    </div>
+</aura:component>
