@@ -19,7 +19,6 @@ import PLAN_PROTOCOL_TREATMENT_PLAN_FIELD from '@salesforce/schema/Plan_Protocol
 export default class TreatmentModifySession extends LightningElement {
     @api sessionId = null;
     @api recordId = null;
-    horizontalAlign = 'space';
     wireResponse;
     assignedProtocols = [];
     planProtocolsToUpdate = [];
@@ -29,6 +28,8 @@ export default class TreatmentModifySession extends LightningElement {
     addNewProtocol = false;
     isUpdateButtonDisabled = true;
     preferredMotivators;
+    updating = false;
+    toggleShowUnassignedProtocols = false;
 
     _refresh;
     @api
@@ -94,8 +95,6 @@ export default class TreatmentModifySession extends LightningElement {
         }
         this.isUpdateButtonDisabled = (this.assignedProtocolUpdates.length > 0 || this.protocolsToAssign.length > 0 || this.planProtocolsToUpdate.length > 0) ? false : true;
     }
-
-    updating = false;
 
     handleProtocolAssignmentUpdates(){
         window.console.log('in handleProtocolAssignmentUpdates');
@@ -200,6 +199,10 @@ export default class TreatmentModifySession extends LightningElement {
         );
     }
 
+    handleToggleView(){
+        this.toggleShowUnassignedProtocols = !this.toggleShowUnassignedProtocols;
+    }
+
     get protocolType(){
         return this.sessionId != null ? 'session' : 'protocol';
     }
@@ -210,5 +213,13 @@ export default class TreatmentModifySession extends LightningElement {
 
     get showLoading(){
         return this.updating;
+    }
+
+    get toggleButtonIconName(){
+        return this.toggleShowUnassignedProtocols ? 'utility:chevrondown' : 'utility:chevronright';
+    }
+
+    get showUnassignedProtocols(){
+        return this.unassignedProtocols && this.toggleShowUnassignedProtocols;
     }
 }

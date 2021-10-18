@@ -1,4 +1,5 @@
 import { LightningElement, api, wire } from 'lwc';
+import FORM_FACTOR from '@salesforce/client/formFactor'
 import hasRemoveFromPlanPermission from '@salesforce/customPermission/Remove_Protocol_From_Plan';
 import getProtocolSkippedInfo from '@salesforce/apex/TreatmentSessionLWCController.getProtocolSkippedInfo';
 
@@ -10,6 +11,7 @@ export default class TreatmentModifySessionProtocol extends LightningElement {
     notRemoved = false;
     addToPlan = false;
     loading = true;
+    formFactor = FORM_FACTOR;
 
     _refresh;
     @api
@@ -22,33 +24,22 @@ export default class TreatmentModifySessionProtocol extends LightningElement {
         this.refreshProtocol();
     }
 
-    // connectedCallback(){
-    //     if(this.protocolType == 'protocol'){
-    //         window.console.log('protocol: ', JSON.stringify(this.protocol));
-    //     }
-    // }
-
     @api
     refreshProtocol(){
         if(this.isAssignedType){
-            // if(this.protocolType == 'session'){
-                getProtocolSkippedInfo({protocolId: this.protocol.Id})
-                .then((result) => {
-                    if(result != null){
-                        this.notSkipped = this.isAssignedType ? !result.IsSkipped__c : false;
-                        this.notRemoved = !result.IsRemoved__c;
-                    }
-                    else {
-                        this.notRemoved = !this.protocol.IsRemoved__c;
-                    }
-                })
-                .then(() =>{
-                    this.loading = false;
-                })
-            // } else {
-                
-            //     this.loading = false;
-            // }
+            getProtocolSkippedInfo({protocolId: this.protocol.Id})
+            .then((result) => {
+                if(result != null){
+                    this.notSkipped = this.isAssignedType ? !result.IsSkipped__c : false;
+                    this.notRemoved = !result.IsRemoved__c;
+                }
+                else {
+                    this.notRemoved = !this.protocol.IsRemoved__c;
+                }
+            })
+            .then(() =>{
+                this.loading = false;
+            })
         }
     }
 
@@ -116,5 +107,9 @@ export default class TreatmentModifySessionProtocol extends LightningElement {
 
     get canRemoveProtocol(){
         return hasRemoveFromPlanPermission;
+    }
+
+    get boxClass(){
+        return FORM_FACTOR == 'Small' ? 'box slds-grid' : 'slds-box slds-grid';
     }
 }
