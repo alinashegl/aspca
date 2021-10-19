@@ -98,7 +98,7 @@
         <fields>Session_Contact__c</fields>
         <fields>Session_Notes__c</fields>
         <relatedList>Treatment_Session__c.Treatment_Plan__c</relatedList>
-        <sortField>Session_Date__c</sortField>
+        <sortField>NAME</sortField>
         <sortOrder>Desc</sortOrder>
     </relatedLists>
     <relatedLists>
