@@ -1,6 +1,9 @@
 import { LightningElement, api } from 'lwc';
 import { updateRecord } from 'lightning/uiRecordApi';
 import { NavigationMixin } from "lightning/navigation";
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+
+import getActiveProtocolAndFields from '@salesforce/apex/TreatmentSessionLWCController.getActiveProtocolAndFields';
 
 import PROTOCOL_ID_FIELD from '@salesforce/schema/Session_Protocol__c.Id';
 import IS_SKIPPED_FIELD from '@salesforce/schema/Session_Protocol__c.IsSkipped__c';
@@ -8,9 +11,6 @@ import IS_REMOVED_FIELD from '@salesforce/schema/Session_Protocol__c.IsRemoved__
 import NEEDS_REVIEW_FIELD from '@salesforce/schema/Session_Protocol__c.Needs_Review__c';
 import PROTOCOL_NOTES_FIELD from '@salesforce/schema/Session_Protocol__c.Protocol_Notes__c';
 import PREFERRED_MOTIVATORS_FIELD from '@salesforce/schema/Session_Protocol__c.Preferred_Motivators__c';
-
-import getActiveProtocolAndFields from '@salesforce/apex/TreatmentSessionLWCController.getActiveProtocolAndFields';
-import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 export default class TreatmentSessionProtocol extends NavigationMixin(LightningElement) {
     @api recordId;
