@@ -17,7 +17,7 @@ import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 const columns = [
     { label: 'View',
         type: 'button',
-      typeAttributes: { label: "View", name: "goToObservation", variant: "base"}
+        typeAttributes: { label: "View", name: "goToObservation", variant: "base"}
     },
     { label: 'Date', fieldName: 'Observation_Date__c', type:'date-local'},
     { label: 'Notes', fieldName: 'Observation_Notes__c' },

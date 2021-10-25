@@ -1,16 +1,24 @@
 public with sharing class CustomLookupLWCController {
 
     @AuraEnabled
-    public static searchResponse search(String objectName, List<String> fields, String searchTerm, Integer offset){
+    public static searchResponse search(String objectName, List<String> fields, String searchTerm, Integer offset, String whereClause, String fieldToQuery){
+        System.debug('whereclause: ' + whereClause);
+
         searchResponse response = new searchResponse();
         Integer rowsToSkip = offset * 25;
         String searchKeyword = searchTerm + '*';
         String returningQuery = objectName+' ( Id, '+String.join(fields,',')+')';
 
-        String query = 'SELECT Id, '+String.join(fields,',')+' FROM ' + objectName + ' WHERE Name LIKE \'%' + searchTerm + '%\' LIMIT 25 OFFSET ' + rowsToSkip;
-        Integer  count = database.countQuery('SELECT count() FROM ' + objectName + ' WHERE Name LIKE \'%' + searchTerm + '%\'');
+        String whereString;
+        if(whereClause != null){
+            whereString = whereClause;
+        }
+        whereString = fieldToQuery == null ? whereString : whereString + fieldToQuery;
 
-        System.debug(' query '+query);
+        String query = 'SELECT Id, '+String.join(fields,',')+' FROM ' + objectName + ' WHERE ' + whereClause + ' LIKE \'%' + searchTerm + '%\' LIMIT 25 OFFSET ' + rowsToSkip;
+        System.debug('query '+query);
+        Integer  count = database.countQuery('SELECT count() FROM ' + objectName + ' WHERE ' + whereClause + ' LIKE \'%' + searchTerm + '%\'');
+
         response.recordList = Database.query(query);
         response.pageCount = Math.ceil(Decimal.valueOf(count).divide(25,1));
 
@@ -24,16 +32,14 @@ public with sharing class CustomLookupLWCController {
 
     @AuraEnabled (cacheable=true)
     public static sobject getCurrentRecord(String objectName, Id recordId, String[] fields){
-    // public static sobject getCurrentRecord(String objectName){
         System.debug('in getCurrentCrecord: ' + objectName + ': ' + recordId + ': ' + fields);
+
         String query = 'SELECT Id, '+String.join(fields,',')+' FROM ' + objectName + ' WHERE Id = \'' + recordId + '\' LIMIT 1';
 
         System.debug(' query '+query);
         sobject sob = Database.query(query)[0];
         System.debug('sob: ' + sob);
         return sob;
-
-        // return null;
     }
 
     @AuraEnabled
@@ -50,9 +56,9 @@ public with sharing class CustomLookupLWCController {
     }
 
     @AuraEnabled (cacheable=true)
-    public static SObject[] getRecords(String type){
+    public static SObject[] getRecentlyViewedRecords(String type, String whereClause){
         try {
-            SObject[] objList = getRecordList(type);
+            SObject[] objList = getRecordList(type, whereClause);
 
             System.debug('objList = ' + objList);
             return objList;
@@ -61,22 +67,24 @@ public with sharing class CustomLookupLWCController {
         }
     }
 
-    private static SObject[] getRecordList(String type){
+    private static SObject[] getRecordList(String type, String whereClause){
         Set<Id> recordIds = getRecentlyViewedIds(type);
-        SObject[] recentlyViewed = queryRecords(type, recordIds);
+        SObject[] recentlyViewed = queryRecords(type, recordIds, whereClause);
 
         return recentlyViewed;
     }
 
-    private static SObject[] queryRecords(String type, Set<Id> recordIds){
+    private static SObject[] queryRecords(String type, Set<Id> recordIds, String whereClause){
         String fields = fieldsToQuery(type);
         Id[] recIds = new Id[0];
         recIds.addAll(recordIds);
-        String query = 'SELECT Id, ' + fields + ' FROM ' + type + ' WHERE Id IN: recIds';
+        
+        String query = 'SELECT Id, ' + fields + ' FROM ' + type + ' WHERE ';
+        query += whereClause == null ? 'Id IN: recIds' : whereClause + 'Id IN: recIds';
+
         System.debug('query String = '+ query);
         SObject[] records = Database.query(query);
         return records;
-
     }
 
     private static Set<Id> getRecentlyViewedIds(String type){
@@ -89,9 +97,10 @@ public with sharing class CustomLookupLWCController {
 
     private static String fieldsToQuery(String type){
         Map<String, String> objToFields = new Map<String, String>{
-            'Contact' => 'Name'
+            'Contact' => 'Name',
+            'Animal__c' => 'Animal_Name__c'
         };
 
-        return objToFields.containsKey(type) ? objToFields.get(type) : null;
+        return objToFields.containsKey(type) ? objToFields.get(type) : 'Name';
     }
 }

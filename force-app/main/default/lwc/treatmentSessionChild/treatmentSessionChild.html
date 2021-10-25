@@ -3,16 +3,27 @@
         <lightning-record-edit-form
             object-api-name={objectApi}
             record-id={record.Id}
-            onsuccess={handleSuccess}>
+            onsubmit={handleUpdateRecordSubmit}
+            onsuccess={handleSuccess}
+            >
             <lightning-messages>
             </lightning-messages>
             <div class="slds-grid">
                 <div class="slds-col slds-size_3-of-8 ">
-                    <lightning-input-field
-                        variant="label-hidden"
-                        field-name={parentFieldName}
-                        onchange={enableSaveButton}>
-                    </lightning-input-field>
+                    <c-custom-lookup
+                        obj-name={customLookUpObject}
+                        icon-name={customLookupIcon}
+                        placeholder={customLookupPlaceholder}
+                        fields={customLookupFields}
+                        display-fields={customLookupDisplayFields}
+                        onlookup={handleLookup}
+                        value-id={customLookupNewId}
+                        read-only=true
+                        where-clause={customLookupWhereClause}
+                        field-to-query={customLookupFeidlToQuery}
+                        label-name={customLookupLabelName}
+                    >
+                    </c-custom-lookup>
                 </div>
                 <template if:true={isContactList}>
                     <div class="slds-col slds-size_3-of-8 slds-p-left_x-small">
@@ -24,11 +35,11 @@
                     </div>
                     <div class="slds-col slds-size_1-of-8 slds-p-left_x-small">
                         <lightning-button-icon 
-                            icon-name="action:approval" 
+                            icon-name={saveButtonIcon} 
                             alternative-text="Save" 
                             type="submit"
                             title="Save"
-                            disabled={buttonStatus}
+                            disabled={disableSaveButton}
                             variant={saveButtonVariant}>
                         </lightning-button-icon>
                     </div>                    
@@ -48,16 +59,25 @@
     <template if:false={record}>
         <lightning-record-edit-form
             object-api-name={objectApi}
-            onsuccess={handleSuccess}>
+            onsuccess={handleSuccess}
+            onsubmit={handleNewRecordSubmit}
+            >
             <lightning-messages>
             </lightning-messages>
             <div class="slds-grid">
                 <div class="slds-col slds-size_3-of-8">
-                    <lightning-input-field
-                        variant="label-hidden"
-                        field-name={parentFieldName}
-                        onchange={enableButton}>
-                    </lightning-input-field>
+                    <c-custom-lookup
+                        obj-name={customLookUpObject}
+                        icon-name={customLookupIcon}
+                        placeholder={customLookupPlaceholder}
+                        fields={customLookupFields}
+                        display-fields={customLookupDisplayFields}
+                        onlookup={handleLookup}
+                        where-clause={customLookupWhereClause}
+                        field-to-query={customLookupFeidlToQuery}
+                        label-name={customLookupLabelName}
+                    >
+                    </c-custom-lookup>
                 </div>
                 <template if:true={isContactList}>
                     <div class="slds-col slds-size_3-of-8 slds-p-left_x-small">
@@ -68,15 +88,16 @@
                         </lightning-input-field>
                     </div>
                 </template>
-                <div class="slds-col slds-size_2-of-8 slds-p-left_x-small">
-                    <lightning-input-field
-                        variant="label-hidden"
-                        field-name="Session_Protocol__c"
-                        disabled=true
-                        value={protocolId}
+                <template if:true={isLoading}>
+                    <div class="slds-m-left_small">
+                        <lightning-icon 
+                            icon-name='utility:spinner'
+                            alternative-text="loading" 
+                            size="x-small"
                         >
-                    </lightning-input-field>
-                </div>
+                        </lightning-icon>
+                    </div>
+                </template>
             </div>
             <div class="slds-p-top_small">
                 <lightning-button

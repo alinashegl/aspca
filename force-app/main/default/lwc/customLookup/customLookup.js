@@ -1,8 +1,8 @@
 import { LightningElement, api, wire } from 'lwc';
-import getRecords from '@salesforce/apex/CustomLookupLWCController.getRecords';
+import getRecentlyViewedRecords from '@salesforce/apex/CustomLookupLWCController.getRecentlyViewedRecords';
 import getCurrentRecord from '@salesforce/apex/CustomLookupLWCController.getCurrentRecord';
-
 import search from '@salesforce/apex/CustomLookupLWCController.search';
+
 const DELAY = 200;
 
 export default class CustomLookup extends LightningElement {
@@ -18,6 +18,8 @@ export default class CustomLookup extends LightningElement {
     @api createRecord;
     @api fields = ['Name'];
     @api displayFields = 'Name, Rating, AccountNumber';
+    @api whereClause;
+    @api fieldToQuery = 'Name';
 
     error;
 
@@ -50,13 +52,13 @@ export default class CustomLookup extends LightningElement {
     connectedCallback(){
         document.addEventListener('click', this._handler = this.close.bind(this));
 
-        if(this.objName.includes('__c')){
-            let obj = this.objName.substring(0, this.objName.length-3);
-            this.objectLabel = obj.replaceAll('_',' ');
-        }else{
-            this.objectLabel = this.objName;
-        }
-        this.objectLabel    = this.titleCase(this.objectLabel);
+        // if(this.objName.includes('__c')){
+        //     let obj = this.objName.substring(0, this.objName.length-3);
+        //     this.objectLabel = obj.replaceAll('_',' ');
+        // }else{
+        //     this.objectLabel = this.objName;
+        // }
+        // this.objectLabel    = this.titleCase(this.objectLabel);
         let fieldList;
         if( !Array.isArray(this.displayFields)){
             fieldList       = this.displayFields.split(',');
@@ -65,7 +67,7 @@ export default class CustomLookup extends LightningElement {
         }
         
         if(fieldList.length > 1){
-            this.field  = fieldList[0].trim();
+            this.field = fieldList[0].trim();
             this.field1 = fieldList[1].trim();
         }
         if(fieldList.length > 2){
@@ -115,7 +117,7 @@ export default class CustomLookup extends LightningElement {
     }
 
     handleOnFocus(){
-        getRecords({type: this.objName})
+        getRecentlyViewedRecords({type: this.objName, whereClause: this.whereClause})
         .then((result) =>{
             this.handleResponse(result);
             this.showSpinner = false;
@@ -141,7 +143,9 @@ export default class CustomLookup extends LightningElement {
             objectName : this.objName,
             fields     : this.fields,
             searchTerm : this.searchKey,
-            offset: this.offset
+            offset: this.offset,
+            whereClause: this.whereClause,
+            fieldToQuery: this.fieldToQuery
         })
         .then(result => {
             this.pageCount = result.pageCount;
@@ -159,6 +163,8 @@ export default class CustomLookup extends LightningElement {
     handleResponse(result){
         let stringResult = JSON.stringify(result);
         let allResult    = JSON.parse(stringResult);
+        window.console.log('this.field: ', this.field);
+        window.console.log('this.field1: ', this.field1);
         allResult.forEach( record => {
             record.FIELD1 = record[this.field];
             record.FIELD2 = record[this.field1];
@@ -169,6 +175,8 @@ export default class CustomLookup extends LightningElement {
             }
         });
         this.searchRecords = allResult;
+        window.console.log('searchRecords: ');
+        window.console.table(this.searchRecords);
     }
 
     currentRecordResponse(result){
@@ -256,7 +264,7 @@ export default class CustomLookup extends LightningElement {
     }
 
     get modalTitle(){
-        return this.showCreateRecord ? 'Create New Contact' : 'Search for Contact';
+        return this.showCreateRecord ? 'Create New ' + this.labelName : 'Search for ' + this.labelName;
     }
 
     get disablePreviousButton(){

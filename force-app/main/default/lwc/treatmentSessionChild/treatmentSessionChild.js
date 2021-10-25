@@ -1,23 +1,46 @@
-import { LightningElement, api } from 'lwc';
+import { RecordFieldDataType } from 'lightning/uiRecordApi';
+import { LightningElement, api, wire } from 'lwc';
 
 export default class TreatmentSessionChild extends LightningElement {
     @api record;
     @api objectApi;
     @api protocolId;
+    customLookupNewId;
+    isLoading = false;
 
     hasChanged = false;
 
-    handleSuccess(){
-        window.console.log('successfully updated');
+    connectedCallback(){
+        if(this.record){
+            this.customLookupNewId = (this.isContactList) ? this.record.Contact__c : this.record.Additional_Dog__c;
+        }
+    }
+
+    handleSuccess(event){
+        window.console.log('successfully updated: ', event.detail.id);
         this.hasChanged = false;
         if(this.record == undefined){
             this.updateList();
         }
+        this.isLoading = false;
     }
 
-    handleSubmit(event){
+    handleUpdateRecordSubmit(){
+        this.isLoading = true;
+    }
+
+    handleNewRecordSubmit(event){
+        this.isLoading = true;
         event.preventDefault(); 
-        this.handleRemoveRecord();
+        const fields = event.detail.fields;
+        if(this.isContactList){
+            fields['Contact__c'] = this.customLookupNewId;
+        } else {
+            fields['Additional_Dog__c'] = this.customLookupNewId
+        }
+
+        fields['Session_Protocol__c'] = this.protocolId;
+        this.template.querySelector('lightning-record-edit-form').submit(fields);
     }
 
     handleRemoveRecord(){
@@ -42,16 +65,26 @@ export default class TreatmentSessionChild extends LightningElement {
         this.updateList();
     }
 
+    handleLookup(event){
+        window.console.log('handleLookup: ', JSON.stringify ( event.detail) );
+        this.customLookupNewId = event.detail.data.recordId;
+        // this.lookupIdChanged = this.customLookupNewId != this.record.Id;
+    }
+
     get isContactList(){
         return this.objectApi === 'Session_Protocol_Contact__c' ? true : false;
     }
 
-    get buttonStatus(){
+    get disableSaveButton(){
         return !this.hasChanged;
     }
 
+    get saveButtonIcon(){
+        return this.isLoading ? 'utility:spinner' : "action:approval";
+    }
+
     get saveButtonVariant(){
-        return this.hasChanged ? 'border-filled' : 'border';
+        return this.disableSaveButton ? 'border-filled' : 'border';
     }
 
     get addNewLabel(){
@@ -62,4 +95,36 @@ export default class TreatmentSessionChild extends LightningElement {
         return this.isContactList ? 'Contact__c' : 'Additional_Dog__c';
     }
 
+    get customLookUpObject(){
+        return this.isContactList ? 'Contact' : 'Animal__c';
+    }
+
+    get customLookupFields(){
+        return this.isContactList ? ['Name','Email','Phone'] : ['Animal_Name__c', 'Name'];
+    }
+
+    get customLookupDisplayFields(){
+        return this.isContactList ? 'Name, Email, Phone' : 'Animal_Name__c, Name';
+    }
+
+    get customLookupPlaceholder(){
+        return this.isContactList ? 'Search Contacts...' : 'Search Dogs...';
+    }
+
+    get customLookupIcon(){
+        return this.isContactList ? 'standard:contact' : 'custom:custom47';
+    }
+
+    get customLookupWhereClause(){
+        if(!this.isContactList){
+            return 'Potential_Helper_Dog__c = true AND ';
+        }
+    }
+
+    get customLookupFeidlToQuery(){
+        return this.isContactList ? 'Name' : 'Animal_Name__c';
+    }
+    get customLookupLabelName(){
+        return this.isContactList ? 'Protocol Contact' : 'Helper Dog';
+    }
 }
