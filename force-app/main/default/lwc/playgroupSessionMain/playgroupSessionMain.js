@@ -1,26 +1,46 @@
 import { LightningElement, api, wire } from 'lwc';
 import getPlaygroupSessionInfo from '@salesforce/apex/playgroupSessionLWCController.getPlaygroupSessionInfo';
-import copyPlaygroup from '@salesforce/apex/playgroupSessionLWCController.copyPlaygroup';
+import startPlaygroupSession from '@salesforce/apex/playgroupSessionLWCController.startPlaygroupSession';
 
 export default class PlaygroupSessionMain extends LightningElement {
     @api recordId;
+    @api newSession = false; //if newSession = true need to create a session
+    @api animalIds = [];
     wireResponse;
-    updating = true;
+    showSpinner = true;
+    animals = [];
+
+    fields = ["Name","Email","Phone"];
+    displayFields = 'Name, Email, Phone';
 
     @wire(getPlaygroupSessionInfo, {sessionId: '$recordId'})
     response(result){
         this.wireResponse = result;
-        this.updating = false;
+        window.console.log('result: ', JSON.stringify(result));
+        if(result.data && result.data.animalPlaygroups){
+            this.animals = result.data.animalPlaygroups;
+            this.showSpinner = false;
+        }
     }
 
     handleCopyPlaygroup(){
-        this.updating = true;
-        copyPlaygroup({sessionId: this.recordId})
+        this.showSpinner = true;
+        startPlaygroupSession({sessionId: this.recordId})
         .then((response) => {
             this.recordId = response;
         })
         .finally(() => {
-            this.updating = false;
+            this.showSpinner = false;
         })
+    }
+
+    get currentDateTime(){
+        if(!this.recordId){
+            return (new Date().toISOString());
+        }
+    }
+
+    handleLookup(event){
+        window.console.log('handleLookup: ', JSON.stringify ( event.detail) )
     }
 }

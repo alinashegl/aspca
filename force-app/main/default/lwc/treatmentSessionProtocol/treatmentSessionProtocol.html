@@ -9,7 +9,8 @@
             size="small"
         >
         </lightning-button-icon>
-        <lightning-button variant="base" label={protocolName} title={protocolName} onclick={handleToggleView} disabled={protocolButtonStatus} class="slds-m-left_xx-small"></lightning-button>        <lightning-icon icon-name={sessionStatusIconName} alternative-text={sessionStatusIconText} variant={sessionStatusIconVariant} title="success variant x-small" size="x-small"></lightning-icon>
+        <lightning-button variant="base" label={protocolName} title={protocolName} onclick={handleToggleView} disabled={protocolButtonStatus} class="slds-m-left_xx-small"></lightning-button>        
+        <lightning-icon icon-name={sessionStatusIconName} alternative-text={sessionStatusIconText} variant={sessionStatusIconVariant} title="success variant x-small" size="x-small"></lightning-icon>
     </div>
 
     <template if:true={toggleView}>

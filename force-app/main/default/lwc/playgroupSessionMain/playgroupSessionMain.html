@@ -1,3 +1,45 @@
 <template>
-    
+    <template if:true={showSpinner}>
+        <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+    </template>
+    <template if:false={showSPinner}>
+        <!-- <template if:true={recordId}> -->
+            <lightning-record-edit-form
+                object-api-name="Playgroup_Session__c"
+                record-id={recordId}
+            >
+            <lightning-card  variant="Narrow"  title="Playgroup Session">
+                <p class="slds-p-horizontal_x-small">
+                    <c-custom-lookup
+                        obj-name="Contact"
+                        icon-name="standard:contact"
+                        label-name="Playgroup Leader"
+                        placeholder="Search Contacts..." 
+                        fields={fields}
+                        display-fields={displayFields}
+                        onlookup={handleLookup} 
+                    >
+                    </c-custom-lookup>
+                    <!-- value-id='0030100000HPng8AAD' -->
+                </p>
+                <!-- <lightning-input-field field-name="Playgroup_Leader__c"> </lightning-input-field> -->
+                <lightning-input-field field-name="Playgroup_Location__c"> </lightning-input-field>
+                <lightning-input-field field-name="Playgroup_Date_Time__c" value={currentDateTime}> </lightning-input-field>
+                <lightning-button
+                    class="slds-m-top_small"
+                    variant="brand"
+                    type="submit"
+                    name="update"
+                    label="Update"
+                >
+                </lightning-button>
+            </lightning-card>
+            </lightning-record-edit-form>
+            <!-- <template if:true={animals}>
+                <p>
+                    playgroups size: {animals.length}
+                </p>
+            </template> -->
+        <!-- </template> -->
+    </template>
 </template>

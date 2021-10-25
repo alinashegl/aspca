@@ -1,11 +1,17 @@
 public with sharing class playgroupSessionLWCController {
     @AuraEnabled (cacheable=true)
-    public static playgroupSessionInfo getPlaygroupSessionInfo(){
+    public static playgroupSessionInfo getPlaygroupSessionInfo(Id sessionId){
         try {
-            return null;
+            playgroupSessionInfo info = new playgroupSessionInfo();
+            info.animalPlaygroups = animalPlaygroups(sessionId);
+            return info;
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }
+    }
+
+    private static Animal_Playgroup__c[] animalPlaygroups (Id sessionId){
+        return [SELECT Id FROM Animal_Playgroup__c WHERE Playgroup_Session__c =: sessionId];
     }
 
     @AuraEnabled
@@ -156,8 +162,6 @@ public with sharing class playgroupSessionLWCController {
     }    
 
     public class playgroupSessionInfo{
-        // @AuraEnabled public Id sessionId {get; set;}
-        // @AuraEnabled public Id sessionLeader {get; set;}
         @AuraEnabled public Playgroup_Session__c playgroupSession {get; set;}
         @AuraEnabled public Animal_Playgroup__c[] animalPlaygroups {get; set;}
     }
