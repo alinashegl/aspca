@@ -25,7 +25,7 @@
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Required</behavior>
                 <field>Session_Contact__c</field>
             </layoutItems>
             <layoutItems>
@@ -44,8 +44,18 @@
         <detailHeading>false</detailHeading>
         <editHeading>true</editHeading>
         <label>System Information</label>
-        <layoutColumns/>
-        <layoutColumns/>
+        <layoutColumns>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>CreatedById</field>
+            </layoutItems>
+        </layoutColumns>
+        <layoutColumns>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>LastModifiedById</field>
+            </layoutItems>
+        </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
     </layoutSections>
     <layoutSections>
@@ -59,10 +69,16 @@
         <style>CustomLinks</style>
     </layoutSections>
     <relatedLists>
-        <fields>NAME</fields>
+        <excludeButtons>MassChangeOwner</excludeButtons>
         <fields>ProtocolId__c</fields>
+        <fields>Protocol_Box_Link__c</fields>
+        <fields>NAME</fields>
         <fields>IsSkipped__c</fields>
+        <fields>CREATED_DATE</fields>
+        <fields>LAST_UPDATE</fields>
         <relatedList>Session_Protocol__c.TreatmentSessionId__c</relatedList>
+        <sortField>ProtocolId__c</sortField>
+        <sortOrder>Asc</sortOrder>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>

@@ -3,7 +3,7 @@
     <fullName>Box_Link_Validation</fullName>
     <active>true</active>
     <description>The url should start with https:// or http://</description>
-    <errorConditionFormula>NOT(BEGINS(&apos;http&apos;, Protocol_Box_Link__c))</errorConditionFormula>
+    <errorConditionFormula>NOT(BEGINS(Protocol_Box_Link__c, &apos;http&apos;))</errorConditionFormula>
     <errorDisplayField>Protocol_Box_Link__c</errorDisplayField>
     <errorMessage>Please make sure the url starts with http</errorMessage>
 </ValidationRule>
