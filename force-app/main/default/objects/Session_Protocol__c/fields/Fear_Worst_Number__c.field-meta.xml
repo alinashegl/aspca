@@ -2,8 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Fear_Worst_Number__c</fullName>
     <externalId>false</externalId>
-    <formula>VALUE(LEFT(TEXT(Fear_Worst__c ),1))</formula>
-    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <formula>IF(TEXT(Fear_Worst__c) = &quot;Not Applicable&quot;, NULL, VALUE(LEFT(TEXT(Fear_Worst__c),1)))</formula>
     <label>Fear - Worst (Number)</label>
     <precision>18</precision>
     <required>false</required>
