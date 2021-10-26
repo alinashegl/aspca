@@ -25,7 +25,7 @@
                         value="{!v.newEnrichment.Enrichment_Coordinator_Other__c}" />
             
     <c:MultiPickToCheckboxGroup objectName="Daily_Enrichment__c" fieldName="Enrichment_Activities__c" fieldLabel="Enrichment Activities"
-                        selectedValues="{!v.treatmentPlan.Enrichment_Activities__c}" outputValues="{!v.newEnrichment.Enrichment_Activities__c}" required="false" />
+                        selectedValues="{!v.newEnrichment.Enrichment_Activities__c}" outputValues="{!v.newEnrichment.Enrichment_Activities__c}" required="false" />
 
     <lightning:textarea aura:id="enrichmentField" name="notes" label="Notes"
                         value="{!v.newEnrichment.Notes__c}" />

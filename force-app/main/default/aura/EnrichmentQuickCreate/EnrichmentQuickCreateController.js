@@ -8,17 +8,25 @@
                 component.set("v.treatmentPlan", response.getReturnValue());
                 let treatmentPlan = response.getReturnValue();
                 component.set("v.newEnrichment.Animal__c", component.get("v.recordId"));
-                if (treatmentPlan.Id) {
-                    component.set("v.newEnrichment.Related_Treatment_Plan__c", treatmentPlan.Id);
+                if (treatmentPlan) {
+                    if (treatmentPlan.Id) {
+                        component.set("v.newEnrichment.Related_Treatment_Plan__c", treatmentPlan.Id);
+                    }
+                    if (treatmentPlan.Treatment_Bundle__c) {
+                        component.set("v.newEnrichment.Related_Treatment_Bundle__c", treatmentPlan.AssignedTreatmentBundleId__c);
+                    }
+                    if (treatmentPlan.Enrichment_Activities__c) {
+                        component.set("v.newEnrichment.Enrichment_Activities__c", treatmentPlan.Enrichment_Activities__c);
+                    }
+                    else {
+                        component.set("v.newEnrichment.Enrichment_Activities__c", "");
+                    }
+                    if (treatmentPlan.Shelter_Color_Code__c) {
+                        component.set("v.colorCode", treatmentPlan.Shelter_Color_Code__c);
+                    }
                 }
-                if (treatmentPlan.Treatment_Bundle__c) {
-                    component.set("v.newEnrichment.Related_Treatment_Bundle__c", treatmentPlan.AssignedTreatmentBundleId__c);
-                }
-                if (treatmentPlan.Enrichment_Activities__c) {
-                    component.set("v.newEnrichment.Enrichment_Activities__c", treatmentPlan.Enrichment_Activities__c);
-                }
-                if (treatmentPlan.Shelter_Color_Code__c) {
-                    component.set("v.colorCode", treatmentPlan.Shelter_Color_Code__c);
+                else {
+                    component.set("v.newEnrichment.Enrichment_Activities__c", "");
                 }
             } else {
                 console.log('Problem getting treatment plan, response state: ' + state);
