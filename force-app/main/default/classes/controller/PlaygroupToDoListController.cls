@@ -39,4 +39,20 @@ public with sharing class PlaygroupToDoListController {
         }
         return sessionResult;
     }
+
+    @AuraEnabled(cacheable=true)
+    public static List<String> getMedicalIndicators(Id animalId) {
+        Set<String> indicators = new Set<String>();
+        List<Medical_Conditions__c> medConditions = [SELECT Id, Medical_Condition__c FROM Medical_Conditions__c
+                                                    WHERE Medical_Condition__c IN ('Babesia', 'In Heat') AND Animal__c = :animalId];
+        for (Medical_Conditions__c m : medConditions) {
+            if (m.Medical_Condition__c == 'Babesia') {
+                indicators.add('Babesia');
+            }
+            if (m.Medical_Condition__c == 'In Heat') {
+                indicators.add('In Heat');
+            }
+        }
+        return new List<String>(indicators);
+    }
 }

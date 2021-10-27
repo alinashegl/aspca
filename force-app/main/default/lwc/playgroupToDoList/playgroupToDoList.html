@@ -47,9 +47,10 @@
                             </template>
                             <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-large-size_1-of-12 slds-box slds-var-m-right_x-small">
                                 <!-- placeholder section -->
-                                <p><lightning-icon icon-name="utility:priority" variant="success" size="small"></lightning-icon>Babesia</p>
+                                <!-- <p><lightning-icon icon-name="utility:priority" variant="success" size="small"></lightning-icon>Babesia</p>
                                 <p><lightning-icon icon-name="utility:priority" variant="warning" size="small"></lightning-icon>In Heat</p>
-                                <p><lightning-icon icon-name="utility:priority" variant="error" size="small"></lightning-icon>{animal.Handler__c}</p>
+                                <p><lightning-icon icon-name="utility:priority" variant="error" size="small"></lightning-icon>{animal.Handler__c}</p> -->
+                                <c-playgroup-to-do-indicators animal-id={animal.Id} handler-code={animal.Handler__c}></c-playgroup-to-do-indicators>
                             </div>
                             <div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-large-size_2-of-12">
                                 <lightning-input type="checkbox" label="Does NOT walk on leash" checked={animal.Does_Not_Walk_on_a_Leash__c} disabled></lightning-input>
