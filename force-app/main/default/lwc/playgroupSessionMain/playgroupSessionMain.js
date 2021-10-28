@@ -9,16 +9,23 @@ export default class PlaygroupSessionMain extends LightningElement {
     wireResponse;
     showSpinner = true;
     animals = [];
+    session;
+    sessionPlaygroupLeader;
 
-    fields = ["Name","Email","Phone"];
-    displayFields = 'Name, Email, Phone';
+    customLookupFields = ["Name","Email","External_Id__c"];
+    customLookupDisplayFields = 'Name, Email, External_Id__c';
 
     @wire(getPlaygroupSessionInfo, {sessionId: '$recordId'})
     response(result){
         this.wireResponse = result;
         window.console.log('result: ', JSON.stringify(result));
-        if(result.data && result.data.animalPlaygroups){
-            this.animals = result.data.animalPlaygroups;
+        if(result.data ){
+            this.session = result.data.playgroupSession;
+            this.sessionPlaygroupLeader = result.data.playgroupSession.Playgroup_Leader__c;
+            if(result.data.animalPlaygroups){
+                this.animals = result.data.animalPlaygroups;
+                
+            }
             this.showSpinner = false;
         }
     }
@@ -34,13 +41,28 @@ export default class PlaygroupSessionMain extends LightningElement {
         })
     }
 
+    customLookupEvent(event){
+        window.console.log('customLookupEvent: ', JSON.stringify ( event.detail));
+        this.sessionPlaygroupLeader = event.detail.data.recordId;
+    }
+
+    handleCustomLookupExpandSearch(event){
+        window.console.log('in handleCustomLookupExpandSearch: ', JSON.stringify ( event.detail.data) );
+        let data = event.detail.data;
+        let dataId = data.elementId;
+        this.template.querySelector('[data-id="' + dataId + '"]').className =
+            data.expandField ? 'slds-col slds-size_1-of-1' : data.initialColSize;
+    }
+
     get currentDateTime(){
         if(!this.recordId){
             return (new Date().toISOString());
         }
     }
 
-    handleLookup(event){
-        window.console.log('handleLookup: ', JSON.stringify ( event.detail) )
+    get customLookupValueId(){
+        if(this.sessionPlaygroupLeader){
+            return this.sessionPlaygroupLeader;
+        }
     }
 }

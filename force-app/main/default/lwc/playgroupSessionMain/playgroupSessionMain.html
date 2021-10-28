@@ -8,33 +8,41 @@
                 object-api-name="Playgroup_Session__c"
                 record-id={recordId}
             >
-            <lightning-card  variant="Narrow"  title="Playgroup Session">
-                <p class="slds-p-horizontal_x-small">
-                    <c-custom-lookup
-                        obj-name="Contact"
-                        icon-name="standard:contact"
-                        label-name="Playgroup Leader"
-                        placeholder="Search Contacts..." 
-                        fields={fields}
-                        display-fields={displayFields}
-                        onlookup={handleLookup} 
-                        value-id='0030100000HPng8AAD'
-                    >
-                    </c-custom-lookup>
-                    <!-- value-id='0030100000HPng8AAD' -->
-                </p>
-                <!-- <lightning-input-field field-name="Playgroup_Leader__c"> </lightning-input-field> -->
-                <lightning-input-field field-name="Playgroup_Location__c"> </lightning-input-field>
-                <lightning-input-field field-name="Playgroup_Date_Time__c" value={currentDateTime}> </lightning-input-field>
-                <lightning-button
-                    class="slds-m-top_small"
-                    variant="brand"
-                    type="submit"
-                    name="update"
-                    label="Update"
-                >
-                </lightning-button>
-            </lightning-card>
+                <lightning-card  variant="Narrow"  title="Playgroup Session">
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-size_1-of-2 slds-align-top" data-id='customlookuppg'>
+                            Playgroup Leader
+                            <c-custom-lookup
+                                obj-name="Contact"
+                                icon-name="standard:contact"
+                                label-name="Playgroup Leader"
+                                placeholder="Search Contacts..." 
+                                fields={customLookupFields}
+                                display-fields={customLookupDisplayFields}
+                                onlookup={customLookupEvent} 
+                                value-id={customLookupValueId}
+                                onexpandfield={handleCustomLookupExpandSearch}
+                                element-id='customlookuppg'
+                                initial-col-size='slds-col slds-size_1-of-2 slds-align-top'
+                            >
+                            </c-custom-lookup>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2 slds-align-top">
+                            <lightning-input-field field-name="Playgroup_Location__c"> </lightning-input-field>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-input-field field-name="Playgroup_Date_Time__c" value={currentDateTime}> </lightning-input-field>
+                            <!-- <lightning-button
+                                class="slds-m-top_small"
+                                variant="brand"
+                                type="submit"
+                                name="update"
+                                label="Update"
+                            >
+                            </lightning-button> -->
+                        </div>
+                    </div>
+                </lightning-card>
             </lightning-record-edit-form>
             <!-- <template if:true={animals}>
                 <p>
@@ -43,4 +51,14 @@
             </template> -->
         <!-- </template> -->
     </template>
+
+    <!-- 
+        <c-playgroup-to-do-list
+        oncopy={}
+        >
+    </c-playgroup-to-do-list>
+
+        animalsToAdd
+        sessionId
+     -->
 </template>

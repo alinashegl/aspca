@@ -1,4 +1,5 @@
 import { LightningElement, api, wire } from 'lwc';
+import FORM_FACTOR from '@salesforce/client/formFactor'
 import getRecentlyViewedRecords from '@salesforce/apex/CustomLookupLWCController.getRecentlyViewedRecords';
 import getCurrentRecord from '@salesforce/apex/CustomLookupLWCController.getCurrentRecord';
 import search from '@salesforce/apex/CustomLookupLWCController.search';
@@ -20,7 +21,10 @@ export default class CustomLookup extends LightningElement {
     @api displayFields = 'Name, Rating, AccountNumber';
     @api whereClause;
     @api fieldToQuery = 'Name';
+    @api elementId;
+    @api initialColSize;
 
+    formFactor = FORM_FACTOR;
     error;
 
     searchKey = '';
@@ -33,9 +37,10 @@ export default class CustomLookup extends LightningElement {
     selectedRecord;
     objectLabel;
     isLoading = false;
-    showModal = false;
-    showCreateRecord = false;
-    showTable = false;
+    showCreateNew = false;
+    showRecent = false;
+    editRecord = false;
+    showExpandedSearch = false;
 
     field;
     field1;
@@ -50,15 +55,7 @@ export default class CustomLookup extends LightningElement {
     }
 
     connectedCallback(){
-        document.addEventListener('click', this._handler = this.close.bind(this));
-
-        // if(this.objName.includes('__c')){
-        //     let obj = this.objName.substring(0, this.objName.length-3);
-        //     this.objectLabel = obj.replaceAll('_',' ');
-        // }else{
-        //     this.objectLabel = this.objName;
-        // }
-        // this.objectLabel    = this.titleCase(this.objectLabel);
+        window.console.log('in connectedCallback');
         let fieldList;
         if( !Array.isArray(this.displayFields)){
             fieldList       = this.displayFields.split(',');
@@ -83,56 +80,67 @@ export default class CustomLookup extends LightningElement {
         this.fields = combinedFields.concat( JSON.parse(JSON.stringify(this.fields)) );
     }    
 
-    disconnectedCallback() {
+    removeListener(){
+        window.console.log('in removeListener');
         document.removeEventListener('click', this._handler);
     }
 
     handleQueryAll(){
         window.console.log('handle query all');
-        this.showTable = false;
-        this.showModal = true;
-        this.searchAllRecords();
-    }
-
-    searchAllRecords(){
+        this.showRecent = false;
         this.handleQuery();
     }
 
     handlePrevious() {
         this.offset = this.offset -1;
-        this.searchAllRecords();
-
+        this.handleQuery();
     }
 
     handleNext() {
         this.offset = this.offset +1;
-        this.searchAllRecords();
+        this.handleQuery();
     }
 
     handleAddNew(){
         window.console.log('handle add new');
-        this.showTable = false;
-        this.showModal = true;
-        this.showCreateRecord = true;
+        // document.addEventListener('click', this._handler = this.close.bind(this));
+        this.showRecent = false;
+        this.showExpandedSearch = false;
+        this.showCreateNew = true;
+        this.expandInput(true);
     }
 
     handleOnFocus(){
+        window.console.log('in handleOnFocus');
+        this.isLoading = true;
+        if(this.isEditMode && !this.showRecent && !this.showExpandedSearch){
+            this.editRecord = true;
+            this.handleQueryRecentlyViewed();
+        }
+    }
+
+    handleQueryRecentlyViewed(){
+        window.console.log('in handleOnFocus');
+        document.addEventListener('click', this._handler = this.close.bind(this));
         getRecentlyViewedRecords({type: this.objName, whereClause: this.whereClause})
         .then((result) =>{
             this.handleResponse(result);
-            this.showSpinner = false;
-            this.showTable = true;
-        });    
+        })
+        .finally( ()=>{
+            this.showRecent = true;
+            this.isLoading = false;
+        });
     }
 
     handleInputChange(event){
+        window.console.log('in handleInputChange');
         window.clearTimeout(this.delayTimeout);
         this.clickCount = 0;
         this.offset = 0;
         this.searchKey = event.target.value;
         this.isLoading = true;
         this.delayTimeout = setTimeout(() => {
-            if(this.searchKey.length >= 2){
+            if(this.searchKey.length >= 2 || this.searchKey.length == 0){
                 this.handleQuery();
             }
         }, DELAY);
@@ -161,10 +169,9 @@ export default class CustomLookup extends LightningElement {
     }
 
     handleResponse(result){
+        // window.console.log('in handleResponse: ', JSON.stringify(result));
         let stringResult = JSON.stringify(result);
         let allResult    = JSON.parse(stringResult);
-        window.console.log('this.field: ', this.field);
-        window.console.log('this.field1: ', this.field1);
         allResult.forEach( record => {
             record.FIELD1 = record[this.field];
             record.FIELD2 = record[this.field1];
@@ -175,8 +182,7 @@ export default class CustomLookup extends LightningElement {
             }
         });
         this.searchRecords = allResult;
-        window.console.log('searchRecords: ');
-        window.console.table(this.searchRecords);
+        // window.console.log('this.searchRecords: ', this.searchRecords);
     }
 
     currentRecordResponse(result){
@@ -197,7 +203,9 @@ export default class CustomLookup extends LightningElement {
 
     handleSelect(event){
         window.console.log('handle Select');
-        this.showModal = false;
+        this.showRecent = false;
+        this.showExpandedSearch = false;
+        this.editRecord = false;
         this.clickCount = 0;
         
         let recordId = event.currentTarget.dataset.recordId;
@@ -219,10 +227,78 @@ export default class CustomLookup extends LightningElement {
         this.dispatchEvent(selectedEvent);
     }
 
-    handleClose(){
-        this.selectedRecord = undefined;
+    handleNewRecordResponse(event){
+        this.editRecord = false;
+        this.showCreateNew = false;
+        this.valueId = event.detail.id;
+        window.console.log('handleNewRecordResponse: ', event.detail.id);
+        this.clickCount = 0;
+        this.expandInput(false);
+
+        const selectedEvent = new CustomEvent('lookup', {
+            detail: {  
+                data : {
+                    recordId        : event.detail.id,
+                }
+            }
+        });
+        this.dispatchEvent(selectedEvent);
+    }
+
+    expandInput(expand){
+        const selectedEvent = new CustomEvent('expandfield', { 
+            detail: {  
+                data : {
+                    expandField : expand,
+                    initialColSize : this.initialColSize,
+                    elementId : this.elementId
+                }
+            }
+        });
+
+        this.dispatchEvent(selectedEvent);
+    }
+
+    handleClose(event){
+        event.stopPropagation();
+        this.editRecord = true;
         this.searchRecords  = undefined;
-        this.handleOnFocus();
+        this.handleQueryRecentlyViewed();
+    }
+
+    handleToggleExpandSearch(){
+        window.console.log('in handleExpandSearch');
+        if(this.isEditMode){
+            this.showExpandedSearch = !this.showExpandedSearch;
+            this.showRecent = !this.showRecent;
+            if(this.showExpandedSearch){
+                this.handleQueryAll();
+                this.expandInput(true);
+            } else {
+                this.searchKey = '';
+                this.handleQueryRecentlyViewed();
+                this.expandInput(false);
+            }
+        }
+    }
+
+    handleInputIconClick(){
+        window.console.log('in handleIconClick');
+        this.isLoading = true;
+        if(this.selectedRecord == undefined && !this.editRecord){
+            this.editRecord = true;
+            this.handleQueryRecentlyViewed();
+        }
+        else{
+            if(!this.isEditMode || this.showCreateNew){
+                this.showCreateNew = false;
+                this.editRecord = true;
+                this.expandInput(false);
+                this.handleQueryRecentlyViewed();
+            } else {
+                this.handleToggleExpandSearch();
+            }
+        }
     }
 
     titleCase(string) {
@@ -233,38 +309,42 @@ export default class CustomLookup extends LightningElement {
         return sentence;
     }
 
-    handleCancel(){
-        this.showModal = false;
-        this.showCreateRecord = false;
-        this.clickCount = 0;
-    }
-
-    handleNewRecordResponse(event){
-        this.valueId = event.detail.id;
-        window.console.log('handleNewRecordResponse: ', event.detail.id);
-        this.showModal = false;
-        this.clickCount = 0;
-    }
-
-    handleClick(event) {
-        event.stopPropagation();
-        return false;
-    }
     close() { 
-        console.log('we should close now');
-        this.showTable = false;
+        window.console.log('in close');
+        this.showRecent = false;
+        this.showExpandedSearch = false;
+        this.editRecord = false;
+        this.showCreateNew = false;
+        this.expandInput(false);
+        this.removeListener();
     }
     
     handleModalIconClick(){
         this.clickCount = this.clickCount == 3 ? 0 : this.clickCount + 1; 
     }
 
-    get showSearchRecords(){
-        return this.showTable;
+    get inputValue(){
+        return this.isReadOnlyMode ? this.selectedRecord.FIELD1 : this.searchKey;
+    }
+
+    get isEditMode(){
+        return this.editRecord || this.selectedRecord == undefined;
+    }
+
+    get isReadOnlyMode(){
+        return this.selectedRecord && !this.editRecord;
+    }
+
+    get isInputDisabled(){
+        return this.isReadOnlyMode || this.showCreateNew;
+    }
+
+    get showRecentRecords(){
+        return this.showRecent;
     }
 
     get modalTitle(){
-        return this.showCreateRecord ? 'Create New ' + this.labelName : 'Search for ' + this.labelName;
+        return this.showCreateNew ? 'Create New ' + this.labelName : 'Search for ' + this.labelName;
     }
 
     get disablePreviousButton(){
@@ -280,7 +360,18 @@ export default class CustomLookup extends LightningElement {
     }
 
     get searchBarIcon(){
-        return this.isLoading ? 'utility:spinner' : 'utility:search';
+        return this.isLoading ? 'utility:spinner' : 
+                this.selectedRecord == undefined && !this.editRecord ? 'utility:search' :
+                    !this.isEditMode || this.showCreateNew ? 'utility:close' :
+                        this.showExpandedSearch ? 'utility:contract_alt' : 'utility:expand_alt';
+    }
+
+    get searchBarIconTitle(){
+        return this.isLoading ? 'Loading' : 
+            this.showCreateNew ? 'Cancel' :
+                this.selectedRecord == undefined && !this.editRecord ? 'Search' :
+                !this.isEditMode ? 'Remove Selection' :
+                    this.showExpandedSearch ? 'Contract' : 'Expand';
     }
 
     get searchIcon(){
@@ -294,5 +385,61 @@ export default class CustomLookup extends LightningElement {
     get imageClass(){
         return this.clickCount > 2 ? 'background_img' : '';
     }
+
+    get showSearchResults(){
+        return this.showRecent || this.showExpandedSearch || this.showCreateNew;
+    }
+
+    handleDivClick(event){
+        window.console.log('in handleDivClick')
+        event.stopPropagation();
+    }
+
+    // count = 0;
+
+    // get showRecent1 (){
+    //     return this.count == 1;
+    // }
+
+    // get showExpandedSearch1 (){
+    //     return this.count == 2;
+    // }
+
+    // get showCreateNew1 (){
+    //     return this.count == 3;
+    // }
+
+    get gridSize(){
+        if(this.showCreateNew || FORM_FACTOR == 'Small' || (FORM_FACTOR == 'Medium' && this.showExpandedSearch)){
+            return 'slds-col slds-size_1-of-1';
+        } else {
+            if(FORM_FACTOR == 'Medium'){
+                return 'slds-col slds-size_1-of-2';
+            }
+            else {
+                return 'slds-col slds-size_1-of-3';
+            }
+        }
+    }
+
+    get inputFieldClass(){
+        return this.editRecord ? 'slds-input slds-combobox__input slds-combobox__input-value slds-has-focus' : 'slds-input slds-combobox__input slds-combobox__input-value';
+    }
+
+
+    // handleComboboxIconClick(){
+    //     this.template
+    //     .querySelector('.accounts_list')
+    //     .classList.remove('slds-hide');
+    //     this.template
+    //     .querySelector('.slds-searchIcon')
+    //     .classList.add('slds-hide');
+    //     this.template
+    //     .querySelector('.slds-icon-utility-down')
+    //     .classList.remove('slds-hide');
+    //     this.template
+    //     .querySelector('.slds-dropdown-trigger')
+    //     .classList.add('slds-is-open');
+    // }
 
 }

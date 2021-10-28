@@ -8,7 +8,8 @@ export default class TreatmentSessionChild extends LightningElement {
     customLookupNewId;
     isLoading = false;
 
-    hasChanged = false;
+    lookupIdChanged = false;
+    fieldChanged = false;
 
     connectedCallback(){
         if(this.record){
@@ -18,18 +19,28 @@ export default class TreatmentSessionChild extends LightningElement {
 
     handleSuccess(event){
         window.console.log('successfully updated: ', event.detail.id);
-        this.hasChanged = false;
+        this.lookupIdChanged = false;
+        this.fieldChanged = false;
         if(this.record == undefined){
             this.updateList();
         }
         this.isLoading = false;
     }
 
-    handleUpdateRecordSubmit(){
+    handleUpdateRecordSubmit(event){
         this.isLoading = true;
+        event.preventDefault(); 
+        const fields = event.detail.fields;
+        if(this.isContactList){
+            fields['Contact__c'] = this.customLookupNewId;
+        } else {
+            fields['Additional_Dog__c'] = this.customLookupNewId
+        }
+        this.template.querySelector('lightning-record-edit-form').submit(fields);
     }
 
     handleNewRecordSubmit(event){
+        window.console.log('in handleNewRecordSubmit');
         this.isLoading = true;
         event.preventDefault(); 
         const fields = event.detail.fields;
@@ -40,6 +51,7 @@ export default class TreatmentSessionChild extends LightningElement {
         }
 
         fields['Session_Protocol__c'] = this.protocolId;
+        window.console.log('new contact: ', JSON.stringify(fields));
         this.template.querySelector('lightning-record-edit-form').submit(fields);
     }
 
@@ -58,17 +70,25 @@ export default class TreatmentSessionChild extends LightningElement {
     }
 
     enableSaveButton(){
-        this.hasChanged = true;
+        this.hasChanged;
     }
 
     cancelAddNew(){
         this.updateList();
     }
 
-    handleLookup(event){
+    customLookupEvent(event){
         window.console.log('handleLookup: ', JSON.stringify ( event.detail) );
         this.customLookupNewId = event.detail.data.recordId;
-        // this.lookupIdChanged = this.customLookupNewId != this.record.Id;
+        this.lookupIdChanged = !this.record || (this.customLookupNewId != this.record.Id);
+    }
+
+    handleCustomLookupExpandSearch(event){
+        window.console.log('in handleCustomLookupExpandSearch: ', JSON.stringify ( event.detail.data) );
+        let data = event.detail.data;
+        let dataId = data.elementId;
+        this.template.querySelector('[data-id="' + dataId + '"]').className =
+           data.expandField ? 'slds-col slds-size_1-of-1' : data.initialColSize;
     }
 
     get isContactList(){
@@ -126,5 +146,9 @@ export default class TreatmentSessionChild extends LightningElement {
     }
     get customLookupLabelName(){
         return this.isContactList ? 'Protocol Contact' : 'Helper Dog';
+    }
+
+    get hasChanged(){
+        return this.lookupIdChanged || this.fieldChanged;
     }
 }

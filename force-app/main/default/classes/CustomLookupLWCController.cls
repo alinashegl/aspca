@@ -9,15 +9,20 @@ public with sharing class CustomLookupLWCController {
         String searchKeyword = searchTerm + '*';
         String returningQuery = objectName+' ( Id, '+String.join(fields,',')+')';
 
-        String whereString;
+        String whereString = ' WHERE ';
         if(whereClause != null){
-            whereString = whereClause;
+            whereString += whereClause;
         }
-        whereString = fieldToQuery == null ? whereString : whereString + fieldToQuery;
 
-        String query = 'SELECT Id, '+String.join(fields,',')+' FROM ' + objectName + ' WHERE ' + whereClause + ' LIKE \'%' + searchTerm + '%\' LIMIT 25 OFFSET ' + rowsToSkip;
-        System.debug('query '+query);
-        Integer  count = database.countQuery('SELECT count() FROM ' + objectName + ' WHERE ' + whereClause + ' LIKE \'%' + searchTerm + '%\'');
+        System.debug('shereSTring1: ' + whereString);
+
+        whereString = fieldToQuery == null ? whereString : whereString + fieldToQuery;
+        
+        System.debug('shereSTring2: ' + whereString);
+
+        String query = 'SELECT Id, '+String.join(fields,',')+' FROM ' + objectName + whereString + ' LIKE \'%' + searchTerm + '%\' LIMIT 25 OFFSET ' + rowsToSkip;
+        System.debug('query ' + query);
+        Integer  count = database.countQuery('SELECT count() FROM ' + objectName + whereString + ' LIKE \'%' + searchTerm + '%\'');
 
         response.recordList = Database.query(query);
         response.pageCount = Math.ceil(Decimal.valueOf(count).divide(25,1));
@@ -78,7 +83,7 @@ public with sharing class CustomLookupLWCController {
         String fields = fieldsToQuery(type);
         Id[] recIds = new Id[0];
         recIds.addAll(recordIds);
-        
+
         String query = 'SELECT Id, ' + fields + ' FROM ' + type + ' WHERE ';
         query += whereClause == null ? 'Id IN: recIds' : whereClause + 'Id IN: recIds';
 
@@ -102,5 +107,19 @@ public with sharing class CustomLookupLWCController {
         };
 
         return objToFields.containsKey(type) ? objToFields.get(type) : 'Name';
+    }
+
+    @AuraEnabled(cacheable=true)
+    public static List < sObject > fetchLookUpValues(String 
+     searchKey,String 
+    fieldName, String ObjectName,String keyField) {
+      List < sObject > returnList = new List < sObject > ();
+        String sQuery =  'select '+fieldName+','+keyField+ ' from '
+        +ObjectName+' LIMIT 5000' ;
+        List < sObject > lstOfRecords = Database.query(sQuery);
+        for (sObject obj: lstOfRecords) {
+            returnList.add(obj);
+        }
+        return returnList;
     }
 }
