@@ -749,4 +749,50 @@ public without sharing class TestDataFactory {
         insert enrichment;
         return enrichment;
     }
+
+    public static List<Medical_Conditions__c> createMedicalConditions() {
+        Animal__c a = createAnimal();
+        List<Medical_Conditions__c> medConditions = new List<Medical_Conditions__c>{
+            new Medical_Conditions__c(
+                Animal__c = a.Id,
+                Medical_Condition__c = 'Babesia',
+                Date_Diagnosed__c = System.today()),
+            new Medical_Conditions__c(
+                Animal__c = a.Id,
+                Medical_Condition__c = 'Dermatitis',
+                Date_Diagnosed__c = System.today()),
+            new Medical_Conditions__c(
+                Animal__c = a.Id,
+                Medical_Condition__c = 'In Heat',
+                Date_Diagnosed__c = System.today())
+        };
+        insert medConditions;
+        return medConditions;
+    }
+
+    public static Playgroup_Session__c createPlaygroupSessionWithAnimals() {
+        Animal__c a = createAnimal();
+        Contact c = createContact();
+        Playgroup_Session__c session = new Playgroup_Session__c(
+            Playgroup_Location__c = 'MRC Indoor Play Yard',
+            Playgroup_Leader__c = c.Id
+        );
+        insert session;
+        Animal_Playgroup__c animalPlaygroup = new Animal_Playgroup__c(
+            Animal__c = a.Id,
+            Playgroup_Session__c = session.Id,
+            Common_Playgroup_Note_Sections__c = 'Greeting',
+            Common_Playgroup_Notes__c = 'Defensive',
+            Play_Rating__c = 'Green',
+            Playgroup_Individual_Notes__c = 'Individual note'
+        );
+        insert animalPlaygroup;
+        Playgroup_Contact__c playgroupContact = new Playgroup_Contact__c(
+            Contact__c = c.Id,
+            Novel_Not_Novel__c = 'Novel',
+            Playgroup__c = animalPlaygroup.Id
+        );
+        insert playgroupContact;
+        return session;
+    }
 }
