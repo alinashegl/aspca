@@ -13,4 +13,8 @@ export default class PlaygroupToDoSection extends LightningElement {
     handleClick() {
         this.isSelected = !this.isSelected;
     }
+
+    handleSuccess() {
+        this.dispatchEvent(new CustomEvent('update'));
+    }
 }

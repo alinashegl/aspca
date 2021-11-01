@@ -1,7 +1,7 @@
 <template>
     <lightning-button-stateful
-        label-when-off="More"
-        label-when-on="Less"
+        label-when-off="Show editable"
+        label-when-on="Hide editable"
         icon-name-when-off="utility:add"
         icon-name-when-on="utility:dash"
         selected={isSelected}
@@ -12,7 +12,8 @@
             object-api-name="Animal__c"
             record-id={recordId}
             density="comfy"
-            fields={fields}>
+            fields={fields}
+            onsuccess={handleSuccess}>
         </lightning-record-form>
 </template>
 </template>

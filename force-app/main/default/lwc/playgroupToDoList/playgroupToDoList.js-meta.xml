@@ -5,29 +5,14 @@
     <masterLabel>Playgroup To Do List</masterLabel>
     <description>Allows for management of animal playgroups</description>
     <targets>
-        <!-- <target>lightning__RecordPage</target> -->
         <target>lightning__AppPage</target>
-        <!-- <target>lightning__HomePage</target> -->
     </targets>
     <targetConfigs>
         <targetConfig targets="lightning__AppPage">
-            <!-- <property name="prop2" type="Boolean" /> -->
             <supportedFormFactors>
                 <supportedFormFactor type="Small" />
                 <supportedFormFactor type="Large" />
             </supportedFormFactors>
         </targetConfig>
-        <!-- <targetConfig targets="lightning__RecordPage">
-            <property name="prop1" type="String" />
-            <supportedFormFactors>
-                <supportedFormFactor type="Large" />
-            </supportedFormFactors>
-        </targetConfig>
-        <targetConfig targets="lightning__HomePage">
-            <property name="prop3" type="Integer" />
-            <supportedFormFactors>
-                <supportedFormFactor type="Large" />
-            </supportedFormFactors>
-        </targetConfig> -->
     </targetConfigs>
 </LightningComponentBundle>
