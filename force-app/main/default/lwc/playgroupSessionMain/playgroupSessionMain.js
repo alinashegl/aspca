@@ -12,8 +12,9 @@ export default class PlaygroupSessionMain extends LightningElement {
     session;
     sessionPlaygroupLeader;
 
-    customLookupFields = ["Name","Email","External_Id__c"];
-    customLookupDisplayFields = 'Name, Email, External_Id__c';
+    customLookupFields = ["Name","Email","Title"];
+    customLookupDisplayFields = 'Name, Email, Title';
+    customLookupCreateNewFields = ['FirstName', 'LastName', 'Title', 'Department', 'Email'];
 
     @wire(getPlaygroupSessionInfo, {sessionId: '$recordId'})
     response(result){
@@ -65,4 +66,11 @@ export default class PlaygroupSessionMain extends LightningElement {
             return this.sessionPlaygroupLeader;
         }
     }
+
+
+    // ******************* mock up ***********************
+
+    animalPlaygroups = [
+        {Name: 'Clfford', Id: '123', Sex: 'Male', Location: 'MRC', }
+    ];
 }

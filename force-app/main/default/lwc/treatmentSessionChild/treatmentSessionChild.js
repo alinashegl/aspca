@@ -127,6 +127,10 @@ export default class TreatmentSessionChild extends LightningElement {
         return this.isContactList ? 'Name, Email, Phone' : 'Animal_Name__c, Name';
     }
 
+    get customLookupCreateNewFields(){
+        return this.isContactList ? ['FirstName', 'LastName', 'Title', 'Department', 'Email'] : undefined;
+    }
+
     get customLookupPlaceholder(){
         return this.isContactList ? 'Search Contacts...' : 'Search Dogs...';
     }

@@ -23,6 +23,7 @@ export default class CustomLookup extends LightningElement {
     @api fieldToQuery = 'Name';
     @api elementId;
     @api initialColSize;
+    @api createNewFields;
 
     formFactor = FORM_FACTOR;
     error;

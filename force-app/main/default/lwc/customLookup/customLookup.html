@@ -129,14 +129,26 @@
         </div>
         <template if:true={showCreateNew}>
             <div class='slds-box' onclick={handleDivClick}>
-                <lightning-record-form
-                    object-api-name={objName}
-                    layout-type="Compact"
-                    mode="edit"
-                    onsuccess={handleNewRecordResponse}
-                    oncancel={handleInputIconClick}
-                >
-                </lightning-record-form>
+                <template if:true={createNewFields}>
+                    <lightning-record-form
+                        object-api-name={objName}
+                        fields={createNewFields}
+                        mode="edit"
+                        onsuccess={handleNewRecordResponse}
+                        oncancel={handleInputIconClick}
+                    >
+                    </lightning-record-form>
+                </template>
+                <template if:false={createNewFields}>
+                    <lightning-record-form
+                        object-api-name={objName}
+                        layout-type="Full"
+                        mode="edit"
+                        onsuccess={handleNewRecordResponse}
+                        oncancel={handleInputIconClick}
+                    >
+                    </lightning-record-form>
+                </template>
             </div>
         </template>
     </div>
