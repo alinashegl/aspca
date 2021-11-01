@@ -24,7 +24,6 @@ export default class TreatmentSessionMain extends NavigationMixin(LightningEleme
         this.wireResponse = result;
         this.activeProtocols = [];
         if(result.data){
-            // this.activeProtocols = result.data;
             this.setIconAndAltText(result.data);
             this.refereshProtocolStatus = !this.refereshProtocolStatus;
             window.console.log('getActiveProtocols.length: ', result.data.length);

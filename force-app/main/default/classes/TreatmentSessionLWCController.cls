@@ -16,7 +16,6 @@ public with sharing class TreatmentSessionLWCController {
                     Overall_Score__c,
                     Needs_Review__c,
                     Protocol_Name__c,
-                    Status_Icon__c,
                     Status__c
                 FROM Session_Protocol__c 
                 WHERE TreatmentSessionId__c =: sessionId
