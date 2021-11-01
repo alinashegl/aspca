@@ -115,7 +115,6 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
     updateProtocolInfo(selectedOption, fieldName){
         this.fieldValues.find(field => field.name == fieldName).value = selectedOption;
         window.console.log('this.fieldValues: ', this.fieldValues);
-
     }
 
     resetProtocol(action){
@@ -241,7 +240,7 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
     }
 
     get isComplete(){
-        const incompleteField = this.fieldValues.find(field => field.value == null);
+        const incompleteField = this.fieldValues.find(field => field.value == null  && field.name != 'Solicitation__c');
         return  incompleteField == null;
     }
 
