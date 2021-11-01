@@ -3,37 +3,52 @@
         <lightning-record-edit-form
             object-api-name={objectApi}
             record-id={record.Id}
-            onsuccess={handleSuccess}>
+            onsubmit={handleUpdateRecordSubmit}
+            onsuccess={handleSuccess}
+            >
             <lightning-messages>
             </lightning-messages>
-            <div class="slds-grid">
-                <div class="slds-col slds-size_3-of-8 ">
-                    <lightning-input-field
-                        variant="label-hidden"
-                        field-name={parentFieldName}
-                        onchange={enableSaveButton}>
-                    </lightning-input-field>
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_5-of-6" data-id='customlookupsearch'>
+                    <c-custom-lookup
+                        obj-name={customLookUpObject}
+                        icon-name={customLookupIcon}
+                        placeholder={customLookupPlaceholder}
+                        fields={customLookupFields}
+                        display-fields={customLookupDisplayFields}
+                        create-new-fields={customLookupCreateNewFields}
+                        value-id={customLookupNewId}
+                        read-only=true
+                        where-clause={customLookupWhereClause}
+                        field-to-query={customLookupFeidlToQuery}
+                        label-name={customLookupLabelName}
+                        onlookup={customLookupEvent}
+                        onexpandfield={handleCustomLookupExpandSearch}
+                        element-id='customlookupsearch'
+                        initial-col-size='slds-col slds-size_5-of-6'
+                    >
+                    </c-custom-lookup>
                 </div>
                 <template if:true={isContactList}>
-                    <div class="slds-col slds-size_3-of-8 slds-p-left_x-small">
+                    <div class="slds-col slds-size_4-of-6 slds-p-left_x-small">
                         <lightning-input-field
                             variant="label-hidden"
                             field-name="Novel_Not_Novel__c"
                             onchange={enableSaveButton}>
                         </lightning-input-field>
                     </div>
-                    <div class="slds-col slds-size_1-of-8 slds-p-left_x-small">
+                    <div class="slds-col slds-size_1-of-6 slds-p-left_x-small">
                         <lightning-button-icon 
-                            icon-name="action:approval" 
+                            icon-name={saveButtonIcon} 
                             alternative-text="Save" 
                             type="submit"
                             title="Save"
-                            disabled={buttonStatus}
+                            disabled={disableSaveButton}
                             variant={saveButtonVariant}>
                         </lightning-button-icon>
                     </div>                    
                 </template>
-                <div class="slds-col slds-size_1-of-8 slds-p-left_x-small">
+                <div class="slds-col slds-size_1-of-6 slds-p-left_x-small">
                     <lightning-button-icon 
                         icon-name="action:delete" 
                         alternative-text="Delete" 
@@ -48,19 +63,32 @@
     <template if:false={record}>
         <lightning-record-edit-form
             object-api-name={objectApi}
-            onsuccess={handleSuccess}>
+            onsuccess={handleSuccess}
+            onsubmit={handleNewRecordSubmit}
+            >
             <lightning-messages>
             </lightning-messages>
-            <div class="slds-grid">
-                <div class="slds-col slds-size_3-of-8">
-                    <lightning-input-field
-                        variant="label-hidden"
-                        field-name={parentFieldName}
-                        onchange={enableButton}>
-                    </lightning-input-field>
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_3-of-6" data-id='customlookupcreatenew'>
+                    <c-custom-lookup
+                        obj-name={customLookUpObject}
+                        icon-name={customLookupIcon}
+                        placeholder={customLookupPlaceholder}
+                        fields={customLookupFields}
+                        display-fields={customLookupDisplayFields}
+                        create-new-fields={customLookupCreateNewFields}
+                        onlookup={customLookupEvent}
+                        where-clause={customLookupWhereClause}
+                        field-to-query={customLookupFeidlToQuery}
+                        label-name={customLookupLabelName}
+                        onexpandfield={handleCustomLookupExpandSearch}
+                        element-id='customlookupcreatenew'
+                        initial-col-size='slds-col slds-size_3-of-6'
+                    >
+                    </c-custom-lookup>
                 </div>
                 <template if:true={isContactList}>
-                    <div class="slds-col slds-size_3-of-8 slds-p-left_x-small">
+                    <div class="slds-col slds-size_3-of-6 slds-p-left_x-small">
                         <lightning-input-field
                             variant="label-hidden"
                             field-name="Novel_Not_Novel__c"
@@ -68,15 +96,16 @@
                         </lightning-input-field>
                     </div>
                 </template>
-                <div class="slds-col slds-size_2-of-8 slds-p-left_x-small">
-                    <lightning-input-field
-                        variant="label-hidden"
-                        field-name="Session_Protocol__c"
-                        disabled=true
-                        value={protocolId}
+                <template if:true={isLoading}>
+                    <div class="slds-m-left_small">
+                        <lightning-icon 
+                            icon-name='utility:spinner'
+                            alternative-text="loading" 
+                            size="x-small"
                         >
-                    </lightning-input-field>
-                </div>
+                        </lightning-icon>
+                    </div>
+                </template>
             </div>
             <div class="slds-p-top_small">
                 <lightning-button

@@ -1,7 +1,7 @@
 <template>
     <template if:true={recordList}>
         <h2 class="slds-card__header-title">{tableName}</h2>
-        <lightning-card>
+        <!-- <lightning-card> -->
             <template for:each={recordList.data} for:item="record">
                 <div key={record.Id} class="slds-p-bottom_small">
                     <c-treatment-session-child
@@ -30,8 +30,7 @@
                     </c-treatment-session-child>
                 </template>
             </div>
-        </lightning-card>
-        <!-- </div> -->
+        <!-- </lightning-card> -->
     </template>
     
 </template>

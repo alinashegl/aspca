@@ -9,7 +9,7 @@
                 <template if:true={assignedProtocols}>
                     <lightning-layout multiple-rows>
                         <template for:each={assignedProtocols} for:item='protocol'>
-                            <lightning-layout-item flexibility="auto" key={protocol.Id} size="12" small-device-size="12" medium-device-size="3" large-device-size="3" class="slds-p-around_xx-small">
+                            <lightning-layout-item flexibility="auto" key={protocol.Id} size="12" small-device-size="12" medium-device-size="6" large-device-size="3" class="slds-p-around_xx-small">
                                 <div class="slds-form-element">
                                     <div class="slds-form-element__static">
                                         <c-treatment-modify-session-protocol
@@ -44,7 +44,7 @@
             <template if:true={showUnassignedProtocols}>
                 <lightning-layout multiple-rows>
                     <template for:each={unassignedProtocols} for:item='protocol'>
-                        <lightning-layout-item key={protocol.Id} size="12" small-device-size="12" medium-device-size="3" large-device-size="3" class="slds-p-around_xx-small">
+                        <lightning-layout-item key={protocol.Id} size="12" small-device-size="12" medium-device-size="6" large-device-size="3" class="slds-p-around_xx-small">
                             <c-treatment-modify-session-protocol
                                 type="unassigned"
                                 protocol={protocol}
@@ -113,5 +113,3 @@
         </template>
     </lightning-card>
 </template>
-
-
