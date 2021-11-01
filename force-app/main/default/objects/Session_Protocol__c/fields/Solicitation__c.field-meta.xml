@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Novel_Not_Novel__c</fullName>
+    <fullName>Solicitation__c</fullName>
     <externalId>false</externalId>
-    <label>Novel/Familiar</label>
-    <required>true</required>
-    <trackHistory>false</trackHistory>
+    <label>Solicitation</label>
+    <required>false</required>
     <trackTrending>false</trackTrending>
     <type>Picklist</type>
     <valueSet>
@@ -12,14 +11,14 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Novel</fullName>
+                <fullName>1. No</fullName>
                 <default>false</default>
-                <label>Novel</label>
+                <label>1. No</label>
             </value>
             <value>
-                <fullName>Familiar</fullName>
+                <fullName>2. Yes</fullName>
                 <default>false</default>
-                <label>Familiar</label>
+                <label>2. Yes</label>
             </value>
         </valueSetDefinition>
     </valueSet>
