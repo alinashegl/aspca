@@ -219,7 +219,7 @@
                             <template if:true={isLargeDisplay}>
                                 <lightning-layout multiple-rows>
                                     <template for:each={activeProtocols} for:item='protocol'>
-                                        <lightning-layout-item key={protocol.Id} size="4" class="slds-p-around_xx-small">
+                                        <lightning-layout-item key={protocol.Id} size="12" class="slds-p-around_xx-small">
                                             <c-treatment-session-protocol
                                                 key={protocol.Id}
                                                 record-id={protocol.Id}

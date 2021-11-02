@@ -145,7 +145,7 @@ export default class TreatmentSessionChild extends LightningElement {
         }
     }
 
-    get customLookupFeidlToQuery(){
+    get customLookupFieldToQuery(){
         return this.isContactList ? 'Name' : 'Animal_Name__c';
     }
     get customLookupLabelName(){
@@ -154,5 +154,9 @@ export default class TreatmentSessionChild extends LightningElement {
 
     get hasChanged(){
         return this.lookupIdChanged || this.fieldChanged;
+    }
+
+    get customLookupAllowCreateNew(){
+        return this.isContactList ? true : false;
     }
 }
