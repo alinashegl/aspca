@@ -155,4 +155,8 @@ export default class TreatmentSessionChild extends LightningElement {
     get hasChanged(){
         return this.lookupIdChanged || this.fieldChanged;
     }
+
+    get customLookupAllowCreateNew(){
+        return this.isContactList ? true : false;
+    }
 }

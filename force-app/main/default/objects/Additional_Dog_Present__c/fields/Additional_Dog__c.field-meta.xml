@@ -4,15 +4,6 @@
     <deleteConstraint>SetNull</deleteConstraint>
     <externalId>false</externalId>
     <label>Additional Dog</label>
-    <lookupFilter>
-        <active>true</active>
-        <filterItems>
-            <field>Animal__c.Potential_Helper_Dog__c</field>
-            <operation>equals</operation>
-            <value>True</value>
-        </filterItems>
-        <isOptional>false</isOptional>
-    </lookupFilter>
     <referenceTo>Animal__c</referenceTo>
     <relationshipLabel>Additional Dogs Present</relationshipLabel>
     <relationshipName>Additional_Dogs_Present</relationshipName>

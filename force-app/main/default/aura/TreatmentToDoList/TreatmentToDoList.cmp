@@ -38,11 +38,34 @@
                 <td class="width"><strong>Bundle Assignment</strong></td>
                 <td class="width"><strong>Treatment Count</strong></td>
                 <td class="width"><strong>Shelter Color Code</strong></td>
+                <td class="width"><strong>Sex (w/ Spay/Neuter status)</strong></td>
+                <td class="width"><strong>Age</strong></td>
+                <td class="width"><strong>Grade</strong></td>
+                <td class="width"><strong>Location</strong></td>
             </tr>
         </table>
         <aura:iteration var="line" items="{!v.data}" indexVar="indexVar" aura:id="dataList">
             <table>
-                <c:ToDoListLineItem Name="{!line.animal.Name}" ASPCAName="{!line.aspcaname}" Priority="{!line.priority}" Assignment="{!line.assignment}" TreatmentCount="{!line.treatmentcount}" ColorCode="{!line.colorCode}" Data="{!line.rowSelections}" IndexVar="{!line.indexVar}" RenderProtocols="{!line.displayProtocols}" NotPresentData="{!line.notPresentSelections}" RenderNotPresentData="{!line.displayNotPresent}" AnimalId="{!line.animal.Id}" PlanId="{!line.plan.Id}" AssignedBundleId="{!line.plan.AssignedTreatmentBundleId__c}" />
+                <c:ToDoListLineItem
+                    Name="{!line.animal.Name}"
+                    ASPCAName="{!line.aspcaname}"
+                    Priority="{!line.priority}"
+                    Assignment="{!line.assignment}"
+                    TreatmentCount="{!line.treatmentcount}"
+                    ColorCode="{!line.colorCode}"
+                    Data="{!line.rowSelections}"
+                    IndexVar="{!line.indexVar}"
+                    RenderProtocols="{!line.displayProtocols}"
+                    NotPresentData="{!line.notPresentSelections}"
+                    RenderNotPresentData="{!line.displayNotPresent}"
+                    AnimalId="{!line.animal.Id}"
+                    PlanId="{!line.plan.Id}"
+                    AssignedBundleId="{!line.plan.AssignedTreatmentBundleId__c}"
+                    Sex="{!line.sex}"
+                    Age="{!line.age}"
+                    Grade="{!line.grade}"
+                    Location="{!line.location}"
+                />
             </table>
 
         </aura:iteration>

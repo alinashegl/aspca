@@ -200,7 +200,11 @@ public with sharing class test_TreatmentToDoListController {
             true,
             0,
             new List<TreatmentToDoListController.RowSelection>{rSelection},
-            new List<String>{'MRC'}
+            new List<String>{'MRC'},
+            'MS',
+            2.0,
+            'A',
+            'location'
         );
         ToDoListModWrapper tdModConstr = new ToDoListModWrapper('123', true);
         Test.stopTest();
@@ -268,6 +272,10 @@ public with sharing class test_TreatmentToDoListController {
         System.assertEquals(0, tdDataConstr.indexVar);
         System.assertEquals(new List<TreatmentToDoListController.RowSelection>{rSelection}, tdDataConstr.notPresentSelections);
         System.assertEquals(new List<String>{'MRC'}, tdDataConstr.shelterLocation);
+        System.assertEquals('MS', tdDataConstr.sex);
+        System.assertEquals(2.0, tdDataConstr.age);
+        System.assertEquals('A', tdDataConstr.grade);
+        System.assertEquals('location', tdDataConstr.location);
         System.assertEquals('123', tdModConstr.protocolId);
         System.assertEquals(true, tdModConstr.checked);
     }
