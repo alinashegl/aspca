@@ -21,6 +21,10 @@
     <aura:attribute type="String" name="AnimalUrlPath" />
     <aura:attribute type="String" name="TreatmentPlanURLPath" />
     <aura:attribute type="String" name="AssignedBundleId" />
+    <aura:attribute type="String" name="Sex" />
+    <aura:attribute type="String" name="Age" />
+    <aura:attribute type="String" name="Grade" />
+    <aura:attribute type="String" name="Location" />
 
     <aura:handler name="protocolSelectEvent" event="c:treatmentProtocolSelectEvent" action="{!c.handleSelectEvent}"/>
     <aura:registerEvent name="protocolSaveEvent" type="c:treatmentProtocolSaveEvent"/>
@@ -45,6 +49,10 @@
                 </td>
             <td class="width">{!v.TreatmentCount}</td>
             <td class="width">{!v.ColorCode}</td>
+            <td class="width">{!v.Sex}</td>
+            <td class="width">{!v.Age}</td>
+            <td class="width">{!v.Grade}</td>
+            <td class="width">{!v.Location}</td>
         </tr>
     </table>
     <table bgcolor="white">
