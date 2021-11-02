@@ -58,11 +58,32 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
         });
     }
 
+    col1Fields = [];
+    col2Fields = [];
+    col3Fields = [];
+    col4Fields = [];
+    col5Fields = [];
+
     setFieldValues(data){
         window.console.log('setFieldValues');
         this.fieldValues = [];
         data.picklistFields.forEach(element => {
             this.fieldValues.push({name: element.apiName, value: element.currentValue});
+            if(element.apiName == 'Aggressive_Worst__c'){
+                this.col1Fields.push(element);
+            } else 
+            if(element.apiName.includes('Arousal')){
+                this.col2Fields.push(element);
+            } else 
+            if(element.apiName == 'Fear_Best__c' || element.apiName == 'Fear_Worst__c'){
+                this.col3Fields.push(element);
+            } else 
+            if(element.apiName == 'Social_Best__c' || element.apiName == 'Solicitation__c'){
+                this.col4Fields.push(element);
+            } else 
+            if(element.apiName == 'Overall_Score__c'){
+                this.col5Fields.push(element);
+            }
         });
         this.isSkipped = data.isSkipped;
         this.isRemoved = data.isRemoved;
