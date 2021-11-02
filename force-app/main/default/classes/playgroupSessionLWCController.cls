@@ -22,7 +22,7 @@ public with sharing class playgroupSessionLWCController {
     }
 
     private static Animal_Playgroup__c[] animalPlaygroups (Id sessionId){
-        return [SELECT Id FROM Animal_Playgroup__c WHERE Playgroup_Session__c =: sessionId];
+        return [SELECT Id, Animal__c FROM Animal_Playgroup__c WHERE Playgroup_Session__c =: sessionId];
     }
 
     @AuraEnabled

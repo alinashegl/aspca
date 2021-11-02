@@ -145,7 +145,7 @@ export default class TreatmentSessionChild extends LightningElement {
         }
     }
 
-    get customLookupFeidlToQuery(){
+    get customLookupFieldToQuery(){
         return this.isContactList ? 'Name' : 'Animal_Name__c';
     }
     get customLookupLabelName(){

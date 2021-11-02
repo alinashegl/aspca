@@ -1,0 +1,148 @@
+<template>
+    <template if:true={animalPlaygroup}>
+        <!-- <div class="slds-card slds-card_boundary slds-m-around_medium"> -->
+            <div class="slds-card slds-card_boundary">
+                <div class='slds-grid'>
+                    <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+                        <lightning-record-view-form
+                            object-api-name="Animal__c"
+                            record-id={animalId}
+                        >
+                            <lightning-layout multiple-rows pull-to-boundary="medium" class="slds-p-left_xx-small">
+                                <lightning-layout-item flexibility="auto" size="12" small-device-size="6" medium-device-size="6" large-device-size="4" padding="horizontal-medium">
+                                    <div class="slds-form-element">
+                                        <label class="slds-form-element__label" for="form-element-01">Name</label>
+                                        <lightning-output-field field-name="Animal_Name__c" variant='label-hidden'> </lightning-output-field>
+                                    </div>
+                                </lightning-layout-item>
+                                <lightning-layout-item flexibility="auto" size="12" small-device-size="6" medium-device-size="6" large-device-size="4" padding="horizontal-medium">
+                                    <div class="slds-form-element">
+                                        <label class="slds-form-element__label" for="form-element-01">Id#</label>
+                                        <lightning-output-field field-name="Name" variant='label-hidden'> </lightning-output-field>
+                                    </div>
+                                </lightning-layout-item>
+                                <lightning-layout-item flexibility="auto" size="12" small-device-size="6" medium-device-size="6" large-device-size="4" padding="horizontal-medium">
+                                    <div class="slds-form-element">
+                                        <label class="slds-form-element__label" for="form-element-01">Sex</label>
+                                        <lightning-output-field field-name="Gender__c" variant='label-hidden'> </lightning-output-field>
+                                    </div>
+                                </lightning-layout-item>
+                                <lightning-layout-item flexibility="auto" size="12" small-device-size="6" medium-device-size="6" large-device-size="4" padding="horizontal-medium">
+                                    <div class="slds-form-element">
+                                        <label class="slds-form-element__label" for="form-element-01">Location</label>
+                                        <!-- <lightning-output-field field-name="Shelter_Location2__c" variant='label-hidden' value='MRC'> </lightning-output-field> -->
+                                        <p>
+                                            MRC
+                                        </p>
+                                    </div>
+                                </lightning-layout-item>
+                                <lightning-layout-item flexibility="auto" size="12" small-device-size="6" medium-device-size="6" large-device-size="4" padding="horizontal-medium">
+                                    <div class="slds-form-element">
+                                        <label class="slds-form-element__label" for="form-element-01">Play Priority</label>
+                                        <!-- <lightning-output-field field-name="Play_Priority__c" variant='label-hidden'> </lightning-output-field> -->
+                                        <p>
+                                            High
+                                        </p>
+                                    </div>
+                                </lightning-layout-item>
+                                <lightning-layout-item flexibility="auto" size="12" small-device-size="6" medium-device-size="6" large-device-size="4" padding="horizontal-medium">
+                                    <div class="slds-form-element">
+                                        <label class="slds-form-element__label" for="form-element-01">Play Category</label>
+                                        <!-- <lightning-output-field field-name="Play_Category__c" variant='label-hidden'> </lightning-output-field> -->
+                                        <p>
+                                            Small Mellow
+                                        </p>
+                                    </div>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </lightning-record-view-form>
+                    </div>
+                </div>
+            <!-- </lightning-record-view-form> -->
+
+            <!-- 
+                <lightning-layout multiple-rows pull-to-boundary="medium" class="slds-p-left_small">
+                    <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size={customLookupLeaderDeviceSize}  large-device-size={customLookupLeaderDeviceSize} padding="horizontal-medium">
+                        <div class="slds-form-element">
+                            <div class="slds-form-element__static">
+                                    Playgroup Leader
+                                    <c-custom-lookup
+                                        obj-name="Contact"
+                                        icon-name="standard:contact"
+                                        placeholder="Search Contacts..." 
+                                        fields={customLookupFields}
+                                        display-fields={customLookupDisplayFields}
+                                        create-new-fields={customLookupCreateNewFields}
+                                        value-id={customLookupValueId}
+                                        label-name='Playgroup Leader'
+                                        onlookup={customLookupEvent}
+                                        onexpandfield={handleCustomLookupExpandSearch}
+                                    >
+                                    </c-custom-lookup>
+                                </div>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="6" large-device-size="3" padding="horizontal-medium">
+                            <div class="slds-form-element">
+                                <div class="slds-form-element__static">
+                                    <lightning-input-field field-name="Playgroup_Location__c"> </lightning-input-field>
+                                </div>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="6" large-device-size="3" padding="horizontal-medium">
+                            <div class="slds-form-element">
+                                <div class="slds-form-element__static">
+                                    <lightning-input-field field-name="Playgroup_Date_Time__c" value={currentDateTime}> </lightning-input-field>
+                                </div>
+                            </div>
+                        </lightning-layout-item>
+                        <template if:false={smallForm}>
+                            <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="6" large-device-size="3" padding="horizontal-medium">
+                                <div class="slds-form-element">
+                                    <div class="slds-form-element__static">
+                                        <p>
+                                            <lightning-button
+                                                class="slds-m-top_small"
+                                                variant="brand"
+                                                type="submit"
+                                                name="update"
+                                                label="Complete and Exit"
+                                            >
+                                            </lightning-button>
+                                        </p>
+                                        <p class='slds-p-top_xxx-small'>
+                                            <lightning-button
+                                                class="slds-m-top_small"
+                                                variant="brand"
+                                                type="submit"
+                                                name="update"
+                                                label="Create New Session"
+                                            >
+                                            </lightning-button>
+                                        </p>
+                                        <p class='slds-p-top_xxx-small'>
+                                            <lightning-button
+                                                class="slds-m-top_small"
+                                                variant="brand"
+                                                type="submit"
+                                                name="update"
+                                                label="Copy Session"
+                                            >
+                                            </lightning-button>
+                                        </p>
+                                    </div>
+                                </div>
+                            </lightning-layout-item>
+                            <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="12" large-device-size="12" padding="horizontal-medium">
+                                <div class="slds-form-element">
+                                    <div class="slds-form-element__static">
+                                        <lightning-input-field field-name="Playgroup_Notes__c"></lightning-input-field>
+                                    </div>
+                                </div>
+                            </lightning-layout-item>
+                        </template>
+                </lightning-layout>
+            </lightning-record-edit-form> -->
+        </div>
+    </template>
+</template>

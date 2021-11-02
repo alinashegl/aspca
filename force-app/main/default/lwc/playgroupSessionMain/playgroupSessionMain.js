@@ -1,4 +1,5 @@
 import { LightningElement, api, wire } from 'lwc';
+import FORM_FACTOR from '@salesforce/client/formFactor'
 import getPlaygroupSessionInfo from '@salesforce/apex/playgroupSessionLWCController.getPlaygroupSessionInfo';
 import startPlaygroupSession from '@salesforce/apex/playgroupSessionLWCController.startPlaygroupSession';
 
@@ -15,6 +16,7 @@ export default class PlaygroupSessionMain extends LightningElement {
     customLookupFields = ["Name","Email","Title"];
     customLookupDisplayFields = 'Name, Email, Title';
     customLookupCreateNewFields = ['FirstName', 'LastName', 'Title', 'Department', 'Email'];
+    formFactor = FORM_FACTOR;
 
     @wire(getPlaygroupSessionInfo, {sessionId: '$recordId'})
     response(result){
@@ -47,12 +49,25 @@ export default class PlaygroupSessionMain extends LightningElement {
         this.sessionPlaygroupLeader = event.detail.data.recordId;
     }
 
+    customLookupExpandedField = false;
+
     handleCustomLookupExpandSearch(event){
         window.console.log('in handleCustomLookupExpandSearch: ', JSON.stringify ( event.detail.data) );
         let data = event.detail.data;
-        let dataId = data.elementId;
-        this.template.querySelector('[data-id="' + dataId + '"]').className =
-            data.expandField ? 'slds-col slds-size_1-of-1' : data.initialColSize;
+        this.customLookupExpandedField = data.expandField;
+    }
+
+    get customLookupLeaderDeviceSize(){
+        if(FORM_FACTOR == 'Large'){
+            return this.customLookupExpandedField ? '6' : '3';
+        }
+        if(FORM_FACTOR == 'Medium'){
+            return this.customLookupExpandedField ? '12' : '6';
+        }
+    }
+
+    get smallForm(){
+        return this.formFactor == 'Small';
     }
 
     get currentDateTime(){
@@ -66,11 +81,4 @@ export default class PlaygroupSessionMain extends LightningElement {
             return this.sessionPlaygroupLeader;
         }
     }
-
-
-    // ******************* mock up ***********************
-
-    animalPlaygroups = [
-        {Name: 'Clfford', Id: '123', Sex: 'Male', Location: 'MRC', }
-    ];
 }
