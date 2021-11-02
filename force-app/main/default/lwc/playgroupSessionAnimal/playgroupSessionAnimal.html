@@ -9,26 +9,26 @@
                             record-id={animalId}
                         >
                             <lightning-layout multiple-rows pull-to-boundary="medium" class="slds-p-left_xx-small">
-                                <lightning-layout-item flexibility="auto" size="12" small-device-size="6" medium-device-size="6" large-device-size="4" padding="horizontal-medium">
-                                    <div class="slds-form-element">
+                                <lightning-layout-item flexibility="auto" size="12" small-device-size="6" medium-device-size="6" large-device-size="4" padding={layoutItemPadding}>
+                                    <div class="slds-form-element slds-p-left_x-small">
                                         <label class="slds-form-element__label" for="form-element-01">Name</label>
                                         <lightning-output-field field-name="Animal_Name__c" variant='label-hidden'> </lightning-output-field>
                                     </div>
                                 </lightning-layout-item>
-                                <lightning-layout-item flexibility="auto" size="12" small-device-size="6" medium-device-size="6" large-device-size="4" padding="horizontal-medium">
-                                    <div class="slds-form-element">
+                                <lightning-layout-item flexibility="auto" size="12" small-device-size="6" medium-device-size="6" large-device-size="4" padding={layoutItemPadding}>
+                                    <div class="slds-form-element slds-p-left_x-small">
                                         <label class="slds-form-element__label" for="form-element-01">Id#</label>
                                         <lightning-output-field field-name="Name" variant='label-hidden'> </lightning-output-field>
                                     </div>
                                 </lightning-layout-item>
-                                <lightning-layout-item flexibility="auto" size="12" small-device-size="6" medium-device-size="6" large-device-size="4" padding="horizontal-medium">
-                                    <div class="slds-form-element">
+                                <lightning-layout-item flexibility="auto" size="12" small-device-size="6" medium-device-size="6" large-device-size="4" padding={layoutItemPadding}>
+                                    <div class="slds-form-element slds-p-left_x-small">
                                         <label class="slds-form-element__label" for="form-element-01">Sex</label>
                                         <lightning-output-field field-name="Gender__c" variant='label-hidden'> </lightning-output-field>
                                     </div>
                                 </lightning-layout-item>
-                                <lightning-layout-item flexibility="auto" size="12" small-device-size="6" medium-device-size="6" large-device-size="4" padding="horizontal-medium">
-                                    <div class="slds-form-element">
+                                <lightning-layout-item flexibility="auto" size="12" small-device-size="6" medium-device-size="6" large-device-size="4" padding={layoutItemPadding}>
+                                    <div class="slds-form-element slds-p-left_x-small">
                                         <label class="slds-form-element__label" for="form-element-01">Location</label>
                                         <!-- <lightning-output-field field-name="Shelter_Location2__c" variant='label-hidden' value='MRC'> </lightning-output-field> -->
                                         <p>
@@ -36,8 +36,8 @@
                                         </p>
                                     </div>
                                 </lightning-layout-item>
-                                <lightning-layout-item flexibility="auto" size="12" small-device-size="6" medium-device-size="6" large-device-size="4" padding="horizontal-medium">
-                                    <div class="slds-form-element">
+                                <lightning-layout-item flexibility="auto" size="12" small-device-size="6" medium-device-size="6" large-device-size="4" padding={layoutItemPadding}>
+                                    <div class="slds-form-element slds-p-left_x-small">
                                         <label class="slds-form-element__label" for="form-element-01">Play Priority</label>
                                         <!-- <lightning-output-field field-name="Play_Priority__c" variant='label-hidden'> </lightning-output-field> -->
                                         <p>
@@ -45,8 +45,8 @@
                                         </p>
                                     </div>
                                 </lightning-layout-item>
-                                <lightning-layout-item flexibility="auto" size="12" small-device-size="6" medium-device-size="6" large-device-size="4" padding="horizontal-medium">
-                                    <div class="slds-form-element">
+                                <lightning-layout-item flexibility="auto" size="12" small-device-size="6" medium-device-size="6" large-device-size="4" padding={layoutItemPadding}>
+                                    <div class="slds-form-element slds-p-left_x-small">
                                         <label class="slds-form-element__label" for="form-element-01">Play Category</label>
                                         <!-- <lightning-output-field field-name="Play_Category__c" variant='label-hidden'> </lightning-output-field> -->
                                         <p>
@@ -56,6 +56,16 @@
                                 </lightning-layout-item>
                             </lightning-layout>
                         </lightning-record-view-form>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+                        <lightning-layout multiple-rows pull-to-boundary="medium" class="slds-p-left_xx-small">
+                            <lightning-layout-item flexibility="auto" size="12" small-device-size="6" medium-device-size="6" large-device-size="4" padding={layoutItemPadding}>
+                                <div class="slds-form-element slds-p-left_x-small">
+                                    <label class="slds-form-element__label" for="form-element-01">Common Playgroup Notes</label>
+                                    <lightning-output-field field-name="Common_Playgroup_Notes__c" variant='label-hidden'> </lightning-output-field>
+                                </div>
+                            </lightning-layout-item>
+                        </lightning-layout>
                     </div>
                 </div>
             <!-- </lightning-record-view-form> -->

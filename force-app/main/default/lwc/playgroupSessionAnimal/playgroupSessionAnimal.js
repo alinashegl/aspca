@@ -1,5 +1,6 @@
 import { LightningElement, api, wire } from 'lwc';
 import { getRecord, updateRecord } from 'lightning/uiRecordApi';
+import FORM_FACTOR from '@salesforce/client/formFactor'
 
 // import ANIMAL_PG_NAME_FIELD from '@salesforce/schema/Animal_Playgroup__c.Animal_Name__c';
 import ANIMAL_PG_NOTES_FIELD from '@salesforce/schema/Animal_Playgroup__c.Playgroup_Individual_Notes__c';
@@ -17,5 +18,9 @@ export default class PlaygroupSessionAnimal extends LightningElement {
 
     @wire(getRecord, {recordId: '$animalPlaygroupId', fields: '$fields'})
     animalPlaygroup;
+
+    get layoutItemPadding(){
+        return FORM_FACTOR == 'small' ? 'around-small' : 'around-small';
+    }
     
 }
