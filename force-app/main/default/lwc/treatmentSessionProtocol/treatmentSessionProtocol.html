@@ -48,19 +48,83 @@
                     <template if:true={protocolInfo}>
                         <template if:false={protocolInfo.isSkipped}>
                             <!-- <lightning-card> -->
-                                <template for:each={protocolInfo.picklistFields} for:item="field">
-                                    <div key={field.name} class="slds-p-top_medium"> 
-                                        <h2 class="slds-card__header-title">{field.name}</h2>
-                                        <lightning-radio-group
-                                            options={field.options}
-                                            value={field.currentValue}
-                                            type="radio"
-                                            onchange={handleRadioChange}
-                                            data-fname={field.apiName}
-                                            >
-                                        </lightning-radio-group>
+                                <div class='slds-grid slds-wrap'>
+                                    <div class='slds-col slds-size_1-of-1 slds-medium-size_3-of-6 slds-large-size_3-of-12'>
+                                        <template for:each={col1Fields} for:item="field">
+                                            <div key={field.name} class="slds-p-top_medium"> 
+                                                <h2 class="slds-card__header-title">{field.name}</h2>
+                                                <lightning-radio-group
+                                                    options={field.options}
+                                                    value={field.currentValue}
+                                                    type="radio"
+                                                    onchange={handleRadioChange}
+                                                    data-fname={field.apiName}
+                                                    >
+                                                </lightning-radio-group>
+                                            </div>
+                                        </template>
                                     </div>
-                                </template>
+                                    <div class='slds-col slds-size_1-of-1 slds-medium-size_3-of-6 slds-large-size_1-of-6'>
+                                        <template for:each={col2Fields} for:item="field">
+                                            <div key={field.name} class="slds-p-top_medium"> 
+                                                <h2 class="slds-card__header-title">{field.name}</h2>
+                                                <lightning-radio-group
+                                                    options={field.options}
+                                                    value={field.currentValue}
+                                                    type="radio"
+                                                    onchange={handleRadioChange}
+                                                    data-fname={field.apiName}
+                                                    >
+                                                </lightning-radio-group>
+                                            </div>
+                                        </template>
+                                    </div>
+                                    <div class='slds-col slds-size_1-of-1 slds-medium-size_3-of-6 slds-large-size_1-of-6'>
+                                        <template for:each={col3Fields} for:item="field">
+                                            <div key={field.name} class="slds-p-top_medium"> 
+                                                <h2 class="slds-card__header-title">{field.name}</h2>
+                                                <lightning-radio-group
+                                                    options={field.options}
+                                                    value={field.currentValue}
+                                                    type="radio"
+                                                    onchange={handleRadioChange}
+                                                    data-fname={field.apiName}
+                                                    >
+                                                </lightning-radio-group>
+                                            </div>
+                                        </template>
+                                    </div>
+                                    <div class='slds-col slds-size_1-of-1 slds-medium-size_3-of-6 slds-large-size_3-of-12'>
+                                        <template for:each={col4Fields} for:item="field">
+                                            <div key={field.name} class="slds-p-top_medium"> 
+                                                <h2 class="slds-card__header-title">{field.name}</h2>
+                                                <lightning-radio-group
+                                                    options={field.options}
+                                                    value={field.currentValue}
+                                                    type="radio"
+                                                    onchange={handleRadioChange}
+                                                    data-fname={field.apiName}
+                                                    >
+                                                </lightning-radio-group>
+                                            </div>
+                                        </template>
+                                    </div>
+                                    <div class='slds-col slds-size_1-of-1 slds-medium-size_3-of-6 slds-large-size_1-of-6'>
+                                        <template for:each={col5Fields} for:item="field">
+                                            <div key={field.name} class="slds-p-top_medium"> 
+                                                <h2 class="slds-card__header-title">{field.name}</h2>
+                                                <lightning-radio-group
+                                                    options={field.options}
+                                                    value={field.currentValue}
+                                                    type="radio"
+                                                    onchange={handleRadioChange}
+                                                    data-fname={field.apiName}
+                                                    >
+                                                </lightning-radio-group>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
                                 <h2 class="slds-p-top_large slds-card__header-title">Needs Review
                                     <lightning-input class="slds-p-left_medium" data-name="needsReview" type="checkbox" name="needsReview" checked={protocolInfo.needsReview}></lightning-input>
                                 </h2>
