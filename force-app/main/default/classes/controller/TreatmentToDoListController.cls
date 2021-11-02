@@ -24,10 +24,15 @@ public with sharing class TreatmentToDoListController {
         @AuraEnabled public Integer indexVar { get; set; }
         @AuraEnabled public Boolean displayNotPresent { get; set; }
         @AuraEnabled public List<String> shelterLocation { get; set; }
+        @AuraEnabled public String sex { get; set; }
+        @AuraEnabled public Decimal age { get; set; }
+        @AuraEnabled public String grade { get; set; }
+        @AuraEnabled public String location { get; set; }
 
         public TreatmentToDoListData(String name, String aspcaname, String priority, String assignment, Integer treatmentCount, String colorCode,
             Boolean hasProtocols, List<BundleSelection> selections, List<RowSelection> rowSelections, Boolean displayProtocols,
-            Boolean displayNotPresent, Integer indexVar, List<RowSelection> notPresentSelections, List<String> shelterLocation) {
+            Boolean displayNotPresent, Integer indexVar, List<RowSelection> notPresentSelections, List<String> shelterLocation,
+            String sex, Decimal age, String grade, String location) {
             this.name = name;
             this.aspcaname = aspcaname;
             this.priority = priority;
@@ -42,6 +47,10 @@ public with sharing class TreatmentToDoListController {
             this.indexVar = indexVar;
             this.notPresentSelections = notPresentSelections;
             this.shelterLocation = shelterLocation;
+            this.sex = sex;
+            this.age = age;
+            this.grade = grade;
+            this.location = location;
         }
 
         public TreatmentToDoListData() { }
@@ -131,6 +140,7 @@ public with sharing class TreatmentToDoListController {
     public static List<TreatmentToDoListData> listData(String key) {
         List<Treatment_Plan__c> treatmentPlans = [SELECT Id, Name, Treatment_Priority__c, Animal__c, IsActive__c,
                 Animal__r.Animal_Name__c, Animal__r.Name, Animal__r.Location__c, Animal__r.Shelter_Location2__c, Animal__r.Number_of_Treatments__c,
+                Animal__r.Gender__c, Animal__r.Current_Animal_Age_Estimate__c, Animal__r.Current_Behavior_Grade__c, Animal__r.Shelter_Location__c,
                 AssignedTreatmentBundleId__c, Shelter_Color_Code__c FROM Treatment_Plan__c WHERE Animal__r.Shelter_Location2__c =: key
                 AND IsActive__c = TRUE];
 
@@ -172,7 +182,10 @@ public with sharing class TreatmentToDoListController {
                 bundle = [SELECT Name, Id FROM Treatment_Bundle__c WHERE Id =: plan.AssignedTreatmentBundleId__c];
             }
 
-
+            item.sex = animal.Gender__c;
+            item.age = animal.Current_Animal_Age_Estimate__c;
+            item.grade = animal.Current_Behavior_Grade__c;
+            item.location = animal.Shelter_Location__c;
             item.assignment = bundle == null ? 'None Found' : bundle.Name;
             item.colorCode = plan.Shelter_Color_Code__c == null ? 'None Found' : plan.Shelter_Color_Code__c;
             item.treatmentcount = animal.Number_of_Treatments__c == null ? 0 : Integer.valueOf(animal.Number_of_Treatments__c);
