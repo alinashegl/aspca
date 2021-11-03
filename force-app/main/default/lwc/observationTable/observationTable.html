@@ -20,40 +20,40 @@
             </p>
             <template if:true={addNewObservation}>
                 <lightning-layout multiple-rows>
-                        <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="3" large-device-size="3" class="slds-p-around_xx-small">
-                            <div class="slds-form-element">
-                                <div class="slds-form-element__static">
-                                    <lightning-input required type="date" label="Date" name="dateInput" value={dateValue} data-name="dateInput"></lightning-input>
-                                </div>
+                    <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="3" large-device-size="3" class="slds-p-around_xx-small">
+                        <div class="slds-form-element">
+                            <div class="slds-form-element__static">
+                                <lightning-input required type="date" label="Date" name="dateInput" value={dateValue} data-name="dateInput"></lightning-input>
                             </div>
-                        </lightning-layout-item>
-                        <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="3" large-device-size="3" class="slds-p-around_xx-small">
-                            <div class="slds-form-element">
-                                <div class="slds-form-element__static">
-                                    <lightning-textarea required label="Notes" type="text-area" name="descriptionInput" data-name="descriptionInput"></lightning-textarea>
-                                </div>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="3" large-device-size="3" class="slds-p-around_xx-small">
+                        <div class="slds-form-element">
+                            <div class="slds-form-element__static">
+                                <lightning-textarea required label="Notes" type="text-area" name="descriptionInput" data-name="descriptionInput"></lightning-textarea>
                             </div>
-                        </lightning-layout-item>
-                        <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="3" large-device-size="3" class="slds-p-around_xx-small">
-                            <div class="slds-form-element">
-                                <div class="slds-form-element__static">
-                                    <lightning-input required label="Initials" type="text" name="initialInput" data-name="initialInput" maxlength="10"></lightning-input>
-                                </div>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="3" large-device-size="3" class="slds-p-around_xx-small">
+                        <div class="slds-form-element">
+                            <div class="slds-form-element__static">
+                                <lightning-input required label="Initials" type="text" name="initialInput" data-name="initialInput" maxlength="10"></lightning-input>
                             </div>
-                        </lightning-layout-item>
-                        <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="3" large-device-size="3" class="slds-p-around_xx-small">
-                            <div class="slds-form-element">
-                                <div class={addNewButtonClass}>
-                                    <lightning-button label='Add' onclick={handleInsertNewObservation} disabled={saveButtonDisabled} class="slds-m-left_x-small"></lightning-button>
-                                    <lightning-button label='Cancel' onclick={handleNew} class="slds-m-left_x-small"></lightning-button>
-                                </div>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="3" large-device-size="3" class="slds-p-around_xx-small">
+                        <div class="slds-form-element">
+                            <div class={addNewButtonClass}>
+                                <lightning-button label='Add' onclick={handleInsertNewObservation} disabled={saveButtonDisabled} class="slds-m-left_x-small"></lightning-button>
+                                <lightning-button label='Cancel' onclick={handleNew} class="slds-m-left_x-small"></lightning-button>
                             </div>
-                        </lightning-layout-item>
+                        </div>
+                    </lightning-layout-item>
                 </lightning-layout>
             </template>
 
             <template if:true={observationList}>
-                <lightning-datatable
+                <!-- <lightning-datatable
                     key-field="Id"
                     data={observationList}
                     class="slds-max-medium-table_stacked"
@@ -63,7 +63,67 @@
                     show-row-number-column
                     onrowaction={handleRowAction}
                 >
-                </lightning-datatable>
+                </lightning-datatable> -->
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item flexibility="auto" size="12" small-device-size="6" medium-device-size="3" large-device-size="1" class="slds-p-around_xx-small">
+                        <div class="slds-form-element custom-class">
+                            <div class="slds-form-element__static">
+                                View
+                            </div>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="auto" size="12" small-device-size="6" medium-device-size="3" large-device-size="2" class="slds-p-around_xx-small">
+                        <div class="slds-form-element custom-class">
+                            <div class="slds-form-element__static">
+                                Date
+                            </div>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="12" large-device-size="7" class="slds-p-around_xx-small">
+                        <div class="slds-form-element custom-class">
+                            <div class="slds-form-element__static">
+                                Notes
+                            </div>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="auto" size="12" small-device-size="6" medium-device-size="3" large-device-size="2" class="slds-p-around_xx-small">
+                        <div class="slds-form-element custom-class">
+                            <div class="slds-form-element__static">
+                                Initials
+                            </div>
+                        </div>
+                    </lightning-layout-item>
+                    <template for:each={observationList} for:item='row'>
+                        <lightning-layout-item key={row.Id} flexibility="auto" size="12" small-device-size="6" medium-device-size="3" large-device-size="1" class="slds-p-around_xx-small">
+                            <div class="slds-form-element">
+                                <div class="slds-form-element__static">
+                                    View
+                                </div>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item key={row.Id} flexibility="auto" size="12" small-device-size="6" medium-device-size="3" large-device-size="2" class="slds-p-around_xx-small">
+                            <div class="slds-form-element">
+                                <div class="slds-form-element__static">
+                                    {row.Observation_Date__c}
+                                </div>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item key={row.Id} flexibility="auto" size="12" small-device-size="12" medium-device-size="12" large-device-size="7" class="slds-p-around_xx-small">
+                            <div class="slds-form-element">
+                                <div class="slds-form-element__static">
+                                    {row.Observation_Notes__c}
+                                </div>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item key={row.Id} flexibility="auto" size="12" small-device-size="6" medium-device-size="3" large-device-size="2" class="slds-p-around_xx-small">
+                            <div class="slds-form-element">
+                                <div class="slds-form-element__static">
+                                    {row.Observation_Reported_By__c}
+                                </div>
+                            </div>
+                        </lightning-layout-item>
+                    </template>
+                </lightning-layout>
             </template>
         </lightning-card>
     </article>
