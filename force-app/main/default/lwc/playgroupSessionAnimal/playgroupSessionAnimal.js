@@ -1,8 +1,8 @@
 import { LightningElement, api, wire } from 'lwc';
-import { getRecord, updateRecord } from 'lightning/uiRecordApi';
+import { getRecord, getFieldValue, updateRecord } from 'lightning/uiRecordApi';
 import FORM_FACTOR from '@salesforce/client/formFactor'
 
-// import ANIMAL_PG_NAME_FIELD from '@salesforce/schema/Animal_Playgroup__c.Animal_Name__c';
+import ANIMAL_NAME_FIELD from '@salesforce/schema/Animal__c.Animal_Name__c';
 import ANIMAL_PG_NOTES_FIELD from '@salesforce/schema/Animal_Playgroup__c.Playgroup_Individual_Notes__c';
 // import ANIMAL_LOCATION_FIELD from '@salesforce/schema/Animal_Playgroup__c.Animal__r.Shelter_Location2__c';
 // import ANIMAL_ID_FIELD from '@salesforce/schema/Animal_Playgroup__c.Animal__r.Name';
@@ -12,15 +12,23 @@ import ANIMAL_PG_NOTES_FIELD from '@salesforce/schema/Animal_Playgroup__c.Playgr
 
 export default class PlaygroupSessionAnimal extends LightningElement {
     @api animalId;
-    @api animalPlaygroupId;
+    @api playgroupAnimalId;
 
-    fields = [ANIMAL_PG_NOTES_FIELD];
+    fields = [ANIMAL_NAME_FIELD];
 
-    @wire(getRecord, {recordId: '$animalPlaygroupId', fields: '$fields'})
-    animalPlaygroup;
+    @wire(getRecord, {recordId: '$animalId', fields: [ANIMAL_NAME_FIELD]})
+    animal;
 
     get layoutItemPadding(){
-        return FORM_FACTOR == 'small' ? 'around-small' : 'around-small';
+        return FORM_FACTOR == 'small' ? 'around-small' : 'around-medium';
+    }
+
+    get updateDogButtonLabel() {
+        return 'Update ' + this.animalName;
+    }
+
+    get animalName() {
+        return getFieldValue(this.animal.data, ANIMAL_NAME_FIELD);
     }
     
 }

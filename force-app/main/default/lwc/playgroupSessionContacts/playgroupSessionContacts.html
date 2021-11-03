@@ -1,0 +1,76 @@
+<template>
+    v1.2
+    <template if:true={showDogList}>
+        <div class='slds-box'>
+            Contacts: {showFirstContact}
+        </div>
+    </template>
+
+    <div class="slds-grid slds-wrap slds-gutters">
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_3-of-6 slds-large-size_1-of-6" data-id='customlookcreatenew'>
+            <label class="slds-form-element__label" for="form-element-01">Playgroup Contact</label>
+            <c-custom-lookup
+                obj-name='Contact'
+                icon-name='standard:contact'
+                placeholder='Search Contacts...'
+                fields={customLookupFields}
+                display-fields={customLookupDisplayFields}
+                create-new-fields={customLookupCreateNewFields}
+                field-to-query='Name'
+                label-name='Playgroup Contact'
+                onlookup={customLookupEvent}
+                onexpandfield={handleCustomLookupExpandSearch}
+                element-id='customlookcreatenew'
+                allow-create-new=true
+                initial-col-size='slds-col slds-size_1-of-1 slds-medium-size_3-of-6 slds-large-size_1-of-6'
+            >
+            </c-custom-lookup>
+            <template if:true={showDogList}>
+                <div class='slds-p-top_x-small'>
+                    <lightning-button
+                        variant="brand"
+                        name="update"
+                        label="Save"
+                        onclick={handleAddContact}
+                    >
+                    </lightning-button>
+
+                    <lightning-button
+                        class='slds-p-left_x-small'
+                        variant="brand"
+                        name="update"
+                        label="Cancel"
+                        onclick={handleCancelAddContact}
+                    >
+                    </lightning-button>
+                </div>
+                
+            </template>
+        </div>
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2" data-id='customlookcreatenew'>
+            <template if:true={showDogList}>
+                <lightning-layout multiple-rows class='slds-grid_vertical-align-center'>
+                    <template for:each={dogList} for:item='animal'>
+                        <lightning-layout-item size="6" small-device-size="2" medium-device-size="2" large-device-size="2" key={animal.Id} padding="around-small" class='slds-border_bottom slds-grid_vertical-align-start'>
+                            <div >
+                                <p class="field-title" title="animalName">{animal.Name}</p>
+                            </div>
+                            <div title='Status'>
+                                <lightning-input 
+                                    type="toggle"
+                                    checked=false
+                                    message-toggle-active='Familiar'
+                                    message-toggle-inactive='Novel'
+                                    onchange={handleToggleChange}
+                                    data-id={animal.Id}
+                                >
+                                </lightning-input>
+                            </div>
+                        </lightning-layout-item>
+                    </template>
+                </lightning-layout>
+            </template>
+        </div>
+    </div>
+    
+</template>

@@ -139,12 +139,6 @@ export default class TreatmentSessionChild extends LightningElement {
         return this.isContactList ? 'standard:contact' : 'custom:custom47';
     }
 
-    get customLookupWhereClause(){
-        if(!this.isContactList){
-            return 'Potential_Helper_Dog__c = true AND ';
-        }
-    }
-
     get customLookupFieldToQuery(){
         return this.isContactList ? 'Name' : 'Animal_Name__c';
     }

@@ -12,10 +12,12 @@ export default class PlaygroupSessionMain extends LightningElement {
     animals = [];
     session;
     sessionPlaygroupLeader;
+    toggleDropdown = false;
 
     customLookupFields = ["Name","Email","Title"];
     customLookupDisplayFields = 'Name, Email, Title';
     customLookupCreateNewFields = ['FirstName', 'LastName', 'Title', 'Department', 'Email'];
+    customLookupExpandedField = false;
     formFactor = FORM_FACTOR;
 
     @wire(getPlaygroupSessionInfo, {sessionId: '$recordId'})
@@ -49,12 +51,14 @@ export default class PlaygroupSessionMain extends LightningElement {
         this.sessionPlaygroupLeader = event.detail.data.recordId;
     }
 
-    customLookupExpandedField = false;
-
     handleCustomLookupExpandSearch(event){
         window.console.log('in handleCustomLookupExpandSearch: ', JSON.stringify ( event.detail.data) );
         let data = event.detail.data;
         this.customLookupExpandedField = data.expandField;
+    }
+
+    handleToggleDropdown(){
+        this.toggleDropdown = !this.toggleDropdown;
     }
 
     get customLookupLeaderDeviceSize(){
@@ -80,5 +84,9 @@ export default class PlaygroupSessionMain extends LightningElement {
         if(this.sessionPlaygroupLeader){
             return this.sessionPlaygroupLeader;
         }
+    }
+
+    get dropdownIcon(){
+        return this.toggleDropdown ? 'utility:chevrondown' : 'utility:chevronright';
     }
 }

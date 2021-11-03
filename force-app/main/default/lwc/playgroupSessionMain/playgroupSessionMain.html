@@ -5,74 +5,77 @@
     <template if:false={showSPinner}>
         <template if:true={recordId}>
             <template if:true={smallForm}>
-                <!-- <div class="slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open"> -->
-                <div class="slds-dropdown-trigger slds-dropdown-trigger_click">
-                    <button class="slds-button slds-button_icon slds-button_icon-border-filled" aria-haspopup="true" aria-expanded="true" title="Show More">
-                        <lightning-icon icon-name='utility:close'
+                <div class="slds-dropdown_medium slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open">
+                <!-- <div class="slds-dropdown-trigger slds-dropdown-trigger_click"> -->
+                    <button class="slds-button slds-button_icon slds-button_icon-border-filled" onclick={handleToggleDropdown} aria-haspopup="true" aria-expanded="true" title="Show More">
+                        <lightning-icon icon-name={dropdownIcon}
                         >
                         </lightning-icon>
                     </button>
-                    <div class="slds-dropdown slds-dropdown_left">
-                        <ul class="slds-dropdown__list" role="menu" aria-label="Show More">
-                            <li class="slds-dropdown__item" role="presentation">
-                                <lightning-button
-                                    class="slds-m-top_small"
-                                    variant="base"
-                                    type="submit"
-                                    name="update"
-                                    label="Complete and Exit"
-                                >
-                                </lightning-button>
-                            </li>
-                            <li class="slds-dropdown__item" role="presentation">
-                                <lightning-button
-                                    class="slds-m-top_small"
-                                    variant="base"
-                                    type="submit"
-                                    name="update"
-                                    label="Create New Session"
-                                >
-                                </lightning-button>
-                            </li>
-                            <li class="slds-dropdown__item" role="presentation">
-                                <lightning-button
-                                    class="slds-m-top_small"
-                                    variant="base"
-                                    type="submit"
-                                    name="update"
-                                    label="Copy Session"
-                                >
-                                </lightning-button>
-                            </li>
-                        </ul>
-                    </div>
+                    <template if:true={toggleDropdown}>
+                        <div class="slds-dropdown slds-dropdown_left">
+                            <ul class="slds-dropdown__list" role="menu" aria-label="Show More">
+                                <li class="slds-dropdown__item" role="presentation">
+                                    <lightning-button
+                                        class="slds-m-top_small"
+                                        variant="base"
+                                        type="submit"
+                                        name="update"
+                                        label="Complete and Exit"
+                                    >
+                                    </lightning-button>
+                                </li>
+                                <li class="slds-dropdown__item" role="presentation">
+                                    <lightning-button
+                                        class="slds-m-top_small"
+                                        variant="base"
+                                        type="submit"
+                                        name="update"
+                                        label="Create New Session"
+                                    >
+                                    </lightning-button>
+                                </li>
+                                <li class="slds-dropdown__item" role="presentation">
+                                    <lightning-button
+                                        class="slds-m-top_small"
+                                        variant="base"
+                                        type="submit"
+                                        name="update"
+                                        label="Copy Session"
+                                    >
+                                    </lightning-button>
+                                </li>
+                            </ul>
+                        </div>
+                    </template>
                 </div>
             </template>
-            <lightning-record-edit-form
-                object-api-name="Playgroup_Session__c"
-                record-id={recordId}
-            >
-                <lightning-layout multiple-rows pull-to-boundary="medium" class="slds-p-left_xx-small">
-                    <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size={customLookupLeaderDeviceSize} large-device-size={customLookupLeaderDeviceSize} padding="horizontal-medium">
-                        <div class="slds-form-element">
-                            <div class="slds-form-element__static">
-                                <label class="slds-form-element__label" for="form-element-01">Playgroup Leader</label>
-                                <c-custom-lookup
-                                    obj-name="Contact"
-                                    icon-name="standard:contact"
-                                    placeholder="Search Contacts..." 
-                                    fields={customLookupFields}
-                                    display-fields={customLookupDisplayFields}
-                                    create-new-fields={customLookupCreateNewFields}
-                                    value-id={customLookupValueId}
-                                    label-name='Playgroup Leader'
-                                    onlookup={customLookupEvent}
-                                    allow-create-new=true
-                                    onexpandfield={handleCustomLookupExpandSearch}
-                                >
-                                </c-custom-lookup>
+            <div class='slds-box'>
+                <lightning-record-edit-form
+                    object-api-name="Playgroup_Session__c"
+                    record-id={recordId}
+                >
+                    <lightning-layout multiple-rows pull-to-boundary="medium" class="slds-p-left_xx-small">
+                        <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size={customLookupLeaderDeviceSize} large-device-size={customLookupLeaderDeviceSize} padding="horizontal-medium">
+                            <div class="slds-form-element">
+                                <div class="slds-form-element__static">
+                                    <label class="slds-form-element__label" for="form-element-01">Playgroup Leader</label>
+                                    <c-custom-lookup
+                                        obj-name="Contact"
+                                        icon-name="standard:contact"
+                                        placeholder="Search Contacts..." 
+                                        fields={customLookupFields}
+                                        display-fields={customLookupDisplayFields}
+                                        create-new-fields={customLookupCreateNewFields}
+                                        value-id={customLookupValueId}
+                                        label-name='Playgroup Leader'
+                                        onlookup={customLookupEvent}
+                                        allow-create-new=true
+                                        onexpandfield={handleCustomLookupExpandSearch}
+                                    >
+                                    </c-custom-lookup>
+                                </div>
                             </div>
-                        </div>
                         </lightning-layout-item>
                         <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="6" large-device-size="3" padding="horizontal-medium">
                             <div class="slds-form-element">
@@ -125,19 +128,30 @@
                                     </div>
                                 </div>
                             </lightning-layout-item>
-                            <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="12" large-device-size="12" padding="horizontal-medium">
-                                <div class="slds-form-element">
-                                    <div class="slds-form-element__static">
-                                        <lightning-input-field field-name="Playgroup_Notes__c"></lightning-input-field>
-                                    </div>
-                                </div>
-                            </lightning-layout-item>
                         </template>
-                </lightning-layout>
-            </lightning-record-edit-form>
+                        <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="12" large-device-size="12" padding="horizontal-medium">
+                            <div class="slds-form-element">
+                                <div class="slds-form-element__static">
+                                    <lightning-input-field field-name="Playgroup_Notes__c"></lightning-input-field>
+                                </div>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="12" large-device-size="12" padding="horizontal-medium">
+                            <div class="slds-form-element">
+                                <div class="slds-form-element__static">
+                                    <c-playgroup-session-contacts
+                                        session-id={recordId}
+                                    >
+                                    </c-playgroup-session-contacts>
+                                </div>
+                            </div>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </lightning-record-edit-form>
+            </div>
             
             <template if:true={animals}>
-                <div class="slds-p-left_xx-small">
+                <div class="slds-p-left_xx-small slds-p-top_small">
                     <template for:each={animals} for:item='animal'>
                         <div class="slds-p-bottom_xx-small" key={animal.Id}>
                             <c-playgroup-session-animal
@@ -151,14 +165,4 @@
             </template>
         </template>
     </template>
-
-    <!-- 
-        <c-playgroup-to-do-list
-        oncopy={}
-        >
-    </c-playgroup-to-do-list>
-
-        animalsToAdd
-        sessionId
-     -->
 </template>
