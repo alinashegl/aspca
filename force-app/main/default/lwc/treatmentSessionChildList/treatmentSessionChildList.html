@@ -1,6 +1,6 @@
 <template>
     <template if:true={recordList}>
-        <h2 class="slds-card__header-title">{tableName}</h2>
+        <h2 class="slds-card__header-title slds-p-bottom_small">{tableName}</h2>
         <!-- <lightning-card> -->
             <template for:each={recordList.data} for:item="record">
                 <div key={record.Id} class="slds-p-bottom_small">
