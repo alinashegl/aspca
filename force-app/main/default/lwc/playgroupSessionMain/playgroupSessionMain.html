@@ -101,7 +101,7 @@
                                                 variant="brand"
                                                 type="submit"
                                                 name="update"
-                                                label="Complete and Exit"
+                                                label="Save"
                                             >
                                             </lightning-button>
                                         </p>
@@ -136,21 +136,25 @@
                                 </div>
                             </div>
                         </lightning-layout-item>
-                        <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="12" large-device-size="12" padding="horizontal-medium">
-                            <div class="slds-form-element">
-                                <div class="slds-form-element__static">
-                                    <c-playgroup-session-contacts
-                                        session-id={recordId}
-                                    >
-                                    </c-playgroup-session-contacts>
+                        <template if:true={hasAnimalList}>
+                            <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="12" large-device-size="12" padding="horizontal-medium">
+                                <div class="slds-form-element">
+                                    <div class="slds-form-element__static">
+                                        <c-playgroup-session-contacts
+                                            session-id={recordId}
+                                            animals={animals}
+                                            contacts={playgroupContacts}
+                                        >
+                                        </c-playgroup-session-contacts>
+                                    </div>
                                 </div>
-                            </div>
-                        </lightning-layout-item>
+                            </lightning-layout-item>
+                        </template>
                     </lightning-layout>
                 </lightning-record-edit-form>
             </div>
             
-            <template if:true={animals}>
+            <template if:true={hasAnimalList}>
                 <div class="slds-p-left_xx-small slds-p-top_small">
                     <template for:each={animals} for:item='animal'>
                         <div class="slds-p-bottom_xx-small" key={animal.Id}>

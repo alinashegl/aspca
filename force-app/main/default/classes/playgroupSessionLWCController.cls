@@ -5,6 +5,7 @@ public with sharing class playgroupSessionLWCController {
             playgroupSessionInfo info = new playgroupSessionInfo();
             info.animalPlaygroups = animalPlaygroups(sessionId);
             info.playgroupSession = getPlaygroupSession(sessionId);
+            info.playgroupContacts = getPlaygroupContacts(info.animalPlaygroups[0].Id);
             return info;
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
@@ -22,7 +23,11 @@ public with sharing class playgroupSessionLWCController {
     }
 
     private static Animal_Playgroup__c[] animalPlaygroups (Id sessionId){
-        return [SELECT Id, Animal__c FROM Animal_Playgroup__c WHERE Playgroup_Session__c =: sessionId];
+        return [SELECT Id, Animal__c, Animal_Name__c FROM Animal_Playgroup__c WHERE Playgroup_Session__c =: sessionId];
+    }
+
+    private static Playgroup_Contact__c[] getPlaygroupContacts(Id animalPlaygroupId){
+        return [SELECT Id, Contact__c, Contact__r.Name FROM Playgroup_Contact__c WHERE Playgroup__c =: animalPlaygroupId];
     }
 
     @AuraEnabled
@@ -55,6 +60,37 @@ public with sharing class playgroupSessionLWCController {
         return newAnimals;
     }
 
+    @AuraEnabled
+    public static Animal_Playgroup__c[] getAnimalList(Id sessionId){
+
+        return [SELECT Id, Animal_Name__c, Animal__c FROM Animal_Playgroup__c WHERE Playgroup_Session__c =: sessionId];
+    }
+
+    @AuraEnabled
+    public static String addContact(Id sessionId, Id contactId, Id[] animalIdsWithNovelContact){
+        try{
+            Playgroup_Contact__c[] pgContacts = new Playgroup_Contact__c[0];
+            for(Animal_Playgroup__c animal : getAnimalList(sessionId)){
+                Playgroup_Contact__c pg = new Playgroup_Contact__c(
+                    Playgroup__c = animal.Id,
+                    Contact__c = contactId,
+                    Novel_Not_Novel__c = animalIdsWithNovelContact.contains(animal.Animal__c) ? 'Novel' : 'Familiar'
+                );
+                pgContacts.add(pg);
+            }
+
+            insert pgContacts;
+            return 'Success';
+
+        } catch(exception error) {
+            throw new AuraHandledException(error.getMessage());
+        }
+    }
+
+    @AuraEnabled
+    public static void removeContact(){
+
+    }
 
     @AuraEnabled
     public static string endPlaygroup(){
@@ -86,6 +122,7 @@ public with sharing class playgroupSessionLWCController {
     public class playgroupSessionInfo{
         @AuraEnabled public Playgroup_Session__c playgroupSession {get; set;}
         @AuraEnabled public Animal_Playgroup__c[] animalPlaygroups {get; set;}
+        @AuraEnabled public Playgroup_Contact__c[] playgroupContacts {get; set;}
     }
 }
 

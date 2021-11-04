@@ -2,6 +2,7 @@ import { LightningElement, api, wire } from 'lwc';
 import FORM_FACTOR from '@salesforce/client/formFactor'
 import getPlaygroupSessionInfo from '@salesforce/apex/playgroupSessionLWCController.getPlaygroupSessionInfo';
 import startPlaygroupSession from '@salesforce/apex/playgroupSessionLWCController.startPlaygroupSession';
+import { getRecordCreateDefaults } from 'lightning/uiRecordApi';
 
 export default class PlaygroupSessionMain extends LightningElement {
     @api recordId;
@@ -10,6 +11,7 @@ export default class PlaygroupSessionMain extends LightningElement {
     wireResponse;
     showSpinner = true;
     animals = [];
+    playgroupContacts = [];
     session;
     sessionPlaygroupLeader;
     toggleDropdown = false;
@@ -23,13 +25,14 @@ export default class PlaygroupSessionMain extends LightningElement {
     @wire(getPlaygroupSessionInfo, {sessionId: '$recordId'})
     response(result){
         this.wireResponse = result;
-        window.console.log('result: ', JSON.stringify(result));
         if(result.data ){
             this.session = result.data.playgroupSession;
             this.sessionPlaygroupLeader = result.data.playgroupSession.Playgroup_Leader__c;
             if(result.data.animalPlaygroups){
                 this.animals = result.data.animalPlaygroups;
-                
+            }
+            if(result.data.playgroupContacts){
+                this.playgroupContacts = result.data.playgroupContacts;
             }
             this.showSpinner = false;
         }
@@ -88,5 +91,9 @@ export default class PlaygroupSessionMain extends LightningElement {
 
     get dropdownIcon(){
         return this.toggleDropdown ? 'utility:chevrondown' : 'utility:chevronright';
+    }
+
+    get hasAnimalList(){
+        return this.animals.length > 0;
     }
 }

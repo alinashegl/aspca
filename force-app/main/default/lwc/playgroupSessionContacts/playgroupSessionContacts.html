@@ -1,37 +1,45 @@
 <template>
-    v1.5
-    <template if:true={showDogList}>
-        <div class='slds-box'>
-            Contacts: {showFirstContact}
+    <template if:true={showContactList}>
+        <div class="slds-scrollable_x slds-border_top slds-border_bottom">
+            Contacts:
+            <lightning-pill-container items={contactListPill} onitemremove={handleRemoveContact}></lightning-pill-container>
         </div>
     </template>
+    <template if:true={error}>
+        <c-error-panel errors={error} type='inlineMessage' friendly-message='Error adding contact'></c-error-panel>
+    </template>
 
-    <div class="slds-grid slds-wrap slds-gutters">
-        <div class="slds-col slds-size_1-of-1 slds-medium-size_3-of-6 slds-large-size_1-of-6" data-id='customlookcreatenew'>
+    <div class="slds-grid slds-wrap slds-gutters slds-p-top_small">
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_3-of-6 slds-large-size_1-of-6" data-id='customlookupcreatenew'>
             <label class="slds-form-element__label" for="form-element-01">Playgroup Contact</label>
-            <c-custom-lookup
-                obj-name='Contact'
-                icon-name='standard:contact'
-                placeholder='Search Contacts...'
-                fields={customLookupFields}
-                display-fields={customLookupDisplayFields}
-                create-new-fields={customLookupCreateNewFields}
-                field-to-query='Name'
-                label-name='Playgroup Contact'
-                onlookup={customLookupEvent}
-                onexpandfield={handleCustomLookupExpandSearch}
-                element-id='customlookcreatenew'
-                allow-create-new=true
-                initial-col-size='slds-col slds-size_1-of-1 slds-medium-size_3-of-6 slds-large-size_1-of-6'
-            >
-            </c-custom-lookup>
-            <template if:true={showDogList}>
+            <template if:true={showContactLookup}>
+                <c-custom-lookup
+                    obj-name='Contact'
+                    icon-name='standard:contact'
+                    value-id={customLookupValueId}
+                    placeholder='Search Contacts...'
+                    fields={customLookupFields}
+                    display-fields={customLookupDisplayFields}
+                    create-new-fields={customLookupCreateNewFields}
+                    field-to-query='Name'
+                    label-name='Playgroup Contact'
+                    onlookup={customLookupEvent}
+                    onexpandfield={handleCustomLookupExpandSearch}
+                    element-id='customlookupcreatenew'
+                    clear-selection={customLookupClearSelection}
+                    allow-create-new=true
+                    initial-col-size='slds-col slds-size_1-of-1 slds-medium-size_3-of-6 slds-large-size_1-of-6'
+                >
+                </c-custom-lookup>
+            </template>
+            <template if:true={showAnimalList}>
                 <div class='slds-p-top_x-small'>
                     <lightning-button
                         variant="brand"
                         name="update"
-                        label="Save"
+                        label={addContactButtonLabel}
                         onclick={handleAddContact}
+                        disabled={disableSaveContactButton}
                     >
                     </lightning-button>
 
@@ -44,16 +52,15 @@
                     >
                     </lightning-button>
                 </div>
-                
             </template>
         </div>
         <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2" data-id='customlookcreatenew'>
-            <template if:true={showDogList}>
+            <template if:true={showAnimalList}>
                 <lightning-layout multiple-rows class='slds-grid_vertical-align-center'>
-                    <template for:each={dogList} for:item='animal'>
+                    <template for:each={animals} for:item='animal'>
                         <lightning-layout-item size="6" small-device-size="2" medium-device-size="4" large-device-size="3" key={animal.Id} padding="around-small" class='slds-border_bottom slds-grid_vertical-align-end'>
                             <div >
-                                <p class="field-title" title="animalName">{animal.Name}</p>
+                                <p class="field-title" title={animal.Animal_Name__c}>{animal.Animal_Name__c}</p>
                             </div>
                             <div title='Status'>
                                 <lightning-input 

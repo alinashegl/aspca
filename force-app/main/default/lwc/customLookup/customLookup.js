@@ -26,6 +26,18 @@ export default class CustomLookup extends LightningElement {
     @api createNewFields;
     @api allowCreateNew = false;
 
+    _clearSelection;
+    @api
+    get clearSelection() {
+        return this._clearSelection;
+    }
+    set clearSelection(value) {
+        this._clearSelection = value;
+        this.selectedRecord = undefined;
+        this.searchKey = '';
+        this.editRecord = true;
+    }
+
     formFactor = FORM_FACTOR;
     error;
 
