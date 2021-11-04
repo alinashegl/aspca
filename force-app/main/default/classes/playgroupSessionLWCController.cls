@@ -74,7 +74,7 @@ public with sharing class playgroupSessionLWCController {
                 Playgroup_Contact__c pg = new Playgroup_Contact__c(
                     Playgroup__c = animal.Id,
                     Contact__c = contactId,
-                    Novel_Not_Novel__c = animalIdsWithNovelContact.contains(animal.Animal__c) ? 'Novel' : 'Familiar'
+                    Novel_Not_Novel__c = animalIdsWithNovelContact.contains(animal.Id) ? 'Novel' : 'Familiar'
                 );
                 pgContacts.add(pg);
             }
@@ -88,8 +88,13 @@ public with sharing class playgroupSessionLWCController {
     }
 
     @AuraEnabled
-    public static void removeContact(){
-
+    public static String removeContact(Id sessionId, Id contactId){
+        try{
+            delete [SELECT Id FROM Playgroup_Contact__c WHERE Contact__c =: contactId AND Playgroup__r.Playgroup_Session__c =: sessionId];
+            return 'Success';
+        } catch (exception error){
+            throw new AuraHandledException(error.getMessage());
+        }
     }
 
     @AuraEnabled

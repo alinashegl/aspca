@@ -1,4 +1,5 @@
 import { LightningElement, api, track, wire } from 'lwc';
+import FORM_FACTOR from '@salesforce/client/formFactor'
 import addContact from '@salesforce/apex/playgroupSessionLWCController.addContact';
 import removeContact from '@salesforce/apex/playgroupSessionLWCController.removeContact';
 
@@ -6,12 +7,22 @@ export default class PlaygroupSessionContacts extends LightningElement {
     @api sessionId;
     @api animals = [];
     @api contacts = [];
-    customLookupNewId;
 
+    @track contactListPill = [];
+
+    customLookupNewId;
+    customLookupClearSelection = true;
     showAnimalList = false;
     contactList = [];
     ranRenderedCallback = false;
-
+    modalClass = FORM_FACTOR == 'Small' ? 'slds-fade-in-open' : 'slds-modal slds-fade-in-open';
+    tempAnimalsWithNovelContact = [];
+    tempContact;
+    isDuplicateContact = false;
+    confirmDelete = false;
+    contactToRemove;
+    error;
+    showSpinner = false;
 
     renderedCallback(){
         if(!this.ranRenderedCallback){
@@ -28,15 +39,12 @@ export default class PlaygroupSessionContacts extends LightningElement {
         }
     }
 
-    isDuplicateContact = false;
-
     customLookupEvent(event){
         window.console.log('handleLookup: ', JSON.stringify ( event.detail) );
         this.customLookupNewId = event.detail.data.recordId;
         this.showAnimalList = true;
-        // this.contactList.push(event.detail.data.record.Name);
         this.tempContact = event.detail.data.record;
-        if(this.contacts.find(cont => cont.Contact__c == this.tempContact.Id)){
+        if(this.contactListPill.find(cont => cont.name == this.tempContact.Id)){
             window.console.log('isDuplicateContact');
             this.isDuplicateContact = true;
         } else {
@@ -53,15 +61,9 @@ export default class PlaygroupSessionContacts extends LightningElement {
            data.expandField ? 'slds-col slds-size_1-of-1' : data.initialColSize;
     }
 
-    @track contactListPill = [];
-
-    tempContact;
-    showContactLookup = true;
-    customLookupClearSelection = true;
-    error;
-
     handleAddContact(){
         window.console.log('addContact');
+        this.showSpinner = true;
         addContact({sessionId: this.sessionId, contactId: this.tempContact.Id, animalIdsWithNovelContact: this.tempAnimalsWithNovelContact})
         .then ((result) =>{
             if(result){
@@ -80,27 +82,49 @@ export default class PlaygroupSessionContacts extends LightningElement {
             console.error('error: ', error.statusText);
             console.error('error message: ', error.body.message);
             this.error = error;
+        })
+        .finally(() => {
+            this.showSpinner = false;
         });
     }
 
-    get disableSaveButton(){
-        return tempContact == undefined ? true : false;
-    }
-
-    get showContactList(){
-        return this.contactListPill.length > 0;
-    }
-
     handleRemoveContact(event){
-        const name = event.detail.item.name;
-        this.contactListPill = this.contactListPill.filter(x => x.name !== name);
+        this.contactToRemove = event.detail.item;
+        this.confirmDelete = true;
+    }
+
+    handleDeleteContact(){
+        this.showSpinner = true;
+        removeContact({sessionId: this.sessionId, contactId: this.contactToRemove.name})
+        .then((result) => {
+            if(result){
+                this.contactListPill = this.contactListPill.filter(x => x.name !== this.contactToRemove.name);
+                this.confirmDelete = false;
+            }
+        })
+        .catch((error) => {
+            console.error('error: ', error.statusText);
+            console.error('error message: ', error.body.message);
+            this.error = error;
+        })
+        .finally(() => {
+            this.showSpinner = false;
+        });
+        
+    }
+
+    handleCloseModal (){
+        this.confirmDelete = false;
     }
 
     handleCancelAddContact(){
         window.console.log('handleCancelAddContact');
+        this.tempAnimalsWithNovelContact = [];
+        this.tempContact = undefined;
+        this.showAnimalList = false;
+        this.customLookupClearSelection = !this.customLookupClearSelection;
+        this.isDuplicateContact = false;
     }
-
-    tempAnimalsWithNovelContact = [];
 
     handleToggleChange(event){
         let dataId = event.target.dataset.id;
@@ -109,7 +133,6 @@ export default class PlaygroupSessionContacts extends LightningElement {
 
         window.console.log('handleToggleChange: ', dataId);
         window.console.log('value: ', value);
-
     }
 
     get customLookupFields(){
@@ -133,6 +156,25 @@ export default class PlaygroupSessionContacts extends LightningElement {
     }
 
     get addContactButtonLabel (){
-        return this.isDuplicateContact ? 'Cannot add duplicate' : 'Add';
+        return this.isDuplicateContact ? 'Duplicate Contact' : 'Add';
+    }
+
+    get isLargeFormFactor(){
+        return FORM_FACTOR != 'Small';
+    }
+
+    get deleteButtonLabel(){
+        return FORM_FACTOR == 'Small' ? 'Delete' : 'Delete Contact';
+    }
+
+    get showAnimalToggle(){
+        return this.showAnimalList && !this.isDuplicateContact;
+    }
+    get disableSaveButton(){
+        return tempContact == undefined ? true : false;
+    }
+
+    get showContactList(){
+        return this.contactListPill.length > 0;
     }
 }
