@@ -1,5 +1,5 @@
 <template>
-    v1.2
+    v1.5
     <template if:true={showDogList}>
         <div class='slds-box'>
             Contacts: {showFirstContact}
@@ -51,7 +51,7 @@
             <template if:true={showDogList}>
                 <lightning-layout multiple-rows class='slds-grid_vertical-align-center'>
                     <template for:each={dogList} for:item='animal'>
-                        <lightning-layout-item size="6" small-device-size="2" medium-device-size="2" large-device-size="2" key={animal.Id} padding="around-small" class='slds-border_bottom slds-grid_vertical-align-start'>
+                        <lightning-layout-item size="6" small-device-size="2" medium-device-size="4" large-device-size="3" key={animal.Id} padding="around-small" class='slds-border_bottom slds-grid_vertical-align-end'>
                             <div >
                                 <p class="field-title" title="animalName">{animal.Name}</p>
                             </div>

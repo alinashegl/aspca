@@ -16,12 +16,13 @@ import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 const columns = [
     { label: 'View',
-        type: 'button',
-        typeAttributes: { label: "View", name: "goToObservation", variant: "base"}
+      type: 'button',
+      initialWidth: '50px',
+      typeAttributes: { label: "View", name: "goToObservation", variant: "base"}
     },
-    { label: 'Date', fieldName: 'Observation_Date__c', type:'date-local'},
+    { label: 'Date', fieldName: 'Observation_Date__c', type:'date-local', initialWidth: '50px'},
     { label: 'Notes', fieldName: 'Observation_Notes__c' },
-    { label: 'Initials', fieldName: 'Observation_Reported_By__c' }
+    { label: 'Initials', fieldName: 'Observation_Reported_By__c', initialWidth: '50px' }
 ];
 
 export default class ObservationTable extends NavigationMixin(LightningElement) {
