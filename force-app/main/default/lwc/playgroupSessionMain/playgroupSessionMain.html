@@ -20,7 +20,7 @@
                                         variant="base"
                                         type="submit"
                                         name="update"
-                                        label="Save"
+                                        label="Save Session Info"
                                     >
                                     </lightning-button>
                                 </li>
@@ -53,6 +53,9 @@
                 <lightning-record-edit-form
                     object-api-name="Playgroup_Session__c"
                     record-id={recordId}
+                    onsuccess={handleSessionUpdateSuccess}
+                    onerror={handleSessionUpdateError}
+                    onsubmit={handleSaveSession}
                 >
                     <lightning-layout multiple-rows pull-to-boundary="medium" class="slds-p-left_xx-small">
                         <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size={customLookupLeaderDeviceSize} large-device-size={customLookupLeaderDeviceSize} padding="horizontal-medium">
@@ -79,14 +82,14 @@
                         <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="6" large-device-size="3" padding="horizontal-medium">
                             <div class="slds-form-element">
                                 <div class="slds-form-element__static">
-                                    <lightning-input-field field-name="Playgroup_Location__c"> </lightning-input-field>
+                                    <lightning-input-field field-name="Playgroup_Location__c" data-id='Playgroup_Individual_Notes__c' onchange={handleOnChangeSessionInfo}> </lightning-input-field>
                                 </div>
                             </div>
                         </lightning-layout-item>
                         <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="6" large-device-size="3" padding="horizontal-medium">
                             <div class="slds-form-element">
                                 <div class="slds-form-element__static">
-                                    <lightning-input-field field-name="Playgroup_Date_Time__c" value={currentDateTime}> </lightning-input-field>
+                                    <lightning-input-field field-name="Playgroup_Date_Time__c" value={currentDateTime} data-id='Playgroup_Individual_Notes__c' onchange={handleOnChangeSessionInfo}> </lightning-input-field>
                                 </div>
                             </div>
                         </lightning-layout-item>
@@ -94,6 +97,9 @@
                             <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="6" large-device-size="3" padding="horizontal-medium">
                                 <div class="slds-form-element">
                                     <div class="slds-form-element__static">
+                                        <template if:true={error}>
+                                            <c-error-panel errors={error} type='inlineMessage' friendly-message='Error updating animal'></c-error-panel>
+                                        </template>
                                         <p>
                                             <lightning-button
                                                 class="slds-m-top_small"
@@ -132,7 +138,7 @@
                         <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="12" large-device-size="12" padding="horizontal-medium">
                             <div class="slds-form-element">
                                 <div class="slds-form-element__static">
-                                    <lightning-input-field field-name="Playgroup_Notes__c"></lightning-input-field>
+                                    <lightning-input-field field-name="Playgroup_Notes__c" data-id='Playgroup_Individual_Notes__c' onchange={handleOnChangeSessionInfo}></lightning-input-field>
                                 </div>
                             </div>
                         </lightning-layout-item>

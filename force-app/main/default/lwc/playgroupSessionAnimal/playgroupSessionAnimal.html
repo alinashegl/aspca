@@ -34,20 +34,20 @@
                                     <lightning-output-field field-name="Shelter_Location2__c" variant='label-hidden'> </lightning-output-field>
                                 </div>
                             </lightning-layout-item>
-                            <lightning-layout-item flexibility="auto, no-grow" size="6" small-device-size="3" medium-device-size="2" large-device-size="4" padding={layoutItemPadding}>
-                                <div class="slds-form-element slds-p-left_x-small">
+                            <lightning-layout-item flexibility="auto, no-grow" size="12" small-device-size="6" medium-device-size="2" large-device-size="4" padding={layoutItemPadding}>
+                                <div class="slds-form-element slds-p-left_x-small slds-p-right_x-small">
                                     <label class="slds-form-element__label" for="form-element-01">Play Priority</label>
                                     <lightning-input-field field-name="Play_Priority__c" variant='label-hidden' data-id='Play_Priority__c' onchange={handleOnChangeAnimal}> </lightning-input-field>
                                 </div>
                             </lightning-layout-item>
-                            <lightning-layout-item flexibility="auto, no-grow" size="6" small-device-size="3" medium-device-size="2" large-device-size="4" padding={layoutItemPadding}>
-                                <div class="slds-form-element slds-p-left_x-small">
+                            <lightning-layout-item flexibility="auto, no-grow" size="12" small-device-size="6" medium-device-size="2" large-device-size="4" padding={layoutItemPadding}>
+                                <div class="slds-form-element slds-p-left_x-small slds-p-right_x-small">
                                     <label class="slds-form-element__label" for="form-element-01">Play Category</label>
                                     <lightning-input-field field-name="Play_Category__c" variant='label-hidden' data-id='Play_Category__c' onchange={handleOnChangeAnimal}> </lightning-input-field>
                                 </div>
                             </lightning-layout-item>
-                            <lightning-layout-item flexibility="auto, no-grow" size="6" small-device-size="12" medium-device-size="12" large-device-size="12" padding={layoutItemPadding}>
-                                <div class="slds-form-element slds-p-left_x-small">
+                            <lightning-layout-item flexibility="auto, no-grow" size="12" small-device-size="6" medium-device-size="12" large-device-size="12" padding={layoutItemPadding}>
+                                <div class="slds-form-element slds-p-left_x-small slds-p-right_x-small">
                                     <label class="slds-form-element__label" for="form-element-01">Play Style Notes</label>
                                     <lightning-input-field field-name="Play_Style_Notes__c" variant='label-hidden' data-id='Play_Style_Notes__c' onchange={handleOnChangeAnimal}> </lightning-input-field>
                                 </div>
@@ -65,7 +65,7 @@
                     >
                         <lightning-layout multiple-rows pull-to-boundary="medium" class="slds-p-left_xx-small">
                             <lightning-layout-item flexibility="auto" size="12" small-device-size="6" medium-device-size="6" large-device-size="6" padding={layoutItemPadding}>
-                                <div class="slds-form-element">
+                                <div class="slds-form-element slds-p-right_x-small">
                                     <label class="slds-form-element__label" for="form-element-01">Common Playgroup Notes</label>
                                     <lightning-input-field field-name="Common_Playgroup_Notes__c" variant='label-hidden' data-id='Common_Playgroup_Notes__c' onchange={handleOnChangeAnimalPlaygroup}> </lightning-input-field>
                                 </div>
@@ -93,6 +93,10 @@
                                                 disabled={disableUpdateDogButton}
                                             >
                                             </lightning-button>
+                                            <template if:true={showSpinner}>
+                                                <lightning-icon icon-name="utility:spinner" alternative-text="Loading" size="x-small" title="spinner">
+                                                </lightning-icon>
+                                            </template>
                                         </div>
                                     </div>
                                 </div>

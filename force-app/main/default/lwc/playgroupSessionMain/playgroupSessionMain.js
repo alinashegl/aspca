@@ -22,6 +22,9 @@ export default class PlaygroupSessionMain extends LightningElement {
     customLookupExpandedField = false;
     formFactor = FORM_FACTOR;
 
+    sessionPendingUpdate = false;
+    error;
+
     @wire(getPlaygroupSessionInfo, {sessionId: '$recordId'})
     response(result){
         this.wireResponse = result;
@@ -58,6 +61,29 @@ export default class PlaygroupSessionMain extends LightningElement {
         window.console.log('in handleCustomLookupExpandSearch: ', JSON.stringify ( event.detail.data) );
         let data = event.detail.data;
         this.customLookupExpandedField = data.expandField;
+    }
+
+    sessionUpdateInProgress = false;
+    handleSaveSession(event){
+        event.preventDefault();
+        const fields = event.detail.fields;
+        window.console.log('fields: ', fields);
+        this.template.querySelectorAll('lightning-record-edit-form').submit(fields);
+        this.sessionUpdateInProgress = true;
+    }
+
+    handleOnChangeSessionInfo(){
+        this.sessionPendingUpdate = true;
+    }
+
+    handleSessionUpdateSuccess(){
+        this.sessionPendingUpdate = false;
+        this.sessionUpdateInProgress = false;
+    }
+
+    handleSessionUpdateError(event){
+        const error = event.detail.detail;
+        this.error = error;
     }
 
     handleToggleDropdown(){
