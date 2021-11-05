@@ -26,7 +26,7 @@ export default class PlaygroupSessionContacts extends LightningElement {
 
     renderedCallback(){
         if(!this.ranRenderedCallback){
-            window.console.log("session Contacts animals: ", JSON.stringify(this.animals));
+            // window.console.log("session Contacts animals: ", JSON.stringify(this.animals));
             if(this.contacts.length > 0){
                 this.contacts.forEach(contact => {
                     this.contactListPill.push({

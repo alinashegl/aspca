@@ -6,7 +6,6 @@
         <template if:true={recordId}>
             <template if:true={smallForm}>
                 <div class="slds-dropdown_medium slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open">
-                <!-- <div class="slds-dropdown-trigger slds-dropdown-trigger_click"> -->
                     <button class="slds-button slds-button_icon slds-button_icon-border-filled" onclick={handleToggleDropdown} aria-haspopup="true" aria-expanded="true" title="Show More">
                         <lightning-icon icon-name={dropdownIcon}
                         >
@@ -21,7 +20,7 @@
                                         variant="base"
                                         type="submit"
                                         name="update"
-                                        label="Complete and Exit"
+                                        label="Save"
                                     >
                                     </lightning-button>
                                 </li>
@@ -102,6 +101,7 @@
                                                 type="submit"
                                                 name="update"
                                                 label="Save"
+                                                onclick={handleSaveSession}
                                             >
                                             </lightning-button>
                                         </p>
@@ -163,6 +163,7 @@
                                 playgroup-animal-id={animal.Id}
                             >
                             </c-playgroup-session-animal>
+                            <!-- save-updates={saveAnimalUpdates} -->
                         </div>
                     </template>
                 </div>

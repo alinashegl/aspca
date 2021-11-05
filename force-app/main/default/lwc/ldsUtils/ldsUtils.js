@@ -14,8 +14,12 @@
             .filter((error) => !!error)
             // Extract an error message
             .map((error) => {
+                //error is a string
+                if (typeof error === 'string'){
+                    return error;
+                }
                 // UI API read errors
-                if (Array.isArray(error.body)) {
+                else if (Array.isArray(error.body)) {
                     return error.body.map((e) => e.message);
                 }
                 // Page level errors

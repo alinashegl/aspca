@@ -64,6 +64,12 @@ export default class PlaygroupSessionMain extends LightningElement {
         this.toggleDropdown = !this.toggleDropdown;
     }
 
+    // saveAnimalUpdates = false;
+    // handleSaveSession(){
+    //     window.console.log('handleSaveSession')
+    //     this.saveAnimalUpdates = true;
+    // }
+
     get customLookupLeaderDeviceSize(){
         if(FORM_FACTOR == 'Large'){
             return this.customLookupExpandedField ? '6' : '3';
