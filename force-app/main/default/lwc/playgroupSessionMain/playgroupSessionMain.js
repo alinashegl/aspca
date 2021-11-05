@@ -67,8 +67,8 @@ export default class PlaygroupSessionMain extends LightningElement {
     handleSaveSession(event){
         event.preventDefault();
         const fields = event.detail.fields;
-        window.console.log('fields: ', fields);
-        this.template.querySelectorAll('lightning-record-edit-form').submit(fields);
+        window.console.log('fields: ', JSON.stringify(fields));
+        this.template.querySelector('lightning-record-edit-form').submit(fields);
         this.sessionUpdateInProgress = true;
     }
 
@@ -79,11 +79,37 @@ export default class PlaygroupSessionMain extends LightningElement {
     handleSessionUpdateSuccess(){
         this.sessionPendingUpdate = false;
         this.sessionUpdateInProgress = false;
+        this.toggleDropdown = false;
     }
 
     handleSessionUpdateError(event){
         const error = event.detail.detail;
         this.error = error;
+    }
+
+    handleCreateNewSession(){
+        window.console.log('createNewSession');
+        this.handleToggleDropdown();
+    }
+
+    handleCopySession(){
+        window.console.log('copySession');
+        this.handleToggleDropdown();
+    }
+
+    async handleReset() {
+        await this.resetFields();
+        this.sessionPendingUpdate = false;
+        this.handleToggleDropdown();
+    }
+
+    resetFields(){
+        const inputFields = this.template.querySelectorAll('lightning-input-field');
+        if (inputFields) {
+            inputFields.forEach(field => {
+                field.reset();
+            });
+        }
     }
 
     handleToggleDropdown(){
@@ -127,5 +153,13 @@ export default class PlaygroupSessionMain extends LightningElement {
 
     get hasAnimalList(){
         return this.animals.length > 0;
+    }
+
+    get disableSaveButton(){
+        return !this.sessionPendingUpdate;
+    }
+
+    get isSessionPendingUpdate(){
+        return this.sessionPendingUpdate;
     }
 }

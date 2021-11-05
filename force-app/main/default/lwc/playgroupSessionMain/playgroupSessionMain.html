@@ -1,54 +1,10 @@
 <template>
+    v1.2
     <template if:true={showSpinner}>
         <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
     </template>
     <template if:false={showSPinner}>
         <template if:true={recordId}>
-            <template if:true={smallForm}>
-                <div class="slds-dropdown_medium slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open">
-                    <button class="slds-button slds-button_icon slds-button_icon-border-filled" onclick={handleToggleDropdown} aria-haspopup="true" aria-expanded="true" title="Show More">
-                        <lightning-icon icon-name={dropdownIcon}
-                        >
-                        </lightning-icon>
-                    </button>
-                    <template if:true={toggleDropdown}>
-                        <div class="slds-dropdown slds-dropdown_left">
-                            <ul class="slds-dropdown__list" role="menu" aria-label="Show More">
-                                <li class="slds-dropdown__item" role="presentation">
-                                    <lightning-button
-                                        class="slds-m-top_small"
-                                        variant="base"
-                                        type="submit"
-                                        name="update"
-                                        label="Save Session Info"
-                                    >
-                                    </lightning-button>
-                                </li>
-                                <li class="slds-dropdown__item" role="presentation">
-                                    <lightning-button
-                                        class="slds-m-top_small"
-                                        variant="base"
-                                        type="submit"
-                                        name="update"
-                                        label="Create New Session"
-                                    >
-                                    </lightning-button>
-                                </li>
-                                <li class="slds-dropdown__item" role="presentation">
-                                    <lightning-button
-                                        class="slds-m-top_small"
-                                        variant="base"
-                                        type="submit"
-                                        name="update"
-                                        label="Copy Session"
-                                    >
-                                    </lightning-button>
-                                </li>
-                            </ul>
-                        </div>
-                    </template>
-                </div>
-            </template>
             <div class='slds-box'>
                 <lightning-record-edit-form
                     object-api-name="Playgroup_Session__c"
@@ -57,6 +13,68 @@
                     onerror={handleSessionUpdateError}
                     onsubmit={handleSaveSession}
                 >
+                <template if:true={smallForm}>
+                    <div class="slds-dropdown_medium slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open">
+                        <button class="slds-button slds-button_icon slds-button_icon-border-filled" type='button' onclick={handleToggleDropdown} aria-haspopup="true" aria-expanded="true" title="Show More">
+                            <lightning-icon icon-name={dropdownIcon}
+                            >
+                            </lightning-icon>
+                        </button>
+                        <template if:true={toggleDropdown}>
+                            <div class="slds-dropdown slds-dropdown_left">
+                                <ul class="slds-dropdown__list" role="menu" aria-label="Show More">
+                                    <li class="slds-dropdown__item" role="presentation">
+                                        <lightning-button
+                                            class="slds-m-top_small"
+                                            variant="base"
+                                            type="submit"
+                                            name="update"
+                                            label="Save Session Info"
+                                            onclick={handleSaveSession}
+                                            disabled={disableSaveButton}
+                                        >
+                                        </lightning-button>
+                                    </li>
+                                    <template if:true={isSessionPendingUpdate}>
+                                        <li class="slds-dropdown__item" role="presentation">
+                                            <lightning-button
+                                                class="slds-m-top_small"
+                                                variant="base"
+                                                name="cancel"
+                                                label="Cancel"
+                                                onclick={handleReset}
+                                            ></lightning-button>
+                                        </li>
+                                    </template>
+                                    <template if:false={isSessionPendingUpdate}>
+                                        <li class="slds-dropdown__item" role="presentation">
+                                            <lightning-button
+                                                class="slds-m-top_small"
+                                                variant="base"
+                                                type="button"
+                                                name="update"
+                                                label="Create New Session"
+                                                onclick={handleCreateNewSession}
+                                            >
+                                            </lightning-button>
+                                        </li>
+                                        <li class="slds-dropdown__item" role="presentation">
+                                            <lightning-button
+                                                class="slds-m-top_small"
+                                                variant="base"
+                                                type="button"
+                                                name="update"
+                                                label="Copy Session"
+                                                onclick={handleCopySession}
+                                            >
+                                            </lightning-button>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+                        </template>
+                    </div>
+                </template>
                     <lightning-layout multiple-rows pull-to-boundary="medium" class="slds-p-left_xx-small">
                         <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size={customLookupLeaderDeviceSize} large-device-size={customLookupLeaderDeviceSize} padding="horizontal-medium">
                             <div class="slds-form-element">
@@ -100,37 +118,50 @@
                                         <template if:true={error}>
                                             <c-error-panel errors={error} type='inlineMessage' friendly-message='Error updating animal'></c-error-panel>
                                         </template>
+                                        <template if:true={sessionUpdateInProgress}>
+                                            <lightning-icon icon-name="utility:spinner" alternative-text="Loading" size="x-small" title="spinner">
+                                            </lightning-icon>
+                                        </template>
                                         <p>
                                             <lightning-button
                                                 class="slds-m-top_small"
                                                 variant="brand"
                                                 type="submit"
                                                 name="update"
-                                                label="Save"
-                                                onclick={handleSaveSession}
+                                                label="Save Session Info"
+                                                disabled={disableSaveButton}
                                             >
                                             </lightning-button>
+                                            <template if:true={isSessionPendingUpdate}>
+                                                    <lightning-button
+                                                        class='slds-p-left_x-small'
+                                                        label="Cancel"
+                                                        onclick={handleReset}
+                                                    ></lightning-button>
+                                            </template>
                                         </p>
-                                        <p class='slds-p-top_xxx-small'>
-                                            <lightning-button
-                                                class="slds-m-top_small"
-                                                variant="brand"
-                                                type="submit"
-                                                name="update"
-                                                label="Create New Session"
-                                            >
-                                            </lightning-button>
-                                        </p>
-                                        <p class='slds-p-top_xxx-small'>
-                                            <lightning-button
-                                                class="slds-m-top_small"
-                                                variant="brand"
-                                                type="submit"
-                                                name="update"
-                                                label="Copy Session"
-                                            >
-                                            </lightning-button>
-                                        </p>
+                                        <template if:false={isSessionPendingUpdate}>
+                                            <p class='slds-p-top_xxx-small'>
+                                                <lightning-button
+                                                    class="slds-m-top_small"
+                                                    variant="brand"
+                                                    name="createNewSession"
+                                                    label="Create New Session"
+                                                    onclick={handleCreateNewSession}
+                                                >
+                                                </lightning-button>
+                                            </p>
+                                            <p class='slds-p-top_xxx-small'>
+                                                <lightning-button
+                                                    class="slds-m-top_small"
+                                                    variant="brand"
+                                                    name="copySession"
+                                                    label="Copy Session"
+                                                    onclick={handleCopySession}
+                                                >
+                                                </lightning-button>
+                                            </p>
+                                        </template>
                                     </div>
                                 </div>
                             </lightning-layout-item>
