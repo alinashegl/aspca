@@ -14,7 +14,7 @@ public with sharing class playgroupSessionLWCController {
 
     private static Playgroup_Session__c getPlaygroupSession (Id sessionId){
         Playgroup_Session__c[] sessions = [
-            SELECT Id, Playgroup_Location__c, Playgroup_Leader__c
+            SELECT Id, Name, Playgroup_Location__c, Playgroup_Leader__c
             FROM Playgroup_Session__c 
             WHERE Id =: sessionId 
             LIMIT 1
@@ -94,6 +94,15 @@ public with sharing class playgroupSessionLWCController {
             return 'Success';
         } catch (exception error){
             throw new AuraHandledException(error.getMessage());
+        }
+    }
+
+    @AuraEnabled
+    public static string removeFromPlaygroup(Id animalPlagroupId){
+        try {
+            return 'success';
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
         }
     }
 

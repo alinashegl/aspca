@@ -79,7 +79,9 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
         for (let i = 0; i < this.animalsToAdd.length; i++) {
             //select each stateful button for the animal list
             let iconButton = this.template.querySelector(`[data-id="${this.animalsToAdd[i].name}"]`);
-            iconButton.selected = !iconButton.selected;
+            if(iconButton){
+                iconButton.selected = !iconButton.selected;
+            }
         }
     }
 

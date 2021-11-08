@@ -4,10 +4,40 @@ import addContact from '@salesforce/apex/playgroupSessionLWCController.addContac
 import removeContact from '@salesforce/apex/playgroupSessionLWCController.removeContact';
 
 export default class PlaygroupSessionContacts extends LightningElement {
-    @api sessionId;
+    // @api sessionId;
     @api animals = [];
-    @api contacts = [];
+    // @api contacts = [];
 
+    _sessionId;
+    @api
+    get sessionId() {
+        return this._sessionId;
+    }
+    set sessionId(value) {
+        this._sessionId = value;
+    }
+
+    _contacts;
+    @api
+    get contacts() {
+        return this._contacts;
+    }
+    set contacts(value) {
+        this._contacts = value;
+        // this.contactsInternal = Array.from(this.contacts);
+        this.contactListPill = [];
+        if(this.contacts.length > 0){
+            
+            this.contacts.forEach(contact => {
+                this.contactListPill.push({
+                    label: contact.Contact__r.Name,
+                    name: contact.Contact__c
+                });
+            });
+        }
+    }
+
+    // @track contactsInternal = [];
     @track contactListPill = [];
 
     customLookupNewId;
@@ -24,20 +54,20 @@ export default class PlaygroupSessionContacts extends LightningElement {
     error;
     showSpinner = false;
 
-    renderedCallback(){
-        if(!this.ranRenderedCallback){
-            // window.console.log("session Contacts animals: ", JSON.stringify(this.animals));
-            if(this.contacts.length > 0){
-                this.contacts.forEach(contact => {
-                    this.contactListPill.push({
-                        label: contact.Contact__r.Name,
-                        name: contact.Contact__c
-                    });
-                });
-            }
-            this.ranRenderedCallback = true;
-        }
-    }
+    // renderedCallback(){
+    //     if(!this.ranRenderedCallback){
+    //         // window.console.log("session Contacts animals: ", JSON.stringify(this.animals));
+    //         if(this.contacts.length > 0){
+    //             this.contacts.forEach(contact => {
+    //                 this.contactListPill.push({
+    //                     label: contact.Contact__r.Name,
+    //                     name: contact.Contact__c
+    //                 });
+    //             });
+    //         }
+    //         this.ranRenderedCallback = true;
+    //     }
+    // }
 
     customLookupEvent(event){
         window.console.log('handleLookup: ', JSON.stringify ( event.detail) );

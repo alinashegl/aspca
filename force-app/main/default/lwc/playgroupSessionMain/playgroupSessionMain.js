@@ -1,13 +1,14 @@
 import { LightningElement, api, wire } from 'lwc';
 import FORM_FACTOR from '@salesforce/client/formFactor'
+import { NavigationMixin } from "lightning/navigation";
 import getPlaygroupSessionInfo from '@salesforce/apex/playgroupSessionLWCController.getPlaygroupSessionInfo';
 import startPlaygroupSession from '@salesforce/apex/playgroupSessionLWCController.startPlaygroupSession';
 import { getRecordCreateDefaults } from 'lightning/uiRecordApi';
 
-export default class PlaygroupSessionMain extends LightningElement {
+export default class PlaygroupSessionMain extends NavigationMixin(LightningElement) {
     @api recordId;
-    @api newSession = false; //if newSession = true need to create a session
-    @api animalIds = [];
+    // @api newSession = false; //if newSession = true need to create a session
+    animalIds = [];
     wireResponse;
     showSpinner = true;
     animals = [];
@@ -25,6 +26,8 @@ export default class PlaygroupSessionMain extends LightningElement {
     sessionPendingUpdate = false;
     error;
 
+    showToDoList = false;
+
     @wire(getPlaygroupSessionInfo, {sessionId: '$recordId'})
     response(result){
         this.wireResponse = result;
@@ -36,6 +39,7 @@ export default class PlaygroupSessionMain extends LightningElement {
             }
             if(result.data.playgroupContacts){
                 this.playgroupContacts = result.data.playgroupContacts;
+                window.console.log('this.playgroupContacts: ', JSON.stringify(this.playgroupContacts));
             }
             this.showSpinner = false;
         }
@@ -55,6 +59,7 @@ export default class PlaygroupSessionMain extends LightningElement {
     customLookupEvent(event){
         window.console.log('customLookupEvent: ', JSON.stringify ( event.detail));
         this.sessionPlaygroupLeader = event.detail.data.recordId;
+        this.sessionPendingUpdate = true;
     }
 
     handleCustomLookupExpandSearch(event){
@@ -67,6 +72,7 @@ export default class PlaygroupSessionMain extends LightningElement {
     handleSaveSession(event){
         event.preventDefault();
         const fields = event.detail.fields;
+        fields['Playgroup_Leader__c'] = this.sessionPlaygroupLeader;
         window.console.log('fields: ', JSON.stringify(fields));
         this.template.querySelector('lightning-record-edit-form').submit(fields);
         this.sessionUpdateInProgress = true;
@@ -89,11 +95,19 @@ export default class PlaygroupSessionMain extends LightningElement {
 
     handleCreateNewSession(){
         window.console.log('createNewSession');
+        this.showToDoList = true;
         this.handleToggleDropdown();
     }
 
+    animalsForCopy = [];
     handleCopySession(){
         window.console.log('copySession');
+        this.animals.forEach(animal => {
+            this.animalsForCopy.push({label: animal.Animal_Name__c, name: animal.Animal__c});
+        });
+        window.console.log('animalIds: ', this.animalIds);
+        
+        this.showToDoList = true;
         this.handleToggleDropdown();
     }
 
@@ -114,6 +128,25 @@ export default class PlaygroupSessionMain extends LightningElement {
 
     handleToggleDropdown(){
         this.toggleDropdown = !this.toggleDropdown;
+    }
+
+    hanldeCopyEvent(event){
+        window.console.log('handleCopyEvent');
+        window.console.log(JSON.stringify(event.detail));
+
+        this.showToDoList = false;
+        this.recordId = event.detail.id;
+    }
+
+    handleNavigateToSession(){
+        this[NavigationMixin.Navigate]({
+            type: 'standard__recordPage',
+            attributes: {
+                recordId: this.recordId,
+                objectApiName: 'Playgroup_Session__c',
+                actionName: 'view'
+            }
+        });
     }
 
     // saveAnimalUpdates = false;
@@ -161,5 +194,8 @@ export default class PlaygroupSessionMain extends LightningElement {
 
     get isSessionPendingUpdate(){
         return this.sessionPendingUpdate;
+    }
+    get sessionButtonLabel(){
+        return 'Session: ' + this.session.Name;
     }
 }

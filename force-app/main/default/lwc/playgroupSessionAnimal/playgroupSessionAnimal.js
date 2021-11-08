@@ -2,27 +2,14 @@ import { LightningElement, api, wire } from 'lwc';
 import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
 import FORM_FACTOR from '@salesforce/client/formFactor'
 import ANIMAL_NAME_FIELD from '@salesforce/schema/Animal__c.Animal_Name__c';
+import removeFromPlaygroup from '@salesforce/apex/playgroupSessionLWCController.removeFromPlaygroup';
 
 export default class PlaygroupSessionAnimal extends LightningElement {
     @api animalId;
     @api playgroupAnimalId;
     animalPlaygroupChanges = {};
     animalChanges = {Type_of_Animal__c: 'Dog'};
-    // hasChanges = false;
     error;
-
-    // _saveUpdates;
-    // @api
-    // get saveUpdates() {
-    //     return this._saveUpdates;
-    // }
-    // set saveUpdates(value) {
-    //     window.console.log('saveUpdates')
-    //     if(value == true && this.animalPlaygroupChanges){
-    //         const fields = this.animalPlaygroupChanges;
-    //         this.template.querySelector('lightning-record-edit-form').submit(fields);
-    //     }
-    // }
 
     @wire(getRecord, {recordId: '$animalId', fields: [ANIMAL_NAME_FIELD]})
     animal;
@@ -77,6 +64,14 @@ export default class PlaygroupSessionAnimal extends LightningElement {
         this.animalUpdateInProgress = false;
         this.playgroupUpdteInProgress = false;
         this.error = error;
+    }
+
+    handleRemoveAnimal(){
+        this.playgroupUpdteInProgress = true;
+        removeFromPlaygroup({animalPlagroupId: this.playgroupAnimalId})
+        .then(() => {
+            this.playgroupUpdteInProgress = false;
+        });
     }
 
     get showSpinner(){

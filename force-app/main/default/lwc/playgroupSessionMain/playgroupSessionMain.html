@@ -1,209 +1,228 @@
 <template>
-    v1.2
     <template if:true={showSpinner}>
         <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
     </template>
     <template if:false={showSPinner}>
         <template if:true={recordId}>
-            <div class='slds-box'>
-                <lightning-record-edit-form
-                    object-api-name="Playgroup_Session__c"
-                    record-id={recordId}
-                    onsuccess={handleSessionUpdateSuccess}
-                    onerror={handleSessionUpdateError}
-                    onsubmit={handleSaveSession}
+            <template if:true={showToDoList}>
+                <c-playgroup-to-do-list
+                    session-id={recordId}
+                    animals-to-add={animalsForCopy}
+                    oncopy={hanldeCopyEvent}
                 >
-                <template if:true={smallForm}>
-                    <div class="slds-dropdown_medium slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open">
-                        <button class="slds-button slds-button_icon slds-button_icon-border-filled" type='button' onclick={handleToggleDropdown} aria-haspopup="true" aria-expanded="true" title="Show More">
-                            <lightning-icon icon-name={dropdownIcon}
-                            >
-                            </lightning-icon>
-                        </button>
-                        <template if:true={toggleDropdown}>
-                            <div class="slds-dropdown slds-dropdown_left">
-                                <ul class="slds-dropdown__list" role="menu" aria-label="Show More">
-                                    <li class="slds-dropdown__item" role="presentation">
-                                        <lightning-button
-                                            class="slds-m-top_small"
-                                            variant="base"
-                                            type="submit"
-                                            name="update"
-                                            label="Save Session Info"
-                                            onclick={handleSaveSession}
-                                            disabled={disableSaveButton}
-                                        >
-                                        </lightning-button>
-                                    </li>
-                                    <template if:true={isSessionPendingUpdate}>
+                </c-playgroup-to-do-list>
+            </template>
+
+            <template if:false={showToDoList}>
+                <div class='slds-box'>
+                    <lightning-record-edit-form
+                        object-api-name="Playgroup_Session__c"
+                        record-id={recordId}
+                        onsuccess={handleSessionUpdateSuccess}
+                        onerror={handleSessionUpdateError}
+                        onsubmit={handleSaveSession}
+                    >
+                    <template if:true={smallForm}>
+                        <div class="slds-dropdown_medium slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open">
+                            <button class="slds-button slds-button_icon slds-button_icon-border-filled" type='button' onclick={handleToggleDropdown} aria-haspopup="true" aria-expanded="true" title="Show More">
+                                <lightning-icon icon-name={dropdownIcon}
+                                >
+                                </lightning-icon>
+                            </button>
+                            <template if:true={toggleDropdown}>
+                                <div class="slds-dropdown slds-dropdown_left">
+                                    <ul class="slds-dropdown__list" role="menu" aria-label="Show More">
                                         <li class="slds-dropdown__item" role="presentation">
                                             <lightning-button
                                                 class="slds-m-top_small"
                                                 variant="base"
-                                                name="cancel"
-                                                label="Cancel"
-                                                onclick={handleReset}
-                                            ></lightning-button>
-                                        </li>
-                                    </template>
-                                    <template if:false={isSessionPendingUpdate}>
-                                        <li class="slds-dropdown__item" role="presentation">
-                                            <lightning-button
-                                                class="slds-m-top_small"
-                                                variant="base"
-                                                type="button"
-                                                name="update"
-                                                label="Create New Session"
-                                                onclick={handleCreateNewSession}
-                                            >
-                                            </lightning-button>
-                                        </li>
-                                        <li class="slds-dropdown__item" role="presentation">
-                                            <lightning-button
-                                                class="slds-m-top_small"
-                                                variant="base"
-                                                type="button"
-                                                name="update"
-                                                label="Copy Session"
-                                                onclick={handleCopySession}
-                                            >
-                                            </lightning-button>
-                                        </li>
-                                    </template>
-                                </ul>
-                            </div>
-                        </template>
-                    </div>
-                </template>
-                    <lightning-layout multiple-rows pull-to-boundary="medium" class="slds-p-left_xx-small">
-                        <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size={customLookupLeaderDeviceSize} large-device-size={customLookupLeaderDeviceSize} padding="horizontal-medium">
-                            <div class="slds-form-element">
-                                <div class="slds-form-element__static">
-                                    <label class="slds-form-element__label" for="form-element-01">Playgroup Leader</label>
-                                    <c-custom-lookup
-                                        obj-name="Contact"
-                                        icon-name="standard:contact"
-                                        placeholder="Search Contacts..." 
-                                        fields={customLookupFields}
-                                        display-fields={customLookupDisplayFields}
-                                        create-new-fields={customLookupCreateNewFields}
-                                        value-id={customLookupValueId}
-                                        label-name='Playgroup Leader'
-                                        onlookup={customLookupEvent}
-                                        allow-create-new=true
-                                        onexpandfield={handleCustomLookupExpandSearch}
-                                    >
-                                    </c-custom-lookup>
-                                </div>
-                            </div>
-                        </lightning-layout-item>
-                        <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="6" large-device-size="3" padding="horizontal-medium">
-                            <div class="slds-form-element">
-                                <div class="slds-form-element__static">
-                                    <lightning-input-field field-name="Playgroup_Location__c" data-id='Playgroup_Individual_Notes__c' onchange={handleOnChangeSessionInfo}> </lightning-input-field>
-                                </div>
-                            </div>
-                        </lightning-layout-item>
-                        <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="6" large-device-size="3" padding="horizontal-medium">
-                            <div class="slds-form-element">
-                                <div class="slds-form-element__static">
-                                    <lightning-input-field field-name="Playgroup_Date_Time__c" value={currentDateTime} data-id='Playgroup_Individual_Notes__c' onchange={handleOnChangeSessionInfo}> </lightning-input-field>
-                                </div>
-                            </div>
-                        </lightning-layout-item>
-                        <template if:false={smallForm}>
-                            <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="6" large-device-size="3" padding="horizontal-medium">
-                                <div class="slds-form-element">
-                                    <div class="slds-form-element__static">
-                                        <template if:true={error}>
-                                            <c-error-panel errors={error} type='inlineMessage' friendly-message='Error updating animal'></c-error-panel>
-                                        </template>
-                                        <template if:true={sessionUpdateInProgress}>
-                                            <lightning-icon icon-name="utility:spinner" alternative-text="Loading" size="x-small" title="spinner">
-                                            </lightning-icon>
-                                        </template>
-                                        <p>
-                                            <lightning-button
-                                                class="slds-m-top_small"
-                                                variant="brand"
                                                 type="submit"
                                                 name="update"
                                                 label="Save Session Info"
+                                                onclick={handleSaveSession}
                                                 disabled={disableSaveButton}
                                             >
                                             </lightning-button>
-                                            <template if:true={isSessionPendingUpdate}>
-                                                    <lightning-button
-                                                        class='slds-p-left_x-small'
-                                                        label="Cancel"
-                                                        onclick={handleReset}
-                                                    ></lightning-button>
-                                            </template>
-                                        </p>
-                                        <template if:false={isSessionPendingUpdate}>
-                                            <p class='slds-p-top_xxx-small'>
+                                        </li>
+                                        <template if:true={isSessionPendingUpdate}>
+                                            <li class="slds-dropdown__item" role="presentation">
                                                 <lightning-button
                                                     class="slds-m-top_small"
-                                                    variant="brand"
-                                                    name="createNewSession"
+                                                    variant="base"
+                                                    name="cancel"
+                                                    label="Cancel"
+                                                    onclick={handleReset}
+                                                ></lightning-button>
+                                            </li>
+                                        </template>
+                                        <template if:false={isSessionPendingUpdate}>
+                                            <li class="slds-dropdown__item" role="presentation">
+                                                <lightning-button
+                                                    class="slds-m-top_small"
+                                                    variant="base"
+                                                    type="button"
+                                                    name="update"
                                                     label="Create New Session"
                                                     onclick={handleCreateNewSession}
                                                 >
                                                 </lightning-button>
-                                            </p>
-                                            <p class='slds-p-top_xxx-small'>
+                                            </li>
+                                            <li class="slds-dropdown__item" role="presentation">
                                                 <lightning-button
                                                     class="slds-m-top_small"
-                                                    variant="brand"
-                                                    name="copySession"
+                                                    variant="base"
+                                                    type="button"
+                                                    name="update"
                                                     label="Copy Session"
                                                     onclick={handleCopySession}
                                                 >
                                                 </lightning-button>
-                                            </p>
+                                            </li>
                                         </template>
+                                    </ul>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+                        <lightning-layout multiple-rows pull-to-boundary="medium" class="slds-p-left_xx-small">
+                            <template if:true={session}>
+                                <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="12" large-device-size="12" padding="horizontal-medium" class="slds-p-bottom_small">
+                                    <div class="slds-form-element">
+                                        <div class="slds-form-element__static slds-text-align_center session-header">
+                                            <lightning-button variant="base" label={sessionButtonLabel} title="Session Name" onclick={handleNavigateToSession}></lightning-button>
+                                        </div>
+                                    </div>
+                                </lightning-layout-item>
+                            </template>
+                            <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size={customLookupLeaderDeviceSize} large-device-size={customLookupLeaderDeviceSize} padding="horizontal-medium">
+                                <div class="slds-form-element">
+                                    <div class="slds-form-element__static">
+                                        <label class="slds-form-element__label" for="form-element-01">Playgroup Leader</label>
+                                        <c-custom-lookup
+                                            obj-name="Contact"
+                                            icon-name="standard:contact"
+                                            placeholder="Search Contacts..." 
+                                            fields={customLookupFields}
+                                            display-fields={customLookupDisplayFields}
+                                            create-new-fields={customLookupCreateNewFields}
+                                            value-id={customLookupValueId}
+                                            label-name='Playgroup Leader'
+                                            onlookup={customLookupEvent}
+                                            allow-create-new=true
+                                            onexpandfield={handleCustomLookupExpandSearch}
+                                        >
+                                        </c-custom-lookup>
                                     </div>
                                 </div>
                             </lightning-layout-item>
-                        </template>
-                        <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="12" large-device-size="12" padding="horizontal-medium">
-                            <div class="slds-form-element">
-                                <div class="slds-form-element__static">
-                                    <lightning-input-field field-name="Playgroup_Notes__c" data-id='Playgroup_Individual_Notes__c' onchange={handleOnChangeSessionInfo}></lightning-input-field>
+                            <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="6" large-device-size="3" padding="horizontal-medium">
+                                <div class="slds-form-element">
+                                    <div class="slds-form-element__static">
+                                        <lightning-input-field field-name="Playgroup_Location__c" data-id='Playgroup_Individual_Notes__c' onchange={handleOnChangeSessionInfo}> </lightning-input-field>
+                                    </div>
                                 </div>
-                            </div>
-                        </lightning-layout-item>
-                        <template if:true={hasAnimalList}>
+                            </lightning-layout-item>
+                            <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="6" large-device-size="3" padding="horizontal-medium">
+                                <div class="slds-form-element">
+                                    <div class="slds-form-element__static">
+                                        <lightning-input-field field-name="Playgroup_Date_Time__c" value={currentDateTime} data-id='Playgroup_Individual_Notes__c' onchange={handleOnChangeSessionInfo}> </lightning-input-field>
+                                    </div>
+                                </div>
+                            </lightning-layout-item>
+                            <template if:false={smallForm}>
+                                <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="6" large-device-size="3" padding="horizontal-medium">
+                                    <div class="slds-form-element">
+                                        <div class="slds-form-element__static">
+                                            <template if:true={error}>
+                                                <c-error-panel errors={error} type='inlineMessage' friendly-message='Error updating animal'></c-error-panel>
+                                            </template>
+                                            <template if:true={sessionUpdateInProgress}>
+                                                <lightning-icon icon-name="utility:spinner" alternative-text="Loading" size="x-small" title="spinner">
+                                                </lightning-icon>
+                                            </template>
+                                            <p>
+                                                <lightning-button
+                                                    class="slds-m-top_small"
+                                                    variant="brand"
+                                                    type="submit"
+                                                    name="update"
+                                                    label="Save Session Info"
+                                                    disabled={disableSaveButton}
+                                                >
+                                                </lightning-button>
+                                                <template if:true={isSessionPendingUpdate}>
+                                                        <lightning-button
+                                                            class='slds-p-left_x-small'
+                                                            label="Cancel"
+                                                            onclick={handleReset}
+                                                        ></lightning-button>
+                                                </template>
+                                            </p>
+                                            <template if:false={isSessionPendingUpdate}>
+                                                <p class='slds-p-top_xxx-small'>
+                                                    <lightning-button
+                                                        class="slds-m-top_small"
+                                                        variant="brand"
+                                                        name="createNewSession"
+                                                        label="Create New Session"
+                                                        onclick={handleCreateNewSession}
+                                                    >
+                                                    </lightning-button>
+                                                </p>
+                                                <p class='slds-p-top_xxx-small'>
+                                                    <lightning-button
+                                                        class="slds-m-top_small"
+                                                        variant="brand"
+                                                        name="copySession"
+                                                        label="Copy Session"
+                                                        onclick={handleCopySession}
+                                                    >
+                                                    </lightning-button>
+                                                </p>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </lightning-layout-item>
+                            </template>
                             <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="12" large-device-size="12" padding="horizontal-medium">
                                 <div class="slds-form-element">
                                     <div class="slds-form-element__static">
-                                        <c-playgroup-session-contacts
-                                            session-id={recordId}
-                                            animals={animals}
-                                            contacts={playgroupContacts}
-                                        >
-                                        </c-playgroup-session-contacts>
+                                        <lightning-input-field field-name="Playgroup_Notes__c" data-id='Playgroup_Individual_Notes__c' onchange={handleOnChangeSessionInfo}></lightning-input-field>
                                     </div>
                                 </div>
                             </lightning-layout-item>
-                        </template>
-                    </lightning-layout>
-                </lightning-record-edit-form>
-            </div>
-            
-            <template if:true={hasAnimalList}>
-                <div class="slds-p-left_xx-small slds-p-top_small">
-                    <template for:each={animals} for:item='animal'>
-                        <div class="slds-p-bottom_xx-small" key={animal.Id}>
-                            <c-playgroup-session-animal
-                                animal-id={animal.Animal__c}
-                                playgroup-animal-id={animal.Id}
-                            >
-                            </c-playgroup-session-animal>
-                            <!-- save-updates={saveAnimalUpdates} -->
-                        </div>
-                    </template>
+                            <template if:true={hasAnimalList}>
+                                <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="12" large-device-size="12" padding="horizontal-medium">
+                                    <div class="slds-form-element">
+                                        <div class="slds-form-element__static">
+                                            <c-playgroup-session-contacts
+                                                session-id={recordId}
+                                                animals={animals}
+                                                contacts={playgroupContacts}
+                                            >
+                                            </c-playgroup-session-contacts>
+                                        </div>
+                                    </div>
+                                </lightning-layout-item>
+                            </template>
+                        </lightning-layout>
+                    </lightning-record-edit-form>
                 </div>
+                
+                <template if:true={hasAnimalList}>
+                    <div class="slds-p-left_xx-small slds-p-top_small">
+                        <template for:each={animals} for:item='animal'>
+                            <div class="slds-p-bottom_xx-small" key={animal.Id}>
+                                <c-playgroup-session-animal
+                                    animal-id={animal.Animal__c}
+                                    playgroup-animal-id={animal.Id}
+                                >
+                                </c-playgroup-session-animal>
+                                <!-- save-updates={saveAnimalUpdates} -->
+                            </div>
+                        </template>
+                    </div>
+                </template>
             </template>
         </template>
     </template>
