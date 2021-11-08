@@ -26,6 +26,11 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
     isSkipped = false;
     isRemoved = false;
     toggleView = false;
+    col1Fields = [];
+    col2Fields = [];
+    col3Fields = [];
+    col4Fields = [];
+    col5Fields = [];
 
     _refresh;
     @api
@@ -58,15 +63,15 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
         });
     }
 
-    col1Fields = [];
-    col2Fields = [];
-    col3Fields = [];
-    col4Fields = [];
-    col5Fields = [];
-
     setFieldValues(data){
         window.console.log('setFieldValues');
         this.fieldValues = [];
+        this.col1Fields = [];
+        this.col2Fields = [];
+        this.col3Fields = [];
+        this.col4Fields = [];
+        this.col5Fields = [];
+
         data.picklistFields.forEach(element => {
             this.fieldValues.push({name: element.apiName, value: element.currentValue});
             if(element.apiName == 'Aggressive_Worst__c'){
