@@ -100,6 +100,8 @@ public with sharing class playgroupSessionLWCController {
     @AuraEnabled
     public static string removeFromPlaygroup(Id animalPlagroupId){
         try {
+            delete [SELECT Id FROM Playgroup_Contact__c WHERE Playgroup__c =: animalPlagroupId];
+            delete animalPlagroupId;
             return 'success';
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());

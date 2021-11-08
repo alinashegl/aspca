@@ -177,7 +177,6 @@ public with sharing class TreatmentSessionLWCController {
     }
 
     private static void addNewProtocolsToPlan(String[] protocolIds, String planId){
-        // Treatment_Plan__c tPlan = [SELECT Id, Preferred_Motivators__c FROM Treatment_Plan__c WHERE Id =: planId LIMIT 1];
         Plan_Protocol__c[] newPProtocols = new Plan_Protocol__c[0];
 
         for(String pId : protocolIds){
