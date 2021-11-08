@@ -3,11 +3,11 @@ import FORM_FACTOR from '@salesforce/client/formFactor'
 import { NavigationMixin } from "lightning/navigation";
 import getPlaygroupSessionInfo from '@salesforce/apex/playgroupSessionLWCController.getPlaygroupSessionInfo';
 import startPlaygroupSession from '@salesforce/apex/playgroupSessionLWCController.startPlaygroupSession';
+import { refreshApex } from '@salesforce/apex';
 import { getRecordCreateDefaults } from 'lightning/uiRecordApi';
 
 export default class PlaygroupSessionMain extends NavigationMixin(LightningElement) {
     @api recordId;
-    // @api newSession = false; //if newSession = true need to create a session
     animalIds = [];
     wireResponse;
     showSpinner = true;
@@ -147,6 +147,11 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
                 actionName: 'view'
             }
         });
+    }
+
+    handleAnimalRemovedEvent(){
+        window.console.log("remove animal");
+        refreshApex(this.wireResponse);
     }
 
     // saveAnimalUpdates = false;
