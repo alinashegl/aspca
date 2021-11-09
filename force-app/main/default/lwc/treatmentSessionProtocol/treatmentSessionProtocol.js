@@ -26,6 +26,11 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
     isSkipped = false;
     isRemoved = false;
     toggleView = false;
+    col1Fields = [];
+    col2Fields = [];
+    col3Fields = [];
+    col4Fields = [];
+    col5Fields = [];
 
     _refresh;
     @api
@@ -61,8 +66,29 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
     setFieldValues(data){
         window.console.log('setFieldValues');
         this.fieldValues = [];
+        this.col1Fields = [];
+        this.col2Fields = [];
+        this.col3Fields = [];
+        this.col4Fields = [];
+        this.col5Fields = [];
+
         data.picklistFields.forEach(element => {
             this.fieldValues.push({name: element.apiName, value: element.currentValue});
+            if(element.apiName == 'Aggressive_Worst__c'){
+                this.col1Fields.push(element);
+            } else 
+            if(element.apiName.includes('Arousal')){
+                this.col2Fields.push(element);
+            } else 
+            if(element.apiName == 'Fear_Best__c' || element.apiName == 'Fear_Worst__c'){
+                this.col3Fields.push(element);
+            } else 
+            if(element.apiName == 'Social_Best__c' || element.apiName == 'Solicitation__c'){
+                this.col4Fields.push(element);
+            } else 
+            if(element.apiName == 'Overall_Score__c'){
+                this.col5Fields.push(element);
+            }
         });
         this.isSkipped = data.isSkipped;
         this.isRemoved = data.isRemoved;
@@ -115,7 +141,6 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
     updateProtocolInfo(selectedOption, fieldName){
         this.fieldValues.find(field => field.name == fieldName).value = selectedOption;
         window.console.log('this.fieldValues: ', this.fieldValues);
-
     }
 
     resetProtocol(action){
@@ -241,7 +266,7 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
     }
 
     get isComplete(){
-        const incompleteField = this.fieldValues.find(field => field.value == null);
+        const incompleteField = this.fieldValues.find(field => field.value == null  && field.name != 'Solicitation__c');
         return  incompleteField == null;
     }
 

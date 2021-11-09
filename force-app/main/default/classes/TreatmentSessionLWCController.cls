@@ -15,7 +15,8 @@ public with sharing class TreatmentSessionLWCController {
                     Social_Best__c,
                     Overall_Score__c,
                     Needs_Review__c,
-                    Protocol_Name__c
+                    Protocol_Name__c,
+                    Status__c
                 FROM Session_Protocol__c 
                 WHERE TreatmentSessionId__c =: sessionId
                 ORDER BY Protocol_Name__c ASC
@@ -47,7 +48,8 @@ public with sharing class TreatmentSessionLWCController {
                 Novel_Person_Notes__c,
                 Manager_Review_Notes__c,
                 Preferred_Motivators__c,
-                ProtocolId__r.Protocol_Box_Link__c
+                ProtocolId__r.Protocol_Box_Link__c,
+                Solicitation__c
             FROM Session_Protocol__c 
             WHERE Id =: protocolId
         ];
@@ -250,7 +252,8 @@ public with sharing class TreatmentSessionLWCController {
                 'Fear_Best__c',
                 'Fear_Worst__c',
                 'Social_Best__c',
-                'Overall_Score__c'
+                'Overall_Score__c',
+                'Solicitation__c'
             };
 
             for(String fieldAPI : fieldList){

@@ -6,54 +6,17 @@
                 <componentName>TreatmentToDoList</componentName>
             </componentInstance>
         </itemInstances>
-        <mode>Replace</mode>
-        <name>top</name>
-        <type>Region</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <componentInstance>
-                <componentName>home:eventContainer</componentName>
-            </componentInstance>
-        </itemInstances>
         <itemInstances>
             <componentInstance>
                 <componentName>home:recentRecordContainer</componentName>
             </componentInstance>
         </itemInstances>
-        <mode>Replace</mode>
-        <name>bottomLeft</name>
-        <type>Region</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <componentInstance>
-                <componentName>runtime_sales_activities:todayTaskContainer</componentName>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
-            <componentInstance>
-                <componentName>home:topDealsContainer</componentName>
-            </componentInstance>
-        </itemInstances>
-        <mode>Replace</mode>
-        <name>bottomRight</name>
-        <type>Region</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <componentInstance>
-                <componentName>home:assistant</componentName>
-            </componentInstance>
-        </itemInstances>
-        <mode>Replace</mode>
-        <name>sidebar</name>
+        <name>main</name>
         <type>Region</type>
     </flexiPageRegions>
     <masterLabel>Demo Home Page Default</masterLabel>
-    <parentFlexiPage>home__desktopDefault</parentFlexiPage>
     <template>
-        <name>home:desktopTemplate</name>
+        <name>runtime_commerce_oci:homeTemplateOneRegion</name>
     </template>
     <type>HomePage</type>
 </FlexiPage>
