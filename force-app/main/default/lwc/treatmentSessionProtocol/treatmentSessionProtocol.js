@@ -2,9 +2,7 @@ import { LightningElement, api } from 'lwc';
 import { updateRecord } from 'lightning/uiRecordApi';
 import { NavigationMixin } from "lightning/navigation";
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
-
 import getActiveProtocolAndFields from '@salesforce/apex/TreatmentSessionLWCController.getActiveProtocolAndFields';
-
 import PROTOCOL_ID_FIELD from '@salesforce/schema/Session_Protocol__c.Id';
 import IS_SKIPPED_FIELD from '@salesforce/schema/Session_Protocol__c.IsSkipped__c';
 import IS_REMOVED_FIELD from '@salesforce/schema/Session_Protocol__c.IsRemoved__c';
@@ -45,7 +43,6 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
     useRefreshedData = true;
 
     getProtocolInfo(){
-        window.console.log('in getProtocolInfo');
         this.protocolInfo = null;
         getActiveProtocolAndFields({protocolId: this.recordId})
         .then((result) => {
@@ -64,7 +61,6 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
     }
 
     setFieldValues(data){
-        window.console.log('setFieldValues');
         this.fieldValues = [];
         this.col1Fields = [];
         this.col2Fields = [];
@@ -127,20 +123,16 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
             fields[IS_REMOVED_FIELD.fieldApiName] = this.isRemoved;
             this.updateProtocol(fields);
         }
-        
     }
 
     handleRadioChange(event) {
         const selectedOption = event.detail.value;
         const fieldName = event.target.dataset.fname;
-        window.console.log('selectedOption: ', selectedOption);
-        window.console.log('event.detail.dataset = ', event.target.dataset.fname);
         this.updateProtocolInfo(selectedOption, fieldName);
     }
 
     updateProtocolInfo(selectedOption, fieldName){
         this.fieldValues.find(field => field.name == fieldName).value = selectedOption;
-        window.console.log('this.fieldValues: ', this.fieldValues);
     }
 
     resetProtocol(action){
@@ -167,13 +159,10 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
         this.fieldValues.forEach(element => {
             fields[element.name] = element.value;
         });
-
-        window.console.log('fields =', JSON.stringify(fields));
         this.updateProtocol(fields);
     }
 
     updateProtocol(fields){
-        window.console.log("fields: ", JSON.stringify(fields));
         const recordUpdate = {fields};
         updateRecord(recordUpdate).then(recordUpdate => {
             this.dispatchEvent(

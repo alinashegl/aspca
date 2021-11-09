@@ -62,8 +62,21 @@ public with sharing class PlaygroupToDoListController {
     public static Id copyPlaygroupSession(Id sessionId, Id[] animalsToAdd){
         try {
             Id newSessionId = handleCopyPlaygroupSession(sessionId);
-            createNewAnimalPlaygroups(sessionId, newSessionId, animalsToAdd);
+            createNewAnimalPlaygroupsFromCopy(sessionId, newSessionId, animalsToAdd);
             return newSessionId;
+
+        } catch (Exception e) {
+            System.debug('error: ' + e.getMessage());
+            System.debug('line: ' + e.getStackTraceString());
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
+
+    @AuraEnabled
+    public static Id editPlaygroup(Id sessionId, Id[] animalsToAdd){
+        try {
+            createNewAnimalPlaygroupsFromEdit(sessionId, animalsToAdd);
+            return sessionId;
 
         } catch (Exception e) {
             System.debug('error: ' + e.getMessage());
@@ -77,7 +90,8 @@ public with sharing class PlaygroupToDoListController {
         Playgroup_Session__c newSession = new Playgroup_Session__c(
             Playgroup_Leader__c = originalSession.Playgroup_Leader__c,
             Playgroup_Location__c = originalSession.Playgroup_Location__c,
-            Playgroup_Date_Time__c = dateTime.now()
+            Playgroup_Date_Time__c = dateTime.now(),
+            Contact_Ids__c = originalSession.Contact_Ids__c
         );
         insert newSession;
         return newSession.Id;
@@ -85,7 +99,7 @@ public with sharing class PlaygroupToDoListController {
 
     private static Playgroup_Session__c getPlaygroupSession (Id sessionId){
         Playgroup_Session__c[] sessions = [
-            SELECT Id, Playgroup_Location__c, Playgroup_Leader__c
+            SELECT Id, Playgroup_Location__c, Playgroup_Leader__c, Contact_Ids__c
             FROM Playgroup_Session__c 
             WHERE Id =: sessionId 
             LIMIT 1
@@ -93,7 +107,21 @@ public with sharing class PlaygroupToDoListController {
         return sessions.isEmpty() ? null : sessions[0];
     }
 
-    private static void createNewAnimalPlaygroups(Id oldSessionId, Id newSessionId, Id[] animalsToAdd){
+    private static void createNewAnimalPlaygroupsFromEdit(Id sessionId, Id[] animalsToAdd){
+        Animal_Playgroup__c[] newAnimalPlaygroups = new Animal_Playgroup__c[0];
+        for(Id animalToAdd : animalsToAdd){
+            Animal_Playgroup__c newAnimal = new Animal_Playgroup__c(
+                Animal__c = animalToAdd,
+                Playgroup_Session__c = sessionId
+            );
+            newAnimalPlaygroups.add(newAnimal);
+        }
+
+        insert newAnimalPlaygroups;
+        createPlaygroupContacts(newAnimalPlaygroups, null, sessionId);
+    }
+
+    private static void createNewAnimalPlaygroupsFromCopy(Id oldSessionId, Id newSessionId, Id[] animalsToAdd){
         Animal_Playgroup__c[] newAnimalPlaygroups = new Animal_Playgroup__c[0];
 
         Animal_Playgroup__c[] oldAnimalPlaygroups = [
@@ -104,14 +132,14 @@ public with sharing class PlaygroupToDoListController {
             AND Animal__c IN: animalsToAdd
         ];
 
-        Map<Id, Animal_Playgroup__c> animalPlaygroupMap = new Map<Id, Animal_Playgroup__c>();
+        Map<Id, Animal_Playgroup__c> oldAnimalPlaygroupMap = new Map<Id, Animal_Playgroup__c>();
         for(Animal_Playgroup__c oldAnimal : oldAnimalPlaygroups){
-            animalPlaygroupMap.put(oldAnimal.Animal__c, oldAnimal);
+            oldAnimalPlaygroupMap.put(oldAnimal.Animal__c, oldAnimal);
         }
 
         for(Id animalToAdd : animalsToAdd){
-            if(animalPlaygroupMap.containsKey(animalToAdd)){
-                Animal_Playgroup__c oldAnimal = animalPlaygroupMap.get(animalToAdd);
+            if(oldAnimalPlaygroupMap.containsKey(animalToAdd)){
+                Animal_Playgroup__c oldAnimal = oldAnimalPlaygroupMap.get(animalToAdd);
                 Animal_Playgroup__c newAnimal = new Animal_Playgroup__c(
                     Animal__c = oldAnimal.Animal__c, 
                     Common_Playgroup_Note_Sections__c = oldAnimal.Common_Playgroup_Note_Sections__c, 
@@ -132,18 +160,31 @@ public with sharing class PlaygroupToDoListController {
         }
 
         insert newAnimalPlaygroups;
-        createPlaygroupContacts(newAnimalPlaygroups, animalPlaygroupMap);
+        createPlaygroupContacts(newAnimalPlaygroups, oldAnimalPlaygroupMap, newSessionId);
     }
 
-    private static void createPlaygroupContacts(Animal_Playgroup__c[] animalPlaygroups, Map<Id, Animal_Playgroup__c> animalPlaygroupMap){
+    private static void createPlaygroupContacts(Animal_Playgroup__c[] animalPlaygroups, Map<Id, Animal_Playgroup__c> oldAnimalPlaygroupMap, Id newSessionId){
+        Playgroup_Session__c session = [SELECT Id, Contact_Ids__c FROM Playgroup_Session__c WHERE Id =: newSessionId LIMIT 1];
+        String[] contactList = session.Contact_Ids__c.split(',');
         Playgroup_Contact__c[] pgContacts = new Playgroup_Contact__c[0];
         for(Animal_Playgroup__c animal : animalPlaygroups){
-            if(animalPlaygroupMap.containsKey(animal.Animal__c)){
-                for(Playgroup_Contact__c pgContact : animalPlaygroupMap.get(animal.Animal__c).Playgroup_Contacts__r){
+            if(oldAnimalPlaygroupMap.containsKey(animal.Animal__c)){
+                for(Playgroup_Contact__c pgContact : oldAnimalPlaygroupMap.get(animal.Animal__c).Playgroup_Contacts__r){
                     pgContacts.add(
                         new Playgroup_Contact__c(
                             Contact__c = pgContact.Contact__c,
                             Novel_Not_Novel__c = pgContact.Novel_Not_Novel__c,
+                            Playgroup__c = animal.Id
+                        )
+                    );
+                }
+            }
+            else {
+                for(String con : contactList){
+                    pgContacts.add(
+                        new Playgroup_Contact__c(
+                            Contact__c = con,
+                            Novel_Not_Novel__c = 'Familiar',
                             Playgroup__c = animal.Id
                         )
                     );

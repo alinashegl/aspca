@@ -62,14 +62,12 @@ export default class CustomLookup extends LightningElement {
 
     @wire(getCurrentRecord, {objectName: '$objName', recordId: '$valueId', fields: '$fields'})
     response(result){
-        window.console.log('lookup result: ', JSON.stringify(result));
         if(result.data){
             this.currentRecordResponse(result.data);
         }
     }
 
     connectedCallback(){
-        window.console.log('in connectedCallback');
         let fieldList;
         if( !Array.isArray(this.displayFields)){
             fieldList       = this.displayFields.split(',');
@@ -95,12 +93,10 @@ export default class CustomLookup extends LightningElement {
     }    
 
     removeListener(){
-        window.console.log('in removeListener');
         document.removeEventListener('click', this._handler);
     }
 
     handleQueryAll(){
-        window.console.log('handle query all');
         this.showRecent = false;
         this.handleQuery();
     }
@@ -116,8 +112,6 @@ export default class CustomLookup extends LightningElement {
     }
 
     handleAddNew(){
-        window.console.log('handle add new');
-        // document.addEventListener('click', this._handler = this.close.bind(this));
         this.showRecent = false;
         this.showExpandedSearch = false;
         this.showCreateNew = true;
@@ -125,7 +119,6 @@ export default class CustomLookup extends LightningElement {
     }
 
     handleOnFocus(){
-        window.console.log('in handleOnFocus');
         this.isLoading = true;
         if(this.isEditMode && !this.showRecent && !this.showExpandedSearch){
             this.editRecord = true;
@@ -134,7 +127,6 @@ export default class CustomLookup extends LightningElement {
     }
 
     handleQueryRecentlyViewed(){
-        window.console.log('in handleOnFocus');
         document.addEventListener('click', this._handler = this.close.bind(this));
         getRecentlyViewedRecords({type: this.objName, whereClause: this.whereClause})
         .then((result) =>{
@@ -147,7 +139,6 @@ export default class CustomLookup extends LightningElement {
     }
 
     handleInputChange(event){
-        window.console.log('in handleInputChange');
         window.clearTimeout(this.delayTimeout);
         this.clickCount = 0;
         this.offset = 0;
@@ -183,7 +174,6 @@ export default class CustomLookup extends LightningElement {
     }
 
     handleResponse(result){
-        // window.console.log('in handleResponse: ', JSON.stringify(result));
         let stringResult = JSON.stringify(result);
         let allResult    = JSON.parse(stringResult);
         allResult.forEach( record => {
@@ -196,7 +186,6 @@ export default class CustomLookup extends LightningElement {
             }
         });
         this.searchRecords = allResult;
-        // window.console.log('this.searchRecords: ', this.searchRecords);
     }
 
     currentRecordResponse(result){
@@ -216,7 +205,6 @@ export default class CustomLookup extends LightningElement {
     }
 
     handleSelect(event){
-        window.console.log('handle Select');
         this.showRecent = false;
         this.showExpandedSearch = false;
         this.editRecord = false;
@@ -245,7 +233,6 @@ export default class CustomLookup extends LightningElement {
         this.editRecord = false;
         this.showCreateNew = false;
         this.valueId = event.detail.id;
-        window.console.log('handleNewRecordResponse: ', event.detail.id);
         this.clickCount = 0;
         this.expandInput(false);
 
@@ -281,7 +268,6 @@ export default class CustomLookup extends LightningElement {
     }
 
     handleToggleExpandSearch(){
-        window.console.log('in handleExpandSearch');
         if(this.isEditMode){
             this.showExpandedSearch = !this.showExpandedSearch;
             this.showRecent = !this.showRecent;
@@ -297,7 +283,6 @@ export default class CustomLookup extends LightningElement {
     }
 
     handleInputIconClick(){
-        window.console.log('in handleIconClick');
         this.isLoading = true;
         if(this.selectedRecord == undefined && !this.editRecord){
             this.editRecord = true;
@@ -324,7 +309,6 @@ export default class CustomLookup extends LightningElement {
     }
 
     close() { 
-        window.console.log('in close');
         this.showRecent = false;
         this.showExpandedSearch = false;
         this.editRecord = false;
@@ -405,23 +389,8 @@ export default class CustomLookup extends LightningElement {
     }
 
     handleDivClick(event){
-        window.console.log('in handleDivClick')
         event.stopPropagation();
     }
-
-    // count = 0;
-
-    // get showRecent1 (){
-    //     return this.count == 1;
-    // }
-
-    // get showExpandedSearch1 (){
-    //     return this.count == 2;
-    // }
-
-    // get showCreateNew1 (){
-    //     return this.count == 3;
-    // }
 
     get gridSize(){
         if(this.showCreateNew || FORM_FACTOR == 'Small' || (FORM_FACTOR == 'Medium' && this.showExpandedSearch)){
@@ -439,21 +408,4 @@ export default class CustomLookup extends LightningElement {
     get inputFieldClass(){
         return this.editRecord ? 'slds-input slds-combobox__input slds-combobox__input-value slds-has-focus' : 'slds-input slds-combobox__input slds-combobox__input-value';
     }
-
-
-    // handleComboboxIconClick(){
-    //     this.template
-    //     .querySelector('.accounts_list')
-    //     .classList.remove('slds-hide');
-    //     this.template
-    //     .querySelector('.slds-searchIcon')
-    //     .classList.add('slds-hide');
-    //     this.template
-    //     .querySelector('.slds-icon-utility-down')
-    //     .classList.remove('slds-hide');
-    //     this.template
-    //     .querySelector('.slds-dropdown-trigger')
-    //     .classList.add('slds-is-open');
-    // }
-
 }

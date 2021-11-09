@@ -2,13 +2,18 @@
     <template if:true={showSpinner}>
         <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
     </template>
+    <template if:true={sessionInfoError}>
+        <c-error-panel errors={sessionInfoError} type='inlineMessage' friendly-message='Error laoding session info:'></c-error-panel>
+    </template>
     <template if:false={showSPinner}>
         <template if:true={recordId}>
             <template if:true={showToDoList}>
                 <c-playgroup-to-do-list
-                    session-id={recordId}
+                    session-id={sessionIdForCopy}
                     animals-to-add={animalsForCopy}
-                    oncopy={hanldeCopyEvent}
+                    action={toDoListAction}
+                    oncopy={handleCopyEvent}
+                    onedit={handleEditEvent}
                 >
                 </c-playgroup-to-do-list>
             </template>
@@ -163,6 +168,16 @@
                                                     <lightning-button
                                                         class="slds-m-top_small"
                                                         variant="brand"
+                                                        name="editAnimals"
+                                                        label="Edit Animals"
+                                                        onclick={handleEditSession}
+                                                    >
+                                                    </lightning-button>
+                                                </p>
+                                                <p class='slds-p-top_xxx-small'>
+                                                    <lightning-button
+                                                        class="slds-m-top_small"
+                                                        variant="brand"
                                                         name="createNewSession"
                                                         label="Create New Session"
                                                         onclick={handleCreateNewSession}
@@ -199,6 +214,7 @@
                                                 session-id={recordId}
                                                 animals={animals}
                                                 contacts={playgroupContacts}
+                                                oncontactevent={handleContactEvent}
                                             >
                                             </c-playgroup-session-contacts>
                                         </div>
@@ -216,10 +232,10 @@
                                 <c-playgroup-session-animal
                                     animal-id={animal.Animal__c}
                                     playgroup-animal-id={animal.Id}
+                                    refresh={refresh}
                                     onremovedevent={handleAnimalRemovedEvent}
                                 >
                                 </c-playgroup-session-animal>
-                                <!-- save-updates={saveAnimalUpdates} -->
                             </div>
                         </template>
                     </div>

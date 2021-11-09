@@ -1,10 +1,8 @@
 import { LightningElement, api, wire } from 'lwc';
 import FORM_FACTOR from '@salesforce/client/formFactor'
 import { NavigationMixin } from "lightning/navigation";
-import getPlaygroupSessionInfo from '@salesforce/apex/playgroupSessionLWCController.getPlaygroupSessionInfo';
-import startPlaygroupSession from '@salesforce/apex/playgroupSessionLWCController.startPlaygroupSession';
 import { refreshApex } from '@salesforce/apex';
-import { getRecordCreateDefaults } from 'lightning/uiRecordApi';
+import getPlaygroupSessionInfo from '@salesforce/apex/playgroupSessionLWCController.getPlaygroupSessionInfo';
 
 export default class PlaygroupSessionMain extends NavigationMixin(LightningElement) {
     @api recordId;
@@ -13,6 +11,9 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
     showSpinner = true;
     animals = [];
     playgroupContacts = [];
+    animalsForCopy = [];
+    sessionIdForCopy;
+    toDoListAction;
     session;
     sessionPlaygroupLeader;
     toggleDropdown = false;
@@ -24,9 +25,12 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
     formFactor = FORM_FACTOR;
 
     sessionPendingUpdate = false;
+    sessionUpdateInProgress = false;
+    sessionInfoError;
     error;
 
     showToDoList = false;
+    refresh = false;
 
     @wire(getPlaygroupSessionInfo, {sessionId: '$recordId'})
     response(result){
@@ -39,41 +43,44 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
             }
             if(result.data.playgroupContacts){
                 this.playgroupContacts = result.data.playgroupContacts;
-                window.console.log('this.playgroupContacts: ', JSON.stringify(this.playgroupContacts));
             }
+            this.showSpinner = false;
+        } else if(result.error){
+            this.sessionInfoError = result.error;
             this.showSpinner = false;
         }
     }
 
-    handleCopyPlaygroup(){
-        this.showSpinner = true;
-        startPlaygroupSession({sessionId: this.recordId})
-        .then((response) => {
-            this.recordId = response;
-        })
-        .finally(() => {
-            this.showSpinner = false;
-        })
-    }
+    // connectedCallback(){
+    //     this.animalsForCopy = [];
+    //     this.sessionIdForCopy = undefined;
+    // }
+
+    // handleCopyPlaygroup(){
+    //     this.showSpinner = true;
+    //     startPlaygroupSession({sessionId: this.recordId})
+    //     .then((response) => {
+    //         this.recordId = response;
+    //     })
+    //     .finally(() => {
+    //         this.showSpinner = false;
+    //     })
+    // }
 
     customLookupEvent(event){
-        window.console.log('customLookupEvent: ', JSON.stringify ( event.detail));
         this.sessionPlaygroupLeader = event.detail.data.recordId;
         this.sessionPendingUpdate = true;
     }
 
     handleCustomLookupExpandSearch(event){
-        window.console.log('in handleCustomLookupExpandSearch: ', JSON.stringify ( event.detail.data) );
         let data = event.detail.data;
         this.customLookupExpandedField = data.expandField;
     }
 
-    sessionUpdateInProgress = false;
     handleSaveSession(event){
         event.preventDefault();
         const fields = event.detail.fields;
         fields['Playgroup_Leader__c'] = this.sessionPlaygroupLeader;
-        window.console.log('fields: ', JSON.stringify(fields));
         this.template.querySelector('lightning-record-edit-form').submit(fields);
         this.sessionUpdateInProgress = true;
     }
@@ -93,19 +100,31 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
         this.error = error;
     }
 
-    handleCreateNewSession(){
-        window.console.log('createNewSession');
+    handleEditSession(){
+        this.toDoListAction = 'edit';
+        this.animals.forEach(animal => {
+            this.animalsForCopy.push({label: animal.Animal_Name__c, name: animal.Animal__c});
+        });
+        this.sessionIdForCopy = this.session.Id;
+        
         this.showToDoList = true;
         this.handleToggleDropdown();
     }
 
-    animalsForCopy = [];
+    handleCreateNewSession(){
+        this.toDoListAction = 'new';
+        this.animalsForCopy = [];
+        this.sessionIdForCopy = undefined;
+        this.showToDoList = true;
+        this.handleToggleDropdown();
+    }
+
     handleCopySession(){
-        window.console.log('copySession');
+        this.toDoListAction = 'copy';
         this.animals.forEach(animal => {
             this.animalsForCopy.push({label: animal.Animal_Name__c, name: animal.Animal__c});
         });
-        window.console.log('animalIds: ', this.animalIds);
+        this.sessionIdForCopy = this.session.Id;
         
         this.showToDoList = true;
         this.handleToggleDropdown();
@@ -130,35 +149,39 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
         this.toggleDropdown = !this.toggleDropdown;
     }
 
-    hanldeCopyEvent(event){
-        window.console.log('handleCopyEvent');
-        window.console.log(JSON.stringify(event.detail));
-
+    handleCopyEvent(event){
+        window.console.log('in handleCopyEvent');
+        this.playgroupContacts = [];
+        this.sessionPlaygroupLeader = undefined;
         this.showToDoList = false;
         this.recordId = event.detail.id;
+        refreshApex(this.wireResponse);
+    }
+
+    handleEditEvent(event){
+        this.showToDoList = false;
+        refreshApex(this.wireResponse);
     }
 
     handleNavigateToSession(){
         this[NavigationMixin.Navigate]({
             type: 'standard__recordPage',
             attributes: {
-                recordId: this.recordId,
+                recordId: this.session.Id,
                 objectApiName: 'Playgroup_Session__c',
                 actionName: 'view'
             }
         });
-    }
-
-    handleAnimalRemovedEvent(){
-        window.console.log("remove animal");
         refreshApex(this.wireResponse);
     }
 
-    // saveAnimalUpdates = false;
-    // handleSaveSession(){
-    //     window.console.log('handleSaveSession')
-    //     this.saveAnimalUpdates = true;
-    // }
+    handleAnimalRemovedEvent(){
+        refreshApex(this.wireResponse);
+    }
+
+    handleContactEvent(){
+        this.refresh = !this.refresh;
+    }
 
     get customLookupLeaderDeviceSize(){
         if(FORM_FACTOR == 'Large'){
@@ -174,7 +197,7 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
     }
 
     get currentDateTime(){
-        if(!this.recordId){
+        if(!this.session){
             return (new Date().toISOString());
         }
     }

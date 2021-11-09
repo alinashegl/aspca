@@ -6,6 +6,7 @@ import FORM_FACTOR from '@salesforce/client/formFactor';
 import getPlaygroupAnimals from '@salesforce/apex/PlaygroupToDoListController.getPlaygroupAnimals';
 import createPlaygroup from '@salesforce/apex/PlaygroupToDoListController.createPlaygroup';
 import copyPlaygroupSession from '@salesforce/apex/PlaygroupToDoListController.copyPlaygroupSession';
+import editPlaygroup from '@salesforce/apex/PlaygroupToDoListController.editPlaygroup';
 
 export default class PlaygroupToDoList extends NavigationMixin(LightningElement) {
     location = 'MRC';
@@ -14,6 +15,8 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
     sessionId;
     @api
     animalsToAdd = [];
+    @api
+    action;
     //internally tracked list of animals since @api does not track the contents of arrays
     @track
     animalsToAddInternal = [];
@@ -113,7 +116,7 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
             //get list of animal Ids for controller call
             let animals = this.animalsToAddInternal.map(a => a.name);
             //sessionId having a value means we are copying an existing playgroup
-            if (this.sessionId) {
+            if (this.sessionId && this.action == 'copy') {
                 //copy existing playgroup with list of selected animals
                 copyPlaygroupSession({ sessionId: this.sessionId, animalsToAdd: animals })
                     .then(result => {
@@ -123,6 +126,26 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
                     .catch(error => {
                         this.dispatchEvent(new CustomEvent('copy', {detail: {id: null, error: error}}));
                     })
+            }
+            else if(this.action == 'new'){
+                createPlaygroup({ animals: animals })
+                    .then(result => {
+                    //id: result is the new sessionId value
+                    this.dispatchEvent(new CustomEvent('copy', {detail: {id: result, error: null}}));
+                })
+                .catch(error => {
+                    this.dispatchEvent(new CustomEvent('copy', {detail: {id: null, error: error}}));
+                })
+            }
+            else if(this.action == 'edit'){
+                editPlaygroup({ sessionId: this.sessionId, animalsToAdd: animals  })
+                    .then(result => {
+                    //id: result is the new sessionId value
+                    this.dispatchEvent(new CustomEvent('edit', {detail: {id: result, error: null}}));
+                })
+                .catch(error => {
+                    this.dispatchEvent(new CustomEvent('edit', {detail: {id: null, error: error}}));
+                })
             }
             else {
                 //create new playgroup with list of selected animals

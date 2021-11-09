@@ -4,9 +4,7 @@ import addContact from '@salesforce/apex/playgroupSessionLWCController.addContac
 import removeContact from '@salesforce/apex/playgroupSessionLWCController.removeContact';
 
 export default class PlaygroupSessionContacts extends LightningElement {
-    // @api sessionId;
     @api animals = [];
-    // @api contacts = [];
 
     _sessionId;
     @api
@@ -24,20 +22,17 @@ export default class PlaygroupSessionContacts extends LightningElement {
     }
     set contacts(value) {
         this._contacts = value;
-        // this.contactsInternal = Array.from(this.contacts);
         this.contactListPill = [];
         if(this.contacts.length > 0){
-            
             this.contacts.forEach(contact => {
                 this.contactListPill.push({
-                    label: contact.Contact__r.Name,
-                    name: contact.Contact__c
+                    label: contact.Name,
+                    name: contact.Id
                 });
             });
         }
     }
 
-    // @track contactsInternal = [];
     @track contactListPill = [];
 
     customLookupNewId;
@@ -54,37 +49,18 @@ export default class PlaygroupSessionContacts extends LightningElement {
     error;
     showSpinner = false;
 
-    // renderedCallback(){
-    //     if(!this.ranRenderedCallback){
-    //         // window.console.log("session Contacts animals: ", JSON.stringify(this.animals));
-    //         if(this.contacts.length > 0){
-    //             this.contacts.forEach(contact => {
-    //                 this.contactListPill.push({
-    //                     label: contact.Contact__r.Name,
-    //                     name: contact.Contact__c
-    //                 });
-    //             });
-    //         }
-    //         this.ranRenderedCallback = true;
-    //     }
-    // }
-
     customLookupEvent(event){
-        window.console.log('handleLookup: ', JSON.stringify ( event.detail) );
         this.customLookupNewId = event.detail.data.recordId;
         this.showAnimalList = true;
         this.tempContact = event.detail.data.record;
         if(this.contactListPill.find(cont => cont.name == this.tempContact.Id)){
-            window.console.log('isDuplicateContact');
             this.isDuplicateContact = true;
         } else {
-            window.console.log('is not DuplicateContact');
             this.isDuplicateContact = false;
         }
     }
 
     handleCustomLookupExpandSearch(event){
-        window.console.log('in handleCustomLookupExpandSearch: ', JSON.stringify ( event.detail.data) );
         let data = event.detail.data;
         let dataId = data.elementId;
         this.template.querySelector('[data-id="' + dataId + '"]').className =
@@ -92,7 +68,6 @@ export default class PlaygroupSessionContacts extends LightningElement {
     }
 
     handleAddContact(){
-        window.console.log('addContact');
         this.showSpinner = true;
         addContact({sessionId: this.sessionId, contactId: this.tempContact.Id, animalIdsWithNovelContact: this.tempAnimalsWithNovelContact})
         .then ((result) =>{
@@ -106,11 +81,10 @@ export default class PlaygroupSessionContacts extends LightningElement {
                 this.tempContact = undefined;
                 this.showAnimalList = false;
                 this.customLookupClearSelection = !this.customLookupClearSelection;
+                this.dispatchContactEvent();
             }
         })
         .catch((error) => {
-            console.error('error: ', error.statusText);
-            console.error('error message: ', error.body.message);
             this.error = error;
         })
         .finally(() => {
@@ -130,17 +104,15 @@ export default class PlaygroupSessionContacts extends LightningElement {
             if(result){
                 this.contactListPill = this.contactListPill.filter(x => x.name !== this.contactToRemove.name);
                 this.confirmDelete = false;
+                this.dispatchContactEvent();
             }
         })
         .catch((error) => {
-            console.error('error: ', error.statusText);
-            console.error('error message: ', error.body.message);
             this.error = error;
         })
         .finally(() => {
             this.showSpinner = false;
         });
-        
     }
 
     handleCloseModal (){
@@ -148,7 +120,6 @@ export default class PlaygroupSessionContacts extends LightningElement {
     }
 
     handleCancelAddContact(){
-        window.console.log('handleCancelAddContact');
         this.tempAnimalsWithNovelContact = [];
         this.tempContact = undefined;
         this.showAnimalList = false;
@@ -160,9 +131,11 @@ export default class PlaygroupSessionContacts extends LightningElement {
         let dataId = event.target.dataset.id;
         let value = event.target.checked;
         this.tempAnimalsWithNovelContact.push(dataId);
+    }
 
-        window.console.log('handleToggleChange: ', dataId);
-        window.console.log('value: ', value);
+    dispatchContactEvent(){
+        const selectedEvent = new CustomEvent('contactevent', {});
+        this.dispatchEvent(selectedEvent);
     }
 
     get customLookupFields(){

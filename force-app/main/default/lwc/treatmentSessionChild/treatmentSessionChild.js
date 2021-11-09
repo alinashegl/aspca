@@ -1,4 +1,3 @@
-import { RecordFieldDataType } from 'lightning/uiRecordApi';
 import { LightningElement, api, wire } from 'lwc';
 
 export default class TreatmentSessionChild extends LightningElement {
@@ -18,7 +17,6 @@ export default class TreatmentSessionChild extends LightningElement {
     }
 
     handleSuccess(event){
-        window.console.log('successfully updated: ', event.detail.id);
         this.lookupIdChanged = false;
         this.fieldChanged = false;
         if(this.record == undefined){
@@ -40,7 +38,6 @@ export default class TreatmentSessionChild extends LightningElement {
     }
 
     handleNewRecordSubmit(event){
-        window.console.log('in handleNewRecordSubmit');
         this.isLoading = true;
         event.preventDefault(); 
         const fields = event.detail.fields;
@@ -51,12 +48,10 @@ export default class TreatmentSessionChild extends LightningElement {
         }
 
         fields['Session_Protocol__c'] = this.protocolId;
-        window.console.log('new contact: ', JSON.stringify(fields));
         this.template.querySelector('lightning-record-edit-form').submit(fields);
     }
 
     handleRemoveRecord(){
-        window.console.log('in handleRemoveRecord')
         let eventDetails = {id:this.record.Id};
         const event = new CustomEvent('deletechild', {
             detail: eventDetails
@@ -78,13 +73,11 @@ export default class TreatmentSessionChild extends LightningElement {
     }
 
     customLookupEvent(event){
-        window.console.log('handleLookup: ', JSON.stringify ( event.detail) );
         this.customLookupNewId = event.detail.data.recordId;
         this.lookupIdChanged = !this.record || (this.customLookupNewId != this.record.Id);
     }
 
     handleCustomLookupExpandSearch(event){
-        window.console.log('in handleCustomLookupExpandSearch: ', JSON.stringify ( event.detail.data) );
         let data = event.detail.data;
         let dataId = data.elementId;
         this.template.querySelector('[data-id="' + dataId + '"]').className =

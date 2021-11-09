@@ -2,8 +2,6 @@ public with sharing class CustomLookupLWCController {
 
     @AuraEnabled
     public static searchResponse search(String objectName, List<String> fields, String searchTerm, Integer offset, String whereClause, String fieldToQuery){
-        System.debug('whereclause: ' + whereClause);
-
         searchResponse response = new searchResponse();
         Integer rowsToSkip = offset * 25;
         String searchKeyword = searchTerm + '*';
@@ -14,16 +12,9 @@ public with sharing class CustomLookupLWCController {
             whereString += whereClause;
         }
 
-        System.debug('shereSTring1: ' + whereString);
-
         whereString = fieldToQuery == null ? whereString : whereString + fieldToQuery;
-        
-        System.debug('shereSTring2: ' + whereString);
-
         String query = 'SELECT Id, '+String.join(fields,',')+' FROM ' + objectName + whereString + ' LIKE \'%' + searchTerm + '%\' LIMIT 25 OFFSET ' + rowsToSkip;
-        System.debug('query ' + query);
         Integer  count = database.countQuery('SELECT count() FROM ' + objectName + whereString + ' LIKE \'%' + searchTerm + '%\'');
-
         response.recordList = Database.query(query);
         response.pageCount = Math.ceil(Decimal.valueOf(count).divide(25,1));
 
@@ -37,13 +28,8 @@ public with sharing class CustomLookupLWCController {
 
     @AuraEnabled (cacheable=true)
     public static sobject getCurrentRecord(String objectName, Id recordId, String[] fields){
-        System.debug('in getCurrentCrecord: ' + objectName + ': ' + recordId + ': ' + fields);
-
         String query = 'SELECT Id, '+String.join(fields,',')+' FROM ' + objectName + ' WHERE Id = \'' + recordId + '\' LIMIT 1';
-
-        System.debug(' query '+query);
         sobject sob = Database.query(query)[0];
-        System.debug('sob: ' + sob);
         return sob;
     }
 
@@ -52,7 +38,6 @@ public with sharing class CustomLookupLWCController {
         try {
             Integer rowsToSkip = offset * 25;
             String query = 'SELECT Id, '+String.join(fields,',')+' FROM ' + objectAPI + ' LIMIT 25 OFFSET ' + rowsToSkip;
-            System.debug(' query '+query);
 
             return Database.query(query);
         } catch (Exception e) {
@@ -65,7 +50,6 @@ public with sharing class CustomLookupLWCController {
         try {
             SObject[] objList = getRecordList(type, whereClause);
 
-            System.debug('objList = ' + objList);
             return objList;
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
@@ -87,7 +71,6 @@ public with sharing class CustomLookupLWCController {
         String query = 'SELECT Id, ' + fields + ' FROM ' + type + ' WHERE ';
         query += whereClause == null ? 'Id IN: recIds' : whereClause + 'Id IN: recIds';
 
-        System.debug('query String = '+ query);
         SObject[] records = Database.query(query);
         return records;
     }
@@ -107,19 +90,5 @@ public with sharing class CustomLookupLWCController {
         };
 
         return objToFields.containsKey(type) ? objToFields.get(type) : 'Name';
-    }
-
-    @AuraEnabled(cacheable=true)
-    public static List < sObject > fetchLookUpValues(String 
-     searchKey,String 
-    fieldName, String ObjectName,String keyField) {
-      List < sObject > returnList = new List < sObject > ();
-        String sQuery =  'select '+fieldName+','+keyField+ ' from '
-        +ObjectName+' LIMIT 5000' ;
-        List < sObject > lstOfRecords = Database.query(sQuery);
-        for (sObject obj: lstOfRecords) {
-            returnList.add(obj);
-        }
-        return returnList;
     }
 }

@@ -52,6 +52,41 @@
                                     <lightning-input-field field-name="Play_Style_Notes__c" variant='label-hidden' data-id='Play_Style_Notes__c' onchange={handleOnChangeAnimal}> </lightning-input-field>
                                 </div>
                             </lightning-layout-item>
+                            
+                        <template if:true={animalContacts}>
+                            <lightning-layout-item flexibility="auto, no-grow" size="12" small-device-size="6" medium-device-size="12" large-device-size="12" padding='around-small'>
+                                <div class="slds-form-element slds-p-left_x-small slds-p-right_x-small">
+                                    <lightning-button
+                                        variant="base"
+                                        type="button"
+                                        name="update"
+                                        label={showContactsButtonLabel}
+                                        onclick={handleToggleShowContacts}
+                                    ></lightning-button>
+                                </div>
+                            </lightning-layout-item>
+                            <template if:true={showContacts}>
+                                <template for:each={animalContacts} for:item='contact'>
+                                    <lightning-layout-item key={contact.id} flexibility="auto, no-grow" size="6" small-device-size="6" medium-device-size="3" large-device-size="3" padding='around-small'>
+                                        <div class="slds-form-element slds-p-left_x-small slds-p-right_x-small">
+                                            {contact.name}
+                                            <div title='Status' class='slds-p-left_x-small'>
+                                                <lightning-input 
+                                                    type="toggle"
+                                                    checked={contact.checked}
+                                                    message-toggle-active='Familiar'
+                                                    message-toggle-inactive='Novel'
+                                                    onchange={handleToggleChange}
+                                                    data-id={contact.id}
+                                                >
+                                                </lightning-input>
+                                            </div>
+                                        </div>
+                                    </lightning-layout-item>
+                                </template>
+                            </template>
+                        </template>
+
                         </lightning-layout>
                     </lightning-record-edit-form>
                 </lightning-layout-item>
@@ -106,6 +141,24 @@
                                                 >
                                                 </lightning-button>
                                             </p>
+                                            <template if:true={confirmDelete}>
+                                                <section role='dialog' tabindex="0" class={modalClass} onkeydown={handleKeyDown}>
+                                                    <div class="slds-modal__container">
+                                                        <div class="slds-modal__content slds-p-around_medium">
+                                                            Are you sure you want to remove {animalName} from the playgroup?
+                                                        </div>
+                                                        <footer class="slds-modal__footer slds-is-relative">
+                                                            <lightning-button label='Cancel' class="slds-p-horizontal_xxx-small" onclick={handleCloseModal}>
+                                                            </lightning-button>
+                                                            <lightning-button label={deleteButtonLabel} variant='Confirm'
+                                                                class="slds-p-horizontal_xxx-small" onclick={handleConfirmRemoveAnimal}></lightning-button>
+                                                        </footer>
+                                                    </div>
+                                                </section>
+                                                    <template if:true={isLargeFormFactor}>
+                                                        <div class="slds-backdrop slds-backdrop_open"></div>
+                                                    </template>
+                                            </template>
                                         </div>
                                     </div>
                                 </div>

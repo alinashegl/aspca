@@ -1,18 +1,67 @@
 import { LightningElement, api, wire } from 'lwc';
-import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
-import FORM_FACTOR from '@salesforce/client/formFactor'
+import { getRecord, getFieldValue, updateRecord } from 'lightning/uiRecordApi';
+import { refreshApex } from '@salesforce/apex';
+import FORM_FACTOR from '@salesforce/client/formFactor';
 import ANIMAL_NAME_FIELD from '@salesforce/schema/Animal__c.Animal_Name__c';
+import CONTACT_ID_FIELD from '@salesforce/schema/Playgroup_Contact__c.Id';
+import CONTACT_NOVEL_FIELD from '@salesforce/schema/Playgroup_Contact__c.Novel_Not_Novel__c';
 import removeFromPlaygroup from '@salesforce/apex/playgroupSessionLWCController.removeFromPlaygroup';
+import getAnimalContacts from '@salesforce/apex/playgroupSessionLWCController.getAnimalContacts';
 
 export default class PlaygroupSessionAnimal extends LightningElement {
     @api animalId;
     @api playgroupAnimalId;
+    
+    _refresh;
+    @api
+    get refresh() {
+        return this._refresh;
+    }
+    set refresh(value) {
+        this._refresh = value;
+        refreshApex(this.wireResponse);
+    }
+
+    animalPlaygroupPendingUpdate = false;
+    animalPendingUpdate = false;
+    animalUpdateInProgress = false;
+    playgroupUpdteInProgress = false;
+
     animalPlaygroupChanges = {};
     animalChanges = {Type_of_Animal__c: 'Dog'};
+    showContacts = false;
+    confirmDelete = false;
+    modalClass = FORM_FACTOR == 'Small' ? 'slds-fade-in-open' : 'slds-modal slds-fade-in-open';
     error;
 
     @wire(getRecord, {recordId: '$animalId', fields: [ANIMAL_NAME_FIELD]})
     animal;
+
+    wireResponse;
+    animalContacts = [];
+    @wire(getAnimalContacts, {playgroupAnimalId: '$playgroupAnimalId'})
+    response(result){
+        this.wireResponse = result;
+        if(result.data){
+            let contactList = [];
+            this.animalContacts = [];
+
+            contactList = result.data;
+
+            if(contactList.length > 0){
+                contactList.forEach(contact => {
+                    this.animalContacts.push({
+                        id: contact.Id,
+                        name: contact.Contact__r.Name,
+                        checked: contact.Novel_Not_Novel__c == 'Familiar'
+                    });
+                });
+            }
+        } 
+        else if(result.error){
+            this.error = result.error;
+        }
+    }
 
     handleOnChangeAnimal(event){
         const target = event.target;
@@ -26,10 +75,7 @@ export default class PlaygroupSessionAnimal extends LightningElement {
         this.animalPlaygroupPendingUpdate = true;
     }
 
-    animalUpdateInProgress = false;
-    playgroupUpdteInProgress = false;
     handleSaveDog(event){
-        window.console.log('save Dog');
         event.preventDefault();
         const form = this.template.querySelectorAll('lightning-record-edit-form');
         if(this.animalPendingUpdate){
@@ -42,17 +88,13 @@ export default class PlaygroupSessionAnimal extends LightningElement {
         }
     }
 
-    animalPendingUpdate = false;
     handleAnimalUpdateSuccess(){
-        window.console.log('handleAnimalUpdateSuccess');
         this.animalPendingUpdate = false;
         this.animalUpdateInProgress = false;
         this.animalChanges = {Type_of_Animal__c: 'Dog'};
     }
 
-    animalPlaygroupPendingUpdate = false;
     handleAnimalPlaygroupUpdateSuccess(){
-        window.console.log('animalPlaygroupUpdateSuccess');
         this.animalPlaygroupPendingUpdate = false;
         this.playgroupUpdteInProgress = false;
         this.animalPlaygroupChanges = {};
@@ -66,21 +108,53 @@ export default class PlaygroupSessionAnimal extends LightningElement {
         this.error = error;
     }
 
-    handleRemoveAnimal(){
+    // handleRemoveAnimal(){
+    //     this.playgroupUpdteInProgress = true;
+    //     removeFromPlaygroup({animalPlagroupId: this.playgroupAnimalId})
+    //     .then(() => {
+    //         const selectedEvent = new CustomEvent('removedevent', {});
+    //         this.dispatchEvent(selectedEvent);
+    //         this.playgroupUpdteInProgress = false;
+    //     });
+    // }
+
+    handleToggleChange(event){
+        const evt = event.target;
+        const fields = {};
+        fields[CONTACT_ID_FIELD.fieldApiName] = evt.dataset.id;
+        fields[CONTACT_NOVEL_FIELD.fieldApiName] = evt.checked ? 'Familiar' : 'Novel';
+        const recordUpdate = {fields: fields};
+
+        updateRecord(recordUpdate)
+        .then(() => {})
+        .catch(error => {
+            this.error = error;
+        });
+    }
+
+    handleToggleShowContacts(){
+        this.showContacts = !this.showContacts;
+    }
+
+    handleRemoveAnimal(event){
+        this.confirmDelete = true;
+    }
+
+    handleCloseModal (){
+        this.confirmDelete = false;
+    }
+
+    handleConfirmRemoveAnimal(){
         this.playgroupUpdteInProgress = true;
         removeFromPlaygroup({animalPlagroupId: this.playgroupAnimalId})
         .then(() => {
-            const selectedEvent = new CustomEvent('removedevent', {
-                // detail: {  
-                //     data : {
-                //         record          : selectRecord,
-                //         recordId        : recordId,
-                //         currentRecordId : this.currentRecordId
-                //     }
-                // }
-            });
+            const selectedEvent = new CustomEvent('removedevent', {});
             this.dispatchEvent(selectedEvent);
-
+        })
+        .catch((error) => {
+            this.error = error;
+        })
+        .finally(() => {
             this.playgroupUpdteInProgress = false;
         });
     }
@@ -103,6 +177,18 @@ export default class PlaygroupSessionAnimal extends LightningElement {
 
     get disableUpdateDogButton(){
         return !this.animalPlaygroupPendingUpdate && !this.animalPendingUpdate;
+    }
+
+    get showContactsButtonLabel(){
+        return this.showContacts ? 'Hide Contacts' : 'Show Contacts';
+    }
+
+    get isLargeFormFactor(){
+        return FORM_FACTOR != 'Small';
+    }
+
+    get deleteButtonLabel(){
+        return FORM_FACTOR == 'Small' ? 'Remove' : 'Remove Animal';
     }
     
 }
