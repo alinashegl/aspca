@@ -12,6 +12,7 @@ public with sharing class playgroupSessionLWCController {
         }
     }
 
+    @testVisible
     private static Playgroup_Session__c getPlaygroupSession (Id sessionId){
         Playgroup_Session__c[] sessions = [
             SELECT Id, Name, Playgroup_Location__c, Playgroup_Leader__c, Contact_Ids__c
@@ -22,10 +23,12 @@ public with sharing class playgroupSessionLWCController {
         return sessions.isEmpty() ? null : sessions[0];
     }
 
+    @testVisible
     private static Animal_Playgroup__c[] animalPlaygroups (Id sessionId){
         return [SELECT Id, Animal__c, Animal_Name__c FROM Animal_Playgroup__c WHERE Playgroup_Session__c =: sessionId ORDER BY Animal_Name__c ASC];
     }
 
+    @testVisible
     private static Contact[] getPlaygroupContacts(String contactIds){
         if(contactIds != null){
             Id[] contactIdList = contactIds.split(',');
@@ -35,6 +38,7 @@ public with sharing class playgroupSessionLWCController {
         }
     }
 
+    @testVisible
     private static Animal_Playgroup__c[] createNewPlaygroupAnimals(playgroupSessionInfo info, Id[] animalIdsToAdd){
         Animal_Playgroup__c[] newAnimals = new Animal_Playgroup__c[0];
         for(Id animalId : animalIdsToAdd){
