@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Facility_Outcome__c</fullName>
+    <externalId>false</externalId>
+    <formula>TEXT(Animal__r.Shelter_Location2__c)</formula>
+    <label>Facility/Outcome</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

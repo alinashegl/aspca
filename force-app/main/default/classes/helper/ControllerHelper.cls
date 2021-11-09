@@ -1,36 +1,32 @@
-/*
+/**
  * Created by barne on 4/9/2021.
  */
 
-global with sharing class ControllerHelper {
-    dao_Animal daoAnimal = new dao_Animal();
+public with sharing class ControllerHelper {
 
+    public class Properties{
+        public String id;
+        public String label;
+        public List<PicklistEntry> entries;
+        public DescribeFieldResult fieldResult;
 
-    global List<SelectOption> getPicklist (List<Schema.PicklistEntry> picklistEntries) {
-        List<SelectOption> selectOptions = new List<SelectOption>();
-        for (PicklistEntry entry : picklistEntries) {
-            selectOptions.add(new SelectOption (entry.getValue(), entry.getLabel(), true));
-            System.debug('#### Picklist Value' + entry.value);
-            System.debug('#### Picklist Label ' + entry.getLabel());
-            System.debug('#### Picklist isActive ' + entry.isActive());
-
-        }
-        return selectOptions;
-    }
-
-    global List<String> getOptions(List<Schema.PicklistEntry> picklistEntries) {
-        List<String> options = new List<String>();
-        for (PicklistEntry entry : picklistEntries) {
-            options.add(entry.getValue());
+        public Properties(String id, String label, List<PicklistEntry> entries, DescribeFieldResult fieldResult){
+            this.id = id;
+            this.label = label;
+            this.entries = entries;
+            this.fieldResult = fieldResult;
         }
 
-        return options;
+        public Properties(){ }
     }
 
-    global List<PicklistEntry> getEntries(DescribeFieldResult fieldResult) {
-        List<PicklistEntry> picklistEntries = fieldResult.getPicklistValues();
+    public static Properties getFieldProperties(SObjectField field) {
+        Properties prop = new Properties();
+        prop.fieldResult = field.getDescribe();
+        prop.entries = prop.fieldResult.getPicklistValues();
+        prop.id = prop.fieldResult.name;
+        prop.label = prop.fieldResult.label;
 
-        return picklistEntries;
+        return prop;
     }
-
 }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Handler__c</fullName>
+    <externalId>false</externalId>
+    <label>Handler</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Yellow</fullName>
+                <default>false</default>
+                <label>Yellow</label>
+            </value>
+            <value>
+                <fullName>Red (designated)</fullName>
+                <default>false</default>
+                <label>Red (designated)</label>
+            </value>
+            <value>
+                <fullName>Blue</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Blue</label>
+            </value>
+            <value>
+                <fullName>Purple</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Purple</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

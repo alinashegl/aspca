@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Microchip_Results__c</fullName>
+    <description>If scanned, Positive or Negative?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>If scanned, Positive or Negative?</inlineHelpText>
+    <label>Microchip Results</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Positive</fullName>
+                <default>false</default>
+                <label>Positive</label>
+            </value>
+            <value>
+                <fullName>Negative</fullName>
+                <default>false</default>
+                <label>Negative</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

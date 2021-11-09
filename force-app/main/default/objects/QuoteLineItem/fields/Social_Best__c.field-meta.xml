@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Social_Best__c</fullName>
+    <externalId>false</externalId>
+    <label>Social - Best</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>1. Solicitation, sustained proximity</fullName>
+                <default>false</default>
+                <label>1. Solicitation, sustained proximity</label>
+            </value>
+            <value>
+                <fullName>2. Soliciation, short proximity</fullName>
+                <default>false</default>
+                <label>2. Soliciation, short proximity</label>
+            </value>
+            <value>
+                <fullName>3. Soliciation, no proximity</fullName>
+                <default>false</default>
+                <label>3. Soliciation, no proximity</label>
+            </value>
+            <value>
+                <fullName>4. No Solicitation, sustained proximity</fullName>
+                <default>false</default>
+                <label>4. No Solicitation, sustained proximity</label>
+            </value>
+            <value>
+                <fullName>5. No Solicitation, short proximity</fullName>
+                <default>false</default>
+                <label>5. No Solicitation, short proximity</label>
+            </value>
+            <value>
+                <fullName>6. No Solicitation, no proximity</fullName>
+                <default>false</default>
+                <label>6. No Solicitation, no proximity</label>
+            </value>
+            <value>
+                <fullName>None</fullName>
+                <default>true</default>
+                <label>None</label>
+            </value>
+            <value>
+                <fullName>6. No soliciation, no proximity</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>6. No soliciation, no proximity</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

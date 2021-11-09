@@ -1,0 +1,88 @@
+<!--
+ - Page Description
+ - 
+ - @author barne
+ -->
+
+<aura:component description="ToDoListLineItem" controller="TreatmentToDoListController">
+    <aura:attribute type="String" name="Name" />
+    <aura:attribute type="String" name="ASPCAName" />
+    <aura:attribute type="String" name="AnimalId" />
+    <aura:attribute type="String" name="PlanId" />
+    <aura:attribute type="String" name="Priority" />
+    <aura:attribute type="String" name="Assignment" />
+    <aura:attribute type="String" name="TreatmentCount" />
+    <aura:attribute type="String" name="ColorCode" />
+    <aura:attribute type="Integer" name="IndexVar" />
+    <aura:attribute type="List" name="Data" />
+    <aura:attribute type="List" name="NotPresentData" />
+    <aura:attribute type="Boolean" name="RenderNotPresentData" />
+    <aura:attribute type="Boolean" name="RenderProtocols" />
+    <aura:attribute type="String" name="AnimalUrlPath" />
+    <aura:attribute type="String" name="TreatmentPlanURLPath" />
+    <aura:attribute type="String" name="AssignedBundleId" />
+    <aura:attribute type="String" name="Sex" />
+    <aura:attribute type="String" name="Age" />
+    <aura:attribute type="String" name="Grade" />
+    <aura:attribute type="String" name="Location" />
+
+    <aura:handler name="protocolSelectEvent" event="c:treatmentProtocolSelectEvent" action="{!c.handleSelectEvent}"/>
+    <aura:registerEvent name="protocolSaveEvent" type="c:treatmentProtocolSaveEvent"/>
+    <aura:handler name="protocolSaveEvent" event="c:treatmentProtocolSaveEvent" action="{!c.handleSaveEvent}"/>
+    <aura:html tag="style">
+        .toastMessage.forceActionsText{
+            white-space : pre-line !important;
+        }
+    </aura:html>
+    <table bgcolor="white" class="line">
+        <tr class="spaceUnder">
+            <td class="width"><lightning:formattedUrl value="{!'/' + v.AnimalId}" label="{!v.Name}" /></td>
+            <td class="width">{!v.ASPCAName}</td>
+            <td class="width">{!v.Priority}</td>
+            <td class="width">
+                <aura:if isTrue="{!not(empty(v.Assignment))}">
+                    <lightning:formattedUrl value="{!'/' + v.AssignedBundleId}" label="{!v.Assignment}" />
+                </aura:if>
+                <aura:if isTrue="{!empty(v.Assignment)}">
+                    {!v.Assignment}
+                </aura:if>
+                </td>
+            <td class="width">{!v.TreatmentCount}</td>
+            <td class="width">{!v.ColorCode}</td>
+            <td class="width">{!v.Sex}</td>
+            <td class="width">{!v.Age}</td>
+            <td class="width">{!v.Grade}</td>
+            <td class="width">{!v.Location}</td>
+        </tr>
+    </table>
+    <table bgcolor="white">
+        <tr>
+            <td>
+                <lightning:buttonGroup >
+                    <lightning:button name="showProtocols" label="Assigned Protocols" onclick="{!c.handleClick}"
+                                      class="float"  aura:id="{!v.IndexVar}"/>
+                    <lightning:button name="showNotPresent" label="Unassigned Protocols" onclick="{!c.handleClick}"
+                                      class="float" />
+                    <lightning:button name="updatePlanProtocols" label="Save Changes" class="float" onclick="{!c.handleClick}" />
+                </lightning:buttonGroup>
+
+            </td>
+        </tr>
+    </table>
+    <table bgcolor="white">
+        <aura:if isTrue="{!v.RenderProtocols}">
+            <thead><strong>Assigned Protocols</strong></thead>
+            <tr class="small">
+                <c:TreatmentProtocolList data="{!v.Data}" sectionType="assigned" />
+            </tr>
+        </aura:if>
+    </table>
+    <table bgcolor="white">
+        <aura:if isTrue="{!v.RenderNotPresentData}">
+            <thead><strong>Unassigned Protocols</strong></thead>
+            <tr class="small">
+                <c:TreatmentProtocolList data="{!v.NotPresentData}" sectionType="unassigned" />
+            </tr>
+        </aura:if>
+    </table>
+</aura:component>

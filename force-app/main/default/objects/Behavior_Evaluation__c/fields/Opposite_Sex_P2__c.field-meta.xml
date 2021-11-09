@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Opposite_Sex_P2__c</fullName>
+    <externalId>false</externalId>
+    <label>Opposite-Sex P2</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Friendly</fullName>
+                <default>false</default>
+                <label>Friendly</label>
+            </value>
+            <value>
+                <fullName>Submissive</fullName>
+                <default>false</default>
+                <label>Submissive</label>
+            </value>
+            <value>
+                <fullName>Neutral</fullName>
+                <default>false</default>
+                <label>Neutral</label>
+            </value>
+            <value>
+                <fullName>Nervous/fearful</fullName>
+                <default>false</default>
+                <label>Nervous/fearful</label>
+            </value>
+            <value>
+                <fullName>Tense/assertive</fullName>
+                <default>false</default>
+                <label>Tense/assertive</label>
+            </value>
+            <value>
+                <fullName>Very intense/aroused</fullName>
+                <default>false</default>
+                <label>Very intense/aroused</label>
+            </value>
+            <value>
+                <fullName>Predatory</fullName>
+                <default>false</default>
+                <label>Predatory</label>
+            </value>
+            <value>
+                <fullName>Became aggressive</fullName>
+                <default>false</default>
+                <label>Became aggressive</label>
+            </value>
+            <value>
+                <fullName>Extremely fearful</fullName>
+                <default>false</default>
+                <label>Extremely fearful</label>
+            </value>
+            <value>
+                <fullName>No interest</fullName>
+                <default>false</default>
+                <label>No interest</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Behavior_Evaluation_Trigger_Enabled__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Determines if the Behavior Evaluation Trigger is Enabled or not</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Set to &apos;True&apos; to enable Behavior Evaluation Trigger</inlineHelpText>
+    <label>Behavior Evaluation Trigger Enabled</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

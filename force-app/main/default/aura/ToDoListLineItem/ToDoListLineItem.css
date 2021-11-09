@@ -1,0 +1,35 @@
+/**
+ * 
+ * Class Description
+ *
+ * @author barne
+ * @version 1.0.0
+ */
+.THIS.c-container {
+    border: 1px solid #d8dde6;
+    margin: 10px 0 20px 0;
+}
+.THIS .grid-container {
+  display: inline-grid;
+  grid-template-columns: auto auto auto auto;
+  background-color: #FFFFFF;
+  padding: 5px;
+}
+.THIS .grid-item {
+  background-color: #FFFFFF;
+  border: 0px white;
+  padding: 5px;
+  text-align: left;
+}
+.THIS tr.spaceUnder>td {
+    padding: 5px;
+}
+.THIS .line{
+	border-top: 2px solid #8c8b8b;
+}
+.THIS td.width {
+    width: 10%;
+}
+.THIS tr.small {
+    font-size: .75em;
+}

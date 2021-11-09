@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Puppy_Restraint__c</fullName>
+    <externalId>false</externalId>
+    <label>Puppy Restraint</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Remained mainly motionless - relaxed</fullName>
+                <default>false</default>
+                <label>Remained mainly motionless - relaxed</label>
+            </value>
+            <value>
+                <fullName>Remained mainly motionless - tense</fullName>
+                <default>false</default>
+                <label>Remained mainly motionless - tense</label>
+            </value>
+            <value>
+                <fullName>Struggled periodically - interspersed with relaxation</fullName>
+                <default>false</default>
+                <label>Struggled periodically - interspersed with relaxation</label>
+            </value>
+            <value>
+                <fullName>Struggled periodically - interspersed with rigidity</fullName>
+                <default>false</default>
+                <label>Struggled periodically - interspersed with rigidity</label>
+            </value>
+            <value>
+                <fullName>Struggled persistently</fullName>
+                <default>false</default>
+                <label>Struggled persistently</label>
+            </value>
+            <value>
+                <fullName>Struggled and mouthy</fullName>
+                <default>false</default>
+                <label>Struggled and mouthy</label>
+            </value>
+            <value>
+                <fullName>Struggled and had a temper tantrum</fullName>
+                <default>false</default>
+                <label>Struggled and had a temper tantrum</label>
+            </value>
+            <value>
+                <fullName>Struggled and panicked</fullName>
+                <default>false</default>
+                <label>Struggled and panicked</label>
+            </value>
+            <value>
+                <fullName>Became aggressive</fullName>
+                <default>false</default>
+                <label>Became aggressive</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

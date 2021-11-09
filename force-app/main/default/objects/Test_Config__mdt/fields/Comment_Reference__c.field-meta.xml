@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Comment_Reference__c</fullName>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Comment Reference</label>
+    <metadataRelationshipControllingField>Test_Config__mdt.Object_Reference__c</metadataRelationshipControllingField>
+    <referenceTo>EntityParticle</referenceTo>
+    <relationshipLabel>Comment_Reference</relationshipLabel>
+    <relationshipName>Comment_Reference</relationshipName>
+    <required>false</required>
+    <type>MetadataRelationship</type>
+    <unique>false</unique>
+</CustomField>

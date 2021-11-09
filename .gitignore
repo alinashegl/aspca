@@ -8,7 +8,6 @@
 package.json
 package-lock.json
 
-
 #ManagedPackage Class, Pages, and Triggers
 
 classes/Loop__*
@@ -72,8 +71,11 @@ ehthumbs.db
 $RECYCLE.BIN/
 
 
-aspca/.eslintignore
-aspca/.prettierignore
-aspca/scripts/apex/hello.apex
-aspca/scripts/soql/account.soql
-.vscode/settings.json
+/out/
+/config/
+/.vscode/
+
+# scripts
+/scripts/
+package.xml
+gitignore

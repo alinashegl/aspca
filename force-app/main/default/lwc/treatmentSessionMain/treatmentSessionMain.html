@@ -1,0 +1,255 @@
+<template>
+    <lightning-card>
+        <template if:true={activeProtocols}>
+            <div class="slds-page-header slds-page-header_joined slds-page-header_bleed slds-shrink-none test-headerRegion slds-is-relative slds-page-header--object-home">
+                <h2 class="slds-card__header-title">
+                    <lightning-icon icon-name="custom:custom63" alternative-text="Protocol" title="Protocol"></lightning-icon>
+                    <div class="slds-p-left_small">
+                        Session Protocols ({activeProtocols.length})
+                        <lightning-button variant="Neutral" label={startSessionLabel} title="Start Session" onclick={handleStartSession} class="slds-m-left_x-small"></lightning-button>
+                        <lightning-button variant="Neutral" label={modifySessionLabel} title="Modify Session" onclick={handleModifySession} class="slds-m-left_x-small"></lightning-button>                    <template if:true={showTogglefields}>
+                            <lightning-button variant="Neutral" label="Toggle Fields" title="Toggle Fields" onclick={handleToggleFields} class="slds-m-left_x-small"></lightning-button>
+                        </template>
+                    </div>
+                </h2>
+            </div>
+            <template if:true={showModifySession}>
+                <c-treatment-modify-session
+                    session-id={recordId}
+                    refresh={sessionListRefresh}
+                >
+                </c-treatment-modify-session>
+            </template>
+            <template if:false={showModifySession}>
+                <template if:true={activeProtocols}>
+                    <div class="slds-p-top_x-small">
+                        <template if:false={activeSession}>
+                            <template if:true={allColumns}>
+                                <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                                    <thead>
+                                        <tr class="slds-line-height_reset">
+                                            <th  class="slds-is-resizable" scope="col">
+                                                <div class="slds-truncate" title="Name">
+                                                    Name
+                                                </div>
+                                            </th>
+                                            <th  class="slds-is-resizable" scope="col">
+                                                <div class="slds-truncate" title="Status">
+                                                    Status
+                                                </div>
+                                            </th>
+                                            <th  class="slds-is-resizable" scope="col">
+                                                <div class="slds-truncate" title="Account Number">
+                                                    Fear - Best
+                                                </div>
+                                            </th>
+                                            <th class="slds-is-resizable" scope="col">
+                                                <div class="slds-truncate" title="Phone">
+                                                    Fear - Worst
+                                                </div>
+                                            </th>
+                                            <th class="slds-is-resizable" scope="col">
+                                                <div class="slds-truncate" title="Phone">
+                                                    Aggresive - Worst
+                                                </div>
+                                            </th>
+                                            <th class="slds-is-resizable" scope="col">
+                                                <div class="slds-truncate" title="Phone">
+                                                    Arousal - Best
+                                                </div>
+                                            </th>
+                                            <th class="slds-is-resizable" scope="col">
+                                                <div class="slds-truncate" title="Phone">
+                                                    Arousal - Worst
+                                                </div>
+                                            </th>
+                                            <th class="slds-is-resizable" scope="col">
+                                                <div class="slds-truncate" title="Phone">
+                                                    Social - Best
+                                                </div>
+                                            </th>
+                                            <th class="slds-is-resizable" scope="col">
+                                                <div class="slds-truncate" title="Phone">
+                                                    Overall Score
+                                                </div>
+                                            </th>
+                                            <th class="slds-is-resizable" scope="col">
+                                                <div class="slds-truncate" title="Phone">
+                                                    Needs Review
+                                                </div>
+                                            </th>
+                                            <th class="slds-is-resizable" scope="col">
+                                                <div class="slds-truncate" title="Phone">
+                                                    Skip Protocol
+                                                </div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <template for:each={activeProtocols} for:item="row">
+                                            <tr key={row.Id}>
+                                                <th scope="row" data-label="Name">
+                                                    <div class="slds-truncate" title='Name'>
+                                                        <lightning-button
+                                                            variant='base'
+                                                            label={row.Protocol_Name__c}
+                                                            onclick={handleNavigateToRecord}
+                                                            data-id={row.Id}
+                                                        >
+                                                        </lightning-button>
+                                                    </div>
+                                                </th>
+                                                <th scope="row" data-label="Status">
+                                                    <div class="slds-truncate" title='Status'>
+                                                        <img src={row.urlIcon} alt='Status'>
+                                                    </div>
+                                                </th>
+                                                <template if:true={allColumns}>
+                                                    <th scope="row" data-label="Fear Best">
+                                                        <div class="slds-truncate" title='Fear Best'>
+                                                            {row.Fear_Best__c}
+                                                        </div>
+                                                    </th>
+                        
+                                                    <th scope="row" data-label="Fear Worst">
+                                                        <div class="slds-truncate" title='Fear Worst'>
+                                                            {row.Fear_Worst__c}
+                                                        </div>
+                                                    </th>
+                                                    <th scope="row" data-label="Fear Best">
+                                                        <div class="slds-truncate" title='Fear Best'>
+                                                            {row.Aggressive_Worst__c}
+                                                        </div>
+                                                    </th>
+                                                    <th scope="row" data-label="Arousal Best">
+                                                        <div class="slds-truncate" title='Arousal Best'>
+                                                            {row.Arousal_Best__c}
+                                                        </div>
+                                                    </th>
+                                                    <th scope="row" data-label="Aruosal Worst">
+                                                        <div class="slds-truncate" title='Aruosal Worst'>
+                                                            {row.Arousal_Worst__c}
+                                                        </div>
+                                                    </th>
+                                                    <th scope="row" data-label="Social Best">
+                                                        <div class="slds-truncate" title='Social Best'>
+                                                            {row.Social_Best__c}
+                                                        </div>
+                                                    </th>
+                                                </template>
+                                                <th scope="row" data-label="Overall Score">
+                                                    <div class="slds-truncate" title='Overall Score'>
+                                                        {row.Overall_Score__c}
+                                                    </div>
+                                                </th>
+                                                <th scope="row" data-label="Needs Review">
+                                                    <div class="slds-truncate" title='Needs Review'>
+                                                        {row.Needs_Review__c}
+                                                    </div>
+                                                </th>
+                                                <th scope="row" data-label="Is Skipped">
+                                                    <div class="slds-truncate" title='Is Skipped'>
+                                                        {row.IsSkipped__c}
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        </template>
+                                    </tbody>
+                                </table>
+                            </template>
+                        
+                            <template if:false={allColumns}>
+                                <template for:each={activeProtocols} for:item="row">
+                                    <div key={row.Id} class='slds-border_bottom'>
+                                        <lightning-layout multiple-rows key={row.Id}>                                        
+                                            <lightning-layout-item key={row.Id} flexibility="auto" size="12" small-device-size="12" medium-device-size="3" large-device-size="3" class="slds-p-around_xx-small">
+                                                <div class="slds-form-element">
+                                                    <div class="slds-form-element__static">
+                                                        <p class='slds-text-title_bold'>
+                                                            Name:
+                                                        </p>
+                                                        <lightning-button
+                                                            variant='base'
+                                                            label={row.Protocol_Name__c}
+                                                            onclick={handleNavigateToRecord}
+                                                            data-id={row.Id}
+                                                        >
+                                                        </lightning-button>
+                                                        <img src={row.urlIcon} alt='Status'>
+                                                    </div>
+                                                </div>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item key={row.Id} flexibility="auto" size="12" small-device-size="12" medium-device-size="3" large-device-size="3" class="slds-p-around_xx-small">
+                                                <div class="slds-form-element">
+                                                    <div class="slds-form-element__static">
+                                                        <p class='slds-text-title_bold'>
+                                                            Overall Score:
+                                                        </p>
+                                                        
+                                                        {row.Overall_Score__c}
+                                                    </div>
+                                                </div>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item key={row.Id} flexibility="auto" size="12" small-device-size="12" medium-device-size="3" large-device-size="3" class="slds-p-around_xx-small">
+                                                <div class="slds-form-element">
+                                                    <div class="slds-form-element__static">
+                                                        <p class='slds-text-title_bold'>
+                                                            Needs Review:
+                                                        </p>
+                                                        {row.Needs_Review__c}
+                                                    </div>
+                                                </div>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item key={row.Id} flexibility="auto" size="12" small-device-size="12" medium-device-size="3" large-device-size="3" class="slds-p-around_xx-small">
+                                                <div class="slds-form-element">
+                                                    <div class="slds-form-element__static">
+                                                        <p class='slds-text-title_bold'>
+                                                            Skipped:
+                                                        </p>
+                                                        {row.IsSkipped__c}
+                                                    </div>
+                                                </div>
+                                            </lightning-layout-item>
+                                        </lightning-layout>
+                                    </div>
+                                </template>
+                            </template>
+                        </template> 
+                        <template if:true={activeSession}>
+                            <template if:true={isLargeDisplay}>
+                                <lightning-layout multiple-rows>
+                                    <template for:each={activeProtocols} for:item='protocol'>
+                                        <lightning-layout-item key={protocol.Id} size="12" class="slds-p-around_xx-small">
+                                            <c-treatment-session-protocol
+                                                key={protocol.Id}
+                                                record-id={protocol.Id}
+                                                session-id={recordId}
+                                                protocol-name={protocol.ProtocolId__r.Name}
+                                                can-remove-protocol={canRemoveProtocol}
+                                                refresh={refreshProtocolLists}
+                                                >
+                                            </c-treatment-session-protocol>
+                                        </lightning-layout-item>
+                                    </template>
+                                </lightning-layout>
+                            </template>
+                            <template if:false={isLargeDisplay}>
+                                <template for:each={activeProtocols} for:item="protocol">
+                                    <c-treatment-session-protocol
+                                        key={protocol.Id}
+                                        record-id={protocol.Id}
+                                        session-id={recordId}
+                                        protocol-name={protocol.ProtocolId__r.Name}
+                                        can-remove-protocol={canRemoveProtocol}
+                                        refresh={refreshProtocolLists}
+                                        >
+                                    </c-treatment-session-protocol>
+                                </template>
+                            </template>
+                        </template>
+                    </div>
+                </template>
+            </template>
+        </template>
+    </lightning-card>
+</template>

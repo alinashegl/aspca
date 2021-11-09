@@ -1,0 +1,11 @@
+<template>
+    <template for:each={medicalIndicators.data} for:item='condition'>
+        <c-playgroup-to-do-indicator-item key={condition} condition={condition}></c-playgroup-to-do-indicator-item>
+    </template>
+    <template if:true={handlerCode}>
+        <p>
+            <lightning-icon icon-name="utility:priority" title={handlerCode} variant={handlerVariant} size="x-small"></lightning-icon>
+            <span class="slds-var-p-left_xx-small">Handler Code</span>
+        </p>
+    </template>
+</template>

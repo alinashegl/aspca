@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Puppy_Play_Tug_P2__c</fullName>
+    <externalId>false</externalId>
+    <label>Puppy Play Tug P2</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Played with toy</fullName>
+                <default>false</default>
+                <label>Played with toy</label>
+            </value>
+            <value>
+                <fullName>Explored environment</fullName>
+                <default>false</default>
+                <label>Explored environment</label>
+            </value>
+            <value>
+                <fullName>Solicited attention from the tester</fullName>
+                <default>false</default>
+                <label>Solicited attention from the tester</label>
+            </value>
+            <value>
+                <fullName>Investigated toy</fullName>
+                <default>false</default>
+                <label>Investigated toy</label>
+            </value>
+            <value>
+                <fullName>Ignored toy, unresponsive</fullName>
+                <default>false</default>
+                <label>Ignored toy, unresponsive</label>
+            </value>
+            <value>
+                <fullName>Tried to keep the toy from the tester</fullName>
+                <default>false</default>
+                <label>Tried to keep the toy from the tester</label>
+            </value>
+            <value>
+                <fullName>Moderately fearful</fullName>
+                <default>false</default>
+                <label>Moderately fearful</label>
+            </value>
+            <value>
+                <fullName>Refused to relinquish toy-stiff</fullName>
+                <default>false</default>
+                <label>Refused to relinquish toy-stiff</label>
+            </value>
+            <value>
+                <fullName>Extremely fearful</fullName>
+                <default>false</default>
+                <label>Extremely fearful</label>
+            </value>
+            <value>
+                <fullName>Guarded toy</fullName>
+                <default>false</default>
+                <label>Guarded toy</label>
+            </value>
+            <value>
+                <fullName>Became aggressive</fullName>
+                <default>false</default>
+                <label>Became aggressive</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

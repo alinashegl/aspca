@@ -1,0 +1,72 @@
+<!--
+ - Page Description
+ - @author barne
+ -->
+
+<aura:component description="TreatmentToDoList"
+                implements="flexipage:availableForAllPageTypes,force:hasRecordId,flexipage:availableForRecordHome" access="public"
+                controller="TreatmentToDoListController">
+    <aura:attribute name="data" type="Object" />
+    <aura:attribute name="columns" type="List" />
+    <aura:attribute name="ShelterLocation" type="Object" />
+    <aura:attribute name="Location" type="String" default="MRC" />
+    <aura:attribute name="currentIndex" type="Integer" />
+    <aura:handler name="init" value="{! this}" action="{! c.init}" />
+    <aura:method name="handleClick"  action="{!c.handleClick}" access="public" />
+    <div>
+        <h1 class="large">Treatment Priority To Do List</h1>
+    </div>
+    <!--
+    The below Section will be used to make the page Dynamic based on the current Location
+    <div>
+        <lightning:select label="Choose Location to View" name="shelterLocation" value="{!v.Location}"
+                          aura:id="shelterLoc">
+            <aura:iteration items="{!v.ShelterLocation}" var="location">
+                <option>{!location.label}</option>
+            </aura:iteration>
+        </lightning:select>
+        <lightning:button value="Refresh" label="Refresh" onclick="{!c.handleClick}" class="button3" name="refreshView"/>
+    </div>
+    -->
+    <table bgcolor="white" class="slds-box">
+            <thead></thead>
+            <br/>
+            <tr class="spaceUnder">
+                <td class="width"><strong>Animal</strong></td>
+                <td class="width"><strong>ASPCA Name</strong></td>
+                <td class="width"><strong>Treatment Priority</strong></td>
+                <td class="width"><strong>Bundle Assignment</strong></td>
+                <td class="width"><strong>Treatment Count</strong></td>
+                <td class="width"><strong>Shelter Color Code</strong></td>
+                <td class="width"><strong>Sex (w/ Spay/Neuter status)</strong></td>
+                <td class="width"><strong>Age</strong></td>
+                <td class="width"><strong>Grade</strong></td>
+                <td class="width"><strong>Location</strong></td>
+            </tr>
+        </table>
+        <aura:iteration var="line" items="{!v.data}" indexVar="indexVar" aura:id="dataList">
+            <table>
+                <c:ToDoListLineItem
+                    Name="{!line.animal.Name}"
+                    ASPCAName="{!line.aspcaname}"
+                    Priority="{!line.priority}"
+                    Assignment="{!line.assignment}"
+                    TreatmentCount="{!line.treatmentcount}"
+                    ColorCode="{!line.colorCode}"
+                    Data="{!line.rowSelections}"
+                    IndexVar="{!line.indexVar}"
+                    RenderProtocols="{!line.displayProtocols}"
+                    NotPresentData="{!line.notPresentSelections}"
+                    RenderNotPresentData="{!line.displayNotPresent}"
+                    AnimalId="{!line.animal.Id}"
+                    PlanId="{!line.plan.Id}"
+                    AssignedBundleId="{!line.plan.AssignedTreatmentBundleId__c}"
+                    Sex="{!line.sex}"
+                    Age="{!line.age}"
+                    Grade="{!line.grade}"
+                    Location="{!line.location}"
+                />
+            </table>
+
+        </aura:iteration>
+</aura:component>

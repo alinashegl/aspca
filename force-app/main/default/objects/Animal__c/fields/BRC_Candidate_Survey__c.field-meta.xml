@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BRC_Candidate_Survey__c</fullName>
+    <defaultValue>&quot;https://www.surveymonkey.com/r/ASPCABehavioralRehabCenter_BehaviorSurvey&quot;</defaultValue>
+    <externalId>false</externalId>
+    <label>BRC Candidate Survey</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Url</type>
+</CustomField>

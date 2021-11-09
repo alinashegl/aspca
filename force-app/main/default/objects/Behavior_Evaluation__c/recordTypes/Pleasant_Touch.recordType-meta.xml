@@ -1,0 +1,4206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pleasant_Touch</fullName>
+    <active>true</active>
+    <label>Pleasant Touch</label>
+    <picklistValues>
+        <picklist>Behavior_in_Kennel__c</picklist>
+        <values>
+            <fullName>Aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Aggressive in cage only</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Did not approach the tester-Moderately fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Excited</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Extremely fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Hyperaroused</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mildly fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not social</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Social</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Stereotypic behavior</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Threatened</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Behavior_on_Leash__c</picklist>
+        <values>
+            <fullName>Excited</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Frenetic movement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mildly fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Moderately fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Panicked</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Relaxed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Showed aggressive behavior</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Walked or balked-extremely fearful</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Evaluation_Subtype__c</picklist>
+        <values>
+            <fullName>Adult Animal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dog Fighting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dog%2FDog Only</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Puppy</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Fake_Dog__c</picklist>
+        <values>
+            <fullName>Charges-aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Defensive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Extremely fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Greeted-friendly</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Greeted-sexual behavior</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Greeted-submissive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Investigated-not fooled</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Nervous%2Ffearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Neutral</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Neutral%2C nervous%2Ffearful or friendly%E2%80%94then aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Playful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Predatory-aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Predatory-not aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pushy-aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pushy-not aggressive</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Opposite_Sex_P1__c</picklist>
+        <values>
+            <fullName>Became aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Extremely fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Friendly</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Nervous%2Ffearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Neutral</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No interest</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Predatory</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Submissive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tense%2Fassertive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Very intense%2Faroused</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Opposite_Sex_P2__c</picklist>
+        <values>
+            <fullName>Became aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Friendly</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Nervous%2Ffearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Neutral</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Predatory</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Submissive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tense%2Fassertive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Very intense%2Faroused</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Opposite_Sex_P3__c</picklist>
+        <values>
+            <fullName>Charged-aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Defensive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Distracted by muzzle</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Elicited poor reaction from helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Greeted-friendly</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Greeted-neutral</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Greeted-sexual behavior</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Greeted-submissive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Nervous%2Ffearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Neutral%2C nervous%2Ffearful or friendly%E2%80%94then aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No interest</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Predatory-aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pushy-aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pushy-did not relax</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pushy-relaxes</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Very intense%2Faroused</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Overall_Evaluation_Grade__c</picklist>
+        <values>
+            <fullName>A - No Concerns</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>B - Mild Concern%28s%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>C - Moderate Concern%28s%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>D - Dog Aggression</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>D - Severe Concern%28s%29</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Play_Test_P1__c</picklist>
+        <values>
+            <fullName>Becomes aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Curious but not playful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Extremely fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Highly aroused</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Moderately fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Plays with toy and%2For tester</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Seeks interaction with tester</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unresponsive</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Play_Test_P2__c</picklist>
+        <values>
+            <fullName>Becomes aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Extremely fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Guards toy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ignores toy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Interacts with tester</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Investigates toy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Moderately fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Plays with toy alone</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Refuses to relinquish toy - stiff</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tries to keep toy from tester</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Play_Test_Tug_P1__c</picklist>
+        <values>
+            <fullName>Became aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Curious but not playful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Extremely fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Highly aroused</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Moderately fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Played with toy and%2For tester</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sought interaction with tester</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unresponsive</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Play_Test_Tug_P2__c</picklist>
+        <values>
+            <fullName>Became aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Extremely fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Guarded toy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ignored toy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Interacted with tester</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Investigated toy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Moderately fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Played with toy alone</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Refused to relinquish toy-stiff</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tried to keep toy from tester</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Pleasant_Touch_Test__c</picklist>
+        <values>
+            <fullName>Accepts Contact - relaxed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Becomes aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Enjoys Contact - seeks it out</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Extremely fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Moderately fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Orients to tester%27s hand - mouthy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tense</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tolerates Handling - not relaxed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unruly</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Pleasant_Touch__c</picklist>
+        <values>
+            <fullName>Accepted contact-relaxed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Enjoyed contact-sought it out</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Extremely fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Moderately fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Oriented to tester%27s hand-mouthy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tense</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tolerated handling%E2%80%94not relaxed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unruly</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Potential_Behavior_Issues__c</picklist>
+        <values>
+            <fullName>Aggression to Dogs</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Aggression to People</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fear</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>High Arousal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_BIK_Housing__c</picklist>
+        <values>
+            <fullName>Co-housed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Singly-housed</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Behavior_in_Kennel__c</picklist>
+        <values>
+            <fullName>Aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Aggressive in cage only</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Did not approach the tester-moderately fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Excited</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Extremely fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Hyperaroused</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mildly fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not social</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Social</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Stereotypic behavior</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Threatened</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Behavior_on_Leash__c</picklist>
+        <values>
+            <fullName>Excited</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mildly fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Moderately fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Panicked</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Relaxed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Showed aggressive behavior</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Too fearful%E2%80%94subtest was not done</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Walked or balked-extremely fearful</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Child_Doll_P1__c</picklist>
+        <values>
+            <fullName>Avoids doll</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Becomes aggressive-offensive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Extremely fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Greeted or looked at doll-friendly</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mildly fearful but investigated</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Moderately fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not fooled by doll</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Playful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Playful-high arousal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Threatens-defensive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Too fearful%E2%80%94subtest not done</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Child_Doll_P2__c</picklist>
+        <values>
+            <fullName>Became aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Did not try to get away-mildly fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Extremely fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ignored doll</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Moderately fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not fooled by doll</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Relaxed-interacted with the doll</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Threatened</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Too fearful%E2%80%94subtest not done</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tried to get away-mildly fearful</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Dog_Interaction_P1__c</picklist>
+        <values>
+            <fullName>Aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Defensive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Distracted by muzzle</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Extremely fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Greeted%2C mildly fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Greeted-explored separately from other puppy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Greeted-hung out or explored with other puppy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Greeted-plays</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ignored other puppy %26 tester</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Moderately fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mounted other puppy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Played then escalated to %22scrappy%22 behavior</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Preferred to socialize with tester</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pushy-did not relax</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pushy-relaxes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Dog_Interaction_P2__c</picklist>
+        <values>
+            <fullName>Aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Defensive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Distracted by muzzle</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Extremely fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Greeted%2C mildly fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Greeted-explored separately from other puppy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Greeted-hung out or explored with other puppy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Greeted-plays</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ignored other puppy %26 tester</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Moderately fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mounted other puppy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Played then escalated to %22scrappy%22 behavior</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Preferred to socialize with tester</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pushy-did not relax</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pushy-relaxes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Dog_Interaction_P3__c</picklist>
+        <values>
+            <fullName>Aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Defensive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Distracted by muzzle</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Extremely fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Greeted%2C mildly fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Greeted%2C submissive interaction with adult</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Greeted%2C submissive-explored together with an adult dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Greeted%2C submissive-explores separately from adult dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ignored adult dog %26 tester</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Moderately fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mounted an adult dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Preferred to socialize with tester</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pushy-does not relax</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pushy-relaxed</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Play_Tag__c</picklist>
+        <values>
+            <fullName>Became aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Did not play but follows</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Extremely fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Highly aroused</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Moderately fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Played with tester</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Threatened</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Too fearful-subtest not done</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unresponsive-distracted by the environment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Watched tester-does not follow</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Play_Tug_P1__c</picklist>
+        <values>
+            <fullName>Became aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Explored environment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Extremely fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Highly aroused</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ignored toy%2C unresponsive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Investigated toy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Moderately fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Played with toy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Solicited attention from tester</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Play_Tug_P2__c</picklist>
+        <values>
+            <fullName>Became aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Explored environment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Extremely fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Guarded toy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ignored toy%2C unresponsive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Investigated toy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Moderately fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Played with toy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Refused to relinquish toy-stiff</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Solicited attention from the tester</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tried to keep the toy from the tester</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Resource_Guarding_P1_Push_Face__c</picklist>
+        <values>
+            <fullName>Ate but seemed nervous</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid%E2%80%94bit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid-no escalation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid-threatened</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Left bowl to interact with tester</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Motivated to eat-not stiff%2Frigid</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not interested</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Remained relaxed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Stopped eating-fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Too fearful</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Resource_Guarding_P1_Touch_Body__c</picklist>
+        <values>
+            <fullName>Ate but seemed nervous</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid%E2%80%94bit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid-no escalation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid-threatened</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Left bowl to interact with tester</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Motivated to eat-not stiff%2Frigid</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not interested</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Remained relaxed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Stopped eating-fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Too fearful</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Resource_Guarding_P1_Touch_Face__c</picklist>
+        <values>
+            <fullName>Ate but seemed nervous</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid%E2%80%94bit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid-no escalation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid-threatened</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Left bowl to interact with tester</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Motivated to eat-not stiff%2Frigid</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not interested</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Remained relaxed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Stopped eating-fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Too fearful</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Resource_Guarding_P1_Touch_Neck__c</picklist>
+        <values>
+            <fullName>Ate but seemed nervous</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid%E2%80%94bit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid-no escalation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid-threatened</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Left bowl to interact with tester</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Motivated to eat-not stiff%2Frigid</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not interested</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Remained relaxed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Stopped eating-fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Too fearful</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Resource_Guarding_P2_Push_Face__c</picklist>
+        <values>
+            <fullName>Became stiff rigid%E2%80%94no escalation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid-bit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid-threatened</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Chewed but seemed nervous</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Left chew to interact with tester</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Motivated to chew-not stiff%2Frigid</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not interested</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Remained relaxed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Stopped chewing-fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Too fearful</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Resource_Guarding_P2_Touch_Body__c</picklist>
+        <values>
+            <fullName>Became stiff rigid%E2%80%94no escalation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid-bit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid-threatened</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Chewed but seemed nervous</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Left chew to interact with tester</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Motivated to chew-not stiff%2Frigid</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not interested</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Remained relaxed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Stopped chewing-fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Too fearful</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Resource_Guarding_P2_Touch_Face__c</picklist>
+        <values>
+            <fullName>Became stiff rigid%E2%80%94no escalation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid-bit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid-threatened</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Chewed but seemed nervous</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Left chew to interact with tester</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Motivated to chew-not stiff%2Frigid</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not interested</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Remained relaxed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Stopped chewing-fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Too fearful</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Resource_Guarding_P2_Touch_Neck__c</picklist>
+        <values>
+            <fullName>Became stiff rigid%E2%80%94no escalation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid-bit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid-threatened</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Chewed but seemed nervous</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Left chew to interact with tester</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Motivated to chew-not stiff%2Frigid</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not interested</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Remained relaxed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Stopped chewing-fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Too fearful</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Restraint__c</picklist>
+        <values>
+            <fullName>Became aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Remained mainly motionless - relaxed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Remained mainly motionless - tense</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Struggled and had a temper tantrum</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Struggled and mouthy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Struggled and panicked</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Struggled periodically - interspersed with relaxation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Struggled periodically - interspersed with rigidity</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Struggled persistently</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Skipped_BIK__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Skipped_BOL__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Skipped_CD_P1__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Skipped_CD_P2__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Skipped_DI_P1__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Skipped_DI_P2__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Skipped_DI_P3__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Skipped_Play_Tag__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Skipped_Play_Tug_P1__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Skipped_Play_Tug_P2__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Skipped_RG_P1_PF__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Skipped_RG_P1_TB__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Skipped_RG_P1_TF__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Skipped_RG_P1_TN__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Skipped_RG_P1__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Skipped_RG_P2_PF__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Skipped_RG_P2_TB__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Skipped_RG_P2_TF__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Skipped_RG_P2_TN__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Skipped_RG_P2__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Skipped_Restraint__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Skipped_SB_P1__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Skipped_SB_P2__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Social_Behavior_P1__c</picklist>
+        <values>
+            <fullName>Approached tester readily submissive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Approached tester readily-friendly</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Approached tester%E2%80%94but distracted by the environment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Approached tester-mildly fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Did not approach tester-extremely fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Did not approach the tester-distracted by environment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Did not approach the tester-mildly fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Did not approach the tester-moderately fearful</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Puppy_Social_Behavior_P2__c</picklist>
+        <values>
+            <fullName>Became aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Did not follow a tester-distracted environment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Did not follow a tester-mildly fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Did not follow tester-extremely fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Did not follow the tester%E2%80%94moderately fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Followed tester readily%E2%80%94submissive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Followed tester readily-friendly</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Followed tester%E2%80%94but distracted by the environment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Followed tester-mildly fearful</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Resource_Guarding_P1_Push_Face__c</picklist>
+        <values>
+            <fullName>Ate but seemed nervous</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid%E2%80%94bit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid-no escalation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid-threatened</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Left bowl to interact with tester</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Motivated to eat-not stiff%2Frigid</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not interested</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Remained relaxed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Stopped eating-fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Too fearful</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Resource_Guarding_P1_Touch_Body__c</picklist>
+        <values>
+            <fullName>Ate but seemed nervous</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid%E2%80%94bit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid-no escalation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid-threatened</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Left bowl to interact with tester</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Motivated to eat-not stiff%2Frigid</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not interested</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Remained relaxed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Stopped eating-fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Too fearful</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Resource_Guarding_P1_Touch_Face__c</picklist>
+        <values>
+            <fullName>Ate but seemed nervous</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid%E2%80%94bit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid-no escalation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid-threatened</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Left bowl to interact with tester</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Motivated to eat-not stiff%2Frigid</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not interested</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Remained relaxed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Stopped eating-fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Too fearful</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Resource_Guarding_P1_Touch_Neck__c</picklist>
+        <values>
+            <fullName>Ate but seemed nervous</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid%E2%80%94bit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid-no escalation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid-threatened</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Left bowl to interact with tester</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Motivated to eat-not stiff%2Frigid</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not interested</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Remained relaxed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Stopped eating-fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Too fearful</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Resource_Guarding_P2_Push_Face__c</picklist>
+        <values>
+            <fullName>Became stiff rigid%E2%80%94no escalation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid-bit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid-threatened</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Chewed but seemed nervous</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Left chew to interact with tester</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Motivated to chew-not stiff%2Frigid</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not interested</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Remained relaxed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Stopped chewing-fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Too fearful</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Resource_Guarding_P2_Touch_Body__c</picklist>
+        <values>
+            <fullName>Became stiff rigid%E2%80%94no escalation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid-bit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid-threatened</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Chewed but seemed nervous</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Left chew to interact with tester</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Motivated to chew-not stiff%2Frigid</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not interested</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Remained relaxed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Stopped chewing-fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Too fearful</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Resource_Guarding_P2_Touch_Face__c</picklist>
+        <values>
+            <fullName>Became stiff rigid%E2%80%94no escalation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid-bit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid-threatened</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Chewed but seemed nervous</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Left chew to interact with tester</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Motivated to chew-not stiff%2Frigid</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not interested</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Remained relaxed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Stopped chewing-fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Too fearful</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Resource_Guarding_P2_Touch_Neck__c</picklist>
+        <values>
+            <fullName>Became stiff rigid%E2%80%94no escalation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid-bit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became stiff%2Frigid-threatened</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Chewed but seemed nervous</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Left chew to interact with tester</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Motivated to chew-not stiff%2Frigid</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not interested</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Remained relaxed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Stopped chewing-fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Too fearful</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Same_Sex_P1__c</picklist>
+        <values>
+            <fullName>Became aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Extremely fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Friendly</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Nervous%2Ffearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Neutral</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No interest</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Predatory</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Submissive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tense%2Fassertive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Very intense%2Faroused</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Same_Sex_P2__c</picklist>
+        <values>
+            <fullName>Became aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Extremely fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Friendly</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Nervous%2Ffearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Neutral</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No interest</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Predatory</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Submissive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tense%2Fassertive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Very intense%2Faroused</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Same_Sex_P3__c</picklist>
+        <values>
+            <fullName>Charges-aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Defensive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Distracted by muzzle</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Elicited poor reaction from helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Greeted-friendly</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Greeted-neutral</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Greeted-sexual behavior</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Greeted-submissive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Nervous%2Ffearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Neutral%2C nervous%2Ffearful or friendly%E2%80%94then aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No interest</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Predatory-aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pushy-aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pushy-does not relax</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pushy-relaxed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Very intense%2Faroused</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Scolding_Person_P1__c</picklist>
+        <values>
+            <fullName>Approached-friendly</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Avoided tester-nervous or mildly fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Did not approach or avoid-nervous or mildly fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Did not approach or avoid-not afraid</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Extremely fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Moderately fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Redirects</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Threatened</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Too fearful-subtest was not done</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unresponsive</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Scolding_Person_P2__c</picklist>
+        <values>
+            <fullName>Approached-friendly</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Approached-mildly fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Did not approach-friendly or neutral</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Extremely fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Moderately fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Too fearful-subtest not done</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unresponsive</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Skipped_BIK__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Skipped_BOL__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Skipped_FD__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Skipped_OSD_P1__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Skipped_OSD_P2__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Skipped_OSD_P3__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Skipped_PDI_P1__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Skipped_PDI_P2__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Skipped_PDI_P3__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Skipped_PPT__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Skipped_PR__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Skipped_PSB_P2__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Skipped_Play_Tug_P1__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Skipped_Play_Tug_P2__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Skipped_Pleasant_Touch__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Skipped_Pleasant__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Skipped_RG_P1_PF__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Skipped_RG_P1_TB__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Skipped_RG_P1_TF__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Skipped_RG_P1_TN__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Skipped_RG_P1__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Skipped_RG_P2_PF__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Skipped_RG_P2_TB__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Skipped_RG_P2_TF__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Skipped_RG_P2_TN__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Skipped_RG_P2__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Skipped_SB_P1__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Skipped_SB_P2__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Skipped_SP_P1__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Skipped_SP_P2__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Skipped_SSD_P1__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Skipped_SSD_P2__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Skipped_SSD_P3__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Skipped_TD_P1__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Skipped_TD_P2__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Skipped_Tag__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Skipped_UT_1st__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Skipped_UT_2nd__c</picklist>
+        <values>
+            <fullName>Skipped due to not having an appropriate helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped due to risk to the helper dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped for medical reason</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped not necessary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Skipped to safeguard welfare of the animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Social_Behavior_P1__c</picklist>
+        <values>
+            <fullName>Approached tester readily%E2%80%94submissive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Approached tester readily-friendly</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Approached tester%E2%80%94but distracted by environment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Approached tester-mildly fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Did not approach tester-distracted by environment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Did not approach tester-extremely fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Did not approach tester-moderately fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Frenetic movement</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Social_Behavior_P2_2__c</picklist>
+        <values>
+            <fullName>Approached tester readily submissive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Approached tester readily-friendly</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Approached tester-but distracted by environment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Approached tester-mildly fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Approached tester-stiff and rigid</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Did not approach tester-distracted by environment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Did not approach tester-extremely fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Frenetic movement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Looked at the people but did not approach-moderately fearful</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Social_Behavior_P2__c</picklist>
+        <values>
+            <fullName>Appoaches tester - but distracted by environment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Approaches tester - mildly fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Approaches tester - stiff and rigid</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Approaches tester readily - friendly</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Approaches tester readily - submissive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Becomes aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Does not approach tester - distracted by environment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Does not approach tester - extremely fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Frenetic Movement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Looks at the people but does not approach - moderately fearful</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Social_Behavior_Test_P1__c</picklist>
+        <values>
+            <fullName>Approaches Tester - but distracted by Environment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Approaches Tester readily - Friendly</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Approaches tester - mildly fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Approaches tester readily - Submissive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Becomes aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Does not approach Tester - Moderately fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Does not approach tester - extremely fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Does not approach tester -Distracted by Environment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Frenetic Movement</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Tag_Test__c</picklist>
+        <values>
+            <fullName>Did not play but followed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Extremely fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Highly aroused</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Moderately fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Played with tester</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Threatened</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Too fearful-subtest not done</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unresponsive-distracted by environment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Watched tester-did not follow</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Toddler_Doll_P1__c</picklist>
+        <values>
+            <fullName>Avoided doll</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became aggressive-offensive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Extremely fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Greeted or looked at doll-friendly</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>High arousal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Moderately afraid of doll</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mounted or humped doll-sexual behavior</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Nervous but investigated</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not fooled by doll</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Playful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Threatened-defensive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Too fearful-subtest not done</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Toddler_Doll_P2__c</picklist>
+        <values>
+            <fullName>Became aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Extremely fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ignored doll</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Moderately fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mounted or humped doll-sexual behavior</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not fooled by doll</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Relaxed-interacted with doll</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Threatened</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Too fearful-subtest not done</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tried to get away</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Uncomfortable-didn%27t try to get away</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Unpleasant_Touch_1st__c</picklist>
+        <values>
+            <fullName>Accepted contact-relaxed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Did not pull away</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Jerked away</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Moderately fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not possible to deliver the pinch</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Oriented to tester%27s hand-mouthy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pulled away</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rear Flank pinched instead</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Stiff</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tense</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tolerated handling-not relaxed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unmanageable</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unmanageable-frenetic or escape behavior</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Unpleasant_Touch_2nd__c</picklist>
+        <values>
+            <fullName>Accepted contact-relaxed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Became aggressive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Did not pull away</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Jerked away</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Moderately fearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not possible to deliver the pinch</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Oriented to tester%27s hand-mouthy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pulled away</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rear Flank pinched instead</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Stiff</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tense</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tolerated handling-not relaxed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unmanageable</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unmanageable-frenetic or escape behavior</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>
