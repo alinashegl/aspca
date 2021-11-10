@@ -1,22 +1,29 @@
 public with sharing class CustomLookupLWCController {
 
+    //query for the records
     @AuraEnabled
     public static searchResponse search(String objectName, List<String> fields, String searchTerm, Integer offset, String whereClause, String fieldToQuery){
         searchResponse response = new searchResponse();
         Integer rowsToSkip = offset * 25;
-        String searchKeyword = searchTerm + '*';
-        String returningQuery = objectName+' ( Id, '+String.join(fields,',')+')';
+        // String searchKeyword = searchTerm + '*';
+        // String returningQuery = objectName+' ( Id, '+String.join(fields,',')+')';
 
         String whereString = ' WHERE ';
         if(whereClause != null){
             whereString += whereClause + ' AND ';
         }
-
         whereString = fieldToQuery == null ? whereString : whereString + fieldToQuery;
+
+        //put together they query string
         String query = 'SELECT Id, '+String.join(fields,',')+' FROM ' + objectName + whereString + ' LIKE \'%' + searchTerm + '%\' LIMIT 25 OFFSET ' + rowsToSkip;
         System.debug('query: ' + query);
+
+        //query for the full list to get the count so we can display the total number of pages
         Integer  count = database.countQuery('SELECT count() FROM ' + objectName + whereString + ' LIKE \'%' + searchTerm + '%\'');
+
+        //query the records
         response.recordList = Database.query(query);
+        //divide the total number of records by 25 to convert to page numbers
         response.pageCount = Math.ceil(Decimal.valueOf(count).divide(25,1));
 
         return response;
@@ -29,18 +36,6 @@ public with sharing class CustomLookupLWCController {
         return sob;
     }
 
-    // @AuraEnabled
-    // public static SObject[] queryAll(String objectAPI, Integer offset, String[] fields){
-    //     try {
-    //         Integer rowsToSkip = offset * 25;
-    //         String query = 'SELECT Id, '+String.join(fields,',')+' FROM ' + objectAPI + ' LIMIT 25 OFFSET ' + rowsToSkip;
-
-    //         return Database.query(query);
-    //     } catch (Exception e) {
-    //         throw new AuraHandledException(e.getMessage());
-    //     }
-    // }
-
     @AuraEnabled (cacheable=true)
     public static SObject[] getRecentlyViewedRecords(String objectAPI, String whereClause){
         try {
@@ -52,6 +47,7 @@ public with sharing class CustomLookupLWCController {
         }
     }
 
+    //gets the list of recently viewed records for that objecta nd then queries the actual records based on the ids
     private static SObject[] getRecordList(String objectAPI, String whereClause){
         Set<Id> recordIds = getRecentlyViewedIds(objectAPI);
         SObject[] recentlyViewed = queryRecords(objectAPI, recordIds, whereClause);

@@ -11,26 +11,28 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
     showSpinner = true;
     animals = [];
     playgroupContacts = [];
-    animalsForCopy = [];
-    sessionIdForCopy;
-    toDoListAction;
-    session;
-    sessionPlaygroupLeader;
-    toggleDropdown = false;
 
+    toggleDropdown = false;
+    showToDoList = false;
+    refresh = false;
+
+    //variables to pass to ToDoList
+    toDoListSessionId;
+    toDoListAction;
+
+    //customLookup variables
     customLookupFields = ["Name","Email","Title"];
     customLookupDisplayFields = 'Name, Email, Title';
     customLookupCreateNewFields = ['FirstName', 'LastName', 'Title', 'Department', 'Email'];
     customLookupExpandedField = false;
-    formFactor = FORM_FACTOR;
 
+    // formFactor = FORM_FACTOR;
+    session;
+    sessionPlaygroupLeader;
     sessionPendingUpdate = false;
     sessionUpdateInProgress = false;
     sessionInfoError;
     error;
-
-    showToDoList = false;
-    refresh = false;
 
     @wire(getPlaygroupSessionInfo, {sessionId: '$recordId'})
     response(result){
@@ -50,22 +52,6 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
             this.showSpinner = false;
         }
     }
-
-    // connectedCallback(){
-    //     this.animalsForCopy = [];
-    //     this.sessionIdForCopy = undefined;
-    // }
-
-    // handleCopyPlaygroup(){
-    //     this.showSpinner = true;
-    //     startPlaygroupSession({sessionId: this.recordId})
-    //     .then((response) => {
-    //         this.recordId = response;
-    //     })
-    //     .finally(() => {
-    //         this.showSpinner = false;
-    //     })
-    // }
 
     customLookupEvent(event){
         this.sessionPlaygroupLeader = event.detail.data.recordId;
@@ -103,9 +89,11 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
     handleEditSession(){
         this.toDoListAction = 'edit';
         this.animals.forEach(animal => {
-            this.animalsForCopy.push({label: animal.Animal_Name__c, name: animal.Animal__c});
+            this.animalIds.push({label: animal.Animal_Name__c, name: animal.Animal__c});
+            // switch to this with the updated todo list
+            // this.animalIds.push(animal.Animal__c);
         });
-        this.sessionIdForCopy = this.session.Id;
+        this.toDoListSessionId = this.session.Id;
         
         this.showToDoList = true;
         this.handleToggleDropdown();
@@ -113,8 +101,8 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
 
     handleCreateNewSession(){
         this.toDoListAction = 'new';
-        this.animalsForCopy = [];
-        this.sessionIdForCopy = undefined;
+        this.animalIds = [];
+        this.toDoListSessionId = undefined;
         this.showToDoList = true;
         this.handleToggleDropdown();
     }
@@ -122,9 +110,11 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
     handleCopySession(){
         this.toDoListAction = 'copy';
         this.animals.forEach(animal => {
-            this.animalsForCopy.push({label: animal.Animal_Name__c, name: animal.Animal__c});
+            this.animalIds.push({label: animal.Animal_Name__c, name: animal.Animal__c});
+            // switch to this with the updated todo list
+            // this.animalIds.push(animal.Animal__c);
         });
-        this.sessionIdForCopy = this.session.Id;
+        this.toDoListSessionId = this.session.Id;
         
         this.showToDoList = true;
         this.handleToggleDropdown();
@@ -193,7 +183,7 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
     }
 
     get smallForm(){
-        return this.formFactor == 'Small';
+        return FORM_FACTOR == 'Small';
     }
 
     get currentDateTime(){

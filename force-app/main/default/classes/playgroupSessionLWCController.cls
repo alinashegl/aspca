@@ -38,28 +38,6 @@ public with sharing class playgroupSessionLWCController {
         }
     }
 
-    // @testVisible
-    // private static Animal_Playgroup__c[] createNewPlaygroupAnimals(playgroupSessionInfo info, Id[] animalIdsToAdd){
-    //     Animal_Playgroup__c[] newAnimals = new Animal_Playgroup__c[0];
-    //     for(Id animalId : animalIdsToAdd){
-    //         Animal_Playgroup__c newAnimal = new Animal_Playgroup__c(
-    //             Animal__c = animalId,
-    //             Playgroup_Session__c = info.playgroupSession.Id
-    //         );
-    //         newAnimals.add(newAnimal);
-    //     }
-    //     insert newAnimals;
-    //     createNewPlaygroupContacts(newAnimals, info.playgroupSession.Playgroup_Leader__c);
-
-    //     return newAnimals;
-    // }
-
-    // @AuraEnabled
-    // public static Animal_Playgroup__c[] getAnimalList(Id sessionId){
-
-    //     return [SELECT Id, Animal_Name__c, Animal__c FROM Animal_Playgroup__c WHERE Playgroup_Session__c =: sessionId];
-    // }
-
     @AuraEnabled
     public static String addContact(Id sessionId, Id contactId, Id[] animalIdsWithNovelContact){
         try{
@@ -132,29 +110,6 @@ public with sharing class playgroupSessionLWCController {
             throw new AuraHandledException(e.getMessage());
         }
     }
-
-    // @AuraEnabled
-    // public static string endPlaygroup(){
-    //     try {
-    //         return null;
-    //     } catch (Exception e) {
-    //         throw new AuraHandledException(e.getMessage());
-    //     }
-    // }
-
-    // public static void createNewPlaygroupContacts(Animal_Playgroup__c[] newAnimals, Id sessionLeader){
-    //     Playgroup_Contact__c[] pgContacts = new Playgroup_Contact__c[0];
-    //     for(Animal_Playgroup__c animal : newAnimals){
-    //         pgContacts.add(
-    //             new Playgroup_Contact__c(
-    //                 Contact__c = sessionLeader,
-    //                 Novel_Not_Novel__c = 'Familiar',
-    //                 Playgroup__c = animal.Id
-    //             )
-    //         );
-    //     }
-    //     insert pgContacts;
-    // }
 
     public class playgroupSessionInfo{
         @AuraEnabled public Playgroup_Session__c playgroupSession {get; set;}

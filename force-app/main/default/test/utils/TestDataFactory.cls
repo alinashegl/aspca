@@ -715,6 +715,7 @@ public without sharing class TestDataFactory {
         for(Session_Protocol__c protocol : protocolList){
           Session_Protocol_Contact__c sCon = new Session_Protocol_Contact__c(
             Session_Protocol__c = protocol.Id,
+            Novel_Not_Novel__c = 'Familiar',
             Contact__c = con.Id
           );
           sContacts.add(sCon);

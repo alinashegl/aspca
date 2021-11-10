@@ -17,8 +17,11 @@ private class test_TreatmentSessionLWCController {
         Treatment_Plan__c plan = new Treatment_Plan__c();
         insert plan;
 
+        Contact con = TestDataFactory.createContact();
+
         Treatment_Session__c session = new Treatment_Session__c(
-            Treatment_Plan__c = plan.Id
+            Treatment_Plan__c = plan.Id,
+            Session_Contact__c = con.Id
         );
         insert session;
 

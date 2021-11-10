@@ -9,15 +9,14 @@
         <template if:true={recordId}>
             <template if:true={showToDoList}>
                 <c-playgroup-to-do-list
-                    session-id={sessionIdForCopy}
-                    animals-to-add={animalsForCopy}
+                    session-id={toDoListSessionId}
+                    animals-to-add={animalIds}
                     action={toDoListAction}
                     oncopy={handleCopyEvent}
                     onedit={handleEditEvent}
                 >
                 </c-playgroup-to-do-list>
             </template>
-
             <template if:false={showToDoList}>
                 <div class='slds-box'>
                     <lightning-record-edit-form
