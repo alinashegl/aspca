@@ -80,7 +80,7 @@ public with sharing class playgroupSessionLWCController {
             System.debug('session: ' + session);
             update session;
 
-            return 'Success';
+            return 'success';
 
         } catch(exception error) {
             throw new AuraHandledException(error.getMessage());
@@ -102,7 +102,7 @@ public with sharing class playgroupSessionLWCController {
                 session.Contact_Ids__c = string.join(contactList, ',');
                 update session;
             }
-            return 'Success';
+            return 'success';
         } catch (exception error){
             throw new AuraHandledException(error.getMessage());
         }
@@ -133,14 +133,14 @@ public with sharing class playgroupSessionLWCController {
         }
     }
 
-    @AuraEnabled
-    public static string endPlaygroup(){
-        try {
-            return null;
-        } catch (Exception e) {
-            throw new AuraHandledException(e.getMessage());
-        }
-    }
+    // @AuraEnabled
+    // public static string endPlaygroup(){
+    //     try {
+    //         return null;
+    //     } catch (Exception e) {
+    //         throw new AuraHandledException(e.getMessage());
+    //     }
+    // }
 
     // public static void createNewPlaygroupContacts(Animal_Playgroup__c[] newAnimals, Id sessionLeader){
     //     Playgroup_Contact__c[] pgContacts = new Playgroup_Contact__c[0];

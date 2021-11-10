@@ -128,7 +128,7 @@ export default class CustomLookup extends LightningElement {
 
     handleQueryRecentlyViewed(){
         document.addEventListener('click', this._handler = this.close.bind(this));
-        getRecentlyViewedRecords({type: this.objName, whereClause: this.whereClause})
+        getRecentlyViewedRecords({objectAPI: this.objName, whereClause: this.whereClause})
         .then((result) =>{
             this.handleResponse(result);
         })

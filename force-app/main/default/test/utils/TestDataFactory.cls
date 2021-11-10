@@ -801,7 +801,7 @@ public without sharing class TestDataFactory {
             Animal__c = a.Id,
             Playgroup_Session__c = session.Id,
             Common_Playgroup_Note_Sections__c = 'Greeting',
-            Common_Playgroup_Notes__c = 'Defensive',
+            Common_Playgroup_Notes__c = 'Dragline',
             Play_Rating__c = 'Green',
             Playgroup_Individual_Notes__c = 'Individual note'
         );
