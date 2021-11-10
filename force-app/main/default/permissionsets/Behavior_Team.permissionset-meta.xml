@@ -61,12 +61,12 @@
         <enabled>true</enabled>
     </classAccesses>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Additional_Dog_Present__c.Additional_Dog__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Additional_Dog_Present__c.Session_Protocol__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -2328,6 +2328,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Protocol__c.Protocol_Box_Link__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Protocol__c.Protocol_Categories__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
