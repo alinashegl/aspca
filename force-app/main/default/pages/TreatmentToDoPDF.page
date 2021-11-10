@@ -30,10 +30,7 @@
                     <td class="line"><strong>Grade</strong></td>
                     <td class="line"><strong>Tx Count</strong></td>
                     <td class="line"><strong>Shelter Color Code</strong></td>
-                </thead> 
-
-<!--                <apex:variable var="protocol" value="{!protocolStr}"/> -->
-
+                </thead>
                 <apex:repeat var="anim" value="{!treatmentPlans}">
                         <tr class="spaceUnder" style="vertical-align:top;">
                             <td width="10%">{!anim.Animal__r.Name}</td>
@@ -52,13 +49,6 @@
                             <td width="10%" style="vertical-align:top;"><strong>Tx Plan Notes:</strong></td>
                             <td width="90%" colspan="10">{!anim.Plan_Notes__c}</td>
                         </tr> 
-<!--                <apex:repeat var="proto" value="{!anim.Plan_Protocols__r}">
-            <table>
-                        <tr class="spaceUnder">
-                            <td width="10%" style="vertical-align:top;"><strong>Assigned Protocols:</strong></td>
-                            <td width="90%" colspan="10">{!proto.Protocol_Name__c}</td>
-                            <td width="90%" colspan="10">{!protocolStr}</td>
-                        </tr> -->
                         <tr class="line">
                             <td class="line"></td>
                             <td class="line"></td>
@@ -72,8 +62,6 @@
                             <td class="line"></td>
                             <td class="line"></td>
                         </tr> 
-<!--            </table>
-                </apex:repeat>-->
                 </apex:repeat>
             </table>
         </body>
