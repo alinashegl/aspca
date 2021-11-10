@@ -64,7 +64,7 @@ public with sharing class CustomLookupLWCController {
         Id[] recIds = new Id[0];
         recIds.addAll(recordIds);
 
-        String whereString = ' WHERE ';
+        String whereString = '';
         if(whereClause != null){
             whereString += whereClause + ' AND ';
         }

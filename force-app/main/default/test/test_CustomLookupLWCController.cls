@@ -120,5 +120,45 @@ private class test_CustomLookupLWCController {
         System.assert(objsReturned.isEmpty(), 'should have returned an empty list, but instead was: ' + objsReturned);
     }
 
+    @isTest
+    static void getRecentlyViewedRecords_hasRecords(){
+        TestDataFactory.insertAccounts();
+        Account[] accsToUpdate = [SELECT Id, Industry FROM Account LIMIT 5];
+        for(Account acc : accsToUpdate){
+            acc.Industry = 'Banking';
+        }
+        update accsToUpdate;
 
+        String whereClause = 'Industry = \'Banking\'';
+
+        test.startTest();
+            SObject[] objsReturned = CustomLookupLWCController.getRecentlyViewedRecords('Account', whereClause);
+        test.stopTest();
+
+        System.assert(objsReturned != null);
+        System.assertEquals(5, objsReturned.size());
+    }
+
+    @isTest
+    static void getRecentlyViewedRecords_badWhereClause(){
+        TestDataFactory.insertAccounts();
+        Account[] accsToUpdate = [SELECT Id, Industry FROM Account LIMIT 5];
+        for(Account acc : accsToUpdate){
+            acc.Industry = 'Banking';
+        }
+        update accsToUpdate;
+
+        String whereClause = 'WHERE Industry = \'Banking\'';
+
+        String error;
+        test.startTest();
+        try{
+            SObject[] objsReturned = CustomLookupLWCController.getRecentlyViewedRecords('Account', whereClause);
+        } catch (exception e){
+            error = e.getMessage();
+        }
+        test.stopTest();
+
+        System.assert(error != null);
+    }
 }
