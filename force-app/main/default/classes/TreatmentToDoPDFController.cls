@@ -2,12 +2,15 @@ public class TreatmentToDoPDFController {
     
     public List<Animal__c> objAnimal{get;set;}
     public List<Treatment_Plan__c> treatmentPlans{get;set;}
+    public List<TreatmentPlanWithProtocols> treatmentPlansWithProtocols{get;set;}
     public List<Treatment_Bundle__c> bundle{get;set;} 
     public List<Plan_Protocol__c> protocols{get;set;} 
     public List<Protocol__c> proto{get;set;} 
     
     public TreatmentToDoPDFController (){
-        treatmentPlans = [SELECT Id
+
+        TreatmentPlanWithProtocols[] treatmentPlanList = new TreatmentPlanWithProtocols[0];
+        for(Treatment_Plan__c plan : [SELECT Id
                           , Name
                           , Treatment_Priority__c
                           , Animal__c
@@ -30,23 +33,25 @@ public class TreatmentToDoPDFController {
                              , Protocol_Name__c
                              FROM Plan_Protocols__r)
                           FROM Treatment_Plan__c WHERE IsActive__c = TRUE
-                          /*								AND Animal__r.Shelter_Location2__c =: key*/];
-    }
-    
-/*    public String getProtocolStr() {
-        String protocolStr = '';
-        List<Plan_Protocol__c> protocolLst = new List<Plan_Protocol__c>([SELECT Id
-                                                                         , Name
-                                                                         , Protocol__r.Name
-                                                                         , Treatment_Plan__r.Name
-                                                                         FROM Plan_Protocol__c where Treatment_Plan__r.IsActive__c = TRUE 
-                                                                         ]);
-List<String> protocolNames = new List<String>();
+                          /*								AND Animal__r.Shelter_Location2__c =: key*/]){
 
-        for(Plan_Protocol__c protocolObj : protocolLst){
-            protocolNames.add(protocolObj.Protocol__r.Name);
-       }
-        protocolStr = string.join(protocolNames, '; ');
-        return protocolStr;
-    }*/
+                            TreatmentPlanWithProtocols tPlan = new TreatmentPlanWithProtocols();
+                            tPlan.treatmentPlan = plan;
+
+                            List<String> protocolNames = new List<String>();
+                            for(Plan_Protocol__c protocolObj : plan.Plan_Protocols__r){
+                                protocolNames.add(protocolObj.Protocol_Name__c);
+                            }
+                            tPlan.protocols = string.join(protocolNames, '; ');
+
+                            treatmentPlanList.add(tPlan);
+                          }
+
+                          treatmentPlansWithProtocols = treatmentPlanList;
+    }
+
+    public class TreatmentPlanWithProtocols{
+        public Treatment_Plan__c treatmentPlan {get; set;}
+        public String protocols {get; set;}
+    }
 }
