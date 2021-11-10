@@ -30,25 +30,32 @@
                     <td class="line"><strong>Grade</strong></td>
                     <td class="line"><strong>Tx Count</strong></td>
                     <td class="line"><strong>Shelter Color Code</strong></td>
-                </thead>
-                <apex:repeat var="anim" value="{!treatmentPlans}">
+                </thead> 
+
+<!--                <apex:variable var="protocol" value="{!protocolStr}"/> -->
+
+                <apex:repeat var="anim" value="{!treatmentPlansWithProtocols}">
                         <tr class="spaceUnder" style="vertical-align:top;">
-                            <td width="10%">{!anim.Animal__r.Name}</td>
-                            <td width="10%">{!anim.Animal__r.Animal_Name__c}</td>
-                            <td width="5%">{!anim.Animal__r.Gender__c}</td>
-                            <td width="5%">{!anim.Animal__r.Current_Animal_Age_Estimate__c}</td>
-                            <td width="10%">{!anim.AssignedTreatmentBundleId__r.Name}</td>
-                            <td width="10%">{!anim.Animal__r.Shelter_Location__c}</td>
-                            <td width="15%">{!anim.Preferred_Motivators__c}</td>
-                            <td width="10%">{!anim.Treatment_Priority__c}</td>
-                            <td width="5%">{!anim.Animal__r.Current_Behavior_Grade__c}</td>
-                            <td width="5%">{!anim.Animal__r.Number_of_Treatments__c}</td>
-                            <td width="15%">{!anim.Animal__r.Shelter_Color_Coding__c}</td>
+                            <td width="10%">{!anim.treatmentPlan.Animal__r.Name}</td>
+                            <td width="10%">{!anim.treatmentPlan.Animal__r.Animal_Name__c}</td>
+                            <td width="5%">{!anim.treatmentPlan.Animal__r.Gender__c}</td>
+                            <td width="5%">{!anim.treatmentPlan.Animal__r.Current_Animal_Age_Estimate__c}</td>
+                            <td width="10%">{!anim.treatmentPlan.AssignedTreatmentBundleId__r.Name}</td>
+                            <td width="10%">{!anim.treatmentPlan.Animal__r.Shelter_Location__c}</td>
+                            <td width="15%">{!anim.treatmentPlan.Preferred_Motivators__c}</td>
+                            <td width="10%">{!anim.treatmentPlan.Treatment_Priority__c}</td>
+                            <td width="5%">{!anim.treatmentPlan.Animal__r.Current_Behavior_Grade__c}</td>
+                            <td width="5%">{!anim.treatmentPlan.Animal__r.Number_of_Treatments__c}</td>
+                            <td width="15%">{!anim.treatmentPlan.Animal__r.Shelter_Color_Coding__c}</td>
                         </tr> 
                         <tr class="spaceUnder">
                             <td width="10%" style="vertical-align:top;"><strong>Tx Plan Notes:</strong></td>
-                            <td width="90%" colspan="10">{!anim.Plan_Notes__c}</td>
+                            <td width="90%" colspan="10">{!anim.treatmentPlan.Plan_Notes__c}</td>
                         </tr> 
+                        <tr class="spaceUnder">
+                            <td width="10%" style="vertical-align:top;"><strong>Assigned Protocols:</strong></td>
+                            <td width="90%" colspan="10">{!anim.protocols}</td>
+                        </tr>
                         <tr class="line">
                             <td class="line"></td>
                             <td class="line"></td>
