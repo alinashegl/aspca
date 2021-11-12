@@ -16,6 +16,7 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
     @api protocolName;
     @api showPicklist = false;
     @api canRemoveProtocol = false;
+    @api location;
 
     fieldValues = [];
     protocolInfo;

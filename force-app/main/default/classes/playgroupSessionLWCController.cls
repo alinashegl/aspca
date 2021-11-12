@@ -105,7 +105,7 @@ public with sharing class playgroupSessionLWCController {
     @AuraEnabled (cacheable=true)
     public static Playgroup_Contact__c[] getAnimalContacts(Id playgroupAnimalId){
         try {
-            return [SELECT Id, Contact__r.Name, Novel_Not_Novel__c FROM Playgroup_Contact__c WHERE Playgroup__c =: playgroupAnimalId ORDER BY Contact__r.Name ASC];
+            return [SELECT Id, Contact__r.Name, Novel_Not_Novel__c FROM Playgroup_Contact__c WHERE Playgroup__c =: playgroupAnimalId AND Novel_Not_Novel__c != 'PG Leader' ORDER BY Contact__r.Name ASC];
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }

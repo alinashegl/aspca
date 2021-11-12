@@ -4,6 +4,8 @@ export default class TreatmentSessionChild extends LightningElement {
     @api record;
     @api objectApi;
     @api protocolId;
+    @api location;
+
     customLookupNewId;
     isLoading = false;
 
@@ -137,6 +139,12 @@ export default class TreatmentSessionChild extends LightningElement {
     }
     get customLookupLabelName(){
         return this.isContactList ? 'Protocol Contact' : 'Helper Dog';
+    }
+
+    get customLookupWhereClause(){
+        if(!this.isContactList){
+            return ' Shelter_Location2__c = \'' + this.location + '\'';
+        }
     }
 
     get hasChanged(){

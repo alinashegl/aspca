@@ -216,7 +216,7 @@
                             </template>
                         </template> 
                         <template if:true={activeSession}>
-                            <template if:true={isLargeDisplay}>
+                            <!-- <template if:true={isLargeDisplay}>
                                 <lightning-layout multiple-rows>
                                     <template for:each={activeProtocols} for:item='protocol'>
                                         <lightning-layout-item key={protocol.Id} size="12" class="slds-p-around_xx-small">
@@ -227,13 +227,14 @@
                                                 protocol-name={protocol.ProtocolId__r.Name}
                                                 can-remove-protocol={canRemoveProtocol}
                                                 refresh={refreshProtocolLists}
+                                                location={location}
                                                 >
                                             </c-treatment-session-protocol>
                                         </lightning-layout-item>
                                     </template>
                                 </lightning-layout>
-                            </template>
-                            <template if:false={isLargeDisplay}>
+                            </template> -->
+                            <!-- <template if:false={isLargeDisplay}> -->
                                 <template for:each={activeProtocols} for:item="protocol">
                                     <c-treatment-session-protocol
                                         key={protocol.Id}
@@ -242,10 +243,11 @@
                                         protocol-name={protocol.ProtocolId__r.Name}
                                         can-remove-protocol={canRemoveProtocol}
                                         refresh={refreshProtocolLists}
+                                        location={location}
                                         >
                                     </c-treatment-session-protocol>
                                 </template>
-                            </template>
+                            <!-- </template> -->
                         </template>
                     </div>
                 </template>

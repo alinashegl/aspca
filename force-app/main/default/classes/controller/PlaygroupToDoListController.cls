@@ -101,6 +101,7 @@ public with sharing class PlaygroupToDoListController {
             Playgroup_Leader__c = originalSession.Playgroup_Leader__c,
             Playgroup_Location__c = originalSession.Playgroup_Location__c,
             Playgroup_Date_Time__c = dateTime.now(),
+            Population__c = originalSession.Population__c,
             Contact_Ids__c = originalSession.Contact_Ids__c
         );
         insert newSession;
@@ -109,7 +110,7 @@ public with sharing class PlaygroupToDoListController {
 
     private static Playgroup_Session__c getPlaygroupSession (Id sessionId){
         Playgroup_Session__c[] sessions = [
-            SELECT Id, Playgroup_Location__c, Playgroup_Leader__c, Contact_Ids__c
+            SELECT Id, Playgroup_Location__c, Playgroup_Leader__c, Contact_Ids__c, Population__c
             FROM Playgroup_Session__c 
             WHERE Id =: sessionId 
             LIMIT 1
@@ -144,9 +145,7 @@ public with sharing class PlaygroupToDoListController {
                 Animal_Playgroup__c oldAnimal = oldAnimalPlaygroupMap.get(animalToAdd);
                 Animal_Playgroup__c newAnimal = new Animal_Playgroup__c(
                     Animal__c = oldAnimal.Animal__c, 
-                    Common_Playgroup_Note_Sections__c = oldAnimal.Common_Playgroup_Note_Sections__c, 
-                    Common_Playgroup_Notes__c = oldAnimal.Common_Playgroup_Notes__c, 
-                    Play_Rating__c = oldAnimal.Play_Rating__c, 
+                    Play_Rating__c = 'Green', 
                     Playgroup_Individual_Notes__c = oldAnimal.Playgroup_Individual_Notes__c,
                     Playgroup_Session__c = newSessionId
                 );
@@ -167,7 +166,7 @@ public with sharing class PlaygroupToDoListController {
 
     private static Map<Id, Animal_Playgroup__c> getAnimalPlaygroupsForCurrentSession(Id sessionId, Id[] animalsToAdd){
         Animal_Playgroup__c[] animalPlaygroups = [
-            SELECT Id, Animal__c, Common_Playgroup_Note_Sections__c, Common_Playgroup_Notes__c, Play_Rating__c, Playgroup_Individual_Notes__c,
+            SELECT Id, Animal__c, Common_Playgroup_Note_Sections__c, Common_Playgroup_Notes__c, Playgroup_Individual_Notes__c,
             (SELECT Id, Contact__c, Novel_Not_Novel__c, Playgroup__c FROM Playgroup_Contacts__r)
             FROM Animal_Playgroup__c 
             WHERE Playgroup_Session__c =: sessionId

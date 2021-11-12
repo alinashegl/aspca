@@ -39,7 +39,6 @@ export default class PlaygroupSessionContacts extends LightningElement {
     customLookupClearSelection = true;
     showAnimalList = false;
     contactList = [];
-    ranRenderedCallback = false;
     modalClass = FORM_FACTOR == 'Small' ? 'slds-fade-in-open' : 'slds-modal slds-fade-in-open';
     tempAnimalsWithNovelContact = [];
     tempContact;
@@ -150,10 +149,6 @@ export default class PlaygroupSessionContacts extends LightningElement {
         return ['FirstName', 'LastName', 'Title', 'Department', 'Email'];
     }
 
-    get showFirstContact(){
-        return this.contactList[0];
-    }
-
     get disableSaveContactButton(){
         return this.isDuplicateContact;
     }
@@ -172,9 +167,6 @@ export default class PlaygroupSessionContacts extends LightningElement {
 
     get showAnimalToggle(){
         return this.showAnimalList && !this.isDuplicateContact;
-    }
-    get disableSaveButton(){
-        return tempContact == undefined ? true : false;
     }
 
     get showContactList(){

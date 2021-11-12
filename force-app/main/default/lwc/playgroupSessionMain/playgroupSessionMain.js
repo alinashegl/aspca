@@ -6,6 +6,7 @@ import getPlaygroupSessionInfo from '@salesforce/apex/playgroupSessionLWCControl
 
 export default class PlaygroupSessionMain extends NavigationMixin(LightningElement) {
     @api recordId;
+    location = 'MRC';
     animalIds = [];
     wireResponse;
     showSpinner = true;
@@ -140,17 +141,26 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
     }
 
     handleCopyEvent(event){
-        window.console.log('in handleCopyEvent');
-        this.playgroupContacts = [];
-        this.sessionPlaygroupLeader = undefined;
         this.showToDoList = false;
-        this.recordId = event.detail.id;
-        refreshApex(this.wireResponse);
+        if(event.detail.id){
+            this.playgroupContacts = [];
+            this.sessionPlaygroupLeader = undefined;
+            this.recordId = event.detail.id;
+            refreshApex(this.wireResponse);
+        }
+        else if(event.detail.error){
+            this.sessionInfoError = event.detail.error;
+        }
     }
 
     handleEditEvent(event){
         this.showToDoList = false;
-        refreshApex(this.wireResponse);
+        if(event.detail.id){
+            refreshApex(this.wireResponse);
+        }
+        else if(event.detail.error){
+            this.sessionInfoError = event.detail.error;
+        }
     }
 
     handleNavigateToSession(){
@@ -199,7 +209,7 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
     }
 
     get dropdownIcon(){
-        return this.toggleDropdown ? 'utility:chevrondown' : 'utility:chevronright';
+        return this.sessionPendingUpdate ? 'utility:save' : this.toggleDropdown ? 'utility:chevrondown' : 'utility:chevronright';
     }
 
     get hasAnimalList(){
