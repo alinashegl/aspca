@@ -31,9 +31,10 @@ public class TreatmentToDoPDFController {
                           , Animal__r.Shelter_Color_Coding__c 
                           , (SELECT Id
                              , Protocol_Name__c
-                             FROM Plan_Protocols__r)
+                             FROM Plan_Protocols__r
+                             WHERE IsRemoved__c = False)
                           FROM Treatment_Plan__c WHERE IsActive__c = TRUE
-                          /*								AND Animal__r.Shelter_Location2__c =: key*/]){
+                          								/*AND Animal__r.Shelter_Location2__c =: key*/]){
 
                             TreatmentPlanWithProtocols tPlan = new TreatmentPlanWithProtocols();
                             tPlan.treatmentPlan = plan;
