@@ -20,31 +20,16 @@ export default class PlayCategoryPicklist extends LightningElement {
     selectionChangeHandler(event){
         window.console.log('selectionChangeHandler: ', event.target.value);
         const fields = {};
-        fields[ANIMAL_ID_FIELD.fieldApiName] = this.animalId;
-        fields[ANIMAL_PLAY_CATEGORY.fieldApiName] = event.target.value;
+        fields['Id'] = this.animalId;
+        fields['Play_Category__c'] = event.target.value;
         const recordUpdate = {fields};
+        window.console.log('fields: ', JSON.stringify(fields));
         updateRecord(recordUpdate).then(recordUpdate => {
-            this.dispatchEvent(
-                new ShowToastEvent({
-                    title: 'Success',
-                    message: 'Protocol updated',
-                    variant: 'success',
-                }),
-            );
+            this.error = undefined;
         })
         .catch(error => {
-            this.dispatchEvent(
-                new ShowToastEvent({
-                    title: 'Unable to upate protocol',
-                    message: error.body.message,
-                    variant: 'error',
-                }),
-            );
-        })
-        .finally(() => {
-            this.getProtocolInfo();
+            this.error = error;
         });
-
     }
 
     get animalId() {
