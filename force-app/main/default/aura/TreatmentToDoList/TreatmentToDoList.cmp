@@ -13,7 +13,9 @@
     <aura:attribute name="currentIndex" type="Integer" />
     <aura:handler name="init" value="{! this}" action="{! c.init}" />
     <aura:method name="handleClick"  action="{!c.handleClick}" access="public" />
+    <lightning:navigation aura:id="navigationService" />
     <div>
+        <lightning:button class="slds-float_right slds-var-m-top_xx-small slds-var-m-right_xx-small" value="PDF" label="PDF" name="PDF" onclick="{!c.handlePDF}" />
         <h1 class="large">Treatment Priority To Do List</h1>
     </div>
     <!--
