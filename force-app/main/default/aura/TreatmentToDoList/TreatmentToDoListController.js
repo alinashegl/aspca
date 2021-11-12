@@ -23,7 +23,12 @@
         helper.buttonAction(cmp, event, button);
     } ,
 
-    handleChange : function(cmp, event) {
-        //change handler
-        }
+    handlePDF : function(cmp) {
+        cmp.find("navigationService").navigate({
+            type: "standard__webPage",
+            attributes: {
+                url: '/apex/TreatmentToDoPDF'
+            }
+        });
+    }
 });
