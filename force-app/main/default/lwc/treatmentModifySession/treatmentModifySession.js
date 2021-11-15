@@ -20,7 +20,7 @@ export default class TreatmentModifySession extends LightningElement {
     @api sessionId = null;
     @api recordId = null;
     wireResponse;
-    assignedProtocols = [];
+
     planProtocolsToUpdate = [];
     unassignedProtocols = [];
     assignedProtocolUpdates = [];
@@ -30,6 +30,9 @@ export default class TreatmentModifySession extends LightningElement {
     preferredMotivators;
     updating = false;
     toggleShowUnassignedProtocols = false;
+    
+    categoriesListOfLists = [];
+    unassignedProtocolsCategoriesLists = [];
 
     _refresh;
     @api
@@ -44,8 +47,8 @@ export default class TreatmentModifySession extends LightningElement {
     response(result){
         this.wireResponse = result;
         if(result.data){
-            this.assignedProtocols = result.data.assignedSessionProtocols ? result.data.assignedSessionProtocols : result.data.assignedPlanProtocols; 
-            this.unassignedProtocols = result.data.unassignedProtocols;
+            this.categoriesListOfLists = result.data.assignedSessionProtocolsLists ? result.data.assignedSessionProtocolsLists : result.data.assignedPlanProtocolsLists;
+            this.unassignedProtocolsCategoriesLists = result.data.unassignedProtocolsLists;
             this.preferredMotivators = result.data.preferredMotivators;
         }
     }
@@ -208,7 +211,7 @@ export default class TreatmentModifySession extends LightningElement {
     }
 
     get showProtocols(){
-        return this.assignedProtocols || this.unassignedProtocols ? true : false;
+        return this.categoriesListOfLists || this.unassignedProtocolsCategoriesLists ? true : false;
     }
 
     get showLoading(){
@@ -220,6 +223,6 @@ export default class TreatmentModifySession extends LightningElement {
     }
 
     get showUnassignedProtocols(){
-        return this.unassignedProtocols && this.toggleShowUnassignedProtocols;
+        return this.unassignedProtocolsCategoriesLists && this.toggleShowUnassignedProtocols;
     }
 }

@@ -43,18 +43,6 @@ export default class TreatmentModifySessionProtocol extends LightningElement {
         }
     }
 
-    get notSkippedValue(){
-        return this.notSkipped;
-    }
-
-    get notRemovedValue(){
-        return this.notRemoved;
-    }
-
-    get showLoading(){
-        return this.isAssignedType && this.loading;
-    }
-
     toggleIsSkipped(){
         this.notSkipped = !this.notSkipped;
         this.handleToggleUpdateEvent();
@@ -87,6 +75,18 @@ export default class TreatmentModifySessionProtocol extends LightningElement {
         this.dispatchEvent(event);
     }
 
+    get notSkippedValue(){
+        return this.notSkipped;
+    }
+
+    get notRemovedValue(){
+        return this.notRemoved;
+    }
+
+    get showLoading(){
+        return this.isAssignedType && this.loading;
+    }
+
     get isSessionProtocol(){
         return this.protocolType == 'session';
     }
@@ -96,7 +96,7 @@ export default class TreatmentModifySessionProtocol extends LightningElement {
     }
 
     get isAssignedType(){
-        return this.isAssigned;
+        return this.isAssigned == 'assigned';
     }
 
     get protocolName(){
