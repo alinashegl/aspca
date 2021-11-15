@@ -7,6 +7,7 @@ import ANIMAL_PLAY_CATEGORY from '@salesforce/schema/Behavior_Evaluation__c.Anim
 export default class PlayCategoryPicklist extends LightningElement {
     @api recordId
     error;
+    categorySuccessfullyUpdated = false;
 
     options=[
         {label: 'New/Unknown', value: 'New/Unknown'},
@@ -19,6 +20,7 @@ export default class PlayCategoryPicklist extends LightningElement {
 
     selectionChangeHandler(event){
         window.console.log('selectionChangeHandler: ', event.target.value);
+        this.categorySuccessfullyUpdated = false;
         const fields = {};
         fields['Id'] = this.animalId;
         fields['Play_Category__c'] = event.target.value;
@@ -26,6 +28,7 @@ export default class PlayCategoryPicklist extends LightningElement {
         window.console.log('fields: ', JSON.stringify(fields));
         updateRecord(recordUpdate).then(recordUpdate => {
             this.error = undefined;
+            this.categorySuccessfullyUpdated = true;
         })
         .catch(error => {
             this.error = error;
