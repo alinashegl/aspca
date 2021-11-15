@@ -108,16 +108,6 @@ export default class PlaygroupSessionAnimal extends LightningElement {
         this.error = error;
     }
 
-    // handleRemoveAnimal(){
-    //     this.playgroupUpdteInProgress = true;
-    //     removeFromPlaygroup({animalPlagroupId: this.playgroupAnimalId})
-    //     .then(() => {
-    //         const selectedEvent = new CustomEvent('removedevent', {});
-    //         this.dispatchEvent(selectedEvent);
-    //         this.playgroupUpdteInProgress = false;
-    //     });
-    // }
-
     handleToggleChange(event){
         const evt = event.target;
         const fields = {};

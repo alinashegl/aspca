@@ -63,7 +63,7 @@ export default class PlaygroupSessionContacts extends LightningElement {
         let data = event.detail.data;
         let dataId = data.elementId;
         this.template.querySelector('[data-id="' + dataId + '"]').className =
-           data.expandField ? 'slds-col slds-size_1-of-1' : data.initialColSize;
+            data.expandField ? 'slds-col slds-size_1-of-1' : data.initialColSize;
     }
 
     handleAddContact(){
