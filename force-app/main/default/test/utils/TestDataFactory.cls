@@ -497,7 +497,9 @@ public without sharing class TestDataFactory {
                     Animal_Age__c = 8,
                     Gender__c = 'MN',
                     Animal_Name__c = 'Doggo123',
-                    Shelter_Location2__c = 'MRC'
+                    Shelter_Location2__c = 'MRC',
+                    Is_Eval__c = 'No',
+                    Play_Category__c = 'Unevaluated'
         );
         insert a;
         return a;
@@ -616,6 +618,7 @@ public without sharing class TestDataFactory {
             Protocol__c protocol = new Protocol__c();
             protocol.Name = 'Test Protocol ' + i;
             protocol.IsActive__c = true;
+            protocol.Protocol_Categories__c = 'Non Fear Protocols';
             protocols.add(protocol);
             i++;
         }
@@ -696,7 +699,8 @@ public without sharing class TestDataFactory {
         for(Session_Protocol__c protocol : protocolList){
           Session_Protocol_Contact__c sCon = new Session_Protocol_Contact__c(
             Session_Protocol__c = protocol.Id,
-            Contact__c = con.Id
+            Contact__c = con.Id,
+            Novel_Not_Novel__c = 'Familiar'
           );
           sContacts.add(sCon);
         }
