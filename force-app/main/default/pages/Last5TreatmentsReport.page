@@ -1,0 +1,70 @@
+<apex:page Controller="Last5TreatmentsController"
+           renderAs="pdf"
+           applyHtmlTag="false"
+           applyBodyTag="false"
+           showHeader="false"
+           sidebar="false" 
+           standardStylesheets="false">
+
+    <apex:styleSheet value="{!URLFOR($Resource.VF_PDF_StyleSheet)}"/>
+    
+    <html>
+        <head>
+            <style type="text/css" media="print">
+            </style>
+        </head>
+        <body>
+            <div>
+                <h1 class="large">Last 5 Treatments for Active Treatment Plan</h1>
+            </div>
+            <table>
+                <thead>
+                    <td class="line"><strong>Protocol</strong></td>
+                    <td class="line"><strong>Overall Score</strong></td>
+                    <td class="line"><strong>Aggressive Worst</strong></td>
+                    <td class="line"><strong>Arousal Best</strong></td>
+                    <td class="line"><strong>Arousal Worst</strong></td>
+                    <td class="line"><strong>Fear Best</strong></td>
+                    <td class="line"><strong>Fear Worst</strong></td>
+                    <td class="line"><strong>Fear - Sociability</strong></td>
+                    <td class="line"><strong>Solicitation</strong></td>
+                    <td class="line"><strong>Novel Person</strong></td>
+                    <td class="line"><strong>Skipped?</strong></td>
+                </thead> 
+                <apex:repeat var="treat" value="{!treatments}">
+                        <tr class="spaceUnder" style="vertical-align:top;">
+                            <td width="10%">{!treat.ProtocolId__r.Name}</td>
+                            <td width="10%">{!treat.Overall_Score__c}</td>
+                            <td width="5%">{!treat.Aggressive_Worst__c}</td>
+                            <td width="5%">{!treat.Arousal_Best__c}</td>
+                            <td width="10%">{!treat.Arousal_Worst__c}</td>
+                            <td width="10%">{!treat.Fear_Best__c}</td>
+                            <td width="15%">{!treat.Fear_Worst__c}</td>
+                            <td width="10%">{!treat.Social_Best__c}</td>
+                            <td width="5%">{!treat.Solicitation__c}</td>
+                            <td width="5%">{!treat.Novel_Person__c}</td>
+                            <td width="15%">{!treat.IsSkipped__c}</td>
+                        </tr> 
+                        <tr class="spaceUnder">
+                            <td width="10%" style="vertical-align:top;"><strong>Tx Plan Notes:</strong></td>
+                            <td width="90%" colspan="10">{!treat.Protocol_Notes__c}</td>
+                        </tr> 
+                       <tr class="line">
+                            <td class="line"></td>
+                            <td class="line"></td>
+                            <td class="line"></td>
+                            <td class="line"></td>
+                            <td class="line"></td>
+                            <td class="line"></td>
+                            <td class="line"></td>
+                            <td class="line"></td>
+                            <td class="line"></td>
+                            <td class="line"></td>
+                            <td class="line"></td>
+                        </tr> 
+                </apex:repeat>
+            </table>
+        </body>
+    </html>
+    
+</apex:page>
