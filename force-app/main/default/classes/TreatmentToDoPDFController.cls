@@ -1,14 +1,6 @@
 public class TreatmentToDoPDFController {
-    
-    public List<Animal__c> objAnimal{get;set;}
-    public List<Treatment_Plan__c> treatmentPlans{get;set;}
     public List<TreatmentPlanWithProtocols> treatmentPlansWithProtocols{get;set;}
-    public List<Treatment_Bundle__c> bundle{get;set;} 
-    public List<Plan_Protocol__c> protocols{get;set;} 
-    public List<Protocol__c> proto{get;set;} 
-    
     public TreatmentToDoPDFController (){
-
         TreatmentPlanWithProtocols[] treatmentPlanList = new TreatmentPlanWithProtocols[0];
         for(Treatment_Plan__c plan : [SELECT Id
                           , Name
