@@ -239,4 +239,16 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
     get editAnimalsButtonLabel(){
         return '+/- Current PG Dogs';
     }
+
+    get editAnimalsHelpText(){
+        return 'Return to PG To Do List to modify dogs in this playgroup';
+    }
+
+    get copySessionHelpText(){
+        return 'Copy dogs from current playgroup and return to PG To Do List to edit next playgroup; Play Notes will be transferred for dogs remaining in playgroup';
+    }
+
+    get createNewSessionHelpText(){
+        return 'Start new playgroup from scratch';
+    }
 }

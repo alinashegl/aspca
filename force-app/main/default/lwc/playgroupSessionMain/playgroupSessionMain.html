@@ -69,7 +69,7 @@
                                                     onclick={handleEditSession}
                                                 >
                                                 </lightning-button>
-                                                <lightning-helptext content="You'll receive weekly updates"></lightning-helptext>
+                                                <lightning-helptext content={editAnimalsHelpText}></lightning-helptext>
                                             </li>
                                             <li class="slds-dropdown__item" role="presentation">
                                                 <lightning-button
@@ -81,6 +81,7 @@
                                                     onclick={handleCopySession}
                                                 >
                                                 </lightning-button>
+                                                <lightning-helptext content={copySessionHelpText}></lightning-helptext>
                                             </li>
                                             <li class="slds-dropdown__item" role="presentation">
                                                 <lightning-button
@@ -92,7 +93,7 @@
                                                     onclick={handleCreateNewSession}
                                                 >
                                                 </lightning-button>
-                                                <lightning-helptext content="You'll receive weekly updates"></lightning-helptext>
+                                                <lightning-helptext content={createNewSessionHelpText}></lightning-helptext>
                                             </li>                                            
                                         </template>
                                     </ul>
@@ -135,7 +136,6 @@
                             <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="6" large-device-size="3" padding="horizontal-medium">
                                 <div class="slds-form-element">
                                     <div class="slds-form-element__static">
-                                        <!-- <lightning-input-field field-name="Playgroup_Location__c" data-id='Playgroup_Individual_Notes__c' onchange={handleOnChangeSessionInfo}> </lightning-input-field> -->
                                         <label class="slds-form-element__label" for="form-element-01">Playgroup Location</label>
                                         <lightning-output-field field-name="Population__c" data-id='Population__c' variant='label-hidden'> </lightning-output-field>
                                         <lightning-input-field field-name="Playgroup_Location__c" data-id='Playgroup_Location__c' onchange={handleOnChangeSessionInfo} variant='label-hidden'> </lightning-input-field>
@@ -145,7 +145,6 @@
                             <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="6" large-device-size="3" padding="horizontal-medium">
                                 <div class="slds-form-element">
                                     <div class="slds-form-element__static">
-                                        <!-- <lightning-input-field field-name="Playgroup_Date_Time__c" value={currentDateTime} data-id='Playgroup_Individual_Notes__c' onchange={handleOnChangeSessionInfo}> </lightning-input-field> -->
                                         <lightning-input-field field-name="Playgroup_Date_Time__c" value={currentDateTime} data-id='Playgroup_Date_Time__c' onchange={handleOnChangeSessionInfo}> </lightning-input-field>
                                     </div>
                                 </div>
@@ -189,7 +188,7 @@
                                                         onclick={handleEditSession}
                                                     >
                                                     </lightning-button>
-                                                    <lightning-helptext content="You'll receive weekly updates"></lightning-helptext>
+                                                    <lightning-helptext content={editAnimalsHelpText}></lightning-helptext>
                                                 </p>
                                                 <p class='slds-p-top_xxx-small'>
                                                     <lightning-button
@@ -200,7 +199,7 @@
                                                         onclick={handleCopySession}
                                                     >
                                                     </lightning-button>
-                                                    <lightning-helptext content="You'll receive weekly updates"></lightning-helptext>
+                                                    <lightning-helptext content={copySessionHelpText}></lightning-helptext>
                                                 </p>
                                                 <p class='slds-p-top_xxx-small'>
                                                     <lightning-button
@@ -211,7 +210,7 @@
                                                         onclick={handleCreateNewSession}
                                                     >
                                                     </lightning-button>
-                                                    <lightning-helptext content="You'll receive weekly updates"></lightning-helptext>
+                                                    <lightning-helptext content={createNewSessionHelpText}></lightning-helptext>
                                                 </p>
                                             </template>
                                         </div>
