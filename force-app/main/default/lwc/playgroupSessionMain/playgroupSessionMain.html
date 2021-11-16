@@ -10,11 +10,12 @@
             <template if:true={showToDoList}>
                 <c-playgroup-to-do-list
                     session-id={toDoListSessionId}
-                    animals-to-add={animalIds}
+                    animals-to-add={toDoListAnimalIds}
                     location={location}
                     action={toDoListAction}
                     oncopy={handleCopyEvent}
                     onedit={handleEditEvent}
+                    oncancel={handleCloseToDoList}
                 >
                 </c-playgroup-to-do-list>
             </template>

@@ -7,7 +7,6 @@ import getPlaygroupSessionInfo from '@salesforce/apex/playgroupSessionLWCControl
 export default class PlaygroupSessionMain extends NavigationMixin(LightningElement) {
     @api recordId;
     location = 'MRC';
-    animalIds = [];
     wireResponse;
     showSpinner = true;
     animals = [];
@@ -18,7 +17,7 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
     refresh = false;
 
     //variables to pass to ToDoList
-    toDoListSessionId;
+    // animalIds = [];
     toDoListAction;
 
     //customLookup variables
@@ -27,7 +26,6 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
     customLookupCreateNewFields = ['FirstName', 'LastName', 'Title', 'Department', 'Email'];
     customLookupExpandedField = false;
 
-    // formFactor = FORM_FACTOR;
     session;
     sessionPlaygroupLeader;
     sessionPendingUpdate = false;
@@ -43,6 +41,11 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
             this.sessionPlaygroupLeader = result.data.playgroupSession.Playgroup_Leader__c;
             if(result.data.animalPlaygroups){
                 this.animals = result.data.animalPlaygroups;
+                // this.animals.forEach(animal => {
+                //     this.animalIds.push({label: animal.Animal_Name__c, name: animal.Animal__c});
+                //     // switch to this with the updated todo list
+                //     // this.animalIds.push(animal.Animal__c);
+                // });
             }
             if(result.data.playgroupContacts){
                 this.playgroupContacts = result.data.playgroupContacts;
@@ -89,34 +92,19 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
 
     handleEditSession(){
         this.toDoListAction = 'edit';
-        this.animals.forEach(animal => {
-            this.animalIds.push({label: animal.Animal_Name__c, name: animal.Animal__c});
-            // switch to this with the updated todo list
-            // this.animalIds.push(animal.Animal__c);
-        });
-        this.toDoListSessionId = this.session.Id;
-        
         this.showToDoList = true;
         this.handleToggleDropdown();
     }
 
     handleCreateNewSession(){
         this.toDoListAction = 'new';
-        this.animalIds = [];
-        this.toDoListSessionId = undefined;
+        // this.animalIds = [];
         this.showToDoList = true;
         this.handleToggleDropdown();
     }
 
     handleCopySession(){
         this.toDoListAction = 'copy';
-        this.animals.forEach(animal => {
-            this.animalIds.push({label: animal.Animal_Name__c, name: animal.Animal__c});
-            // switch to this with the updated todo list
-            // this.animalIds.push(animal.Animal__c);
-        });
-        this.toDoListSessionId = this.session.Id;
-        
         this.showToDoList = true;
         this.handleToggleDropdown();
     }
@@ -161,6 +149,10 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
         else if(event.detail.error){
             this.sessionInfoError = event.detail.error;
         }
+    }
+
+    handleCloseToDoList(){
+        this.showToDoList = false;
     }
 
     handleNavigateToSession(){
@@ -250,5 +242,23 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
 
     get createNewSessionHelpText(){
         return 'Start new playgroup from scratch';
+    }
+
+    get toDoListSessionId(){
+        return this.toDoListAction === 'new' ? undefined : this.session.Id;
+    }
+
+    get toDoListAnimalIds(){
+        if(this.toDoListAction === 'new'){
+            return undefined;
+        } else {
+            let animalIds = [];
+            this.animals.forEach(animal => {
+                animalIds.push({label: animal.Animal_Name__c, name: animal.Animal__c});
+                // switch to this with the updated todo list
+                // this.animalIds.push(animal.Animal__c);
+            });
+            return animalIds;
+        }
     }
 }
