@@ -223,7 +223,20 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
     get isSessionPendingUpdate(){
         return this.sessionPendingUpdate;
     }
+    
     get sessionButtonLabel(){
         return 'Session: ' + this.session.Name;
+    }
+
+    get createNewSessionButtonLabel(){
+        return 'Create New PG';
+    }
+    
+    get copySessionButtonLabel(){
+        return 'Copy Dogs to Next PG';
+    }
+
+    get editAnimalsButtonLabel(){
+        return '+/- Current PG Dogs';
     }
 }

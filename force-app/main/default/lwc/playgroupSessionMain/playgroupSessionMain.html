@@ -65,33 +65,35 @@
                                                     class="slds-m-top_small"
                                                     variant="base"
                                                     name="editAnimals"
-                                                    label="Add/Remove Animals"
+                                                    label={editAnimalsButtonLabel}
                                                     onclick={handleEditSession}
                                                 >
                                                 </lightning-button>
+                                                <lightning-helptext content="You'll receive weekly updates"></lightning-helptext>
                                             </li>
                                             <li class="slds-dropdown__item" role="presentation">
                                                 <lightning-button
                                                     class="slds-m-top_small"
                                                     variant="base"
                                                     type="button"
-                                                    name="update"
-                                                    label="Create New Session"
-                                                    onclick={handleCreateNewSession}
-                                                >
-                                                </lightning-button>
-                                            </li>
-                                            <li class="slds-dropdown__item" role="presentation">
-                                                <lightning-button
-                                                    class="slds-m-top_small"
-                                                    variant="base"
-                                                    type="button"
-                                                    name="update"
-                                                    label="Copy Session"
+                                                    name="copySession"
+                                                    label={copySessionButtonLabel}
                                                     onclick={handleCopySession}
                                                 >
                                                 </lightning-button>
                                             </li>
+                                            <li class="slds-dropdown__item" role="presentation">
+                                                <lightning-button
+                                                    class="slds-m-top_small"
+                                                    variant="base"
+                                                    type="button"
+                                                    name="createNewSession"
+                                                    label={createNewSessionButtonLabel}
+                                                    onclick={handleCreateNewSession}
+                                                >
+                                                </lightning-button>
+                                                <lightning-helptext content="You'll receive weekly updates"></lightning-helptext>
+                                            </li>                                            
                                         </template>
                                     </ul>
                                 </div>
@@ -183,30 +185,33 @@
                                                         class="slds-m-top_small"
                                                         variant="brand"
                                                         name="editAnimals"
-                                                        label="Add/Remove Animals"
+                                                        label={editAnimalsButtonLabel}
                                                         onclick={handleEditSession}
                                                     >
                                                     </lightning-button>
-                                                </p>
-                                                <p class='slds-p-top_xxx-small'>
-                                                    <lightning-button
-                                                        class="slds-m-top_small"
-                                                        variant="brand"
-                                                        name="createNewSession"
-                                                        label="Create New Session"
-                                                        onclick={handleCreateNewSession}
-                                                    >
-                                                    </lightning-button>
+                                                    <lightning-helptext content="You'll receive weekly updates"></lightning-helptext>
                                                 </p>
                                                 <p class='slds-p-top_xxx-small'>
                                                     <lightning-button
                                                         class="slds-m-top_small"
                                                         variant="brand"
                                                         name="copySession"
-                                                        label="Copy Session"
+                                                        label={copySessionButtonLabel}
                                                         onclick={handleCopySession}
                                                     >
                                                     </lightning-button>
+                                                    <lightning-helptext content="You'll receive weekly updates"></lightning-helptext>
+                                                </p>
+                                                <p class='slds-p-top_xxx-small'>
+                                                    <lightning-button
+                                                        class="slds-m-top_small"
+                                                        variant="brand"
+                                                        name="createNewSession"
+                                                        label={createNewSessionButtonLabel}
+                                                        onclick={handleCreateNewSession}
+                                                    >
+                                                    </lightning-button>
+                                                    <lightning-helptext content="You'll receive weekly updates"></lightning-helptext>
                                                 </p>
                                             </template>
                                         </div>
