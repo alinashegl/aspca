@@ -498,7 +498,6 @@ public without sharing class TestDataFactory {
                     Gender__c = 'MN',
                     Animal_Name__c = 'Doggo123',
                     Shelter_Location2__c = 'MRC',
-                    Is_Eval__c = 'No',
                     Play_Category__c = 'Unevaluated'
         );
         insert a;
