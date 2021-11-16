@@ -17,8 +17,10 @@ private class test_TreatmentSessionLWCController {
         Treatment_Plan__c plan = new Treatment_Plan__c();
         insert plan;
 
+        Contact con= TestDataFactory.createContact();
         Treatment_Session__c session = new Treatment_Session__c(
-            Treatment_Plan__c = plan.Id
+            Treatment_Plan__c = plan.Id,
+            Session_Contact__c = con.Id
         );
         insert session;
 
@@ -125,9 +127,8 @@ private class test_TreatmentSessionLWCController {
         TreatmentSessionLWCController.protocolAssignment protocolAssignments = TreatmentSessionLWCController.getProtocolLists(treatmentSession.Id, null);
         Test.stopTest();
 
-        System.debug('protocolAssignments: ' + protocolAssignments.assignedSessionProtocols);
-        System.assert(protocolAssignments.assignedSessionProtocols != null, 'No Session Protocols were returned');
-        System.assert(protocolAssignments.unassignedProtocols != null, 'No Unassigned Protocols were returned');
+        System.assert(protocolAssignments.assignedSessionProtocolsLists != null, 'No Session Protocols were returned');
+        System.assert(protocolAssignments.unassignedProtocolsLists != null, 'No Unassigned Protocols were returned');
     }
 
     @isTest 
@@ -138,8 +139,7 @@ private class test_TreatmentSessionLWCController {
         TreatmentSessionLWCController.protocolAssignment protocolAssignments = TreatmentSessionLWCController.getProtocolLists(null, planProtocols[0].Treatment_Plan__c);
         Test.stopTest();
 
-        System.debug('protocolAssignments: ' + protocolAssignments);
-        System.assert(protocolAssignments.assignedPlanProtocols != null, 'No Plan Protocols were returned');
+        System.assert(protocolAssignments.assignedPlanProtocolsLists != null, 'No Plan Protocols were returned');
     }
 
     @isTest 
