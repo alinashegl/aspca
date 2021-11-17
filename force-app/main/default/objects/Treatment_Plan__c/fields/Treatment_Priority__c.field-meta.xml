@@ -36,6 +36,30 @@
                 <default>false</default>
                 <label>Low – 3 days</label>
             </value>
+            <value>
+                <fullName>Daily (7 days/wk)</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Daily (7 days/wk)</label>
+            </value>
+            <value>
+                <fullName>High (5 days/wk)</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>High (5 days/wk)</label>
+            </value>
+            <value>
+                <fullName>Low ( 3 days/wk)</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Low ( 3 days/wk)</label>
+            </value>
+            <value>
+                <fullName>Medium (4 days/wk)</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Medium (4 days/wk)</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>

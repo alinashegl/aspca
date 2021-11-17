@@ -154,7 +154,7 @@
     <enableStreamingApi>true</enableStreamingApi>
     <label>Observation</label>
     <nameField>
-        <displayFormat>{0000}</displayFormat>
+        <displayFormat>{YYYY}/{MM}/{DD}-{0}</displayFormat>
         <label>Observation Number</label>
         <type>AutoNumber</type>
     </nameField>

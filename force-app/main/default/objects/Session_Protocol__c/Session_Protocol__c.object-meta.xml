@@ -160,7 +160,7 @@
     <enableStreamingApi>true</enableStreamingApi>
     <label>Session Protocol</label>
     <nameField>
-        <displayFormat>{000000000}</displayFormat>
+        <displayFormat>{YYYY}/{MM}/{DD}-{0}</displayFormat>
         <label>Session Protocol Id</label>
         <type>AutoNumber</type>
     </nameField>

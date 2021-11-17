@@ -160,7 +160,7 @@
     <enableStreamingApi>true</enableStreamingApi>
     <label>Plan Protocol</label>
     <nameField>
-        <displayFormat>{0000000000}</displayFormat>
+        <displayFormat>{YYYY}/{MM}/{DD}-{0}</displayFormat>
         <label>Plan Protocol Name</label>
         <trackHistory>false</trackHistory>
         <type>AutoNumber</type>
