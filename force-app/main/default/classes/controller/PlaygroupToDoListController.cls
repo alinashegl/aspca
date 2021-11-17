@@ -192,32 +192,34 @@ public with sharing class PlaygroupToDoListController {
 
     private static void createPlaygroupContacts(Animal_Playgroup__c[] animalPlaygroups, Map<Id, Animal_Playgroup__c> oldAnimalPlaygroupMap, Id newSessionId){
         Playgroup_Session__c session = [SELECT Id, Contact_Ids__c FROM Playgroup_Session__c WHERE Id =: newSessionId LIMIT 1];
-        String[] contactList = session.Contact_Ids__c.split(',');
-        Playgroup_Contact__c[] pgContacts = new Playgroup_Contact__c[0];
-        for(Animal_Playgroup__c animal : animalPlaygroups){
-            if(oldAnimalPlaygroupMap != null && oldAnimalPlaygroupMap.containsKey(animal.Animal__c)){
-                for(Playgroup_Contact__c pgContact : oldAnimalPlaygroupMap.get(animal.Animal__c).Playgroup_Contacts__r){
-                    pgContacts.add(
-                        new Playgroup_Contact__c(
-                            Contact__c = pgContact.Contact__c,
-                            Novel_Not_Novel__c = pgContact.Novel_Not_Novel__c,
-                            Playgroup__c = animal.Id
-                        )
-                    );
+        if(session.Contact_Ids__c != null){
+            String[] contactList = session.Contact_Ids__c.split(',');
+            Playgroup_Contact__c[] pgContacts = new Playgroup_Contact__c[0];
+            for(Animal_Playgroup__c animal : animalPlaygroups){
+                if(oldAnimalPlaygroupMap != null && oldAnimalPlaygroupMap.containsKey(animal.Animal__c)){
+                    for(Playgroup_Contact__c pgContact : oldAnimalPlaygroupMap.get(animal.Animal__c).Playgroup_Contacts__r){
+                        pgContacts.add(
+                            new Playgroup_Contact__c(
+                                Contact__c = pgContact.Contact__c,
+                                Novel_Not_Novel__c = pgContact.Novel_Not_Novel__c,
+                                Playgroup__c = animal.Id
+                            )
+                        );
+                    }
+                }
+                else {
+                    for(String con : contactList){
+                        pgContacts.add(
+                            new Playgroup_Contact__c(
+                                Contact__c = con,
+                                Novel_Not_Novel__c = 'Familiar',
+                                Playgroup__c = animal.Id
+                            )
+                        );
+                    }
                 }
             }
-            else {
-                for(String con : contactList){
-                    pgContacts.add(
-                        new Playgroup_Contact__c(
-                            Contact__c = con,
-                            Novel_Not_Novel__c = 'Familiar',
-                            Playgroup__c = animal.Id
-                        )
-                    );
-                }
-            }
+            insert pgContacts;
         }
-        insert pgContacts;
     }
 }

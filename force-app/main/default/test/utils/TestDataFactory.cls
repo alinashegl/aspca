@@ -504,6 +504,25 @@ public without sharing class TestDataFactory {
         return a;
     }
 
+    //adding this to avoid creating duplicate animals
+    public static Animal__c createAnimalWithName(String name) {
+      Case c = createCase();
+      Animal__c a = new Animal__c(
+                  Name = name,
+                  Case__c = c.Id,
+                  Type_of_Animal__c = 'Dog',
+                  Color__c = 'Black',
+                  Age__c = 'Unknown At Intake',
+                  Breed__c = 'Mix',
+                  Animal_Age__c = 8,
+                  Gender__c = 'MN',
+                  Animal_Name__c = 'Doggo123',
+                  Shelter_Location2__c = 'MRC'
+      );
+      insert a;
+      return a;
+  }
+
     public static Behavior_Evaluation__c createPuppyBehaviorEvaluation() {
         Animal__c a = createAnimal();
         Behavior_Evaluation__c be = new Behavior_Evaluation__c(

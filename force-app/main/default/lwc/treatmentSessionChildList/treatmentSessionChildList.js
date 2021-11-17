@@ -8,6 +8,7 @@ import { refreshApex } from '@salesforce/apex';
 export default class TreatmentSessionChildList extends LightningElement {
     @api protocolId;
     @api objectApi;
+    @api location;
 
     loading = false;
     recordList = [];
