@@ -71,41 +71,6 @@ private class test_playgroupSessionLWCController {
         System.assertEquals(null, returnedContacts);
     }
 
-    // @isTest 
-    // static void createNewPlaygroupAnimals_hasAnimalsToAdd(){
-    //     Playgroup_Session__c session = TestDataFactory.createPlaygroupSessionWithAnimals();
-    //     Contact c1 = testDataFactory.createContact();
-    //     Contact c2 = testDataFactory.createContact();
-    //     session.Contact_Ids__c = c1.Id + ',' + c2.Id;
-    //     update session;
-        
-    //     playgroupSessionLWCController.playgroupSessionInfo sessionInfo = new playgroupSessionLWCController.playgroupSessionInfo();
-    //     sessionInfo.playgroupSession = session;
-    //     Animal__c newAnimal = TestDataFactory.createAnimalWithName('Doggo1');
-
-    //     test.startTest();
-    //         Animal_Playgroup__c[] returnedAnimalPlaygroup = playgroupSessionLWCController.createNewPlaygroupAnimals(sessionInfo, new Id[]{newAnimal.Id});
-    //     test.stopTest();
-
-    //     System.assert(!returnedAnimalPlaygroup.isEmpty(), 'Should have returned an animal playgroup, instead returned: ' + returnedAnimalPlaygroup);
-    //     System.assertEquals(session.Id, returnedAnimalPlaygroup[0].Playgroup_Session__c);
-    //     System.assertEquals(newAnimal.Id, returnedAnimalPlaygroup[0].Animal__c);
-
-    //     Playgroup_Contact__c[] pgCons = [SELECT Id, Contact__c FROM Playgroup_Contact__c WHERE Playgroup__c =: returnedAnimalPlaygroup[0].Id];
-    //     System.assertEquals(2, pgCons.Size());
-    // }
-
-    // @isTest 
-    // static void getAnimalList_hasAnimals(){
-    //     Playgroup_Session__c session = TestDataFactory.createPlaygroupSessionWithAnimals();
-
-    //     test.startTest();
-    //         Animal_Playgroup__c[] returnedAnimalPlaygroups = playgroupSessionLWCController.getAnimalList(session.Id);
-    //     test.stopTest();
-
-    //     System.assert(!returnedAnimalPlaygroups.isEmpty(), 'Returned animal playgroups should not be empty');
-    // }
-
     @isTest 
     static void addContact_success(){
         Playgroup_Session__c session = TestDataFactory.createPlaygroupSessionWithAnimals();
