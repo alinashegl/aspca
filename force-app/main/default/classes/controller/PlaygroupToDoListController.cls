@@ -50,7 +50,7 @@ public with sharing class PlaygroupToDoListController {
         List<Medical_Conditions__c> medConditions = [SELECT Id FROM Medical_Conditions__c
                                                     WHERE Medical_Condition__c = 'Babesia'
                                                         AND Date_Diagnosed__c <= TODAY
-                                                        AND (Date_Resolved__c = null OR Date_Resolved__c < TODAY)
+                                                        AND (Date_Resolved__c = null OR Date_Resolved__c > TODAY)
                                                         AND Animal__c = :animalId];
         if (medConditions.size() > 0) {
             indicators.add('Babesia +');
@@ -59,7 +59,7 @@ public with sharing class PlaygroupToDoListController {
                                         WHERE Type__c = 'Medical'
                                             AND Play_Pause_Reason__c = 'In Heat'
                                             AND Start_Date__c <= TODAY
-                                            AND (End_Date__c = null OR End_Date__c < TODAY)
+                                            AND (End_Date__c = null OR End_Date__c > TODAY)
                                             AND Animal__c = :animalId];
         if (playPauses.size() > 0) {
             indicators.add('In Heat');
