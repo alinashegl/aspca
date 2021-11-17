@@ -127,7 +127,7 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
         this.toggleDropdown = !this.toggleDropdown;
     }
 
-    handleNewPlaygroupEvent(event){
+    handleCopyEvent(event){
         this.showToDoList = false;
         if(event.detail.id){
             this.playgroupContacts = [];
