@@ -497,7 +497,8 @@ public without sharing class TestDataFactory {
                     Animal_Age__c = 8,
                     Gender__c = 'MN',
                     Animal_Name__c = 'Doggo123',
-                    Shelter_Location2__c = 'MRC'
+                    Shelter_Location2__c = 'MRC',
+                    Play_Category__c = 'Unevaluated'
         );
         insert a;
         return a;
@@ -616,6 +617,7 @@ public without sharing class TestDataFactory {
             Protocol__c protocol = new Protocol__c();
             protocol.Name = 'Test Protocol ' + i;
             protocol.IsActive__c = true;
+            protocol.Protocol_Categories__c = 'Non Fear Protocols';
             protocols.add(protocol);
             i++;
         }
@@ -696,7 +698,8 @@ public without sharing class TestDataFactory {
         for(Session_Protocol__c protocol : protocolList){
           Session_Protocol_Contact__c sCon = new Session_Protocol_Contact__c(
             Session_Protocol__c = protocol.Id,
-            Contact__c = con.Id
+            Contact__c = con.Id,
+            Novel_Not_Novel__c = 'Familiar'
           );
           sContacts.add(sCon);
         }
@@ -750,8 +753,7 @@ public without sharing class TestDataFactory {
         return enrichment;
     }
 
-    public static List<Medical_Conditions__c> createMedicalConditions() {
-        Animal__c a = createAnimal();
+    public static List<Medical_Conditions__c> createMedicalConditions(Animal__c a) {
         List<Medical_Conditions__c> medConditions = new List<Medical_Conditions__c>{
             new Medical_Conditions__c(
                 Animal__c = a.Id,
@@ -760,14 +762,27 @@ public without sharing class TestDataFactory {
             new Medical_Conditions__c(
                 Animal__c = a.Id,
                 Medical_Condition__c = 'Dermatitis',
-                Date_Diagnosed__c = System.today()),
-            new Medical_Conditions__c(
-                Animal__c = a.Id,
-                Medical_Condition__c = 'In Heat',
                 Date_Diagnosed__c = System.today())
         };
         insert medConditions;
         return medConditions;
+    }
+
+    public static List<Play_Pause__c> createPlayPauses(Animal__c a) {
+        List<Play_Pause__c> playPauses = new List<Play_Pause__c>{
+            new Play_Pause__c(
+                Animal__c = a.Id,
+                Type__c = 'Medical',
+                Play_Pause_Reason__c = 'In Heat',
+                Start_Date__c = System.today()),
+            new Play_Pause__c(
+                Animal__c = a.Id,
+                Type__c = 'Behavioral',
+                Play_Pause_Reason__c = 'Needs a Break',
+                Start_Date__c = System.today())
+        };
+        insert playPauses;
+        return playPauses;
     }
 
     public static Playgroup_Session__c createPlaygroupSessionWithAnimals() {
@@ -775,14 +790,16 @@ public without sharing class TestDataFactory {
         Contact c = createContact();
         Playgroup_Session__c session = new Playgroup_Session__c(
             Playgroup_Location__c = 'MRC Indoor Play Yard',
-            Playgroup_Leader__c = c.Id
+            Population__c = 'MRC',
+            Playgroup_Leader__c = c.Id,
+            Contact_Ids__c = c.Id
         );
         insert session;
         Animal_Playgroup__c animalPlaygroup = new Animal_Playgroup__c(
             Animal__c = a.Id,
             Playgroup_Session__c = session.Id,
             Common_Playgroup_Note_Sections__c = 'Greeting',
-            Common_Playgroup_Notes__c = 'Defensive',
+            Common_Playgroup_Notes__c = 'Airhorn',
             Play_Rating__c = 'Green',
             Playgroup_Individual_Notes__c = 'Individual note'
         );
