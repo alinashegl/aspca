@@ -1,0 +1,90 @@
+<apex:page controller="PlaygroupToDoPdfController" renderAs="pdf" applyHtmlTag="false" applyBodyTag="false" showHeader="false" standardStylesheets="false">
+    <head>
+    <style type="text/css">
+        @page {
+            size: letter landscape;
+        }
+        /* table {
+            width: 100%;
+        } */
+        td.label {
+            font-weight: 600;
+            /* width: 10%; */
+        }
+        td.name {
+            font-weight: 600;
+            width: 20%;
+        }
+        td.id {
+            font-weight: 600;
+            width: 5%;
+        }
+        td.handler {
+            font-weight: 600;
+            width: 30%;
+        }
+        td.priority {
+            font-weight: 600;
+            width: 10%;
+        }
+        td.category {
+            font-weight: 600;
+            width: 20%;
+        }
+        td.notes {
+            font-weight: 600;
+            width: 20%;
+        }
+        td.reason {
+            font-weight: 600;
+            width: 20%;
+        }
+        td.content {
+            /* border: 1px solid black; */
+            width: auto;
+        }
+        /* td.bigContent {
+            width: 87.5%;
+        } */
+    </style>
+    </head>
+    <body>
+        <apex:form>
+            <apex:pageBlock title="Playgroup To Do PDF" mode="detail">
+                <apex:repeat value="{!animals}" var="animal" id="animalList">
+                    <div style="page-break-inside: avoid;">
+                        <table width="100%">
+                            <tr>
+                                <td class="name label"><apex:outputField value="{!animal.Animal_Name__c}"/></td>
+                            </tr>
+                        </table>
+                        <table width="100%">
+                            <tr>
+                                <td class="id label">ID#:</td>
+                                <td class="content"><apex:outputField value="{!animal.Name}"/></td>
+                                <td class="handler label">Handler color code:</td>
+                                <td class="content"><apex:outputField value="{!animal.Handler__c}"/></td>
+                            <!-- </tr>
+                            <tr> -->
+                                <td class="priority label">PG Priority:</td>
+                                <td class="content"><apex:outputField value="{!animal.Playgroup_Priority_Level__c}"/></td>
+                                <td class="category label">Play category:</td>
+                                <td class="content"><apex:outputField value="{!animal.Play_Category__c}"/></td>
+                            </tr>
+                        </table>
+                        <table width="100%">
+                            <tr>
+                                <td class="notes label">Play style notes:</td>
+                                <td class="content"><apex:outputField value="{!animal.Play_Style_Notes__c}"/></td>
+                            </tr>
+                            <tr>
+                                <td class="reason label">Play pause reason:</td>
+                                <td class="content"><apex:outputField value="{!animal.Play_Pause_Reason__c}"/></td>
+                            </tr>
+                        </table>
+                    </div>
+                </apex:repeat>
+            </apex:pageBlock>
+        </apex:form>
+    </body>
+</apex:page>

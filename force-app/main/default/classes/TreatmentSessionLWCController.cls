@@ -61,9 +61,24 @@ public with sharing class TreatmentSessionLWCController {
         return !protocols.isEmpty() ? protocols[0] : null;
     }
 
-    private static Session_Protocol__c[] getAssignedSessionProtocols(Id sessionId){
+    private static List<List<Session_Protocol__c>> getAssignedSessionProtocolsLists(Id sessionId){
         if(sessionId == null) return null;
-        return [SELECT Id, ProtocolId__c, Protocol_Name__c, IsSkipped__c, IsRemoved__c FROM Session_Protocol__c WHERE TreatmentSessionId__c =: sessionId ORDER BY Protocol_Name__c ASC];
+        Map<String, Session_Protocol__c[]> protocolsMap = new Map<String, Session_Protocol__c[]>();
+        for(Session_Protocol__c protocol : [SELECT Id, ProtocolId__c, Protocol_Name__c, IsSkipped__c, IsRemoved__c, ProtocolId__r.Protocol_Categories__c FROM Session_Protocol__c WHERE TreatmentSessionId__c =: sessionId ORDER BY ProtocolId__r.Protocol_Categories__c ASC, Protocol_Name__c ASC]){
+            if(protocolsMap.containsKey(protocol.ProtocolId__r.Protocol_Categories__c)){
+                protocolsMap.get(protocol.ProtocolId__r.Protocol_Categories__c).add(protocol);
+            }
+            else {
+                protocolsMap.put(protocol.ProtocolId__r.Protocol_Categories__c, new Session_Protocol__c[]{protocol});
+            }
+        }
+
+        List<List<Session_Protocol__c>> assignedSessionProtocolsLists = new List<List<Session_Protocol__c>>();
+        for(String category : protocolsMap.keySet()){
+            assignedSessionProtocolsLists.add(protocolsMap.get(category));
+        }
+
+        return assignedSessionProtocolsLists;
     }
 
     @AuraEnabled (cacheable=true)
@@ -111,13 +126,13 @@ public with sharing class TreatmentSessionLWCController {
     public static protocolAssignment getProtocolLists(Id sessionId, Id planId){
         protocolAssignment assignments = new protocolAssignment();   
         if(sessionId != null)     {
-            assignments.assignedSessionProtocols = getAssignedSessionProtocols(sessionId);
-            assignments.unassignedProtocols = getUnassignedProtocolsFromSessionProtocols(assignments.assignedSessionProtocols);
+            assignments.assignedSessionProtocolsLists = getAssignedSessionProtocolsLists(sessionId);
+            assignments.unassignedProtocolsLists = getUnassignedProtocolsListsFromSessionProtocols(assignments.assignedSessionProtocolsLists);
             assignments.preferredMotivators = getSessionPreferredMotivator(sessionId);
         }
         else if(planId != null){
-            assignments.assignedPlanProtocols = getAssignedPlanProtocols(planId);
-            assignments.unassignedProtocols = getUnassignedProtocolsFromPlanProtocols(assignments.assignedPlanProtocols);
+            assignments.assignedPlanProtocolsLists = getAssignedPlanProtocolsLists(planId);
+            assignments.unassignedProtocolsLists = getUnassignedProtocolsListsFromPlanProtocols(assignments.assignedPlanProtocolsLists);
         }
         
         return assignments;
@@ -127,28 +142,62 @@ public with sharing class TreatmentSessionLWCController {
         return [SELECT Preferred_Motivators__c FROM Treatment_Session__c WHERE Id =: sessionId LIMIT 1].Preferred_Motivators__c;
     }
 
-    private static Plan_Protocol__c[] getAssignedPlanProtocols(Id planId){
-        return [SELECT Id, Protocol__c, Protocol__r.Name, Protocol_Description__c, IsRemoved__c FROM Plan_Protocol__c WHERE Treatment_Plan__c =: planId ORDER BY Protocol__r.Name ASC];
+    private static List<List<Plan_Protocol__c>> getAssignedPlanProtocolsLists(Id planId){
+        Map<String, Plan_Protocol__c[]> protocolsMap = new Map<String, Plan_Protocol__c[]>();
+        for(Plan_Protocol__c protocol : [SELECT Id, Protocol__c, Protocol__r.Name, Protocol_Description__c, IsRemoved__c, Protocol__r.Protocol_Categories__c FROM Plan_Protocol__c WHERE Treatment_Plan__c =: planId ORDER BY Protocol__r.Protocol_Categories__c, Protocol__r.Name ASC]){
+            if(protocolsMap.containsKey(protocol.Protocol__r.Protocol_Categories__c)){
+                protocolsMap.get(protocol.Protocol__r.Protocol_Categories__c).add(protocol);
+            }
+            else {
+                protocolsMap.put(protocol.Protocol__r.Protocol_Categories__c, new Plan_Protocol__c[]{protocol});
+            }
+        }
+
+        List<List<Plan_Protocol__c>> assignedPlanProtocolsLists = new List<List<Plan_Protocol__c>>();
+        for(String category : protocolsMap.keySet()){
+            assignedPlanProtocolsLists.add(protocolsMap.get(category));
+        }
+
+        return assignedPlanProtocolsLists;
     }
 
-    private static Protocol__c[] getUnassignedProtocolsFromPlanProtocols(Plan_Protocol__c[] assignedProtocols){
+    private static List<List<Protocol__c>> getUnassignedProtocolsListsFromPlanProtocols(List<List<Plan_Protocol__c>> assignedProtocols){
         Set<Id> assignedIds = new Set<Id>();
-        for(Plan_Protocol__c sp : assignedProtocols){
-            assignedIds.add(sp.Protocol__c);
+        for(List<Plan_Protocol__c> protocolList : assignedProtocols){
+            for(Plan_Protocol__c sp : protocolList){
+                assignedIds.add(sp.Protocol__c);
+            }
         }
         return getUnassignedProtocols(assignedIds);
     }
 
-    private static Protocol__c[] getUnassignedProtocolsFromSessionProtocols(Session_Protocol__c[] assignedProtocols){
+    private static List<List<Protocol__c>> getUnassignedProtocolsListsFromSessionProtocols(List<List<Session_Protocol__c>> assignedProtocolsLists){
         Set<Id> assignedIds = new Set<Id>();
-        for(Session_Protocol__c sp : assignedProtocols){
-            assignedIds.add(sp.ProtocolId__c);
+        for(List<Session_Protocol__c> protocolList : assignedProtocolsLists){
+            for(Session_Protocol__c protocol: protocolList){
+                assignedIds.add(protocol.ProtocolId__c);
+            }
         }
         return getUnassignedProtocols(assignedIds);
     }
 
-    private static Protocol__c[] getUnassignedProtocols(Set<Id> protocolIdsToExclude){
-        return [SELECT Id, Name FROM Protocol__c WHERE IsActive__c = true AND Id NOT IN :protocolIdsToExclude ORDER BY Name ASC];
+    private static List<List<Protocol__c>> getUnassignedProtocols(Set<Id> protocolIdsToExclude){
+        Map<String, Protocol__c[]> protocolsMap = new Map<String, Protocol__c[]>();
+        for(Protocol__c protocol : [SELECT Id, Name, Protocol_Categories__c FROM Protocol__c WHERE IsActive__c = true AND Id NOT IN :protocolIdsToExclude ORDER BY Protocol_Categories__c ASC, Name ASC]){
+            if(protocolsMap.containsKey(protocol.Protocol_Categories__c)){
+                protocolsMap.get(protocol.Protocol_Categories__c).add(protocol);
+            }
+            else {
+                protocolsMap.put(protocol.Protocol_Categories__c, new Protocol__c[]{protocol});
+            }
+        }
+
+        List<List<Protocol__c>> protocolsLists = new List<List<Protocol__c>>();
+        for(String category : protocolsMap.keySet()){
+            protocolsLists.add(protocolsMap.get(category));
+        }
+
+        return protocolsLists;
     }
 
     @AuraEnabled
@@ -178,7 +227,6 @@ public with sharing class TreatmentSessionLWCController {
 
     private static void addNewProtocolsToPlan(String[] protocolIds, String planId){
         Plan_Protocol__c[] newPProtocols = new Plan_Protocol__c[0];
-
         for(String pId : protocolIds){
             Plan_Protocol__c pp = new Plan_Protocol__c(
                 Protocol__c = pId,
@@ -209,9 +257,9 @@ public with sharing class TreatmentSessionLWCController {
     }
 
     public class protocolAssignment {
-        @AuraEnabled public Session_Protocol__c[] assignedSessionProtocols { get; set; }
-        @AuraEnabled public Plan_Protocol__c[] assignedPlanProtocols { get; set; }
-        @AuraEnabled public Protocol__c[] unassignedProtocols { get; set; }
+        @AuraEnabled public List<List<Session_Protocol__c>> assignedSessionProtocolsLists { get; set; }
+        @AuraEnabled public List<List<Protocol__c>> unassignedProtocolsLists { get; set; }
+        @AuraEnabled public List<List<Plan_Protocol__c>> assignedPlanProtocolsLists { get; set; }
         @AuraEnabled public String preferredMotivators;
     }
 

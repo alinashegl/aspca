@@ -1,15 +1,17 @@
 public with sharing class PlaygroupToDoListController {
     @AuraEnabled(cacheable=true)
-    public static List<Animal__c> getPlaygroupAnimals(String location) {
-        List<Animal__c> animals = [SELECT Id, Name, Animal_Name__c, Gender__c, Shelter_Location__c, Shelter_Location2__c, Playgroup_Priority_Level__c,
-                                        Play_Category__c, Handler__c, Number_of_Playgroups__c, Play_Pause__c, Does_Not_Walk_on_a_Leash__c,
-                                        (SELECT Id FROM Animal_Playgroups__r
-                                        WHERE Playgroup_Session__r.Playgroup_Date_Time__c >= TODAY
-                                            AND Playgroup_Session__r.Playgroup_Date_Time__c < TOMORROW LIMIT 1)
-                                    FROM Animal__c
-                                    WHERE Play_Category__c NOT IN ('Unevaluated', 'DO NOT PLAY')
-                                        AND (Behavior_Play_Pause__c = null OR Behavior_Play_Pause_Date__c <= TODAY)
-                                        AND Shelter_Location2__c =: location];
+    public static List<Animal__c> getPlaygroupAnimals(String location, String sortString, String filterString) {
+        List<Animal__c> animals = Database.query('SELECT Id, Name, Animal_Name__c, Gender__c, Shelter_Location__c, Playgroup_Priority_Level__c, ' +
+                                        'Play_Category__c, Handler__c, Number_of_Playgroups__c, Does_Not_Walk_on_a_Leash__c, ' +
+                                        '(SELECT Id FROM Animal_Playgroups__r ' +
+                                        'WHERE Playgroup_Session__r.Playgroup_Date_Time__c >= TODAY ' +
+                                            'AND Playgroup_Session__r.Playgroup_Date_Time__c < TOMORROW LIMIT 1) ' +
+                                    'FROM Animal__c ' +
+                                    'WHERE Play_Category__c NOT IN (\'Unevaluated\', \'DO NOT PLAY\') ' +
+                                        'AND Id NOT IN (SELECT Animal__c FROM Play_Pause__c WHERE Type__c = \'Behavioral\' AND Start_Date__c <= TODAY AND (End_Date__c = null OR End_Date__c >= TODAY)) ' +
+                                        'AND Shelter_Location2__c =: location ' +
+                                        (String.isBlank(filterString) ? '' : filterString) +
+                                    'ORDER BY ' + (String.isBlank(sortString) ? 'Id' : sortString));
         return animals;
     }
 
@@ -45,15 +47,22 @@ public with sharing class PlaygroupToDoListController {
     @AuraEnabled(cacheable=true)
     public static List<String> getMedicalIndicators(Id animalId) {
         Set<String> indicators = new Set<String>();
-        List<Medical_Conditions__c> medConditions = [SELECT Id, Medical_Condition__c FROM Medical_Conditions__c
-                                                    WHERE Medical_Condition__c IN ('Babesia', 'In Heat') AND Animal__c = :animalId];
-        for (Medical_Conditions__c m : medConditions) {
-            if (m.Medical_Condition__c == 'Babesia') {
-                indicators.add('Babesia');
-            }
-            if (m.Medical_Condition__c == 'In Heat') {
-                indicators.add('In Heat');
-            }
+        List<Medical_Conditions__c> medConditions = [SELECT Id FROM Medical_Conditions__c
+                                                    WHERE Medical_Condition__c = 'Babesia'
+                                                        AND Date_Diagnosed__c <= TODAY
+                                                        AND (Date_Resolved__c = null OR Date_Resolved__c > TODAY)
+                                                        AND Animal__c = :animalId];
+        if (medConditions.size() > 0) {
+            indicators.add('Babesia +');
+        }
+        List<Play_Pause__c> playPauses = [SELECT Id FROM Play_Pause__c
+                                        WHERE Type__c = 'Medical'
+                                            AND Play_Pause_Reason__c = 'In Heat'
+                                            AND Start_Date__c <= TODAY
+                                            AND (End_Date__c = null OR End_Date__c > TODAY)
+                                            AND Animal__c = :animalId];
+        if (playPauses.size() > 0) {
+            indicators.add('In Heat');
         }
         return new List<String>(indicators);
     }
