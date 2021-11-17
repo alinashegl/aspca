@@ -135,10 +135,6 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>MockupController</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>MultiPickToCheckboxGroupController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -4502,11 +4498,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Session_Protocol__c.Solicitation__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Session_Protocol__c.Status_Icon__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
