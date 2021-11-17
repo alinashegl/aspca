@@ -1,14 +1,11 @@
 public with sharing class PlaygroupSessionTriggerHandler {
     public static void insertHandler(Playgroup_Session__c[] newSessions){
-        System.debug('wegot here, insertHandler');
         //if playgroup leader is populated, need to create a playgroup contact for each of the child animal playgroups
         handlePlaygroupleaderPopulated(newSessions);
 
     }
 
     public static void updateHandler(Playgroup_Session__c[] updatedSessions, Map<Id, Playgroup_Session__c> oldSessionMap){
-        System.debug('wegot here, updateHandler');
-
         //if playgroup leader is has changed, need to update, create, edit the playgroup contact for each of the child animal playgroups
         handlePlaygroupLeaderUpdated(updatedSessions, oldSessionMap);
     }
