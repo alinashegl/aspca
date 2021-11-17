@@ -98,7 +98,6 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
 
     handleCreateNewSession(){
         this.toDoListAction = 'new';
-        // this.animalIds = [];
         this.showToDoList = true;
         this.handleToggleDropdown();
     }
@@ -128,7 +127,19 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
         this.toggleDropdown = !this.toggleDropdown;
     }
 
-    handleCopyEvent(event){
+    handleToDoResponse(event){
+        if(event.detail.error){
+            this.sessionInfoError = event.detail.error;
+        }
+        else if(event.detail.action === 'copy' || event.detail.action === 'new'){
+            this.handleNewPlaygroupEvent();
+        }
+        else if(event.detail.action === 'edit'){
+            this.handleEditEvent();
+        }
+    }
+
+    handleNewPlaygroupEvent(event){
         this.showToDoList = false;
         if(event.detail.id){
             this.playgroupContacts = [];
@@ -136,8 +147,8 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
             this.recordId = event.detail.id;
             refreshApex(this.wireResponse);
         }
-        else if(event.detail.error){
-            this.sessionInfoError = event.detail.error;
+        else{
+            this.sessionInfoError = 'No playgroup Id was returned';
         }
     }
 
@@ -147,7 +158,7 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
             refreshApex(this.wireResponse);
         }
         else if(event.detail.error){
-            this.sessionInfoError = event.detail.error;
+            this.sessionInfoError = 'No playgroup Id was returned';
         }
     }
 
@@ -217,7 +228,7 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
     }
     
     get sessionButtonLabel(){
-        return 'Session: ' + this.session.Name;
+        return 'Playgroup: ' + this.session.Name;
     }
 
     get createNewSessionButtonLabel(){
@@ -254,9 +265,7 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
         } else {
             let animalIds = [];
             this.animals.forEach(animal => {
-                animalIds.push({label: animal.Animal_Name__c, name: animal.Animal__c});
-                // switch to this with the updated todo list
-                // this.animalIds.push(animal.Animal__c);
+                animalIds.push(animal.Animal__c);
             });
             return animalIds;
         }

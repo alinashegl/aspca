@@ -13,8 +13,7 @@
                     animals-to-add={toDoListAnimalIds}
                     location={location}
                     action={toDoListAction}
-                    oncopy={handleCopyEvent}
-                    onedit={handleEditEvent}
+                    ontodoevent={handleToDoResponse}
                     oncancel={handleCloseToDoList}
                 >
                 </c-playgroup-to-do-list>
@@ -44,7 +43,7 @@
                                                 variant="base"
                                                 type="submit"
                                                 name="update"
-                                                label="Save Session Info"
+                                                label="Save Playgroup Info"
                                                 disabled={disableSaveButton}
                                             >
                                             </lightning-button>
@@ -167,7 +166,7 @@
                                                     variant="brand"
                                                     type="submit"
                                                     name="update"
-                                                    label="Save Session Info"
+                                                    label="Save Playgroup Info"
                                                     disabled={disableSaveButton}
                                                 >
                                                 </lightning-button>
