@@ -1661,9 +1661,9 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Animal__c.Play_Category__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
@@ -1683,7 +1683,7 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Animal__c.Play_Priority__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -4498,6 +4498,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Session_Protocol__c.Solicitation__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Session_Protocol__c.Status_Icon__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
