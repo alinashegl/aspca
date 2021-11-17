@@ -17,7 +17,6 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
     refresh = false;
 
     //variables to pass to ToDoList
-    // animalIds = [];
     toDoListAction;
 
     //customLookup variables
@@ -41,11 +40,6 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
             this.sessionPlaygroupLeader = result.data.playgroupSession.Playgroup_Leader__c;
             if(result.data.animalPlaygroups){
                 this.animals = result.data.animalPlaygroups;
-                // this.animals.forEach(animal => {
-                //     this.animalIds.push({label: animal.Animal_Name__c, name: animal.Animal__c});
-                //     // switch to this with the updated todo list
-                //     // this.animalIds.push(animal.Animal__c);
-                // });
             }
             if(result.data.playgroupContacts){
                 this.playgroupContacts = result.data.playgroupContacts;
