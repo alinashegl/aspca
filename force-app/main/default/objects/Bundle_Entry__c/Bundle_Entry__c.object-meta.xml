@@ -149,12 +149,12 @@
     <enableHistory>false</enableHistory>
     <enableLicensing>false</enableLicensing>
     <enableReports>false</enableReports>
-    <enableSearch>false</enableSearch>
+    <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <label>Bundle Entry</label>
     <nameField>
-        <displayFormat>{000000000}</displayFormat>
+        <displayFormat>{YYYY}/{MM}/{DD}-{0}</displayFormat>
         <label>Bundle Entries Name</label>
         <type>AutoNumber</type>
     </nameField>

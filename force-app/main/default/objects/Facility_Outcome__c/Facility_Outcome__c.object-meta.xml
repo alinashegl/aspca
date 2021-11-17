@@ -157,7 +157,7 @@
     <enableStreamingApi>true</enableStreamingApi>
     <label>Facility/Outcome</label>
     <nameField>
-        <displayFormat>{0}</displayFormat>
+        <displayFormat>{YYYY}/{MM}/{DD}-{0}</displayFormat>
         <label>F/O #</label>
         <trackHistory>false</trackHistory>
         <type>AutoNumber</type>

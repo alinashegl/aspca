@@ -160,7 +160,7 @@
     <enableStreamingApi>true</enableStreamingApi>
     <label>Behavior Evaluation</label>
     <nameField>
-        <displayFormat>BE-{0000000000}</displayFormat>
+        <displayFormat>{YYYY}/{MM}/{DD}-{0}</displayFormat>
         <label>Behavior Evaluation Name</label>
         <type>AutoNumber</type>
     </nameField>

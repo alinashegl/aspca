@@ -160,7 +160,7 @@
     <enableStreamingApi>true</enableStreamingApi>
     <label>Animal Playgroup</label>
     <nameField>
-        <displayFormat>{0000}</displayFormat>
+        <displayFormat>{YYYY}/{MM}/{DD}-{0}</displayFormat>
         <label>Animal Playgroup Id</label>
         <type>AutoNumber</type>
     </nameField>

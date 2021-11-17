@@ -160,7 +160,7 @@
     <enableStreamingApi>true</enableStreamingApi>
     <label>Playgroup Session</label>
     <nameField>
-        <displayFormat>{0000}</displayFormat>
+        <displayFormat>{YYYY}/{MM}/{DD}-{0}</displayFormat>
         <label>Playgroup Session Id</label>
         <trackHistory>false</trackHistory>
         <type>AutoNumber</type>
