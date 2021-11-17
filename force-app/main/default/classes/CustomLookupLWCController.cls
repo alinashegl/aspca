@@ -5,9 +5,6 @@ public with sharing class CustomLookupLWCController {
     public static searchResponse search(String objectName, List<String> fields, String searchTerm, Integer offset, String whereClause, String fieldToQuery){
         searchResponse response = new searchResponse();
         Integer rowsToSkip = offset * 25;
-        // String searchKeyword = searchTerm + '*';
-        // String returningQuery = objectName+' ( Id, '+String.join(fields,',')+')';
-
         String whereString = ' WHERE ';
         if(whereClause != null){
             whereString += whereClause + ' AND ';
