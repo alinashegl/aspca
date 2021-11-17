@@ -127,18 +127,6 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
         this.toggleDropdown = !this.toggleDropdown;
     }
 
-    handleToDoResponse(event){
-        if(event.detail.error){
-            this.sessionInfoError = event.detail.error;
-        }
-        else if(event.detail.action === 'copy' || event.detail.action === 'new'){
-            this.handleNewPlaygroupEvent();
-        }
-        else if(event.detail.action === 'edit'){
-            this.handleEditEvent();
-        }
-    }
-
     handleNewPlaygroupEvent(event){
         this.showToDoList = false;
         if(event.detail.id){
@@ -148,7 +136,7 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
             refreshApex(this.wireResponse);
         }
         else{
-            this.sessionInfoError = 'No playgroup Id was returned';
+            this.sessionInfoError = event.detail.error;
         }
     }
 
@@ -158,7 +146,7 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
             refreshApex(this.wireResponse);
         }
         else if(event.detail.error){
-            this.sessionInfoError = 'No playgroup Id was returned';
+            this.sessionInfoError = event.detail.error;
         }
     }
 
