@@ -90,7 +90,7 @@
                             onclick={handleClick}
                             alternative-text="Add to PG">
                         </lightning-button-icon-stateful>
-                        <c-playgroup-to-do-section record-id={animal.Id} handler-code={animal.Handler__c} playgroup={animal.Animal_Playgroups__r}></c-playgroup-to-do-section>
+                        <c-playgroup-to-do-section record-id={animal.Id} handler-code={animal.Shelter_Color_Coding__c} playgroup={animal.Animal_Playgroups__r} onupdate={handleUpdate}></c-playgroup-to-do-section>
                     </lightning-tile>
                 </div>
             </template>

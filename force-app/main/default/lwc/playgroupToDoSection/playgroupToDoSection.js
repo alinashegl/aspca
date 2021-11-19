@@ -1,11 +1,12 @@
 import { api, LightningElement, wire } from 'lwc';
+import { NavigationMixin } from 'lightning/navigation';
 import FORM_FACTOR from '@salesforce/client/formFactor';
 import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
 import PLAY_CATEGORY from '@salesforce/schema/Animal__c.Play_Category__c';
 
 const fields = [PLAY_CATEGORY];
 
-export default class PlaygroupToDoSection extends LightningElement {
+export default class PlaygroupToDoSection extends NavigationMixin(LightningElement) {
     @api
     recordId;
     @api
@@ -16,6 +17,19 @@ export default class PlaygroupToDoSection extends LightningElement {
     isExpanded = false;
     isChanged = false;
     isEdit = false;
+    url;
+
+    connectedCallback() {
+        this.recordPageRef = {
+            type: 'standard__recordPage',
+            attributes: {
+                recordId: this.recordId,
+                actionName: 'view',
+            }
+        };
+        this[NavigationMixin.GenerateUrl](this.recordPageRef)
+            .then(url => this.url = url);
+    }
 
     @wire(getRecord, { recordId: '$recordId', fields })
     category;
@@ -60,5 +74,12 @@ export default class PlaygroupToDoSection extends LightningElement {
 
     handleSuccess() {
         this.isEdit = false;
+        this.dispatchEvent(new CustomEvent('update'));
+    }
+
+    handleId(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        this[NavigationMixin.Navigate](this.recordPageRef);
     }
 }

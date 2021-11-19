@@ -10,11 +10,27 @@ export default class PlaygroupToDoIndicators extends LightningElement {
     @wire(getMedicalIndicators, { animalId: '$animalId'})
     medicalIndicators;
 
-    get noData() {
-        return this.medicalIndicators.data != undefined && this.medicalIndicators.data.length === 0 && this.handlerCode !== '';
+    get showHandler() {
+        return this.handlerCode != undefined && this.handlerCode !== '' && !this.handlerCode.startsWith('Green');
     }
 
     get handlerVariant() {
-        return this.handlerCode === 'Yellow' ? 'warning' : this.handlerCode === 'Red (designated)' ? 'error' : '';
+        let colorClass;
+        if (this.handlerCode.startsWith('Yellow')) {
+            colorClass = 'yellowIcon';
+        }
+        else if (this.handlerCode.startsWith('Purple')) {
+            colorClass = 'purpleIcon';
+        }
+        else if (this.handlerCode.startsWith('Red')) {
+            colorClass = 'redIcon';
+        }
+        else if (this.handlerCode.startsWith('Blue')) {
+            colorClass = 'blueIcon';
+        }
+        else if (this.handlerCode.startsWith('Black')) {
+            colorClass = 'blackIcon';
+        }
+        return colorClass;
     }
 }
