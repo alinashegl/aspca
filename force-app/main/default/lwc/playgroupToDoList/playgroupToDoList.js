@@ -54,7 +54,7 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
             { label: 'Does Not Walk on Leash', value: 'Does_Not_Walk_on_a_Leash__c' },
             { label: 'Playgroup Priority Level', value: 'Playgroup_Priority_Level__c' },
             { label: 'Play Category', value: 'Play_Category__c' },
-            { label: 'Handler Code', value: 'Handler__c' },
+            { label: 'Handler Code', value: 'Shelter_Color_Coding__c' },
         ];
     }
 
@@ -68,7 +68,7 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
             { label: 'Does Not Walk on Leash', value: 'Does_Not_Walk_on_a_Leash__c' },
             { label: 'Playgroup Priority Level', value: 'Playgroup_Priority_Level__c' },
             { label: 'Play Category', value: 'Play_Category__c' },
-            { label: 'Handler Code', value: 'Handler__c' },
+            { label: 'Handler Code', value: 'Shelter_Color_Coding__c' },
         ];
     }
 
@@ -286,8 +286,7 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
             attributes: {
                 url: url
             }
-        },
-        true);
+        });
     }
 
     handleRemoveAnimal(event) {
@@ -369,30 +368,12 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
                 createPlaygroup({ animals: animals })
                     .then(result => {
                         if (!result.startsWith('Error')) {
-                            this[NavigationMixin.GenerateUrl]({
+                            this[NavigationMixin.Navigate]({
                                 type: 'standard__recordPage',
                                 attributes: {
                                     recordId: result,
                                     actionName: 'view',
-                                },
-                            }).then((url) => {
-                                //showing new sessionId not allowed in Mobile toast messages
-                                const message = FORM_FACTOR === 'Large' ? 'Playgroup {0} created!' : 'Playgroup created!';
-                                const event = new ShowToastEvent({
-                                    title: 'Success!',
-                                    message: message,
-                                    messageData: [
-                                        {
-                                            url: url,
-                                            label: result,
-                                        },
-                                    ],
-                                    variant: 'success',
-                                });
-                                this.dispatchEvent(event);
-                                //reset and refresh
-                                this.resetSelected();
-                                refreshApex(this.playgroupAnimals);
+                                }
                             });
                         }
                         else {
@@ -417,6 +398,7 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
     }
 
     handleUpdate() {
+        this.resetFilterValues();
         refreshApex(this.playgroupAnimals);
     }
 
