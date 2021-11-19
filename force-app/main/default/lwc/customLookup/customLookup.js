@@ -26,6 +26,18 @@ export default class CustomLookup extends LightningElement {
     @api createNewFields;
     @api allowCreateNew = false;
 
+    _clearSelection;
+    @api
+    get clearSelection() {
+        return this._clearSelection;
+    }
+    set clearSelection(value) {
+        this._clearSelection = value;
+        this.selectedRecord = undefined;
+        this.searchKey = '';
+        this.editRecord = true;
+    }
+
     formFactor = FORM_FACTOR;
     error;
 
@@ -48,16 +60,16 @@ export default class CustomLookup extends LightningElement {
     field1;
     field2;
 
+    //if the recordId exists we need to get the record to display the correct information
     @wire(getCurrentRecord, {objectName: '$objName', recordId: '$valueId', fields: '$fields'})
     response(result){
-        window.console.log('lookup result: ', JSON.stringify(result));
         if(result.data){
             this.currentRecordResponse(result.data);
         }
     }
 
+    //need to prep the field information to display correctly
     connectedCallback(){
-        window.console.log('in connectedCallback');
         let fieldList;
         if( !Array.isArray(this.displayFields)){
             fieldList       = this.displayFields.split(',');
@@ -80,40 +92,57 @@ export default class CustomLookup extends LightningElement {
         });
 
         this.fields = combinedFields.concat( JSON.parse(JSON.stringify(this.fields)) );
-    }    
+    }
 
+    //set the field values based on the response from querying the record
+    currentRecordResponse(result){
+        this.currentRecordId = result.Id;
+        let returnedRecord = result;
+        let record = {
+            FIELD1 : returnedRecord[this.field],
+            FIELD2 : returnedRecord[this.field1]
+        }
+        if( this.field2 ){
+            record.FIELD3 = [this.field2];
+        }else{
+            record.FIELD3 = '';
+        }
+
+        this.selectedRecord = record;
+    }
+
+    //remove the 'click' listener since the drop down is no longer open
     removeListener(){
-        window.console.log('in removeListener');
         document.removeEventListener('click', this._handler);
     }
 
-    handleQueryAll(){
-        window.console.log('handle query all');
-        this.showRecent = false;
-        this.handleQuery();
+    //if user clicks inside the dropdown or the input field, do not close the dropdown
+    handleDivClick(event){
+        event.stopPropagation();
     }
 
+    //update the list of records
     handlePrevious() {
         this.offset = this.offset -1;
         this.handleQuery();
     }
 
+    //update the list of records
     handleNext() {
         this.offset = this.offset +1;
         this.handleQuery();
     }
 
+    //show the create new record page
     handleAddNew(){
-        window.console.log('handle add new');
-        // document.addEventListener('click', this._handler = this.close.bind(this));
         this.showRecent = false;
         this.showExpandedSearch = false;
         this.showCreateNew = true;
         this.expandInput(true);
     }
 
+    //when user clicks into the text box, need to open the dropdown and query the recently viewed records
     handleOnFocus(){
-        window.console.log('in handleOnFocus');
         this.isLoading = true;
         if(this.isEditMode && !this.showRecent && !this.showExpandedSearch){
             this.editRecord = true;
@@ -121,10 +150,11 @@ export default class CustomLookup extends LightningElement {
         }
     }
 
+    //query for the recently viewed records
     handleQueryRecentlyViewed(){
-        window.console.log('in handleOnFocus');
+        //the click event listener is triggered on each click, if the clicks outside of specific areas the dropdown closes
         document.addEventListener('click', this._handler = this.close.bind(this));
-        getRecentlyViewedRecords({type: this.objName, whereClause: this.whereClause})
+        getRecentlyViewedRecords({objectAPI: this.objName, whereClause: this.whereClause})
         .then((result) =>{
             this.handleResponse(result);
         })
@@ -134,8 +164,8 @@ export default class CustomLookup extends LightningElement {
         });
     }
 
+    //When user is typing in the text box, update the query
     handleInputChange(event){
-        window.console.log('in handleInputChange');
         window.clearTimeout(this.delayTimeout);
         this.clickCount = 0;
         this.offset = 0;
@@ -148,6 +178,7 @@ export default class CustomLookup extends LightningElement {
         }, DELAY);
     }
 
+    //calls the apex method to query the records
     handleQuery(){
         search({ 
             objectName : this.objName,
@@ -170,8 +201,8 @@ export default class CustomLookup extends LightningElement {
         });
     }
 
+    //takes the respone from the queried records and preps the data to display correctly to the user
     handleResponse(result){
-        // window.console.log('in handleResponse: ', JSON.stringify(result));
         let stringResult = JSON.stringify(result);
         let allResult    = JSON.parse(stringResult);
         allResult.forEach( record => {
@@ -184,27 +215,10 @@ export default class CustomLookup extends LightningElement {
             }
         });
         this.searchRecords = allResult;
-        // window.console.log('this.searchRecords: ', this.searchRecords);
     }
 
-    currentRecordResponse(result){
-        this.currentRecordId = result.Id;
-        let returnedRecord = result;
-        let record = {
-            FIELD1 : returnedRecord[this.field],
-            FIELD2 : returnedRecord[this.field1]
-        }
-        if( this.field2 ){
-            record.FIELD3 = [this.field2];
-        }else{
-            record.FIELD3 = '';
-        }
-
-        this.selectedRecord = record;
-    }
-
+    //When a record is selected from the dopdown, set it as the selected record, and close the dropdown
     handleSelect(event){
-        window.console.log('handle Select');
         this.showRecent = false;
         this.showExpandedSearch = false;
         this.editRecord = false;
@@ -216,7 +230,9 @@ export default class CustomLookup extends LightningElement {
             return item.Id === recordId;
         });
         this.selectedRecord = selectRecord;
+        this.expandInput(false);
         
+        //let the parent component know a record was selected and pass the record Id
         const selectedEvent = new CustomEvent('lookup', {
             detail: {  
                 data : {
@@ -229,14 +245,16 @@ export default class CustomLookup extends LightningElement {
         this.dispatchEvent(selectedEvent);
     }
 
+
+    //If user has created a new record instead of selecting an existing one
     handleNewRecordResponse(event){
         this.editRecord = false;
         this.showCreateNew = false;
         this.valueId = event.detail.id;
-        window.console.log('handleNewRecordResponse: ', event.detail.id);
         this.clickCount = 0;
         this.expandInput(false);
 
+        //let the parent component know a record was created and pass the record Id
         const selectedEvent = new CustomEvent('lookup', {
             detail: {  
                 data : {
@@ -247,6 +265,7 @@ export default class CustomLookup extends LightningElement {
         this.dispatchEvent(selectedEvent);
     }
 
+    //When the input field/dropdown needs to expand to make it easier for the user to see the table, we need to let the parent component know.
     expandInput(expand){
         const selectedEvent = new CustomEvent('expandfield', { 
             detail: {  
@@ -261,20 +280,14 @@ export default class CustomLookup extends LightningElement {
         this.dispatchEvent(selectedEvent);
     }
 
-    handleClose(event){
-        event.stopPropagation();
-        this.editRecord = true;
-        this.searchRecords  = undefined;
-        this.handleQueryRecentlyViewed();
-    }
-
+    //When the input field/dropdown size needs to change we use this method
     handleToggleExpandSearch(){
-        window.console.log('in handleExpandSearch');
         if(this.isEditMode){
             this.showExpandedSearch = !this.showExpandedSearch;
             this.showRecent = !this.showRecent;
             if(this.showExpandedSearch){
-                this.handleQueryAll();
+                this.showRecent = false;
+                this.handleQuery();
                 this.expandInput(true);
             } else {
                 this.searchKey = '';
@@ -284,8 +297,8 @@ export default class CustomLookup extends LightningElement {
         }
     }
 
+    //when the user clicks on the icon in the text field, need to open the dropdown and query the recently viewed records
     handleInputIconClick(){
-        window.console.log('in handleIconClick');
         this.isLoading = true;
         if(this.selectedRecord == undefined && !this.editRecord){
             this.editRecord = true;
@@ -303,26 +316,14 @@ export default class CustomLookup extends LightningElement {
         }
     }
 
-    titleCase(string) {
-        var sentence = string.toLowerCase().split(" ");
-        for(var i = 0; i< sentence.length; i++){
-            sentence[i] = sentence[i][0].toUpperCase() + sentence[i].slice(1);
-        }
-        return sentence;
-    }
-
+    //this is used by the event listener
     close() { 
-        window.console.log('in close');
         this.showRecent = false;
         this.showExpandedSearch = false;
         this.editRecord = false;
         this.showCreateNew = false;
         this.expandInput(false);
         this.removeListener();
-    }
-    
-    handleModalIconClick(){
-        this.clickCount = this.clickCount == 3 ? 0 : this.clickCount + 1; 
     }
 
     get inputValue(){
@@ -339,14 +340,6 @@ export default class CustomLookup extends LightningElement {
 
     get isInputDisabled(){
         return this.isReadOnlyMode || this.showCreateNew;
-    }
-
-    get showRecentRecords(){
-        return this.showRecent;
-    }
-
-    get modalTitle(){
-        return this.showCreateNew ? 'Create New ' + this.labelName : 'Search for ' + this.labelName;
     }
 
     get disablePreviousButton(){
@@ -376,72 +369,11 @@ export default class CustomLookup extends LightningElement {
                     this.showExpandedSearch ? 'Contract' : 'Expand';
     }
 
-    get searchIcon(){
-        return 'utility:search';
-    }
-
     get addNewIcon(){
         return 'utility:new';
-    }
-
-    get imageClass(){
-        return this.clickCount > 2 ? 'background_img' : '';
-    }
-
-    get showSearchResults(){
-        return this.showRecent || this.showExpandedSearch || this.showCreateNew;
-    }
-
-    handleDivClick(event){
-        window.console.log('in handleDivClick')
-        event.stopPropagation();
-    }
-
-    // count = 0;
-
-    // get showRecent1 (){
-    //     return this.count == 1;
-    // }
-
-    // get showExpandedSearch1 (){
-    //     return this.count == 2;
-    // }
-
-    // get showCreateNew1 (){
-    //     return this.count == 3;
-    // }
-
-    get gridSize(){
-        if(this.showCreateNew || FORM_FACTOR == 'Small' || (FORM_FACTOR == 'Medium' && this.showExpandedSearch)){
-            return 'slds-col slds-size_1-of-1';
-        } else {
-            if(FORM_FACTOR == 'Medium'){
-                return 'slds-col slds-size_1-of-2';
-            }
-            else {
-                return 'slds-col slds-size_1-of-3';
-            }
-        }
     }
 
     get inputFieldClass(){
         return this.editRecord ? 'slds-input slds-combobox__input slds-combobox__input-value slds-has-focus' : 'slds-input slds-combobox__input slds-combobox__input-value';
     }
-
-
-    // handleComboboxIconClick(){
-    //     this.template
-    //     .querySelector('.accounts_list')
-    //     .classList.remove('slds-hide');
-    //     this.template
-    //     .querySelector('.slds-searchIcon')
-    //     .classList.add('slds-hide');
-    //     this.template
-    //     .querySelector('.slds-icon-utility-down')
-    //     .classList.remove('slds-hide');
-    //     this.template
-    //     .querySelector('.slds-dropdown-trigger')
-    //     .classList.add('slds-is-open');
-    // }
-
 }

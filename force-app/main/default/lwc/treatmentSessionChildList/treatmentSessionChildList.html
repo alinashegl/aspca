@@ -1,12 +1,12 @@
 <template>
     <template if:true={recordList}>
         <h2 class="slds-card__header-title slds-p-bottom_small">{tableName}</h2>
-        <!-- <lightning-card> -->
             <template for:each={recordList.data} for:item="record">
                 <div key={record.Id} class="slds-p-bottom_small">
                     <c-treatment-session-child
                         record={record}
                         object-api={objectApi}
+                        location={location}
                         ondeletechild={handleDeleteChild}
                     >
                     </c-treatment-session-child>
@@ -25,12 +25,12 @@
                     <c-treatment-session-child
                         object-api={objectApi}
                         protocol-id={protocolId}
+                        location={location}
                         onrefreshlist={handleUpdateList}
                     >
                     </c-treatment-session-child>
                 </template>
             </div>
-        <!-- </lightning-card> -->
     </template>
     
 </template>

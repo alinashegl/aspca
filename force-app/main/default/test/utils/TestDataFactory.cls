@@ -504,6 +504,25 @@ public without sharing class TestDataFactory {
         return a;
     }
 
+    //adding this to avoid creating duplicate animals
+    public static Animal__c createAnimalWithName(String name) {
+      Case c = createCase();
+      Animal__c a = new Animal__c(
+                  Name = name,
+                  Case__c = c.Id,
+                  Type_of_Animal__c = 'Dog',
+                  Color__c = 'Black',
+                  Age__c = 'Unknown At Intake',
+                  Breed__c = 'Mix',
+                  Animal_Age__c = 8,
+                  Gender__c = 'MN',
+                  Animal_Name__c = 'Doggo123',
+                  Shelter_Location2__c = 'MRC'
+      );
+      insert a;
+      return a;
+  }
+
     public static Behavior_Evaluation__c createPuppyBehaviorEvaluation() {
         Animal__c a = createAnimal();
         Behavior_Evaluation__c be = new Behavior_Evaluation__c(
@@ -753,8 +772,7 @@ public without sharing class TestDataFactory {
         return enrichment;
     }
 
-    public static List<Medical_Conditions__c> createMedicalConditions() {
-        Animal__c a = createAnimal();
+    public static List<Medical_Conditions__c> createMedicalConditions(Animal__c a) {
         List<Medical_Conditions__c> medConditions = new List<Medical_Conditions__c>{
             new Medical_Conditions__c(
                 Animal__c = a.Id,
@@ -763,14 +781,27 @@ public without sharing class TestDataFactory {
             new Medical_Conditions__c(
                 Animal__c = a.Id,
                 Medical_Condition__c = 'Dermatitis',
-                Date_Diagnosed__c = System.today()),
-            new Medical_Conditions__c(
-                Animal__c = a.Id,
-                Medical_Condition__c = 'In Heat',
                 Date_Diagnosed__c = System.today())
         };
         insert medConditions;
         return medConditions;
+    }
+
+    public static List<Play_Pause__c> createPlayPauses(Animal__c a) {
+        List<Play_Pause__c> playPauses = new List<Play_Pause__c>{
+            new Play_Pause__c(
+                Animal__c = a.Id,
+                Type__c = 'Medical',
+                Play_Pause_Reason__c = 'In Heat',
+                Start_Date__c = System.today()),
+            new Play_Pause__c(
+                Animal__c = a.Id,
+                Type__c = 'Behavioral',
+                Play_Pause_Reason__c = 'Needs a Break',
+                Start_Date__c = System.today())
+        };
+        insert playPauses;
+        return playPauses;
     }
 
     public static Playgroup_Session__c createPlaygroupSessionWithAnimals() {
@@ -778,14 +809,16 @@ public without sharing class TestDataFactory {
         Contact c = createContact();
         Playgroup_Session__c session = new Playgroup_Session__c(
             Playgroup_Location__c = 'MRC Indoor Play Yard',
-            Playgroup_Leader__c = c.Id
+            Population__c = 'MRC',
+            Playgroup_Leader__c = c.Id,
+            Contact_Ids__c = c.Id
         );
         insert session;
         Animal_Playgroup__c animalPlaygroup = new Animal_Playgroup__c(
             Animal__c = a.Id,
             Playgroup_Session__c = session.Id,
             Common_Playgroup_Note_Sections__c = 'Greeting',
-            Common_Playgroup_Notes__c = 'Defensive',
+            Common_Playgroup_Notes__c = 'Airhorn',
             Play_Rating__c = 'Green',
             Playgroup_Individual_Notes__c = 'Individual note'
         );

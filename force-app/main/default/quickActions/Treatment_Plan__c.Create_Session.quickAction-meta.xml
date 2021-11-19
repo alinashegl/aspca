@@ -10,10 +10,6 @@
         <formula>Treatment_Plan__c.Preferred_Motivators__c</formula>
     </fieldOverrides>
     <fieldOverrides>
-        <field>Treatment_BundleId__c</field>
-        <formula>Treatment_Plan__c.AssignedTreatmentBundleId__c</formula>
-    </fieldOverrides>
-    <fieldOverrides>
         <field>Treatment_Plan__c</field>
         <formula>Treatment_Plan__c.Id</formula>
     </fieldOverrides>
@@ -39,11 +35,6 @@
             </quickActionLayoutItems>
         </quickActionLayoutColumns>
         <quickActionLayoutColumns>
-            <quickActionLayoutItems>
-                <emptySpace>false</emptySpace>
-                <field>Treatment_BundleId__c</field>
-                <uiBehavior>Edit</uiBehavior>
-            </quickActionLayoutItems>
             <quickActionLayoutItems>
                 <emptySpace>false</emptySpace>
                 <field>Session_Contact__c</field>

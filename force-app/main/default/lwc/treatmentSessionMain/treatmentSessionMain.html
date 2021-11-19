@@ -216,35 +216,17 @@
                             </template>
                         </template> 
                         <template if:true={activeSession}>
-                            <template if:true={isLargeDisplay}>
-                                <lightning-layout multiple-rows>
-                                    <template for:each={activeProtocols} for:item='protocol'>
-                                        <lightning-layout-item key={protocol.Id} size="12" class="slds-p-around_xx-small">
-                                            <c-treatment-session-protocol
-                                                key={protocol.Id}
-                                                record-id={protocol.Id}
-                                                session-id={recordId}
-                                                protocol-name={protocol.ProtocolId__r.Name}
-                                                can-remove-protocol={canRemoveProtocol}
-                                                refresh={refreshProtocolLists}
-                                                >
-                                            </c-treatment-session-protocol>
-                                        </lightning-layout-item>
-                                    </template>
-                                </lightning-layout>
-                            </template>
-                            <template if:false={isLargeDisplay}>
-                                <template for:each={activeProtocols} for:item="protocol">
-                                    <c-treatment-session-protocol
-                                        key={protocol.Id}
-                                        record-id={protocol.Id}
-                                        session-id={recordId}
-                                        protocol-name={protocol.ProtocolId__r.Name}
-                                        can-remove-protocol={canRemoveProtocol}
-                                        refresh={refreshProtocolLists}
-                                        >
-                                    </c-treatment-session-protocol>
-                                </template>
+                            <template for:each={activeProtocols} for:item="protocol">
+                                <c-treatment-session-protocol
+                                    key={protocol.Id}
+                                    record-id={protocol.Id}
+                                    session-id={recordId}
+                                    protocol-name={protocol.ProtocolId__r.Name}
+                                    can-remove-protocol={canRemoveProtocol}
+                                    refresh={refreshProtocolLists}
+                                    location={location}
+                                    >
+                                </c-treatment-session-protocol>
                             </template>
                         </template>
                     </div>
