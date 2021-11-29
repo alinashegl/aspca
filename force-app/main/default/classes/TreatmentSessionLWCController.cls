@@ -183,7 +183,17 @@ public with sharing class TreatmentSessionLWCController {
 
     private static List<List<Protocol__c>> getUnassignedProtocols(Set<Id> protocolIdsToExclude){
         Map<String, Protocol__c[]> protocolsMap = new Map<String, Protocol__c[]>();
-        for(Protocol__c protocol : [SELECT Id, Name, Protocol_Categories__c FROM Protocol__c WHERE IsActive__c = true AND Id NOT IN :protocolIdsToExclude ORDER BY Protocol_Categories__c ASC, Name ASC]){
+        Set<Id> masterBundleProtocolIds = new Set<Id>();
+        for(Bundle_Entry__c entry : [
+            SELECT Id, Protocol__c
+            FROM Bundle_Entry__c 
+            WHERE Treatment_Bundle__r.IsActive__c = true 
+            AND Treatment_Bundle__r.IsMaster__c = true
+            AND Protocol__c NOT IN: protocolIdsToExclude
+        ]){
+            masterBundleProtocolIds.add(entry.Protocol__c);
+        }
+        for(Protocol__c protocol : [SELECT Id, Name, Protocol_Categories__c FROM Protocol__c WHERE Id IN :masterBundleProtocolIds ORDER BY Protocol_Categories__c ASC, Name ASC]){
             if(protocolsMap.containsKey(protocol.Protocol_Categories__c)){
                 protocolsMap.get(protocol.Protocol_Categories__c).add(protocol);
             }
