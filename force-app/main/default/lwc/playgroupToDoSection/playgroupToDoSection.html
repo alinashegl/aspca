@@ -11,7 +11,9 @@
             </div>
             <div class="slds-col slds-size_1-of-2 slds-medium-size_2-of-12 slds-large-size_1-of-12">
                 <label class="slds-form-element__label">ID#</label>
-                <lightning-output-field field-name="Name" variant="label-hidden"></lightning-output-field>
+                <a class="idLink" href={url} onclick={handleId}>
+                    <lightning-output-field field-name="Name" variant="label-hidden"></lightning-output-field>
+                </a>
             </div>
             <template if:true={expanded}>
                 <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-large-size_1-of-12">

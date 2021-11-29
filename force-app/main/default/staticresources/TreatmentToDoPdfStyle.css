@@ -11,6 +11,10 @@ thead{
     background-color: Silver;
 }
 
+tbody {
+  page-break-inside: avoid;
+}
+
 tr.spaceUnder>td {
   	padding: 3px;
 }
@@ -33,4 +37,8 @@ h1.large {
   padding: 5px;
   text-align:center;  
   font-weight: bold;
+}
+
+hr {
+  margin: 5px;
 }
