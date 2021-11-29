@@ -24,13 +24,14 @@
                     </template>
                 </div>
                 <div class="slds-col slds-size_1-of-6 slds-medium-size_2-of-12 slds-large-size_2-of-12">
-                    <template if:true={canRemoveProtocol}>
-                        <lightning-input 
+                    <template if:false={isSessionProtocol}>
+                        <lightning-input
                             type="toggle"
                             checked={notRemovedValue}
                             message-toggle-active='Assigned'
                             message-toggle-inactive='Removed'
                             onchange={toggleIsRemoved}
+                            disabled={disableToggle}
                             >
                         </lightning-input>
                     </template>

@@ -105,8 +105,8 @@ export default class TreatmentModifySessionProtocol extends LightningElement {
         
     }
 
-    get canRemoveProtocol(){
-        return hasRemoveFromPlanPermission;
+    get disableToggle(){
+        return !hasRemoveFromPlanPermission;
     }
 
     get boxClass(){
