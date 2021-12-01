@@ -52,7 +52,7 @@ export default class PlaygroupSessionContacts extends LightningElement {
         this.customLookupNewId = event.detail.data.recordId;
         this.showAnimalList = true;
         this.tempContact = event.detail.data.record;
-        if(this.contactListPill.find(cont => cont.name == this.tempContact.Id)){
+        if(this.contactListPill.find(cont => cont.name == this.customLookupNewId)){
             this.isDuplicateContact = true;
         } else {
             this.isDuplicateContact = false;
@@ -68,7 +68,7 @@ export default class PlaygroupSessionContacts extends LightningElement {
 
     handleAddContact(){
         this.showSpinner = true;
-        addContact({sessionId: this.sessionId, contactId: this.tempContact.Id, animalIdsWithNovelContact: this.tempAnimalsWithNovelContact})
+        addContact({sessionId: this.sessionId, contactId: this.customLookupNewId, animalIdsWithNovelContact: this.tempAnimalsWithNovelContact})
         .then ((result) =>{
             if(result){
                 this.contactListPill.push({
