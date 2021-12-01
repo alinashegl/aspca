@@ -8,7 +8,6 @@ global with sharing class DaybackRest {
             resp.resources = new ResourceInfo[0];
             resp.resources.addAll(getContactList());
             resp.resources.addAll(getAnimalList());
-            resp.resources.addAll(getLocationList());
             resp.folders = new String[folderNames];
             
         return resp;
@@ -33,14 +32,14 @@ global with sharing class DaybackRest {
 
     private static ResourceInfo[] getAnimalList(){
         ResourceInfo[] conResources = new ResourceInfo[0];
-        for(Animal__c animal :[SELECT Id, Animal_Name_Id__c, Shelter_Location2__c FROM Animal__c WHERE Type_of_Animal__c = 'Dog' AND Shelter_Location2__c = 'MRC']){
+        for(Animal__c animal :[SELECT Id, Animal_Name_Id__c, Current_Location__c, Current_Recent_Shelter_Location__c FROM Animal__c WHERE Type_of_Animal__c = 'Dog' AND Current_Recent_Shelter_Location__c IN('MRC', 'CRC')]){
             ResourceInfo res = new ResourceInfo();
-            res.type = animal.Shelter_Location2__c;
+            res.type = animal.Current_Recent_Shelter_Location__c;
             res.resourceName = animal.Animal_Name_Id__c;
-            res.folderName = animal.Shelter_Location2__c;
+            res.folderName = animal.Current_Recent_Shelter_Location__c;
             res.resource = animal;
 
-            folderNames.add(animal.Shelter_Location2__c);
+            folderNames.add(animal.Current_Recent_Shelter_Location__c);
 
             conResources.add(res);
         }
