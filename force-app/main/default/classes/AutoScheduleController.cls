@@ -6,7 +6,7 @@ public with sharing class AutoScheduleController {
     private static void scheduleAnimalPlaygroups(){
         Task[] tasksToInsert = new Task[0];
         Map<String, Calendar_Schedule_Config__mdt> calendarConfigMap = getCalendarConfig('Playgroup');
-        for(Animal__c animal : [SELECT Id, Playgroup_Priority_Level__c, Shelter_Location2__c, Animal_Name_Id__c FROM Animal__c WHERE Playgroup_Priority_Level__c != null AND Shelter_Location2__c = 'MRC']){
+        for(Animal__c animal : [SELECT Id, Playgroup_Priority_Level__c, Shelter_Location2__c, Animal_Name_Id__c, Current_Recent_Shelter_Location__c, Current_Location__c FROM Animal__c WHERE Playgroup_Priority_Level__c != null AND Shelter_Location2__c = 'MRC']){
             String configKey = animal.Shelter_Location2__c + '-' + animal.Playgroup_Priority_Level__c.split(' ')[0];
             if(calendarConfigMap.containsKey(configKey)){
                 tasksToInsert.addAll(prepTasks(animal, calendarConfigMap.get(configKey), 'Playgroup'));
