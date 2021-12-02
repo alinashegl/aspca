@@ -66,28 +66,6 @@ public with sharing class test_PlaygroupToDoListController {
     }
 
     @isTest
-    static void getMedicalIndicatorsSuccess() {
-        Animal__c a = TestDataFactory.createAnimal();
-        List<Medical_Conditions__c> medConditions = TestDataFactory.createMedicalConditions(a);
-        List<Play_Pause__c> playPauses = TestDataFactory.createPlayPauses(a);
-        Test.startTest();
-        List<String> conditions = PlaygroupToDoListController.getMedicalIndicators(medConditions[0].Animal__c);
-        Test.stopTest();
-        System.assertEquals(2, conditions.size());
-        System.assert(conditions.contains('Babesia +'));
-        System.assert(conditions.contains('In Heat'));
-    }
-
-    @isTest
-    static void getMedicalIndicatorsNoData() {
-        Animal__c a = TestDataFactory.createAnimal();
-        Test.startTest();
-        List<String> conditions = PlaygroupToDoListController.getMedicalIndicators(a.Id);
-        Test.stopTest();
-        System.assertEquals(0, conditions.size());
-    }
-
-    @isTest
     static void copyPlaygroupSessionSuccess() {
         Playgroup_Session__c playSession = TestDataFactory.createPlaygroupSessionWithAnimals();
         Animal__c a = [SELECT Id FROM Animal__c LIMIT 1];
@@ -122,12 +100,13 @@ public with sharing class test_PlaygroupToDoListController {
     static void editPlaygroupSessionSuccess() {
         Playgroup_Session__c playSession = TestDataFactory.createPlaygroupSessionWithAnimals();
         Animal__c a = [SELECT Id FROM Animal__c LIMIT 1];
+        Animal__c b = TestDataFactory.createAnimalWithName('b');
         Test.startTest();
-        Id sessionId = PlaygroupToDoListController.editPlaygroup(playSession.Id, new List<Id>{a.Id});
+        Id sessionId = PlaygroupToDoListController.editPlaygroup(playSession.Id, new List<Id>{a.Id, b.Id});
         Test.stopTest();
         Playgroup_Session__c editSession = [SELECT Id, Playgroup_Location__c, Playgroup_Leader__c, (SELECT Id FROM Animal_Playgroups__r) FROM Playgroup_Session__c WHERE Id = :sessionId LIMIT 1];
         System.assertEquals(playSession.Playgroup_Location__c, editSession.Playgroup_Location__c);
         System.assertEquals(playSession.Playgroup_Leader__c, editSession.Playgroup_Leader__c);
-        System.assertEquals(1, editSession.Animal_Playgroups__r.size());
+        System.assertEquals(2, editSession.Animal_Playgroups__r.size());
     }
 }

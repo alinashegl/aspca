@@ -1,18 +1,10 @@
-import { api, LightningElement, wire } from 'lwc';
+import { api, LightningElement } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
 import FORM_FACTOR from '@salesforce/client/formFactor';
-import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
-import PLAY_CATEGORY from '@salesforce/schema/Animal__c.Play_Category__c';
-
-const fields = [PLAY_CATEGORY];
 
 export default class PlaygroupToDoSection extends NavigationMixin(LightningElement) {
     @api
-    recordId;
-    @api
-    handlerCode;
-    @api
-    playgroup = false;
+    playgroupAnimal;
     hasRendered = false;
     isExpanded = false;
     isChanged = false;
@@ -23,7 +15,7 @@ export default class PlaygroupToDoSection extends NavigationMixin(LightningEleme
         this.recordPageRef = {
             type: 'standard__recordPage',
             attributes: {
-                recordId: this.recordId,
+                recordId: this.playgroupAnimal.Id,
                 actionName: 'view',
             }
         };
@@ -31,11 +23,8 @@ export default class PlaygroupToDoSection extends NavigationMixin(LightningEleme
             .then(url => this.url = url);
     }
 
-    @wire(getRecord, { recordId: '$recordId', fields })
-    category;
-
     get categoryValue() {
-        return getFieldValue(this.category.data, PLAY_CATEGORY);
+        return this.playgroupAnimal.Play_Category__c;
     }
 
     get categoryClass() {
@@ -75,11 +64,5 @@ export default class PlaygroupToDoSection extends NavigationMixin(LightningEleme
     handleSuccess() {
         this.isEdit = false;
         this.dispatchEvent(new CustomEvent('update'));
-    }
-
-    handleId(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        this[NavigationMixin.Navigate](this.recordPageRef);
     }
 }
