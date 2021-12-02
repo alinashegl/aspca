@@ -6,8 +6,13 @@ public with sharing class AutoScheduleController {
     private static void scheduleAnimalPlaygroups(){
         Task[] tasksToInsert = new Task[0];
         Map<String, Calendar_Schedule_Config__mdt> calendarConfigMap = getCalendarConfig('Playgroup');
-        for(Animal__c animal : [SELECT Id, Playgroup_Priority_Level__c, Shelter_Location2__c, Animal_Name_Id__c, Current_Recent_Shelter_Location__c, Current_Location__c FROM Animal__c WHERE Playgroup_Priority_Level__c != null AND Shelter_Location2__c = 'MRC']){
-            String configKey = animal.Shelter_Location2__c + '-' + animal.Playgroup_Priority_Level__c.split(' ')[0];
+        for(Animal__c animal : [
+            SELECT Id, Playgroup_Priority_Level__c, Shelter_Location2__c, Animal_Name_Id__c, Current_Recent_Shelter_Location__c, Current_Location__c, Behavior_Case_Worker__r.Name
+            FROM Animal__c 
+            WHERE Playgroup_Priority_Level__c != null 
+            AND Current_Recent_Shelter_Location__c IN ('MRC', 'CRC')
+        ]){
+            String configKey = animal.Current_Recent_Shelter_Location__c + '-' + animal.Playgroup_Priority_Level__c.split(' ')[0];
             if(calendarConfigMap.containsKey(configKey)){
                 tasksToInsert.addAll(prepTasks(animal, calendarConfigMap.get(configKey), 'Playgroup'));
             }
@@ -36,14 +41,16 @@ public with sharing class AutoScheduleController {
         for(String day : dateMap.keySet()){
             Task newTask = new Task(
                 WhatId = animal.Id,
+                Animal__c = animal.Id,
                 RecordTypeId = taskRTId,
                 ActivityDate = dateMap.get(day),
-                Description = 'Playgroup is needed for: ' + animal.Animal_Name_Id__c,
+                Description = 'Playgroup is needed for: ' + animal.Animal_Name_Id__c + ' (' + animal.Current_Recent_Shelter_Location__c + ')',
                 IsReminderSet = true,
                 Status = 'Not Started',
-                WhoId = '0030100000IdslhAAB',
+                WhoId = animal.Behavior_Case_Worker__c != null ? animal.Behavior_Case_Worker__c : '0030100000IdslhAAB',
                 Subject = 'Playgroup',
-                Assigned_Resources__c = animal.Animal_Name_Id__c + ';Dwight Schrute'
+                Assigned_Resources__c = animal.Animal_Name_Id__c + ';' + (animal.Behavior_Case_Worker__r.Name != null ? animal.Behavior_Case_Worker__r.Name : 'Dwight Schrute')
+
             );
             newTasks.add(newTask);
         }
