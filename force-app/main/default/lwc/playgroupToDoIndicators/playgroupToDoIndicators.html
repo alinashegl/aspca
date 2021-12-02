@@ -1,6 +1,13 @@
 <template>
-    <template for:each={medicalIndicators.data} for:item='condition'>
-        <c-playgroup-to-do-indicator-item key={condition} condition={condition}></c-playgroup-to-do-indicator-item>
+    <template if:true={babesia}>
+        <p>
+            <span class="slds-var-p-right_xx-small">Babesia +</span>
+        </p>
+    </template>
+    <template if:true={inHeat}>
+        <p>
+            <span class="slds-var-p-right_xx-small">In Heat</span>
+        </p>
     </template>
     <template if:true={showHandler}>
         <p>

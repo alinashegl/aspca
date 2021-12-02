@@ -77,6 +77,9 @@ export default class CustomLookup extends LightningElement {
             fieldList       = this.displayFields;
         }
         
+        if(fieldList.length == 1) {
+            this.field = fieldList[0].trim();
+        }
         if(fieldList.length > 1){
             this.field = fieldList[0].trim();
             this.field1 = fieldList[1].trim();

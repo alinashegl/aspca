@@ -1,8 +1,17 @@
 public with sharing class PlaygroupToDoListController {
     @AuraEnabled(cacheable=true)
     public static List<Animal__c> getPlaygroupAnimals(String location, String sortString, String filterString) {
-        List<Animal__c> animals = Database.query('SELECT Id, Name, Animal_Name__c, Gender__c, Shelter_Location__c, Playgroup_Priority_Level__c, ' +
-                                        'Play_Category__c, Shelter_Color_Coding__c, Number_of_Playgroups__c, Does_Not_Walk_on_a_Leash__c, ' +
+        List<Animal__c> animals = Database.query('SELECT Id, Name, Animal_Name__c, Gender__c, Shelter_Location__c, Playgroup_Priority_Level__c, Play_Style_Notes__c, ' +
+                                        'Play_Category__c, Shelter_Color_Coding__c, Number_of_Playgroups__c, Does_Not_Walk_on_a_Leash__c, Does_Not_Walk_on_a_Leash_Notes__c, ' +
+                                        '(SELECT Id FROM Medical_Conditions__r ' +
+                                        'WHERE Medical_Condition__c = \'Babesia\' ' +
+                                            'AND Date_Diagnosed__c <= TODAY ' +
+                                            'AND (Date_Resolved__c = null OR Date_Resolved__c > TODAY) LIMIT 1), ' +
+                                        '(SELECT Id FROM Play_Pauses__r ' +
+                                        'WHERE Type__c = \'Medical\' ' +
+                                            'AND Play_Pause_Reason__c = \'In Heat\' ' +
+                                            'AND Start_Date__c <= TODAY ' +
+                                            'AND (End_Date__c = null OR End_Date__c > TODAY) LIMIT 1), ' +
                                         '(SELECT Id FROM Animal_Playgroups__r ' +
                                         'WHERE Playgroup_Session__r.Playgroup_Date_Time__c >= TODAY ' +
                                             'AND Playgroup_Session__r.Playgroup_Date_Time__c < TOMORROW LIMIT 1) ' +
@@ -42,29 +51,6 @@ public with sharing class PlaygroupToDoListController {
             sessionResult = 'Error creating playgroup session';
         }
         return sessionResult;
-    }
-
-    @AuraEnabled(cacheable=true)
-    public static List<String> getMedicalIndicators(Id animalId) {
-        Set<String> indicators = new Set<String>();
-        List<Medical_Conditions__c> medConditions = [SELECT Id FROM Medical_Conditions__c
-                                                    WHERE Medical_Condition__c = 'Babesia'
-                                                        AND Date_Diagnosed__c <= TODAY
-                                                        AND (Date_Resolved__c = null OR Date_Resolved__c > TODAY)
-                                                        AND Animal__c = :animalId];
-        if (medConditions.size() > 0) {
-            indicators.add('Babesia +');
-        }
-        List<Play_Pause__c> playPauses = [SELECT Id FROM Play_Pause__c
-                                        WHERE Type__c = 'Medical'
-                                            AND Play_Pause_Reason__c = 'In Heat'
-                                            AND Start_Date__c <= TODAY
-                                            AND (End_Date__c = null OR End_Date__c > TODAY)
-                                            AND Animal__c = :animalId];
-        if (playPauses.size() > 0) {
-            indicators.add('In Heat');
-        }
-        return new List<String>(indicators);
     }
 
     @AuraEnabled
