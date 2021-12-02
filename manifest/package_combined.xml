@@ -1,55 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
-        <members>Animal__c.Case_Type1__c</members>
-        <members>Animal__c.Current_Playgroup_Summary_Notes__c</members>
-        <members>Animal__c.Shelter_Location2__c</members>
-        <members>Playgroup_Session__c.Playgroup_Date__c</members>
-        <members>Playgroup_Session__c.Population__c</members>
-        <members>Animal_playgroup__c.Common_Playgroup_Notes__c</members>
-        <name>CustomField</name>
-    </types>
-    <types>
-        <members>Behavior_Team</members>
-        <name>PermissionSet</name>
-    </types>
-    <types>
-        <members>PlaygroupToDoPdf</members>
-        <name>ApexPage</name>
-    </types>
-    <types>
         <members>PlaygroupToDoListController</members>
-        <members>PlaygroupToDoPdfController</members>
-        <members>TreatmentSessionLWCController</members>
+        <members>TreatmentToDoListController</members>
+        <members>test_PlaygroupToDoListController</members>
+        <members>test_TreatmentToDoListController</members>
         <name>ApexClass</name>
     </types>
     <types>
-        <members>Animal_Playgroup_Record_Page</members>
-        <members>Dog_Database_Animal_Page_Layout</members>
+        <members>Demo_Home_Page_Default</members>
+        <members>To_Do_Lists</members>
         <name>FlexiPage</name>
     </types>
     <types>
+        <members>customLookup</members>
         <members>playgroupToDoIndicators</members>
         <members>playgroupToDoList</members>
         <members>playgroupToDoSection</members>
-        <members>treatmentModifySessionProtocol</members>
-        <members>playgroupSessionAnimal</members>
-        <members>playgroupSessionContacts</members>
-        <members>customLookup</members>
+        <members>treatmentPriorityToDoList</members>
+        <members>treatmentToDoSection</members>
         <name>LightningComponentBundle</name>
     </types>
+<!--
     <types>
-        <members>Animal_Playgroup__c-Animal Playgroup Layout</members>
-        <members>Animal__c-Animal Layout %28Behavior%29</members>
-        <members>Play_Pause__c-Play Pause Layout</members>
-        <members>Playgroup_Session__c-Playgroup Session Layout</members>
+        <members>*</members>
+        <name>CustomField</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>PermissionSet</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>ApexPage</name>
+    </types>
+    <types>
+        <members>*</members>
         <name>Layout</name>
     </types>
     <type>
-        <members>TreatmentToDoPdfStyle</members>
+        <members>*</members>
         <name>staticresources</members>
     </types>
-<!--
+
     <types>
         <members>*</members>
         <name>Report</name>
