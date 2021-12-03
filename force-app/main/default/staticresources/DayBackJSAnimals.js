@@ -24,7 +24,7 @@ var DayBack = (function() {
 			{
 				name : 'dbk.url',
         payload : {
-				 "url":location.search + '&sidebarShow=false' + '&filterResources=' + filterResources,
+				 "url":location.search + '&sidebarShow=true' + '&filterResources=' + filterResources + '&view=basicResourceHor',
 				 "location":window.location.pathname,
 			  }
 		  }
@@ -89,30 +89,6 @@ var DayBack = (function() {
 				//add your event subscription events here separated by commas
 				//Use a unique name with the dbk prefix
 				//follow the syntax from the above events
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	    //#############################################################
 			] //end array of subscriptions
