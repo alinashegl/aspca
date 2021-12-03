@@ -24,7 +24,7 @@ var DayBack = (function() {
 			{
 				name : 'dbk.url',
         payload : {
-				 "url":location.search + '&sidebarShow=true' + '&filterResources=' + filterResources + '&view=basicResourceHor',
+				 "url":location.search + '&sidebarShow=false' + '&filterResources=' + filterResources + '&view=basicResourceHor',
 				 "location":window.location.pathname,
 			  }
 		  }
