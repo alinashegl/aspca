@@ -1,15 +1,20 @@
 @RestResource(urlMapping='/resources/*')
 global with sharing class DaybackRest {
     public static Set<String> folderNames = new Set<String>();
+    public static String sfObject;
 
     @HttpGet
     global static DaybackResponse getResources() {
-            DaybackResponse resp = new DaybackResponse();
-            resp.resources = new ResourceInfo[0];
-            resp.resources.addAll(getContactList());
-            resp.resources.addAll(getAnimalList());
-            resp.folders = new String[folderNames];
-            resp.folderInfos = prepFolderInfos();
+        RestRequest restReq = RestContext.request;
+        sfObject = restReq.params.get('sfObject');
+
+        DaybackResponse resp = new DaybackResponse();
+        resp.resources = new ResourceInfo[0];
+        resp.resources.addAll(getContactList());
+        resp.resources.addAll(getAnimalList());
+        resp.folders = new String[folderNames];
+        resp.folderInfos = prepFolderInfos();
+        resp.sfObject = sfObject;
             
         return resp;
     }
@@ -87,9 +92,12 @@ global with sharing class DaybackRest {
     }
 
     private static Boolean getFolderSelected(String name){
-        Boolean selected = true;
-        if(name == 'CRC' || name == 'MRC'){
-            selected = false;
+        Boolean selected = false;
+        if(sfObject == 'default'){
+            selected = true;
+            if(name == 'CRC' || name == 'MRC'){
+                selected = false;
+            }
         }
         return selected;
     }
@@ -98,6 +106,7 @@ global with sharing class DaybackRest {
         public ResourceInfo[] resources;
         public folderInfo[] folderInfos;
         public String[] folders;
+        public String sfObject;
     }
 
     global class folderInfo{
@@ -111,6 +120,7 @@ global with sharing class DaybackRest {
         public String resourceName;
         public String folderName;
         public String shortName;
+        public String selected;
         public SObject resource;
     }
 }
