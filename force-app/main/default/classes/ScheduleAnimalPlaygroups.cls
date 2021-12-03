@@ -31,8 +31,8 @@ public with sharing class ScheduleAnimalPlaygroups {
                 IsReminderSet = true,
                 Status = 'Not Started',
                 WhoId = animal.Behavior_Case_Worker__c != null ? animal.Behavior_Case_Worker__c : '0030100000IdslhAAB',
-                Subject = 'Playgroup',
-                Assigned_Resources__c = animal.Animal_Name_Id__c + ';' + AutoScheduleTasksUtil.NO_RESOURCE_DEFAULT
+                Subject = 'Playgroup'
+                // ,Assigned_Resources__c = animal.Animal_Name_Id__c + ';' + AutoScheduleTasksUtil.NO_RESOURCE_DEFAULT
 
             );
             newTasks.add(newTask);

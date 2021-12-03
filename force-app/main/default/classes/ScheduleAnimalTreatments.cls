@@ -39,8 +39,8 @@ public with sharing class ScheduleAnimalTreatments {
                 IsReminderSet = true,
                 Status = 'Not Started',
                 WhoId = treatment.Animal__r.Behavior_Case_Worker__c != null ? treatment.Animal__r.Behavior_Case_Worker__c : '0030100000IdslhAAB',
-                Subject = 'Treatment',
-                Assigned_Resources__c = treatment.Animal__r.Animal_Name_Id__c + ';' + AutoScheduleTasksUtil.NO_RESOURCE_DEFAULT
+                Subject = 'Treatment'
+                // ,Assigned_Resources__c = treatment.Animal__r.Animal_Name_Id__c + ';' + AutoScheduleTasksUtil.NO_RESOURCE_DEFAULT
 
             );
             newTasks.add(newTask);
