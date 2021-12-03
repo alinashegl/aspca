@@ -9,6 +9,7 @@ global with sharing class DaybackRest {
             resp.resources.addAll(getContactList());
             resp.resources.addAll(getAnimalList());
             resp.folders = new String[folderNames];
+            resp.folderInfos = prepFolderInfos();
             
         return resp;
     }
@@ -65,15 +66,51 @@ global with sharing class DaybackRest {
         return conResources;
     }
 
+    private static folderInfo[] prepFolderInfos(){
+        folderInfo[] infos = new folderInfo[0];
+        for(String folder : folderNames){
+            folderInfo info = new folderInfo();
+            info.name = folder;
+            info.color = getFolderColor(folder);
+            info.selected = getFolderSelected(folder);
+            infos.add(info);
+        }
+        return infos;
+    }
+
+    private static String getFoldercolor(String name){
+        String color = 'rgba(244, 244, 244, 0.85)';
+        if(name == 'CRC' || name == 'MRC'){
+            color = 'rgba(245, 39, 39, 0.8)';
+        }
+        return color;
+    }
+
+    private static Boolean getFolderSelected(String name){
+        Boolean selected = true;
+        if(name == 'CRC' || name == 'MRC'){
+            selected = false;
+        }
+        return selected;
+    }
+
     global class DaybackResponse{
         public ResourceInfo[] resources;
+        public folderInfo[] folderInfos;
         public String[] folders;
+    }
+
+    global class folderInfo{
+        public String name;
+        public String color;
+        public Boolean selected;
     }
 
     global class ResourceInfo{
         public String type;
         public String resourceName;
         public String folderName;
+        public String shortName;
         public SObject resource;
     }
 }
