@@ -77,6 +77,9 @@ export default class CustomLookup extends LightningElement {
             fieldList       = this.displayFields;
         }
         
+        if(fieldList.length == 1) {
+            this.field = fieldList[0].trim();
+        }
         if(fieldList.length > 1){
             this.field = fieldList[0].trim();
             this.field1 = fieldList[1].trim();
@@ -252,17 +255,32 @@ export default class CustomLookup extends LightningElement {
         this.showCreateNew = false;
         this.valueId = event.detail.id;
         this.clickCount = 0;
-        this.expandInput(false);
-
-        //let the parent component know a record was created and pass the record Id
-        const selectedEvent = new CustomEvent('lookup', {
-            detail: {  
-                data : {
-                    recordId        : event.detail.id,
+        let response;
+        getCurrentRecord({objectName: this.objName, recordId: event.detail.id, fields: this.fields})
+        .then((result) =>{
+            response = result;
+            this.currentRecordResponse(result);
+        })
+        .finally( ()=>{
+            this.showRecent = true;
+            this.isLoading = false;
+            this.expandInput(false);
+            
+            //let the parent component know a record was created and pass the record Id
+            const selectedEvent = new CustomEvent('lookup', {
+                detail: {  
+                    data : {
+                        recordId       : event.detail.id,
+                        record : response
+                    }
                 }
-            }
+            });
+            this.dispatchEvent(selectedEvent);
         });
-        this.dispatchEvent(selectedEvent);
+        
+
+        
+        
     }
 
     //When the input field/dropdown needs to expand to make it easier for the user to see the table, we need to let the parent component know.
