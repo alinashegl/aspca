@@ -6,6 +6,8 @@
         <members>test_PlaygroupToDoListController</members>
         <members>test_TreatmentToDoListController</members>
         <members>test_PlaygroupToDoPdfController</members>
+        <members>Last5TreatmentsController</members>
+        <members>test_Last5TreatmentsController</members>
         <name>ApexClass</name>
     </types>
     <types>
@@ -26,6 +28,14 @@
         <members>Animal_Playgroup__c.Play_Rating__c</members>
         <name>CustomField</name>
     </types>
+    <types>
+        <members>Last5TreatmentsReport</members>
+        <name>ApexPage</name>
+    </types>
+    <type>
+        <members>VF_PDF_StyleSheet</members>
+        <name>staticresources</members>
+    </types>    
 <!--
     <types>
         <members>*</members>
@@ -33,17 +43,8 @@
     </types>
     <types>
         <members>*</members>
-        <name>ApexPage</name>
-    </types>
-    <types>
-        <members>*</members>
         <name>Layout</name>
     </types>
-    <type>
-        <members>*</members>
-        <name>staticresources</members>
-    </types>
-
     <types>
         <members>*</members>
         <name>Report</name>
