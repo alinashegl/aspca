@@ -24,7 +24,12 @@ var DayBack = (function() {
 			{
 				name : 'dbk.url',
         payload : {
-				 "url":location.search + '&sidebarShow=false' + '&filterResources=' + filterResources + '&view=basicResourceHor',
+				 "url":location.search + 
+				 '&sidebarShow=false' + 
+				 '&filterResources=' + filterResources + 
+				 '&view=basicResourceHor' + 
+				 '&source=Playgroup Dogs' + 
+				 '&source=Treatment Dogs',
 				 "location":window.location.pathname,
 			  }
 		  }
