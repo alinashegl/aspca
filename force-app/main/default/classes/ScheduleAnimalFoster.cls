@@ -37,6 +37,11 @@ public with sharing class ScheduleAnimalFoster {
     public static Task[] prepTasks(Animal__c animal, Calendar_Schedule_Config__mdt config){
         Id taskRTId = [SELECT Id FROM RecordType WHERE SobjectType = 'Task' AND DeveloperName =: AutoScheduleTasksUtil.FOSTER_TASK_RECORD_TYPE_NAME LIMIT 1].Id;
         Task[] newTasks = new Task[0];
+        Map<String, Date> dateMap = new Map<String, Date>();
+
+        Facility_Outcome__c location = animal.Animal_Locations__r[0];
+
+        
         // Map<String, Date> dateMap = new Map<String, Date>();
         
         // if(config != null){
