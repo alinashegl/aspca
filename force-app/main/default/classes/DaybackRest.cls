@@ -84,12 +84,12 @@ global with sharing class DaybackRest {
 
     private static Boolean getFolderSelected(String name){
         Boolean selected = false;
-        // if(sfObject == 'default'){
-        //     selected = true;
-        //     if(name == 'CRC' || name == 'MRC'){
-        //         selected = false;
-        //     }
-        // }
+        if(sfObject == 'default'){
+            selected = true;
+            if(name == 'CRC' || name == 'MRC'){
+                selected = false;
+            }
+        }
         return selected;
     }
 
