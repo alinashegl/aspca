@@ -1,6 +1,7 @@
 public with sharing class AutoScheduleTasksUtil {
     public static final String TREATMENT_TASK_RECORD_TYPE_NAME = 'Behavior_TX';
     public static final String PLAYGROUP_TASK_RECORD_TYPE_NAME = 'Playgroup';
+    public static final String FOSTER_TASK_RECORD_TYPE_NAME = 'Foster Follow Up';
     public static final String NO_RESOURCE_DEFAULT = 'No Contact';
 
     public static Map<String, Calendar_Schedule_Config__mdt> getCalendarConfig(String taskType){
