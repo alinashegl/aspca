@@ -1,14 +1,12 @@
-import { api, LightningElement, wire } from 'lwc';
-import getMedicalIndicators from '@salesforce/apex/PlaygroupToDoListController.getMedicalIndicators';
+import { api, LightningElement } from 'lwc';
 
 export default class PlaygroupToDoIndicators extends LightningElement {
     @api
-    animalId;
+    babesia = false;
+    @api
+    inHeat = false;
     @api
     handlerCode;
-
-    @wire(getMedicalIndicators, { animalId: '$animalId'})
-    medicalIndicators;
 
     get showHandler() {
         return this.handlerCode != undefined && this.handlerCode !== '' && !this.handlerCode.startsWith('Green');
