@@ -1,165 +1,107 @@
-
-
-thead{
-/*	display: table-header-group;*/
-    background-color: Silver;
-/*    color: White;*/
-}
-/*tfoot{
-	display: table-footer-group;
-}
-table{
-	-fs-table-paginate: paginate;
-}
-*/
-@page { 
-        size: letter landscape;
-/*        margin-top: 40px;
-        margin-bottom: 40px;*/
-    @top-right {
-      content: "Page " counter(page) " of " counter(pages);
-          font-weight: lighter;
-          font-size:8pt;
-        }
-/*    @top-left {
-        content: element(header_left);
-    }
-    @bottom-center {
-        content: element(footer_center);
-    }*/
+thead {
+  background-color: Silver;
+  page-break-inside: avoid;
 }
 
-/*@page:first{
-    @top-right {
-      content: counter();
-          font-weight: lighter;
-          font-size:8pt;
-    }
-} 
-
-.header_left {
-    text-align: left;
-    position: running(header_left);
+@page {
+  size: letter landscape;
+  @top-right {
+    content: "Page " counter(page) " of " counter(pages);
+    font-weight: lighter;
+    font-size: 8pt;
+  }
 }
 
-.footer_center {
-    text-align: center;
-    position: running(footer_center);
+tbody {
+  page-break-inside: avoid;
 }
 
-.pageNumber:before {
-    content: counter(page); 
+hr {
+  margin: 5px;
 }
 
-.pageCount:before {
-    content: counter(pages);  
+tr.spaceUnder > td {
+  padding: 3px;
 }
 
-.mytblclass{
-       -fs-table-paginate: paginate;
-}
-	
-.eachField.narrowRegion{
-    width:100%;
-}
-
-.eachField{
-    width:50%;
-    display:inline-block;
-}
-
-.border {
-    border: 1px solid black;    
-}*/
-
-tr.spaceUnder>td {
-/*    border-bottom: 1px solid black;
-  	padding-bottom: 1em;
-  	padding-left: 1em;*/
-  	padding: 3px;
-}
-
-.line{
-	border-bottom: .5px solid black;
+.line {
+  border-bottom: 0.5px solid black;
 }
 
 td.width {
-    width: 16%;
+  width: 16%;
 }
 
 tr.small {
-    font-size: .75em;
+  font-size: 0.75em;
 }
 
 table {
-/*    page-break-inside: avoid;
-	-fs-table-paginate: paginate;
-    border: 1px solid black;*/
-    padding: 5px;
-    vertical-align:Top;
-    font-size: small;
-    width: 100%;
+  padding: 5px;
+  vertical-align: Top;
+  font-size: small;
+  width: 100%;
 }
 
 h1.large {
   font-size: 1.5em;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   padding: 5px;
-  text-align:center;  
+  text-align: center;
   font-weight: bold;
 }
 
 .tabHeader {
-    font-weight: bold;
-    font-size: 24px;
+  font-weight: bold;
+  font-size: 24px;
 }
 
 .tabDesc {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 input.largerCheckbox {
--webkit-box-shadow: 0px 0px 0px 1px rgba(255,0,0,1);
--moz-box-shadow: 0px 0px 0px 1px rgba(255,0,0,1);
-box-shadow: 0px 0px 0px 1px rgba(255,0,0,1);
+  -webkit-box-shadow: 0px 0px 0px 1px rgba(255, 0, 0, 1);
+  -moz-box-shadow: 0px 0px 0px 1px rgba(255, 0, 0, 1);
+  box-shadow: 0px 0px 0px 1px rgba(255, 0, 0, 1);
 }
 
-.slds-spinner_container {  
+.slds-spinner_container {
   z-index: 10000;
-  position: fixed;   
+  position: fixed;
 }
 
 .grid-container {
   display: inline-grid;
   grid-template-columns: auto auto auto auto;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   padding: 5px;
   width: 100%;
 }
 
 .grid-item {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border: 0px white;
   padding: 5px;
   text-align: left;
 }
 
 .c-container {
-    border: 1px solid #d8dde6;
-    margin: 10px 0 20px 0;
+  border: 1px solid #d8dde6;
+  margin: 10px 0 20px 0;
 }
 
-button.button3{
-    display:inline-block;
-    padding:0.3em 1.2em;
-    margin:0 0.3em 0.3em 0;
-    border-radius:2em;
-    box-sizing: border-box;
-    text-decoration:none;
-    font-family:'Roboto',sans-serif;
-    font-weight:300;
-    color:#FFFFFF;
-    background-color:#4eb5f1;
-    text-align:center;
-    transition: all 0.2s;
+button.button3 {
+  display: inline-block;
+  padding: 0.3em 1.2em;
+  margin: 0 0.3em 0.3em 0;
+  border-radius: 2em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  color: #ffffff;
+  background-color: #4eb5f1;
+  text-align: center;
+  transition: all 0.2s;
 }
