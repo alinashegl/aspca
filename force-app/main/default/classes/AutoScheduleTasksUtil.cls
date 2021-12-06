@@ -1,7 +1,7 @@
 public with sharing class AutoScheduleTasksUtil {
     public static final String TREATMENT_TASK_RECORD_TYPE_NAME = 'Behavior_TX';
     public static final String PLAYGROUP_TASK_RECORD_TYPE_NAME = 'Playgroup';
-    public static final String FOSTER_TASK_RECORD_TYPE_NAME = 'Foster Follow Up';
+    public static final String FOSTER_TASK_RECORD_TYPE_NAME = 'Foster_Follow_Up';
     public static final String NO_RESOURCE_DEFAULT = 'No Contact';
 
     public static Map<String, Calendar_Schedule_Config__mdt> getCalendarConfig(String taskType){
@@ -41,7 +41,6 @@ public with sharing class AutoScheduleTasksUtil {
         Map<String, Date> dateMap = new Map<String, Date>();
         Date myDate = Date.today();
         Date weekStart = myDate.toStartofWeek().addDays(2);
-        System.debug('weekStart = ' + weekStart);
         Map<String, Integer> dayOfWeekMap = dayOfWeekMap();
         for(String day : customSchedule.split(';')){
             //exclude dates in the past
@@ -60,7 +59,14 @@ public with sharing class AutoScheduleTasksUtil {
             'Friday__c' => 3,
             'Saturday__c' => 4,
             'Sunday__c' => 5,
-            'Monday__c' => 6
+            'Monday__c' => 6,
+            'Tuesday' => 0,
+            'Wednesday' => 1,
+            'Thursday' => 2,
+            'Friday' => 3,
+            'Saturday' => 4,
+            'Sunday' => 5,
+            'Monday' => 6
         };
     }    
 }
