@@ -21,7 +21,7 @@ global with sharing class DaybackRest {
 
     private static ResourceInfo[] getContactList(){
         ResourceInfo[] conResources = new ResourceInfo[0];
-        for(Contact con :[SELECT Id, Name, Contact_Type__c FROM Contact WHERE Title = 'stevenDev']){
+        for(Contact con :[SELECT Id, Name, Contact_Type__c FROM Contact WHERE Title = 'stevenDev' ORDER BY LastName, FirstName]){
             ResourceInfo res = new ResourceInfo();
             res.type = 'Contacts';
             res.resourceName = con.Name;
@@ -38,7 +38,7 @@ global with sharing class DaybackRest {
 
     private static ResourceInfo[] getAnimalList(){
         ResourceInfo[] conResources = new ResourceInfo[0];
-        for(Animal__c animal :[SELECT Id, Animal_Name_Id__c, Current_Location__c, Current_Recent_Shelter_Location__c FROM Animal__c WHERE Type_of_Animal__c = 'Dog' AND Current_Recent_Shelter_Location__c IN('MRC', 'CRC')]){
+        for(Animal__c animal :[SELECT Id, Animal_Name_Id__c, Current_Location__c, Current_Recent_Shelter_Location__c FROM Animal__c WHERE Type_of_Animal__c = 'Dog' AND Current_Recent_Shelter_Location__c IN('MRC', 'CRC') ORDER BY Animal_Name_Id__c]){
             ResourceInfo res = new ResourceInfo();
             res.type = animal.Current_Recent_Shelter_Location__c;
             res.resourceName = animal.Animal_Name_Id__c;
@@ -73,32 +73,23 @@ global with sharing class DaybackRest {
 
     private static folderInfo[] prepFolderInfos(){
         folderInfo[] infos = new folderInfo[0];
-        for(String folder : folderNames){
+        for(String folderName : folderNames){
             folderInfo info = new folderInfo();
-            info.name = folder;
-            info.color = getFolderColor(folder);
-            info.selected = getFolderSelected(folder);
+            info.name = folderName;
+            info.selected = getFolderSelected(folderName);
             infos.add(info);
         }
         return infos;
     }
 
-    private static String getFoldercolor(String name){
-        String color = 'rgba(244, 244, 244, 0.85)';
-        if(name == 'CRC' || name == 'MRC'){
-            color = 'rgba(245, 39, 39, 0.8)';
-        }
-        return color;
-    }
-
     private static Boolean getFolderSelected(String name){
         Boolean selected = false;
-        if(sfObject == 'default'){
-            selected = true;
-            if(name == 'CRC' || name == 'MRC'){
-                selected = false;
-            }
-        }
+        // if(sfObject == 'default'){
+        //     selected = true;
+        //     if(name == 'CRC' || name == 'MRC'){
+        //         selected = false;
+        //     }
+        // }
         return selected;
     }
 
@@ -111,7 +102,6 @@ global with sharing class DaybackRest {
 
     global class folderInfo{
         public String name;
-        public String color;
         public Boolean selected;
     }
 
