@@ -143,7 +143,7 @@ export default class TreatmentSessionChild extends LightningElement {
 
     get customLookupWhereClause(){
         if(!this.isContactList){
-            return ' Shelter_Location2__c = \'' + this.location + '\'';
+            return ' Current_Recent_Shelter_Location__c = \'' + this.location + '\'';
         }
     }
 
