@@ -1,4 +1,5 @@
 <template>
+    v1.2
     <template if:true={showSpinner}>
         <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
     </template>
@@ -31,16 +32,21 @@
                     <template if:true={smallForm}>
                         <div class="slds-dropdown_medium slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open">
                             <button class="slds-button slds-button_icon slds-button_icon-border-filled" type='button' onclick={handleToggleDropdown} aria-haspopup="true" aria-expanded="true" title="Show More">
-                                <lightning-icon icon-name={dropdownIcon}
+                                <lightning-icon 
+                                    icon-name={dropdownIcon}
+                                    alternative-text={dropdownIcon}
+                                    label={dropdownIcon}
                                 >
                                 </lightning-icon>
                             </button>
                             <template if:true={toggleDropdown}>
                                 <div class="slds-dropdown slds-dropdown_left">
-                                    <ul class="slds-dropdown__list" role="menu" aria-label="Show More">
+                                    <!-- <ul class="slds-dropdown__list" role="menu" aria-label="Show More"> -->
+                                    <!-- <ul class="slds-dropdown" role="menu" aria-label="Show More"> -->
+                                    <ul class="slds-listbox slds-listbox_vertical" role="presentation" aria-label="Show More">
                                         <li class="slds-dropdown__item" role="presentation">
                                             <lightning-button
-                                                class="slds-m-top_small"
+                                                class="slds-var-m-top_small"
                                                 variant="base"
                                                 type="submit"
                                                 name="update"
@@ -52,7 +58,7 @@
                                         <template if:true={isSessionPendingUpdate}>
                                             <li class="slds-dropdown__item" role="presentation">
                                                 <lightning-button
-                                                    class="slds-m-top_small"
+                                                    class="slds-var-m-top_small"
                                                     variant="base"
                                                     name="cancel"
                                                     label="Cancel"
@@ -63,7 +69,7 @@
                                         <template if:false={isSessionPendingUpdate}>
                                             <li class="slds-dropdown__item" role="presentation">
                                                 <lightning-button
-                                                    class="slds-m-top_small"
+                                                    class="slds-var-m-top_small"
                                                     variant="base"
                                                     name="editAnimals"
                                                     label={editAnimalsButtonLabel}
@@ -74,7 +80,7 @@
                                             </li>
                                             <li class="slds-dropdown__item" role="presentation">
                                                 <lightning-button
-                                                    class="slds-m-top_small"
+                                                    class="slds-var-m-top_small"
                                                     variant="base"
                                                     type="button"
                                                     name="copySession"
@@ -86,7 +92,7 @@
                                             </li>
                                             <li class="slds-dropdown__item" role="presentation">
                                                 <lightning-button
-                                                    class="slds-m-top_small"
+                                                    class="slds-var-m-top_small"
                                                     variant="base"
                                                     type="button"
                                                     name="createNewSession"
@@ -102,9 +108,9 @@
                             </template>
                         </div>
                     </template>
-                        <lightning-layout multiple-rows pull-to-boundary="medium" class="slds-p-left_xx-small">
+                        <lightning-layout multiple-rows pull-to-boundary="medium" class="slds-var-p-left_xx-small">
                             <template if:true={session}>
-                                <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="12" large-device-size="12" padding="horizontal-medium" class="slds-p-bottom_small">
+                                <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="12" large-device-size="12" padding="horizontal-medium" class="slds-var-p-bottom_small">
                                     <div class="slds-form-element">
                                         <div class="slds-form-element__static slds-text-align_center session-header">
                                             <lightning-button variant="base" label={sessionButtonLabel} title="Session Name" onclick={handleNavigateToSession}></lightning-button>
@@ -163,7 +169,7 @@
                                             </template>
                                             <p>
                                                 <lightning-button
-                                                    class="slds-m-top_small"
+                                                    class="slds-var-m-top_small"
                                                     variant="brand"
                                                     type="submit"
                                                     name="update"
@@ -173,16 +179,16 @@
                                                 </lightning-button>
                                                 <template if:true={isSessionPendingUpdate}>
                                                         <lightning-button
-                                                            class='slds-p-left_x-small'
+                                                            class='slds-var-p-left_x-small'
                                                             label="Cancel"
                                                             onclick={handleReset}
                                                         ></lightning-button>
                                                 </template>
                                             </p>
                                             <template if:false={isSessionPendingUpdate}>
-                                                <p class='slds-p-top_xxx-small'>
+                                                <p class='slds-var-p-top_xxx-small'>
                                                     <lightning-button
-                                                        class="slds-m-top_small"
+                                                        class="slds-var-m-top_small"
                                                         variant="brand"
                                                         name="editAnimals"
                                                         label={editAnimalsButtonLabel}
@@ -191,9 +197,9 @@
                                                     </lightning-button>
                                                     <lightning-helptext content={editAnimalsHelpText}></lightning-helptext>
                                                 </p>
-                                                <p class='slds-p-top_xxx-small'>
+                                                <p class='slds-var-p-top_xxx-small'>
                                                     <lightning-button
-                                                        class="slds-m-top_small"
+                                                        class="slds-var-m-top_small"
                                                         variant="brand"
                                                         name="copySession"
                                                         label={copySessionButtonLabel}
@@ -202,9 +208,9 @@
                                                     </lightning-button>
                                                     <lightning-helptext content={copySessionHelpText}></lightning-helptext>
                                                 </p>
-                                                <p class='slds-p-top_xxx-small'>
+                                                <p class='slds-var-p-top_xxx-small'>
                                                     <lightning-button
-                                                        class="slds-m-top_small"
+                                                        class="slds-var-m-top_small"
                                                         variant="brand"
                                                         name="createNewSession"
                                                         label={createNewSessionButtonLabel}
@@ -245,9 +251,9 @@
                 </div>
                 
                 <template if:true={hasAnimalList}>
-                    <div class="slds-p-left_xx-small slds-p-top_small">
+                    <div class="slds-var-p-left_xx-small slds-var-p-top_small">
                         <template for:each={animals} for:item='animal'>
-                            <div class="slds-p-bottom_x-small" key={animal.Id}>
+                            <div class="slds-var-p-bottom_x-small" key={animal.Id}>
                                 <c-playgroup-session-animal
                                     animal-id={animal.Animal__c}
                                     playgroup-animal-id={animal.Id}
