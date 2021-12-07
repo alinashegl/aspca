@@ -23,7 +23,7 @@ public with sharing class AutoScheduleTasksUtil {
         Date myDate = Date.today();
         Date weekStart = myDate.toStartofWeek().addDays(2);
         System.debug('weekStart = ' + weekStart);
-        Map<String, Integer> dayOfWeekMap = dayOfWeekMap();
+        Map<String, Integer> dayOfWeekMap = dayOfWeekFields();
         for(String day : dayOfWeekMap.keySet()){
             if(config.get(day) == true){
                 System.Debug('has Day: ' + day);
@@ -51,7 +51,7 @@ public with sharing class AutoScheduleTasksUtil {
         return dateMap;
     }
 
-    private static Map<String, Integer> dayOfWeekMap(){
+    private static Map<String, Integer> dayOfWeekFields(){
         return new Map<String, Integer>{
             'Tuesday__c' => 0,
             'Wednesday__c' => 1,
@@ -59,7 +59,12 @@ public with sharing class AutoScheduleTasksUtil {
             'Friday__c' => 3,
             'Saturday__c' => 4,
             'Sunday__c' => 5,
-            'Monday__c' => 6,
+            'Monday__c' => 6
+        };
+    }
+
+    private static Map<String, Integer> dayOfWeekMap(){
+        return new Map<String, Integer>{            
             'Tuesday' => 0,
             'Wednesday' => 1,
             'Thursday' => 2,
