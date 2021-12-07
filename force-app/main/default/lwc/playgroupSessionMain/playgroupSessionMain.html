@@ -1,5 +1,5 @@
 <template>
-    v1.2
+    v1.3
     <template if:true={showSpinner}>
         <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
     </template>
@@ -41,8 +41,6 @@
                             </button>
                             <template if:true={toggleDropdown}>
                                 <div class="slds-dropdown slds-dropdown_left">
-                                    <!-- <ul class="slds-dropdown__list" role="menu" aria-label="Show More"> -->
-                                    <!-- <ul class="slds-dropdown" role="menu" aria-label="Show More"> -->
                                     <ul class="slds-listbox slds-listbox_vertical" role="presentation" aria-label="Show More">
                                         <li class="slds-dropdown__item" role="presentation">
                                             <lightning-button
