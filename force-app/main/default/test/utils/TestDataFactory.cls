@@ -498,6 +498,7 @@ public without sharing class TestDataFactory {
                     Gender__c = 'MN',
                     Animal_Name__c = 'Doggo123',
                     Shelter_Location2__c = 'MRC',
+                    Current_Recent_Shelter_Location__c = 'MRC',
                     Play_Category__c = 'Unevaluated'
         );
         insert a;
@@ -517,7 +518,8 @@ public without sharing class TestDataFactory {
                   Animal_Age__c = 8,
                   Gender__c = 'MN',
                   Animal_Name__c = 'Doggo123',
-                  Shelter_Location2__c = 'MRC'
+                  Shelter_Location2__c = 'MRC',
+                  Current_Recent_Shelter_Location__c = 'MRC'
       );
       insert a;
       return a;
