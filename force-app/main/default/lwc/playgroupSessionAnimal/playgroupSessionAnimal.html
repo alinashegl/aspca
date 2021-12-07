@@ -1,6 +1,6 @@
 <template>
     <template if:true={playgroupAnimalId}>
-        <div class="slds-card slds-card_boundary">
+        <div class="slds-card slds-card_boundary card-custom">
             <lightning-layout multiple-rows pull-to-boundary="medium" class="slds-p-left_medium slds-p-right_medium" >
                 <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="6" large-device-size="6">
                     <lightning-record-edit-form
@@ -13,7 +13,9 @@
                             <lightning-layout-item flexibility="auto, no-grow" size="6" small-device-size="3" medium-device-size="2" large-device-size="4" padding={layoutItemPadding}>
                                 <div class="slds-form-element slds-p-left_x-small">
                                     <label class="slds-form-element__label" for="form-element-01">Name</label>
-                                    <lightning-output-field field-name="Animal_Name__c" variant='label-hidden'> </lightning-output-field>
+                                    <div class="slds-text-title_bold">
+                                        {animalName}
+                                    </div>
                                 </div>
                             </lightning-layout-item>
                             <lightning-layout-item flexibility="auto, no-grow" size="6" small-device-size="3" medium-device-size="2" large-device-size="4" padding={layoutItemPadding}>
@@ -108,8 +110,7 @@
                             <lightning-layout-item flexibility="auto" size="12" small-device-size="6" medium-device-size="6" large-device-size="6" padding={layoutItemPadding}>
                                 <div class="slds-form-element slds-p-right_x-small">
                                     <div>
-                                        <label class="slds-form-element__label" for="form-element-01">Dog Notes</label>
-                                        <lightning-input-field field-name="Playgroup_Individual_Notes__c" variant='label-hidden' data-id='Playgroup_Individual_Notes__c' onchange={handleOnChangeAnimalPlaygroup}> </lightning-input-field>
+                                        <lightning-input-field field-name="Playgroup_Individual_Notes__c" data-id='Playgroup_Individual_Notes__c' onchange={handleOnChangeAnimalPlaygroup}> </lightning-input-field>
                                     </div>
                                     <div class='slds-grid slds-wrap'>
                                         <div class="slds-col slds-size_2-of-4">
