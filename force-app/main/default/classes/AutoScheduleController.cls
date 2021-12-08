@@ -3,10 +3,8 @@ public with sharing class AutoScheduleController {
         Task[] tasksToInsert = new Task[0];
         tasksToInsert.addAll(ScheduleAnimalPlaygroups.schedulePlaygroups());
         tasksToInsert.addAll(ScheduleAnimalTreatments.scheduleTreatments());
-        tasksToInsert.addAll(ScheduleAnimalFoster.scheeduleFollowUps());
+        tasksToInsert.addAll(ScheduleAnimalFoster.scheduleFollowUps());
 
-        System.debug('tasksToInsert: ' + tasksToinsert);
         insert tasksToInsert;
-        System.debug('tasksToInsert: ' + tasksToinsert);
     }
 }

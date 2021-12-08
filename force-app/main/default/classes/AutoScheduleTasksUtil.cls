@@ -3,6 +3,17 @@ public with sharing class AutoScheduleTasksUtil {
     public static final String PLAYGROUP_TASK_RECORD_TYPE_NAME = 'Playgroup';
     public static final String FOSTER_TASK_RECORD_TYPE_NAME = 'Foster_Follow_Up';
     public static final String NO_RESOURCE_DEFAULT = 'No Contact';
+    public static Map<String, Contact> genericContactMap {
+        get{
+            if(genericContactMap == null){
+                genericContactMap = getGenericContacts();
+            }
+            return genericContactMap;
+        } 
+        set{
+            genericContactMap = getGenericContacts();
+        }
+    }
 
     public static Map<String, Calendar_Schedule_Config__mdt> getCalendarConfig(String taskType){
         Map<String, Calendar_Schedule_Config__mdt> configMap = new Map<String, Calendar_Schedule_Config__mdt>();
@@ -49,6 +60,20 @@ public with sharing class AutoScheduleTasksUtil {
             }
         }
         return dateMap;
+    }
+
+    public static Map<String, Contact> getGenericContacts(){
+        Map<String, Contact> contactMap = new Map<String, Contact>();
+        for(Contact con : [
+            SELECT Id, Name, User__c, User__r.Division
+            FROM Contact
+            WHERE Is_Generic_Contact__c = TRUE
+            AND User__r.isActive = true
+        ]){
+            contactMap.put(con.User__r.Division, con);
+        }
+
+        return contactMap;
     }
 
     private static Map<String, Integer> dayOfWeekFields(){

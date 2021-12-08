@@ -21,19 +21,46 @@ global with sharing class DaybackRest {
 
     private static ResourceInfo[] getContactList(){
         ResourceInfo[] conResources = new ResourceInfo[0];
-        for(Contact con :[SELECT Id, Name, Contact_Type__c FROM Contact WHERE Title = 'stevenDev' ORDER BY LastName, FirstName]){
+        Id[] reportIds = getContactReportIds();
+        
+        for(Contact con :queryContacts(reportIds)){
+
             ResourceInfo res = new ResourceInfo();
             res.type = 'Contacts';
             res.resourceName = con.Name;
-            res.folderName = con.Contact_Type__c;
             res.resource = con;
 
-            folderNames.add(con.Contact_Type__c);
+            if(reportIds.contains(con.Id)){
+                res.folderName = 'Direct Reports';
+                folderNames.add('Direct Reports');
+            }
+            else {
+                res.folderName = con.Contact_Type__c;
+                folderNames.add(con.Contact_Type__c);
+            }
 
             conResources.add(res);
         }
 
         return conResources;
+    }
+
+    private static Id[] getContactReportIds(){
+        Set<Id> reportIds = new Set<Id>();
+        for(Contact con : [SELECT Id FROM Contact WHERE ReportsTo.User__c =: UserInfo.getUserId()]){
+            reportIds.add(con.Id);
+        }
+
+        return reportIds.isEmpty() ? null : new Id[reportIds];
+    }
+
+    private static Contact[] queryContacts(Id[] reportIds){
+        if(reportIds != null){
+            return [SELECT Id, Name, Contact_Type__c FROM Contact WHERE (Title = 'stevenDev' OR Id IN: reportIds) ORDER BY LastName, FirstName];
+        }
+        else {
+            return [SELECT Id, Name, Contact_Type__c FROM Contact WHERE Title = 'stevenDev' ORDER BY LastName, FirstName];
+        }
     }
 
     private static ResourceInfo[] getAnimalList(){
