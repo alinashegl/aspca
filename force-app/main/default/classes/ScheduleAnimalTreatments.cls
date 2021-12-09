@@ -1,5 +1,5 @@
 public with sharing class ScheduleAnimalTreatments {
-    public static Id recordTypeId = Util.getRecordTypeId('Task',AutoScheduleTasksUtil.TREATMENT_TASK_RECORD_TYPE_NAME);
+    public static Id recordTypeId = Util.getRecordTypeId('Task',AutoScheduleTasksUtil.BEH_TREATMENT_TASK_RECORD_TYPE_NAME);
     public static Task[] scheduleTreatments() {
         Task[] treatmentTasks = new Task[0];
         Map<String, Calendar_Schedule_Config__mdt> calendarConfigMap = AutoScheduleTasksUtil.getCalendarConfig('Treatment');
@@ -48,7 +48,8 @@ public with sharing class ScheduleAnimalTreatments {
                 WhoId = treatment.Animal__r.Behavior_Case_Worker__c != null ? treatment.Animal__r.Behavior_Case_Worker__c : genericCon.Id,
                 OwnerId = genericCon.User__c,
                 Subject = 'Treatment',
-                Assigned_Resources__c = treatment.Animal__r.Behavior_Case_Worker__r.Is_Generic_Contact__c == false ? treatment.Animal__r.Behavior_Case_Worker__r.Name : null
+                Assigned_Resources__c = treatment.Animal__r.Behavior_Case_Worker__r.Is_Generic_Contact__c == false ? treatment.Animal__r.Behavior_Case_Worker__r.Name : null,
+                Species__c = 'Dog'
             );
             newTasks.add(newTask);
         }

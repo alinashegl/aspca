@@ -68,12 +68,22 @@ public with sharing class ScheduleAnimalFoster {
     }
 
     public static Integer translateFrequency(String frequency){
-        if(frequency == 'Every Other Week'){
-            return 7;
+        Integer minDays = 0;
+        switch on frequency {
+            when 'Every Other Week' {
+                minDays = 7;
+            }	
+            when 'Every Three Weeks' {
+                minDays = 14;
+            }
+            when 'Monthly' {
+                minDays = 23;
+            }
+            when 'Every Other Month' {
+                minDays = 54;
+            }
         }
-        else {
-            return 14;
-        }
+        return minDays;
     }
 
     public static Task[] prepTasks(Animal__c animal, Calendar_Schedule_Config__mdt config){
@@ -101,7 +111,8 @@ public with sharing class ScheduleAnimalFoster {
                 WhoId = animal.Behavior_Case_Worker__c != null ? animal.Behavior_Case_Worker__c : genericCon.Id,
                 OwnerId = genericCon.User__c,
                 Subject = 'Foster Follow Up',
-                Assigned_Resources__c = animal.Behavior_Case_Worker__r.Is_Generic_Contact__c == false ? animal.Behavior_Case_Worker__r.Name : null
+                Assigned_Resources__c = animal.Behavior_Case_Worker__r.Is_Generic_Contact__c == false ? animal.Behavior_Case_Worker__r.Name : null,
+                Species__c = 'Dog'
             );
             newTasks.add(newTask);
         }
