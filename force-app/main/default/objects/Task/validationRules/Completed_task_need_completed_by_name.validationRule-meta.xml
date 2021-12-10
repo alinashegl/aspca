@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Completed_task_need_completed_by_name</fullName>
+    <active>true</active>
+    <description>When a task is completed</description>
+    <errorConditionFormula>AND( ISPICKVAL( Status , &quot;Completed&quot;),  !( RecordType.Name = &quot;LAM Task&quot;),   ISBLANK( Completed_By_Text__c )  )</errorConditionFormula>
+    <errorDisplayField>Completed_By__c</errorDisplayField>
+    <errorMessage>Completed By value is required when tasks are marked as completed.</errorMessage>
+</ValidationRule>

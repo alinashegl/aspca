@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>activities__CloseTasks</fullName>
+    <availability>online</availability>
+    <displayType>massActionButton</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>Close Tasks</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <requireRowSelection>true</requireRowSelection>
+    <url>{!REQUIRESCRIPT(&quot;/soap/ajax/38.0/connection.js&quot;)}
+{!REQUIRESCRIPT(&quot;/soap/ajax/38.0/apex.js&quot;)}
+var left = (screen.width/2)-(320/2);
+var top = (screen.height/2)-(200/2);
+var records = {!GETRECORDIDS($ObjectType.Task)};
+var strIDs=&apos;&apos;;
+if (records[0] == null)
+{
+alert(&apos;Please select atleast one record&apos;);
+}
+else
+{
+for (var n=0; n&lt;records.length; n++)
+{
+if(strIDs == &apos;&apos;)
+strIDs = records[n];
+else
+strIDs = strIDs + &quot;,&quot; + records[n];
+}
+window.location.href = &apos;/apex/activities__CloseTasks?strIDs=&apos;+strIDs+&apos;&amp;retURL=&apos;+ window.location.href;
+}</url>
+</WebLink>
