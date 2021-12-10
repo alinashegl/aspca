@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>New_task_requires_record_type</fullName>
+    <active>true</active>
+    <description>record type required for medical admin user roles</description>
+    <errorConditionFormula>AND( ISPICKVAL( Record_Type__c , &quot;&quot;) , $UserRole.Name = &quot;FIR Medical Admins&quot;)</errorConditionFormula>
+    <errorDisplayField>Record_Type__c</errorDisplayField>
+    <errorMessage>The Record Type value is required</errorMessage>
+</ValidationRule>
