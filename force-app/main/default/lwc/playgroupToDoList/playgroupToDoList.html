@@ -76,8 +76,8 @@
         <div class="slds-scrollable_x slds-border_top slds-border_bottom">
             <lightning-pill-container items={animalsToAddInternal} onitemremove={handleRemoveAnimal}></lightning-pill-container>
         </div>
-        <template if:true={playgroupAnimals}>
-            <template for:each={playgroupAnimalsData} for:item='animal'>
+        <template if:true={playgroupAnimalsSortFilter}>
+            <template for:each={playgroupAnimalsSortFilter} for:item='animal'>
                 <div class="slds-var-p-around_small slds-border_bottom" key={animal.Id}>
                     <lightning-tile>
                         <lightning-button-icon-stateful

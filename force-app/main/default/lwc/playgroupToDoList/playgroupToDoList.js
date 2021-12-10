@@ -32,8 +32,12 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
         {label: 'Save & Start PG', value: 'copy'},
         {label: 'Save & Continue', value: 'edit'}
     ];
+    //result for refreshApex
     playgroupAnimals;
+    //holds actual data from server call
     playgroupAnimalsData;
+    //displayed data that sorts/filters on client side
+    playgroupAnimalsSortFilter;
     sortFieldValue;
     sortDirectionValue = 'ASC';
     filterFieldValue;
@@ -65,10 +69,13 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
             { label: 'Sex', value: 'Gender__c' },
             { label: 'Kennel Location', value: 'Shelter_Location__c' },
             { label: '# of Playgroups', value: 'Number_of_Playgroups__c' },
+            { label: 'Playgroup Today?', value: 'Animal_Playgroups__r.Id' },
             { label: 'Does Not Walk on Leash', value: 'Does_Not_Walk_on_a_Leash__c' },
             { label: 'Playgroup Priority Level', value: 'Playgroup_Priority_Level__c' },
             { label: 'Play Category', value: 'Play_Category__c' },
             { label: 'Handler Code', value: 'Shelter_Color_Coding__c' },
+            { label: 'Medical Condition', value: 'Medical_Conditions__r.Id' },
+            { label: 'Behavior Condition', value: 'Play_Pauses__r.Id' },
         ];
     }
 
@@ -88,27 +95,6 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
         return sortValues;
     }
 
-    get filterString() {
-        //Formatted string value for use in filtering data
-        let filterValues = '';
-        if (this.addedFilter.length > 0) {
-            filterValues = ' AND ' + this.addedFilter.map(x => x.qryValue).join(' AND ') + ' ';
-        }
-        return filterValues;
-    }
-
-    get formattedFilterValue() {
-        let formattedValue = '';
-        //Handle boolean values separately from strings
-        if (this.filterValueValue === 'true' || this.filterValueValue === 'false') {
-            formattedValue = this.filterValueValue;
-        }
-        else {
-            formattedValue = '\'' + this.filterValueValue + '\'';
-        }
-        return formattedValue;
-    }
-
     get sortActive() {
         return this.addedSort.length > 0;
     }
@@ -125,11 +111,12 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
         return this.action === 'new';
     }
 
-    @wire(getPlaygroupAnimals, { location: '$location', sortString: '$sortString', filterString: '$filterString'})
+    @wire(getPlaygroupAnimals, { location: '$location', sortString: '$sortString'})
     wiredPlaygroupAnimals(result) {
         this.playgroupAnimals = result;
         if (result.data) {
             this.playgroupAnimalsData = result.data;
+            this.sortFilterData();
             if (this.sessionId) {
                 //Format data for display as selected pill
                 for (let i = 0; i < this.animalsToAdd.length; i++) {
@@ -210,15 +197,18 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
                 const index = this.addedSort.map(x => x.name).indexOf(this.sortFieldValue);
                 this.addedSort.splice(index, 1, newSort);
             }
+            this.sortFilterData();
         }
     }
 
     handleClearSortClick() {
         this.addedSort = [];
+        this.sortFilterData();
     }
 
     handleClearFilterClick() {
         this.addedFilter = [];
+        this.sortFilterData();
     }
 
     handleFilterClick() {
@@ -235,7 +225,7 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
             //get label for display
             let fieldLabel = this.optionsFieldLabel(this.filterFieldValue, this.filterFieldOptions);
             //construct new filter object
-            let newFilter = {label: fieldLabel + ' = ' + this.filterValueValue, name: this.filterFieldValue, qryValue: this.filterFieldValue + ' = ' + this.formattedFilterValue};
+            let newFilter = {label: fieldLabel + ' = ' + this.filterValueValue, name: this.filterFieldValue, filtered: this.filterValueValue};
             if (oldFilter.length == 0) {
                 //add new filter if no previous filter exists for the field
                 this.addedFilter.push(newFilter);
@@ -245,9 +235,41 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
                 const index = this.addedFilter.map(x => x.name).indexOf(this.filterFieldValue);
                 this.addedFilter.splice(index, 1, newFilter);
             }
+            this.sortFilterData();
         }
         //Clear selected values for next filter options populating
         this.resetFilterValues();
+    }
+
+    sortFilterData() {
+        this.playgroupAnimalsSortFilter = Array.from(this.playgroupAnimalsData ?? []);
+        if (this.filterActive) {
+            //handle filtering of data
+            for (let i = 0; i < this.addedFilter.length; i++) {
+                let name = this.addedFilter[i].name.split('.');
+                let filtered = this.addedFilter[i].filtered;
+                if (name.length == 1) {
+                    this.playgroupAnimalsSortFilter = this.playgroupAnimalsSortFilter.filter(f => (filtered === 'true' ? f[name] == true : (filtered === 'false' ? f[name] == false : f[name] == filtered)));
+                }
+                else {
+                    if (name[0] === 'Medical_Conditions__r') {
+                        this.playgroupAnimalsSortFilter = this.playgroupAnimalsSortFilter.filter(f => f.Medical_Conditions__r != null);
+                    }
+                    else if (name[0] === 'Play_Pauses__r') {
+                        this.playgroupAnimalsSortFilter = this.playgroupAnimalsSortFilter.filter(f => f.Play_Pauses__r != null);
+                    }
+                    else if (name[0] === 'Animal_Playgroups__r') {
+                        this.playgroupAnimalsSortFilter = this.playgroupAnimalsSortFilter.filter(f => (filtered === 'true' ? f.Animal_Playgroups__r != null : f.Animal_Playgroups__r == null));
+                    }
+                    else {
+                        this.playgroupAnimalsSortFilter = this.playgroupAnimalsSortFilter.filter(f => f[name[0]][name[1]] == filtered);
+                    }
+                }
+            }
+        }
+        if (this.sortActive) {
+            //handle sorting of data
+        }
     }
 
     resetFilterValues() {
@@ -266,7 +288,35 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
 
     setFilterValues() {
         //Clear any null values from the current fields list of values
-        let fieldData = [...new Set(this.playgroupAnimalsData.map(x => x[this.filterFieldValue]).filter(x => x != null))];
+        let valueData = this.filterFieldValue.split('.');
+        let fieldData;
+        if (valueData.length == 1) {
+            fieldData = [...new Set(this.playgroupAnimalsSortFilter.map(x => x[valueData]).filter(x => x != null))];
+        }
+        else {
+            fieldData = [];
+            if (valueData[0] === 'Medical_Conditions__r') {
+                if (this.playgroupAnimalsSortFilter.filter(x => x.Medical_Conditions__r != null).length > 0) {
+                    fieldData = ['Babesia +'];
+                }
+            }
+            else if (valueData[0] === 'Play_Pauses__r') {
+                if (this.playgroupAnimalsSortFilter.filter(x => x.Play_Pauses__r != null).length > 0) {
+                    fieldData = ['In Heat'];
+                }
+            }
+            else if (valueData[0] === 'Animal_Playgroups__r') {
+                if (this.playgroupAnimalsSortFilter.filter(f => f.Animal_Playgroups__r == null).length > 0) {
+                    fieldData = [false, ...fieldData];
+                }
+                if (this.playgroupAnimalsSortFilter.filter(f => f.Animal_Playgroups__r != null).length > 0) {
+                    fieldData = [true, ...fieldData];
+                }
+            }
+            else {
+                fieldData = [...new Set(this.playgroupAnimalsSortFilter.map(x => x[valueData[0]][valueData[1]]).filter(x => x != null))];
+            }
+        }
         //Populate filter value options from non-null data
         this.filterValueOptions = fieldData.map(x => ({label: x.toString(), value: x.toString()}));
     }
@@ -300,11 +350,13 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
     handleRemoveSort(event) {
         const name = event.detail.item.name;
         this.addedSort = this.addedSort.filter(x => x.name !== name);
+        this.sortFilterData();
     }
 
     handleRemoveFilter(event) {
         const name = event.detail.item.name;
         this.addedFilter = this.addedFilter.filter(x => x.name !== name);
+        this.sortFilterData();
         this.resetFilterValues();
     }
 
@@ -399,7 +451,10 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
 
     handleUpdate() {
         this.resetFilterValues();
-        refreshApex(this.playgroupAnimals);
+        refreshApex(this.playgroupAnimals)
+        .then(() => {
+            this.sortFilterData();
+        });
     }
 
     handleCancel() {
