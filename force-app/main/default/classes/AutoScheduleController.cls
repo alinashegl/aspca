@@ -7,5 +7,6 @@ public with sharing class AutoScheduleController {
         tasksToInsert.addAll(ScheduleAnimalMedCheck.scheduleMedCheck());
 
         insert tasksToInsert;
+        System.debug('tasksToInsert = ' + tasksToInsert);
     }
 }

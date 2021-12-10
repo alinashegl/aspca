@@ -3,7 +3,9 @@ public with sharing class ScheduleAnimalMedCheck {
     public static Task[] scheduleMedCheck(){
         Task[] medCheckTasks = new Task[0];
         for(Task treatmentTask : getTreatmentTasks()){
-            medCheckTasks.add(prepTask(treatmentTask));
+            if(treatmentTask.Animal__c != null){
+                medCheckTasks.add(prepTask(treatmentTask));
+            }
         }
         return medCheckTasks;
     }
@@ -39,8 +41,9 @@ public with sharing class ScheduleAnimalMedCheck {
         return [
             SELECT Id, IsRecurrence, CreatedDate, ActivityDate, RecurrenceStartDateOnly, RecurrenceEndDateOnly, RecurrenceActivityId,
             WhatId, WhoId, OwnerId, Animal__c, Animal__r.Animal_Name_Id__c, Animal__r.Current_Recent_Shelter_Location__c,
-            Animal__r.Behavior_Case_Worker__c, Animal__r.Behavior_Case_Worker__r.Name
-            FROM Task WHERE RecordType.Name = 'Treatments' 
+            Animal__r.Behavior_Case_Worker__c, Animal__r.Behavior_Case_Worker__r.Name, Animal__r.Behavior_Case_Worker__r.Is_Generic_Contact__c
+            FROM Task WHERE RecordType.Name = 'Treatments'
+            AND Animal__r.Type_of_Animal__c = 'Dog'
             AND (
                 (IsRecurrence = true AND RecurrenceEndDateOnly >= : tempEndDate)
                 OR 
