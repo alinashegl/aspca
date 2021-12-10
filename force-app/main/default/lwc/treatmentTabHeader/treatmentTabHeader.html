@@ -1,0 +1,7 @@
+<template>
+    <lightning-card>
+        <template if:false={smallForm}>
+            <lightning-button title="Last 5 Treatments Report" label="Last 5 Treatments Report" slot="actions" onclick={handlePdf}></lightning-button>
+        </template>
+    </lightning-card>
+</template>
