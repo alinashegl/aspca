@@ -69,8 +69,8 @@
                 </div>
             </lightning-accordion-section>
         </lightning-accordion>
-        <template if:true={animalTreatments}>
-            <template for:each={animalTreatmentsData} for:item='treatment'>
+        <template if:true={animalTreatmentSortFilter}>
+            <template for:each={animalTreatmentSortFilter} for:item='treatment'>
                 <div class="slds-var-p-around_small slds-border_bottom" key={treatment.Id}>
                     <lightning-tile>
                         <c-treatment-to-do-section
