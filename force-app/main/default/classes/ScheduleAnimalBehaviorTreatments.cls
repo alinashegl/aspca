@@ -1,4 +1,4 @@
-public with sharing class ScheduleAnimalTreatments {
+public with sharing class ScheduleAnimalBehaviorTreatments {
     public static Id recordTypeId = Util.getRecordTypeId('Task',AutoScheduleTasksUtil.BEH_TREATMENT_TASK_RECORD_TYPE_NAME);
     public static Task[] scheduleTreatments() {
         Task[] treatmentTasks = new Task[0];

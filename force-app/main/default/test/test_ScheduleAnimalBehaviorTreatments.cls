@@ -1,5 +1,5 @@
-@isTest
-private class test_ScheduleAnimalTreatments {
+@isTest 
+private class test_ScheduleAnimalBehaviorTreatments {
     @TestSetUp
     static void testSetup(){
         Animal__c animalARC = TestDataFactory.createAnimalWithName('animalARC');
