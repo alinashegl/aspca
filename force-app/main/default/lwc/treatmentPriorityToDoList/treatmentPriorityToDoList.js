@@ -13,8 +13,12 @@ export default class TreatmentPriorityToDoList extends NavigationMixin(Lightning
     addedFilter = [];
     @track
     filterValueOptions = [];
+    //result for refreshApex
     animalTreatments;
+    //holds actual data from server call
     animalTreatmentsData;
+    //displayed data that sorts/filters on client side
+    animalTreatmentSortFilter;
     sortFieldValue;
     sortDirectionValue = 'ASC';
     filterFieldValue;
@@ -66,27 +70,6 @@ export default class TreatmentPriorityToDoList extends NavigationMixin(Lightning
         return sortValues;
     }
 
-    get filterString() {
-        //Formatted string value for use in filtering data
-        let filterValues = '';
-        if (this.addedFilter.length > 0) {
-            filterValues = ' AND ' + this.addedFilter.map(x => x.qryValue).join(' AND ') + ' ';
-        }
-        return filterValues;
-    }
-
-    get formattedFilterValue() {
-        let formattedValue = '';
-        //Handle boolean values separately from strings
-        if (this.filterValueValue === 'true' || this.filterValueValue === 'false') {
-            formattedValue = this.filterValueValue;
-        }
-        else {
-            formattedValue = '\'' + this.filterValueValue + '\'';
-        }
-        return formattedValue;
-    }
-
     get sortActive() {
         return this.addedSort.length > 0;
     }
@@ -99,11 +82,12 @@ export default class TreatmentPriorityToDoList extends NavigationMixin(Lightning
         return FORM_FACTOR === 'Small';
     }
 
-    @wire(getAnimalTreatments, { location: '$location', sortString: '$sortString', filterString: '$filterString'})
+    @wire(getAnimalTreatments, { location: '$location', sortString: '$sortString'})
     wiredAnimalTreatments(result) {
         this.animalTreatments = result;
         if (result.data) {
             this.animalTreatmentsData = result.data;
+            this.sortFilterData();
         }
         else if (result.error) {
             const evt = new ShowToastEvent({
@@ -145,15 +129,18 @@ export default class TreatmentPriorityToDoList extends NavigationMixin(Lightning
                 const index = this.addedSort.map(x => x.name).indexOf(this.sortFieldValue);
                 this.addedSort.splice(index, 1, newSort);
             }
+            this.sortFilterData();
         }
     }
 
     handleClearSortClick() {
         this.addedSort = [];
+        this.sortFilterData();
     }
 
     handleClearFilterClick() {
         this.addedFilter = [];
+        this.sortFilterData();
     }
 
     handleFilterClick() {
@@ -170,7 +157,7 @@ export default class TreatmentPriorityToDoList extends NavigationMixin(Lightning
             //get label for display
             let fieldLabel = this.optionsFieldLabel(this.filterFieldValue, this.filterFieldOptions);
             //construct new filter object
-            let newFilter = {label: fieldLabel + ' = ' + this.filterValueValue, name: this.filterFieldValue, qryValue: this.filterFieldValue + ' = ' + this.formattedFilterValue};
+            let newFilter = {label: fieldLabel + ' = ' + this.filterValueValue, name: this.filterFieldValue, filtered: this.filterValueValue};
             if (oldFilter.length == 0) {
                 //add new filter if no previous filter exists for the field
                 this.addedFilter.push(newFilter);
@@ -180,9 +167,30 @@ export default class TreatmentPriorityToDoList extends NavigationMixin(Lightning
                 const index = this.addedFilter.map(x => x.name).indexOf(this.filterFieldValue);
                 this.addedFilter.splice(index, 1, newFilter);
             }
+            this.sortFilterData();
         }
         //Clear selected values for next filter options populating
         this.resetFilterValues();
+    }
+
+    sortFilterData() {
+        this.animalTreatmentSortFilter = Array.from(this.animalTreatmentsData ?? []);
+        if (this.filterActive) {
+            //handle filtering of data
+            for (let i = 0; i < this.addedFilter.length; i++) {
+                let name = this.addedFilter[i].name.split('.');
+                let filtered = this.addedFilter[i].filtered;
+                if (name.length == 1) {
+                    this.animalTreatmentSortFilter = this.animalTreatmentSortFilter.filter(f => f[name] == filtered);
+                }
+                else {
+                    this.animalTreatmentSortFilter = this.animalTreatmentSortFilter.filter(f => f[name[0]][name[1]] == filtered);
+                }
+            }
+        }
+        if (this.sortActive) {
+            //handle sorting of data
+        }
     }
 
     resetFilterValues() {
@@ -201,7 +209,14 @@ export default class TreatmentPriorityToDoList extends NavigationMixin(Lightning
 
     setFilterValues() {
         //Clear any null values from the current fields list of values
-        let fieldData = [...new Set(this.animalTreatmentsData.map(x => x[this.filterFieldValue]).filter(x => x != null))];
+        let valueData = this.filterFieldValue.split('.');
+        let fieldData;
+        if (valueData.length == 1) {
+            fieldData = [...new Set(this.animalTreatmentSortFilter.map(x => x[valueData]).filter(x => x != null))];
+        }
+        else {
+            fieldData = [...new Set(this.animalTreatmentSortFilter.map(x => x[valueData[0]][valueData[1]]).filter(x => x != null))];
+        }
         //Populate filter value options from non-null data
         this.filterValueOptions = fieldData.map(x => ({label: x.toString(), value: x.toString()}));
     }
@@ -227,16 +242,21 @@ export default class TreatmentPriorityToDoList extends NavigationMixin(Lightning
     handleRemoveSort(event) {
         const name = event.detail.item.name;
         this.addedSort = this.addedSort.filter(x => x.name !== name);
+        this.sortFilterData();
     }
 
     handleRemoveFilter(event) {
         const name = event.detail.item.name;
         this.addedFilter = this.addedFilter.filter(x => x.name !== name);
+        this.sortFilterData();
         this.resetFilterValues();
     }
 
     handleUpdate() {
         this.resetFilterValues();
-        refreshApex(this.animalTreatments);
+        refreshApex(this.animalTreatments)
+        .then(() => {
+            this.sortFilterData();
+        });
     }
 }
