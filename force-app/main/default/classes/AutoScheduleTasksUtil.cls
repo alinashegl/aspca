@@ -35,16 +35,14 @@ public with sharing class AutoScheduleTasksUtil {
     public static Map<String, Date> getDateMap(Calendar_Schedule_Config__mdt config){
         Map<String, Date> dateMap = new Map<String, Date>();
         Date myDate = Date.today();
-        Date weekStart = myDate.toStartofWeek().addDays(2);
-        System.debug('weekStart = ' + weekStart);
-        Map<String, Integer> dayOfWeekMap = dayOfWeekFields();
+        Map<String, Date> dayOfWeekMap = dayOfWeekFields();
         for(String day : dayOfWeekMap.keySet()){
             if(config.get(day) == true){
                 System.Debug('has Day: ' + day);
                 System.Debug('date: ' + dayOfWeekMap.get(day));
                 //exclude dates in the past
-                if(weekStart.addDays(dayOfWeekMap.get(day)) >= date.today()){
-                    dateMap.put(day, weekStart.addDays(dayOfWeekMap.get(day)));
+                if(dayOfWeekMap.get(day) >= date.today()){
+                    dateMap.put(day, dayOfWeekMap.get(day));
                 }
             }
         }
@@ -54,12 +52,11 @@ public with sharing class AutoScheduleTasksUtil {
     public static Map<String, Date> getDateMap(String customSchedule){
         Map<String, Date> dateMap = new Map<String, Date>();
         Date myDate = Date.today();
-        Date weekStart = myDate.toStartofWeek().addDays(2);
-        Map<String, Integer> dayOfWeekMap = dayOfWeekMap();
+        Map<String, Date> dayOfWeekMap = dayOfWeekMap();
         for(String day : customSchedule.split(';')){
             //exclude dates in the past
-            if(weekStart.addDays(dayOfWeekMap.get(day)) >= date.today()){
-                dateMap.put(day, weekStart.addDays(dayOfWeekMap.get(day)));
+            if(dayOfWeekMap.get(day) >= date.today()){
+                dateMap.put(day, dayOfWeekMap.get(day));
             }
         }
         return dateMap;
@@ -79,27 +76,31 @@ public with sharing class AutoScheduleTasksUtil {
         return contactMap;
     }
 
-    private static Map<String, Integer> dayOfWeekFields(){
-        return new Map<String, Integer>{
-            'Tuesday__c' => 0,
-            'Wednesday__c' => 1,
-            'Thursday__c' => 2,
-            'Friday__c' => 3,
-            'Saturday__c' => 4,
-            'Sunday__c' => 5,
-            'Monday__c' => 6
+    private static Map<String, Date> dayOfWeekFields(){
+        date currentDate = date.today();
+        date weekStart = currentDate.toStartofWeek();
+        return new Map<String, Date>{
+            'Tuesday__c' => weekStart.addDays(2),
+            'Wednesday__c' => weekStart.addDays(3),
+            'Thursday__c' => weekStart.addDays(4),
+            'Friday__c' => weekStart.addDays(5),
+            'Saturday__c' => weekStart.addDays(6),
+            'Sunday__c' => weekStart.addDays(7),
+            'Monday__c' => weekStart.addDays(8)
         };
     }
 
-    private static Map<String, Integer> dayOfWeekMap(){
-        return new Map<String, Integer>{            
-            'Tuesday' => 0,
-            'Wednesday' => 1,
-            'Thursday' => 2,
-            'Friday' => 3,
-            'Saturday' => 4,
-            'Sunday' => 5,
-            'Monday' => 6
+    public static Map<String, Date> dayOfWeekMap(){
+        date currentDate = date.today();
+        date weekStart = currentDate.toStartofWeek();
+        return new Map<String, Date>{
+            'Tuesday' => weekStart.addDays(2),
+            'Wednesday' => weekStart.addDays(3),
+            'Thursday' => weekStart.addDays(4),
+            'Friday' => weekStart.addDays(5),
+            'Saturday' => weekStart.addDays(6),
+            'Sunday' => weekStart.addDays(7),
+            'Monday' => weekStart.addDays(8)
         };
     }    
 }

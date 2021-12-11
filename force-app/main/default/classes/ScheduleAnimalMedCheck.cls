@@ -4,19 +4,33 @@ public with sharing class ScheduleAnimalMedCheck {
         Task[] medCheckTasks = new Task[0];
         for(Task treatmentTask : getTreatmentTasks()){
             if(treatmentTask.Animal__c != null){
-                medCheckTasks.add(prepTask(treatmentTask));
+                Date followUpDate = calculateTaskDate(treatmentTask);
+                if(followUpDate != null){
+                    medCheckTasks.add(prepTask(treatmentTask, followUpDate));
+                }
             }
         }
         return medCheckTasks;
     }
 
-    private static Task prepTask(Task treatmentTask){
+    private static Date calculateTaskDate(Task task){
+        Date lastDayOfWeek = AutoScheduleTasksUtil.dayOfWeekMap().get('Monday');
+
+        Date tempDate = task.IsRecurrence == True ? task.RecurrenceStartDateOnly : task.ActivityDate;
+        Date tempDateWeekStart = tempDate.toStartOfWeek();
+        Integer daysBetween = tempDateWeekStart.daysBetween(Date.today());
+        String dayOfWeek = checkDayofWeek(daysBetween + 1);
+        Date nextFollowUpDate = AutoScheduleTasksUtil.dayOfWeekMap().get(dayOfWeek);
+        return nextFollowUpDate <= lastDayOfWeek ? nextFollowUpDate : null;
+    }
+
+    private static Task prepTask(Task treatmentTask, Date taskDate){
         Contact genericCon = AutoScheduleTasksUtil.genericContactMap.get(treatmentTask.Animal__r.Current_Recent_Shelter_Location__c);
         Task newTask = new Task(
             WhatId = treatmentTask.WhatId,
             Animal__c = treatmentTask.Animal__c,
             RecordTypeId = recordTypeId,
-            ActivityDate = calculateActivityDate(treatmentTask),
+            ActivityDate = taskDate,
             Description = 'Med Check is needed for: ' + treatmentTask.Animal__r.Animal_Name_Id__c + ' (' + treatmentTask.Animal__r.Current_Recent_Shelter_Location__c + ')',
             IsReminderSet = false,
             Status = 'Not Started',
@@ -28,12 +42,6 @@ public with sharing class ScheduleAnimalMedCheck {
         );
 
         return newTask;
-    }
-
-    private static Date calculateActivityDate(Task task){
-        Date tempDate = task.IsRecurrence == True ? task.RecurrenceStartDateOnly : task.ActivityDate;
-        Double daysToAdd = Math.Ceil((Double) tempDate.daysBetween(Date.today())/7)*7;
-        return tempDate.addDays(integer.valueOf(daysToAdd));
     }
 
     private static Task[] getTreatmentTasks(){
@@ -50,5 +58,30 @@ public with sharing class ScheduleAnimalMedCheck {
                 (RecurrenceActivityId = null AND ActivityDate >= : tempEndDate)
             )
         ];
+    }
+
+    private static String checkDayOfWeek(Integer num){
+        String dayOfWeek = 'Sunday';
+        switch on num {
+            when 1 {
+                dayOfWeek = 'Monday';
+            }	
+            when 2 {
+                dayOfWeek = 'Tuesday';
+            }
+            when 3 {
+                dayOfWeek = 'Wednesday';
+            }
+            when 4 {
+                dayOfWeek = 'Thursday';
+            }
+            when 5 {
+                dayOfWeek = 'Friday';
+            }
+            when 6 {
+                dayOfWeek = 'Saturday';
+            }
+        }
+        return dayOfWeek;
     }
 }

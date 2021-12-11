@@ -42,7 +42,7 @@ public with sharing class ScheduleAnimalBehaviorTreatments {
                 Animal__c = treatment.Animal__c,
                 RecordTypeId = recordTypeId,
                 ActivityDate = dateMap.get(day),
-                Description = 'Treatment is needed for: ' + treatment.Animal__r.Animal_Name_Id__c + ' (' + treatment.Animal__r.Current_Recent_Shelter_Location__c + ')',
+                Description = 'Beh Treatment is needed for: ' + treatment.Animal__r.Animal_Name_Id__c + ' (' + treatment.Animal__r.Current_Recent_Shelter_Location__c + ')',
                 IsReminderSet = true,
                 Status = 'Not Started',
                 WhoId = treatment.Animal__r.Behavior_Case_Worker__c != null ? treatment.Animal__r.Behavior_Case_Worker__c : genericCon.Id,
