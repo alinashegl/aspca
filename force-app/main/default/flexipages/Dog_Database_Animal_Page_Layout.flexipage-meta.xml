@@ -1959,12 +1959,6 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>treatmentTabHeader</componentName>
-                <identifier>c_treatmentTabHeader1</identifier>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
-            <componentInstance>
                 <componentInstanceProperties>
                     <name>parentFieldApiName</name>
                     <value>Animal__c.Id</value>
@@ -2124,11 +2118,19 @@
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
-                    <name>hideHeader</name>
+                    <name>height</name>
+                    <value>600</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>pageName</name>
+                    <value>DayBackAnimals</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>showLabel</name>
                     <value>false</value>
                 </componentInstanceProperties>
-                <componentName>force:relatedListQuickLinksContainer</componentName>
-                <identifier>force_relatedListQuickLinksContainer</identifier>
+                <componentName>flexipage:visualforcePage</componentName>
+                <identifier>flexipage_visualforcePage1</identifier>
             </componentInstance>
         </itemInstances>
         <name>Facet-8aa19073-8ad5-4afe-a68e-5b12de1d9f7d</name>
