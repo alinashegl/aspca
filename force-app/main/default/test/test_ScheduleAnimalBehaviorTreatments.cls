@@ -68,7 +68,7 @@ private class test_ScheduleAnimalBehaviorTreatments {
     @isTest
     static void scheduleTratements_success() {
         Test.startTest();
-            Task[] toInsert = ScheduleAnimalTreatments.scheduleTreatments();
+            Task[] toInsert = ScheduleAnimalBehaviorTreatments.scheduleTreatments();
         Test.stopTest();
 
         Map<Id, Task[]> taskMap = new Map<Id, Task[]>();
@@ -116,7 +116,7 @@ private class test_ScheduleAnimalBehaviorTreatments {
         update plans;
 
         Test.startTest();
-            Task[] toInsert = ScheduleAnimalTreatments.scheduleTreatments();
+            Task[] toInsert = ScheduleAnimalBehaviorTreatments.scheduleTreatments();
         Test.stopTest();
 
         Map<Id, Task[]> taskMap = new Map<Id, Task[]>();
