@@ -3,7 +3,7 @@
     <fullName>User__c</fullName>
     <deleteConstraint>SetNull</deleteConstraint>
     <externalId>false</externalId>
-    <inlineHelpText>What user will this Contact log into Salesforce ass</inlineHelpText>
+    <inlineHelpText>What user will this Contact log into Salesforce as</inlineHelpText>
     <label>User</label>
     <referenceTo>User</referenceTo>
     <relationshipName>Contacts</relationshipName>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Frequency_Of_Treatment__c</fullName>
+    <description>Frequency the medication is administered to the patient.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Please choose the Frequency this medication is to be administered.</inlineHelpText>
+    <label>Frequency Of Treatment</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>SID</fullName>
+                <default>false</default>
+                <label>SID</label>
+            </value>
+            <value>
+                <fullName>BID</fullName>
+                <default>false</default>
+                <label>BID</label>
+            </value>
+            <value>
+                <fullName>TID</fullName>
+                <default>false</default>
+                <label>TID</label>
+            </value>
+            <value>
+                <fullName>QID</fullName>
+                <default>false</default>
+                <label>QID</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
