@@ -27,7 +27,7 @@ public with sharing class ScheduleAnimalMedCheck {
     private static Task prepTask(Task treatmentTask, Date taskDate){
         Contact genericCon = AutoScheduleTasksUtil.genericContactMap.get(treatmentTask.Animal__r.Current_Recent_Shelter_Location__c);
         Task newTask = new Task(
-            WhatId = treatmentTask.WhatId,
+            WhatId = treatmentTask.Animal_Exam_Sheet_Lookup__c,
             Animal__c = treatmentTask.Animal__c,
             RecordTypeId = recordTypeId,
             ActivityDate = taskDate,
@@ -49,7 +49,8 @@ public with sharing class ScheduleAnimalMedCheck {
         return [
             SELECT Id, IsRecurrence, CreatedDate, ActivityDate, RecurrenceStartDateOnly, RecurrenceEndDateOnly, RecurrenceActivityId,
             WhatId, WhoId, OwnerId, Animal__c, Animal__r.Animal_Name_Id__c, Animal__r.Current_Recent_Shelter_Location__c,
-            Animal__r.Behavior_Case_Worker__c, Animal__r.Behavior_Case_Worker__r.Name, Animal__r.Behavior_Case_Worker__r.Is_Generic_Contact__c
+            Animal__r.Behavior_Case_Worker__c, Animal__r.Behavior_Case_Worker__r.Name, Animal__r.Behavior_Case_Worker__r.Is_Generic_Contact__c,
+            Animal_Exam_Sheet_Lookup__c
             FROM Task WHERE RecordType.Name = 'Treatments'
             AND Animal__r.Type_of_Animal__c = 'Dog'
             AND (
