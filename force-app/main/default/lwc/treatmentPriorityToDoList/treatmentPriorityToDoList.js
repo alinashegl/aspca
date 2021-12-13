@@ -41,8 +41,6 @@ export default class TreatmentPriorityToDoList extends NavigationMixin(Lightning
 
     get filterFieldOptions() {
         return [
-            //{ label: 'Name', value: 'Animal_Name__c' },
-            //{ label: 'ID#', value: 'Name' },
             { label: 'Treatment Priority', value: 'Treatment_Priority__c' },
             { label: 'Bundle Assignment', value: 'AssignedTreatmentBundleId__r.Name' },
             { label: 'Treatment Count', value: 'Animal__r.Number_of_Treatments__c' },
@@ -61,15 +59,6 @@ export default class TreatmentPriorityToDoList extends NavigationMixin(Lightning
         ];
     }
 
-    get sortString() {
-        //Formatted string value for use in sorting data
-        let sortValues = '';
-        if (this.addedSort.length > 0) {
-            sortValues = this.addedSort.map(x => x.qryValue).join(',');
-        }
-        return sortValues;
-    }
-
     get sortActive() {
         return this.addedSort.length > 0;
     }
@@ -82,7 +71,7 @@ export default class TreatmentPriorityToDoList extends NavigationMixin(Lightning
         return FORM_FACTOR === 'Small';
     }
 
-    @wire(getAnimalTreatments, { location: '$location', sortString: '$sortString'})
+    @wire(getAnimalTreatments, { location: '$location'})
     wiredAnimalTreatments(result) {
         this.animalTreatments = result;
         if (result.data) {
@@ -119,7 +108,7 @@ export default class TreatmentPriorityToDoList extends NavigationMixin(Lightning
             let fieldLabel = this.optionsFieldLabel(this.sortFieldValue, this.sortFieldOptions);
             let directionLabel = this.optionsFieldLabel(this.sortDirectionValue, this.sortDirectionOptions);
             //construct new sort object
-            let newSort = {label: fieldLabel + ' ' + directionLabel, name: this.sortFieldValue, qryValue: this.sortFieldValue + ' ' + this.sortDirectionValue};
+            let newSort = {label: fieldLabel + ' ' + directionLabel, name: this.sortFieldValue, direction: this.sortDirectionValue};
             if (oldSort.length == 0) {
                 //add new sort if no previous sort exists for the field
                 this.addedSort.push(newSort);
@@ -190,6 +179,28 @@ export default class TreatmentPriorityToDoList extends NavigationMixin(Lightning
         }
         if (this.sortActive) {
             //handle sorting of data
+            this.animalTreatmentSortFilter.sort((a, b) => {
+                for (let i = 0; i < this.addedSort.length; i++) {
+                    let name = this.addedSort[i].name.split('.');
+                    let direction = this.addedSort[i].direction;
+                    if (name.length == 1) {
+                        if ((a[name] > b[name]) || (a[name] != undefined && b[name] == undefined)) {
+                            return (direction === 'ASC') ? 1 : -1;
+                        }
+                        else if ((a[name] < b[name]) || (a[name] == undefined && b[name] != undefined)) {
+                            return (direction === 'ASC') ? -1 : 1;
+                        }
+                    }
+                    else {
+                        if ((a[name[0]][name[1]] > b[name[0]][name[1]]) || (a[name[0]][name[1]] != undefined && b[name[0]][name[1]] == undefined)) {
+                            return (direction === 'ASC') ? 1 : -1;
+                        }
+                        else if ((a[name[0]][name[1]] < b[name[0]][name[1]]) || (a[name[0]][name[1]] == undefined && b[name[0]][name[1]] != undefined)) {
+                            return (direction === 'ASC') ? -1 : 1;
+                        }
+                    }
+                }
+            });
         }
     }
 
