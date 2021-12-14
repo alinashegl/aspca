@@ -1,0 +1,26 @@
+<apex:page standardStylesheets="false" standardController="Animal__c" sideBar="false">
+
+    <apex:outputPanel rendered="{! $User.UIThemeDisplayed == 'Theme4d' }">
+        <apex:stylesheet value="{!URLFOR($Resource.dbk__style_resources,'styles/lightning.css')}"/>
+    </apex:outputPanel>
+
+    <apex:includeScript value="/canvas/sdk/js/36.0/controller.js"/>
+
+    <script type="text/javascript">
+        var filterResources = '{!Animal__c.Animal_Name_Id__c}';
+        DayBack.subscribe();
+    </script>
+
+    <apex:includeScript value="{!$Resource.DayBackJSAnimals}"/>
+
+    <apex:canvasApp namespacePrefix="dbk" canvasId="dbk" developerName="DayBack" width="100%"/>
+
+    <script type="text/javascript">
+        setTimeout(function() {
+           DayBack.init({
+               theme: "{! $User.UIThemeDisplayed}"
+           });
+        },0);
+    </script>
+
+</apex:page>
