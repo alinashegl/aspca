@@ -123,7 +123,13 @@ export default class TreatmentSessionChild extends LightningElement {
     }
 
     get customLookupCreateNewFields(){
-        return this.isContactList ? ['FirstName', 'LastName', 'Title', 'Department', 'Email'] : undefined;
+        return this.isContactList ? [
+            {fieldAPI: 'FirstName', fieldLabel: 'First Name', required: true},
+            {fieldAPI: 'LastName', fieldLabel: 'Last Name', required: true},
+            {fieldAPI: 'Title', required: false},
+            {fieldAPI: 'Department', required: false},
+            {fieldAPI: 'Email', required: false}
+        ] : undefined;
     }
 
     get customLookupPlaceholder(){
