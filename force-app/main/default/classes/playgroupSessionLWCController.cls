@@ -103,17 +103,39 @@ public with sharing class playgroupSessionLWCController {
     }
 
     @AuraEnabled (cacheable=true)
-    public static Playgroup_Contact__c[] getAnimalContacts(Id playgroupAnimalId){
+    public static playgroupAnimalInfo getAnimalInfo(Id playgroupAnimalId){
         try {
-            return [SELECT Id, Contact__r.Name, Novel_Not_Novel__c FROM Playgroup_Contact__c WHERE Playgroup__c =: playgroupAnimalId AND Novel_Not_Novel__c != 'PG Leader' ORDER BY Contact__r.Name ASC];
+            playgroupAnimalInfo info = new playgroupAnimalInfo();
+            info.animal = getAnimalPlaygroupById(playgroupAnimalId);
+            info.animalContacts = getAnimalContacts(playgroupAnimalId);
+            return info;
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }
+    }
+
+    public static Animal_Playgroup__c getAnimalPlaygroupById(Id playgroupAnimalId){
+        return [SELECT Id, Animal__c, Animal_Name__c, Play_Rating__c FROM Animal_Playgroup__c WHERE Id =: playgroupAnimalId LIMIT 1];
+
+    }
+
+    public static Animal__c getAnimal(Id animalId){
+        return [SELECT Id, Animal_Name__c, Play_Rating__c FROM Animal__c WHERE Id =: animalId LIMIT 1];
+    }
+
+    public static Playgroup_Contact__c[] getAnimalContacts(Id playgroupAnimalId){
+        Playgroup_Contact__c[] contactList = [SELECT Id, Contact__r.Name, Novel_Not_Novel__c FROM Playgroup_Contact__c WHERE Playgroup__c =: playgroupAnimalId AND Novel_Not_Novel__c != 'PG Leader' ORDER BY Contact__r.Name ASC];
+        return !contactList.isEmpty() ? contactList : null;
     }
 
     public class playgroupSessionInfo{
         @AuraEnabled public Playgroup_Session__c playgroupSession {get; set;}
         @AuraEnabled public Animal_Playgroup__c[] animalPlaygroups {get; set;}
         @AuraEnabled public Contact[] playgroupContacts {get; set;}
+    }
+
+    public class playgroupAnimalInfo{
+        @AuraEnabled public Animal_Playgroup__c animal {get; set;}
+        @AuraEnabled public Playgroup_Contact__c[] animalContacts {get; set;}
     }
 }

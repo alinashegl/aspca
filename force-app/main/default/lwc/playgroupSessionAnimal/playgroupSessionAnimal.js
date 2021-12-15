@@ -3,10 +3,11 @@ import { getRecord, getFieldValue, updateRecord } from 'lightning/uiRecordApi';
 import { refreshApex } from '@salesforce/apex';
 import FORM_FACTOR from '@salesforce/client/formFactor';
 import ANIMAL_NAME_FIELD from '@salesforce/schema/Animal__c.Animal_Name__c';
+import ANIMAL_PLAY_RATING_FIELD from '@salesforce/schema/Animal__c.Play_Rating__c';
 import CONTACT_ID_FIELD from '@salesforce/schema/Playgroup_Contact__c.Id';
 import CONTACT_NOVEL_FIELD from '@salesforce/schema/Playgroup_Contact__c.Novel_Not_Novel__c';
 import removeFromPlaygroup from '@salesforce/apex/playgroupSessionLWCController.removeFromPlaygroup';
-import getAnimalContacts from '@salesforce/apex/playgroupSessionLWCController.getAnimalContacts';
+import getAnimalInfo from '@salesforce/apex/playgroupSessionLWCController.getAnimalInfo';
 
 export default class PlaygroupSessionAnimal extends LightningElement {
     @api animalId;
@@ -34,21 +35,26 @@ export default class PlaygroupSessionAnimal extends LightningElement {
     modalClass = FORM_FACTOR == 'Small' ? 'slds-fade-in-open' : 'slds-modal slds-fade-in-open';
     error;
 
-    @wire(getRecord, {recordId: '$animalId', fields: [ANIMAL_NAME_FIELD]})
-    animal;
-
     wireResponse;
     animalContacts = [];
-    @wire(getAnimalContacts, {playgroupAnimalId: '$playgroupAnimalId'})
+    animalNameResponse;
+    playRatingValue;
+
+    @wire(getAnimalInfo, {playgroupAnimalId: '$playgroupAnimalId'})
     response(result){
         this.wireResponse = result;
         if(result.data){
             let contactList = [];
             this.animalContacts = [];
 
-            contactList = result.data;
+            contactList = result.data.animalContacts;
+            if(result.data.animal != null){
+                window.console.log('animal response: ', result.data.animal.Animal_Name__c);
+                this.animalNameResponse = result.data.animal.Animal_Name__c;
+                this.playRatingValue = result.data.animal.Play_Rating__c;
+            }
 
-            if(contactList.length > 0){
+            if(contactList != null && contactList.length > 0){
                 contactList.forEach(contact => {
                     this.animalContacts.push({
                         id: contact.Id,
@@ -73,6 +79,13 @@ export default class PlaygroupSessionAnimal extends LightningElement {
         const target = event.target;
         this.animalPlaygroupChanges[target.dataset.id] = target.value;
         this.animalPlaygroupPendingUpdate = true;
+    }
+
+    handleOnChangeAnimalPlayRating(event){
+        const target = event.target;
+        this.animalPlaygroupChanges[target.dataset.id] = target.value;
+        this.animalPlaygroupPendingUpdate = true;
+        this.playRatingValue = target.value;
     }
 
     handleSaveDog(event){
@@ -158,12 +171,24 @@ export default class PlaygroupSessionAnimal extends LightningElement {
     }
 
     get updateDogButtonLabel() {
-        return 'Update ' + this.animalName;
+        return 'Update ' + this.animalNameResponse;
     }
 
     get animalName() {
-        return getFieldValue(this.animal.data, ANIMAL_NAME_FIELD);
+        return this.animalNameResponse;
     }
+
+    get playRating(){
+        if(this.playRatingValue == 'Green'){
+            return 'play-rating-green';
+        }
+        else if(this.playRatingValue == 'Yellow'){
+            return 'play-rating-yellow';
+        }
+        else {
+            return 'play-rating-red';
+        }
+    }    
 
     get disableUpdateDogButton(){
         return !this.animalPlaygroupPendingUpdate && !this.animalPendingUpdate;
