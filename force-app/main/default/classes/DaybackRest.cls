@@ -30,7 +30,7 @@ global with sharing class DaybackRest {
             res.resourceName = con.Name;
             res.resource = con;
 
-            if(reportIds.contains(con.Id)){
+            if(reportIds != null && reportIds.contains(con.Id)){
                 res.folderName = 'Direct Reports';
                 folderNames.add('Direct Reports');
             }
