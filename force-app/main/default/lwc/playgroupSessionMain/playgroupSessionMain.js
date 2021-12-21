@@ -22,7 +22,6 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
     //customLookup variables
     customLookupFields = ["Name","Email","Title"];
     customLookupDisplayFields = 'Name, Email, Title';
-    customLookupCreateNewFields = ['FirstName', 'LastName', 'Title', 'Department', 'Email'];
     customLookupExpandedField = false;
 
     session;
@@ -251,5 +250,15 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
             });
             return animalIds;
         }
+    }
+
+    get customLookupCreateNewFields(){
+        return [
+            {fieldAPI: 'FirstName', fieldLabel: 'First Name', required: true},
+            {fieldAPI: 'LastName', fieldLabel: 'Last Name', required: true},
+            {fieldAPI: 'Title', required: false},
+            {fieldAPI: 'Department', required: false},
+            {fieldAPI: 'Email', required: false}
+        ];
     }
 }
