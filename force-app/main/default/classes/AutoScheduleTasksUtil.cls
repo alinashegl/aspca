@@ -104,5 +104,23 @@ public with sharing class AutoScheduleTasksUtil {
             'Sunday' => weekStart.addDays(7),
             'Monday' => weekStart.addDays(8)
         };
-    }    
+    }
+
+    public static Id[] getTaskRecordTypeIds(){
+        Id[] rtIds = new Id[0];
+        for(RecordType rt : [
+            SELECT Id FROM RecordType WHERE SobjectType = 'Task'
+            AND DeveloperName IN(
+                :BEH_TREATMENT_TASK_RECORD_TYPE_NAME,
+                :PLAYGROUP_TASK_RECORD_TYPE_NAME,
+                :FOSTER_TASK_RECORD_TYPE_NAME,
+                :BEHAVIOR_MED_CHECK_TASK_RECORD_TYPE_NAME,
+                :BOARD_AND_TRAIN
+            )
+        ]){
+            rtIds.add(rt.Id);
+        }
+
+        return rtIds;
+    }
 }
