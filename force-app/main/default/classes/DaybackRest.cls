@@ -65,7 +65,7 @@ global with sharing class DaybackRest {
 
     private static ResourceInfo[] getAnimalList(){
         ResourceInfo[] conResources = new ResourceInfo[0];
-        for(Animal__c animal :[SELECT Id, Animal_Name_Id__c, Current_Location__c, Current_Recent_Shelter_Location__c FROM Animal__c WHERE Type_of_Animal__c = 'Dog' AND Current_Recent_Shelter_Location__c IN('MRC', 'CRC', 'ARC/CARE') AND Final_Outcome__c = null ORDER BY Animal_Name_Id__c]){
+        for(Animal__c animal :[SELECT Id, Animal_Name_Id__c, Current_Location__c, Current_Recent_Shelter_Location__c FROM Animal__c WHERE Type_of_Animal__c = 'Dog' AND Current_Recent_Shelter_Location__c IN('MRC', 'CRC') ORDER BY Animal_Name_Id__c]){
             ResourceInfo res = new ResourceInfo();
             res.type = animal.Current_Recent_Shelter_Location__c;
             res.resourceName = animal.Animal_Name_Id__c;
