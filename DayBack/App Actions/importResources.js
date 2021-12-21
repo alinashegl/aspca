@@ -69,6 +69,19 @@ function processResult(data) {
     };
 
     resources.unshift(noneResource);
+    
+    //add no contact resource
+    var noneResource = {
+      id: 'no contact',
+      name: 'no contact',
+      nameSafe: 'nc',
+      shortName: 'n/a',
+      status: {
+        selected: sfObject == 'default',
+      },
+    };
+
+    resources.unshift(noneResource);       
 
     //continue actions
     action.callbacks.confirm();
