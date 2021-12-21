@@ -37,11 +37,21 @@ public with sharing class ScheduleAnimalMedCheck {
             WhoId = treatmentTask.Animal__r.Behavior_Case_Worker__c != null ? treatmentTask.Animal__r.Behavior_Case_Worker__c : genericCon.Id,
             OwnerId = genericCon.User__c,
             Subject = 'Behavior Medication Check',
-            Assigned_Resources__c = treatmentTask.Animal__r.Behavior_Case_Worker__r.Is_Generic_Contact__c == false ? treatmentTask.Animal__r.Behavior_Case_Worker__r.Name : null,
+            Assigned_Resources__c = determineResources(treatmentTask),
             Species__c = 'Dog'
         );
 
         return newTask;
+    }
+
+    private static String determineResources(Task task){
+        String[] resourceList = new String[0];
+        if(task.Animal__r.Animal_Name_Id__c != null){
+            resourceList.add(task.Animal__r.Animal_Name_Id__c);
+        }
+        resourceList.add(task.Animal__r.Behavior_Case_Worker__r.Is_Generic_Contact__c == false ? task.Animal__r.Behavior_Case_Worker__r.Name : AutoScheduleTasksUtil.NO_CONTACT_RESOURCE);
+        return string.join(resourceList, ';');
+
     }
 
     private static Task[] getTreatmentTasks(){

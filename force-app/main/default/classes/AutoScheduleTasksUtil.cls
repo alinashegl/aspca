@@ -5,6 +5,7 @@ public with sharing class AutoScheduleTasksUtil {
     public static final String BEHAVIOR_MED_CHECK_TASK_RECORD_TYPE_NAME = 'Behavior_Medication_Check';
     public static final String BOARD_AND_TRAIN = 'Board_And_Train';
     public static final String TREATMENT_TASK_RECORD_TYPE_NAME = 'Treatments';
+    public static final String NO_CONTACT_RESOURCE = 'no contact';
 
     public static final String NO_RESOURCE_DEFAULT = 'No Contact';
     public static Map<String, Contact> genericContactMap {
