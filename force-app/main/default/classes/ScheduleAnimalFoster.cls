@@ -6,7 +6,7 @@ public with sharing class ScheduleAnimalFoster {
         Calendar_Schedule_Config__mdt defaultConfig = calendarConfigMap.get('Foster - All-Foster - Weekly');
         Animal__c[] animals = getAnimals();
         Map<Id, Task> animalToTaskMap = getTasks(animals);
-        for(Animal__c animal : getAnimals()){
+        for(Animal__c animal : animals){
             if(needTasksThisWeek(animal, animalToTaskMap)){
                 fosterTasks.addAll(prepTasks(animal, defaultConfig));
             }
