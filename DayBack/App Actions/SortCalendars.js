@@ -44,14 +44,16 @@ try {
           'Beh Treatment Tasks',
           'Foster Follow Up Tasks', 
           'Playgroup Tasks', 
-          'Treatment Tasks', 
+          'Treatment Tasks',
+          'Board and Train Follow Up Tasks',
+          'Procedures (Read Only)',
+          'Vaccines (Read Only)',
           'Beh Med Check Dogs (Read Only)',
           'Beh Treatment Dogs (Read Only)',
           'Foster Follow Up Dogs (Read Only)', 
           'Playgroup Dogs (Read Only)', 
-          'Treatment Dogs (Read Only)' ,
-          'Procedures (Read Only)',
-          'Vaccines (Read Only)'
+          'Treatment Dogs (Read Only)'
+
         ];
         
     //----------- End Configuration -------------------
