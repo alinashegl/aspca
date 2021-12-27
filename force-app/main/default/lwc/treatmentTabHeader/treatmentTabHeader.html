@@ -1,6 +1,61 @@
 <template>
+    <template if:true={showModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 class="slds-modal__title slds-hyphenate">
+                        New Treatment<template if:false={smallForm}>: Default</template>
+                    </h2>
+                </header>
+                <div class="slds-modal__content slds-var-p-around_medium">
+                    <lightning-record-edit-form object-api-name="Treatment_Plan__c"
+                                                onsubmit={handleSubmit}
+                                                onsuccess={handleSuccess}>
+                        <template if:false={smallForm}>
+                            <h3 class="label slds-truncate slds-var-p-around_x-small slds-theme_shade">
+                                <span title="Information" class="slds-truncate">Information</span>
+                            </h3>
+                        </template>
+                        <div class="slds-grid slds-wrap">  
+                            <div class="slds-col slds-size_1-of-2"> 
+                                <lightning-input-field field-name="AssignedTreatmentBundleId__c"></lightning-input-field>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2"> 
+                                <lightning-input-field field-name="IsActive__c"></lightning-input-field>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2"> 
+                                <lightning-input-field field-name="Treatment_Priority__c"></lightning-input-field>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2"> 
+                                <lightning-input-field field-name="Preferred_Motivators__c"></lightning-input-field>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2"> 
+                                <lightning-input-field field-name="Enrichment_Priority__c"></lightning-input-field>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2"> 
+                                <lightning-input-field field-name="Plan_Notes__c"></lightning-input-field>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2"> 
+                                <lightning-input-field field-name="Enrichment_Activities__c"></lightning-input-field>
+                            </div>
+                        </div>
+                        <div  class="slds-align_absolute-center">
+                            <lightning-button variant="neutral" label="Cancel" onclick={handleCancel}></lightning-button>
+                            <lightning-button variant="brand" class="slds-var-m-left_x-small" label="Save" type="submit"></lightning-button>
+                        </div>
+                    </lightning-record-edit-form>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        <template if:true={smallForm}>
+            <!-- In the mobile view for the containing tab, the visible area does not expand to show the modal -->
+            <div class="mobileBuffer"></div>
+        </template>
+    </template>
     <lightning-card>
         <template if:false={smallForm}>
+            <lightning-button title="New Treatment" label="New Treatment" slot="actions" onclick={handleClick}></lightning-button>
             <lightning-button title="Last 5 Treatments Report" label="Last 5 Treatments Report" slot="actions" onclick={handlePdf}></lightning-button>
         </template>
     </lightning-card>
