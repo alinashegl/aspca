@@ -11,4 +11,31 @@ public with sharing class TreatmentToDoListController {
                 ORDER BY Id];
         return treatmentPlans;
     }
+
+    @AuraEnabled(cacheable=false)
+    public static void updateTreatment(ID recordId, Map<String, Object> fieldMap){
+        sObject sObj = cloneRecord(recordId);
+        for(String field : fieldMap.keySet()){
+            sObj.put(field, fieldMap.get(field));
+        }
+        insert sObj;
+    }
+
+    public static SObject cloneRecord(ID recordId){
+        DescribeSObjectResult describeResult = recordId.getSObjectType().getDescribe();
+        List<String> fieldNames = new List<String>( describeResult.fields.getMap().keySet() );
+        String query =
+        ' SELECT ' +
+            String.join( fieldNames, ',' ) +
+        ' FROM ' +
+            describeResult.getName() +
+        ' WHERE ' +
+            ' id = :recordId ' +
+        ' LIMIT 1 '
+        ;
+        SObject record = Database.query( query );
+        sObject sObj = Schema.getGlobalDescribe().get(describeResult.getName()).newSObject();
+        sObj = record.clone();
+        return sObj;
+    }
 }
