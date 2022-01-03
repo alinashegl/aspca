@@ -38,7 +38,8 @@ public with sharing class ScheduleAnimalMedCheck {
             OwnerId = genericCon.User__c,
             Subject = 'Behavior Medication Check',
             Assigned_Resources__c = determineResources(treatmentTask),
-            Species__c = 'Dog'
+            Species__c = 'Dog',
+            Medication__c = treatmentTask.Medication__c
         );
 
         return newTask;
@@ -60,9 +61,10 @@ public with sharing class ScheduleAnimalMedCheck {
             SELECT Id, IsRecurrence, CreatedDate, ActivityDate, RecurrenceStartDateOnly, RecurrenceEndDateOnly, RecurrenceActivityId,
             WhatId, WhoId, OwnerId, Animal__c, Animal__r.Animal_Name_Id__c, Animal__r.Current_Recent_Shelter_Location__c,
             Animal__r.Behavior_Case_Worker__c, Animal__r.Behavior_Case_Worker__r.Name, Animal__r.Behavior_Case_Worker__r.Is_Generic_Contact__c,
-            Animal_Exam_Sheet_Lookup__c
+            Animal_Exam_Sheet_Lookup__c, Medication__c
             FROM Task WHERE RecordType.Name = 'Treatments'
             AND Animal__r.Type_of_Animal__c = 'Dog'
+            AND Medication__r.Behavior_Medication__c = true
             AND (
                 (IsRecurrence = true AND RecurrenceEndDateOnly >= : tempEndDate)
                 OR 
