@@ -35,20 +35,11 @@ public with sharing class ScheduleAnimalPlaygroups {
                 WhoId = animal.Behavior_Case_Worker__c != null ? animal.Behavior_Case_Worker__c : genericCon.Id,
                 OwnerId = genericCon.User__c,
                 Subject = 'Playgroup',
-                Assigned_Resources__c = determineResources(animal),
+                Assigned_Resources__c = AutoScheduleTasksUtil.determineResources(animal),
                 Species__c = 'Dog'
             );
             newTasks.add(newTask);
         }
         return newTasks;
-    }
-
-    private static String determineResources(Animal__c animal){
-        String[] resourceList = new String[0];
-        if(animal.Animal_Name_Id__c != null){
-            resourceList.add(animal.Animal_Name_Id__c);
-        }
-        resourceList.add(animal.Behavior_Case_Worker__r.Is_Generic_Contact__c == false ? animal.Behavior_Case_Worker__r.Name : AutoScheduleTasksUtil.NO_CONTACT_RESOURCE);
-        return string.join(resourceList, ';');
     }
 }

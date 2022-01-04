@@ -13,6 +13,7 @@ public with sharing class ScheduleAnimalMedCheck {
         return medCheckTasks;
     }
 
+    @testVisible
     private static Date calculateTaskDate(Task task){
         Date lastDayOfWeek = AutoScheduleTasksUtil.dayOfWeekMap().get('Monday');
 
@@ -24,37 +25,33 @@ public with sharing class ScheduleAnimalMedCheck {
         return nextFollowUpDate <= lastDayOfWeek ? nextFollowUpDate : null;
     }
 
+    @testVisible
     private static Task prepTask(Task treatmentTask, Date taskDate){
-        Contact genericCon = AutoScheduleTasksUtil.genericContactMap.get(treatmentTask.Animal__r.Current_Recent_Shelter_Location__c);
-        Task newTask = new Task(
-            WhatId = treatmentTask.Animal_Exam_Sheet_Lookup__c,
-            Animal__c = treatmentTask.Animal__c,
-            RecordTypeId = recordTypeId,
-            ActivityDate = taskDate,
-            Description = 'Med Check is needed for: ' + treatmentTask.Animal__r.Animal_Name_Id__c + ' (' + treatmentTask.Animal__r.Current_Recent_Shelter_Location__c + ')',
-            IsReminderSet = false,
-            Status = 'Not Started',
-            WhoId = treatmentTask.Animal__r.Behavior_Case_Worker__c != null ? treatmentTask.Animal__r.Behavior_Case_Worker__c : genericCon.Id,
-            OwnerId = genericCon.User__c,
-            Subject = 'Behavior Medication Check',
-            Assigned_Resources__c = determineResources(treatmentTask),
-            Species__c = 'Dog',
-            Medication__c = treatmentTask.Medication__c
-        );
-
-        return newTask;
-    }
-
-    private static String determineResources(Task task){
-        String[] resourceList = new String[0];
-        if(task.Animal__r.Animal_Name_Id__c != null){
-            resourceList.add(task.Animal__r.Animal_Name_Id__c);
+        if(treatmentTask != null && taskDate != null){
+            Contact genericCon = AutoScheduleTasksUtil.genericContactMap.get(treatmentTask.Animal__r.Current_Recent_Shelter_Location__c);
+            Task newTask = new Task(
+                WhatId = treatmentTask.Animal_Exam_Sheet_Lookup__c,
+                Animal__c = treatmentTask.Animal__c,
+                RecordTypeId = recordTypeId,
+                ActivityDate = taskDate,
+                Description = 'Med Check is needed for: ' + treatmentTask.Animal__r.Animal_Name_Id__c + ' (' + treatmentTask.Animal__r.Current_Recent_Shelter_Location__c + ')',
+                IsReminderSet = false,
+                Status = 'Not Started',
+                WhoId = treatmentTask.Animal__r.Behavior_Case_Worker__c != null ? treatmentTask.Animal__r.Behavior_Case_Worker__c : genericCon.Id,
+                OwnerId = genericCon.User__c,
+                Subject = 'Behavior Medication Check',
+                Assigned_Resources__c = AutoScheduleTasksUtil.determineResources(treatmentTask.Animal__r),
+                Species__c = 'Dog',
+                Medication__c = treatmentTask.Medication__c
+            );
+            return newTask;
+        } else {
+            return null;
         }
-        resourceList.add(task.Animal__r.Behavior_Case_Worker__r.Is_Generic_Contact__c == false ? task.Animal__r.Behavior_Case_Worker__r.Name : AutoScheduleTasksUtil.NO_CONTACT_RESOURCE);
-        return string.join(resourceList, ';');
-
+        
     }
 
+    @testVisible
     private static Task[] getTreatmentTasks(){
         Date tempEndDate = Date.today().addDays(-7);
         return [
@@ -73,6 +70,7 @@ public with sharing class ScheduleAnimalMedCheck {
         ];
     }
 
+    @testVisible
     private static String checkDayOfWeek(Integer num){
         String dayOfWeek = 'Sunday';
         switch on num {

@@ -7,7 +7,7 @@ public with sharing class AutoScheduleTasksUtil {
     public static final String TREATMENT_TASK_RECORD_TYPE_NAME = 'Treatments';
     public static final String NO_CONTACT_RESOURCE = 'unassigned';
     public static final String[] dogPopulations = new String[]{'ARC','CARE','CRC','MRC'};
-    
+
     public static Map<String, Contact> genericContactMap {
         get{
             if(genericContactMap == null){
@@ -127,5 +127,14 @@ public with sharing class AutoScheduleTasksUtil {
         }
 
         return rtIds;
+    }
+
+    public static String determineResources(Animal__c animal){
+        String[] resourceList = new String[0];
+        if(animal.Animal_Name_Id__c != null){
+            resourceList.add(animal.Animal_Name_Id__c);
+        }
+        resourceList.add(animal.Behavior_Case_Worker__r.Is_Generic_Contact__c == false ? animal.Behavior_Case_Worker__r.Name : AutoScheduleTasksUtil.NO_CONTACT_RESOURCE);
+        return string.join(resourceList, ';');
     }
 }
