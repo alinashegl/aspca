@@ -5,9 +5,9 @@ public with sharing class AutoScheduleTasksUtil {
     public static final String BEHAVIOR_MED_CHECK_TASK_RECORD_TYPE_NAME = 'Behavior_Medication_Check';
     public static final String BOARD_AND_TRAIN_RECORD_TYPE_NAME = 'Board_And_Train';
     public static final String TREATMENT_TASK_RECORD_TYPE_NAME = 'Treatments';
-    public static final String NO_CONTACT_RESOURCE = 'no contact';
-
-    public static final String NO_RESOURCE_DEFAULT = 'No Contact';
+    public static final String NO_CONTACT_RESOURCE = 'unassigned';
+    public static final String[] dogPopulations = new String[]{'ARC','CARE','CRC','MRC'};
+    
     public static Map<String, Contact> genericContactMap {
         get{
             if(genericContactMap == null){
@@ -72,7 +72,12 @@ public with sharing class AutoScheduleTasksUtil {
             WHERE Is_Generic_Contact__c = TRUE
             AND User__r.isActive = true
         ]){
-            contactMap.put(con.User__r.Division, con);
+            if(con.User__r.Division == 'ARC/CARE'){
+                contactMap.put('ARC', con);
+                contactMap.put('CARE', con);    
+            } else {
+                contactMap.put(con.User__r.Division, con);
+            }
         }
 
         return contactMap;

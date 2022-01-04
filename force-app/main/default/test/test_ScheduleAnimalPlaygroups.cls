@@ -4,7 +4,7 @@ private class test_ScheduleAnimalPlaygroups {
     static void testSetup(){
         Animal__c animalARC = TestDataFactory.createAnimalWithName('animalARC');
         animalARC.Playgroup_Priority_Level__c = 'Low – 2 days';
-        animalARC.Current_Recent_Shelter_Location__c = 'ARC/CARE';
+        animalARC.Current_Recent_Shelter_Location__c = 'ARC';
 
         Animal__c animalCRC = TestDataFactory.createAnimalWithName('animalCRC');
         animalCRC.Playgroup_Priority_Level__c = 'High – 4 days';
