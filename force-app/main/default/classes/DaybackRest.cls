@@ -65,7 +65,7 @@ global with sharing class DaybackRest {
 
     private static ResourceInfo[] getAnimalList(){
         ResourceInfo[] conResources = new ResourceInfo[0];
-        for(Animal__c animal :[SELECT Id, Animal_Name_Id__c, Current_Location__c, Current_Recent_Shelter_Location__c FROM Animal__c WHERE Type_of_Animal__c = 'Dog' AND Current_Recent_Shelter_Location__c IN('MRC', 'CRC') ORDER BY Animal_Name_Id__c]){
+        for(Animal__c animal :[SELECT Id, Animal_Name_Id__c, Current_Location__c, Current_Recent_Shelter_Location__c FROM Animal__c WHERE Type_of_Animal__c = 'Dog' AND Current_Recent_Shelter_Location__c IN :AutoScheduleTasksUtil.dogPopulations ORDER BY Animal_Name_Id__c]){
             ResourceInfo res = new ResourceInfo();
             res.type = animal.Current_Recent_Shelter_Location__c;
             res.resourceName = animal.Animal_Name_Id__c;
@@ -113,7 +113,7 @@ global with sharing class DaybackRest {
         Boolean selected = false;
         if(sfObject == 'default'){
             selected = true;
-            if(name == 'CRC' || name == 'MRC'){
+            if(AutoScheduleTasksUtil.dogPopulations.contains(name)){
                 selected = false;
             }
         }

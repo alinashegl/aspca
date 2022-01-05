@@ -28,8 +28,13 @@ var DayBack = (function() {
 				 '&sidebarShow=false' + 
 				 '&filterResources=' + filterResources + 
 				 '&view=basicResourceHor' + 
-				 '&source=Playgroup Dogs' + 
-				 '&source=Treatment Dogs' +
+				 '&source=Beh Med Check Tasks' + 
+				 '&source=Beh Treatment Tasks' +
+				 '&source=Foster Follow Up Tasks' + 
+				 '&source=Playgroup Tasks' + 
+				 '&source=Board And Train' + 
+				 '&source=Procedures (Read Only)' + 
+				 '&source=Vaccines (Read Only)' + 
                  '&customResources=true',
 				 "location":window.location.pathname,
 			  }

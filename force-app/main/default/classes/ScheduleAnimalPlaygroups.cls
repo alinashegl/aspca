@@ -8,7 +8,7 @@ public with sharing class ScheduleAnimalPlaygroups {
             Behavior_Case_Worker__r.Name, Behavior_Case_Worker__r.Is_Generic_Contact__c
             FROM Animal__c 
             WHERE Playgroup_Priority_Level__c != null 
-            AND Current_Recent_Shelter_Location__c IN ('MRC', 'CRC', 'ARC/CARE')
+            AND Current_Recent_Shelter_Location__c IN: AutoScheduleTasksUtil.dogPopulations
             AND Type_of_Animal__c = 'Dog'
         ]){
             String configKey = animal.Current_Recent_Shelter_Location__c + '-' + animal.Playgroup_Priority_Level__c.split(' ')[0];
@@ -35,20 +35,11 @@ public with sharing class ScheduleAnimalPlaygroups {
                 WhoId = animal.Behavior_Case_Worker__c != null ? animal.Behavior_Case_Worker__c : genericCon.Id,
                 OwnerId = genericCon.User__c,
                 Subject = 'Playgroup',
-                Assigned_Resources__c = determineResources(animal),
+                Assigned_Resources__c = AutoScheduleTasksUtil.determineResources(animal),
                 Species__c = 'Dog'
             );
             newTasks.add(newTask);
         }
         return newTasks;
-    }
-
-    private static String determineResources(Animal__c animal){
-        String[] resourceList = new String[0];
-        if(animal.Animal_Name_Id__c != null){
-            resourceList.add(animal.Animal_Name_Id__c);
-        }
-        resourceList.add(animal.Behavior_Case_Worker__r.Is_Generic_Contact__c == false ? animal.Behavior_Case_Worker__r.Name : AutoScheduleTasksUtil.NO_CONTACT_RESOURCE);
-        return string.join(resourceList, ';');
     }
 }

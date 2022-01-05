@@ -9,7 +9,7 @@ public with sharing class ScheduleAnimalBehaviorTreatments {
             Animal__r.Behavior_Case_Worker__c, Animal__r.Behavior_Case_Worker__r.Name, Animal__r.Behavior_Case_Worker__r.Is_Generic_Contact__c,
             Animal__r.Behavior_Case_Worker__r.User__c
             FROM Treatment_Plan__c
-            WHERE Animal__r.Current_Recent_Shelter_Location__c IN ('MRC', 'CRC', 'ARC/CARE') 
+            WHERE Animal__r.Current_Recent_Shelter_Location__c IN: AutoScheduleTasksUtil.dogPopulations 
             AND IsActive__c = TRUE
             AND Treatment_Priority__c NOT IN ('No Treatment', '')
             AND Animal__r.Type_of_Animal__c = 'Dog'
@@ -48,20 +48,11 @@ public with sharing class ScheduleAnimalBehaviorTreatments {
                 WhoId = treatment.Animal__r.Behavior_Case_Worker__c != null ? treatment.Animal__r.Behavior_Case_Worker__c : genericCon.Id,
                 OwnerId = genericCon.User__c,
                 Subject = 'Treatment',
-                Assigned_Resources__c = determineResources(treatment),
+                Assigned_Resources__c = AutoScheduleTasksUtil.determineResources(treatment.Animal__r),
                 Species__c = 'Dog'
             );
             newTasks.add(newTask);
         }
         return newTasks;
-    }
-
-    private static String determineResources(Treatment_Plan__c treatment){
-        String[] resourceList = new String[0];
-        if(treatment.Animal__r.Animal_Name_Id__c != null){
-            resourceList.add(treatment.Animal__r.Animal_Name_Id__c);
-        }
-        resourceList.add(treatment.Animal__r.Behavior_Case_Worker__r.Is_Generic_Contact__c == false ? treatment.Animal__r.Behavior_Case_Worker__r.Name : AutoScheduleTasksUtil.NO_CONTACT_RESOURCE);
-        return string.join(resourceList, ';');
     }
 }
