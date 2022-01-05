@@ -1,5 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>AutoScheduleTasksUtil</members>
+        <members>DaybackRest</members>
+        <members>ScheduleAnimalBehaviorTreatments</members>
+        <members>ScheduleAnimalFoster</members>
+        <members>ScheduleAnimalMedCheck</members>
+        <members>ScheduleAnimalPlaygroups</members>
+        <members>ScheduleBoardAndTrainTask</members>
+        <members>test_AutoScheduleTasksUtil</members>
+        <members>test_ScheduleAnimalBehaviorTreatments</members>
+        <members>test_ScheduleAnimalMedCheck</members>
+        <members>test_ScheduleAnimalPlaygroups</members>
+        <members>test_ScheduleBoardAndTrainTask</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
+        <members>Calendar_Schedule_Config.Playgroup_ARC_High</members>
+        <members>Calendar_Schedule_Config.Playgroup_ARC_Low</members>
+        <members>Calendar_Schedule_Config.Playgroup_CARE_High</members>
+        <members>Calendar_Schedule_Config.Playgroup_CARE_Low</members>
+        <members>Calendar_Schedule_Config.Treatment_ARC_High</members>
+        <members>Calendar_Schedule_Config.Treatment_ARC_Low</members>
+        <members>Calendar_Schedule_Config.Treatment_CARE_High</members>
+        <members>Calendar_Schedule_Config.Treatment_CARE_Low</members>
+        <name>CustomMetadata</name>
+    </types>
+        <types>
+        <members>Calendar_Schedule_Config__mdt-Calendar Schedule Config Layout</members>
+        <name>Layout</name>
+    </types>
+    <types>
+        <members>Animal_Location_Lightning_Layout</members>
+        <name>FlexiPage</name>
+    </types>
+    <types>
+        <members>DayBackJSAnimals</members>
+        <name>StaticResource</name>
+    </types>
 <!--    <types>
         <members>*</members>
         <name>Report</name>
@@ -15,10 +53,6 @@
     <types>
         <members>*</members>
         <name>ApexPage</name>
-    </types>
-    <types>
-        <members>*</members>
-        <name>ApexClass</name>
     </types>
     <types>
         <members>*</members>
@@ -99,11 +133,7 @@
     <types>
         <members>*</members>
         <name>CustomLabel</name>
-    </types>
-        <types>
-        <members>*</members>
-        <name>Layout</name>
-    </types>
+
 -->
     <version>53.0</version>
 </Package>
