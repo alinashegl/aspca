@@ -115,7 +115,9 @@
                                     <div class='slds-grid slds-wrap'>
                                         <div class="slds-col slds-size_2-of-4">
                                             <label class="slds-form-element__label" for="form-element-01">Play Rating</label>
-                                            <lightning-input-field field-name="Play_Rating__c" variant='label-hidden' data-id='Play_Rating__c' onchange={handleOnChangeAnimalPlaygroup}> </lightning-input-field>
+                                            <div class={playRating}>
+                                                <lightning-input-field field-name="Play_Rating__c" variant='label-hidden' data-id='Play_Rating__c' onchange={handleOnChangeAnimalPlayRating}> </lightning-input-field>
+                                            </div>
                                         </div>
                                         <div class="slds-col slds-size_3-of-4 slds-align-bottom slds-var-p-top_small">
                                             <template if:true={error}>
@@ -146,7 +148,7 @@
                                                 <section role='dialog' tabindex="0" class={modalClass} onkeydown={handleKeyDown}>
                                                     <div class="slds-modal__container">
                                                         <div class="slds-modal__content slds-var-p-around_medium">
-                                                            Are you sure you want to remove {animalName} from the playgroup?
+                                                            Are you sure you want to remove {animalNameResponse} from the playgroup?
                                                         </div>
                                                         <footer class="slds-modal__footer slds-is-relative">
                                                             <lightning-button label='Cancel' class="slds-var-p-horizontal_xxx-small" onclick={handleCloseModal}>

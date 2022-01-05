@@ -131,17 +131,23 @@
         </div>
         <template if:true={showCreateNew}>
             <div class='slds-box' onclick={handleDivClick}>
-                <template if:true={createNewFields}>
+                <template if:true={hasCreateNewFields}>
+                    <template if:true={showErrors}>
+                        <div class='error-message'>
+                            *Please fill out all required fields: {errors}
+                        </div>
+                    </template>
                     <lightning-record-form
                         object-api-name={objName}
-                        fields={createNewFields}
+                        fields={createNewFieldList}
                         mode="edit"
                         onsuccess={handleNewRecordResponse}
                         oncancel={handleInputIconClick}
+                        onsubmit={handleOnSubmit}
                     >
                     </lightning-record-form>
                 </template>
-                <template if:false={createNewFields}>
+                <template if:false={hasCreateNewFields}>
                     <lightning-record-form
                         object-api-name={objName}
                         layout-type="Full"

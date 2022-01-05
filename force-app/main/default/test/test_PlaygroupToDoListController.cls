@@ -6,7 +6,7 @@ public with sharing class test_PlaygroupToDoListController {
         a.Play_Category__c = 'Small Mellow';
         update a;
         Test.startTest();
-        List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals('MRC', '');
+        List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals('MRC');
         Test.stopTest();
 
         List<Animal__c> animals = [SELECT Id, Shelter_Location2__c, Play_Category__c, Behavior_Play_Pause__c, Behavior_Play_Pause_Date__c FROM Animal__c WHERE Id = :a.Id];
@@ -18,7 +18,7 @@ public with sharing class test_PlaygroupToDoListController {
     static void getPlaygroupAnimalsBadCategory() {
         Animal__c a = TestDataFactory.createAnimal();
         Test.startTest();
-        List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals('MRC', '');
+        List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals('MRC');
         Test.stopTest();
         System.assertEquals(0, playgroupAnimals.size());
     }
@@ -28,7 +28,7 @@ public with sharing class test_PlaygroupToDoListController {
         Animal__c a = TestDataFactory.createAnimal();
         List<Play_Pause__c> playPauses = TestDataFactory.createPlayPauses(a);
         Test.startTest();
-        List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals('MRC', '');
+        List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals('MRC');
         Test.stopTest();
         System.assertEquals(0, playgroupAnimals.size());
     }
@@ -37,7 +37,7 @@ public with sharing class test_PlaygroupToDoListController {
     static void getPlaygroupAnimalsBadLocation() {
         Animal__c a = TestDataFactory.createAnimal();
         Test.startTest();
-        List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals('Not MRC', '');
+        List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals('Not MRC');
         Test.stopTest();
         System.assertEquals(0, playgroupAnimals.size());
     }

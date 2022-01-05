@@ -55,17 +55,18 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
             { label: 'Sex', value: 'Gender__c' },
             { label: 'Kennel Location', value: 'Shelter_Location__c' },
             { label: '# of Playgroups', value: 'Number_of_Playgroups__c' },
+            { label: 'Playgroup Today?', value: 'Animal_Playgroups__r.Id' },
             { label: 'Does Not Walk on Leash', value: 'Does_Not_Walk_on_a_Leash__c' },
             { label: 'Playgroup Priority Level', value: 'Playgroup_Priority_Level__c' },
             { label: 'Play Category', value: 'Play_Category__c' },
             { label: 'Handler Code', value: 'Shelter_Color_Coding__c' },
+            { label: 'Medical Condition', value: 'Medical_Conditions__r.Id' },
+            { label: 'Behavior Condition', value: 'Play_Pauses__r.Id' },
         ];
     }
 
     get filterFieldOptions() {
         return [
-            //{ label: 'Name', value: 'Animal_Name__c' },
-            //{ label: 'ID#', value: 'Name' },
             { label: 'Sex', value: 'Gender__c' },
             { label: 'Kennel Location', value: 'Shelter_Location__c' },
             { label: '# of Playgroups', value: 'Number_of_Playgroups__c' },
@@ -86,15 +87,6 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
         ];
     }
 
-    get sortString() {
-        //Formatted string value for use in sorting data
-        let sortValues = '';
-        if (this.addedSort.length > 0) {
-            sortValues = this.addedSort.map(x => x.qryValue).join(',');
-        }
-        return sortValues;
-    }
-
     get sortActive() {
         return this.addedSort.length > 0;
     }
@@ -111,7 +103,7 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
         return this.action === 'new';
     }
 
-    @wire(getPlaygroupAnimals, { location: '$location', sortString: '$sortString'})
+    @wire(getPlaygroupAnimals, { location: '$location'})
     wiredPlaygroupAnimals(result) {
         this.playgroupAnimals = result;
         if (result.data) {
@@ -187,7 +179,7 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
             let fieldLabel = this.optionsFieldLabel(this.sortFieldValue, this.sortFieldOptions);
             let directionLabel = this.optionsFieldLabel(this.sortDirectionValue, this.sortDirectionOptions);
             //construct new sort object
-            let newSort = {label: fieldLabel + ' ' + directionLabel, name: this.sortFieldValue, qryValue: this.sortFieldValue + ' ' + this.sortDirectionValue};
+            let newSort = {label: fieldLabel + ' ' + directionLabel, name: this.sortFieldValue, direction: this.sortDirectionValue};
             if (oldSort.length == 0) {
                 //add new sort if no previous sort exists for the field
                 this.addedSort.push(newSort);
@@ -269,6 +261,31 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
         }
         if (this.sortActive) {
             //handle sorting of data
+            this.playgroupAnimalsSortFilter.sort((a, b) => {
+                for (let i = 0; i < this.addedSort.length; i++) {
+                    let name = this.addedSort[i].name.split('.');
+                    let direction = this.addedSort[i].direction;
+                    if (name.length == 1) {
+                        if ((a[name] > b[name]) || (a[name] != undefined && b[name] == undefined)) {
+                            return (direction === 'ASC') ? 1 : -1;
+                        }
+                        else if ((a[name] < b[name]) || (a[name] == undefined && b[name] != undefined)) {
+                            return (direction === 'ASC') ? -1 : 1;
+                        }
+                    }
+                    else {
+                        //this handles only whether the comparisons have data or don't have data
+                        //need other comparisons if new fields are added that are related fields
+                        //instead of child query relations that these currently work for
+                        if (a[name[0]] != undefined && b[name[0]] == undefined) {
+                            return (direction === 'ASC') ? 1 : -1;
+                        }
+                        else if (a[name[0]] == undefined && b[name[0]] != undefined) {
+                            return (direction === 'ASC') ? -1 : 1;
+                        }
+                    }
+                }
+            });
         }
     }
 

@@ -23,6 +23,14 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>AutoScheduleController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>AutoScheduleTasksUtil</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>BehEvalPdfController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -80,6 +88,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>DataDisplayController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>DaybackRest</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -215,6 +227,22 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>ScheduleAnimalBehaviorTreatments</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ScheduleAnimalFoster</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ScheduleAnimalMedCheck</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ScheduleAnimalPlaygroups</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>SchemaHelper</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -260,10 +288,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>Test_ObservationController</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>ToDoListModWrapper</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -320,6 +344,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>UpdateContact</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>Util</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -447,6 +475,14 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>test_AutoScheduleController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>test_AutoScheduleTasksUtil</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>test_BehEvalPdfController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -491,6 +527,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>test_Last5TreatmentsController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>test_LastTreatmentsController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -519,11 +559,27 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>test_PlaygroupToDoPdfController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>test_QueryFactory</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>test_RecordIdController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>test_ScheduleAnimalBehaviorTreatments</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>test_ScheduleAnimalFoster</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>test_ScheduleAnimalPlaygroups</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -893,6 +949,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Animal__c.Animal_Field_ID__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Animal__c.Animal_Name_Id__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -2936,6 +2997,61 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Calendar_Schedule_Config__mdt.Frequency__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Calendar_Schedule_Config__mdt.Friday__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Calendar_Schedule_Config__mdt.IsActive__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Calendar_Schedule_Config__mdt.Monday__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Calendar_Schedule_Config__mdt.Population__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Calendar_Schedule_Config__mdt.Saturday__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Calendar_Schedule_Config__mdt.Sunday__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Calendar_Schedule_Config__mdt.Task_Type__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Calendar_Schedule_Config__mdt.Thursday__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Calendar_Schedule_Config__mdt.Tuesday__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Calendar_Schedule_Config__mdt.Wednesday__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Case.ExternalId__c</field>
         <readable>true</readable>
@@ -3096,6 +3212,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.Is_Generic_Contact__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Contact.Jigsaw</field>
         <readable>true</readable>
@@ -3206,13 +3327,13 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>Contact.Work_Phone__c</field>
-        <readable>true</readable>
+        <editable>false</editable>
+        <field>Contact.User__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.animalshelters__Is_a_Foster__c</field>
+        <field>Contact.Work_Phone__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -3412,6 +3533,16 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Event.Animal_Name__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Event.Assigned_Resources__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Facility_Outcome__c.End_Date__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -3428,6 +3559,16 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Facility_Outcome__c.Facility_or_Outcome__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Facility_Outcome__c.Follow_Up_Days__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Facility_Outcome__c.Follow_Up_Frequency__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -3921,29 +4062,29 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Play_Pause__c.End_Date__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Play_Pause__c.Play_Pause_Notes__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Play_Pause__c.Play_Pause_Reason__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Play_Pause__c.Start_Date__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Play_Pause__c.Type__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -3996,6 +4137,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Playgroup_Session__c.Playgroup_Date__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Playgroup_Session__c.Playgroup_Leader__c</field>
         <readable>true</readable>
@@ -4014,6 +4160,56 @@
         <editable>true</editable>
         <field>Playgroup_Session__c.Population__c</field>
         <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Playgroup__c.Animal__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Playgroup__c.Did_Not_Attend_Playgroup__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Playgroup__c.Playgroup_Color_Code__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Playgroup__c.Playgroup_Date_Time__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Playgroup__c.Playgroup_Individual_Notes__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Playgroup__c.Playgroup_Location__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Playgroup__c.Playgroup_Notes_Text__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Procedure__c.Animal_Name_Id__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Procedure__c.Calendar_Display_Start__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Procedure__c.Show_On_Calendar__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
@@ -4472,6 +4668,16 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Task.Animal_Name__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Task.Assigned_Resources__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Test_Config__mdt.Child_Test_Config__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -4601,6 +4807,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Treatment_Plan__c.Custom_Schedule__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Treatment_Plan__c.Description__c</field>
         <readable>true</readable>
@@ -4665,11 +4876,33 @@
         <field>Treatment_Session__c.Session_Notes__c</field>
         <readable>true</readable>
     </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Vaccine_and_Preventative__c.Animal_Name_Id__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Vaccine_and_Preventative__c.Calendar_Display_Start__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Vaccine_and_Preventative__c.Show_On_Calendar__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
     <layoutAssignments>
         <layout>Additional_Dog_Present__c-Additional Dog Present Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Animal_Playgroup__c-Animal Playgroup Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Animal__c-Animal Layout %28Behavior%29</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Animal__c-Animal Layout %28Behavior%29</layout>
+        <recordType>Animal__c.Behavior</recordType>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Animal__c_hd-Animal Layout</layout>
@@ -4746,6 +4979,9 @@
         <recordType>Evaluation__c.Social_Behavior</recordType>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Facility_Outcome__c-Facility%2FOutcome Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Observation__c-Observation Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -4761,6 +4997,9 @@
         <layout>Plan_Protocol__c-Plan Protocol Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Play_Pause__c-Play Pause Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Playgroup_Contact__c-Playgroup Contact Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -4768,6 +5007,9 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>Pricebook2-Price Book Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Procedure__c-Procedure Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Protocol__c-Protocol Layout</layout>
@@ -4785,6 +5027,33 @@
         <layout>Session_Protocol__c-Session Protocol Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Task-Task Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Task-Task Layout</layout>
+        <recordType>Task.Behavior_Medication_Check</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Task-Task Layout</layout>
+        <recordType>Task.Behavior_TX</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Task-Task Layout</layout>
+        <recordType>Task.Foster_Follow_Up</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Task-Task Layout</layout>
+        <recordType>Task.General_Task</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Task-Task Layout</layout>
+        <recordType>Task.Playgroup</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Task-Treatment Tasks</layout>
+        <recordType>Task.Treatments</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Test_Config__mdt-Test Config Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -4795,6 +5064,9 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>Treatment_Session__c-Treatment Session Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Vaccine_and_Preventative__c-Vaccine Administration Layout</layout>
     </layoutAssignments>
     <objectPermissions>
         <allowCreate>true</allowCreate>
@@ -5018,6 +5290,15 @@
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
+        <object>Playgroup__c</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
         <object>Protocol__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
@@ -5085,6 +5366,10 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>BehaviorEvaluationMatrix</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>DayBackAnimals</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
@@ -5181,6 +5466,37 @@
         <recordType>Legal_Advocacy_Matter__c.Tracking</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Task.Behavior_Medication_Check</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Task.Behavior_TX</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Task.Foster_Follow_Up</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>true</default>
+        <personAccountDefault>true</personAccountDefault>
+        <recordType>Task.General_Task</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Task.Playgroup</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Task.Treatments</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
     <tabVisibilities>
         <tab>Animal_Transport__c</tab>
         <visibility>DefaultOn</visibility>
@@ -5218,6 +5534,10 @@
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>
+        <tab>Play_Pause__c</tab>
+        <visibility>DefaultOn</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
         <tab>Playgroup_Session__c</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
@@ -5231,7 +5551,7 @@
     </tabVisibilities>
     <tabVisibilities>
         <tab>To_Do_Lists</tab>
-        <visibility>Hidden</visibility>
+        <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>
         <tab>Treatment_Bundle__c</tab>
@@ -5276,10 +5596,6 @@
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
-        <name>AddDirectMessageMembers</name>
-    </userPermissions>
-    <userPermissions>
-        <enabled>true</enabled>
         <name>ApexRestServices</name>
     </userPermissions>
     <userPermissions>
@@ -5308,15 +5624,7 @@
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
-        <name>CanInsertFeedSystemFields</name>
-    </userPermissions>
-    <userPermissions>
-        <enabled>true</enabled>
         <name>CanUseNewDashboardBuilder</name>
-    </userPermissions>
-    <userPermissions>
-        <enabled>true</enabled>
-        <name>CanVerifyComment</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
@@ -5324,27 +5632,7 @@
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
-        <name>ChatterEditOwnPost</name>
-    </userPermissions>
-    <userPermissions>
-        <enabled>true</enabled>
-        <name>ChatterEditOwnRecordPost</name>
-    </userPermissions>
-    <userPermissions>
-        <enabled>true</enabled>
         <name>ChatterFileLink</name>
-    </userPermissions>
-    <userPermissions>
-        <enabled>true</enabled>
-        <name>ChatterInternalUser</name>
-    </userPermissions>
-    <userPermissions>
-        <enabled>true</enabled>
-        <name>ChatterInviteExternalUsers</name>
-    </userPermissions>
-    <userPermissions>
-        <enabled>true</enabled>
-        <name>ChatterOwnGroups</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
@@ -5704,10 +5992,6 @@
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
-        <name>ManageUnlistedGroups</name>
-    </userPermissions>
-    <userPermissions>
-        <enabled>true</enabled>
         <name>ManageUsers</name>
     </userPermissions>
     <userPermissions>
@@ -5717,10 +6001,6 @@
     <userPermissions>
         <enabled>true</enabled>
         <name>MergeTopics</name>
-    </userPermissions>
-    <userPermissions>
-        <enabled>true</enabled>
-        <name>ModerateChatter</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
@@ -5757,10 +6037,6 @@
     <userPermissions>
         <enabled>true</enabled>
         <name>PublishPackaging</name>
-    </userPermissions>
-    <userPermissions>
-        <enabled>true</enabled>
-        <name>RemoveDirectMessageMembers</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>

@@ -1,9 +1,14 @@
 import { api, LightningElement, wire } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
 import { updateRecord } from 'lightning/uiRecordApi';
+import { getObjectInfo } from 'lightning/uiObjectInfoApi';
+import { getPicklistValues } from 'lightning/uiObjectInfoApi';
 import FORM_FACTOR from '@salesforce/client/formFactor';
 import ID_FIELD from '@salesforce/schema/Treatment_Plan__c.Id';
 import BUNDLE_ID_FIELD from '@salesforce/schema/Treatment_Plan__c.AssignedTreatmentBundleId__c';
+import TREATMENT_OBJECT from '@salesforce/schema/Treatment_Plan__c';
+import PRIORITY_FIELD from '@salesforce/schema/Treatment_Plan__c.Treatment_Priority__c';
+import updateTreatment from '@salesforce/apex/TreatmentToDoListController.updateTreatment';
 
 export default class TreatmentToDoSection extends NavigationMixin(LightningElement) {
     @api
@@ -14,6 +19,18 @@ export default class TreatmentToDoSection extends NavigationMixin(LightningEleme
     isEdit = false;
     urlId;
     urlBundle;
+    treatmentPriority;
+    isConfirmationVisible = false;
+
+    @wire(getObjectInfo, { objectApiName: TREATMENT_OBJECT })
+    treatmentMetadata;
+
+    @wire(getPicklistValues,
+    {
+        recordTypeId: '$treatmentMetadata.data.defaultRecordTypeId', 
+        fieldApiName: PRIORITY_FIELD
+    })
+    treatmentPriorirtyPicklist;
 
     connectedCallback() {
         this.recordPageRefId = {
@@ -35,6 +52,7 @@ export default class TreatmentToDoSection extends NavigationMixin(LightningEleme
         this[NavigationMixin.GenerateUrl](this.recordPageRefBundle)
             .then(url => this.urlBundle = url);
         this.customLookupNewId = this.animalTreatment.AssignedTreatmentBundleId__c;
+        this.treatmentPriority = this.animalTreatment.Treatment_Priority__c;
     }
 
     get treatmentCount() {
@@ -113,24 +131,35 @@ export default class TreatmentToDoSection extends NavigationMixin(LightningEleme
     }
 
     handleUpdate() {
-        //trigger update logic and send update event to parent
-        if (this.customLookupNewId !== this.animalTreatment.AssignedTreatmentBundleId__c) {
-            const fields = {};
-            fields[ID_FIELD.fieldApiName] = this.animalTreatment.Id;
-            fields[BUNDLE_ID_FIELD.fieldApiName] = this.customLookupNewId;
-            const recordInput = { fields };
-            updateRecord(recordInput)
-            .then(() => {
-                this.dispatchEvent(new CustomEvent('update'));
-                this.isEdit = false;
-            })
-            .catch(error => {
-                console.log('error', JSON.stringify(error));
-            });
-        }
+        this.isConfirmationVisible = true;
     }
 
     customLookupEvent(event){
         this.customLookupNewId = event.detail.data.recordId;
+    }
+
+    handleTreatmentPriorityChange(event){
+        this.treatmentPriority = event.detail.value;
+    }
+
+    handleConfirmationClick(event){
+        if(event.detail.status === 'confirm') {
+            //trigger update logic and send update event to parent
+            if (this.customLookupNewId !== this.animalTreatment.AssignedTreatmentBundleId__c || 
+                this.treatmentPriority !== this.animalTreatment.Treatment_Priority__c) {
+                const fields = {};
+                fields[BUNDLE_ID_FIELD.fieldApiName] = this.customLookupNewId;
+                fields[PRIORITY_FIELD.fieldApiName] = this.treatmentPriority;
+                updateTreatment({recordId: this.animalTreatment.Id, fieldMap: fields})
+                .then(() => {
+                    this.dispatchEvent(new CustomEvent('update'));
+                })
+                .catch(error => {
+                    console.log('error', JSON.stringify(error));
+                });
+            }
+        }
+        this.isEdit = false;
+        this.isConfirmationVisible = false;
     }
 }

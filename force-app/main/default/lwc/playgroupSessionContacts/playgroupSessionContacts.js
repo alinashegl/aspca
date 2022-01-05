@@ -146,7 +146,13 @@ export default class PlaygroupSessionContacts extends LightningElement {
     }
 
     get customLookupCreateNewFields(){
-        return ['FirstName', 'LastName', 'Title', 'Department', 'Email'];
+        return [
+            {fieldAPI: 'FirstName', fieldLabel: 'First Name', required: true},
+            {fieldAPI: 'LastName', fieldLabel: 'Last Name', required: true},
+            {fieldAPI: 'Title', required: false},
+            {fieldAPI: 'Department', required: false},
+            {fieldAPI: 'Email', required: false}
+        ];
     }
 
     get disableSaveContactButton(){

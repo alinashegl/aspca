@@ -3,6 +3,7 @@ import FORM_FACTOR from '@salesforce/client/formFactor'
 import getRecentlyViewedRecords from '@salesforce/apex/CustomLookupLWCController.getRecentlyViewedRecords';
 import getCurrentRecord from '@salesforce/apex/CustomLookupLWCController.getCurrentRecord';
 import search from '@salesforce/apex/CustomLookupLWCController.search';
+import UserPreferencesExcludeMailAppAttachments from '@salesforce/schema/User.UserPreferencesExcludeMailAppAttachments';
 
 const DELAY = 200;
 
@@ -24,6 +25,7 @@ export default class CustomLookup extends LightningElement {
     @api elementId;
     @api initialColSize;
     @api createNewFields;
+    @api createNewFieldsWithRequired;
     @api allowCreateNew = false;
 
     _clearSelection;
@@ -39,7 +41,7 @@ export default class CustomLookup extends LightningElement {
     }
 
     formFactor = FORM_FACTOR;
-    error;
+    errors;
 
     searchKey = '';
     delayTimeout;
@@ -94,7 +96,7 @@ export default class CustomLookup extends LightningElement {
             }
         });
 
-        this.fields = combinedFields.concat( JSON.parse(JSON.stringify(this.fields)) );
+        this.fields = combinedFields.concat( JSON.parse(JSON.stringify(this.fields)) );     
     }
 
     //set the field values based on the response from querying the record
@@ -248,6 +250,27 @@ export default class CustomLookup extends LightningElement {
         this.dispatchEvent(selectedEvent);
     }
 
+    handleOnSubmit(event){
+        this.errors = null;
+        event.preventDefault();
+        const fields = event.detail.fields;
+        let errorList = [];
+        if(this.createNewFieldsWithRequired != undefined){
+            this.createNewFieldsWithRequired.forEach(element => {
+                if(element.required && (fields[element.fieldAPI] == null || fields[element.fieldAPI] === '')){
+                    errorList.push(element.fieldLabel);
+                }
+            });
+            if(errorList == undefined || errorList.length == 0){
+                this.template.querySelector('lightning-record-form').submit(fields);
+            }
+            else {
+                this.errors = errorList.join(", ");;
+            }
+        } else {
+            this.template.querySelector('lightning-record-form').submit(fields);
+        }
+    }
 
     //If user has created a new record instead of selecting an existing one
     handleNewRecordResponse(event){
@@ -277,10 +300,6 @@ export default class CustomLookup extends LightningElement {
             });
             this.dispatchEvent(selectedEvent);
         });
-        
-
-        
-        
     }
 
     //When the input field/dropdown needs to expand to make it easier for the user to see the table, we need to let the parent component know.
@@ -393,5 +412,26 @@ export default class CustomLookup extends LightningElement {
 
     get inputFieldClass(){
         return this.editRecord ? 'slds-input slds-combobox__input slds-combobox__input-value slds-has-focus' : 'slds-input slds-combobox__input slds-combobox__input-value';
+    }
+
+    get hasCreateNewFields(){
+        return this.createNewFields != undefined || this.createNewFieldsWithRequired != undefined;
+    }
+
+    get createNewFieldList(){
+        if(this.createNewFields){
+            return this.createNewFields;
+        }
+        else if(this.createNewFieldsWithRequired){
+            let fieldList = [];
+            this.createNewFieldsWithRequired.forEach(element => {
+                fieldList.push(element.fieldAPI);
+            });
+            return fieldList;
+        }
+    }
+
+    get showErrors(){
+        return this.errors != undefined && this.errors != null;
     }
 }
