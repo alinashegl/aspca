@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Euthanasia_Authorized_By__c</fullName>
+    <externalId>false</externalId>
+    <label>Euthanasia Authorized By</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Dr. Rachel Touroo</fullName>
+                <default>false</default>
+                <label>Dr. Rachel Touroo, DVM</label>
+            </value>
+            <value>
+                <fullName>Dr. Nicole Eller-Medina, DVM</fullName>
+                <default>false</default>
+                <label>Dr. Nicole Eller-Medina, DVM</label>
+            </value>
+            <value>
+                <fullName>Dr. Mary Lummis, DVM</fullName>
+                <default>false</default>
+                <label>Dr. Mary Lummis, DVM</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

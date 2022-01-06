@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Right_Spur__c</fullName>
+    <externalId>false</externalId>
+    <label>Right Spur</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Unaltered</fullName>
+                <default>false</default>
+                <label>Unaltered</label>
+            </value>
+            <value>
+                <fullName>Blunted</fullName>
+                <default>false</default>
+                <label>Blunted</label>
+            </value>
+            <value>
+                <fullName>Sharpened</fullName>
+                <default>false</default>
+                <label>Sharpened</label>
+            </value>
+            <value>
+                <fullName>Cut</fullName>
+                <default>false</default>
+                <label>Cut</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
