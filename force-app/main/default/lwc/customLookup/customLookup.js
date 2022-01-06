@@ -251,21 +251,24 @@ export default class CustomLookup extends LightningElement {
     }
 
     handleOnSubmit(event){
-        this.errors = [];
+        this.errors = null;
         event.preventDefault();
         const fields = event.detail.fields;
-        let errors;
-        this.createNewFieldsWithRequired.forEach(element => {
-            if(element.required && fields[element.fieldAPI] == null){
-                errors.push(element.fieldLabel);
+        let errorList = [];
+        if(this.createNewFieldsWithRequired != undefined){
+            this.createNewFieldsWithRequired.forEach(element => {
+                if(element.required && (fields[element.fieldAPI] == null || fields[element.fieldAPI] === '')){
+                    errorList.push(element.fieldLabel);
+                }
+            });
+            if(errorList == undefined || errorList.length == 0){
+                this.template.querySelector('lightning-record-form').submit(fields);
             }
-        });
-        if(errors == undefined){
+            else {
+                this.errors = errorList.join(", ");;
+            }
+        } else {
             this.template.querySelector('lightning-record-form').submit(fields);
-        }
-        else {
-            this.errors = errors.join(", ");;
-            window.console.log("errors: ", this.errors);
         }
     }
 

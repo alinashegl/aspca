@@ -16,6 +16,7 @@ seedcodeCalendar.init('resources', resources);
 var client = fbk.client();
 
 //retrieve our canvas context object for REST links/urls
+//determine if we display the default dayback, or object specific
 var context = fbk.context();
 var sfObject = 'default';
 if (context.environment.record.attributes != undefined) {
@@ -54,21 +55,19 @@ function processResult(data) {
     }
 
     createResources(resp.resources);
-
-    //sort resourses
-    //resources = dbk.filterFieldSort(resources);
-
+   
+    //add unassigned resource
     var noneResource = {
-      id: 'none',
-      name: 'none',
-      nameSafe: 'none',
+      id: 'unassigned',
+      name: 'unassigned',
+      nameSafe: 'nc',
       shortName: 'n/a',
       status: {
         selected: sfObject == 'default',
       },
     };
 
-    resources.unshift(noneResource);
+    resources.unshift(noneResource);       
 
     //continue actions
     action.callbacks.confirm();

@@ -8,7 +8,7 @@ public with sharing class ScheduleAnimalPlaygroups {
             Behavior_Case_Worker__r.Name, Behavior_Case_Worker__r.Is_Generic_Contact__c
             FROM Animal__c 
             WHERE Playgroup_Priority_Level__c != null 
-            AND Current_Recent_Shelter_Location__c IN ('MRC', 'CRC', 'ARC/CARE')
+            AND Current_Recent_Shelter_Location__c IN: AutoScheduleTasksUtil.dogPopulations
             AND Type_of_Animal__c = 'Dog'
         ]){
             String configKey = animal.Current_Recent_Shelter_Location__c + '-' + animal.Playgroup_Priority_Level__c.split(' ')[0];
@@ -35,7 +35,7 @@ public with sharing class ScheduleAnimalPlaygroups {
                 WhoId = animal.Behavior_Case_Worker__c != null ? animal.Behavior_Case_Worker__c : genericCon.Id,
                 OwnerId = genericCon.User__c,
                 Subject = 'Playgroup',
-                Assigned_Resources__c = animal.Behavior_Case_Worker__r.Is_Generic_Contact__c == false ? animal.Behavior_Case_Worker__r.Name : null,
+                Assigned_Resources__c = AutoScheduleTasksUtil.determineResources(animal),
                 Species__c = 'Dog'
             );
             newTasks.add(newTask);
