@@ -111,7 +111,6 @@ public with sharing class ScheduleBoardAndTrainTask {
                 WhoId = animal.Behavior_Case_Worker__c != null ? animal.Behavior_Case_Worker__c : genericCon.Id,
                 OwnerId = genericCon.User__c,
                 Subject = 'Board and Train Follow Up',
-                Assigned_Resources__c = AutoScheduleTasksUtil.determineResources(animal),
                 Species__c = 'Dog'
             );
             newTasks.add(newTask);

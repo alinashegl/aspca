@@ -5,8 +5,18 @@ public with sharing class AutoScheduleTasksUtil {
     public static final String BEHAVIOR_MED_CHECK_TASK_RECORD_TYPE_NAME = 'Behavior_Medication_Check';
     public static final String BOARD_AND_TRAIN_RECORD_TYPE_NAME = 'Board_And_Train';
     public static final String TREATMENT_TASK_RECORD_TYPE_NAME = 'Treatments';
+    public static final String EVALUATION_RECORD_TYPE_NAME = 'Evaluation';
     public static final String NO_CONTACT_RESOURCE = 'unassigned';
     public static final String[] dogPopulations = new String[]{'ARC','CARE','CRC','MRC'};
+    public static final String[] taskRecordTypes = new String[]{
+        BEH_TREATMENT_TASK_RECORD_TYPE_NAME, 
+        PLAYGROUP_TASK_RECORD_TYPE_NAME, 
+        FOSTER_TASK_RECORD_TYPE_NAME,
+        BEHAVIOR_MED_CHECK_TASK_RECORD_TYPE_NAME,
+        BOARD_AND_TRAIN_RECORD_TYPE_NAME
+    };
+    // ,
+    //     EVALUATION_RECORD_TYPE_NAME
 
     public static Map<String, Contact> genericContactMap {
         get{
