@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Amount1_cannot_be_left_blank</fullName>
+    <active>true</active>
+    <description>If &quot;Fenbendazole&quot; is checked, &quot;Amount-1 in ml&quot; must not be left blank</description>
+    <errorConditionFormula>Fenbendazole__c = true  &amp;&amp;  ISBLANK(Amount_1__c)</errorConditionFormula>
+    <errorMessage>Please specify a Fenbendazole amount</errorMessage>
+</ValidationRule>

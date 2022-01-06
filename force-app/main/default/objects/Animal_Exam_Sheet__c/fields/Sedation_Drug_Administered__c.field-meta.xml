@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sedation_Drug_Administered__c</fullName>
+    <externalId>false</externalId>
+    <label>Sedation Drug Administered</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Ketamine</fullName>
+                <default>false</default>
+                <label>Ketamine</label>
+            </value>
+            <value>
+                <fullName>Telazol</fullName>
+                <default>false</default>
+                <label>Telazol</label>
+            </value>
+            <value>
+                <fullName>Xylazine</fullName>
+                <default>false</default>
+                <label>Xylazine</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

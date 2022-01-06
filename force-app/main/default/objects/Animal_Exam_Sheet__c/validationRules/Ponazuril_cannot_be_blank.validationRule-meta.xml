@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Ponazuril_cannot_be_blank</fullName>
+    <active>true</active>
+    <description>Ponazuril cannot be blank if Amount-2 in ml, Strength-2 or Administered-2 have values</description>
+    <errorConditionFormula>(!ISBLANK(Amount_2__c) || !ISPICKVAL(Administered_2__c, &quot;&quot;) || !ISBLANK(Strength_2__c)) &amp;&amp; Ponazuril__c = false</errorConditionFormula>
+    <errorMessage>Ponazuril cannot be blank if any of its corresponding fields (Amount-2 in ml, Strength-2 or Administered-2) have values</errorMessage>
+</ValidationRule>

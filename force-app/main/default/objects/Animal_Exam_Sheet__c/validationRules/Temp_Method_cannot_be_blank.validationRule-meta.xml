@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Temp_Method_cannot_be_blank</fullName>
+    <active>true</active>
+    <errorConditionFormula>!ISBLANK(Temp__c) &amp;&amp; ISPICKVAL(Temp_Method__c,&quot;&quot;) &amp;&amp;  (DATEVALUE(CreatedDate) &gt; DATE(2018,07,27))</errorConditionFormula>
+    <errorMessage>Please specify if the temperature was acquired rectally or aurally.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Exam_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Exam Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Concern</fullName>
+                <default>false</default>
+                <label>Concern</label>
+            </value>
+            <value>
+                <fullName>Diagnostic</fullName>
+                <default>false</default>
+                <label>Diagnostic</label>
+            </value>
+            <value>
+                <fullName>Discharge</fullName>
+                <default>false</default>
+                <label>Discharge</label>
+            </value>
+            <value>
+                <fullName>Euthanasia</fullName>
+                <default>false</default>
+                <label>Euthanasia</label>
+            </value>
+            <value>
+                <fullName>Forensic</fullName>
+                <default>false</default>
+                <label>Forensic</label>
+            </value>
+            <value>
+                <fullName>Intake</fullName>
+                <default>false</default>
+                <label>Intake</label>
+            </value>
+            <value>
+                <fullName>Recheck</fullName>
+                <default>false</default>
+                <label>Recheck</label>
+            </value>
+            <value>
+                <fullName>Referral Feedback</fullName>
+                <default>false</default>
+                <label>Referral Feedback</label>
+            </value>
+            <value>
+                <fullName>Tech Note</fullName>
+                <default>false</default>
+                <label>Tech Note</label>
+            </value>
+            <value>
+                <fullName>Shelter Note</fullName>
+                <default>false</default>
+                <label>Shelter Note</label>
+            </value>
+            <value>
+                <fullName>Transport</fullName>
+                <default>false</default>
+                <label>Transport</label>
+            </value>
+            <value>
+                <fullName>Foster</fullName>
+                <default>false</default>
+                <label>Foster</label>
+            </value>
+            <value>
+                <fullName>Deceased</fullName>
+                <default>false</default>
+                <label>Deceased</label>
+            </value>
+            <value>
+                <fullName>Health Cert</fullName>
+                <default>false</default>
+                <label>Health Cert</label>
+            </value>
+            <value>
+                <fullName>Hospitalized</fullName>
+                <default>false</default>
+                <label>Hospitalized</label>
+            </value>
+            <value>
+                <fullName>Lab Results</fullName>
+                <default>false</default>
+                <label>Lab Results</label>
+            </value>
+            <value>
+                <fullName>MRI</fullName>
+                <default>false</default>
+                <label>MRI</label>
+            </value>
+            <value>
+                <fullName>Necropsy</fullName>
+                <default>false</default>
+                <label>Necropsy</label>
+            </value>
+            <value>
+                <fullName>Radiograph</fullName>
+                <default>false</default>
+                <label>Radiograph</label>
+            </value>
+            <value>
+                <fullName>Reference Lab Consult</fullName>
+                <default>false</default>
+                <label>Reference Lab Consult</label>
+            </value>
+            <value>
+                <fullName>Specialist Consult</fullName>
+                <default>false</default>
+                <label>Specialist Consult</label>
+            </value>
+            <value>
+                <fullName>Surgery</fullName>
+                <default>false</default>
+                <label>Surgery</label>
+            </value>
+            <value>
+                <fullName>Histopathology</fullName>
+                <default>false</default>
+                <label>Histopathology</label>
+            </value>
+            <value>
+                <fullName>Annual</fullName>
+                <default>false</default>
+                <label>Annual</label>
+            </value>
+            <value>
+                <fullName>Vaccine/Preventative</fullName>
+                <default>false</default>
+                <label>Vaccine/Preventative</label>
+            </value>
+            <value>
+                <fullName>Weight</fullName>
+                <default>false</default>
+                <label>Weight</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

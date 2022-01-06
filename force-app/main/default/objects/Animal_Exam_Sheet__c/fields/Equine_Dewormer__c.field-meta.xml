@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Equine_Dewormer__c</fullName>
+    <externalId>false</externalId>
+    <label>Equine Dewormer</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Ivermectin</fullName>
+                <default>false</default>
+                <label>Ivermectin</label>
+            </value>
+            <value>
+                <fullName>Pyrantel</fullName>
+                <default>false</default>
+                <label>Pyrantel</label>
+            </value>
+            <value>
+                <fullName>Fenbendazole</fullName>
+                <default>false</default>
+                <label>Fenbendazole</label>
+            </value>
+            <value>
+                <fullName>Oxybendazole</fullName>
+                <default>false</default>
+                <label>Oxybendazole</label>
+            </value>
+            <value>
+                <fullName>Moxidectin</fullName>
+                <default>false</default>
+                <label>Moxidectin</label>
+            </value>
+            <value>
+                <fullName>Praziquantal</fullName>
+                <default>false</default>
+                <label>Praziquantal</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
