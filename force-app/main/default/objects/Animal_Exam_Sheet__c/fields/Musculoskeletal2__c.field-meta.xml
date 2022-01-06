@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Musculoskeletal2__c</fullName>
+    <externalId>false</externalId>
+    <label>Musculoskeletal</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Well-muscled</fullName>
+                <default>false</default>
+                <label>Well-muscled</label>
+            </value>
+            <value>
+                <fullName>Adequate muscling, ambulatory on all four legs</fullName>
+                <default>false</default>
+                <label>Adequate muscling, ambulatory on all four legs</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>Adequately muscled</fullName>
+                <default>false</default>
+                <label>Adequately muscled</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

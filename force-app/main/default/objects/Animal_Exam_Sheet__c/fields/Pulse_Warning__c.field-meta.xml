@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pulse_Warning__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(AND(Pulse__c&gt;0,
+
+OR(
+AND(Species__c=&quot;Fowl&quot;, OR( Pulse__c &lt;250,Pulse__c &gt;300)), 
+
+AND(OR(Species__c=&quot;Dog&quot;,Species__c=&quot;Cat&quot;) , CONTAINS(Age_Estimate__c, &quot;0-4&quot;), OR(Pulse__c&lt;220)), 
+
+AND(Animal__r.AGE_CD__c = &quot;C&quot;, Species__c=&quot;Cat&quot;,OR(Pulse__c&lt;140,Pulse__c &gt;200)), 
+AND(Animal__r.AGE_CD__c = &quot;C&quot;, Species__c=&quot;Dog&quot;, OR(Pulse__c&lt;60,Temp__c &gt;140)),
+
+
+AND(Animal__r.AGE_CD__c = &quot;B&quot;, Species__c=&quot;Dog&quot;, OR(Pulse__c&lt;110,Pulse__c&gt;120)),
+AND(Animal__r.AGE_CD__c = &quot;B&quot;, Species__c=&quot;Cat&quot;, OR(Pulse__c&lt;130,Pulse__c&gt;140)))),
+
+
+IMAGE(&quot;/img/samples/flag_red.gif&quot;,&quot;Warning&quot;),
+&quot;Normal&quot;
+
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Pulse Warning</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

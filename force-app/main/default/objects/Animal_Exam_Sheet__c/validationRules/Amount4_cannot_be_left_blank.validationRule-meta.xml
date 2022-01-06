@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Amount4_cannot_be_left_blank</fullName>
+    <active>true</active>
+    <description>If &quot;Pyrantel Pamoate PO&quot; is checked, &quot;Amount-4 in ml&quot; must not be left blank</description>
+    <errorConditionFormula>Pyrantel_Pamoate_PO__c = true  &amp;&amp;  ISBLANK(Amount_4__c)</errorConditionFormula>
+    <errorMessage>Please specify a Pyrantel Pamoate PO amount</errorMessage>
+</ValidationRule>
