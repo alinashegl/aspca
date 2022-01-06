@@ -6,7 +6,7 @@ public with sharing class ScheduleAnimalFoster {
         Calendar_Schedule_Config__mdt defaultConfig = calendarConfigMap.get('Foster - All-Foster - Weekly');
         Animal__c[] animals = getAnimals();
         Map<Id, Task> animalToTaskMap = getTasks(animals);
-        for(Animal__c animal : getAnimals()){
+        for(Animal__c animal : animals){
             if(needTasksThisWeek(animal, animalToTaskMap)){
                 fosterTasks.addAll(prepTasks(animal, defaultConfig));
             }
@@ -111,7 +111,7 @@ public with sharing class ScheduleAnimalFoster {
                 WhoId = animal.Behavior_Case_Worker__c != null ? animal.Behavior_Case_Worker__c : genericCon.Id,
                 OwnerId = genericCon.User__c,
                 Subject = 'Foster Follow Up',
-                Assigned_Resources__c = animal.Behavior_Case_Worker__r.Is_Generic_Contact__c == false ? animal.Behavior_Case_Worker__r.Name : null,
+                Assigned_Resources__c = AutoScheduleTasksUtil.determineResources(animal),
                 Species__c = 'Dog'
             );
             newTasks.add(newTask);

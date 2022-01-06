@@ -3,7 +3,7 @@ private class test_ScheduleAnimalBehaviorTreatments {
     @TestSetUp
     static void testSetup(){
         Animal__c animalARC = TestDataFactory.createAnimalWithName('animalARC');
-        animalARC.Current_Recent_Shelter_Location__c = 'ARC/CARE';
+        animalARC.Current_Recent_Shelter_Location__c = 'ARC';
 
         Animal__c animalCRC = TestDataFactory.createAnimalWithName('animalCRC');
         animalCRC.Current_Recent_Shelter_Location__c = 'MRC';

@@ -1,0 +1,18 @@
+<messaging:emailTemplate subject="ASPCA Foster Dog Behavior Survey" recipientType="Contact" relatedToType="Facility_Outcome__c">
+    <messaging:htmlEmailBody >
+        <p>
+            Dear {!relatedTo.Point_of_Contact__r.FirstName},
+        </p>
+        <p>
+            Please fill out this <a href="https://www.surveymonkey.com/r/5VGBWZV" target="_blank">survey</a> for {!relatedTo.Animal__r.Animal_Name__c} - {!relatedTo.Animal__r.Name}.
+        </p>
+        <p>
+            <div>
+                Sincerely,
+            </div>
+            <div>
+                CRC Behavior Mgmt
+            </div>
+        </p>
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>

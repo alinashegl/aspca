@@ -616,7 +616,7 @@ public without sharing class TestDataFactory {
     }
 
     public static Contact createContact() {
-        Contact c = new Contact(FirstName = 'Test', LastName = 'Contact');
+        Contact c = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'test@contact.com');
         insert c;
         return c;
     }
@@ -832,5 +832,75 @@ public without sharing class TestDataFactory {
         );
         insert playgroupContact;
         return session;
+    }
+
+    public static Facility_Outcome__c createFacilityOutcome() {
+        Animal__c a = createAnimal();
+        Contact c = createContact();
+        Facility_Outcome__c facility = new Facility_Outcome__c(
+            Animal__c = a.Id,
+            Facility_or_Outcome__c = 'Facility',
+            Facility_Outcome__c = 'Foster Home',
+            Point_of_Contact__c = c.Id,
+            Start_Date__c = System.today()
+        );
+        insert facility;
+        return facility;
+    }
+
+    public static List<Facility_Outcome__c> createWeeklyMonthlyFacilityOutcomes() {
+        Contact c = createContact();
+        List<Facility_Outcome__c> fosterList = new List<Facility_Outcome__c>{
+            new Facility_Outcome__c(
+                Animal__c = createAnimalWithName('Dog1').Id,
+                Facility_or_Outcome__c = 'Facility',
+                Facility_Outcome__c = 'Foster Home',
+                Point_of_Contact__c = c.Id,
+                Start_Date__c = System.today().addDays(-7)),
+            new Facility_Outcome__c(
+                Animal__c = createAnimalWithName('Dog2').Id,
+                Facility_or_Outcome__c = 'Facility',
+                Facility_Outcome__c = 'Foster Home',
+                Point_of_Contact__c = c.Id,
+                Start_Date__c = System.today().addDays(-14)),
+            new Facility_Outcome__c(
+                Animal__c = createAnimalWithName('Dog3').Id,
+                Facility_or_Outcome__c = 'Facility',
+                Facility_Outcome__c = 'Foster Home',
+                Point_of_Contact__c = c.Id,
+                Start_Date__c = System.today().addDays(-21)),
+            new Facility_Outcome__c(
+                Animal__c = createAnimalWithName('Dog4').Id,
+                Facility_or_Outcome__c = 'Facility',
+                Facility_Outcome__c = 'Foster Home',
+                Point_of_Contact__c = c.Id,
+                Start_Date__c = System.today().addDays(-28)),
+            new Facility_Outcome__c(
+                Animal__c = createAnimalWithName('Dog5').Id,
+                Facility_or_Outcome__c = 'Facility',
+                Facility_Outcome__c = 'Foster Home',
+                Point_of_Contact__c = c.Id,
+                Start_Date__c = System.today().addDays(-56)),
+            new Facility_Outcome__c(
+                Animal__c = createAnimalWithName('Dog6').Id,
+                Facility_or_Outcome__c = 'Facility',
+                Facility_Outcome__c = 'Foster Home',
+                Point_of_Contact__c = c.Id,
+                Start_Date__c = System.today().addDays(-5)),
+            new Facility_Outcome__c(
+                Animal__c = createAnimalWithName('Dog7').Id,
+                Facility_or_Outcome__c = 'Facility',
+                Facility_Outcome__c = 'Foster Home',
+                Point_of_Contact__c = c.Id,
+                Start_Date__c = System.today().addDays(-33)),
+            new Facility_Outcome__c(
+                Animal__c = createAnimalWithName('Dog8').Id,
+                Facility_or_Outcome__c = 'Facility',
+                Facility_Outcome__c = 'Foster Home',
+                Point_of_Contact__c = c.Id,
+                Start_Date__c = System.today().addDays(-26))
+        };
+        insert fosterList;
+        return fosterList;
     }
 }

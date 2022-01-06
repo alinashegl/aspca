@@ -5,7 +5,8 @@ public with sharing class AutoScheduleController {
         tasksToInsert.addAll(ScheduleAnimalBehaviorTreatments.scheduleTreatments());
         tasksToInsert.addAll(ScheduleAnimalFoster.scheduleFollowUps());
         tasksToInsert.addAll(ScheduleAnimalMedCheck.scheduleMedCheck());
-
+        tasksToInsert.addAll(ScheduleBoardAndTrainTask.scheduleFollowUps());
+        
         insert tasksToInsert;
     }
 }
