@@ -13,10 +13,10 @@ public with sharing class AutoScheduleTasksUtil {
         PLAYGROUP_TASK_RECORD_TYPE_NAME, 
         FOSTER_TASK_RECORD_TYPE_NAME,
         BEHAVIOR_MED_CHECK_TASK_RECORD_TYPE_NAME,
-        BOARD_AND_TRAIN_RECORD_TYPE_NAME
+        BOARD_AND_TRAIN_RECORD_TYPE_NAME,
+        EVALUATION_RECORD_TYPE_NAME
     };
-    // ,
-    //     EVALUATION_RECORD_TYPE_NAME
+
 
     public static Map<String, Contact> genericContactMap {
         get{
@@ -119,24 +119,6 @@ public with sharing class AutoScheduleTasksUtil {
             'Sunday' => weekStart.addDays(7),
             'Monday' => weekStart.addDays(8)
         };
-    }
-
-    public static Id[] getTaskRecordTypeIds(){
-        Id[] rtIds = new Id[0];
-        for(RecordType rt : [
-            SELECT Id FROM RecordType WHERE SobjectType = 'Task'
-            AND DeveloperName IN(
-                :BEH_TREATMENT_TASK_RECORD_TYPE_NAME,
-                :PLAYGROUP_TASK_RECORD_TYPE_NAME,
-                :FOSTER_TASK_RECORD_TYPE_NAME,
-                :BEHAVIOR_MED_CHECK_TASK_RECORD_TYPE_NAME,
-                :BOARD_AND_TRAIN_RECORD_TYPE_NAME
-            )
-        ]){
-            rtIds.add(rt.Id);
-        }
-
-        return rtIds;
     }
 
     public static String determineResources(Animal__c animal){
