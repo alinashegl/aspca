@@ -45,7 +45,7 @@ public with sharing class TaskTriggerHandler {
     }
 
     public static void handleDaybackResourceUpdates(Task[] taskList, Map<Id, Task> oldMap){
-        Id[] recordTypeIds = AutoScheduleTasksUtil.getTaskRecordTypeIds();
+        Id[] recordTypeIds = getRTIds();
         for(Task task : taskList){
             //skip any tasks that don't have the correct record type
             if(!recordTypeIds.contains(task.RecordTypeId) && task.Species__c == 'Dog') continue;
