@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Evaluation</fullName>
+    <active>true</active>
+    <label>Evaluation</label>
+    <picklistValues>
+        <picklist>Completed_By__c</picklist>
+        <values>
+            <fullName>Alexis Mitchell</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Andres Gouthro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Auto-completion Based on Discharge</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Carol Mefferd</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cassie Gorbette%2C CVT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cat Simpson</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Consie Von Gontard</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Deb Eizinger</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2E Mary Lummis</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2E Nicole Eller</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2E Rachel Touroo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Jamie Flesch</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Josiah Matthews</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lisa Madeaux</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Maxi Lambert</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Michele Ortiz</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Niki Curnell</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pam Dickens</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rita Laws</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Scott Sherlock</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Stephen Quandt</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Frequency_Of_Treatment__c</picklist>
+        <values>
+            <fullName>BID</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QID</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SID</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TID</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Include_in_discharge__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Priority</picklist>
+        <values>
+            <fullName>High</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Low</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Normal</fullName>
+            <default>true</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Record_Type__c</picklist>
+        <values>
+            <fullName>General Task</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Treatment</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status</picklist>
+        <values>
+            <fullName>Completed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Deferred</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>In Progress</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Started</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Waiting for Foster</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Waiting for Foster %28Internal%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Waiting on someone else</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Subject</picklist>
+        <values>
+            <fullName>Animal Treatment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Behavior Medication Check</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Call</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Foster Follow Up</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Playgroup</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Send Letter</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Timeline Status</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Treatment</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Type</picklist>
+        <values>
+            <fullName>Call</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Meeting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>
