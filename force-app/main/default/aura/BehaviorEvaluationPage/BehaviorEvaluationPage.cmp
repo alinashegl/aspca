@@ -42,6 +42,7 @@
     <aura:attribute name="oppositeSexDogTestPart1" type="Object[]" />
     <aura:attribute name="oppositeSexDogTestPart2" type="Object[]" />
     <aura:attribute name="oppositeSexDogTestPart3" type="Object[]" />
+    <aura:attribute name="tabsAttributeMap" type="Map"/>
 
     <!-- PUPPY TEST PROPERTIES -->
     <aura:attribute name="puppyBehaviorInKennel" type="Object[]" />
@@ -91,7 +92,8 @@
     <aura:handler name="change" value="{!v.tabId}" action="{!c.handleChange}" />
     <aura:handler name="select" value="{!v.selection}" action="{!c.handleSelection}" />
     <aura:method name="handleClick"  action="{!c.handleClick}" access="public" />
-     
+    <aura:handler name="skipSaveEvt" event="c:skipSaveEvent" action="{!c.handleSkipSaveEvent}"/>
+    <aura:attribute name="behaviorEvaluation" type="Object"/>
     <!--loading spinner start-->
     <aura:if isTrue="{!v.spinner}">
         <div aura:id="spinnerId" class="slds-spinner_container">
@@ -165,7 +167,7 @@
                                         <aura:iteration items="{!v.behaviorInKennelTest}" var="variable">
                                             <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
                                                                         IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
-                                                                        skipVal="{!variable.skipField}"/>
+                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                         </aura:iteration>
                                     </lightning:layout>
                                 </lightning:layoutItem>
@@ -206,7 +208,7 @@
                                         <aura:iteration items="{!v.behaviorOnLeashTest}" var="variable">
                                             <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
                                                                         IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
-                                                                        skipVal="{!variable.skipField}"/>
+                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                         </aura:iteration>
                                         &nbsp; &nbsp;
                                     </lightning:layout>
@@ -251,7 +253,7 @@
                                         <aura:iteration items="{!v.socialBehaviorTestPart1}" var="variable">
                                             <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
                                                                         IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
-                                                                        skipVal="{!variable.skipField}"/>
+                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                         </aura:iteration>>
                                         &nbsp; &nbsp;
                                     </lightning:layout>
@@ -296,7 +298,7 @@
                                         <aura:iteration items="{!v.socialBehaviorTestPart2}" var="variable">
                                             <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
                                                                         IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
-                                                                        skipVal="{!variable.skipField}"/>
+                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                         </aura:iteration>
                                         &nbsp; &nbsp;
                                     </lightning:layout>
@@ -341,7 +343,7 @@
                                         <aura:iteration items="{!v.pleasantTouchTest}" var="variable">
                                             <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
                                                                         IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
-                                                                        skipVal="{!variable.skipField}"/>
+                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                         </aura:iteration>
                                         &nbsp; &nbsp;
                                     </lightning:layout>
@@ -444,7 +446,7 @@
                                         <aura:iteration items="{!v.unpleasantTouchTest}" var="variable">
                                             <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
                                                                         IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
-                                                                        skipVal="{!variable.skipField}"/>
+                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                         </aura:iteration>
                                         &nbsp; &nbsp;
                                     </lightning:layout>
@@ -489,7 +491,7 @@
                                         <aura:iteration items="{!v.playTestPart1}" var="variable">
                                             <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
                                                                         IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
-                                                                        skipVal="{!variable.skipField}"/>
+                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                         </aura:iteration>
                                         &nbsp; &nbsp;
                                     </lightning:layout>
@@ -534,7 +536,7 @@
                                         <aura:iteration items="{!v.playTestPart2}" var="variable">
                                             <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
                                                                         IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
-                                                                        skipVal="{!variable.skipField}"/>
+                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                         </aura:iteration>
                                         &nbsp; &nbsp;
                                     </lightning:layout>
@@ -581,7 +583,7 @@
                                         <aura:iteration items="{!v.tagTest}" var="variable">
                                             <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
                                                                         IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
-                                                                        skipVal="{!variable.skipField}"/>
+                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                         </aura:iteration>
                                         &nbsp; &nbsp;
                                     </lightning:layout>
@@ -653,7 +655,7 @@
                                         <aura:iteration items="{!v.resourceGuardingTestPart1}" var="variable">
                                             <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
                                                                         IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
-                                                                        skipVal="{!variable.skipField}"/>
+                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                         </aura:iteration>
                                         &nbsp; &nbsp;
                                     </lightning:layout>
@@ -726,7 +728,7 @@
                                         <aura:iteration items="{!v.resourceGuardingTestPart2}" var="variable">
                                             <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
                                                                         IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
-                                                                        skipVal="{!variable.skipField}"/>
+                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                         </aura:iteration>
                                         &nbsp; &nbsp;
                                     </lightning:layout>
@@ -771,7 +773,7 @@
                                         <aura:iteration items="{!v.toddlerDollTestPart1}" var="variable">
                                             <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
                                                                         IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
-                                                                        skipVal="{!variable.skipField}"/>
+                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                         </aura:iteration>
                                         &nbsp; &nbsp;
                                     </lightning:layout>
@@ -816,7 +818,7 @@
                                         <aura:iteration items="{!v.toddlerDollTestP2}" var="variable">
                                             <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
                                                                         IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
-                                                                        skipVal="{!variable.skipField}"/>
+                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                         </aura:iteration>
                                         &nbsp; &nbsp;
                                     </lightning:layout>
@@ -863,7 +865,7 @@
                                         <aura:iteration items="{!v.scoldingPersonTestP1}" var="variable">
                                             <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
                                                                         IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
-                                                                        skipVal="{!variable.skipField}"/>
+                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                         </aura:iteration>
                                         &nbsp; &nbsp;
                                     </lightning:layout>
@@ -908,7 +910,7 @@
                                         <aura:iteration items="{!v.scoldingPersonTestP2}" var="variable">
                                             <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
                                                                         IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
-                                                                        skipVal="{!variable.skipField}"/>
+                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                         </aura:iteration>
                                         &nbsp; &nbsp;
                                     </lightning:layout>
@@ -967,7 +969,7 @@
                                             <aura:iteration items="{!v.fakeDogInteractionTest}" var="variable">
                                                 <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
                                                                             IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
-                                                                            skipVal="{!variable.skipField}"/>
+                                                                            skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                             </aura:iteration>
                                             &nbsp; &nbsp;
                                         </lightning:layout>
@@ -1014,7 +1016,7 @@
                                     <aura:iteration items="{!v.sameSexDogTestPart1}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
-                                                                       skipVal="{!variable.skipField}"/>
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>
                                     &nbsp; &nbsp;
                                 </lightning:layout>
@@ -1059,7 +1061,7 @@
                                     <aura:iteration items="{!v.sameSexDogTestPart2}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
-                                                                       skipVal="{!variable.skipField}"/>
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>
                                     &nbsp; &nbsp;
                                 </lightning:layout>
@@ -1113,7 +1115,7 @@
                                     <aura:iteration items="{!v.sameSexDogTestPart3}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
-                                                                       skipVal="{!variable.skipField}"/>
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>
                                     &nbsp; &nbsp;
                                 </lightning:layout>
@@ -1158,7 +1160,7 @@
                                     <aura:iteration items="{!v.oppositeSexDogTestPart1}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
-                                                                       skipVal="{!variable.skipField}"/>
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>
                                     &nbsp; &nbsp;
                                 </lightning:layout>
@@ -1203,7 +1205,7 @@
                                     <aura:iteration items="{!v.oppositeSexDogTestPart2}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
-                                                                       skipVal="{!variable.skipField}"/>
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>
                                     &nbsp; &nbsp;
                                 </lightning:layout>
@@ -1257,7 +1259,7 @@
                                     <aura:iteration items="{!v.oppositeSexDogTestPart3}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
-                                                                       skipVal="{!variable.skipField}"/>
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>
                                     &nbsp; &nbsp;
                                 </lightning:layout>
@@ -1313,7 +1315,7 @@
                                     <aura:iteration items="{!v.puppyBehaviorInKennel}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
-                                                                       skipVal="{!variable.skipField}"/>
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>&nbsp; &nbsp;
                                 </lightning:layout>
                             </lightning:layoutItem>
@@ -1357,7 +1359,7 @@
                                     <aura:iteration items="{!v.puppyBehaviorOnLeash}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
-                                                                       skipVal="{!variable.skipField}"/>
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>&nbsp; &nbsp;
                                 </lightning:layout>
                             </lightning:layoutItem>
@@ -1401,7 +1403,7 @@
                                     <aura:iteration items="{!v.puppySocialBehaviorPart1}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
-                                                                       skipVal="{!variable.skipField}"/>
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>&nbsp; &nbsp;
                                 </lightning:layout>
                             </lightning:layoutItem>
@@ -1445,7 +1447,7 @@
                                     <aura:iteration items="{!v.puppySocialBehaviorPart2}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
-                                                                       skipVal="{!variable.skipField}"/>
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>&nbsp; &nbsp;
                                 </lightning:layout>
                             </lightning:layoutItem>
@@ -1491,7 +1493,7 @@
                                     <aura:iteration items="{!v.puppyPlayTestTugPart1}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
-                                                                       skipVal="{!variable.skipField}"/>
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>&nbsp; &nbsp;
                                 </lightning:layout>
                             </lightning:layoutItem>
@@ -1535,7 +1537,7 @@
                                     <aura:iteration items="{!v.puppyPlayTestTugPart2}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
-                                                                       skipVal="{!variable.skipField}"/>
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>&nbsp; &nbsp;
                                 </lightning:layout>
                             </lightning:layoutItem>
@@ -1579,7 +1581,7 @@
                                     <aura:iteration items="{!v.puppyPlayTestTag}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
-                                                                       skipVal="{!variable.skipField}"/>
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>&nbsp; &nbsp;
                                 </lightning:layout>
                             </lightning:layoutItem>
@@ -1623,7 +1625,7 @@
                                     <aura:iteration items="{!v.puppyRestraint}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
-                                                                       skipVal="{!variable.skipField}"/>
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>&nbsp; &nbsp;
                                 </lightning:layout>
                             </lightning:layoutItem>
@@ -1699,7 +1701,7 @@
                                     <aura:iteration items="{!v.puppyResourceGuardingPart1}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
-                                                                       skipVal="{!variable.skipField}"/>
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>&nbsp; &nbsp;
                                 </lightning:layout>
                             </lightning:layoutItem>
@@ -1774,7 +1776,7 @@
                                     <aura:iteration items="{!v.puppyResourceGuardingPart2}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
-                                                                       skipVal="{!variable.skipField}"/>
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>&nbsp; &nbsp;
                                 </lightning:layout>
                             </lightning:layoutItem>
@@ -1818,7 +1820,7 @@
                                     <aura:iteration items="{!v.puppyChildDollPart1}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
-                                                                       skipVal="{!variable.skipField}"/>
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>&nbsp; &nbsp;
                                 </lightning:layout>
                             </lightning:layoutItem>
@@ -1862,7 +1864,7 @@
                                     <aura:iteration items="{!v.puppyChildDollPart2}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
-                                                                       skipVal="{!variable.skipField}"/>
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>&nbsp; &nbsp;
                                 </lightning:layout>
                             </lightning:layoutItem>
@@ -1915,7 +1917,7 @@
                                     <aura:iteration items="{!v.puppyDogInteractionPart1}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
-                                                                       skipVal="{!variable.skipField}"/>
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>&nbsp; &nbsp;
                                 </lightning:layout>
                             </lightning:layoutItem>
@@ -1968,7 +1970,7 @@
                                     <aura:iteration items="{!v.puppyDogInteractionPart2}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
-                                                                       skipVal="{!variable.skipField}"/>
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>&nbsp; &nbsp;
                                 </lightning:layout>
                             </lightning:layoutItem>
@@ -2021,7 +2023,7 @@
                                     <aura:iteration items="{!v.puppyDogInteractionPart3}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
-                                                                       skipVal="{!variable.skipField}"/>
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>&nbsp; &nbsp;
                                 </lightning:layout>
                             </lightning:layoutItem>

@@ -400,6 +400,7 @@
         );
     } ,
     loadAdultBehaviorData : function(cmp) {
+        var allTabsArr = Object.keys(this.tablist);
         var params = {
             evaluation: cmp.get('v.behaviorRecord')
         };
@@ -499,6 +500,30 @@
                 cmp.set('v.oppositeSexDogTestPart1', response[19]);
                 cmp.set('v.oppositeSexDogTestPart2', response[20]);
                 cmp.set('v.oppositeSexDogTestPart3', response[21]);
+                let tabAttributeMap = {};
+                tabAttributeMap.behaveInKennel = 'behaviorInKennelTest';
+                tabAttributeMap.bol = 'behaviorOnLeashTest';
+                tabAttributeMap.sbt1 = 'socialBehaviorTestPart1';
+                tabAttributeMap.sbt2 = 'socialBehaviorTestPart2';
+                tabAttributeMap.ptt = 'pleasantTouchTest';
+                tabAttributeMap.utt = 'unpleasantTouchTest';
+                tabAttributeMap.pt1 = 'playTestPart1';
+                tabAttributeMap.pt2 = 'playTestPart2';
+                tabAttributeMap.tag = 'tagTest';
+                tabAttributeMap.rgt1 = 'resourceGuardingTestPart1';
+                tabAttributeMap.rgt2 = 'resourceGuardingTestPart2';
+                tabAttributeMap.tdt1 = 'toddlerDollTestPart1';
+                tabAttributeMap.tdt2 = 'toddlerDollTestP2';
+                tabAttributeMap.spt1 = 'scoldingPersonTestP1';
+                tabAttributeMap.spt2 = 'scoldingPersonTestP2';
+                tabAttributeMap.fdit = 'fakeDogInteractionTest';
+                tabAttributeMap.ssdt1 = 'sameSexDogTestPart1';
+                tabAttributeMap.ssdt2 = 'sameSexDogTestPart2';
+                tabAttributeMap.ssdt3 = 'sameSexDogTestPart3';
+                tabAttributeMap.osdt1 = 'oppositeSexDogTestPart1';
+                tabAttributeMap.osdt2 = 'oppositeSexDogTestPart2';
+                tabAttributeMap.osdt3 = 'oppositeSexDogTestPart3';
+                cmp.set("v.tabsAttributeMap", tabAttributeMap);
                 cmp.set("v.spinner", false);
             }
         ).catch(
@@ -573,6 +598,25 @@
                 cmp.set('v.puppyDogInteractionPart1', response[12]);
                 cmp.set('v.puppyDogInteractionPart2', response[13]);
                 cmp.set('v.puppyDogInteractionPart3', response[14]);
+                let tabAttributeMap = {};
+                tabAttributeMap.pbik = 'puppyBehaviorInKennel';
+                tabAttributeMap.pbol = 'puppyBehaviorOnLeash';
+                tabAttributeMap.psb1 = 'puppySocialBehaviorPart1';
+                tabAttributeMap.psb2 = 'puppySocialBehaviorPart2';
+                tabAttributeMap.ppt1 = 'puppyPlayTestTugPart1';
+                tabAttributeMap.ppt2 = 'puppyPlayTestTugPart2';
+                tabAttributeMap.ppt = 'puppyPlayTestTag';
+                tabAttributeMap.pr = 'puppyRestraint';
+                tabAttributeMap.prg1 = 'puppyResourceGuardingPart1';
+                tabAttributeMap.prg2 = 'puppyResourceGuardingPart2';
+                tabAttributeMap.pcd1 = 'puppyChildDollPart1';
+                tabAttributeMap.pcd2 = 'puppyChildDollPart2';
+                tabAttributeMap.pdi1 = 'puppyDogInteractionPart1';
+                tabAttributeMap.pdi2 = 'puppyDogInteractionPart2';
+                tabAttributeMap.pdi3 = 'puppyDogInteractionPart2';
+                let tabsAttributeMap = cmp.get("v.tabsAttributeMap");
+                let allTabsAttributeMap = Object.assign(tabsAttributeMap, tabAttributeMap);
+                cmp.set("v.tabsAttributeMap", allTabsAttributeMap);
                 cmp.set("v.spinner", false);
             }
         ).catch(
@@ -642,6 +686,46 @@
             x = this.tablist['fdit'];
         }
         cmp.set('v.tabId' , x['nextTab']);
+        let tabsAttributeMap = cmp.get("v.tabsAttributeMap");
+        let attributeName = tabsAttributeMap[c];
+        let tabValueArr = Object.values(this.tablist);
+        let skippedAttribute = cmp.get("v."+attributeName)[0];
+        if(skippedAttribute.isSkipped === true){
+            var index = tabValueArr.findIndex(function(item, i){
+                return item.nextTab === c
+            });
+            tabValueArr.splice(0,index);
+            for(let i = 0; i < tabValueArr.length; i++){
+                if(tabValueArr[i].nextTab.substring(0, tabValueArr[i].nextTab.length - 1) !== c.substring(0, c.length - 1)){
+                    let newTabId = tabValueArr[i].nextTab;
+                    if ((i_Adult && !i_DogFight && !i_DogOnly && newTabId == 'fdit') || (i_DogOnly && newTabId == 'behaveInKennel')) {
+                        newTabId = this.tablist['fdit'].nextTab;
+                    }
+                    cmp.set('v.tabId', newTabId);
+                    break;
+                } else {
+                    let bEval = cmp.get("v.behaviorEvaluation").data.item[0];
+                    let obj = cmp.get("v."+tabsAttributeMap[tabValueArr[i].nextTab]);
+                    obj[0].isSkipped = skippedAttribute.isSkipped;
+                    obj[0].skipField.value = bEval[skippedAttribute.skipField.id];
+                    console.log(obj[0].skipField);
+                    cmp.set("v."+tabsAttributeMap[tabValueArr[i].nextTab], obj);
+                    let behEvalTabFooter = cmp.find("behEvalTabFooter");
+                    let evalparam = {}; 
+                    evalparam.recordId = cmp.get("v.recordId");
+                    evalparam.apiName = obj[0].skipField.id;
+                    evalparam.values = obj[0].skipField.value;
+                    evalparam.methodName = "c.updateEval";
+                    if(!Array.isArray(behEvalTabFooter)){
+                        behEvalTabFooter.updateEvaluation(evalparam);
+                    } else {
+                        behEvalTabFooter[behEvalTabFooter.length-1].updateEvaluation(evalparam);
+                    }
+                }
+            }
+            
+        }
+        
         $A.get('e.force:refreshView').fire();
     } ,
     handlePrevTab: function(cmp, event, button) {
