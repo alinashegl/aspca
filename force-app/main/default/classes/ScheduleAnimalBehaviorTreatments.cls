@@ -48,7 +48,6 @@ public with sharing class ScheduleAnimalBehaviorTreatments {
                 WhoId = treatment.Animal__r.Behavior_Case_Worker__c != null ? treatment.Animal__r.Behavior_Case_Worker__c : genericCon.Id,
                 OwnerId = genericCon.User__c,
                 Subject = 'Treatment',
-                Assigned_Resources__c = AutoScheduleTasksUtil.determineResources(treatment.Animal__r),
                 Species__c = 'Dog'
             );
             newTasks.add(newTask);

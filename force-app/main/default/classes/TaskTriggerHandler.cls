@@ -3,8 +3,49 @@ public with sharing class TaskTriggerHandler {
         handleDaybackResourceUpdates(taskList, oldMap);
     }
 
+    public static void onInsertHandler(Task[] taskList){
+        handleAssignDaybackResources(taskList);
+    }
+
+    public static void handleAssignDaybackResources(Task[] taskList){
+        Map<Id, Task[]> animalToTaskMap = new Map<Id, Task[]>();
+        Id[] taskRTIds = getRTIds();
+
+        for(Task task : taskList){
+            if(taskRTIds.Contains(task.RecordTypeId) && Task.Species__c == 'Dog' && task.Animal__c != null){
+                if(animalToTaskMap.containsKey(task.Animal__c)){
+                    animalToTaskMap.get(task.Animal__c).add(task);
+                } else {
+                    animalToTaskMap.put(task.Animal__c, new Task[]{task});
+                }
+            }
+        }
+
+        for(Animal__c animal : queryAnimals(new Id[animalToTaskMap.keySet()])){
+            for(Task task : animalToTaskMap.get(animal.Id)){
+                task.Assigned_Resources__c = AutoScheduleTasksUtil.determineResources(animal);
+            }
+        }
+    }
+
+    private static Animal__c[] queryAnimals(Id[] animalIds){
+        return [SELECT Id,Animal_Name_Id__c, Behavior_Case_Worker__r.Is_Generic_Contact__c, Behavior_Case_Worker__r.Name FROM Animal__c WHERE Id IN: animalIds];
+    }
+
+    private static Id[] getRTIds(){
+        Id[] rtIds = new Id[0];
+        for(String rtName : AutoScheduleTasksUtil.taskRecordTypes){
+            Id rtId = Util.getRecordTypeId('Task', rtName);
+            if(rtId != null){
+                rtIds.add(rtId);
+            }
+        }
+
+        return rtIds;
+    }
+
     public static void handleDaybackResourceUpdates(Task[] taskList, Map<Id, Task> oldMap){
-        Id[] recordTypeIds = AutoScheduleTasksUtil.getTaskRecordTypeIds();
+        Id[] recordTypeIds = getRTIds();
         for(Task task : taskList){
             //skip any tasks that don't have the correct record type
             if(!recordTypeIds.contains(task.RecordTypeId) && task.Species__c == 'Dog') continue;

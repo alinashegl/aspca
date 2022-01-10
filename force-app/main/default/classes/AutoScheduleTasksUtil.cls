@@ -5,8 +5,18 @@ public with sharing class AutoScheduleTasksUtil {
     public static final String BEHAVIOR_MED_CHECK_TASK_RECORD_TYPE_NAME = 'Behavior_Medication_Check';
     public static final String BOARD_AND_TRAIN_RECORD_TYPE_NAME = 'Board_And_Train';
     public static final String TREATMENT_TASK_RECORD_TYPE_NAME = 'Treatments';
+    public static final String EVALUATION_RECORD_TYPE_NAME = 'Evaluation';
     public static final String NO_CONTACT_RESOURCE = 'unassigned';
     public static final String[] dogPopulations = new String[]{'ARC','CARE','CRC','MRC'};
+    public static final String[] taskRecordTypes = new String[]{
+        BEH_TREATMENT_TASK_RECORD_TYPE_NAME, 
+        PLAYGROUP_TASK_RECORD_TYPE_NAME, 
+        FOSTER_TASK_RECORD_TYPE_NAME,
+        BEHAVIOR_MED_CHECK_TASK_RECORD_TYPE_NAME,
+        BOARD_AND_TRAIN_RECORD_TYPE_NAME,
+        EVALUATION_RECORD_TYPE_NAME
+    };
+
 
     public static Map<String, Contact> genericContactMap {
         get{
@@ -111,30 +121,12 @@ public with sharing class AutoScheduleTasksUtil {
         };
     }
 
-    public static Id[] getTaskRecordTypeIds(){
-        Id[] rtIds = new Id[0];
-        for(RecordType rt : [
-            SELECT Id FROM RecordType WHERE SobjectType = 'Task'
-            AND DeveloperName IN(
-                :BEH_TREATMENT_TASK_RECORD_TYPE_NAME,
-                :PLAYGROUP_TASK_RECORD_TYPE_NAME,
-                :FOSTER_TASK_RECORD_TYPE_NAME,
-                :BEHAVIOR_MED_CHECK_TASK_RECORD_TYPE_NAME,
-                :BOARD_AND_TRAIN_RECORD_TYPE_NAME
-            )
-        ]){
-            rtIds.add(rt.Id);
-        }
-
-        return rtIds;
-    }
-
     public static String determineResources(Animal__c animal){
         String[] resourceList = new String[0];
         if(animal.Animal_Name_Id__c != null){
             resourceList.add(animal.Animal_Name_Id__c);
         }
-        resourceList.add(animal.Behavior_Case_Worker__r.Is_Generic_Contact__c == false ? animal.Behavior_Case_Worker__r.Name : AutoScheduleTasksUtil.NO_CONTACT_RESOURCE);
+        resourceList.add(animal.Behavior_Case_Worker__r?.Is_Generic_Contact__c == false ? animal.Behavior_Case_Worker__r.Name : NO_CONTACT_RESOURCE);
         return string.join(resourceList, ';');
     }
 }
