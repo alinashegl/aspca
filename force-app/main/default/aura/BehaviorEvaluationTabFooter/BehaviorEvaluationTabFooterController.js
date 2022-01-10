@@ -30,5 +30,19 @@
     handleNewSkip: function(cmp, event, helper)
     {
         helper.processingProcess(cmp, 'handleNewSkip');
+    } ,
+    handleAuraMethod : function(cmp, event, helper){
+        let params = event.getParam('arguments');
+        if (params) {
+            console.log(JSON.stringify(params));
+            console.log('skipreason:' + cmp.get('v.skipReason'))
+            helper.sendValues(cmp, 
+                              params.evalObj.recordId, 
+                              params.evalObj.apiName, 
+                              params.evalObj.values, 
+                              params.evalObj.methodName); 
+            
+        }
     }
+    
 });

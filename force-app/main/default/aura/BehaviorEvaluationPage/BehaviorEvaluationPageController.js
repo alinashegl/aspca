@@ -48,6 +48,10 @@
     },
     handleMuzzle: function(cmp, event, helper) {
         helper.setMuzzle(cmp, event);
+    },
+    handleSkipSaveEvent: function(cmp, event, helper) {
+        var behaviorEvalObj = event.getParam("behaviorEvalObj");
+        cmp.set("v.behaviorEvaluation",behaviorEvalObj);
     }
 
 });
