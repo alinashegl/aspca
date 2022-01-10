@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Praziquantel_cannot_be_blank</fullName>
+    <active>true</active>
+    <description>Praziquantel cannot be blank if Amount-3 in ml, Strength-3 or Administered-3 have values</description>
+    <errorConditionFormula>(!ISBLANK(Amount_3__c) || !ISPICKVAL(Administered_3__c, &quot;&quot;) || !ISBLANK(Strength_3__c)) &amp;&amp; Praziquantel_SC__c = false</errorConditionFormula>
+    <errorMessage>Praziquantel cannot be blank if any of its corresponding fields (Amount-3 in ml, Strength-3 or Administered-3) have values</errorMessage>
+</ValidationRule>
