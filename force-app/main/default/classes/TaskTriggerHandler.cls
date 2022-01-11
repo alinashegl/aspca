@@ -1,13 +1,126 @@
-public class TaskTriggerHandler {
+public with sharing class TaskTriggerHandler {
     public static Id recordTypeId = Util.getRecordTypeId('Task',AutoScheduleTasksUtil.BEHAVIOR_MED_CHECK_TASK_RECORD_TYPE_NAME);
-    
+    public static void updateHandler(Task[] taskList, Map<Id, Task> oldMap) {
+        handleDaybackResourceUpdates(taskList, oldMap);
+    }
+
+    public static void onInsertHandler(Task[] taskList){
+        handleAssignDaybackResources(taskList);
+    }
+
     public static void afterInsertHandler(List<Task> newRecords){
         checkBehaviorMedication(newRecords, null);
     }
-    
-    public static void afterUpdateHandler(List<Task> newRecords, Map<Id, Task> oldRecords){
+
+    public static void handleAssignDaybackResources(Task[] taskList){
+        Map<Id, Task[]> animalToTaskMap = new Map<Id, Task[]>();
+        Id[] taskRTIds = getRTIds();
+
+        for(Task task : taskList){
+            if(taskRTIds.Contains(task.RecordTypeId) && Task.Species__c == 'Dog' && task.Animal__c != null){
+                if(animalToTaskMap.containsKey(task.Animal__c)){
+                    animalToTaskMap.get(task.Animal__c).add(task);
+                } else {
+                    animalToTaskMap.put(task.Animal__c, new Task[]{task});
+                }
+            }
+        }
+
+        for(Animal__c animal : queryAnimals(new Id[animalToTaskMap.keySet()])){
+            for(Task task : animalToTaskMap.get(animal.Id)){
+                task.Assigned_Resources__c = AutoScheduleTasksUtil.determineResources(animal);
+            }
+        }
     }
-    
+
+    private static Animal__c[] queryAnimals(Id[] animalIds){
+        return [SELECT Id,Animal_Name_Id__c, Behavior_Case_Worker__r.Is_Generic_Contact__c, Behavior_Case_Worker__r.Name FROM Animal__c WHERE Id IN: animalIds];
+    }
+
+    private static Id[] getRTIds(){
+        Id[] rtIds = new Id[0];
+        for(String rtName : AutoScheduleTasksUtil.taskRecordTypes){
+            Id rtId = Util.getRecordTypeId('Task', rtName);
+            if(rtId != null){
+                rtIds.add(rtId);
+            }
+        }
+
+        return rtIds;
+    }
+
+    public static void handleDaybackResourceUpdates(Task[] taskList, Map<Id, Task> oldMap){
+        Id[] recordTypeIds = getRTIds();
+        for(Task task : taskList){
+            //skip any tasks that don't have the correct record type
+            if(!recordTypeIds.contains(task.RecordTypeId) && task.Species__c == 'Dog') continue;
+
+            Task oldTask = oldMap.get(task.Id);
+            if(task.Assigned_Resources__c != oldTask.Assigned_Resources__c){
+                //get a map of old and new resources to compare
+                Map<String, String[]> newResourceMap = resourceMap(task.Assigned_Resources__c);
+                Map<String, String[]> oldResourceMap = resourceMap(oldTask.Assigned_Resources__c);
+                
+                //if additional dog was added as a resource revert to original resources and date
+                if(newResourceMap.containsKey('dog')){
+                    if(newResourceMap.get('dog').size() > 1){
+                        task.Assigned_Resources__c = oldTask.Assigned_Resources__c;
+                        task.ActivityDate = oldTask.ActivityDate;
+                        continue;
+                    }
+                }
+                //if the dogs match don't do anything
+                if(
+                    oldResourceMap.containsKey('dog') &&    
+                    newResourceMap.containsKey('dog') &&
+                    newResourceMap.get('dog') == oldResourceMap.get('dog')
+                ){
+                    if(newResourceMap.containsKey('contact')){
+                        task.Assigned_Resources__c = task.Animal_Name__c + ';' + cleanResources(newResourceMap.get('contact'));
+                    }
+                } else {
+                    //if the dogs don't match and the orignal had a dog resource put it back
+                    String[] resourceList = new String[0];
+                    if(oldResourceMap.containsKey('dog')){
+                        resourceList.add(task.Animal_Name__c);
+                        task.ActivityDate = oldTask.ActivityDate;
+                    }
+                    //if there are new contacts add them as resources
+                    if(newResourceMap.containsKey('contact')){
+                        resourceList.addAll(newResourceMap.get('contact'));
+                    }
+                    //if no new contacts put the old contacts back
+                    else if(oldResourceMap.containsKey('contact')){
+                        resourceList.addAll(oldResourceMap.get('contact'));
+                    }
+                    task.Assigned_Resources__c = cleanResources(resourceList);
+                }
+            }
+        }
+    }
+
+    //used to remove the 'no contact' resource if another contact resource has been added
+    public static String cleanResources(String[] resourceList){
+        if(resourceList.size() > 1 && resourceList.contains(AutoScheduleTasksUtil.NO_CONTACT_RESOURCE)){
+            Integer index = resourceList.indexOf(AutoScheduleTasksUtil.NO_CONTACT_RESOURCE);
+            resourceList.remove(index);
+        }
+        return String.join(resourceList,';');
+    }
+
+    public static Map<String, String[]> resourceMap(String resources){
+        Map<String, String[]> resourceMap = new Map<String, String[]>();
+        for(String resource : resources.split(';')){
+            String type = (resource.contains('(') && resource.contains(')')) ? 'dog' : 'contact';
+            if(resourceMap.containsKey(type)){
+                resourceMap.get(type).add(resource);
+            } else {
+                resourceMap.put(type, new String[]{resource});
+            }
+        }
+        return resourceMap;
+    }
+
     public static void checkBehaviorMedication(List<Task> newRecords, Map<Id, Task> oldRecords){
         Map<Id, Task> taskMap = new Map<Id, Task>();
         String animal_prefix = Schema.SObjectType.Animal__c.getKeyPrefix();
