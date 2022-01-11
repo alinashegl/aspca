@@ -14,6 +14,7 @@ public class DateTimeUtilityTest {
     
     @isTest
     static void testDateTimeMethods(){
+        DateTimeUtility.AddBusinessDays(System.now(), 1);
         DateTimeUtility.Request request = new DateTimeUtility.Request();
         request.dateTimeString = '1/7/2022';
         request.days = 4;
