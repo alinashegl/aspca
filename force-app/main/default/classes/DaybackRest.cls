@@ -2,21 +2,26 @@
 global with sharing class DaybackRest {
     public static Set<String> folderNames = new Set<String>();
     public static String sfObject;
-    public static String[] location{
+    public static String[] locationGroup{
         get{
-            if(location == null){
-                String tempLocation = getUserLocation();
-                location = (tempLocation == 'ARC/CARE') ? 
-                    new String[]{'ARC', 'CARE'} : 
-                    new String[]{'CRC', 'MRC'};
+            if(locationGroup == null){
+                return getLocationGroup();
             }
-            return location;
+            else {
+                return locationGroup;
+            }
         }
-        set{
-            String tempLocation = getUserLocation();
-            location = (tempLocation == 'ARC/CARE') ? 
-                new String[]{'ARC', 'CARE'} : 
-                new String[]{'CRC', 'MRC'};
+        set;
+    }
+
+    public static String userLocation{
+        get {
+            if(userLocation == null){
+                return getUserLocation();
+            }
+            else {
+                return userLocation;
+            }
         }
     }
 
@@ -28,7 +33,7 @@ global with sharing class DaybackRest {
 
         DaybackResponse resp = new DaybackResponse();
 
-        if(location != null){
+        if(locationgroup != null){
             resp.resources = prepContactResources();
             resp.resources.addAll(getAnimalList());
             resp.folders = new String[folderNames];
@@ -36,6 +41,18 @@ global with sharing class DaybackRest {
             resp.sfObject = sfObject;
         }
         return resp;
+    }
+
+    private static String[] getLocationGroup(){
+        String[] tempLocationGroup = new String[]{'CRC', 'MRC'};
+            String tempLocation = userLocation;
+            if(tempLocation == 'All'){
+                tempLocationGroup = new String[]{'ARC', 'CARE', 'ARC/CARE', 'CRC', 'MRC'};
+            }
+            if(tempLocation == 'ARC/CARE'){
+                tempLocationGroup = new String[]{'ARC', 'CARE', 'ARC/CARE'};
+            }
+        return tempLocationGroup;
     }
 
     private static String getUserLocation(){
@@ -49,21 +66,24 @@ global with sharing class DaybackRest {
         Id currentUserId = UserInfo.getUserId();
         Contact[] contactList = queryContacts();
         //first loop through the contacts to pull out any contacts that have direct reports
-        for(Contact con : contactList){
-            if(con.ReportsToId != null && !managerIds.contains(con.ReportsToId)){
-                ResourceInfo managerRes = new ResourceInfo();
-                managerRes.type = 'Contacts';
-                managerRes.resourceName = con.ReportsTo.Name;
-                managerRes.folderName = 'Managers';
-                folderNames.add('Managers');
-                managerIds.add(con.ReportsToId);
-                infos.add(managerRes);
+        //ARC/CARE doesn't want to have their resources broken out so we skip this part for them
+        if(userLocation != 'ARC/CARE'){
+            for(Contact con : contactList){
+                if(con.ReportsToId != null && !managerIds.contains(con.ReportsToId)){
+                    ResourceInfo managerRes = new ResourceInfo();
+                    managerRes.type = 'Contacts';
+                    managerRes.resourceName = con.ReportsTo.Name;
+                    managerRes.folderName = 'Managers';
+                    folderNames.add('Managers');
+                    managerIds.add(con.ReportsToId);
+                    infos.add(managerRes);
+                }
             }
         }
 
         //loop through the contacts again to create the direct reports for current user and the rest as Behavior Case Workers
         for(Contact con : contactList){
-            if(con.ReportsTo.User__c == currentUserId){
+            if(con.ReportsTo.User__c == currentUserId && userLocation != 'ARC/CARE'){
                 ResourceInfo res = new ResourceInfo();
                 res.type = 'Contacts';
                 res.resourceName = con.Name;
@@ -86,11 +106,12 @@ global with sharing class DaybackRest {
     }
 
     private static Contact[] queryContacts(){
+
         return [
             SELECT Id, Name, ReportsToId, ReportsTo.Name, ReportsTo.User__c, Contact_Type__c, User__c
             FROM Contact 
             WHERE Active__c = true
-            AND User__r.Location__c IN: location
+            AND User__r.Location__c IN : locationgroup
             AND Is_Generic_Contact__c = false
             AND Contact_Type__c = 'Behavior Case Worker'
             ORDER BY LastName, FirstName
@@ -104,7 +125,7 @@ global with sharing class DaybackRest {
                 FROM Animal__c 
                 WHERE Type_of_Animal__c = 'Dog' 
                 AND Current_Recent_Shelter_Location__c 
-                IN :location 
+                IN :locationgroup 
                 ORDER BY Current_Recent_Shelter_Location__c, Animal_Name_Id__c
             ]){
             ResourceInfo res = new ResourceInfo();
@@ -119,24 +140,6 @@ global with sharing class DaybackRest {
 
         return conResources;
     }
-
-    // private static ResourceInfo[] getLocationList(){
-    //     ResourceInfo[] conResources = new ResourceInfo[0];
-
-    //     Schema.SObjectField fieldInfo = SchemaHelper.DetermineSObjectFieldByLabel('Playgroup_Session__c', 'Playgroup Location');
-    //     for(String value : SchemaHelper.GetPicklistValues(fieldInfo)){
-    //         ResourceInfo res = new ResourceInfo();
-    //         res.type = 'Location';
-    //         res.resourceName = value;
-    //         res.folderName = 'Location';
-
-    //         conResources.add(res);
-    //     }
-
-    //     folderNames.add('Location');
-
-    //     return conResources;
-    // }
 
     private static folderInfo[] prepFolderInfos(){
         folderInfo[] infos = new folderInfo[0];
@@ -180,62 +183,3 @@ global with sharing class DaybackRest {
         public String selected;
     }
 }
-
-
-    // private static Contact[] queryContacts(Id[] reportIds){
-        // if(reportIds != null){
-        //     return [
-        //         SELECT Id, Name, Contact_Type__c,
-        //         (SELECT Id FROM ReportsTo)
-        //         FROM Contact 
-        //         WHERE (
-        //                 (Active__c = true AND User__r.Location__c =: location) OR Id IN: reportIds
-        //             ) 
-        //         ORDER BY LastName, FirstName];
-        // }
-        // return null;
-        // else {
-        //     return [
-        //         SELECT Id, Name, Contact_Type__c,
-        //         (SELECT Id FROM ReportsTo__r)
-        //         FROM Contact 
-        //         WHERE Active__c = true AND User__r.Location__c =: location
-        //         ORDER BY LastName, FirstName
-        //     ];
-        // }
-    // }
-
-    // private static ResourceInfo[] getContactList(){
-    //     ResourceInfo[] conResources = new ResourceInfo[0];
-    //     Id[] reportIds = getContactReportIds();
-        
-    //     for(Contact con :queryContacts(reportIds)){
-
-    //         ResourceInfo res = new ResourceInfo();
-    //         res.type = 'Contacts';
-    //         res.resourceName = con.Name;
-    //         res.resource = con;
-
-    //         if(reportIds != null && reportIds.contains(con.Id)){
-    //             res.folderName = 'Direct Reports';
-    //             folderNames.add('Direct Reports');
-    //         }
-    //         else {
-    //             res.folderName = con.Contact_Type__c;
-    //             folderNames.add(con.Contact_Type__c);
-    //         }
-
-    //         conResources.add(res);
-    //     }
-
-    //     return conResources;
-    // }
-
-    // private static Id[] getContactReportIds(){
-    //     Set<Id> reportIds = new Set<Id>();
-    //     for(Contact con : [SELECT Id FROM Contact WHERE Active__c = true AND User__r.Location__c =: location AND ReportsTo.User__c =: UserInfo.getUserId()]){
-    //         reportIds.add(con.Id);
-    //     }
-
-    //     return reportIds.isEmpty() ? null : new Id[reportIds];
-    // }
