@@ -57,17 +57,43 @@ function processResult(data) {
     createResources(resp.resources);
    
     //add unassigned resource
-    var noneResource = {
-      id: 'unassigned',
-      name: 'unassigned',
-      nameSafe: 'nc',
-      shortName: 'n/a',
+    var mrcResource = {
+      id: 'MRC BehaviorMngmnt',
+      name: 'MRC BehaviorMngmnt',
+      nameSafe: 'mrc',
+      shortName: 'mrc',
       status: {
         selected: sfObject == 'default',
       },
     };
 
-    resources.unshift(noneResource);       
+    resources.unshift(mrcResource);
+
+    //add unassigned resource
+    var crcResource = {
+      id: 'CRC BehaviorMngmt',
+      name: 'CRC BehaviorMngmt',
+      nameSafe: 'crc',
+      shortName: 'crc',
+      status: {
+        selected: sfObject == 'default',
+      },
+    };
+
+    resources.unshift(crcResource);
+
+    //add unassigned resource
+    var arcCareResource = {
+      id: 'ARC CARE BehaviorMgmt',
+      name: 'ARC CARE BehaviorMgmt',
+      nameSafe: 'ac',
+      shortName: 'a/c',
+      status: {
+        selected: sfObject == 'default',
+      },
+    };
+
+    resources.unshift(arcCareResource);
 
     //continue actions
     action.callbacks.confirm();
