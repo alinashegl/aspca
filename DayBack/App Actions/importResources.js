@@ -55,45 +55,22 @@ function processResult(data) {
     }
 
     createResources(resp.resources);
-   
-    //add unassigned resource
-    var mrcResource = {
-      id: 'MRC BehaviorMngmnt',
-      name: 'MRC BehaviorMngmnt',
-      nameSafe: 'mrc',
-      shortName: 'mrc',
-      status: {
-        selected: sfObject == 'default',
-      },
-    };
 
-    resources.unshift(mrcResource);
-
-    //add unassigned resource
-    var crcResource = {
-      id: 'CRC BehaviorMngmt',
-      name: 'CRC BehaviorMngmt',
-      nameSafe: 'crc',
-      shortName: 'crc',
-      status: {
-        selected: sfObject == 'default',
-      },
-    };
-
-    resources.unshift(crcResource);
-
-    //add unassigned resource
-    var arcCareResource = {
-      id: 'ARC CARE BehaviorMgmt',
-      name: 'ARC CARE BehaviorMgmt',
-      nameSafe: 'ac',
-      shortName: 'a/c',
-      status: {
-        selected: sfObject == 'default',
-      },
-    };
-
-    resources.unshift(arcCareResource);
+    //insert the generic resources
+    for(var i = 0; i < resp.genResources.length; i++){
+      var tempResource = resp.genResources[i];
+      var resource = {
+          id: tempResource.id,
+          name: tempResource.name,
+          nameSafe: tempResource.nameSafe,
+          shortName: tempResource.shortName,
+          status: {
+            selected: sfObject == tempResource.statusSelected,
+          },
+        };
+    
+        resources.unshift(resource);
+    }
 
     //continue actions
     action.callbacks.confirm();

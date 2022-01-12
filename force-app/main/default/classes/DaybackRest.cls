@@ -34,6 +34,7 @@ global with sharing class DaybackRest {
         DaybackResponse resp = new DaybackResponse();
 
         if(locationgroup != null){
+            resp.genResources = prepGenericResources();
             resp.resources = prepContactResources();
             resp.resources.addAll(getAnimalList());
             resp.folders = new String[folderNames];
@@ -41,6 +42,24 @@ global with sharing class DaybackRest {
             resp.sfObject = sfObject;
         }
         return resp;
+    }
+
+    private static GenericResource[] prepGenericResources(){
+        GenericResource[] genResources = new GenericResource[0];
+        if(userLocation == 'All'){
+            genResources.add(mrcGenericResource());
+            genResources.add(crcGenericResource());
+            genResources.add(arcCareGenericResource());
+        }
+        else if(userLocation == 'ARC/CARE'){
+            genResources.add(arcCareGenericResource());
+        }
+        else {
+            genResources.add(mrcGenericResource());
+            genResources.add(crcGenericResource());
+        }
+
+        return genResources;
     }
 
     private static String[] getLocationGroup(){
@@ -163,11 +182,45 @@ global with sharing class DaybackRest {
         return selected;
     }
 
+    private static GenericResource arcCareGenericResource(){
+        GenericResource resource = new GenericResource();
+        resource.id = 'ARC CARE BehaviorMgmt';
+        resource.name = 'ARC CARE BehaviorMgmt';
+        resource.nameSafe = 'ac';
+        resource.shortName = 'a/c';
+        resource.statusSelected = 'default';
+
+        return resource;
+    }
+
+    private static GenericResource crcGenericResource(){
+        GenericResource resource = new GenericResource();
+        resource.id = 'CRC BehaviorMngmt';
+        resource.name = 'CRC BehaviorMngmt';
+        resource.nameSafe = 'crc';
+        resource.shortName = 'crc';
+        resource.statusSelected = 'default';
+
+        return resource;
+    }
+
+    private static GenericResource mrcGenericResource(){
+        GenericResource resource = new GenericResource();
+        resource.id = 'MRC BehaviorMngmnt';
+        resource.name = 'MRC BehaviorMngmnt';
+        resource.nameSafe = 'mrc';
+        resource.shortName = 'mrc';
+        resource.statusSelected = 'default';
+
+        return resource;
+    }
+
     global class DaybackResponse{
         public ResourceInfo[] resources;
         public folderInfo[] folderInfos;
         public String[] folders;
         public String sfObject;
+        public GenericResource[] genResources;
     }
 
     global class folderInfo{
@@ -181,5 +234,13 @@ global with sharing class DaybackRest {
         public String folderName;
         public String shortName;
         public String selected;
+    }
+
+    global class GenericResource{
+        public String id;
+        public String name;
+        public String nameSafe;
+        public String shortName;
+        public String statusSelected;
     }
 }
