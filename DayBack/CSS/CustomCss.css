@@ -9,8 +9,18 @@
 }
 
 /*change color for 'none' resource columns/rows*/
-.dbk_calendarContent td[data-resource="none"] {
-	background-color: #DFECF5 !important;	
+.dbk_calendarContent td[data-resource="ARC CARE BehaviorMgmt"] {
+	background-color: #edf7c5 !important;	
+}
+
+/*change color for 'none' resource columns/rows*/
+.dbk_calendarContent td[data-resource="CRC BehaviorMngmt"] {
+	background-color: #c3e4fc !important;	
+}
+
+/*change color for 'none' resource columns/rows*/
+.dbk_calendarContent td[data-resource="MRC BehaviorMngmnt"] {
+	background-color: #bdfcd2 !important;	
 }
 
 /*******************Add Custom Button*****************/
