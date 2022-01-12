@@ -77,16 +77,16 @@ public with sharing class AutoScheduleTasksUtil {
     public static Map<String, Contact> getGenericContacts(){
         Map<String, Contact> contactMap = new Map<String, Contact>();
         for(Contact con : [
-            SELECT Id, Name, User__c, User__r.Division
+            SELECT Id, Name, User__c, User__r.Location__c
             FROM Contact
             WHERE Is_Generic_Contact__c = TRUE
             AND User__r.isActive = true
         ]){
-            if(con.User__r.Division == 'ARC/CARE'){
+            if(con.User__r.Location__c == 'ARC/CARE'){
                 contactMap.put('ARC', con);
                 contactMap.put('CARE', con);    
             } else {
-                contactMap.put(con.User__r.Division, con);
+                contactMap.put(con.User__r.Location__c, con);
             }
         }
 
@@ -126,7 +126,7 @@ public with sharing class AutoScheduleTasksUtil {
         if(animal.Animal_Name_Id__c != null){
             resourceList.add(animal.Animal_Name_Id__c);
         }
-        resourceList.add(animal.Behavior_Case_Worker__r?.Is_Generic_Contact__c == false ? animal.Behavior_Case_Worker__r.Name : NO_CONTACT_RESOURCE);
+        resourceList.add(animal.Behavior_Case_Worker__r != null ? animal.Behavior_Case_Worker__r.Name : NO_CONTACT_RESOURCE);
         return string.join(resourceList, ';');
     }
 }

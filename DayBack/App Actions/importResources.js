@@ -55,19 +55,22 @@ function processResult(data) {
     }
 
     createResources(resp.resources);
-   
-    //add unassigned resource
-    var noneResource = {
-      id: 'unassigned',
-      name: 'unassigned',
-      nameSafe: 'nc',
-      shortName: 'n/a',
-      status: {
-        selected: sfObject == 'default',
-      },
-    };
 
-    resources.unshift(noneResource);       
+    //insert the generic resources
+    for(var i = 0; i < resp.genResources.length; i++){
+      var tempResource = resp.genResources[i];
+      var resource = {
+          id: tempResource.id,
+          name: tempResource.name,
+          nameSafe: tempResource.nameSafe,
+          shortName: tempResource.shortName,
+          status: {
+            selected: sfObject == tempResource.statusSelected,
+          },
+        };
+    
+        resources.unshift(resource);
+    }
 
     //continue actions
     action.callbacks.confirm();

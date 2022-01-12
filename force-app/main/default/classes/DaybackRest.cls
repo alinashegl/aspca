@@ -2,98 +2,160 @@
 global with sharing class DaybackRest {
     public static Set<String> folderNames = new Set<String>();
     public static String sfObject;
+    public static String[] locationGroup{
+        get{
+            if(locationGroup == null){
+                return getLocationGroup();
+            }
+            else {
+                return locationGroup;
+            }
+        }
+        set;
+    }
+
+    public static String userLocation{
+        get {
+            if(userLocation == null){
+                return getUserLocation();
+            }
+            else {
+                return userLocation;
+            }
+        }
+    }
 
     @HttpGet
     global static DaybackResponse getResources() {
         RestRequest restReq = RestContext.request;
         sfObject = restReq.params.get('sfObject');
+        
 
         DaybackResponse resp = new DaybackResponse();
-        resp.resources = new ResourceInfo[0];
-        resp.resources.addAll(getContactList());
-        resp.resources.addAll(getAnimalList());
-        resp.folders = new String[folderNames];
-        resp.folderInfos = prepFolderInfos();
-        resp.sfObject = sfObject;
-            
+
+        if(locationgroup != null){
+            resp.genResources = prepGenericResources();
+            resp.resources = prepContactResources();
+            resp.resources.addAll(getAnimalList());
+            resp.folders = new String[folderNames];
+            resp.folderInfos = prepFolderInfos();
+            resp.sfObject = sfObject;
+        }
         return resp;
     }
 
-    private static ResourceInfo[] getContactList(){
-        ResourceInfo[] conResources = new ResourceInfo[0];
-        Id[] reportIds = getContactReportIds();
-        
-        for(Contact con :queryContacts(reportIds)){
-
-            ResourceInfo res = new ResourceInfo();
-            res.type = 'Contacts';
-            res.resourceName = con.Name;
-            res.resource = con;
-
-            if(reportIds != null && reportIds.contains(con.Id)){
-                res.folderName = 'Direct Reports';
-                folderNames.add('Direct Reports');
-            }
-            else {
-                res.folderName = con.Contact_Type__c;
-                folderNames.add(con.Contact_Type__c);
-            }
-
-            conResources.add(res);
+    private static GenericResource[] prepGenericResources(){
+        GenericResource[] genResources = new GenericResource[0];
+        if(userLocation == 'All'){
+            genResources.add(mrcGenericResource());
+            genResources.add(crcGenericResource());
+            genResources.add(arcCareGenericResource());
         }
-
-        return conResources;
-    }
-
-    private static Id[] getContactReportIds(){
-        Set<Id> reportIds = new Set<Id>();
-        for(Contact con : [SELECT Id FROM Contact WHERE ReportsTo.User__c =: UserInfo.getUserId()]){
-            reportIds.add(con.Id);
-        }
-
-        return reportIds.isEmpty() ? null : new Id[reportIds];
-    }
-
-    private static Contact[] queryContacts(Id[] reportIds){
-        if(reportIds != null){
-            return [SELECT Id, Name, Contact_Type__c FROM Contact WHERE (Title = 'stevenDev' OR Id IN: reportIds) ORDER BY LastName, FirstName];
+        else if(userLocation == 'ARC/CARE'){
+            genResources.add(arcCareGenericResource());
         }
         else {
-            return [SELECT Id, Name, Contact_Type__c FROM Contact WHERE Title = 'stevenDev' ORDER BY LastName, FirstName];
+            genResources.add(mrcGenericResource());
+            genResources.add(crcGenericResource());
         }
+
+        return genResources;
+    }
+
+    private static String[] getLocationGroup(){
+        String[] tempLocationGroup = new String[]{'CRC', 'MRC'};
+            String tempLocation = userLocation;
+            if(tempLocation == 'All'){
+                tempLocationGroup = new String[]{'ARC', 'CARE', 'ARC/CARE', 'CRC', 'MRC'};
+            }
+            if(tempLocation == 'ARC/CARE'){
+                tempLocationGroup = new String[]{'ARC', 'CARE', 'ARC/CARE'};
+            }
+        return tempLocationGroup;
+    }
+
+    private static String getUserLocation(){
+        User u = [SELECT Id, Location__c FROM User WHERE Id =: userInfo.getUserId()];
+        return u.Location__c;
+    }
+
+    public static ResourceInfo[] prepContactResources(){
+        ResourceInfo[] infos = new ResourceInfo[0];
+        Set<Id> managerIds = new Set<Id>();
+        Id currentUserId = UserInfo.getUserId();
+        Contact[] contactList = queryContacts();
+        //first loop through the contacts to pull out any contacts that have direct reports
+        //ARC/CARE doesn't want to have their resources broken out so we skip this part for them
+        if(userLocation != 'ARC/CARE'){
+            for(Contact con : contactList){
+                if(con.ReportsToId != null && !managerIds.contains(con.ReportsToId)){
+                    ResourceInfo managerRes = new ResourceInfo();
+                    managerRes.type = 'Contacts';
+                    managerRes.resourceName = con.ReportsTo.Name;
+                    managerRes.folderName = 'Managers';
+                    folderNames.add('Managers');
+                    managerIds.add(con.ReportsToId);
+                    infos.add(managerRes);
+                }
+            }
+        }
+
+        //loop through the contacts again to create the direct reports for current user and the rest as Behavior Case Workers
+        for(Contact con : contactList){
+            if(con.ReportsTo.User__c == currentUserId && userLocation != 'ARC/CARE'){
+                ResourceInfo res = new ResourceInfo();
+                res.type = 'Contacts';
+                res.resourceName = con.Name;
+                res.folderName = 'Direct Reports';
+                folderNames.add('Direct Reports');
+                infos.add(res);
+                continue;
+            }
+            
+            if(!managerIds.contains(con.Id)){
+                ResourceInfo res = new ResourceInfo();
+                res.type = 'Contacts';
+                res.resourceName = con.Name;
+                res.folderName = con.Contact_Type__c;
+                folderNames.add(con.Contact_Type__c);
+                infos.add(res);
+            }
+        }
+        return infos;
+    }
+
+    private static Contact[] queryContacts(){
+
+        return [
+            SELECT Id, Name, ReportsToId, ReportsTo.Name, ReportsTo.User__c, Contact_Type__c, User__c
+            FROM Contact 
+            WHERE Active__c = true
+            AND User__r.Location__c IN : locationgroup
+            AND Is_Generic_Contact__c = false
+            AND Contact_Type__c = 'Behavior Case Worker'
+            ORDER BY LastName, FirstName
+        ];
     }
 
     private static ResourceInfo[] getAnimalList(){
         ResourceInfo[] conResources = new ResourceInfo[0];
-        for(Animal__c animal :[SELECT Id, Animal_Name_Id__c, Current_Location__c, Current_Recent_Shelter_Location__c FROM Animal__c WHERE Type_of_Animal__c = 'Dog' AND Current_Recent_Shelter_Location__c IN :AutoScheduleTasksUtil.dogPopulations ORDER BY Animal_Name_Id__c]){
+        for(Animal__c animal :[
+                SELECT Id, Animal_Name_Id__c, Current_Location__c, Current_Recent_Shelter_Location__c 
+                FROM Animal__c 
+                WHERE Type_of_Animal__c = 'Dog' 
+                AND Current_Recent_Shelter_Location__c 
+                IN :locationgroup 
+                ORDER BY Current_Recent_Shelter_Location__c, Animal_Name_Id__c
+            ]){
             ResourceInfo res = new ResourceInfo();
             res.type = animal.Current_Recent_Shelter_Location__c;
             res.resourceName = animal.Animal_Name_Id__c;
             res.folderName = animal.Current_Recent_Shelter_Location__c;
-            res.resource = animal;
 
             folderNames.add(animal.Current_Recent_Shelter_Location__c);
 
             conResources.add(res);
         }
-
-        return conResources;
-    }
-
-    private static ResourceInfo[] getLocationList(){
-        ResourceInfo[] conResources = new ResourceInfo[0];
-
-        Schema.SObjectField fieldInfo = SchemaHelper.DetermineSObjectFieldByLabel('Playgroup_Session__c', 'Playgroup Location');
-        for(String value : SchemaHelper.GetPicklistValues(fieldInfo)){
-            ResourceInfo res = new ResourceInfo();
-            res.type = 'Location';
-            res.resourceName = value;
-            res.folderName = 'Location';
-
-            conResources.add(res);
-        }
-
-        folderNames.add('Location');
 
         return conResources;
     }
@@ -120,11 +182,45 @@ global with sharing class DaybackRest {
         return selected;
     }
 
+    private static GenericResource arcCareGenericResource(){
+        GenericResource resource = new GenericResource();
+        resource.id = 'ARC CARE BehaviorMgmt';
+        resource.name = 'ARC CARE BehaviorMgmt';
+        resource.nameSafe = 'ac';
+        resource.shortName = 'a/c';
+        resource.statusSelected = 'default';
+
+        return resource;
+    }
+
+    private static GenericResource crcGenericResource(){
+        GenericResource resource = new GenericResource();
+        resource.id = 'CRC BehaviorMngmt';
+        resource.name = 'CRC BehaviorMngmt';
+        resource.nameSafe = 'crc';
+        resource.shortName = 'crc';
+        resource.statusSelected = 'default';
+
+        return resource;
+    }
+
+    private static GenericResource mrcGenericResource(){
+        GenericResource resource = new GenericResource();
+        resource.id = 'MRC BehaviorMngmnt';
+        resource.name = 'MRC BehaviorMngmnt';
+        resource.nameSafe = 'mrc';
+        resource.shortName = 'mrc';
+        resource.statusSelected = 'default';
+
+        return resource;
+    }
+
     global class DaybackResponse{
         public ResourceInfo[] resources;
         public folderInfo[] folderInfos;
         public String[] folders;
         public String sfObject;
+        public GenericResource[] genResources;
     }
 
     global class folderInfo{
@@ -138,6 +234,13 @@ global with sharing class DaybackRest {
         public String folderName;
         public String shortName;
         public String selected;
-        public SObject resource;
+    }
+
+    global class GenericResource{
+        public String id;
+        public String name;
+        public String nameSafe;
+        public String shortName;
+        public String statusSelected;
     }
 }

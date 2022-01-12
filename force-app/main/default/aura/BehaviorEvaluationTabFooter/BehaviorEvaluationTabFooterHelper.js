@@ -173,11 +173,17 @@
         //alert(JSON.stringify(params['apiName']));
 
         //this.sendRequest(cmp, 'c.updateEval', params);
-
+		var comp = cmp;
         this.sendPromise(cmp, mName, params, params[apiName])
         .then(
           function(response) {
               console.log('SENT VALUES RESPONSE', response);
+              $A.get('e.force:refreshView').fire();
+              var compEvent = comp.getEvent("skipSaveEvt");
+              compEvent.setParams({
+                  behaviorEvalObj: response
+              });
+              compEvent.fire();
           }
         ).catch(
             function(error) {
