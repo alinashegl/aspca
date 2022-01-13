@@ -2488,6 +2488,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.User_Location__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Contact.User__c</field>
         <readable>true</readable>
@@ -3280,6 +3285,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Treatment_Session__c.Session_Notes__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>User.Location__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
