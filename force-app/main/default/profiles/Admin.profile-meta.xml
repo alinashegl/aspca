@@ -5,11 +5,6 @@
         <default>false</default>
         <visible>true</visible>
     </applicationVisibilities>
-    <applicationVisibilities>
-        <application>Medical_Team</application>
-        <default>false</default>
-        <visible>true</visible>
-    </applicationVisibilities>
     <classAccesses>
         <apexClass>AnimalSelector</apexClass>
         <enabled>true</enabled>
@@ -63,10 +58,6 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>BehaviorEvaluationTriggers</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>BehaviorEvaluationsSelector</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -104,10 +95,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>EnrichmentQuickCreateController</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>EvalHelperTextMapUtil</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -2988,16 +2975,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Bundle_Entry__c.Entry_Label__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Bundle_Entry__c.Protocol__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
         <field>Calendar_Schedule_Config__mdt.Frequency__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -3463,72 +3440,12 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Evaluation_Entry__c.Field_Label__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Evaluation_Entry__c.Helper_Text__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Evaluation_Entry__c.Is_Selected__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Evaluation_Entry__c.Response_Type__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Evaluation_Type__c.Active__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
         <field>Evaluation_Type__c.Eval_Summary__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Evaluation__c.Description__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Evaluation__c.EvaluationRecordTypeName__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Evaluation__c.Evaluation_Type__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Evaluation__c.Play_Test_Tug_Part_1__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Evaluation__c.Play_Test_Tug_Part_2__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Evaluation__c.Pleasant_Touch_Test__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Evaluation__c.Social_Behavior_Test_P2__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Evaluation__c.Social_Behavior_Test__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -4102,26 +4019,6 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
-        <field>Playgroup_Familiar_Contact__c.Contact__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Playgroup_Familiar_Contact__c.Playgroup__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Playgroup_Novel_Contact__c.Contact__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Playgroup_Novel_Contact__c.Playgroup__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
         <editable>true</editable>
         <field>Playgroup_Session__c.Animal_Playgroup__c</field>
         <readable>true</readable>
@@ -4160,41 +4057,6 @@
         <editable>true</editable>
         <field>Playgroup_Session__c.Population__c</field>
         <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Playgroup__c.Animal__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Playgroup__c.Did_Not_Attend_Playgroup__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Playgroup__c.Playgroup_Color_Code__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Playgroup__c.Playgroup_Date_Time__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Playgroup__c.Playgroup_Individual_Notes__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Playgroup__c.Playgroup_Location__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Playgroup__c.Playgroup_Notes_Text__c</field>
-        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
@@ -4908,29 +4770,7 @@
         <layout>Animal__c_hd-Animal Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Behavior_Evaluation__c-Behavior Evaluation Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>Behavior_Evaluation__c-Behavior Evaluation Layout</layout>
-        <recordType>Behavior_Evaluation__c.Default</recordType>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>Behavior_Evaluation__c-Behavior Evaluation Layout</layout>
-        <recordType>Behavior_Evaluation__c.Play_Test</recordType>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>Behavior_Evaluation__c-Behavior Evaluation Layout</layout>
-        <recordType>Behavior_Evaluation__c.Pleasant_Touch</recordType>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>Behavior_Evaluation__c-Behavior Evaluation Layout</layout>
-        <recordType>Behavior_Evaluation__c.Social_Behavior</recordType>
-    </layoutAssignments>
-    <layoutAssignments>
         <layout>Behavior_Foster_Notes__c-Behavior Foster Notes Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>Bundle_Entry__c-Bundle Entry Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Contact-Contact Layout</layout>
@@ -4954,29 +4794,7 @@
         <layout>Domain_Action_Binding__mdt-CQ Domain Action Binding Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Evaluation_Entry__c-Evaluation Entry Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
         <layout>Evaluation_Type__c-Evaluation Type Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>Evaluation__c-Evaluation Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>Evaluation__c-Evaluation Layout</layout>
-        <recordType>Evaluation__c.Default</recordType>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>Evaluation__c-Play Test</layout>
-        <recordType>Evaluation__c.Play_Test</recordType>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>Evaluation__c-Pleasant Touch Test</layout>
-        <recordType>Evaluation__c.Pleasant_Touch</recordType>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>Evaluation__c-Social Behavior Test</layout>
-        <recordType>Evaluation__c.Social_Behavior</recordType>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Facility_Outcome__c-Facility%2FOutcome Layout</layout>
@@ -5128,15 +4946,6 @@
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
-        <object>Bundle_Entry__c</object>
-        <viewAllRecords>true</viewAllRecords>
-    </objectPermissions>
-    <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>true</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>true</modifyAllRecords>
         <object>Contact</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
@@ -5164,28 +4973,10 @@
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
-        <object>Evaluation_Entry__c</object>
-        <viewAllRecords>true</viewAllRecords>
-    </objectPermissions>
-    <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>true</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>true</modifyAllRecords>
         <object>Evaluation_Type__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
-    <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>true</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>true</modifyAllRecords>
-        <object>Evaluation__c</object>
-        <viewAllRecords>true</viewAllRecords>
-    </objectPermissions>
-    <objectPermissions>
+   <objectPermissions>
         <allowCreate>true</allowCreate>
         <allowDelete>true</allowDelete>
         <allowEdit>true</allowEdit>
@@ -5263,34 +5054,7 @@
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
-        <object>Playgroup_Familiar_Contact__c</object>
-        <viewAllRecords>true</viewAllRecords>
-    </objectPermissions>
-    <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>true</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>true</modifyAllRecords>
-        <object>Playgroup_Novel_Contact__c</object>
-        <viewAllRecords>true</viewAllRecords>
-    </objectPermissions>
-    <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>true</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>true</modifyAllRecords>
         <object>Playgroup_Session__c</object>
-        <viewAllRecords>true</viewAllRecords>
-    </objectPermissions>
-    <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>true</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>true</modifyAllRecords>
-        <object>Playgroup__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <objectPermissions>
@@ -5381,14 +5145,6 @@
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
-        <apexPage>LightningPDFGenerator</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
-        <apexPage>PDFGenerator</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
         <apexPage>PlaygroupToDoPdf</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
@@ -5420,26 +5176,6 @@
         <default>false</default>
         <recordType>Behavior_Evaluation__c.Social_Behavior</recordType>
         <visible>false</visible>
-    </recordTypeVisibilities>
-    <recordTypeVisibilities>
-        <default>true</default>
-        <recordType>Evaluation__c.Default</recordType>
-        <visible>true</visible>
-    </recordTypeVisibilities>
-    <recordTypeVisibilities>
-        <default>false</default>
-        <recordType>Evaluation__c.Play_Test</recordType>
-        <visible>true</visible>
-    </recordTypeVisibilities>
-    <recordTypeVisibilities>
-        <default>false</default>
-        <recordType>Evaluation__c.Pleasant_Touch</recordType>
-        <visible>true</visible>
-    </recordTypeVisibilities>
-    <recordTypeVisibilities>
-        <default>false</default>
-        <recordType>Evaluation__c.Social_Behavior</recordType>
-        <visible>true</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
         <default>true</default>
@@ -5506,10 +5242,6 @@
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>
-        <tab>Bundle_Entry__c</tab>
-        <visibility>DefaultOn</visibility>
-    </tabVisibilities>
-    <tabVisibilities>
         <tab>County__c</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
@@ -5518,19 +5250,7 @@
         <visibility>DefaultOff</visibility>
     </tabVisibilities>
     <tabVisibilities>
-        <tab>Evaluation_Type__c</tab>
-        <visibility>DefaultOff</visibility>
-    </tabVisibilities>
-    <tabVisibilities>
-        <tab>Evaluation__c</tab>
-        <visibility>DefaultOn</visibility>
-    </tabVisibilities>
-    <tabVisibilities>
         <tab>Legal_Advocacy_Matter__c</tab>
-        <visibility>DefaultOn</visibility>
-    </tabVisibilities>
-    <tabVisibilities>
-        <tab>Plan_Protocol__c</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>
@@ -5560,10 +5280,6 @@
     <tabVisibilities>
         <tab>Treatment_Plan__c</tab>
         <visibility>DefaultOff</visibility>
-    </tabVisibilities>
-    <tabVisibilities>
-        <tab>Treatment_Session__c</tab>
-        <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>
         <tab>standard-Contact</tab>

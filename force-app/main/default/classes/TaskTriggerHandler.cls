@@ -11,7 +11,7 @@ public with sharing class TaskTriggerHandler {
     public static void afterInsertHandler(List<Task> newRecords){
         checkBehaviorMedication(newRecords, null);
     }
-
+  
     public static void handleAssignDaybackResources(Task[] taskList){
         Map<Id, Task[]> animalToTaskMap = new Map<Id, Task[]>();
         Id[] taskRTIds = getRTIds();

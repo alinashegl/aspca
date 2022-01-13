@@ -42,14 +42,10 @@ try {
         inputs.calendarOrder = [
           'Beh Med Check Tasks',
           'Beh Treatment Tasks',
+          'Board And Train',
+          'Evaluation',
           'Foster Follow Up Tasks', 
-          'Playgroup Tasks', 
-          'Treatment Tasks', 
-          'Beh Med Check Dogs (Read Only)',
-          'Beh Treatment Dogs (Read Only)',
-          'Foster Follow Up Dogs (Read Only)', 
-          'Playgroup Dogs (Read Only)', 
-          'Treatment Dogs (Read Only)' ,
+          'Playgroup Tasks',
           'Procedures (Read Only)',
           'Vaccines (Read Only)'
         ];

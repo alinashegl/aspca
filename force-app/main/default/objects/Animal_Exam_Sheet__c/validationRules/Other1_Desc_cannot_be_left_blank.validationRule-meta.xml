@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Other1_Desc_cannot_be_left_blank</fullName>
+    <active>true</active>
+    <description>If &quot;Other1&quot; is checked, &quot;Other1 Desc&quot; must not be left blank</description>
+    <errorConditionFormula>Other1__c  = true  &amp;&amp;  ISBLANK( Other1_Desc__c )</errorConditionFormula>
+    <errorMessage>Other1 Description cannot be left blank if &apos;Other1&apos; is checked</errorMessage>
+</ValidationRule>
