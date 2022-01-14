@@ -91,6 +91,10 @@ export default class TreatmentToDoSection extends NavigationMixin(LightningEleme
         return this.isExpanded || FORM_FACTOR === 'Large';
     }
 
+    get treatmentBundleName(){
+        return this.animalTreatment.AssignedTreatmentBundleId__r != undefined ? this.animalTreatment.AssignedTreatmentBundleId__r.Name : null;
+    }
+
     get customLookupFields(){
         return ['Name'];
     }
