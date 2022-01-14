@@ -615,6 +615,9 @@
                 tabAttributeMap.pdi2 = 'puppyDogInteractionPart2';
                 tabAttributeMap.pdi3 = 'puppyDogInteractionPart2';
                 let tabsAttributeMap = cmp.get("v.tabsAttributeMap");
+                if(!tabsAttributeMap){
+                    tabsAttributeMap = {};
+                }
                 let allTabsAttributeMap = Object.assign(tabsAttributeMap, tabAttributeMap);
                 cmp.set("v.tabsAttributeMap", allTabsAttributeMap);
                 cmp.set("v.spinner", false);
