@@ -41,7 +41,7 @@ public with sharing class ScheduleAnimalBRCMRC {
             Status = 'Not Started',
             WhoId = animal.Behavior_Case_Worker__c != null ? animal.Behavior_Case_Worker__c : genericCon.Id,
             Subject = subjectPrefix+' Accepted follow up for: ' + animal.Animal_Name_Id__c,
-            Assigned_Resources__c = animal.Behavior_Case_Worker__r.Is_Generic_Contact__c == false ? animal.Behavior_Case_Worker__r.Name : null,
+            //Assigned_Resources__c = animal.Behavior_Case_Worker__r.Is_Generic_Contact__c == false ? animal.Behavior_Case_Worker__r.Name : null,
             Species__c = 'Dog'
         );
         system.debug(animal.id+'-'+newTask);
