@@ -127,7 +127,6 @@ public with sharing class AutoScheduleTasksUtil {
         if(animal.Animal_Name_Id__c != null){
             resourceList.add(animal.Animal_Name_Id__c);
         }
-        resourceList.add(animal.Behavior_Case_Worker__r != null ? animal.Behavior_Case_Worker__r.Name : NO_CONTACT_RESOURCE);
-        return string.join(resourceList, ';');
+        resourceList.add(animal.Behavior_Case_Worker__r != null ? animal.Behavior_Case_Worker__r.Name.replace('/',' ') : NO_CONTACT_RESOURCE);        return string.join(resourceList, ';');
     }
 }
