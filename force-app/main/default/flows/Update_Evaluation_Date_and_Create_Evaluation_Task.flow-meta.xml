@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionCalls>
-        <name>Add_Days_to_Intake_Date</name>
-        <label>Add Days to Intake Date</label>
-        <locationX>176</locationX>
-        <locationY>335</locationY>
+        <name>BRC_MRC_Reminders</name>
+        <label>BRC/MRC Reminders</label>
+        <locationX>50</locationX>
+        <locationY>1151</locationY>
         <actionName>DateTimeUtility</actionName>
         <actionType>apex</actionType>
         <connector>
-            <targetReference>Update_Evaluation_Date</targetReference>
+            <targetReference>Assign_BRC_MRC_1st_Reminder</targetReference>
         </connector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
@@ -20,25 +20,757 @@
         <inputParameters>
             <name>days</name>
             <value>
-                <numberValue>4.0</numberValue>
+                <numberValue>14.0</numberValue>
             </value>
         </inputParameters>
         <inputParameters>
             <name>requestType</name>
             <value>
-                <stringValue>DateTime</stringValue>
+                <stringValue>datetime</stringValue>
             </value>
         </inputParameters>
         <outputParameters>
-            <assignToReference>EvaluationDate</assignToReference>
+            <assignToReference>ReminderDate</assignToReference>
+            <name>resultDate</name>
+        </outputParameters>
+    </actionCalls>
+    <actionCalls>
+        <name>BRC_Reminders</name>
+        <label>BRC Reminders</label>
+        <locationX>314</locationX>
+        <locationY>1151</locationY>
+        <actionName>DateTimeUtility</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>Assign_BRC_1st_Reminder</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>dateTimeString</name>
+            <value>
+                <elementReference>$Record.Intake_Date_Time__c</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>days</name>
+            <value>
+                <numberValue>14.0</numberValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>requestType</name>
+            <value>
+                <stringValue>datetime</stringValue>
+            </value>
+        </inputParameters>
+        <outputParameters>
+            <assignToReference>ReminderDate</assignToReference>
+            <name>resultDate</name>
+        </outputParameters>
+    </actionCalls>
+    <actionCalls>
+        <name>MRC_Reminders</name>
+        <label>MRC Reminders</label>
+        <locationX>578</locationX>
+        <locationY>1151</locationY>
+        <actionName>DateTimeUtility</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>Assign_MRC_1st_Reminder</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>dateTimeString</name>
+            <value>
+                <elementReference>$Record.Intake_Date_Time__c</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>days</name>
+            <value>
+                <numberValue>14.0</numberValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>requestType</name>
+            <value>
+                <stringValue>datetime</stringValue>
+            </value>
+        </inputParameters>
+        <outputParameters>
+            <assignToReference>ReminderDate</assignToReference>
             <name>resultDate</name>
         </outputParameters>
     </actionCalls>
     <apiVersion>53.0</apiVersion>
+    <assignments>
+        <name>Assign_BRC_1st_Reminder</name>
+        <label>Assign BRC 1st Reminder</label>
+        <locationX>314</locationX>
+        <locationY>1271</locationY>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.ActivityDate</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>ReminderDate</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.Animal__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.Description</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>BRCFollowupDescription</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.Priority</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Normal</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.RecordTypeId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>BRC_MRC_RecordtypeId</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.Species__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Dog</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.Status</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Not Started</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.Subject</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>BRCFollowupDescription</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.WhatId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.WhoId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Behavior_Case_Worker__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Assign_Tasks_to_List_0</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_BRC_2nd_Reminder</name>
+        <label>Assign BRC 2nd Reminder</label>
+        <locationX>314</locationX>
+        <locationY>1511</locationY>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.ActivityDate</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>SecondReminderDate</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.Animal__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.Description</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>BRCFollowupDescription</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.Priority</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Normal</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.RecordTypeId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>BRC_MRC_RecordtypeId</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.Species__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Dog</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.Status</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Not Started</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.Subject</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>BRCFollowupDescription</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.WhatId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.WhoId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Behavior_Case_Worker__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Assign_Tasks_to_List</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_BRC_MRC_1st_Reminder</name>
+        <label>Assign BRC/MRC 1st Reminder</label>
+        <locationX>50</locationX>
+        <locationY>1271</locationY>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.ActivityDate</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>ReminderDate</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.Animal__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.Description</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>BRCMRCFollowupDescription</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.Priority</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Normal</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.RecordTypeId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>BRC_MRC_RecordtypeId</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.Species__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Dog</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.Status</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Not Started</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.Subject</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>BRCMRCFollowupDescription</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.WhatId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.WhoId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Behavior_Case_Worker__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Assign_Tasks_to_List_0_0_0</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_BRC_MRC_2nd_Reminder_0</name>
+        <label>Assign BRC/MRC 2nd Reminder</label>
+        <locationX>50</locationX>
+        <locationY>1511</locationY>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.ActivityDate</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>SecondReminderDate</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.Animal__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.Description</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>BRCMRCFollowupDescription</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.Priority</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Normal</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.RecordTypeId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>BRC_MRC_RecordtypeId</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.Species__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Dog</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.Status</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Not Started</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.Subject</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>BRCMRCFollowupDescription</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.WhatId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.WhoId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Behavior_Case_Worker__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Assign_Tasks_to_List</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_MRC_1st_Reminder</name>
+        <label>Assign MRC 1st Reminder</label>
+        <locationX>578</locationX>
+        <locationY>1271</locationY>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.ActivityDate</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>ReminderDate</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.Animal__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.Description</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>MRCFollowupDescription</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.Priority</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Normal</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.RecordTypeId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>BRC_MRC_RecordtypeId</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.Species__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Dog</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.Status</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Not Started</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.Subject</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>MRCFollowupDescription</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.WhatId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.WhoId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Behavior_Case_Worker__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Assign_Tasks_to_List_0_0</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_MRC_2nd_Reminder</name>
+        <label>Assign MRC 2nd Reminder</label>
+        <locationX>578</locationX>
+        <locationY>1511</locationY>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.ActivityDate</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>SecondReminderDate</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.Animal__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.Description</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>MRCFollowupDescription</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.Priority</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Normal</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.RecordTypeId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>BRC_MRC_RecordtypeId</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.Species__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Dog</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.Status</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Not Started</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.Subject</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>MRCFollowupDescription</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.WhatId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varTaskRecord.WhoId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Behavior_Case_Worker__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Assign_Tasks_to_List</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_Tasks_to_List</name>
+        <label>Assign Tasks to List</label>
+        <locationX>446</locationX>
+        <locationY>1727</locationY>
+        <assignmentItems>
+            <assignToReference>varTaskList</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>varTaskRecord</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Create_BRC_MRC_FollowUp_tasks</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_Tasks_to_List_0</name>
+        <label>Assign Tasks to List</label>
+        <locationX>314</locationX>
+        <locationY>1391</locationY>
+        <assignmentItems>
+            <assignToReference>varTaskList</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>varTaskRecord</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Assign_BRC_2nd_Reminder</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_Tasks_to_List_0_0</name>
+        <label>Assign Tasks to List</label>
+        <locationX>578</locationX>
+        <locationY>1391</locationY>
+        <assignmentItems>
+            <assignToReference>varTaskList</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>varTaskRecord</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Assign_MRC_2nd_Reminder</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_Tasks_to_List_0_0_0</name>
+        <label>Assign Tasks to List</label>
+        <locationX>50</locationX>
+        <locationY>1391</locationY>
+        <assignmentItems>
+            <assignToReference>varTaskList</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>varTaskRecord</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Assign_BRC_MRC_2nd_Reminder_0</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <name>BRC_MRC_Candidate_Check</name>
+        <label>BRC/MRC Candidate Check</label>
+        <locationX>446</locationX>
+        <locationY>1031</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>BRC_MRC_Candidate</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.BRC_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>BRC Candidate</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.MRC_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>MRC Candidate</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>BRC_MRC_Reminders</targetReference>
+            </connector>
+            <label>BRC/MRC Candidate</label>
+        </rules>
+        <rules>
+            <name>BRC_Candidate</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.BRC_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>BRC Candidate</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>BRC_Reminders</targetReference>
+            </connector>
+            <label>BRC Candidate</label>
+        </rules>
+        <rules>
+            <name>MRC_Candidate</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.MRC_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>MRC Candidate</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>MRC_Reminders</targetReference>
+            </connector>
+            <label>MRC Candidate</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Is_Animal_New</name>
+        <label>Is Animal New</label>
+        <locationX>446</locationX>
+        <locationY>335</locationY>
+        <defaultConnector>
+            <targetReference>Get_Task_MRC_MRC_Followup_Record_Type</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Evaluation_Due_Date</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Current_Recent_Shelter_Location__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>CARE</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Current_Recent_Shelter_Location__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>ARC</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Populate_Evaluation_Due_Date</targetReference>
+            </connector>
+            <label>Evaluation Due Date</label>
+        </rules>
+    </decisions>
+    <formulas>
+        <name>BRCFollowupDescription</name>
+        <dataType>String</dataType>
+        <expression>&quot;BRC Candidate Follow up for: &quot;+{!$Record.Animal_Name_Id__c}</expression>
+    </formulas>
+    <formulas>
+        <name>BRCMRCFollowupDescription</name>
+        <dataType>String</dataType>
+        <expression>&quot;BRC/MRC Candidate Follow up for: &quot;+{!$Record.Animal_Name_Id__c}</expression>
+    </formulas>
     <formulas>
         <name>EvaluationDescription</name>
         <dataType>String</dataType>
         <expression>&quot;Evaluation Due for: &quot;+{!$Record.Animal_Name_Id__c} +&quot; (&quot;+{!$Record.Current_Recent_Shelter_Location__c}+&quot;)&quot;</expression>
+    </formulas>
+    <formulas>
+        <name>EvaluationDueDate</name>
+        <dataType>Date</dataType>
+        <expression>TODAY() + 4</expression>
+    </formulas>
+    <formulas>
+        <name>MRC2ndReminderDate</name>
+        <dataType>Date</dataType>
+        <expression>{!ReminderDate} + 7</expression>
+    </formulas>
+    <formulas>
+        <name>MRCFollowupDescription</name>
+        <dataType>String</dataType>
+        <expression>&quot;MRC Candidate Follow up for: &quot;+{!$Record.Animal_Name_Id__c}</expression>
+    </formulas>
+    <formulas>
+        <name>NewAnimal</name>
+        <dataType>Boolean</dataType>
+        <expression>ISNEW()</expression>
+    </formulas>
+    <formulas>
+        <name>SecondReminderDate</name>
+        <dataType>Date</dataType>
+        <expression>{!ReminderDate} + 7</expression>
     </formulas>
     <interviewLabel>Update Evaluation Date and Create Evaluation Task {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Update Evaluation Date and Create Evaluation Task</label>
@@ -62,14 +794,24 @@
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
     <recordCreates>
-        <name>Create_Evaluation_Task</name>
+        <name>Create_BRC_MRC_FollowUp_tasks</name>
+        <label>Create BRC/MRC FollowUp tasks</label>
+        <locationX>446</locationX>
+        <locationY>1847</locationY>
+        <inputReference>varTaskList</inputReference>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Evaluation_Task_0</name>
         <label>Create Evaluation Task</label>
-        <locationX>176</locationX>
+        <locationX>314</locationX>
         <locationY>695</locationY>
+        <connector>
+            <targetReference>Get_Task_MRC_MRC_Followup_Record_Type</targetReference>
+        </connector>
         <inputAssignments>
             <field>ActivityDate</field>
             <value>
-                <elementReference>EvaluationDate</elementReference>
+                <elementReference>EvaluationDueDate</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -130,13 +872,13 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <recordLookups>
-        <name>Get_Task_Evaluation_RecordType</name>
+        <name>Get_Task_Evaluation_RecordType_0</name>
         <label>Get Task Evaluation RecordType</label>
-        <locationX>176</locationX>
+        <locationX>314</locationX>
         <locationY>575</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Create_Evaluation_Task</targetReference>
+            <targetReference>Create_Evaluation_Task_0</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -152,48 +894,63 @@
             <field>Id</field>
         </outputAssignments>
     </recordLookups>
+    <recordLookups>
+        <name>Get_Task_MRC_MRC_Followup_Record_Type</name>
+        <label>Get Task BRC/MRC Followup RecordType</label>
+        <locationX>446</locationX>
+        <locationY>911</locationY>
+        <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>BRC_MRC_Candidate_Check</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>MRC_BRC_Follow_UP</stringValue>
+            </value>
+        </filters>
+        <object>RecordType</object>
+        <outputAssignments>
+            <assignToReference>BRC_MRC_RecordtypeId</assignToReference>
+            <field>Id</field>
+        </outputAssignments>
+    </recordLookups>
     <recordUpdates>
-        <name>Update_Evaluation_Date</name>
-        <label>Update Evaluation Date</label>
-        <locationX>176</locationX>
+        <name>Populate_Evaluation_Due_Date</name>
+        <label>Populate Evaluation Due Date</label>
+        <locationX>314</locationX>
         <locationY>455</locationY>
         <connector>
-            <targetReference>Get_Task_Evaluation_RecordType</targetReference>
+            <targetReference>Get_Task_Evaluation_RecordType_0</targetReference>
         </connector>
         <inputAssignments>
-            <field>Evaluation_Date__c</field>
+            <field>Evaluation_Due_Date__c</field>
             <value>
-                <elementReference>EvaluationDate</elementReference>
+                <elementReference>EvaluationDueDate</elementReference>
             </value>
         </inputAssignments>
         <inputReference>$Record</inputReference>
     </recordUpdates>
     <start>
-        <locationX>50</locationX>
+        <locationX>320</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>Add_Days_to_Intake_Date</targetReference>
+            <targetReference>Is_Animal_New</targetReference>
         </connector>
-        <filterLogic>1 OR 2</filterLogic>
-        <filters>
-            <field>Current_Recent_Shelter_Location__c</field>
-            <operator>EqualTo</operator>
-            <value>
-                <stringValue>ARC</stringValue>
-            </value>
-        </filters>
-        <filters>
-            <field>Current_Recent_Shelter_Location__c</field>
-            <operator>EqualTo</operator>
-            <value>
-                <stringValue>CARE</stringValue>
-            </value>
-        </filters>
         <object>Animal__c</object>
-        <recordTriggerType>Create</recordTriggerType>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
         <triggerType>RecordAfterSave</triggerType>
     </start>
     <status>Active</status>
+    <variables>
+        <name>BRC_MRC_RecordtypeId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
     <variables>
         <name>EvaluationDate</name>
         <dataType>Date</dataType>
@@ -202,10 +959,33 @@
         <isOutput>true</isOutput>
     </variables>
     <variables>
+        <name>ReminderDate</name>
+        <dataType>Date</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
         <name>TaskEvaluationRecordTypeId</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>true</isInput>
         <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>varTaskList</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Task</objectType>
+    </variables>
+    <variables>
+        <name>varTaskRecord</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Task</objectType>
     </variables>
 </Flow>
