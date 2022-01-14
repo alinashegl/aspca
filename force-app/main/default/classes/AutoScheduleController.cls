@@ -6,7 +6,11 @@ public with sharing class AutoScheduleController {
         tasksToInsert.addAll(ScheduleAnimalFoster.scheduleFollowUps());
         tasksToInsert.addAll(ScheduleAnimalMedCheck.scheduleMedCheck());
         tasksToInsert.addAll(ScheduleBoardAndTrainTask.scheduleFollowUps());
-        
+        tasksToInsert.addAll(ScheduleAnimalBRCMRC.scheduleBRCMRCTasks());
+
+        //update existing BRCMRC tasks
+        ScheduleAnimalBRCMRC.completeBRCMRCTasks();
+
         insert tasksToInsert;
     }
 }
