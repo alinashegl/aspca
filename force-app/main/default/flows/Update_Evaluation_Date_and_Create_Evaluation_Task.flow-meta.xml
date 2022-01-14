@@ -126,7 +126,7 @@
             <assignToReference>varTaskRecord.Description</assignToReference>
             <operator>Assign</operator>
             <value>
-                <stringValue>BRC candidate follow up needed</stringValue>
+                <elementReference>BRCFollowupDescription</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -161,7 +161,7 @@
             <assignToReference>varTaskRecord.Subject</assignToReference>
             <operator>Assign</operator>
             <value>
-                <stringValue>BRC Candidate Follow Up</stringValue>
+                <elementReference>BRCFollowupDescription</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -205,7 +205,7 @@
             <assignToReference>varTaskRecord.Description</assignToReference>
             <operator>Assign</operator>
             <value>
-                <stringValue>BRC candidate follow up needed</stringValue>
+                <elementReference>BRCFollowupDescription</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -240,7 +240,7 @@
             <assignToReference>varTaskRecord.Subject</assignToReference>
             <operator>Assign</operator>
             <value>
-                <stringValue>BRC Candidate Follow Up</stringValue>
+                <elementReference>BRCFollowupDescription</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -284,7 +284,7 @@
             <assignToReference>varTaskRecord.Description</assignToReference>
             <operator>Assign</operator>
             <value>
-                <stringValue>BRC/MRC candidate follow up needed</stringValue>
+                <elementReference>BRCMRCFollowupDescription</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -319,7 +319,7 @@
             <assignToReference>varTaskRecord.Subject</assignToReference>
             <operator>Assign</operator>
             <value>
-                <stringValue>BRC/MRC Candidate Follow Up</stringValue>
+                <elementReference>BRCMRCFollowupDescription</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -363,7 +363,7 @@
             <assignToReference>varTaskRecord.Description</assignToReference>
             <operator>Assign</operator>
             <value>
-                <stringValue>BRC/MRC candidate follow up needed</stringValue>
+                <elementReference>BRCMRCFollowupDescription</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -398,7 +398,7 @@
             <assignToReference>varTaskRecord.Subject</assignToReference>
             <operator>Assign</operator>
             <value>
-                <stringValue>BRC/MRC Candidate Follow Up</stringValue>
+                <elementReference>BRCMRCFollowupDescription</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -442,7 +442,7 @@
             <assignToReference>varTaskRecord.Description</assignToReference>
             <operator>Assign</operator>
             <value>
-                <stringValue>MRC candidate follow up needed</stringValue>
+                <elementReference>MRCFollowupDescription</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -477,7 +477,7 @@
             <assignToReference>varTaskRecord.Subject</assignToReference>
             <operator>Assign</operator>
             <value>
-                <stringValue>MRC Candidate Follow Up</stringValue>
+                <elementReference>MRCFollowupDescription</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -521,7 +521,7 @@
             <assignToReference>varTaskRecord.Description</assignToReference>
             <operator>Assign</operator>
             <value>
-                <stringValue>MRC candidate follow up needed</stringValue>
+                <elementReference>MRCFollowupDescription</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -556,7 +556,7 @@
             <assignToReference>varTaskRecord.Subject</assignToReference>
             <operator>Assign</operator>
             <value>
-                <stringValue>MRC Candidate Follow Up</stringValue>
+                <elementReference>MRCFollowupDescription</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -733,6 +733,16 @@
         </rules>
     </decisions>
     <formulas>
+        <name>BRCFollowupDescription</name>
+        <dataType>String</dataType>
+        <expression>&quot;BRC Candidate Follow up for: &quot;+{!$Record.Animal_Name_Id__c}</expression>
+    </formulas>
+    <formulas>
+        <name>BRCMRCFollowupDescription</name>
+        <dataType>String</dataType>
+        <expression>&quot;BRC/MRC Candidate Follow up for: &quot;+{!$Record.Animal_Name_Id__c}</expression>
+    </formulas>
+    <formulas>
         <name>EvaluationDescription</name>
         <dataType>String</dataType>
         <expression>&quot;Evaluation Due for: &quot;+{!$Record.Animal_Name_Id__c} +&quot; (&quot;+{!$Record.Current_Recent_Shelter_Location__c}+&quot;)&quot;</expression>
@@ -746,6 +756,11 @@
         <name>MRC2ndReminderDate</name>
         <dataType>Date</dataType>
         <expression>{!ReminderDate} + 7</expression>
+    </formulas>
+    <formulas>
+        <name>MRCFollowupDescription</name>
+        <dataType>String</dataType>
+        <expression>&quot;MRC Candidate Follow up for: &quot;+{!$Record.Animal_Name_Id__c}</expression>
     </formulas>
     <formulas>
         <name>NewAnimal</name>
