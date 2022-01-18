@@ -1,118 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
-    <actionCalls>
-        <name>BRC_MRC_Reminders</name>
-        <label>BRC/MRC Reminders</label>
-        <locationX>50</locationX>
-        <locationY>1151</locationY>
-        <actionName>DateTimeUtility</actionName>
-        <actionType>apex</actionType>
-        <connector>
-            <targetReference>Assign_BRC_MRC_1st_Reminder</targetReference>
-        </connector>
-        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
-        <inputParameters>
-            <name>dateTimeString</name>
-            <value>
-                <elementReference>$Record.Intake_Date_Time__c</elementReference>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>days</name>
-            <value>
-                <numberValue>14.0</numberValue>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>requestType</name>
-            <value>
-                <stringValue>datetime</stringValue>
-            </value>
-        </inputParameters>
-        <outputParameters>
-            <assignToReference>ReminderDate</assignToReference>
-            <name>resultDate</name>
-        </outputParameters>
-    </actionCalls>
-    <actionCalls>
-        <name>BRC_Reminders</name>
-        <label>BRC Reminders</label>
-        <locationX>314</locationX>
-        <locationY>1151</locationY>
-        <actionName>DateTimeUtility</actionName>
-        <actionType>apex</actionType>
-        <connector>
-            <targetReference>Assign_BRC_1st_Reminder</targetReference>
-        </connector>
-        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
-        <inputParameters>
-            <name>dateTimeString</name>
-            <value>
-                <elementReference>$Record.Intake_Date_Time__c</elementReference>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>days</name>
-            <value>
-                <numberValue>14.0</numberValue>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>requestType</name>
-            <value>
-                <stringValue>datetime</stringValue>
-            </value>
-        </inputParameters>
-        <outputParameters>
-            <assignToReference>ReminderDate</assignToReference>
-            <name>resultDate</name>
-        </outputParameters>
-    </actionCalls>
-    <actionCalls>
-        <name>MRC_Reminders</name>
-        <label>MRC Reminders</label>
-        <locationX>578</locationX>
-        <locationY>1151</locationY>
-        <actionName>DateTimeUtility</actionName>
-        <actionType>apex</actionType>
-        <connector>
-            <targetReference>Assign_MRC_1st_Reminder</targetReference>
-        </connector>
-        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
-        <inputParameters>
-            <name>dateTimeString</name>
-            <value>
-                <elementReference>$Record.Intake_Date_Time__c</elementReference>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>days</name>
-            <value>
-                <numberValue>14.0</numberValue>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>requestType</name>
-            <value>
-                <stringValue>datetime</stringValue>
-            </value>
-        </inputParameters>
-        <outputParameters>
-            <assignToReference>ReminderDate</assignToReference>
-            <name>resultDate</name>
-        </outputParameters>
-    </actionCalls>
     <apiVersion>53.0</apiVersion>
     <assignments>
         <name>Assign_BRC_1st_Reminder</name>
         <label>Assign BRC 1st Reminder</label>
         <locationX>314</locationX>
-        <locationY>1271</locationY>
+        <locationY>1151</locationY>
         <assignmentItems>
             <assignToReference>varTaskRecord.ActivityDate</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>ReminderDate</elementReference>
+                <elementReference>TwoWeekReminderDate</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -186,12 +84,12 @@
         <name>Assign_BRC_2nd_Reminder</name>
         <label>Assign BRC 2nd Reminder</label>
         <locationX>314</locationX>
-        <locationY>1511</locationY>
+        <locationY>1391</locationY>
         <assignmentItems>
             <assignToReference>varTaskRecord.ActivityDate</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>SecondReminderDate</elementReference>
+                <elementReference>ThirdWeekReminderDate</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -265,12 +163,12 @@
         <name>Assign_BRC_MRC_1st_Reminder</name>
         <label>Assign BRC/MRC 1st Reminder</label>
         <locationX>50</locationX>
-        <locationY>1271</locationY>
+        <locationY>1151</locationY>
         <assignmentItems>
             <assignToReference>varTaskRecord.ActivityDate</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>ReminderDate</elementReference>
+                <elementReference>TwoWeekReminderDate</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -344,12 +242,12 @@
         <name>Assign_BRC_MRC_2nd_Reminder_0</name>
         <label>Assign BRC/MRC 2nd Reminder</label>
         <locationX>50</locationX>
-        <locationY>1511</locationY>
+        <locationY>1391</locationY>
         <assignmentItems>
             <assignToReference>varTaskRecord.ActivityDate</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>SecondReminderDate</elementReference>
+                <elementReference>ThirdWeekReminderDate</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -423,12 +321,12 @@
         <name>Assign_MRC_1st_Reminder</name>
         <label>Assign MRC 1st Reminder</label>
         <locationX>578</locationX>
-        <locationY>1271</locationY>
+        <locationY>1151</locationY>
         <assignmentItems>
             <assignToReference>varTaskRecord.ActivityDate</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>ReminderDate</elementReference>
+                <elementReference>TwoWeekReminderDate</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -502,12 +400,12 @@
         <name>Assign_MRC_2nd_Reminder</name>
         <label>Assign MRC 2nd Reminder</label>
         <locationX>578</locationX>
-        <locationY>1511</locationY>
+        <locationY>1391</locationY>
         <assignmentItems>
             <assignToReference>varTaskRecord.ActivityDate</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>SecondReminderDate</elementReference>
+                <elementReference>ThirdWeekReminderDate</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -581,7 +479,7 @@
         <name>Assign_Tasks_to_List</name>
         <label>Assign Tasks to List</label>
         <locationX>446</locationX>
-        <locationY>1727</locationY>
+        <locationY>1607</locationY>
         <assignmentItems>
             <assignToReference>varTaskList</assignToReference>
             <operator>Add</operator>
@@ -597,7 +495,7 @@
         <name>Assign_Tasks_to_List_0</name>
         <label>Assign Tasks to List</label>
         <locationX>314</locationX>
-        <locationY>1391</locationY>
+        <locationY>1271</locationY>
         <assignmentItems>
             <assignToReference>varTaskList</assignToReference>
             <operator>Add</operator>
@@ -613,7 +511,7 @@
         <name>Assign_Tasks_to_List_0_0</name>
         <label>Assign Tasks to List</label>
         <locationX>578</locationX>
-        <locationY>1391</locationY>
+        <locationY>1271</locationY>
         <assignmentItems>
             <assignToReference>varTaskList</assignToReference>
             <operator>Add</operator>
@@ -629,7 +527,7 @@
         <name>Assign_Tasks_to_List_0_0_0</name>
         <label>Assign Tasks to List</label>
         <locationX>50</locationX>
-        <locationY>1391</locationY>
+        <locationY>1271</locationY>
         <assignmentItems>
             <assignToReference>varTaskList</assignToReference>
             <operator>Add</operator>
@@ -665,7 +563,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>BRC_MRC_Reminders</targetReference>
+                <targetReference>Assign_BRC_MRC_1st_Reminder</targetReference>
             </connector>
             <label>BRC/MRC Candidate</label>
         </rules>
@@ -680,7 +578,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>BRC_Reminders</targetReference>
+                <targetReference>Assign_BRC_1st_Reminder</targetReference>
             </connector>
             <label>BRC Candidate</label>
         </rules>
@@ -695,7 +593,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>MRC_Reminders</targetReference>
+                <targetReference>Assign_MRC_1st_Reminder</targetReference>
             </connector>
             <label>MRC Candidate</label>
         </rules>
@@ -772,6 +670,16 @@
         <dataType>Date</dataType>
         <expression>{!ReminderDate} + 7</expression>
     </formulas>
+    <formulas>
+        <name>ThirdWeekReminderDate</name>
+        <dataType>Date</dataType>
+        <expression>DATEVALUE({!$Record.Intake_Date_Time__c}) + 21</expression>
+    </formulas>
+    <formulas>
+        <name>TwoWeekReminderDate</name>
+        <dataType>Date</dataType>
+        <expression>DATEVALUE({!$Record.Intake_Date_Time__c}) + 14</expression>
+    </formulas>
     <interviewLabel>Update Evaluation Date and Create Evaluation Task {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Update Evaluation Date and Create Evaluation Task</label>
     <processMetadataValues>
@@ -797,7 +705,7 @@
         <name>Create_BRC_MRC_FollowUp_tasks</name>
         <label>Create BRC/MRC FollowUp tasks</label>
         <locationX>446</locationX>
-        <locationY>1847</locationY>
+        <locationY>1727</locationY>
         <inputReference>varTaskList</inputReference>
     </recordCreates>
     <recordCreates>
