@@ -130,9 +130,9 @@ global with sharing class DaybackRest {
             SELECT Id, Name, ReportsToId, ReportsTo.Name, ReportsTo.User__c, Contact_Type__c, User__c
             FROM Contact 
             WHERE Active__c = true
-            AND User__r.Location__c IN : locationgroup
             AND Is_Generic_Contact__c = false
             AND Contact_Type__c = 'Behavior Case Worker'
+            AND User_Location__c IN: locationGroup
             ORDER BY LastName, FirstName
         ];
     }
@@ -195,8 +195,8 @@ global with sharing class DaybackRest {
 
     private static GenericResource crcGenericResource(){
         GenericResource resource = new GenericResource();
-        resource.id = 'CRC BehaviorMngmt';
-        resource.name = 'CRC BehaviorMngmt';
+        resource.id = 'CRC BehaviorMgmt';
+        resource.name = 'CRC BehaviorMgmt';
         resource.nameSafe = 'crc';
         resource.shortName = 'crc';
         resource.statusSelected = 'default';
@@ -206,8 +206,8 @@ global with sharing class DaybackRest {
 
     private static GenericResource mrcGenericResource(){
         GenericResource resource = new GenericResource();
-        resource.id = 'MRC BehaviorMngmnt';
-        resource.name = 'MRC BehaviorMngmnt';
+        resource.id = 'MRC BehaviorMgmt';
+        resource.name = 'MRC BehaviorMgmt';
         resource.nameSafe = 'mrc';
         resource.shortName = 'mrc';
         resource.statusSelected = 'default';

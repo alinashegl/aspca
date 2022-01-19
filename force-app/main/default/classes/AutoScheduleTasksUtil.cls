@@ -6,6 +6,7 @@ public with sharing class AutoScheduleTasksUtil {
     public static final String BOARD_AND_TRAIN_RECORD_TYPE_NAME = 'Board_And_Train';
     public static final String TREATMENT_TASK_RECORD_TYPE_NAME = 'Treatments';
     public static final String EVALUATION_RECORD_TYPE_NAME = 'Evaluation';
+    public static final String MRC_BRC_FOLLOW_UP_TASK_RECORD_TYPE_NAME = 'MRC_BRC_Follow_UP';
     public static final String NO_CONTACT_RESOURCE = 'unassigned';
     public static final String[] dogPopulations = new String[]{'ARC','CARE','CRC','MRC'};
     public static final String[] taskRecordTypes = new String[]{
@@ -14,9 +15,9 @@ public with sharing class AutoScheduleTasksUtil {
         FOSTER_TASK_RECORD_TYPE_NAME,
         BEHAVIOR_MED_CHECK_TASK_RECORD_TYPE_NAME,
         BOARD_AND_TRAIN_RECORD_TYPE_NAME,
-        EVALUATION_RECORD_TYPE_NAME
+        EVALUATION_RECORD_TYPE_NAME,
+        MRC_BRC_FOLLOW_UP_TASK_RECORD_TYPE_NAME
     };
-
 
     public static Map<String, Contact> genericContactMap {
         get{
@@ -126,7 +127,6 @@ public with sharing class AutoScheduleTasksUtil {
         if(animal.Animal_Name_Id__c != null){
             resourceList.add(animal.Animal_Name_Id__c);
         }
-        resourceList.add(animal.Behavior_Case_Worker__r != null ? animal.Behavior_Case_Worker__r.Name : NO_CONTACT_RESOURCE);
-        return string.join(resourceList, ';');
+        resourceList.add(animal.Behavior_Case_Worker__r != null ? animal.Behavior_Case_Worker__r.Name.replace('/',' ') : NO_CONTACT_RESOURCE);        return string.join(resourceList, ';');
     }
 }

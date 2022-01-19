@@ -615,6 +615,9 @@
                 tabAttributeMap.pdi2 = 'puppyDogInteractionPart2';
                 tabAttributeMap.pdi3 = 'puppyDogInteractionPart2';
                 let tabsAttributeMap = cmp.get("v.tabsAttributeMap");
+                if(!tabsAttributeMap){
+                    tabsAttributeMap = {};
+                }
                 let allTabsAttributeMap = Object.assign(tabsAttributeMap, tabAttributeMap);
                 cmp.set("v.tabsAttributeMap", allTabsAttributeMap);
                 cmp.set("v.spinner", false);
@@ -704,22 +707,24 @@
                     cmp.set('v.tabId', newTabId);
                     break;
                 } else {
-                    let bEval = cmp.get("v.behaviorEvaluation").data.item[0];
-                    let obj = cmp.get("v."+tabsAttributeMap[tabValueArr[i].nextTab]);
-                    obj[0].isSkipped = skippedAttribute.isSkipped;
-                    obj[0].skipField.value = bEval[skippedAttribute.skipField.id];
-                    console.log(obj[0].skipField);
-                    cmp.set("v."+tabsAttributeMap[tabValueArr[i].nextTab], obj);
-                    let behEvalTabFooter = cmp.find("behEvalTabFooter");
-                    let evalparam = {}; 
-                    evalparam.recordId = cmp.get("v.recordId");
-                    evalparam.apiName = obj[0].skipField.id;
-                    evalparam.values = obj[0].skipField.value;
-                    evalparam.methodName = "c.updateEval";
-                    if(!Array.isArray(behEvalTabFooter)){
-                        behEvalTabFooter.updateEvaluation(evalparam);
-                    } else {
-                        behEvalTabFooter[behEvalTabFooter.length-1].updateEvaluation(evalparam);
+                    if(!$A.util.isUndefinedOrNull(cmp.get("v.behaviorEvaluation"))){
+                        let bEval = cmp.get("v.behaviorEvaluation").data.item[0];
+                        let obj = cmp.get("v."+tabsAttributeMap[tabValueArr[i].nextTab]);
+                        obj[0].isSkipped = skippedAttribute.isSkipped;
+                        obj[0].skipField.value = bEval[skippedAttribute.skipField.id];
+                        console.log(obj[0].skipField);
+                        cmp.set("v."+tabsAttributeMap[tabValueArr[i].nextTab], obj);
+                        let behEvalTabFooter = cmp.find("behEvalTabFooter");
+                        let evalparam = {}; 
+                        evalparam.recordId = cmp.get("v.recordId");
+                        evalparam.apiName = obj[0].skipField.id;
+                        evalparam.values = obj[0].skipField.value;
+                        evalparam.methodName = "c.updateEval";
+                        if(!Array.isArray(behEvalTabFooter)){
+                            behEvalTabFooter.updateEvaluation(evalparam);
+                        } else {
+                            behEvalTabFooter[behEvalTabFooter.length-1].updateEvaluation(evalparam);
+                        }
                     }
                 }
             }
