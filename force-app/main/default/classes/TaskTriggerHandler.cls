@@ -11,7 +11,7 @@ public with sharing class TaskTriggerHandler {
     public static void afterInsertHandler(List<Task> newRecords){
         checkBehaviorMedication(newRecords, null);
     }
-  
+
     public static void handleAssignDaybackResources(Task[] taskList){
         Map<Id, Task[]> animalToTaskMap = new Map<Id, Task[]>();
         Id[] taskRTIds = getRTIds();
@@ -136,11 +136,11 @@ public with sharing class TaskTriggerHandler {
         for(Task t : wrapper.taskMapByAnimal.values()){
             System.debug(String.valueOf(t.WhatId)+String.valueOf(t.Medication__c));
             if(!existingTaskMap.containsKey(String.valueOf(t.WhatId)+String.valueOf(t.Medication__c))){
-                DateTime dT = t.CreatedDate;
-                Date createdDate = date.newinstance(dT.year(), dT.month(), dT.day());
+                Date activityDate = t.ActivityDate;
                 List<Integer> dayEntries = new List<Integer>{0, 1, 3};
                     for(Integer i : dayEntries){
-                        Date followupDate = DateTimeUtility.AddBusinessDays(createdDate, i);
+                        Date followupDate = activityDate.addDays(i);
+                        System.debug('followUpDate'+followUpDate);
                         Task newTask = prepTask(t, followupDate, wrapper);
                         if( newTask != null){
                             newTasks.add(newTask);
