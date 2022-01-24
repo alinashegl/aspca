@@ -243,10 +243,29 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldItem>Record.Modify_Schedule__c</fieldItem>
+                <identifier>RecordModify_Schedule_cField1</identifier>
+                <visibilityRule>
+                    <booleanFilter>1 OR 2</booleanFilter>
+                    <criteria>
+                        <leftValue>{!Record.Facility_Outcome__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>Board and Train</rightValue>
+                    </criteria>
+                    <criteria>
+                        <leftValue>{!Record.Facility_Outcome__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>Foster Home</rightValue>
+                    </criteria>
+                </visibilityRule>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
                 <fieldItem>Record.Follow_Up_Days__c</fieldItem>
                 <identifier>RecordFollow_Up_Days_cField1</identifier>
                 <visibilityRule>
-                    <booleanFilter>1 OR 2</booleanFilter>
+                    <booleanFilter>(1 OR 2) AND 3</booleanFilter>
                     <criteria>
                         <leftValue>{!Record.Facility_Outcome__c}</leftValue>
                         <operator>EQUAL</operator>
@@ -256,6 +275,11 @@
                         <leftValue>{!Record.Facility_Outcome__c}</leftValue>
                         <operator>EQUAL</operator>
                         <rightValue>Board and Train</rightValue>
+                    </criteria>
+                    <criteria>
+                        <leftValue>{!Record.Modify_Schedule__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>true</rightValue>
                     </criteria>
                 </visibilityRule>
             </fieldInstance>
@@ -265,7 +289,7 @@
                 <fieldItem>Record.Follow_Up_Frequency__c</fieldItem>
                 <identifier>RecordFollow_Up_Frequency_cField1</identifier>
                 <visibilityRule>
-                    <booleanFilter>1 OR 2</booleanFilter>
+                    <booleanFilter>(1 OR 2) AND 3</booleanFilter>
                     <criteria>
                         <leftValue>{!Record.Facility_Outcome__c}</leftValue>
                         <operator>EQUAL</operator>
@@ -275,6 +299,11 @@
                         <leftValue>{!Record.Facility_Outcome__c}</leftValue>
                         <operator>EQUAL</operator>
                         <rightValue>Board and Train</rightValue>
+                    </criteria>
+                    <criteria>
+                        <leftValue>{!Record.Modify_Schedule__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>true</rightValue>
                     </criteria>
                 </visibilityRule>
             </fieldInstance>
