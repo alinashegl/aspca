@@ -1,6 +1,0 @@
-deploy
-sfdx force:source:deploy -x manifest/package.xml
-
-run this command to run the descructive changes
-sfdx force:source:deploy --manifest manifest/package.xml --predestructivechanges manifest/destructiveChangesPre.xml
-sfdx force:source:deploy --manifest manifest/package.xml --postdestructivechanges manifest/destructiveChangesPost.xml

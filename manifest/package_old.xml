@@ -1,58 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
-        <members>Animal__c.Case_Type1__c</members>
-        <members>Animal__c.Current_Playgroup_Summary_Notes__c</members>
-        <members>Animal__c.Shelter_Location2__c</members>
-        <members>Playgroup_Session__c.Playgroup_Date__c</members>
-        <members>Playgroup_Session__c.Population__c</members>
-        <members>Animal_playgroup__c.Common_Playgroup_Notes__c</members>
+        <members>*</members>
+        <name>Report</name>
+    </types>
+    <types>
+        <members>*</members>
         <name>CustomField</name>
     </types>
     <types>
-        <members>Behavior_Team</members>
+        <members>*</members>
         <name>PermissionSet</name>
     </types>
     <types>
-        <members>PlaygroupToDoPdf</members>
+        <members>*</members>
         <name>ApexPage</name>
     </types>
     <types>
-        <members>PlaygroupToDoListController</members>
-        <members>PlaygroupToDoPdfController</members>
-        <members>TreatmentSessionLWCController</members>
-        <name>ApexClass</name>
-    </types>
-    <types>
-        <members>Animal_Playgroup_Record_Page</members>
-        <members>Dog_Database_Animal_Page_Layout</members>
-        <name>FlexiPage</name>
-    </types>
-    <types>
-        <members>playgroupToDoIndicators</members>
-        <members>playgroupToDoList</members>
-        <members>playgroupToDoSection</members>
-        <members>treatmentModifySessionProtocol</members>
-        <members>playgroupSessionAnimal</members>
-        <members>playgroupSessionContacts</members>
-        <members>customLookup</members>
-        <name>LightningComponentBundle</name>
-    </types>
-    <types>
-        <members>Animal_Playgroup__c-Animal Playgroup Layout</members>
-        <members>Animal__c-Animal Layout %28Behavior%29</members>
-        <members>Play_Pause__c-Play Pause Layout</members>
-        <members>Playgroup_Session__c-Playgroup Session Layout</members>
-        <name>Layout</name>
-    </types>
-    <type>
-        <members>TreatmentToDoPdfStyle</members>
-        <name>staticresources</members>
-    </types>
-<!--
-    <types>
         <members>*</members>
-        <name>Report</name>
+        <name>ApexClass</name>
     </types>
     <types>
         <members>*</members>
@@ -88,7 +54,15 @@
     </types>
     <types>
         <members>*</members>
+        <name>StaticResource</name>
+    </types>
+    <types>
+        <members>*</members>
         <name>QuickAction</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>FlexiPage</name>
     </types>
     <types>
         <members>*</members>
@@ -98,7 +72,11 @@
         <members>*</members>
         <name>CustomTab</name>
     </types>
-        <types>
+    <types>
+        <members>*</members>
+        <name>LightningComponentBundle</name>
+    </types>
+    <types>
         <members>*</members>
         <name>ListView</name>
     </types>
@@ -126,6 +104,9 @@
         <members>*</members>
         <name>CustomLabel</name>
     </types>
--->
-    <version>53.0</version>
+        <types>
+        <members>*</members>
+        <name>Layout</name>
+    </types>
+    <version>52.0</version>
 </Package>
