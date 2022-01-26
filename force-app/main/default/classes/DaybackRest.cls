@@ -44,6 +44,7 @@ global with sharing class DaybackRest {
         return resp;
     }
 
+    @testVisible
     private static GenericResource[] prepGenericResources(){
         GenericResource[] genResources = new GenericResource[0];
         if(userLocation == 'All'){
@@ -137,8 +138,9 @@ global with sharing class DaybackRest {
         ];
     }
 
+    @testVisible
     private static ResourceInfo[] getAnimalList(){
-        ResourceInfo[] conResources = new ResourceInfo[0];
+        ResourceInfo[] animalResources = new ResourceInfo[0];
         for(Animal__c animal :[
                 SELECT Id, Animal_Name_Id__c, Current_Location__c, Current_Recent_Shelter_Location__c 
                 FROM Animal__c 
@@ -154,10 +156,10 @@ global with sharing class DaybackRest {
 
             folderNames.add(animal.Current_Recent_Shelter_Location__c);
 
-            conResources.add(res);
+            animalResources.add(res);
         }
 
-        return conResources;
+        return animalResources;
     }
 
     private static folderInfo[] prepFolderInfos(){

@@ -26,9 +26,7 @@ public with sharing class AutoScheduleTasksUtil {
             }
             return genericContactMap;
         } 
-        set{
-            genericContactMap = getGenericContacts();
-        }
+        set;
     }
 
     public static Map<String, Calendar_Schedule_Config__mdt> getCalendarConfig(String taskType){
