@@ -1,0 +1,171 @@
+<apex:page standardController="Incidents__c"
+           extensions="Behavior_Incident_Report_Controller"
+           renderAs="pdf" applyHtmlTag="false" applyBodyTag="false"
+           showHeader="false" standardStylesheets="false">
+<!--           extensions="Behavior_Incident_Report_Controller"
+-->           
+    
+    <apex:styleSheet value="{!URLFOR($Resource.Behavior_Incident_PDF_Style)}"/>
+<apex:variable var="inc" value="{!incident}" />    
+    <html>
+        <head>
+        </head>
+        <body>
+            <div>
+                <h2>Behavior Incident Report</h2>
+                <h3>To be completed by main person involved in the incident, or his/her supervisor</h3>
+            </div>
+            <table>
+                <tr><td></td></tr>
+                <tr><td></td></tr>
+                <tr>
+                    <td width="25%" align="right"><strong>Animal ID</strong></td>
+                    <td width="25%" align="left">{!inc.Animal__r.Name}</td>
+                    <td width="25%" align="right"><strong>ASPCA Name</strong></td>
+                    <td width="25%" align="left">{!inc.Animal__r.Animal_Name__c}</td>
+                </tr> 
+                <tr><td></td></tr>
+                <tr><td></td></tr>
+                <tr>
+                    <td width="25%" align="right"><strong>Incident ID</strong></td>
+                    <td width="25%" align="left">{!inc.Name}</td>
+                    <td width="25%" align="right"><strong>Incident date/time</strong></td>
+                    <td width="25%" align="left">{!inc.Incident_Date_Time__c}</td>
+                </tr> 
+                <tr><td></td></tr>
+                <tr><td></td></tr>
+                <tr>
+                    <td width="25%" align="right"><strong>Supervisor / Team lead</strong></td>
+                    <td width="25%" align="left"></td>
+                    <td width="25%" align="right"><strong>Report date</strong></td>
+                    <td width="25%" align="left">{!inc.Report_Date__c}</td>
+                </tr>
+                <tr><td></td></tr>
+                <tr><td></td></tr>
+            </table>
+            <table bgcolor="#D3D3D3">
+            <tr><th colspan="2">PLEASE IDENTIFY WHO WAS INVOLVED AND ANY WITNESSES TO THE INCIDENT</th></tr>
+                <tr><td></td></tr>
+                <tr><td></td></tr>
+                <tr>
+                    <td width="50%"><strong>Your name</strong></td>
+                    <td width="50%"><strong>Witnesses</strong></td>
+                </tr>
+                <tr class="one">
+                    <td width="50%">{!inc.Person_Involved__c}</td>
+                    <td width="50%">{!inc.Witnesses__c}</td>
+                </tr>
+                <tr><td></td></tr>
+                <tr><td></td></tr>
+            </table>
+            <table>
+            <tr><th>PLEASE DESCRIBE, IN DETAIL, WHAT OCCURRED OR WHAT YOU SAW</th></tr>
+                <tr><td></td></tr>
+                <tr><td>BE SURE TO INCLUDE ANY INFORMATION ABOUT THE ENVIRONMENT, THE SITUATION, AND PRECEDING EVENTS THAT MAY BE RELEVANT.</td></tr>
+                <tr><td></td></tr>
+                <tr><td></td></tr>
+                <tr width="80%" class="one">
+                    <td>{!inc.Incident_Description__c}</td>
+                </tr>
+                <tr><td></td></tr>
+                <tr><td></td></tr>
+            </table>
+            <table bgcolor="#D3D3D3">
+            <tr><th colspan="4">WHAT BEHAVIORS WERE EXHIBITED BY THE DOG (CHECK ALL THAT APPLY):</th></tr>
+                <tr><td></td></tr>
+                <tr><td></td></tr>
+                <tr>
+                    <td width="5%"></td>
+                    <td width="45%">{!inc.Behaviors_Exhibited_by_the_Dog__c}</td>
+                    <td width="5%"></td>
+                    <td width="45%">{!inc.Behaviors_Exhibited_by_the_Dog__c}</td>
+                </tr>
+                <tr><td></td></tr>
+                <tr><td></td></tr>
+            </table>
+            <table>
+            <tr><th>PLEASE DESCRIBE/IDENTIFY THE SPECIFIC TARGET OF THE DOG'S BEHAVIOR</th></tr>
+                <tr><td></td></tr>
+                <tr><td>(FOR EXAMPLE, WAS THE DOG AIMING FOR ANOTHER DOG, A LEASH, A PIECE OF EQUIPMENT, THE KENNEL, A PERSON'S HAND, A PERSON'S BOOT, ETC.):</td></tr>
+                <tr><td></td></tr>
+                <tr><td></td></tr>
+                <tr width="80%" class="one">
+                    <td>{!inc.Specific_Target_of_Dog_s_Behavior__c}</td>
+                </tr>
+                <tr><td></td></tr>
+                <tr><td></td></tr>
+            </table>
+            <table bgcolor="#D3D3D3">
+            <tr><th colspan="4">IF A BITE OCCURRED, PLEASE DESCRIBE THE TYPE OF BITE:</th></tr>
+                <tr><td></td></tr>
+                <tr><td></td></tr>
+                <tr>
+                    <td width="20%" align="right"></td>
+                    <td width="30%" align="left">{!inc.Type_of_Bite__c}</td>
+                    <td width="25%" align="right">Number of bites</td>
+                    <td width="25%" align="left">{!inc.Number_of_bites__c}</td>
+                </tr>
+                <tr><td></td></tr>
+                <tr><td></td></tr>
+            </table>
+            <table>
+            <tr><th colspan="4">IF A PERSON WAS BITTEN, WAS THE AREA THAT WAS BITTEN COVERED WITH CLOTHING?</th></tr>
+                <tr><td></td></tr>
+                <tr><td></td></tr>
+                <tr>
+                    <td width="10%" align="right"></td>
+                    <td width="10%" align="left">{!inc.Was_Bitten_Area_Covered_with_Clothing__c}</td>
+                    <td width="50%" align="right">IF YES, DESCRIBE CLOTHING WORN AT THE SITE OF THE BITE:</td>
+                    <td width="30%" align="left">{!inc.Clothing_Worn_at_Bite_Site__c}</td>
+                </tr>
+                <tr><td></td></tr>
+                <tr><td></td></tr>
+            </table>
+            <table bgcolor="#D3D3D3">
+            <tr><th colspan="4">DESCRIBE THE DAMAGE DONE BY THE DOG:</th></tr>
+                <tr><td></td></tr>
+                <tr><td></td></tr>
+                <tr>
+                    <td width="15%" align="right"><input type="checkbox" value="{!inc.Damage_Done_by_the_Dog__c}"/></td>
+                    <td width="35%" align="left">{!inc.Damage_Done_by_the_Dog__c}</td>
+                    <td width="15%" align="right"></td>
+                    <td width="35%" align="left">{!inc.Damage_Done_by_the_Dog__c}</td>
+                </tr>
+                <tr width="80%" class="one">
+                    <td colspan="4">{!inc.Other_Damage_Done_by_the_Dog__c}</td>
+                </tr>
+                <tr><td></td></tr>
+                <tr><td></td></tr>
+            </table>
+            <table>
+            <tr><th colspan="2">IF THE DOG DID NOT BITE, DO YOU THINK IT WOULD HAVE DONE SO IF YOU HADN'T TAKEN EVASIVE ACTION OR USED DEFENSIVE HANDING?</th></tr>
+                <tr><td></td></tr>
+                <tr><td></td></tr>
+                <tr>
+                    <td width="15%" align="right"><input type="checkbox" value="{!inc.Damage_Done_by_the_Dog__c}"/></td>
+                    <td>{!inc.If_dog_did_not_bite__c}</td>
+                </tr>
+                <tr>
+                    <td width="15%" align="right"><input type="checkbox" value="{!inc.Damage_Done_by_the_Dog__c}"/></td>
+                    <td width="35%" align="left">{!inc.If_dog_did_not_bite__c}</td>
+                </tr>
+                <tr width="80%" class="one">
+                    <td colspan="2">{!inc.Please_explain_why_you_think_so__c}</td>
+                </tr>
+                <tr><td></td></tr>
+                <tr><td></td></tr>
+             </table>
+            <table bgcolor="#D3D3D3">
+            <tr><th>PLEASE PROVIDE ANY ADDITIONAL COMMENTS YOU MAY HAVE:</th></tr>
+                <tr><td></td></tr>
+                <tr><td></td></tr>
+               <tr width="80%" class="one">
+                    <td>{!inc.Additional_Comments__c}</td>
+                </tr>
+                <tr><td></td></tr>
+                <tr><td></td></tr>
+            </table>
+        </body>
+    </html>
+
+</apex:page>
