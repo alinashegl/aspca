@@ -15,13 +15,19 @@ public with sharing class ScheduleAnimalMedCheck {
 
     @testVisible
     private static Date calculateTaskDate(Task task){
+        //Need to know the date of the last day of the week (ASPCA week ends on Mondays)
         Date lastDayOfWeek = AutoScheduleTasksUtil.dayOfWeekMap().get('Monday');
-
+        //Need the start date of recurring tasks, or the due date of a single task
         Date tempDate = task.IsRecurrence == True ? task.RecurrenceStartDateOnly : task.ActivityDate;
+        //Now we need to get the date of the first day of the week the temp date is in
         Date tempDateWeekStart = tempDate.toStartOfWeek();
+        //How many days separte the week start and today?
         Integer daysBetween = tempDateWeekStart.daysBetween(Date.today());
+        //From the number of days that separate week start and today and adding one, we can get the day of the week the new task should be scheduled for
         String dayOfWeek = checkDayofWeek(daysBetween + 1);
+        //now convert the day of the week for the next task to a date
         Date nextFollowUpDate = AutoScheduleTasksUtil.dayOfWeekMap().get(dayOfWeek);
+        //if the date is greater than the last day of this week we don't need to create one for this week so we return a null value
         return nextFollowUpDate <= lastDayOfWeek ? nextFollowUpDate : null;
     }
 

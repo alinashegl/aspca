@@ -56,6 +56,11 @@ public with sharing class ScheduleBoardAndTrainTask {
     }
 
     public static Boolean needTasksThisWeek(Animal__c animal, Map<Id, Task> taskMap){
+        /*
+         * depending on the schedule we may not need to create a task for this week.
+         * We need to compare the date of the last task and frequency set up.  i.e. if we only need a task every other week then we
+         * only create one for this week if the last one was at least 7 days ago (see translateFrequency()).
+        */
         Boolean needsTasks = true;
         Facility_Outcome__c location = animal.Animal_Locations__r[0];
         if(location.Follow_Up_Frequency__c != null && location.Follow_Up_Frequency__c != 'Weekly' && taskMap.containsKey(animal.Id)){

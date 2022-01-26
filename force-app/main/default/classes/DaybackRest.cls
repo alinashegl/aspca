@@ -28,12 +28,21 @@ global with sharing class DaybackRest {
     @HttpGet
     global static DaybackResponse getResources() {
         RestRequest restReq = RestContext.request;
+        /*
+         * The sfObject comes from Dayback, if the value id 'default' we are on the default Dayback tab and not a specific object
+         * if the object is 'Animal__c' (currently the only other one that is set up) then we make sure the only resource selected
+         * by default is the current animal
+        */
         sfObject = restReq.params.get('sfObject');
         
 
         DaybackResponse resp = new DaybackResponse();
 
         if(locationgroup != null){
+            /* 
+             * The generic resources are generic contacts created for each of the population groups.  We assign tasks to the
+             * generic contacts when a Behavior Case Worker has not yet been assigned to the dog
+            */
             resp.genResources = prepGenericResources();
             resp.resources = prepContactResources();
             resp.resources.addAll(getAnimalList());
