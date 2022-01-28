@@ -2380,6 +2380,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Incidents__c.Person_Involved__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Incidents__c.Please_explain_why_you_think_so__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -2391,6 +2396,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Incidents__c.Specific_Target_of_Dog_s_Behavior__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Incidents__c.Supervisor_Team_Lead__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
