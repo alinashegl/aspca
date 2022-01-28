@@ -54,7 +54,7 @@ public class ScheduleAnimalBRCMRCTest {
     
     @isTest
     static void testBRCMRCTasks(){
-        List<Task> tasks = ScheduleAnimalBRCMRC.scheduleBRCMRCTasks();
+        List<Task> tasks = ScheduleAnimalBRCMRC.scheduleBRCMRCTasks(null);
         System.debug(tasks.size());
         ScheduleAnimalBRCMRC.completeBRCMRCTasks();
     }

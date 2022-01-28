@@ -53,7 +53,7 @@ private class test_ScheduleAnimalPlaygroups {
     @isTest 
     static void schedulePlaygroups_success(){
         Test.startTest();
-            Task[] toInsert = ScheduleAnimalPlaygroups.schedulePlaygroups();
+            Task[] toInsert = ScheduleAnimalPlaygroups.schedulePlaygroups(null);
         Test.stopTest();
 
         Map<Id, Task[]> taskMap = new Map<Id, Task[]>();
@@ -73,6 +73,43 @@ private class test_ScheduleAnimalPlaygroups {
         following tuesday are created
         */
         Animal__c[] animals = [SELECT Id, Playgroup_Priority_Level__c, Name, Current_Recent_Shelter_Location__c FROM Animal__c];
+        System.debug('Animals = ' + animals);
+        for(Animal__c animal : animals){
+            Integer count = taskCount(animal);
+            System.debug('count = ' + count);
+            if(taskMap.containsKey(animal.Id)){
+                System.assertEquals(count, taskMap.get(animal.Id).size());
+            }
+            else {
+                System.assertEquals(0, count);
+            }
+        }
+    }
+
+    @isTest 
+    static void schedulePlaygroupsAnimalSpecific_success(){
+        Animal__c dog = [SELECT Id FROM Animal__c WHERE Current_Recent_Shelter_Location__c = 'ARC' LIMIT 1];
+        Test.startTest();
+            Task[] toInsert = ScheduleAnimalPlaygroups.schedulePlaygroups(new Id[]{dog.Id});
+        Test.stopTest();
+
+        Map<Id, Task[]> taskMap = new Map<Id, Task[]>();
+        for(Task t : toInsert){
+            if(taskMap.containsKey(t.Animal__c)){
+                taskMap.get(t.Animal__c).add(t);
+            }
+            else {
+                taskMap.put(t.Animal__c, new Task[]{t});
+            }
+        }
+        System.debug('taskMap = ' + taskMap);
+
+        /*
+        this assert loop takes into account the number of days on the custom meta data records may change.
+        it also takes into account the day of the week the test is ran to make sure only those tasks need through the
+        following tuesday are created
+        */
+        Animal__c[] animals = [SELECT Id, Playgroup_Priority_Level__c, Name, Current_Recent_Shelter_Location__c FROM Animal__c WHERE Id =: dog.Id];
         System.debug('Animals = ' + animals);
         for(Animal__c animal : animals){
             Integer count = taskCount(animal);

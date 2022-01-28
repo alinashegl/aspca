@@ -43,6 +43,7 @@ try {
           'Beh Med Check Tasks',
           'Beh Treatment Tasks',
           'Board And Train',
+          'BRC/MRC Candidate Check',
           'Evaluation',
           'Foster Follow Up Tasks', 
           'Playgroup Tasks',

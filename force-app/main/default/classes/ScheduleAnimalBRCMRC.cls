@@ -1,8 +1,8 @@
 public with sharing class ScheduleAnimalBRCMRC {
     public static Id recordTypeId = Util.getRecordTypeId('Task','MRC_BRC_Follow_UP');
-    public static Task[] scheduleBRCMRCTasks(){
+    public static Task[] scheduleBRCMRCTasks(Id[] animalIds){
         Task[] brcmrcTasks = new Task[0];
-        List<Animal__c> animalList = getAnimals();
+        List<Animal__c> animalList = getAnimals(animalIds);
         Map<Id, Date> followupDateByAnimal = getFollowupDate(animalList);
         for(Animal__c animal : animalList){
             Date acceptedDate = System.today(); // change this to animal.acceptedDate
@@ -49,12 +49,18 @@ public with sharing class ScheduleAnimalBRCMRC {
     }
 
     // once the date field is created that needs to be added in the query and that will be considered as reminder startdate
-    private static Animal__c[] getAnimals(){
+    private static Animal__c[] getAnimals(Id[] animalIds){
         Date tempEndDate = Date.today().addDays(-7);
-        return [SELECT Id, BRC_Status__c, MRC_Status__c, Animal_Name_Id__c, Current_Recent_Shelter_Location__c,
-                Behavior_Case_Worker__c, Behavior_Case_Worker__r.Is_Generic_Contact__c,
-                Behavior_Case_Worker__r.Name from Animal__c 
-                WHERE (BRC_Status__c = 'BRC Accepted' OR MRC_Status__c = 'MRC Accepted')and (Current_Recent_Shelter_Location__c != 'BRC' AND Current_Recent_Shelter_Location__c != 'MRC')];
+        String queryString = 'SELECT Id, BRC_Status__c, MRC_Status__c, Animal_Name_Id__c, Current_Recent_Shelter_Location__c, ' +
+            'Behavior_Case_Worker__c, Behavior_Case_Worker__r.Is_Generic_Contact__c, ' +
+            'Behavior_Case_Worker__r.Name from Animal__c ' +
+            'WHERE (BRC_Status__c = \'BRC Accepted\' OR MRC_Status__c = \'MRC Accepted\')and (Current_Recent_Shelter_Location__c != \'BRC\' AND Current_Recent_Shelter_Location__c != \'MRC\')';
+
+        if(animalIds != null){
+            queryString += ' AND Id IN: animalIds';
+        }
+
+        return Database.query(queryString);
     }
     
     public static Map<Id, Date> getFollowupDate(List<Animal__c> animals){

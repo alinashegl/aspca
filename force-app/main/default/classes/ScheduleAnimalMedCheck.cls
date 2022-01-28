@@ -1,8 +1,8 @@
 public with sharing class ScheduleAnimalMedCheck {
     public static Id recordTypeId = Util.getRecordTypeId('Task',AutoScheduleTasksUtil.BEHAVIOR_MED_CHECK_TASK_RECORD_TYPE_NAME);
-    public static Task[] scheduleMedCheck(){
+    public static Task[] scheduleMedCheck(Id[] animalIds){
         Task[] medCheckTasks = new Task[0];
-        for(Task treatmentTask : getTreatmentTasks()){
+        for(Task treatmentTask : getTreatmentTasks(animalIds)){
             if(treatmentTask.Animal__c != null){
                 Date followUpDate = calculateTaskDate(treatmentTask);
                 if(followUpDate != null){
@@ -57,22 +57,23 @@ public with sharing class ScheduleAnimalMedCheck {
     }
 
     @testVisible
-    private static Task[] getTreatmentTasks(){
+    private static Task[] getTreatmentTasks(Id[] animalIds){
         Date tempEndDate = Date.today().addDays(-7);
-        return [
-            SELECT Id, IsRecurrence, CreatedDate, ActivityDate, RecurrenceStartDateOnly, RecurrenceEndDateOnly, RecurrenceActivityId,
-            WhatId, WhoId, OwnerId, Animal__c, Animal__r.Animal_Name_Id__c, Animal__r.Current_Recent_Shelter_Location__c,
-            Animal__r.Behavior_Case_Worker__c, Animal__r.Behavior_Case_Worker__r.Name, Animal__r.Behavior_Case_Worker__r.Is_Generic_Contact__c,
-            Animal_Exam_Sheet_Lookup__c, Medication__c
-            FROM Task WHERE RecordType.Name = 'Treatments'
-            AND Animal__r.Type_of_Animal__c = 'Dog'
-            AND Medication__r.Behavior_Medication__c = true
-            AND (
-                (IsRecurrence = true AND RecurrenceEndDateOnly >= : tempEndDate)
-                OR 
-                (RecurrenceActivityId = null AND ActivityDate >= : tempEndDate)
-            )
-        ];
+        String queryString = 'SELECT Id, IsRecurrence, CreatedDate, ActivityDate, RecurrenceStartDateOnly, RecurrenceEndDateOnly, RecurrenceActivityId, ' +
+            'WhatId, WhoId, OwnerId, Animal__c, Animal__r.Animal_Name_Id__c, Animal__r.Current_Recent_Shelter_Location__c, ' +
+            'Animal__r.Behavior_Case_Worker__c, Animal__r.Behavior_Case_Worker__r.Name, Animal__r.Behavior_Case_Worker__r.Is_Generic_Contact__c, ' +
+            'Animal_Exam_Sheet_Lookup__c, Medication__c ' +
+            'FROM Task WHERE RecordType.Name = \'Treatments\' ' +
+            'AND Animal__r.Type_of_Animal__c = \'Dog\' ' +
+            'AND Medication__r.Behavior_Medication__c = true ' +
+            'AND ((IsRecurrence = true AND RecurrenceEndDateOnly >= : tempEndDate) ' +
+            'OR (RecurrenceActivityId = null AND ActivityDate >= : tempEndDate))';
+
+        if(animalIds != null){
+            queryString += ' AND Animal__c IN: animalIds';
+        }
+
+        return Database.query(queryString);
     }
 
     @testVisible
