@@ -40,7 +40,7 @@ public with sharing class ScheduleAnimalMedCheck {
                 Animal__c = treatmentTask.Animal__c,
                 RecordTypeId = recordTypeId,
                 ActivityDate = taskDate,
-                Description = 'Med Check is needed for: ' + treatmentTask.Animal__r.Animal_Name_Id__c + ' (' + treatmentTask.Animal__r.Current_Recent_Shelter_Location__c + ')',
+                Description = 'Bmed Check is needed for: ' + treatmentTask.Animal__r.Animal_Name_Id__c + ' (' + treatmentTask.Animal__r.Current_Recent_Shelter_Location__c + ')',
                 IsReminderSet = false,
                 Status = 'Not Started',
                 WhoId = treatmentTask.Animal__r.Behavior_Case_Worker__c != null ? treatmentTask.Animal__r.Behavior_Case_Worker__c : genericCon.Id,
