@@ -28,12 +28,21 @@ global with sharing class DaybackRest {
     @HttpGet
     global static DaybackResponse getResources() {
         RestRequest restReq = RestContext.request;
+        /*
+         * The sfObject comes from Dayback, if the value id 'default' we are on the default Dayback tab and not a specific object
+         * if the object is 'Animal__c' (currently the only other one that is set up) then we make sure the only resource selected
+         * by default is the current animal
+        */
         sfObject = restReq.params.get('sfObject');
         
 
         DaybackResponse resp = new DaybackResponse();
 
         if(locationgroup != null){
+            /* 
+             * The generic resources are generic contacts created for each of the population groups.  We assign tasks to the
+             * generic contacts when a Behavior Case Worker has not yet been assigned to the dog
+            */
             resp.genResources = prepGenericResources();
             resp.resources = prepContactResources();
             resp.resources.addAll(getAnimalList());
@@ -44,6 +53,7 @@ global with sharing class DaybackRest {
         return resp;
     }
 
+    @testVisible
     private static GenericResource[] prepGenericResources(){
         GenericResource[] genResources = new GenericResource[0];
         if(userLocation == 'All'){
@@ -137,8 +147,9 @@ global with sharing class DaybackRest {
         ];
     }
 
+    @testVisible
     private static ResourceInfo[] getAnimalList(){
-        ResourceInfo[] conResources = new ResourceInfo[0];
+        ResourceInfo[] animalResources = new ResourceInfo[0];
         for(Animal__c animal :[
                 SELECT Id, Animal_Name_Id__c, Current_Location__c, Current_Recent_Shelter_Location__c 
                 FROM Animal__c 
@@ -154,10 +165,10 @@ global with sharing class DaybackRest {
 
             folderNames.add(animal.Current_Recent_Shelter_Location__c);
 
-            conResources.add(res);
+            animalResources.add(res);
         }
 
-        return conResources;
+        return animalResources;
     }
 
     private static folderInfo[] prepFolderInfos(){

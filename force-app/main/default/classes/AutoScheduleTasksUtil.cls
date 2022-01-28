@@ -26,9 +26,7 @@ public with sharing class AutoScheduleTasksUtil {
             }
             return genericContactMap;
         } 
-        set{
-            genericContactMap = getGenericContacts();
-        }
+        set;
     }
 
     public static Map<String, Calendar_Schedule_Config__mdt> getCalendarConfig(String taskType){
@@ -127,6 +125,8 @@ public with sharing class AutoScheduleTasksUtil {
         if(animal.Animal_Name_Id__c != null){
             resourceList.add(animal.Animal_Name_Id__c);
         }
-        resourceList.add(animal.Behavior_Case_Worker__r != null ? animal.Behavior_Case_Worker__r.Name.replace('/',' ') : NO_CONTACT_RESOURCE);        return string.join(resourceList, ';');
+        //Dayback doesn't work well with '/' in a resource name, so we have to remove it
+        resourceList.add(animal.Behavior_Case_Worker__r != null ? animal.Behavior_Case_Worker__r.Name.replace('/',' ') : NO_CONTACT_RESOURCE);
+        return string.join(resourceList, ';');
     }
 }

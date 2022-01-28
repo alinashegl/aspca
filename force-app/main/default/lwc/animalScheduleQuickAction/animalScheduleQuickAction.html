@@ -1,0 +1,20 @@
+<template>
+    <lightning-quick-action-panel header="Refresh Calendar">
+    <p>By clicking 'Yes', all Dayback tasks for this dog from today through next Monday will be deleted and recreated</p>
+    <template if:true={error}>
+        <c-error-panel errors={error} type='inlineMessage' friendly-message='Error creating tasks'></c-error-panel>
+    </template>
+    <div slot="footer">
+        <template if:true={showSpinner}>
+            <lightning-icon icon-name="utility:spinner" alternative-text="Connected" size="medium" title="large size">
+            </lightning-icon>
+        </template>
+        <template if:false={showSpinner}>
+            <lightning-button variant="neutral" label="Cancel" onclick={handleCancelClick}></lightning-button>
+            <lightning-button variant="brand" label="Yes" onclick={handleYesClick} class="slds-var-p-left_small"></lightning-button>
+        </template>
+    </div>
+  </lightning-quick-action-panel>
+</template>
+
+

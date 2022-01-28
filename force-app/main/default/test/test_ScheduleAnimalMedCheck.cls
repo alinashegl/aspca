@@ -27,7 +27,7 @@ private class test_ScheduleAnimalMedCheck {
         Task treatmentTask2 = insertTask(true, anim2);
 
         test.startTest();
-            Task[] taskList = ScheduleAnimalMedCheck.getTreatmentTasks();
+            Task[] taskList = ScheduleAnimalMedCheck.getTreatmentTasks(null);
         test.stopTest();
 
         System.assert(!taskList.isEmpty(), 'returned list was empty');
@@ -37,7 +37,7 @@ private class test_ScheduleAnimalMedCheck {
     @isTest
     static void getTreatmentTasksNoTasks(){
         test.startTest();
-            Task[] taskList = ScheduleAnimalMedCheck.getTreatmentTasks();
+            Task[] taskList = ScheduleAnimalMedCheck.getTreatmentTasks(null);
         test.stopTest();
 
         System.assert(taskList.isEmpty(), 'returned list should be empty');
@@ -110,7 +110,7 @@ private class test_ScheduleAnimalMedCheck {
         createGenericContact(anim2);
 
         test.startTest();
-            Task[] taskList = ScheduleAnimalMedCheck.scheduleMedCheck();
+            Task[] taskList = ScheduleAnimalMedCheck.scheduleMedCheck(null);
         test.stopTest();
 
         system.assert(!taskList.isEmpty());
@@ -119,11 +119,43 @@ private class test_ScheduleAnimalMedCheck {
     @isTest
     static void scheduleMedCheckNoTasks(){        
         test.startTest();
-            Task[] taskList = ScheduleAnimalMedCheck.scheduleMedCheck();
+            Task[] taskList = ScheduleAnimalMedCheck.scheduleMedCheck(null);
         test.stopTest();
 
         system.assert(taskList.isEmpty());
-    }    
+    }
+
+    @isTest
+    static void scheduleMedCheckSpecificDogSuccess(){        
+        Animal__c anim1 = TestDataFactory.createAnimalWithName('anim1');
+        Task treatmentTask1 = insertTask(false, anim1);
+        createGenericContact(anim1);
+
+        Animal__c anim2 = TestDataFactory.createAnimalWithName('anim2');
+        Task treatmentTask2 = insertTask(true, anim2);
+        createGenericContact(anim2);
+
+        test.startTest();
+            Task[] toInsert = ScheduleAnimalMedCheck.scheduleMedCheck(new Id[]{anim1.Id});
+        test.stopTest();
+
+        system.assert(!toInsert.isEmpty());
+
+        //one task for anim1 and no tasks for anim2 should be created
+        Map<Id, Task[]> taskMap = new Map<Id, Task[]>();
+        for(Task t : toInsert){
+            if(taskMap.containsKey(t.Animal__c)){
+                taskMap.get(t.Animal__c).add(t);
+            }
+            else {
+                taskMap.put(t.Animal__c, new Task[]{t});
+            }
+        }
+        System.debug('taskMap = ' + taskMap);
+
+        System.assertEquals(1, taskMap.get(anim1.Id).size());
+        System.assert(!taskMap.containsKey(anim2.Id));
+    }
 
     private static void createGenericContact(Animal__c anim){
         User u = [SELECT Id FROM User WHERE Division =: anim.Current_Recent_Shelter_Location__c AND isActive = true LIMIT 1];

@@ -1,8 +1,8 @@
 public with sharing class ScheduleAnimalMedCheck {
     public static Id recordTypeId = Util.getRecordTypeId('Task',AutoScheduleTasksUtil.BEHAVIOR_MED_CHECK_TASK_RECORD_TYPE_NAME);
-    public static Task[] scheduleMedCheck(){
+    public static Task[] scheduleMedCheck(Id[] animalIds){
         Task[] medCheckTasks = new Task[0];
-        for(Task treatmentTask : getTreatmentTasks()){
+        for(Task treatmentTask : getTreatmentTasks(animalIds)){
             if(treatmentTask.Animal__c != null){
                 Date followUpDate = calculateTaskDate(treatmentTask);
                 if(followUpDate != null){
@@ -15,13 +15,19 @@ public with sharing class ScheduleAnimalMedCheck {
 
     @testVisible
     private static Date calculateTaskDate(Task task){
+        //Need to know the date of the last day of the week (ASPCA week ends on Mondays)
         Date lastDayOfWeek = AutoScheduleTasksUtil.dayOfWeekMap().get('Monday');
-
+        //Need the start date of recurring tasks, or the due date of a single task
         Date tempDate = task.IsRecurrence == True ? task.RecurrenceStartDateOnly : task.ActivityDate;
+        //Now we need to get the date of the first day of the week the temp date is in
         Date tempDateWeekStart = tempDate.toStartOfWeek();
+        //How many days separte the week start and today?
         Integer daysBetween = tempDateWeekStart.daysBetween(Date.today());
+        //From the number of days that separate week start and today and adding one, we can get the day of the week the new task should be scheduled for
         String dayOfWeek = checkDayofWeek(daysBetween + 1);
+        //now convert the day of the week for the next task to a date
         Date nextFollowUpDate = AutoScheduleTasksUtil.dayOfWeekMap().get(dayOfWeek);
+        //if the date is greater than the last day of this week we don't need to create one for this week so we return a null value
         return nextFollowUpDate <= lastDayOfWeek ? nextFollowUpDate : null;
     }
 
@@ -34,7 +40,7 @@ public with sharing class ScheduleAnimalMedCheck {
                 Animal__c = treatmentTask.Animal__c,
                 RecordTypeId = recordTypeId,
                 ActivityDate = taskDate,
-                Description = 'Med Check is needed for: ' + treatmentTask.Animal__r.Animal_Name_Id__c + ' (' + treatmentTask.Animal__r.Current_Recent_Shelter_Location__c + ')',
+                Description = 'Bmed Check is needed for: ' + treatmentTask.Animal__r.Animal_Name_Id__c + ' (' + treatmentTask.Animal__r.Current_Recent_Shelter_Location__c + ')',
                 IsReminderSet = false,
                 Status = 'Not Started',
                 WhoId = treatmentTask.Animal__r.Behavior_Case_Worker__c != null ? treatmentTask.Animal__r.Behavior_Case_Worker__c : genericCon.Id,
@@ -51,22 +57,23 @@ public with sharing class ScheduleAnimalMedCheck {
     }
 
     @testVisible
-    private static Task[] getTreatmentTasks(){
+    private static Task[] getTreatmentTasks(Id[] animalIds){
         Date tempEndDate = Date.today().addDays(-7);
-        return [
-            SELECT Id, IsRecurrence, CreatedDate, ActivityDate, RecurrenceStartDateOnly, RecurrenceEndDateOnly, RecurrenceActivityId,
-            WhatId, WhoId, OwnerId, Animal__c, Animal__r.Animal_Name_Id__c, Animal__r.Current_Recent_Shelter_Location__c,
-            Animal__r.Behavior_Case_Worker__c, Animal__r.Behavior_Case_Worker__r.Name, Animal__r.Behavior_Case_Worker__r.Is_Generic_Contact__c,
-            Animal_Exam_Sheet_Lookup__c, Medication__c
-            FROM Task WHERE RecordType.Name = 'Treatments'
-            AND Animal__r.Type_of_Animal__c = 'Dog'
-            AND Medication__r.Behavior_Medication__c = true
-            AND (
-                (IsRecurrence = true AND RecurrenceEndDateOnly >= : tempEndDate)
-                OR 
-                (RecurrenceActivityId = null AND ActivityDate >= : tempEndDate)
-            )
-        ];
+        String queryString = 'SELECT Id, IsRecurrence, CreatedDate, ActivityDate, RecurrenceStartDateOnly, RecurrenceEndDateOnly, RecurrenceActivityId, ' +
+            'WhatId, WhoId, OwnerId, Animal__c, Animal__r.Animal_Name_Id__c, Animal__r.Current_Recent_Shelter_Location__c, ' +
+            'Animal__r.Behavior_Case_Worker__c, Animal__r.Behavior_Case_Worker__r.Name, Animal__r.Behavior_Case_Worker__r.Is_Generic_Contact__c, ' +
+            'Animal_Exam_Sheet_Lookup__c, Medication__c ' +
+            'FROM Task WHERE RecordType.Name = \'Treatments\' ' +
+            'AND Animal__r.Type_of_Animal__c = \'Dog\' ' +
+            'AND Medication__r.Behavior_Medication__c = true ' +
+            'AND ((IsRecurrence = true AND RecurrenceEndDateOnly >= : tempEndDate) ' +
+            'OR (RecurrenceActivityId = null AND ActivityDate >= : tempEndDate))';
+
+        if(animalIds != null){
+            queryString += ' AND Animal__c IN: animalIds';
+        }
+
+        return Database.query(queryString);
     }
 
     @testVisible
