@@ -37,28 +37,6 @@ public with sharing class ScheduleBoardAndTrainTask {
         }
 
         return Database.query(queryString);
-        // return [
-        //     SELECT Id, Animal_Name_Id__c, Current_Recent_Shelter_Location__c, Current_Location__c, 
-        //     Behavior_Case_Worker__c, Behavior_Case_Worker__r.Name, Behavior_Case_Worker__r.Is_Generic_Contact__c,
-        //     (
-        //         SELECT Id, Follow_Up_Days__c, Follow_Up_Frequency__c, CreatedDate
-        //         FROM Animal_Locations__r
-        //         WHERE Facility_Outcome__c = 'Board and Train'
-        //         AND (End_Date__c = null OR End_Date__c >= TODAY)
-        //         ORDER BY CreatedDate DESC
-        //         LIMIT 1
-        //     )
-        //     FROM Animal__c
-        //     WHERE Current_Location__c = 'Board and Train'
-        //     AND Type_of_Animal__c = 'Dog'
-        //     AND Id IN
-        //     (
-        //         SELECT Animal__c
-        //         FROM Facility_Outcome__c
-        //         WHERE Facility_Outcome__c = 'Board and Train'
-        //         AND (End_Date__c = null OR End_Date__c >= TODAY)
-        //     )
-        // ];
     }
 
     public static Map<Id,Task> getTasks(Animal__c[] animals){
