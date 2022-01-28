@@ -93,7 +93,7 @@ public with sharing class AutoScheduleTasksUtil {
     }
 
     private static Map<String, Date> dayOfWeekFields(){
-        date currentDate = date.today();
+        date currentDate = date.today().addDays(7);
         date weekStart = currentDate.toStartofWeek();
         return new Map<String, Date>{
             'Tuesday__c' => weekStart.addDays(2),
@@ -107,7 +107,7 @@ public with sharing class AutoScheduleTasksUtil {
     }
 
     public static Map<String, Date> dayOfWeekMap(){
-        date currentDate = date.today();
+        date currentDate = date.today().addDays(7);
         date weekStart = currentDate.toStartofWeek();
         return new Map<String, Date>{
             'Tuesday' => weekStart.addDays(2),
