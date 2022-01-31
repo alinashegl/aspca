@@ -1,4 +1,4 @@
-public with sharing class AutoScheduleTasksUtil {
+public class AutoScheduleTasksUtil {
     public static final String BEH_TREATMENT_TASK_RECORD_TYPE_NAME = 'Behavior_TX';
     public static final String PLAYGROUP_TASK_RECORD_TYPE_NAME = 'Playgroup';
     public static final String FOSTER_TASK_RECORD_TYPE_NAME = 'Foster_Follow_Up';
@@ -86,19 +86,19 @@ public with sharing class AutoScheduleTasksUtil {
     public static Map<String, Contact> getGenericContacts(){
         Map<String, Contact> contactMap = new Map<String, Contact>();
         for(Contact con : [
-            SELECT Id, Name, User__c, User__r.Location__c
+            SELECT Id, Name, User__c, User_Location__c
             FROM Contact
             WHERE Is_Generic_Contact__c = TRUE
+            AND Active__c = true
             AND User__r.isActive = true
         ]){
-            if(con.User__r.Location__c == 'ARC/CARE'){
+            if(con.User_Location__c == 'ARC/CARE'){
                 contactMap.put('ARC', con);
                 contactMap.put('CARE', con);    
             } else {
-                contactMap.put(con.User__r.Location__c, con);
+                contactMap.put(con.User_Location__c, con);
             }
         }
-
         return contactMap;
     }
 
