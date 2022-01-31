@@ -226,7 +226,8 @@ private class test_ScheduleBoardAndTrainTask {
             Task[] toInsert = ScheduleBoardAndTrainTask.scheduleFollowUps(new Id[]{dog.Id});
         test.stopTest();
 
-        //one task for each animal should be created
+        System.debug('toInsert: ' + toInsert);
+
         Map<Id, Task[]> taskMap = new Map<Id, Task[]>();
         for(Task t : toInsert){
             if(taskMap.containsKey(t.Animal__c)){

@@ -65,7 +65,9 @@ public with sharing class ScheduleBoardAndTrainTask {
         Facility_Outcome__c location = animal.Animal_Locations__r[0];
         if(location.Follow_Up_Frequency__c != null && location.Follow_Up_Frequency__c != 'Weekly' && taskMap.containsKey(animal.Id)){
             Task t = taskMap.get(animal.Id);
-            if(t.ActivityDate.daysBetween(Date.Today()) < translateFrequency(location.Follow_Up_Frequency__c)){
+            Date activityDateWeekStart = t.ActivityDate.toStartofWeek();
+            Date schedulingWeekStart = AutoScheduleTasksUtil.dateRanges.startDate.toStartOfWeek();
+            if(activityDateWeekStart.daysBetween(schedulingWeekStart) < translateFrequency(location.Follow_Up_Frequency__c)){
                 needsTasks = false;
             }
         }
@@ -76,16 +78,16 @@ public with sharing class ScheduleBoardAndTrainTask {
         Integer minDays = 0;
         switch on frequency {
             when 'Every Other Week' {
-                minDays = 7;
+                minDays = 14;
             }	
             when 'Every Three Weeks' {
-                minDays = 14;
+                minDays = 21;
             }
             when 'Monthly' {
-                minDays = 23;
+                minDays = 28;
             }
             when 'Every Other Month' {
-                minDays = 54;
+                minDays = 56;
             }
         }
         return minDays;

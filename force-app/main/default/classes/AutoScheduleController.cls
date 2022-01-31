@@ -14,13 +14,13 @@ public with sharing class AutoScheduleController {
         insert tasksToInsert;
     }
 
-    public static void deleteFutureTasks(Id[] animalIds){
+    public static void deleteFutureTasks(Id[] animalIds, Date startDate){
         delete [
             SELECT Id 
             FROM Task 
             WHERE Animal__c IN: animalIds 
             AND RecordType.DeveloperName IN :AutoScheduleTasksUtil.taskRecordTypes
-            AND ActivityDate >= TODAY
+            AND ActivityDate >=: startDate
         ];
     }
 }
