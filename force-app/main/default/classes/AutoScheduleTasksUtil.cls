@@ -29,6 +29,16 @@ public with sharing class AutoScheduleTasksUtil {
         set;
     }
 
+    public static DateRangeWrapper dateRanges {
+        get{
+            if(dateRanges == null){
+                dateRanges = determineDateRange();
+            }
+            return dateRanges;
+        }
+        set;
+    }
+
     public static Map<String, Calendar_Schedule_Config__mdt> getCalendarConfig(String taskType){
         Map<String, Calendar_Schedule_Config__mdt> configMap = new Map<String, Calendar_Schedule_Config__mdt>();
         for(Calendar_Schedule_Config__mdt config : [
@@ -93,31 +103,59 @@ public with sharing class AutoScheduleTasksUtil {
     }
 
     private static Map<String, Date> dayOfWeekFields(){
-        date currentDate = date.today().addDays(7);
-        date weekStart = currentDate.toStartofWeek();
+        date startDate = dateRanges.startDate;
         return new Map<String, Date>{
-            'Tuesday__c' => weekStart.addDays(2),
-            'Wednesday__c' => weekStart.addDays(3),
-            'Thursday__c' => weekStart.addDays(4),
-            'Friday__c' => weekStart.addDays(5),
-            'Saturday__c' => weekStart.addDays(6),
-            'Sunday__c' => weekStart.addDays(7),
-            'Monday__c' => weekStart.addDays(8)
+            'Tuesday__c' => startDate,
+            'Wednesday__c' => startDate.addDays(1),
+            'Thursday__c' => startDate.addDays(2),
+            'Friday__c' => startDate.addDays(3),
+            'Saturday__c' => startDate.addDays(4),
+            'Sunday__c' => startDate.addDays(5),
+            'Monday__c' => startDate.addDays(6)
         };
     }
 
     public static Map<String, Date> dayOfWeekMap(){
-        date currentDate = date.today().addDays(7);
-        date weekStart = currentDate.toStartofWeek();
+        date startDate = dateRanges.startDate;
         return new Map<String, Date>{
-            'Tuesday' => weekStart.addDays(2),
-            'Wednesday' => weekStart.addDays(3),
-            'Thursday' => weekStart.addDays(4),
-            'Friday' => weekStart.addDays(5),
-            'Saturday' => weekStart.addDays(6),
-            'Sunday' => weekStart.addDays(7),
-            'Monday' => weekStart.addDays(8)
+            'Tuesday' => startDate,
+            'Wednesday' => startDate.addDays(1),
+            'Thursday' => startDate.addDays(2),
+            'Friday' => startDate.addDays(3),
+            'Saturday' => startDate.addDays(4),
+            'Sunday' => startDate.addDays(5),
+            'Monday' => startDate.addDays(6)
         };
+    }
+
+    public static DateRangeWrapper determineDateRange(){
+        DateRangeWrapper dateRanges = new DateRangeWrapper();
+        Date today = date.today();
+        Date tempWeekStart = today.toStartOfWeek();
+
+        Date startDate = tempWeekStart.addDays(9);
+        Date endDate = tempWeekStart.addDays(15);
+        DateTime startDT = DateTime.newInstance(startDate.year(), startDate.month(), startDate.day(), 11, 59, 59);
+        DateTime endDT = DateTime.newInstance(endDate.year(), endDate.month(), endDate.day(), 11, 59, 59);
+
+        dateRanges.startDate = startDate;
+        dateRanges.endDate = endDate;
+        dateRanges.startDateFormatted = startDate.format();
+        dateRanges.endDateFormatted = endDate.format();
+        
+        dateRanges.startDateDay = startDT.format('EEEE');
+        dateRanges.endDateDay = endDT.format('EEEE');
+
+        return dateRanges;
+    }
+
+    public class DateRangeWrapper{
+        @AuraEnabled public Date startDate;
+        @AuraEnabled public Date endDate;
+        @AuraEnabled public String startDateFormatted;
+        @AuraEnabled public String endDateFormatted;
+        @AuraEnabled public String startDateDay;
+        @AuraEnabled public String endDateDay;
     }
 
     public static String determineResources(Animal__c animal){

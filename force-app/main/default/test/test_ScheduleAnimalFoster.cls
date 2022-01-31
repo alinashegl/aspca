@@ -242,13 +242,13 @@ private class test_ScheduleAnimalFoster {
         
         Facility_Outcome__c[] locs = [SELECT Id, Animal__c, Animal__r.Current_Recent_Shelter_Location__c, Follow_Up_Days__c, Follow_Up_Frequency__c FROM Facility_Outcome__c];
         for(Facility_Outcome__c loc : locs){
-            Integer count = taskCount(loc);
-            System.debug('count = ' + count);
-            if(taskMap.containsKey(loc.Animal__c)){
+            if(loc.Animal__c == dog.Id){
+                system.debug('this is the dog');
+                Integer count = taskCount(loc);
                 System.assertEquals(count, taskMap.get(loc.Animal__c).size());
             }
             else {
-                System.assertEquals(0, count);
+                system.assert(!taskMap.containsKey(loc.Animal__c));
             }
         }
     }

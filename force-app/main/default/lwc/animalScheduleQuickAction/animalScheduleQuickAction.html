@@ -1,6 +1,6 @@
 <template>
     <lightning-quick-action-panel header="Refresh Calendar">
-    <p>By clicking 'Yes', all Dayback tasks for this dog from today through next Monday will be deleted and recreated</p>
+    <p>By clicking 'Yes', all Dayback tasks for this dog from {startDay}, {startDate} through {endDay}, {endDate} will be deleted and recreated based on current schedules</p>
     <template if:true={error}>
         <c-error-panel errors={error} type='inlineMessage' friendly-message='Error creating tasks'></c-error-panel>
     </template>
