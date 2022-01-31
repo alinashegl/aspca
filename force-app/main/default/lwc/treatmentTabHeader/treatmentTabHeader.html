@@ -4,7 +4,7 @@
             <div class="slds-modal__container">
                 <header class="slds-modal__header">
                     <h2 class="slds-modal__title slds-hyphenate">
-                        New Treatment<template if:false={smallForm}>: Default</template>
+                        New Treatment<template if:false={smallForm}>: Plan</template>
                     </h2>
                 </header>
                 <div class="slds-modal__content slds-var-p-around_medium">
@@ -16,7 +16,10 @@
                                 <span title="Information" class="slds-truncate">Information</span>
                             </h3>
                         </template>
-                        <div class="slds-grid slds-wrap">  
+                        <div class="slds-grid slds-wrap"> 
+                            <div class="slds-col slds-size_1-of-2"> 
+                                <lightning-input-field field-name="Problem_Behavior__c"></lightning-input-field>
+                            </div> 
                             <div class="slds-col slds-size_1-of-2"> 
                                 <lightning-input-field field-name="AssignedTreatmentBundleId__c"></lightning-input-field>
                             </div>
