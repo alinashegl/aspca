@@ -6,6 +6,6 @@ global class BehaviorSchedulable implements Schedulable{
     */
 
     global void execute(SchedulableContext SC){
-        AutoScheduleController.handleScheduleTasks(null);
+        AutoScheduleController.handleScheduleTasks(null, null, null);
     }
 }
