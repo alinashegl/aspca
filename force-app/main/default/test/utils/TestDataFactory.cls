@@ -358,6 +358,37 @@ public without sharing class TestDataFactory {
         insert users;
     }
 
+    public static User[] createUsersWithoutInserting(Integer count) {
+      Integer userCount = count != null ? count : USERS_COUNT;
+      
+      List<User> users = new List<User>();
+
+      Profile p = getProfileFromDb('Standard User');
+
+      for(Integer i = 0; i < USERS_COUNT; i++) {
+          String name = (String)USER_PATTERN.get('name') + '_' + i;
+          String lastname = (String)USER_PATTERN.get('lastName') + '_' + i;
+          String uid = (String)USER_PATTERN.get('name') + '_' + i;
+
+          User u = new User(
+                  Alias = uid,
+                  Email = uid + '@' + (String)USER_PATTERN.get('domain'),
+                  EmailEncodingKey = (String)USER_PATTERN.get('emailEncodingKey'),
+                  //Name = name,
+                  LastName = lastname,
+                  LanguageLocaleKey = (String)USER_PATTERN.get('languageLocaleKey'),
+                  LocaleSidKey = (String)USER_PATTERN.get('localeSidKey'),
+                  ProfileId = p.Id,
+                  TimeZoneSidKey = (String)USER_PATTERN.get('timeZoneSidKey'),
+                  UserName = (uid + '@' +  (String)USER_PATTERN.get('domain'))
+          );
+          users.add(u);
+      }
+
+      return users;
+  }
+
+
     public static List<User> getUsersFromDb() {
         Set<String> standardUsers = new Set<String> {
                 'User',

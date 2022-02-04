@@ -29,7 +29,7 @@ private class test_AutoScheduleTasksUtil {
             String resource = AutoScheduleTasksUtil.determineResources(anim);
         test.stopTest();
 
-        System.assertEquals('anim (anim);', resource);
+        System.assertEquals('anim (anim);unassigned', resource);
     }
 
     @isTest
@@ -40,6 +40,60 @@ private class test_AutoScheduleTasksUtil {
             String resource = AutoScheduleTasksUtil.determineResources(anim);
         test.stopTest();
 
-        System.assertEquals('', resource);
+        System.assertEquals('unassigned', resource);
+    }
+
+    @isTest
+    static void genericContactMapSuccess(){
+        Map<String, Contact> contactMap = new Map<String, Contact>();
+        User[] userList = [SELECT Id, Location__c FROM User WHERE isActive = true AND Location__c != null LIMIT 2];
+        Contact[] genericContacts = new Contact[0];
+        for(User u : userList){
+            Contact con = new Contact(
+                LastName = 'genericContact',
+                Is_Generic_Contact__c = true,
+                User__c = u.Id,
+                Active__c = true
+            );
+            genericContacts.add(con);
+        }
+
+        insert genericContacts;
+
+        test.startTest();
+            contactMap = AutoScheduleTasksUtil.genericContactMap;
+        test.stopTest();
+
+        System.assert(!contactMap.isEmpty(), 'Should have returned a map of generic contacts but was empty');
+    }
+
+    @isTest
+    static void genericContactMapNoContacts(){
+        Map<String, Contact> contactMap = new Map<String, Contact>();
+        test.startTest();
+            contactMap = AutoScheduleTasksUtil.genericContactMap;
+        test.stopTest();
+
+        System.assert(contactMap.isEmpty(), 'Should have returned an empty map of generic contacts but was ' + contactMap);
+    }
+
+    @isTest
+    static void getDateMapFromDaysSuccess(){
+        Map<String, Date> dateMap = new Map<String, Date>();
+        test.startTest();
+            dateMap = AutoScheduleTasksUtil.getDateMap('Monday;Tuesday;Wednesday;Thursday;Friday;Saturday;Sunday');
+        test.stopTest();
+
+        System.assert(!dateMap.isEmpty(), 'Should have returned a map with dates, but was empty');
+    }
+
+    @isTest
+    static void getDateMapFromDaysBadDay(){
+        Map<String, Date> dateMap = new Map<String, Date>();
+        test.startTest();
+            dateMap = AutoScheduleTasksUtil.getDateMap('nodays');
+        test.stopTest();
+
+        System.assert(dateMap.isEmpty(), 'Should have returned an empty map, but was ' + dateMap);
     }
 }

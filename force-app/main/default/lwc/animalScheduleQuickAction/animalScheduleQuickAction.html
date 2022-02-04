@@ -1,0 +1,26 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <lightning-quick-action-panel header="Refresh Calendar">
+        <template if:true={showOptions}>
+            <lightning-input type="toggle" label={thisWeekToggleLabel} message-toggle-active='Selected' message-toggle-inactive='Not Selected' onchange={thisWeekChanged}>
+            </lightning-input>
+            <lightning-input type="toggle" label={nextWeekToggleLabel} message-toggle-active='Selected' message-toggle-inactive='Not Selected' onchange={nextWeekChanged}>
+            </lightning-input>
+
+            <p class="slds-var-p-top_small text-color">By clicking Continue, the tasks for this animal that are between the dates selected and were automatically scheduled by the weekly job will be deleted and recreated.  Any Changes that have been made to the tasks will be lost.</p>
+        </template>
+        <template if:true={error}>
+            <c-error-panel errors={error} type='inlineMessage' friendly-message='Error creating tasks'></c-error-panel>
+        </template>
+        <div slot="footer">
+            <template if:true={showSpinner}>
+                <lightning-icon icon-name="utility:spinner" alternative-text="Connected" size="medium" title="large size">
+                </lightning-icon>
+            </template>
+            <template if:false={showSpinner}>
+                <lightning-button variant="neutral" label="Cancel" onclick={handleCancelClick}></lightning-button>
+                <lightning-button variant="brand" label="Continue" onclick={handleContinueClick} disabled={disableContinue} class="slds-var-p-left_small"></lightning-button>
+            </template>
+        </div>
+    </lightning-quick-action-panel>
+</template>
