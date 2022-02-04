@@ -7,6 +7,7 @@ public with sharing class AnimalScheduleQuickActionLWCController {
                 AutoScheduleController.handleScheduleTasks(new Id[]{animalId}, startDate, endDate);
                 return 'success';
             } catch (Exception e) {
+                System.debug('stackTrace: ' + e.getStackTraceString());
                 throw new AuraHandledException(e.getMessage());
             }
         } else {

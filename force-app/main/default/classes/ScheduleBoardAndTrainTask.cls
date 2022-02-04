@@ -17,7 +17,7 @@ public with sharing class ScheduleBoardAndTrainTask {
     public static Animal__c[] getAnimals(Id[] animalIds){
         String queryString = 'SELECT Id, Animal_Name_Id__c, Current_Recent_Shelter_Location__c, Current_Location__c, ' +
             'Behavior_Case_Worker__c, Behavior_Case_Worker__r.Name, Behavior_Case_Worker__r.Is_Generic_Contact__c, ' +
-                '(SELECT Id, Follow_Up_Days__c, Follow_Up_Frequency__c, CreatedDate ' +
+                '(SELECT Id, Follow_Up_Days__c, Follow_Up_Frequency__c, CreatedDate, Start_Date__c ' +
                 'FROM Animal_Locations__r ' +
                 'WHERE Facility_Outcome__c = \'Board and Train\' ' +
                 'AND (End_Date__c = null OR End_Date__c >= TODAY) ' +
