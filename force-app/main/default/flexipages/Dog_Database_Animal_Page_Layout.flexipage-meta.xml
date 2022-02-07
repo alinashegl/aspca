@@ -227,7 +227,7 @@
             <fieldInstance>
                 <fieldInstanceProperties>
                     <name>uiBehavior</name>
-                    <value>none</value>
+                    <value>readonly</value>
                 </fieldInstanceProperties>
                 <fieldItem>Record.Behavior_Case_Worker__c</fieldItem>
                 <identifier>RecordBehavior_Case_Worker__cField</identifier>
@@ -823,6 +823,32 @@
                 </componentInstanceProperties>
                 <componentName>force:relatedListSingleContainer</componentName>
                 <identifier>force_relatedListSingleContainer</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>parentFieldApiName</name>
+                    <value>Animal__c.Id</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>relatedListApiName</name>
+                    <value>Behavior_Case_Workers__r</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>relatedListComponentOverride</name>
+                    <value>ADVGRID</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>rowsToDisplay</name>
+                    <value>10</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>showActionBar</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentName>force:relatedListSingleContainer</componentName>
+                <identifier>force_relatedListSingleContainer10</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>
@@ -2238,6 +2264,52 @@
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
+                    <name>columns</name>
+                    <value>[{ 	&quot;label&quot;: &quot;Animal&quot;, 	&quot;fieldName&quot;: &quot;recordUrl&quot;, 	&quot;type&quot;: &quot;url&quot;, 	&quot;typeAttributes&quot;: { 		&quot;label&quot;: { 			&quot;fieldName&quot;: &quot;RecordName__c&quot; 		}, 		&quot;target&quot;: &quot;_blank&quot; 	} }, { 	&quot;fieldName&quot;: &quot;FieldName__c&quot;, 	&quot;label&quot;: &quot;Field Name&quot;, 	&quot;type&quot;: &quot;text&quot; }, { 	&quot;fieldName&quot;: &quot;OldValue__c&quot;, 	&quot;label&quot;: &quot;Old Value&quot;, 	&quot;type&quot;: &quot;text&quot; }, { 	&quot;fieldName&quot;: &quot;NewValue__c&quot;, 	&quot;label&quot;: &quot;New Value&quot;, 	&quot;type&quot;: &quot;text&quot; }, { 	&quot;fieldName&quot;: &quot;CreatedBy.Name&quot;, 	&quot;label&quot;: &quot;Modified By&quot;, 	&quot;type&quot;: &quot;text&quot; }, { 	&quot;fieldName&quot;: &quot;CreatedDate&quot;, 	&quot;label&quot;: &quot;Last Modified&quot;, 	&quot;type&quot;: &quot;date&quot;, 	&quot;typeAttributes&quot;: { 		&quot;day&quot;: &quot;numeric&quot;, 		&quot;month&quot;: &quot;numeric&quot;, 		&quot;year&quot;: &quot;numeric&quot;, 		&quot;hour&quot;: &quot;2-digit&quot;, 		&quot;minute&quot;: &quot;2-digit&quot;, 		&quot;second&quot;: &quot;2-digit&quot;, 		&quot;hour12&quot;: &quot;true&quot; 	} }]</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>iconName</name>
+                    <value>standard:related_list</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>limit</name>
+                    <value>5</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>objectName</name>
+                    <value>EntityHistory__c</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>orderBy</name>
+                    <value>CreatedDate DESC</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>paginate</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>relatedFieldAPI</name>
+                    <value>ObjectId__c</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Animal</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>whereClause</name>
+                    <value>ObjectName__c = &apos;Animal&apos;</value>
+                </componentInstanceProperties>
+                <componentName>genericDataTable</componentName>
+                <identifier>c_genericDataTable1</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-a4b94346-3f22-4122-bfb5-6963b2f1953a</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
                     <name>active</name>
                     <value>true</value>
                 </componentInstanceProperties>
@@ -2383,6 +2455,20 @@
                 <identifier>customTab10</identifier>
             </componentInstance>
         </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-a4b94346-3f22-4122-bfb5-6963b2f1953a</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Change Log</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tab</componentName>
+                <identifier>flexipage_tab1</identifier>
+            </componentInstance>
+        </itemInstances>
         <name>Facet-f4430da2-2afd-4cfd-b7aa-a03eae5da232</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -2395,6 +2481,48 @@
                 </componentInstanceProperties>
                 <componentName>flexipage:tabset</componentName>
                 <identifier>flexipage_tabset</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>columns</name>
+                    <value>[{ 	&quot;label&quot;: &quot;Animal&quot;, 	&quot;fieldName&quot;: &quot;recordUrl&quot;, 	&quot;type&quot;: &quot;url&quot;, 	&quot;typeAttributes&quot;: { 		&quot;label&quot;: { 			&quot;fieldName&quot;: &quot;RecordName__c&quot; 		}, 		&quot;target&quot;: &quot;_blank&quot; 	} }, { 	&quot;fieldName&quot;: &quot;FieldName__c&quot;, 	&quot;label&quot;: &quot;Field Name&quot;, 	&quot;type&quot;: &quot;text&quot; }, { 	&quot;fieldName&quot;: &quot;OldValue__c&quot;, 	&quot;label&quot;: &quot;Old Value&quot;, 	&quot;type&quot;: &quot;text&quot; }, { 	&quot;fieldName&quot;: &quot;NewValue__c&quot;, 	&quot;label&quot;: &quot;New Value&quot;, 	&quot;type&quot;: &quot;text&quot; }, { 	&quot;fieldName&quot;: &quot;CreatedBy.Name&quot;, 	&quot;label&quot;: &quot;Modified By&quot;, 	&quot;type&quot;: &quot;text&quot; }, { 	&quot;fieldName&quot;: &quot;CreatedDate&quot;, 	&quot;label&quot;: &quot;Last Modified&quot;, 	&quot;type&quot;: &quot;date&quot;, 	&quot;typeAttributes&quot;: { 		&quot;day&quot;: &quot;numeric&quot;, 		&quot;month&quot;: &quot;numeric&quot;, 		&quot;year&quot;: &quot;numeric&quot;, 		&quot;hour&quot;: &quot;2-digit&quot;, 		&quot;minute&quot;: &quot;2-digit&quot;, 		&quot;second&quot;: &quot;2-digit&quot;, 		&quot;hour12&quot;: &quot;true&quot; 	} }]</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>iconName</name>
+                    <value>standard:related_list</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>limit</name>
+                    <value>5</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>objectName</name>
+                    <value>EntityHistory__c</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>orderBy</name>
+                    <value>CreatedDate DESC</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>paginate</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>relatedFieldAPI</name>
+                    <value>ParentId__c</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Behavior Evaluation</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>whereClause</name>
+                    <value>ObjectName__c = &apos;Behavior Evaluation&apos;</value>
+                </componentInstanceProperties>
+                <componentName>genericDataTable</componentName>
+                <identifier>c_genericDataTable2</identifier>
             </componentInstance>
         </itemInstances>
         <name>main</name>

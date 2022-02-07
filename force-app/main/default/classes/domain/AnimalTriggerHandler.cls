@@ -1,4 +1,5 @@
 public with sharing class AnimalTriggerHandler {
+    Private static Boolean alreadyRan = false;
 
     public static void Execute() {
         if (!Trigger.isExecuting) { return; }
@@ -64,6 +65,25 @@ public with sharing class AnimalTriggerHandler {
 
     }
 
+    public static void onBeforeUpdateHandler(List<Animal__c> anms, Map<Id, Animal__c> oldAnms){
+        if(alreadyRan == true) return;
+        Animal__c[] brcMrcApprovedAnimals = new Animal__c[0];
+        for (Animal__c a : anms){
+            Animal__c oldAnimal = oldAnms.get(a.Id);
+            if(
+                a.Type_of_Animal__c == 'Dog' &&
+                ((a.MRC_Status__c == 'MRC Accepted' && oldAnimal.MRC_Status__c != 'MRC Accepted' && a.Current_Recent_Shelter_Location__c != 'MRC') ||
+                (a.BRC_Status__c == 'BRC Accepted' && oldAnimal.MRC_Status__c != 'BRC Accepted' && a.Current_Recent_Shelter_Location__c != 'BRC'))
+            ){
+                brcMrcApprovedAnimals.add(a);
+            }
+        }
+        if(!brcMrcApprovedAnimals.isEmpty()){
+            createBrcMrcTasks(brcMrcApprovedAnimals);
+        }
+
+        alreadyRan = true;
+    }
     
     public static void updateHandler(List<Animal__c> anms, Map<Id, Animal__c> oldAnms){
         CaseContactRole conrole = new CaseContactRole();
@@ -90,7 +110,8 @@ public with sharing class AnimalTriggerHandler {
                 }
                 System.debug(conrole);
             }
-            }
+        }
+        LogHistory.LogHistory(oldAnms, anms);
     }
     
 	@future(callout=true)
@@ -120,5 +141,22 @@ public with sharing class AnimalTriggerHandler {
         		update lstAnim;
         	}
         }
-    }  
+    }
+
+    private static void createBrcMrcTasks(Animal__c[] animals){
+        //make sure we're not creating duplicate tasks
+        Map<Id, Animal__c> queriedAnimals = new Map<Id, Animal__c>([SELECT Id, (SELECT Id, ActivityDate, Record_Type__c FROM Activities__r WHERE Record_Type__c =: AutoScheduleTasksUtil.MRC_BRC_FOLLOW_UP_TASK_RECORD_TYPE_NAME ORDER BY ActivityDate DESC LIMIT 1) FROM Animal__c WHERE Id IN: animals]);
+        Task[] toInsert = new Task[0];
+        for(Animal__c anim : animals){
+            if(!queriedAnimals.get(anim.Id).Activities__r.isEmpty()){
+                if(queriedAnimals.get(anim.Id).Activities__r[0].ActivityDate < date.today()){
+                    toInsert.add(ScheduleAnimalBRCMRC.prepTask(anim, date.today().addDays(14), false));
+                }
+            }
+            else {
+                toInsert.add(ScheduleAnimalBRCMRC.prepTask(anim, date.today().addDays(14), false));
+            }
+        }
+        insert toInsert;
+    }
 }
