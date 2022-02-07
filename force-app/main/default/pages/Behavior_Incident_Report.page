@@ -11,6 +11,8 @@
         <head>
         </head>
         <body>
+            <apex:variable value="{!$Resource.dbUnchecked}" var="uncheked"/>
+            <apex:variable value="{!$Resource.dbChecked}" var="checked"/>
             <div>
                 <h2>Behavior Incident Report</h2>
                 <h3>To be completed by main person involved in the incident, or his/her supervisor</h3>
@@ -36,12 +38,13 @@
                 <tr><td></td></tr>
                 <tr>
                     <td width="25%" align="right"><strong>Supervisor / Team lead</strong></td>
-                    <td width="25%" align="left"></td>
+                    <td width="25%" align="left">{!inc.Supervisor_Team_Lead__c}</td>
                     <td width="25%" align="right"><strong>Report date</strong></td>
                     <td width="25%" align="left">{!inc.Report_Date__c}</td>
                 </tr>
                 <tr><td></td></tr>
                 <tr><td></td></tr>
+               
             </table>
             <table bgcolor="#D3D3D3">
             <tr><th colspan="2">PLEASE IDENTIFY WHO WAS INVOLVED AND ANY WITNESSES TO THE INCIDENT</th></tr>
@@ -71,15 +74,19 @@
                 <tr><td></td></tr>
             </table>
             <table bgcolor="#D3D3D3">
-            <tr><th colspan="4">WHAT BEHAVIORS WERE EXHIBITED BY THE DOG (CHECK ALL THAT APPLY):</th></tr>
-                <tr><td></td></tr>
-                <tr><td></td></tr>
-                <tr>
-                    <td width="5%"></td>
-                    <td width="45%">{!inc.Behaviors_Exhibited_by_the_Dog__c}</td>
-                    <td width="5%"></td>
-                    <td width="45%">{!inc.Behaviors_Exhibited_by_the_Dog__c}</td>
-                </tr>
+    <apex:form >
+        <apex:pageBlock title="WHAT BEHAVIORS WERE EXHIBITED BY THE DOG (CHECK ALL THAT APPLY):">
+            <apex:dataTable value="{!behaviorsExhibited}" var="b">
+                <apex:column >
+                    <apex:inputCheckbox value="{!b.selected}" label="{!b.label}" rendered="true">
+                        <apex:image value="{!IF(B.selected == true , checked, uncheked)}" width="25" height="12" style="float: left"/>
+                        &nbsp;
+                        {!b.label}
+                    </apex:inputCheckbox>
+                </apex:column>
+            </apex:dataTable>
+       </apex:pageBlock>
+    </apex:form>
                 <tr><td></td></tr>
                 <tr><td></td></tr>
             </table>
@@ -113,10 +120,10 @@
                 <tr><td></td></tr>
                 <tr><td></td></tr>
                 <tr>
-                    <td width="10%" align="right"></td>
+                    <td width="20%" align="right">Was Bitten Area Covered with Clothing?</td>
                     <td width="10%" align="left">{!inc.Was_Bitten_Area_Covered_with_Clothing__c}</td>
-                    <td width="50%" align="right">IF YES, DESCRIBE CLOTHING WORN AT THE SITE OF THE BITE:</td>
-                    <td width="30%" align="left">{!inc.Clothing_Worn_at_Bite_Site__c}</td>
+                    <td width="30%" align="right">If YES, describe clothing worn at the site of the bite:</td>
+                    <td width="40%" align="left">{!inc.Clothing_Worn_at_Bite_Site__c}</td>
                 </tr>
                 <tr><td></td></tr>
                 <tr><td></td></tr>
@@ -167,5 +174,4 @@
             </table>
         </body>
     </html>
-
 </apex:page>

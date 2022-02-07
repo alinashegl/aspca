@@ -3,11 +3,9 @@ public with sharing class ScheduleAnimalBRCMRC {
     public static Task[] scheduleBRCMRCTasks(Id[] animalIds){
         Task[] brcmrcTasks = new Task[0];
         List<Animal__c> animalList = getAnimals(animalIds);
-        Map<Id, Date> followupDateByAnimal = getFollowupDate(animalList);
         for(Animal__c animal : animalList){
-            Date acceptedDate = System.today(); // change this to animal.acceptedDate
-            Date followupDate = followupDateByAnimal.containsKey(animal.Id) ? followupDateByAnimal.get(animal.Id): acceptedDate;
-            brcmrcTasks.add(prepTask(animal, followUpDate));
+            Date followUpDate = calculateFollowUpDate(animal);
+            brcmrcTasks.add(prepTask(animal, followUpDate, true));
         }
         return brcmrcTasks;
     }
@@ -23,7 +21,7 @@ public with sharing class ScheduleAnimalBRCMRC {
         update taskList;
     }
     
-    private static Task prepTask(Animal__c animal, Date taskDate){
+    public static Task prepTask(Animal__c animal, Date taskDate, Boolean isAutoScheduled){
         Contact genericCon = AutoScheduleTasksUtil.genericContactMap.get(animal.Current_Recent_Shelter_Location__c);
         String subjectPrefix = 'MRC';
         if(animal.BRC_Status__c == 'BRC Accepted' && animal.MRC_Status__c == 'MRC Accepted'){
@@ -35,14 +33,15 @@ public with sharing class ScheduleAnimalBRCMRC {
             WhatId = animal.Id,
             Animal__c = animal.Id,
             RecordTypeId = recordTypeId,
+            Record_Type__c = AutoScheduleTasksUtil.MRC_BRC_FOLLOW_UP_TASK_RECORD_TYPE_NAME,
             ActivityDate = taskDate,
             Description = subjectPrefix + ' Accepted follow up for: ' + animal.Animal_Name_Id__c,
             IsReminderSet = false,
             Status = 'Not Started',
             WhoId = animal.Behavior_Case_Worker__c != null ? animal.Behavior_Case_Worker__c : genericCon.Id,
             Subject = subjectPrefix+' Accepted follow up for: ' + animal.Animal_Name_Id__c,
-            //Assigned_Resources__c = animal.Behavior_Case_Worker__r.Is_Generic_Contact__c == false ? animal.Behavior_Case_Worker__r.Name : null,
-            Species__c = 'Dog'
+            Species__c = 'Dog',
+            Auto_Scheduled_Task__c = isAutoScheduled
         );
         system.debug(animal.id+'-'+newTask);
 		return newTask;
@@ -51,9 +50,12 @@ public with sharing class ScheduleAnimalBRCMRC {
     // once the date field is created that needs to be added in the query and that will be considered as reminder startdate
     private static Animal__c[] getAnimals(Id[] animalIds){
         Date tempEndDate = Date.today().addDays(-7);
+        String recordTypeName = AutoScheduleTasksUtil.MRC_BRC_FOLLOW_UP_TASK_RECORD_TYPE_NAME;
         String queryString = 'SELECT Id, BRC_Status__c, MRC_Status__c, Animal_Name_Id__c, Current_Recent_Shelter_Location__c, ' +
             'Behavior_Case_Worker__c, Behavior_Case_Worker__r.Is_Generic_Contact__c, ' +
-            'Behavior_Case_Worker__r.Name from Animal__c ' +
+            'Behavior_Case_Worker__r.Name, ' +
+            '(SELECT Id, ActivityDate FROM Activities__r WHERE Record_Type__c =: recordTypeName AND ActivityDate != null ORDER BY ActivityDate DESC LIMIT 1) ' +
+            'FROM Animal__c ' +
             'WHERE (BRC_Status__c = \'BRC Accepted\' OR MRC_Status__c = \'MRC Accepted\')and (Current_Recent_Shelter_Location__c != \'BRC\' AND Current_Recent_Shelter_Location__c != \'MRC\')';
 
         if(animalIds != null){
@@ -62,15 +64,19 @@ public with sharing class ScheduleAnimalBRCMRC {
 
         return Database.query(queryString);
     }
-    
-    public static Map<Id, Date> getFollowupDate(List<Animal__c> animals){
-        Map<Id, Date> dateMap = new Map<Id, Date>();
-        for(Task t : [Select Id, WhatId, ActivityDate from Task where recordTypeId =:recordTypeId and WhatId IN : animals Order By ActivityDate DESC]){
-            if(!dateMap.containsKey(t.WhatId)){
-                dateMap.put(t.WhatId, DateTimeUtility.AddBusinessDays(t.ActivityDate, 10));
+
+    private static Date calculateFollowUpDate(Animal__c animal){
+        Date followUpDate;
+        if(!animal.Activities__r.isEmpty()){
+            Date tempActivityDate = animal.Activities__r[0].ActivityDate.addDays(14);
+            if(tempActivityDate >= AutoScheduleTasksUtil.startDate && tempActivityDate <= AutoScheduleTasksUtil.endDate){
+                followUpDate = tempActivityDate;
             }
+        }   
+        else {
+            followUpDate = date.today();
         }
-        return dateMap;
+        return followUpDate;
     }
     
     public static List<Animal__c> getAnimalsForTaskUpdate(){

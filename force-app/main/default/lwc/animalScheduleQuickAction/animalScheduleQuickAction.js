@@ -8,21 +8,20 @@ export default class AnimalScheduleQuickAction extends LightningElement {
     @api recordId;
     showSpinner = false;
     error = null;
-    startDate;
-    endDate;
-    startDay;
-    endDay;
+    showOptions = false;
+    thisWeek;
+    nextWeek;
+    thisWeekSelected = false;
+    nextWeekSelected = false;
 
     connectedCallback(){
-        if(this.startDate == undefined || this.endDate == undefined){
+        if(this.thisWeek == undefined || this.nextWeek == undefined){
             this.showSpinner = true;
             getDateRange({})
             .then((result) =>{
-                window.console.log('result: ', result);
-                this.startDate = result.startDateFormatted;
-                this.endDate = result.endDateFormatted;
-                this.startDay = result.startDateDay;
-                this.endDay = result.endDateDay;
+                this.thisWeek = result.thisWeek;
+                this.nextWeek = result.nextWeek;
+                this.showOptions = true;
             })
             .catch(error => {
                 this.error = error;
@@ -33,13 +32,11 @@ export default class AnimalScheduleQuickAction extends LightningElement {
         }
     }
 
-    handleYesClick(){
-        window.console.log('yes: ', this.recordId);
+    handleContinueClick(){
         this.error = null;
         this.showSpinner = true;
-        recreateTasks({animalId : this.recordId})
+        recreateTasks({animalId : this.recordId, startDate: this.startDate, endDate: this.endDate})
         .then((result) =>{
-            window.console.log('result: ', result);
             if(result == 'success'){
                 this.dispatchEvent(new CloseActionScreenEvent());
                 this.dispatchEvent(
@@ -60,7 +57,51 @@ export default class AnimalScheduleQuickAction extends LightningElement {
     }
 
     handleCancelClick(){
-        window.console.log('cancel');
         this.dispatchEvent(new CloseActionScreenEvent());
+    }
+
+    thisWeekChanged(event){
+        this.thisWeekSelected = event.target.checked;
+    }
+
+    nextWeekChanged(event){
+        this.nextWeekSelected = event.target.checked;
+    }
+
+    get thisWeekToggleLabel(){
+        return this.thisWeek != undefined && this.thisWeek.isMonday ? 'This Week: today only' : 'This Week: Today through ' + this.thisWeek.endDay + ', ' + this.thisWeek.endDateFormatted;
+    }
+
+    get nextWeekToggleLabel(){
+        return this.nextWeek != undefined ? 'Next Week: ' + this.nextWeek.startDay + ', ' + this.nextWeek.startDateFormatted + ' through ' + this.nextWeek.endDay + ', ' + this.nextWeek.endDateFormatted : null;
+    }
+
+    get startDate(){
+        let startDate;
+        if(this.thisWeekSelected && this.thisWeek.startDate != null){
+            startDate = this.thisWeek.startDate;
+        } 
+        else if(this.nextWeekSelected && this.nextWeek.startDate != null){
+            startDate = this.nextWeek.startDate;
+        }
+        
+        return startDate;
+    }
+
+    get endDate(){
+        let endDate;
+        if(this.nextWeekSelected && this.nextWeek.endDate != null){
+            endDate = this.nextWeek.endDate;
+        }
+
+        else if(this.thisWeekSelected && this.thisWeek.endDate != null){
+            endDate = this.thisWeek.endDate;
+        }
+        
+        return endDate;
+    }
+
+    get disableContinue(){
+        return this.startDate == undefined || this.endDate == undefined;
     }
 }

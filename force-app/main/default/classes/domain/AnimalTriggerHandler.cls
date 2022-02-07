@@ -111,7 +111,6 @@ public with sharing class AnimalTriggerHandler {
                 System.debug(conrole);
             }
         }
-        LogHistory.LogHistory(oldAnms, anms);
     }
     
 	@future(callout=true)
