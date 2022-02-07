@@ -12,4 +12,8 @@ trigger behaviorEvaluationTrigger on Behavior_Evaluation__c (before insert, befo
             BehaviorEvaluationSummaryUtil.handleUpdate(Trigger.new, Trigger.oldMap);
         }
     }
+
+     if(Trigger.isAfter && Trigger.isUpdate){
+        BehaviorEvaluationSummaryUtil.handleAfterUpdate(Trigger.new, Trigger.oldMap);
+    }
 }
