@@ -3,31 +3,34 @@ public with sharing class ScheduleAnimalFoster {
 
     //main method,called by AutoScheduleController class
     public static Task[] scheduleFollowUps(Id[] animalIds) {
+        //make sure we have default start and end dates set
+        Map<String, AutoScheduleTasksUtil.DateRangeWrapper> dateRanges = AutoScheduleTasksUtil.dateRanges;
+
         Task[] fosterTasks = new Task[0];
 
         //get a map of all the active foster Calendar_Schedule_Config__mdt records
         Map<String, Calendar_Schedule_Config__mdt> calendarConfigMap = AutoScheduleTasksUtil.getCalendarConfig('Foster');
+
         //if the map is empty or does not containthe default, no need to continue
-        if(calendarConfigMap.isEmpty() || calendarConfigMap.containsKey('Foster - All-Foster - Weekly')){ 
-            return null;
-        }
+        if(!calendarConfigMap.isEmpty() && calendarConfigMap.containsKey('Foster - All-Foster - Weekly')){ 
 
-        //set the default config
-        Calendar_Schedule_Config__mdt defaultConfig = calendarConfigMap.get('Foster - All-Foster - Weekly');
+            //set the default config
+            Calendar_Schedule_Config__mdt defaultConfig = calendarConfigMap.get('Foster - All-Foster - Weekly');
 
-        Animal__c[] animals = getAnimals(animalIds);
+            Animal__c[] animals = getAnimals(animalIds);
 
-        //Query for any existing foster tasks related to the animals
-        Map<Id, Task> animalToTaskMap = getTasks(animals);
+            //Query for any existing foster tasks related to the animals
+            Map<Id, Task> animalToTaskMap = getTasks(animals);
 
-        //query the animals that meet the criteria and loops through them preparing the tasks for each one
-        for(Animal__c animal : animals){
-            //if the animal has an existing task already assign it here
-            Task task = animalToTaskMap.containsKey(animal.Id) ? animalToTaskMap.get(animal.Id) : null;
+            //query the animals that meet the criteria and loops through them preparing the tasks for each one
+            for(Animal__c animal : animals){
+                //if the animal has an existing task already assign it here
+                Task task = animalToTaskMap.containsKey(animal.Id) ? animalToTaskMap.get(animal.Id) : null;
 
-            fosterTasks.addAll(
-                prepTasks(animal, defaultConfig, task)
-            );
+                fosterTasks.addAll(
+                    prepTasks(animal, defaultConfig, task)
+                );
+            }
         }
         return fosterTasks;
     }

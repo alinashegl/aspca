@@ -8,7 +8,7 @@ public with sharing class ScheduleAnimalBRCMRC {
         //query the animals that meet the criteria and loops through them preparing the tasks for each one
         List<Animal__c> animalList = getAnimals(animalIds);
         for(Animal__c animal : animalList){
-            //first determine what date would need a follow task, if no follow up date, skip this animal
+            //first determine what date would need a follow up task, if no follow up date, skip this animal
             Date followUpDate = calculateFollowUpDate(animal);
             if(followUpDate != null){
                 brcmrcTasks.add(

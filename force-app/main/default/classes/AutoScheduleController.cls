@@ -6,11 +6,7 @@ public with sharing class AutoScheduleController {
         * we don't need to pass the dates around each time.
         * the default datse are for the following week, with ASPCA's week starting on Tuesday
         */
-        if(startDate == null || endDate == null){
-            Map<String, AutoScheduleTasksUtil.DateRangeWrapper> dateRanges = AutoScheduleTasksUtil.dateRanges;
-            AutoScheduleTasksUtil.startDate = dateRanges.get('nextWeek').startDate;
-            AutoScheduleTasksUtil.endDate = dateRanges.get('nextWeek').endDate;
-        } else {
+        if(startDate != null || endDate != null){
             AutoScheduleTasksUtil.startDate = startDate;
             AutoScheduleTasksUtil.endDate = endDate;
         }

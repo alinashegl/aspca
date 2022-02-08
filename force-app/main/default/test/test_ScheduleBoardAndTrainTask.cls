@@ -39,6 +39,7 @@ private class test_ScheduleBoardAndTrainTask {
 
     @isTest
     static void scheduleFollowups_success() {
+        Map<String, AutoScheduleTasksUtil.DateRangeWrapper> dateRanges = AutoScheduleTasksUtil.dateRanges;
         test.startTest();
             Task[] toInsert = ScheduleBoardAndTrainTask.scheduleFollowUps(null);
         test.stopTest();
@@ -76,6 +77,7 @@ private class test_ScheduleBoardAndTrainTask {
 
     @isTest
     static void scheduleFollowups_withExistingTask() {
+        Map<String, AutoScheduleTasksUtil.DateRangeWrapper> dateRanges = AutoScheduleTasksUtil.dateRanges;
         Id recordTypeId = Util.getRecordTypeId('Task',AutoScheduleTasksUtil.BOARD_AND_TRAIN_RECORD_TYPE_NAME);
         Task[] existingTasks = new Task[0];
         for(Animal__c anim : [SELECT Id FROM Animal__c]){
@@ -125,6 +127,7 @@ private class test_ScheduleBoardAndTrainTask {
 
     @isTest
     static void scheduleFollowups_customSchedule() {
+        Map<String, AutoScheduleTasksUtil.DateRangeWrapper> dateRanges = AutoScheduleTasksUtil.dateRanges;
         Facility_Outcome__c[] locs = [SELECT Id, Animal__c, Animal__r.Current_Recent_Shelter_Location__c, Follow_Up_Days__c, Follow_Up_Frequency__c FROM Facility_Outcome__c];
         locs[0].Follow_Up_Days__c = 'Wednesday;Friday';
         locs[1].Follow_Up_Frequency__c = 'Every Other Week';
@@ -155,20 +158,32 @@ private class test_ScheduleBoardAndTrainTask {
         following tuesday are created
         */
 
-        for(Facility_Outcome__c loc : locs){
-            Integer count = taskCount(loc);
-            System.debug('count = ' + count);
-            if(taskMap.containsKey(loc.Animal__c)){
-                System.assertEquals(count, taskMap.get(loc.Animal__c).size());
-            }
-            else {
-                System.assertEquals(0, count);
-            }
-        }
+        // for(Facility_Outcome__c loc : locs){
+        //     Integer count = taskCount(loc);
+        //     System.debug('count = ' + count);
+        //     if(taskMap.containsKey(loc.Animal__c)){
+        //         System.assertEquals(count, taskMap.get(loc.Animal__c).size());
+        //     }
+        //     else {
+        //         System.assertEquals(0, count);
+        //     }
+        // }
+
+                /*
+        the first check takes into account the number of days on the custom meta data records may change.
+        it also takes into account the day of the week the test is ran to make sure only those tasks needed through the
+        following tuesday are created
+        */
+        Integer count = taskCount(locs[0]);
+        System.assertEquals(count, taskMap.get(locs[0].Animal__c).size());
+
+        //because the follow up frequency for this loc is set to every other week a task should not be created at this time
+        System.assert(!taskMap.containsKey(locs[1].Animal__c), 'taskMap should not have contained tasks for this animal, instead was: ' + taskMap.get(locs[1].Animal__c));
     }
 
     @isTest
     static void scheduleFollowups_customScheduleWithExistingTasks() {
+        Map<String, AutoScheduleTasksUtil.DateRangeWrapper> dateRanges = AutoScheduleTasksUtil.dateRanges;
         Facility_Outcome__c[] locs = [SELECT Id, Animal__c, Animal__r.Current_Recent_Shelter_Location__c, Follow_Up_Days__c, Follow_Up_Frequency__c FROM Facility_Outcome__c];
         locs[0].Follow_Up_Days__c = 'Wednesday;Friday';
         locs[0].Follow_Up_Frequency__c = 'Every Other Week';
@@ -221,6 +236,7 @@ private class test_ScheduleBoardAndTrainTask {
 
     @isTest
     static void scheduleFollowupsSpecificDog_success() {
+        Map<String, AutoScheduleTasksUtil.DateRangeWrapper> dateRanges = AutoScheduleTasksUtil.dateRanges;
         Animal__c dog = [SELECT Id FROM Animal__c LIMIT 1];
         test.startTest();
             Task[] toInsert = ScheduleBoardAndTrainTask.scheduleFollowUps(new Id[]{dog.Id});
@@ -261,8 +277,10 @@ private class test_ScheduleBoardAndTrainTask {
     //need to calculate the number of tasks needed from today through tuesday
     private static Integer taskCount(Facility_Outcome__c loc){
         Map<String, Date> dateMap = new Map<String, Date>();
+        Date[] dateList = new Date[0];
         if(loc.Follow_Up_Days__c != null){
-            dateMap = AutoScheduleTasksUtil.getDateMap(loc.Follow_Up_Days__c);
+            // dateMap = AutoScheduleTasksUtil.getDateMap(loc.Follow_Up_Days__c);
+            dateList = AutoScheduleTasksUtil.getDateList(loc.Follow_Up_Days__c);
         } else {
             Calendar_Schedule_Config__mdt config = [
                 SELECT Frequency__c, Population__c, Monday__c, Tuesday__c, Wednesday__c, Thursday__c, Friday__c, Saturday__c, Sunday__c
@@ -270,9 +288,10 @@ private class test_ScheduleBoardAndTrainTask {
                 WHERE Task_Type__c = 'Board And Train'
             ];
 
-            dateMap = AutoScheduleTasksUtil.getDateMap(config);
+            // dateMap = AutoScheduleTasksUtil.getDateMap(config);
+            dateList = AutoScheduleTasksUtil.getDateList(config);
         }
 
-        return !dateMap.isEmpty() ? dateMap.size() : 0;
+        return !dateList.isEmpty() ? dateList.size() : 0;
     }    
 }

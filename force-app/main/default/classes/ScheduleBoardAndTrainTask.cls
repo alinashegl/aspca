@@ -8,25 +8,25 @@ public with sharing class ScheduleBoardAndTrainTask {
         //get a map of all the active Board And Train Calendar_Schedule_Config__mdt records
         Map<String, Calendar_Schedule_Config__mdt> calendarConfigMap = AutoScheduleTasksUtil.getCalendarConfig('Board And Train');
         //if the map is empty or does not containthe default, no need to continue
-        if(calendarConfigMap.isEmpty() || calendarConfigMap.containsKey('Board And Train All-Weekly')){ 
-            return null;
-        }
-        //set the default config
-        Calendar_Schedule_Config__mdt defaultConfig = calendarConfigMap.get('Board And Train All-Weekly');
+        if(!calendarConfigMap.isEmpty() && calendarConfigMap.containsKey('Board And Train All-Weekly')){ 
 
-        Animal__c[] animals = getAnimals(animalIds);
+            //set the default config
+            Calendar_Schedule_Config__mdt defaultConfig = calendarConfigMap.get('Board And Train All-Weekly');
 
-        //Query for any existing Board and Train tasks related to the animals
-        Map<Id, Task> animalToTaskMap = getTasks(animals);
+            Animal__c[] animals = getAnimals(animalIds);
 
-        //query the animals that meet the criteria and loops through them preparing the tasks for each one
-        for(Animal__c animal : animals){
-            //if the animal has an existing task already assign it here
-            Task task = animalToTaskMap.containsKey(animal.Id) ? animalToTaskMap.get(animal.Id) : null;
+            //Query for any existing Board and Train tasks related to the animals
+            Map<Id, Task> animalToTaskMap = getTasks(animals);
 
-            bntTasks.addAll(
-                prepTasks(animal, defaultConfig, task)
-            );
+            //query the animals that meet the criteria and loops through them preparing the tasks for each one
+            for(Animal__c animal : animals){
+                //if the animal has an existing task already assign it here
+                Task task = animalToTaskMap.containsKey(animal.Id) ? animalToTaskMap.get(animal.Id) : null;
+
+                bntTasks.addAll(
+                    prepTasks(animal, defaultConfig, task)
+                );
+            }
         }
         return bntTasks;
     }

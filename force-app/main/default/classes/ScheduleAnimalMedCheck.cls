@@ -81,6 +81,7 @@ public with sharing class ScheduleAnimalMedCheck {
     @testVisible
     private static Task[] prepTask(Task treatmentTask, Date[] taskDates){
         Task[] treatmentTasks = new Task[0];
+        //only create followup tasks if there was an original treatment task and the taskDates are not null
         if(treatmentTask != null && !taskDates.isEmpty()){
             //get the genericCon for the animal's location
             Contact genericCon = AutoScheduleTasksUtil.genericContactMap.get(treatmentTask.Animal__r.Current_Recent_Shelter_Location__c);
@@ -129,7 +130,7 @@ public with sharing class ScheduleAnimalMedCheck {
     }
 
     @testVisible
-    private static integer dayOfWeekToInteger(String day){
+    private static Integer dayOfWeekToInteger(String day){
         Integer dayNum = 0;
         switch on day {	
             when 'Wednesday' {

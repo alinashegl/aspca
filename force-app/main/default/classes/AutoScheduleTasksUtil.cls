@@ -76,6 +76,10 @@ public class AutoScheduleTasksUtil {
     * the date to the datesForTasks list
     */
     private static Date[] datesForTasks(String[] dayList){
+        if(startDate == null || endDate == null){
+            determineDateRange();
+        }
+
         Date[] datesForTasks = new Date[0];
         Integer numOfDays = startDate.daysBetween(endDate) + 1;
         for(integer i = 0; i < numOfDays; i++){
@@ -141,7 +145,7 @@ public class AutoScheduleTasksUtil {
 
     //return a map of date ranges for the rest of this week and next week
     public static Map<String, DateRangeWrapper> determineDateRange(){
-        Map<String, DateRangeWrapper> dateRanges = new Map<String, DateRangeWrapper>();
+        Map<String, DateRangeWrapper> dateRangeMap = new Map<String, DateRangeWrapper>();
 
         Date today = date.today();
 
@@ -149,39 +153,45 @@ public class AutoScheduleTasksUtil {
         // Boolean isMonday = 
 
         Date tempWeekStart = startOfASPCAWeek(today);
-        Date startDate;
-        Date endDate;
+        Date tempStartDate;
+        Date tempEndDate;
 
         //current week dates
-        startDate = today;
-        endDate = tempWeekStart.addDays(6);
+        tempStartDate = today;
+        tempEndDate = tempWeekStart.addDays(6);
 
         //create date range for this week
         DateRangeWrapper thisWeek = new DateRangeWrapper();
         thisWeek.startDate = today;
-        thisWeek.endDate = endDate;
-        thisWeek.startDateFormatted = startDate.format();
-        thisWeek.endDateFormatted = endDate.format();
-        thisWeek.startDay = getDayOfWeek(startDate);
-        thisWeek.endDay = getDayOfWeek(endDate);
+        thisWeek.endDate = tempEndDate;
+        thisWeek.startDateFormatted = tempStartDate.format();
+        thisWeek.endDateFormatted = tempEndDate.format();
+        thisWeek.startDay = getDayOfWeek(tempStartDate);
+        thisWeek.endDay = getDayOfWeek(tempEndDate);
         thisWeek.isMonday = getDayOfWeek(today) == 'Monday';
-        dateRanges.put('thisWeek', thisWeek);
+        dateRangeMap.put('thisWeek', thisWeek);
 
 
         //next week's dates
-        startDate = tempWeekStart.addDays(7);
-        endDate = tempWeekStart.addDays(13);
+        tempStartDate = tempWeekStart.addDays(7);
+        tempEndDate = tempWeekStart.addDays(13);
 
         DateRangeWrapper nextWeek = new DateRangeWrapper();
-        nextWeek.startDate = startDate;
-        nextWeek.endDate = endDate;
-        nextWeek.startDateFormatted = startDate.format();
-        nextWeek.endDateFormatted = endDate.format();
-        nextWeek.startDay = getDayOfWeek(startDate);
-        nextWeek.endDay = getDayOfWeek(endDate);
-        dateRanges.put('nextWeek', nextWeek);
+        nextWeek.startDate = tempStartDate;
+        nextWeek.endDate = tempEndDate;
+        nextWeek.startDateFormatted = tempStartDate.format();
+        nextWeek.endDateFormatted = tempEndDate.format();
+        nextWeek.startDay = getDayOfWeek(tempStartDate);
+        nextWeek.endDay = getDayOfWeek(tempEndDate);
+        dateRangeMap.put('nextWeek', nextWeek);
 
-        return dateRanges;
+        //setting default dates if in case they aren't sent by the calling class
+        if(startDate == null && endDate == null){
+            startDate = dateRangeMap.get('nextWeek').startDate;
+            endDate = dateRangeMap.get('nextWeek').endDate;
+        }
+
+        return dateRangeMap;
     }
 
     //Convert a date to a day of the week
