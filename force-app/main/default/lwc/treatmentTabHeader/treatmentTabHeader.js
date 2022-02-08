@@ -29,6 +29,7 @@ export default class TreatmentTabHeader extends NavigationMixin(LightningElement
         event.preventDefault();
         const fields = event.detail.fields;
         fields.Animal__c = this.recordId;
+        window.console.log('fields: ', JSON.stringify(fields));
         this.template.querySelector('lightning-record-edit-form').submit(fields);
     }
 
