@@ -3,6 +3,15 @@
     <fullName>CaseWorker__c</fullName>
     <externalId>false</externalId>
     <label>Case Worker</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Contact.Contact_Type__c</field>
+            <operation>equals</operation>
+            <value>Behavior Case Worker</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
     <referenceTo>Contact</referenceTo>
     <relationshipLabel>Behavior Case Workers</relationshipLabel>
     <relationshipName>Case_Workers</relationshipName>
