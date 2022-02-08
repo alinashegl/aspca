@@ -52,7 +52,6 @@ private class test_ScheduleAnimalPlaygroups {
 
     @isTest 
     static void schedulePlaygroups_success(){
-        Map<String, AutoScheduleTasksUtil.DateRangeWrapper> dateRanges = AutoScheduleTasksUtil.dateRanges;
         Test.startTest();
             Task[] toInsert = ScheduleAnimalPlaygroups.schedulePlaygroups(null);
         Test.stopTest();
@@ -89,7 +88,6 @@ private class test_ScheduleAnimalPlaygroups {
 
     @isTest 
     static void schedulePlaygroupsAnimalSpecific_success(){
-        Map<String, AutoScheduleTasksUtil.DateRangeWrapper> dateRanges = AutoScheduleTasksUtil.dateRanges;
         Animal__c dog = [SELECT Id FROM Animal__c WHERE Current_Recent_Shelter_Location__c = 'ARC' LIMIT 1];
         Test.startTest();
             Task[] toInsert = ScheduleAnimalPlaygroups.schedulePlaygroups(new Id[]{dog.Id});
@@ -135,8 +133,6 @@ private class test_ScheduleAnimalPlaygroups {
             AND Population__c =: animal.Current_Recent_Shelter_Location__c
             AND Frequency__c =: priority
         ];
-
-        // Map<String, Date> dateMap = AutoScheduleTasksUtil.getDateMap(config);
         Date[] dateList = AutoScheduleTasksUtil.getDateList(config);
         System.debug('dateList = ' + dateList);
 

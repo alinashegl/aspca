@@ -3,6 +3,9 @@ public with sharing class ScheduleBoardAndTrainTask {
 
     //main method,called by AutoScheduleController class
     public static Task[] scheduleFollowUps(Id[] animalIds) {
+        //make sure we have default start and end dates set
+        Map<String, AutoScheduleTasksUtil.DateRangeWrapper> dateRanges = AutoScheduleTasksUtil.dateRanges;
+
         Task[] bntTasks = new Task[0];
 
         //get a map of all the active Board And Train Calendar_Schedule_Config__mdt records

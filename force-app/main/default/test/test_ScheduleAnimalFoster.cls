@@ -38,7 +38,6 @@ private class test_ScheduleAnimalFoster {
 
     @isTest
     static void scheduleFollowups_success() {
-        // Map<String, AutoScheduleTasksUtil.DateRangeWrapper> dateRanges = AutoScheduleTasksUtil.dateRanges;
         test.startTest();
             Task[] toInsert = ScheduleAnimalFoster.scheduleFollowUps(null);
         test.stopTest();
@@ -76,7 +75,6 @@ private class test_ScheduleAnimalFoster {
 
     @isTest
     static void scheduleFollowups_withExistingTask() {
-        // Map<String, AutoScheduleTasksUtil.DateRangeWrapper> dateRanges = AutoScheduleTasksUtil.dateRanges;
         Id recordTypeId = Util.getRecordTypeId('Task',AutoScheduleTasksUtil.FOSTER_TASK_RECORD_TYPE_NAME);
         Task[] existingTasks = new Task[0];
         for(Animal__c anim : [SELECT Id FROM Animal__c]){
@@ -126,7 +124,6 @@ private class test_ScheduleAnimalFoster {
 
     @isTest
     static void scheduleFollowups_customSchedule() {
-        // Map<String, AutoScheduleTasksUtil.DateRangeWrapper> dateRanges = AutoScheduleTasksUtil.dateRanges;
         Facility_Outcome__c[] locs = [SELECT Id, Animal__c, Animal__r.Current_Recent_Shelter_Location__c, Follow_Up_Days__c, Follow_Up_Frequency__c FROM Facility_Outcome__c];
         locs[0].Follow_Up_Days__c = 'Wednesday;Friday';
         locs[1].Follow_Up_Frequency__c = 'Every Other Week';
@@ -162,7 +159,6 @@ private class test_ScheduleAnimalFoster {
 
     @isTest
     static void scheduleFollowups_customScheduleWithExistingTasks() {
-        // Map<String, AutoScheduleTasksUtil.DateRangeWrapper> dateRanges = AutoScheduleTasksUtil.dateRanges;
         Facility_Outcome__c[] locs = [SELECT Id, Animal__c, Animal__r.Current_Recent_Shelter_Location__c, Follow_Up_Days__c, Follow_Up_Frequency__c FROM Facility_Outcome__c];
         locs[0].Follow_Up_Days__c = 'Wednesday;Friday';
         locs[0].Follow_Up_Frequency__c = 'Every Other Week';
@@ -187,7 +183,7 @@ private class test_ScheduleAnimalFoster {
             recordTypeId = recordTypeId,
             Animal__c = animals[1].Id,
             WhatId = locs[1].Id,
-            ActivityDate = date.today().addDays(-5),
+            ActivityDate = date.today().addDays(2),
             Subject = 'Foster Follow Up'
         );
         existingTasks.add(t2);
@@ -215,7 +211,6 @@ private class test_ScheduleAnimalFoster {
 
     @isTest
     static void scheduleFollowupsSpecificDog_success() {
-        // Map<String, AutoScheduleTasksUtil.DateRangeWrapper> dateRanges = AutoScheduleTasksUtil.dateRanges;
         Animal__c dog = [SELECT Id FROM Animal__c LIMIT 1];
         test.startTest();
             Task[] toInsert = ScheduleAnimalFoster.scheduleFollowUps(new Id[]{dog.Id});
@@ -254,10 +249,8 @@ private class test_ScheduleAnimalFoster {
 
     //need to calculate the number of tasks needed from today through tuesday
     private static Integer taskCount(Facility_Outcome__c loc){
-        // Map<String, Date> dateMap = new Map<String, Date>();
         Date[] dateList = new Date[0];
         if(loc.Follow_Up_Days__c != null){
-            // dateMap = AutoScheduleTasksUtil.getDateMap(loc.Follow_Up_Days__c);
             dateList = AutoScheduleTasksUtil.getDateList(loc.Follow_Up_Days__c);
         } else {
             Calendar_Schedule_Config__mdt config = [
@@ -266,7 +259,6 @@ private class test_ScheduleAnimalFoster {
                 WHERE Task_Type__c = 'Foster'
             ];
 
-            // dateMap = AutoScheduleTasksUtil.getDateMap(config);
             dateList = AutoScheduleTasksUtil.getDateList(config);
         }
 
