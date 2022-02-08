@@ -1,21 +1,21 @@
 @isTest
 private class test_ScheduleAnimalMedCheck {
     @isTest
-    static void checkDayOfWeek() {
+    static void checkDayOfWeekToInteger() {
         test.startTest();
-            String day = ScheduleAnimalMedCheck.checkDayOfWeek(1);
+            Integer dayNumber = ScheduleAnimalMedCheck.dayOfWeekToInteger('Wednesday');
         test.stopTest();
 
-        System.assertEquals('Monday', day);
+        System.assertEquals(1, dayNumber);
     }
 
     @isTest
-    static void checkDayOfWeekDefault() {
+    static void checkDayOfWeekToIntegerDefault() {
         test.startTest();
-            String day = ScheduleAnimalMedCheck.checkDayOfWeek(10);
+            Integer dayNumber = ScheduleAnimalMedCheck.dayOfWeekToInteger('Tuesday');
         test.stopTest();
 
-        System.assertEquals('Sunday', day);
+        System.assertEquals(0, dayNumber);
     }
 
     @isTest
@@ -51,10 +51,10 @@ private class test_ScheduleAnimalMedCheck {
         treatmentTask = [SELECT Id, Animal__c, Animal__r.Animal_Name_ID__c, Animal__r.Behavior_Case_Worker__r.Is_Generic_Contact__c, Animal__r.Current_Recent_Shelter_Location__c, Animal_Exam_Sheet_Lookup__c, Medication__c FROM Task WHERE Id =: treatmentTask.Id LIMIT 1];
 
         test.startTest();
-            Task newTask = ScheduleAnimalMedCheck.prepTask(treatmentTask, date.today().addDays(3));
+            Task[] newTasks = ScheduleAnimalMedCheck.prepTask(treatmentTask, new Date[]{date.today().addDays(3)});
         test.stopTest();
 
-        System.assert(newTask != null);
+        System.assert(!newTasks.isEmpty(), 'should have returned tasks, but instead was an empty list');
     }
 
     @isTest
@@ -63,10 +63,10 @@ private class test_ScheduleAnimalMedCheck {
         createGenericContact(anim);
 
         test.startTest();
-            Task newTask = ScheduleAnimalMedCheck.prepTask(null, date.today().addDays(3));
+            Task[] newTasks = ScheduleAnimalMedCheck.prepTask(null, new Date[]{date.today().addDays(3)});
         test.stopTest();
 
-        System.assert(newTask == null);
+        System.assert(newTasks.isEmpty(), 'should not have returned any tasks, instead was: ' + newTasks);
     }
 
     @isTest
@@ -77,11 +77,11 @@ private class test_ScheduleAnimalMedCheck {
         treatmentTask = [SELECT Id, IsRecurrence, RecurrenceStartDateOnly, ActivityDate FROM Task WHERE Id =: treatmentTask.Id LIMIT 1];
 
         test.startTest();
-            Date d = ScheduleAnimalMedCheck.calculateTaskDate(treatmentTask);
+            Date[] dates = ScheduleAnimalMedCheck.calculateTaskDates(treatmentTask);
         test.stopTest();
 
-        system.assert(d != null, 'Date was null, expected a date');
-        system.assert(d > date.today(), 'expected a future date, but was: ' + d);
+        system.assert(!dates.isEmpty(), 'Date was null, expected a date');
+        system.assert(dates[0] > date.today(), 'expected a future date, but was: ' + dates[0]);
     }
 
     @isTest
@@ -92,11 +92,11 @@ private class test_ScheduleAnimalMedCheck {
         treatmentTask = [SELECT Id, IsRecurrence, RecurrenceStartDateOnly, ActivityDate FROM Task WHERE Id =: treatmentTask.Id LIMIT 1];
 
         test.startTest();
-            Date d = ScheduleAnimalMedCheck.calculateTaskDate(treatmentTask);
+            Date[] dates = ScheduleAnimalMedCheck.calculateTaskDates(treatmentTask);
         test.stopTest();
 
-        system.assert(d != null, 'Date was null, expected a date');
-        system.assert(d > date.today(), 'expected a future date, but was: ' + d);
+        system.assert(!dates.isEmpty(), 'Date was null, expected a date');
+        system.assert(dates[0] > date.today(), 'expected a future date, but was: ' + dates[0]);
     }
 
     @isTest

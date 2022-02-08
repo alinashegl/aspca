@@ -167,15 +167,12 @@ private class test_ScheduleAnimalBehaviorTreatments {
                 taskMap.put(t.Animal__c, new Task[]{t});
             }
         }
-        System.debug('taskMap = ' + taskMap);
 
         /*
         this assert loop takes into account the number of days on the custom meta data records may change.
         it also takes into account the day of the week the test is ran to make sure only those tasks need through the
         following tuesday are created
         */
-        // Treatment_Plan__c[] plans = [SELECT Id, Custom_Schedule__c, Treatment_Priority__c, Animal__r.Name, Animal__r.Current_Recent_Shelter_Location__c FROM Treatment_Plan__c];
-        System.debug('plans = ' + plans);
         for(Treatment_Plan__c plan : plans){
             Integer count = taskCount(plan);
             System.debug('count = ' + count);
@@ -190,7 +187,7 @@ private class test_ScheduleAnimalBehaviorTreatments {
 
     //need to calculate the number of tasks needed from today through tuesday
     private static Integer taskCount(Treatment_Plan__c plan){
-        Map<String, Date> dateMap = new Map<String,Date>();
+        Date[] dateList = new Date[0];
         if(plan.Custom_Schedule__c == null){
             String priority = plan.Treatment_Priority__c.split(' ')[0];
             Calendar_Schedule_Config__mdt config = [
@@ -200,11 +197,11 @@ private class test_ScheduleAnimalBehaviorTreatments {
                 AND Population__c =: plan.Animal__r.Current_Recent_Shelter_Location__c
                 AND Frequency__c =: priority
             ];
-            dateMap = AutoScheduleTasksUtil.getDateMap(config);
+            dateList = AutoScheduleTasksUtil.getDateList(config);
         }
         else {
-            dateMap = AutoScheduleTasksUtil.getDateMap(plan.Custom_Schedule__c);
+            dateList = AutoScheduleTasksUtil.getDateList(plan.Custom_Schedule__c);
         }
-        return !dateMap.isEmpty() ? dateMap.size() : 0;
+        return !dateList.isEmpty() ? dateList.size() : 0;
     }
 }

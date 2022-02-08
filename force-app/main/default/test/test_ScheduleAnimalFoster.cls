@@ -146,21 +146,15 @@ private class test_ScheduleAnimalFoster {
         System.debug('taskMap = ' + taskMap);
 
         /*
-        this assert loop takes into account the number of days on the custom meta data records may change.
-        it also takes into account the day of the week the test is ran to make sure only those tasks need through the
+        the first check takes into account the number of days on the custom meta data records may change.
+        it also takes into account the day of the week the test is ran to make sure only those tasks needed through the
         following tuesday are created
         */
+        Integer count = taskCount(locs[0]);
+        System.assertEquals(count, taskMap.get(locs[0].Animal__c).size());
 
-        for(Facility_Outcome__c loc : locs){
-            Integer count = taskCount(loc);
-            System.debug('count = ' + count);
-            if(taskMap.containsKey(loc.Animal__c)){
-                System.assertEquals(count, taskMap.get(loc.Animal__c).size());
-            }
-            else {
-                System.assertEquals(0, count);
-            }
-        }
+        //because the follow up frequency for this loc is set to every other week a task should not be created at this time
+        System.assert(!taskMap.containsKey(locs[1].Animal__c), 'taskMap should not have contained tasks for this animal, instead was: ' + taskMap.get(locs[1].Animal__c));
     }
 
     @isTest
@@ -189,7 +183,7 @@ private class test_ScheduleAnimalFoster {
             recordTypeId = recordTypeId,
             Animal__c = animals[1].Id,
             WhatId = locs[1].Id,
-            ActivityDate = date.today().addDays(-5),
+            ActivityDate = date.today().addDays(2),
             Subject = 'Foster Follow Up'
         );
         existingTasks.add(t2);
@@ -255,9 +249,9 @@ private class test_ScheduleAnimalFoster {
 
     //need to calculate the number of tasks needed from today through tuesday
     private static Integer taskCount(Facility_Outcome__c loc){
-        Map<String, Date> dateMap = new Map<String, Date>();
+        Date[] dateList = new Date[0];
         if(loc.Follow_Up_Days__c != null){
-            dateMap = AutoScheduleTasksUtil.getDateMap(loc.Follow_Up_Days__c);
+            dateList = AutoScheduleTasksUtil.getDateList(loc.Follow_Up_Days__c);
         } else {
             Calendar_Schedule_Config__mdt config = [
                 SELECT Frequency__c, Population__c, Monday__c, Tuesday__c, Wednesday__c, Thursday__c, Friday__c, Saturday__c, Sunday__c
@@ -265,9 +259,9 @@ private class test_ScheduleAnimalFoster {
                 WHERE Task_Type__c = 'Foster'
             ];
 
-            dateMap = AutoScheduleTasksUtil.getDateMap(config);
+            dateList = AutoScheduleTasksUtil.getDateList(config);
         }
 
-        return !dateMap.isEmpty() ? dateMap.size() : 0;
+        return !dateList.isEmpty() ? dateList.size() : 0;
     }
 }
