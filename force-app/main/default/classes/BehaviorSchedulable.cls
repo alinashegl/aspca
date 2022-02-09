@@ -6,6 +6,7 @@ global class BehaviorSchedulable implements Schedulable{
     */
 
     global void execute(SchedulableContext SC){
+        //we pass in null values so it will run for all animals and the default dates instead of specific animals and dates
         AutoScheduleController.handleScheduleTasks(null, null, null);
     }
 }

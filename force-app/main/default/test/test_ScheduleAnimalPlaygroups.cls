@@ -133,9 +133,9 @@ private class test_ScheduleAnimalPlaygroups {
             AND Population__c =: animal.Current_Recent_Shelter_Location__c
             AND Frequency__c =: priority
         ];
+        Date[] dateList = AutoScheduleTasksUtil.getDateList(config);
+        System.debug('dateList = ' + dateList);
 
-        Map<String, Date> dateMap = AutoScheduleTasksUtil.getDateMap(config);
-
-        return !dateMap.isEmpty() ? dateMap.size() : 0;
+        return !dateList.isEmpty() ? dateList.size() : 0;
     }
 }

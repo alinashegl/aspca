@@ -185,4 +185,8 @@ public class BehaviorEvaluationSummaryUtil {
             }
         }
     }
+
+    public static void handleAfterUpdate(List<Behavior_Evaluation__c> triggerNew, Map<Id, Behavior_Evaluation__c> triggerOldMap) {
+        LogHistory.LogHistory(triggerOldMap, triggerNew);
+    }
 }

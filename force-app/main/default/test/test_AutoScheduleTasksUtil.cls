@@ -10,14 +10,14 @@ private class test_AutoScheduleTasksUtil {
     }
 
     @isTest 
-    static void getDateMap(){
+    static void getDateListFromConfig(){
         Map<String, Calendar_Schedule_Config__mdt> configs = AutoScheduleTasksUtil.getCalendarConfig('Playgroup');
 
         Test.startTest();
-            Map<String, Date> dateMap = AutoScheduleTasksUtil.getDateMap(configs.values()[0]);
+            Date[] dateList = AutoScheduleTasksUtil.getDateList(configs.values()[0]);
         Test.stopTest();
 
-        System.assert(!dateMap.isEmpty(), 'shold have returned configs, instead was empty');
+        System.assert(!dateList.isEmpty(), 'shold have returned configs, instead was empty');
     }
 
     @isTest
@@ -78,22 +78,76 @@ private class test_AutoScheduleTasksUtil {
     }
 
     @isTest
-    static void getDateMapFromDaysSuccess(){
-        Map<String, Date> dateMap = new Map<String, Date>();
+    static void getDateListFromDaysSuccess(){
+        Date[] dateList = new Date[0];
         test.startTest();
-            dateMap = AutoScheduleTasksUtil.getDateMap('Monday;Tuesday;Wednesday;Thursday;Friday;Saturday;Sunday');
+            dateList = AutoScheduleTasksUtil.getDateList('Monday;Tuesday;Wednesday;Thursday;Friday;Saturday;Sunday');
         test.stopTest();
 
-        System.assert(!dateMap.isEmpty(), 'Should have returned a map with dates, but was empty');
+        System.assert(!dateList.isEmpty(), 'Should have returned a map with dates, but was empty');
     }
 
     @isTest
-    static void getDateMapFromDaysBadDay(){
-        Map<String, Date> dateMap = new Map<String, Date>();
+    static void getDateListFromDaysBadDay(){
+        Date[] dateList = new Date[0];
         test.startTest();
-            dateMap = AutoScheduleTasksUtil.getDateMap('nodays');
+            dateList = AutoScheduleTasksUtil.getDateList('nodays');
         test.stopTest();
 
-        System.assert(dateMap.isEmpty(), 'Should have returned an empty map, but was ' + dateMap);
+        System.assert(dateList.isEmpty(), 'Should have returned an empty map, but was ' + dateList);
+    }
+
+    @isTest
+    static void translateFrequencyEveryOtherWeek(){
+        test.startTest();
+            Integer minDays = AutoScheduleTasksUtil.translateFrequency('Every Other Week');
+        test.stopTest();
+
+        System.assertEquals(13, minDays);
+    }
+
+    @isTest
+    static void translateFrequencyEveryThreeWeeks(){
+        test.startTest();
+            Integer minDays = AutoScheduleTasksUtil.translateFrequency('Every Three Weeks');
+        test.stopTest();
+
+        System.assertEquals(20, minDays);
+    }
+
+    @isTest
+    static void translateFrequencyMonthly(){
+        test.startTest();
+            Integer minDays = AutoScheduleTasksUtil.translateFrequency('Monthly');
+        test.stopTest();
+
+        System.assertEquals(27, minDays);
+    }
+
+    @isTest
+    static void translateFrequencyEveryOtherMonth(){
+        test.startTest();
+            Integer minDays = AutoScheduleTasksUtil.translateFrequency('Every Other Month');
+        test.stopTest();
+
+        System.assertEquals(55, minDays);
+    }
+
+    @isTest
+    static void translateFrequencyDefault(){
+        test.startTest();
+            Integer minDays = AutoScheduleTasksUtil.translateFrequency(null);
+        test.stopTest();
+
+        System.assertEquals(0, minDays);
+    }
+
+    @isTest 
+    static void dayOfWeekMap(){
+        test.startTest();
+            Map<String, Date> dayMap = AutoScheduleTasksUtil.dayOfWeekMap();
+        test.stopTest();
+
+        System.assert(!dayMap.isEmpty(), 'Should have returned a map of days, and dates, instead was empty');
     }
 }

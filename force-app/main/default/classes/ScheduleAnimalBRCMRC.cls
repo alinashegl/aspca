@@ -1,11 +1,20 @@
 public with sharing class ScheduleAnimalBRCMRC {
     public static Id recordTypeId = Util.getRecordTypeId('Task','MRC_BRC_Follow_UP');
+
+    //main method,called by AutoScheduleController class
     public static Task[] scheduleBRCMRCTasks(Id[] animalIds){
         Task[] brcmrcTasks = new Task[0];
+
+        //query the animals that meet the criteria and loops through them preparing the tasks for each one
         List<Animal__c> animalList = getAnimals(animalIds);
         for(Animal__c animal : animalList){
+            //first determine what date would need a follow up task, if no follow up date, skip this animal
             Date followUpDate = calculateFollowUpDate(animal);
-            brcmrcTasks.add(prepTask(animal, followUpDate, true));
+            if(followUpDate != null){
+                brcmrcTasks.add(
+                    prepTask(animal, followUpDate, true)
+                );
+            }
         }
         return brcmrcTasks;
     }
@@ -21,8 +30,14 @@ public with sharing class ScheduleAnimalBRCMRC {
         update taskList;
     }
     
+    /*
+    * prepares and returns the new task
+    */
     public static Task prepTask(Animal__c animal, Date taskDate, Boolean isAutoScheduled){
+        //get the genericCon for the animal's location        
         Contact genericCon = AutoScheduleTasksUtil.genericContactMap.get(animal.Current_Recent_Shelter_Location__c);
+
+        //determine the task subject prefix
         String subjectPrefix = 'MRC';
         if(animal.BRC_Status__c == 'BRC Accepted' && animal.MRC_Status__c == 'MRC Accepted'){
             subjectPrefix = 'MRC/BRC';
@@ -65,8 +80,9 @@ public with sharing class ScheduleAnimalBRCMRC {
         return Database.query(queryString);
     }
 
+    //returns a date that is 14 days after the last activityDate if it falls between startDate and endDate
     private static Date calculateFollowUpDate(Animal__c animal){
-        Date followUpDate;
+        Date followUpDate = null;
         if(!animal.Activities__r.isEmpty()){
             Date tempActivityDate = animal.Activities__r[0].ActivityDate.addDays(14);
             if(tempActivityDate >= AutoScheduleTasksUtil.startDate && tempActivityDate <= AutoScheduleTasksUtil.endDate){
