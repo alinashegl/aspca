@@ -858,10 +858,15 @@ public without sharing class TestDataFactory {
         insert animalPlaygroup;
         Playgroup_Contact__c playgroupContact = new Playgroup_Contact__c(
             Contact__c = c.Id,
-            Novel_Not_Novel__c = 'Novel',
+            Novel_Not_Novel__c = 'PG Leader',
             Playgroup__c = animalPlaygroup.Id
         );
-        insert playgroupContact;
+        Playgroup_Contact__c playgroupLeaderContact = new Playgroup_Contact__c(
+          Contact__c = createContact().Id,
+          Novel_Not_Novel__c = 'Novel',
+          Playgroup__c = animalPlaygroup.Id
+      );
+        insert new Playgroup_Contact__c[]{playgroupContact, playgroupLeaderContact};
         return session;
     }
 

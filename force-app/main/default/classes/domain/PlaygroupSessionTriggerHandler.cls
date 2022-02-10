@@ -46,7 +46,8 @@ public with sharing class PlaygroupSessionTriggerHandler {
 
     }
 
-    private static Map<String, Map<Id, Playgroup_Session__c>> prepUPdatedSessionMap(Playgroup_Session__c[] sessions, Map<Id, Playgroup_Session__c> oldSessionMap){
+    @testVisible
+    private static Map<String, Map<Id, Playgroup_Session__c>> prepUpdatedSessionMap(Playgroup_Session__c[] sessions, Map<Id, Playgroup_Session__c> oldSessionMap){
         Map<String, Map<Id, Playgroup_Session__c>> sessionActionMap = new Map<String, Map<Id, Playgroup_Session__c>>{
             'removed' => new Map<Id, Playgroup_Session__c>(),
             'updated' => new Map<Id, Playgroup_Session__c>(),
@@ -71,6 +72,7 @@ public with sharing class PlaygroupSessionTriggerHandler {
         return sessionActionMap;
     }
 
+    @testVisible
     private static Map<Id, Playgroup_Session__c> filterSessionsWithLeaders(Playgroup_Session__c[] sessions){
         Map<Id, Playgroup_Session__c> sessionsWithLeaders = new Map<Id, Playgroup_Session__c>();
 
@@ -82,32 +84,38 @@ public with sharing class PlaygroupSessionTriggerHandler {
         return sessionsWithLeaders;
     }
 
+    @testVisible
     private static Animal_Playgroup__c[] getAnimalPlaygroups(Set<Id> sessionIds){
         return [SELECT Id, Playgroup_Session__c FROM Animal_Playgroup__c WHERE Playgroup_Session__c IN: sessionIds];
     }
 
+    @testVisible
     private static Playgroup_Contact__c[] getPlaygroupLeaderContacts(Set<Id> sessionIds){
         return [SELECT Id, Contact__c, Playgroup__r.Playgroup_Session__c FROM Playgroup_Contact__c WHERE Playgroup__r.Playgroup_Session__c IN: sessionIds AND Novel_Not_Novel__c = 'PG Leader'];
     }
 
+    @testVisible
     private static void createPlaygroupContacts(Map<Id, Playgroup_Session__c> sessionMap, Animal_Playgroup__c[] animalPlaygroups){
         Playgroup_Contact__c[] newContacts = new Playgroup_Contact__c[0];
 
-        for(Animal_Playgroup__c animal : animalPlaygroups){
-            if(sessionMap.containsKey(animal.Playgroup_Session__c)){
-                Playgroup_Session__c session = sessionMap.get(animal.Playgroup_Session__c);
-                Playgroup_Contact__c contact = new Playgroup_Contact__c(
-                    Novel_Not_Novel__c = 'PG Leader',
-                    Contact__c = session.Playgroup_Leader__c,
-                    Playgroup__c = animal.Id
-                );
-                newContacts.add(contact);
+        if(!sessionMap.isEmpty() && !animalPlaygroups.isEmpty()){
+            for(Animal_Playgroup__c animal : animalPlaygroups){
+                if(sessionMap.containsKey(animal.Playgroup_Session__c)){
+                    Playgroup_Session__c session = sessionMap.get(animal.Playgroup_Session__c);
+                    Playgroup_Contact__c contact = new Playgroup_Contact__c(
+                        Novel_Not_Novel__c = 'PG Leader',
+                        Contact__c = session.Playgroup_Leader__c,
+                        Playgroup__c = animal.Id
+                    );
+                    newContacts.add(contact);
+                }
             }
-        }
 
-        insert newContacts;
+            insert newContacts;
+        }
     }
 
+    @testVisible
     private static void updatePlaygroupContacts(Map<Id, Playgroup_Session__c> sessionMap, Playgroup_Contact__c[] pgContacts){
         for(Playgroup_Contact__c contact : pgContacts){
             if(sessionMap.containsKey(contact.Playgroup__r.Playgroup_Session__c)){

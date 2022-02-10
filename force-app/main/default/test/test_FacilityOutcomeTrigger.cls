@@ -18,7 +18,9 @@ public class test_FacilityOutcomeTrigger {
         update fosterFacility;
         Integer emailInvocations = Limits.getEmailInvocations();
         Test.stopTest();
-        System.assertEquals(3, emailInvocations);
+        
+        //do not send emails if tests are running because it will fail if emails are turned off (typical in sandboxes) so, this should be 0
+        System.assertEquals(0, emailInvocations);
     }
 
     @isTest
