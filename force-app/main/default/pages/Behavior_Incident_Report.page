@@ -44,10 +44,9 @@
                 </tr>
                 <tr><td></td></tr>
                 <tr><td></td></tr>
-               
             </table>
             <table bgcolor="#D3D3D3">
-            <tr><th colspan="2">PLEASE IDENTIFY WHO WAS INVOLVED AND ANY WITNESSES TO THE INCIDENT</th></tr>
+                <tr><th colspan="2">PLEASE IDENTIFY WHO WAS INVOLVED AND ANY WITNESSES TO THE INCIDENT</th></tr>
                 <tr><td></td></tr>
                 <tr><td></td></tr>
                 <tr>
@@ -62,7 +61,7 @@
                 <tr><td></td></tr>
             </table>
             <table>
-            <tr><th>PLEASE DESCRIBE, IN DETAIL, WHAT OCCURRED OR WHAT YOU SAW</th></tr>
+                <tr><th>PLEASE DESCRIBE, IN DETAIL, WHAT OCCURRED OR WHAT YOU SAW</th></tr>
                 <tr><td></td></tr>
                 <tr><td>BE SURE TO INCLUDE ANY INFORMATION ABOUT THE ENVIRONMENT, THE SITUATION, AND PRECEDING EVENTS THAT MAY BE RELEVANT.</td></tr>
                 <tr><td></td></tr>
@@ -73,25 +72,51 @@
                 <tr><td></td></tr>
                 <tr><td></td></tr>
             </table>
+            <!-- <table bgcolor="#D3D3D3">
+                <apex:form >
+                    <apex:pageBlock title="WHAT BEHAVIORS WERE EXHIBITED BY THE DOG (CHECK ALL THAT APPLY):">
+                        <apex:dataTable value="{!behaviorsExhibited}" var="b">
+                            <apex:column >
+                                <apex:inputCheckbox value="{!b.selected}" label="{!b.label}" rendered="true">
+                                    <apex:image value="{!IF(B.selected == true , checked, uncheked)}" width="25" height="12" style="float: left"/>
+                                    &nbsp;
+                                    {!b.label}
+                                </apex:inputCheckbox>
+                            </apex:column>
+                        </apex:dataTable>
+                    </apex:pageBlock>
+                </apex:form>
+                <tr><td></td></tr>
+                <tr><td></td></tr>
+            </table> -->
             <table bgcolor="#D3D3D3">
-    <apex:form >
-        <apex:pageBlock title="WHAT BEHAVIORS WERE EXHIBITED BY THE DOG (CHECK ALL THAT APPLY):">
-            <apex:dataTable value="{!behaviorsExhibited}" var="b">
-                <apex:column >
-                    <apex:inputCheckbox value="{!b.selected}" label="{!b.label}" rendered="true">
-                        <apex:image value="{!IF(B.selected == true , checked, uncheked)}" width="25" height="12" style="float: left"/>
-                        &nbsp;
-                        {!b.label}
-                    </apex:inputCheckbox>
-                </apex:column>
-            </apex:dataTable>
-       </apex:pageBlock>
-    </apex:form>
+                <apex:form >
+                    <apex:pageBlock title="WHAT BEHAVIORS WERE EXHIBITED BY THE DOG (CHECK ALL THAT APPLY):">
+                        <apex:dataTable value="{!behaviorsExhibited}" var="b">
+                            <apex:column >
+                                <apex:inputCheckbox value="{!b.selected}" label="{!b.label}" rendered="true">
+                                    <apex:image value="{!IF(B.selected == true , checked, uncheked)}" width="25" height="12" style="float: left"/>
+                                    &nbsp;
+                                    {!b.label}
+                                </apex:inputCheckbox>
+                            </apex:column>
+                            <apex:column >
+                                <apex:outputPanel rendered="{!b.secondLabel != null}" >
+                                    <apex:inputCheckbox value="{!b.secondSelected}" label="{!b.secondLabel}" rendered="true">
+                                        <apex:image value="{!IF(B.secondSelected == true , checked, uncheked)}" width="25" height="12" style="float: left"/>
+                                        &nbsp;
+                                        {!b.secondLabel}
+                                    </apex:inputCheckbox>
+                                </apex:outputPanel>
+                            </apex:column>
+                        </apex:dataTable>
+                    </apex:pageBlock>
+                </apex:form>
                 <tr><td></td></tr>
                 <tr><td></td></tr>
             </table>
             <table>
-            <tr><th>PLEASE DESCRIBE/IDENTIFY THE SPECIFIC TARGET OF THE DOG'S BEHAVIOR</th></tr>
+                <tr><th>PLEASE DESCRIBE/IDENTIFY THE SPECIFIC TARGET OF THE DOG'S BEHAVIOR</th></tr>
                 <tr><td></td></tr>
                 <tr><td>(FOR EXAMPLE, WAS THE DOG AIMING FOR ANOTHER DOG, A LEASH, A PIECE OF EQUIPMENT, THE KENNEL, A PERSON'S HAND, A PERSON'S BOOT, ETC.):</td></tr>
                 <tr><td></td></tr>
