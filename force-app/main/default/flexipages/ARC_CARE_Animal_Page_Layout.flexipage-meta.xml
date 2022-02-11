@@ -359,6 +359,12 @@
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
+                <fieldItem>Record.Evaluation_Due_Date__c</fieldItem>
+                <identifier>RecordEvaluation_Due_Date_cField1</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
                 <fieldInstanceProperties>
                     <name>uiBehavior</name>
                     <value>none</value>
@@ -445,6 +451,25 @@
             <fieldInstance>
                 <fieldItem>Record.Volunteer_Reading_Okay__c</fieldItem>
                 <identifier>RecordVolunteer_Reading_Okay_cField1</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.BRC_Status__c</fieldItem>
+                <identifier>RecordBRC_Status_cField1</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.BRC_Decline_Reason__c</fieldItem>
+                <identifier>RecordBRC_Decline_Reason_cField1</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!Record.BRC_Status__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>BRC Declined</rightValue>
+                    </criteria>
+                </visibilityRule>
             </fieldInstance>
         </itemInstances>
         <name>Facet-0e4ad15a-202e-41de-ab60-adf4bbb665ca</name>
