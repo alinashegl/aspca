@@ -11,6 +11,10 @@
         <visible>false</visible>
     </applicationVisibilities>
     <classAccesses>
+        <apexClass>AnimalScheduleQuickActionLWCController</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>AnimalSelector</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -68,6 +72,14 @@
     </classAccesses>
     <classAccesses>
         <apexClass>BehaviorEvaluationsSelector</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>BehaviorSchedulable</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>Behavior_Incident_Report_Controller</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -139,6 +151,10 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>GenericDataTableController</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>HighValueCategoryWrapper</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -160,6 +176,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>LogHandler</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>LogHistory</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -244,6 +264,14 @@
     </classAccesses>
     <classAccesses>
         <apexClass>SObjectSelector</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ScheduleAnimalBRCMRC</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ScheduleAnimalBRCMRCTest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -507,6 +535,10 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>test_AnimalScheduleActionLWCController</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>test_AutoScheduleController</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -531,11 +563,19 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>test_BehaviorSchedulable</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>test_Criteria</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>test_CustomLookupLWCController</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>test_DaybackRest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -731,6 +771,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Additional_Dog_Present__c.Session_Protocol__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Animal_Exam_Sheet__c.Medication_Drug__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1135,6 +1180,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Animal__c.CRC_ID__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Animal__c.Case_Number__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -1395,6 +1445,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Animal__c.Evaluation_Due_Date__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Animal__c.Evaluation_Re_Test_Date__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -1426,6 +1481,26 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Animal__c.Extra_Enrichment__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Animal__c.FM_Case_Type__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Animal__c.FM_Geo_Location__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Animal__c.FM_Intake_Agency_Dept__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Animal__c.FM_UUID__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1556,6 +1631,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Animal__c.Injury_Type__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Animal__c.Intake_Agency_Dept__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1721,6 +1801,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Animal__c.Outcome_Notes__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Animal__c.Outside_Agency_Id__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -2060,6 +2145,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>BehaviorCaseWorker__c.EndDate__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Behavior_Evaluation__c.Animal_Age__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -2092,11 +2182,6 @@
         <editable>false</editable>
         <field>Behavior_Evaluation__c.Assistant_Initials__c</field>
         <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Behavior_Evaluation__c.Behavior_Eval_Record_Type_Name__c</field>
-        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
@@ -2391,6 +2476,36 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Behavior_Evaluation__c.Potential_Behavior_Issues__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Behavior_Evaluation__c.Potential_Issue_Aggression_To_Animals__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Behavior_Evaluation__c.Potential_Issue_Aggression_To_People__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Behavior_Evaluation__c.Potential_Issue_Fear__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Behavior_Evaluation__c.Potential_Issue_High_Arousal__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Behavior_Evaluation__c.Potential_Issue_Other_Notes__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Behavior_Evaluation__c.Potential_Issue_Other__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -3385,6 +3500,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Contact.User_Location__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Contact.User__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -3519,24 +3639,44 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>Evaluation_Entry__c.Field_Label__c</field>
-        <readable>true</readable>
+        <editable>false</editable>
+        <field>EntityHistory__c.FieldName__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>Evaluation_Entry__c.Helper_Text__c</field>
-        <readable>true</readable>
+        <editable>false</editable>
+        <field>EntityHistory__c.NewValue__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>Evaluation_Entry__c.Is_Selected__c</field>
-        <readable>true</readable>
+        <editable>false</editable>
+        <field>EntityHistory__c.ObjectId__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>Evaluation_Entry__c.Response_Type__c</field>
-        <readable>true</readable>
+        <editable>false</editable>
+        <field>EntityHistory__c.ObjectName__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>EntityHistory__c.OldValue__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>EntityHistory__c.ParentId__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>EntityHistory__c.RecordLink__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>EntityHistory__c.RecordName__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -3547,46 +3687,6 @@
         <editable>true</editable>
         <field>Evaluation_Type__c.Eval_Summary__c</field>
         <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Evaluation__c.Description__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Evaluation__c.EvaluationRecordTypeName__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Evaluation__c.Evaluation_Type__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Evaluation__c.Play_Test_Tug_Part_1__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Evaluation__c.Play_Test_Tug_Part_2__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Evaluation__c.Pleasant_Touch_Test__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Evaluation__c.Social_Behavior_Test_P2__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Evaluation__c.Social_Behavior_Test__c</field>
-        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
@@ -3600,12 +3700,12 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Event.Calendar_Day__c</field>
+        <field>Event.Auto_Scheduled_Task__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Event.Calendar_Month__c</field>
+        <field>Event.Record_Type__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -3655,12 +3755,102 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Facility_Outcome__c.Modify_Schedule__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Facility_Outcome__c.Point_of_Contact__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>Facility_Outcome__c.Return_Reason__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Incidents__c.Additional_Comments__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Incidents__c.Behaviors_Exhibited_by_the_Dog__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Incidents__c.Clothing_Worn_at_Bite_Site__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Incidents__c.Damage_Done_by_the_Dog__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Incidents__c.If_dog_did_not_bite__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Incidents__c.Incident_Date_Time__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Incidents__c.Incident_Description__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Incidents__c.Number_of_bites__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Incidents__c.Other_Damage_Done_by_the_Dog__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Incidents__c.Person_Involved__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Incidents__c.Please_explain_why_you_think_so__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Incidents__c.Report_Date__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Incidents__c.Specific_Target_of_Dog_s_Behavior__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Incidents__c.Supervisor_Team_Lead__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Incidents__c.Type_of_Bite__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Incidents__c.Was_Bitten_Area_Covered_with_Clothing__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Incidents__c.Witnesses__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -4750,12 +4940,12 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Task.Calendar_Day__c</field>
+        <field>Task.Auto_Scheduled_Task__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Task.Calendar_Month__c</field>
+        <field>Task.Record_Type__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -4982,8 +5172,7 @@
         <layout>Additional_Dog_Present__c-Additional Dog Present Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Animal__c-Animal Layout</layout>
-        <recordType>Animal__c.Behavior</recordType>
+        <layout>Animal_Exam_Sheet__c-Generic Exam Sheet Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Animal__c-Animal Layout %28FIR Sheltering%29</layout>
@@ -4992,23 +5181,10 @@
         <layout>Animal__c_hd-Animal Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Behavior_Evaluation__c-Behavior Evaluation Layout</layout>
+        <layout>BehaviorCaseWorker__c-Behavior Case Worker Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Behavior_Evaluation__c-Behavior Evaluation Layout</layout>
-        <recordType>Behavior_Evaluation__c.Default</recordType>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>Behavior_Evaluation__c-Behavior Evaluation Layout</layout>
-        <recordType>Behavior_Evaluation__c.Play_Test</recordType>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>Behavior_Evaluation__c-Behavior Evaluation Layout</layout>
-        <recordType>Behavior_Evaluation__c.Pleasant_Touch</recordType>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>Behavior_Evaluation__c-Behavior Evaluation Layout</layout>
-        <recordType>Behavior_Evaluation__c.Social_Behavior</recordType>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Behavior_Foster_Notes__c-Behavior Foster Notes Layout</layout>
@@ -5041,32 +5217,13 @@
         <layout>Domain_Action_Binding__mdt-CQ Domain Action Binding Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Evaluation_Entry__c-Evaluation Entry Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
         <layout>Evaluation_Type__c-Evaluation Type Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Evaluation__c-Evaluation Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>Evaluation__c-Evaluation Layout</layout>
-        <recordType>Evaluation__c.Default</recordType>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>Evaluation__c-Play Test</layout>
-        <recordType>Evaluation__c.Play_Test</recordType>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>Evaluation__c-Pleasant Touch Test</layout>
-        <recordType>Evaluation__c.Pleasant_Touch</recordType>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>Evaluation__c-Social Behavior Test</layout>
-        <recordType>Evaluation__c.Social_Behavior</recordType>
-    </layoutAssignments>
-    <layoutAssignments>
         <layout>Facility_Outcome__c-Facility%2FOutcome Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Incidents__c-Incidents Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Medication_Drug__c-Controlled Drug Layout</layout>
@@ -5145,7 +5302,7 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>Task-Task Layout</layout>
-        <recordType>Task.LAM_Task</recordType>
+        <recordType>Task.MRC_BRC_Follow_UP</recordType>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Task-Task Layout</layout>
@@ -5169,9 +5326,6 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>User-User Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>UserAlt-User Profile Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Vaccine_and_Preventative__c-Vaccine Administration Layout</layout>
@@ -5203,6 +5357,24 @@
         <object>Daily_Enrichment__c</object>
         <viewAllRecords>false</viewAllRecords>
     </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>false</modifyAllRecords>
+        <object>Opportunity</object>
+        <viewAllRecords>false</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>false</modifyAllRecords>
+        <object>Quote</object>
+        <viewAllRecords>false</viewAllRecords>
+    </objectPermissions>
     <pageAccesses>
         <apexPage>BehEvalPdf</apexPage>
         <enabled>false</enabled>
@@ -5213,6 +5385,10 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>BehaviorEvaluationMatrix</apexPage>
+        <enabled>false</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>Behavior_Incident_Report</apexPage>
         <enabled>false</enabled>
     </pageAccesses>
     <pageAccesses>
@@ -5243,51 +5419,6 @@
         <apexPage>TreatmentToDoPDF</apexPage>
         <enabled>false</enabled>
     </pageAccesses>
-    <recordTypeVisibilities>
-        <default>true</default>
-        <recordType>Animal__c.Behavior</recordType>
-        <visible>true</visible>
-    </recordTypeVisibilities>
-    <recordTypeVisibilities>
-        <default>true</default>
-        <recordType>Behavior_Evaluation__c.Default</recordType>
-        <visible>true</visible>
-    </recordTypeVisibilities>
-    <recordTypeVisibilities>
-        <default>false</default>
-        <recordType>Behavior_Evaluation__c.Play_Test</recordType>
-        <visible>false</visible>
-    </recordTypeVisibilities>
-    <recordTypeVisibilities>
-        <default>false</default>
-        <recordType>Behavior_Evaluation__c.Pleasant_Touch</recordType>
-        <visible>false</visible>
-    </recordTypeVisibilities>
-    <recordTypeVisibilities>
-        <default>false</default>
-        <recordType>Behavior_Evaluation__c.Social_Behavior</recordType>
-        <visible>false</visible>
-    </recordTypeVisibilities>
-    <recordTypeVisibilities>
-        <default>true</default>
-        <recordType>Evaluation__c.Default</recordType>
-        <visible>true</visible>
-    </recordTypeVisibilities>
-    <recordTypeVisibilities>
-        <default>false</default>
-        <recordType>Evaluation__c.Play_Test</recordType>
-        <visible>true</visible>
-    </recordTypeVisibilities>
-    <recordTypeVisibilities>
-        <default>false</default>
-        <recordType>Evaluation__c.Pleasant_Touch</recordType>
-        <visible>false</visible>
-    </recordTypeVisibilities>
-    <recordTypeVisibilities>
-        <default>false</default>
-        <recordType>Evaluation__c.Social_Behavior</recordType>
-        <visible>false</visible>
-    </recordTypeVisibilities>
     <recordTypeVisibilities>
         <default>false</default>
         <recordType>Legal_Advocacy_Matter__c.Amicus</recordType>
@@ -5340,13 +5471,12 @@
     </recordTypeVisibilities>
     <recordTypeVisibilities>
         <default>true</default>
-        <personAccountDefault>true</personAccountDefault>
         <recordType>Task.General_Task</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
         <default>false</default>
-        <recordType>Task.LAM_Task</recordType>
+        <recordType>Task.MRC_BRC_Follow_UP</recordType>
         <visible>false</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
@@ -5358,11 +5488,6 @@
         <default>false</default>
         <recordType>Task.Treatments</recordType>
         <visible>true</visible>
-    </recordTypeVisibilities>
-    <recordTypeVisibilities>
-        <default>false</default>
-        <recordType>Task.Vaccinations_and_Parasites</recordType>
-        <visible>false</visible>
     </recordTypeVisibilities>
     <tabVisibilities>
         <tab>Animal_Transport__c</tab>
@@ -5385,12 +5510,12 @@
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>
-        <tab>Evaluation_Type__c</tab>
-        <visibility>DefaultOff</visibility>
+        <tab>EntityHistory__c</tab>
+        <visibility>Hidden</visibility>
     </tabVisibilities>
     <tabVisibilities>
-        <tab>Evaluation__c</tab>
-        <visibility>DefaultOn</visibility>
+        <tab>Evaluation_Type__c</tab>
+        <visibility>DefaultOff</visibility>
     </tabVisibilities>
     <tabVisibilities>
         <tab>Legal_Advocacy_Matter__c</tab>
@@ -5451,6 +5576,10 @@
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
+        <name>AddDirectMessageMembers</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
         <name>ApexRestServices</name>
     </userPermissions>
     <userPermissions>
@@ -5460,6 +5589,10 @@
     <userPermissions>
         <enabled>true</enabled>
         <name>AssignTopics</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ChatterEditOwnPost</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
@@ -5476,6 +5609,14 @@
     <userPermissions>
         <enabled>true</enabled>
         <name>ChatterOwnGroups</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ContentWorkspaces</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ConvertLeads</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
@@ -5499,6 +5640,10 @@
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
+        <name>EditOppLineItemUnitPrice</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
         <name>EditTask</name>
     </userPermissions>
     <userPermissions>
@@ -5515,11 +5660,19 @@
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
+        <name>EnableCommunityAppLauncher</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
         <name>EnableNotifications</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
         <name>ExportReport</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ImportPersonal</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
@@ -5540,6 +5693,10 @@
     <userPermissions>
         <enabled>true</enabled>
         <name>MassInlineEdit</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>RemoveDirectMessageMembers</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
@@ -5584,5 +5741,13 @@
     <userPermissions>
         <enabled>true</enabled>
         <name>ViewRoles</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ViewSetup</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ViewTrustMeasures</name>
     </userPermissions>
 </Profile>

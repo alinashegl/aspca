@@ -595,6 +595,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Animal__c.FM_UUID__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Animal__c.Feeding_Amount_Inactive__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -721,6 +726,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Animal__c.Injury_Type__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Animal__c.Intake_Agency_Dept__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -886,6 +896,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Animal__c.Outcome_Notes__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Animal__c.Outside_Agency_Id__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1246,11 +1261,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Behavior_Evaluation__c.Assistant_Initials__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Behavior_Evaluation__c.Behavior_Eval_Record_Type_Name__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -3618,10 +3628,6 @@
         <apexPage>dbk__DayBack</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
-    <recordTypeVisibilities>
-        <recordType>Behavior_Evaluation__c.Default</recordType>
-        <visible>true</visible>
-    </recordTypeVisibilities>
     <tabSettings>
         <tab>Animal__c</tab>
         <visibility>Visible</visibility>
