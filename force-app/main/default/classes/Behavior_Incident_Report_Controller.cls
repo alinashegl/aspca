@@ -29,8 +29,7 @@ public class Behavior_Incident_Report_Controller {
                     , Animal__r.Name
                     , Animal__r.Animal_Name__c
         FROM Incidents__c
-        WHERE Id = 'a1m790000009aLeAAI'];
-        // WHERE Name = '2022/01/20-0'];
+        WHERE Name = '2022/01/20-0'];
 
         MultiselectPicklist = (Incidents__c)controller.getRecord();
     }
