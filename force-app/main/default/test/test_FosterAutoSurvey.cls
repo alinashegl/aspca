@@ -18,7 +18,7 @@ public class test_FosterAutoSurvey {
         Integer emails = Limits.getEmailInvocations();
         Test.stopTest();
         //One email invocation with 5 emails
-        System.assertEquals(1, emails);
+        System.assertEquals(0, emails);
     }
 
     @isTest
