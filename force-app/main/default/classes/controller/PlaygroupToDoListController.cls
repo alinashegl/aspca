@@ -1,6 +1,7 @@
 public with sharing class PlaygroupToDoListController {
     @AuraEnabled(cacheable=true)
     public static List<Animal__c> getPlaygroupAnimals(String location) {
+        String[] translatedLocation = util.translateLocation(location);
         List<Animal__c> animals = [SELECT Id, Name, Animal_Name__c, Gender__c, Shelter_Location__c, Playgroup_Priority_Level__c, Play_Style_Notes__c,
                                         Play_Category__c, Shelter_Color_Coding__c, Number_of_Playgroups__c, Does_Not_Walk_on_a_Leash__c, Does_Not_Walk_on_a_Leash_Notes__c,
                                         (SELECT Id FROM Medical_Conditions__r
@@ -18,7 +19,7 @@ public with sharing class PlaygroupToDoListController {
                                     FROM Animal__c
                                     WHERE Play_Category__c NOT IN ('Unevaluated', 'DO NOT PLAY')
                                         AND Id NOT IN (SELECT Animal__c FROM Play_Pause__c WHERE Type__c = 'Behavioral' AND Start_Date__c <= TODAY AND (End_Date__c = null OR End_Date__c >= TODAY))
-                                        AND Current_Recent_Shelter_Location__c =: location
+                                        AND Current_Recent_Shelter_Location__c IN: translatedLocation
                                     ORDER BY Id];
         return animals;
     }
@@ -78,6 +79,15 @@ public with sharing class PlaygroupToDoListController {
         } catch (Exception e) {
             System.debug('error: ' + e.getMessage());
             System.debug('line: ' + e.getStackTraceString());
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
+
+    @AuraEnabled 
+    public static String getUserLocation(){
+        try {
+            return [SELECT Location__c FROM User WHERE Id =: UserInfo.getUserId() LIMIT 1].Location__c;
+        } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }
     }
