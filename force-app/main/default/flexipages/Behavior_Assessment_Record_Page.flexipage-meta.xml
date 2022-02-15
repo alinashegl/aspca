@@ -56,6 +56,12 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldItem>Record.Assessment_Type__c</fieldItem>
+                <identifier>RecordAssessment_Type_cField1</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
                 <fieldItem>Record.Assessment_Date__c</fieldItem>
                 <identifier>RecordAssessment_Date_cField1</identifier>
             </fieldInstance>
@@ -64,6 +70,12 @@
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Animal__c</fieldItem>
+                <identifier>RecordAnimal_cField1</identifier>
+            </fieldInstance>
+        </itemInstances>
         <itemInstances>
             <fieldInstance>
                 <fieldInstanceProperties>
@@ -76,8 +88,8 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Assessment_Type__c</fieldItem>
-                <identifier>RecordAssessment_Type_cField1</identifier>
+                <fieldItem>Record.Airtable_Id__c</fieldItem>
+                <identifier>RecordAirtable_Id_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-1d5e97b0-8589-400c-b7c3-8a2e32ebb252</name>
