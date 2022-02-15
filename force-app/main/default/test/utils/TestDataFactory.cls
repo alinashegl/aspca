@@ -641,7 +641,13 @@ public without sharing class TestDataFactory {
         Treatment_Bundle__c masterbundle = createMasterBundle();
         Treatment_Bundle__c planBundle = createTreatmentBundle();
         List<Bundle_Entry__c> planBundleEntries = assignEntries(planBundle, createProtocols(4));
-        Treatment_Plan__c plan = new Treatment_Plan__c(IsActive__c = true, Description__c = 'Test', Animal__c = a.Id, AssignedTreatmentBundleId__c = planBundle.Id);
+        Treatment_Plan__c plan = new Treatment_Plan__c(
+          IsActive__c = true, 
+          Description__c = 'Test', 
+          Animal__c = a.Id, 
+          AssignedTreatmentBundleId__c = planBundle.Id,
+          Problem_Behavior__c = 'Fear of People - Mild'
+        );
         insert plan;
         return plan;
     }
