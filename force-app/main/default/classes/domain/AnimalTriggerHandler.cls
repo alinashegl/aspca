@@ -91,9 +91,7 @@ public with sharing class AnimalTriggerHandler {
         CaseContactRole[] conroles = new CaseContactRole[0];
         Map<Id, CaseContactRole> animalToCaseContactRoleMap = queryCaseContactRoles(anms);
         for (Animal__c a : anms){
-            // List<CaseContactRole> curroles = [SELECT Id from CaseContactRole WHERE CasesId =: a.Case__c AND ContactId =: a.Discharged_to_Contact__c AND Role = 'Animal Discharge Contact'];
-            Id oldCon = oldAnms.get(a.id).Discharged_to_Contact__c;
-    
+            Id oldCon = oldAnms.get(a.id).Discharged_to_Contact__c;    
 			if (a.Discharged_to_Contact__c != oldCon && a.Discharged_to_Contact__c != null){
                 CaseContactRole ccr = animalToCaseContactRoleMap.containsKey(a.Id) ? animalToCaseContactRoleMap.get(a.Id) : null;
                 if(ccr == null){
@@ -169,11 +167,8 @@ public with sharing class AnimalTriggerHandler {
     private static void createBrcMrcTasks(Animal__c[] animals){
         //make sure we're not creating duplicate tasks
         Map<Id, Animal__c> queriedAnimals = new Map<Id, Animal__c>([SELECT Id, (SELECT Id, ActivityDate, Record_Type__c FROM Activities__r WHERE Record_Type__c =: AutoScheduleTasksUtil.MRC_BRC_FOLLOW_UP_TASK_RECORD_TYPE_NAME ORDER BY ActivityDate DESC LIMIT 1) FROM Animal__c WHERE Id IN: animals]);
-        System.debug('queriedAnimals: ' + queriedAnimals);
         Task[] toInsert = new Task[0];
         for(Animal__c anim : animals){
-            System.debug('anim: ' + anim);
-            System.debug('anim Activities__r: ' + anim.Activities__r);
             if(!queriedAnimals.get(anim.Id).Activities__r.isEmpty()){
                 if(queriedAnimals.get(anim.Id).Activities__r[0].ActivityDate < date.today()){
                     toInsert.add(ScheduleAnimalBRCMRC.prepTask(anim, date.today().addDays(14), false));
@@ -184,6 +179,5 @@ public with sharing class AnimalTriggerHandler {
             }
         }
         insert toInsert;
-        System.debug('afterInsert: ' + toInsert);
     }
 }
