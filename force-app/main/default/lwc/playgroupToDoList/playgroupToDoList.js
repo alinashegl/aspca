@@ -7,9 +7,10 @@ import getPlaygroupAnimals from '@salesforce/apex/PlaygroupToDoListController.ge
 import createPlaygroup from '@salesforce/apex/PlaygroupToDoListController.createPlaygroup';
 import copyPlaygroupSession from '@salesforce/apex/PlaygroupToDoListController.copyPlaygroupSession';
 import editPlaygroup from '@salesforce/apex/PlaygroupToDoListController.editPlaygroup';
+import getUserLocation from '@salesforce/apex/PlaygroupToDoListController.getUserLocation';
 
 export default class PlaygroupToDoList extends NavigationMixin(LightningElement) {
-    location = 'MRC';
+    location;
     //exposed properties for "copy playgroup" and "edit playgroup"
     @api
     sessionId;
@@ -139,6 +140,23 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
             if (this.sessionId && this.animalsToAdd.length !== 0) {
                 this.toggleSelections();
             }
+        }
+
+        //only execute if location is not set
+        if(this.location == undefined || this.location == null){
+            getUserLocation()
+            .then((response) => {
+                this.location = response;
+            })
+            .catch((result) => {
+                window.console.log('result: ', JSON.stringify(result));
+                const evt = new ShowToastEvent({
+                    title: 'Error',
+                    message: result,
+                    variant: 'error',
+                });
+                this.dispatchEvent(evt);
+            })
         }
     }
 
