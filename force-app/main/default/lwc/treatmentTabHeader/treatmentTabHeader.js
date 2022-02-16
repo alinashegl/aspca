@@ -1,7 +1,7 @@
-import { api, LightningElement, wire } from 'lwc';
+import { api, LightningElement } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
 import FORM_FACTOR from '@salesforce/client/formFactor';
-import getActiveTreatmentPlan from '@salesforce/apex/TreatmentTabHeaderController.getActiveTreatmentPlan';
+
 
 export default class TreatmentTabHeader extends NavigationMixin(LightningElement) {
     @api
@@ -9,25 +9,6 @@ export default class TreatmentTabHeader extends NavigationMixin(LightningElement
     showModal = false;
     showNewSessionModal = false;
     showNewTreatmentModal = false;
-
-    treatmentPlan = 'noPlan';
-
-    @wire(getActiveTreatmentPlan, { animalId : '$recordId' })
-    wiredTreatmentPlan(result) {
-        window.console.log('result: ', JSON.stringify(result));
-        if(result.data){
-
-            this.treatmentPlan = result.data;
-        }
-        // else if (result.error) {
-        //     const evt = new ShowToastEvent({
-        //         title: 'Error',
-        //         message: result.error,
-        //         variant: 'error',
-        //     });
-        //     this.dispatchEvent(evt);
-        // }
-    }
 
     handleClick() {
         this.showModal = true;
@@ -53,7 +34,6 @@ export default class TreatmentTabHeader extends NavigationMixin(LightningElement
         if(this.customLookupNewId != undefined){
             fields.AssignedTreatmentBundleId__c = this.customLookupNewId;
         }
-        window.console.log('fields: ', JSON.stringify(fields));
         this.template.querySelector('lightning-record-edit-form').submit(fields);
     }
 
@@ -87,10 +67,6 @@ export default class TreatmentTabHeader extends NavigationMixin(LightningElement
 
     get smallForm() {
         return FORM_FACTOR === 'Small';
-    }
-
-    get showNewTreatmentSessionButton(){
-        return (this.treatmentPlan != 'noPlan') ? true : false;
     }
 
 
