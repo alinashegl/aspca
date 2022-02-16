@@ -1,18 +1,37 @@
-import { api, LightningElement } from 'lwc';
+import { api, LightningElement, wire } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
 import FORM_FACTOR from '@salesforce/client/formFactor';
+import getActiveTreatmentPlan from '@salesforce/apex/TreatmentTabHeaderController.getActiveTreatmentPlan';
 
 export default class TreatmentTabHeader extends NavigationMixin(LightningElement) {
     @api
     recordId;
     showModal = false;
+    showNewSessionModal = false;
+    showNewTreatmentModal = false;
 
-    get smallForm() {
-        return FORM_FACTOR === 'Small';
+    treatmentPlan = 'noPlan';
+
+    @wire(getActiveTreatmentPlan, { animalId : '$recordId' })
+    wiredTreatmentPlan(result) {
+        window.console.log('result: ', JSON.stringify(result));
+        if(result.data){
+
+            this.treatmentPlan = result.data;
+        }
+        // else if (result.error) {
+        //     const evt = new ShowToastEvent({
+        //         title: 'Error',
+        //         message: result.error,
+        //         variant: 'error',
+        //     });
+        //     this.dispatchEvent(evt);
+        // }
     }
 
     handleClick() {
         this.showModal = true;
+        this.showNewTreatmentModal = true;
     }
 
     handleCancel() {
@@ -23,6 +42,8 @@ export default class TreatmentTabHeader extends NavigationMixin(LightningElement
             });
         }
         this.showModal = false;
+        this.showNewTreatmentModal = false;
+        this.showNewSessionModal = false;
     }
     
     handleSubmit(event){
@@ -56,6 +77,20 @@ export default class TreatmentTabHeader extends NavigationMixin(LightningElement
                 url: url
             }
         });
+    }
+
+    handleNewSession(){
+        window.console.log('new session');
+        this.showModal = true;
+        this.showNewSessionModal = true;
+    }
+
+    get smallForm() {
+        return FORM_FACTOR === 'Small';
+    }
+
+    get showNewTreatmentSessionButton(){
+        return (this.treatmentPlan != 'noPlan') ? true : false;
     }
 
 

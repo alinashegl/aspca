@@ -50,6 +50,9 @@ export default class CustomLookup extends LightningElement {
     //JSON string of fields to show on the create new form and which ones are required (example is below)
     @api createNewFieldsWithRequired;
 
+    //if read only, do not allow edits
+    @api readOnly = false;
+
     //Boolean that whenever changed will reset the lookupfield to null and clear out the search terms
     _clearSelection;
     @api
@@ -171,10 +174,12 @@ export default class CustomLookup extends LightningElement {
 
     //when user clicks into the text box, need to open the dropdown and query the recently viewed records
     handleOnFocus(){
-        this.isLoading = true;
-        if(this.isEditMode && !this.showRecent && !this.showExpandedSearch){
-            this.editRecord = true;
-            this.handleQueryRecentlyViewed();
+        if(!this.readOnly){
+            this.isLoading = true;
+            if(this.isEditMode && !this.showRecent && !this.showExpandedSearch){
+                this.editRecord = true;
+                this.handleQueryRecentlyViewed();
+            }
         }
     }
 

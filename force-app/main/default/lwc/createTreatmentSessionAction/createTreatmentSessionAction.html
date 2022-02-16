@@ -1,0 +1,69 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <header class="slds-modal__header">
+        <h2 class="slds-modal__title slds-hyphenate">
+            New Session:
+        </h2>
+    </header>
+    <div class="slds-modal__content slds-var-p-around_medium">
+        <lightning-record-edit-form object-api-name="Treatment_Session__c"
+                                    onsubmit={handleSubmit}
+                                    onsuccess={handleSuccess}>
+            <div class="slds-grid slds-wrap"> 
+                <div class="slds-col slds-size_1-of-2"> 
+                    <!-- <lightning-input-field field-name="Treatment_Plan__c"></lightning-input-field> -->
+                    <label class="slds-form-element__label" for="form-element-01">Treatmen Plan</label></br>
+                    <c-custom-lookup
+                        obj-name='Treatment_Plan__c'
+                        value-id={planId}
+                        fields={customLookupTreatmentFields}
+                        display-fields='Name'
+                        read-only=true
+                    >
+                    </c-custom-lookup>
+                </div>
+
+                <div class="slds-col slds-size_1-of-2"> 
+                    <lightning-input-field field-name="Session_Contact__c" required></lightning-input-field>
+                </div> 
+                <!-- <div class="slds-col slds-size_1-of-2"> 
+                    <label class="slds-form-element__label" for="form-element-01">Assigned Treatment Bundle</label>
+                    <c-custom-lookup
+                        obj-name='Treatment_Bundle__c'
+                        icon-name='utility:case'
+                        placeholder='Search Treatment Bundles...'
+                        fields={customLookupFields}
+                        display-fields={customLookupDisplayFields}
+                        field-to-query='Name'
+                        where-clause='IsActive__c = true'
+                        label-name='Treatment Bundle'
+                        onlookup={customLookupEvent}
+                        onexpandfield={handleCustomLookupExpandSearch}
+                        element-id='customlookupcreatenew'
+                        initial-col-size='slds-col slds-size_1-of-1 slds-medium-size_3-of-6 slds-large-size_1-of-6'
+                    >
+                    </c-custom-lookup>
+                </div> -->
+                <div class="slds-col slds-size_1-of-2"> 
+                    <!-- <lightning-input-field field-name="Animal__c"></lightning-input-field> -->
+                    <label class="slds-form-element__label" for="form-element-01">Animal</label></br>
+                    <c-custom-lookup
+                        obj-name='Animal__c'
+                        value-id={animalId}
+                        fields={customLookupTreatmentFields}
+                        display-fields='Animal_Name_Id__c'
+                        read-only=true
+                    >
+                    </c-custom-lookup>
+                </div>
+            </div>
+            <div class="slds-col slds-size_1-of-2"> 
+                <lightning-input-field field-name="Session_Notes__c" required></lightning-input-field>
+            </div> 
+            <div  class="slds-align_absolute-center">
+                <lightning-button variant="neutral" label="Cancel" onclick={handleCancel}></lightning-button>
+                <lightning-button variant="brand" class="slds-var-m-left_x-small" label="Save" type="submit"></lightning-button>
+            </div>
+        </lightning-record-edit-form>
+    </div>
+</template>
