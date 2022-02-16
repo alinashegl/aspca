@@ -60,7 +60,6 @@ export default class TreatmentTabHeader extends NavigationMixin(LightningElement
     }
 
     handleNewSession(){
-        window.console.log('new session');
         this.showModal = true;
         this.showNewSessionModal = true;
     }
