@@ -1,0 +1,9 @@
+<template>
+    <lightning-card>
+        <template if:true={hasDate}>
+            <div class="datePicker">
+                <lightning-input type="date" name="input2" label="Select a date" value={date} onchange={dateChange}></lightning-input>
+            </div>
+        </template>
+    </lightning-card>
+</template>
