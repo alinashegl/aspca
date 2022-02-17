@@ -1,4 +1,5 @@
 import { LightningElement, api, wire } from 'lwc';
+import getUserLocation from '@salesforce/apex/ObservationController.getUserLocation';
 
 export default class ObservationMain extends LightningElement {
     @api recordId;
@@ -7,18 +8,14 @@ export default class ObservationMain extends LightningElement {
     observations = [];
     concerns = [];
 
-    // @wire(getObservationLists, {recordId: '$recordId'})
-    // response(result){
-    //     this.wireResponse = result;
-    //     // this.happyTails = [];
-    //     // this.observations = [];
-    //     // this.concerns = [];
-    //     if(result.data){
-    //         this.happyTails = result.data.happyTails;
-    //         this.observations = result.data.observations;
-    //         this.concerns = result.data.concerns;
+    isArcCare = false;
 
-    //         window.console.log('observations: ', JSON.stringify(this.wireResponse));
-    //     }
-    // }
+    connectedCallback(){
+        if(this.userLocation == undefined || this.userLocation == null){
+            getUserLocation()
+            .then((result) => {
+                this.isArcCare = result;
+            });
+        }
+    }
 }
