@@ -2,17 +2,17 @@ import { api, LightningElement } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
 import FORM_FACTOR from '@salesforce/client/formFactor';
 
+
 export default class TreatmentTabHeader extends NavigationMixin(LightningElement) {
     @api
     recordId;
     showModal = false;
-
-    get smallForm() {
-        return FORM_FACTOR === 'Small';
-    }
+    showNewSessionModal = false;
+    showNewTreatmentModal = false;
 
     handleClick() {
         this.showModal = true;
+        this.showNewTreatmentModal = true;
     }
 
     handleCancel() {
@@ -23,6 +23,8 @@ export default class TreatmentTabHeader extends NavigationMixin(LightningElement
             });
         }
         this.showModal = false;
+        this.showNewTreatmentModal = false;
+        this.showNewSessionModal = false;
     }
     
     handleSubmit(event){
@@ -32,7 +34,6 @@ export default class TreatmentTabHeader extends NavigationMixin(LightningElement
         if(this.customLookupNewId != undefined){
             fields.AssignedTreatmentBundleId__c = this.customLookupNewId;
         }
-        window.console.log('fields: ', JSON.stringify(fields));
         this.template.querySelector('lightning-record-edit-form').submit(fields);
     }
 
@@ -56,6 +57,15 @@ export default class TreatmentTabHeader extends NavigationMixin(LightningElement
                 url: url
             }
         });
+    }
+
+    handleNewSession(){
+        this.showModal = true;
+        this.showNewSessionModal = true;
+    }
+
+    get smallForm() {
+        return FORM_FACTOR === 'Small';
     }
 
 
