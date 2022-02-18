@@ -1,0 +1,34 @@
+<template>
+    <lightning-card variant="Narrow" title=Animal icon-name="standard:related_list">
+        <div class="slds-m-around_medium">
+            <lightning-layout>
+                <lightning-layout-item size="3">
+                    <lightning-combobox variant="label-inline" name="filterBy" label="Filter By" value={searchKey} options={filterOptions} onchange={handleKeyChange} ></lightning-combobox>
+                </lightning-layout-item>
+                <lightning-layout-item size="3">
+                    <lightning-input variant="label-inline" label="Modified Date" type="date" name="filterDate" value={filterDateValue} onchange={handleFilterDateChange}></lightning-input>
+                </lightning-layout-item>
+                </lightning-layout>
+           
+                <lightning-datatable key-field="Id" data={data} columns={columns} sorted-by={sortedBy}
+                    sorted-direction={sortedDirection} onsort={sortColumns} hide-checkbox-column>
+                </lightning-datatable>
+                </br>
+                <template if:true={totalRecountCount}>
+                <lightning-layout horizontal-align="space">
+                    <lightning-layout-item flexibility="auto">
+                        <lightning-button label="Previous" icon-name="utility:chevronleft" onclick={previousHandler}>
+                        </lightning-button>
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="auto">
+                        Page {page} of {totalPage}
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="auto">
+                        <lightning-button label="Next" icon-name="utility:chevronright" icon-position="right"
+                            onclick={nextHandler}></lightning-button>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </template>
+        </div>
+    </lightning-card>
+</template>
