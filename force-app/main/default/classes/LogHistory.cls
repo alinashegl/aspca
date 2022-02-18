@@ -54,8 +54,49 @@ public without sharing class LogHistory {
         return (String)Schema.getGlobalDescribe().get(ObjectApi).getDescribe().fields.getMap().get(FieldApi).getDescribe().getLabel()+' \n';
     }
     
+    @AuraEnabled(cacheable=true)
+    public static List<EntityHistory__c> getAnimalHistory( String searchKey, String dateFilter, String sortBy, String sortDirection) {
+        
+        String query = 'SELECT Id, RecordName__c, OwnerId, IsDeleted, Name, CreatedDate, CreatedBy.Name, FieldName__c, NewValue__c, OldValue__c, ObjectId__c, ObjectName__c FROM EntityHistory__c WHERE ObjectName__c = \'Animal\'';
+        
+        if ( dateFilter != null && dateFilter != '' ) {
+            query += ' AND '+dateFilter;
+        }
+        
+        if ( searchKey != null && searchKey != '' ) {
+            String key = '%' + searchKey + '%';
+            query += ' AND FieldName__c LIKE :key';
+        }
+        if ( sortBy != null && sortDirection != null ) {
+            query += ' ORDER BY ' + sortBy + ' ' + sortDirection;
+        }
+        return Database.query( query );
+    }
+    
+    
+        @AuraEnabled(cacheable=true)
+    public static List<EntityHistory__c> getBehaviorEvaluationHistory( String searchKey, String dateFilter, String sortBy, String sortDirection) {
+        
+        String query = 'SELECT Id, RecordName__c, OwnerId, IsDeleted, Name, CreatedDate, CreatedBy.Name, FieldName__c, NewValue__c, OldValue__c, ObjectId__c, ObjectName__c FROM EntityHistory__c WHERE ObjectName__c = \'Behavior Evaluation\'';
+        
+        if ( dateFilter != null && dateFilter != '' ) {
+            query += ' AND '+dateFilter;
+        }
+        
+        if ( searchKey != null && searchKey != '' ) {
+            String key = '%' + searchKey + '%';
+            query += ' AND FieldName__c LIKE :key';
+        }
+        if ( sortBy != null && sortDirection != null ) {
+            query += ' ORDER BY ' + sortBy + ' ' + sortDirection;
+        }
+        return Database.query( query );
+    }
+    
     private static Map<String, Set<String>> objectFieldMap = new Map<String, Set<String>>{
         'animal__c' => new Set<String> {'handling_instructions__c', 'shelter_color_coding__c', 'play_style_notes__c','designated_handler_reason__c'},  
         'behavior_evaluation__c' => new Set<String> {'overall_evaluation_grade__c'}
     };    
+        
+        
 }
