@@ -28,7 +28,7 @@ public class ContactTriggerHandler {
             }
         }
         
-        if(weeklyOffList.size() > 0){
+        if(!weeklyOffList.isEmpty()){
             insert weeklyOffList;
         }
     }
@@ -57,14 +57,14 @@ public class ContactTriggerHandler {
             }
         }
         
-        if(contactIds.size() > 0){
+        if(!contactIds.isEmpty()){
             delete [Select id, StartDate__c from OutOfOffice__c
                     WHERE Contact__c in: contactIds
                    AND RecordTypeId =: recordTypeId
                    AND StartDate__c >=: reminderToBeDeletedFrom];
         }
         
-        if(weeklyOffList.size() > 0){
+        if(!weeklyOffList.isEmpty()){
             insert weeklyOffList;
         }
     }
