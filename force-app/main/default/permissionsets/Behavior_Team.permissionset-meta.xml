@@ -97,6 +97,14 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>TreatmentToDoPDFController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>createTreatmentSessionController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>dbk__DayBackResource</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -1278,6 +1286,16 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Behavior_Assessment_Response__c.Evaluation_Type__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Behavior_Assessment__c.Airtable_Id__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Behavior_Assessment__c.Animal__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -3724,10 +3742,6 @@
     </recordTypeVisibilities>
     <recordTypeVisibilities>
         <recordType>Behavior_Assessment__c.CRC</recordType>
-        <visible>true</visible>
-    </recordTypeVisibilities>
-    <recordTypeVisibilities>
-        <recordType>Behavior_Evaluation__c.Default</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
     <tabSettings>
