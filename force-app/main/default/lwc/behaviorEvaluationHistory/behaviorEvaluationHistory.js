@@ -54,6 +54,7 @@ export default class BehaviorEvaluationHistory extends LightningElement {
     @api sortedBy = 'CreatedDate';
     @api searchKey = '';
     @api filterDateValue = '';
+    @api recordId;
     result;
     
     @track page = 1; 
@@ -70,7 +71,7 @@ export default class BehaviorEvaluationHistory extends LightningElement {
         {label : "All", value: ""},
         {label : "Overall Evaluation Grade", value: "Overall Evaluation Grade"}
     ];
-    @wire(getRecords, {searchKey: '$searchKey', dateFilter: '$filterDateValue', sortBy: '$sortedBy', sortDirection: '$sortedDirection'})
+    @wire(getRecords, {recordId : '$recordId', searchKey: '$searchKey', dateFilter: '$filterDateValue', sortBy: '$sortedBy', sortDirection: '$sortedDirection'})
     wiredData({ error, data }) {
         if (data) {
             let newData = data.map((item) => 
