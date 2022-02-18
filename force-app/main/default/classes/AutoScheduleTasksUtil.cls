@@ -122,6 +122,7 @@ public class AutoScheduleTasksUtil {
                 contactMap.put(con.User_Location__c, con);
             }
         }
+        System.debug('contactMap: ' + contactMap);
         return contactMap;
     }
 
