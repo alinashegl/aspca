@@ -1,0 +1,108 @@
+<template>
+    <lightning-card>
+        <template if:true={hasDate}>
+            <div class="datePicker">
+                <lightning-input type="date" name="input2" label="Select a date" value={date} onchange={dateChange} class="slds-var-p-left_small"></lightning-input>
+            </div>
+        </template>
+
+        <template if:true={error}>
+            <c-error-panel errors={error} type='inlineMessage' friendly-message='Error Fetching Treatment Plan:' class="slds-var-p-left_small"></c-error-panel>
+        </template>
+
+        <template if:true={dailyCareId}>
+            <div class="slds-var-p-top_small">
+
+                <lightning-record-edit-form
+                    object-api-name="Daily_Care__c"
+                    record-id={dailyCareId}
+                >
+                    <lightning-layout multiple-rows pull-to-boundary="medium" class="slds-var-p-around_small">
+                        <lightning-layout-item flexibility="auto" size="4" small-device-size="12" medium-device-size="12" large-device-size="4" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                            <lightning-input-field field-name={generalRemindersField}> </lightning-input-field>
+                        </lightning-layout-item>
+
+                        <lightning-layout-item flexibility="auto" size="4" small-device-size="12" medium-device-size="12" large-device-size="4" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                            <lightning-input-field field-name={amRemindersField}> </lightning-input-field>
+                        </lightning-layout-item>
+
+                        <lightning-layout-item flexibility="auto" size="4" small-device-size="12" medium-device-size="12" large-device-size="4" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                            <lightning-input-field field-name={pmRemindersField}> </lightning-input-field>
+                        </lightning-layout-item>
+
+                        <lightning-layout-item flexibility="auto" size="4" small-device-size="12" medium-device-size="12" large-device-size="4" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                            <lightning-input-field field-name={specialProjectsField}> </lightning-input-field>
+                        </lightning-layout-item>
+
+                        <lightning-layout-item flexibility="auto" size="4" small-device-size="12" medium-device-size="12" large-device-size="4" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                            <lightning-output-field field-name={scentField}> </lightning-output-field>
+                        </lightning-layout-item>
+
+                        <lightning-layout-item flexibility="auto" size="4" small-device-size="12" medium-device-size="12" large-device-size="4" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                            <div class="slds-var-m-top_medium">
+                                <lightning-button variant="brand" type="submit" label="Save">
+                                </lightning-button>
+                            </div>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </lightning-record-edit-form>
+
+                <div class="slds-card slds-card_boundary card-custom">
+                    <lightning-layout multiple-rows pull-to-boundary="medium" class="slds-var-p-around_small">
+                        <lightning-layout-item flexibility="auto" size="1" small-device-size="6" medium-device-size="4" large-device-size="1" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                            Name
+                        </lightning-layout-item>
+        
+                        <lightning-layout-item flexibility="auto" size="1" small-device-size="6" medium-device-size="4" large-device-size="1" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                            <div>
+                                Daily Ration
+                            </div>
+                            <div class="slds-var-p-top_small">
+                                Rest Days
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item flexibility="auto" size="1" small-device-size="6" medium-device-size="4" large-device-size="1" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                            Behavior Meds:
+                        </lightning-layout-item>
+        
+                        <lightning-layout-item flexibility="auto" size="2" small-device-size="12" medium-device-size="12" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                            Special Care Notes
+                        </lightning-layout-item>
+        
+                        <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                            Enrichment
+                        </lightning-layout-item>
+        
+                        <lightning-layout-item flexibility="auto" size="1" small-device-size="6" medium-device-size="4" large-device-size="1" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                            Round
+                        </lightning-layout-item>
+        
+                        <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                            Movement for Cleaning
+                        </lightning-layout-item>
+        
+                        <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                            Movement Method for Cleaning
+                        </lightning-layout-item>
+        
+                        <lightning-layout-item flexibility="auto" size="1" small-device-size="12" medium-device-size="12" large-device-size="1" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </div>
+                <template if:true={hasAnimalCareList}>
+                    <div class="slds-var-p-left_xx-small slds-var-p-top_small">
+                        <template for:each={animalCareList} for:item='animalC'>
+                            <div class="slds-var-p-bottom_x-small" key={animalC}>
+                                <c-animal-daily-care
+                                    record-id={animalC}
+                                >
+                                </c-animal-daily-care>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+
+            </div>
+        </template>
+    </lightning-card>
+</template>
