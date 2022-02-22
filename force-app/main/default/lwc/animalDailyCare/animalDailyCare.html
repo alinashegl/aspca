@@ -1,0 +1,66 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <div class="slds-card slds-card_boundary card-custom">
+        <template if:true={error}>
+            <c-error-panel errors={error} type='inlineMessage' friendly-message='Error Fetching Treatment Plan:'></c-error-panel>
+        </template>
+        <template if:true={animalDailyCareInfo}>
+
+            <lightning-record-edit-form
+                object-api-name="Animal_Daily_Care__c"
+                record-id={recordId}
+            >
+                <lightning-layout multiple-rows pull-to-boundary="medium" class="slds-var-p-around_small">
+                    <lightning-layout-item flexibility="auto" size="1" small-device-size="6" medium-device-size="4" large-device-size="1" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                        {animalDailyCareInfo.animalName}
+                        <template if:true={showSpinner}>
+                            <lightning-icon icon-name="utility:spinner" alternative-text="Connected" size="small" title="large size">
+                            </lightning-icon>
+                        </template>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item flexibility="auto" size="1" small-device-size="6" medium-device-size="4" large-device-size="1" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                        <div>
+                            {animalDailyCareInfo.dailyRations}
+                        </div>
+                        <div class="slds-var-p-top_small">
+                            {animalDailyCareInfo.restDays}
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="auto" size="1" small-device-size="6" medium-device-size="4" large-device-size="1" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                        {animalDailyCareInfo.behaviorMeds}
+                    </lightning-layout-item>
+
+                    <lightning-layout-item flexibility="auto" size="2" small-device-size="12" medium-device-size="12" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                        <lightning-input-field field-name={specialCareField}> </lightning-input-field>
+                        <lightning-input-field field-name={specialCareOutsideField}> </lightning-input-field>
+                        <lightning-input-field field-name={specialCareOtherField}> </lightning-input-field>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                        {animalDailyCareInfo.enrichment}
+                    </lightning-layout-item>
+
+                    <lightning-layout-item flexibility="auto" size="1" small-device-size="6" medium-device-size="4" large-device-size="1" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                        <lightning-input-field field-name={roundField}> </lightning-input-field>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                        <lightning-input-field field-name={movemntForCleaningField}> </lightning-input-field>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                        <lightning-textarea value={animalDailyCareInfo.movementMethod} data-field={movementMethodFieldAPI} onblur={handleInputBlur}></lightning-textarea>
+                    </lightning-layout-item>
+
+                    <!-- <lightning-layout-item flexibility="auto" size="1" small-device-size="12" medium-device-size="12" large-device-size="1" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                        <div class="slds-var-m-top_medium">
+                            <lightning-button variant="brand" type="submit" label="Save">
+                            </lightning-button>
+                        </div>
+                    </lightning-layout-item> -->
+                </lightning-layout>
+            </lightning-record-edit-form>
+        </template>
+    </div>
+</template>
