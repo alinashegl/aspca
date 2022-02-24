@@ -10,6 +10,9 @@ import SCENT_FIELD from '@salesforce/schema/Daily_Care__c.Scent_of_the_Week__c';
 import { NavigationMixin } from 'lightning/navigation';
 
 export default class DailyCareMain extends NavigationMixin(LightningElement) {
+import SCENT_FIELD from '@salesforce/schema/Daily_Care__c.Scent_Of_The_Week__c';
+
+export default class DailyCareMain extends LightningElement {
 
     generalRemindersField = GENERAL_REMINDERS_FIELD;
     amRemindersField = AM_REMINDERS_FIELD;
@@ -60,7 +63,6 @@ export default class DailyCareMain extends NavigationMixin(LightningElement) {
     get hasAnimalCareList(){
         return this.animalCareList != undefined && this.animalCareList != null;
     }
-
     handlePdf(event){
         this[NavigationMixin.GenerateUrl]({
             type: 'standard__webPage',

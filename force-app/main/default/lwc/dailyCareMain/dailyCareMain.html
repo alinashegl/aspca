@@ -11,7 +11,6 @@
                 <lightning-input type="date" name="input2" label="Select a date" value={date} onchange={dateChange} class="slds-var-p-left_small"></lightning-input>
             </div>
         </template>
-        
         <template if:true={error}>
             <c-error-panel errors={error} type='inlineMessage' friendly-message='Error Fetching Treatment Plan:' class="slds-var-p-left_small"></c-error-panel>
         </template>
