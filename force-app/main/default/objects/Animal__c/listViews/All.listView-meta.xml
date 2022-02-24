@@ -13,10 +13,5 @@
     <columns>Behavior_Case_Worker__c</columns>
     <columns>ExternalId__c</columns>
     <filterScope>Everything</filterScope>
-    <filters>
-        <field>RECORDTYPE</field>
-        <operation>notEqual</operation>
-        <value>01221000001WeCE</value>
-    </filters>
     <label>All</label>
 </ListView>
