@@ -1,11 +1,16 @@
 <template>
     <lightning-card>
-        <template if:true={hasDate}>
+        <lightning-accordion allow-multiple-sections-open="true">
+            <lightning-accordion-section title="MRC Daily Care To Do List" label="MRC Daily Care To Do List" name="mrcDailyCareToDoList">
+                <lightning-button label="PDF" slot="actions" onclick={handlePdf}></lightning-button>
+                <template if:true={dailyCareId}>
+                    <lightning-button label="Start DC" class="slds-var-m-left_x-small" slot="actions" onclick={handleDailyCare}></lightning-button>
+                </template>
+                <template if:true={hasDate}> 
             <div class="datePicker">
                 <lightning-input type="date" name="input2" label="Select a date" value={date} onchange={dateChange} class="slds-var-p-left_small"></lightning-input>
             </div>
         </template>
-
         <template if:true={error}>
             <c-error-panel errors={error} type='inlineMessage' friendly-message='Error Fetching Treatment Plan:' class="slds-var-p-left_small"></c-error-panel>
         </template>
@@ -50,39 +55,39 @@
                 <div class="slds-card slds-card_boundary card-custom">
                     <lightning-layout multiple-rows pull-to-boundary="medium" class="slds-var-p-around_small">
                         <lightning-layout-item flexibility="auto" size="1" small-device-size="6" medium-device-size="4" large-device-size="1" padding="horizontal-medium" class="slds-var-p-bottom_small">
-                            Name
+                            <b>Name</b>
                         </lightning-layout-item>
         
                         <lightning-layout-item flexibility="auto" size="1" small-device-size="6" medium-device-size="4" large-device-size="1" padding="horizontal-medium" class="slds-var-p-bottom_small">
                             <div>
-                                Daily Ration
+                                <b>Daily Ration</b>
                             </div>
                             <div class="slds-var-p-top_small">
-                                Rest Days
+                                <b>Rest Days</b>
                             </div>
                         </lightning-layout-item>
                         <lightning-layout-item flexibility="auto" size="1" small-device-size="6" medium-device-size="4" large-device-size="1" padding="horizontal-medium" class="slds-var-p-bottom_small">
-                            Behavior Meds:
+                            <b>Behavior Meds:</b>
                         </lightning-layout-item>
         
                         <lightning-layout-item flexibility="auto" size="2" small-device-size="12" medium-device-size="12" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small">
-                            Special Care Notes
+                            <b>Special Care Notes</b>
                         </lightning-layout-item>
         
                         <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small">
-                            Enrichment
+                            <b>Enrichment</b>
                         </lightning-layout-item>
         
                         <lightning-layout-item flexibility="auto" size="1" small-device-size="6" medium-device-size="4" large-device-size="1" padding="horizontal-medium" class="slds-var-p-bottom_small">
-                            Round
+                            <b>Round</b>
                         </lightning-layout-item>
         
                         <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small">
-                            Movement for Cleaning
+                            <b>Movement for Cleaning</b>
                         </lightning-layout-item>
         
                         <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small">
-                            Handling Instructions
+                            <b>Movement Method for Cleaning</b>
                         </lightning-layout-item>
         
                         <lightning-layout-item flexibility="auto" size="1" small-device-size="12" medium-device-size="12" large-device-size="1" padding="horizontal-medium" class="slds-var-p-bottom_small">
@@ -90,9 +95,11 @@
                     </lightning-layout>
                 </div>
                 <template if:true={hasAnimalCareList}>
-                    <div class="slds-var-p-left_xx-small slds-var-p-top_small">
+                    <!--<div class="slds-var-p-left_xx-small slds-var-p-top_small">-->
+                        <div>
                         <template for:each={animalCareList} for:item='animalC'>
-                            <div class="slds-var-p-bottom_x-small" key={animalC}>
+                            <!--<div class="slds-var-p-bottom_x-small" key={animalC}>-->
+                                <div key={animalC}>
                                 <c-animal-daily-care
                                     record-id={animalC}
                                 >
@@ -104,5 +111,7 @@
 
             </div>
         </template>
+        </lightning-accordion-section>
+        </lightning-accordion>
     </lightning-card>
 </template>
