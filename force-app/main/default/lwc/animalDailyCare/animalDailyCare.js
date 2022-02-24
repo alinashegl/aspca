@@ -3,7 +3,7 @@ import { updateRecord } from 'lightning/uiRecordApi';
 import getAnimalDailyCareInfo from '@salesforce/apex/DailyCareLWCController.getAnimalDailyCareInfo';
 
 // import ANIMAL_NAME_FIELD from '@salesforce/schema/Animal_Daily_Care__c.Animal__r.Animal_Name_Id__c';
-import MOVEMENT_METHOD_FIELD from '@salesforce/schema/Animal_Daily_Care__c.Movement_Method_For_Cleaning__c';
+import HANDLING_INSTRUCTIONS_FIELD from '@salesforce/schema/Animal_Daily_Care__c.Handling_Instructions__c';
 import MOVEMENT_FOR_CLEANING_FIELD from '@salesforce/schema/Animal_Daily_Care__c.Movements_For_Cleaning__c';
 import ROUND_FIELD from '@salesforce/schema/Animal_Daily_Care__c.Round__c';
 import SPECIAL_CARE_OTHER_FIELD from '@salesforce/schema/Animal_Daily_Care__c.Special_Care_Other__c';
@@ -12,14 +12,14 @@ import SPECIAL_CARE_FIELD from '@salesforce/schema/Animal_Daily_Care__c.Special_
 
 export default class AnimalDailyCare extends LightningElement {
     // animalNameField = ANIMAL_NAME_FIELD;
-    movementMethodField = MOVEMENT_METHOD_FIELD;
+    handlingInstructionsField = HANDLING_INSTRUCTIONS_FIELD;
     movemntForCleaningField = MOVEMENT_FOR_CLEANING_FIELD;
     roundField = ROUND_FIELD;
     specialCareOtherField = SPECIAL_CARE_OTHER_FIELD;
     specialCareOutsideField = SPECIAL_CARE_OUTSIDE_FIELD;
     specialCareField = SPECIAL_CARE_FIELD;
 
-    movementMethodFieldAPI = MOVEMENT_METHOD_FIELD.fieldApiName;
+    handlingInstructionsFieldAPI = HANDLING_INSTRUCTIONS_FIELD.fieldApiName;
     movemntForCleaningFieldAPI = MOVEMENT_FOR_CLEANING_FIELD.fieldApiName;
     roundFieldAPI = ROUND_FIELD.fieldApiName;
     specialCareOtherFieldAPI = SPECIAL_CARE_OTHER_FIELD.fieldApiName;
