@@ -2,7 +2,7 @@
 <template>
     <div class="slds-card slds-card_boundary card-custom">
         <template if:true={error}>
-            <c-error-panel errors={error} type='inlineMessage' friendly-message='Error Fetching Treatment Plan:'></c-error-panel>
+            <c-error-panel errors={error} type='inlineMessage' friendly-message={errorMessage}></c-error-panel>
         </template>
         <template if:true={animalDailyCareInfo}>
 
@@ -32,9 +32,9 @@
                     </lightning-layout-item>
 
                     <lightning-layout-item flexibility="auto" size="2" small-device-size="12" medium-device-size="12" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small">
-                        <lightning-input-field field-name={specialCareField}> </lightning-input-field>
-                        <lightning-input-field field-name={specialCareOutsideField}> </lightning-input-field>
-                        <lightning-input-field field-name={specialCareOtherField}> </lightning-input-field>
+                        <lightning-input type="text" value={animalDailyCareInfo.specialCareTreatment} label="Special Care TX" data-field={specialCareFieldAPI} onblur={handleInputBlur}></lightning-input>
+                        <lightning-input type="text" value={animalDailyCareInfo.specialCareOutside} label="Special Care Outside TX" data-field={specialCareOutsideFieldAPI} onblur={handleInputBlur}></lightning-input>
+                        <lightning-input type="text" value={animalDailyCareInfo.specialCareOther} label="Special Care Other" data-field={specialCareOtherFieldAPI} onblur={handleInputBlur}></lightning-input>
                     </lightning-layout-item>
 
                     <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small">
@@ -46,19 +46,12 @@
                     </lightning-layout-item>
 
                     <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small">
-                        <lightning-input-field field-name={movemntForCleaningField}> </lightning-input-field>
+                        <lightning-textarea value={animalDailyCareInfo.movemntAndCleaningDestinationField} data-field={movemntAndCleaningDestinationFieldAPI} onblur={handleInputBlur}></lightning-textarea>
                     </lightning-layout-item>
 
                     <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small">
-                        <lightning-textarea value={animalDailyCareInfo.movementMethod} data-field={movementMethodFieldAPI} onblur={handleInputBlur}></lightning-textarea>
+                        <lightning-textarea value={animalDailyCareInfo.handlingInstructions} data-field={handlingInstructionsFieldAPI} onblur={handleInputBlur}></lightning-textarea>
                     </lightning-layout-item>
-
-                    <!-- <lightning-layout-item flexibility="auto" size="1" small-device-size="12" medium-device-size="12" large-device-size="1" padding="horizontal-medium" class="slds-var-p-bottom_small">
-                        <div class="slds-var-m-top_medium">
-                            <lightning-button variant="brand" type="submit" label="Save">
-                            </lightning-button>
-                        </div>
-                    </lightning-layout-item> -->
                 </lightning-layout>
             </lightning-record-edit-form>
         </template>

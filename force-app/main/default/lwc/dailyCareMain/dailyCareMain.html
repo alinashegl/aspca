@@ -12,7 +12,7 @@
             </div>
         </template>
         <template if:true={error}>
-            <c-error-panel errors={error} type='inlineMessage' friendly-message='Error Fetching Treatment Plan:' class="slds-var-p-left_small"></c-error-panel>
+            <c-error-panel errors={error} type='inlineMessage' friendly-message='Error retrieving Daily Care:' class="slds-var-p-left_small"></c-error-panel>
         </template>
 
         <template if:true={dailyCareId}>
@@ -83,11 +83,11 @@
                         </lightning-layout-item>
         
                         <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small">
-                            <b>Movement for Cleaning</b>
+                            <b>Movement Round Notes & Destination for Cleaning</b>
                         </lightning-layout-item>
         
                         <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small">
-                            <b>Movement Method for Cleaning</b>
+                            <b>Handling Instructions</b>
                         </lightning-layout-item>
         
                         <lightning-layout-item flexibility="auto" size="1" small-device-size="12" medium-device-size="12" large-device-size="1" padding="horizontal-medium" class="slds-var-p-bottom_small">
@@ -95,11 +95,9 @@
                     </lightning-layout>
                 </div>
                 <template if:true={hasAnimalCareList}>
-                    <!--<div class="slds-var-p-left_xx-small slds-var-p-top_small">-->
-                        <div>
+                    <div class="slds-var-p-top_small">
                         <template for:each={animalCareList} for:item='animalC'>
-                            <!--<div class="slds-var-p-bottom_x-small" key={animalC}>-->
-                                <div key={animalC}>
+                            <div class="slds-var-p-bottom_x-small" key={animalC}>
                                 <c-animal-daily-care
                                     record-id={animalC}
                                 >

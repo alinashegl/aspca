@@ -4,7 +4,7 @@ import getAnimalDailyCareInfo from '@salesforce/apex/DailyCareLWCController.getA
 
 // import ANIMAL_NAME_FIELD from '@salesforce/schema/Animal_Daily_Care__c.Animal__r.Animal_Name_Id__c';
 import HANDLING_INSTRUCTIONS_FIELD from '@salesforce/schema/Animal_Daily_Care__c.Handling_Instructions__c';
-import MOVEMENT_FOR_CLEANING_FIELD from '@salesforce/schema/Animal_Daily_Care__c.Movements_For_Cleaning__c';
+import MOVEMENT_AND_CLEANING__DESTINATION_FIELD from '@salesforce/schema/Animal_Daily_Care__c.Mvmt_Round_Notes_Cleaning_Destination__c';
 import ROUND_FIELD from '@salesforce/schema/Animal_Daily_Care__c.Round__c';
 import SPECIAL_CARE_OTHER_FIELD from '@salesforce/schema/Animal_Daily_Care__c.Special_Care_Other__c';
 import SPECIAL_CARE_OUTSIDE_FIELD from '@salesforce/schema/Animal_Daily_Care__c.Special_Care_Outside_TX__c';
@@ -12,15 +12,15 @@ import SPECIAL_CARE_FIELD from '@salesforce/schema/Animal_Daily_Care__c.Special_
 
 export default class AnimalDailyCare extends LightningElement {
     // animalNameField = ANIMAL_NAME_FIELD;
-    handlingInstructionsField = HANDLING_INSTRUCTIONS_FIELD;
-    movemntForCleaningField = MOVEMENT_FOR_CLEANING_FIELD;
-    roundField = ROUND_FIELD;
+    // handlingInstructionsField = HANDLING_INSTRUCTIONS_FIELD;
+    // movemntAndCleaningDestinationField = MOVEMENT_AND_CLEANING__DESTINATION_FIELD;
+    // roundField = ROUND_FIELD;
     specialCareOtherField = SPECIAL_CARE_OTHER_FIELD;
     specialCareOutsideField = SPECIAL_CARE_OUTSIDE_FIELD;
     specialCareField = SPECIAL_CARE_FIELD;
 
     handlingInstructionsFieldAPI = HANDLING_INSTRUCTIONS_FIELD.fieldApiName;
-    movemntForCleaningFieldAPI = MOVEMENT_FOR_CLEANING_FIELD.fieldApiName;
+    movemntAndCleaningDestinationFieldAPI = MOVEMENT_AND_CLEANING__DESTINATION_FIELD.fieldApiName;
     roundFieldAPI = ROUND_FIELD.fieldApiName;
     specialCareOtherFieldAPI = SPECIAL_CARE_OTHER_FIELD.fieldApiName;
     specialCareOutsideFieldAPI = SPECIAL_CARE_OUTSIDE_FIELD.fieldApiName;
@@ -31,6 +31,7 @@ export default class AnimalDailyCare extends LightningElement {
     showSpinner = false;
 
     error;
+    errorMessage;
 
     @wire(getAnimalDailyCareInfo, {animalDailyCareId: '$recordId'})
     response(result) {
@@ -38,6 +39,7 @@ export default class AnimalDailyCare extends LightningElement {
             this.animalDailyCareInfo = result.data;
         }
         else if(result.error){
+            this.errorMessage = 'Error retrieving Animal Daily Care:';
             this.error = result.error;
         }
     }
@@ -57,6 +59,7 @@ export default class AnimalDailyCare extends LightningElement {
         })
         .catch(error => {
             window.console.log('error: ', error.body.message);
+            this.errorMessage = 'Error updating Animal Daily Care:';
             this.error = error;
         })
         .finally(() => {

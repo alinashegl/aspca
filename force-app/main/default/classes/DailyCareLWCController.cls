@@ -47,7 +47,7 @@ public with sharing class DailyCareLWCController {
                     Special_Care_Outside_TX__c,
                     Special_Care_Other__c,
                     Round__c,
-                    Movements_For_Cleaning__c,
+                    Mvmt_Round_Notes_Cleaning_Destination__c,
                     Handling_Instructions__c
                 FROM Animal_Daily_Care__c 
                 WHERE Id =: animalDailyCareId
@@ -66,7 +66,7 @@ public with sharing class DailyCareLWCController {
                 info.specialCareOther = adc.Special_Care_Other__c;
                 info.enrichment = getAnimalEnrichments(adc.Animal__c);
                 info.round = adc.Round__c;
-                info.movementForCleaning = adc.Movements_For_Cleaning__c;
+                info.movemntAndCleaningDestinationField = adc.Mvmt_Round_Notes_Cleaning_Destination__c;
                 info.handlingInstructions = adc.Handling_Instructions__c;
             }
             
@@ -137,7 +137,7 @@ public with sharing class DailyCareLWCController {
         @AuraEnabled public String specialCareOther;
         @AuraEnabled public String enrichment;
         @AuraEnabled public String Round;
-        @AuraEnabled public String movementForCleaning;
+        @AuraEnabled public String movemntAndCleaningDestinationField;
         @AuraEnabled public String handlingInstructions;
     }
 }
