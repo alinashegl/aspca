@@ -1,0 +1,152 @@
+<apex:page readOnly="true"
+           controller="DailyCarePDFController" 
+           applyHtmlTag="false"    
+           sidebar="false"    
+           showHeader="false"    
+           cache="true"    
+           renderAs="advanced_pdf"
+           docType="html-5.0"
+           standardStylesheets="false">
+    <head>    
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />    
+        
+        <style type="text/css">
+            @page {
+            size: A4 landscape;     
+            padding-left: 5px;    
+            padding-right: 5px;      
+            }
+            .c13{
+            padding-left: 15px;
+            }
+            
+            .th {
+            font-weight: bold;
+            text-align: center;
+            background-color: #E1EBE3;
+            color: black;
+            padding: 8px;
+            }
+            .wrapWithWordBreak {
+            word-wrap: break-word;
+            height:40px;
+            }
+            span.a {
+            display: inline-block; /* the default for span */
+            padding: 5px;
+            }
+            span.b {
+            display: inline; /* the default for span */
+            width: 10px;
+            height: 10px;
+            padding: 5px;
+            }
+            
+        </style>    
+    </head>    
+    <body>
+        <apex:form >
+            <!-- header part -->
+            <p class="c13"><h3><span>MRC Daily Care, Meds &amp; Reminders &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {!TODAY()} </span></h3></p>
+        <!-- middle part -->
+        <apex:pageBlock >
+            <table width="100%">    
+                <tr>
+                    <th>General Reminders</th>    
+                    <th>AM Reminders</th>
+                    <th>PM Reminders</th> 
+                </tr>    
+                <tr>
+                    <th rowspan="2" style="border: 1px solid black; width:40%">
+                        <ol type="1">
+                            <li>{!dailyCare.General_Reminders__c}</li>
+                        </ol>
+                        <br/>
+                        <br/>
+                        
+                        NEW! SCENT OF THE WEEK: {!dailyCare.Scent_of_the_Week__c}
+                        
+                    </th>
+                    <td  style="border: 1px solid black; width:30%">
+                        <ol type="1">
+                            <li>{!dailyCare.AM_Reminders__c}</li>
+                        </ol>              
+                    </td>
+                    <td  style="border: 1px solid black; width:30%">
+                        <ol type="1">
+                            <li>{!dailyCare.PM_Reminders__c}</li>
+                        </ol>  
+                    </td> 
+                </tr>
+                <tr rowspan="1" >
+                    <td colspan="3"  style="border: 1px solid black; width:40%">
+                        <table width="100%">
+                            <tr>
+                                <th>Special Projects</th>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid black;  width:40%" class="wrapWithWordBreak">
+                                    {!dailyCare.Special_Projects__c}
+                                </td>       
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>  
+            
+            <table width="100%" class="table">    
+                <tr>
+                    <th class="th" style="width:10%">Name</th>    
+                    <th class="th" style="width:15%">Daily ration Rest days</th>
+                    <th class="th" style="width:5%">Behav meds</th> 
+                    <th class="th" style="width:5%">AM</th> 
+                    <th class="th" style="width:5%">PM</th> 
+                    <th class="th" style="width:15%">Special care notes</th> 
+                    <th class="th" style="width:10%">Enrichment</th> 
+                    <th class="th" style="width:15%">Movement  for cleaning</th> 
+                    <th class="th" style="width:20%" > Movement method for cleaning</th> 
+                </tr>    
+                <apex:repeat value="{!animalDailyCares}" var="adc">
+                    <tr>                
+                        <td style="width:10%; border: 1px solid;"> {!adc.Name}</td>    
+                        <td style="width:10%; border: 1px solid;">
+                            <!-- write loop -->
+                            <ol type="1">
+                                <li>Test</li>
+                            </ol>
+                        </td>
+                        <td style="width:5%; border: 1px solid;">
+                            <img src="/img/checkbox_unchecked.gif"/>
+                            <img src="/img/checkbox_checked.gif"/>
+                        </td>  
+                        <td colspan="2" style="width:10%; border: 1px solid;">
+                            <div>
+                                <table>
+                                    <tr>
+                                        <td>feds</td>
+                                        <td style="border: 1px solid black; width: 20px;"><span class="a"></span></td>
+                                        <td style="border: 1px solid black; width: 20px;"><span class="a"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Meds</td>
+                                        <td style="border: 1px solid black; width: 20px;"><span class="a"></span></td>
+                                        <td style="border: 1px solid black; width: 20px;"><span class="a"></span></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            
+                        </td>    
+                        <td style="width:15%; border: 1px solid;">Special care notes</td>
+                        <td style="width:10%; border: 1px solid;">Enrichment</td>    
+                        <td style="width:15%; border: 1px solid;">Movement  for cleaning</td>
+                        <td style="width:20%; border: 1px solid;">Movement method for cleaning</td>
+                    </tr>    
+                </apex:repeat>
+            </table>  
+            
+        </apex:pageBlock>
+    </apex:form>
+</body>
+
+
+</apex:page>
