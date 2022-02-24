@@ -107,7 +107,7 @@ public with sharing class DailyCareController {
             SELECT Id, Handling_Instructions__c,
                 (SELECT Id, Round__c, Special_Care_Other__c, Special_Care_Outside_TX__c, Special_Care_TX__c, Movements_For_Cleaning__c FROM Animals_Daily_Care__r ORDER BY CreatedDate DESC LIMIT 1)
             FROM Animal__c
-            WHERE Current_Recent_Shelter_Location__c = 'MRC' AND Final_Outcome__c = null
+            WHERE Current_Location__c = 'MRC' AND Final_Outcome__c = null
         ];
     }
 
