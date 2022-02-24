@@ -136,7 +136,7 @@ public with sharing class DailyCareLWCController {
         @AuraEnabled public String specialCareOutside;
         @AuraEnabled public String specialCareOther;
         @AuraEnabled public String enrichment;
-        @AuraEnabled public String Round;
+        @AuraEnabled public String round;
         @AuraEnabled public String movemntAndCleaningDestinationField;
         @AuraEnabled public String handlingInstructions;
     }

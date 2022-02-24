@@ -19,6 +19,7 @@ export default class DailyCareMain extends NavigationMixin(LightningElement) {
     careDate;
     dailyCareId;
     animalCareList= [];
+    roundPicklistsValues = [];
     error;
 
     @wire(getDailyCare, {careDate: '$careDate'})
@@ -26,6 +27,7 @@ export default class DailyCareMain extends NavigationMixin(LightningElement) {
         if(result.data){
             this.dailyCareId = result.data.dailyCareId;
             this.animalCareList = result.data.animalDailyCares;
+            this.roundPicklistsValues = result.data.roundPicklistOptions;
         }
         else if(result.error){
             this.error = result.error;
