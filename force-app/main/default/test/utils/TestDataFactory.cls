@@ -945,4 +945,17 @@ public without sharing class TestDataFactory {
         insert fosterList;
         return fosterList;
     }
+
+    public static Daily_Care__c createDailyCareWithAnimalDailyCares(){
+      
+      return null;
+    }
+
+    public static Daily_Care__c createDailyCare(){
+      Daily_Care__c dc = new Daily_Care__c(
+        Date__c = date.today()
+      );
+      insert dc;
+      return dc;
+    }
 }
