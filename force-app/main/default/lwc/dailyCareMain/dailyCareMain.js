@@ -10,10 +10,6 @@ import SCENT_FIELD from '@salesforce/schema/Daily_Care__c.Scent_of_the_Week__c';
 import { NavigationMixin } from 'lightning/navigation';
 
 export default class DailyCareMain extends NavigationMixin(LightningElement) {
-import SCENT_FIELD from '@salesforce/schema/Daily_Care__c.Scent_Of_The_Week__c';
-
-export default class DailyCareMain extends LightningElement {
-
     generalRemindersField = GENERAL_REMINDERS_FIELD;
     amRemindersField = AM_REMINDERS_FIELD;
     pmRemindersField = PM_REMINDERS_FIELD;
