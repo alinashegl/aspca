@@ -109,10 +109,6 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>BehaviorEvaluationTriggers</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>BehaviorEvaluationsSelector</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -197,14 +193,6 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>DailyCareController</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>DailyCareLWCController</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>DataDisplayController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -246,10 +234,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>EnrichmentQuickCreateController</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>EvalHelperTextMapUtil</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -1981,10 +1965,6 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>test_DailyCareController</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>test_DaybackRest</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -2408,11 +2388,6 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Animal__c.Case_Number__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Animal__c.Case_Type1__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -3433,11 +3408,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Behavior_Evaluation__c.Assistant_Initials__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Behavior_Evaluation__c.Behavior_Eval_Record_Type_Name__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -6742,10 +6712,6 @@
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
-        <apexPage>LightningPDFGenerator</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
         <apexPage>Loop__JobQueueStatus</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
@@ -6942,10 +6908,6 @@
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
-        <apexPage>PDFGenerator</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
         <apexPage>PlaygroupToDoPdf</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
@@ -7126,31 +7088,11 @@
         <enabled>true</enabled>
     </pageAccesses>
     <recordTypeVisibilities>
-        <recordType>Animal__c.Behavior</recordType>
-        <visible>true</visible>
-    </recordTypeVisibilities>
-    <recordTypeVisibilities>
         <recordType>Behavior_Assessment__c.ARC_CARE</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
         <recordType>Behavior_Assessment__c.CRC</recordType>
-        <visible>true</visible>
-    </recordTypeVisibilities>
-    <recordTypeVisibilities>
-        <recordType>Behavior_Evaluation__c.Default</recordType>
-        <visible>true</visible>
-    </recordTypeVisibilities>
-    <recordTypeVisibilities>
-        <recordType>Behavior_Evaluation__c.Play_Test</recordType>
-        <visible>true</visible>
-    </recordTypeVisibilities>
-    <recordTypeVisibilities>
-        <recordType>Behavior_Evaluation__c.Pleasant_Touch</recordType>
-        <visible>true</visible>
-    </recordTypeVisibilities>
-    <recordTypeVisibilities>
-        <recordType>Behavior_Evaluation__c.Social_Behavior</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
@@ -7214,10 +7156,6 @@
         <visibility>Visible</visibility>
     </tabSettings>
     <tabSettings>
-        <tab>Behavior_Assessment_Response__c</tab>
-        <visibility>Visible</visibility>
-    </tabSettings>
-    <tabSettings>
         <tab>Behavior_Assessment__c</tab>
         <visibility>Visible</visibility>
     </tabSettings>
@@ -7238,10 +7176,6 @@
         <visibility>Visible</visibility>
     </tabSettings>
     <tabSettings>
-        <tab>Plan_Protocol__c</tab>
-        <visibility>Visible</visibility>
-    </tabSettings>
-    <tabSettings>
         <tab>Playgroup_Session__c</tab>
         <visibility>Visible</visibility>
     </tabSettings>
@@ -7259,10 +7193,6 @@
     </tabSettings>
     <tabSettings>
         <tab>Treatment_Plan__c</tab>
-        <visibility>Visible</visibility>
-    </tabSettings>
-    <tabSettings>
-        <tab>Treatment_Session__c</tab>
         <visibility>Visible</visibility>
     </tabSettings>
     <tabSettings>
