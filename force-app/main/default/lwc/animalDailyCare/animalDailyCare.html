@@ -5,7 +5,6 @@
             <c-error-panel errors={error} type='inlineMessage' friendly-message={errorMessage}></c-error-panel>
         </template>
         <template if:true={animalDailyCareInfo}>
-
             <lightning-record-edit-form
                 object-api-name="Animal_Daily_Care__c"
                 record-id={recordId}
@@ -15,6 +14,12 @@
                         <b>Name</b>
                         <div>
                             {animalDailyCareInfo.animalName}
+                        </div>
+                        <div class="slds-var-p-top_small">
+                            <b>Kennel Location</b>
+                        </div>
+                        <div>
+                            {animalDailyCareInfo.animalKennelLocation}
                         </div>
                         <template if:true={showSpinner}>
                             <lightning-icon icon-name="utility:spinner" alternative-text="Connected" size="small" title="large size">
