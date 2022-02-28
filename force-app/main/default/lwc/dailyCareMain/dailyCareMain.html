@@ -92,6 +92,41 @@
                     </lightning-layout>
                 </div> -->
                 <template if:true={hasAnimalCareList}>
+                    <lightning-layout multiple-rows pull-to-boundary="medium" class="slds-var-p-around_small">
+                        <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                            <b>Sort By Kennel Location</b>
+                            <lightning-combobox 
+                                name="locationSort" 
+                                value={locationSortValue}
+                                options={sortOptions} 
+                                onchange={handleSortByLocation}
+                                data-id="location"
+                                >
+                            </lightning-combobox>
+                        </lightning-layout-item>
+                        <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                            <b>Sort By Round</b>
+                            <lightning-combobox 
+                                name="roundSort"
+                                value={roundSortValue}
+                                options={sortOptions} 
+                                onchange={handleSortByRound}
+                                data-id="round"
+                                >
+                            </lightning-combobox>
+                            <template if:true={showSpinner}>
+                                <lightning-icon icon-name="utility:spinner" alternative-text="Connected" size="small" title="large size">
+                                </lightning-icon>
+                            </template>
+                        </lightning-layout-item>
+                        <lightning-layout-item flexibility="auto" size="1" small-device-size="6" medium-device-size="4" large-device-size="1" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                            <template if:true={showSpinner}>
+                                <lightning-icon icon-name="utility:spinner" alternative-text="Connected" size="small" title="large size">
+                                </lightning-icon>
+                            </template>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                    
                     <div class="slds-var-p-top_small">
                         <template for:each={animalCareList} for:item='animalC'>
                             <div class="slds-var-p-bottom_x-small" key={animalC}>

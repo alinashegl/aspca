@@ -10,7 +10,7 @@ public with sharing class DailyCareController {
         Map<Id, Animal_Daily_Care__c> animalToADCMap = getAnimalDailyCareMap(odlDailyCare.Id);
 
         //if animal daily care fields have changed - update the parent animal record
-        updateAnimals(animalToADCMap);
+        updateAnimals(animalToADCMap.values());
 
         //create Daily Care record for new day - copying values from most recent Daily Care
         Daily_Care__c newDailyCare = createDailyCare(odlDailyCare);
@@ -58,9 +58,10 @@ public with sharing class DailyCareController {
         ];
     }
 
-    public static void updateAnimals(Map<Id, Animal_Daily_Care__c> adcMap){
+    public static void updateAnimals(Animal_Daily_Care__c[] adcs){
+        if(adcs == null) return;
         Animal__c[] animalsToUpdate =  new Animal__c[0];
-        for(Animal_Daily_Care__c adc : adcMap.values()){
+        for(Animal_Daily_Care__c adc : adcs){
             if(adc.Handling_Instructions__c != adc.Animal__r.Handling_Instructions__c){
                 animalsToUpdate.add(new Animal__c(
                     Id = adc.Animal__c,
@@ -76,6 +77,7 @@ public with sharing class DailyCareController {
     }
 
     public static Daily_Care__c createDailyCare(Daily_Care__c oldDC){
+        if(oldDC == null) return null;
         Daily_Care__c dc = oldDc.clone(false, true, false, false);
         Date today = Date.today();
         Date dcDate = oldDc.Date__c == today ? today.addDays(1) : today;
@@ -96,7 +98,7 @@ public with sharing class DailyCareController {
         if(scentValues.contains(currentScent)){
             Integer currentIndex = scentValues.indexOf(currentScent);
             if((currentIndex + 1) < scentValues.size()){
-                index = currentIndex++;
+                index = currentIndex +1;
             }
         }
         return scentValues[index];
