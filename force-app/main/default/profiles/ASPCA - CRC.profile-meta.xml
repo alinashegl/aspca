@@ -23,6 +23,10 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>AnimalTriggerTest</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>AppConfig</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -84,6 +88,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>CommentSkipWrapper</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ContactTriggerHandler</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -208,6 +216,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>OrderBy</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>OutOfOfficeController</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -412,6 +424,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>cq</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>createTreatmentSessionController</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -635,6 +651,10 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>test_PlaygroupSessionTriggerHandler</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>test_PlaygroupToDoListController</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -736,6 +756,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>test_cq</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>test_createTreatmentSessionController</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -1190,11 +1214,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Animal__c.Case_Type1__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
         <field>Animal__c.Case_Type__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -1457,6 +1476,11 @@
         <editable>true</editable>
         <field>Animal__c.Evaluation_Re_Test__c</field>
         <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Animal__c.Evaluation_Status__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -2146,6 +2170,46 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>BehaviorCaseWorker__c.EndDate__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Behavior_Assessment_Response__c.Evaluation_Label__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Behavior_Assessment_Response__c.Evaluation_Response__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Behavior_Assessment_Response__c.Evaluation_Score__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Behavior_Assessment_Response__c.Evaluation_Type__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Behavior_Assessment__c.Airtable_Id__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Behavior_Assessment__c.Animal__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Behavior_Assessment__c.Assessment_Date__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Behavior_Assessment__c.Assessment_Type__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -3509,6 +3573,11 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.WeeklyOff__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Contact.Work_Phone__c</field>
         <readable>true</readable>
@@ -4255,6 +4324,36 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>OutOfOffice__c.ContactName__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>OutOfOffice__c.Days__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>OutOfOffice__c.EndDate__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>OutOfOffice__c.IsEnabled__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>OutOfOffice__c.Message__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>OutOfOffice__c.StartDate__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Picklist_Description_Config__mdt.Field_API_Name__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -4750,6 +4849,46 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Research_Animal__c.ASPCA_Animal_Name__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Research_Animal__c.Case__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Research_Animal__c.Post_Placement_F_U_survey__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Research_Animal__c.Study_Animal_Box_URL__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Research_Study__c.Principle_Researcher__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Research_Study__c.Study_Box_URL__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Research_Study__c.Study_Name__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Research_Study__c.Study_Status__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Session_Protocol_Contact__c.Session_Protocol__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -5184,6 +5323,20 @@
         <layout>BehaviorCaseWorker__c-Behavior Case Worker Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Behavior_Assessment_Response__c-Behavior Assessment Response Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Behavior_Assessment__c-Behavior Assessment Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Behavior_Assessment__c-Behavior Assessment Layout</layout>
+        <recordType>Behavior_Assessment__c.ARC_CARE</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Behavior_Assessment__c-Behavior Assessment Layout</layout>
+        <recordType>Behavior_Assessment__c.CRC</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Behavior_Evaluation__c-Behavior Evaluation Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -5217,6 +5370,9 @@
         <layout>Domain_Action_Binding__mdt-CQ Domain Action Binding Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>EntityHistory__c-Entity History Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Evaluation_Type__c-Evaluation Type Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -5236,6 +5392,21 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>OrderItem-Order Product Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>OutOfOffice__c-OutOfOffice Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>OutOfOffice__c-OutOfOffice Layout</layout>
+        <recordType>OutOfOffice__c.PTO_OOO</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>OutOfOffice__c-OutOfOffice Layout</layout>
+        <recordType>OutOfOffice__c.Vacation</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>OutOfOffice__c-OutOfOffice Layout</layout>
+        <recordType>OutOfOffice__c.Weekly_OOO</recordType>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Picklist_Description_Config__mdt-Picklist Description Config Layout</layout>
@@ -5266,6 +5437,15 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>QuoteLineItem-Treatment Session</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Research_Animal__c-Research Animal Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Research_Junction__c-Research Junction Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Research_Study__c-Research Study Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Session_Protocol_Contact__c-Session Protocol Contact Layout</layout>
@@ -5421,6 +5601,16 @@
     </pageAccesses>
     <recordTypeVisibilities>
         <default>false</default>
+        <recordType>Behavior_Assessment__c.ARC_CARE</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Behavior_Assessment__c.CRC</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
         <recordType>Legal_Advocacy_Matter__c.Amicus</recordType>
         <visible>false</visible>
     </recordTypeVisibilities>
@@ -5442,6 +5632,21 @@
     <recordTypeVisibilities>
         <default>false</default>
         <recordType>Legal_Advocacy_Matter__c.Tracking</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>OutOfOffice__c.PTO_OOO</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>OutOfOffice__c.Vacation</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>OutOfOffice__c.Weekly_OOO</recordType>
         <visible>false</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
@@ -5498,6 +5703,10 @@
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>
+        <tab>Behavior_Assessment__c</tab>
+        <visibility>Hidden</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
         <tab>Bundle_Entry__c</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
@@ -5535,6 +5744,10 @@
     </tabVisibilities>
     <tabVisibilities>
         <tab>Protocol__c</tab>
+        <visibility>DefaultOn</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>Research_Study__c</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>
