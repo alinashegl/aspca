@@ -2,16 +2,16 @@
            extensions="Behavior_Incident_Report_Controller"
            renderAs="pdf" applyHtmlTag="false" applyBodyTag="false"
            showHeader="false" standardStylesheets="false">
-<!--           extensions="Behavior_Incident_Report_Controller"
+    <!--           extensions="Behavior_Incident_Report_Controller"
 -->           
     
     <apex:styleSheet value="{!URLFOR($Resource.Behavior_Incident_PDF_Style)}"/>
-<apex:variable var="inc" value="{!incident}" />    
+    <apex:variable var="inc" value="{!incident}" />    
     <html>
         <head>
         </head>
         <body>
-            <apex:variable value="{!$Resource.dbUnchecked}" var="uncheked"/>
+            <apex:variable value="{!$Resource.dbUnchecked}" var="unchecked"/>
             <apex:variable value="{!$Resource.dbChecked}" var="checked"/>
             <div>
                 <h2>Behavior Incident Report</h2>
@@ -44,6 +44,7 @@
                 </tr>
                 <tr><td></td></tr>
                 <tr><td></td></tr>
+                
             </table>
             <table bgcolor="#D3D3D3">
                 <tr><th colspan="2">PLEASE IDENTIFY WHO WAS INVOLVED AND ANY WITNESSES TO THE INCIDENT</th></tr>
@@ -78,7 +79,7 @@
                         <apex:dataTable value="{!behaviorsExhibited}" var="b">
                             <apex:column >
                                 <apex:inputCheckbox value="{!b.selected}" label="{!b.label}" rendered="true">
-                                    <apex:image value="{!IF(B.selected == true , checked, uncheked)}" width="25" height="12" style="float: left"/>
+                                    <apex:image value="{!IF(B.selected == true , checked, unchecked)}" width="25" height="12" style="float: left"/>
                                     &nbsp;
                                     {!b.label}
                                 </apex:inputCheckbox>
@@ -90,12 +91,17 @@
                 <tr><td></td></tr>
             </table> -->
             <table bgcolor="#D3D3D3">
+                <tr><td></td></tr>
+                <tr><td></td></tr>
+                <tr><th>WHAT BEHAVIORS WERE EXHIBITED BY THE DOG (CHECK ALL THAT APPLY):</th></tr>
+                <tr><td></td></tr>
+                <tr><td></td></tr>
                 <apex:form >
-                    <apex:pageBlock title="WHAT BEHAVIORS WERE EXHIBITED BY THE DOG (CHECK ALL THAT APPLY):">
+                    <apex:pageBlock >
                         <apex:dataTable value="{!behaviorsExhibited}" var="b">
                             <apex:column >
                                 <apex:inputCheckbox value="{!b.selected}" label="{!b.label}" rendered="true">
-                                    <apex:image value="{!IF(B.selected == true , checked, uncheked)}" width="25" height="12" style="float: left"/>
+                                    <apex:image value="{!IF(B.selected == true , checked, unchecked)}" width="20" height="20" style="float: left"/>
                                     &nbsp;
                                     {!b.label}
                                 </apex:inputCheckbox>
@@ -103,7 +109,7 @@
                             <apex:column >
                                 <apex:outputPanel rendered="{!b.secondLabel != null}" >
                                     <apex:inputCheckbox value="{!b.secondSelected}" label="{!b.secondLabel}" rendered="true">
-                                        <apex:image value="{!IF(B.secondSelected == true , checked, uncheked)}" width="25" height="12" style="float: left"/>
+                                        <apex:image value="{!IF(B.secondSelected == true , checked, unchecked)}" width="20" height="20" style="float: left"/>
                                         &nbsp;
                                         {!b.secondLabel}
                                     </apex:inputCheckbox>
@@ -112,8 +118,25 @@
                         </apex:dataTable>
                     </apex:pageBlock>
                 </apex:form>
+<!--                <tr><td></td></tr>
+                <tr><td></td></tr>
+                <tr><th>WHAT BEHAVIORS WERE EXHIBITED BY THE DOG (CHECK ALL THAT APPLY):</th></tr>
                 <tr><td></td></tr>
                 <tr><td></td></tr>
+                <apex:form >
+                    <apex:pageBlock >
+                        <apex:dataTable columns="2" value="{!behaviorsExhibited}" var="b">
+                            <apex:column >
+                                <apex:inputCheckbox value="{!b.selected}" label="{!b.label}" rendered="true">
+                                    <apex:image value="{!IF(B.selected == true , checked, unchecked)}" width="20" height="20"/>
+                                    &nbsp; &nbsp; &nbsp;
+                                    {!b.label}
+                                </apex:inputCheckbox>
+                            </apex:column>
+                        </apex:dataTable>
+                    </apex:pageBlock>
+                </apex:form>
+-->
             </table>
             <table>
                 <tr><th>PLEASE DESCRIBE/IDENTIFY THE SPECIFIC TARGET OF THE DOG'S BEHAVIOR</th></tr>
@@ -128,74 +151,127 @@
                 <tr><td></td></tr>
             </table>
             <table bgcolor="#D3D3D3">
-            <tr><th colspan="4">IF A BITE OCCURRED, PLEASE DESCRIBE THE TYPE OF BITE:</th></tr>
+                <tr><th colspan="4">IF A BITE OCCURRED, PLEASE DESCRIBE THE TYPE OF BITE:</th></tr>
                 <tr><td></td></tr>
                 <tr><td></td></tr>
                 <tr>
-                    <td width="20%" align="right"></td>
-                    <td width="30%" align="left">{!inc.Type_of_Bite__c}</td>
-                    <td width="25%" align="right">Number of bites</td>
-                    <td width="25%" align="left">{!inc.Number_of_bites__c}</td>
+                    <td>
+                        <apex:form >
+                            <apex:pageBlock >
+                                <apex:dataTable value="{!typeBite}" var="tb">
+                                    <apex:column >
+                                        <apex:inputCheckbox value="{!tb.selected}" label="{!tb.label}" rendered="true">
+                                            <apex:image value="{!IF(TB.selected == true , checked, unchecked)}" width="20" height="20"/>
+                                            &nbsp; &nbsp; &nbsp;
+                                            {!tb.label}
+                                        </apex:inputCheckbox>
+                                    </apex:column>
+                                    <apex:column />
+                                </apex:dataTable>
+                            </apex:pageBlock>
+                        </apex:form>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Number of bites</td>
+                </tr>
+                <tr class="one">
+                    <td>{!inc.Number_of_bites__c}</td>
                 </tr>
                 <tr><td></td></tr>
                 <tr><td></td></tr>
             </table>
             <table>
-            <tr><th colspan="4">IF A PERSON WAS BITTEN, WAS THE AREA THAT WAS BITTEN COVERED WITH CLOTHING?</th></tr>
+                <tr><th colspan="4">IF A PERSON WAS BITTEN, WAS THE AREA THAT WAS BITTEN COVERED WITH CLOTHING?</th></tr>
                 <tr><td></td></tr>
                 <tr><td></td></tr>
                 <tr>
-                    <td width="20%" align="right">Was Bitten Area Covered with Clothing?</td>
-                    <td width="10%" align="left">{!inc.Was_Bitten_Area_Covered_with_Clothing__c}</td>
-                    <td width="30%" align="right">If YES, describe clothing worn at the site of the bite:</td>
-                    <td width="40%" align="left">{!inc.Clothing_Worn_at_Bite_Site__c}</td>
+                    <td>
+                        <apex:form >
+                            <apex:pageBlock >
+                                <apex:dataTable value="{!Clothing}" var="C">
+                                    <apex:column >
+                                        <apex:inputCheckbox value="{!C.selected}" label="{!C.label}" rendered="true">
+                                            <apex:image value="{!IF(C.selected == true , checked, unchecked)}" width="20" height="20"/>
+                                            &nbsp; &nbsp; &nbsp;
+                                            {!C.label}
+                                        </apex:inputCheckbox>
+                                    </apex:column>
+                                    <apex:column />
+                                </apex:dataTable>
+                            </apex:pageBlock>
+                        </apex:form>
+                    </td>
+                </tr>
+                <tr>
+                    <td>If YES, describe clothing worn at the site of the bite:</td>
+                </tr>
+                <tr class="one">
+                    <td>{!inc.Clothing_Worn_at_Bite_Site__c}</td>
                 </tr>
                 <tr><td></td></tr>
                 <tr><td></td></tr>
             </table>
             <table bgcolor="#D3D3D3">
-            <tr><th colspan="4">DESCRIBE THE DAMAGE DONE BY THE DOG:</th></tr>
-                <tr><td></td></tr>
-                <tr><td></td></tr>
-                <tr>
-                    <td width="15%" align="right"><input type="checkbox" value="{!inc.Damage_Done_by_the_Dog__c}"/></td>
-                    <td width="35%" align="left">{!inc.Damage_Done_by_the_Dog__c}</td>
-                    <td width="15%" align="right"></td>
-                    <td width="35%" align="left">{!inc.Damage_Done_by_the_Dog__c}</td>
-                </tr>
+                <tr><th colspan="4">DESCRIBE THE DAMAGE DONE BY THE DOG:</th></tr>
+                <apex:form >
+                    <apex:pageBlock >
+                        <apex:dataTable value="{!Damage}" var="D">
+                            <apex:column >
+                                <apex:inputCheckbox value="{!D.selected}" label="{!D.label}" rendered="true">
+                                    <apex:image value="{!IF(D.selected == true , checked, unchecked)}" width="20" height="20" style="float: left"/>
+                                    &nbsp;
+                                    {!D.label}
+                                </apex:inputCheckbox>
+                            </apex:column>
+                            <apex:column >
+                                <apex:outputPanel rendered="{!D.secondLabel != null}" >
+                                    <apex:inputCheckbox value="{!D.secondSelected}" label="{!D.secondLabel}" rendered="true">
+                                        <apex:image value="{!IF(D.secondSelected == true , checked, unchecked)}" width="20" height="20" style="float: left"/>
+                                        &nbsp;
+                                        {!D.secondLabel}
+                                    </apex:inputCheckbox>
+                                </apex:outputPanel>
+                            </apex:column>
+                        </apex:dataTable>
+                    </apex:pageBlock>
+                </apex:form>
                 <tr width="80%" class="one">
                     <td colspan="4">{!inc.Other_Damage_Done_by_the_Dog__c}</td>
                 </tr>
-                <tr><td></td></tr>
-                <tr><td></td></tr>
             </table>
-            <table>
-            <tr><th colspan="2">IF THE DOG DID NOT BITE, DO YOU THINK IT WOULD HAVE DONE SO IF YOU HADN'T TAKEN EVASIVE ACTION OR USED DEFENSIVE HANDING?</th></tr>
-                <tr><td></td></tr>
-                <tr><td></td></tr>
+                 <table>
+                <tr><th colspan="4">IF THE DOG DID NOT BITE, DO YOU THINK IT WOULD HAVE DONE SO IF YOU HADN'T TAKEN EVASIVE ACTION OR USED DEFENSIVE HANDING?</th></tr>
                 <tr>
-                    <td width="15%" align="right"><input type="checkbox" value="{!inc.Damage_Done_by_the_Dog__c}"/></td>
-                    <td>{!inc.If_dog_did_not_bite__c}</td>
+                    <td>
+                        <apex:form >
+                            <apex:pageBlock >
+                                <apex:dataTable value="{!Handling}" var="H">
+                                    <apex:column >
+                                        <apex:inputCheckbox value="{!H.selected}" label="{!H.label}" rendered="true">
+                                            <apex:image value="{!IF(H.selected == true , checked, unchecked)}" width="20" height="20"/>
+                                            &nbsp; &nbsp; &nbsp;
+                                            {!H.label}
+                                        </apex:inputCheckbox>
+                                    </apex:column>
+                                    <apex:column />
+                                </apex:dataTable>
+                            </apex:pageBlock>
+                        </apex:form>
+                    </td>
                 </tr>
                 <tr>
-                    <td width="15%" align="right"><input type="checkbox" value="{!inc.Damage_Done_by_the_Dog__c}"/></td>
-                    <td width="35%" align="left">{!inc.If_dog_did_not_bite__c}</td>
+                    <td>Please Explain Why You Think So:</td>
                 </tr>
+                <tr class="one">
+                    <td>{!inc.Clothing_Worn_at_Bite_Site__c}</td>
+                </tr>
+            </table>
+      <table bgcolor="#D3D3D3">
+                <tr><th>PLEASE PROVIDE ANY ADDITIONAL COMMENTS YOU MAY HAVE:</th></tr>
                 <tr width="80%" class="one">
-                    <td colspan="2">{!inc.Please_explain_why_you_think_so__c}</td>
-                </tr>
-                <tr><td></td></tr>
-                <tr><td></td></tr>
-             </table>
-            <table bgcolor="#D3D3D3">
-            <tr><th>PLEASE PROVIDE ANY ADDITIONAL COMMENTS YOU MAY HAVE:</th></tr>
-                <tr><td></td></tr>
-                <tr><td></td></tr>
-               <tr width="80%" class="one">
                     <td>{!inc.Additional_Comments__c}</td>
                 </tr>
-                <tr><td></td></tr>
-                <tr><td></td></tr>
             </table>
         </body>
     </html>
