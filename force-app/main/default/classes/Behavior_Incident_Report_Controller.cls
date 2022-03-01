@@ -30,7 +30,7 @@ public class Behavior_Incident_Report_Controller {
                     , Animal__r.Animal_Name__c
                     , Supervisor_Team_Lead__c
         FROM Incidents__c
-        WHERE Name = '2022/01/20-0'];
+        WHERE Id = :ApexPages.currentPage().getParameters().get('Id')];
 
         MultiselectPicklist = (Incidents__c)controller.getRecord();
     }
