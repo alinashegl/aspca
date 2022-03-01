@@ -1,7 +1,7 @@
 public with sharing class DailyCareLWCController {
     
     @AuraEnabled (cacheable=true)
-    public static DailyCareInfo getDailyCare(Date careDate){
+    public static DailyCareInfo getDailyCare(Date careDate, String sortByField, String sortByValue){
         DailyCareInfo info = new DailyCareInfo();
         if(careDate != null){
             try{
@@ -9,7 +9,7 @@ public with sharing class DailyCareLWCController {
                 if(!dcList.isEmpty()){
                     Id dcId = dcList[0].Id;
                     info.dailyCareId = dcId;
-                    info.animalDailyCares = getAnimalDailyCares(dcId);
+                    info.animalDailyCares = getAnimalDailyCares(dcId, sortByField, sortByValue);
                 }
                 return info;
             } catch (Exception e) {
@@ -23,9 +23,12 @@ public with sharing class DailyCareLWCController {
         }
     }
 
-    private static Id[] getAnimalDailyCares(Id dailyCareId){
+    private static Id[] getAnimalDailyCares(Id dailyCareId, String sortByField, String sortByValue){
         Id[] idList = new Id[0];
-        for(Animal_Daily_Care__c adc : [SELECT Id FROM Animal_Daily_Care__c WHERE Daily_Care__c =: dailyCareId]){
+        String query = 'SELECT Id FROM Animal_Daily_Care__c WHERE Daily_Care__c = \'' +  dailyCareId + '\' ORDER BY ' + sortByField + ' ' + sortByValue;
+        System.debug('query: ' + query);
+        Animal_Daily_Care__c[] adcs = Database.query(query);
+        for(Animal_Daily_Care__c adc : adcs){
             idList.add(adc.Id);
         }
         return idList;
@@ -43,12 +46,13 @@ public with sharing class DailyCareLWCController {
                     Animal__r.Animal_Name_Id__c, 
                     Animal__r.Behavior_Medication_Flag__c,
                     Animal__r.Feeding_Amount__c,
+                    Animal__r.Shelter_Location__c,
                     Special_Care_TX__c,
                     Special_Care_Outside_TX__c,
                     Special_Care_Other__c,
                     Round__c,
-                    Movements_For_Cleaning__c,
-                    Movement_Method_For_Cleaning__c
+                    Mvmt_Round_Notes_Cleaning_Destination__c,
+                    Handling_Instructions__c
                 FROM Animal_Daily_Care__c 
                 WHERE Id =: animalDailyCareId
                 LIMIT 1
@@ -58,6 +62,7 @@ public with sharing class DailyCareLWCController {
                 Animal_Daily_Care__c adc = adcs[0];
                 info.animalCareId = adc.Id;
                 info.animalName = adc.Animal__r.Animal_Name_Id__c;
+                info.animalKennelLocation = adc.Animal__r.Shelter_Location__c;
                 info.dailyRations = adc.Animal__r.Feeding_Amount__c;
                 info.restDays = getAnimalRestDays(adc.animal__c);
                 info.behaviorMeds = adc.Animal__r.Behavior_Medication_Flag__c;
@@ -66,8 +71,8 @@ public with sharing class DailyCareLWCController {
                 info.specialCareOther = adc.Special_Care_Other__c;
                 info.enrichment = getAnimalEnrichments(adc.Animal__c);
                 info.round = adc.Round__c;
-                info.movementForCleaning = adc.Movements_For_Cleaning__c;
-                info.movementMethod = adc.Movement_Method_For_Cleaning__c;
+                info.movemntAndCleaningDestinationField = adc.Mvmt_Round_Notes_Cleaning_Destination__c;
+                info.handlingInstructions = adc.Handling_Instructions__c;
             }
             
             return info;
@@ -129,6 +134,7 @@ public with sharing class DailyCareLWCController {
     public class AnimalInfo{
         @AuraEnabled public Id animalCareId;
         @AuraEnabled public String animalName;
+        @AuraEnabled public String animalKennelLocation;
         @AuraEnabled public String dailyRations;
         @AuraEnabled public String restDays;
         @AuraEnabled public Boolean behaviorMeds;
@@ -136,8 +142,8 @@ public with sharing class DailyCareLWCController {
         @AuraEnabled public String specialCareOutside;
         @AuraEnabled public String specialCareOther;
         @AuraEnabled public String enrichment;
-        @AuraEnabled public String Round;
-        @AuraEnabled public String movementForCleaning;
-        @AuraEnabled public String movementMethod;
+        @AuraEnabled public String round;
+        @AuraEnabled public String movemntAndCleaningDestinationField;
+        @AuraEnabled public String handlingInstructions;
     }
 }
