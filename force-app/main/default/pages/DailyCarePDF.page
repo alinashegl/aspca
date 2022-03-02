@@ -1,152 +1,220 @@
-<apex:page readOnly="true"
-           controller="DailyCarePDFController" 
-           applyHtmlTag="false"    
-           sidebar="false"    
-           showHeader="false"    
-           cache="true"    
-           renderAs="advanced_pdf"
-           docType="html-5.0"
-           standardStylesheets="false">
-    <head>    
-        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />    
-        
+<apex:page readOnly="true" controller="DailyCarePDFController" applyHtmlTag="false" sidebar="false" showHeader="false" cache="true"
+    renderAs="advanced_pdf" docType="html-5.0" standardStylesheets="false">
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+
         <style type="text/css">
             @page {
-            size: A4 landscape;     
-            padding-left: 5px;    
-            padding-right: 5px;      
+                size: A4 landscape;
+                padding-left: 5px;
+                padding-right: 5px;
             }
-            .c13{
-            padding-left: 15px;
+
+            .c13 {
+                padding-left: 15px;
             }
-            
+
             .th {
-            font-weight: bold;
-            text-align: center;
-            background-color: #E1EBE3;
-            color: black;
-            padding: 8px;
+                font-weight: bold;
+                text-align: center;
+                background-color: #E1EBE3;
+                color: black;
+                padding: 8px;
             }
+
             .wrapWithWordBreak {
-            word-wrap: break-word;
-            height:40px;
+                word-wrap: break-word;
+                height: 40px;
             }
+
             span.a {
-            display: inline-block; /* the default for span */
-            padding: 5px;
+                display: inline-block;
+                /* the default for span */
+                padding: 5px;
             }
+
             span.b {
-            display: inline; /* the default for span */
-            width: 10px;
-            height: 10px;
-            padding: 5px;
+                display: inline;
+                /* the default for span */
+                width: 10px;
+                height: 10px;
+                padding: 5px;
             }
-            
-        </style>    
-    </head>    
+            .c_table{
+                -fs-table-paginate: paginate;
+                border-spacing: 0;
+                table-layout:fixed
+            }
+            .line{
+                border: 1px solid black;
+            	word-wrap: break-word;
+                font-weight: normal !important;
+            }
+        </style>
+    </head>
+
     <body>
         <apex:form >
             <!-- header part -->
-            <p class="c13"><h3><span>MRC Daily Care, Meds &amp; Reminders &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {!TODAY()} </span></h3></p>
-        <!-- middle part -->
-        <apex:pageBlock >
-            <table width="100%">    
-                <tr>
-                    <th>General Reminders</th>    
-                    <th>AM Reminders</th>
-                    <th>PM Reminders</th> 
-                </tr>    
-                <tr>
-                    <th rowspan="2" style="border: 1px solid black; width:40%">
-                        <ol type="1">
-                            <li>{!dailyCare.General_Reminders__c}</li>
-                        </ol>
-                        <br/>
-                        <br/>
-                        
-                        NEW! SCENT OF THE WEEK: {!dailyCare.Scent_of_the_Week__c}
-                        
-                    </th>
-                    <td  style="border: 1px solid black; width:30%">
-                        <ol type="1">
-                            <li>{!dailyCare.AM_Reminders__c}</li>
-                        </ol>              
-                    </td>
-                    <td  style="border: 1px solid black; width:30%">
-                        <ol type="1">
-                            <li>{!dailyCare.PM_Reminders__c}</li>
-                        </ol>  
-                    </td> 
-                </tr>
-                <tr rowspan="1" >
-                    <td colspan="3"  style="border: 1px solid black; width:40%">
-                        <table width="100%">
-                            <tr>
-                                <th>Special Projects</th>
-                            </tr>
-                            <tr>
-                                <td style="border: 1px solid black;  width:40%" class="wrapWithWordBreak">
-                                    {!dailyCare.Special_Projects__c}
-                                </td>       
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-            </table>  
-            
-            <table width="100%" class="table">    
-                <tr>
-                    <th class="th" style="width:10%">Name</th>    
-                    <th class="th" style="width:15%">Daily ration Rest days</th>
-                    <th class="th" style="width:5%">Behav meds</th> 
-                    <th class="th" style="width:5%">AM</th> 
-                    <th class="th" style="width:5%">PM</th> 
-                    <th class="th" style="width:15%">Special care notes</th> 
-                    <th class="th" style="width:10%">Enrichment</th> 
-                    <th class="th" style="width:15%">Movement  for cleaning</th> 
-                    <th class="th" style="width:20%" > Movement method for cleaning</th> 
-                </tr>    
-                <apex:repeat value="{!animalDailyCares}" var="adc">
-                    <tr>                
-                        <td style="width:10%; border: 1px solid;"> {!adc.Name}</td>    
-                        <td style="width:10%; border: 1px solid;">
-                            <!-- write loop -->
-                            <ol type="1">
-                                <li>Test</li>
-                            </ol>
-                        </td>
-                        <td style="width:5%; border: 1px solid;">
-                            <img src="/img/checkbox_unchecked.gif"/>
-                            <img src="/img/checkbox_checked.gif"/>
-                        </td>  
-                        <td colspan="2" style="width:10%; border: 1px solid;">
-                            <div>
-                                <table>
-                                    <tr>
-                                        <td>feds</td>
-                                        <td style="border: 1px solid black; width: 20px;"><span class="a"></span></td>
-                                        <td style="border: 1px solid black; width: 20px;"><span class="a"></span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Meds</td>
-                                        <td style="border: 1px solid black; width: 20px;"><span class="a"></span></td>
-                                        <td style="border: 1px solid black; width: 20px;"><span class="a"></span></td>
-                                    </tr>
-                                </table>
-                            </div>
+            <p class="c13">
+                <h3>
+                    <span>MRC Daily Care, Meds &amp; Reminders &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+                            <apex:param value="{!TODAY()}" />
+                        </apex:outputText>
+                    </span>
+                </h3>
+            </p>
+            <!-- middle part -->
+            <apex:pageBlock >
+                <table>
+                    <thead>
+                        <td><strong>General Reminders</strong></td>
+                        <td><strong>AM Reminders</strong></td>
+                        <td><strong>PM Reminders</strong></td>
+                    </thead>
+                    <tr>
+                        <th rowspan="2" width ="40%" class="line" valign="top">
+                           <span> {!dailyCare.General_Reminders__c}</span>
+                            <br/>
+                            <br/><strong>NEW!</strong>  SCENT OF THE WEEK: {!dailyCare.Scent_of_the_Week__c}
+
+                        </th>
+                        <td width ="30%" class="line" valign="top">
+                            <span>  {!dailyCare.AM_Reminders__c} </span>
                             
-                        </td>    
-                        <td style="width:15%; border: 1px solid;">Special care notes</td>
-                        <td style="width:10%; border: 1px solid;">Enrichment</td>    
-                        <td style="width:15%; border: 1px solid;">Movement  for cleaning</td>
-                        <td style="width:20%; border: 1px solid;">Movement method for cleaning</td>
-                    </tr>    
-                </apex:repeat>
-            </table>  
-            
-        </apex:pageBlock>
-    </apex:form>
-</body>
+                        </td>
+                        <td width ="30%" class="line" valign="top">
+                            <span>   {!dailyCare.PM_Reminders__c} </span>
+                            
+                        </td>
+                    </tr>
+                    <tr rowspan="1">
+                        <td colspan="3" width ="40%" class="line">
+                            <table width="100%">
+                                <thead>
+                                    <td><strong>Special Projects</strong></td>
+                                </thead>
+                                <tr>
+                                    <td width ="40%" class="line wrapWithWordBreak">
+                                        {!dailyCare.Special_Projects__c}
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
 
+                <table width="100%" class="c_table">
+                    <thead>
+                        <td class="th" width="20%">Name</td>
+                        <td class="th" width="15%">
+                            <span>Daily ration</span>
+                            <br/>
+                            <span>Rest days</span>
+                        </td>
+                        <td class="th" width="5%">Behav Meds</td>
+                        <td class="th" width="5%">AM</td>
+                        <td class="th" width="8%">PM</td>
+                        <td class="th" width="15%">Special care notes</td>
+                        <td class="th" width="15%">Enrichment</td>
+                        <td class="th" width="15%">Movement method for cleaning</td>
+                        <td class="th" width="20%">Handling instructions </td>
+                        <!--<th class="th" style="width:10%">Round </th>-->
+                    </thead>
+                    <apex:repeat value="{!animalDailyCares}" var="adc">
+                        <tr style="page-break-inside:avoid">
+                            <td width ="25%" class="line" valign="top">
+                                <div>
+                                    <span>
+                                        <strong>AnimalNameId:</strong> {!adc.animalNameId}</span>
+                                </div>
+                                <br/>
+                                <div>
+                                    <span>
+                                        <strong>Location:</strong> {!adc.animalshelterLocation}</span>
+                                </div>
+                                <br/>
+                                <div>
+                                    <strong>Round:</strong> {!adc.round}</div>
+                            </td>
+                            <td width ="10%" class="line" style="margin-top:2px" valign="top">
+                                <!-- write loop -->
+                                <table  style="width:100%;">
+                                    <tr>
+                                        <td style="{!IF(ISBLANK(adc.dailyRations),'','width:100%; border: 1px solid;')}"> <span>{!adc.dailyRations}</span></td>
+                                    </tr>
+                                    <apex:repeat value="{!adc.restDays}" var="item">
+                                        <tr>
+                                            <td style="{!IF(ISBLANK(item),'','width:100%; border: 1px solid;')}">
+                                                <span>
+                                                    <apex:outputText value="{!item}" />
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </apex:repeat>
+                                </table>
+                            </td>
+                            <td width ="5%" class="line" style="text-align: center;" valign="top">
+                                <apex:outputPanel rendered="{!adc.behaviorMeds == true}">
+                                   <div style="border: 1px solid black; width: 10px; height: 15px;margin: 5px 0px 5px 12px;">  <img src="/img/checkbox_checked.gif" /> </div>
+                                </apex:outputPanel>
+                                <apex:outputPanel rendered="{!adc.behaviorMeds == false}">
+                                    <div style="border: 1px solid black; width: 10px; height: 15px;margin: 5px 0px 5px 12px">   <img src="/img/checkbox_unchecked.gif" /> </div>
+                                </apex:outputPanel>
 
+                            </td>
+                            <td colspan="2" width ="10%" class="line"  valign="top">
+                                <div>
+                                    <table>
+                                        <tr>
+                                            <td>Fed</td>
+                                            <td style="border: 1px solid black; width: 10px;">
+                                                <span class="a"></span>
+                                            </td>
+                                            <td style="border: 1px solid black; width: 20px;">
+                                                <span class="a"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Meds</td>
+                                            <td style="border: 1px solid black; width: 20px;">
+                                                <span class="a"></span>
+                                            </td>
+                                            <td style="border: 1px solid black; width: 20px;">
+                                                <span class="a"></span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                            </td>
+                            <td width ="15%" class="line"  valign="top">
+                                <div>
+                                    <span>
+                                        <strong>TX:</strong> {!adc.specialCareTreatment}</span>
+                                </div>
+                                <br/>
+                                <div>
+                                    <span>
+                                        <strong>Outside TX:</strong> {!adc.specialCareOutside}</span>
+                                </div>
+                                <br/>
+                                <div>
+                                    <strong>Other:</strong> {!adc.specialCareOther}</div>
+                            </td>
+                            <td width ="15%" class="line"  valign="top">
+                                <span>{!adc.enrichment}</span>
+                            </td>
+                            <td width ="15%" class="line"  valign="top">{!adc.movemntAndCleaningDestinationField}</td>
+                            <td width ="20%" class="line"  valign="top">{!adc.handlingInstructions}</td>
+                            <!--<td style="width:20%; border: 1px solid;" valign="top">{!adc.round}</td>-->
+                        </tr>
+                    </apex:repeat>
+                </table>
+
+            </apex:pageBlock>
+        </apex:form>
+    </body>
 </apex:page>
