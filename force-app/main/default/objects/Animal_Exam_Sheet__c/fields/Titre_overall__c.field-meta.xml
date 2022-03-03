@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Titre_overall__c</fullName>
+    <description>Since Titre has can have multiple results we created one open field that they can put as many notes regarding this as possible. need to make report that will show any exams that have this field filled.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Add all results comments regarding any titre tests</inlineHelpText>
+    <label>Titre (INACTIVE)</label>
+    <length>32768</length>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>5</visibleLines>
+</CustomField>

@@ -1,0 +1,63 @@
+<!--
+ - Created by barne on 6/1/2021.
+ -->
+
+<aura:component description="BehaviorEvaluationMultipleOptionGroup" controller="BehaviorEvaluationPageController">
+    <aura:attribute name="tableHeader" type="Aura.Component[]" />
+    <aura:attribute name="options" type="Object[]" default="[]" required="true"/>
+    <aura:attribute name="index" type="Integer" />
+    <aura:attribute name="colNumber" type="Integer" required="true"/>
+    <aura:attribute name="type" type="String" />
+    <aura:attribute name="col1API" type="String" />
+    <aura:attribute name="col2API" type="String"/>
+    <aura:attribute name="col3API" type="String"/>
+    <aura:attribute name="col4API" type="String"/>
+    <aura:attribute name="selections" type="String" />
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="image" type="Aura.Component[]" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <table class="slds-box slds-p-top_medium" width="100%">
+        <div class="grid-container">
+            <div class="grid-item" >{!v.image}</div>
+            <div> {!v.col1API}</div>
+                <div class="grid-item" >
+                    <aura:iteration items="{!v.options}" var="options" indexVar="{!v.index}">
+                        <tr class="spaceUnder" align="left">
+                            <td class="float slds-theme_shade">
+                                <lightning:input name="{!v.col1API}" label="{!options.column1.label}"
+                                                 type="checkbox-button"
+                                                 variant="label-hidden" aura:id="opts" onchange="{!c.handleSelect}" checked="{!options.column1.IsSelected}"/>
+                            </td>
+                            <aura:if isTrue="{!v.colNumber >= 2}">
+                            <td class="float slds-theme_shade">
+                                <lightning:input name="{!v.col2API}" label="{!options.column2.label}"
+                                                 type="checkbox-button"
+                                                 variant="label-hidden" aura:id="opts2" onchange="{!c.handleSelect2}" checked="{!options.column2.IsSelected}" />
+                            </td>
+                            </aura:if>
+                            <aura:if isTrue="{!v.colNumber >= 3}">
+                            <td class="float slds-theme_shade">
+                                <lightning:input name="{!v.col3API}" label="{!options.column3.label}"
+                                                 type="checkbox-button"
+                                                 variant="label-hidden" aura:id="opts3" onchange="{!c.handleSelect3}" checked="{!options.column3.IsSelected}" />
+                            </td>
+                            </aura:if>
+                            <aura:if isTrue="{!v.colNumber >= 4}">
+                            <td class="float slds-theme_shade">
+                                <lightning:input name="{!v.col4API}" label="{!options.column4.label}"
+                                                 type="checkbox-button"
+                                                 variant="label-hidden" aura:id="opts4" onchange="{!c.handleSelect4}" checked="{!options.column4.IsSelected}" />
+                            </td>
+                            </aura:if>
+                            <td align="left">
+                                <strong> {!options.column1.label}</strong>
+                                <aura:if isTrue="{!options.column1.longDesc != null }">&nbsp;{!options.column1.longDesc}</aura:if>
+                            </td>
+                        </tr>
+                    </aura:iteration>
+                </div>
+        </div>
+    </table>
+
+</aura:component>

@@ -1,0 +1,41 @@
+/**
+ * Created by barne on 5/6/2021.
+ */
+
+.THIS .eachField.narrowRegion{
+    width:100%;
+}
+.THIS .eachField{
+    width:50%;
+    display:inline-block;
+}
+
+.THIS tr.spaceUnder>td {
+  padding-bottom: 1em;
+  padding-left: 1em;
+}
+
+.THIS table.format>lightning:tab {
+    padding: 1em;
+    width: 100%;
+
+}
+
+.THIS .tabHeader {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.THIS .tabDesc {
+    font-size: 16px;
+}
+
+.THIS input.largerCheckbox {
+-webkit-box-shadow: 0px 0px 0px 1px rgba(255,0,0,1);
+-moz-box-shadow: 0px 0px 0px 1px rgba(255,0,0,1);
+box-shadow: 0px 0px 0px 1px rgba(255,0,0,1);
+}
+.THIS.slds-spinner_container {  
+  z-index: 10000;
+  position: fixed;   
+}

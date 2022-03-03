@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Potential_Behavior_Issues__c</fullName>
+    <externalId>false</externalId>
+    <label>Potential Behavior Issues</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Aggression to People</fullName>
+                <default>false</default>
+                <label>Aggression to People</label>
+            </value>
+            <value>
+                <fullName>Aggression to Dogs</fullName>
+                <default>false</default>
+                <label>Aggression to Dogs</label>
+            </value>
+            <value>
+                <fullName>Fear</fullName>
+                <default>false</default>
+                <label>Fear</label>
+            </value>
+            <value>
+                <fullName>High Arousal</fullName>
+                <default>false</default>
+                <label>High Arousal</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other:</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

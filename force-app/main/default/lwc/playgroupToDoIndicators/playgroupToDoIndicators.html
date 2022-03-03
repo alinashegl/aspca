@@ -1,0 +1,18 @@
+<template>
+    <template if:true={babesia}>
+        <p>
+            <span class="slds-var-p-right_xx-small">Babesia +</span>
+        </p>
+    </template>
+    <template if:true={inHeat}>
+        <p>
+            <span class="slds-var-p-right_xx-small">In Heat</span>
+        </p>
+    </template>
+    <template if:true={showHandler}>
+        <p>
+            <lightning-icon icon-name="utility:priority" title={handlerCode} class={handlerVariant} size="x-small"></lightning-icon>
+            <span class="slds-var-p-left_xx-small">Handler Code</span>
+        </p>
+    </template>
+</template>

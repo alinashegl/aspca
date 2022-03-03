@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Toddler_Doll_P2__c</fullName>
+    <externalId>false</externalId>
+    <label>Toddler Doll P2</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Relaxed-interacted with doll</fullName>
+                <default>false</default>
+                <label>Relaxed-interacted with doll</label>
+            </value>
+            <value>
+                <fullName>Ignored doll</fullName>
+                <default>false</default>
+                <label>Ignored doll</label>
+            </value>
+            <value>
+                <fullName>Uncomfortable-didn&apos;t try to get away</fullName>
+                <default>false</default>
+                <label>Uncomfortable-didn&apos;t try to get away</label>
+            </value>
+            <value>
+                <fullName>Tried to get away</fullName>
+                <default>false</default>
+                <label>Tried to get away</label>
+            </value>
+            <value>
+                <fullName>Mounted or humped doll-sexual behavior</fullName>
+                <default>false</default>
+                <label>Mounted or humped doll-sexual behavior</label>
+            </value>
+            <value>
+                <fullName>Moderately fearful</fullName>
+                <default>false</default>
+                <label>Moderately fearful</label>
+            </value>
+            <value>
+                <fullName>Extremely fearful</fullName>
+                <default>false</default>
+                <label>Extremely fearful</label>
+            </value>
+            <value>
+                <fullName>Threatened</fullName>
+                <default>false</default>
+                <label>Threatened</label>
+            </value>
+            <value>
+                <fullName>Became aggressive</fullName>
+                <default>false</default>
+                <label>Became aggressive</label>
+            </value>
+            <value>
+                <fullName>Not fooled by doll</fullName>
+                <default>false</default>
+                <label>Not fooled by doll</label>
+            </value>
+            <value>
+                <fullName>Too fearful-subtest not done</fullName>
+                <default>false</default>
+                <label>Too fearful-subtest not done</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

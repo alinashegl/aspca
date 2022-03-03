@@ -1,0 +1,23 @@
+<template>
+    <template if:true={recordId}>
+        <c-observation-table
+            record-id={recordId}
+            observation-type='Happy Tail'
+        >
+        </c-observation-table>
+
+        <template if:false={isArcCare}>
+            <c-observation-table
+                record-id={recordId}
+                observation-type='Observation'
+            >
+            </c-observation-table>
+        </template>
+
+        <c-observation-table
+            record-id={recordId}
+            observation-type='Concern'
+        >
+        </c-observation-table>
+    </template>
+</template>

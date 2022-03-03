@@ -1,0 +1,11 @@
+.datePicker{
+    width: 25%;
+}
+
+.card-custom{
+    --sds-c-card-sizing-border: 1px;
+}
+
+:host {
+    --sds-c-textarea-sizing-min-height: 150px;
+}

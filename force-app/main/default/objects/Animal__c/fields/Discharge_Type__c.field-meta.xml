@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Discharge_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Discharge Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Adopted</fullName>
+                <default>false</default>
+                <label>Adopted</label>
+            </value>
+            <value>
+                <fullName>Deceased</fullName>
+                <default>false</default>
+                <label>Deceased</label>
+            </value>
+            <value>
+                <fullName>Discharged to board and train</fullName>
+                <default>false</default>
+                <label>Discharged to board and train</label>
+            </value>
+            <value>
+                <fullName>Euthanized</fullName>
+                <default>false</default>
+                <label>Euthanized</label>
+            </value>
+            <value>
+                <fullName>Internal ASPCA Foster Transfer</fullName>
+                <default>false</default>
+                <label>Internal ASPCA Foster Transfer</label>
+            </value>
+            <value>
+                <fullName>Internal ASPCA Placement Transfer</fullName>
+                <default>false</default>
+                <label>Internal ASPCA Placement Transfer</label>
+            </value>
+            <value>
+                <fullName>Returned to Caregiver</fullName>
+                <default>false</default>
+                <label>Returned to Caregiver</label>
+            </value>
+            <value>
+                <fullName>Returned to Owner</fullName>
+                <default>false</default>
+                <label>Returned to Owner</label>
+            </value>
+            <value>
+                <fullName>Transferred to Boarding</fullName>
+                <default>false</default>
+                <label>Transferred to Boarding</label>
+            </value>
+            <value>
+                <fullName>Transferred to Clinic</fullName>
+                <default>false</default>
+                <label>Transferred to Clinic</label>
+            </value>
+            <value>
+                <fullName>Transferred to Foster</fullName>
+                <default>false</default>
+                <label>Transferred to Foster</label>
+            </value>
+            <value>
+                <fullName>Transferred to Rehab</fullName>
+                <default>false</default>
+                <label>Transferred to Rehab</label>
+            </value>
+            <value>
+                <fullName>Transferred to Response Partner</fullName>
+                <default>false</default>
+                <label>Transferred to Response Partner</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

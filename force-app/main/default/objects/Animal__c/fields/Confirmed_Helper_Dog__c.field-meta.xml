@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Confirmed_Helper_Dog__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Selection if an Animal is designated as a Helper Dog</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Click this if this Animal is confirmed as a Helper Dog.</inlineHelpText>
+    <label>Confirmed Helper Dog</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

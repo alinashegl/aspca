@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Response_Partner_Outcome__c</fullName>
+    <externalId>false</externalId>
+    <label>Response Partner Outcome</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Adopted</fullName>
+                <default>false</default>
+                <label>Adopted</label>
+            </value>
+            <value>
+                <fullName>Transferred</fullName>
+                <default>false</default>
+                <label>Transferred</label>
+            </value>
+            <value>
+                <fullName>Deceased</fullName>
+                <default>false</default>
+                <label>Deceased</label>
+            </value>
+            <value>
+                <fullName>Euthanized for Behavior</fullName>
+                <default>false</default>
+                <label>Euthanized for Behavior</label>
+            </value>
+            <value>
+                <fullName>Euthanized for Medical</fullName>
+                <default>false</default>
+                <label>Euthanized for Medical</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

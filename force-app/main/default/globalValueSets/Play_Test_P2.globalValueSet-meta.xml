@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Plays with toy alone</fullName>
+        <default>false</default>
+        <label>Plays with toy alone</label>
+    </customValue>
+    <customValue>
+        <fullName>Interacts with tester</fullName>
+        <default>false</default>
+        <label>Interacts with tester</label>
+    </customValue>
+    <customValue>
+        <fullName>Investigates toy</fullName>
+        <default>false</default>
+        <label>Investigates toy</label>
+    </customValue>
+    <customValue>
+        <fullName>Ignores toy</fullName>
+        <default>false</default>
+        <label>Ignores toy</label>
+    </customValue>
+    <customValue>
+        <fullName>Tries to keep toy from tester</fullName>
+        <default>false</default>
+        <label>Tries to keep toy from tester</label>
+    </customValue>
+    <customValue>
+        <fullName>Moderately fearful</fullName>
+        <default>false</default>
+        <label>Moderately fearful</label>
+    </customValue>
+    <customValue>
+        <fullName>Refuses to relinquish toy - stiff</fullName>
+        <default>false</default>
+        <label>Refuses to relinquish toy - stiff</label>
+    </customValue>
+    <customValue>
+        <fullName>Extremely fearful</fullName>
+        <default>false</default>
+        <label>Extremely fearful</label>
+    </customValue>
+    <customValue>
+        <fullName>Guards toy</fullName>
+        <default>false</default>
+        <label>Guards toy</label>
+    </customValue>
+    <customValue>
+        <fullName>Becomes aggressive</fullName>
+        <default>false</default>
+        <label>Becomes aggressive</label>
+    </customValue>
+    <masterLabel>Play Test P2</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

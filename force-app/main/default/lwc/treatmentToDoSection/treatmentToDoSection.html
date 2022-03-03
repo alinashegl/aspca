@@ -1,0 +1,148 @@
+<template>
+    <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_1-of-2 slds-medium-size_2-of-12 slds-large-size_1-of-12">
+            <label class="slds-form-element__legend slds-form-element__label">Name</label>
+            <template if:true={smallForm}>
+                <lightning-helptext icon-name="utility:info" content="Click animal name to toggle fields"></lightning-helptext>
+            </template>
+            <div class="slds-form-element__static">
+                <span onclick={toggleExpand}>{animalTreatment.Animal__r.Animal_Name__c}</span>
+            </div>
+        </div>
+        <div class="slds-col slds-size_1-of-2 slds-medium-size_2-of-12 slds-large-size_1-of-12">
+            <label class="slds-form-element__legend slds-form-element__label">ID#</label>
+            <div class="slds-form-element__static">
+                <a href={urlId}>{animalTreatment.Animal__r.Name}</a>
+            </div>
+        </div>
+        <template if:true={expanded}>
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-large-size_1-of-12">
+                <template if:true={isEdit}>
+                    <template if:true={treatmentPriorirtyPicklist.data}>
+                        <legend class="slds-form-element__legend slds-form-element__label">Treatment Priority</legend>
+                        <lightning-combobox name="treatmentPriority" label="Treatment Priority" variant="label-hidden" value={treatmentPriority}
+                            options={treatmentPriorirtyPicklist.data.values} onchange={handleTreatmentPriorityChange}>
+                        </lightning-combobox>
+                    </template>        
+                </template>
+                <template if:false={isEdit}>
+                    <label class="slds-form-element__legend slds-form-element__label">
+                        Treatment Priority
+                        <lightning-button-icon icon-name="utility:edit" variant="bare" onclick={handleEdit}></lightning-button-icon>
+                    </label>
+                    <div class="slds-form-element__static">
+                        <span>{animalTreatment.Treatment_Priority__c}</span>
+                    </div>
+                </template>
+            </div>
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-large-size_1-of-12" data-id='customlookupsearch'>
+                <template if:true={isEdit}>
+                    <label class="slds-form-element__legend slds-form-element__label">
+                        Bundle Assignment
+                    </label>
+                    <c-custom-lookup
+                        obj-name="Treatment_Bundle__c"
+                        icon-name="standard:procedure"
+                        placeholder="Search Bundles..."
+                        fields={customLookupFields}
+                        display-fields={customLookupDisplayFields}
+                        value-id={customLookupNewId}
+                        field-to-query={customLookupFieldToQuery}
+                        where-clause={customLookupWhereClause}
+                        label-name="Bundle Assignment"
+                        onlookup={customLookupEvent}
+                        onexpandfield={handleCustomLookupExpandSearch}
+                        element-id='customlookupsearch'
+                        initial-col-size='slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-large-size_1-of-12'
+                    >
+                    </c-custom-lookup>
+                </template>
+                <template if:false={isEdit}>
+                    <label class="slds-form-element__legend slds-form-element__label">
+                        Bundle Assignment
+                        <lightning-button-icon icon-name="utility:edit" variant="bare" onclick={handleEdit}></lightning-button-icon>
+                    </label>
+                    <div class="slds-form-element__static">
+                        <a href={urlBundle}>{treatmentBundleName}</a>
+                    </div>
+                </template>
+            </div>
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-large-size_1-of-12">
+                <label class="slds-form-element__legend slds-form-element__label">Treatment Count</label>
+                <div class="slds-form-element__static">
+                    <span>{treatmentCount}</span>
+                </div>
+            </div>
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-large-size_1-of-12">
+                <label class="slds-form-element__legend slds-form-element__label">Shelter Color Code</label>
+                <template if:true={showHandler}>
+                    <div class="slds-form-element__static">
+                        <lightning-icon icon-name="utility:priority" title={animalTreatment.Shelter_Color_Code__c} class={handlerVariant} size="x-small"></lightning-icon>
+                        <span class="slds-var-p-left_xx-small">Handler Code</span>
+                    </div>
+                </template>
+            </div>
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-large-size_1-of-12">
+                <label class="slds-form-element__legend slds-form-element__label">Sex (w/ Spay/Neuter)</label>
+                <div class="slds-form-element__static">
+                    <span>{animalTreatment.Animal__r.Gender__c}</span>
+                </div>
+            </div>
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-large-size_1-of-12">
+                <label class="slds-form-element__legend slds-form-element__label">Age</label>
+                <div class="slds-form-element__static">
+                    <span>{animalTreatment.Animal__r.Current_Animal_Age_Estimate__c}</span>
+                </div>
+            </div>
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-large-size_1-of-12">
+                <label class="slds-form-element__legend slds-form-element__label">Grade</label>
+                <div class="slds-form-element__static">
+                    <span>{animalTreatment.Animal__r.Current_Behavior_Grade__c}</span>
+                </div>
+            </div>
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_3-of-12 slds-large-size_1-of-12">
+                <label class="slds-form-element__legend slds-form-element__label">Kennel Location</label>
+                <div class="slds-form-element__static">
+                    <span>{animalTreatment.Animal__r.Shelter_Location__c}</span>
+                </div>
+            </div>
+            <lightning-button-stateful
+                label-when-off="Show protocols"
+                label-when-on="Hide protocols"
+                icon-name-when-off="utility:add"
+                icon-name-when-on="utility:dash"
+                selected={isSelected}
+                onclick={handleClick}>
+            </lightning-button-stateful>
+            <template if:true={isEdit}>
+                <div class="slds-col slds-size_1-of-1 slds-var-m-top_medium">
+                    <lightning-button
+                        class="slds-var-m-top_small"
+                        label="Cancel"
+                        onclick={handleReset}
+                    ></lightning-button>
+                    <lightning-button
+                        class="slds-var-m-top_small slds-var-m-left_x-small"
+                        variant="brand"
+                        onclick={handleUpdate}
+                        label="Update"
+                    ></lightning-button>
+                </div>
+            </template>
+            <template if:true={isConfirmationVisible}>
+                <c-confirmation-dialog title='Confirmation'
+                           message='This will create a new active treatment plan for this dog and will deactivate the current plan. Do you want to proceed?'
+                           confirm-label='Yes'
+                           cancel-label='No'
+                           visible={isConfirmationVisible}
+                           name="confirmModal"
+                           ondlgclick={handleConfirmationClick}></c-confirmation-dialog>
+            </template>
+            <template if:true={isSelected}>
+                <div class="slds-col slds-size_1-of-1">
+                    <c-treatment-modify-session record-id={animalTreatment.Id}></c-treatment-modify-session>
+                </div>
+            </template>
+        </template>
+    </div>
+</template>

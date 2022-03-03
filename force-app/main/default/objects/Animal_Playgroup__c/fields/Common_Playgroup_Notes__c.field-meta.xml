@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Common_Playgroup_Notes__c</fullName>
+    <externalId>false</externalId>
+    <label>Management Tools Used</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Body Block</fullName>
+                <default>false</default>
+                <label>Body Block</label>
+            </value>
+            <value>
+                <fullName>Dragline</fullName>
+                <default>false</default>
+                <label>Dragline</label>
+            </value>
+            <value>
+                <fullName>Verbal Interrupter</fullName>
+                <default>false</default>
+                <label>Verbal Interrupter</label>
+            </value>
+            <value>
+                <fullName>Spray Bottle with Water</fullName>
+                <default>false</default>
+                <label>Spray Bottle with Water</label>
+            </value>
+            <value>
+                <fullName>Small Shake Can</fullName>
+                <default>false</default>
+                <label>Small Shake Can</label>
+            </value>
+            <value>
+                <fullName>Monster Shake Can</fullName>
+                <default>false</default>
+                <label>Monster Shake Can</label>
+            </value>
+            <value>
+                <fullName>Pet Corrector</fullName>
+                <default>false</default>
+                <label>Pet Corrector</label>
+            </value>
+            <value>
+                <fullName>Citronella Spray</fullName>
+                <default>false</default>
+                <label>Citronella Spray</label>
+            </value>
+            <value>
+                <fullName>Airhorn</fullName>
+                <default>false</default>
+                <label>Airhorn</label>
+            </value>
+            <value>
+                <fullName>Break Stick</fullName>
+                <default>false</default>
+                <label>Break Stick</label>
+            </value>
+            <value>
+                <fullName>Aggressed</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Aggressed</label>
+            </value>
+            <value>
+                <fullName>Appropriately corrected rude behavior</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Appropriately corrected rude behavior</label>
+            </value>
+            <value>
+                <fullName>Defensive</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Defensive</label>
+            </value>
+            <value>
+                <fullName>Disengaged - remained tense</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Disengaged - remained tense</label>
+            </value>
+            <value>
+                <fullName>Disengaged – relaxed and milled</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Disengaged – relaxed and milled</label>
+            </value>
+            <value>
+                <fullName>Disengaged – relaxed some</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Disengaged – relaxed some</label>
+            </value>
+            <value>
+                <fullName>Greeted – no greeting</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Greeted – no greeting</label>
+            </value>
+            <value>
+                <fullName>Greeted – playful</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Greeted – playful</label>
+            </value>
+            <value>
+                <fullName>Greeted – politely</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Greeted – politely</label>
+            </value>
+            <value>
+                <fullName>Greeted – rude but playful</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Greeted – rude but playful</label>
+            </value>
+            <value>
+                <fullName>Greeted – rude, aroused, not social</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Greeted – rude, aroused, not social</label>
+            </value>
+            <value>
+                <fullName>Greeted – tense</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Greeted – tense</label>
+            </value>
+            <value>
+                <fullName>Overcorrected rude approach</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Overcorrected rude approach</label>
+            </value>
+            <value>
+                <fullName>Played – arousal escalated</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Played – arousal escalated</label>
+            </value>
+            <value>
+                <fullName>Played – boxed</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Played – boxed</label>
+            </value>
+            <value>
+                <fullName>Played – chase</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Played – chase</label>
+            </value>
+            <value>
+                <fullName>Played – roughly</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Played – roughly</label>
+            </value>
+            <value>
+                <fullName>Played – rude</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Played – rude</label>
+            </value>
+            <value>
+                <fullName>Played – wrestle</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Played – wrestle</label>
+            </value>
+            <value>
+                <fullName>Requires Muzzle</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Requires Muzzle</label>
+            </value>
+            <value>
+                <fullName>Requires drag for TO</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Requires drag for TO</label>
+            </value>
+            <value>
+                <fullName>Requires handler to crate breaks in play</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Requires handler to crate breaks in play</label>
+            </value>
+            <value>
+                <fullName>Responded to handler correction</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Responded to handler correction</label>
+            </value>
+            <value>
+                <fullName>Tolerated play solicitations</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Tolerated play solicitations</label>
+            </value>
+            <value>
+                <fullName>Tolerated rude behavior</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Tolerated rude behavior</label>
+            </value>
+            <value>
+                <fullName>Took breaks</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Took breaks</label>
+            </value>
+            <value>
+                <fullName>Unresponsive to dogs’ correction</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Unresponsive to dogs’ correction</label>
+            </value>
+            <value>
+                <fullName>Unresponsive to handler correction</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Unresponsive to handler correction</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

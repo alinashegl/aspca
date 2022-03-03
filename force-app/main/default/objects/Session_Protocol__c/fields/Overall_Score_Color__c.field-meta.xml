@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Overall_Score_Color__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(TEXT(Overall_Score__c) = &quot;1. Beginning / Acquisition&quot;, &quot;🟥&quot;, IF(TEXT(Overall_Score__c) = &quot;2. Catching On / Fluency&quot;, &quot;🟧&quot;, IF(TEXT(Overall_Score__c) = &quot;3. Almost There / Generalization&quot;, &quot;🟨&quot;, IF(TEXT(Overall_Score__c) = &quot;4. Maintenance&quot;, &quot;🟩&quot;, &quot;&quot;) ) ) )</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Overall Score Color</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

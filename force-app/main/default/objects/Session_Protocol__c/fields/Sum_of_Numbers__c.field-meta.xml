@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sum_of_Numbers__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(ISBLANK(TEXT(Aggressive_Worst__c)), 0, 1) +
+IF(ISBLANK(TEXT(Arousal_Best__c)), 0, 1) +
+IF(ISBLANK(TEXT(Arousal_Worst__c)), 0, 1) +
+IF(ISBLANK(TEXT(Fear_Best__c)), 0, 1) +
+IF(ISBLANK(TEXT(Fear_Worst__c)), 0, 1) +
+IF(ISBLANK(TEXT(Overall_Score__c)), 0, 1) +
+IF(ISBLANK(TEXT(Social_Best__c)), 0, 1)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Sum of Numbers</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>
