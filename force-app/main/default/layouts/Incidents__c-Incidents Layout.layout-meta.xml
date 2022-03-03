@@ -47,7 +47,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Other_Damage_Done_by_the_Dog__c</field>
+                <field>If_dog_did_not_bite__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Please_explain_why_you_think_so__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -81,11 +85,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>If_dog_did_not_bite__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Please_explain_why_you_think_so__c</field>
+                <field>Other_Damage_Done_by_the_Dog__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>

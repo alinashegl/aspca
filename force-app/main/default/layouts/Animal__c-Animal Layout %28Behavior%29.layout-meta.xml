@@ -144,6 +144,8 @@
         <fields>EndDate__c</fields>
         <fields>CREATEDBY_USER</fields>
         <relatedList>BehaviorCaseWorker__c.Animal__c</relatedList>
+        <sortField>StartDate__c</sortField>
+        <sortOrder>Desc</sortOrder>
     </relatedLists>
     <relatedLists>
         <excludeButtons>MassChangeOwner</excludeButtons>
@@ -415,6 +417,18 @@
         <fields>Incident_Date_Time__c</fields>
         <fields>Incident_Description__c</fields>
         <relatedList>Incidents__c.Animal__c</relatedList>
+        <sortField>NAME</sortField>
+        <sortOrder>Desc</sortOrder>
+    </relatedLists>
+    <relatedLists>
+        <excludeButtons>MassChangeOwner</excludeButtons>
+        <excludeButtons>New</excludeButtons>
+        <fields>NAME</fields>
+        <fields>ASPCA_Animal_Name__c</fields>
+        <fields>Case__c</fields>
+        <fields>Study_Animal_Box_URL__c</fields>
+        <fields>Post_Placement_F_U_survey__c</fields>
+        <relatedList>Research_Animal__c.Animal__c</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>
