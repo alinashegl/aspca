@@ -90,4 +90,14 @@ global class DateTimeUtility {
         String myDateString = Datetime.newInstance(myDate.year(), myDate.month(),myDate.day()).format('EEE');
         return 'Sat'.equals(myDateString) || 'Sun'.equals(myDateString);
     }
+    
+    public static List<Date> getBiweeklyDates(Date startDate, Integer months){
+        List<Date> dates = new List<Date>{startDate};
+        for(Integer i = 1; i <= months; i++){
+            dates.add(AddBusinessDays(startDate, 10));
+            dates.add(AddBusinessDays(startDate, 20));
+            startDate = AddBusinessDays(startDate, 20);
+        }
+        return dates;
+    }
 }
