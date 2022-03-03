@@ -1,7 +1,8 @@
 import { LightningElement, api, wire } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
 import getActiveTreatmentPlan from '@salesforce/apex/createTreatmentSessionController.getActiveTreatmentPlan';
-import SystemModstamp from '@salesforce/schema/APXT_BPM__Conductor__c.SystemModstamp';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+// import SystemModstamp from '@salesforce/schema/APXT_BPM__Conductor__c.SystemModstamp';
 
 export default class CreateTreatmentSession extends NavigationMixin(LightningElement) {
     @api animalId;
@@ -10,9 +11,10 @@ export default class CreateTreatmentSession extends NavigationMixin(LightningEle
     planId;
     showSpinner = false;
     customLookupContactId;
+    requiredContact = true;
 
     get hasPlan(){
-        return this.planId != undefined && this.planId != null;
+        return  this.planId != undefined && this.planId != null;
     }
 
     // @wire(getActiveTreatmentPlan, {animalId: '$animalId'})
@@ -36,19 +38,20 @@ export default class CreateTreatmentSession extends NavigationMixin(LightningEle
     handleCustomLookupExpandSearch(event){
         let data = event.detail.data;
         let dataId = data.elementId;
-        this.template.querySelector('[data-id="' + dataId + '"]').className =
-            data.expandField ? 'slds-col slds-size_1-of-1' : data.initialColSize;
+        // this.template.querySelector('[data-id="' + dataId + '"]').className =
+        //     data.expandField ? 'slds-col slds-size_1-of-1' : data.initialColSize;
     }
 
     handleSubmit(event){
         event.preventDefault();
         this.showSpinner = true;
         const fields = event.detail.fields;
-        fields.Animal__c = this.animalId;
-        fields.Treatment_Plan__c = this.planId;
         if(this.customLookupContactId != undefined){
             fields.Session_Contact__c = this.customLookupContactId;
         }
+        fields.Animal__c = this.animalId;
+        fields.Treatment_Plan__c = this.planId;
+        
         this.template.querySelector('lightning-record-edit-form').submit(fields);
     }
 
@@ -61,12 +64,21 @@ export default class CreateTreatmentSession extends NavigationMixin(LightningEle
                 actionName: 'view',
             }
         });
+         // Prepare a toast UI message
+         this.dispatchEvent(
+            new ShowToastEvent({
+                title: "",
+                message: "Treatment Session was created.",
+                variant: "success"
+            })
+        );
     }
-
+    
     handleCancel(){
         const selectedEvent = new CustomEvent('cancel', {});
         this.dispatchEvent(selectedEvent);
     }
+    
     
     get customLookupTreatmentFields(){
         return ['Name'];

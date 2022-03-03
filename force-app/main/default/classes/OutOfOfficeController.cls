@@ -29,12 +29,12 @@ public class OutOfOfficeController {
     
     // Method is used to run weekly check and create new entries in outofoffice based on enddates
     public static void handleOutOfOfficeSchedule(){
-        Date endDate = System.today().addDays(6);
+        Date endDate = System.today().addMonths(6);
         List<AggregateResult> records = [Select Contact__c, Max(EndDate__c) endDate FROM OutOfOffice__c WHERE Contact__r.WeeklyOff__c != NULL Group by Contact__c];
         Map<Id, Date> contactByEndDate = new Map<Id, Date>();
         for(AggregateResult out : records){
             Date dDate = (Date)out.get('endDate');
-            if(dDate >= System.today() && dDate <= endDate){
+            if(dDate >= endDate.addDays(-6) && dDate <= endDate){
                 contactByEndDate.put((Id)out.get('Contact__c'), dDate);
             }
         }
@@ -46,9 +46,9 @@ public class OutOfOfficeController {
                 Contact c = contactMap.get(contactId);
                 if(String.isNotBlank(c.WeeklyOff__c)){
                     Date startDate = contactByEndDate.get(contactId).addDays(1);
-                    Date endDate6M = startDate.addMonths(6);
+                    Date endDate6Days = startDate.addDays(6);
                     List<String> days = c.WeeklyOff__c.split(';');
-                    List<Date> dateList = ContactTriggerHandler.calculateDates(startDate, endDate6M, days);
+                    List<Date> dateList = ContactTriggerHandler.calculateDates(startDate, endDate6Days, days);
                     for(Date offDate : dateList){
                         OutOfOffice__c weeklyOff = new OutOfOffice__c();
                         weeklyOff.Contact__c = contactId;
@@ -60,7 +60,7 @@ public class OutOfOfficeController {
             }
             
             if(!weeklyOffList.isEmpty()){
-                insert weeklyOffList;
+                //insert weeklyOffList;
             }
         }
     }
