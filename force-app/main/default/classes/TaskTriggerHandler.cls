@@ -191,7 +191,7 @@ public with sharing class TaskTriggerHandler {
             newTask.Animal__c = animal.Id;
             newTask.RecordTypeId = recordTypeId;
             newTask.ActivityDate = taskDate;
-            newTask.Description = 'Med Check is needed for: ' + animal.Animal_Name_Id__c + ' (' + animal.Current_Recent_Shelter_Location__c + ')';
+            newTask.Description = AutoScheduleTasksUtil.BMED_DESCRIPTION + animal.Animal_Name_Id__c + ' (' + animal.Current_Recent_Shelter_Location__c + ')';
             newTask.IsReminderSet = false;
             newTask.Status = 'Not Started';
             newTask.WhoId = animal.Behavior_Case_Worker__c != null ? animal.Behavior_Case_Worker__c : genericCon.Id;
@@ -206,7 +206,7 @@ public with sharing class TaskTriggerHandler {
     
     public static Map<String, Task> getExistingTasks(Map<Id, Task> taskMap){
         Map<String, Task> existingTaskMap = new Map<String, Task>();
-        List<Task> tasks = [Select Animal__c, Medication__c from task where recordTypeId =: recordTypeId and Medication__c != null and Id not in : taskMap.values()];
+        List<Task> tasks = [Select Animal__c, Medication__c from task where recordTypeId =: recordTypeId and Medication__c != null and Id not in : taskMap.values() AND Status NOT IN('Completed', 'Deferred')];
         for(Task t : tasks){
             existingTaskMap.put(String.valueof(t.Animal__c)+String.valueOf(t.Medication__c), t);
         }
