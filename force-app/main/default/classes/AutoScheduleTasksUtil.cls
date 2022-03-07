@@ -18,6 +18,7 @@ public class AutoScheduleTasksUtil {
     };
     public static final String NO_CONTACT_RESOURCE = 'unassigned';
     public static final String[] dogPopulations = new String[]{'ARC','CARE','CRC','MRC'};
+    public static final String BMED_DESCRIPTION = 'Bmed Check is needed for: ';
     public static Date startDate;
     public static Date endDate;
 
