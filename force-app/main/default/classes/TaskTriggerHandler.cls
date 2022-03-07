@@ -206,7 +206,7 @@ public with sharing class TaskTriggerHandler {
     
     public static Map<String, Task> getExistingTasks(Map<Id, Task> taskMap){
         Map<String, Task> existingTaskMap = new Map<String, Task>();
-        List<Task> tasks = [Select Animal__c, Medication__c from task where recordTypeId =: recordTypeId and Medication__c != null and Id not in : taskMap.values() AND Status NOT IN('Completed', 'Deferred')];
+        List<Task> tasks = [Select Animal__c, Medication__c from task where recordTypeId =: recordTypeId and Medication__c != null and Id not in : taskMap.values()];
         for(Task t : tasks){
             existingTaskMap.put(String.valueof(t.Animal__c)+String.valueOf(t.Medication__c), t);
         }
