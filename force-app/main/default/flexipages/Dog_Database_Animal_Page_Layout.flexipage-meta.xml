@@ -419,7 +419,7 @@
             <fieldInstance>
                 <fieldInstanceProperties>
                     <name>uiBehavior</name>
-                    <value>none</value>
+                    <value>readonly</value>
                 </fieldInstanceProperties>
                 <fieldItem>Record.Preliminary_Behavior_Grade__c</fieldItem>
                 <identifier>RecordPreliminary_Behavior_Grade__cField</identifier>
@@ -2292,16 +2292,6 @@
                 </componentInstanceProperties>
                 <componentName>flexipage:reportChart</componentName>
                 <identifier>flexipage_reportChart1</identifier>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>hideHeader</name>
-                    <value>false</value>
-                </componentInstanceProperties>
-                <componentName>force:relatedListQuickLinksContainer</componentName>
-                <identifier>force_relatedListQuickLinksContainer3</identifier>
             </componentInstance>
         </itemInstances>
         <name>Facet-69a34d12-b479-4e31-9b77-203b0b975224</name>
