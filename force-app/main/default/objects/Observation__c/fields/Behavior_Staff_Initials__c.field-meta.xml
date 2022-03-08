@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Capture_Date__c</fullName>
-    <defaultValue>TODAY()</defaultValue>
+    <fullName>Behavior_Staff_Initials__c</fullName>
     <externalId>false</externalId>
-    <label>Contact Date</label>
+    <label>Behavior Staff Initials</label>
+    <length>10</length>
     <required>false</required>
     <trackTrending>false</trackTrending>
-    <type>Date</type>
+    <type>Text</type>
+    <unique>false</unique>
 </CustomField>
