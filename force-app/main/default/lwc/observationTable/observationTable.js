@@ -56,6 +56,18 @@ export default class ObservationTable extends NavigationMixin(LightningElement) 
         }
     }
 
+    goToObservation(event){
+        this[NavigationMixin.GenerateUrl]({
+            type: 'standard__recordPage',
+            attributes: {
+                recordId: event.target.dataset.id,
+                objectApiName: 'Observation__c',
+                actionName: 'view'
+            }
+        })
+        .then(url => { window.open(url) });
+    }
+
     updateActiveList(){
         if(this.count == 5 && this.returnedList && this.returnedList.length > 5){
             this.observationList = this.returnedList.slice(0, 5)
