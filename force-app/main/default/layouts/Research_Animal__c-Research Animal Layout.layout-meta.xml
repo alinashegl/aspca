@@ -19,6 +19,10 @@
                 <behavior>Readonly</behavior>
                 <field>ASPCA_Animal_Name__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Case_Type__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -69,7 +73,6 @@
         <excludeButtons>MassChangeOwner</excludeButtons>
         <fields>Research_Study__c.NAME</fields>
         <fields>Research_Study__c.Study_Name__c</fields>
-        <fields>Research_Study__c.Principle_Researcher__c</fields>
         <fields>Research_Study__c.Study_Box_URL__c</fields>
         <fields>Research_Study__c.Study_Status__c</fields>
         <relatedList>Research_Junction__c.Research_Animal__c</relatedList>

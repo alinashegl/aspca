@@ -21,6 +21,26 @@
                 <behavior>Readonly</behavior>
                 <field>Case_Type__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>FM_ID__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>FM_Age__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>FM_Breed__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>FM_Animal_Status__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>FM_Deceased_Reason__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -426,8 +446,9 @@
         <fields>NAME</fields>
         <fields>ASPCA_Animal_Name__c</fields>
         <fields>Case__c</fields>
-        <fields>Study_Animal_Box_URL__c</fields>
+        <fields>Case_Type__c</fields>
         <fields>Post_Placement_F_U_survey__c</fields>
+        <fields>Study_Animal_Box_URL__c</fields>
         <relatedList>Research_Animal__c.Animal__c</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
