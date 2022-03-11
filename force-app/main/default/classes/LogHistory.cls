@@ -85,7 +85,7 @@ public without sharing class LogHistory {
         String query = 'SELECT Id, RecordName__c, OwnerId, IsDeleted, Name, CreatedDate, CreatedBy.Name, FieldName__c, NewValue__c, OldValue__c, ObjectId__c, ObjectName__c FROM EntityHistory__c WHERE ObjectName__c = \'Behavior Evaluation\'';
         
         if ( recordId != null && recordId != '' ) {
-            query += ' AND ObjectId__c = \''+recordId+'\'';
+            query += ' AND ParentId__c = \''+recordId+'\'';
         }
         
         if ( dateFilter != null && dateFilter != '' ) {

@@ -529,6 +529,7 @@ public without sharing class TestDataFactory {
                     Gender__c = 'MN',
                     Animal_Name__c = 'Doggo123',
                     Shelter_Location2__c = 'MRC',
+                    Current_Location__c = 'MRC',
                     Current_Recent_Shelter_Location__c = 'MRC',
                     Play_Category__c = 'Unevaluated'
         );
@@ -550,6 +551,7 @@ public without sharing class TestDataFactory {
                   Gender__c = 'MN',
                   Animal_Name__c = name,
                   Shelter_Location2__c = 'MRC',
+                  Current_Location__c = 'MRC',
                   Current_Recent_Shelter_Location__c = 'MRC'
       );
       insert a;
@@ -944,5 +946,31 @@ public without sharing class TestDataFactory {
         };
         insert fosterList;
         return fosterList;
+    }
+
+    public static Daily_Care__c createDailyCareWithAnimalDailyCares(Integer animalCount){
+      Animal__c[] animals = new Animal__c[0];
+      for(Integer i = 0; i < animalCount; i++){
+        animals.add(createAnimalWithName('name' + i));
+      }
+      Daily_Care__c dc = createDailyCare();
+      Animal_Daily_Care__c[] adcs = new Animal_Daily_Care__c[0];
+      for(Animal__c a : animals){
+        adcs.add(new Animal_Daily_Care__c(
+          Animal__c = a.Id,
+          Daily_Care__c = dc.Id
+        ));
+      }
+
+      insert adcs;
+      return dc;
+    }
+
+    public static Daily_Care__c createDailyCare(){
+      Daily_Care__c dc = new Daily_Care__c(
+        Date__c = date.today()
+      );
+      insert dc;
+      return dc;
     }
 }

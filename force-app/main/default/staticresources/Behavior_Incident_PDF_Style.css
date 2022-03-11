@@ -18,6 +18,13 @@ tr.one>td {
     height: 1in;
 }
 
+tr.half>td {
+    border: 1px solid black; 
+    background-color: White;
+    vertical-align:Top;
+    height: .5in;
+}
+
 .line{
 	border-bottom: .5px solid black;
 }

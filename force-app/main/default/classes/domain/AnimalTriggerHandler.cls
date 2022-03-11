@@ -13,6 +13,7 @@ public with sharing class AnimalTriggerHandler {
     }
     
     public static void insertHandler(){
+        reviewForMRCDailyCare((Animal__c[])Trigger.new);
         CaseContactRole conrole = new CaseContactRole();
         for (Animal__c a : (List<Animal__c>)Trigger.new){
             List<CaseContactRole> curroles = [SELECT Id from CaseContactRole WHERE CasesId =: a.Case__c AND ContactId =: a.Discharged_to_Contact__c AND Role = 'Animal Discharge Contact'];
@@ -88,6 +89,7 @@ public with sharing class AnimalTriggerHandler {
     }
     
     public static void updateHandler(List<Animal__c> anms, Map<Id, Animal__c> oldAnms){
+        reviewForMRCDailyCare(anms, oldAnms);
         CaseContactRole[] conroles = new CaseContactRole[0];
         Map<Id, CaseContactRole> animalToCaseContactRoleMap = queryCaseContactRoles(anms);
         for (Animal__c a : anms){
@@ -106,6 +108,7 @@ public with sharing class AnimalTriggerHandler {
         }
         System.debug(conroles);
         insert conroles;
+        LogHistory.LogHistory(oldAnms, anms);
     }
 
     private static Map<Id, CaseContactRole> queryCaseContactRoles(Animal__c[] animals){
@@ -180,4 +183,80 @@ public with sharing class AnimalTriggerHandler {
         }
         insert toInsert;
     }
+
+    private static void reviewForMRCDailyCare(Animal__c[] animals, Map<Id, Animal__c> oldAnimals){
+        Animal_Daily_Care__c[] newAdcs = new Animal_Daily_Care__c[0];
+        //this list is for animals that have had certain updates that need to be pushed to the current animal daily care.
+        Animal__c[] updatedAnimals = new Animal__c[0];
+        for(Animal__c anim : animals){
+            if(anim.Current_Location__c == 'MRC' && anim.Final_Outcome__c == null){
+                Animal__c oldAnim = oldAnimals.get(anim.Id);
+                if(oldAnim.Current_Location__c != anim.Current_Location__c){
+                    newAdcs.add(prepADC(anim));
+                }
+                else if(anim.Handling_Instructions__c != oldAnim.Handling_Instructions__c){
+                    updatedAnimals.add(anim);
+                }
+                else if(anim.Feeding_Amount__c != oldAnim.Feeding_Amount__c){
+                    updatedAnimals.add(anim);
+                }
+            }
+        }
+
+        if(!newAdcs.isEmpty()){
+            insertNewAnimalDailyCares(newAdcs);
+        }
+
+        if(!updatedAnimals.isEmpty()){
+            updateAnimalDailyCares(updatedAnimals);
+        }
+    }
+
+    private static void updateAnimalDailyCares(Animal__c[] animals){
+        Animal_Daily_Care__c[] adcs = [SELECT Id, Handling_Instructions__c, Feeding_Amount__c, Animal__r.Handling_Instructions__c, Animal__r.Feeding_Amount__c FROM Animal_Daily_Care__c WHERE Animal__c IN: animals AND Daily_Care__r.Date__c =: date.today()];
+        for(Animal_Daily_Care__c adc : adcs){
+            adc.Handling_Instructions__c = adc.Animal__r.Handling_Instructions__c;
+            adc.Feeding_Amount__c = adc.Animal__r.Feeding_Amount__c;
+        }
+
+        update adcs;
+    }
+
+    private static void reviewForMRCDailyCare(Animal__c[] animals){
+        Animal_Daily_Care__c[] newAdcs = new Animal_Daily_Care__c[0];
+        for(Animal__c anim : animals){
+            if(anim.Current_Location__c == 'MRC' && anim.Final_Outcome__c == null){
+                newAdcs.add(
+                    prepADC(anim)
+                );
+            }
+        }
+
+        if(!newAdcs.isEmpty()){
+            insertNewAnimalDailyCares(newAdcs);
+        }
+    }
+
+    private static void insertNewAnimalDailyCares(Animal_Daily_Care__c[] newAdcs){
+        Daily_Care__c[] dcs = [SELECT Id FROM Daily_Care__c ORDER BY Date__c DESC LIMIT 1];
+        if(!dcs.isEmpty()){
+            Daily_Care__c dc = dcs[0];
+            for(Animal_Daily_Care__c adc : newAdcs){
+                adc.Daily_Care__c = dc.Id;
+            }
+            insert newAdcs;
+        }
+    }
+
+    private static Animal_Daily_Care__c prepADC(Animal__c anim){
+        return new Animal_Daily_Care__c(
+            Animal__c = anim.Id,
+            Handling_Instructions__c = anim.Handling_Instructions__c,
+            Round__c = '1',
+            Special_Care_Outside_TX__c = 'Dry',
+            Special_Care_TX__c = 'Dry + Wet',
+            Movements_For_Cleaning__c = null
+        );
+    }
+
 }
