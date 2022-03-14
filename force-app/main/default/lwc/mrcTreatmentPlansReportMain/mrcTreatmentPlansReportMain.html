@@ -1,0 +1,17 @@
+<template>
+    <lightning-card>
+        <template if:true={animalList}>
+            Total Animals: {animalListLength}
+            <div class="slds-var-p-top_small">
+                <template for:each={animalList} for:item='animal'>
+                    <div class="slds-var-p-bottom_x-small" key={animal.Id}>
+                        <c-mrc-Treatment-Plans-Animal
+                            record-id={animal.Id}
+                        >
+                    </c-mrc-Treatment-Plans-Animal>
+                    </div>
+                </template>
+            </div>
+        </template>
+    </lightning-card>
+</template>

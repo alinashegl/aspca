@@ -105,6 +105,10 @@ public class BehaviorEvaluationSummaryUtil {
     }
 
     public static String formatComment(String newValue, String fieldValue, String testName, Boolean dupeCheck) {
+        System.debug('newValue: ' + newValue);
+        System.debug('fieldValue: ' + fieldValue);
+        System.debug('testName: ' + testName);
+        System.debug('dupeCheck: ' + dupeCheck);
         String result = fieldValue;
         Integer startSection = fieldValue.indexOf('<b>' + testName);
         if (startSection != -1) {

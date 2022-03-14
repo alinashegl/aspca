@@ -1,0 +1,180 @@
+<template>
+    <div class="slds-card slds-card_boundary card-custom">
+        <template if:true={error}>
+            <c-error-panel errors={error} type='inlineMessage' friendly-message={errorMessage}></c-error-panel>
+        </template>
+
+        <template if:true={recordId}>
+            <lightning-record-view-form
+                object-api-name="Animal__c"
+                record-id={recordId}
+            >
+                <lightning-layout multiple-rows pull-to-boundary="medium" class="slds-var-p-around_small">
+                    <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                        <b>Name</b>
+                        <div>
+                            <lightning-output-field field-name={animalNameIdField} variant="label-hidden"> </lightning-output-field>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="auto" size="1" small-device-size="6" medium-device-size="4" large-device-size="1" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                        <b>Sex</b>
+                        <div>
+                            <lightning-output-field field-name={animalGenderField} variant="label-hidden"> </lightning-output-field>
+                        </div>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item flexibility="auto" size="1" small-device-size="6" medium-device-size="4" large-device-size="1" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                        <b>Breed</b>
+                        <div>
+                            <lightning-output-field field-name={animalBreedField} variant="label-hidden"> </lightning-output-field>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="auto" size="1" small-device-size="6" medium-device-size="4" large-device-size="1" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                        <b>Location</b>               
+                        <div>
+                            <lightning-output-field field-name={animalLocationField} variant="label-hidden"> </lightning-output-field>
+                        </div>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                        <b>Rest Days</b>
+                        <template if:true={animalInfo}>
+                            <div>
+                                {animalInfo.restDays}
+                            </div>
+                        </template>
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="auto" size="5" small-device-size="6" medium-device-size="4" large-device-size="5" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                    </lightning-layout-item>
+                </lightning-layout>
+
+                    <lightning-accordion allow-multiple-sections-open="true">
+                        <lightning-accordion-section title="Plan Protocol List" label="Protocols" name="planProtocols">
+                            <lightning-layout multiple-rows pull-to-boundary="medium" class="slds-var-p-around_small">
+                                <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small card-custom">
+                                    <b>Fear Socialization</b>
+                                    <div>
+                                        <template for:each={fearSocializationProtocols} for:item='Id'>
+                                            <div class="slds-var-p-bottom_x-small" key={Id}>
+                                                <c-mrc-treatment-plans-protocol
+                                                    record-id={Id}
+                                                >
+                                                </c-mrc-treatment-plans-protocol>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </lightning-layout-item>
+                                <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small card-custom">
+                                    <b>Fear Leashing</b>
+                                    <div>
+                                        <template for:each={fearLeashingProtocols} for:item='Id'>
+                                            <div class="slds-var-p-bottom_x-small" key={Id}>
+                                                <c-mrc-treatment-plans-protocol
+                                                    record-id={Id}
+                                                >
+                                                </c-mrc-treatment-plans-protocol>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </lightning-layout-item>
+                                <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small card-custom">
+                                    <b>Fear Walking</b>
+                                    <div>
+                                        <template for:each={fearWalkingProtocols} for:item='Id'>
+                                            <div class="slds-var-p-bottom_x-small" key={Id}>
+                                                <c-mrc-treatment-plans-protocol
+                                                    record-id={Id}
+                                                >
+                                                </c-mrc-treatment-plans-protocol>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </lightning-layout-item>
+                                <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small card-custom">
+                                    <b>Fear Handling</b>
+                                    <div>
+                                        <template for:each={fearHandlingProtocols} for:item='Id'>
+                                            <div class="slds-var-p-bottom_x-small" key={Id}>
+                                                <c-mrc-treatment-plans-protocol
+                                                    record-id={Id}
+                                                >
+                                                </c-mrc-treatment-plans-protocol>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </lightning-layout-item>
+                                <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small card-custom">
+                                    <b>Fear Containment</b>
+                                    <div>
+                                        <template for:each={fearContainmentProtocols} for:item='Id'>
+                                            <div class="slds-var-p-bottom_x-small" key={Id}>
+                                                <c-mrc-treatment-plans-protocol
+                                                    record-id={Id}
+                                                >
+                                                </c-mrc-treatment-plans-protocol>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </lightning-layout-item>
+                                <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small card-custom">
+                                    <b>Non Fear Protocols</b>
+                                    <div>
+                                        <template for:each={nonFearProtocols} for:item='Id'>
+                                            <div class="slds-var-p-bottom_x-small" key={Id}>
+                                                <c-mrc-treatment-plans-protocol
+                                                    record-id={Id}
+                                                >
+                                                </c-mrc-treatment-plans-protocol>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </lightning-accordion-section>
+                    </lightning-accordion>
+                <!-- </lightning-layout> -->
+            </lightning-record-view-form>
+                    <!-- <lightning-layout-item flexibility="auto" size="4" small-device-size="12" medium-device-size="12" large-device-size="4" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                        <b>Special Care Notes</b>
+                        <div>
+                            <lightning-input type="text" value={animalDailyCareInfo.specialCareTreatment} label="Special Care TX" data-field={specialCareFieldAPI} onblur={handleInputBlur}></lightning-input>
+                            <lightning-input type="text" value={animalDailyCareInfo.specialCareOutside} label="Special Care Outside TX" data-field={specialCareOutsideFieldAPI} onblur={handleInputBlur}></lightning-input>
+                            <lightning-input type="text" value={animalDailyCareInfo.specialCareOther} label="Special Care Other" data-field={specialCareOtherFieldAPI} onblur={handleInputBlur}></lightning-input>
+                        </div>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item flexibility="auto" size="3" small-device-size="6" medium-device-size="4" large-device-size="3" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                        <b>Enrichment</b>
+                        <div>
+                            {animalDailyCareInfo.enrichment}
+                        </div>                        
+                    </lightning-layout-item>
+
+                    <lightning-layout-item flexibility="auto" size="1" small-device-size="6" medium-device-size="4" large-device-size="1" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                        <b>Round</b>
+                        <div>
+                            <template if:true={roundPicklist.data}>
+                                <lightning-combobox name="round" value={animalDailyCareInfo.round}
+                                    options={roundPicklist.data.values} data-field={roundFieldAPI} onchange={handleInputBlur}>
+                                </lightning-combobox>
+                            </template>
+                        </div>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item flexibility="auto" size="4" small-device-size="6" medium-device-size="4" large-device-size="4" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                        <b>Mvmt Round Notes & Cleaning Destination</b>
+                        <div>
+                            <lightning-textarea value={animalDailyCareInfo.movemntAndCleaningDestinationField} data-field={movemntAndCleaningDestinationFieldAPI} onblur={handleInputBlur}></lightning-textarea>
+                        </div>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item flexibility="auto" size="4" small-device-size="6" medium-device-size="4" large-device-size="4" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                        <b>Handling Instructions</b>
+                        <div>
+                            <lightning-textarea value={animalDailyCareInfo.handlingInstructions} data-field={handlingInstructionsFieldAPI} onblur={handleInputBlur}></lightning-textarea>
+                        </div>
+                    </lightning-layout-item> -->
+                
+        </template>
+    </div>
+</template>

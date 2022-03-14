@@ -1,0 +1,26 @@
+<template>
+    <div class="slds-card slds-card_boundary card-custom">
+        <template if:true={recordId}>
+            <lightning-record-edit-form
+                object-api-name="Plan_Protocol__c"
+                record-id={recordId}
+            >
+                <lightning-layout multiple-rows pull-to-boundary="medium" class="slds-var-p-around_small">
+                    <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="6" large-device-size="12" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                        <lightning-output-field field-name={protocolNameField} variant="label-hidden"> </lightning-output-field>
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="auto" size="8" small-device-size="12" medium-device-size="6" large-device-size="8" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                        Notes Last Modified
+                        <lightning-output-field field-name={protocolNotesModifiedDateField} variant="label-hidden"> </lightning-output-field>
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="auto" size="4" small-device-size="12" medium-device-size="6" large-device-size="4" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                        <lightning-input-field field-name={protocolRemovedField}> </lightning-input-field>
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="12" large-device-size="12" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                        <lightning-input-field field-name={protocolNotesField}> </lightning-input-field>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-record-edit-form>
+        </template>
+    </div>
+</template>

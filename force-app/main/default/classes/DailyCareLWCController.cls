@@ -83,7 +83,7 @@ public with sharing class DailyCareLWCController {
         }
     }
 
-    private static String getAnimalRestDays(Id animalId){
+    public static String getAnimalRestDays(Id animalId){
         String restDays = null;
         Date today = date.today();
         Date startDate = AutoScheduleTasksUtil.startOfASPCAWeek(today);
