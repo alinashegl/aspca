@@ -2191,16 +2191,6 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
-        <field>Animal_Daily_Care__c.Movement_Method_For_Cleaning__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Animal_Daily_Care__c.Movements_For_Cleaning__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
         <editable>true</editable>
         <field>Animal_Daily_Care__c.Mvmt_Round_Notes_Cleaning_Destination__c</field>
         <readable>true</readable>
@@ -5192,6 +5182,16 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Observation__c.Behavior_Response__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Observation__c.Behavior_Staff_Initials__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Observation__c.Daily_Enrichment__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -7325,4 +7325,8 @@
         <tab>standard-Task</tab>
         <visibility>Visible</visibility>
     </tabSettings>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>AccessContentBuilder</name>
+    </userPermissions>
 </PermissionSet>

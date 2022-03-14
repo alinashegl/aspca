@@ -3,7 +3,8 @@ public with sharing class ObservationController {
     public static Observation__c[] getObservations(Id recordId, String observationType){
         try {
             Observation__c[] observations = [
-                SELECT Id, Animal__c, Daily_Enrichment__c, Observation_Date__c, Observation_Notes__c, Observation_Reported_By__c, Observation_Type__c
+                SELECT Id, Animal__c, Daily_Enrichment__c, Observation_Date__c, Observation_Notes__c, Observation_Reported_By__c, Observation_Type__c,
+                Behavior_Response__c, Behavior_Staff_Initials__c
                 FROM Observation__c 
                 WHERE Animal__c =: recordId 
                 AND Observation_Type__c =: observationType 

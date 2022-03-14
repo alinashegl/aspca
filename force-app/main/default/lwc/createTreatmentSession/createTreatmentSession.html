@@ -85,7 +85,7 @@
                     <lightning-layout-item size="12">
                         <template if:true={hasPlan}>
                             <div>
-                                <lightning-input-field field-name="Preferred_Motivators__c"></lightning-input-field>
+                                <lightning-input-field field-name="Preferred_Motivators__c" value={preferredMotivators}></lightning-input-field>
                             </div>
                         </template>
                         
@@ -93,7 +93,7 @@
                 </lightning-layout>
                 <lightning-layout>
                     <lightning-layout-item size="12">
-                        <template if:true={hasPlan}>
+                        <template if:true={noPlan}>
                             <div>
                                 Please create a Treatment Plan first.
                             </div>

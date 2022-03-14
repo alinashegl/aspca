@@ -73,7 +73,7 @@ export default class DailyCareMain extends NavigationMixin(LightningElement) {
         this[NavigationMixin.GenerateUrl]({
             type: 'standard__webPage',
             attributes: {
-                url: '/apex/DailyCarePDF?dailyCareId='+this.dailyCareId
+                url: '/apex/DailyCarePDF?dailyCareId='+this.dailyCareId  + '&sortByField='+ this.sortByField + '&sortByValue='+ this.sortByValue
             }
         }).then(generatedUrl => {
             window.open(generatedUrl,'_blank');
