@@ -114,7 +114,7 @@
         <lightning:tabset variant="vertical" selectedTabId="{!v.tabId}" aura:id="tabs">
             <lightning:recordEditForm class="slds-grid slds-theme_shade" objectApiName="Behavior_Evaluation__c"
                                       recordId="{!v.recordId}">
-                <lightning:buttonGroup class="position: relative;" >
+                <!--<lightning:buttonGroup class="position: relative;" >
                     <lightning:button name="prevTab" value="Previous Tab" label="Previous Tab" onclick="{!c.handleClick}"
                                       class="float"/>
                     <lightning:button class="float" name="nextTab" value="Next Tab" label="Next Tab" onclick="{!c.handleClick}"/>
@@ -129,7 +129,22 @@
                             <lightning:button variant="neutral" label="Close" name="closeModal" onclick="{!c.handleClick}"/>
                         </aura:set>
                     </c:BehaviorEvaluationModal>
-                </lightning:buttonGroup>
+                </lightning:buttonGroup>-->
+                <aura:if isTrue="{!!v.spinner}">
+                    <lightning:layout >
+                        <lightning:layoutItem size="6">
+                            <div class="slds-float_left">
+                                <lightning:button name="prevTab" value="Previous Tab" label="Previous Tab" onclick="{!c.handleClick}"
+                                                  class="float"/>
+                            </div>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem size="6">
+                            <div class="slds-float_right">
+                                <lightning:button class="float" name="nextTab" value="Next Tab" label="Next Tab" onclick="{!c.handleClick}"/>
+                            </div>
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                </aura:if>
                 <aura:if isTrue="{!v.IsAdult}">
                     <aura:if isTrue="{!!v.IsDogOnly}">
                         <lightning:tab label="Behavior In Kennel" id = "behaveInKennel">
@@ -2030,7 +2045,7 @@
                         </lightning:layout>
                     </lightning:tab>
                 </aura:if>
-                <lightning:buttonGroup class="position: relative;" >
+                <!--<lightning:buttonGroup class="position: relative;" >
                     <lightning:button name="prevTab" value="Previous Tab" label="Previous Tab" onclick="{!c.handleClick}"
                                       class="float"/>
                     <lightning:button class="float" name="nextTab" value="Next Tab" label="Next Tab" onclick="{!c.handleClick}"/>
@@ -2046,8 +2061,27 @@
                             <lightning:button variant="neutral" label="Close" name="closeModal" onclick="{!c.handleClick}"/>
                         </aura:set>
                     </c:BehaviorEvaluationModal>
-                </lightning:buttonGroup>
-                <lightning:button class="slds-float_right" type="submit" label="Save and Complete Evaluation" variant="brand" onclick="{!c.refresh}" />
+                </lightning:buttonGroup>-->
+                <aura:if isTrue="{!!v.spinner}">
+                    <lightning:layout >
+                        <lightning:layoutItem size="4">
+                            <div class="slds-float_left">
+                                <lightning:button name="prevTab" value="Previous Tab" label="Previous Tab" onclick="{!c.handleClick}"
+                                                  class="float"/>
+                            </div>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem size="4">
+                            <div class="slds-align_absolute-center">
+                                <lightning:button class="slds-float_right" type="submit" label="Save and Complete Evaluation" variant="destructive" onclick="{!c.refresh}" />
+                            </div>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem size="4">
+                            <div class="slds-float_right">
+                                <lightning:button class="float" name="nextTab" value="Next Tab" label="Next Tab" onclick="{!c.handleClick}"/>
+                            </div>
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                </aura:if>
             </lightning:recordEditForm>
         </lightning:tabset>
 </aura:component>
