@@ -9,34 +9,34 @@
                 object-api-name="Animal__c"
                 record-id={recordId}
             >
-                <lightning-layout multiple-rows pull-to-boundary="medium" class="slds-var-p-around_small">
-                    <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                <lightning-layout multiple-rows pull-to-boundary="small" class="slds-var-p-around_xx-small">
+                    <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-small" class="slds-var-p-bottom_small">
                         <b>Name</b>
                         <div>
                             <lightning-output-field field-name={animalNameIdField} variant="label-hidden"> </lightning-output-field>
                         </div>
                     </lightning-layout-item>
-                    <lightning-layout-item flexibility="auto" size="1" small-device-size="6" medium-device-size="4" large-device-size="1" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                    <lightning-layout-item flexibility="auto" size="1" small-device-size="6" medium-device-size="4" large-device-size="1" padding="horizontal-small" class="slds-var-p-bottom_small">
                         <b>Sex</b>
                         <div>
                             <lightning-output-field field-name={animalGenderField} variant="label-hidden"> </lightning-output-field>
                         </div>
                     </lightning-layout-item>
 
-                    <lightning-layout-item flexibility="auto" size="1" small-device-size="6" medium-device-size="4" large-device-size="1" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                    <lightning-layout-item flexibility="auto" size="1" small-device-size="6" medium-device-size="4" large-device-size="1" padding="horizontal-small" class="slds-var-p-bottom_small">
                         <b>Breed</b>
                         <div>
                             <lightning-output-field field-name={animalBreedField} variant="label-hidden"> </lightning-output-field>
                         </div>
                     </lightning-layout-item>
-                    <lightning-layout-item flexibility="auto" size="1" small-device-size="6" medium-device-size="4" large-device-size="1" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                    <lightning-layout-item flexibility="auto" size="1" small-device-size="6" medium-device-size="4" large-device-size="1" padding="horizontal-small" class="slds-var-p-bottom_small">
                         <b>Location</b>               
                         <div>
                             <lightning-output-field field-name={animalLocationField} variant="label-hidden"> </lightning-output-field>
                         </div>
                     </lightning-layout-item>
 
-                    <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                    <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-small" class="slds-var-p-bottom_small">
                         <b>Rest Days</b>
                         <template if:true={animalInfo}>
                             <div>
@@ -44,14 +44,15 @@
                             </div>
                         </template>
                     </lightning-layout-item>
-                    <lightning-layout-item flexibility="auto" size="5" small-device-size="6" medium-device-size="4" large-device-size="5" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                    <lightning-layout-item flexibility="auto" size="5" small-device-size="6" medium-device-size="4" large-device-size="5" padding="horizontal-small" class="slds-var-p-bottom_small">
                     </lightning-layout-item>
                 </lightning-layout>
 
                     <lightning-accordion allow-multiple-sections-open="true">
                         <lightning-accordion-section title="Plan Protocol List" label="Protocols" name="planProtocols">
-                            <lightning-layout multiple-rows pull-to-boundary="medium" class="slds-var-p-around_small">
-                                <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small card-custom">
+                            <!-- <lightning-layout multiple-rows pull-to-boundary="small" class="slds-var-p-around_xx-small"> -->
+                            <lightning-layout multiple-rows>
+                                <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" class="slds-var-p-bottom_small card-custom">
                                     <b>Fear Socialization</b>
                                     <div>
                                         <template for:each={fearSocializationProtocols} for:item='Id'>
@@ -64,7 +65,7 @@
                                         </template>
                                     </div>
                                 </lightning-layout-item>
-                                <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small card-custom">
+                                <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" class="slds-var-p-bottom_small card-custom">
                                     <b>Fear Leashing</b>
                                     <div>
                                         <template for:each={fearLeashingProtocols} for:item='Id'>
@@ -77,7 +78,7 @@
                                         </template>
                                     </div>
                                 </lightning-layout-item>
-                                <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small card-custom">
+                                <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" class="slds-var-p-bottom_small card-custom">
                                     <b>Fear Walking</b>
                                     <div>
                                         <template for:each={fearWalkingProtocols} for:item='Id'>
@@ -90,7 +91,7 @@
                                         </template>
                                     </div>
                                 </lightning-layout-item>
-                                <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small card-custom">
+                                <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" class="slds-var-p-bottom_small card-custom">
                                     <b>Fear Handling</b>
                                     <div>
                                         <template for:each={fearHandlingProtocols} for:item='Id'>
@@ -103,7 +104,7 @@
                                         </template>
                                     </div>
                                 </lightning-layout-item>
-                                <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small card-custom">
+                                <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" class="slds-var-p-bottom_small card-custom">
                                     <b>Fear Containment</b>
                                     <div>
                                         <template for:each={fearContainmentProtocols} for:item='Id'>
@@ -116,7 +117,7 @@
                                         </template>
                                     </div>
                                 </lightning-layout-item>
-                                <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small card-custom">
+                                <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-xxx-small" class="slds-var-p-bottom_small card-custom">
                                     <b>Non Fear Protocols</b>
                                     <div>
                                         <template for:each={nonFearProtocols} for:item='Id'>
