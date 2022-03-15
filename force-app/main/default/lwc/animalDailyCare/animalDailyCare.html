@@ -56,10 +56,8 @@
                     </lightning-layout-item>
 
                     <lightning-layout-item flexibility="auto" size="3" small-device-size="6" medium-device-size="4" large-device-size="3" padding="horizontal-medium" class="slds-var-p-bottom_small">
-                        <b>Enrichment</b>
-                        <div>
-                            {animalDailyCareInfo.enrichment}
-                        </div>                        
+                        <lightning-input type="text" value={animalDailyCareInfo.enrichment} label="Enrichment" data-field={enrichmentAPI} onblur={handleInputBlur}></lightning-input>
+                                             
                     </lightning-layout-item>
 
                     <lightning-layout-item flexibility="auto" size="1" small-device-size="6" medium-device-size="4" large-device-size="1" padding="horizontal-medium" class="slds-var-p-bottom_small">
