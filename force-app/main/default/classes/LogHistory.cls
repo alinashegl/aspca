@@ -27,6 +27,10 @@ public without sharing class LogHistory {
                     history.FieldName__c = getFieldLabel(objectApiName, fieldName);
                     history.OldValue__c = String.valueOf(oldRecord.get(record.Id).get(fieldName));
                     history.NewValue__c = String.valueOf(record.get(fieldName));
+                    if(fieldName == 'current_behavior_grade__c' || fieldName == 'overall_evaluation_grade__c'){
+                        history.OldValue__c = String.valueOf(oldRecord.get(record.Id).get(fieldName)) ;//+ ' - ' + String.valueOf(oldRecord.get(record.Id).get('grade_change_reason__c'));
+                        history.NewValue__c = String.valueOf(record.get(fieldName)) + ' - ' + String.valueOf(record.get('grade_change_reason__c'));
+                    }
                     history.ObjectId__c = record.Id;
                     history.ObjectName__c = getObjectLabel(record.Id);
                     histories.add(history);
@@ -104,8 +108,8 @@ public without sharing class LogHistory {
     }
     
     private static Map<String, Set<String>> objectFieldMap = new Map<String, Set<String>>{
-        'animal__c' => new Set<String> {'handling_instructions__c', 'shelter_color_coding__c', 'play_style_notes__c','designated_handler_reason__c'},  
-        'behavior_evaluation__c' => new Set<String> {'overall_evaluation_grade__c'}
+        'animal__c' => new Set<String> {'handling_instructions__c', 'shelter_color_coding__c', 'play_style_notes__c','designated_handler_reason__c','current_behavior_grade__c','grade_change_reason__c'},  
+        'behavior_evaluation__c' => new Set<String> {'overall_evaluation_grade__c','grade_change_reason__c'}
     };    
         
         

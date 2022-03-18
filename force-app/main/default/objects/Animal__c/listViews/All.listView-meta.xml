@@ -13,5 +13,10 @@
     <columns>Behavior_Case_Worker__c</columns>
     <columns>ExternalId__c</columns>
     <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>notEqual</operation>
+        <value>Animal__c.Behavior</value>
+    </filters>
     <label>All</label>
 </ListView>

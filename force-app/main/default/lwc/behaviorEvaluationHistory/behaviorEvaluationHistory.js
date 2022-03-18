@@ -69,7 +69,8 @@ export default class BehaviorEvaluationHistory extends LightningElement {
   
     filterOptions = [
         {label : "All", value: ""},
-        {label : "Overall Evaluation Grade", value: "Overall Evaluation Grade"}
+        {label : "Overall Evaluation Grade", value: "Overall Evaluation Grade"},
+        {label : "Grade Change Reason", value: "Grade Change Reason"}
     ];
     @wire(getRecords, {recordId : '$recordId', searchKey: '$searchKey', dateFilter: '$filterDateValue', sortBy: '$sortedBy', sortDirection: '$sortedDirection'})
     wiredData({ error, data }) {

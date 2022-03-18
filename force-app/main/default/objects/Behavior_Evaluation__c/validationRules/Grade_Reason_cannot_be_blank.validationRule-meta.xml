@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Grade_Reason_cannot_be_blank</fullName>
+    <active>true</active>
+    <description>Grade Reason cannot be blank if Overall Grade is changed</description>
+    <errorConditionFormula>AND( ISBLANK( Grade_Change_Reason__c ) , ISCHANGED( Overall_Evaluation_Grade__c ) )</errorConditionFormula>
+    <errorDisplayField>Grade_Change_Reason__c</errorDisplayField>
+    <errorMessage>Grade Reason cannot be blank if Overall Grade is changed</errorMessage>
+</ValidationRule>
