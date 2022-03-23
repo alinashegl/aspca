@@ -153,6 +153,7 @@ public class BehaviorEvaluationSummaryUtil {
                     b.Behavior_Evaluation_Summary__c = summary.get(b.Evaluation_Subtype__c);
                 }
             }
+            
             for (CommentSkipWrapper c : commentSkipList) {
                 if ((String)oldRecord.get(c.commentField) == null && (String)b.get(c.commentField) != null) {
                     //Insert new comment value into summary field for the specified test name
@@ -171,7 +172,11 @@ public class BehaviorEvaluationSummaryUtil {
                     String skipValue = (String)b.get(c.skipField);
                     b.Behavior_Evaluation_Summary__c = formatComment(skipValue, b.Behavior_Evaluation_Summary__c, c.testName);
                 }
+               // if(String.valueof(b.get(c.skipField)) == '@@'){
+                 //  b.Behavior_Evaluation_Summary__c = ' ';
+               // }
             }
+            
             for (HighValueCategoryWrapper h : highValueList) {
                 //Check high value items when picklist field updated, but ignore edits that remove all picklist values
                 if ((String)oldRecord.get(h.fieldApiName) != (String)b.get(h.fieldApiName) && (String)b.get(h.fieldApiName) != null) {
@@ -182,7 +187,11 @@ public class BehaviorEvaluationSummaryUtil {
                         b.Behavior_Evaluation_Summary__c = formatComment(h.fieldvalue, b.Behavior_Evaluation_Summary__c, h.testName, true);
                     }
                 }
+                //if(String.valueof(b.get(h.fieldApiName)) == '@@'){
+                    //b.Behavior_Evaluation_Summary__c = ' ';
+                //}
             }
+             
         }
     }
 
