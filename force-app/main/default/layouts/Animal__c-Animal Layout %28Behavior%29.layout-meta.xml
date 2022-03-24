@@ -245,14 +245,6 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
-        <fields>Contact_Date__c</fields>
-        <fields>Foster_Notes__c</fields>
-        <relatedList>Foster_Note__c.Animal__c</relatedList>
-        <sortField>Contact_Date__c</sortField>
-        <sortOrder>Desc</sortOrder>
-    </relatedLists>
-    <relatedLists>
-        <fields>NAME</fields>
         <fields>Start_Date__c</fields>
         <fields>End_Date__c</fields>
         <fields>Reason__c</fields>
@@ -357,6 +349,15 @@
         <fields>Behavior_Foster_Note__c</fields>
         <relatedList>Behavior_Foster_Notes__c.Animal__c</relatedList>
         <sortField>Capture_Date__c</sortField>
+        <sortOrder>Desc</sortOrder>
+    </relatedLists>
+    <relatedLists>
+        <fields>NAME</fields>
+        <fields>Contact_Date__c</fields>
+        <fields>Initials__c</fields>
+        <fields>Foster_Notes__c</fields>
+        <relatedList>Foster_Note__c.Animal__c</relatedList>
+        <sortField>Contact_Date__c</sortField>
         <sortOrder>Desc</sortOrder>
     </relatedLists>
     <relatedLists>

@@ -50,6 +50,7 @@ public with sharing class DailyCareLWCController {
                     Special_Care_TX__c,
                     Special_Care_Outside_TX__c,
                     Special_Care_Other__c,
+                Enrichment__c,
                     Round__c,
                     Mvmt_Round_Notes_Cleaning_Destination__c,
                     Handling_Instructions__c
@@ -69,7 +70,8 @@ public with sharing class DailyCareLWCController {
                 info.specialCareTreatment = adc.Special_Care_TX__c;
                 info.specialCareOutside = adc.Special_Care_Outside_TX__c;
                 info.specialCareOther = adc.Special_Care_Other__c;
-                info.enrichment = getAnimalEnrichments(adc.Animal__c);
+                //info.enrichment = getAnimalEnrichments(adc.Animal__c);
+                info.enrichment = adc.Enrichment__c;
                 info.round = adc.Round__c;
                 info.movemntAndCleaningDestinationField = adc.Mvmt_Round_Notes_Cleaning_Destination__c;
                 info.handlingInstructions = adc.Handling_Instructions__c;
@@ -116,7 +118,7 @@ public with sharing class DailyCareLWCController {
         return restDays;
     }
 
-    private static String getAnimalEnrichments(Id animalId){
+  /*private static String getAnimalEnrichments(Id animalId){
         String enrichments = null;
         Treatment_Plan__c[] plans = [SELECT Id, Enrichment_Activities__c FROM Treatment_Plan__c WHERE IsActive__c = true AND Animal__c =: animalId LIMIT 1];
         if(!plans.isEmpty() && plans[0].Enrichment_Activities__c != null){
@@ -124,7 +126,7 @@ public with sharing class DailyCareLWCController {
         }
         return enrichments;
 
-    }
+    }*/
 
     public class DailyCareInfo{
         @AuraEnabled public Id dailyCareId;

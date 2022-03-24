@@ -9,6 +9,7 @@ import ROUND_FIELD from '@salesforce/schema/Animal_Daily_Care__c.Round__c';
 import SPECIAL_CARE_OTHER_FIELD from '@salesforce/schema/Animal_Daily_Care__c.Special_Care_Other__c';
 import SPECIAL_CARE_OUTSIDE_FIELD from '@salesforce/schema/Animal_Daily_Care__c.Special_Care_Outside_TX__c';
 import SPECIAL_CARE_FIELD from '@salesforce/schema/Animal_Daily_Care__c.Special_Care_TX__c';
+import ENRICHMENT_FIELD from '@salesforce/schema/Animal_Daily_Care__c.Enrichment__c';
 
 
 import { getObjectInfo } from 'lightning/uiObjectInfoApi';
@@ -36,6 +37,7 @@ export default class AnimalDailyCare extends LightningElement {
     specialCareOutsideFieldAPI = SPECIAL_CARE_OUTSIDE_FIELD.fieldApiName;
     specialCareFieldAPI = SPECIAL_CARE_FIELD.fieldApiName;
     feedingAmountFieldAPI = FEEDING_AMOUNT_FIELD.fieldApiName;
+    enrichmentAPI = ENRICHMENT_FIELD.fieldApiName;
 
     @api recordId;
     animalDailyCareInfo;
