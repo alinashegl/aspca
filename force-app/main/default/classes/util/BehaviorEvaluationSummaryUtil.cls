@@ -14,6 +14,8 @@ public class BehaviorEvaluationSummaryUtil {
         String dogOnlyString = '';
         Map<String, String> result = new Map<String, String>();
         List<Test_Config__mdt> testConfig = Test_Config__mdt.getAll().values();
+        ListUtils.sort(testConfig, new SObjectStringFieldComparator('Test_Display_Order__c'));
+
         for (Test_Config__mdt t : testConfig) {
             String testName = t.Overall_Test_Display_Name__c != null ? t.Overall_Test_Display_Name__c : t.Test_Name__c;
             if (testName != null) {
@@ -44,10 +46,7 @@ public class BehaviorEvaluationSummaryUtil {
                 }
             }
         }
-        puppySummary.sort();
-        adultSummary.sort();
-        fightingSummary.sort();
-        dogOnlySummary.sort();
+
         for (SummaryWrapper s : puppySummary) {
             puppyString += s.labelValue;
         }
@@ -68,106 +67,97 @@ public class BehaviorEvaluationSummaryUtil {
     }
 
 
-    //todo: clean this up, don't need to return the formatting here
-    public static Map<String, Map<String, String[]>> getSummaryTemplateMap() {
+    public static Map<String, String[]> getSummaryTemplateMap() {
         Set<String> puppySet = new Set<String>();
         Set<String> adultSet = new Set<String>();
         Set<String> fightingSet = new Set<String>();
         Set<String> dogOnlySet = new Set<String>();
-        List<SummaryWrapper> puppySummary = new List<SummaryWrapper>();
-        List<SummaryWrapper> adultSummary = new List<SummaryWrapper>();
-        List<SummaryWrapper> fightingSummary = new List<SummaryWrapper>();
-        List<SummaryWrapper> dogOnlySummary = new List<SummaryWrapper>();
-        String[] puppyString = new String[0];
-        String[] adultString = new String[0];
-        String[] fightingString = new String[0];
-        String[] dogOnlyString = new String[0];
-        Map<String, Map<String, String[]>> result = new Map<String, Map<String, String[]>>();
+
+        Map<String, String[]> result = new Map<String, String[]>();
 
         List<Test_Config__mdt> testConfig = Test_Config__mdt.getAll().values();
+        ListUtils.sort(testConfig, new SObjectStringFieldComparator('Test_Display_Order__c'));
+
         for (Test_Config__mdt t : testConfig) {
             String testName = t.Overall_Test_Display_Name__c != null ? t.Overall_Test_Display_Name__c : t.Test_Name__c;
             if (testName != null) {
                 testName = testName.replace(' P1', '').replace(' P2', '').replace(' P3', '');
                 if (t.IsPuppy__c) {
-                    if (!puppySet.contains(testName)) {
-                        puppySet.add(testName);
-                        puppySummary.add(new SummaryWrapper(Integer.valueOf(t.Test_Display_Order__c), '<p><b>' + testName + ':</b> </p>', testName));
-                    }
+                    puppySet.add(testName);
                 }
+
                 if (t.IsAdult__c) {
-                    if (!adultSet.contains(testName)) {
-                        adultSet.add(testName);
-                        adultSummary.add(new SummaryWrapper(Integer.valueOf(t.Test_Display_Order__c), '<p><b>' + testName + ':</b> </p>', testName));
-                    }
+                    adultSet.add(testName);
                 }
+
                 if (t.IsDogFighting__c) {
-                    if (!fightingSet.contains(testName)) {
-                        fightingSet.add(testName);
-                        fightingSummary.add(new SummaryWrapper(Integer.valueOf(t.Test_Display_Order__c), '<p><b>' + testName + ':</b> </p>', testName));
-                    }
+                    fightingSet.add(testName);
                 }
+
                 if (t.IsDogOnly__c) {
-                    if (!dogOnlySet.contains(testName)) {
-                        dogOnlySet.add(testName);
-                        dogOnlySummary.add(new SummaryWrapper(Integer.valueOf(t.Test_Display_Order__c), '<p><b>' + testName + ':</b> </p>', testName));
-                    }
+                    dogOnlySet.add(testName);
                 }
             }
         }
-        puppySummary.sort();
-        adultSummary.sort();
-        fightingSummary.sort();
-        dogOnlySummary.sort();
 
-        Map<String, String[]> puppySummaryMap = new Map<String, String[]>();
-        for (SummaryWrapper s : puppySummary) {
-            puppySummaryMap.put(s.testName, new String[]{s.labelValue});
-            // puppyString.add(s.labelValue);
-        }
-
-        Map<String, String[]> adultSummaryMap = new Map<String, String[]>();
-        for (SummaryWrapper s : adultSummary) {
-            adultSummaryMap.put(s.testName, new String[]{s.labelValue});
-            // adultString.add(s.labelValue);
-        }
-
-        Map<String, String[]> fightingSummaryMap = new Map<String, String[]>();
-        for (SummaryWrapper s : fightingSummary) {
-            fightingSummaryMap.put(s.testName, new String[]{s.labelValue});
-            // fightingString.add(s.labelValue);
-        }
-
-        Map<String, String[]> dogOnlySummaryMap = new Map<String, String[]>();
-        for (SummaryWrapper s : dogOnlySummary) {
-            dogOnlySummaryMap.put(s.testName, new String[]{s.labelValue});
-            // dogOnlyString.add(s.labelValue);
-        }
-        result.put('Puppy', puppySummaryMap);
-        result.put('Adult Animal', adultSummaryMap);
-        result.put('Dog Fighting', fightingSummaryMap);
-        result.put('Dog/Dog Only', dogOnlySummaryMap);
+        result.put('Puppy', new List<String>(puppySet));
+        result.put('Adult Animal', new List<String>(adultSet));
+        result.put('Dog Fighting', new List<String>(fightingSet));
+        result.put('Dog/Dog Only', new List<String>(dogOnlySet));
         return result;
     }
 
-    public static Map<String, Test_Config__mdt[]> getCommentSkipFieldsMap() {
-        Map<String, Test_Config__mdt[]> commentFieldsMap = new Map<String, Test_Config__mdt[]>();
+    public static Map<String, Map<String, Test_Config__mdt[]>> getCommentSkipFieldsMap() {
+        Map<String, Map<String, Test_Config__mdt[]>> commentFieldsMap = new Map<String, Map<String, Test_Config__mdt[]>>();
         List<Test_Config__mdt> testConfig = Test_Config__mdt.getAll().values();
+
+        ListUtils.sort(testConfig, new SObjectStringFieldComparator('Test_Display_Order__c'));
+
+        Map<String, Test_Config__mdt[]> puppyConfigMap = new Map<String, Test_Config__mdt[]>();
+        Map<String, Test_Config__mdt[]> adultConfigMap = new Map<String, Test_Config__mdt[]>();
+        Map<String, Test_Config__mdt[]> fightingConfigMap = new Map<String, Test_Config__mdt[]>();
+        Map<String, Test_Config__mdt[]> dogOnlyConfigMap = new Map<String, Test_Config__mdt[]>();
+
         for (Test_Config__mdt t : testConfig) {
             String testName = t.Overall_Test_Display_Name__c != null ? t.Overall_Test_Display_Name__c : t.Test_Name__c;
             if (testName != null) {
                 testName = testName.replace(' P1', '').replace(' P2', '').replace(' P3', '');
-                if(commentFieldsMap.containsKey(testName)){
-                    commentFieldsMap.get(testName).add(t);
-                } else {
-                    commentFieldsMap.put(testName, new Test_Config__mdt[]{t});
+
+                if (t.IsPuppy__c) {
+                    if(puppyConfigMap.containsKey(testName)){
+                        puppyConfigMap.get(testName).add(t);
+                    } else {
+                        puppyConfigMap.put(testName, new Test_Config__mdt[]{t});
+                    }
+                }
+                if (t.IsAdult__c) {
+                    if(adultConfigMap.containsKey(testName)){
+                        adultConfigMap.get(testName).add(t);
+                    } else {
+                        adultConfigMap.put(testName, new Test_Config__mdt[]{t});
+                    }
+                }
+                if (t.IsDogFighting__c) {
+                    if(fightingConfigMap.containsKey(testName)){
+                        fightingConfigMap.get(testName).add(t);
+                    } else {
+                        fightingConfigMap.put(testName, new Test_Config__mdt[]{t});
+                    }
+                }
+                if (t.IsDogOnly__c) {
+                    if(dogOnlyConfigMap.containsKey(testName)){
+                        dogOnlyConfigMap.get(testName).add(t);
+                    } else {
+                        dogOnlyConfigMap.put(testName, new Test_Config__mdt[]{t});
+                    }
                 }
             }
         }
-        for(String testName: commentFieldsMap.keySet()){
-            Test_Config__mdt[] configList = commentFieldsMap.get(testName);
-            ListUtils.sort(configList, new SObjectStringFieldComparator('Test_Name__c'));
-        }
+
+        commentFieldsMap.put('Puppy', puppyConfigMap);
+        commentFieldsMap.put('Adult Animal', adultConfigMap);
+        commentFieldsMap.put('Dog Fighting', fightingConfigMap);
+        commentFieldsMap.put('Dog/Dog Only', dogOnlyConfigMap);
 
         return commentFieldsMap;
     }
@@ -207,18 +197,18 @@ public class BehaviorEvaluationSummaryUtil {
 
     public static void handleUpdate(List<Behavior_Evaluation__c> triggerNew, Map<Id, Behavior_Evaluation__c> triggerOldMap) {
         //List of comment and skip field names per test config
-        // List<CommentSkipWrapper> commentSkipList = getCommentSkipFields();
-        Map<String, Test_Config__mdt[]> commentFieldsMap = getCommentSkipFieldsMap();
-        System.debug('commentFieldsMap: ' + commentFieldsMap.keyset());
+        Map<String, Map<String, Test_Config__mdt[]>> commentFieldsMapMap = getCommentSkipFieldsMap();
 
         //List of picklist fields/values that have a value category of 4
         Map<String, String[]> highValueMap = getHighValueCategoryMap();
 
-        //In case summary values are cleared, pull template to re-populate summary field
-        Map<String, Map<String, String[]>> summaryListMap = getSummaryTemplateMap();
+        Map<String, String[]> summaryListMap = getSummaryTemplateMap();
         System.debug('summaryTemplate: ' + summaryListMap);
 
         for (Behavior_Evaluation__c b : triggerNew) {
+            Map<String, Test_Config__mdt[]> commentFieldsMap = commentFieldsMapMap.get(b.Evaluation_Subtype__c);
+            System.debug('commentFieldsMap: ' + commentFieldsMap.keyset());
+
             Boolean skipDogTests = false;
             Behavior_Evaluation__c oldRecord = triggerOldMap.get(b.Id);
             if (oldRecord.Overall_Evaluation_Grade__c == null && b.Overall_Evaluation_Grade__c == 'D - Dog Aggression') {
@@ -226,13 +216,14 @@ public class BehaviorEvaluationSummaryUtil {
                 skipDogTests = true;
             }
 
-            Map<String, String[]> summaryLists = summaryListMap.get(b.Evaluation_Subtype__c);
+            String[] summaryList = summaryListMap.get(b.Evaluation_Subtype__c);
             Map<String, CommentSkipWrapper[]> commentMap = new Map<String, CommentSkipWrapper[]>();
 
-            for(String summaryTitle : summaryLists.keySet()){
+            for(String summaryTitle : summaryList){
                 System.debug('summaryTitle: ' + summaryTitle);
                 CommentSkipWrapper[] commentList = new CommentSkipWrapper[0];
                 if(commentFieldsMap.containsKey(summaryTitle)){
+                    System.debug('congifList: ' + commentFieldsMap.get(summaryTitle));
                     for(Test_Config__mdt config : commentFieldsMap.get(summaryTitle)){
                         if (skipDogTests) {
                             if (summaryTitle.startsWith('Same Sex') || summaryTitle.startsWith('Opposite Sex')) {
@@ -262,14 +253,12 @@ public class BehaviorEvaluationSummaryUtil {
                         ));
                     }
                     commentMap.put(summaryTitle, commentList);
-                    System.debug('commentList: ' + commentList);
                 }
             }
-            System.debug('commentMap keys: ' + commentMap.keySet());
 
             String summary = '';
             
-            for(String testName: summaryLists.keySet()){
+            for(String testName: summaryList){
                 summary += '<p><b>' + testName + ': </b>';
                 if(commentMap.containsKey(testName)){
                     String[] tempCommentList = new String[0];
