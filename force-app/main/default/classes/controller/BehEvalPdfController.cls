@@ -12,7 +12,7 @@ public class BehEvalPdfController {
                 Overall_Evaluation_Grade__c, Evaluation_Subtype__c,
                 Facility_Outcome__c, Animal_Name__c, Animal_ID__c,
                 Animal_Breed__c, Animal_Age__c, Animal_Color__c,
-                Animal_Sex__c, Evaluation_Date__c, Case_Number__c,
+                Animal_Sex__c, Case_Number__c,
                 Potential_Beh_Iss_Other__c, Behavior_Evaluation_Summary__c,
                 Tester_Initials__c, Caution__c,
                 Behavior_in_Kennel__c, Skipped_BIK__c, Comments_BIK__c,
