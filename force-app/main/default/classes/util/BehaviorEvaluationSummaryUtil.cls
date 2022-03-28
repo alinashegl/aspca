@@ -268,6 +268,9 @@ public class BehaviorEvaluationSummaryUtil {
                     }
                     commentMap.put(summaryTitle, commentList);
                 }
+               // if(String.valueof(b.get(c.skipField)) == '@@'){
+                 //  b.Behavior_Evaluation_Summary__c = ' ';
+               // }
             }
 
             String summary = '';

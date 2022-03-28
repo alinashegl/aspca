@@ -80,8 +80,7 @@
         if(skipVal){
             cmp.set('v.showModal', true);
         } else {
-           // cmp.set('v.skipReason','@@');
-            cmp.set('v.skipReason', null);
+            // cmp.set('v.skipReason', null);
             this.putSkipReason(cmp, event);
         }
     } ,
