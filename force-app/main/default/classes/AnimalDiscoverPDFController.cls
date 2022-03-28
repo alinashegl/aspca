@@ -21,9 +21,8 @@ public class AnimalDiscoverPDFController {
                              Current_Location__c,Intake_Type__c,Behavior_Concerns__c, Shelter_Kennel__c , Shelter_Location__c, Behavior_Case_Worker__c,Behavior_Case_Worker__r.Name,
                              (SELECT ID, NAME, Observation_Date__c, Observation_Notes__c, Observation_Reported_By__c, Behavior_Response__c, Observation_Type__c, Animal__r.Behavior_Concerns__c from Observations__r),
                              (SELECT Id, Additional_Comments__c,Behaviors_Exhibited_by_the_Dog__c, Clothing_Worn_at_Bite_Site__c, Damage_Done_by_the_Dog__c, Incident_Date_Time__c, Incident_Description__c ,Name, Number_of_bites__c, Other_Damage_Done_by_the_Dog__c, Person_Involved__c, Please_explain_why_you_think_so__c, Report_Date__c, Specific_Target_of_Dog_s_Behavior__c, Type_of_Bite__c FROM Incidents__r),
-                             (SELECT ID,Name,Behavior_Foster_Note__c from Behavior_Foster_Notes__r),
-                           	 //(SELECT ID, NAME ,Playgroup_Date_Time__c, Playgroup_Location__c, Playgroup_Notes_Text__c  FROM Playgroups__r ),
-                           	 (SELECT Play_Rating__c FROM Animal_Playgroups__r)
+                             (SELECT ID,Name,Behavior_Foster_Note__c from Behavior_Foster_Notes__r)
+                           
                              from Animal__C where ID = : animalId];
             }
             return animalD;
@@ -31,7 +30,15 @@ public class AnimalDiscoverPDFController {
         private set;
     }
 
-  
+    public List<Animal_Playgroup__c> aPlayGroups {
+        public get {
+            aPlayGroups = [SELECT ID, Play_Rating__c, Playgroup_Individual_Notes__c,Animal__C,
+            Playgroup_Session__r.Playgroup_Location__c,Playgroup_Session__r.Playgroup_Notes__c, 
+            Playgroup_Session__r.Playgroup_Date__c FROM Animal_Playgroup__c WHERE  Animal__c = : animalId];
+            return aPlayGroups;
+        }
+        private set;
+    }
 
     public List<Session_Protocol__c> aTreatmentSession {
         public get {
