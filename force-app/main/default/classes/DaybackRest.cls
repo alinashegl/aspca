@@ -52,23 +52,6 @@ global with sharing class DaybackRest {
         return genResources;
     }
 
-    // private static String[] getLocationGroup(){
-    //     String[] tempLocationGroup = new String[]{'CRC', 'MRC'};
-    //         String tempLocation = userLocation;
-    //         if(tempLocation == 'All'){
-    //             tempLocationGroup = new String[]{'ARC', 'CARE', 'ARC/CARE', 'CRC', 'MRC'};
-    //         }
-    //         if(tempLocation == 'ARC/CARE'){
-    //             tempLocationGroup = new String[]{'ARC', 'CARE', 'ARC/CARE'};
-    //         }
-    //     return tempLocationGroup;
-    // }
-
-    // private static String getUserLocation(){
-    //     User u = [SELECT Id, Location__c FROM User WHERE Id =: userInfo.getUserId()];
-    //     return u.Location__c;
-    // }
-
     public static ResourceInfo[] prepContactResources(){
         ResourceInfo[] infos = new ResourceInfo[0];
         Set<Id> managerIds = new Set<Id>();
