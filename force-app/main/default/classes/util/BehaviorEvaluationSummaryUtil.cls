@@ -203,11 +203,9 @@ public class BehaviorEvaluationSummaryUtil {
         Map<String, String[]> highValueMap = getHighValueCategoryMap();
 
         Map<String, String[]> summaryListMap = getSummaryTemplateMap();
-        System.debug('summaryTemplate: ' + summaryListMap);
 
         for (Behavior_Evaluation__c b : triggerNew) {
             Map<String, Test_Config__mdt[]> commentFieldsMap = commentFieldsMapMap.get(b.Evaluation_Subtype__c);
-            System.debug('commentFieldsMap: ' + commentFieldsMap.keyset());
 
             Boolean skipDogTests = false;
             Behavior_Evaluation__c oldRecord = triggerOldMap.get(b.Id);
@@ -222,13 +220,29 @@ public class BehaviorEvaluationSummaryUtil {
             for(String summaryTitle : summaryList){
                 System.debug('summaryTitle: ' + summaryTitle);
                 CommentSkipWrapper[] commentList = new CommentSkipWrapper[0];
+
+                Boolean skipSubsequentParts = false;
+                String skipReason = null;
+                Test_Config__mdt p1Config = commentFieldsMap.get(summaryTitle)[0];
+                String currentFieldApi = p1Config.Test_Skip_Reason_Field__c;
+
+                //if skipping p1, skip the others for the same reason
+                if(currentFieldApi.contains('P1')){
+                    if(oldRecord.get(currentFieldApi) == null && b.get(currentFieldApi) != null){
+                        skipSubsequentParts = true;
+                        skipReason = (String) b.get(currentFieldApi);
+                    }                    
+                }
+
                 if(commentFieldsMap.containsKey(summaryTitle)){
-                    System.debug('congifList: ' + commentFieldsMap.get(summaryTitle));
                     for(Test_Config__mdt config : commentFieldsMap.get(summaryTitle)){
                         if (skipDogTests) {
                             if (summaryTitle.startsWith('Same Sex') || summaryTitle.startsWith('Opposite Sex')) {
                                 b.put(config.Test_Skip_Reason_Field__c, 'Skipped due to risk to the helper dog');
                             }
+                        }
+                        else if(skipSubsequentParts && b.get(config.Test_Skip_Reason_Field__c) == null){
+                            b.put(config.Test_Skip_Reason_Field__c, skipReason);
                         }
 
                         String picklistString = (string) b.get(config.Picklist_API_Name__c);
