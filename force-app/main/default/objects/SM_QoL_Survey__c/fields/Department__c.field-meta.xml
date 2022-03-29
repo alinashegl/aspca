@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Department__c</fullName>
+    <externalId>false</externalId>
+    <label>Department</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Adoption Center</fullName>
+                <default>false</default>
+                <label>Adoption Center</label>
+            </value>
+            <value>
+                <fullName>ARC</fullName>
+                <default>false</default>
+                <label>ARC</label>
+            </value>
+            <value>
+                <fullName>BRC</fullName>
+                <default>false</default>
+                <label>BRC</label>
+            </value>
+            <value>
+                <fullName>CARE</fullName>
+                <default>false</default>
+                <label>CARE</label>
+            </value>
+            <value>
+                <fullName>CRC</fullName>
+                <default>false</default>
+                <label>CRC</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

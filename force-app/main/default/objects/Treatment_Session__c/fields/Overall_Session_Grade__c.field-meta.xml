@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Overall_Session_Grade__c</fullName>
+    <externalId>false</externalId>
+    <label>Overall Session Grade</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>1. Low/Neutral</fullName>
+                <default>false</default>
+                <label>1. Low/Neutral</label>
+            </value>
+            <value>
+                <fullName>2. Mild</fullName>
+                <default>false</default>
+                <label>2. Mild</label>
+            </value>
+            <value>
+                <fullName>3. Moderate</fullName>
+                <default>false</default>
+                <label>3. Moderate</label>
+            </value>
+            <value>
+                <fullName>4. Extreme</fullName>
+                <default>false</default>
+                <label>4. Extreme</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

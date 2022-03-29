@@ -108,7 +108,10 @@ public with sharing class AnimalTriggerHandler {
         }
         System.debug(conroles);
         insert conroles;
-        LogHistory.LogHistory(oldAnms, anms);
+        if(RecursiveTriggerHandler.isFirstTime){
+            RecursiveTriggerHandler.isFirstTime = false;
+            LogHistory.LogHistory(oldAnms, anms);
+        }
     }
 
     private static Map<Id, CaseContactRole> queryCaseContactRoles(Animal__c[] animals){
