@@ -31,6 +31,24 @@
                 <default>false</default>
                 <label>Senior (8 yrs+)</label>
             </value>
+            <value>
+                <fullName>Adult (1-8 yrs)</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Adult (1-8 yrs)</label>
+            </value>
+            <value>
+                <fullName>Juvenile (5-12 mos)</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Juvenile (5-12 mos)</label>
+            </value>
+            <value>
+                <fullName>Puppy (&lt;5 mos)</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Puppy (&lt;5 mos)</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>
