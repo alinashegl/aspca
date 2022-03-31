@@ -25,7 +25,7 @@ export default class MrcTreatmentPlansProtocol extends LightningElement {
         this.showSpinner = true;
 
         const fields = {};
-        fields[protocolNotesField] = event.target.value;
+        fields[this.protocolNotesField] = event.target.value;
         fields['Id'] = this.recordId;
 
         const recordInput = { fields };

@@ -30,7 +30,7 @@ public with sharing class MRCTreatmentPlansReportLWCController {
         }
     }
 
-    @AuraEnabled
+    @AuraEnabled(cacheable=true)
     public static Plan_Protocol__c getPlanProtocolInfo(Id recordId){
         try {
             Plan_Protocol__c[] proto = [SELECT Id, Protocol_Notes__c FROM Plan_Protocol__c WHERE Id =: recordId LIMIT 1];
