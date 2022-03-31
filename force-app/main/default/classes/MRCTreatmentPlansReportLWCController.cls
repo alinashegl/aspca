@@ -20,9 +20,21 @@ public with sharing class MRCTreatmentPlansReportLWCController {
         try {
             AnimalInfo info = new AnimalInfo();
             info.restDays = DailyCareLWCController.getAnimalRestDays(recordId);
+            info.motivators = getMotivators(recordId);
+            info.helperDogs = getHelperDogs(recordId);
             info.categoryToProtocolIdMap = getProtocolIdMap(recordId);
 
             return info;
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
+
+    @AuraEnabled
+    public static Plan_Protocol__c getPlanProtocolInfo(Id recordId){
+        try {
+            Plan_Protocol__c[] proto = [SELECT Id, Protocol_Notes__c FROM Plan_Protocol__c WHERE Id =: recordId LIMIT 1];
+            return !proto.isEmpty() ? proto[0] : null;
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }
@@ -47,15 +59,22 @@ public with sharing class MRCTreatmentPlansReportLWCController {
         return protocolMap;
     }
 
-    // private static List<Plan_Protocol__c[]> getProtocolIdLists(Id animalId){
-    //     Plan_Protocol__c[] protocols = [SELECT Id, Protocol__r.Protocol_Categories__c FROM Plan_Protocol__c WHERE Protocol__r.Protocol_Categories__c = 'Fear Walking'];
-    //     List<Plan_Protocol__c[]> mainList = new List<Plan_Protocol__c[]>();
-    //     mainList.add(protocols);
-    //     return mainList;
-    // }
+    private static String getMotivators(Id animalId){
+
+        return 'motivators';
+
+    }
+
+    private static String getHelperDogs(Id animalId){
+
+        return 'helper dogs';
+
+    }
 
     public class AnimalInfo{
         @AuraEnabled public String restDays;
+        @AuraEnabled public String motivators;
+        @AuraEnabled public String helperDogs;
         @AuraEnabled public Map<String, Id[]> categoryToProtocolIdMap;
     }
 }

@@ -18,8 +18,15 @@
                         <lightning-input-field field-name={protocolRemovedField}> </lightning-input-field>
                     </lightning-layout-item>
                     <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="12" large-device-size="12" padding="horizontal-medium" class="slds-var-p-bottom_small">
-                        <lightning-input-field field-name={protocolNotesField}> </lightning-input-field>
+                        <lightning-input-field field-name={protocolNotesField} onblur={handleInputBlur}> </lightning-input-field>
+                        <!-- <template if:true={planProtocolInfo.data}>
+                            <lightning-input type="text" value={planProtocolInfo.data.Protocol_Notes__c} label="Protocol Notes" data-field={enrichmentAPI} onblur={handleInputBlur}></lightning-input>
+                        </template> -->
                     </lightning-layout-item>
+                    <template if:true={showSpinner}>
+                        <lightning-icon icon-name="utility:spinner" alternative-text="Connected" size="small" title="large size">
+                        </lightning-icon>
+                    </template>
                 </lightning-layout>
             </lightning-record-edit-form>
         </template>
