@@ -37,13 +37,6 @@
     </columns>
     <filter>
         <criteriaItems>
-            <column>Animal__c$Id</column>
-            <columnToColumn>false</columnToColumn>
-            <isUnlocked>false</isUnlocked>
-            <operator>equals</operator>
-            <value>a072100000623Qg</value>
-        </criteriaItems>
-        <criteriaItems>
             <column>Animal__c.Behavior_Assessments__r.Behavior_Assessment_Responses__r$Evaluation_Score__c</column>
             <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
