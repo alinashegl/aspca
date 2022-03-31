@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Number_of_Treatments__c</fullName>
+    <fullName>Current_Recent_Shelter_Location_Date__c</fullName>
     <externalId>false</externalId>
-    <label># of Treatments (last seven days)</label>
-    <precision>18</precision>
+    <label>Current/Recent Shelter Location Date</label>
     <required>false</required>
-    <scale>0</scale>
     <trackFeedHistory>false</trackFeedHistory>
     <trackHistory>false</trackHistory>
-    <type>Number</type>
-    <unique>false</unique>
+    <type>Date</type>
 </CustomField>

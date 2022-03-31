@@ -69,6 +69,12 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldItem>Record.Grade_Change_Reason__c</fieldItem>
+                <identifier>RecordGrade_Change_Reason_cField1</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
                 <fieldItem>Record.Caution__c</fieldItem>
                 <identifier>RecordCaution__cField</identifier>
             </fieldInstance>
@@ -131,6 +137,12 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.Handler_Initials__c</fieldItem>
                 <identifier>RecordHandler_Initials__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Evaluation_Date__c</fieldItem>
+                <identifier>RecordEvaluation_Date_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-8862fbf2-948e-4a80-b05f-b8ab232cb550</name>
