@@ -17,7 +17,7 @@ public class AnimalDiscoverPDFController {
     public Animal__c animalD {
         public get {
             if (animalD == null){
-                animalD = [select Id ,Name, Animal_Name__c,Breed__C,Animal_Age__c,Animal_Name_Id__c, Color__c,Gender__c,Case_Type__c,Animal_Status__c,Grade_Change_Reason__c,Current_Behavior_Grade_Change_Date__c,
+                animalD = [select Id ,Name, Animal_Name__c,Breed__C,Age__c, Animal_Age__c,Animal_Name_Id__c, Color__c,Gender__c,Case_Type__c,Animal_Status__c,Grade_Change_Reason__c,Current_Behavior_Grade_Change_Date__c,
                            Current_Location__c,Intake_Type__c,Behavior_Concerns__c, Shelter_Kennel__c , Shelter_Location__c, Behavior_Case_Worker__c,Behavior_Case_Worker__r.Name,
                            (SELECT ID, NAME, Observation_Date__c, Observation_Notes__c, Observation_Reported_By__c,Behavior_Staff_Initials__c, Behavior_Response__c, Observation_Type__c, Animal__r.Behavior_Concerns__c from Observations__r),
                            (SELECT Id, Additional_Comments__c,Behaviors_Exhibited_by_the_Dog__c, Was_Bitten_Area_Covered_with_Clothing__c, Damage_Done_by_the_Dog__c, Incident_Date_Time__c, Incident_Description__c ,Name, Number_of_bites__c, Other_Damage_Done_by_the_Dog__c, Person_Involved__c, Please_explain_why_you_think_so__c, Report_Date__c, Specific_Target_of_Dog_s_Behavior__c, Type_of_Bite__c FROM Incidents__r),
@@ -49,17 +49,7 @@ public class AnimalDiscoverPDFController {
                 animalPlaySummary aps = new animalPlaySummary();
                 aps.Id=amp.ID;
                 aps.playRating=amp.Play_Rating__c;
-                /*if(existingIds.contains(pSessionId)){
-IndividualNotes.add(amp.Playgroup_Individual_Notes__c);
-aps.playGroupIndividualNotes = IndividualNotes;
-}
-else{
-IndividualNotes = new List<String> (); 
-IndividualNotes.add(amp.Playgroup_Individual_Notes__c);
-aps.playGroupIndividualNotes = IndividualNotes;
-}
-*/
-                
+              
                 if(!existingIds.contains(pSessionId)) {
                     List<string> animalNames = new List<string>();
                     List<string> animallocation = new List<string>();
@@ -80,7 +70,6 @@ aps.playGroupIndividualNotes = IndividualNotes;
                     aPlayGroups.add(aps);
                 }
             }
-            System.debug('playgroup sessio log '+ aPlayGroups);
             return aPlayGroups;
         }
         private set;
@@ -296,17 +285,18 @@ aps.playGroupIndividualNotes = IndividualNotes;
                                                            Potential_Issue_Fear__c,
                                                            Potential_Issue_High_Arousal__c,
                                                            Potential_Issue_Other__c,
-                                                           Potential_Issue_Other_Notes__c
+                                                           Potential_Issue_Other_Notes__c,
+                                                           Animal__r.Placement_Recommendations__c,
+                                                           Animal__r.Age__c
                                                            FROM Behavior_Evaluation__c
                                                            WHERE Animal__r.ID = : animalId  Order by Name  DESC LIMIT 10];
             
             List<BehaviorEvaluation> behaviorEvaluations = new List<BehaviorEvaluation>();
             Set<Id> behvIds = new Set<Id>();
-            for (Behavior_Evaluation__c behV : behEvaluations) {
-                behvIds.add(behV.Id);
-            }
+          
             
             for (Behavior_Evaluation__c behV : behEvaluations) {
+                behvIds.add(behV.Id);
                 evaluation = new List<EvaluationGroup>();
                 finalTestAndDisplayValues = new List<List<String>>();
                 finalTestAndDisplayValues = getBehaviorEvaluationMatrix(behV);
@@ -315,7 +305,7 @@ aps.playGroupIndividualNotes = IndividualNotes;
                 behvEval.Id = behV.Id;
                 behvEval.AnimalName = behV.Animal_Name__c;
                 behvEval.AnimalID =  behV.Animal_ID__c ;
-                behvEval.AnimalAge = behV.Animal_Age__c;
+                behvEval.AnimalAge = behV.Animal__r.Age__c;
                 behvEval.AnimalBreed = behV.Animal_Breed__c;
                 behvEval.AnimalColor = behV.Animal_Color__c;
                 behvEval.AnimalSex = behV.Animal_Sex__c;
@@ -338,6 +328,7 @@ aps.playGroupIndividualNotes = IndividualNotes;
                 behvEval.PotentialIssueHighArousal = behV.Potential_Issue_High_Arousal__c;
                 behvEval.PotentialIssueOther = behV.Potential_Issue_Other__c;
                 behvEval.PotentialIssueOtherNotes = behV.Potential_Issue_Other_Notes__c;
+                behvEval.PlacementRecommendations = behV.Animal__r.Placement_Recommendations__c;
                 behaviorEvaluations.add(behvEval);
             }
 			GradeHistories = new List<AnimalGradeHistory>();
@@ -721,11 +712,18 @@ aps.playGroupIndividualNotes = IndividualNotes;
 
     Private List<AnimalGradeHistory> animalGradeHistory(Set<Id> behavIds){
         String query = 'SELECT Id, RecordName__c, CreatedDate, CreatedBy.Name, FieldName__c, NewValue__c, OldValue__c, ObjectId__c, ObjectName__c FROM EntityHistory__c';
+        String behaviorIds = '(';
         List<SObject> results = new List<SObject>();
+        for(String s : behavIds){
+            behaviorIds += '\''+s+'\',';
+        }
+        behaviorIds = behaviorIds.removeEnd(',');
+        behaviorIds += ')';
+        System.debug(behaviorIds);
         List<AnimalGradeHistory> animalHistories = new List<AnimalGradeHistory>();
         if ( animalId != null && animalId != '' ) {
-            query += ' WHERE (ParentId__c = \''+animalId+'\'';
-            query += ' AND ObjectId__c IN ( \''+ behavIds +'\'))';
+            query += ' WHERE ParentId__c = \''+animalId+'\'';
+            query += ' AND ObjectId__c IN '+behaviorIds;
             query += ' Order by RecordName__c,CreatedDate';
             system.debug(query);
             results = Database.query( query );
@@ -953,5 +951,6 @@ aps.playGroupIndividualNotes = IndividualNotes;
         Public string PotentialIssueHighArousal { get; set; }
         Public string PotentialIssueOther { get; set; }
         Public string PotentialIssueOtherNotes { get; set; }
+        Public string PlacementRecommendations { get; set; }
     }
 }
