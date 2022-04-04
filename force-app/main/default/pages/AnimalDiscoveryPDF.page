@@ -647,29 +647,57 @@
                     </tr>
                     <tr>
                         <td>
-                            <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
+                            <!--<apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
                             <span style="vertical-align: top;"> Aggression to People </span> &nbsp;
                             <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
                             <span style="vertical-align: top;"> Fear </span> &nbsp;
                             <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
-                            <span style="vertical-align: top;"> Other: </span>
+                            <span style="vertical-align: top;"> Other: </span>-->
+                            <b>Aggression to People: </b> &nbsp;
+                            <span style="vertical-align: top;"> {!behEval.PotentialIssueAggressionToPeople} </span>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
+                            <b>Fear: </b>
+                            <span style="vertical-align: top;"> {!behEval.PotentialIssueFear} </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Other: </b>
+                            <span style="vertical-align: top;"> {!behEval.PotentialIssueOther}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <!--<apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
                             <span style="vertical-align: top;"> Aggression to Dogs </span> &nbsp; &nbsp;
                             <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
-                            <span style="vertical-align: top;"> High Arousal </span>
+                            <span style="vertical-align: top;"> High Arousal </span>-->
+                            <b>Aggression to Dogs: </b> &nbsp;
+                            <span style="vertical-align: top;"> {!behEval.PotentialIssueAggressionToAnimals}</span> &nbsp; &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>High Arousal: </b> &nbsp;
+                            <span style="vertical-align: top;"> {!behEval.PotentialIssueHighArousal} </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Other Notes: </b> &nbsp;
+                            <span style="vertical-align: top;"> {!behEval.PotentialIssueOtherNotes} </span>
                         </td>
                     </tr>
                 </table>
                 <table class="behavTable" width="100%">
                     <!-- Displays values from potentBehIssue list -->
                     <tr style="font-weight:900;">
-                        <td>Placement recommendations:</td>
+                        <td>Placement recommendations: {!behEval.PlacementRecommendations}</td>
                     </tr>
-                    <tr>
+                    <!--<tr>
                         <td>
                             <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
                             <span style="vertical-align: top;"> No kids under 10e </span> &nbsp;
@@ -692,7 +720,7 @@
                             <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
                             <span style="vertical-align: top;">With another dog</span>
                         </td>
-                    </tr>
+                    </tr>-->
                 </table>
                 <table class="behavTable" width="100%">
                     <tr style="font-weight:900;">

@@ -152,7 +152,7 @@ aps.playGroupIndividualNotes = IndividualNotes;
                 results = Database.query( query );
             }
             
-            for(Integer i = 0; i < results.size();i++){
+            for(Integer i = 0; i < results.size() - 1;i++){
                 AnimalGradeHistory agh = new AnimalGradeHistory();
                 agh.historyDate = DateTime.valueOf(results[i].get('CreatedDate'));
                 agh.historyName = String.valueOf(results[i].get('NewValue__c'));
@@ -290,7 +290,13 @@ aps.playGroupIndividualNotes = IndividualNotes;
                                                            Puppy_Skipped_CD_P1__c,
                                                            Puppy_Skipped_BOL__c,
                                                            Puppy_Skipped_BIK__c,
-                                                           Puppy_BIK_Housing__c
+                                                           Puppy_BIK_Housing__c,
+                                                           Potential_Issue_Aggression_To_People__c,
+                                                           Potential_Issue_Aggression_To_Animals__c,
+                                                           Potential_Issue_Fear__c,
+                                                           Potential_Issue_High_Arousal__c,
+                                                           Potential_Issue_Other__c,
+                                                           Potential_Issue_Other_Notes__c
                                                            FROM Behavior_Evaluation__c
                                                            WHERE Animal__r.ID = : animalId  Order by Name  DESC LIMIT 10];
             
@@ -326,6 +332,12 @@ aps.playGroupIndividualNotes = IndividualNotes;
                 behvEval.AnimalScribeInitials =  behV.Scribe_Initials__c;
                 behvEval.BehaviorTestAndDisplayValues =  finalTestAndDisplayValues;
                 behvEval.Behaviorevaluation = evaluation;
+                behvEval.PotentialIssueAggressionToPeople = behV.Potential_Issue_Aggression_To_People__c;
+                behvEval.PotentialIssueAggressionToAnimals = behV.Potential_Issue_Aggression_To_Animals__c;
+                behvEval.PotentialIssueFear = behV.Potential_Issue_Fear__c;
+                behvEval.PotentialIssueHighArousal = behV.Potential_Issue_High_Arousal__c;
+                behvEval.PotentialIssueOther = behV.Potential_Issue_Other__c;
+                behvEval.PotentialIssueOtherNotes = behV.Potential_Issue_Other_Notes__c;
                 behaviorEvaluations.add(behvEval);
             }
 			GradeHistories = new List<AnimalGradeHistory>();
@@ -935,5 +947,11 @@ aps.playGroupIndividualNotes = IndividualNotes;
         Public string AnimalScribeInitials {get;set;}
         public List<List<String>> BehaviorTestAndDisplayValues {get;set;}
         Public List<EvaluationGroup> Behaviorevaluation { get; set; }
+        Public string PotentialIssueAggressionToPeople { get; set; }
+        Public string PotentialIssueAggressionToAnimals { get; set; }
+        Public string PotentialIssueFear { get; set; }
+        Public string PotentialIssueHighArousal { get; set; }
+        Public string PotentialIssueOther { get; set; }
+        Public string PotentialIssueOtherNotes { get; set; }
     }
 }
