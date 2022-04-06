@@ -2,14 +2,14 @@ public class SeizureEmailNotificationController {
     public static void handleSeizureEmailNotificationSchedular(){
         Map<Id, List<Animal__c>> animalsRec = new  Map<Id, List<Animal__c>>();
 
-        List<Animal__c> lstAnimals =[SELECT Id ,Name, Animal_Name_Id__c,Animal_Name__c,Gender__c,Current_Behavior_Grade__c,
-                               Play_Priority__c, Play_Category__c, Seizure_Surrender_Date__c, Behavior_Case_Worker__c
-                               FROM Animal__c where Email_Notification__c =: true];
+        List<Animal__c> lstAnimals =[SELECT Id ,Name, Animal_Name_Id__c,Animal_Name__c,Gender__c,Current_Behavior_Grade__c,Surrender_Type__c,
+                               Play_Priority__c, Play_Category__c, Seizure_Surrender_Date__c,Current_Recent_Shelter_Location__c, Behavior_Case_Worker__c
+                               FROM Animal__c where Email_Notification__c =: true and (Current_Recent_Shelter_Location__c ='CRC' OR Current_Recent_Shelter_Location__c ='MRC')];
         List<Animal__c> animalValues = null;   
         
         for(Animal__c anm : lstAnimals){
                 if(!animalsRec.containsKey(anm.Behavior_Case_Worker__c)){
-                    animalValues = new  List<Animal__c>();//animalValues = animalsRec.get(anm.Behavior_Case_Worker__c);
+                    animalValues = new  List<Animal__c>();
                 }
             	animalValues.add(anm);
             	animalsRec.put(anm.Behavior_Case_Worker__c, animalValues);
@@ -35,6 +35,7 @@ public class SeizureEmailNotificationController {
             Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
             mail.setToAddresses(new List<String>{'kavya.reddy@aspca.org'});
             //mail.setToAddresses(contactByIdEmail.get(conId));
+            mail.setCcAddresses(new List<String> {'CRCBehaviorMgmt@aspca.org'});
             mail.setSubject('Animal surrender notification');
             String td1='"border:1px solid green; width=200px;"';
             String tdHead= '"border:1px solid green; width=200px; color:white; background-color:green; font-weight:bold;"';
@@ -48,10 +49,11 @@ public class SeizureEmailNotificationController {
                             + '<th style='+ tdHead +'>Play Priority</th>'
                             + '<th style='+ tdHead +'>Play Category</th>'
                             + '<th style='+ tdHead +'>Surrender Date</th>'
+                 			+ '<th style='+ tdHead +'>Surrender Type</th>'
                         + '</tr>'
                         + '</thead><tbody>';
             List<Animal__c> animals = animalsRec.get(conId);
-            
+
             for (Animal__c anm : animals) {
                 String animalName = anm.Name == null ? '': anm.Name;
                 String animalGender = anm.Gender__c == null ? '': anm.Gender__c;
@@ -59,6 +61,7 @@ public class SeizureEmailNotificationController {
                 String animalPlayPriority = anm.Play_Priority__c == null ? '': anm.Play_Priority__c;
                 String animalPlayCategory = anm.Play_Category__c == null ? '': anm.Play_Category__c;
                 Date animalSurrDate = anm.Seizure_Surrender_Date__c;
+                String animalsurrenderType = anm.Surrender_Type__c == null ? '': anm.Surrender_Type__c; 
                 htmlBody = htmlBody +	'<tr>'
                                     + '<td style='+ td1 +'>'+ animalName +'</td>'
                                     + '<td style='+ td1 +'>'+ animalGender +'</td>'
@@ -66,10 +69,12 @@ public class SeizureEmailNotificationController {
                                     + '<td style='+ td1 +'>'+ animalPlayPriority +'</td>'
                                     + '<td style='+ td1 +'>'+ animalPlayCategory +'</td>'
                                     + '<td style='+ td1 +'>'+ String.valueOf(animalSurrDate) +'</td>'
+                  				    + '<td style='+ td1 +'>'+ animalsurrenderType +'</td>'
                           			+ '</tr>'; 
                 
             }
            	htmlBody = htmlBody + '</tbody></table></center>';
+            
             mail.setHtmlBody(htmlBody);
             system.debug(htmlBody);
             mails.add(mail);
@@ -77,6 +82,7 @@ public class SeizureEmailNotificationController {
         if (mails.size() > 0){
             try{
                 Messaging.sendEmail(mails);
+                
             } catch(exception ex){
                 system.debug('error '+ ex );
             }
