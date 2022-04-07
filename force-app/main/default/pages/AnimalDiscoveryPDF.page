@@ -102,15 +102,15 @@
         <apex:variable value="{!$Resource.behvModerate}" var="behvModerate" />
         <apex:variable value="{!$Resource.behvSevere}" var="behvSevere" />
         
-        <div>
-            <center>
-                <h3 style="font:24px;">
+        <div style="border:1px solid;">
+            <center style="border-bottom:1px solid;">
+                <h3 style="font-weight:900">
                     <!--Top Header -->
-                    <strong>Discovery Report</strong>
+					Discovery Report
                 </h3>
                 <!--Top Body Sesction -->
             </center>
-            <div  style="margin-right:50px;margin-left:30px" >
+            <div  style="margin-right:50px;margin-left:30px">
                     <table  class="tableSpcae" cellspacing="0">
                     <thead>
                         <tr>
@@ -124,7 +124,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td width="10%"  class="bottomline">{!animalD.Animal_Name__c}</td>
+                            <td width="10%" class="bottomline">{!animalD.Animal_Name__c}</td>
                             <td width="5%" class="bottomline">{!animalD.Breed__C}</td>
                             <td width="5%" class="bottomline">{!animalD.Age__c}</td>
                             <td width="5" class="bottomline">{!animalD.Gender__c}</td>
@@ -145,10 +145,10 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="bottomline">{!animalD.Animal_Status__c}</td>
-                            <td class="bottomline">{!animalD.Shelter_Kennel__c} &nbsp; {!animalD.Shelter_Location__c}</td>
-                            <td class="bottomline" >{!animalD.Case_Type__c}</td>
-                            <td class="bottomline">{!animalD.Behavior_Case_Worker__r.Name}</td>
+                            <td>{!animalD.Animal_Status__c}</td>
+                            <td>{!animalD.Shelter_Kennel__c} &nbsp; {!animalD.Shelter_Location__c}</td>
+                            <td>{!animalD.Case_Type__c}</td>
+                            <td>{!animalD.Behavior_Case_Worker__r.Name}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -156,69 +156,63 @@
         
         </div>
         <!-- 2. Behavior Progress, section 1   -->
-        <div class="section">
+        <div class="section" style="border:1px solid;">
             
             <table>
                 <thead>
                     <tr>
                         <th colspan="7">
-                            <center>
-                                <h3 style="font:20px;">
-                                    Behavior Progress
-                                </h3>
+                            <center  style="border-bottom:1px solid;">
+                                <h3 style="font-weight:900">  Behavior Progress</h3>
                             </center>
                         </th>
                     </tr>
                     <tr>
-                        <th class="topline">Date</th>
-                        <th class="topline">Concern / Incident / Other</th>
-                        <th class="topline">Reported By</th>
-                        <th class="topline">Behavior Lead Notes</th>
-                        <th class="topline">Behavior Lead Initials</th>
+                        <th>Date</th>
+                        <th>Concern / Incident / Other</th>
+                        <th>Reported By</th>
+                        <th>Behavior Lead Notes</th>
+                        <th>Behavior Lead Initials</th>
                     </tr>
                 </thead>
                 <tbody>
                     <apex:repeat value="{!animalD.Observations__r}" var="aor">
                         <tr>
-                            <td class="bottomline">
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">
                                 <apex:outputText value="{0, date, MM/dd/yy}">
                                     <apex:param value="{!aor.Observation_Date__c}" />
                                 </apex:outputText>
                             </td>
-                            <td class="bottomline">{!aor.Observation_Notes__c}</td>
-                            <td class="bottomline">{!aor.Behavior_Staff_Initials__c}</td>
-                            <td class="bottomline">{!aor.Behavior_Response__c}</td> 
-                            <td class="bottomline">{!aor.Observation_Reported_By__c}</td> 
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!aor.Observation_Notes__c}</td>
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!aor.Behavior_Staff_Initials__c}</td>
+                            <td class="topline">{!aor.Behavior_Response__c}</td> 
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!aor.Observation_Reported_By__c}</td> 
                         </tr>
                     </apex:repeat>
                     <apex:repeat value="{!animalD.Behavior_Foster_Notes__r}" var="aor">
                         <tr>
-                            <td class="bottomline">
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">
                                 <apex:outputText value="{0, date, MM/dd/yy}">
                                     <apex:param value="{!aor.Capture_Date__c}" />
                                 </apex:outputText>
                             </td>
-                            <td class="bottomline">{!aor.Behavior_Foster_Note__c}</td>
-                            <td class="bottomline">{!aor.Initials__c}</td>
-                            <td class="bottomline"></td>
-                            <td class="bottomline">{!aor.Initials__c}</td> 
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!aor.Behavior_Foster_Note__c}</td>
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!aor.Initials__c}</td>
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;"></td>
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!aor.Initials__c}</td> 
                         </tr>
-                    </apex:repeat>
-                    
+                    </apex:repeat>  
                 </tbody>
             </table>
         </div>
         <!-- 3. Behavior Progress, section 2 Incident Object   -->
-        <div class="section">
-            
+        <div class="section" style="border:1px solid;">
             <table style="border-collapse: collapse;">
                 <thead>
                     <tr>
                         <th colspan="4">
-                            <center>
-                                <h3 style="font:20px;">
-                                    Behavior Progress
-                                </h3>
+                            <center  style="border-bottom:1px solid;font-weight:900">
+                                  <h3 style="font-weight:900">Behavior Progress </h3> 
                             </center>
                         </th>
                     </tr>
@@ -286,30 +280,28 @@
             </table>
         </div>
         <!--4. Play History -->
-        <div class="section">
-            
+        <div class="section" style="border:1px solid;">  
             <table class="c_table">
                 <thead>
                     <tr>
-                        <th colspan="8">
-                            <center>
-                                <h3 style="font:20px;">
-                                    Play History
-                                </h3>
+                        <th colspan="9">
+                            <center style="border-bottom:1px solid; font-weight:900">
+                                <h3 style="font-weight:900"> Play History </h3>
                             </center>
                         </th>
                     </tr>
                     <tr>
-                        <th style="border-top:thin #D4D4D4 solid;">Date</th>
-                        <th style="border-top:thin #D4D4D4 solid;">Rating </th>
-                        <th style="border-top:thin #D4D4D4 solid;">&nbsp; </th>
-                        <th style="border-top:thin #D4D4D4 solid;">Location </th>
-                        <th style="border-top:thin #D4D4D4 solid;">&nbsp; </th>  
-                        <th style="border-top:thin #D4D4D4 solid;">Dogs </th>
-                        <th style="border-top:thin #D4D4D4 solid;">&nbsp; </th> 
+                        <th>Date</th>
+                        <th>Rating </th>
+                        <th>&nbsp;</th>
+                        <th>Location </th> 
+                        <th>&nbsp;</th>
+                        <th>Dogs </th>
+                        
                     </tr>
                 </thead>
-                <apex:repeat value="{!aPlayGroups}" var="adp">
+                <tbody>
+               		 <apex:repeat value="{!aPlayGroups}" var="adp">
                     <tr style="page-break-inside:avoid">
                         <td>
                            {!adp.playSessionDate}
@@ -326,60 +318,34 @@
                         <td>
                             <div style="display: inline;">
                                 <apex:repeat value="{!adp.animalNames}" var="name">
-                                        <span>{!name}</span>                               	  
+                                        {!name} &nbsp; &nbsp;                            	  
                                 </apex:repeat>
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td class="bottomline">&nbsp;</td>
-                        <td class="bottomline" colspan="6">
+                        <td class="bottomline" styel="padding-top: 1em;padding-bottom: 1em;">&nbsp;</td>
+                        <td class="bottomline"  styel="padding-top: 1em;padding-bottom: 1em;" colspan="8">
                             <apex:repeat value="{!adp.playSessionNotes}" var="note">
                            			<span>{!note}</span>  
                             </apex:repeat>
                         </td>
                     </tr>
                 </apex:repeat>
-                <!--<apex:repeat value="{!aPlayGroups}" var="adp">
-                    <tr style="page-break-inside:avoid">
-                        <td>
-                            <apex:outputText value="{0, date, MM/dd/yyyy}">
-                                <apex:param value="{!adp.Playgroup_Session__r.Playgroup_Date__c}" />
-                            </apex:outputText>
-                        </td>
-                        <td >{!adp.Play_Rating__c}</td>
-                        <td>&nbsp;</td>
-                        <td>
-                            <apex:outputPanel >
-                                {!adp.Playgroup_Session__r.Playgroup_Location__c}
-                            </apex:outputPanel>
-                        </td>
-                        <td>&nbsp;</td>
-                        <td>
-                            {!adp.animal__r.Name}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td class="bottomline" colspan="6">{!adp.Playgroup_Session__r.Playgroup_Notes__c}</td>
-                    </tr>
-                </apex:repeat> -->
-                
+                </tbody>
             </table>
         </div>
         <!--3. Training & Behavior Modification Behavior Mod-->
-        <div class="section" style="page-break-inside:avoid;page-break-inside:avoid; page-break-after: always; padding-top: .5em;">
-            
+        <div class="section" style="page-break-inside:avoid;page-break-inside:avoid; page-break-after: always; padding-top: .5em; border:1px solid;">
             <table class="c_table" width="100%">
                 <thead>
                     <tr>
                         <th colspan="7">
-                            <center>
-                                <h3 style="font:20px;">Training Behavior Modification Behavior Mod.</h3>
+                            <center style="border-bottom:1px solid;">
+                                <h3 style="font-weight:900"> Training Behavior Modification Behavior Mod.</h3>
                             </center>
                         </th>
-                    </tr>
-                    
+                    </tr>  
                 </thead>
                 <tbody>
                     <apex:repeat value="{!aTreatmentSession}" var="treat">
@@ -550,7 +516,11 @@
                             <td>Sex:</td>
                             <td>{!behEval.AnimalSex}</td>
                             <td>Date:</td>
-                            <td>{!behEval.AnimalEvaluationDate}</td>
+                            <td>
+                                <apex:outputText value="{0, date, MM/dd/yy}">
+                                    <apex:param value="{!behEval.AnimalEvaluationDate}" />
+                                </apex:outputText>
+                            </td>
                         </tr>
                         <tr>
                             <td>Case #:</td>

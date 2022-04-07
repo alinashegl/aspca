@@ -166,7 +166,7 @@ public class AnimalDiscoverPDFController {
                                                            Animal_ID__c,Animal_Name__c,Animal_Sex__c,Animal__c,
                                                            Assistant_Initials__c,Behavior_Evaluation_Summary__c,
                                                            Facility_Outcome__c, Evaluation_Date__c,Case_Number__c,
-                                                           Scribe_Initials__c,Tester_Initials__c,
+                                                           Scribe_Initials__c,Tester_Initials__c,createdDate,
                                                            Overall_Evaluation_Grade__c,Evaluation_Subtype__c,
                                                            Puppy_Dog_Interaction_P3__c,
                                                            Puppy_Dog_Interaction_P2__c,
@@ -309,7 +309,7 @@ public class AnimalDiscoverPDFController {
                 behvEval.AnimalBreed = behV.Animal_Breed__c;
                 behvEval.AnimalColor = behV.Animal_Color__c;
                 behvEval.AnimalSex = behV.Animal_Sex__c;
-                behvEval.AnimalEvaluationDate = String.valueOf(behV.Evaluation_Date__c);
+                behvEval.AnimalEvaluationDate = behV.createdDate;
                 behvEval.AnimalCaseNumber =  behV.Case_Number__c;
                 behvEval.AnimalFacilityOutcome = behV.Facility_Outcome__c;
                 behvEval.AnimalOverallEvaluationGrade =  behV.Overall_Evaluation_Grade__c;
@@ -933,7 +933,7 @@ public class AnimalDiscoverPDFController {
         Public string AnimalBreed{get;set;}
         Public string AnimalColor {get;set;}
         Public string AnimalSex {get;set;}
-        Public string AnimalEvaluationDate {get;set;}
+        Public DateTime AnimalEvaluationDate {get;set;}
         Public string AnimalCaseNumber {get;set;}
         Public string AnimalFacilityOutcome {get;set;}
         Public string AnimalOverallEvaluationGrade {get;set;}
