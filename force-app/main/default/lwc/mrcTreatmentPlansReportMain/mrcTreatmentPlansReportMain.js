@@ -1,21 +1,21 @@
 import { LightningElement } from 'lwc';
-import getMRCDogs from '@salesforce/apex/MRCTreatmentPlansReportLWCController.getMRCDogs';
+import getMRCDogs from '@salesforce/apex/MRCTreatmentPlansReportLWCController.getMRCDogsForPDF';
 import SystemModstamp from '@salesforce/schema/Account.SystemModstamp';
 
 export default class MrcTreatmentPlansReportMain extends LightningElement {
-    animalList;
+    animalInfoList;
 
     connectedCallback(){
         window.console.log('main - connected');
-        if(this.animalList == undefined){
+        if(this.animalInfoList == undefined){
             getMRCDogs()
             .then((result) => {
-                this.animalList = result;
+                this.animalInfoList = result;
             });
         }
     }
 
     get animalListLength(){
-        return this.animalList != undefined ? this.animalList.length : 0;
+        return this.animalInfoList != undefined ? this.animalInfoList.length : null;
     }
 }

@@ -9,6 +9,8 @@ import PROTOCOL_NOTES_MODIFIED_FIELD from '@salesforce/schema/Plan_Protocol__c.N
 
 export default class MrcTreatmentPlansProtocol extends LightningElement {
     @api recordId;
+    @api protocol;
+    protocolNotes;
 
     protocolNameField = PROTOCOL_NAME_FIELD.fieldApiName;
     protocolNotesField = PROTOCOL_NOTES_FIELD.fieldApiName;
@@ -16,31 +18,48 @@ export default class MrcTreatmentPlansProtocol extends LightningElement {
     protocolNotesModifiedDateField = PROTOCOL_NOTES_MODIFIED_FIELD.fieldApiName;
 
     showSpinner = false;
+    isLoading = true;
 
     @wire(getPlanProtocolInfo, { recordId: '$recordId' })
     planProtocolInfo;
 
+    handleOnLoad(event){
+        var record = event.detail.records;
+        var fields = record[this.recordId].fields;
+        this.protocolNotes = fields[this.protocolNotesField].value;
+        if(fields[this.protocolNotesModifiedDateField] != undefined){
+            this.isLoading = false;
+        }
+    }
+
     handleInputBlur(event){
         window.console.log('blur');
-        this.showSpinner = true;
+        //only need to update the notes if they have changed
+        if(event.target.value != this.protocolNotes){
+            this.isLoading = true;
 
-        const fields = {};
-        fields[this.protocolNotesField] = event.target.value;
-        fields['Id'] = this.recordId;
+            const fields = {};
+            fields[this.protocolNotesField] = event.target.value;
+            fields['Id'] = this.recordId;
 
-        const recordInput = { fields };
+            const recordInput = { fields };
 
-        updateRecord(recordInput)
-        .then(() => {
-            window.console.log('success');
-        })
-        .catch(error => {
-            window.console.log('error: ', error.body.message);
-            this.errorMessage = 'Error updating Plan Protocol Notes:';
-            this.error = error;
-        })
-        .finally(() => {
-            this.showSpinner = false;
-        });
+            updateRecord(recordInput)
+            .then(() => {
+                //nothing to do here as the record refreshed automatically
+            })
+            .catch(error => {
+                window.console.log('error: ', error.body.message);
+                this.errorMessage = 'Error updating Plan Protocol Notes:';
+                this.error = error;
+            })
+            .finally(() => {
+                this.isLoading = false;
+            });
+        }
+    }
+
+    get protocolName(){
+        return this.protocol != undefined ? this.protocol[this.protocolNameField] : null;
     }
 }

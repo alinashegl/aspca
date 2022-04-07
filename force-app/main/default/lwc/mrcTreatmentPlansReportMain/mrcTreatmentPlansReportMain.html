@@ -1,12 +1,17 @@
 <template>
     <lightning-card>
-        <template if:true={animalList}>
-            Total Animals: {animalListLength}
+        Total Animals: {animalListLength}
+        <template if:false={animalInfoList}>
+            <lightning-icon icon-name="utility:spinner" alternative-text="Connected" size="xx-small" title="large size">
+            </lightning-icon>
+        </template>
+        <template if:true={animalInfoList}>
             <div class="slds-var-p-top_small">
-                <template for:each={animalList} for:item='animal'>
-                    <div class="slds-var-p-bottom_x-small" key={animal.Id}>
+                <template for:each={animalInfoList} for:item='animalInfo'>
+                    <div class="slds-var-p-bottom_x-small" key={animalInfo.dog.Id}>
                         <c-mrc-Treatment-Plans-Animal
-                            record-id={animal.Id}
+                            record-id={animalInfo.dog.Id}
+                            animal-info={animalInfo}
                         >
                     </c-mrc-Treatment-Plans-Animal>
                     </div>

@@ -65,7 +65,7 @@ public with sharing class DailyCareLWCController {
                 info.animalName = adc.Animal__r.Animal_Name_Id__c;
                 info.animalKennelLocation = adc.Animal__r.Shelter_Location__c;
                 info.dailyRations = adc.Animal__r.Feeding_Amount__c;
-                info.restDays = getAnimalRestDays(adc.animal__c);
+                info.restDays = BehaviorUtil.getAnimalRestDays(adc.animal__c);
                 info.behaviorMeds = adc.Animal__r.Behavior_Medication_Flag__c;
                 info.specialCareTreatment = adc.Special_Care_TX__c;
                 info.specialCareOutside = adc.Special_Care_Outside_TX__c;
@@ -84,49 +84,6 @@ public with sharing class DailyCareLWCController {
             throw new AuraHandledException(e.getMessage());
         }
     }
-
-    public static String getAnimalRestDays(Id animalId){
-        String restDays = null;
-        Date today = date.today();
-        Date startDate = AutoScheduleTasksUtil.startOfASPCAWeek(today);
-        Date endDate = startDate.addDays(7);
-        Id rtId = Util.getRecordTypeId('Task', AutoScheduleTasksUtil.BEH_TREATMENT_TASK_RECORD_TYPE_NAME);
-        Set<String> restDaysSet = new Set<String>();
-        Date[] treatmentDays = new Date[0];
-        for(Task t : [SELECT Id, ActivityDate FROM Task WHERE Animal__c =: animalId AND RecordTypeId =: rtId AND ActivityDate >=: startDate AND ActivityDate <: endDate]){
-            treatmentDays.add(t.ActivityDate);
-        }
-
-        System.debug('treatmentDays: ' + treatmentDays);
-
-        if(treatmentDays.isEmpty()){
-            restDays = 'No treatments assigned this week';
-        }
-        else{
-            while(startDate < endDate){
-                System.debug('startDate: ' + startDate);
-                if(!treatmentDays.contains(startDate)){
-                    restDaysSet.add(AutoScheduleTasksUtil.getDayOfWeek(startDate));
-                }   
-                startDate = startDate.addDays(1);
-            }
-
-            if(!restDaysSet.isEmpty()){
-                restDays = String.join(new List<String>(restDaysSet), ',');
-            }
-        }
-        return restDays;
-    }
-
-  /*private static String getAnimalEnrichments(Id animalId){
-        String enrichments = null;
-        Treatment_Plan__c[] plans = [SELECT Id, Enrichment_Activities__c FROM Treatment_Plan__c WHERE IsActive__c = true AND Animal__c =: animalId LIMIT 1];
-        if(!plans.isEmpty() && plans[0].Enrichment_Activities__c != null){
-            enrichments = plans[0].Enrichment_Activities__c.replace(';', ',');
-        }
-        return enrichments;
-
-    }*/
 
     public class DailyCareInfo{
         @AuraEnabled public Id dailyCareId;

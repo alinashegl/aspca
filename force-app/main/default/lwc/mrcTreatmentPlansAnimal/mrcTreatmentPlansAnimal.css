@@ -6,3 +6,11 @@
   --sds-c-card-sizing-border: 4px;
   --sds-c-card-color-border: #808080;
 }
+
+.redIcon {
+  --sds-c-icon-color-foreground-default: red;
+}
+
+.blueIcon {
+  --sds-c-icon-color-foreground-default: blue;
+}
