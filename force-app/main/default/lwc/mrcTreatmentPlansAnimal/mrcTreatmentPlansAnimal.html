@@ -1,3 +1,4 @@
+<!-- sldsValidatorIgnore -->
 <template>
     <div class="slds-card slds-card_boundary card-custom">
         <template if:true={error}>
@@ -173,18 +174,11 @@
                 <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
                     <lightning-layout multiple-rows pull-to-boundary="small" class="slds-var-p-around_xx-small">
                         <template for:each={animalInfo.helperDogs.dogs} for:item='dog'>
-                            <!-- <lightning-layout-item key={dog.Id} flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-small" class="slds-var-p-bottom_small">
-                                <b>{dog.Additional_Dog__r.Animal_Name_Id__c}</b>
-                            </lightning-layout-item> -->
                             <lightning-layout-item key={dog.Id} flexibility="auto" size="10" small-device-size="12" medium-device-size="12" large-device-size="10" padding="horizontal-small" class="slds-var-p-bottom_small">
-                                <c-treatment-session-child
-                                    record={dog}
-                                    object-api={objectApi}
-                                    location={currentLocation}
-
-                                    ondeletechild={handleDeleteChild}
+                                <c-helper-animal-lookup
+                                    helper-animal={dog}
                                 >
-                                </c-treatment-session-child>
+                                </c-helper-animal-lookup>
                             </lightning-layout-item>
                         </template>
                     </lightning-layout>
