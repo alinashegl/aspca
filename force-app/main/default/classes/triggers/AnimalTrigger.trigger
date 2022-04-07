@@ -17,7 +17,7 @@ trigger AnimalTrigger on Animal__c (after insert, after update, before insert, b
     
     if (trigger.isUpdate && trigger.isBefore){
         AnimalTriggerHandler.onBeforeUpdateHandler(Trigger.new, Trigger.oldMap);
-        // ANH.AutoNumberHelper.OnBeforeUpdate(Trigger.new,Trigger.OldMap);
+        ANH.AutoNumberHelper.OnBeforeUpdate(Trigger.new,Trigger.OldMap);
     }
         
 }
