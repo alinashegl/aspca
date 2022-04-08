@@ -1,0 +1,194 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <div class="slds-card slds-card_boundary card-custom">
+        <template if:true={error}>
+            <c-error-panel errors={error} type='inlineMessage' friendly-message={errorMessage}></c-error-panel>
+        </template>
+
+        <template if:true={showAnimalInfo}>
+            <lightning-layout multiple-rows pull-to-boundary="small" class="slds-var-p-around_xx-small">
+                <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-small" class="slds-var-p-bottom_small">
+                    <b>Name</b>
+                    <div>
+                        <template if:true={isShelterColorRed}>
+                            <lightning-icon icon-name="utility:priority" title="Shelter Color Code" class="redIcon" size="x-small"></lightning-icon>
+                        </template>
+                        <template if:true={isPlayPause}>
+                            <lightning-icon icon-name="utility:pause" title="Play Pause" class="blueIcon" size="x-small"></lightning-icon>
+                        </template>
+                        {animalName}
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item flexibility="auto" size="1" small-device-size="6" medium-device-size="4" large-device-size="1" padding="horizontal-small" class="slds-var-p-bottom_small">
+                    <b>Sex</b>
+                    <div>
+                        {gender}
+                    </div>
+                </lightning-layout-item>
+
+                <lightning-layout-item flexibility="auto" size="1" small-device-size="6" medium-device-size="4" large-device-size="1" padding="horizontal-small" class="slds-var-p-bottom_small">
+                    <b>Breed</b>
+                    <div>
+                        {breed}
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item flexibility="auto" size="1" small-device-size="6" medium-device-size="4" large-device-size="1" padding="horizontal-small" class="slds-var-p-bottom_small">
+                    <b>Location</b>               
+                    <div>
+                        {currentLocation}
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item flexibility="auto" size="1" small-device-size="6" medium-device-size="4" large-device-size="1" padding="horizontal-small" class="slds-var-p-bottom_small">
+                    <b>Kennel Location</b>               
+                    <div>
+                        {kennelLocation}
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-small" class="slds-var-p-bottom_small">
+                    <b>Rest Days</b>
+                    <template if:true={animalInfo}>
+                        <div>
+                            {animalInfo.restDays}
+                        </div>
+                    </template>
+                </lightning-layout-item>
+                <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-small" class="slds-var-p-bottom_small">
+                    <b>Motivators</b>
+                    <template if:true={animalInfo}>
+                        <div>
+                            {animalInfo.motivators}
+                        </div>
+                    </template>
+                </lightning-layout-item>
+                <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-small" class="slds-var-p-bottom_small">
+                    <b>Helper Dogs</b>
+                    <lightning-button-icon icon-name="utility:edit" variant="bare"  alternative-text="Edit Helper Dogs" class="slds-m-left_xx-small" title="Helper Dogs" onclick={editHelperDogs}></lightning-button-icon>
+                    <template if:true={animalInfo}>
+                        <div>
+                            {animalInfo.helperDogs.names}
+                        </div>
+                    </template>
+                </lightning-layout-item>
+            </lightning-layout>
+
+            <lightning-accordion allow-multiple-sections-open="true">
+                <lightning-accordion-section title="Plan Protocol List" label="Protocols" name="planProtocols">
+                    <lightning-layout multiple-rows>
+                        <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" class="slds-var-p-bottom_small card-custom">
+                            <b>Fear Socialization</b>
+                            <div>
+                                <template for:each={fearSocializationProtocols} for:item='protocol'>
+                                    <div class="slds-var-p-bottom_x-small" key={protocol.Id}>
+                                        <c-mrc-treatment-plans-protocol
+                                            record-id={protocol.Id}
+                                            protocol={protocol}
+                                        >
+                                        </c-mrc-treatment-plans-protocol>
+                                    </div>
+                                </template>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" class="slds-var-p-bottom_small card-custom">
+                            <b>Fear Leashing</b>
+                            <div>
+                                <template for:each={fearLeashingProtocols} for:item='protocol'>
+                                    <div class="slds-var-p-bottom_x-small" key={protocol.Id}>
+                                        <c-mrc-treatment-plans-protocol
+                                            record-id={protocol.Id}
+                                            protocol={protocol}
+                                        >
+                                        </c-mrc-treatment-plans-protocol>
+                                    </div>
+                                </template>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" class="slds-var-p-bottom_small card-custom">
+                            <b>Fear Walking</b>
+                            <div>
+                                <template for:each={fearWalkingProtocols} for:item='protocol'>
+                                    <div class="slds-var-p-bottom_x-small" key={protocol.Id}>
+                                        <c-mrc-treatment-plans-protocol
+                                            record-id={protocol.Id}
+                                            protocol={protocol}
+                                        >
+                                        </c-mrc-treatment-plans-protocol>
+                                    </div>
+                                </template>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" class="slds-var-p-bottom_small card-custom">
+                            <b>Fear Handling</b>
+                            <div>
+                                <template for:each={fearHandlingProtocols} for:item='protocol'>
+                                    <div class="slds-var-p-bottom_x-small" key={protocol.Id}>
+                                        <c-mrc-treatment-plans-protocol
+                                            record-id={protocol.Id}
+                                            protocol={protocol}
+                                        >
+                                        </c-mrc-treatment-plans-protocol>
+                                    </div>
+                                </template>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" class="slds-var-p-bottom_small card-custom">
+                            <b>Fear Containment</b>
+                            <div>
+                                <template for:each={fearContainmentProtocols} for:item='protocol'>
+                                    <div class="slds-var-p-bottom_x-small" key={protocol.Id}>
+                                        <c-mrc-treatment-plans-protocol
+                                            record-id={protocol.Id}
+                                            protocol={protocol}
+                                        >
+                                        </c-mrc-treatment-plans-protocol>
+                                    </div>
+                                </template>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-xxx-small" class="slds-var-p-bottom_small card-custom">
+                            <b>Non Fear Protocols</b>
+                            <div>
+                                <template for:each={nonFearProtocols} for:item='protocol'>
+                                    <div class="slds-var-p-bottom_x-small" key={protocol.Id}>
+                                        <c-mrc-treatment-plans-protocol
+                                            record-id={protocol.Id}
+                                            protocol={protocol}
+                                        >
+                                        </c-mrc-treatment-plans-protocol>
+                                    </div>
+                                </template>
+                            </div>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </lightning-accordion-section>
+            </lightning-accordion>
+        </template>
+    </div>
+
+    <!-- Edit helper dogs modal -->
+    <template if:true={showModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <div class="slds-modal__header">
+                    <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Modify Helper Dogs</h1>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <lightning-layout multiple-rows pull-to-boundary="small" class="slds-var-p-around_xx-small">
+                        <template for:each={animalInfo.helperDogs.dogs} for:item='dog'>
+                            <lightning-layout-item key={dog.Id} flexibility="auto" size="10" small-device-size="12" medium-device-size="12" large-device-size="10" padding="horizontal-small" class="slds-var-p-bottom_small">
+                                <c-helper-animal-lookup
+                                    helper-animal={dog}
+                                >
+                                </c-helper-animal-lookup>
+                            </lightning-layout-item>
+                        </template>
+                    </lightning-layout>
+                </div>
+                <div class="slds-modal__footer">
+                    <lightning-button label="Cancel" title="Cancel" onclick={handleCloseModal}></lightning-button>
+                    <lightning-button label="Save" title="Save" onclick={handleSave} variant="brand" class="slds-var-m-left_x-small"></lightning-button>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+</template>

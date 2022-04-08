@@ -5,19 +5,19 @@ private class test_createTreatmentSessionController {
         Treatment_Plan__c plan = TestDataFactory.createPlan();
 
         test.startTest();
-            String planId = createTreatmentSessionController.getActiveTreatmentPlan(plan.Animal__c);
+            Treatment_Plan__c returnedPlan = createTreatmentSessionController.getActiveTreatmentPlan(plan.Animal__c);
         test.stopTest();
 
-        System.assertEquals(plan.Id, planId);
+        System.assertEquals(plan.Id, returnedPlan.Id);
     }
 
     static void getActiveTreatmentPlanNoPlan(){
         Animal__c anim = TestDataFactory.createAnimal();
 
         test.startTest();
-            String planId = createTreatmentSessionController.getActiveTreatmentPlan(anim.Id);
+            Treatment_Plan__c returnedPlan = createTreatmentSessionController.getActiveTreatmentPlan(anim.Id);
         test.stopTest();
 
-        System.assertEquals(null, planId);
+        System.assertEquals(null, returnedPlan.Id);
     }
 }

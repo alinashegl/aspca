@@ -13,6 +13,13 @@
                                                 onsuccess={handleSuccess}>
                         <template if:false={smallForm}>
                             <h3 class="label slds-truncate slds-var-p-around_x-small slds-theme_shade">
+                                <span title="Evaluation Date" class="slds-truncate">Evaluation Date</span>
+                            </h3>
+                        </template>
+                        <lightning-input-field field-name="Evaluation_Date__c"></lightning-input-field>
+                        <template if:false={smallForm}>
+                            
+                            <h3 class="label slds-truncate slds-var-p-around_x-small slds-theme_shade">
                                 <span title="Initials" class="slds-truncate">Initials</span>
                             </h3>
                         </template>

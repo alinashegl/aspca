@@ -1,98 +1,99 @@
 <apex:page controller="AnimalDiscoverPDFController" readOnly="true" applyHtmlTag="false" sidebar="false" showHeader="false"
-    cache="true" renderAs="advanced_pdf" docType="html-5.0" standardStylesheets="false">
-
+           cache="true" renderAs="advanced_pdf" docType="html-5.0" standardStylesheets="false">
+    
     <head>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-
+        
         <style>
             @page {
-                /* Landscape orientation */
-                size: landscape;
-                /* Put page numbers in the top right corner of each
-                page in the pdf document. */
-                @bottom-center {
-                    content: "Page " counter(page) " of " counter(pages);
-
-                    content: "Date " env(date);
-                }
-
+            /* Landscape orientation */
+            size: landscape;
+            /* Put page numbers in the top right corner of each
+            page in the pdf document. */
+            @bottom-center {
+            content: "Page " counter(page) " of " counter(pages);
+            
+            content: "Date " env(date);
             }
-
+            
+            }
+            
             table {
-                width: 100%;
-                padding: 5px;
-                vertical-align: Top;
-                font-size: small;
+            width: 100%;
+            padding: 5px;
+            vertical-align: Top;
+            font-size: small;
             }
-
+            
             table thead>tr>th {
-                word-wrap: break-word;
-                font-weight: bold;
-                text-align: left;
+            word-wrap: break-word;
+            font-weight: bold;
+            text-align: left;
             }
-
+            
             table tbody>tr>td {
-                word-wrap: break-word;
-                text-align: left;
+            word-wrap: break-word;
+            text-align: left;
             }
-
+            
             .section {
-                margin-top: 20px;
-                width: 100%;
+            margin-top: 20px;
+            width: 100%;
             }
-
+            
             .tableSpace {
-                border-collapse: separate;
-                border-spacing: 0 5px;
+            border-collapse: separate;
+            border-spacing: 0 5px;
+            
             }
-
+            
             .bottomline {
-                border-bottom: thin #D4D4D4 solid;
-                padding-top: .5em;
-                padding-bottom: .5em;
+            border-bottom: thin #D4D4D4 solid;
+            padding-top: .5em;
+            padding-bottom: .5em;
             }
-
+            
             .topline {
-                border-top: thin #D4D4D4 solid;
+            border-top: thin #D4D4D4 solid;
             }
-
+            
             .c_table {
-                -fs-table-paginate: paginate;
-                border-spacing: 0;
-                table-layout: fixed
+            -fs-table-paginate: paginate;
+            border-spacing: 0;
+            table-layout: fixed
             }
-
+            
             .first-green {
-                height: 100px;
-                width: 60px;
-                background-color: green;
+            height: 100px;
+            width: 60px;
+            background-color: green;
             }
-
+            
             .white {
-                height: 100px;
-                width: 60px;
-                background-color: white;
+            height: 100px;
+            width: 60px;
+            background-color: white;
             }
-
+            
             .second-green {
-                height: 100px;
-                width: 60px;
-                background-color: green;
+            height: 100px;
+            width: 60px;
+            background-color: green;
             }
-
+            
             .behavTable {
-                border: 1px solid black;
-
+            border: 1px solid black;
+            
             }
-
+            
             .pageBreak {
-                page-break-before: avoid;
-                page-break-inside: avoid;
-                page-break-after: always;
+            page-break-before: avoid;
+            page-break-inside: avoid;
+            page-break-after: always;
             }
         </style>
     </head>
-
+    
     <body>
         <apex:variable value="{!$Resource.dbChecked}" var="checked" />
         <apex:variable value="{!$Resource.dbUnchecked}" var="unchecked" />
@@ -100,126 +101,118 @@
         <apex:variable value="{!$Resource.behaviorMild}" var="behaviorMild" />
         <apex:variable value="{!$Resource.behvModerate}" var="behvModerate" />
         <apex:variable value="{!$Resource.behvSevere}" var="behvSevere" />
-
-        <div>
-            <center>
-                <h3 style="font:24px;">
+        
+        <div style="border:1px solid;">
+            <center style="border-bottom:1px solid;">
+                <h3 style="font-weight:900">
                     <!--Top Header -->
-                    <strong>Discovery Report</strong>
+					Discovery Report
                 </h3>
-
                 <!--Top Body Sesction -->
-                <table class="tableSpcae" style="margin: 0 50px 0 50px;" cellspacing="0">
+            </center>
+            <div  style="margin-right:50px;margin-left:30px">
+                    <table  class="tableSpcae" cellspacing="0">
                     <thead>
                         <tr>
-                            <th width="20%">Animal name</th>
-                            <th width="20%">Breed</th>
-                            <th width="5%">Age</th>
-                            <th width="10%">Sex</th>
-                            <th width="10%">Color</th>
-                            <th width="20%">Intake Agency / Dept</th>
+                            <th width="10%" class="bottomline">Animal name</th>
+                            <th width="5%"  class="bottomline">Breed</th>
+                            <th width="5%"  class="bottomline">Age</th>
+                            <th width="5%"  class="bottomline">Sex</th>
+                            <th width="5%"  class="bottomline">Color</th>
+                            <th width="5%"  class="bottomline">Intake Agency /<br/>Dept</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td width="20%">{!animalD.Animal_Name__c}</td>
-                            <td width="20%">{!animalD.Breed__C}</td>
-                            <td width="5%">{!animalD.Animal_Age__c}</td>
-                            <td width="10%">{!animalD.Gender__c}</td>
-                            <td width="10%">{!animalD.Color__c}</td>
-                            <td width="20%">{!animalD.Intake_Type__c}</td>
+                            <td width="10%" class="bottomline">{!animalD.Animal_Name__c}</td>
+                            <td width="5%" class="bottomline">{!animalD.Breed__C}</td>
+                            <td width="5%" class="bottomline">{!animalD.Age__c}</td>
+                            <td width="5" class="bottomline">{!animalD.Gender__c}</td>
+                            <td width="5%" class="bottomline">{!animalD.Color__c}</td>
+                            <td width="5%" class="bottomline">{!animalD.Intake_Type__c}</td>
                         </tr>
                     </tbody>
                 </table>
-                <br/>
-                <table style="margin: 0 50px 0 50px;">
+             <br/>
+             <table>
                     <thead>
                         <tr>
-                            <th>Status</th>
-                            <!-- <th>If Deceased, Reason</th> -->
-                            <th>Cage Location</th>
-                            <th>Current Geo Loc</th>
-                            <!-- <th>Original Geo Loc</th> -->
-                            <th>Case Worker</th>
+                            <th class="bottomline">Status</th>
+                            <th class="bottomline">Cage Location</th>
+                            <th class="bottomline">Case Type</th>
+                            <th class="bottomline">Case Worker</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>{!animalD.Animal_Status__c}</td>
-                            <!-- <td></td> -->
                             <td>{!animalD.Shelter_Kennel__c} &nbsp; {!animalD.Shelter_Location__c}</td>
-                            <td>{!animalD.Current_Location__c}</td>
-                            <!-- <td></td> -->
+                            <td>{!animalD.Case_Type__c}</td>
                             <td>{!animalD.Behavior_Case_Worker__r.Name}</td>
                         </tr>
                     </tbody>
                 </table>
-            </center>
+            </div>
+        
         </div>
-        <!-- 2.	Behavior Progress, section 1   -->
-        <div class="section">
-
+        <!-- 2. Behavior Progress, section 1   -->
+        <div class="section" style="border:1px solid;">
+            
             <table>
                 <thead>
                     <tr>
                         <th colspan="7">
-                            <center>
-                                <h3 style="font:20px;">
-                                    Behavior Progress
-                                </h3>
+                            <center  style="border-bottom:1px solid;">
+                                <h3 style="font-weight:900">  Behavior Progress</h3>
                             </center>
                         </th>
                     </tr>
                     <tr>
-                        <th class="topline">Date</th>
-                        <th class="topline">Concern / Incident / Other</th>
-                        <th class="topline">Reported By</th>
-                        <!-- <th class="topline">Incid. </th>
-                        <th class="topline">Bite</th> -->
-                        <th class="topline">Behavior Lead Notes</th>
-                        <th class="topline">Behavior Lead Initials</th>
+                        <th>Date</th>
+                        <th>Concern / Incident / Other</th>
+                        <th>Reported By</th>
+                        <th>Behavior Lead Notes</th>
+                        <th>Behavior Lead Initials</th>
                     </tr>
                 </thead>
                 <tbody>
                     <apex:repeat value="{!animalD.Observations__r}" var="aor">
                         <tr>
-                            <td class="bottomline">
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">
                                 <apex:outputText value="{0, date, MM/dd/yy}">
                                     <apex:param value="{!aor.Observation_Date__c}" />
                                 </apex:outputText>
                             </td>
-                            <td class="bottomline">{!aor.Observation_Notes__c}</td>
-                            <td class="bottomline">{!aor.Observation_Reported_By__c}</td>
-                            <!-- <td class="bottomline">
-                                    <apex:outputPanel >
-                                        <div style="border: 1px solid black; width: 10px; height: 15px;margin: 5px 0px 5px 12px">
-                                            <img src="/img/checkbox_unchecked.gif" /> </div>
-                                    </apex:outputPanel>
-                                </td>
-                                <td class="bottomline">
-                                    <apex:outputPanel >
-                                        <div style="border: 1px solid black; width: 10px; height: 15px;margin: 5px 0px 5px 12px">
-                                            <img src="/img/checkbox_unchecked.gif" /> </div>
-                                    </apex:outputPanel>
-                                </td> -->
-                            <td class="bottomline">{!aor.Behavior_Response__c}</td> 
-                            <td class="bottomline">{!aor.Observation_Reported_By__c}</td> 
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!aor.Observation_Notes__c}</td>
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!aor.Behavior_Staff_Initials__c}</td>
+                            <td class="topline">{!aor.Behavior_Response__c}</td> 
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!aor.Observation_Reported_By__c}</td> 
                         </tr>
                     </apex:repeat>
+                    <apex:repeat value="{!animalD.Behavior_Foster_Notes__r}" var="aor">
+                        <tr>
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">
+                                <apex:outputText value="{0, date, MM/dd/yy}">
+                                    <apex:param value="{!aor.Capture_Date__c}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!aor.Behavior_Foster_Note__c}</td>
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!aor.Initials__c}</td>
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;"></td>
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!aor.Initials__c}</td> 
+                        </tr>
+                    </apex:repeat>  
                 </tbody>
             </table>
         </div>
-        <!-- 3.	Behavior Progress, section 2 Incident Object   -->
-        <div class="section">
-
+        <!-- 3. Behavior Progress, section 2 Incident Object   -->
+        <div class="section" style="border:1px solid;">
             <table style="border-collapse: collapse;">
                 <thead>
                     <tr>
                         <th colspan="4">
-                            <center>
-                                <h3 style="font:20px;">
-                                    Behavior Progress
-                                </h3>
+                            <center  style="border-bottom:1px solid;font-weight:900">
+                                  <h3 style="font-weight:900">Behavior Progress </h3> 
                             </center>
                         </th>
                     </tr>
@@ -261,7 +254,7 @@
                                 <td width="9%">{!inc.Specific_Target_of_Dog_s_Behavior__c}</td>
                                 <td width="10%">{!inc.Type_of_Bite__c}
                                     <br/> Number of bites: {!inc.Number_of_bites__c}</td>
-                                <td width="20%">{!inc.Clothing_Worn_at_Bite_Site__c}</td>
+                                <td width="20%">{!inc.Was_Bitten_Area_Covered_with_Clothing__c}</td>
                                 <td width="20%">{!inc.Damage_Done_by_the_Dog__c}</td>
                                 
                             </tr>
@@ -278,7 +271,7 @@
                                 </tr>
                             </tbody>
                         </table>
-
+                        
                     </apex:repeat>
                     <tr>
                         <td class="bottomline" width="100%"></td>
@@ -287,103 +280,86 @@
             </table>
         </div>
         <!--4. Play History -->
-        <div class="section">
-
-            <table width="100%" class="c_table">
+        <div class="section" style="border:1px solid;">  
+            <table class="c_table">
                 <thead>
                     <tr>
-                        <th colspan="4">
-                            <center>
-                                <h3 style="font:20px;">
-                                    Play History
-                                </h3>
+                        <th colspan="9">
+                            <center style="border-bottom:1px solid; font-weight:900">
+                                <h3 style="font-weight:900"> Play History </h3>
                             </center>
                         </th>
                     </tr>
                     <tr>
-                        <th style="border-top:thin #D4D4D4 solid;">Date</th>
-                        <th style="border-top:thin #D4D4D4 solid;">Rating </th>
-                        <th style="border-top:thin #D4D4D4 solid;">Location </th>
-                        <th style="border-top:thin #D4D4D4 solid;">Dogs </th>
-                        <th style="border-top:thin #D4D4D4 solid;">&nbsp; </th>
-                        <th style="border-top:thin #D4D4D4 solid;">&nbsp; </th>
-                        <th style="border-top:thin #D4D4D4 solid;">&nbsp; </th>
+                        <th>Date</th>
+                        <th>Rating </th>
+                        <th>&nbsp;</th>
+                        <th>Location </th> 
+                        <th>&nbsp;</th>
+                        <th>Dogs </th>
+                        
                     </tr>
                 </thead>
-                <apex:repeat value="{!aPlayGroups}" var="adp">
+                <tbody>
+               		 <apex:repeat value="{!aPlayGroups}" var="adp">
                     <tr style="page-break-inside:avoid">
-                        <td class="bottomline" width="10%">
-                            <apex:outputText value="{0, date, MM/dd/yyyy}">
-                                    <apex:param value="{!adp.Playgroup_Session__r.Playgroup_Date__c}" />
-                                </apex:outputText>
+                        <td>
+                           {!adp.playSessionDate}
                         </td>
-                        <td class="bottomline">{!adp.Play_Rating__c}</td>
-                        <td class="bottomline"  width="30%">
-                            <apex:outputPanel >
-                                {!adp.Playgroup_Session__r.Playgroup_Location__c}
-                            </apex:outputPanel>
+                        <td >{!adp.playRating}</td>
+                        <td>&nbsp;</td>
+                        <td>
+                           <!--<apex:repeat value="{!adp.playLocation}" var="location">
+                                {!location}
+                           </apex:repeat>-->
+                            {! IF(adp.playLocation.size > 0, adp.playLocation[0], '') }
                         </td>
-                        <td colspan="4" class="bottomline"  width="60%">
-                            {!adp.Playgroup_Individual_Notes__c}
-                            <br/>
-                            {!adp.Playgroup_Session__r.Playgroup_Notes__c}
+                        <td>&nbsp;</td>
+                        <td>
+                            <div style="display: inline;">
+                                <apex:repeat value="{!adp.animalNames}" var="name">
+                                        {!name} &nbsp; &nbsp;                            	  
+                                </apex:repeat>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="bottomline" styel="padding-top: 1em;padding-bottom: 1em;">&nbsp;</td>
+                        <td class="bottomline"  styel="padding-top: 1em;padding-bottom: 1em;" colspan="8">
+                            <apex:repeat value="{!adp.playSessionNotes}" var="note">
+                           			<span>{!note}</span>  
+                            </apex:repeat>
                         </td>
                     </tr>
                 </apex:repeat>
-                <!--
-                    <apex:repeat value="{!animalD.Playgroups__r}" var="adp">
-                    <tr style="page-break-inside:avoid">
-                        <td class="bottomline">
-                            <apex:outputText value="{0, date, MM/dd/yy}">
-                                {!adp.Playgroup_Date_Time__c}
-                            </apex:outputText>
-                        </td>
-                        <td class="bottomline">
-                         <apex:outputText rendered="{!animalD.Animal_Playgroups__r.size > 0 }">
-                                {!animalD.Animal_Playgroups__r[0].Play_Rating__c}
-                            </apex:outputText>
-                        </td>
-                        <td class="bottomline">
-                            <apex:outputPanel >
-                                {!adp.Playgroup_Location__c}
-                            </apex:outputPanel>
-                        </td>
-                        <td class="bottomline">
-                            {!adp.Playgroup_Individual_Notes__c} &nbsp; {!adp.Playgroup_Notes_Text__c}
-                           
-                        </td>
-                    </tr>
-                
-                </apex:repeat>-->
+                </tbody>
             </table>
         </div>
         <!--3. Training & Behavior Modification Behavior Mod-->
-        <div class="section" style="page-break-inside:avoid;page-break-inside:avoid; page-break-after: always; padding-top: .5em;">
-
+        <div class="section" style="page-break-inside:avoid;page-break-inside:avoid; page-break-after: always; padding-top: .5em; border:1px solid;">
             <table class="c_table" width="100%">
                 <thead>
                     <tr>
                         <th colspan="7">
-                            <center>
-                                <h3 style="font:20px;">Training Behavior Modification Behavior Mod.</h3>
+                            <center style="border-bottom:1px solid;">
+                                <h3 style="font-weight:900"> Training Behavior Modification Behavior Mod.</h3>
                             </center>
                         </th>
-                    </tr>
-                    
+                    </tr>  
                 </thead>
                 <tbody>
                     <apex:repeat value="{!aTreatmentSession}" var="treat">
-                    <thead>
-                     <tr>
-                        <th style="border-top:thin #D4D4D4 solid;">Name</th>
-                        <!-- <th  style="border-top:thin #D4D4D4 solid;">Status</th> -->
-                        <th style="border-top:thin #D4D4D4 solid;">Fear-Best</th>
-                        <th style="border-top:thin #D4D4D4 solid;">Fear - Worst</th>
-                        <th style="border-top:thin #D4D4D4 solid;">Aggresive - Worst</th>
-                        <th style="border-top:thin #D4D4D4 solid;">Arousal - Best</th>
-                        <th style="border-top:thin #D4D4D4 solid;">Arousal - Worst</th>
-                     </tr>
-                    </thead>
+                        <thead>
+                            <tr>
+                                <th style="border-top:thin #D4D4D4 solid;">Name</th>
+                                <!-- <th  style="border-top:thin #D4D4D4 solid;">Status</th> -->
+                                <th style="border-top:thin #D4D4D4 solid;">Fear-Best</th>
+                                <th style="border-top:thin #D4D4D4 solid;">Fear - Worst</th>
+                                <th style="border-top:thin #D4D4D4 solid;">Aggresive - Worst</th>
+                                <th style="border-top:thin #D4D4D4 solid;">Arousal - Best</th>
+                                <th style="border-top:thin #D4D4D4 solid;">Arousal - Worst</th>
+                            </tr>
+                        </thead>
                         <tr style="page-break-inside:avoid">
                             <td>{!treat.Protocol_Name__c }</td>
                             <!-- <td>{!treat.Status__c }</td> -->
@@ -427,565 +403,556 @@
                 </tbody>
             </table>
         </div>
- <!-- Dog Behavior Grading Key: -->
-            <div class="section" style=" page-break-after: always; padding-top: .5em;">
-                <table>
-                    <tr>
-                        <td>
-                            <center>
-                                <h1> Dog Behavior Grading Key </h1>
-                            </center>
-                        </td>
-                    </tr>
-                  <!--  <tr>
-                        <td>
-                            <center>
-                                <h3> This dog's grade: {!LEFT(behEval.Overall_Evaluation_Grade__c, FIND(' ', behEval.Overall_Evaluation_Grade__c))} </h3>
-                            </center>
-                        </td>
-                    </tr>-->
-                </table>
-                <table>
-                    <tr>
-                        <td width="10%">
-                            <apex:image height="100px" width="100px" value="{!behvConcern }" />
-                        </td>
-                        <td width="70%">
-                            <strong>"A Dogs" exhibit no significantly concerning behavior.</strong>
-                            <br/> These dogs show no aggressive behavior during the evaluation, and they show no fear or anxity
-                            for the majority of the evalutaion, some appear nervous during the first few minutes of the evalutaion
-                            but quickly relax and show no further sign of significant anxiety. some exhibit mildly fearful
-                            responses to a situation or stimulus during the evaluation, but suce responses are temporary--the
-                            dog recovers in just a few seconds.
-                            <br/> In our Opinion, A Dogs are ready for the adoption floor and require no special treatment or
-                            adopter counseling.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="10%">
-                            <apex:image height="100px" width="100px" value="{!behaviorMild }" /> </td>
-                        <td width="70%">
-                            <strong>"B Dogs" exhibit mild fear, anxiety or aggression.</strong>
-                            <br/> Some of these dogs show signs of mild fear or anxiety throught the evaluation. Others show mild
-                            fear in response to a certain situation of stimulus and do not recover immediately. Some show
-                            mild aggressive behaviour, such as growling or freezing in a response to a person touching them
-                            while they eat or yelping and mouthing or orienting to a person's hand during uncomfortable handling.
-                            However,B Dogs do not bite or attemp to bite during the evaluation.
-                            <br/> Some B Dogs may not show any behavior problems once they adjust to a new home, Others would
-                            benifit from behaviour modification sessions before or after placement Foster care may be benificial
-                            for some fearful B Dogs. Adopter counseling .before placement and/or placement restirctions (no
-                            young children, no other dogs, experienced owner, etc.) may be appropriate.
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="10%">
-                            <apex:image height="100px" width="100px" value="{!behvModerate }" /> </td>
-                        <td width="70%">
-                            <strong>"C Dogs" exhibit moderate fear, anxiety or aggression.</strong>
-                            <br/> Fearful C Dogs show signs of moderate fer or anxiety for the majority of or during the entire
-                            evluation. if started, they do not recover--they reamin fearful and may attempt to hide or become
-                            immobile. Most do show at least some sign of social behaviour towards people during the evaluation,
-                            however some are undersocialized to people and only show social behaviour toward them when in
-                            the presence of other dogs.
-                            <br/> Aggressive C Dogs may (1) show aggression during the majority of the evaluation, in response
-                            to multiple situations or stimuli, (2) bite or attempt to bite at some point during the evaluation
-                            or both
-                            <br/> C Dogs may need long-term behaviour modification and/or management. Foster care may be necessary
-                            for some fearful C Dogs. Adopter counseling before placement is strongly recommended. Placement
-                            restrictions (no young children, no other dogs, experienced owner, etc.) are often appropriate.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="10%">
-                            <apex:image height="100px" width="100px" value="{!behvSevere }" /> </td>
-                        <td width="70%">
-                            <strong>"D Dogs" exhibit severe fear or aggression.</strong>
-                            <br/> They fall into two categories: (1) dogs that are too aggressive toware people or other animals
-                            to place in an adoptive home ot (2) dogs that aresuooering from an extremely poor quanity of
-                            life due to extreme fear or anxiety. if D Dogs fall into the secons category, they show no social
-                            behaviour toward people during the evaluation. they may exhibit feral behavior. In our opinion,
-                            prognosis is poor in either case, and euthanasia is the most appropriate outcome.
-
-                        </td>
-                    </tr>
-                </table>
-            </div>
-           
+        <!-- Dog Behavior Grading Key: -->
+        <div class="section" style=" page-break-after: always; padding-top: .5em;">
+            <table>
+                <tr>
+                    <td>
+                        <center>
+                            <h1> Dog Behavior Grading Key </h1>
+                        </center>
+                    </td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td width="10%">
+                        <apex:image height="100px" width="100px" value="{!behvConcern }" />
+                    </td>
+                    <td width="70%">
+                        <strong>"A Dogs" exhibit no significantly concerning behavior.</strong>
+                        <br/> These dogs show no aggressive behavior during the evaluation, and they show no fear or anxity
+                        for the majority of the evalutaion, some appear nervous during the first few minutes of the evalutaion
+                        but quickly relax and show no further sign of significant anxiety. some exhibit mildly fearful
+                        responses to a situation or stimulus during the evaluation, but suce responses are temporary--the
+                        dog recovers in just a few seconds.
+                        <br/> In our Opinion, A Dogs are ready for the adoption floor and require no special treatment or
+                        adopter counseling.
+                    </td>
+                </tr>
+                <tr>
+                    <td width="10%">
+                        <apex:image height="100px" width="100px" value="{!behaviorMild }" /> </td>
+                    <td width="70%">
+                        <strong>"B Dogs" exhibit mild fear, anxiety or aggression.</strong>
+                        <br/> Some of these dogs show signs of mild fear or anxiety throught the evaluation. Others show mild
+                        fear in response to a certain situation of stimulus and do not recover immediately. Some show
+                        mild aggressive behaviour, such as growling or freezing in a response to a person touching them
+                        while they eat or yelping and mouthing or orienting to a person's hand during uncomfortable handling.
+                        However,B Dogs do not bite or attemp to bite during the evaluation.
+                        <br/> Some B Dogs may not show any behavior problems once they adjust to a new home, Others would
+                        benifit from behaviour modification sessions before or after placement Foster care may be benificial
+                        for some fearful B Dogs. Adopter counseling .before placement and/or placement restirctions (no
+                        young children, no other dogs, experienced owner, etc.) may be appropriate.
+                        
+                    </td>
+                </tr>
+                <tr>
+                    <td width="10%">
+                        <apex:image height="100px" width="100px" value="{!behvModerate }" /> </td>
+                    <td width="70%">
+                        <strong>"C Dogs" exhibit moderate fear, anxiety or aggression.</strong>
+                        <br/> Fearful C Dogs show signs of moderate fer or anxiety for the majority of or during the entire
+                        evluation. if started, they do not recover--they reamin fearful and may attempt to hide or become
+                        immobile. Most do show at least some sign of social behaviour towards people during the evaluation,
+                        however some are undersocialized to people and only show social behaviour toward them when in
+                        the presence of other dogs.
+                        <br/> Aggressive C Dogs may (1) show aggression during the majority of the evaluation, in response
+                        to multiple situations or stimuli, (2) bite or attempt to bite at some point during the evaluation
+                        or both
+                        <br/> C Dogs may need long-term behaviour modification and/or management. Foster care may be necessary
+                        for some fearful C Dogs. Adopter counseling before placement is strongly recommended. Placement
+                        restrictions (no young children, no other dogs, experienced owner, etc.) are often appropriate.
+                    </td>
+                </tr>
+                <tr>
+                    <td width="10%">
+                        <apex:image height="100px" width="100px" value="{!behvSevere }" /> </td>
+                    <td width="70%">
+                        <strong>"D Dogs" exhibit severe fear or aggression.</strong>
+                        <br/> They fall into two categories: (1) dogs that are too aggressive toware people or other animals
+                        to place in an adoptive home ot (2) dogs that aresuooering from an extremely poor quanity of
+                        life due to extreme fear or anxiety. if D Dogs fall into the secons category, they show no social
+                        behaviour toward people during the evaluation. they may exhibit feral behavior. In our opinion,
+                        prognosis is poor in either case, and euthanasia is the most appropriate outcome.
+                        
+                    </td>
+                </tr>
+            </table>
+        </div>
+        
         <!-- Behavior Evaluations Report: -->
-        <apex:repeat value="{!behEvaluations}" var="behEval">
-            <div class="section" style="page-break-inside:avoid;page-break-inside:avoid; page-break-after: always; padding-top: .5em;">
-
-                <table class="behavTable" width="100%">
-                    <tr style="font:24px;">
-                        <td width="40%">Behavior Report: {!behEval.Animal_Name__c}</td>
-                        <th class="behavTable" width="60%">ASPCA Shelter: {!behEval.Animal__r.Current_Recent_Shelter_Location__c}</th>
-                    </tr>
-                </table>
-                <table class="behavTable" width="100%" style="border-width: 0px 1px 1px;">
-                    <tr>
-                        <td>Name:</td>
-                        <td>{!behEval.Animal_Name__c}</td>
-                        <td>ID #:</td>
-                        <td>{!behEval.Animal_ID__c}</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>Breed:</td>
-                        <td>{!behEval.Animal_Breed__c}</td>
-                        <td>Age:</td>
-                        <td>{!behEval.Animal_Age__c}</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>Color:</td>
-                        <td>{!behEval.Animal_Color__c}</td>
-                        <td>Sex:</td>
-                        <td>{!behEval.Animal_Sex__c}</td>
-                        <td>Date:</td>
-                        <td>{!behEval.Evaluation_Date__c}</td>
-                    </tr>
-                    <tr>
-                        <td>Case #:</td>
-                        <td>{!behEval.Case_Number__c}</td>
-                        <td>Location:</td>
-                        <td>{!behEval.Facility_Outcome__c}</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </table>
-                <table width="100%" cellspacing="0" cellpadding="0" style="padding: 0px; border: 0px;">
-                    <tr>
-                        <td bgcolor="#66B132" width="18%" align="center" style="border-left: 1px solid black; border-right: 1px solid black;">
-                            <table style="border: 0px;">
-                                <tr>
-                                    <td style="width: 50%; verical-align: middle;">
-                                        <apex:image height="20px" width="20px" value="{!IF(behEval.Overall_Evaluation_Grade__c == 'A - No Concerns', checked, unchecked)}"
-                                        />
-                                    </td>
-                                    <td style="width: 50%; font-weight: bold;">
-                                        <div style="font-size: 20px;">A</div>
-                                        <div>No</div>
-                                        <div>Concern(s)</div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                        <td></td>
-                        <td bgcolor="#FFFF01" width="18%" align="center" style="border-left: 1px solid black; border-right: 1px solid black;">
-                            <table style="border: 0px;">
-                                <tr>
-                                    <td style="width: 50%; verical-align: middle;">
-                                        <apex:image height="20px" width="20px" value="{!IF(behEval.Overall_Evaluation_Grade__c == 'B - Mild Concern(s)', checked, unchecked)}"
-                                        />
-                                    </td>
-                                    <td style="width: 50%; font-weight: bold;">
-                                        <div style="font-size: 20px;">B</div>
-                                        <div>Mild</div>
-                                        <div>Concern(s)</div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                        <td></td>
-                        <td bgcolor="#FE0000" width="18%" align="center" style="border-left: 1px solid black; border-right: 1px solid black;">
-                            <table style="border: 0px;">
-                                <tr>
-                                    <td style="width: 50%; verical-align: middle;">
-                                        <apex:image height="20px" width="20px" value="{!IF(behEval.Overall_Evaluation_Grade__c == 'C - Moderate Concern(s)', checked, unchecked)}"
-                                        />
-                                    </td>
-                                    <td style="width: 50%; font-weight: bold;">
-                                        <div style="font-size: 20px;">C</div>
-                                        <div>Moderate</div>
-                                        <div>Concern(s)</div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                        <td></td>
-                        <td bgcolor="#006C92" width="18%" align="center" style="border-left: 1px solid black; border-right: 1px solid black;">
-                            <table style="border: 0px;">
-                                <tr>
-                                    <td style="width: 50%; verical-align: middle;">
-                                        <apex:image height="20px" width="20px" value="{!IF(behEval.Overall_Evaluation_Grade__c == 'D - Severe Concern(s)', checked, unchecked)}"
-                                        />
-                                    </td>
-                                    <td style="width: 50%; font-weight: bold;">
-                                        <div style="font-size: 20px;">D</div>
-                                        <div>Severe</div>
-                                        <div>Concern(s)</div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                        <td></td>
-                        <td bgcolor="#006C92" width="18%" align="center" style="border-left: 1px solid black; border-right: 1px solid black;">
-                            <table style="border: 0px;">
-                                <tr>
-                                    <td style="width: 50%; verical-align: middle;">
-                                        <apex:image height="20px" width="20px" value="{!IF(behEval.Overall_Evaluation_Grade__c == 'D - Dog Aggression', checked, unchecked)}"
-                                        />
-                                    </td>
-                                    <td style="width: 50%; font-weight: bold;">
-                                        <div style="font-size: 20px;">D</div>
-                                        <div>Dog</div>
-                                        <div>Aggression</div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-                <table class="behavTable" width="100%">
-                    <!-- Displays values from potentBehIssue list -->
-                    <tr style="font-weight:900;">
-                        <td>Potential behavior concern(s):</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
-                            <span style="vertical-align: top;"> Aggression to People </span> &nbsp;
-                            <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
-                            <span style="vertical-align: top;"> Fear </span> &nbsp;
-                            <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
-                            <span style="vertical-align: top;"> Other: </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
-                            <span style="vertical-align: top;"> Aggression to Dogs </span> &nbsp; &nbsp;
-                            <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
-                            <span style="vertical-align: top;"> High Arousal </span>
-                        </td>
-                    </tr>
-                </table>
-                <table class="behavTable" width="100%">
-                    <!-- Displays values from potentBehIssue list -->
-                    <tr style="font-weight:900;">
-                        <td>Placement recommendations:</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
-                            <span style="vertical-align: top;"> No kids under 10e </span> &nbsp;
-                            <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
-                            <span style="vertical-align: top;"> Experienced owner </span> &nbsp;
-                            <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
-                            <span style="vertical-align: top;"> Other: </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
-                            <span style="vertical-align: top;"> No other dogs</span> &nbsp; &nbsp; &nbsp; &nbsp;
-                            <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
-                            <span style="vertical-align: top;"> Quiet household </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
-                            <span style="vertical-align: top;">With another dog</span>
-                        </td>
-                    </tr>
-                </table>
-                <table class="behavTable" width="100%">
-                    <tr style="font-weight:900;">
-                        <td>BEHAVIOR SUMMARY:</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <apex:outputText value="{!summary}" escape="false" />
-                            <br/>
-                        </td>
-                    </tr>
-                </table>
-
-            </div>
-            <br/>
-           
-            <!-- Grade History -->
-            <div class="section" style="page-break-inside:avoid; padding-top: .5em;">
-                <table class="behavTable" width="100%" style="border-width: 1px 1px 1px;">
-                    <tr>
-                        <td>Name:</td>
-                        <td>{!behEval.Animal_Name__c}</td>
-                        <td>ID #:</td>
-                        <td>{!behEval.Animal_ID__c}</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>Breed:</td>
-                        <td>{!behEval.Animal_Breed__c}</td>
-                        <td>Age:</td>
-                        <td>{!behEval.Animal_Age__c}</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>Color:</td>
-                        <td>{!behEval.Animal_Color__c}</td>
-                        <td>Sex:</td>
-                        <td>{!behEval.Animal_Sex__c}</td>
-                        <td>Date:</td>
-                        <td>{!behEval.Evaluation_Date__c}</td>
-                    </tr>
-                    <tr>
-                        <td>Case #:</td>
-                        <td>{!behEval.Case_Number__c}</td>
-                        <td>Location:</td>
-                        <td>{!behEval.Facility_Outcome__c}</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </table>
-                <table class="behavTable" width="100%" style="border-width: 1px 1px 1px;">
-                    <tr>
-                        <td>
-                            <h3> Grade history: </h3>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <table border="1" style="border-collapse: collapse;">
-                                <tr>
-                                    <th  style="text-align: center;">Date</th>
-                                    <th  style="text-align: center;">Grade</th>
-                                    <th  style="text-align: center;">Reason</th>
-                                </tr>
-                                <apex:repeat value="{!gradeHistory}" var="grade">
-                                    <tr>
-                                        <td width="5%"  style="text-align: center;">
-                                            <apex:outputText value="{0, date, MM/dd/yy}">
-                                                <apex:param value="{!grade.Evaluation_Date__c}" />
-                                             </apex:outputText>
-                                        </td>
-                                        <td width="5%" style="text-align: center;">{!LEFT(grade.Overall_Evaluation_Grade__c,FIND(' ',grade.Overall_Evaluation_Grade__c))}</td>
-                                        <td width="50%"  style="text-align: center;">{!grade.Grade_Change_Reason__c}</td>
-                                    </tr>
-                                </apex:repeat>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-                <br/>
-               <!-- <table class="behavTable" width="100%" style="border-width: 1px 1px 1px;">
-                    <tr>
-                        <td>
-                            <h3>Behavior during daily care behavior modification treatment:</h3>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td height="80px">
-                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                        </td>
-                    </tr>
-                </table>
-                <br/>
-                <table class="behavTable" width="100%" style="border-width: 1px 1px 1px;">
-                    <tr>
-                        <td>
-                            <h3>Behavior in dog-dog play sessions:</h3>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td height="80px">
-                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                        </td>
-                    </tr>
-                </table>
-                <br/>
-                <table class="behavTable" width="100%" style="border-width: 1px 1px 1px;">
-                    <tr>
-                        <td>
-                            <h3>Bite history:</h3>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td height="80px">
-                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                        </td>
-                    </tr>
-                </table>
-                <br/>
-                <table class="behavTable" width="100%" style="border-width: 1px 1px 1px;">
-                    <tr>
-                        <td>
-                            <h3>Medical issues that could affect behavior:</h3>
-                            <p>*Full medical info is on medical discharge sheet</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td height="80px">
-                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                        </td>
-                    </tr>
-                </table>
-				-->
-            </div>
-            <!-- Behavior Evaluation -->
-            <div class="section" style="page-break-inside:avoid; padding-top: .5em;">
-                <table class="behavTable" width="100%" style="border-width: 1px 1px 1px;">
-                    <tr>
-                        <th>Behavior evaluation:</th>
-
-                        <th>Eval #: &nbsp; 1</th>
-
-                        <th>Tester: &nbsp; MN</th>
-
-                        <th>Scribe: &nbsp; SNN</th>
-                    </tr>
-                </table>
-                <table class="behavTable" width="100%" style="border-width: 1px 1px 1px;">
-                    <tr>
-                        <td>
-                            <apex:outputText value="{!behEval.Behavior_Evaluation_Summary__c}" escape="false" />
-                            <br/>
-                        </td>
-                    </tr>
-                </table>
-                <table style="border-collapse: collapse;" border="1" width="100%">
-                    <tr>
-                        <th width="28%"></th>
-                        <th width="18%">Not Concerning</th>
-                        <th width="18%">Red Flag</th>
-                        <th width="18%">Alert</th>
-                        <th width="18%">Inconclusive</th>
-                    </tr>
-                    <apex:repeat value="{!finalTestAndDisplayValues}" var="subtestName">
-                        <tr style="{!IF((BEGINS(subtestName[0], 'Same Sex') || BEGINS(subtestName[0], 'Opposite Sex')) && paramForensic, 'display:none;', '')}">
-                            <th>
-                                <span>{!subtestName[0]}</span>
-                            </th>
-                            <th>
-                                <span style="font-family:Arial Unicode MS;{!IF(subtestName[1]!='❌','','display:none;')}">{!subtestName[1]}</span>
-                                <span style="color:red;font-family:Arial Unicode MS;{!IF(subtestName[1]=='❌','','display:none;')}">&#10007;</span>
-                            </th>
-                            <th>
-                                <span style="font-family:Arial Unicode MS;{!IF(subtestName[2]!='❌','','display:none;')}">{!subtestName[2]}</span>
-                                <span style="color:red;font-family:Arial Unicode MS;{!IF(subtestName[2]=='❌','','display:none;')}">&#10007;</span>
-                            </th>
-                            <th>
-                                <span style="font-family:Arial Unicode MS;{!IF(subtestName[3]!='❌','','display:none;')}">{!subtestName[3]}</span>
-                                <span style="color:red;font-family:Arial Unicode MS;{!IF(subtestName[3]=='❌','','display:none;')}">&#10007;</span>
-                            </th>
-                            <th>
-                                <span style="font-family:Arial Unicode MS;{!IF(subtestName[4]!='❌','','display:none;')}">{!subtestName[4]}</span>
-                                <span style="color:red;font-family:Arial Unicode MS;{!IF(subtestName[4]=='❌','','display:none;')}">&#10007;</span>
-                            </th>
+        <div class="section" style="page-break-inside:avoid; page-break-after: always; padding-top: .5em;">
+            <apex:variable var="rowNum" value="{!0}" />
+            <apex:repeat value="{!behaviorEvaluations}" var="behEval">
+                <div class="section" style="page-break-inside:avoid; page-break-after: always; padding-top: .5em;">
+                    
+                    <table class="behavTable" width="100%">
+                        <tr style="font:24px;">
+                            <td width="40%">Behavior Report: {!behEval.AnimalName}</td>
+                            <th class="behavTable" width="60%">ASPCA Shelter: {!behEval.CurrentShelterLocation}</th>
                         </tr>
-                        <tr style="{!IF((BEGINS(subtestName[0], 'Same Sex') || BEGINS(subtestName[0], 'Opposite Sex')) && paramForensic, '', 'display:none;')}">
-                            <th>
-                                <span>{!subtestName[0]}</span>
-                            </th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
+                    </table>
+                    <table class="behavTable" width="100%" style="border-width: 0px 1px 1px;">
+                        <tr>
+                            <td>Name:</td>
+                            <td>{!behEval.AnimalName}</td>
+                            <td>ID #:</td>
+                            <td>{!behEval.AnimalID}</td>
+                            <td></td>
+                            <td></td>
                         </tr>
-                    </apex:repeat>
-                </table>
-
-            </div>
-        </apex:repeat>
-        <div>
-            <apex:repeat var="eval" value="{!evaluation}">
-                <div>
-                    <table bgcolor="#777777" width="100%" style="page-break-before:always;">
-                        <tr style="color:white; height:80px;">
+                        <tr>
+                            <td>Breed:</td>
+                            <td>{!behEval.AnimalBreed}</td>
+                            <td>Age:</td>
+                            <td>{!behEval.AnimalAge}</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Color:</td>
+                            <td>{!behEval.AnimalColor}</td>
+                            <td>Sex:</td>
+                            <td>{!behEval.AnimalSex}</td>
+                            <td>Date:</td>
                             <td>
-                                <div style="font:24px; text-align: center;">{!eval.groupValue}</div>
-                                <apex:outputText style="font: 16px;" value="{!eval.headerValue}" escape="false" />
+                                <apex:outputText value="{0, date, MM/dd/yy}">
+                                    <apex:param value="{!behEval.AnimalEvaluationDate}" />
+                                </apex:outputText>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Case #:</td>
+                            <td>{!behEval.AnimalCaseNumber}</td>
+                            <td>Location:</td>
+                            <td>{!behEval.AnimalFacilityOutcome}</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                    <table width="100%" cellspacing="0" cellpadding="0" style="padding: 0px; border: 0px;">
+                        <tr>
+                            <td bgcolor="#66B132" width="18%" align="center" style="border-left: 1px solid black; border-right: 1px solid black;">
+                                <table style="border: 0px;">
+                                    <tr>
+                                        <td style="width: 50%; verical-align: middle;">
+                                            <apex:image height="20px" width="20px" value="{!IF(behEval.AnimalOverallEvaluationGrade == 'A - No Concerns', checked, unchecked)}"
+                                                        />
+                                        </td>
+                                        <td style="width: 50%; font-weight: bold;">
+                                            <div style="font-size: 20px;">A</div>
+                                            <div>No</div>
+                                            <div>Concern(s)</div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td></td>
+                            <td bgcolor="#FFFF01" width="18%" align="center" style="border-left: 1px solid black; border-right: 1px solid black;">
+                                <table style="border: 0px;">
+                                    <tr>
+                                        <td style="width: 50%; verical-align: middle;">
+                                            <apex:image height="20px" width="20px" value="{!IF(behEval.AnimalOverallEvaluationGrade == 'B - Mild Concern(s)', checked, unchecked)}"
+                                                        />
+                                        </td>
+                                        <td style="width: 50%; font-weight: bold;">
+                                            <div style="font-size: 20px;">B</div>
+                                            <div>Mild</div>
+                                            <div>Concern(s)</div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td></td>
+                            <td bgcolor="#FE0000" width="18%" align="center" style="border-left: 1px solid black; border-right: 1px solid black;">
+                                <table style="border: 0px;">
+                                    <tr>
+                                        <td style="width: 50%; verical-align: middle;">
+                                            <apex:image height="20px" width="20px" value="{!IF(behEval.AnimalOverallEvaluationGrade == 'C - Moderate Concern(s)', checked, unchecked)}"
+                                                        />
+                                        </td>
+                                        <td style="width: 50%; font-weight: bold;">
+                                            <div style="font-size: 20px;">C</div>
+                                            <div>Moderate</div>
+                                            <div>Concern(s)</div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td></td>
+                            <td bgcolor="#006C92" width="18%" align="center" style="border-left: 1px solid black; border-right: 1px solid black;">
+                                <table style="border: 0px;">
+                                    <tr>
+                                        <td style="width: 50%; verical-align: middle;">
+                                            <apex:image height="20px" width="20px" value="{!IF(behEval.AnimalOverallEvaluationGrade == 'D - Severe Concern(s)', checked, unchecked)}"
+                                                        />
+                                        </td>
+                                        <td style="width: 50%; font-weight: bold;">
+                                            <div style="font-size: 20px;">D</div>
+                                            <div>Severe</div>
+                                            <div>Concern(s)</div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td></td>
+                            <td bgcolor="#006C92" width="18%" align="center" style="border-left: 1px solid black; border-right: 1px solid black;">
+                                <table style="border: 0px;">
+                                    <tr>
+                                        <td style="width: 50%; verical-align: middle;">
+                                            <apex:image height="20px" width="20px" value="{!IF(behEval.AnimalOverallEvaluationGrade == 'D - Dog Aggression', checked, unchecked)}"
+                                                        />
+                                        </td>
+                                        <td style="width: 50%; font-weight: bold;">
+                                            <div style="font-size: 20px;">D</div>
+                                            <div>Dog</div>
+                                            <div>Aggression</div>
+                                        </td>
+                                    </tr>
+                                </table>
                             </td>
                         </tr>
                     </table>
-                    <div style="margin-top: 4px; padding: 4px; text-align: center; {!IF(eval.optionalValue.selectedValue != '','','display:none;')}">
-                        <apex:repeat var="opt" value="{!eval.optionalValue.availableValues}">
-                            <apex:image height="14px" width="14px" style="padding-right: 2px;" value="{!IF(eval.optionalValue.selectedValue == opt, checked, unchecked)}"/>
-                            <apex:outputText value="{!opt}" style="padding-right: 6px;" />
-                        </apex:repeat>
-                    </div>
-                    <div style="border: 1px solid black; margin-top: 4px; padding: 4px;{!IF(eval.hasFieldTypes,'','display:none;')}">
-                        <apex:repeat var="fieldGroup" value="{!eval.valueGroup1[0].fields}">
-                            <apex:outputText value="{!fieldGroup.fieldType}" style="font: 12px; padding-right: 2px;" />
-                        </apex:repeat>
-                        <span style="margin-left:60px;"></span>
-                        <apex:repeat var="fieldGroup" value="{!eval.valueGroup1[0].fields}">
-                            <apex:outputText value="{!fieldGroup.fieldTypeDescription}" style="font: 14px; padding-left: 8px;" />
-                        </apex:repeat>
-                    </div>
-                    <div style="border: 1px solid black; margin-top: 4px; padding: 4px;{!IF(eval.hasGroup0,'','display:none;')}">
-                        <apex:repeat var="valGroup" value="{!eval.valueGroup0}">
-                            <div>
-                                <apex:repeat var="fieldGroup" value="{!valGroup.fields}">
-                                    <apex:image height="14px" width="14px" style="padding-right: 2px; padding-top: 4px;" value="{!IF(fieldGroup.isSelected, checked, unchecked)}"/>
-                                </apex:repeat>
-                                <apex:outputText value="{!valGroup.fieldValue}" style="font-size: 14px; font-weight: bold; padding-top: 4px;" />
-                                <apex:outputText value="{!IF(valGroup.fieldDescription == null, '', ' - ' + valGroup.fieldDescription)}" style="font-size: 14px; padding-top: 4px;" />
-                            </div>
-                        </apex:repeat>
-                    </div>
-                    <div style="border: 1px solid black; margin-top: 4px; padding: 4px;{!IF(eval.hasGroup1,'','display:none;')}">
-                        <apex:repeat var="valGroup" value="{!eval.valueGroup1}">
-                            <div>
-                                <apex:repeat var="fieldGroup" value="{!valGroup.fields}">
-                                    <apex:image height="14px" width="14px" style="padding-right: 2px; padding-top: 4px;" value="{!IF(fieldGroup.isSelected, checked, unchecked)}"/>
-                                </apex:repeat>
-                                <apex:outputText value="{!valGroup.fieldValue}" style="font-size: 14px; font-weight: bold; padding-top: 4px;" />
-                                <apex:outputText value="{!IF(valGroup.fieldDescription == null, '', ' - ' + valGroup.fieldDescription)}" style="font-size: 14px; padding-top: 4px;" />
-                            </div>
-                        </apex:repeat>
-                    </div>
-                    <div style="border: 1px solid black; margin-top: 4px; padding: 4px;{!IF(eval.hasGroup2,'','display:none;')}">
-                        <apex:repeat var="valGroup" value="{!eval.valueGroup2}">
-                            <div>
-                                <apex:repeat var="fieldGroup" value="{!valGroup.fields}">
-                                    <apex:image height="14px" width="14px" style="padding-right: 2px; padding-top: 4px;" value="{!IF(fieldGroup.isSelected, checked, unchecked)}"/>
-                                </apex:repeat>
-                                <apex:outputText value="{!valGroup.fieldValue}" style="font-size: 14px; font-weight: bold; padding-top: 4px;" />
-                                <apex:outputText value="{!IF(valGroup.fieldDescription == null, '', ' - ' + valGroup.fieldDescription)}" style="font-size: 14px; padding-top: 4px;" />
-                            </div>
-                        </apex:repeat>
-                    </div>
-                    <div style="border: 1px solid black; margin-top: 4px; padding: 4px;{!IF(eval.hasGroup3,'','display:none;')}">
-                        <apex:repeat var="valGroup" value="{!eval.valueGroup3}">
-                            <div>
-                                <apex:repeat var="fieldGroup" value="{!valGroup.fields}">
-                                    <apex:image height="14px" width="14px" style="padding-right: 2px; padding-top: 4px;" value="{!IF(fieldGroup.isSelected, checked, unchecked)}"/>
-                                </apex:repeat>
-                                <apex:outputText value="{!valGroup.fieldValue}" style="font-size: 14px; font-weight: bold; padding-top: 4px;" />
-                                <apex:outputText value="{!IF(valGroup.fieldDescription == null, '', ' - ' + valGroup.fieldDescription)}" style="font-size: 14px; padding-top: 4px;" />
-                            </div>
-                        </apex:repeat>
-                    </div>
-                    <div style="border: 1px solid black; margin-top: 4px; padding: 4px;{!IF(eval.hasGroup4,'','display:none;')}">
-                        <apex:repeat var="valGroup" value="{!eval.valueGroup4}">
-                            <div>
-                                <apex:repeat var="fieldGroup" value="{!valGroup.fields}">
-                                    <apex:image height="14px" width="14px" style="padding-right: 2px; padding-top: 4px;" value="{!IF(fieldGroup.isSelected, checked, unchecked)}"/>
-                                </apex:repeat>
-                                <apex:outputText value="{!valGroup.fieldValue}" style="font-size: 14px; font-weight: bold; padding-top: 4px;" />
-                                <apex:outputText value="{!IF(valGroup.fieldDescription == null, '', ' - ' + valGroup.fieldDescription)}" style="font-size: 14px; padding-top: 4px;" />
-                            </div>
-                        </apex:repeat>
-                    </div>
-                    <div style="margin-top: 4px;">
-                        <apex:outputText value="Skipped? " />
-                        <apex:image height="14px" width="14px" value="{!IF(eval.skipValue != null, checked, unchecked)}"/>
-                        <apex:outputText style="padding-left: 4px;" value="{!eval.skipValue}" />
-                    </div>
-                    <div style="margin-top: 4px;">
-                        <apex:outputText value="Comments: " />
-                        <apex:outputText value="{!eval.commentValue}" />
-                    </div>
+                    <table class="behavTable" width="100%">
+                        <!-- Displays values from potentBehIssue list -->
+                        <tr style="font-weight:900;">
+                            <td colspan="4">Potential behavior concern(s):</td>
+                        </tr>
+                        <tr>
+                            <td style="padding-top: .5em;padding-bottom: .5em;">&nbsp;</td>
+                            <td style="padding-top: .5em;padding-bottom: .5em;">
+                                <!--<apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
+                                <span style="vertical-align: top;"> Aggression to People </span> &nbsp;
+                                <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
+                                <span style="vertical-align: top;"> Fear </span> &nbsp;
+                                <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
+                                <span style="vertical-align: top;"> Other: </span>-->
+                                <b>Aggression to People: </b> &nbsp;
+                                <span style="vertical-align: top;"> {!behEval.PotentialIssueAggressionToPeople} </span>
+                            </td>
+                             <td style="padding-top: .5em;padding-bottom: .5em;">
+                                <b>Fear: </b>
+                                <span style="vertical-align: top;"> {!behEval.PotentialIssueFear} </span>
+                            </td>
+                            <td style="padding-top: .5em;padding-bottom: .5em;">
+                                <b>Other: </b>
+                                <span style="vertical-align: top;"> {!behEval.PotentialIssueOther}</span>
+                            </td>
+                        </tr>
+    
+                        <tr>
+                             <td  style="padding-top: .5em;padding-bottom: .5em;">&nbsp;</td>
+                            <td style="padding-top: .5em;padding-bottom: .5em;">
+                                <!--<apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
+                                <span style="vertical-align: top;"> Aggression to Dogs </span> &nbsp; &nbsp;
+                                <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
+                                <span style="vertical-align: top;"> High Arousal </span>-->
+                                <b>Aggression to Dogs: </b> &nbsp;
+                                <span style="vertical-align: top;"> {!behEval.PotentialIssueAggressionToAnimals}</span> &nbsp; &nbsp;
+                            </td>
+                            <td style="padding-top: .5em;padding-bottom: .5em;">
+                                <b>High Arousal: </b> &nbsp;
+                                <span style="vertical-align: top;"> {!behEval.PotentialIssueHighArousal} </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>
+                                <b>Other Notes: </b> &nbsp;
+                                <span style="vertical-align: top;"> {!behEval.PotentialIssueOtherNotes} </span>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="behavTable" width="100%">
+                        <!-- Displays values from potentBehIssue list -->
+                        <tr style="font-weight:900;">
+                            <td>Placement recommendations: {!behEval.PlacementRecommendations}</td>
+                        </tr>
+                        <!--<tr>
+                            <td>
+                                <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
+                                <span style="vertical-align: top;"> No kids under 10e </span> &nbsp;
+                                <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
+                                <span style="vertical-align: top;"> Experienced owner </span> &nbsp;
+                                <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
+                                <span style="vertical-align: top;"> Other: </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
+                                <span style="vertical-align: top;"> No other dogs</span> &nbsp; &nbsp; &nbsp; &nbsp;
+                                <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
+                                <span style="vertical-align: top;"> Quiet household </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
+                                <span style="vertical-align: top;">With another dog</span>
+                            </td>
+                        </tr>-->
+                    </table>
+                    <table class="behavTable" width="100%">
+                        <tr style="font-weight:900;">
+                            <td>BEHAVIOR SUMMARY:</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <apex:outputText value="{!behEval.AnimalSummary}" escape="false" />
+                                <br/>
+                            </td>
+                        </tr>
+                    </table>
+                    
                 </div>
+                <br/>
+                
+                <!-- Grade History -->
+                <div class="section" style="page-break-inside:avoid; padding-top: .5em;">
+                    <table class="behavTable" width="100%" style="border-width: 1px 1px 1px;">
+                        <tr>
+                            <td>Name:</td>
+                            <td>{!behEval.AnimalName}</td>
+                            <td>ID #:</td>
+                            <td>{!behEval.AnimalID}</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Breed:</td>
+                            <td>{!behEval.AnimalBreed}</td>
+                            <td>Age:</td>
+                            <td>{!behEval.AnimalAge}</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Color:</td>
+                            <td>{!behEval.AnimalColor}</td>
+                            <td>Sex:</td>
+                            <td>{!behEval.AnimalSex}</td>
+                            <td>Date:</td>
+                            <td>{!behEval.AnimalEvaluationDate}</td>
+                        </tr>
+                        <tr>
+                            <td>Case #:</td>
+                            <td>{!behEval.AnimalCaseNumber}</td>
+                            <td>Location:</td>
+                            <td>{!behEval.AnimalFacilityOutcome}</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                    <table class="behavTable" width="100%" style="border-width: 1px 1px 1px;">
+                        <tr>
+                            <td>
+                                <h3> Grade History: </h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table border="1" style="border-collapse: collapse;">
+                                  
+                                        <tr>
+                                            <th  width="5%" style="text-align: center;">Date</th>
+                                            <th  width="5%" style="text-align: center;">Grade</th>
+                                            <th  width="50%" style="text-align: center;">Reason</th>
+                                        </tr>
+                                
+                                    <!--<apex:repeat value="{!gradeHistory}" var="grade">
+                                        <tr>
+                                            <td width="5%"  style="text-align: center;">
+                                                <apex:outputText value="{0, date, MM/dd/yy}">
+                                                    <apex:param value="{!grade.historyDate}" />
+                                                </apex:outputText>
+                                            </td>
+                                            <td width="5%" style="text-align: center;">{!LEFT(grade.historyName,FIND(' ',grade.historyName))}</td>
+                                            <td width="50%"  style="text-align: center;">{!grade.historyReason}</td>
+                                        </tr>
+                                    </apex:repeat>-->
+                                    
+                                    
+                                        <apex:repeat value="{!GradeHistories}" var="grade">
+                                            <apex:outputText rendered="{!IF(grade.historyId ==  behEval.Id, true, false)}">
+                                                <tr>
+                                                    <td width="5%"  style="text-align: center;">
+                                                        <apex:outputText value="{0, date, MM/dd/yy}">
+                                                            <apex:param value="{!grade.historyDate}" />
+                                                        </apex:outputText>
+                                                    </td>
+                                                    <td width="5%" style="text-align: center;">{!LEFT(grade.historyName,FIND(' ',grade.historyName))}</td>
+                                                    <td width="50%"  style="text-align: center;">{!grade.historyReason}</td>
+                                                </tr>
+                                             </apex:outputText>
+                                    </apex:repeat>
+                                    
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
+                </div>
+                <!-- Behavior Evaluation -->
+                <div class="section" style="page-break-inside:avoid; padding-top: .5em;">
+                    <table class="behavTable" width="100%" style="border-width: 1px 1px 1px;">
+                        <tr>
+                            <th>Behavior evaluation: {!behEval.AnimalEvaluationSubtype}</th>
+                            
+                            <th>Eval #: &nbsp; {!rowNum}</th>
+                            
+                            <th>Tester: &nbsp; {!behEval.AnimalTesterInitials}</th>
+                            
+                            <th>Scribe: &nbsp; {!behEval.AnimalScribeInitials}</th>
+                        </tr>
+                    </table>
+                    <table class="behavTable" width="100%" style="border-width: 1px 1px 1px;">
+                        <tr>
+                            <td>
+                                <apex:outputText value="{!behEval.AnimalSummary}" escape="false" />
+                                <br/>
+                            </td>
+                        </tr>
+                    </table>
+                    <table style="border-collapse: collapse;" border="1" width="100%">
+                        <tr>
+                            <th width="28%"></th>
+                            <th width="18%">Not Concerning</th>
+                            <th width="18%">Red Flag</th>
+                            <th width="18%">Alert</th>
+                            <th width="18%">Inconclusive</th>
+                        </tr>
+                        <apex:repeat value="{!behEval.BehaviorTestAndDisplayValues}" var="subtestName">
+                            <tr style="{!IF((BEGINS(subtestName[0], 'Same Sex') || BEGINS(subtestName[0], 'Opposite Sex')) && paramForensic, 'display:none;', '')}">
+                                <th>
+                                    <span>{!subtestName[0]}</span>
+                                </th>
+                                <th>
+                                    <span style="font-family:Arial Unicode MS;{!IF(subtestName[1]!='❌','','display:none;')}">{!subtestName[1]}</span>
+                                    <span style="color:red;font-family:Arial Unicode MS;{!IF(subtestName[1]=='❌','','display:none;')}">&#10007;</span>
+                                </th>
+                                <th>
+                                    <span style="font-family:Arial Unicode MS;{!IF(subtestName[2]!='❌','','display:none;')}">{!subtestName[2]}</span>
+                                    <span style="color:red;font-family:Arial Unicode MS;{!IF(subtestName[2]=='❌','','display:none;')}">&#10007;</span>
+                                </th>
+                                <th>
+                                    <span style="font-family:Arial Unicode MS;{!IF(subtestName[3]!='❌','','display:none;')}">{!subtestName[3]}</span>
+                                    <span style="color:red;font-family:Arial Unicode MS;{!IF(subtestName[3]=='❌','','display:none;')}">&#10007;</span>
+                                </th>
+                                <th>
+                                    <span style="font-family:Arial Unicode MS;{!IF(subtestName[4]!='❌','','display:none;')}">{!subtestName[4]}</span>
+                                    <span style="color:red;font-family:Arial Unicode MS;{!IF(subtestName[4]=='❌','','display:none;')}">&#10007;</span>
+                                </th>
+                            </tr>
+                            <tr style="{!IF((BEGINS(subtestName[0], 'Same Sex') || BEGINS(subtestName[0], 'Opposite Sex')) && paramForensic, '', 'display:none;')}">
+                                <th>
+                                    <span>{!subtestName[0]}</span>
+                                </th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </apex:repeat> 
+                    </table>
+                </div>
+                <div class="section" style="page-break-inside:avoid; padding-top: .5em;">
+                     <apex:repeat var="eval" value="{!behEval.Behaviorevaluation}">
+                    <div>
+                        <table bgcolor="#777777" width="100%" style="page-break-before:always;">
+                            <tr style="color:white; height:80px;">
+                                <td>
+                                    <div style="font:24px; text-align: center;">{!eval.groupValue}</div>
+                                    <apex:outputText style="font: 16px;" value="{!eval.headerValue}" escape="false" />
+                                </td>
+                            </tr>
+                        </table>
+                        <div style="margin-top: 4px; padding: 4px; text-align: center; {!IF(eval.optionalValue.selectedValue != '','','display:none;')}">
+                            <apex:repeat var="opt" value="{!eval.optionalValue.availableValues}">
+                                <apex:image height="14px" width="14px" style="padding-right: 2px;" value="{!IF(eval.optionalValue.selectedValue == opt, checked, unchecked)}"/>
+                                <apex:outputText value="{!opt}" style="padding-right: 6px;" />
+                            </apex:repeat>
+                        </div>
+                        <div style="border: 1px solid black; margin-top: 4px; padding: 4px;{!IF(eval.hasFieldTypes,'','display:none;')}">
+                            <apex:repeat var="fieldGroup" value="{!eval.valueGroup1[0].fields}">
+                                <apex:outputText value="{!fieldGroup.fieldType}" style="font: 12px; padding-right: 2px;" />
+                            </apex:repeat>
+                            <span style="margin-left:60px;"></span>
+                            <apex:repeat var="fieldGroup" value="{!eval.valueGroup1[0].fields}">
+                                <apex:outputText value="{!fieldGroup.fieldTypeDescription}" style="font: 14px; padding-left: 8px;" />
+                            </apex:repeat>
+                        </div>
+                        <div style="border: 1px solid black; margin-top: 4px; padding: 4px;{!IF(eval.hasGroup0,'','display:none;')}">
+                            <apex:repeat var="valGroup" value="{!eval.valueGroup0}">
+                                <div>
+                                    <apex:repeat var="fieldGroup" value="{!valGroup.fields}">
+                                        <apex:image height="14px" width="14px" style="padding-right: 2px; padding-top: 4px;" value="{!IF(fieldGroup.isSelected, checked, unchecked)}"/>
+                                    </apex:repeat>
+                                    <apex:outputText value="{!valGroup.fieldValue}" style="font-size: 14px; font-weight: bold; padding-top: 4px;" />
+                                    <apex:outputText value="{!IF(valGroup.fieldDescription == null, '', ' - ' + valGroup.fieldDescription)}" style="font-size: 14px; padding-top: 4px;" />
+                                </div>
+                            </apex:repeat>
+                        </div>
+                        <div style="border: 1px solid black; margin-top: 4px; padding: 4px;{!IF(eval.hasGroup1,'','display:none;')}">
+                            <apex:repeat var="valGroup" value="{!eval.valueGroup1}">
+                                <div>
+                                    <apex:repeat var="fieldGroup" value="{!valGroup.fields}">
+                                        <apex:image height="14px" width="14px" style="padding-right: 2px; padding-top: 4px;" value="{!IF(fieldGroup.isSelected, checked, unchecked)}"/>
+                                    </apex:repeat>
+                                    <apex:outputText value="{!valGroup.fieldValue}" style="font-size: 14px; font-weight: bold; padding-top: 4px;" />
+                                    <apex:outputText value="{!IF(valGroup.fieldDescription == null, '', ' - ' + valGroup.fieldDescription)}" style="font-size: 14px; padding-top: 4px;" />
+                                </div>
+                            </apex:repeat>
+                        </div>
+                        <div style="border: 1px solid black; margin-top: 4px; padding: 4px;{!IF(eval.hasGroup2,'','display:none;')}">
+                            <apex:repeat var="valGroup" value="{!eval.valueGroup2}">
+                                <div>
+                                    <apex:repeat var="fieldGroup" value="{!valGroup.fields}">
+                                        <apex:image height="14px" width="14px" style="padding-right: 2px; padding-top: 4px;" value="{!IF(fieldGroup.isSelected, checked, unchecked)}"/>
+                                    </apex:repeat>
+                                    <apex:outputText value="{!valGroup.fieldValue}" style="font-size: 14px; font-weight: bold; padding-top: 4px;" />
+                                    <apex:outputText value="{!IF(valGroup.fieldDescription == null, '', ' - ' + valGroup.fieldDescription)}" style="font-size: 14px; padding-top: 4px;" />
+                                </div>
+                            </apex:repeat>
+                        </div>
+                        <div style="border: 1px solid black; margin-top: 4px; padding: 4px;{!IF(eval.hasGroup3,'','display:none;')}">
+                            <apex:repeat var="valGroup" value="{!eval.valueGroup3}">
+                                <div>
+                                    <apex:repeat var="fieldGroup" value="{!valGroup.fields}">
+                                        <apex:image height="14px" width="14px" style="padding-right: 2px; padding-top: 4px;" value="{!IF(fieldGroup.isSelected, checked, unchecked)}"/>
+                                    </apex:repeat>
+                                    <apex:outputText value="{!valGroup.fieldValue}" style="font-size: 14px; font-weight: bold; padding-top: 4px;" />
+                                    <apex:outputText value="{!IF(valGroup.fieldDescription == null, '', ' - ' + valGroup.fieldDescription)}" style="font-size: 14px; padding-top: 4px;" />
+                                </div>
+                            </apex:repeat>
+                        </div>
+                        <div style="border: 1px solid black; margin-top: 4px; padding: 4px;{!IF(eval.hasGroup4,'','display:none;')}">
+                            <apex:repeat var="valGroup" value="{!eval.valueGroup4}">
+                                <div>
+                                    <apex:repeat var="fieldGroup" value="{!valGroup.fields}">
+                                        <apex:image height="14px" width="14px" style="padding-right: 2px; padding-top: 4px;" value="{!IF(fieldGroup.isSelected, checked, unchecked)}"/>
+                                    </apex:repeat>
+                                    <apex:outputText value="{!valGroup.fieldValue}" style="font-size: 14px; font-weight: bold; padding-top: 4px;" />
+                                    <apex:outputText value="{!IF(valGroup.fieldDescription == null, '', ' - ' + valGroup.fieldDescription)}" style="font-size: 14px; padding-top: 4px;" />
+                                </div>
+                            </apex:repeat>
+                        </div>
+                        <div style="margin-top: 4px;">
+                            <apex:outputText value="Skipped? " />
+                            <apex:image height="14px" width="14px" value="{!IF(eval.skipValue != null, checked, unchecked)}"/>
+                            <apex:outputText style="padding-left: 4px;" value="{!eval.skipValue}" />
+                        </div>
+                        <div style="margin-top: 4px;">
+                            <apex:outputText value="Comments: " />
+                            <apex:outputText value="{!eval.commentValue}" />
+                        </div>
+                    </div>
+                </apex:repeat>
+                </div>
+                <apex:variable var="rowNum" value="{!rowNum+1}"/>
             </apex:repeat>
         </div>
     </body>
-
+    
 </apex:page>
