@@ -14,3 +14,8 @@
 .blueIcon {
   --sds-c-icon-color-foreground-default: blue;
 }
+
+.slds-modal__content {
+  overflow: visible;
+  overflow-y: visible;
+}

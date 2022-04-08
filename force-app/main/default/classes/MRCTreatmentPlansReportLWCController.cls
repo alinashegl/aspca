@@ -161,7 +161,7 @@ public with sharing class MRCTreatmentPlansReportLWCController {
         HelperDogsWrapper hDogs = new HelperDogsWrapper();
         Set<String> dNames = new Set<String>();
         hDogs.dogs = new Additional_Dog_Present__c[0];
-        for(Additional_Dog_Present__c dog : [SELECT Id, Additional_Dog__r.Animal_Name_Id__c FROM Additional_Dog_Present__c WHERE Treatment_Plan__r.Animal__c =: animalId AND Treatment_Plan__r.IsActive__c = true]){
+        for(Additional_Dog_Present__c dog : [SELECT Id, Additional_Dog__c, Additional_Dog__r.Animal_Name_Id__c FROM Additional_Dog_Present__c WHERE Treatment_Plan__r.Animal__c =: animalId AND Treatment_Plan__r.IsActive__c = true]){
             dNames.add(dog.Additional_Dog__r.Animal_Name_Id__c);
             hDogs.dogs.add(dog);
         }
