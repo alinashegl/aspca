@@ -1,0 +1,13 @@
+<template>
+    <lightning-card>
+        <template if:true={showTreatmentPlansButton}>
+            <lightning-button
+                variant="brand"
+                label="MRC Treatment Plans Report"
+                title="Launch Treatment Plans Report"
+                onclick={handleLaunchMrcTreatmentPlans}
+            >
+            </lightning-button>
+        </template>
+    </lightning-card>
+</template>
