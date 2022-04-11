@@ -261,5 +261,13 @@ public with sharing class AnimalTriggerHandler {
             Movements_For_Cleaning__c = null
         );
     }
+    
+     public static void beforeFieldUpdateHandler(List<Animal__c> anms, Map<Id, Animal__c> oldAnms){
+        for(Animal__c anm: anms){
+            if(anm.Seizure_Surrender_Date__c != oldAnms.get(anm.Id).Seizure_Surrender_Date__c ){
+                anm.Email_Notification__c = true;
+            }
+        }
+    }
 
 }
