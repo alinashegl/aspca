@@ -64,6 +64,7 @@ public with sharing class MRCTreatmentPlansReportLWCController {
         return [SELECT Id, Helper_Dogs__c FROM Animal__c WHERE Id =: recordId LIMIT 1];
     }
 
+    @testVisible
     private static Map<Id, Map<String, Plan_Protocol__c[]>> getProtocolCategoryMap(Id[] animalIds){
         Map<Id, Map<String, Plan_Protocol__c[]>> animalCategoryProtocolMap = new Map<Id, Map<String, Plan_Protocol__c[]>>();
 
@@ -90,26 +91,7 @@ public with sharing class MRCTreatmentPlansReportLWCController {
         return animalCategoryProtocolMap;
     }
 
-
-    private static Map<String, Id[]> getProtocolIdMap(Id animalId){
-        Map<String, Id[]> protocolMap = new Map<String, Id[]>();
-        for(Plan_Protocol__c protocol : [
-            SELECT Id, Protocol__r.Protocol_Categories__c 
-            FROM Plan_Protocol__c 
-            WHERE Treatment_Plan__r.IsActive__c = TRUE
-            AND Treatment_Plan__r.Animal__c =: animalId
-        ]){
-            String category = protocol.Protocol__r.Protocol_Categories__c == null ? 'Non Fear Protocols' : protocol.Protocol__r.Protocol_Categories__c;
-            
-            if(protocolMap.containsKey(category)){
-                protocolMap.get(category).add(protocol.Id);
-            }else{
-                protocolMap.put(category, new Id[]{protocol.Id});
-            }
-        }
-        return protocolMap;
-    }
-
+    @testVisible
     private static String getMotivators(Animal__c dog){
         Set<String> motivators = new Set<String>();
         for(Treatment_Plan__c plan : dog.Treatment_Plan__r){
@@ -133,7 +115,6 @@ public with sharing class MRCTreatmentPlansReportLWCController {
         @AuraEnabled public String restDays;
         @AuraEnabled public String motivators;
         @AuraEnabled public Boolean isPlayPause;
-        @AuraEnabled public Map<String, Id[]> categoryToProtocolIdMap;
         @AuraEnabled public Map<String, Plan_Protocol__c[]> categoryToProtocolMap;
     }
 }
