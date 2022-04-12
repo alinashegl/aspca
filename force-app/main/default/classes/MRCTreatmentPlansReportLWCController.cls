@@ -1,4 +1,10 @@
 public with sharing class MRCTreatmentPlansReportLWCController {
+
+    public List<AnimalInfo> infoWrapper {get; set;}
+    public MRCTreatmentPlansReportLWCController(){
+        infoWrapper = getMRCDogsForPDF();
+    }
+    
     @AuraEnabled
     public static AnimalInfo[] getMRCDogsForPDF(){
         Animal__c[] mrcDogs = getMRCDogs();
@@ -69,7 +75,7 @@ public with sharing class MRCTreatmentPlansReportLWCController {
         Map<Id, Map<String, Plan_Protocol__c[]>> animalCategoryProtocolMap = new Map<Id, Map<String, Plan_Protocol__c[]>>();
 
         for(Plan_Protocol__c protocol : [
-            SELECT Id, Protocol__r.Protocol_Categories__c, Treatment_Plan__r.Animal__c, Protocol_Name__c, IsRemoved__c
+            SELECT Id, Protocol__r.Protocol_Categories__c, Protocol_Notes__c, Treatment_Plan__r.Animal__c, Protocol_Name__c, IsRemoved__c
             FROM Plan_Protocol__c 
             WHERE Treatment_Plan__r.IsActive__c = TRUE
             AND Treatment_Plan__r.Animal__c IN: animalIds

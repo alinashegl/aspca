@@ -1,5 +1,6 @@
 <template>
     <lightning-card>
+        <lightning-button label="PDF" onclick={exportAsPdf} slot="actions"></lightning-button>  
         Total Animals: {animalListLength}
         <template if:false={animalInfoList}>
             <lightning-icon icon-name="utility:spinner" alternative-text="Connected" size="xx-small" title="large size">
