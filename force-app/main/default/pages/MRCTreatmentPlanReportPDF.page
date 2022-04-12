@@ -1,0 +1,258 @@
+<apex:page controller="MRCTreatmentPlansReportLWCController" readOnly="true" applyHtmlTag="false" sidebar="false" showHeader="false"
+           cache="true" renderAs="advanced_pdf" docType="html-5.0" standardStylesheets="false">
+    
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+        
+        <style>
+            @page {
+                size: landscape;
+                @bottom-left {
+                    content: "Page " counter(page) " of " counter(pages);
+                    font-family: sans-serif;
+                    font-size: 80%;
+                }
+                @bottom-right {
+            	content: "Date: {!MONTH(TODAY())}/{!DAY(TODAY())}/{!YEAR(TODAY())}";
+                    font-family: sans-serif;
+                    font-size: 80%;
+                }
+            }
+            
+            table {
+            width: 100%;
+            padding: 5px;
+            vertical-align: Top;
+            font-size: small;
+            }
+            
+            table thead>tr>th {
+            word-wrap: break-word;
+            font-weight: bold;
+            text-align: left;
+            }
+            
+            table tbody>tr>td {
+            word-wrap: break-word;
+            text-align: left;
+            }
+            
+            .section {
+            margin-top: 20px;
+            width: 100%;
+            }
+            
+            .tableSpace {
+            border-collapse: separate;
+            border-spacing: 0 5px;
+            
+            }
+            
+            .bottomline {
+            border-bottom: thin #D4D4D4 solid;
+            padding-top: .5em;
+            padding-bottom: .5em;
+            
+            }
+            
+            .topline {
+            border-top: thin #D4D4D4 solid;
+            }
+            
+            .c_table {
+            -fs-table-paginate: paginate;
+            border-spacing: 0;
+            table-layout: fixed
+            }
+            
+            .first-green {
+            height: 100px;
+            width: 60px;
+            background-color: green;
+            }
+            
+            .white {
+            height: 100px;
+            width: 60px;
+            background-color: white;
+            }
+            
+            .second-green {
+            height: 100px;
+            width: 60px;
+            background-color: green;
+            }
+            
+            .behavTable {
+            border: 1px solid black;
+            
+            }
+            
+            .pageBreak {
+            page-break-before: avoid;
+            page-break-inside: avoid;
+            page-break-after: always;
+            }
+            
+            .line{
+                border: 0.5px solid black;
+            	word-wrap: break-word;
+                font-weight: normal !important;
+                vertical-align:top;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <apex:variable value="{!$Resource.dbChecked}" var="checked" />
+        <apex:variable value="{!$Resource.dbUnchecked}" var="unchecked" />
+        <apex:variable value="{!$Resource.behvConcern}" var="behvConcern" />
+        <apex:variable value="{!$Resource.behaviorMild}" var="behaviorMild" />
+        <apex:variable value="{!$Resource.behvModerate}" var="behvModerate" />
+        <apex:variable value="{!$Resource.behvSevere}" var="behvSevere" />
+        
+        <div style="border:1px solid;">
+            <center style="border-bottom:1px solid;">
+                <h3 style="font-weight:900">
+                    <!--Top Header -->
+					Mini Rehab Center Treatment Plans
+                </h3>
+                <!--Top Body Sesction -->
+            </center>
+            <div>
+                    <table  class="tableSpcae c_table" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th width="10%" class="bottomline"></th>
+                            <th width="5%"  class="bottomline">Socialsion</th>
+                            <th width="5%"  class="bottomline">Leashing</th>
+                            <th width="5%"  class="bottomline">Walking</th>
+                            <th width="5%"  class="bottomline">Handling</th>
+                            <th width="5%"  class="bottomline">Containment</th>
+                            <th width="5%"  class="bottomline">Non Fear Protocols</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <apex:repeat value="{!infoWrapper}" var="record">
+                        <tr style="page-break-inside:avoid">
+                            <td class="line" style="border-top: 1px solid;">
+                                <div>
+                                    <span>
+                                        <b>Name:</b> {!record.dog.Animal_Name_Id__c}<br/>
+                                        <b>Sex:</b> {!record.dog.Gender__c}<br/>
+                                        <b>Breed:</b> {!record.dog.Breed__c}<br/>
+                                        <b>Current Location:</b> {!record.dog.Current_Location__c}<br/>
+                                        <b>Shelter Color Coding:</b> {!record.dog.Shelter_Color_Coding__c}<br/>
+                                        <b>Shelter Location:</b> {!record.dog.Shelter_Location__c}<br/>
+                                    </span>
+                                </div>
+                                <br/>
+                                <div style="border-top: 1px solid; padding-top: 15px">
+                                    <span>
+                                        <strong>Rest Days:</strong>{!record.restDays}</span>
+                                </div>
+                            </td>
+                            
+                            <td class="line" style="border-top: 1px solid;">
+                                <table>
+                                    <apex:repeat value="{!record.categoryToProtocolMap['Fear Socialization']}" var="innerProtocol">
+                                        <tr>
+                                            <td>
+                                                <b>{!UPPER( innerProtocol.Protocol_Name__c )}</b>
+                                                <apex:outputPanel rendered="{!If(ISBLANK(innerProtocol.Protocol_Notes__c),false,true)}">
+                                                - {!innerProtocol.Protocol_Notes__c}
+                                                </apex:outputPanel>
+                                            </td>
+                                        </tr>
+                                    </apex:repeat>
+                                </table>
+                            </td>
+                            <td class="line" style="border-top: 1px solid;">
+                                <table>
+                                    <apex:repeat value="{!record.categoryToProtocolMap['Fear Leashing']}" var="innerProtocol">
+                                        <tr>
+                                            <td>
+                                                <b>{!UPPER( innerProtocol.Protocol_Name__c )}</b>
+                                                <apex:outputPanel rendered="{!If(ISBLANK(innerProtocol.Protocol_Notes__c),false,true)}">
+                                                - {!innerProtocol.Protocol_Notes__c}
+                                                </apex:outputPanel>
+                                            </td>
+                                        </tr>
+                                    </apex:repeat>
+                                </table>
+                            </td>
+                            <!--<td class="line" style="border-top: 1px solid;">
+                                <table>
+                                    <apex:repeat value="{!record.categoryToProtocolMap['Fear Walking']}" var="innerProtocol">
+                                        <tr>
+                                            <td>
+                                                <b>{!UPPER( innerProtocol.Protocol_Name__c )}</b>
+                                                <apex:outputPanel rendered="{!If(ISBLANK(innerProtocol.Protocol_Notes__c),false,true)}">
+                                                - {!innerProtocol.Protocol_Notes__c}
+                                                </apex:outputPanel>
+                                            </td>
+                                        </tr>
+                                    </apex:repeat>
+                                </table>
+                            </td>
+                            <td class="line" style="border-top: 1px solid;">
+                                <table>
+                                    <apex:repeat value="{!record.categoryToProtocolMap['Fear Handling']}" var="innerProtocol">
+                                        <tr>
+                                            <td>
+                                                <b>{!UPPER( innerProtocol.Protocol_Name__c )}</b>
+                                                <apex:outputPanel rendered="{!If(ISBLANK(innerProtocol.Protocol_Notes__c),false,true)}">
+                                                - {!innerProtocol.Protocol_Notes__c}
+                                                </apex:outputPanel>
+                                            </td>
+                                        </tr>
+                                    </apex:repeat>
+                                </table>
+                            </td>-->
+                            <td class="line" style="border-top: 1px solid;"></td>
+                            <td class="line" style="border-top: 1px solid;"></td>
+                            <td class="line" style="border-top: 1px solid;">
+                                <table>
+                                    <apex:repeat value="{!record.categoryToProtocolMap['Fear Containment']}" var="innerProtocol">
+                                        <tr>
+                                            <td>
+                                                <b>{!UPPER( innerProtocol.Protocol_Name__c )}</b>
+                                                <apex:outputPanel rendered="{!If(ISBLANK(innerProtocol.Protocol_Notes__c),false,true)}">
+                                                - {!innerProtocol.Protocol_Notes__c}
+                                                </apex:outputPanel>
+                                            </td>
+                                        </tr>
+                                    </apex:repeat>
+                                </table>
+                            </td>
+                            <td class="line" style="border-top: 1px solid;">
+                                <table>
+                                    <apex:repeat value="{!record.categoryToProtocolMap['Non Fear Protocols']}" var="innerProtocol">
+                                        <tr>
+                                            <td>
+                                                <b>{!UPPER( innerProtocol.Protocol_Name__c )}</b>
+                                                <apex:outputPanel rendered="{!If(ISBLANK(innerProtocol.Protocol_Notes__c),false,true)}">
+                                                - {!innerProtocol.Protocol_Notes__c}
+                                                </apex:outputPanel>
+                                            </td>
+                                        </tr>
+                                    </apex:repeat>
+                                </table>
+                            </td>
+                            <!--</apex:repeat>-->
+                        </tr>
+                            <tr>
+                            	<td></td>
+                                <td colspan="2"><b>Motivators:</b>{!record.motivators}</td>
+                                <td colspan="2"><b>Helper Dogs:</b>{!record.helperDogs.names}</td>
+                                <td></td>
+                            </tr>
+                        </apex:repeat>
+                    </tbody>
+                </table>
+             <br/>
+            </div>
+        
+        </div>
+    </body>
+</apex:page>
