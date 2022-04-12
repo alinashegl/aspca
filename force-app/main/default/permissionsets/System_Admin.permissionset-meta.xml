@@ -5362,6 +5362,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Plan_Protocol__c.Notes_Last_Modified_Date__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Plan_Protocol__c.Protocol_Box_Link__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -5373,6 +5378,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Plan_Protocol__c.Protocol_Name__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Plan_Protocol__c.Protocol_Notes__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

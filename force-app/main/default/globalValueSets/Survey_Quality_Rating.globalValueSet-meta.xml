@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Extremely Good</fullName>
+        <default>false</default>
+        <label>Extremely Good</label>
+    </customValue>
+    <customValue>
+        <fullName>Very Good</fullName>
+        <default>false</default>
+        <label>Very Good</label>
+    </customValue>
+    <customValue>
+        <fullName>Good</fullName>
+        <default>false</default>
+        <label>Good</label>
+    </customValue>
+    <customValue>
+        <fullName>Moderate</fullName>
+        <default>false</default>
+        <label>Moderate</label>
+    </customValue>
+    <customValue>
+        <fullName>Poor</fullName>
+        <default>false</default>
+        <label>Poor</label>
+    </customValue>
+    <customValue>
+        <fullName>Very Poor</fullName>
+        <default>false</default>
+        <label>Very Poor</label>
+    </customValue>
+    <customValue>
+        <fullName>Extremely Poor</fullName>
+        <default>false</default>
+        <label>Extremely Poor</label>
+    </customValue>
+    <customValue>
+        <fullName>I don&apos;t know</fullName>
+        <default>false</default>
+        <label>I don&apos;t know</label>
+    </customValue>
+    <masterLabel>Survey Quality Rating</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

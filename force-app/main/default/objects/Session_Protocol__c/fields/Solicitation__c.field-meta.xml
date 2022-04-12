@@ -2,7 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Solicitation__c</fullName>
     <externalId>false</externalId>
-    <label>Solicitation</label>
+    <label>Solicitation - Non-Fearful Treatment</label>
     <required>false</required>
     <trackTrending>false</trackTrending>
     <type>Picklist</type>
@@ -19,6 +19,11 @@
                 <fullName>2. Yes</fullName>
                 <default>false</default>
                 <label>2. Yes</label>
+            </value>
+            <value>
+                <fullName>Not Applicable</fullName>
+                <default>false</default>
+                <label>Not Applicable</label>
             </value>
         </valueSetDefinition>
     </valueSet>
