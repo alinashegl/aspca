@@ -10,6 +10,7 @@ trigger playgroupSessionTrigger on Playgroup_Session__c (after insert, after upd
         
         if (trigger.isUpdate && trigger.isAfter){
             PlaygroupSessionTriggerHandler.updateHandler(Trigger.new, Trigger.oldMap);
+            PlaygroupSessionTriggerHandler.UpdateNoteToAnimal(Trigger.newMap, Trigger.oldMap);
         }
         
         if (trigger.isUpdate && trigger.isBefore){}
