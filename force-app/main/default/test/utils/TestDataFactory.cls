@@ -973,4 +973,42 @@ public without sharing class TestDataFactory {
       insert dc;
       return dc;
     }
+
+    public static Task[] createBehaviorTreatmentTasks(){
+      Animal__c dog = createAnimal();
+
+      Date startDate = AutoScheduleTasksUtil.startOfASPCAWeek(date.today());
+      Date activityDate1 = startDate.addDays(1);
+      Date activityDate2 = startDate.addDays(3);
+      Date activityDate3 = startDate.addDays(5);
+
+      Id rtId = Util.getRecordTypeId('Task', AutoScheduleTasksUtil.BEH_TREATMENT_TASK_RECORD_TYPE_NAME);
+
+      Task[] tasks = new Task[0];
+
+      Task t1 = new Task(
+        ActivityDate = activityDate1,
+        Animal__c = dog.Id,
+        RecordTypeId = rtId
+      );
+      tasks.add(t1);
+
+      Task t2 = new Task(
+        ActivityDate = activityDate2,
+        Animal__c = dog.Id,
+        RecordTypeId = rtId
+      );
+      tasks.add(t2);
+
+      Task t3 = new Task(
+        ActivityDate = activityDate3,
+        Animal__c = dog.Id,
+        RecordTypeId = rtId
+      );
+      tasks.add(t3);
+
+      insert tasks;
+      return tasks;
+
+    }
 }

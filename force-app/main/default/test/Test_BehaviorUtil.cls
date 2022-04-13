@@ -147,4 +147,49 @@ private class Test_BehaviorUtil {
         String location = BehaviorUtil.userLocation;
         System.assertEquals('CRC', location);
     }
+
+    @isTest 
+    static void getAnimalRestDays_Success(){
+        Task[] tasks = TestDataFactory.createBehaviorTreatmentTasks();
+
+        test.startTest();
+            String restDays = BehaviorUtil.getAnimalRestDays(tasks[0].Animal__c);
+        test.stopTest();
+
+        System.assertEquals('Tuesday, Thursday, Saturday, Monday', restDays);
+    }
+
+    @isTest 
+    static void getAnimalRestDays_NoActivities(){
+        Animal__c dog = TestDataFactory.createAnimal();
+
+        test.startTest();
+            String restDays = BehaviorUtil.getAnimalRestDays(dog.Id);
+        test.stopTest();
+
+        System.assertEquals('No treatments assigned this week', restDays);
+    }
+
+    @isTest 
+    static void getAnimalRestDays_AnimalList_Success(){
+        Task[] tasks = TestDataFactory.createBehaviorTreatmentTasks();
+
+        test.startTest();
+            Map<Id, String> restDaysMap = BehaviorUtil.getAnimalRestDays(new Id[]{tasks[0].Animal__c});
+        test.stopTest();
+
+        System.assertEquals('Tuesday, Thursday, Saturday, Monday', restDaysMap.get(tasks[0].Animal__c));
+    }
+
+    @isTest 
+    static void getAnimalRestDays_AnimalList_NoTasks(){
+        Animal__c dog = TestDataFactory.createAnimal();
+
+        test.startTest();
+            Map<Id, String> restDaysMap = BehaviorUtil.getAnimalRestDays(new Id[]{dog.Id});
+        test.stopTest();
+
+        System.assertEquals('No treatments assigned this week', restDaysMap.get(dog.Id));
+    }
+
 }
