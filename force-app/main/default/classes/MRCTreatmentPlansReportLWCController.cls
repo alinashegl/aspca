@@ -72,7 +72,7 @@ public with sharing class MRCTreatmentPlansReportLWCController {
 
     @AuraEnabled
     public static Generic_Data__c getTipOfMonth(){
-        return [
+        Generic_Data__c[] gData = [
             SELECT Id, Text__c 
             FROM Generic_Data__c 
             WHERE Species__c = 'Dog'
@@ -80,6 +80,8 @@ public with sharing class MRCTreatmentPlansReportLWCController {
             AND Name = 'MRC TOM'
             LIMIT 1
         ];
+
+        return !gData.isEmpty() ? gData[0] : null;
     }
 
     @testVisible

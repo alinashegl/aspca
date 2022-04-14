@@ -4,8 +4,14 @@
             <div class="slds-size_1-of-3">
                 <div class="slds-var-p-left_x-small">
                     <b>Tip of the month:</b>
+                    <template if:true={showSpinner}>
+                        <lightning-button-icon icon-name="utility:spinner" variant="bare"  alternative-text="Edit Helper Dogs" class="slds-m-left_xx-small" title="Helper Dogs" ></lightning-button-icon>
+                    </template>
                     <template if:true={tipOfMonth}>
                         <lightning-textarea value={tipOfMonth.Text__c} onblur={handleTOMBlur}></lightning-textarea>
+                    </template>
+                    <template if:true={error}>
+                        <c-error-panel errors={error} type='inlineMessage' friendly-message={errorMessage}></c-error-panel>
                     </template>
                 </div>
             </div>
