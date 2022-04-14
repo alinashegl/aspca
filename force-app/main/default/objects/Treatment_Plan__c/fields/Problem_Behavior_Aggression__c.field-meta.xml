@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Problem_Behavior_Aggression__c</fullName>
+    <externalId>false</externalId>
+    <label>Problem Behavior - Aggression</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Aggression Toward People – Defensive - Low Risk</fullName>
+                <default>false</default>
+                <label>Aggression Toward People – Defensive - Low Risk</label>
+            </value>
+            <value>
+                <fullName>Aggression Toward People – Defensive - Medium Risk</fullName>
+                <default>false</default>
+                <label>Aggression Toward People – Defensive - Medium Risk</label>
+            </value>
+            <value>
+                <fullName>Aggression Toward People – Defensive - High/Extreme Risk</fullName>
+                <default>false</default>
+                <label>Aggression Toward People – Defensive - High/Extreme Risk</label>
+            </value>
+            <value>
+                <fullName>Aggression Toward People – Offensive - Low Risk</fullName>
+                <default>false</default>
+                <label>Aggression Toward People – Offensive - Low Risk</label>
+            </value>
+            <value>
+                <fullName>Aggression Toward People – Offensive - Medium Risk</fullName>
+                <default>false</default>
+                <label>Aggression Toward People – Offensive - Medium Risk</label>
+            </value>
+            <value>
+                <fullName>Aggression Toward People – Offensive - High/Extreme Risk</fullName>
+                <default>false</default>
+                <label>Aggression Toward People – Offensive - High/Extreme Risk</label>
+            </value>
+            <value>
+                <fullName>Aggression Toward Unfamiliar People - Low Risk</fullName>
+                <default>false</default>
+                <label>Aggression Toward Unfamiliar People - Low Risk</label>
+            </value>
+            <value>
+                <fullName>Aggression Toward Unfamiliar People - Medium Risk</fullName>
+                <default>false</default>
+                <label>Aggression Toward Unfamiliar People - Medium Risk</label>
+            </value>
+            <value>
+                <fullName>Aggression Toward Unfamiliar People - High/Extreme Risk</fullName>
+                <default>false</default>
+                <label>Aggression Toward Unfamiliar People - High/Extreme Risk</label>
+            </value>
+            <value>
+                <fullName>Aggression toward Children - Low Risk</fullName>
+                <default>false</default>
+                <label>Aggression toward Children - Low Risk</label>
+            </value>
+            <value>
+                <fullName>Aggression toward Children - Medium Risk</fullName>
+                <default>false</default>
+                <label>Aggression toward Children - Medium Risk</label>
+            </value>
+            <value>
+                <fullName>Aggression toward Children - High/Extreme Risk</fullName>
+                <default>false</default>
+                <label>Aggression toward Children - High/Extreme Risk</label>
+            </value>
+            <value>
+                <fullName>Aggression toward Elderly, Disabled People - Low Risk</fullName>
+                <default>false</default>
+                <label>Aggression toward Elderly, Disabled People - Low Risk</label>
+            </value>
+            <value>
+                <fullName>Aggression toward Elderly, Disabled People - Medium Risk</fullName>
+                <default>false</default>
+                <label>Aggression toward Elderly, Disabled People - Medium Risk</label>
+            </value>
+            <value>
+                <fullName>Aggression toward Elderly, Disabled People - High/Extreme Risk</fullName>
+                <default>false</default>
+                <label>Aggression toward Elderly, Disabled People - High/Extreme Risk</label>
+            </value>
+            <value>
+                <fullName>Aggression When Handled - Low Risk</fullName>
+                <default>false</default>
+                <label>Aggression When Handled - Low Risk</label>
+            </value>
+            <value>
+                <fullName>Aggression When Handled - Medium Risk</fullName>
+                <default>false</default>
+                <label>Aggression When Handled - Medium Risk</label>
+            </value>
+            <value>
+                <fullName>Aggression When Handled - High/Extreme Risk</fullName>
+                <default>false</default>
+                <label>Aggression When Handled - High/Extreme Risk</label>
+            </value>
+            <value>
+                <fullName>Redirected Aggression toward People - Low Risk</fullName>
+                <default>false</default>
+                <label>Redirected Aggression toward People - Low Risk</label>
+            </value>
+            <value>
+                <fullName>Redirected Aggression toward People - Medium Risk</fullName>
+                <default>false</default>
+                <label>Redirected Aggression toward People - Medium Risk</label>
+            </value>
+            <value>
+                <fullName>Redirected Aggression toward People - High/Extreme Risk</fullName>
+                <default>false</default>
+                <label>Redirected Aggression toward People - High/Extreme Risk</label>
+            </value>
+            <value>
+                <fullName>Aggression Toward Dogs – Defensive - Low Risk</fullName>
+                <default>false</default>
+                <label>Aggression Toward Dogs – Defensive - Low Risk</label>
+            </value>
+            <value>
+                <fullName>Aggression Toward Dogs – Defensive - Medium Risk</fullName>
+                <default>false</default>
+                <label>Aggression Toward Dogs – Defensive - Medium Risk</label>
+            </value>
+            <value>
+                <fullName>Aggression Toward Dogs – Defensive - High/Extreme Risk</fullName>
+                <default>false</default>
+                <label>Aggression Toward Dogs – Defensive - High/Extreme Risk</label>
+            </value>
+            <value>
+                <fullName>Aggression Toward Dogs – Offensive - Low Risk</fullName>
+                <default>false</default>
+                <label>Aggression Toward Dogs – Offensive - Low Risk</label>
+            </value>
+            <value>
+                <fullName>Aggression Toward Dogs – Offensive - Medium Risk</fullName>
+                <default>false</default>
+                <label>Aggression Toward Dogs – Offensive - Medium Risk</label>
+            </value>
+            <value>
+                <fullName>Aggression Toward Dogs – Offensive - High/Extreme Risk</fullName>
+                <default>false</default>
+                <label>Aggression Toward Dogs – Offensive - High/Extreme Risk</label>
+            </value>
+            <value>
+                <fullName>Aggression Toward Unfamiliar Dogs - Low Risk</fullName>
+                <default>false</default>
+                <label>Aggression Toward Unfamiliar Dogs - Low Risk</label>
+            </value>
+            <value>
+                <fullName>Aggression Toward Unfamiliar Dogs - Medium Risk</fullName>
+                <default>false</default>
+                <label>Aggression Toward Unfamiliar Dogs - Medium Risk</label>
+            </value>
+            <value>
+                <fullName>Aggression Toward Unfamiliar Dogs - High/Extreme Risk</fullName>
+                <default>false</default>
+                <label>Aggression Toward Unfamiliar Dogs - High/Extreme Risk</label>
+            </value>
+            <value>
+                <fullName>Resource Guarding - Low Risk</fullName>
+                <default>false</default>
+                <label>Resource Guarding - Low Risk</label>
+            </value>
+            <value>
+                <fullName>Resource Guarding - Medium Risk</fullName>
+                <default>false</default>
+                <label>Resource Guarding - Medium Risk</label>
+            </value>
+            <value>
+                <fullName>Resource Guarding - High/Extreme Risk</fullName>
+                <default>false</default>
+                <label>Resource Guarding - High/Extreme Risk</label>
+            </value>
+            <value>
+                <fullName>Predatory Behavior toward people or dogs - Low Risk</fullName>
+                <default>false</default>
+                <label>Predatory Behavior toward people or dogs - Low Risk</label>
+            </value>
+            <value>
+                <fullName>Predatory Behavior toward people or dogs - Medium Risk</fullName>
+                <default>false</default>
+                <label>Predatory Behavior toward people or dogs - Medium Risk</label>
+            </value>
+            <value>
+                <fullName>Predatory Behavior toward people or dogs - High/Extreme Risk</fullName>
+                <default>false</default>
+                <label>Predatory Behavior toward people or dogs - High/Extreme Risk</label>
+            </value>
+            <value>
+                <fullName>Predatory Behavior toward other species - Low Risk</fullName>
+                <default>false</default>
+                <label>Predatory Behavior toward other species - Low Risk</label>
+            </value>
+            <value>
+                <fullName>Predatory Behavior toward other species - Medium Risk</fullName>
+                <default>false</default>
+                <label>Predatory Behavior toward other species - Medium Risk</label>
+            </value>
+            <value>
+                <fullName>Predatory Behavior toward other species - High/Extreme Risk</fullName>
+                <default>false</default>
+                <label>Predatory Behavior toward other species - High/Extreme Risk</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

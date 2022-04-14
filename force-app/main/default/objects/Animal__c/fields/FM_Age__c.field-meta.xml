@@ -12,24 +12,42 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Puppy (&lt;5 mos)</fullName>
+                <fullName>Puppy (&lt; 5 mos)</fullName>
                 <default>false</default>
-                <label>Puppy (&lt;5 mos)</label>
+                <label>Puppy (&lt; 5 mos)</label>
             </value>
             <value>
-                <fullName>Juvenile (5-12 mos)</fullName>
+                <fullName>Juvenile (5 -12 mos)</fullName>
                 <default>false</default>
-                <label>Juvenile (5-12 mos)</label>
+                <label>Juvenile (5 -12 mos)</label>
             </value>
             <value>
-                <fullName>Adult (1-8 yrs)</fullName>
+                <fullName>Adult (1 - 8 yrs)</fullName>
                 <default>false</default>
-                <label>Adult (1-8 yrs)</label>
+                <label>Adult (1 - 8 yrs)</label>
             </value>
             <value>
                 <fullName>Senior (8 yrs+)</fullName>
                 <default>false</default>
                 <label>Senior (8 yrs+)</label>
+            </value>
+            <value>
+                <fullName>Adult (1-8 yrs)</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Adult (1-8 yrs)</label>
+            </value>
+            <value>
+                <fullName>Juvenile (5-12 mos)</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Juvenile (5-12 mos)</label>
+            </value>
+            <value>
+                <fullName>Puppy (&lt;5 mos)</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Puppy (&lt;5 mos)</label>
             </value>
         </valueSetDefinition>
     </valueSet>

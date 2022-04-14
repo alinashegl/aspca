@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>We Are Already Providing This</fullName>
+        <default>false</default>
+        <label>We Are Already Providing This</label>
+    </customValue>
+    <customValue>
+        <fullName>I Suggest We Provide This or Provide More of This</fullName>
+        <default>false</default>
+        <label>I Suggest We Provide This or Provide More of This</label>
+    </customValue>
+    <customValue>
+        <fullName>We Are Unable to Provide This</fullName>
+        <default>false</default>
+        <label>We Are Unable to Provide This</label>
+    </customValue>
+    <masterLabel>Survey Resource Selection</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

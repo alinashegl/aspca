@@ -35,6 +35,15 @@
     <columns>
         <field>Animal__c.Behavior_Assessments__r.Behavior_Assessment_Responses__r$Name</field>
     </columns>
+    <filter>
+        <criteriaItems>
+            <column>Animal__c.Behavior_Assessments__r.Behavior_Assessment_Responses__r$Evaluation_Score__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Meets AG,Reference TEC,Risk Assessment</value>
+        </criteriaItems>
+    </filter>
     <format>Matrix</format>
     <groupingsAcross>
         <dateGranularity>Day</dateGranularity>

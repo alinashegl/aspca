@@ -32,7 +32,6 @@ public with sharing class service_Validation
                             fieldValue = defaultValue;
                         }
                     }
-                    
                     if(valid) {
                         request.Parameters.put(fieldName, fieldValue);
                     } else {
@@ -76,6 +75,7 @@ public with sharing class service_Validation
             String fieldType = (String)field.get('type');
             Set<Object> availableTypes = (Set<Object>)field.get('availableTypes');
             String fieldOperation = (String)field.get('operation');
+            String fieldApiName = (String) params.get('apiName');
             Boolean valid = true;
 
             if(valid && availableTypes != null  && !availableTypes.contains(fieldValue)) {
@@ -114,7 +114,9 @@ public with sharing class service_Validation
                 }
                 when 'string' {                
                     if(String.isBlank((String)(fieldValue))) {
-                        valid = false;
+                        if(fieldApiName == null || !(fieldApiName.contains('Skipped') || fieldApiName.contains('Comments'))){
+                            valid = false;
+                        }
                     }                               
                 }     
                 when 'date' {

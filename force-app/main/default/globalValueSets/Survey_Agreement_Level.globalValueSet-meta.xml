@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Strongly agree</fullName>
+        <default>false</default>
+        <label>Strongly Agree</label>
+    </customValue>
+    <customValue>
+        <fullName>Agree</fullName>
+        <default>false</default>
+        <label>Agree</label>
+    </customValue>
+    <customValue>
+        <fullName>Neutral</fullName>
+        <default>false</default>
+        <label>Neutral</label>
+    </customValue>
+    <customValue>
+        <fullName>Disagree</fullName>
+        <default>false</default>
+        <label>Disagree</label>
+    </customValue>
+    <customValue>
+        <fullName>Strongly disagree</fullName>
+        <default>false</default>
+        <label>Strongly Disagree</label>
+    </customValue>
+    <customValue>
+        <fullName>Unknown</fullName>
+        <default>false</default>
+        <label>Unknown</label>
+    </customValue>
+    <masterLabel>Survey Agreement Level</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>
