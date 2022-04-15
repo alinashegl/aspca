@@ -14,7 +14,10 @@ private class test_TreatmentSessionLWCController {
 
     @isTest
     static void getActiveProtocols_noProtocols(){
-        Treatment_Plan__c plan = new Treatment_Plan__c();
+        Treatment_Plan__c plan = new Treatment_Plan__c(
+            Problem_Behavior__c = 'Fear of People - Mild'
+        );
+
         insert plan;
 
         Contact con = TestDataFactory.createContact();
