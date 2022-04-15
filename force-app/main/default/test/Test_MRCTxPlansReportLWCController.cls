@@ -222,6 +222,32 @@ private class Test_MRCTxPlansReportLWCController {
         test.stopTest();
 
         System.assert(infos.isEmpty(), 'Should have returned an empty list of infos, but was: ' + infos);
+    }
 
+    @isTest 
+    static void getTipOfMonth_Success(){
+        Generic_Data__c gd = new Generic_Data__c(
+            Species__c = 'Dog',
+            Location__c = 'MRC',
+            Name = 'MRC TOM',
+            Text__c = 'tip of month'
+        );
+        insert gd;
+
+        test.startTest();
+        Generic_Data__c returnedGd = MRCTreatmentPlansReportLWCController.getTipOfMonth();
+        test.stopTest();
+
+        System.assert(returnedGd != null, 'Should have returned a generic data for tip of month, but was null');
+        System.assertEquals(gd.Id, returnedGd.Id);
+    }
+
+    @isTest 
+    static void getTipOfMonth_NoGenericData(){
+        test.startTest();
+        Generic_Data__c returnedGd = MRCTreatmentPlansReportLWCController.getTipOfMonth();
+        test.stopTest();
+
+        System.assert(returnedGd == null, 'Should have returned a null value, but was: ' + returnedGd);
     }
 }
