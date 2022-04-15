@@ -131,10 +131,10 @@ public with sharing class MRCTreatmentPlansReportLWCController {
     }
 
     public class AnimalInfo{
-        @AuraEnabled public Animal__c dog;
-        @AuraEnabled public String restDays;
-        @AuraEnabled public String motivators;
-        @AuraEnabled public Boolean isPlayPause;
-        @AuraEnabled public Map<String, Plan_Protocol__c[]> categoryToProtocolMap;
+        @AuraEnabled public Animal__c dog {get;set;}
+        @AuraEnabled public String restDays {get;set;}
+        @AuraEnabled public String motivators {get;set;}
+        @AuraEnabled public Boolean isPlayPause {get;set;}
+        @AuraEnabled public Map<String, Plan_Protocol__c[]> categoryToProtocolMap {get;set;}
     }
 }
