@@ -70,6 +70,20 @@ public with sharing class MRCTreatmentPlansReportLWCController {
         return [SELECT Id, Helper_Dogs__c FROM Animal__c WHERE Id =: recordId LIMIT 1];
     }
 
+    @AuraEnabled
+    public static Generic_Data__c getTipOfMonth(){
+        Generic_Data__c[] gData = [
+            SELECT Id, Text__c 
+            FROM Generic_Data__c 
+            WHERE Species__c = 'Dog'
+            AND Location__c = 'MRC'
+            AND Name = 'MRC TOM'
+            LIMIT 1
+        ];
+
+        return !gData.isEmpty() ? gData[0] : null;
+    }
+
     @testVisible
     private static Map<Id, Map<String, Plan_Protocol__c[]>> getProtocolCategoryMap(Id[] animalIds){
         Map<Id, Map<String, Plan_Protocol__c[]>> animalCategoryProtocolMap = new Map<Id, Map<String, Plan_Protocol__c[]>>();

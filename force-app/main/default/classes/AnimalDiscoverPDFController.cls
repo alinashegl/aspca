@@ -10,9 +10,14 @@ public class AnimalDiscoverPDFController {
     public Map<Integer,String> testOrder {get;set;}
     public List<EvaluationGroup> evaluation { get; set; }
     public List<AnimalGradeHistory> GradeHistories  { get; set; }
-    public AnimalDiscoverPDFController() {
-        this.animalId = ApexPages.currentPage().getparameters().get('Id');
+    
+    public AnimalDiscoverPDFController(ApexPages.standardController con){
+        this.animalId = con.getId();
     }
+        
+    /*public AnimalDiscoverPDFController() {
+        this.animalId = ApexPages.currentPage().getparameters().get('Id');
+    }*/
     
     public Animal__c animalD {
         public get {
@@ -571,7 +576,8 @@ public class AnimalDiscoverPDFController {
         Map<String, Object> evalFields = behEval.getPopulatedFieldsAsMap();
         Set<String> testGroup = new Set<String>();
         Map<String, EvaluationGroup> evaluationMap = new Map<String, EvaluationGroup>();
-        for (Test_Config__mdt config : testConfigMetadata) {
+        if(testConfigMetadata != null){
+            for (Test_Config__mdt config : testConfigMetadata) {
             //Ignore tabs for forensic use
             if (paramForensic != null && paramForensic == true) {
                 if (config.Test_Name__c.startsWith('Same Sex') || config.Test_Name__c.startsWith('Opposite Sex')) {
@@ -704,6 +710,7 @@ public class AnimalDiscoverPDFController {
                 evaluationMap.put(config.Test_Description__c, new EvaluationGroup(Integer.valueOf(config.Test_Display_Order__c), config.Test_Description__c, config.Test_Header_Description__c, /*config.Test_Type_Description__c, */opField, (String)evalFields.get(config.Test_Skip_Reason_Field__c), (String)evalFields.get(config.Test_Comment_Field_Name__c), vG0, vG1, vG2, vG3, vG4));
             }
         }
+    	}
         evaluation = evaluationMap.values();
         //sort tab group data
         evaluation.sort();
@@ -712,18 +719,22 @@ public class AnimalDiscoverPDFController {
 
     Private List<AnimalGradeHistory> animalGradeHistory(Set<Id> behavIds){
         String query = 'SELECT Id, RecordName__c, CreatedDate, CreatedBy.Name, FieldName__c, NewValue__c, OldValue__c, ObjectId__c, ObjectName__c FROM EntityHistory__c';
-        String behaviorIds = '(';
+        String behaviorIds = '';
         List<SObject> results = new List<SObject>();
         for(String s : behavIds){
             behaviorIds += '\''+s+'\',';
         }
         behaviorIds = behaviorIds.removeEnd(',');
-        behaviorIds += ')';
+        //behaviorIds += ')';
         System.debug(behaviorIds);
+        if(String.isBlank(behaviorIds)){
+            behaviorIds = '\'\'';
+        }
+        
         List<AnimalGradeHistory> animalHistories = new List<AnimalGradeHistory>();
         if ( animalId != null && animalId != '' ) {
             query += ' WHERE ParentId__c = \''+animalId+'\'';
-            query += ' AND ObjectId__c IN '+behaviorIds;
+            query += ' AND ObjectId__c IN ('+behaviorIds+')';
             query += ' Order by RecordName__c,CreatedDate';
             system.debug(query);
             results = Database.query( query );
