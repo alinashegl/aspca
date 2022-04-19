@@ -7,6 +7,7 @@ public with sharing class TreatmentSessionLWCController {
                     Id, 
                     ProtocolId__r.Name,
                     Aggressive_Worst__c,
+                    Aggressive_Movement__c,
                     Arousal_Best__c,
                     Arousal_Worst__c,
                     Fear_Best__c,
@@ -34,6 +35,7 @@ public with sharing class TreatmentSessionLWCController {
                 Id, 
                 ProtocolId__r.Name,
                 Aggressive_Worst__c,
+                Aggressive_Movement__c,
                 Arousal_Best__c,
                 Arousal_Worst__c,
                 Fear_Best__c,
@@ -304,6 +306,7 @@ public with sharing class TreatmentSessionLWCController {
 
             String[] fieldList = new String[]{
                 'Aggressive_Worst__c',
+                'Aggressive_Movement__c',
                 'Arousal_Best__c',
                 'Arousal_Worst__c',
                 'Fear_Best__c',

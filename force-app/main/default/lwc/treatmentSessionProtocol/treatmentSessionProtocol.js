@@ -71,7 +71,7 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
 
         data.picklistFields.forEach(element => {
             this.fieldValues.push({name: element.apiName, value: element.currentValue});
-            if(element.apiName == 'Aggressive_Worst__c'){
+            if(element.apiName.includes('Aggressive')){
                 this.col1Fields.push(element);
             } else 
             if(element.apiName.includes('Arousal')){
