@@ -145,8 +145,10 @@
                                 </h2>
                                 <h2 class="slds-p-top_large slds-card__header-title">Preferred Motivators</h2>
                                 <lightning-input class="slds-p-left_medium" data-name="preferredMotivators" type="text" name="preferredMotivators" value={protocolInfo.preferredMotivators}></lightning-input>
-                                <h2 class="slds-p-top_large slds-card__header-title">Protocol Notes</h2>
+                                <h2 class="slds-p-top_large slds-card__header-title">Session Protocol Notes</h2>
                                 <lightning-textarea class="slds-p-left_medium" data-name="protocolNotes" type="text" name="protocolNotes" value={protocolInfo.protocolNotes}></lightning-textarea>
+                                <h2 class="slds-p-top_large slds-card__header-title">Plan Protocol Notes</h2>
+                                <lightning-textarea class="slds-p-left_medium" data-name="planProtocolNotes" type="text" name="planProtocolNotes" value={protocolInfo.planProtocolNotes}></lightning-textarea>
                                 <div class="slds-p-top_large">
                                     <c-treatment-session-child-list
                                         protocol-id={recordId}
