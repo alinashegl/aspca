@@ -53,16 +53,16 @@
 
                                     </div>
                                     <div class='slds-col slds-size_1-of-1 slds-medium-size_3-of-6 slds-large-size_2-of-12'>
-                                        <lightning-button variant="Neutral" label="Arousal Scale" title="Box Link" onclick={handleBoxLink} class="slds-m-left_x-small"></lightning-button>
+                                        <lightning-button variant="Neutral" label={protocolInfo.arousalConfig.Label} data-link={protocolInfo.arousalConfig.Value__c} title="Arousal Scale" onclick={handleConfigLink} class="slds-m-left_x-small"></lightning-button>
                                     </div>
                                     <div class='slds-col slds-size_1-of-1 slds-medium-size_3-of-6 slds-large-size_2-of-12'>
-                                        <lightning-button variant="Neutral" label="Fear Scales" title="Box Link" onclick={handleBoxLink} class="slds-m-left_x-small"></lightning-button>
+                                        <lightning-button variant="Neutral" label={protocolInfo.fearConfig.Label} data-link={protocolInfo.fearConfig.Value__c} title="Fear Scales" onclick={handleConfigLink} class="slds-m-left_x-small"></lightning-button>
                                     </div>
                                     <div class='slds-col slds-size_1-of-1 slds-medium-size_3-of-6 slds-large-size_3-of-12'>
-                                        <lightning-button variant="Neutral" label="Fear - Sociability Scale" title="Box Link" onclick={handleBoxLink} class="slds-m-left_x-small"></lightning-button>
+                                        <lightning-button variant="Neutral" label={protocolInfo.fearSociabilityConfig.Label} data-link={protocolInfo.fearSociabilityConfig.Value__c} title="Fear Sociability Scale" onclick={handleConfigLink} class="slds-m-left_x-small"></lightning-button>
                                     </div>
                                     <div class='slds-col slds-size_1-of-1 slds-medium-size_3-of-6 slds-large-size_2-of-12'>
-                                        <lightning-button variant="Neutral" label="Treatment Stages" title="Box Link" onclick={handleBoxLink} class="slds-m-left_x-small"></lightning-button>
+                                        <lightning-button variant="Neutral" label={protocolInfo.treatmentStagesConfig.Label} data-link={protocolInfo.treatmentStagesConfig.Value__c} title="Treatment Scale" onclick={handleConfigLink} class="slds-m-left_x-small"></lightning-button>
                                     </div>
                                     <div class='slds-col slds-size_1-of-1 slds-medium-size_3-of-6 slds-large-size_3-of-12'>
                                         <template for:each={col1Fields} for:item="field">
