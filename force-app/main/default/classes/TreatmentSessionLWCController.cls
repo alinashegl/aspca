@@ -7,6 +7,7 @@ public with sharing class TreatmentSessionLWCController {
                     Id, 
                     ProtocolId__r.Name,
                     Aggressive_Worst__c,
+                    Aggressive_Movement__c,
                     Arousal_Best__c,
                     Arousal_Worst__c,
                     Fear_Best__c,
@@ -34,6 +35,7 @@ public with sharing class TreatmentSessionLWCController {
                 Id, 
                 ProtocolId__r.Name,
                 Aggressive_Worst__c,
+                Aggressive_Movement__c,
                 Arousal_Best__c,
                 Arousal_Worst__c,
                 Fear_Best__c,
@@ -302,6 +304,10 @@ public with sharing class TreatmentSessionLWCController {
         @AuraEnabled public String boxLink {get; set;}
         @AuraEnabled public String planProtocolId {get; set;}
         @AuraEnabled public String planProtocolNotes {get; set;}
+        @AuraEnabled public behavior_config__mdt arousalConfig {get; set;}
+        @AuraEnabled public behavior_config__mdt fearConfig {get; set;}
+        @AuraEnabled public behavior_config__mdt fearSociabilityConfig {get; set;}
+        @AuraEnabled public behavior_config__mdt treatmentStagesConfig {get; set;}
 
 
         ProtocolInfo(Session_Protocol__c sp){
@@ -320,6 +326,7 @@ public with sharing class TreatmentSessionLWCController {
 
             String[] fieldList = new String[]{
                 'Aggressive_Worst__c',
+                'Aggressive_Movement__c',
                 'Arousal_Best__c',
                 'Arousal_Worst__c',
                 'Fear_Best__c',
@@ -333,6 +340,12 @@ public with sharing class TreatmentSessionLWCController {
                 PicklistField pf = new PicklistField(fieldAPI, String.valueOf(sp.get(fieldAPI)));
                 this.picklistFields.add(pf);
             }
+
+            //get the scale configs
+            this.arousalConfig = Behavior_Config__mdt.getInstance('Arousal_Scale');
+            this.fearConfig = Behavior_Config__mdt.getInstance('Fear_Scales');
+            this.fearSociabilityConfig = Behavior_Config__mdt.getInstance('Fear_Sociability_Scale');
+            this.treatmentStagesConfig = Behavior_Config__mdt.getInstance('Treatment_Stages');
         }
     }
 

@@ -50,6 +50,21 @@
                             <!-- <lightning-card> -->
                                 <div class='slds-grid slds-wrap'>
                                     <div class='slds-col slds-size_1-of-1 slds-medium-size_3-of-6 slds-large-size_3-of-12'>
+
+                                    </div>
+                                    <div class='slds-col slds-size_1-of-1 slds-medium-size_3-of-6 slds-large-size_2-of-12'>
+                                        <lightning-button variant="Neutral" label={protocolInfo.arousalConfig.Label} data-link={protocolInfo.arousalConfig.Value__c} title="Arousal Scale" onclick={handleConfigLink} class="slds-m-left_x-small"></lightning-button>
+                                    </div>
+                                    <div class='slds-col slds-size_1-of-1 slds-medium-size_3-of-6 slds-large-size_2-of-12'>
+                                        <lightning-button variant="Neutral" label={protocolInfo.fearConfig.Label} data-link={protocolInfo.fearConfig.Value__c} title="Fear Scales" onclick={handleConfigLink} class="slds-m-left_x-small"></lightning-button>
+                                    </div>
+                                    <div class='slds-col slds-size_1-of-1 slds-medium-size_3-of-6 slds-large-size_3-of-12'>
+                                        <lightning-button variant="Neutral" label={protocolInfo.fearSociabilityConfig.Label} data-link={protocolInfo.fearSociabilityConfig.Value__c} title="Fear Sociability Scale" onclick={handleConfigLink} class="slds-m-left_x-small"></lightning-button>
+                                    </div>
+                                    <div class='slds-col slds-size_1-of-1 slds-medium-size_3-of-6 slds-large-size_2-of-12'>
+                                        <lightning-button variant="Neutral" label={protocolInfo.treatmentStagesConfig.Label} data-link={protocolInfo.treatmentStagesConfig.Value__c} title="Treatment Scale" onclick={handleConfigLink} class="slds-m-left_x-small"></lightning-button>
+                                    </div>
+                                    <div class='slds-col slds-size_1-of-1 slds-medium-size_3-of-6 slds-large-size_3-of-12'>
                                         <template for:each={col1Fields} for:item="field">
                                             <div key={field.name} class="slds-p-top_medium"> 
                                                 <h2 class="slds-card__header-title">{field.name}</h2>
