@@ -1,0 +1,59 @@
+import { LightningElement, track, wire} from 'lwc';
+import getDogInfo from '@salesforce/apex/TreatmentByDogLWCController.getDogInfo';
+
+// Import message service features required for subscribing and the message channel
+import { subscribe, MessageContext } from 'lightning/messageService';
+import DOG_SELECTED_CHANNEL from '@salesforce/messageChannel/DogSelectedChannel__c';
+
+export default class TreatmentByDogReportMain extends LightningElement {
+    @track dogList = [];
+    recordId;
+
+    @wire(getDogInfo, {recordId: '$recordId'})
+    response(result){
+        if(result.data){
+            this.dogList.push(result.data);
+        } else if(result.error){
+            this.error = result.error;
+            window.console.log('error: ', result.error);
+            this.showSpinner = false;
+        }
+    }
+
+    // By using the MessageContext @wire adapter, unsubscribe will be called
+    // implicitly during the component descruction lifecycle.
+    @wire(MessageContext)
+    messageContext;
+
+    // Encapsulate logic for LMS subscribe.
+    subscribeToMessageChannel() {
+        this.subscription = subscribe(
+            this.messageContext,
+            DOG_SELECTED_CHANNEL,
+            (message) => this.handleMessage(message)
+        );
+    }
+
+    // Handler for message received by component
+    handleMessage(message) {
+        // this.recordId = message.recordId;
+        const dogId = message.recordId;
+        window.console.log("dogId: ", dogId);
+        window.console.log("isSelected: ", message.isSelected);
+        if(message.isSelected){
+            this.recordId = dogId;
+        }
+        //  else {
+        //     const index = this.dogList.indexOf(recordId);
+        //     if (index > -1) {
+        //     this.dogList.splice(index, 1); // 2nd parameter means remove one item only
+            // }
+        // }
+    }
+
+    // Standard lifecycle hooks used to sub/unsub to message channel
+    connectedCallback() {
+        this.subscribeToMessageChannel();
+    }
+
+}

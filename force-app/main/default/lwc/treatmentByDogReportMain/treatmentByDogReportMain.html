@@ -1,0 +1,21 @@
+<template>
+    <lightning-card>
+        treatment report
+        <template for:each={dogList} for:item='dog'>
+            <div class="slds-grid slds-var-m-top_x-small" key={dog.Id}>
+                <div class="slds-size_1-of-6">
+                    {dog.Animal_Name_Id__c}
+                </div>
+                <div class="slds-size_1-of-6">
+                    {dog.Gender__c}
+                </div>
+                <div class="slds-size_1-of-6">
+                    {dog.Breed__c}
+                </div>
+                <div class="slds-size_1-of-6">
+                    {dog.Current_Animal_Age_Formatted__c}
+                </div>
+            </div>
+        </template>
+    </lightning-card>
+</template>
