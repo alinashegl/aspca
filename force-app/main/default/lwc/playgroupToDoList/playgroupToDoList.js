@@ -8,6 +8,7 @@ import createPlaygroup from '@salesforce/apex/PlaygroupToDoListController.create
 import copyPlaygroupSession from '@salesforce/apex/PlaygroupToDoListController.copyPlaygroupSession';
 import editPlaygroup from '@salesforce/apex/PlaygroupToDoListController.editPlaygroup';
 import getUserLocation from '@salesforce/apex/PlaygroupToDoListController.getUserLocation';
+import PlaygroupReportID from '@salesforce/label/c.PlaygroupReportID';
 
 export default class PlaygroupToDoList extends NavigationMixin(LightningElement) {
     location;
@@ -47,6 +48,14 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
 
     get actionLabel() {
         return this.optionsFieldLabel(this.action, this.actionLabels);
+    }
+
+
+    ReportUrl() {
+        
+        var Url = PlaygroupReportID;
+        window.open(Url,"_blank");
+
     }
 
     get sortFieldOptions() {
