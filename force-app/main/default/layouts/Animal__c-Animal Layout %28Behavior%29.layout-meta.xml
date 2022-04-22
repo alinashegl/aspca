@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
-    <customButtons>Generate_Kennel_Card</customButtons>
-    <customButtons>Upload_Photo</customButtons>
     <excludeButtons>ChangeOwnerOne</excludeButtons>
     <excludeButtons>ChangeRecordType</excludeButtons>
     <excludeButtons>Delete</excludeButtons>
@@ -106,44 +104,39 @@
     <platformActionList>
         <actionListContext>Record</actionListContext>
         <platformActionListItems>
-            <actionName>Clone</actionName>
+            <actionName>Edit</actionName>
             <actionType>StandardButton</actionType>
-            <sortOrder>1</sortOrder>
+            <sortOrder>0</sortOrder>
         </platformActionListItems>
         <platformActionListItems>
             <actionName>Animal__c.Refresh_Dog_Schedule</actionName>
             <actionType>QuickAction</actionType>
-            <sortOrder>2</sortOrder>
+            <sortOrder>1</sortOrder>
         </platformActionListItems>
         <platformActionListItems>
             <actionName>Generate_Kennel_Card</actionName>
             <actionType>CustomButton</actionType>
-            <sortOrder>3</sortOrder>
+            <sortOrder>2</sortOrder>
         </platformActionListItems>
         <platformActionListItems>
             <actionName>Create_Animal_Cage_Card</actionName>
             <actionType>CustomButton</actionType>
-            <sortOrder>4</sortOrder>
+            <sortOrder>3</sortOrder>
         </platformActionListItems>
         <platformActionListItems>
             <actionName>Animal__c.Create_Daily_Enrichment</actionName>
             <actionType>QuickAction</actionType>
+            <sortOrder>4</sortOrder>
+        </platformActionListItems>
+        <platformActionListItems>
+            <actionName>Animal_Discover</actionName>
+            <actionType>CustomButton</actionType>
             <sortOrder>5</sortOrder>
         </platformActionListItems>
         <platformActionListItems>
-            <actionName>Delete</actionName>
-            <actionType>StandardButton</actionType>
+            <actionName>New_Incident_Report</actionName>
+            <actionType>CustomButton</actionType>
             <sortOrder>6</sortOrder>
-        </platformActionListItems>
-        <platformActionListItems>
-            <actionName>ChangeRecordType</actionName>
-            <actionType>StandardButton</actionType>
-            <sortOrder>7</sortOrder>
-        </platformActionListItems>
-        <platformActionListItems>
-            <actionName>Edit</actionName>
-            <actionType>StandardButton</actionType>
-            <sortOrder>0</sortOrder>
         </platformActionListItems>
     </platformActionList>
     <relatedLists>
@@ -157,6 +150,20 @@
         <fields>Test_Notes__c</fields>
         <relatedList>Diagnostic__c.Animal__c</relatedList>
         <sortField>Date__c</sortField>
+        <sortOrder>Desc</sortOrder>
+    </relatedLists>
+    <relatedLists>
+        <excludeButtons>MassChangeOwner</excludeButtons>
+        <excludeButtons>New</excludeButtons>
+        <fields>NAME</fields>
+        <fields>Playgroup_Session__c</fields>
+        <fields>Animal_Name__c</fields>
+        <fields>Play_Rating__c</fields>
+        <fields>Playgroup_Session_Notes__c</fields>
+        <fields>Playgroup_Individual_Notes__c</fields>
+        <fields>Common_Playgroup_Notes__c</fields>
+        <relatedList>Animal_Playgroup__c.Animal__c</relatedList>
+        <sortField>NAME</sortField>
         <sortOrder>Desc</sortOrder>
     </relatedLists>
     <relatedLists>
@@ -440,20 +447,6 @@
         <relatedList>Additional_Dog_Present__c.Additional_Dog__c</relatedList>
     </relatedLists>
     <relatedLists>
-        <excludeButtons>MassChangeOwner</excludeButtons>
-        <excludeButtons>New</excludeButtons>
-        <fields>NAME</fields>
-        <fields>Playgroup_Session__c</fields>
-        <fields>Animal_Name__c</fields>
-        <fields>Play_Rating__c</fields>
-        <fields>Playgroup_Individual_Notes__c</fields>
-        <fields>Common_Playgroup_Note_Sections__c</fields>
-        <fields>Common_Playgroup_Notes__c</fields>
-        <relatedList>Animal_Playgroup__c.Animal__c</relatedList>
-        <sortField>NAME</sortField>
-        <sortOrder>Desc</sortOrder>
-    </relatedLists>
-    <relatedLists>
         <fields>NAME</fields>
         <fields>Type__c</fields>
         <fields>Play_Pause_Reason__c</fields>
@@ -463,6 +456,7 @@
     </relatedLists>
     <relatedLists>
         <excludeButtons>MassChangeOwner</excludeButtons>
+        <excludeButtons>New</excludeButtons>
         <fields>NAME</fields>
         <fields>Report_Date__c</fields>
         <fields>Incident_Date_Time__c</fields>

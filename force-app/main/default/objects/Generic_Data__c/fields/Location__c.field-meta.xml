@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Location__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>What location is this data for</inlineHelpText>
+    <label>Location</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>ARC</fullName>
+                <default>false</default>
+                <label>ARC</label>
+            </value>
+            <value>
+                <fullName>CARE</fullName>
+                <default>false</default>
+                <label>CARE</label>
+            </value>
+            <value>
+                <fullName>ARC/CARE</fullName>
+                <default>false</default>
+                <label>ARC/CARE</label>
+            </value>
+            <value>
+                <fullName>CRC</fullName>
+                <default>false</default>
+                <label>CRC</label>
+            </value>
+            <value>
+                <fullName>MRC</fullName>
+                <default>false</default>
+                <label>MRC</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -7,6 +7,7 @@ public with sharing class TreatmentSessionLWCController {
                     Id, 
                     ProtocolId__r.Name,
                     Aggressive_Worst__c,
+                    Aggressive_Movement__c,
                     Arousal_Best__c,
                     Arousal_Worst__c,
                     Fear_Best__c,
@@ -34,6 +35,7 @@ public with sharing class TreatmentSessionLWCController {
                 Id, 
                 ProtocolId__r.Name,
                 Aggressive_Worst__c,
+                Aggressive_Movement__c,
                 Arousal_Best__c,
                 Arousal_Worst__c,
                 Fear_Best__c,
@@ -49,7 +51,8 @@ public with sharing class TreatmentSessionLWCController {
                 Manager_Review_Notes__c,
                 Preferred_Motivators__c,
                 ProtocolId__r.Protocol_Box_Link__c,
-                Solicitation__c
+                Solicitation__c,
+                TreatmentSessionId__r.Treatment_Plan__c
             FROM Session_Protocol__c 
             WHERE Id =: protocolId
         ];
@@ -114,6 +117,9 @@ public with sharing class TreatmentSessionLWCController {
         try {
             Session_Protocol__c sessionProtocol = getProtocol(protocolId);
             ProtocolInfo protocolInfo = new ProtocolInfo(sessionProtocol);
+            Plan_Protocol__c pp = getPlanProtocol(sessionProtocol);
+            protocolInfo.planProtocolId = pp.Id;
+            protocolInfo.planProtocolNotes = pp.Protocol_Notes__c;
 
             System.debug('protocolInfo = ' + protocolInfo);
             return protocolInfo;
@@ -210,6 +216,16 @@ public with sharing class TreatmentSessionLWCController {
         return protocolsLists;
     }
 
+    private static Plan_Protocol__c getPlanProtocol(Session_Protocol__c sessionProtocol){
+        Plan_Protocol__c pProtocol = [
+            SELECT Id, Protocol_Notes__c
+            FROM Plan_Protocol__c
+            WHERE Protocol__c =: sessionProtocol.ProtocolId__c
+            AND Treatment_Plan__c =: sessionProtocol.TreatmentSessionId__r.Treatment_Plan__c
+        ];
+        return pProtocol;
+    }
+
     @AuraEnabled
     public static String updateProtocolAssignments(Session_Protocol__c[] protocolsToUpdate, String[] protocolIds, String[] planProtocolIds, String sessionId, String planId){
         try{
@@ -286,6 +302,12 @@ public with sharing class TreatmentSessionLWCController {
         @AuraEnabled public String protocolNotes { get; set; }
         @AuraEnabled public String managerReviewNotes { get; set; }
         @AuraEnabled public String boxLink {get; set;}
+        @AuraEnabled public String planProtocolId {get; set;}
+        @AuraEnabled public String planProtocolNotes {get; set;}
+        @AuraEnabled public behavior_config__mdt arousalConfig {get; set;}
+        @AuraEnabled public behavior_config__mdt fearConfig {get; set;}
+        @AuraEnabled public behavior_config__mdt fearSociabilityConfig {get; set;}
+        @AuraEnabled public behavior_config__mdt treatmentStagesConfig {get; set;}
 
 
         ProtocolInfo(Session_Protocol__c sp){
@@ -304,6 +326,7 @@ public with sharing class TreatmentSessionLWCController {
 
             String[] fieldList = new String[]{
                 'Aggressive_Worst__c',
+                'Aggressive_Movement__c',
                 'Arousal_Best__c',
                 'Arousal_Worst__c',
                 'Fear_Best__c',
@@ -317,6 +340,12 @@ public with sharing class TreatmentSessionLWCController {
                 PicklistField pf = new PicklistField(fieldAPI, String.valueOf(sp.get(fieldAPI)));
                 this.picklistFields.add(pf);
             }
+
+            //get the scale configs
+            this.arousalConfig = Behavior_Config__mdt.getInstance('Arousal_Scale');
+            this.fearConfig = Behavior_Config__mdt.getInstance('Fear_Scales');
+            this.fearSociabilityConfig = Behavior_Config__mdt.getInstance('Fear_Sociability_Scale');
+            this.treatmentStagesConfig = Behavior_Config__mdt.getInstance('Treatment_Stages');
         }
     }
 

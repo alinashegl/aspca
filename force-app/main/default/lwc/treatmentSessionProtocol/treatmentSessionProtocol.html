@@ -50,6 +50,21 @@
                             <!-- <lightning-card> -->
                                 <div class='slds-grid slds-wrap'>
                                     <div class='slds-col slds-size_1-of-1 slds-medium-size_3-of-6 slds-large-size_3-of-12'>
+
+                                    </div>
+                                    <div class='slds-col slds-size_1-of-1 slds-medium-size_3-of-6 slds-large-size_2-of-12'>
+                                        <lightning-button variant="Neutral" label={protocolInfo.arousalConfig.Label} data-link={protocolInfo.arousalConfig.Value__c} title="Arousal Scale" onclick={handleConfigLink} class="slds-m-left_x-small"></lightning-button>
+                                    </div>
+                                    <div class='slds-col slds-size_1-of-1 slds-medium-size_3-of-6 slds-large-size_2-of-12'>
+                                        <lightning-button variant="Neutral" label={protocolInfo.fearConfig.Label} data-link={protocolInfo.fearConfig.Value__c} title="Fear Scales" onclick={handleConfigLink} class="slds-m-left_x-small"></lightning-button>
+                                    </div>
+                                    <div class='slds-col slds-size_1-of-1 slds-medium-size_3-of-6 slds-large-size_3-of-12'>
+                                        <lightning-button variant="Neutral" label={protocolInfo.fearSociabilityConfig.Label} data-link={protocolInfo.fearSociabilityConfig.Value__c} title="Fear Sociability Scale" onclick={handleConfigLink} class="slds-m-left_x-small"></lightning-button>
+                                    </div>
+                                    <div class='slds-col slds-size_1-of-1 slds-medium-size_3-of-6 slds-large-size_2-of-12'>
+                                        <lightning-button variant="Neutral" label={protocolInfo.treatmentStagesConfig.Label} data-link={protocolInfo.treatmentStagesConfig.Value__c} title="Treatment Scale" onclick={handleConfigLink} class="slds-m-left_x-small"></lightning-button>
+                                    </div>
+                                    <div class='slds-col slds-size_1-of-1 slds-medium-size_3-of-6 slds-large-size_3-of-12'>
                                         <template for:each={col1Fields} for:item="field">
                                             <div key={field.name} class="slds-p-top_medium"> 
                                                 <h2 class="slds-card__header-title">{field.name}</h2>
@@ -130,8 +145,10 @@
                                 </h2>
                                 <h2 class="slds-p-top_large slds-card__header-title">Preferred Motivators</h2>
                                 <lightning-input class="slds-p-left_medium" data-name="preferredMotivators" type="text" name="preferredMotivators" value={protocolInfo.preferredMotivators}></lightning-input>
-                                <h2 class="slds-p-top_large slds-card__header-title">Protocol Notes</h2>
+                                <h2 class="slds-p-top_large slds-card__header-title">Session Protocol Notes</h2>
                                 <lightning-textarea class="slds-p-left_medium" data-name="protocolNotes" type="text" name="protocolNotes" value={protocolInfo.protocolNotes}></lightning-textarea>
+                                <h2 class="slds-p-top_large slds-card__header-title">Plan Protocol Notes</h2>
+                                <lightning-textarea class="slds-p-left_medium" data-name="planProtocolNotes" type="text" name="planProtocolNotes" value={protocolInfo.planProtocolNotes}></lightning-textarea>
                                 <div class="slds-p-top_large">
                                     <c-treatment-session-child-list
                                         protocol-id={recordId}
