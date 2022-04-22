@@ -1,8 +1,9 @@
 public with sharing class MRCTreatmentPlansReportLWCController {
-
+	public Generic_Data__c genericData {get;set;}
     public List<AnimalInfo> infoWrapper {get; set;}
     public MRCTreatmentPlansReportLWCController(){
         infoWrapper = getMRCDogsForPDF();
+        genericData = getTipOfMonth();
     }
     
     @AuraEnabled
@@ -70,6 +71,20 @@ public with sharing class MRCTreatmentPlansReportLWCController {
         return [SELECT Id, Helper_Dogs__c FROM Animal__c WHERE Id =: recordId LIMIT 1];
     }
 
+    @AuraEnabled
+    public static Generic_Data__c getTipOfMonth(){
+        Generic_Data__c[] gData = [
+            SELECT Id, Text__c 
+            FROM Generic_Data__c 
+            WHERE Species__c = 'Dog'
+            AND Location__c = 'MRC'
+            AND Name = 'MRC TOM'
+            LIMIT 1
+        ];
+
+        return !gData.isEmpty() ? gData[0] : null;
+    }
+
     @testVisible
     private static Map<Id, Map<String, Plan_Protocol__c[]>> getProtocolCategoryMap(Id[] animalIds){
         Map<Id, Map<String, Plan_Protocol__c[]>> animalCategoryProtocolMap = new Map<Id, Map<String, Plan_Protocol__c[]>>();
@@ -117,10 +132,10 @@ public with sharing class MRCTreatmentPlansReportLWCController {
     }
 
     public class AnimalInfo{
-        @AuraEnabled public Animal__c dog;
-        @AuraEnabled public String restDays;
-        @AuraEnabled public String motivators;
-        @AuraEnabled public Boolean isPlayPause;
-        @AuraEnabled public Map<String, Plan_Protocol__c[]> categoryToProtocolMap;
+        @AuraEnabled public Animal__c dog {get;set;}
+        @AuraEnabled public String restDays {get;set;}
+        @AuraEnabled public String motivators {get;set;}
+        @AuraEnabled public Boolean isPlayPause {get;set;}
+        @AuraEnabled public Map<String, Plan_Protocol__c[]> categoryToProtocolMap {get;set;}
     }
 }
