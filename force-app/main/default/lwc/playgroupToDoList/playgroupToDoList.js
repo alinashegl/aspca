@@ -8,9 +8,13 @@ import createPlaygroup from '@salesforce/apex/PlaygroupToDoListController.create
 import copyPlaygroupSession from '@salesforce/apex/PlaygroupToDoListController.copyPlaygroupSession';
 import editPlaygroup from '@salesforce/apex/PlaygroupToDoListController.editPlaygroup';
 import getUserLocation from '@salesforce/apex/PlaygroupToDoListController.getUserLocation';
-import PlaygroupReportID from '@salesforce/label/c.PlaygroupReportID';
+import getReportId from '@salesforce/apex/PlaygroupToDoListController.getReportId';
+
 
 export default class PlaygroupToDoList extends NavigationMixin(LightningElement) {
+    @track errorMsg;
+    @track reportID;
+    
     location;
     //exposed properties for "copy playgroup" and "edit playgroup"
     @api
@@ -50,12 +54,17 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
         return this.optionsFieldLabel(this.action, this.actionLabels);
     }
 
+   handleGetReportUrl() {
+        getReportId()
+        .then(result => {
+            this.reportID = result;
+            var Url='/'+this.reportID;
+            window.open(Url, "_blank");
+        })
 
-    ReportUrl() {
-        
-        var Url = PlaygroupReportID;
-        window.open(Url,"_blank");
-
+            .catch(error => {
+                this.errorMsg = error;
+            })
     }
 
     get sortFieldOptions() {
