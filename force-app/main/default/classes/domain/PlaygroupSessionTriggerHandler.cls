@@ -9,6 +9,26 @@ public with sharing class PlaygroupSessionTriggerHandler {
         //if playgroup leader is has changed, need to update, create, edit the playgroup contact for each of the child animal playgroups
         handlePlaygroupLeaderUpdated(updatedSessions, oldSessionMap);
     }
+    
+    //Neha :#376 Card
+    public static void UpdateNoteToAnimal(Map<Id, Playgroup_Session__c> newDataMap,Map<Id, Playgroup_Session__c> olDataMap){
+        Map<String,String> animalIdToNotes = new Map<String,String>();
+        List<Animal_Playgroup__c> animalToUpdate = new List<Animal_Playgroup__c>();
+        for(Playgroup_Session__c ps : newDataMap.values()){
+            if(ps.Animal_Playgroup__c!= null){
+               if(newDataMap.get(ps.id).Playgroup_Notes__c != olDataMap.get(ps.id).Playgroup_Notes__c) {
+                   animalIdToNotes.put(ps.Animal_Playgroup__c, newDataMap.get(ps.id).Playgroup_Notes__c);
+               }
+            }
+        }
+        if(animalIdToNotes.keyset().size() >0){
+            for(Animal_Playgroup__c animal : [Select id,Playgroup_Session_Notes__c from Animal_Playgroup__c where id in : animalIdToNotes.keyset()] ){
+                animal.Playgroup_Session_Notes__c  = animalIdToNotes.get(animal.id);
+                animalToUpdate.add(animal);
+            }
+            Update animalToUpdate;
+        }
+    }
 
     private static void handlePlaygroupleaderPopulated(Playgroup_Session__c[] sessions){
         //need to filter out the sessions without leaders
