@@ -37,6 +37,11 @@
                 <label>D - Dog Aggression</label>
             </value>
             <value>
+                <fullName>No Evaluation</fullName>
+                <default>false</default>
+                <label>No Evaluation</label>
+            </value>
+            <value>
                 <fullName>A</fullName>
                 <default>false</default>
                 <isActive>false</isActive>
@@ -59,12 +64,6 @@
                 <default>false</default>
                 <isActive>false</isActive>
                 <label>D</label>
-            </value>
-            <value>
-                <fullName>No Evaluation</fullName>
-                <default>false</default>
-                <isActive>false</isActive>
-                <label>No Evaluation</label>
             </value>
         </valueSetDefinition>
     </valueSet>
