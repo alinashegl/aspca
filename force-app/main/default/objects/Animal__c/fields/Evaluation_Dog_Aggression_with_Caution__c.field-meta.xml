@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Evaluation_Dog_Aggression_with_Caution__c</fullName>
+    <externalId>false</externalId>
+    <label>Evaluation Dog Aggression with Caution</label>
+    <summaryFilterItems>
+        <field>Behavior_Evaluation__c.Dogs_that_need_a_Dog_Dog_Test__c</field>
+        <operation>equals</operation>
+        <value>True</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Behavior_Evaluation__c.Animal__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>
