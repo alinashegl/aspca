@@ -29,32 +29,18 @@
     </columns>
     <filter>
         <criteriaItems>
-            <column>Animal__c$Evaluation_Dog_Dog_Testing_Needed__c</column>
-            <columnToColumn>false</columnToColumn>
-            <isUnlocked>false</isUnlocked>
-            <operator>greaterThan</operator>
-            <value>0</value>
-        </criteriaItems>
-        <criteriaItems>
-            <column>Animal__c$Evaluation_Dog_Dog_Testing_Done__c</column>
-            <columnToColumn>false</columnToColumn>
-            <isUnlocked>false</isUnlocked>
-            <operator>equals</operator>
-            <value>0</value>
-        </criteriaItems>
-        <criteriaItems>
-            <column>Animal__c$Evaluation_Dog_Aggression_with_Caution__c</column>
-            <columnToColumn>false</columnToColumn>
-            <isUnlocked>false</isUnlocked>
-            <operator>greaterThan</operator>
-            <value>0</value>
-        </criteriaItems>
-        <criteriaItems>
             <column>Animal__c$Current_Recent_Shelter_Location__c</column>
             <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>contains</operator>
             <value>ARC,CRC,MRC</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Animal__c$Location_Filter__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
         </criteriaItems>
     </filter>
     <format>Summary</format>
