@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Report xmlns="http://soap.sforce.com/2006/04/metadata">
     <columns>
-        <field>Animal__c$Name</field>
-    </columns>
-    <columns>
         <field>Animal__c$Animal_Name_Id__c</field>
     </columns>
     <columns>
@@ -29,14 +26,23 @@
         <aggregateTypes>Sum</aggregateTypes>
         <field>Animal__c$Behavior_Medication_Flag__c</field>
     </columns>
+    <columns>
+        <field>Animal__c$Final_Outcome__c</field>
+    </columns>
+    <columns>
+        <field>Animal__c$Final_Outcome_Date__c</field>
+    </columns>
+    <columns>
+        <field>Animal__c$Current_Recent_Shelter_Location__c</field>
+    </columns>
     <description>Card 66 - MRC / CRC Animal Tracking (MRC Supplemental Tracking)</description>
     <filter>
         <criteriaItems>
-            <column>Animal__c$Shelter_Location2__c</column>
+            <column>Animal__c$Current_Recent_Shelter_Location__c</column>
             <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
-            <operator>equals</operator>
-            <value>MRC - CRC</value>
+            <operator>contains</operator>
+            <value>CRC,MRC</value>
         </criteriaItems>
     </filter>
     <format>Tabular</format>

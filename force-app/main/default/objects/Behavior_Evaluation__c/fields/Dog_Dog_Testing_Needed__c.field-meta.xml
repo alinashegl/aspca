@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Dog_Dog_Testing_Needed__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+(IF(TEXT(Evaluation_Subtype__c)=&apos;Puppy&apos;,0,1)) + 
+(IF(TEXT(Evaluation_Subtype__c)=&apos;Dog Fighting&apos;,1,0)) + 
+(IF(TEXT(Evaluation_Subtype__c)=&apos;Adult Animal&apos;,1,0)) + 
+(IF(TEXT(Evaluation_Subtype__c)=&apos;Dog/Dog Only&apos;,1,0))
+&gt;0,TRUE,FALSE)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Dog/Dog Testing Needed</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

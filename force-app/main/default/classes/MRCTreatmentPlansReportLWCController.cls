@@ -1,8 +1,9 @@
 public with sharing class MRCTreatmentPlansReportLWCController {
-
+	public Generic_Data__c genericData {get;set;}
     public List<AnimalInfo> infoWrapper {get; set;}
     public MRCTreatmentPlansReportLWCController(){
         infoWrapper = getMRCDogsForPDF();
+        genericData = getTipOfMonth();
     }
     
     @AuraEnabled

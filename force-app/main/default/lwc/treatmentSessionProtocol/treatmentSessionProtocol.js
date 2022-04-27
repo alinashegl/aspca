@@ -11,6 +11,7 @@ import PROTOCOL_NOTES_FIELD from '@salesforce/schema/Session_Protocol__c.Protoco
 import PREFERRED_MOTIVATORS_FIELD from '@salesforce/schema/Session_Protocol__c.Preferred_Motivators__c';
 import PLAN_PROTOCOL_ID_FIELD from '@salesforce/schema/Plan_Protocol__c.Id';
 import PLAN_PROTOCOL_NOTES_FIELD from '@salesforce/schema/Plan_Protocol__c.Protocol_Notes__c';
+import SystemModstamp from '@salesforce/schema/Account.SystemModstamp';
 
 export default class TreatmentSessionProtocol extends NavigationMixin(LightningElement) {
     @api recordId;
@@ -22,6 +23,7 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
 
     fieldValues = [];
     protocolInfo;
+
     error;
     loading = true;
     isSkipped = false;
@@ -73,7 +75,7 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
 
         data.picklistFields.forEach(element => {
             this.fieldValues.push({name: element.apiName, value: element.currentValue});
-            if(element.apiName == 'Aggressive_Worst__c'){
+            if(element.apiName.includes('Aggressive')){
                 this.col1Fields.push(element);
             } else 
             if(element.apiName.includes('Arousal')){
@@ -233,6 +235,16 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
             type: 'standard__webPage',
             attributes: {
                 url: this.protocolInfo.boxLink
+            }
+        };
+        this[NavigationMixin.Navigate](config);
+    }
+
+    handleConfigLink(event){
+        const config = {
+            type: 'standard__webPage',
+            attributes: {
+                url: event.target.dataset.link
             }
         };
         this[NavigationMixin.Navigate](config);

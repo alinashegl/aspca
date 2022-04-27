@@ -112,19 +112,22 @@
         <apex:variable value="{!$Resource.behvSevere}" var="behvSevere" />
 
         <div style="border:1px solid;">
-            <center style="border-bottom:1px solid;">
+            <div style="border-bottom:1px solid; text-align:center">
                 <h3 style="font-weight:900">
                     <!--Top Header -->
                     Mini Rehab Center Treatment Plans
                 </h3>
                 <!--Top Body Sesction -->
-            </center>
+                <div style="text-align:left">
+                    <b>Tip of the month:</b>{!genericData.Text__c}
+                </div>
+            </div>
             <div>
                 <table class="tableSpcae c_table" cellspacing="0">
                     <thead>
                         <tr>
                             <th width="10%" class="bottomline"></th>
-                            <th width="5%" class="bottomline">Socialsion</th>
+                            <th width="5%" class="bottomline">Socialization</th>
                             <th width="5%" class="bottomline">Leashing</th>
                             <th width="5%" class="bottomline">Walking</th>
                             <th width="5%" class="bottomline">Handling</th>
