@@ -41,15 +41,33 @@ export default class TreatmentByDogReportMain extends LightningElement {
         window.console.log("dogId: ", dogId);
         window.console.log("isSelected: ", message.isSelected);
         if(message.isSelected){
-            this.recordId = dogId;
+            this.dogList.push(dogId);
         }
-        //  else {
-        //     const index = this.dogList.indexOf(recordId);
-        //     if (index > -1) {
-        //     this.dogList.splice(index, 1); // 2nd parameter means remove one item only
-            // }
-        // }
+         else {
+            const index = this.dogList.indexOf(dogId);
+            if (index > -1) {
+                this.dogList.splice(index, 1);
+            }
+        }
     }
+
+    // handleMessage(message) {
+    //     // this.recordId = message.recordId;
+    //     const dogId = message.recordId;
+    //     window.console.log("dogId: ", dogId);
+    //     window.console.log("isSelected: ", message.isSelected);
+    //     if(message.isSelected){
+    //         this.recordId = dogId;
+    //     }
+    //      else {
+    //         // const index = this.dogList.Id.indexOf(recordId);
+    //         const index = this.dogList.findIndex(dog => dog.Id === dogId);
+    //         window.console.log('index: ', index);
+    //         if (index > -1) {
+    //             this.dogList.splice(index, 1);
+    //         }
+    //     }
+    // }
 
     // Standard lifecycle hooks used to sub/unsub to message channel
     connectedCallback() {
