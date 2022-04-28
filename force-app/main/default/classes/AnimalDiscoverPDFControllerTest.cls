@@ -50,6 +50,11 @@ public class AnimalDiscoverPDFControllerTest {
         test.setCurrentPage(pageRef);                       
 
         test.stopTest();
+        System.assertNotEquals(null, apdf.animalD);
+        System.assertNotEquals(null, apdf.aPlayGroups);
+        System.assertNotEquals(null, apdf.aTreatmentSession);
+        System.assertNotEquals(null, apdf.gradeHistory);
+        System.assertNotEquals(null, apdf.behaviorEvaluations);
     }
     
     @isTest
@@ -94,6 +99,11 @@ public class AnimalDiscoverPDFControllerTest {
         test.setCurrentPage(pageRef);                       
 
         test.stopTest();
+        System.assertNotEquals(null, apdf.animalD);
+        System.assertNotEquals(null, apdf.aPlayGroups);
+        System.assertNotEquals(null, apdf.aTreatmentSession);
+        System.assertNotEquals(null, apdf.gradeHistory);
+        System.assertNotEquals(null, apdf.behaviorEvaluations);
     }
     
     private static Playgroup_Session__c createPlaygroupSession(){
