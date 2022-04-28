@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Incident_Report</fullName>
+        <description>Incident Report</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>neha.tabassum@aspca.org</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Incident_Report</template>
+    </alerts>
+</Workflow>
