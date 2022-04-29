@@ -1,8 +1,23 @@
 public with sharing class MRCTreatmentPlansReportLWCController {
+    public List<String> categoryList = new List<String>{'Fear Socialization','Fear Leashing','Fear Walking','Fear Handling','Fear Containment','Non Fear Protocols'};
 	public Generic_Data__c genericData {get;set;}
     public List<AnimalInfo> infoWrapper {get; set;}
     public MRCTreatmentPlansReportLWCController(){
         infoWrapper = getMRCDogsForPDF();
+        for(AnimalInfo ai: infoWrapper){
+            List<CategoryToProtocol> categoryProtocols = new List<CategoryToProtocol>();
+            for(String s : categoryList){
+                CategoryToProtocol cp = new CategoryToProtocol();
+                cp.category = s;
+                if(ai.categoryToProtocolMap != null && ai.categoryToProtocolMap.containsKey(s)){
+                   cp.protocols = ai.categoryToProtocolMap.get(s);
+                } else {
+                    cp.protocols = new List<SObject>();
+                }
+                categoryProtocols.add(cp);
+            }
+            ai.categoryProtocol = categoryProtocols;
+        }
         genericData = getTipOfMonth();
     }
     
@@ -137,5 +152,11 @@ public with sharing class MRCTreatmentPlansReportLWCController {
         @AuraEnabled public String motivators {get;set;}
         @AuraEnabled public Boolean isPlayPause {get;set;}
         @AuraEnabled public Map<String, Plan_Protocol__c[]> categoryToProtocolMap {get;set;}
+        @AuraEnabled public List<CategoryToProtocol> categoryProtocol {get;set;}
+    }
+    
+    public class CategoryToProtocol {
+        public String category {get; set;}
+        public List<Plan_Protocol__c> protocols{get; set;}
     }
 }
