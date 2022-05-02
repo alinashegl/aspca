@@ -1,11 +1,12 @@
 import { LightningElement, track, wire} from 'lwc';
 import getDogInfo from '@salesforce/apex/TreatmentByDogLWCController.getDogInfo';
+import { NavigationMixin } from 'lightning/navigation';
 
 // Import message service features required for subscribing and the message channel
 import { subscribe, MessageContext } from 'lightning/messageService';
 import DOG_SELECTED_CHANNEL from '@salesforce/messageChannel/DogSelectedChannel__c';
 
-export default class TreatmentByDogReportMain extends LightningElement {
+export default class TreatmentByDogReportMain extends NavigationMixin(LightningElement) {
     @track dogList = [];
     recordId;
 
@@ -50,6 +51,31 @@ export default class TreatmentByDogReportMain extends LightningElement {
             }
         }
     }
+
+    exportAsPdf() {
+        this[NavigationMixin.GenerateUrl]({
+            type: 'standard__webPage',
+            attributes: {
+                url: '/apex/TreatmentsByDogPdf?dogList=' + this.dogList
+            }
+        }).then(generatedUrl => {
+            window.open(generatedUrl);
+        });
+    }
+
+    // exportAsPdf() {
+    //     this[NavigationMixin.GenerateUrl]({
+    //         type: 'standard__webPage',
+    //         attributes: {
+    //             url: '/apex/TreatmentsByDogPdf'
+    //         },
+    //         state: {
+    //             c__dogList: this.dogList
+    //         }
+    //     }).then(generatedUrl => {
+    //         window.open(generatedUrl);
+    //     });
+    // }
 
     // handleMessage(message) {
     //     // this.recordId = message.recordId;

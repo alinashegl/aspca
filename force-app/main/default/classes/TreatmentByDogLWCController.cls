@@ -1,7 +1,12 @@
 public with sharing class TreatmentByDogLWCController {
-    public TreatmentByDogLWCController(){
+    public DogInfoWrapper[] dogInfoWrapper {get; set;}
+    public String dogList{get;set;}
 
+    public TreatmentByDogLWCController(){        
+        String dogs = apexpages.currentpage().getparameters().get('dogList');
+        System.debug('dogs: ' + dogs);
     }
+
 
     @AuraEnabled
     public static string[] getUserLocation(){
