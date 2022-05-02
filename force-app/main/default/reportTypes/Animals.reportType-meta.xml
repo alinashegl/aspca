@@ -423,6 +423,11 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>User_Location__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>Number_of_Offspring__c</field>
             <table>Animal__c</table>
         </columns>
@@ -439,6 +444,11 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Photo2__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Location_Filter__c</field>
             <table>Animal__c</table>
         </columns>
         <columns>
@@ -1306,6 +1316,6 @@
             <field>Walks_on_a_Leash_Notes__c</field>
             <table>Animal__c</table>
         </columns>
-        <masterLabel>Blythe.boaz@aspcafir.org.LanieDev</masterLabel>
+        <masterLabel>Animals</masterLabel>
     </sections>
 </ReportType>

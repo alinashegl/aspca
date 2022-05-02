@@ -161,10 +161,10 @@
                                             <strong>Rest Days:</strong>{!record.restDays}</span>
                                     </div>
                                 </td>
-
+								<apex:repeat value="{!record.categoryProtocol}" var="cat">
                                 <td class="line" style="border-top: 1px solid;">
                                     <table>
-                                        <apex:repeat value="{!record.categoryToProtocolMap['Fear Socialization']}" var="innerProtocol">
+                                        <apex:repeat value="{!cat.protocols}" var="innerProtocol">
                                             <tr>
                                                 <td>
                                                     <b>{!UPPER( innerProtocol.Protocol_Name__c )}</b>
@@ -176,79 +176,7 @@
                                         </apex:repeat>
                                     </table>
                                 </td>
-                                <td class="line" style="border-top: 1px solid;">
-                                    <table>
-                                        <apex:repeat value="{!record.categoryToProtocolMap['Fear Leashing']}" var="innerProtocol">
-                                            <tr>
-                                                <td>
-                                                    <b>{!UPPER( innerProtocol.Protocol_Name__c )}</b>
-                                                    <apex:outputPanel rendered="{!If(ISBLANK(innerProtocol.Protocol_Notes__c),false,true)}">
-                                                        - {!innerProtocol.Protocol_Notes__c}
-                                                    </apex:outputPanel>
-                                                </td>
-                                            </tr>
-                                        </apex:repeat>
-                                    </table>
-                                </td>
-                                <!--<td class="line" style="border-top: 1px solid;">
-                                <table>
-                                    <apex:repeat value="{!record.categoryToProtocolMap['Fear Walking']}" var="innerProtocol">
-                                        <tr>
-                                            <td>
-                                                <b>{!UPPER( innerProtocol.Protocol_Name__c )}</b>
-                                                <apex:outputPanel rendered="{!If(ISBLANK(innerProtocol.Protocol_Notes__c),false,true)}">
-                                                - {!innerProtocol.Protocol_Notes__c}
-                                                </apex:outputPanel>
-                                            </td>
-                                        </tr>
-                                    </apex:repeat>
-                                </table>
-                            </td>
-                            <td class="line" style="border-top: 1px solid;">
-                                <table>
-                                    <apex:repeat value="{!record.categoryToProtocolMap['Fear Handling']}" var="innerProtocol">
-                                        <tr>
-                                            <td>
-                                                <b>{!UPPER( innerProtocol.Protocol_Name__c )}</b>
-                                                <apex:outputPanel rendered="{!If(ISBLANK(innerProtocol.Protocol_Notes__c),false,true)}">
-                                                - {!innerProtocol.Protocol_Notes__c}
-                                                </apex:outputPanel>
-                                            </td>
-                                        </tr>
-                                    </apex:repeat>
-                                </table>
-                            </td>-->
-                                <td class="line" style="border-top: 1px solid;"></td>
-                                <td class="line" style="border-top: 1px solid;"></td>
-                                <td class="line" style="border-top: 1px solid;">
-                                    <table>
-                                        <apex:repeat value="{!record.categoryToProtocolMap['Fear Containment']}" var="innerProtocol">
-                                            <tr>
-                                                <td>
-                                                    <b>{!UPPER( innerProtocol.Protocol_Name__c )}</b>
-                                                    <apex:outputPanel rendered="{!If(ISBLANK(innerProtocol.Protocol_Notes__c),false,true)}">
-                                                        - {!innerProtocol.Protocol_Notes__c}
-                                                    </apex:outputPanel>
-                                                </td>
-                                            </tr>
-                                        </apex:repeat>
-                                    </table>
-                                </td>
-                                <td class="line" style="border-top: 1px solid;">
-                                    <table>
-                                        <apex:repeat value="{!record.categoryToProtocolMap['Non Fear Protocols']}" var="innerProtocol">
-                                            <tr>
-                                                <td>
-                                                    <b>{!UPPER( innerProtocol.Protocol_Name__c )}</b>
-                                                    <apex:outputPanel rendered="{!If(ISBLANK(innerProtocol.Protocol_Notes__c),false,true)}">
-                                                        - {!innerProtocol.Protocol_Notes__c}
-                                                    </apex:outputPanel>
-                                                </td>
-                                            </tr>
-                                        </apex:repeat>
-                                    </table>
-                                </td>
-                                <!--</apex:repeat>-->
+                                </apex:repeat>
                             </tr>
                             <tr>
                                 <td></td>

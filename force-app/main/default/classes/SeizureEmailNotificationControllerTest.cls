@@ -20,7 +20,20 @@ public class SeizureEmailNotificationControllerTest {
         Test.startTest();
         SeizureEmailNotificationController.handleSeizureEmailNotificationSchedular();
         Test.stopTest();
+        Animal__c anm = [Select Email_Notification__c from Animal__c where id =: anim.Id];
+        System.assertEquals(false, anm.Email_Notification__c);
     }
+    
+    @isTest
+    static void testSchedule(){
+        Test.StartTest();
+        SeizureEmailNotificationSchedulable sh1 = new SeizureEmailNotificationSchedulable();      
+        String sch = '0 0 23 * * ?';
+        system.schedule('Test check', sch, sh1);
+        Test.stopTest();
+        System.assertNotEquals(null, sh1);
+    }
+
      private static Contact createGenericContact(String location){
         User u = [SELECT Id, Location__c FROM User WHERE isActive = true AND Location__c =: location LIMIT 1];
         
