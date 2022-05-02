@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Do_not_allow_changes_to_contact_Name</fullName>
+    <active>true</active>
+    <description>Do not allow changes to Contact Name for Read only suspect/owner records for specific profiles</description>
+    <errorConditionFormula>AND(OR( $User.ProfileId = &quot;00ei0000000PBaR&quot;,
+$User.ProfileId = &quot;00ei0000000PBaX&quot;,
+$User.ProfileId = &quot;00ei0000000PBaT&quot;,
+$User.ProfileId = &quot;00ei0000000PBaU&quot;,
+$User.ProfileId = &quot;00ei0000000PBaW&quot;,
+$User.ProfileId = &quot;00ei0000000PBaQ&quot;),
+
+OR(ISCHANGED( LastName ), ISCHANGED( FirstName )))</errorConditionFormula>
+    <errorMessage>You do not have permission to make changes to this record.</errorMessage>
+</ValidationRule>

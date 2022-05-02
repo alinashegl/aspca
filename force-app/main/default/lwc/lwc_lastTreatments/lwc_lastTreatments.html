@@ -1,0 +1,86 @@
+<template>
+    <lightning-accordion title="Treatment Protocols" allow-multiple-sections-open class="slds-box slds-theme_default slds-box_x-small">
+        <lightning-accordion-section title="Last Treatment Protocols" name="treatments" label={protocolLabel}>
+            <lightning-button-menu slot="actions"
+                                  alternative-text="Show menu"
+                                  title="Show menu"
+                                  icon-size="x-small"
+                                  menu-alignment="auto">
+                <lightning-menu-item title="Toggle Layout" value="Toggle" label="Toggle fields" onclick={handleToggle}></lightning-menu-item>
+            </lightning-button-menu>
+            <template if:true={allFields}>
+                <lightning-layout multiple-rows>
+                    <template if:true={lastTreatments}>
+                        <template for:each={lastTreatments.data} for:item='protocol'>
+                            <lightning-layout-item key={protocol.Id} size="12" small-device-size="6" medium-device-size="4" large-device-size="3" padding="around-small">
+                                <lightning-card title="Session Protocol" icon-name="utility:list">
+                                    <lightning-record-form
+                                        object-api-name="Session_Protocol__c"
+                                        record-id={protocol.Id}
+                                        layout-type="Full"
+                                        density="comfy"
+                                        mode="readonly">
+                                    </lightning-record-form>
+                                </lightning-card>
+                            </lightning-layout-item>
+                        </template>
+                    </template>
+                </lightning-layout>
+            </template>
+            <template if:false={allFields}>
+                <template if:true={lastTreatments}>
+                    <template for:each={lastTreatments.data} for:item='protocol'>
+                        <lightning-card key={protocol.Id}>
+                            <div class="slds-border_bottom">
+                                <lightning-layout multiple-rows>
+                                    <lightning-layout-item size="12" small-device-size="4" medium-device-size="2" large-device-size="2" padding="horizontal-small">
+                                        <div class="slds-form-element">
+                                            <label class="slds-form-element__label">Overall Score</label>
+                                            <div class="slds-form-element__static">
+                                                {protocol.Overall_Score__c}
+                                            </div>
+                                        </div>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="12" small-device-size="8" medium-device-size="8" large-device-size="6" padding="horizontal-small">
+                                        <div class="slds-form-element">
+                                            <label class="slds-form-element__label">Protocol Notes</label>
+                                            <div class="slds-form-element__static">
+                                                {protocol.Protocol_Notes__c}
+                                            </div>
+                                        </div>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="12" small-device-size="6" medium-device-size="2" large-device-size="2" padding="horizontal-small">
+                                        <div class="slds-form-element">
+                                            <label class="slds-form-element__label">Date</label>
+                                            <div class="slds-form-element__static">
+                                                <lightning-formatted-date-time value={protocol.CreatedDate}></lightning-formatted-date-time>
+                                            </div>
+                                        </div>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="12" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-small">
+                                        <div class="slds-form-element">
+                                            <label class="slds-form-element__label">Novel Person</label>
+                                            <div class="slds-form-element__static">
+                                                <template if:true={protocol.Novel_Person__c}>
+                                                    <lightning-icon icon-name="utility:check" size="x-small"></lightning-icon>
+                                                </template>
+                                            </div>
+                                        </div>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </div>
+                        </lightning-card>
+                    </template>
+                </template>
+            </template>
+            <template if:false={hasData}>
+                <div class="slds-illustration slds-illustration_small">
+                    <div class="slds-text-longform">
+                      <h3 class="slds-text-heading_medium">No data</h3>
+                      <p class="slds-text-body_regular">Add session protocols to populate data</p>
+                    </div>
+                  </div>
+            </template>
+        </lightning-accordion-section>
+    </lightning-accordion>
+</template>

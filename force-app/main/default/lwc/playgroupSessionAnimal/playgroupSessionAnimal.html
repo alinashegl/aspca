@@ -1,0 +1,175 @@
+<template>
+    <template if:true={playgroupAnimalId}>
+        <div class="slds-card slds-card_boundary card-custom">
+            <lightning-layout multiple-rows pull-to-boundary="medium" class="slds-var-p-left_medium slds-var-p-right_medium" >
+                <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="6" large-device-size="6">
+                    <lightning-record-edit-form
+                        object-api-name="Animal__c"
+                        record-id={animalId}
+                        onsuccess={handleAnimalUpdateSuccess}
+                        onerror={handleAnimalUpdateError}
+                    >
+                        <lightning-layout multiple-rows pull-to-boundary="medium">
+                            <lightning-layout-item flexibility="auto, no-grow" size="6" small-device-size="3" medium-device-size="2" large-device-size="4" padding={layoutItemPadding}>
+                                <div class="slds-form-element slds-var-p-left_x-small">
+                                    <label class="slds-form-element__label" for="form-element-01">Name</label>
+                                    <div class="slds-text-title_bold">
+                                        {animalName}
+                                    </div>
+                                </div>
+                            </lightning-layout-item>
+                            <lightning-layout-item flexibility="auto, no-grow" size="6" small-device-size="3" medium-device-size="2" large-device-size="4" padding={layoutItemPadding}>
+                                <div class="slds-form-element slds-var-p-left_x-small">
+                                    <label class="slds-form-element__label" for="form-element-01">Id#</label>
+                                    <lightning-output-field field-name="Name" variant='label-hidden'> </lightning-output-field>
+                                </div>
+                            </lightning-layout-item>
+                            <lightning-layout-item flexibility="auto, no-grow" size="6" small-device-size="3" medium-device-size="2" large-device-size="4" padding={layoutItemPadding}>
+                                <div class="slds-form-element slds-var-p-left_x-small">
+                                    <label class="slds-form-element__label" for="form-element-01">Sex</label>
+                                    <lightning-output-field field-name="Gender__c" variant='label-hidden'> </lightning-output-field>
+                                </div>
+                            </lightning-layout-item>
+                            <lightning-layout-item flexibility="auto, no-grow" size="6" small-device-size="3" medium-device-size="2" large-device-size="4" padding={layoutItemPadding}>
+                                <div class="slds-form-element slds-var-p-left_x-small">
+                                    <label class="slds-form-element__label" for="form-element-01">Location</label>
+                                    <lightning-output-field field-name="Current_Recent_Shelter_Location__c" variant='label-hidden'> </lightning-output-field>
+                                </div>
+                            </lightning-layout-item>
+                            <lightning-layout-item flexibility="auto, no-grow" size="12" small-device-size="6" medium-device-size="2" large-device-size="4" padding={layoutItemPadding}>
+                                <div class="slds-form-element slds-var-p-left_x-small slds-var-p-right_x-small">
+                                    <label class="slds-form-element__label" for="form-element-01">Play Priority</label>
+                                    <lightning-input-field field-name="Playgroup_Priority_Level__c" variant='label-hidden' data-id='Playgroup_Priority_Level__c' onchange={handleOnChangeAnimal}> </lightning-input-field>
+                                </div>
+                            </lightning-layout-item>
+                            <lightning-layout-item flexibility="auto, no-grow" size="12" small-device-size="6" medium-device-size="2" large-device-size="4" padding={layoutItemPadding}>
+                                <div class="slds-form-element slds-var-p-left_x-small slds-var-p-right_x-small">
+                                    <label class="slds-form-element__label" for="form-element-01">Play Category</label>
+                                    <lightning-input-field field-name="Play_Category__c" variant='label-hidden' data-id='Play_Category__c' onchange={handleOnChangeAnimal}> </lightning-input-field>
+                                </div>
+                            </lightning-layout-item>
+                            <lightning-layout-item flexibility="auto, no-grow" size="12" small-device-size="6" medium-device-size="12" large-device-size="12" padding={layoutItemPadding}>
+                                <div class="slds-form-element slds-var-p-left_x-small slds-var-p-right_x-small">
+                                    <label class="slds-form-element__label" for="form-element-01">Play Style Notes</label>
+                                    <lightning-input-field field-name="Play_Style_Notes__c" variant='label-hidden' data-id='Play_Style_Notes__c' onchange={handleOnChangeAnimal}> </lightning-input-field>
+                                </div>
+                            </lightning-layout-item>
+                            
+                        <template if:true={animalContacts}>
+                            <lightning-layout-item flexibility="auto, no-grow" size="12" small-device-size="6" medium-device-size="12" large-device-size="12" padding='around-small'>
+                                <div class="slds-form-element slds-var-p-left_x-small slds-var-p-right_x-small">
+                                    <lightning-button
+                                        variant="base"
+                                        type="button"
+                                        name="update"
+                                        label={showContactsButtonLabel}
+                                        onclick={handleToggleShowContacts}
+                                    ></lightning-button>
+                                </div>
+                            </lightning-layout-item>
+                            <template if:true={showContacts}>
+                                <template for:each={animalContacts} for:item='contact'>
+                                    <lightning-layout-item key={contact.id} flexibility="auto, no-grow" size="6" small-device-size="6" medium-device-size="3" large-device-size="3" padding='around-small'>
+                                        <div class="slds-form-element slds-var-p-left_x-small slds-var-p-right_x-small">
+                                            {contact.name}
+                                            <div title='Status' class='slds-var-p-left_x-small'>
+                                                <lightning-input 
+                                                    type="toggle"
+                                                    checked={contact.checked}
+                                                    message-toggle-active='Familiar'
+                                                    message-toggle-inactive='Novel'
+                                                    onchange={handleToggleChange}
+                                                    data-id={contact.id}
+                                                >
+                                                </lightning-input>
+                                            </div>
+                                        </div>
+                                    </lightning-layout-item>
+                                </template>
+                            </template>
+                        </template>
+
+                        </lightning-layout>
+                    </lightning-record-edit-form>
+                </lightning-layout-item>
+                <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="6" large-device-size="6">
+                    <lightning-record-edit-form
+                        object-api-name="Animal_Playgroup__c"
+                        record-id={playgroupAnimalId}
+                        onsubmit={handleSaveDog}
+                        onsuccess={handleAnimalPlaygroupUpdateSuccess}
+                        onerror={handleAnimalUpdateError}
+                    >
+                        <lightning-layout multiple-rows pull-to-boundary="medium" class="slds-var-p-left_xx-small">
+                            <lightning-layout-item flexibility="auto" size="12" small-device-size="6" medium-device-size="6" large-device-size="6" padding={layoutItemPadding}>
+                                <div class="slds-form-element slds-var-p-right_x-small">
+                                    <label class="slds-form-element__label" for="form-element-01">Management Tools Used</label>
+                                    <lightning-input-field field-name="Common_Playgroup_Notes__c" variant='label-hidden' data-id='Common_Playgroup_Notes__c' onchange={handleOnChangeAnimalPlaygroup}> </lightning-input-field>
+                                </div>
+                            </lightning-layout-item>
+                            <lightning-layout-item flexibility="auto" size="12" small-device-size="6" medium-device-size="6" large-device-size="6" padding={layoutItemPadding}>
+                                <div class="slds-form-element slds-var-p-right_x-small">
+                                    <div>
+                                        <lightning-input-field field-name="Playgroup_Individual_Notes__c" data-id='Playgroup_Individual_Notes__c' onchange={handleOnChangeAnimalPlaygroup}> </lightning-input-field>
+                                    </div>
+                                    <div class='slds-grid slds-wrap'>
+                                        <div class="slds-col slds-size_2-of-4">
+                                            <label class="slds-form-element__label" for="form-element-01">Play Rating</label>
+                                            <div class={playRating}>
+                                                <lightning-input-field field-name="Play_Rating__c" variant='label-hidden' data-id='Play_Rating__c' onchange={handleOnChangeAnimalPlayRating}> </lightning-input-field>
+                                            </div>
+                                        </div>
+                                        <div class="slds-col slds-size_3-of-4 slds-align-bottom slds-var-p-top_small">
+                                            <template if:true={error}>
+                                                <c-error-panel errors={error} type='inlineMessage' friendly-message='Error updating animal'></c-error-panel>
+                                            </template>
+                                            <lightning-button
+                                                variant="brand"
+                                                type="submit"
+                                                name="update"
+                                                label={updateDogButtonLabel}
+                                                disabled={disableUpdateDogButton}
+                                            >
+                                            </lightning-button>
+                                            <template if:true={showSpinner}>
+                                                <lightning-icon icon-name="utility:spinner" alternative-text="Loading" size="x-small" title="spinner">
+                                                </lightning-icon>
+                                            </template>
+                                            <p class='slds-var-p-top_xx-small'>
+                                                <lightning-button
+                                                    variant="destructive"
+                                                    name="update"
+                                                    label='Remove From Playgroup'
+                                                    onclick={handleRemoveAnimal}
+                                                >
+                                                </lightning-button>
+                                            </p>
+                                            <template if:true={confirmDelete}>
+                                                <section role='dialog' tabindex="0" class={modalClass} onkeydown={handleKeyDown}>
+                                                    <div class="slds-modal__container">
+                                                        <div class="slds-modal__content slds-var-p-around_medium">
+                                                            Are you sure you want to remove {animalNameResponse} from the playgroup?
+                                                        </div>
+                                                        <footer class="slds-modal__footer slds-is-relative">
+                                                            <lightning-button label='Cancel' class="slds-var-p-horizontal_xxx-small" onclick={handleCloseModal}>
+                                                            </lightning-button>
+                                                            <lightning-button label={deleteButtonLabel} variant='Confirm'
+                                                                class="slds-var-p-horizontal_xxx-small" onclick={handleConfirmRemoveAnimal}></lightning-button>
+                                                        </footer>
+                                                    </div>
+                                                </section>
+                                                    <template if:true={isLargeFormFactor}>
+                                                        <div class="slds-backdrop slds-backdrop_open"></div>
+                                                    </template>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-record-edit-form>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+    </template>
+</template>

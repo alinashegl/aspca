@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>53.0</apiVersion>
+    <assignments>
+        <name>Assign_Generic_Caseworker</name>
+        <label>Assign Generic Caseworker</label>
+        <locationX>692</locationX>
+        <locationY>429</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Behavior_Case_Worker__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Generic_Contact.Id</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <description>If a caseworker is not assigned to an MRC, CRC, or ARC/CARE dog when the animal record is created, assign a generic caseworker to that dog.</description>
+    <formulas>
+        <name>GenerateGenericCaseworkerValue</name>
+        <dataType>String</dataType>
+        <expression>IF({!$Record.Current_Recent_Shelter_Location__c} = &quot;MRC&quot;, &quot;MRC&quot;, 
+IF({!$Record.Current_Recent_Shelter_Location__c} = &quot;CRC&quot;, &quot;CRC&quot;,
+&quot;ARC/CARE&quot;))</expression>
+    </formulas>
+    <interviewLabel>Create Generic Caseworker {!$Flow.CurrentDateTime}</interviewLabel>
+    <isOverridable>true</isOverridable>
+    <label>Create Generic Caseworker</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Get_Generic_Contact</name>
+        <label>Get Generic Contact</label>
+        <locationX>490</locationX>
+        <locationY>120</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_Generic_Caseworker</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>FirstName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>GenerateGenericCaseworkerValue</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Is_Generic_Contact__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Contact</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>Get_Generic_Caseworker</name>
+        <label>Get Generic Caseworker</label>
+        <locationX>742</locationX>
+        <locationY>120</locationY>
+        <inputAssignments>
+            <field>Behavior_Case_Worker__c</field>
+            <value>
+                <elementReference>Get_Generic_Contact.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>50</locationY>
+        <connector>
+            <targetReference>Get_Generic_Contact</targetReference>
+        </connector>
+        <filterLogic>(1 OR 2 OR 3 OR 5) AND 4</filterLogic>
+        <filters>
+            <field>Current_Recent_Shelter_Location__c</field>
+            <operator>Contains</operator>
+            <value>
+                <stringValue>ARC</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Current_Recent_Shelter_Location__c</field>
+            <operator>Contains</operator>
+            <value>
+                <stringValue>MRC</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Current_Recent_Shelter_Location__c</field>
+            <operator>Contains</operator>
+            <value>
+                <stringValue>CRC</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Behavior_Case_Worker__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Current_Recent_Shelter_Location__c</field>
+            <operator>Contains</operator>
+            <value>
+                <stringValue>CARE</stringValue>
+            </value>
+        </filters>
+        <object>Animal__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

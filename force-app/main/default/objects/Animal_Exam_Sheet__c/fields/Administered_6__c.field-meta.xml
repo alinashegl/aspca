@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Administered_6__c</fullName>
+    <externalId>false</externalId>
+    <label>Administered-6</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>PO</fullName>
+                <default>false</default>
+                <label>PO</label>
+            </value>
+            <value>
+                <fullName>SQ</fullName>
+                <default>false</default>
+                <label>SQ</label>
+            </value>
+            <value>
+                <fullName>IM</fullName>
+                <default>false</default>
+                <label>IM</label>
+            </value>
+            <value>
+                <fullName>Topical</fullName>
+                <default>false</default>
+                <label>Topical</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Novel_Not_Novel__c</fullName>
+    <externalId>false</externalId>
+    <label>Novel/Not Novel</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Novel</fullName>
+                <default>false</default>
+                <label>Novel</label>
+            </value>
+            <value>
+                <fullName>Familiar</fullName>
+                <default>false</default>
+                <label>Familiar</label>
+            </value>
+            <value>
+                <fullName>PG Leader</fullName>
+                <default>false</default>
+                <label>PG Leader</label>
+            </value>
+            <value>
+                <fullName>Not Novel</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Not Novel</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

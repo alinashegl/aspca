@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Playgroup_Location__c</fullName>
+    <externalId>false</externalId>
+    <label>Playgroup Location</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Population__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Indoor Play Yard</fullName>
+                <default>false</default>
+                <label>Indoor Play Yard</label>
+            </value>
+            <value>
+                <fullName>Outdoor Play Yard</fullName>
+                <default>false</default>
+                <label>Outdoor Play Yard</label>
+            </value>
+            <value>
+                <fullName>MRC Indoor Play Yard</fullName>
+                <default>false</default>
+                <label>MRC Indoor Play Yard</label>
+            </value>
+            <value>
+                <fullName>MRC Outdoor Play Yard</fullName>
+                <default>false</default>
+                <label>MRC Outdoor Play Yard</label>
+            </value>
+            <value>
+                <fullName>Monster Park</fullName>
+                <default>false</default>
+                <label>Monster Park</label>
+            </value>
+            <value>
+                <fullName>ARC Terrace</fullName>
+                <default>false</default>
+                <label>ARC Terrace</label>
+            </value>
+            <value>
+                <fullName>SBR</fullName>
+                <default>false</default>
+                <label>SBR</label>
+            </value>
+            <value>
+                <fullName>Playroom 1</fullName>
+                <default>false</default>
+                <label>Playroom 1</label>
+            </value>
+            <value>
+                <fullName>Playroom 2</fullName>
+                <default>false</default>
+                <label>Playroom 2</label>
+            </value>
+            <value>
+                <fullName>Playroom 1 &amp; 2</fullName>
+                <default>false</default>
+                <label>Playroom 1 &amp; 2</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>CRC</controllingFieldValue>
+            <valueName>Indoor Play Yard</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CRC</controllingFieldValue>
+            <valueName>Outdoor Play Yard</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MRC</controllingFieldValue>
+            <valueName>MRC Indoor Play Yard</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MRC</controllingFieldValue>
+            <valueName>MRC Outdoor Play Yard</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ARC &amp; CARE</controllingFieldValue>
+            <valueName>Monster Park</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ARC &amp; CARE</controllingFieldValue>
+            <valueName>ARC Terrace</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ARC &amp; CARE</controllingFieldValue>
+            <valueName>SBR</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ARC &amp; CARE</controllingFieldValue>
+            <valueName>Playroom 1</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ARC &amp; CARE</controllingFieldValue>
+            <valueName>Playroom 2</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ARC &amp; CARE</controllingFieldValue>
+            <valueName>Playroom 1 &amp; 2</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

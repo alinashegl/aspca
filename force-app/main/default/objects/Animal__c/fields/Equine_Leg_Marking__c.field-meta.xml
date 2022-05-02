@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Equine_Leg_Marking__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>LF = left front, RR = right rear. Select none if no leg markings.</inlineHelpText>
+    <label>Equine Leg Marking</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <controllingField>Type_of_Animal__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetName>Equine_Leg_Marking</valueSetName>
+        <valueSettings>
+            <controllingFieldValue>Equine</controllingFieldValue>
+            <valueName>(none)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Equine</controllingFieldValue>
+            <valueName>LF Coronet</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Equine</controllingFieldValue>
+            <valueName>LF Pastern</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Equine</controllingFieldValue>
+            <valueName>LF Sock</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Equine</controllingFieldValue>
+            <valueName>LF Stocking</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Equine</controllingFieldValue>
+            <valueName>RF Coronet</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Equine</controllingFieldValue>
+            <valueName>RF Pastern</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Equine</controllingFieldValue>
+            <valueName>RF Sock</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Equine</controllingFieldValue>
+            <valueName>RF Stocking</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Equine</controllingFieldValue>
+            <valueName>LR Coronet</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Equine</controllingFieldValue>
+            <valueName>LR Pastern</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Equine</controllingFieldValue>
+            <valueName>LR Sock</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Equine</controllingFieldValue>
+            <valueName>LR Stocking</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Equine</controllingFieldValue>
+            <valueName>RR Coronet</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Equine</controllingFieldValue>
+            <valueName>RR Pastern</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Equine</controllingFieldValue>
+            <valueName>RR Sock</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Equine</controllingFieldValue>
+            <valueName>RR Stocking</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Equine</controllingFieldValue>
+            <valueName>LF Partial Coronet</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Equine</controllingFieldValue>
+            <valueName>LF Partial Pastern</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Equine</controllingFieldValue>
+            <valueName>RR Partial Sock</valueName>
+        </valueSettings>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

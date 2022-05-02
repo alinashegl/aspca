@@ -1,0 +1,170 @@
+<template>
+    <!-- <template if:true={readOnly}>
+        {inputValue}
+    </template>
+    <template if:false={readOnly}> -->
+        <div class="slds-form-element">
+            <div class="slds-form-element__control">
+                <div class="slds-combobox_container" onclick={handleDivClick}>
+                    <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open">
+                        <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+                            <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+                                <input 
+                                    type="text"
+                                    onkeyup={handleInputChange} 
+                                    onkeydown={handleInputChange}
+                                    class={inputFieldClass}
+                                    id="combobox-id-1.1" 
+                                    aria-autocomplete="list" 
+                                    aria-controls="listbox-id-1" 
+                                    autocomplete="off" 
+                                    role="textbox" 
+                                    placeholder={placeholder}
+                                    onclick={handleOnFocus}
+                                    data-id='inputField'
+                                    value={inputValue}
+                                    disabled={isInputDisabled}
+                                />
+                                <template if:false={readOnly}>
+                                    <button type='button' class="slds-button slds-button_icon slds-input__icon slds-input__icon_right" title="Remove selected option" onclick={handleInputIconClick}>
+                                        <lightning-icon icon-name={searchBarIcon} alternative-text={searchBarIconTitle} title={searchBarIconTitle} size="x-small"></lightning-icon>
+                                        <span class="slds-assistive-text">Remove selected option</span>
+                                    </button>
+                                </template>
+                            </div>
+                        </div>
+                        <template if:true={isEditMode}>
+                            <template if:true={showRecent}>
+                                <div class="slds-dropdown slds-dropdown_left" data-id='combobox'>
+                                    <div style="background: white;" id="listbox-id-1" class="slds-dropdown_length-with-icon-7 slds-dropdown_fluid" role="listbox">
+                                        <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                            <template if:true={allowCreateNew}>
+                                                <li onclick={handleAddNew} class="slds-dropdown__item slds-m-top_x-small" role="presentation">
+                                                    <div role='menuitem' class='slds-m-top_xx-small'>
+                                                        <div class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta" role="option">
+                                                            <lightning-icon icon-name={addNewIcon} alternative-text="Protocol" title="Protocol" size="small"></lightning-icon>
+                                                            <span class="slds-media__body">
+                                                                <span class="slds-listbox__option-text slds-listbox__option-text_entity slds-m-left_medium">
+                                                                    Add New
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </template>
+                                            <template if:true={searchRecords}>
+                                                <template for:each={searchRecords} for:item="record" for:index="index">
+                                                    <li onclick={handleSelect} class="slds-dropdown__item" role="presentation" data-record-id={record.Id} key={record.Id}>
+                                                        <div role='menuitem' class='slds-m-top_x-small'>
+                                                            <div data-id={record.Id} class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta" role="option">
+                                                                <lightning-icon icon-name={iconName} alternative-text="Protocol" title="Protocol" size="small"></lightning-icon>
+                                                                <span class="slds-media__body">
+                                                                    <span class="slds-listbox__option-text slds-listbox__option-text_entity slds-m-left_medium">
+                                                                        {record.FIELD1}
+                                                                    </span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </template>
+                                            </template>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </template>
+                            <template if:true={showExpandedSearch}>
+                                <section aria-describedby="dialog-body-id-26" aria-label="Language Options" class="slds-popover slds-popover_full-width" id="popover-unique-id-01" role="dialog">
+                                    <div class="slds-popover__body slds-popover__body_small" id="dialog-body-id-26">
+                                        <ul class="slds-listbox slds-listbox_vertical" role="presentation">                             
+                                            <template for:each={searchRecords} for:item="record" for:index="index">
+                                                <li onclick={handleSelect} class="slds-dropdown__item" role="presentation" data-record-id={record.Id} key={record.Id}>
+                                                    <div role='menuitem' class='slds-m-top_x-small'>
+                                                        <div data-id={record.Id} class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta" role="option">
+                                                            <lightning-icon icon-name={iconName} alternative-text="Protocol" title="Protocol" size="x-small"></lightning-icon>
+                                                            <span class="slds-media__body">
+                                                                <span class="slds-listbox__option-text slds-listbox__option-text_entity slds-m-left_medium">
+                                                                    <div class='slds-grid slds-wrap'>
+                                                                        <div class='slds-col slds-size_1-of-1 slds-large-size_1-of-3'>
+                                                                            {record.FIELD1}
+                                                                        </div>
+                                                                        <template if:true={field1}>
+                                                                            <div class='slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-3'>
+                                                                                {record.FIELD2}
+                                                                            </div>
+                                                                        </template>
+                                                                        <template if:true={field2}>
+                                                                            <div class='slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-3'>
+                                                                                {record.FIELD3}
+                                                                            </div>
+                                                                        </template>
+                                                                    </div>
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </template>
+                                        </ul>
+                                    </div>
+                                    <footer class="slds-popover__footer slds-popover__footer_form">
+                                        <div class='slds-align_absolute-center'>
+                                            <p>
+                                                Page: {pageNumber} of {pageCount}
+                                            </p>
+                                        </div>
+                                        <div class='slds-align_absolute-center'>
+                                            <lightning-button
+                                                label="Previous"
+                                                icon-name="utility:chevronleft"
+                                                onclick={handlePrevious}
+                                                disabled={disablePreviousButton}
+                                            ></lightning-button>
+                                            <lightning-button
+                                                class='slds-m-left_small'
+                                                label="Next"
+                                                icon-name="utility:chevronright"
+                                                icon-position="right"
+                                                onclick={handleNext}
+                                                disabled={disableNextButton}
+                                            ></lightning-button>
+                                        </div>
+                                    </footer>
+                                </section>
+                            </template>
+                        </template>
+                    </div>
+                </div>
+            </div>
+            <template if:true={showCreateNew}>
+                <div class='slds-box' onclick={handleDivClick}>
+                    <template if:true={hasCreateNewFields}>
+                        <template if:true={showErrors}>
+                            <div class='error-message'>
+                                *Please fill out all required fields: {errors}
+                            </div>
+                        </template>
+                        <lightning-record-form
+                            object-api-name={objName}
+                            fields={createNewFieldList}
+                            mode="edit"
+                            onsuccess={handleNewRecordResponse}
+                            oncancel={handleInputIconClick}
+                            onsubmit={handleOnSubmit}
+                        >
+                        </lightning-record-form>
+                    </template>
+                    <template if:false={hasCreateNewFields}>
+                        <lightning-record-form
+                            object-api-name={objName}
+                            layout-type="Full"
+                            mode="edit"
+                            onsuccess={handleNewRecordResponse}
+                            oncancel={handleInputIconClick}
+                        >
+                        </lightning-record-form>
+                    </template>
+                </div>
+            </template>
+        </div>
+    <!-- </template> -->
+</template>

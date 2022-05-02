@@ -1,0 +1,147 @@
+<template>
+    <lightning-card>
+        <lightning-accordion allow-multiple-sections-open="true">
+            <lightning-accordion-section title="MRC Daily Care To Do List" label="MRC Daily Care To Do List" name="mrcDailyCareToDoList">
+                <lightning-button label="PDF" slot="actions" onclick={handlePdf}></lightning-button>
+                <template if:true={dailyCareId}>
+                    <lightning-button label="Start DC" class="slds-var-m-left_x-small" slot="actions" onclick={handleDailyCare}></lightning-button>
+                </template>
+                <template if:true={hasDate}> 
+            <div class="datePicker">
+                <lightning-input type="date" name="input2" label="Select a date" value={date} onchange={dateChange} class="slds-var-p-left_small"></lightning-input>
+            </div>
+        </template>
+        <template if:true={error}>
+            <c-error-panel errors={error} type='inlineMessage' friendly-message='Error retrieving Daily Care:' class="slds-var-p-left_small"></c-error-panel>
+        </template>
+
+        <template if:true={dailyCareId}>
+            <div class="slds-var-p-top_small">
+
+                <lightning-record-edit-form
+                    object-api-name="Daily_Care__c"
+                    record-id={dailyCareId}
+                >
+                    <lightning-layout multiple-rows pull-to-boundary="medium" class="slds-var-p-around_small">
+                        <lightning-layout-item flexibility="auto" size="4" small-device-size="12" medium-device-size="12" large-device-size="4" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                            <lightning-input-field field-name={generalRemindersField}> </lightning-input-field>
+                        </lightning-layout-item>
+
+                        <lightning-layout-item flexibility="auto" size="4" small-device-size="12" medium-device-size="12" large-device-size="4" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                            <lightning-input-field field-name={amRemindersField}> </lightning-input-field>
+                        </lightning-layout-item>
+
+                        <lightning-layout-item flexibility="auto" size="4" small-device-size="12" medium-device-size="12" large-device-size="4" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                            <lightning-input-field field-name={pmRemindersField}> </lightning-input-field>
+                        </lightning-layout-item>
+
+                        <lightning-layout-item flexibility="auto" size="4" small-device-size="12" medium-device-size="12" large-device-size="4" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                            <lightning-input-field field-name={specialProjectsField}> </lightning-input-field>
+                        </lightning-layout-item>
+
+                        <lightning-layout-item flexibility="auto" size="4" small-device-size="12" medium-device-size="12" large-device-size="4" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                            <lightning-output-field field-name={scentField}> </lightning-output-field>
+                        </lightning-layout-item>
+
+                        <lightning-layout-item flexibility="auto" size="4" small-device-size="12" medium-device-size="12" large-device-size="4" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                            <div class="slds-var-m-top_medium">
+                                <lightning-button variant="brand" type="submit" label="Save">
+                                </lightning-button>
+                            </div>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </lightning-record-edit-form>
+
+                <!-- <div class="slds-card slds-card_boundary card-custom">
+                    <lightning-layout multiple-rows pull-to-boundary="medium" class="slds-var-p-around_small">
+                        <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                            <b>Name</b>
+                        </lightning-layout-item>
+        
+                        <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                            <div>
+                                <b>Daily Ration</b>
+                            </div>
+                            <div class="slds-var-p-top_small">
+                                <b>Rest Days</b>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item flexibility="auto" size="1" small-device-size="6" medium-device-size="4" large-device-size="1" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                            <b>Behavior Meds:</b>
+                        </lightning-layout-item>
+        
+                        <lightning-layout-item flexibility="auto" size="4" small-device-size="12" medium-device-size="12" large-device-size="4" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                            <b>Special Care Notes</b>
+                        </lightning-layout-item>
+        
+                        <lightning-layout-item flexibility="auto" size="3" small-device-size="6" medium-device-size="4" large-device-size="3" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                            <b>Enrichment</b>
+                        </lightning-layout-item>
+        
+                        <lightning-layout-item flexibility="auto" size="1" small-device-size="6" medium-device-size="4" large-device-size="1" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                            <b>Round</b>
+                        </lightning-layout-item>
+        
+                        <lightning-layout-item flexibility="auto" size="4" small-device-size="6" medium-device-size="4" large-device-size="4" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                            <b>Movement Round Notes & Destination for Cleaning</b>
+                        </lightning-layout-item>
+        
+                        <lightning-layout-item flexibility="auto" size="4" small-device-size="6" medium-device-size="4" large-device-size="4" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                            <b>Handling Instructions</b>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </div> -->
+                <template if:true={hasAnimalCareList}>
+                    <lightning-layout multiple-rows pull-to-boundary="medium" class="slds-var-p-around_small">
+                        <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                            <b>Sort By Kennel Location</b>
+                            <lightning-combobox 
+                                name="locationSort" 
+                                value={locationSortValue}
+                                options={sortOptions} 
+                                onchange={handleSortByLocation}
+                                data-id="location"
+                                >
+                            </lightning-combobox>
+                        </lightning-layout-item>
+                        <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                            <b>Sort By Round</b>
+                            <lightning-combobox 
+                                name="roundSort"
+                                value={roundSortValue}
+                                options={sortOptions} 
+                                onchange={handleSortByRound}
+                                data-id="round"
+                                >
+                            </lightning-combobox>
+                            <template if:true={showSpinner}>
+                                <lightning-icon icon-name="utility:spinner" alternative-text="Connected" size="small" title="large size">
+                                </lightning-icon>
+                            </template>
+                        </lightning-layout-item>
+                        <lightning-layout-item flexibility="auto" size="1" small-device-size="6" medium-device-size="4" large-device-size="1" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                            <template if:true={showSpinner}>
+                                <lightning-icon icon-name="utility:spinner" alternative-text="Connected" size="small" title="large size">
+                                </lightning-icon>
+                            </template>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                    
+                    <div class="slds-var-p-top_small">
+                        <template for:each={animalCareList} for:item='animalC'>
+                            <div class="slds-var-p-bottom_x-small" key={animalC}>
+                                <c-animal-daily-care
+                                    record-id={animalC}
+                                >
+                                </c-animal-daily-care>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+
+            </div>
+        </template>
+        </lightning-accordion-section>
+        </lightning-accordion>
+    </lightning-card>
+</template>

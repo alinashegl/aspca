@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Protocol_Categories__c</fullName>
+    <externalId>false</externalId>
+    <label>Protocol Categories</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Fear Containment</fullName>
+                <default>false</default>
+                <label>Fear Containment</label>
+            </value>
+            <value>
+                <fullName>Fear Handling</fullName>
+                <default>false</default>
+                <label>Fear Handling</label>
+            </value>
+            <value>
+                <fullName>Fear Leashing</fullName>
+                <default>false</default>
+                <label>Fear Leashing</label>
+            </value>
+            <value>
+                <fullName>Fear Socialization</fullName>
+                <default>false</default>
+                <label>Fear Socialization</label>
+            </value>
+            <value>
+                <fullName>Fear Walking</fullName>
+                <default>false</default>
+                <label>Fear Walking</label>
+            </value>
+            <value>
+                <fullName>Non Fear Protocols</fullName>
+                <default>false</default>
+                <label>Non Fear Protocols</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

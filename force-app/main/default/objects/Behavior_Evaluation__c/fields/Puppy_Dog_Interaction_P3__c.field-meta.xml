@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Puppy_Dog_Interaction_P3__c</fullName>
+    <externalId>false</externalId>
+    <label>Puppy Dog Interaction P3</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Greeted, submissive interaction with adult</fullName>
+                <default>false</default>
+                <label>Greeted, submissive interaction with adult</label>
+            </value>
+            <value>
+                <fullName>Greeted, submissive-explored together with an adult dog</fullName>
+                <default>false</default>
+                <label>Greeted, submissive-explored together with an adult dog</label>
+            </value>
+            <value>
+                <fullName>Greeted, submissive-explores separately from adult dog</fullName>
+                <default>false</default>
+                <label>Greeted, submissive-explores separately from adult dog</label>
+            </value>
+            <value>
+                <fullName>Preferred to socialize with tester</fullName>
+                <default>false</default>
+                <label>Preferred to socialize with tester</label>
+            </value>
+            <value>
+                <fullName>Greeted, mildly fearful</fullName>
+                <default>false</default>
+                <label>Greeted, mildly fearful</label>
+            </value>
+            <value>
+                <fullName>Pushy-relaxed</fullName>
+                <default>false</default>
+                <label>Pushy-relaxed</label>
+            </value>
+            <value>
+                <fullName>Defensive</fullName>
+                <default>false</default>
+                <label>Defensive</label>
+            </value>
+            <value>
+                <fullName>Ignored adult dog &amp; tester</fullName>
+                <default>false</default>
+                <label>Ignored adult dog &amp; tester</label>
+            </value>
+            <value>
+                <fullName>Pushy-does not relax</fullName>
+                <default>false</default>
+                <label>Pushy-does not relax</label>
+            </value>
+            <value>
+                <fullName>Mounted an adult dog</fullName>
+                <default>false</default>
+                <label>Mounted an adult dog</label>
+            </value>
+            <value>
+                <fullName>Moderately fearful</fullName>
+                <default>false</default>
+                <label>Moderately fearful</label>
+            </value>
+            <value>
+                <fullName>Aggressive</fullName>
+                <default>false</default>
+                <label>Aggressive</label>
+            </value>
+            <value>
+                <fullName>Extremely fearful</fullName>
+                <default>false</default>
+                <label>Extremely fearful</label>
+            </value>
+            <value>
+                <fullName>Distracted by muzzle</fullName>
+                <default>false</default>
+                <label>Distracted by muzzle</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

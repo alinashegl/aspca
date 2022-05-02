@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Puppy_Behavior_in_Kennel__c</fullName>
+    <externalId>false</externalId>
+    <label>Puppy Behavior in Kennel</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Social</fullName>
+                <default>false</default>
+                <label>Social</label>
+            </value>
+            <value>
+                <fullName>Not social</fullName>
+                <default>false</default>
+                <label>Not social</label>
+            </value>
+            <value>
+                <fullName>Mildly fearful</fullName>
+                <default>false</default>
+                <label>Mildly fearful</label>
+            </value>
+            <value>
+                <fullName>Excited</fullName>
+                <default>false</default>
+                <label>Excited</label>
+            </value>
+            <value>
+                <fullName>Stereotypic behavior</fullName>
+                <default>false</default>
+                <label>Stereotypic behavior</label>
+            </value>
+            <value>
+                <fullName>Hyperaroused</fullName>
+                <default>false</default>
+                <label>Hyperaroused</label>
+            </value>
+            <value>
+                <fullName>Did not approach the tester-moderately fearful</fullName>
+                <default>false</default>
+                <label>Did not approach the tester-moderately fearful</label>
+            </value>
+            <value>
+                <fullName>Aggressive in cage only</fullName>
+                <default>false</default>
+                <label>Aggressive in cage only</label>
+            </value>
+            <value>
+                <fullName>Extremely fearful</fullName>
+                <default>false</default>
+                <label>Extremely fearful</label>
+            </value>
+            <value>
+                <fullName>Threatened</fullName>
+                <default>false</default>
+                <label>Threatened</label>
+            </value>
+            <value>
+                <fullName>Aggressive</fullName>
+                <default>false</default>
+                <label>Aggressive</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

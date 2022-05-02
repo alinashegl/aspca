@@ -1,0 +1,37 @@
+<aura:component controller="EnrichmentQuickCreateController"
+    implements="force:lightningQuickActionWithoutHeader,force:hasRecordId">
+
+    <aura:attribute name="treatmentPlan" type="Treatment_Plan__c" />
+    <aura:attribute name="newEnrichment" type="Daily_Enrichment__c"
+        default="{ 'sobjectType': 'Daily_Enrichment__c' }" />
+    <aura:attribute name="colorCode" type="String" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <div class="slds-page-header" role="banner">
+        <h1 class="slds-page-header__title slds-var-m-right_small slds-truncate">Create Daily Enrichment</h1>
+    </div>
+
+     <lightning:input aura:id="enrichmentField" type="date" name="dedate" label="DE Date"
+                      value="{!v.newEnrichment.DE_Date__c}" required="true" />
+
+    <lightning:input aura:id="enrichmentField" name="sheltercolorcode" label="Shelter Color Code"
+                        value="{!v.colorCode}" readonly="true" />
+            
+    <c:MultiPickToCheckboxGroup aura:id="enrichmentCoordinator" objectName="Daily_Enrichment__c" fieldName="Enrichment_Coordinator__c" fieldLabel="Enrichment Coordinator"
+                        outputValues="{!v.newEnrichment.Enrichment_Coordinator__c}" required="true" />
+
+    <lightning:textarea aura:id="enrichmentField" name="enrichmentcoordinatorother" label="Enrichment Coordinator Other"
+                        value="{!v.newEnrichment.Enrichment_Coordinator_Other__c}" />
+            
+    <c:MultiPickToCheckboxGroup objectName="Daily_Enrichment__c" fieldName="Enrichment_Activities__c" fieldLabel="Enrichment Activities"
+                        selectedValues="{!v.newEnrichment.Enrichment_Activities__c}" outputValues="{!v.newEnrichment.Enrichment_Activities__c}" required="false" />
+
+    <lightning:textarea aura:id="enrichmentField" name="notes" label="Notes"
+                        value="{!v.newEnrichment.Notes__c}" />
+        
+    <lightning:button label="Cancel" onclick="{!c.handleCancel}" class="slds-var-m-top_medium" />
+    <lightning:button label="Save Enrichment" onclick="{!c.handleSaveEnrichment}"
+               variant="brand" class="slds-var-m-top_medium"/>
+    
+</aura:component>

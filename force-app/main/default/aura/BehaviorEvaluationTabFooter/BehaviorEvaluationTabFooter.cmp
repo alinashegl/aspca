@@ -1,0 +1,65 @@
+<!--
+ - Created by barne on 5/24/2021.
+ -->
+
+<aura:component description="BehaviorEvaluationTabFooter" controller="BehaviorEvaluationPageController">
+    <aura:attribute name="testName" type="Object" description="API Name of test Picklist" />
+    <aura:attribute name="skipVal" type="Object" description="API Name of Skip Reason " />
+    <aura:attribute name="tabContent" type="Object[]" default="[]" />
+    <aura:attribute name="IsSkipped" type="Boolean" />
+    <aura:attribute name="showModal" type="Boolean" default="false" />
+    <aura:attribute name="skipReasons" description="List of Skip Reasons" type="List" />
+    <aura:attribute name="skipReason" type="String" />
+    <aura:attribute name="sReasons" type="List" />
+    <aura:attribute name="recordId" type="String" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <lightning:notificationsLibrary aura:id="lib" />
+    <lightning:overlayLibrary aura:id="overlayLib" />
+    <aura:method name="updateEvaluation" action="{!c.handleAuraMethod}" access="public">
+        <aura:attribute name="evalObj" type="Object"/>
+    </aura:method>
+    <aura:registerEvent name="skipSaveEvt" type="c:skipSaveEvent"/>
+    <table>
+        <tr>
+        <lightning:input type="checkbox" name="Skip" label="Skip?" checked="{!v.IsSkipped}" onchange="{!c.handleSkip}"/>
+        <c:BehaviorEvaluationModal title="Select Skip Reason" isActive="{!v.showModal}"  recordId="{!v.recordId}">
+            <aura:set attribute="body">
+                <lightning:select label="Select a Skip Reasons" name="skipReason"
+                                  value="{!v.skipReason}"
+                                    aura:id="reasons">
+                    <aura:iteration items="{!v.skipReasons}" var="reason">
+                        <option> {!reason.label}</option>
+                    </aura:iteration>
+                </lightning:select>
+                <!--
+                                <lightning:checkboxGroup name="Skip Reason"
+                                                         label="Select Skip Reasons"
+                                                         options="{!v.skipReasons}"
+                                                         value="{!v.sReasons}"
+                                                         onchange="{!c.handleNewSkip}" aura:id="newReasons"/>
+
+                {!v.testName.id}
+                &nbsp;
+                {!v.skipVal.id}
+                -->
+            </aura:set>
+            <aura:set attribute="footer">
+                <lightning:button variant="neutral" label="Cancel" onclick="{!c.handleCancel}" />
+                <lightning:button variant="brand" label="Save" onclick="{!c.handleSave}" />
+            </aura:set>
+        </c:BehaviorEvaluationModal>
+        </tr>
+        <tr>
+        <lightning:textarea label="Comments"  name="{!v.testName.id}" aura:id="testComments" value="{!v.testName.value}" />
+        </tr>
+        <tr>
+        <lightning:button variant="brand-outline" label="Add Comment to Summary" name="updateComment"
+                          onclick="{!c.handleTabSave}" />
+        </tr>
+    </table>
+
+
+
+
+</aura:component>

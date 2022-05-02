@@ -1,0 +1,2087 @@
+<!--
+ - Created by barne on 4/29/2021.
+ -->
+
+<aura:component
+        description="BehaviorEvaluationPage"
+        implements="flexipage:availableForAllPageTypes,force:hasRecordId"
+        access="public"
+        controller="BehaviorEvaluationPageController">
+    <!-- Build Attributes to Call from Javascript Controller -->
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="animalId" type="String" />
+    <aura:attribute name="tabs" type="Object[]" /> <!-- TODO: Remove this - try and Refactor -->
+    <aura:attribute name="behaviorRecord" type="Object"/>
+    <aura:attribute name="behaviorReport" type="Object[]"/>
+    <!-- ADULT ANIMAL PROPERTIES -->
+    <aura:attribute name="behaviorInKennelTest" type="Object[]" />
+    <aura:attribute name="behaviorOnLeashTest" type="Object[]" />
+    <aura:attribute name="socialBehaviorTestPart1" type="Object[]" />
+    <aura:attribute name="socialBehaviorTestPart2" type="Object[]" />
+    <aura:attribute name="pleasantTouchTest" type="Object[]" />
+    <aura:attribute name="unpleasantTouchTest" type="Object[]" />
+    <aura:attribute name="playTestPart1" type="Object[]"/>
+    <aura:attribute name="playTestPart2" type="Object[]" />
+    <aura:attribute name="tagTest" type="Object[]" />
+    <aura:attribute name="resourceGuardingTestPart1" type="Object[]" />
+    <aura:attribute name="resourceGuardingTestPart1TF" type="Object[]" />
+    <aura:attribute name="resourceGuardingTestPart1TN" type="Object[]" />
+    <aura:attribute name="resourceGuardingTestPart1TB" type="Object[]" />
+    <aura:attribute name="resourceGuardingTestPart2" type="Object[]" />
+    <aura:attribute name="resourceGuardingTestPart2TF" type="Object[]" />
+    <aura:attribute name="resourceGuardingTestPart2TN" type="Object[]" />
+    <aura:attribute name="resourceGuardingTestPart2TB" type="Object[]" />
+    <aura:attribute name ="toddlerDollTestPart1" type="Object[]" />
+    <aura:attribute name="toddlerDollTestP2" type="Object[]" />
+    <aura:attribute name="scoldingPersonTestP1" type="Object[]" />
+    <aura:attribute name="scoldingPersonTestP2" type="Object[]" />
+    <aura:attribute name="fakeDogInteractionTest" type="Object[]" />
+    <aura:attribute name="sameSexDogTestPart1" type="Object[]" />
+    <aura:attribute name="sameSexDogTestPart2" type="Object[]" />
+    <aura:attribute name="sameSexDogTestPart3" type="Object[]" />
+    <aura:attribute name="oppositeSexDogTestPart1" type="Object[]" />
+    <aura:attribute name="oppositeSexDogTestPart2" type="Object[]" />
+    <aura:attribute name="oppositeSexDogTestPart3" type="Object[]" />
+    <aura:attribute name="tabsAttributeMap" type="Map"/>
+
+    <!-- PUPPY TEST PROPERTIES -->
+    <aura:attribute name="puppyBehaviorInKennel" type="Object[]" />
+    <aura:attribute name="puppyBehaviorOnLeash" type="Object[]" />
+    <aura:attribute name="puppySocialBehaviorPart1" type="Object[]" />
+    <aura:attribute name="puppySocialBehaviorPart2" type="Object[]" />
+    <aura:attribute name="puppyPlayTestTugPart1" type="Object[]" />
+    <aura:attribute name="puppyPlayTestTugPart2" type="Object[]" />
+    <aura:attribute name="puppyPlayTestTag" type="Object[]" />
+    <aura:attribute name="puppyRestraint" type="Object[]" />
+    <aura:attribute name="puppyResourceGuardingPart1" type="Object[]" />
+    <aura:attribute name="puppyResourceGuardingPart2" type="Object[]" />
+    <aura:attribute name="puppyChildDollPart1" type="Object[]" />
+    <aura:attribute name="puppyChildDollPart2" type="Object[]" />
+    <aura:attribute name="puppyDogInteractionPart1" type="Object[]" />
+    <aura:attribute name="puppyDogInteractionPart2" type="Object[]" />
+    <aura:attribute name="puppyDogInteractionPart3" type="Object[]" />
+
+    <!--   Page Action Properties -->
+    <aura:attribute name="tabId" type="String" default="behaveInKennel" />
+    <aura:attribute name="subTabId" type="String" />
+    <aura:attribute name="selection" type="String" />
+    <aura:attribute name="showModal" type="Boolean" default="false" />
+    <aura:attribute name="iShowModal" type="Boolean" default="false" />
+    <aura:attribute name="fShowModal" type="Boolean" default="false" />
+    <aura:attribute name="IsAdult" type="Boolean" default="false" />
+    <aura:attribute name="IsPuppy" type="Boolean" default="false" />
+    <aura:attribute name="IsDogOnly" type="Boolean" default="false" />
+    <aura:attribute name="IsDogFighting" type="Boolean" />
+    <aura:attribute name="UseCaution" type="Boolean" />
+    <aura:attribute name="UnpleasantTouch1stFlank" type="Boolean" />
+    <aura:attribute name="UnpleasantTouch2ndFlank" type="Boolean" />
+    <aura:attribute name="PuppySingly" type="Boolean" />
+    <aura:attribute name="PuppyCoHoused" type="Boolean" />
+    <aura:attribute name="PuppyMuzzle1" type="Boolean" />
+    <aura:attribute name="PuppyMuzzle2" type="Boolean" />
+    <aura:attribute name="PuppyMuzzle3" type="Boolean" />
+    <aura:attribute name="MuzzleSSD3" type="Boolean" />
+    <aura:attribute name="MuzzleOSD3" type="Boolean" />
+    <aura:attribute name="spinner" type="boolean" default="false"/>
+
+
+    <!-- attribute for component attributes -->
+    <aura:attribute name="notConcerningOptions" type="List"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.tabId}" action="{!c.handleChange}" />
+    <aura:handler name="select" value="{!v.selection}" action="{!c.handleSelection}" />
+    <aura:method name="handleClick"  action="{!c.handleClick}" access="public" />
+    <aura:handler name="skipSaveEvt" event="c:skipSaveEvent" action="{!c.handleSkipSaveEvent}"/>
+    <aura:attribute name="behaviorEvaluation" type="Object"/>
+    <!--loading spinner start-->
+    <aura:if isTrue="{!v.spinner}">
+        <div aura:id="spinnerId" class="slds-spinner_container">
+            <div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+                <span class="slds-assistive-text">Loading...</span>
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+    </aura:if>
+    <!-- Loading spinner end-->
+
+    <lightning:notificationsLibrary aura:id="lib" />
+    <lightning:overlayLibrary aura:id="overlayLib" />
+
+
+
+        <lightning:tabset variant="vertical" selectedTabId="{!v.tabId}" aura:id="tabs">
+            <lightning:recordEditForm class="slds-grid slds-theme_shade" objectApiName="Behavior_Evaluation__c"
+                                      recordId="{!v.recordId}">
+                <!--<lightning:buttonGroup class="position: relative;" >
+                    <lightning:button name="prevTab" value="Previous Tab" label="Previous Tab" onclick="{!c.handleClick}"
+                                      class="float"/>
+                    <lightning:button class="float" name="nextTab" value="Next Tab" label="Next Tab" onclick="{!c.handleClick}"/>
+                    <lightning:button name="showHelperDog" value="Helper Dog List" label="Helper Dog List" onclick="{!c.handleClick}"/>
+                    <c:BehaviorEvaluationModal recordId="{!v.recordId}"
+                                               isActive="{!v.showModal}">
+                        <aura:set attribute="body">
+                            <lightning:listView objectApiName="Animal__c" listName="Helper_Dog_List" rows="5"
+                                                showActionBar="false" showRowLevelActions="false" showSearchBar="false" />
+                        </aura:set>
+                        <aura:set attribute="footer">
+                            <lightning:button variant="neutral" label="Close" name="closeModal" onclick="{!c.handleClick}"/>
+                        </aura:set>
+                    </c:BehaviorEvaluationModal>
+                </lightning:buttonGroup>-->
+                <aura:if isTrue="{!!v.spinner}">
+                    <lightning:layout >
+                        <lightning:layoutItem size="6">
+                            <div class="slds-float_left">
+                                <lightning:button name="prevTab" value="Previous Tab" label="Previous Tab" onclick="{!c.handleClick}"
+                                                  class="float"/>
+                            </div>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem size="6">
+                            <div class="slds-float_right">
+                                <lightning:button class="float" name="nextTab" value="Next Tab" label="Next Tab" onclick="{!c.handleClick}"/>
+                            </div>
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                </aura:if>
+                <aura:if isTrue="{!v.IsAdult}">
+                    <aura:if isTrue="{!!v.IsDogOnly}">
+                        <lightning:tab label="Behavior In Kennel" id = "behaveInKennel">
+                            <lightning:layout multipleRows="true">
+                                <lightning:layoutItem size="12">
+                                    <div class="slds-align_absolute-center" style="height:3rem">
+                                        <h1 class="tabHeader">Behavior In Kennel</h1>
+                                    </div>
+                                    <br></br>
+                                    <aura:iteration items="{!v.behaviorInKennelTest}" var="variable">
+                                        <table>
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
+                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                            </c:BehaviorEvaluationOptionGroup>
+                                            &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
+                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                            </c:BehaviorEvaluationOptionGroup>
+                                            &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{#variable.mAlertOptions}"
+                                                                            index="{!index}"  recordId="{!v.recordId}">
+                                            </c:BehaviorEvaluationOptionGroup>
+                                            <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
+                                            &nbsp;
+                                                <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
+                                                                                index="{!index}"
+                                                                                recordId="{!v.recordId}">
+                                                </c:BehaviorEvaluationOptionGroup>
+                                            </aura:if>
+                                        </table>
+                                    </aura:iteration>
+                                </lightning:layoutItem>
+                                <lightning:layoutItem size="12" padding="around-small">
+                                    <lightning:layout >
+                                        <aura:iteration items="{!v.behaviorInKennelTest}" var="variable">
+                                            <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
+                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
+                                        </aura:iteration>
+                                    </lightning:layout>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                        </lightning:tab>
+                        <lightning:tab label="Behavior On Leash" id = "bol">
+                            <lightning:layout multipleRows="true">
+                                <lightning:layoutItem size="12">
+                                    <div class="slds-align_absolute-center" style="height:3rem">
+                                        <h1 class="tabHeader">Behavior On Leash</h1>
+                                    </div>
+                                    <br></br>
+                                    <aura:iteration items="{!v.behaviorOnLeashTest}" var="variable">
+                                        <table>
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
+                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                            </c:BehaviorEvaluationOptionGroup>
+                                            &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
+                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                            </c:BehaviorEvaluationOptionGroup>
+                                            &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
+                                                                            index="{!index}"  recordId="{!v.recordId}">
+                                            </c:BehaviorEvaluationOptionGroup>
+                                            <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
+                                            &nbsp;
+                                                <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
+                                                                                index="{!index}"
+                                                                                recordId="{!v.recordId}">
+                                                </c:BehaviorEvaluationOptionGroup>
+                                            </aura:if>
+                                        </table>
+                                    </aura:iteration>
+                                </lightning:layoutItem>
+                                <lightning:layoutItem size="12" padding="around-small">
+                                    <lightning:layout >
+                                        <aura:iteration items="{!v.behaviorOnLeashTest}" var="variable">
+                                            <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
+                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
+                                        </aura:iteration>
+                                        &nbsp; &nbsp;
+                                    </lightning:layout>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                        </lightning:tab>
+                        <lightning:tab label="Social Behavior - Part 1" id="sbt1">
+                            <lightning:layout multipleRows="true">
+                                <lightning:layoutItem size="12">
+                                    <div class="slds-align_absolute-center" style="height:3rem">
+                                        <h1 class="tabHeader">Social Behavior - Part 1</h1>
+                                    </div>
+                                    <div class="slds-align_absolute-center">
+                                        <p class="tabDesc">Loose in Room, No Interaction invited</p>
+                                    </div>
+                                    <br></br>
+                                    <aura:iteration items="{!v.socialBehaviorTestPart1}" var="variable">
+                                        <table>
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
+                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                            </c:BehaviorEvaluationOptionGroup>
+                                            &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
+                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                            </c:BehaviorEvaluationOptionGroup>
+                                            &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
+                                                                            index="{!index}"  recordId="{!v.recordId}">
+                                            </c:BehaviorEvaluationOptionGroup>
+                                            <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
+                                            &nbsp;
+                                                <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
+                                                                                index="{!index}"
+                                                                                recordId="{!v.recordId}">
+                                                </c:BehaviorEvaluationOptionGroup>
+                                            </aura:if>
+                                        </table>
+                                    </aura:iteration>
+                                </lightning:layoutItem>
+                                <lightning:layoutItem size="12" padding="around-small">
+                                    <lightning:layout >
+                                        <aura:iteration items="{!v.socialBehaviorTestPart1}" var="variable">
+                                            <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
+                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
+                                        </aura:iteration>>
+                                        &nbsp; &nbsp;
+                                    </lightning:layout>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                        </lightning:tab>
+                        <lightning:tab label="Social Behavior - Part 2" id="sbt2">
+                            <lightning:layout multipleRows="true">
+                                <lightning:layoutItem size="12">
+                                    <div class="slds-align_absolute-center" style="height:3rem">
+                                        <h1 class="tabHeader">Social Behavior - Part 2</h1>
+                                    </div>
+                                    <div class="slds-align_absolute-center">
+                                        <p class="tabDesc">Loose in room, tester solicits interaction</p>
+                                    </div>
+                                    <br></br>
+                                    <aura:iteration items="{!v.socialBehaviorTestPart2}" var="variable">
+                                        <table>
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
+                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                            </c:BehaviorEvaluationOptionGroup>
+                                            &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
+                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                            </c:BehaviorEvaluationOptionGroup>
+                                            &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
+                                                                            index="{!index}"  recordId="{!v.recordId}">
+                                            </c:BehaviorEvaluationOptionGroup>
+                                            <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
+                                            &nbsp;
+                                                <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
+                                                                                index="{!index}"
+                                                                                recordId="{!v.recordId}">
+                                                </c:BehaviorEvaluationOptionGroup>
+                                            </aura:if>
+                                        </table>
+                                    </aura:iteration>
+                                </lightning:layoutItem>
+                                <lightning:layoutItem size="12" padding="around-small">
+                                    <lightning:layout >
+                                        <aura:iteration items="{!v.socialBehaviorTestPart2}" var="variable">
+                                            <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
+                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
+                                        </aura:iteration>
+                                        &nbsp; &nbsp;
+                                    </lightning:layout>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                        </lightning:tab>
+                        <lightning:tab label="Pleasant Touch" id="ptt">
+                            <lightning:layout multipleRows="true">
+                                <lightning:layoutItem size="12">
+                                    <div class="slds-align_absolute-center" style="height:3rem">
+                                        <h1 class="tabHeader">Pleasant Touch</h1>
+                                    </div>
+                                    <div class="slds-align_absolute-center">
+                                        <p class="tabDesc">Massage</p>
+                                    </div>
+                                    <br></br>
+                                    <aura:iteration items="{!v.pleasantTouchTest}" var="variable">
+                                        <table>
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
+                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                            </c:BehaviorEvaluationOptionGroup>
+                                            &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
+                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                            </c:BehaviorEvaluationOptionGroup>
+                                            &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
+                                                                            index="{!index}"  recordId="{!v.recordId}">
+                                            </c:BehaviorEvaluationOptionGroup>
+                                            <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
+                                            &nbsp;
+                                                <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
+                                                                                index="{!index}"
+                                                                                recordId="{!v.recordId}">
+                                                </c:BehaviorEvaluationOptionGroup>
+                                            </aura:if>
+                                        </table>
+                                    </aura:iteration>
+                                </lightning:layoutItem>
+                                <lightning:layoutItem size="12" padding="around-small">
+                                    <lightning:layout >
+                                        <aura:iteration items="{!v.pleasantTouchTest}" var="variable">
+                                            <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
+                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
+                                        </aura:iteration>
+                                        &nbsp; &nbsp;
+                                    </lightning:layout>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                        </lightning:tab>
+                        <lightning:tab label="Unpleasant Touch" id="utt">
+                            <lightning:layout multipleRows="true">
+                                <lightning:layoutItem size="12">
+                                    <div class="slds-align_absolute-center" style="height:3rem">
+                                        <h1 class="tabHeader">Unpleasant Touch</h1>
+                                    </div>
+                                    <div class="slds-align_absolute-center">
+                                        <p class="tabDesc">Pinch webbing between toes twice</p>
+                                    </div>
+                                    <br></br>
+                                    <table class="slds-box slds-p-top_medium" width="100%">
+                                        <div class="grid-container">
+                                            <div class="grid-item"></div>
+                                            <div class="grid-item" align="left" >
+                                                <tr class="spaceUnder" width="100%"></tr>
+                                                <br/>
+                                                <tr class="spaceUnder" width="100%" style="font-weight:900;">
+                                                    <td width="2%"></td>
+                                                    <td width="5%">1st</td>
+                                                    <td width="5%">2nd</td>
+                                                    <td width="88%"></td>
+                                                </tr>
+                                            </div>
+                                        </div>
+                                    </table>
+                                            &nbsp;
+                                    <table class="slds-box slds-p-top_medium" width="100%">
+                                        <div class="grid-container">
+                                            <div class="grid-item"></div>
+                                            <div class="grid-item" align="left" >
+                                                <tr class="spaceUnder" width="100%"></tr>
+                                                <br/>
+                                                <tr class="spaceUnder" width="100%">
+                                                    <td width="0%"></td>
+                                                    <td width="5%">
+                                                        <lightning:input
+                                                            type="checkbox-button"
+                                                            onchange="{!c.handleUnpleasantTouch}"
+                                                            aura:id="UnpleasantTouch1stFlankInput"
+                                                            checked="{!v.UnpleasantTouch1stFlank}"
+                                                        />
+                                                    </td>
+                                                    <td width="5%">
+                                                        <lightning:input
+                                                            type="checkbox-button"
+                                                            onchange="{!c.handleUnpleasantTouch}"
+                                                            aura:id="UnpleasantTouch2ndFlankInput"
+                                                            checked="{!v.UnpleasantTouch2ndFlank}"
+                                                        />
+                                                    </td>
+                                                    <td width="89%" style="font-weight:900;">Rear flank pinch instead</td>
+                                                </tr>
+                                            </div>
+                                        </div>
+                                    </table>
+                                            &nbsp;
+                                    <aura:iteration items="{!v.unpleasantTouchTest}" var="variable">
+                                        <table>
+                                        <aura:if isTrue="{!not(empty(variable.VC0))}">
+                                            <c:BehaviorEvaluationMultipleOptionGroup colNumber="2" type="unpleasantTouch"
+                                                                                    options="{!variable.VC0}"
+                                                                                    index="{!index}"
+                                                                                    recordId="{!v.recordId}">
+                                            </c:BehaviorEvaluationMultipleOptionGroup>
+                                        </aura:if>
+                                            &nbsp;
+                                            <c:BehaviorEvaluationMultipleOptionGroup type="unpleasantTouch" colNumber="2"
+                                                                                    options="{!variable.VC1}"
+                                                                                    index="{!index}" recordId="{!v.recordId}" >
+                                            </c:BehaviorEvaluationMultipleOptionGroup>
+                                            &nbsp;
+                                            <c:BehaviorEvaluationMultipleOptionGroup type="unpleasantTouch" colNumber="2"
+                                                                                    options="{!variable.VC2}"
+                                                                                    index="{!index}" recordId="{!v.recordId}" >
+                                            </c:BehaviorEvaluationMultipleOptionGroup>
+                                            &nbsp;
+                                            <c:BehaviorEvaluationMultipleOptionGroup type="unpleasantTouch" colNumber="2"
+                                                                                    options="{!variable.VC3}"
+                                                                                    index="{!index}"  recordId="{!v.recordId}">
+                                            </c:BehaviorEvaluationMultipleOptionGroup>
+                                            <aura:if isTrue="{!not(empty(variable.VC4))}">
+                                            &nbsp;
+                                                <c:BehaviorEvaluationMultipleOptionGroup type="unpleasantTouch" colNumber="2"
+                                                                                        options="{!variable.VC4}"
+                                                                                        index="{!index}"
+                                                                                        recordId="{!v.recordId}">
+                                                </c:BehaviorEvaluationMultipleOptionGroup>
+                                            </aura:if>
+                                        </table>
+                                    </aura:iteration>
+                                </lightning:layoutItem>
+                                <lightning:layoutItem size="12" padding="around-small">
+                                    <lightning:layout >
+                                        <aura:iteration items="{!v.unpleasantTouchTest}" var="variable">
+                                            <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
+                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
+                                        </aura:iteration>
+                                        &nbsp; &nbsp;
+                                    </lightning:layout>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                        </lightning:tab>
+                        <lightning:tab label="Play Tug - Part 1" id="pt1">
+                            <lightning:layout multipleRows="true">
+                                <lightning:layoutItem size="12">
+                                    <div class="slds-align_absolute-center" style="height:3rem">
+                                        <h1 class="tabHeader">Play Tug - Part 1</h1>
+                                    </div>
+                                    <div class="slds-align_absolute-center">
+                                        <p class="tabDesc">Tester enticed dog to tug (on loose leash)</p>
+                                    </div>
+                                    <br></br>
+                                    <aura:iteration items="{!v.playTestPart1}" var="variable">
+                                        <table>
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
+                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                            </c:BehaviorEvaluationOptionGroup>
+                                            &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
+                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                            </c:BehaviorEvaluationOptionGroup>
+                                            &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
+                                                                            index="{!index}"  recordId="{!v.recordId}">
+                                            </c:BehaviorEvaluationOptionGroup>
+                                            <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
+                                            &nbsp;
+                                                <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
+                                                                                index="{!index}"
+                                                                                recordId="{!v.recordId}">
+                                                </c:BehaviorEvaluationOptionGroup>
+                                            </aura:if>
+                                        </table>
+                                    </aura:iteration>
+                                </lightning:layoutItem>
+                                <lightning:layoutItem size="12" padding="around-small">
+                                    <lightning:layout >
+                                        <aura:iteration items="{!v.playTestPart1}" var="variable">
+                                            <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
+                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
+                                        </aura:iteration>
+                                        &nbsp; &nbsp;
+                                    </lightning:layout>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                        </lightning:tab>
+                        <lightning:tab label="Play Tug - Part 2" id="pt2">
+                            <lightning:layout multipleRows="true">
+                                <lightning:layoutItem size="12">
+                                    <div class="slds-align_absolute-center" style="height:3rem">
+                                        <h1 class="tabHeader">Play Tug - Part 2</h1>
+                                    </div>
+                                    <div class="slds-align_absolute-center">
+                                        <p class="tabDesc">Tester dropped toy</p>
+                                    </div>
+                                    <br></br>
+                                    <aura:iteration items="{!v.playTestPart2}" var="variable">
+                                        <table>
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
+                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                            </c:BehaviorEvaluationOptionGroup>
+                                            &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
+                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                            </c:BehaviorEvaluationOptionGroup>
+                                            &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
+                                                                            index="{!index}"  recordId="{!v.recordId}">
+                                            </c:BehaviorEvaluationOptionGroup>
+                                            <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
+                                            &nbsp;
+                                                <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
+                                                                                index="{!index}"
+                                                                                recordId="{!v.recordId}">
+                                                </c:BehaviorEvaluationOptionGroup>
+                                            </aura:if>
+                                        </table>
+                                    </aura:iteration>
+                                </lightning:layoutItem>
+                                <lightning:layoutItem size="12" padding="around-small">
+                                    <lightning:layout >
+                                        <aura:iteration items="{!v.playTestPart2}" var="variable">
+                                            <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
+                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
+                                        </aura:iteration>
+                                        &nbsp; &nbsp;
+                                    </lightning:layout>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                        </lightning:tab>
+                        <lightning:tab label="Tag: Plays tag with dog" id="tag">
+                            <lightning:layout multipleRows="true">
+                                <lightning:layoutItem size="12">
+                                    <div class="slds-align_absolute-center" style="height:3rem">
+                                        <h1 class="tabHeader">Tag - Play Tag with Dog</h1>
+                                    </div>
+                                    <div class="slds-align_absolute-center">
+                                        <p class="tabDesc">Tester played tag with dog (on loose leash)</p>
+                                    </div>
+                                    <br></br>
+                                    <aura:iteration items="{!v.tagTest}" var="variable">
+                                        <table>
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
+                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                            </c:BehaviorEvaluationOptionGroup>
+                                            &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
+                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                            </c:BehaviorEvaluationOptionGroup>
+                                            &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
+                                                                            index="{!index}"  recordId="{!v.recordId}">
+                                            </c:BehaviorEvaluationOptionGroup>
+                                            &nbsp;
+                                            <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
+                                            &nbsp;
+                                                <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
+                                                                                index="{!index}"
+                                                                                recordId="{!v.recordId}">
+                                                </c:BehaviorEvaluationOptionGroup>
+                                            </aura:if>
+
+                                        </table>
+                                    </aura:iteration>
+                                </lightning:layoutItem>
+                                <lightning:layoutItem size="12" padding="around-small">
+                                    <lightning:layout >
+                                        <aura:iteration items="{!v.tagTest}" var="variable">
+                                            <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
+                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
+                                        </aura:iteration>
+                                        &nbsp; &nbsp;
+                                    </lightning:layout>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                        </lightning:tab>
+                        <lightning:tab label="Resource Guarding - Part 1" id="rgt1">
+                            <lightning:layout multipleRows="true">
+                                <lightning:layoutItem size="12">
+                                    <div class="slds-align_absolute-center" style="height:3rem">
+                                        <h1 class="tabHeader">Resource Guarding - Part 1</h1>
+                                    </div>
+                                    <div class="slds-align_absolute-center">
+                                        <p class="tabDesc">Food bowl</p>
+                                    </div>
+                                    <br></br>
+                                    <table class="slds-box slds-p-top_medium" width="100%">
+                                        <div class="grid-container">
+                                            <div class="grid-item"></div>
+                                            <div class="grid-item" align="left" >
+                                                <tr width="100%">
+                                                    <td width="6%"></td>
+                                                    <td width="7%"></td>
+                                                    <td width="7%"></td>
+                                                    <td width="7%"></td>
+                                                    <td width="7%"></td>
+                                                    <td width="25%"></td>
+                                                    <td width="22%">TB = Touch Body</td>
+                                                    <td width="22%">TN = Touch Neck</td>
+                                                </tr>
+                                                <tr width="100%">
+                                                    <td width="6%"></td>
+                                                    <td width="7%"><strong>TB</strong></td>
+                                                    <td width="7%"><strong>TN</strong></td>
+                                                    <td width="7%"><strong>TF</strong></td>
+                                                    <td width="7%"><strong>PF</strong></td>
+                                                    <td width="25%"></td>
+                                                    <td width="22%">TF = Touch Face</td>
+                                                    <td width="22%">PF = Push Face</td>
+                                                </tr>
+                                            </div>
+                                        </div>
+                                    </table>
+                                    <aura:iteration items="{!v.resourceGuardingTestPart1}" var="variable">
+                                        <table>
+                                            <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingOne" colNumber="4" options="{!variable.VC1}"
+                                                                                    index="{!index}" recordId="{!v.recordId}" >
+                                            </c:BehaviorEvaluationMultipleOptionGroup>
+                                            &nbsp;
+                                            <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingOne" colNumber="4" options="{!variable.VC2}"
+                                                                                    index="{!index}" recordId="{!v.recordId}" >
+                                            </c:BehaviorEvaluationMultipleOptionGroup>
+                                            &nbsp;
+                                            <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingOne" colNumber="4" options="{!variable.VC3}"
+                                                                                    index="{!index}"  recordId="{!v.recordId}">
+                                            </c:BehaviorEvaluationMultipleOptionGroup>
+                                            <aura:if isTrue="{!not(empty(variable.VC4))}">
+                                            &nbsp;
+                                                <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingOne" colNumber="4" options="{!variable.VC4}"
+                                                                                        index="{!index}"
+                                                                                        recordId="{!v.recordId}">
+                                                </c:BehaviorEvaluationMultipleOptionGroup>
+                                            </aura:if>
+                                        </table>
+                                    </aura:iteration>
+                                </lightning:layoutItem>
+                                <lightning:layoutItem size="12" padding="around-small">
+                                    <lightning:layout >
+                                        <aura:iteration items="{!v.resourceGuardingTestPart1}" var="variable">
+                                            <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
+                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
+                                        </aura:iteration>
+                                        &nbsp; &nbsp;
+                                    </lightning:layout>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                        </lightning:tab>
+                        <lightning:tab label="Resource Guarding - Part 2" id="rgt2">
+                            <lightning:layout multipleRows="true">
+                                <lightning:layoutItem size="12">
+                                    <div class="slds-align_absolute-center" style="height:3rem">
+                                        <h1 class="tabHeader">Resource Guarding - Part 2</h1>
+                                    </div>
+                                    <div class="slds-align_absolute-center">
+                                        <p class="tabDesc">Chewy</p>
+                                    </div>
+                                    <br></br>
+                                    <table class="slds-box slds-p-top_medium" width="100%">
+                                        <div class="grid-container">
+                                            <div class="grid-item"></div>
+                                            <div class="grid-item" align="left" >
+                                                <tr width="100%">
+                                                    <td width="6%"></td>
+                                                    <td width="7%"></td>
+                                                    <td width="7%"></td>
+                                                    <td width="7%"></td>
+                                                    <td width="7%"></td>
+                                                    <td width="25%"></td>
+                                                    <td width="22%">TB = Touch Body</td>
+                                                    <td width="22%">TN = Touch Neck</td>
+                                                </tr>
+                                                <tr width="100%">
+                                                    <td width="6%"></td>
+                                                    <td width="7%"><strong>TB</strong></td>
+                                                    <td width="7%"><strong>TN</strong></td>
+                                                    <td width="7%"><strong>TF</strong></td>
+                                                    <td width="7%"><strong>PF</strong></td>
+                                                    <td width="25%"></td>
+                                                    <td width="22%">TF = Touch Face</td>
+                                                    <td width="22%">PF = Push Face</td>
+                                                </tr>
+                                            </div>
+                                        </div>
+                                    </table>
+
+                                    <aura:iteration items="{!v.resourceGuardingTestPart2}" var="variable">
+                                        <table>
+                                            <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingTwo" colNumber="4" options="{!variable.VC1}"
+                                                                                    index="{!index}" recordId="{!v.recordId}" >
+                                            </c:BehaviorEvaluationMultipleOptionGroup>
+                                            &nbsp;
+                                            <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingTwo" colNumber="4" options="{!variable.VC2}"
+                                                                                    index="{!index}" recordId="{!v.recordId}" >
+                                            </c:BehaviorEvaluationMultipleOptionGroup>
+                                            &nbsp;
+                                            <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingTwo" colNumber="4" options="{!variable.VC3}"
+                                                                                    index="{!index}"  recordId="{!v.recordId}">
+                                            </c:BehaviorEvaluationMultipleOptionGroup>
+                                            <aura:if isTrue="{!not(empty(variable.VC4))}">
+                                            &nbsp;
+                                                <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingTwo" colNumber="4" options="{!variable.VC4}"
+                                                                                        index="{!index}"
+                                                                                        recordId="{!v.recordId}">
+                                                </c:BehaviorEvaluationMultipleOptionGroup>
+                                            </aura:if>
+                                        </table>
+                                    </aura:iteration>
+                                </lightning:layoutItem>
+                                <lightning:layoutItem size="12" padding="around-small">
+                                    <lightning:layout >
+                                        <aura:iteration items="{!v.resourceGuardingTestPart2}" var="variable">
+                                            <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
+                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
+                                        </aura:iteration>
+                                        &nbsp; &nbsp;
+                                    </lightning:layout>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                        </lightning:tab>
+                        <lightning:tab label="Child Doll - Part 1" id="tdt1">
+                            <lightning:layout multipleRows="true">
+                                <lightning:layoutItem size="12">
+                                    <div class="slds-align_absolute-center" style="height:3rem">
+                                        <h1 class="tabHeader">Child Doll - Part 1</h1>
+                                    </div>
+                                    <div class="slds-align_absolute-center">
+                                        <p class="tabDesc">Approached and greeted</p>
+                                    </div>
+                                    <br></br>
+                                    <aura:iteration items="{!v.toddlerDollTestPart1}" var="variable">
+                                        <table>
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
+                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                            </c:BehaviorEvaluationOptionGroup>
+                                            &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
+                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                            </c:BehaviorEvaluationOptionGroup>
+                                            &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
+                                                                            index="{!index}"  recordId="{!v.recordId}">
+                                            </c:BehaviorEvaluationOptionGroup>
+                                            <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
+                                            &nbsp;
+                                                <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
+                                                                                index="{!index}"
+                                                                                recordId="{!v.recordId}">
+                                                </c:BehaviorEvaluationOptionGroup>
+                                            </aura:if>
+                                        </table>
+                                    </aura:iteration>
+                                </lightning:layoutItem>
+                                <lightning:layoutItem size="12" padding="around-small">
+                                    <lightning:layout >
+                                        <aura:iteration items="{!v.toddlerDollTestPart1}" var="variable">
+                                            <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
+                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
+                                        </aura:iteration>
+                                        &nbsp; &nbsp;
+                                    </lightning:layout>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                        </lightning:tab>
+                        <lightning:tab label="Child Doll - Part 2" id="tdt2">
+                            <lightning:layout multipleRows="true">
+                                <lightning:layoutItem size="12">
+                                    <div class="slds-align_absolute-center" style="height:3rem">
+                                        <h1 class="tabHeader">Child Doll - Part 2</h1>
+                                    </div>
+                                    <div class="slds-align_absolute-center">
+                                        <p class="tabDesc">Trapped and "hugged" by doll</p>
+                                    </div>
+                                    <br></br>
+                                    <aura:iteration items="{!v.toddlerDollTestP2}" var="variable">
+                                        <table>
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
+                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                            </c:BehaviorEvaluationOptionGroup>
+                                            &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
+                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                            </c:BehaviorEvaluationOptionGroup>
+                                            &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
+                                                                            index="{!index}"  recordId="{!v.recordId}">
+                                            </c:BehaviorEvaluationOptionGroup>
+                                            <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
+                                            &nbsp;
+                                                <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
+                                                                                index="{!index}"
+                                                                                recordId="{!v.recordId}">
+                                                </c:BehaviorEvaluationOptionGroup>
+                                            </aura:if>
+                                        </table>
+                                    </aura:iteration>
+                                </lightning:layoutItem>
+                                <lightning:layoutItem size="12" padding="around-small">
+                                    <lightning:layout >
+                                        <aura:iteration items="{!v.toddlerDollTestP2}" var="variable">
+                                            <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
+                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
+                                        </aura:iteration>
+                                        &nbsp; &nbsp;
+                                    </lightning:layout>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                        </lightning:tab>
+                        <lightning:tab label="Scolding Person - Part 1" id="spt1">
+                            <lightning:layout multipleRows="true">
+                                <lightning:layoutItem size="12">
+                                    <div class="slds-align_absolute-center" style="height:3rem">
+                                        <h1 class="tabHeader">Scolding Person - Part 1</h1>
+                                    </div>
+                                    <div class="slds-align_absolute-center">
+                                        <p class="tabDesc">Approached, shouted, gestured</p>
+                                    </div>
+                                    <br></br>
+                                    <aura:iteration items="{!v.scoldingPersonTestP1}" var="variable">
+                                        <table>
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
+                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                            </c:BehaviorEvaluationOptionGroup>
+                                            &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
+                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                            </c:BehaviorEvaluationOptionGroup>
+                                            &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
+                                                                            index="{!index}"  recordId="{!v.recordId}">
+                                            </c:BehaviorEvaluationOptionGroup>
+                                            &nbsp;
+
+                                            <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
+                                            &nbsp;
+                                                <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
+                                                                                index="{!index}"
+                                                                                recordId="{!v.recordId}">
+                                                </c:BehaviorEvaluationOptionGroup>
+                                            </aura:if>
+                                        </table>
+                                    </aura:iteration>
+                                </lightning:layoutItem>
+                                <lightning:layoutItem size="12" padding="around-small">
+                                    <lightning:layout >
+                                        <aura:iteration items="{!v.scoldingPersonTestP1}" var="variable">
+                                            <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
+                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
+                                        </aura:iteration>
+                                        &nbsp; &nbsp;
+                                    </lightning:layout>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                        </lightning:tab>
+                        <lightning:tab label="Scolding Person - Part 2" id="spt2">
+                            <lightning:layout multipleRows="true">
+                                <lightning:layoutItem size="12">
+                                    <div class="slds-align_absolute-center" style="height:3rem">
+                                        <h1 class="tabHeader">Scolding Person - Part 2</h1>
+                                    </div>
+                                    <div class="slds-align_absolute-center">
+                                        <p class="tabDesc">Apologized - switched to friendly behavior</p>
+                                    </div>
+                                    <br></br>
+                                    <aura:iteration items="{!v.scoldingPersonTestP2}" var="variable">
+                                        <table>
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
+                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                            </c:BehaviorEvaluationOptionGroup>
+                                            &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
+                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                            </c:BehaviorEvaluationOptionGroup>
+                                            &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
+                                                                            index="{!index}"  recordId="{!v.recordId}">
+                                            </c:BehaviorEvaluationOptionGroup>
+                                            <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
+                                            &nbsp;
+                                                <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
+                                                                                index="{!index}"
+                                                                                recordId="{!v.recordId}">
+                                                </c:BehaviorEvaluationOptionGroup>
+                                            </aura:if>
+                                        </table>
+                                    </aura:iteration>
+                                </lightning:layoutItem>
+                                <lightning:layoutItem size="12" padding="around-small">
+                                    <lightning:layout >
+                                        <aura:iteration items="{!v.scoldingPersonTestP2}" var="variable">
+                                            <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
+                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
+                                        </aura:iteration>
+                                        &nbsp; &nbsp;
+                                    </lightning:layout>
+                                </lightning:layoutItem>
+                            </lightning:layout>
+                        </lightning:tab>
+                        <aura:if isTrue="{!v.IsDogFighting}">
+                            <lightning:tab label="Fake Dog Interaction" id="fdit">
+                                <lightning:layout multipleRows="true">
+                                    <lightning:layoutItem size="12">
+                                        <div class="slds-align_absolute-center" style="height:3rem">
+                                            <h1 class="tabHeader">Fake Dog Interaction</h1>
+                                        </div>
+                                        <br></br>
+                                        <aura:iteration items="{!v.fakeDogInteractionTest}" var="variable">
+                                            <table>
+
+                                                <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
+                                                                                index="{!index}" recordId="{!v.recordId}" >
+                                                </c:BehaviorEvaluationOptionGroup>
+                                                &nbsp;
+                                                <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
+                                                                                index="{!index}" recordId="{!v.recordId}" >
+                                                </c:BehaviorEvaluationOptionGroup>
+                                                &nbsp;
+                                                <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
+                                                                                index="{!index}"  recordId="{!v.recordId}">
+                                                </c:BehaviorEvaluationOptionGroup>
+                                                &nbsp;
+                                                <div style="font-weight:900; -webkit-text-fill-color:#FF0000; ">
+                                                <table>
+                                                    <tr width="100%">
+                                                    <td width="3%"></td>
+                                                    <td width="7%"><lightning:input type="checkbox-button"
+                                                                    label="Use Caution for Real Dog Test"
+                                                                    checked="{!v.UseCaution}"
+                                                                    onchange="{!c.handleCaution}"
+                                                                    aura:id="cautionInput"/></td>
+                                                    <td width="90%"><label>Use Caution for Real Dog Test</label></td>
+                                                    </tr>
+                                                </table>
+                                                </div>
+                                                &nbsp;
+                                                <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
+                                            &nbsp;
+                                                    <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
+                                                                                    index="{!index}"
+                                                                                    recordId="{!v.recordId}">
+                                                    </c:BehaviorEvaluationOptionGroup>
+                                                </aura:if>
+                                            </table>
+                                        </aura:iteration>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem size="12" padding="around-small">
+                                        <lightning:layout >
+                                            <aura:iteration items="{!v.fakeDogInteractionTest}" var="variable">
+                                                <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
+                                                                            IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                            skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
+                                            </aura:iteration>
+                                            &nbsp; &nbsp;
+                                        </lightning:layout>
+                                    </lightning:layoutItem>
+                                </lightning:layout>
+                            </lightning:tab>
+                        </aura:if>
+                    </aura:if>
+                    <lightning:tab label="Same Sex Dog - Part 1" id="ssdt1">
+                        <lightning:layout multipleRows="true">
+                            <lightning:layoutItem size="12">
+                                <div class="slds-align_absolute-center" style="height:3rem">
+                                    <h1 class="tabHeader">Same Sex Dog - Part 1</h1>
+                                    </div>
+                                    <div class="slds-align_absolute-center">
+                                        <p class="tabDesc">Behind a barrier</p>
+                                </div>
+                                <br></br>
+                                <aura:iteration items="{!v.sameSexDogTestPart1}" var="variable">
+                                    <table>
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
+                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
+                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
+                                                                         index="{!index}"  recordId="{!v.recordId}">
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
+                                        &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
+                                                                             index="{!index}"
+                                                                             recordId="{!v.recordId}">
+                                            </c:BehaviorEvaluationOptionGroup>
+                                        </aura:if>
+                                    </table>
+                                </aura:iteration>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem size="12" padding="around-small">
+                                <lightning:layout >
+                                    <aura:iteration items="{!v.sameSexDogTestPart1}" var="variable">
+                                        <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
+                                    </aura:iteration>
+                                    &nbsp; &nbsp;
+                                </lightning:layout>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </lightning:tab>
+                    <lightning:tab label="Same Sex Dog - Part 2" id="ssdt2">
+                        <lightning:layout multipleRows="true">
+                            <lightning:layoutItem size="12">
+                                <div class="slds-align_absolute-center" style="height:3rem">
+                                    <h1 class="tabHeader">Same Sex Dog - Part 2</h1>
+                                    </div>
+                                    <div class="slds-align_absolute-center">
+                                        <p class="tabDesc">At a distance</p>
+                                </div>
+                                <br></br>
+                                <aura:iteration items="{!v.sameSexDogTestPart2}" var="variable">
+                                    <table>
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
+                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
+                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
+                                                                         index="{!index}"  recordId="{!v.recordId}">
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
+                                        &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
+                                                                             index="{!index}"
+                                                                             recordId="{!v.recordId}">
+                                            </c:BehaviorEvaluationOptionGroup>
+                                        </aura:if>
+                                    </table>
+                                </aura:iteration>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem size="12" padding="around-small">
+                                <lightning:layout >
+                                    <aura:iteration items="{!v.sameSexDogTestPart2}" var="variable">
+                                        <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
+                                    </aura:iteration>
+                                    &nbsp; &nbsp;
+                                </lightning:layout>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </lightning:tab>
+                    <lightning:tab label="Same Sex Dog - Part 3" id="ssdt3">
+                        <lightning:layout multipleRows="true">
+                            <lightning:layoutItem size="12">
+                                <div class="slds-align_absolute-center" style="height:3rem">
+                                    <h1 class="tabHeader">Same Sex Dog - Part 3</h1>
+                                    </div>
+                                    <div class="slds-align_absolute-center">
+                                        <p class="tabDesc">Greeting</p>
+                                </div>
+                                <br></br>
+                                <table class="slds-align_absolute-center">
+                                    <tr>
+                                        <td style="padding-right: 30px;"><input type="radio" id="SMuzzled3" name="sameMuzzled3" value="Muzzled" checked="{!v.MuzzleSSD3}" onchange="{!c.handleMuzzle}"></input>
+                                            <strong><label for="SMuzzled3"> Muzzled</label></strong></td>
+                                        <td><input type="radio" id="SNotMuzzled3" name="sameMuzzled3" value="Not Muzzled" checked="{!not(v.MuzzleSSD3)}" onchange="{!c.handleMuzzle}"></input>
+                                            <strong><label for="SNotMuzzled3"> Not Muzzled</label></strong></td>
+                                    </tr>
+                                </table>
+                                <br></br>
+                                <aura:iteration items="{!v.sameSexDogTestPart3}" var="variable">
+                                    <table>
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
+                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
+                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
+                                                                         index="{!index}"  recordId="{!v.recordId}">
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
+                                        &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
+                                                                             index="{!index}"
+                                                                             recordId="{!v.recordId}">
+                                            </c:BehaviorEvaluationOptionGroup>
+                                        </aura:if>
+                                    </table>
+                                </aura:iteration>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem size="12" padding="around-small">
+                                <lightning:layout >
+                                    <aura:iteration items="{!v.sameSexDogTestPart3}" var="variable">
+                                        <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
+                                    </aura:iteration>
+                                    &nbsp; &nbsp;
+                                </lightning:layout>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </lightning:tab>
+                    <lightning:tab label="Opposite Sex Dog - Part 1" id="osdt1">
+                        <lightning:layout multipleRows="true">
+                            <lightning:layoutItem size="12">
+                                <div class="slds-align_absolute-center" style="height:3rem">
+                                    <h1 class="tabHeader">Opposite Sex Dog - Part 1</h1>
+                                    </div>
+                                    <div class="slds-align_absolute-center">
+                                        <p class="tabDesc">Behind a barrier</p>
+                                </div>
+                                <br></br>
+                                <aura:iteration items="{!v.oppositeSexDogTestPart1}" var="variable">
+                                    <table>
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
+                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
+                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
+                                                                         index="{!index}"  recordId="{!v.recordId}">
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
+                                        &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
+                                                                             index="{!index}"
+                                                                             recordId="{!v.recordId}">
+                                            </c:BehaviorEvaluationOptionGroup>
+                                        </aura:if>
+                                    </table>
+                                </aura:iteration>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem size="12" padding="around-small">
+                                <lightning:layout >
+                                    <aura:iteration items="{!v.oppositeSexDogTestPart1}" var="variable">
+                                        <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
+                                    </aura:iteration>
+                                    &nbsp; &nbsp;
+                                </lightning:layout>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </lightning:tab>
+                    <lightning:tab label="Opposite Sex Dog - Part 2" id="osdt2">
+                        <lightning:layout multipleRows="true">
+                            <lightning:layoutItem size="12">
+                                <div class="slds-align_absolute-center" style="height:3rem">
+                                    <h1 class="tabHeader">Opposite Sex Dog - Part 2</h1>
+                                    </div>
+                                    <div class="slds-align_absolute-center">
+                                        <p class="tabDesc">At a distance</p>
+                                </div>
+                                <br></br>
+                                <aura:iteration items="{!v.oppositeSexDogTestPart2}" var="variable">
+                                    <table>
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
+                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
+                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
+                                                                         index="{!index}"  recordId="{!v.recordId}">
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
+                                        &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
+                                                                             index="{!index}"
+                                                                             recordId="{!v.recordId}">
+                                            </c:BehaviorEvaluationOptionGroup>
+                                        </aura:if>
+                                    </table>
+                                </aura:iteration>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem size="12" padding="around-small">
+                                <lightning:layout >
+                                    <aura:iteration items="{!v.oppositeSexDogTestPart2}" var="variable">
+                                        <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
+                                    </aura:iteration>
+                                    &nbsp; &nbsp;
+                                </lightning:layout>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </lightning:tab>
+                    <lightning:tab label="Opposite Sex Dog - Part 3" id="osdt3">
+                        <lightning:layout multipleRows="true">
+                            <lightning:layoutItem size="12">
+                                <div class="slds-align_absolute-center" style="height:3rem">
+                                    <h1 class="tabHeader">Opposite Sex Dog - Part 3</h1>
+                                    </div>
+                                    <div class="slds-align_absolute-center">
+                                        <p class="tabDesc">Greeting</p>
+                                </div>
+                                <br></br>
+                                <table class="slds-align_absolute-center">
+                                    <tr>
+                                        <td style="padding-right: 30px;"><input type="radio" id="OMuzzled3" name="oppositeMuzzled3" value="Muzzled" checked="{!v.MuzzleOSD3}" onchange="{!c.handleMuzzle}"></input>
+                                            <strong><label for="OMuzzled3"> Muzzled</label></strong></td>
+                                        <td><input type="radio" id="ONotMuzzled3" name="oppositeMuzzled3" value="Not Muzzled" checked="{!not(v.MuzzleOSD3)}" onchange="{!c.handleMuzzle}"></input>
+                                            <strong><label for="ONotMuzzled3"> Not Muzzled</label></strong></td>
+                                    </tr>
+                                </table>
+                                <br></br>
+                                <aura:iteration items="{!v.oppositeSexDogTestPart3}" var="variable">
+                                    <table>
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
+                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
+                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
+                                                                         index="{!index}"  recordId="{!v.recordId}">
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
+                                        &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
+                                                                             index="{!index}"
+                                                                             recordId="{!v.recordId}">
+                                            </c:BehaviorEvaluationOptionGroup>
+                                        </aura:if>
+                                    </table>
+                                </aura:iteration>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem size="12" padding="around-small">
+                                <lightning:layout >
+                                    <aura:iteration items="{!v.oppositeSexDogTestPart3}" var="variable">
+                                        <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
+                                    </aura:iteration>
+                                    &nbsp; &nbsp;
+                                </lightning:layout>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </lightning:tab>
+                </aura:if>
+                <aura:if isTrue="{!v.IsPuppy}">
+                    <lightning:tab label="Behavior In Kennel" id="pbik">
+                        <lightning:layout multipleRows="true">
+                            <lightning:layoutItem size="12">
+                                <div class="slds-align_absolute-center" style="height:3rem">
+                                    <h1 class="tabHeader">Behavior In Kennel</h1>
+                                </div>
+                                <div class="slds-align_absolute-center">
+                                    <p class="tabDesc">Approach kennel at normal walking speed. Observe dog's reaction to your approach. Then remove puppy using a slip lead or by picking dog up (as necessary). Observe puppy's behavior while being removed from kennel</p>
+                                </div>
+                                <br></br>
+                                <table class="slds-align_absolute-center">
+                                    <tr>
+                                        <td style="padding-right: 30px;"><input type="radio" id="singly" name="kennel" value="singly" checked="{!v.PuppySingly}" onchange="{!c.handleHousing}"></input>
+                                            <strong><label for="singly"> Singly-housed</label></strong></td>
+                                        <td><input type="radio" id="CoHouse" name="kennel" value="CoHouse" checked="{!v.PuppyCoHoused}" onchange="{!c.handleHousing}"></input>
+                                            <strong><label for="CoHouse"> Co-housed</label></strong></td>
+                                    </tr>
+                                </table>
+                                <br></br>
+                                <aura:iteration items="{!v.puppyBehaviorInKennel}" var="variable">
+                                    <table>
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
+                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
+                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
+                                                                         index="{!index}"  recordId="{!v.recordId}">
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
+                                        &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
+                                                                             index="{!index}"
+                                                                             recordId="{!v.recordId}">
+                                            </c:BehaviorEvaluationOptionGroup>
+                                        </aura:if>
+                                    </table>
+                                </aura:iteration>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem size="12" padding="around-small">
+                                <lightning:layout >
+                                    <aura:iteration items="{!v.puppyBehaviorInKennel}" var="variable">
+                                        <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
+                                    </aura:iteration>&nbsp; &nbsp;
+                                </lightning:layout>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </lightning:tab>
+                    <lightning:tab label="Behavior On Leash" id="pbol">
+                        <lightning:layout multipleRows="true">
+                            <lightning:layoutItem size="12">
+                                <div class="slds-align_absolute-center" style="height:3rem">
+                                    <h1 class="tabHeader">Behavior On Leash</h1>
+                                </div>
+                                <div class="slds-align_absolute-center">
+                                    <p class="tabDesc">Try to walk puppy on leash to evaluation room</p>
+                                </div>
+                                <br></br>
+                                <aura:iteration items="{!v.puppyBehaviorOnLeash}" var="variable">
+                                    <table>
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
+                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
+                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
+                                                                         index="{!index}"  recordId="{!v.recordId}">
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
+                                        &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
+                                                                             index="{!index}"
+                                                                             recordId="{!v.recordId}">
+                                            </c:BehaviorEvaluationOptionGroup>
+                                        </aura:if>
+                                    </table>
+                                </aura:iteration>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem size="12" padding="around-small">
+                                <lightning:layout >
+                                    <aura:iteration items="{!v.puppyBehaviorOnLeash}" var="variable">
+                                        <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
+                                    </aura:iteration>&nbsp; &nbsp;
+                                </lightning:layout>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </lightning:tab>
+                    <lightning:tab label="Social Behavior - Part 1" id="psb1">
+                        <lightning:layout multipleRows="true">
+                            <lightning:layoutItem size="12">
+                                <div class="slds-align_absolute-center" style="height:3rem">
+                                    <h1 class="tabHeader">Social Behavior - Part 1: Tester Solicits Interaction</h1>
+                                </div>
+                                <div class="slds-align_absolute-center">
+                                    <p class="tabDesc">Place the puppy in the center of testing space and walk 4-5 feet away. Kneel down or sit on the floor. Call the puppy in a friendly voice and gently clap your hands or tap floor to entice the puppy to come. If the puppy comes to you, praise and touch the puppy. If the puppy does not come keep calling. Continue for 1 minute.</p>
+                                </div>
+                                <br></br>
+                                <aura:iteration items="{!v.puppySocialBehaviorPart1}" var="variable">
+                                    <table>
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
+                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
+                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
+                                                                         index="{!index}"  recordId="{!v.recordId}">
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
+                                        &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
+                                                                             index="{!index}"
+                                                                             recordId="{!v.recordId}">
+                                            </c:BehaviorEvaluationOptionGroup>
+                                        </aura:if>
+                                    </table>
+                                </aura:iteration>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem size="12" padding="around-small">
+                                <lightning:layout >
+                                    <aura:iteration items="{!v.puppySocialBehaviorPart1}" var="variable">
+                                        <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
+                                    </aura:iteration>&nbsp; &nbsp;
+                                </lightning:layout>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </lightning:tab>
+                    <lightning:tab label="Social Behavior - Part 2" id="psb2">
+                        <lightning:layout multipleRows="true">
+                            <lightning:layoutItem size="12">
+                                <div class="slds-align_absolute-center" style="height:3rem">
+                                    <h1 class="tabHeader">Social Behavior - Part 2: Tester Invites Puppy To Follow</h1>
+                                </div>
+                                <div class="slds-align_absolute-center">
+                                    <p class="tabDesc">Place puppy in the center of testing space. Stand next to the puppy, turn to the side and crouch a little. While palling your leg and saying, "Here, puppy, come on," encourage them to follow, move a few steps away. If puppy follows, repeat two more times, changing directions each time. If they don't return then try again two more times.</p>
+                                </div>
+                                <br></br>
+                                <aura:iteration items="{!v.puppySocialBehaviorPart2}" var="variable">
+                                    <table>
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
+                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
+                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
+                                                                         index="{!index}"  recordId="{!v.recordId}">
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
+                                        &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
+                                                                             index="{!index}"
+                                                                             recordId="{!v.recordId}">
+                                            </c:BehaviorEvaluationOptionGroup>
+                                        </aura:if>
+                                    </table>
+                                </aura:iteration>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem size="12" padding="around-small">
+                                <lightning:layout >
+                                    <aura:iteration items="{!v.puppySocialBehaviorPart2}" var="variable">
+                                        <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
+                                    </aura:iteration>&nbsp; &nbsp;
+                                </lightning:layout>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </lightning:tab>
+                    <lightning:tab label="Play Tug - Part 1" id="ppt1">
+                        <lightning:layout multipleRows="true">
+                            <lightning:layoutItem size="12">
+                                <div class="slds-align_absolute-center" style="height:3rem">
+                                    <h1 class="tabHeader">Play Tug - Part 1: Interactive Play with Tug Toy</h1>
+                                </div>
+                                <div class="slds-align_absolute-center">
+                                    <p class="tabDesc">Sit on floor and interest puppy in tug toy. Wave it in
+                                        puppy's and/or wiggle it on floor in front of puppy. When puppy grabs it,
+                                        tug with enough force to stimulate a game.</p>
+                                </div>
+                                <br></br>
+                                <aura:iteration items="{!v.puppyPlayTestTugPart1}" var="variable">
+                                    <table>
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
+                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
+                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
+                                                                         index="{!index}"  recordId="{!v.recordId}">
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
+                                        &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
+                                                                             index="{!index}"
+                                                                             recordId="{!v.recordId}">
+                                            </c:BehaviorEvaluationOptionGroup>
+                                        </aura:if>
+                                    </table>
+                                </aura:iteration>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem size="12" padding="around-small">
+                                <lightning:layout >
+                                    <aura:iteration items="{!v.puppyPlayTestTugPart1}" var="variable">
+                                        <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
+                                    </aura:iteration>&nbsp; &nbsp;
+                                </lightning:layout>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </lightning:tab>
+                    <lightning:tab label="Play Tug - Part 2" id="ppt2">
+                        <lightning:layout multipleRows="true">
+                            <lightning:layoutItem size="12">
+                                <div class="slds-align_absolute-center" style="height:3rem">
+                                    <h1 class="tabHeader">Play Tug - Part 2: Tester Drops Tug Toy</h1>
+                                </div>
+                                <div class="slds-align_absolute-center">
+                                    <p class="tabDesc">After a few seconds of tugging with puppy (or trying to entice puppy to tug), release toy and do not engage with puppy for a few seconds.</p>
+                                </div>
+                                <br></br>
+                                <aura:iteration items="{!v.puppyPlayTestTugPart2}" var="variable">
+                                    <table>
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
+                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
+                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
+                                                                         index="{!index}"  recordId="{!v.recordId}">
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
+                                        &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
+                                                                             index="{!index}"
+                                                                             recordId="{!v.recordId}">
+                                            </c:BehaviorEvaluationOptionGroup>
+                                        </aura:if>
+                                    </table>
+                                </aura:iteration>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem size="12" padding="around-small">
+                                <lightning:layout >
+                                    <aura:iteration items="{!v.puppyPlayTestTugPart2}" var="variable">
+                                        <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
+                                    </aura:iteration>&nbsp; &nbsp;
+                                </lightning:layout>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </lightning:tab>
+                    <lightning:tab label="Play Tag" id="ppt">
+                        <lightning:layout multipleRows="true">
+                            <lightning:layoutItem size="12">
+                                <div class="slds-align_absolute-center" style="height:3rem">
+                                    <h1 class="tabHeader">Play Tag: Off Leash or on Very Loose Leash</h1>
+                                </div>
+                                <div class="slds-align_absolute-center">
+                                    <p class="tabDesc">Ask the puppy in friendly voice "Do you wanna play?" Assume a partly crouched, bouncy, playful posture. Move away from puppy, encouraging puppy to join game. Use 2 fingers to point at rear flank, saying, "Wanna play?" Only lag point while moving away from puppy. Attempt tag/point 3 times unless puppy becomes fearful. If puppy mouths hard, tester should yelp.</p>
+                                </div>
+                                <br></br>
+                                <aura:iteration items="{!v.puppyPlayTestTag}" var="variable">
+                                    <table>
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
+                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
+                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
+                                                                         index="{!index}"  recordId="{!v.recordId}">
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
+                                        &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
+                                                                             index="{!index}"
+                                                                             recordId="{!v.recordId}">
+                                            </c:BehaviorEvaluationOptionGroup>
+                                        </aura:if>
+                                    </table>
+                                </aura:iteration>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem size="12" padding="around-small">
+                                <lightning:layout >
+                                    <aura:iteration items="{!v.puppyPlayTestTag}" var="variable">
+                                        <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
+                                    </aura:iteration>&nbsp; &nbsp;
+                                </lightning:layout>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </lightning:tab>
+                    <lightning:tab label="Restraint" id="pr">
+                        <lightning:layout multipleRows="true">
+                            <lightning:layoutItem size="12">
+                                <div class="slds-align_absolute-center" style="height:3rem">
+                                    <h1 class="tabHeader">Restraint</h1>
+                                </div>
+                                <div class="slds-align_absolute-center">
+                                    <p class="tabDesc">Sit on the floor with legs outstretched. Pick up puppy and hold puppy in one of two ways (a) so they are reclined against your torso, supported between your body and your arm and facing away from you or (b) so they are lying on their back, supported between your legs, with rear legs next to your body and their head farthest away. If sitting up, support their rear with the hand of the arm cradling them and their torso with your opposite hand. If lying down, place one hand on either shoulder to provide balance and to keep them from getting up. Hold the puppy in this position for 3 minutes. If they struggle, hold  more firmly, re-position if necessary. If they are relaxed, talk soothingly to them and use your fingers to massage them gently. Briefly handle the body (foot cars, tail, belly, genitalia). Only release when they are relaxed, and at least not actively struggling. If puppy becomes uncontrollably frightened or aggressive, discontinue.</p>
+                                </div>
+                                <br></br>
+                                <aura:iteration items="{!v.puppyRestraint}" var="variable">
+                                    <table>
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
+                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
+                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
+                                                                         index="{!index}"  recordId="{!v.recordId}">
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
+                                        &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
+                                                                             index="{!index}"
+                                                                             recordId="{!v.recordId}">
+                                            </c:BehaviorEvaluationOptionGroup>
+                                        </aura:if>
+                                    </table>
+                                </aura:iteration>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem size="12" padding="around-small">
+                                <lightning:layout >
+                                    <aura:iteration items="{!v.puppyRestraint}" var="variable">
+                                        <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
+                                    </aura:iteration>&nbsp; &nbsp;
+                                </lightning:layout>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </lightning:tab>
+                    <lightning:tab label="Resource Guarding - Part 1" id="prg1">
+                        <lightning:layout multipleRows="true">
+                            <lightning:layoutItem size="12">
+                                <div class="slds-align_absolute-center" style="height:3rem">
+                                    <h1 class="tabHeader">Resource Guarding - Part 1: Food Bowl</h1>
+                                </div>
+                                <div class="slds-align_absolute-center">
+                                    <p class="tabDesc">Have assistant hold puppy's leash, or tether puppy. Place bowl of food (kibble + canned food mix) in front of puppy Once puppy is engaged in eating, approach then:
+                                        <br></br>1. Stroke puppy's back and say curiously, "Hey, whatcha got there?
+                                        <br></br>2. Touch collar and say curiously, "Hey, whatcha got there?"
+                                        <br></br>3. Touch puppy's muzzle while he's eating and say, "Hey, whatcha got there?"
+                                        <br></br>4. Firmly push puppy's muzzle out of the food bowl and say sternly, "OK get out of there!"
+                                    </p>                                </div>
+                                <br></br>
+                                <table class="slds-box slds-p-top_medium" width="100%">
+                                    <div class="grid-container">
+                                        <div class="grid-item"></div>
+                                        <div class="grid-item" align="left" >
+                                            <tr width="100%">
+                                                <td width="6%"></td>
+                                                <td width="7%"></td>
+                                                <td width="7%"></td>
+                                                <td width="7%"></td>
+                                                <td width="7%"></td>
+                                                <td width="25%"></td>
+                                                <td width="22%">TB = Touch Body</td>
+                                                <td width="22%">TN = Touch Neck</td>
+                                            </tr>
+                                            <tr width="100%">
+                                                <td width="6%"></td>
+                                                <td width="7%"><strong>TB</strong></td>
+                                                <td width="7%"><strong>TN</strong></td>
+                                                <td width="7%"><strong>TF</strong></td>
+                                                <td width="7%"><strong>PF</strong></td>
+                                                <td width="25%"></td>
+                                                <td width="22%">TF = Touch Face</td>
+                                                <td width="22%">PF = Push Face</td>
+                                            </tr>
+                                        </div>
+                                    </div>
+                                </table>
+
+                                <aura:iteration items="{!v.puppyResourceGuardingPart1}" var="variable">
+                                    <table>
+                                        <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingOne" colNumber="4" options="{!variable.VC1}"
+                                                                                 index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationMultipleOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingOne" colNumber="4" options="{!variable.VC2}"
+                                                                                 index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationMultipleOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingOne" colNumber="4" options="{!variable.VC3}"
+                                                                                 index="{!index}"  recordId="{!v.recordId}">
+                                        </c:BehaviorEvaluationMultipleOptionGroup>
+                                        <aura:if isTrue="{!not(empty(variable.VC4))}">
+                                        &nbsp;
+                                            <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingOne" colNumber="4" options="{!variable.VC4}"
+                                                                                     index="{!index}"
+                                                                                     recordId="{!v.recordId}">
+                                            </c:BehaviorEvaluationMultipleOptionGroup>
+                                        </aura:if>
+                                    </table>
+                                </aura:iteration>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem size="12" padding="around-small">
+                                <lightning:layout >
+                                    <aura:iteration items="{!v.puppyResourceGuardingPart1}" var="variable">
+                                        <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
+                                    </aura:iteration>&nbsp; &nbsp;
+                                </lightning:layout>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </lightning:tab>
+                    <lightning:tab label="Resource Guarding - Part 2" id="prg2">
+                        <lightning:layout multipleRows="true">
+                            <lightning:layoutItem size="12">
+                                <div class="slds-align_absolute-center" style="height:3rem">
+                                    <h1 class="tabHeader">Resource Guarding - Part 2: Chew</h1>
+                                </div>
+                                <div class="slds-align_absolute-center">
+                                    <p class="tabDesc">Assistant continues to hold leash. Give puppy a pig's ear. Once dog is engaged in chewing approach then
+                                        <br></br>1. Stroke puppy's back and say curiously, "Hey, whatcha got there?"
+                                        <br></br>2. Touch collar and say curiously, "Hey, whatcha got there?"
+                                        <br></br>3. Touch puppy's muzzle and say curiously, "Hey, whatcha got there?"
+                                        <br></br>4. Firmly push puppy's muzzle as though to grasp chewy and say sternly, "Hey get out of there!"
+                                    </p>                                </div>
+                                <br></br>
+                                <table class="slds-box slds-p-top_medium" width="100%">
+                                    <div class="grid-container">
+                                        <div class="grid-item"></div>
+                                        <div class="grid-item" align="left" >
+                                            <tr width="100%">
+                                                <td width="6%"></td>
+                                                <td width="7%"></td>
+                                                <td width="7%"></td>
+                                                <td width="7%"></td>
+                                                <td width="7%"></td>
+                                                <td width="25%"></td>
+                                                <td width="22%">TB = Touch Body</td>
+                                                <td width="22%">TN = Touch Neck</td>
+                                            </tr>
+                                            <tr width="100%">
+                                                <td width="6%"></td>
+                                                <td width="7%"><strong>TB</strong></td>
+                                                <td width="7%"><strong>TN</strong></td>
+                                                <td width="7%"><strong>TF</strong></td>
+                                                <td width="7%"><strong>PF</strong></td>
+                                                <td width="25%"></td>
+                                                <td width="22%">TF = Touch Face</td>
+                                                <td width="22%">PF = Push Face</td>
+                                            </tr>
+                                        </div>
+                                    </div>
+                                </table>
+                                <aura:iteration items="{!v.puppyResourceGuardingPart2}" var="variable">
+                                    <table>
+                                        <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingTwo" colNumber="4" options="{!variable.VC1}"
+                                                                                 index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationMultipleOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingTwo" colNumber="4" options="{!variable.VC2}"
+                                                                                 index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationMultipleOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingTwo" colNumber="4" options="{!variable.VC3}"
+                                                                                 index="{!index}"  recordId="{!v.recordId}">
+                                        </c:BehaviorEvaluationMultipleOptionGroup>
+                                        <aura:if isTrue="{!not(empty(variable.VC4))}">
+                                        &nbsp;
+                                            <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingTwo" colNumber="4" options="{!variable.VC4}"
+                                                                                     index="{!index}"
+                                                                                     recordId="{!v.recordId}">
+                                            </c:BehaviorEvaluationMultipleOptionGroup>
+                                        </aura:if>
+                                    </table>
+                                </aura:iteration>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem size="12" padding="around-small">
+                                <lightning:layout >
+                                    <aura:iteration items="{!v.puppyResourceGuardingPart2}" var="variable">
+                                        <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
+                                    </aura:iteration>&nbsp; &nbsp;
+                                </lightning:layout>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </lightning:tab>
+                    <lightning:tab label="Child Doll - Part 1" id="pcd1">
+                        <lightning:layout multipleRows="true">
+                            <lightning:layoutItem size="12">
+                                <div class="slds-align_absolute-center" style="height:3rem">
+                                    <h1 class="tabHeader">Child Doll - Part 1: Approach and Greet</h1>
+                                </div>
+                                <div class="slds-align_absolute-center">
+                                    <p class="tabDesc">While handler holds leash and distracts puppy, assistant places doll's feet on ground at opposite end of room. Puppy is then permitted to observe while the assistant walks' doll directly toward puppy, saying cheerfully child's voice. "Ohl A doggie! I love doggies! Can I say Hi?" Do not make noises with doll's feet. When 3 feel from puppy, doll stops and allows puppy to approach if he/she desires. After a few seconds doll is make to pop upwards 3 inches while saying "Oooh!" as though slightly startled.</p>
+                                </div>
+                                <br></br>
+                                <aura:iteration items="{!v.puppyChildDollPart1}" var="variable">
+                                    <table>
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
+                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
+                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
+                                                                         index="{!index}"  recordId="{!v.recordId}">
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
+                                        &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
+                                                                             index="{!index}"
+                                                                             recordId="{!v.recordId}">
+                                            </c:BehaviorEvaluationOptionGroup>
+                                        </aura:if>
+                                    </table>
+                                </aura:iteration>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem size="12" padding="around-small">
+                                <lightning:layout >
+                                    <aura:iteration items="{!v.puppyChildDollPart1}" var="variable">
+                                        <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
+                                    </aura:iteration>&nbsp; &nbsp;
+                                </lightning:layout>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </lightning:tab>
+                    <lightning:tab label="Child Doll - Part 2" id="pcd2">
+                        <lightning:layout multipleRows="true">
+                            <lightning:layoutItem size="12">
+                                <div class="slds-align_absolute-center" style="height:3rem">
+                                    <h1 class="tabHeader">Child Doll - Part 2: Cornered and Loomed Over by Doll</h1>
+                                </div>
+                                <div class="slds-align_absolute-center">
+                                    <p class="tabDesc">Handler shortened the leash and/or used the wall or her leg to keep the puppy in place while the doll approached with both arms extended, saying "Can I hug you?". Assistant then attempts to make the doll bend slightly over the puppy for 1 full second. Doll then turned and walked away, across the room. Do not make noises with the doll's feet.</p>
+                                </div>
+                                <br></br>
+                                <aura:iteration items="{!v.puppyChildDollPart2}" var="variable">
+                                    <table>
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
+                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
+                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
+                                                                         index="{!index}"  recordId="{!v.recordId}">
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
+                                        &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
+                                                                             index="{!index}"
+                                                                             recordId="{!v.recordId}">
+                                            </c:BehaviorEvaluationOptionGroup>
+                                        </aura:if>
+                                    </table>
+                                </aura:iteration>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem size="12" padding="around-small">
+                                <lightning:layout >
+                                    <aura:iteration items="{!v.puppyChildDollPart2}" var="variable">
+                                        <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
+                                    </aura:iteration>&nbsp; &nbsp;
+                                </lightning:layout>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </lightning:tab>
+                    <lightning:tab label="Dog Interaction - Littermate" id="pdi1">
+                        <lightning:layout multipleRows="true">
+                            <lightning:layoutItem size="12">
+                                <div class="slds-align_absolute-center" style="height:3rem">
+                                    <h1 class="tabHeader">Dog Interaction - Part 1: Interaction with Littermate</h1>
+                                </div>
+                                <div class="slds-align_absolute-center">
+                                    <p class="tabDesc">Placed another puppy from the same litter in the center of the testing space. Observe interactions for 2 minutes</p>
+                                </div>
+                                <br></br>
+                                <table class="slds-align_absolute-center">
+                                    <tr>
+                                        <td style="padding-right: 30px;"><input type="radio" id="PMuzzled1" name="puppyMuzzle1" value="Muzzled" checked="{!v.PuppyMuzzle1}" onchange="{!c.handleMuzzle}"></input>
+                                            <strong><label for="PMuzzled1"> Muzzled</label></strong></td>
+                                        <td><input type="radio" id="PNotMuzzled1" name="puppyMuzzle1" value="Not Muzzled" checked="{!not(v.PuppyMuzzle1)}" onchange="{!c.handleMuzzle}"></input>
+                                            <strong><label for="PNotMuzzled1"> Not Muzzled</label></strong></td>
+                                    </tr>
+                                </table>
+                                <br></br>
+                                <aura:iteration items="{!v.puppyDogInteractionPart1}" var="variable">
+                                    <table>
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
+                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
+                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
+                                                                         index="{!index}"  recordId="{!v.recordId}">
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
+                                        &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
+                                                                             index="{!index}"
+                                                                             recordId="{!v.recordId}">
+                                            </c:BehaviorEvaluationOptionGroup>
+                                        </aura:if>
+                                    </table>
+                                </aura:iteration>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem size="12" padding="around-small">
+                                <lightning:layout >
+                                    <aura:iteration items="{!v.puppyDogInteractionPart1}" var="variable">
+                                        <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
+                                    </aura:iteration>&nbsp; &nbsp;
+                                </lightning:layout>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </lightning:tab>
+                    <lightning:tab label="Dog Interaction - Unfamiliar" id="pdi2">
+                        <lightning:layout multipleRows="true">
+                            <lightning:layoutItem size="12">
+                                <div class="slds-align_absolute-center" style="height:3rem">
+                                    <h1 class="tabHeader">Dog Interaction - Part 2: Interaction with Unfamiliar Playmate</h1>
+                                </div>
+                                <div class="slds-align_absolute-center">
+                                    <p class="tabDesc">Place unfamiliar puppy in the center of the testing space. Observed interactions for 2 minutes.</p>
+                                </div>
+                                <br></br>
+                                <table class="slds-align_absolute-center">
+                                    <tr>
+                                        <td style="padding-right: 30px;"><input type="radio" id="PMuzzled2" name="puppyMuzzle2" value="Muzzled" checked="{!v.PuppyMuzzle2}" onchange="{!c.handleMuzzle}"></input>
+                                            <strong><label for="PMuzzled2"> Muzzled</label></strong></td>
+                                        <td><input type="radio" id="PNotMuzzled2" name="puppyMuzzle2" value="Not Muzzled" checked="{!not(v.PuppyMuzzle2)}" onchange="{!c.handleMuzzle}"></input>
+                                            <strong><label for="PNotMuzzled2"> Not Muzzled</label></strong></td>
+                                    </tr>
+                                </table>
+                                <br></br>
+                                <aura:iteration items="{!v.puppyDogInteractionPart2}" var="variable">
+                                    <table>
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
+                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
+                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
+                                                                         index="{!index}"  recordId="{!v.recordId}">
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
+                                        &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
+                                                                             index="{!index}"
+                                                                             recordId="{!v.recordId}">
+                                            </c:BehaviorEvaluationOptionGroup>
+                                        </aura:if>
+                                    </table>
+                                </aura:iteration>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem size="12" padding="around-small">
+                                <lightning:layout >
+                                    <aura:iteration items="{!v.puppyDogInteractionPart2}" var="variable">
+                                        <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
+                                    </aura:iteration>&nbsp; &nbsp;
+                                </lightning:layout>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </lightning:tab>
+                    <lightning:tab label="Dog Interaction - Adult" id="pdi3">
+                        <lightning:layout multipleRows="true">
+                            <lightning:layoutItem size="12">
+                                <div class="slds-align_absolute-center" style="height:3rem">
+                                    <h1 class="tabHeader">Dog Interaction - Part 3: Interaction with Adult Dog</h1>
+                                </div>
+                                <div class="slds-align_absolute-center">
+                                    <p class="tabDesc">Bring an unfamiliar adult dog on leash into the testing space. Observe the interactions for 2-5 minutes.</p>
+                                </div>
+                                <br></br>
+                                <table class="slds-align_absolute-center">
+                                    <tr>
+                                        <td style="padding-right: 30px;"><input type="radio" id="PMuzzled3" name="puppyMuzzle3" value="Muzzled" checked="{!v.PuppyMuzzle3}" onchange="{!c.handleMuzzle}"></input>
+                                            <strong><label for="PMuzzled3"> Muzzled</label></strong></td>
+                                        <td><input type="radio" id="PNotMuzzled3" name="puppyMuzzle3" value="Not Muzzled" checked="{!not(v.PuppyMuzzle3)}" onchange="{!c.handleMuzzle}"></input>
+                                            <strong><label for="PNotMuzzled3"> Not Muzzled</label></strong></td>
+                                    </tr>
+                                </table>
+                                <br></br>
+                                <aura:iteration items="{!v.puppyDogInteractionPart3}" var="variable">
+                                    <table>
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
+                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
+                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        &nbsp;
+                                        <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
+                                                                         index="{!index}"  recordId="{!v.recordId}">
+                                        </c:BehaviorEvaluationOptionGroup>
+                                        <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
+                                        &nbsp;
+                                            <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
+                                                                             index="{!index}"
+                                                                             recordId="{!v.recordId}">
+                                            </c:BehaviorEvaluationOptionGroup>
+                                        </aura:if>
+                                    </table>
+                                </aura:iteration>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem size="12" padding="around-small">
+                                <lightning:layout >
+                                    <aura:iteration items="{!v.puppyDogInteractionPart3}" var="variable">
+                                        <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
+                                    </aura:iteration>&nbsp; &nbsp;
+                                </lightning:layout>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </lightning:tab>
+                </aura:if>
+                <!--<lightning:buttonGroup class="position: relative;" >
+                    <lightning:button name="prevTab" value="Previous Tab" label="Previous Tab" onclick="{!c.handleClick}"
+                                      class="float"/>
+                    <lightning:button class="float" name="nextTab" value="Next Tab" label="Next Tab" onclick="{!c.handleClick}"/>
+                    <lightning:button name="showHelperDog" value="Helper Dog List" label="Helper Dog List" onclick="{!c.handleClick}"/>
+                    <c:BehaviorEvaluationModal recordId="{!v.recordId}"
+                                               isActive="{!v.showModal}">
+                        <aura:set attribute="body">
+                            <lightning:listView objectApiName="Animal__c" listName="Helper_Dog_List" rows="5"
+                                                showActionBar="false" showRowLevelActions="true"
+                                                showSearchBar="true" />
+                        </aura:set>
+                        <aura:set attribute="footer">
+                            <lightning:button variant="neutral" label="Close" name="closeModal" onclick="{!c.handleClick}"/>
+                        </aura:set>
+                    </c:BehaviorEvaluationModal>
+                </lightning:buttonGroup>-->
+                <aura:if isTrue="{!!v.spinner}">
+                    <lightning:layout >
+                        <lightning:layoutItem size="4">
+                            <div class="slds-float_left">
+                                <lightning:button name="prevTab" value="Previous Tab" label="Previous Tab" onclick="{!c.handleClick}"
+                                                  class="float"/>
+                            </div>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem size="4">
+                            <div class="slds-align_absolute-center">
+                                <lightning:button class="slds-float_right" type="submit" label="Save and Complete Evaluation" variant="destructive" onclick="{!c.refresh}" />
+                            </div>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem size="4">
+                            <div class="slds-float_right">
+                                <lightning:button class="float" name="nextTab" value="Next Tab" label="Next Tab" onclick="{!c.handleClick}"/>
+                            </div>
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                </aura:if>
+            </lightning:recordEditForm>
+        </lightning:tabset>
+</aura:component>

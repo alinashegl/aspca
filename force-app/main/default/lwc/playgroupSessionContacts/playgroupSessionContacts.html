@@ -1,0 +1,100 @@
+<template>
+    <template if:true={showContactList}>
+        Contacts: ({contactListPill.length}) 
+        <template if:true={showSpinner}>
+            <lightning-icon icon-name="utility:spinner" alternative-text="Loading" size="x-small" title="spinner">
+            </lightning-icon>
+        </template>
+        <div class="slds-scrollable_x slds-border_top slds-border_bottom">
+            <lightning-pill-container items={contactListPill} onitemremove={handleRemoveContact}></lightning-pill-container>
+        </div>
+    </template>
+    <template if:true={error}>
+        <c-error-panel errors={error} type='inlineMessage' friendly-message='Error adding contact'></c-error-panel>
+    </template>
+    <template if:true={confirmDelete}>
+        <section role='dialog' tabindex="0" class={modalClass} onkeydown={handleKeyDown}>
+            <div class="slds-modal__container">
+                <div class="slds-modal__content slds-p-around_medium">
+                    Are you sure you want to remove {contactToRemove.label}?
+                </div>
+                <footer class="slds-modal__footer slds-is-relative">
+                    <lightning-button label='Cancel' class="slds-p-horizontal_xxx-small" onclick={handleCloseModal}>
+                    </lightning-button>
+                    <lightning-button label={deleteButtonLabel} variant='Confirm'
+                        class="slds-p-horizontal_xxx-small" onclick={handleDeleteContact}></lightning-button>
+                </footer>
+            </div>
+        </section>
+            <template if:true={isLargeFormFactor}>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </template>
+    </template>
+    <div class="slds-grid slds-wrap slds-gutters slds-p-top_small">
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_3-of-6 slds-large-size_1-of-6" data-id='customlookupcreatenew'>
+            <label class="slds-form-element__label" for="form-element-01">Person In PG</label>
+            <c-custom-lookup
+                obj-name='Contact'
+                icon-name='standard:contact'
+                value-id={customLookupValueId}
+                placeholder='Search Contacts...'
+                fields={customLookupFields}
+                display-fields={customLookupDisplayFields}
+                create-new-fields-with-required={customLookupCreateNewFields}
+                field-to-query='Name'
+                label-name='Playgroup Contact'
+                onlookup={customLookupEvent}
+                onexpandfield={handleCustomLookupExpandSearch}
+                element-id='customlookupcreatenew'
+                clear-selection={customLookupClearSelection}
+                allow-create-new=true
+                initial-col-size='slds-col slds-size_1-of-1 slds-medium-size_3-of-6 slds-large-size_1-of-6'
+            >
+            </c-custom-lookup>
+            <template if:true={showAnimalList}>
+                <div class='slds-p-top_x-small'>
+                    <lightning-button
+                        variant="brand"
+                        name="update"
+                        label={addContactButtonLabel}
+                        onclick={handleAddContact}
+                        disabled={disableSaveContactButton}
+                    >
+                    </lightning-button>
+                    <lightning-button
+                        class='slds-p-left_x-small'
+                        variant="brand"
+                        name="update"
+                        label="Cancel"
+                        onclick={handleCancelAddContact}
+                    >
+                    </lightning-button>
+                </div>
+            </template>
+        </div>
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2" data-id='customlookcreatenew'>
+            <template if:true={showAnimalToggle}>
+                <lightning-layout multiple-rows class='slds-grid_vertical-align-center'>
+                    <template for:each={animals} for:item='animal'>
+                        <lightning-layout-item size="6" small-device-size="2" medium-device-size="4" large-device-size="3" key={animal.Id} padding="around-small" class='slds-border_bottom slds-grid_vertical-align-end'>
+                            <div >
+                                <p class="field-title" title={animal.Animal_Name__c}>{animal.Animal_Name__c}</p>
+                            </div>
+                            <div title='Status'>
+                                <lightning-input 
+                                    type="toggle"
+                                    checked=false
+                                    message-toggle-active='Familiar'
+                                    message-toggle-inactive='Novel'
+                                    onchange={handleToggleChange}
+                                    data-id={animal.Id}
+                                >
+                                </lightning-input>
+                            </div>
+                        </lightning-layout-item>
+                    </template>
+                </lightning-layout>
+            </template>
+        </div>
+    </div>
+</template>

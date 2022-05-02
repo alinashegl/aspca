@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>City_state_required</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( ISPICKVAL(MailingCountryCode,&apos;United States&apos;), OR( MailingCity =&apos;&apos;,  MailingState =&apos;&apos;))</errorConditionFormula>
+    <errorDisplayField>MailingCity</errorDisplayField>
+    <errorMessage>The City and State are required.</errorMessage>
+</ValidationRule>

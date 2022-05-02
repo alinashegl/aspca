@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Aggressive_Details__c</fullName>
+    <externalId>false</externalId>
+    <label>Aggressive Details</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Friendly/Tolerant/Easy-Going</fullName>
+                <default>false</default>
+                <label>Friendly/Tolerant/Easy-Going</label>
+            </value>
+            <value>
+                <fullName>Evasive/Fearful</fullName>
+                <default>false</default>
+                <label>Evasive/Fearful</label>
+            </value>
+            <value>
+                <fullName>Highly Aroused/Rowdy/Excited</fullName>
+                <default>false</default>
+                <label>Highly Aroused/Rowdy/Excited</label>
+            </value>
+            <value>
+                <fullName>Neutral/Aloof/Stocic</fullName>
+                <default>false</default>
+                <label>Neutral/Aloof/Stocic</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Scent_of_the_Week__c</fullName>
+    <externalId>false</externalId>
+    <label>Scent of the Week</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Deer</fullName>
+                <default>false</default>
+                <label>Deer</label>
+            </value>
+            <value>
+                <fullName>Skunk</fullName>
+                <default>false</default>
+                <label>Skunk</label>
+            </value>
+            <value>
+                <fullName>Squirrel</fullName>
+                <default>false</default>
+                <label>Squirrel</label>
+            </value>
+            <value>
+                <fullName>Coyote</fullName>
+                <default>false</default>
+                <label>Coyote</label>
+            </value>
+            <value>
+                <fullName>Pheasant</fullName>
+                <default>false</default>
+                <label>Pheasant</label>
+            </value>
+            <value>
+                <fullName>Rabbit</fullName>
+                <default>false</default>
+                <label>Rabbit</label>
+            </value>
+            <value>
+                <fullName>Racoon</fullName>
+                <default>false</default>
+                <label>Racoon</label>
+            </value>
+            <value>
+                <fullName>Sow</fullName>
+                <default>false</default>
+                <label>Sow</label>
+            </value>
+            <value>
+                <fullName>White tail Doe</fullName>
+                <default>false</default>
+                <label>White tail Doe</label>
+            </value>
+            <value>
+                <fullName>Bear</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Bear</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
