@@ -1,5 +1,7 @@
-<apex:page controller="TestController" sidebar="false" showHeader="false">    
-    <center>         
+<apex:page controller="TreatmentByDogLWCController" sidebar="false" showHeader="false" readOnly="true" applyHtmlTag="false"
+    cache="true" renderAs="advanced_pdf" docType="html-5.0" standardStylesheets="false">
+
+    <!-- <center>         
         <input type="button" style="margin-top:20px;" onclick="getParameterValue();" value="Click"/>
     </center>
     <script>
@@ -9,15 +11,8 @@
         alert(DogList);
     }
     </script>
- </apex:page>
+ </apex:page> -->
 
-<!-- <apex:page controller="TreatmentByDogLWCController" readOnly="true" applyHtmlTag="false" sidebar="false" showHeader="false"
-    cache="true" renderAs="advanced_pdf" docType="html-5.0" standardStylesheets="false">
-    <script>
-        function getParameterValue(){
-            var dogList = {!$CurrentPage.parameters.dogList}
-        }
-        </script>
 
     <head>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
@@ -121,9 +116,93 @@
         </style>
     </head>
     <body>
+        <div>
+            <apex:repeat value="{!dogInfoWrapper}" var="record">
+                <table class="tableSpcae c_table" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th width="12%" class="bottomline"></th>
+                            <th width="12%" class="bottomline"></th>
+                            <th width="12%" class="bottomline"></th>
+                            <th width="12%" class="bottomline"></th>
+                            <th width="12%" class="bottomline"></th>
+                            <th width="12%" class="bottomline"></th>
+                            <th width="12%" class="bottomline"></th>
+                        </tr>
+                    </thead>
+                
+                    <tr style="page-break-inside:avoid, border-around: 1px solid;">
+                        <td sclass="line">
+                            <b>Name:</b> 
+                            <br/>
+                            {!record.name}
+                        </td>
+                        <td class="line">
+                            <b>Sex:</b> 
+                            <br/>
+                            {!record.gender}
+                        </td>
+                        <td class="line">
+                            <b>Breed:</b> 
+                            <br/>
+                            {!record.breed}
+                        </td>
+                        <td class="line">
+                            <b>Age:</b> 
+                            <br/>
+                            {!record.age}
+                        </td>
+                        <td class="line">
+                            <b>Location:</b> 
+                            <br/>
+                            {!record.location}
+                        </td>
+                        <td class="line">
+                            <b>Eval Grade:</b> 
+                            <br/>
+                            {!record.evalGrade}
+                        </td>
+                        <td class="line">
+                            <b>TX Priority:</b> 
+                            <br/>
+                            {!record.txPriority}
+                        </td>
+                        <td class="line">
+                            <b>Mediations:</b> 
+                            <br/>
+                            {!record.medications}
+                        </td>
+                    </tr>
+                </table>
+                <table class="tableSpcae c_table" cellspacing="0">
+                    <tr style="page-break-inside:avoid">
+                            <td class="line" style="border-bottom: 1px solid;">
+                                <table>
+                                    <apex:repeat value="{!record.protocols}" var="protocolWrapper">
+                                        <tr>
+                                            <td width="20%">
+                                                <b>{!UPPER(protocolWrapper.name )}</b><br/>
+                                            </td>
+                                            <td width="20%">
+                                                {!protocolWrapper.category}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <apex:repeat value="{!protocolWrapper.treatments}" var="treatment">
+                                                <td>                                            
+                                                    {!treatment.score} <br/>
+                                                    {!treatment.txDateFormatted} <br/>
+                                                    {!treatment.colorText}
+                                                </td>
+                                            </apex:repeat>
+                                        </tr>
+                                    </apex:repeat>
+                                </table>
+                            </td>
 
-        here is your pdf
-        {!$CurrentPage.parameters.dogList}
-
+                    </tr>
+                </table>
+            </apex:repeat>
+        </div>
     </body>
-</apex:page> -->
+</apex:page>
