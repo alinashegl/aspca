@@ -1,19 +1,6 @@
 <apex:page controller="TreatmentByDogLWCController" sidebar="false" showHeader="false" readOnly="true" applyHtmlTag="false"
     cache="true" renderAs="advanced_pdf" docType="html-5.0" standardStylesheets="false">
 
-    <!-- <center>         
-        <input type="button" style="margin-top:20px;" onclick="getParameterValue();" value="Click"/>
-    </center>
-    <script>
-    var DogList = '{!$CurrentPage.parameters.dogList}';
-    function getParameterValue(){
-        
-        alert(DogList);
-    }
-    </script>
- </apex:page> -->
-
-
     <head>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
 
@@ -58,14 +45,12 @@
             .tableSpace {
                 border-collapse: separate;
                 border-spacing: 0 5px;
-
             }
 
             .bottomline {
                 border-bottom: thin #D4D4D4 solid;
                 padding-top: .5em;
                 padding-bottom: .5em;
-
             }
 
             .topline {
@@ -78,41 +63,6 @@
                 table-layout: fixed
             }
 
-            .first-green {
-                height: 100px;
-                width: 60px;
-                background-color: green;
-            }
-
-            .white {
-                height: 100px;
-                width: 60px;
-                background-color: white;
-            }
-
-            .second-green {
-                height: 100px;
-                width: 60px;
-                background-color: green;
-            }
-
-            .behavTable {
-                border: 1px solid black;
-
-            }
-
-            .pageBreak {
-                page-break-before: avoid;
-                page-break-inside: avoid;
-                page-break-after: always;
-            }
-
-            .line {
-                border: 0.5px solid black;
-                word-wrap: break-word;
-                font-weight: normal !important;
-                vertical-align: top;
-            }
         </style>
     </head>
     <body>
@@ -176,30 +126,28 @@
                 </table>
                 <table class="tableSpcae c_table" cellspacing="0">
                     <tr style="page-break-inside:avoid">
-                            <td class="line" style="border-bottom: 1px solid;">
-                                <table>
-                                    <apex:repeat value="{!record.protocols}" var="protocolWrapper">
-                                        <tr>
-                                            <td width="20%">
-                                                <b>{!UPPER(protocolWrapper.name )}</b><br/>
+                        <td class="line" style="border-bottom: 1px solid;">
+                            <table>
+                                <apex:repeat value="{!record.protocols}" var="protocolWrapper">
+                                    <tr>
+                                        <td width="20%">
+                                            <b>{!UPPER(protocolWrapper.name )}</b><br/>
+                                        </td>
+                                        <td width="20%">
+                                            {!protocolWrapper.category}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <apex:repeat value="{!protocolWrapper.treatments}" var="treatment">
+                                            <td>  
+                                                {!treatment.txDateFormatted} ({!treatment.colorText}) <br/>
+                                                {!treatment.score}                                                    
                                             </td>
-                                            <td width="20%">
-                                                {!protocolWrapper.category}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <apex:repeat value="{!protocolWrapper.treatments}" var="treatment">
-                                                <td>                                            
-                                                    {!treatment.score} <br/>
-                                                    {!treatment.txDateFormatted} <br/>
-                                                    {!treatment.colorText}
-                                                </td>
-                                            </apex:repeat>
-                                        </tr>
-                                    </apex:repeat>
-                                </table>
-                            </td>
-
+                                        </apex:repeat>
+                                    </tr>
+                                </apex:repeat>
+                            </table>
+                        </td>
                     </tr>
                 </table>
             </apex:repeat>
