@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Hydration__c</fullName>
+    <externalId>false</externalId>
+    <label>Hydration</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Euhydrated (normal)</fullName>
+                <default>false</default>
+                <label>Euhydrated (normal)</label>
+            </value>
+            <value>
+                <fullName>Mild dehydration (~5%) - Minimal loss of skin turgor, semidry mucous membranes and normal eye</fullName>
+                <default>false</default>
+                <label>Mild dehydration (~5%) - Minimal loss of skin turgor, semidry mucous membranes and normal eye</label>
+            </value>
+            <value>
+                <fullName>Moderate dehydration (~8%) - Moderate loss of skin turgor, dry mucous membranes, weak rapid pulses, enopthalmus.</fullName>
+                <default>false</default>
+                <label>Moderate dehydration (~8%) - Moderate loss of skin turgor, dry mucous membranes, weak rapid pulses, enopthalmus.</label>
+            </value>
+            <value>
+                <fullName>Severe dehydration (&gt;10%) - Considerable loss of skin turgor, severe enophthalmos, tachycardia, extremely dry mucous membranes, weak/thready pulses, and altered level of consciousness.</fullName>
+                <default>false</default>
+                <label>Severe dehydration (&gt;10%) - Considerable loss of skin turgor, severe enophthalmos, tachycardia, extremely dry mucous membranes, weak/thready pulses, and altered level of consciousness.</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

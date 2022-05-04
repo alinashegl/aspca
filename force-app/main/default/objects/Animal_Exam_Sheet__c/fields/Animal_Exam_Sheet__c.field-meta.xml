@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Animal_Exam_Sheet__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Animal Exam Sheet</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Animal_Exam_Sheet__c.Animal__c</field>
+            <operation>equals</operation>
+            <valueField>$Source.Animal__c</valueField>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Animal_Exam_Sheet__c</referenceTo>
+    <relationshipLabel>Animal Exam Sheets</relationshipLabel>
+    <relationshipName>Animal_Exam_Sheets</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>
