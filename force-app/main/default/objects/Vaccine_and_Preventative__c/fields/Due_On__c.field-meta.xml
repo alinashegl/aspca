@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Due_On__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( ISPICKVAL(Initial_Series_Booster__c,&quot;Initial&quot;),Date_Administered__c + Vaccine_Preventative__r.Initial_Days__c,IF( ISPICKVAL(Initial_Series_Booster__c,&quot;Booster&quot;),Date_Administered__c + Vaccine_Preventative__r.Booster_Days__c,IF( ISPICKVAL(Initial_Series_Booster__c,&quot;Series&quot;),Date_Administered__c + Vaccine_Preventative__r.Series_Days__c,null)))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Due On</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

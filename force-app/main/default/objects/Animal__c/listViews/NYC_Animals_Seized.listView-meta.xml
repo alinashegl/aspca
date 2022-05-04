@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NYC_Animals_Seized</fullName>
+    <booleanFilter>1 AND (2 OR 3) AND 4</booleanFilter>
+    <columns>NYPD_Complaint__c</columns>
+    <columns>NAME</columns>
+    <columns>Animal_Name__c</columns>
+    <columns>Original_Animal_Name__c</columns>
+    <columns>Intake_Animal_Status__c</columns>
+    <columns>Intake_Date_Time__c</columns>
+    <columns>Interim_Animal_Status__c</columns>
+    <columns>First_Status_Change_Date__c</columns>
+    <columns>Final_Animal_Status__c</columns>
+    <columns>Second_Status_Change_Date__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Case_Type__c</field>
+        <operation>equals</operation>
+        <value>NYC Criminal Case</value>
+    </filters>
+    <filters>
+        <field>Intake_Animal_Status__c</field>
+        <operation>equals</operation>
+        <value>Seized</value>
+    </filters>
+    <filters>
+        <field>Interim_Animal_Status__c</field>
+        <operation>equals</operation>
+        <value>Seized</value>
+    </filters>
+    <filters>
+        <field>Final_Animal_Status__c</field>
+        <operation>equals</operation>
+    </filters>
+    <label>NYPD Animals - Seized Awaiting Outcome</label>
+</ListView>

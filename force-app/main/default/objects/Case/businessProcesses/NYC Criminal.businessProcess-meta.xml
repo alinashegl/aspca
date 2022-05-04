@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BusinessProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NYC Criminal</fullName>
+    <description>Support Process specific to NYC Criminal cases</description>
+    <isActive>true</isActive>
+    <values>
+        <fullName>Bench Warrant Ordered</fullName>
+        <default>false</default>
+    </values>
+    <values>
+        <fullName>Closed - Arrest</fullName>
+        <default>false</default>
+    </values>
+    <values>
+        <fullName>Closed - No Arrest</fullName>
+        <default>false</default>
+    </values>
+    <values>
+        <fullName>Court Pending</fullName>
+        <default>false</default>
+    </values>
+    <values>
+        <fullName>Open</fullName>
+        <default>true</default>
+    </values>
+</BusinessProcess>

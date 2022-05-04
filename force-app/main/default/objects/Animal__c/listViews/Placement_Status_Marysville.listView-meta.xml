@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Placement_Status_Marysville</fullName>
+    <columns>NAME</columns>
+    <columns>Animal_Name__c</columns>
+    <columns>Gender__c</columns>
+    <columns>Animal_Status__c</columns>
+    <columns>Forensic_Status__c</columns>
+    <columns>Charge_Animal__c</columns>
+    <columns>Placement_Status__c</columns>
+    <columns>Medical_Status__c</columns>
+    <columns>Behavior_Placement_Status__c</columns>
+    <columns>Assessment__c</columns>
+    <columns>Recommendations__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Shelter_Location2__c</field>
+        <operation>equals</operation>
+        <value>Marysville</value>
+    </filters>
+    <filters>
+        <field>Animal_Status__c</field>
+        <operation>equals</operation>
+        <value>In Foster Care,In Shelter</value>
+    </filters>
+    <label>Placement Status - Marysville</label>
+</ListView>

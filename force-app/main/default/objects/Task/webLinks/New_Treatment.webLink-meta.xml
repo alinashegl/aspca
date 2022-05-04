@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>New_Treatment</fullName>
+    <availability>online</availability>
+    <description>This is a custom working button to use for any animal treatment tasks</description>
+    <displayType>massActionButton</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>New Treatment</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <requireRowSelection>false</requireRowSelection>
+    <url>/00T/e?what_id={!Animal__c.Id}&amp;CF00N5A00000HMIQ9={!Animal_Exam_Sheet__c.Name}&amp;CF00N5A00000HMIQ9_lkid={!Animal_Exam_Sheet__c.Id}&amp;RecordType=012i00000011G54&amp;retURL={!Animal__c.Id}&amp;00N5A00000IBhB6={!Animal__c.Type_of_Animal__c}</url>
+</WebLink>

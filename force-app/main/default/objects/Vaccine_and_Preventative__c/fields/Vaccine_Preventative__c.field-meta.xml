@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Vaccine_Preventative__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Vaccine Preventative</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Medication_Drug__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Vaccine/Preventative</value>
+        </filterItems>
+        <filterItems>
+            <field>Medication_Drug__c.Expired_Drug__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </filterItems>
+        <filterItems>
+            <field>Medication_Drug__c.Species__c</field>
+            <operation>contains</operation>
+            <valueField>$Source.Species__c</valueField>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Medication_Drug__c</referenceTo>
+    <relationshipLabel>Vaccines and Preventatives</relationshipLabel>
+    <relationshipName>Vaccine_Administration</relationshipName>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

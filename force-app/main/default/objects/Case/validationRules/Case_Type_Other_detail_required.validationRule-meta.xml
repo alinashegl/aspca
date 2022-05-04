@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Case_Type_Other_detail_required</fullName>
+    <active>false</active>
+    <description>Other detail required for Specific Case Type conditions</description>
+    <errorConditionFormula>AND(OR( ISPICKVAL( Case_Subtype__c , &apos;Other&apos;),
+ISPICKVAL( Case_Subtype__c , &apos;Aggravated Cruelty&apos;),
+ISPICKVAL( Case_Subtype__c , &apos;Ritualized Abuse&apos;)),
+Case_Type_Other__c =&apos;&apos; )</errorConditionFormula>
+    <errorDisplayField>Case_Type_Other__c</errorDisplayField>
+    <errorMessage>Please enter additional details in the Case Type Other field to provide further detail</errorMessage>
+</ValidationRule>

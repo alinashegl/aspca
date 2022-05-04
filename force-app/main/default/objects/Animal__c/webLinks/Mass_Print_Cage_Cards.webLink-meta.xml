@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mass_Print_Cage_Cards</fullName>
+    <availability>online</availability>
+    <description>Print all cage cards associated with these animals. These cage cards WILL NOT INCLUDE exam results</description>
+    <displayType>massActionButton</displayType>
+    <height>600</height>
+    <linkType>page</linkType>
+    <masterLabel>Mass Print Cage Cards</masterLabel>
+    <openType>sidebar</openType>
+    <page>Mass_Print_Animal_Cage_Card</page>
+    <protected>false</protected>
+    <requireRowSelection>true</requireRowSelection>
+</WebLink>
