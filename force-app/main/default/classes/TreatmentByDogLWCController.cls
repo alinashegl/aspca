@@ -36,6 +36,7 @@ public with sharing class TreatmentByDogLWCController {
         return getDogInfo(new Id[]{recordId})[0];
     }
 
+    @testVisible
     private static DogInfoWrapper[] getDogInfo(Id[] dogIds){
         Map<Id, Set<String>>  medicationsByDogMap = getDogMedications(dogIds);
         Map<Id, TxProtocolWrapper[]> protocolByDogMap = getDogTreatments(dogIds);
@@ -62,6 +63,7 @@ public with sharing class TreatmentByDogLWCController {
         return dogInfos;
     }    
 
+    @testVisible
     private static Map<Id, Set<String>> getDogMedications(Id[] dogIds){
         Map<Id, Set<String>> dogToMedicationMap = new Map<Id, Set<String>>();
         Id recordTypeId = Util.getRecordTypeId('Task',AutoScheduleTasksUtil.TREATMENT_TASK_RECORD_TYPE_NAME);
@@ -84,16 +86,19 @@ public with sharing class TreatmentByDogLWCController {
         return dogToMedicationMap;
     }
 
+    @testVisible
     private static TxProtocolWrapper[] getDogTreatments(Id dogId){
         return
             getDogTreatments(new Id[]{dogId}).get(dogId);        
     }
 
+    @testVisible
     private static Map<Id, TxProtocolWrapper[]> getDogTreatments(Id[] dogIds){
         Map<Id, Map<String, Session_Protocol__c[]>> sessionProtocolsByDogMap = new Map<Id, Map<String, Session_Protocol__c[]>>();
 
         for(Session_Protocol__c protocol : [
-            SELECT Id, Protocol_Name__c, TreatmentSessionId__c, Overall_Score__c, Overall_Score_Number__c, Overall_Score_Color__c, TreatmentSessionId__r.Session_Date__c, ProtocolId__r.Protocol_Categories__c, TreatmentSessionId__r.Animal__c
+            SELECT Id, Protocol_Name__c, TreatmentSessionId__c, Overall_Score__c, Overall_Score_Number__c, Overall_Score_Color__c, 
+            TreatmentSessionId__r.Session_Date__c, ProtocolId__r.Protocol_Categories__c, TreatmentSessionId__r.Animal__c
             FROM Session_Protocol__c
             WHERE TreatmentSessionId__r.Animal__c IN: dogIds
             AND Overall_Score__c != null
@@ -204,8 +209,5 @@ public with sharing class TreatmentByDogLWCController {
             this.location = dog.Current_Location__c;
             this.selected = false;
         }
-    }
-
-
-    
+    }    
 }
