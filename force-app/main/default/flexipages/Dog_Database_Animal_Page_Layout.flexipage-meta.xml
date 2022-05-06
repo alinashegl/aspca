@@ -823,18 +823,6 @@
                 <identifier>RecordPlay_Style_Notes_cField1</identifier>
             </fieldInstance>
         </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Does_Not_Walk_on_a_Leash__c</fieldItem>
-                <identifier>RecordDoes_Not_Walk_on_a_Leash_cField1</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Does_Not_Walk_on_a_Leash_Notes__c</fieldItem>
-                <identifier>RecordDoes_Not_Walk_on_a_Leash_Notes_cField1</identifier>
-            </fieldInstance>
-        </itemInstances>
         <name>Facet-53ecc8b3-a3b3-406f-93e8-c752c3215c1c</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -847,32 +835,14 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Play_Pause_Reason__c</fieldItem>
-                <identifier>RecordPlay_Pause_Reason_cField2</identifier>
+                <fieldItem>Record.Does_Not_Walk_on_a_Leash__c</fieldItem>
+                <identifier>RecordDoes_Not_Walk_on_a_Leash_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Play_Pause_Update_Date__c</fieldItem>
-                <identifier>RecordPlay_Pause_Update_Date_cField2</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Behavior_Play_Pause__c</fieldItem>
-                <identifier>RecordBehavior_Play_Pause_cField2</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Behavior_Play_Pause_Date__c</fieldItem>
-                <identifier>RecordBehavior_Play_Pause_Date_cField2</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Behavior_Play_Pause_Reason__c</fieldItem>
-                <identifier>RecordBehavior_Play_Pause_Reason_cField2</identifier>
+                <fieldItem>Record.Does_Not_Walk_on_a_Leash_Notes__c</fieldItem>
+                <identifier>RecordDoes_Not_Walk_on_a_Leash_Notes_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-238447c5-8c53-4da8-9062-848cc351899d</name>
@@ -1866,12 +1836,6 @@
                 <identifier>RecordCurrent_Playgroup_Summary_Notes_cField2</identifier>
             </fieldInstance>
         </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Play_Style_Notes__c</fieldItem>
-                <identifier>RecordPlay_Style_Notes_cField2</identifier>
-            </fieldInstance>
-        </itemInstances>
         <name>Facet-960dc250-eb62-44e0-ab8e-4230b9f330d2</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -1884,32 +1848,8 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Play_Pause_Reason__c</fieldItem>
-                <identifier>RecordPlay_Pause_Reason_cField1</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Play_Pause_Update_Date__c</fieldItem>
-                <identifier>RecordPlay_Pause_Update_Date_cField1</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Behavior_Play_Pause__c</fieldItem>
-                <identifier>RecordBehavior_Play_Pause_cField1</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Behavior_Play_Pause_Date__c</fieldItem>
-                <identifier>RecordBehavior_Play_Pause_Date_cField1</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Behavior_Play_Pause_Reason__c</fieldItem>
-                <identifier>RecordBehavior_Play_Pause_Reason_cField1</identifier>
+                <fieldItem>Record.Play_Style_Notes__c</fieldItem>
+                <identifier>RecordPlay_Style_Notes_cField2</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-ae914803-64d6-45b0-a118-34f617045c62</name>
@@ -1951,6 +1891,32 @@
                 </componentInstanceProperties>
                 <componentName>flexipage:fieldSection</componentName>
                 <identifier>flexipage_fieldSection19</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>parentFieldApiName</name>
+                    <value>Animal__c.Id</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>relatedListApiName</name>
+                    <value>Play_Pauses__r</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>relatedListComponentOverride</name>
+                    <value>ADVGRID</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>rowsToDisplay</name>
+                    <value>10</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>showActionBar</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentName>force:relatedListSingleContainer</componentName>
+                <identifier>force_relatedListSingleContainer24</identifier>
             </componentInstance>
         </itemInstances>
         <name>Facet-0baq1i7vl5wb</name>

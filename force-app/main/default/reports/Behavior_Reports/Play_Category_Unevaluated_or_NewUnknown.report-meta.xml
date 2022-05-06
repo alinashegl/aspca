@@ -1,32 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Report xmlns="http://soap.sforce.com/2006/04/metadata">
     <columns>
-        <field>Animal__c$Breed__c</field>
+        <field>Animal__c$Evaluation_Date__c</field>
     </columns>
     <columns>
-        <field>Animal__c$Color__c</field>
+        <field>Animal__c$Evaluation_Dog_Dog_Testing_Date__c</field>
     </columns>
     <columns>
-        <field>Animal__c$Shelter_Location__c</field>
-    </columns>
-    <columns>
-        <field>Animal__c$Shelter_Color_Coding__c</field>
-    </columns>
-    <columns>
-        <field>Animal__c$Current_Animal_Age_Formatted__c</field>
-    </columns>
-    <columns>
-        <field>Animal__c$Gender__c</field>
-    </columns>
-    <columns>
-        <aggregateTypes>Sum</aggregateTypes>
-        <field>Animal__c$Behavior_Medication_Flag__c</field>
-    </columns>
-    <columns>
-        <field>Animal__c$Case__c</field>
-    </columns>
-    <columns>
-        <field>Animal__c$Intake_Date_Time__c</field>
+        <field>Animal__c$Play_Category__c</field>
     </columns>
     <filter>
         <criteriaItems>
@@ -37,18 +18,25 @@
             <value></value>
         </criteriaItems>
         <criteriaItems>
-            <column>Animal__c$Evaluation_Due_Date__c</column>
-            <columnToColumn>false</columnToColumn>
-            <isUnlocked>true</isUnlocked>
-            <operator>lessOrEqual</operator>
-            <value>TODAY</value>
-        </criteriaItems>
-        <criteriaItems>
             <column>Animal__c$Location_Filter__c</column>
             <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Animal__c$Play_Category__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Unevaluated,New/Unknown</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Animal__c$Evaluation_Dog_Dog_Testing_Date__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>lessThan</operator>
+            <value>N_DAYS_AGO:7</value>
         </criteriaItems>
     </filter>
     <format>Summary</format>
@@ -62,7 +50,7 @@
         <field>Animal__c$Name</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
-    <name>Dogs needing Evaluations</name>
+    <name>Play Category Unevaluated or New/Unknown</name>
     <params>
         <name>co</name>
         <value>1</value>
@@ -70,7 +58,7 @@
     <reportType>Animals__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
-    <showGrandTotal>false</showGrandTotal>
+    <showGrandTotal>true</showGrandTotal>
     <showSubTotals>false</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Animal__c$Completed_Date__c</dateColumn>
