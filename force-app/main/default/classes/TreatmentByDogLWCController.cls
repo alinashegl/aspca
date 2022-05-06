@@ -17,7 +17,8 @@ public with sharing class TreatmentByDogLWCController {
             throw new AuraHandledException(e.getMessage());
         }
     }
-
+    
+    @AuraEnabled(cacheable=true)
     public static DogWrapper[] getDogList(String[] selectedLocations){
         return getDogList(selectedLocations, null);
     }
