@@ -67,7 +67,7 @@
     </head>
     <body>
         <div>
-            <apex:repeat value="{!dogInfoWrapper}" var="record">
+            <apex:repeat value="{!dogInfoWrapperList}" var="record">
                 <table class="tableSpcae c_table" cellspacing="0">
                     <thead>
                         <tr>

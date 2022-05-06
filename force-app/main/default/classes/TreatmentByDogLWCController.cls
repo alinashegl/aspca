@@ -1,12 +1,12 @@
 public with sharing class TreatmentByDogLWCController {
-    public DogInfoWrapper[] dogInfoWrapper {get; set;}
+    public DogInfoWrapper[] dogInfoWrapperList {get; set;}
     public String dogList{get;set;}
 
     public TreatmentByDogLWCController(){        
         dogList = apexpages.currentpage().getparameters().get('dogList');
         Id[] dogList = dogList.split(',');
         System.debug('dogList: ' + dogList);
-        dogInfoWrapper = getDogInfo(dogList);        
+        dogInfoWrapperList = getDogInfo(dogList);        
     }
 
     @AuraEnabled
@@ -139,7 +139,6 @@ public with sharing class TreatmentByDogLWCController {
 
             protocolWrapperByDogMap.put(dogId, protocols);
         }
-
         
         return protocolWrapperByDogMap;
     }
