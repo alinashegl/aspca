@@ -18,11 +18,22 @@ public with sharing class TreatmentByDogLWCController {
         }
     }
 
-    @AuraEnabled(cacheable=true)
     public static DogWrapper[] getDogList(String[] selectedLocations){
+        return getDogList(selectedLocations, null);
+    }
+
+    @AuraEnabled(cacheable=true)
+    public static DogWrapper[] getDogList(String[] selectedLocations, String filterText){
         try {
             DogWrapper[] dogs = new DogWrapper[0];
-            for(Animal__c dog : [SELECT Id, Animal_Name_Id__c, Current_Location__c FROM Animal__c WHERE Current_Location__c IN: selectedLocations]){
+            String query = 'SELECT Id, Animal_Name_Id__c, Current_Location__c FROM Animal__c WHERE Current_Location__c IN: selectedLocations';
+            if(filterText != null){
+                query += ' AND Animal_Name_Id__c LIKE \'%' + filterText + '%\'';
+            }
+
+            System.debug('query: ' + query);
+
+            for(Animal__c dog : Database.query(query)){
                 dogs.add(new DogWrapper(dog));
             }
             return dogs;

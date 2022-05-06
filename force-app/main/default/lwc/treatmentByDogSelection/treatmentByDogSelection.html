@@ -1,8 +1,5 @@
 <template>
     <lightning-card>
-        <template if:true={showSpinner}>
-            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
-        </template>
         <template if:true={error}>
             <c-error-panel errors={error} type='inlineMessage' friendly-message='We have encountered the following error:'></c-error-panel>
         </template>
@@ -34,6 +31,20 @@
                 </div>
             </template>
         </div>
+        
+        <div class="slds-var-m-around_medium">
+            <div class="slds-grid">
+                <div class="slds-size_5-of-6">
+                    <lightning-input type="text" label="Filter by Name or Id" onkeyup={handleInputChange} onkeydown={handleInputChange}></lightning-input>
+                </div>
+                <div class="slds-size_1-of-6 slds-align-bottom">
+                    <template if:true={showSpinner}>
+                        <lightning-icon icon-name="utility:spinner" alternative-text="Loading" title="Loading" size="small" class="slds-var-p-around_small"></lightning-icon>
+                    </template>
+                </div>
+            </div>
+        </div>
+
         <div class="slds-var-m-top_medium slds-var-m-left_small">
             <template for:each={dogList} for:item='dog'>
                 <div class="slds-grid slds-var-m-top_x-small" key={dog.id}>
@@ -53,17 +64,6 @@
                             data-id={dog.id}
                         >
                         </lightning-input>
-
-                        <!-- <template if:true={dog.selected}>
-                            <button>
-                                <lightning-icon icon-name="utility:check"  class="blueIcon" alternative-text="Added" title="Added" size="x-small"></lightning-icon>
-                            </button>
-                        </template>
-                        <template if:false={dog.selected}>
-                            <button>
-                                <lightning-icon icon-name="utility:check"  class="redIcon" alternative-text="Added" title="Added" size="x-small"></lightning-icon>
-                            </button>
-                        </template> -->
                     </div>
                 </div>
             </template>

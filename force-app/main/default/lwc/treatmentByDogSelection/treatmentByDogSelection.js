@@ -4,12 +4,17 @@ import getDogList from '@salesforce/apex/TreatmentByDogLWCController.getDogList'
 import { publish, MessageContext } from 'lightning/messageService';
 import DOG_SELECTED_CHANNEL from '@salesforce/messageChannel/DogSelectedChannel__c';
 
+const DELAY = 200;
+
 export default class TreatmentByDogSelection extends LightningElement {
     userLocation = [];
     dogList = [];
     connectedCallbackRan = false;
     error;
     showSpinner = true;
+    showQuerySpinner = false;
+    delayTimeout;
+    filterText = '';
 
     @wire(MessageContext)
     messageContext;
@@ -45,7 +50,7 @@ export default class TreatmentByDogSelection extends LightningElement {
 
     selectedLocations = [];
     wireResponse;
-    @wire(getDogList, {selectedLocations: '$selectedLocations'})
+    @wire(getDogList, {selectedLocations: '$selectedLocations', filterText: '$filterText'})
     response(result){
         this.wireResponse = result;
         if(result.data ){
@@ -89,5 +94,17 @@ export default class TreatmentByDogSelection extends LightningElement {
 
         publish(this.messageContext, DOG_SELECTED_CHANNEL, payload);
         
+    }
+
+    //When user is typing in the text box, update the query
+    handleInputChange(event){
+        window.clearTimeout(this.delayTimeout);
+        let searchKey = event.target.value;
+        this.showSpinner = true;
+        this.delayTimeout = setTimeout(() => {
+            if(searchKey.length >= 2 || searchKey.length == 0){
+                this.filterText = searchKey;
+            }
+        }, DELAY);
     }
 }
