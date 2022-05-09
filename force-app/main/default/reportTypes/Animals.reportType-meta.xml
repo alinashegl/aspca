@@ -163,6 +163,11 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>Helper_Dogs__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>Charge_Animal__c</field>
             <table>Animal__c</table>
         </columns>
@@ -1349,6 +1354,11 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Foster_Length__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Evaluation_Dog_Dog_Testing_Date__c</field>
             <table>Animal__c</table>
         </columns>
         <masterLabel>Animals</masterLabel>
