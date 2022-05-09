@@ -22,6 +22,10 @@
         <aggregateTypes>Sum</aggregateTypes>
         <field>Treatment_Plan__c.Problem_Behavior_Miscellaneous_Count__c</field>
     </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Treatment_Plan__c.Problem_Behavior_Count__c</field>
+    </columns>
     <filter>
         <criteriaItems>
             <column>Treatment_Plan__c.IsActive__c</column>
@@ -48,10 +52,10 @@
         <value>1</value>
     </params>
     <reportType>CustomEntity$Treatment_Plan__c@Treatment_Plan__c.Animal__c</reportType>
-    <scope>user</scope>
+    <scope>organization</scope>
     <showDetails>true</showDetails>
     <showGrandTotal>true</showGrandTotal>
-    <showSubTotals>true</showSubTotals>
+    <showSubTotals>false</showSubTotals>
     <timeFrameFilter>
         <dateColumn>CUST_CREATED_DATE</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>
