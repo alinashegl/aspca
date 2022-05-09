@@ -240,4 +240,17 @@ private class test_PlaygroupSessionTriggerHandler {
         insert aPgList;
         return aPgList;
     }
+    
+    //Neha :     
+    @isTest 
+    static void getAnimalSessionNoteToPlaygroup(){
+        Playgroup_Session__c pgs = TestDataFactory.createPlaygroupSessionWithAnimals();
+        Animal_Playgroup__c apg = [SELECT id from Animal_Playgroup__c limit 1];
+        pgs.Animal_Playgroup__c = apg.id;
+        test.startTest();
+        pgs.Playgroup_Notes__c = 'test';
+        update pgs;
+        test.stopTest();
+        
+    }
 }

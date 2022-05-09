@@ -18,10 +18,18 @@ export default class HomeBanner extends NavigationMixin(LightningElement) {
     }
 
     handleLaunchMrcTreatmentPlans(){
+        this.handleNavigation('/lightning/n/MRC_Treatment_Plan_Report');
+    }
+
+    handleLaunchTreatmentByDogs(){
+        this.handleNavigation('/lightning/n/Treatments_By_Dog');
+    }
+
+    handleNavigation(url){
         this[NavigationMixin.Navigate]({
             type: 'standard__webPage',
             attributes: {
-                url: '/lightning/n/MRC_Treatment_Plan_Report'
+                url: url
             }
         },
         false

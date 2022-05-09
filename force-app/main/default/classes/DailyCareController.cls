@@ -121,10 +121,10 @@ public with sharing class DailyCareController {
                 Daily_Care__c = dailyCareId,
                 Animal__c = dog.Id,
                 Handling_Instructions__c = dog.Handling_Instructions__c,
-                Round__c = oldADC == null ? null : oldADC.Round__c,
+                Round__c = oldADC == null ? '1' : oldADC.Round__c,
                 Special_Care_Other__c = oldADC == null ? null : oldADC.Special_Care_Other__c,
-                Special_Care_Outside_TX__c = oldADC == null ? null : oldADC.Special_Care_Outside_TX__c,
-                Special_Care_TX__c = oldADC == null ? null : oldADC.Special_Care_TX__c,
+                Special_Care_Outside_TX__c = oldADC == null ? 'Dry' : oldADC.Special_Care_Outside_TX__c,
+                Special_Care_TX__c = oldADC == null ? 'Dry + Wet' : oldADC.Special_Care_TX__c,
                 Movements_For_Cleaning__c = oldADC == null ? null : oldADC.Movements_For_Cleaning__c
             ));
         }

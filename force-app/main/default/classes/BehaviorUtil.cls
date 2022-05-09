@@ -51,6 +51,11 @@ public with sharing class BehaviorUtil {
         return u.Location__c;
     }
 
+    public static String getAnimalRestDays(Id animalId){
+        Map<Id, String> restDaysMap = getAnimalRestDays(new Id[]{animalId});
+        return restDaysMap.get(animalId);
+    }
+    
     public static Map<Id, String> getAnimalRestDays (Id[] animalIds){
         Map<Id, String> restDaysMap = new Map<Id, String>();
 
@@ -98,10 +103,5 @@ public with sharing class BehaviorUtil {
             }
         }
         return animalsToDateMap;
-    }
-
-    public static String getAnimalRestDays(Id animalId){
-        Map<Id, String> restDaysMap = getAnimalRestDays(new Id[]{animalId});
-        return restDaysMap.get(animalId);
     }
 }
