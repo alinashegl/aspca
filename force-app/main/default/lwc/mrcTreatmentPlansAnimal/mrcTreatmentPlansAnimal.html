@@ -62,10 +62,20 @@
                 </lightning-layout-item>
                 <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-small" class="slds-var-p-bottom_small">
                     <b>Helper Dogs</b>
-                    <lightning-button-icon icon-name="utility:edit" variant="bare"  alternative-text="Edit Helper Dogs" class="slds-m-left_xx-small" title="Helper Dogs" onclick={editHelperDogs}></lightning-button-icon>
-                    <template if:true={animalInfo}>
+                    <template if:false={showSpinner}>
+                        <lightning-button-icon icon-name="utility:edit" variant="bare"  alternative-text="Edit Helper Dogs" class="slds-m-left_xx-small" title="Helper Dogs" onclick={editHelperDogs}></lightning-button-icon>
+                    </template>
+                    <template if:true={showSpinner}>
+                        <lightning-button-icon icon-name="utility:spinner" variant="bare"  alternative-text="Edit Helper Dogs" class="slds-m-left_xx-small" title="Helper Dogs" ></lightning-button-icon>
+                    </template>
+                    <template if:true={helperDogResponse.data}>
                         <div>
-                            {animalInfo.helperDogs.names}
+                            <template if:false={showEditHelperDogs}>
+                                {helperDogResponse.data.Helper_Dogs__c}
+                            </template>
+                            <template if:true={showEditHelperDogs}>
+                                <lightning-textarea value={helperDogResponse.data.Helper_Dogs__c} onblur={handleHelperDogsBlur}></lightning-textarea>
+                            </template>
                         </div>
                     </template>
                 </lightning-layout-item>
@@ -163,32 +173,4 @@
             </lightning-accordion>
         </template>
     </div>
-
-    <!-- Edit helper dogs modal -->
-    <template if:true={showModal}>
-        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" class="slds-modal slds-fade-in-open">
-            <div class="slds-modal__container">
-                <div class="slds-modal__header">
-                    <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Modify Helper Dogs</h1>
-                </div>
-                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
-                    <lightning-layout multiple-rows pull-to-boundary="small" class="slds-var-p-around_xx-small">
-                        <template for:each={animalInfo.helperDogs.dogs} for:item='dog'>
-                            <lightning-layout-item key={dog.Id} flexibility="auto" size="10" small-device-size="12" medium-device-size="12" large-device-size="10" padding="horizontal-small" class="slds-var-p-bottom_small">
-                                <c-helper-animal-lookup
-                                    helper-animal={dog}
-                                >
-                                </c-helper-animal-lookup>
-                            </lightning-layout-item>
-                        </template>
-                    </lightning-layout>
-                </div>
-                <div class="slds-modal__footer">
-                    <lightning-button label="Cancel" title="Cancel" onclick={handleCloseModal}></lightning-button>
-                    <lightning-button label="Save" title="Save" onclick={handleSave} variant="brand" class="slds-var-m-left_x-small"></lightning-button>
-                </div>
-            </div>
-        </section>
-        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
-    </template>
 </template>

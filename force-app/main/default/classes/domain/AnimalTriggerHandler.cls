@@ -216,7 +216,7 @@ public with sharing class AnimalTriggerHandler {
     }
 
     private static void updateAnimalDailyCares(Animal__c[] animals){
-        Animal_Daily_Care__c[] adcs = [SELECT Id, Handling_Instructions__c, Feeding_Amount__c, Animal__r.Handling_Instructions__c, Animal__r.Feeding_Amount__c FROM Animal_Daily_Care__c WHERE Animal__c IN: animals AND Daily_Care__r.Date__c =: date.today()];
+        Animal_Daily_Care__c[] adcs = [SELECT Id, Handling_Instructions__c, Feeding_Amount__c, Animal__r.Handling_Instructions__c, Animal__r.Feeding_Amount__c FROM Animal_Daily_Care__c WHERE Animal__c IN: animals AND Daily_Care__r.Date__c = TODAY];
         for(Animal_Daily_Care__c adc : adcs){
             adc.Handling_Instructions__c = adc.Animal__r.Handling_Instructions__c;
             adc.Feeding_Amount__c = adc.Animal__r.Feeding_Amount__c;
@@ -241,7 +241,7 @@ public with sharing class AnimalTriggerHandler {
     }
 
     private static void insertNewAnimalDailyCares(Animal_Daily_Care__c[] newAdcs){
-        Daily_Care__c[] dcs = [SELECT Id FROM Daily_Care__c ORDER BY Date__c DESC LIMIT 1];
+        Daily_Care__c[] dcs = [SELECT Id FROM Daily_Care__c WHERE Date__c = TODAY ORDER BY Date__c DESC LIMIT 1];
         if(!dcs.isEmpty()){
             Daily_Care__c dc = dcs[0];
             for(Animal_Daily_Care__c adc : newAdcs){
@@ -260,6 +260,14 @@ public with sharing class AnimalTriggerHandler {
             Special_Care_TX__c = 'Dry + Wet',
             Movements_For_Cleaning__c = null
         );
+    }
+    
+     public static void beforeFieldUpdateHandler(List<Animal__c> anms, Map<Id, Animal__c> oldAnms){
+        for(Animal__c anm: anms){
+            if(anm.Seizure_Surrender_Date__c != oldAnms.get(anm.Id).Seizure_Surrender_Date__c ){
+                anm.Email_Notification__c = true;
+            }
+        }
     }
 
 }

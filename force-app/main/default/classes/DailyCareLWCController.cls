@@ -1,4 +1,10 @@
 public with sharing class DailyCareLWCController {
+
+    //set default sort by field and value
+    @AuraEnabled (cacheable=true)
+    public static DailyCareInfo getDailyCare(Date careDate){
+        return getDailyCare(careDate,'Animal__r.Shelter_Location__c', 'ASC');
+    }
     
     @AuraEnabled (cacheable=true)
     public static DailyCareInfo getDailyCare(Date careDate, String sortByField, String sortByValue){
@@ -23,6 +29,7 @@ public with sharing class DailyCareLWCController {
         }
     }
 
+    @testVisible
     private static Id[] getAnimalDailyCares(Id dailyCareId, String sortByField, String sortByValue){
         Id[] idList = new Id[0];
         String query = 'SELECT Id FROM Animal_Daily_Care__c WHERE Daily_Care__c = \'' +  dailyCareId + '\' ORDER BY ' + sortByField + ' ' + sortByValue;
@@ -36,52 +43,56 @@ public with sharing class DailyCareLWCController {
 
     @AuraEnabled (cacheable=true)
     public static AnimalInfo getAnimalDailyCareInfo(Id animalDailyCareId){
-        try{
-            AnimalInfo info = new AnimalInfo();
+        if(animalDailyCareId != null){
+            try{
+                AnimalInfo info = new AnimalInfo();
 
-            Animal_Daily_Care__c[] adcs = [
-                SELECT 
-                    Id, 
-                    Animal__c,
-                    Animal__r.Animal_Name_Id__c, 
-                    Animal__r.Behavior_Medication_Flag__c,
-                    Animal__r.Feeding_Amount__c,
-                    Animal__r.Shelter_Location__c,
-                    Special_Care_TX__c,
-                    Special_Care_Outside_TX__c,
-                    Special_Care_Other__c,
-                Enrichment__c,
-                    Round__c,
-                    Mvmt_Round_Notes_Cleaning_Destination__c,
-                    Handling_Instructions__c
-                FROM Animal_Daily_Care__c 
-                WHERE Id =: animalDailyCareId
-                LIMIT 1
-            ];
+                Animal_Daily_Care__c[] adcs = [
+                    SELECT 
+                        Id, 
+                        Animal__c,
+                        Animal__r.Animal_Name_Id__c, 
+                        Animal__r.Behavior_Medication_Flag__c,
+                        Animal__r.Feeding_Amount__c,
+                        Animal__r.Shelter_Location__c,
+                        Special_Care_TX__c,
+                        Special_Care_Outside_TX__c,
+                        Special_Care_Other__c,
+                    Enrichment__c,
+                        Round__c,
+                        Mvmt_Round_Notes_Cleaning_Destination__c,
+                        Handling_Instructions__c
+                    FROM Animal_Daily_Care__c 
+                    WHERE Id =: animalDailyCareId
+                    LIMIT 1
+                ];
 
-            if(!adcs.isEmpty()){
-                Animal_Daily_Care__c adc = adcs[0];
-                info.animalCareId = adc.Id;
-                info.animalName = adc.Animal__r.Animal_Name_Id__c;
-                info.animalKennelLocation = adc.Animal__r.Shelter_Location__c;
-                info.dailyRations = adc.Animal__r.Feeding_Amount__c;
-                info.restDays = BehaviorUtil.getAnimalRestDays(adc.animal__c);
-                info.behaviorMeds = adc.Animal__r.Behavior_Medication_Flag__c;
-                info.specialCareTreatment = adc.Special_Care_TX__c;
-                info.specialCareOutside = adc.Special_Care_Outside_TX__c;
-                info.specialCareOther = adc.Special_Care_Other__c;
-                //info.enrichment = getAnimalEnrichments(adc.Animal__c);
-                info.enrichment = adc.Enrichment__c;
-                info.round = adc.Round__c;
-                info.movemntAndCleaningDestinationField = adc.Mvmt_Round_Notes_Cleaning_Destination__c;
-                info.handlingInstructions = adc.Handling_Instructions__c;
-            }
+                if(!adcs.isEmpty()){
+                    Animal_Daily_Care__c adc = adcs[0];
+                    info.animalCareId = adc.Id;
+                    info.animalName = adc.Animal__r.Animal_Name_Id__c;
+                    info.animalKennelLocation = adc.Animal__r.Shelter_Location__c;
+                    info.dailyRations = adc.Animal__r.Feeding_Amount__c;
+                    info.restDays = BehaviorUtil.getAnimalRestDays(adc.animal__c);
+                    info.behaviorMeds = adc.Animal__r.Behavior_Medication_Flag__c;
+                    info.specialCareTreatment = adc.Special_Care_TX__c;
+                    info.specialCareOutside = adc.Special_Care_Outside_TX__c;
+                    info.specialCareOther = adc.Special_Care_Other__c;
+                    //info.enrichment = getAnimalEnrichments(adc.Animal__c);
+                    info.enrichment = adc.Enrichment__c;
+                    info.round = adc.Round__c;
+                    info.movemntAndCleaningDestinationField = adc.Mvmt_Round_Notes_Cleaning_Destination__c;
+                    info.handlingInstructions = adc.Handling_Instructions__c;
+                }
+                
+                return info;
             
-            return info;
-        
-        } catch (Exception e) {
-            System.debug('stackTrace: ' + e.getStackTraceString());
-            throw new AuraHandledException(e.getMessage());
+            } catch (Exception e) {
+                System.debug('stackTrace: ' + e.getStackTraceString());
+                throw new AuraHandledException(e.getMessage());
+            }
+        } else {
+            return null;
         }
     }
 
