@@ -59,9 +59,9 @@
                                             <!--<lightning:input name="contact" label="Contact" aura:id="contactName" value="{!v.recordName}" disabled="true"/> -->
                                             <lightning:inputField fieldName="Contact__c" value="{!v.recordId}"/>
                                         </div>  
-                                        <div class="slds-col slds-size_2-of-2">  
+                                        <!--<div class="slds-col slds-size_2-of-2">  
                                             <lightning:inputField fieldName="IsEnabled__c"/>
-                                        </div>  
+                                        </div>  -->
                                         <aura:if isTrue="{!v.selectedRecordTypeLabel == 'Weekly OOO'}">
                                             <div class="slds-col slds-size_2-of-2">                              
                                                 <lightning:inputField fieldName="Days__c"/>
