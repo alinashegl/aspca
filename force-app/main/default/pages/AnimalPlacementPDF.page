@@ -1,4 +1,4 @@
-<apex:page standardController="Animal__c" extensions="AnimalDiscoverPDFController" readOnly="true" applyHtmlTag="false" sidebar="false" showHeader="false"
+<apex:page standardController="Animal__c" extensions="AnimalPlacementPDFController" readOnly="true" applyHtmlTag="false" sidebar="false" showHeader="false"
            cache="true" renderAs="advanced_pdf" docType="html-5.0" standardStylesheets="false">
     
     <head>
@@ -106,7 +106,7 @@
             <center style="border-bottom:1px solid;">
                 <h3 style="font-weight:900">
                     <!--Top Header -->
-					Discovery Report
+					Animal Placement Report
                 </h3>
                 <!--Top Body Sesction -->
             </center>
@@ -124,12 +124,12 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td width="10%" class="bottomline">{!animalD.Animal_Name__c}</td>
-                            <td width="5%" class="bottomline">{!animalD.Breed__C}</td>
-                            <td width="5%" class="bottomline">{!animalD.Age__c}</td>
-                            <td width="5" class="bottomline">{!animalD.Gender__c}</td>
-                            <td width="5%" class="bottomline">{!animalD.Color__c}</td>
-                            <td width="5%" class="bottomline">{!animalD.Intake_Type__c}</td>
+                            <td width="10%" class="bottomline">{!anmwrapper.animalD.Animal_Name__c}</td>
+                            <td width="5%" class="bottomline">{!anmwrapper.animalD.Breed__C}</td>
+                            <td width="5%" class="bottomline">{!anmwrapper.animalD.Age__c}</td>
+                            <td width="5" class="bottomline">{!anmwrapper.animalD.Gender__c}</td>
+                            <td width="5%" class="bottomline">{!anmwrapper.animalD.Color__c}</td>
+                            <td width="5%" class="bottomline">{!anmwrapper.animalD.Intake_Type__c}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -137,18 +137,20 @@
              <table>
                     <thead>
                         <tr>
+                            <th class="bottomline">Behavior Summary</th>
                             <th class="bottomline">Status</th>
                             <th class="bottomline">Cage Location</th>
                             <th class="bottomline">Case Type</th>
-                            <!--<th class="bottomline">Case Worker</th>-->
+                            <th class="bottomline">Case Worker</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{!animalD.Animal_Status__c}</td>
-                            <td>{!animalD.Shelter_Kennel__c} &nbsp; {!animalD.Shelter_Location__c}</td>
-                            <td>{!animalD.Case_Type__c}</td>
-                            <!--<td>{!animalD.Behavior_Case_Worker__r.Name}</td>-->
+                            <td>{!anmwrapper.animalD.Behavior_Summary__c}</td>
+                            <td>{!anmwrapper.animalD.Animal_Status__c}</td>
+                            <td>{!anmwrapper.animalD.Shelter_Kennel__c} &nbsp; {!anmwrapper.animalD.Shelter_Location__c}</td>
+                            <td>{!anmwrapper.animalD.Case_Type__c}</td>
+                            <td>{!anmwrapper.animalD.Behavior_Case_Worker__r.Name}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -157,39 +159,63 @@
         </div>
         <!-- 2. Behavior Progress, section 1   -->
         <div class="section" style="border:1px solid;">
-            
+            <apex:repeat value="{!anmwrapper.obMap}" var="ob">
             <table>
                 <thead>
                     <tr>
                         <th colspan="7">
                             <center  style="border-bottom:1px solid;">
-                                <h3 style="font-weight:900">  Behavior Progress</h3>
+                                <h3 style="font-weight:900">{!ob}</h3>
                             </center>
                         </th>
                     </tr>
                     <tr>
                         <th>Date</th>
-                        <th>Concern / Incident / Other</th>
+                        <th>Notes</th>
                         <th>Reported By</th>
                         <th>Behavior Lead Notes</th>
                         <th>Behavior Lead Initials</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <apex:repeat value="{!animalD.Observations__r}" var="aor">
+                    <apex:repeat value="{!anmwrapper.obMap[ob]}" var="obs">
                         <tr>
                             <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">
                                 <apex:outputText value="{0, date, MM/dd/yy}">
-                                    <apex:param value="{!aor.Observation_Date__c}" />
+                                    <apex:param value="{!obs.Observation_Date__c}" />
                                 </apex:outputText>
                             </td>
-                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!aor.Observation_Notes__c}</td>
-                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!aor.Behavior_Staff_Initials__c}</td>
-                            <td class="topline">{!aor.Behavior_Response__c}</td> 
-                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!aor.Observation_Reported_By__c}</td> 
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!obs.Observation_Notes__c}</td>
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!obs.Behavior_Staff_Initials__c}</td>
+                            <td class="topline">{!obs.Behavior_Response__c}</td> 
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!obs.Observation_Reported_By__c}</td> 
                         </tr>
                     </apex:repeat>
-                    <apex:repeat value="{!animalD.Behavior_Foster_Notes__r}" var="aor">
+                </tbody>
+            </table>
+            </apex:repeat>
+        </div>
+        <div class="section" style="border:1px solid;">
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="7">
+                            <center  style="border-bottom:1px solid;">
+                                <h3 style="font-weight:900">Foster Notes</h3>
+                            </center>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>Date</th>
+                        <th>Foster Notes</th>
+                        <th>Reported By</th>
+                        <th>Behavior Lead Notes</th>
+                        <th>Behavior Lead Initials</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <apex:repeat value="{!anmwrapper.animalD.Behavior_Foster_Notes__r}" var="aor">
                         <tr>
                             <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">
                                 <apex:outputText value="{0, date, MM/dd/yy}">
@@ -205,6 +231,106 @@
                 </tbody>
             </table>
         </div>
+        <!-- Shelter Notes -->
+		 <div class="section" style="border:1px solid;">
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="7">
+                            <center  style="border-bottom:1px solid;">
+                                <h3 style="font-weight:900">Shelter Notes</h3>
+                            </center>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>Animal</th>
+                        <th>Assessment</th>
+                        <th>Editor</th>
+                        <th>Shelter Lead</th>
+                        <th>Shelter Note Date Time</th>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <apex:repeat value="{!shelterNotes}" var="sn">
+                        <tr>
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!sn.Animal__r.Name}</td>
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!sn.Assessment__c}</td>
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!sn.Editor__c}</td>
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!sn.Shelter_Lead__c}</td> 
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">
+                                <apex:outputText value=" {0,date,M/d/yyy h:mm a}">  
+                                    <apex:param value="{!sn.Shelter_Note_Date_Time__c}" />
+                                </apex:outputText>
+                            </td>
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!sn.Name}</td>
+                        </tr>
+                    </apex:repeat>  
+                </tbody>
+            </table>
+        </div>        
+        <!-- Low Stress Notes -->
+         <div class="section" style="border:1px solid;">
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="7">
+                            <center  style="border-bottom:1px solid;">
+                                <h3 style="font-weight:900">Low Stress Notes</h3>
+                            </center>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>Name</th>
+                        <th>Editor</th>
+                        <th>Pre Exam Management Interventions</th>
+                        <th>Likes</th>
+                        <th>Triggers</th>
+                        <th>Food</th>
+                        <th>Toy</th><!--
+                        <th>Other</th>
+                        <th>Food Notes</th>
+                        <th>Toy Notes</th>
+                        <th>Other Notes</th>
+                        <th>Preferred Location for Exam</th>
+                        <th>Preferred Location for Exam Other</th>
+                        <th>Behavior Management Tools</th>
+                        <th>Behavior Management Tool Other</th>
+                        <th>Additional Notes</th>
+                        <th>Animal Exam Sheet</th>
+                        <th>Shelter Color Coding</th>
+                        <th>Behavior Consult Request</th>-->
+                    </tr>
+                </thead>
+                <tbody>
+                    <apex:repeat value="{!lowStressNotes}" var="lsn">
+                        <tr>
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!lsn.Name}</td>
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!lsn.Editor__c}</td>
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!lsn.Pre_Exam_Management_Interventions__c}</td>
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!lsn.Likes__c}</td>
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!lsn.Triggers__c}</td>
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!lsn.Food__c}</td>
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!lsn.Toy__c}</td>
+                           <!-- <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!lsn.Other__c}</td>
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!lsn.Food_Notes__c}</td>
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!lsn.Toy_Notes__c}</td>
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!lsn.Other_Notes__c}</td>
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!lsn.Preferred_Location_for_Exam__c}</td>
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!lsn.Preferred_Location_for_Exam_Other__c}</td>
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!lsn.Behavior_Management_Tools__c}</td>
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!lsn.Behavior_Management_Tool_Other__c}</td>
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!lsn.Additional_Notes__c}</td>
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!lsn.Animal_Exam_Sheet__c}</td>
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!lsn.Shelter_Color_Coding__c}</td>
+                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!lsn.Behavior_Consult_Request__c}</td>-->
+                        </tr>
+                    </apex:repeat>  
+                </tbody>
+            </table>
+        </div>
         <!-- 3. Behavior Progress, section 2 Incident Object   -->
         <div class="section" style="border:1px solid;">
             <table style="border-collapse: collapse;">
@@ -212,14 +338,14 @@
                     <tr>
                         <th colspan="4">
                             <center  style="border-bottom:1px solid;font-weight:900">
-                                  <h3 style="font-weight:900">Behavior Progress </h3> 
+                                  <h3 style="font-weight:900">Incidents</h3> 
                             </center>
                         </th>
                     </tr>
                     
                 </thead>
                 <tbody>
-                    <apex:repeat value="{!animalD.Incidents__r}" var="inc">
+                    <apex:repeat value="{!anmwrapper.animalD.Incidents__r}" var="inc">
                         <thead>
                             <tr>
                                 <th class="topline">Date</th>
@@ -342,7 +468,7 @@
                     <tr>
                         <th colspan="7">
                             <center style="border-bottom:1px solid;">
-                                <h3 style="font-weight:900"> Behavior Treatment Notes.</h3>
+                                <h3 style="font-weight:900"> Training Behavior Modification Behavior Mod.</h3>
                             </center>
                         </th>
                     </tr>  
@@ -403,9 +529,9 @@
                 </tbody>
             </table>
         </div>
+        
         <!-- Dog Behavior Grading Key: -->
-       <!-- 
-		<div class="section" style=" page-break-after: always; padding-top: .5em;">
+        <div class="section" style=" page-break-after: always; padding-top: .5em;">
             <table>
                 <tr>
                     <td>
@@ -480,13 +606,13 @@
                     </td>
                 </tr>
             </table>
-        </div>-->
+        </div>
         
         <!-- Behavior Evaluations Report: -->
         <div class="section" style="page-break-inside:avoid; page-break-after: always; padding-top: .5em;">
             <apex:variable var="rowNum" value="{!0}" />
             <apex:repeat value="{!behaviorEvaluations}" var="behEval">
-                <div class="section" style="page-break-inside:avoid; page-break-after: always; padding-top: 40px;">
+                <div class="section" style="page-break-inside:avoid; page-break-after: always; padding-top: .5em;">
                     
                     <table class="behavTable" width="100%">
                         <tr style="font:24px;">
@@ -666,34 +792,9 @@
                         </tr>
                     </table>
                     <table class="behavTable" width="100%">
-                        <!-- Displays values from potentBehIssue list -->
                         <tr style="font-weight:900;">
                             <td>Placement recommendations: {!behEval.PlacementRecommendations}</td>
                         </tr>
-                        <!--<tr>
-                            <td>
-                                <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
-                                <span style="vertical-align: top;"> No kids under 10e </span> &nbsp;
-                                <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
-                                <span style="vertical-align: top;"> Experienced owner </span> &nbsp;
-                                <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
-                                <span style="vertical-align: top;"> Other: </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
-                                <span style="vertical-align: top;"> No other dogs</span> &nbsp; &nbsp; &nbsp; &nbsp;
-                                <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
-                                <span style="vertical-align: top;"> Quiet household </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
-                                <span style="vertical-align: top;">With another dog</span>
-                            </td>
-                        </tr>-->
                     </table>
                     <table class="behavTable" width="100%">
                         <tr style="font-weight:900;">
@@ -709,82 +810,7 @@
                     
                 </div>
                 <br/>
-                 <div class="section" style=" page-break-after: always; padding-top: .5em;">
-            <table>
-                <tr>
-                    <td>
-                        <center>
-                            <h1> Dog Behavior Grading Key </h1>
-                        </center>
-                    </td>
-                </tr>
-            </table>
-            <table>
-                <tr>
-                    <td width="10%">
-                        <apex:image height="100px" width="100px" value="{!behvConcern }" />
-                    </td>
-                    <td width="70%">
-                        <strong>"A Dogs" exhibit no significantly concerning behavior.</strong>
-                        <br/> These dogs show no aggressive behavior during the evaluation, and they show no fear or anxity
-                        for the majority of the evalutaion, some appear nervous during the first few minutes of the evalutaion
-                        but quickly relax and show no further sign of significant anxiety. some exhibit mildly fearful
-                        responses to a situation or stimulus during the evaluation, but suce responses are temporary--the
-                        dog recovers in just a few seconds.
-                        <br/> In our Opinion, A Dogs are ready for the adoption floor and require no special treatment or
-                        adopter counseling.
-                    </td>
-                </tr>
-                <tr>
-                    <td width="10%">
-                        <apex:image height="100px" width="100px" value="{!behaviorMild }" /> </td>
-                    <td width="70%">
-                        <strong>"B Dogs" exhibit mild fear, anxiety or aggression.</strong>
-                        <br/> Some of these dogs show signs of mild fear or anxiety throught the evaluation. Others show mild
-                        fear in response to a certain situation of stimulus and do not recover immediately. Some show
-                        mild aggressive behaviour, such as growling or freezing in a response to a person touching them
-                        while they eat or yelping and mouthing or orienting to a person's hand during uncomfortable handling.
-                        However,B Dogs do not bite or attemp to bite during the evaluation.
-                        <br/> Some B Dogs may not show any behavior problems once they adjust to a new home, Others would
-                        benifit from behaviour modification sessions before or after placement Foster care may be benificial
-                        for some fearful B Dogs. Adopter counseling .before placement and/or placement restirctions (no
-                        young children, no other dogs, experienced owner, etc.) may be appropriate.
-                        
-                    </td>
-                </tr>
-                <tr>
-                    <td width="10%">
-                        <apex:image height="100px" width="100px" value="{!behvModerate }" /> </td>
-                    <td width="70%">
-                        <strong>"C Dogs" exhibit moderate fear, anxiety or aggression.</strong>
-                        <br/> Fearful C Dogs show signs of moderate fer or anxiety for the majority of or during the entire
-                        evluation. if started, they do not recover--they reamin fearful and may attempt to hide or become
-                        immobile. Most do show at least some sign of social behaviour towards people during the evaluation,
-                        however some are undersocialized to people and only show social behaviour toward them when in
-                        the presence of other dogs.
-                        <br/> Aggressive C Dogs may (1) show aggression during the majority of the evaluation, in response
-                        to multiple situations or stimuli, (2) bite or attempt to bite at some point during the evaluation
-                        or both
-                        <br/> C Dogs may need long-term behaviour modification and/or management. Foster care may be necessary
-                        for some fearful C Dogs. Adopter counseling before placement is strongly recommended. Placement
-                        restrictions (no young children, no other dogs, experienced owner, etc.) are often appropriate.
-                    </td>
-                </tr>
-                <tr>
-                    <td width="10%">
-                        <apex:image height="100px" width="100px" value="{!behvSevere }" /> </td>
-                    <td width="70%">
-                        <strong>"D Dogs" exhibit severe fear or aggression.</strong>
-                        <br/> They fall into two categories: (1) dogs that are too aggressive toware people or other animals
-                        to place in an adoptive home ot (2) dogs that aresuooering from an extremely poor quanity of
-                        life due to extreme fear or anxiety. if D Dogs fall into the secons category, they show no social
-                        behaviour toward people during the evaluation. they may exhibit feral behavior. In our opinion,
-                        prognosis is poor in either case, and euthanasia is the most appropriate outcome.
-                        
-                    </td>
-                </tr>
-            </table>
-        </div>
+                
                 <!-- Grade History -->
                 <div class="section" style="page-break-inside:avoid; padding-top: .5em;">
                     <table class="behavTable" width="100%" style="border-width: 1px 1px 1px;">
