@@ -72,6 +72,11 @@
                 <default>false</default>
                 <label>Other</label>
             </value>
+            <value>
+                <fullName>Sick/Injured</fullName>
+                <default>false</default>
+                <label>Sick/Injured</label>
+            </value>
         </valueSetDefinition>
         <valueSettings>
             <controllingFieldValue>Medical</controllingFieldValue>
@@ -113,6 +118,10 @@
             <controllingFieldValue>Medical</controllingFieldValue>
             <controllingFieldValue>Behavioral</controllingFieldValue>
             <valueName>Other</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical</controllingFieldValue>
+            <valueName>Sick/Injured</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Behavioral</controllingFieldValue>

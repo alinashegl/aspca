@@ -163,6 +163,11 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>Helper_Dogs__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>Charge_Animal__c</field>
             <table>Animal__c</table>
         </columns>
@@ -423,6 +428,11 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>User_Location__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>Number_of_Offspring__c</field>
             <table>Animal__c</table>
         </columns>
@@ -439,6 +449,11 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Photo2__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Location_Filter__c</field>
             <table>Animal__c</table>
         </columns>
         <columns>
@@ -1306,6 +1321,46 @@
             <field>Walks_on_a_Leash_Notes__c</field>
             <table>Animal__c</table>
         </columns>
-        <masterLabel>Blythe.boaz@aspcafir.org.LanieDev</masterLabel>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Storm_Distress_Anxiety__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Storm_Distress_Anxiety_Notes__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Transition_Animal__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>FM_Legacy_Status__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>FM_Color__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Foster_Count__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Foster_Length__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Evaluation_Dog_Dog_Testing_Date__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <masterLabel>Animals</masterLabel>
     </sections>
 </ReportType>

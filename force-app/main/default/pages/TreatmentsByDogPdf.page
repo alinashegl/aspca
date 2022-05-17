@@ -1,204 +1,77 @@
-<apex:page controller="TreatmentByDogLWCController" sidebar="false" showHeader="false" readOnly="true" applyHtmlTag="false"
-    cache="true" renderAs="advanced_pdf" docType="html-5.0" standardStylesheets="false">
-
-    <head>
-        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-
-        <style>
-            @page {
-                size: landscape;
-                @bottom-left {
-                    content: "Page " counter(page) " of " counter(pages);
-                    font-family: sans-serif;
-                    font-size: 80%;
-                }
-                @bottom-right {
-                    content: "Date: {!MONTH(TODAY())}/{!DAY(TODAY())}/{!YEAR(TODAY())}";
-                    font-family: sans-serif;
-                    font-size: 80%;
-                }
-            }
-
-            table {
-                width: 100%;
-                padding: 5px;
-                vertical-align: Top;
-                font-size: small;
-            }
-
-            table thead>tr>th {
-                word-wrap: break-word;
-                font-weight: bold;
-                text-align: left;
-            }
-
-            table tbody>tr>td {
-                word-wrap: break-word;
-                text-align: left;
-            }
-
-            .section {
-                margin-top: 20px;
-                width: 100%;
-            }
-
-            .tableSpace {
-                border-collapse: separate;
-                border-spacing: 0 5px;
-
-            }
-
-            .bottomline {
-                border-bottom: thin #D4D4D4 solid;
-                padding-top: .5em;
-                padding-bottom: .5em;
-
-            }
-
-            .topline {
-                border-top: thin #D4D4D4 solid;
-            }
-
-            .c_table {
-                -fs-table-paginate: paginate;
-                border-spacing: 0;
-                table-layout: fixed
-            }
-
-            .first-green {
-                height: 100px;
-                width: 60px;
-                background-color: green;
-            }
-
-            .white {
-                height: 100px;
-                width: 60px;
-                background-color: white;
-            }
-
-            .second-green {
-                height: 100px;
-                width: 60px;
-                background-color: green;
-            }
-
-            .behavTable {
-                border: 1px solid black;
-
-            }
-
-            .pageBreak {
-                page-break-before: avoid;
-                page-break-inside: avoid;
-                page-break-after: always;
-            }
-
-            .line {
-                border: 0.5px solid black;
-                word-wrap: break-word;
-                font-weight: normal !important;
-                vertical-align: top;
-            }
-        </style>
-    </head>
-    <body>
-        <div style="border:1px solid;">
-            <div style="text-align:center">
-                <h3 style="font-weight:900">
-                    <!--Top Header -->
-                    Treatments By Dog
-                </h3>
+<apex:page Controller="TreatmentToDoPDFController"
+           renderAs="pdf"
+           applyHtmlTag="false"
+           applyBodyTag="false"
+           showHeader="false"
+           sidebar="false" 
+           standardStylesheets="false">
+    
+    <apex:styleSheet value="{!URLFOR($Resource.TreatmentToDoPdfStyle)}"/>
+    
+    <html>
+        <head>
+            <style type="text/css" media="print">
+            </style>
+        </head>
+        <body>
+            <div>
+                <h1 class="large">Treatment Priority To Do List</h1>
             </div>
-                <table class="tableSpcae c_table" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th width="12%" class="bottomline"></th>
-                            <th class="bottomline"></th>
+            <table>
+                <thead>
+                    <td class="line"><strong>ASPCA Name</strong></td>
+                    <td class="line"><strong>Animal ID</strong></td>
+                    <td class="line"><strong>Sex(+S/N)</strong></td>
+                    <td class="line"><strong>Age</strong></td>
+                    <td class="line"><strong>Grade</strong></td>
+                    <td class="line"><strong>Location</strong></td>
+                    <td class="line"><strong>Bundle</strong></td>
+                    <td class="line"><strong>Motivators</strong></td>
+                    <td class="line"><strong>Tx Priority</strong></td>
+                    <td class="line"><strong>Tx Count</strong></td>
+                    <td class="line"><strong>Shelter Color Code</strong></td>
+                </thead> 
+
+<!--                <apex:variable var="protocol" value="{!protocolStr}"/> -->
+
+                <apex:repeat var="anim" value="{!treatmentPlansWithProtocols}">
+                        <tr class="spaceUnder" style="vertical-align:top;">
+                            <td width="10%"><strong>{!anim.treatmentPlan.Animal__r.Animal_Name__c}</strong></td>
+                            <td width="10%"><strong>{!anim.treatmentPlan.Animal__r.Name}</strong></td>
+                            <td width="5%">{!anim.treatmentPlan.Animal__r.Gender__c}</td>
+                            <td width="5%">{!anim.treatmentPlan.Animal__r.Current_Animal_Age_Estimate__c}</td>
+                            <td width="5%">{!anim.treatmentPlan.Animal__r.Current_Behavior_Grade__c}</td>
+                            <td width="10%"><strong>{!anim.treatmentPlan.Animal__r.Shelter_Location__c}</strong></td>
+                            <td width="10%">{!anim.treatmentPlan.AssignedTreatmentBundleId__r.Name}</td>
+                            <td width="15%">{!anim.treatmentPlan.Preferred_Motivators__c}</td>
+                            <td width="10%">{!anim.treatmentPlan.Treatment_Priority__c}</td>
+                            <td width="5%">{!anim.treatmentPlan.Animal__r.Number_of_Treatments__c}</td>
+                            <td width="15%">{!anim.treatmentPlan.Animal__r.Shelter_Color_Coding__c}</td>
+                        </tr> 
+                        <tr class="spaceUnder">
+                            <td width="10%" style="vertical-align:top;"><strong>Tx Plan Notes:</strong></td>
+                            <td width="90%" colspan="10">{!anim.treatmentPlan.Plan_Notes__c}</td>
+                        </tr> 
+                        <tr class="spaceUnder">
+                            <td width="10%" style="vertical-align:top;"><strong>Assigned Protocols:</strong></td>
+                            <td width="90%" colspan="10">{!anim.protocols}</td>
                         </tr>
-                    </thead>
-                
-                    <tr style="page-break-inside:avoid, border-around: 1px solid;">
-                        <td class="line">
-                            <b>Animal:</b>
-                        </td>
-                        <td class="line">
-                            <b>Protocols:</b> 
-                            <!--<br/>
-                            {!record.medications}-->
-                        </td>
-                    </tr>
-                    <apex:repeat value="{!dogInfoWrapperList}" var="record">
-                        
-                    <tr style="page-break-inside:avoid">
-                        <td class="line" style="border-top: 1px solid;">
-                                    <div>
-                                        <span>
-                                            <b>Name:</b> {!record.name}
-                                            <br/>
-                                            <b>Sex:</b> {!record.gender}
-                                            <br/>
-                                            <b>Breed:</b> {!record.breed}
-                                            <br/>
-                                            <b>Age:</b> {!record.age}
-                                            <br/>
-                                            <b>Location:</b> {!record.location}
-                                        	<br/>
-                                            <b>Evaluation Grade:</b> {!record.evalGrade}
-                                            <br/>
-                                            <b>Priority:</b> {!record.txPriority}
-                                            <br/>
-                                            <b>Medication:</b>
-                                        </span>
-                            </div>
-                        </td>
-                        <!--<td class="line">
-                        	{!record.name}
-                        </td>
-                        <td class="line">
-                        	{!record.gender}
-                        </td>
-                        <td class="line">
-                        	{!record.breed}
-                        </td>
-                        <td class="line">
-                        	{!record.age}
-                        </td>
-                        <td class="line">
-                        	{!record.location}
-                        </td>
-                        <td class="line">
-                        	{!record.evalGrade}
-                        </td>
-                        <td class="line">
-                        	{!record.txPriority}
-                        </td>-->
-                       
-                        <td style="border-bottom: 1px solid;">
-                            <table>
-                                <apex:repeat value="{!record.protocols}" var="protocolWrapper">
-                                    <tr>
-                                        <td class="line" style="border-top: 1px solid;">
-                                            <b>{!UPPER(protocolWrapper.name )}</b><br/>
-                                        </td>
-                                        <td class="line" style="border-top: 1px solid;">
-                                            {!protocolWrapper.category}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <apex:repeat value="{!protocolWrapper.treatments}" var="treatment">
-                                            <td class="line" style="border-top: 1px solid;">
-                                                {!treatment.txDateFormatted} ({!treatment.colorText}) <br/>
-                                                {!treatment.score}                                                    
-                                            </td>
-                                        </apex:repeat>
-                                    </tr>
-                                </apex:repeat>
-                            </table>
-                        </td>
-                    </tr>
-            </apex:repeat>
- 			</table>
-        </div>
-    </body>
+                        <tr class="line">
+                            <td class="line"></td>
+                            <td class="line"></td>
+                            <td class="line"></td>
+                            <td class="line"></td>
+                            <td class="line"></td>
+                            <td class="line"></td>
+                            <td class="line"></td>
+                            <td class="line"></td>
+                            <td class="line"></td>
+                            <td class="line"></td>
+                            <td class="line"></td>
+                        </tr> 
+                </apex:repeat>
+            </table>
+        </body>
+    </html>
+    
 </apex:page>

@@ -666,6 +666,7 @@ public without sharing class TestDataFactory {
         Contact contact = createContact();
         session.Treatment_Plan__c = plan.Id;
         session.Session_Contact__c = contact.Id;
+        session.Animal__c = plan.Animal__c;
         insert session;
         return session;
     }
@@ -1010,5 +1011,25 @@ public without sharing class TestDataFactory {
       insert tasks;
       return tasks;
 
+    }
+
+    public static task createMedicationTask(Id animalId){
+      Id recordTypeId = Util.getRecordTypeId('Task',AutoScheduleTasksUtil.TREATMENT_TASK_RECORD_TYPE_NAME);
+
+      Medication_Drug__c drug = new Medication_Drug__c(
+        Name = 'testDrug'
+      ); 
+
+      insert drug;
+
+      Task t = new Task(
+        Animal__c = animalId,
+        RecordTypeId = recordTypeId,
+        ActivityDate = date.today().addDays(2),
+        Medication__c = drug.Id
+      );
+
+      insert t;
+      return t;
     }
 }
