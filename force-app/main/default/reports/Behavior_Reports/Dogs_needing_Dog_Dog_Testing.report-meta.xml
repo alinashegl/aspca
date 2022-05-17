@@ -49,6 +49,13 @@
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
+        <criteriaItems>
+            <column>Animal__c$Active_Animal__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
     </filter>
     <format>Summary</format>
     <groupingsDown>
@@ -66,7 +73,7 @@
         <field>Animal__c$Animal_Name__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
-    <name>Dogs needing Dog /Dog Testing</name>
+    <name>Dogs Needing Dog/Dog Testing</name>
     <params>
         <name>co</name>
         <value>1</value>

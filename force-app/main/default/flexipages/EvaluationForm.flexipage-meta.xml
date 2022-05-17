@@ -81,14 +81,38 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Potential_Behavior_Issues__c</fieldItem>
-                <identifier>RecordPotential_Behavior_Issues__cField</identifier>
+                <fieldItem>Record.Potential_Issue_Aggression_To_Animals__c</fieldItem>
+                <identifier>RecordPotential_Issue_Aggression_To_Animals_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Potential_Beh_Iss_Other__c</fieldItem>
-                <identifier>RecordPotential_Beh_Iss_Other__cField</identifier>
+                <fieldItem>Record.Potential_Issue_Aggression_To_People__c</fieldItem>
+                <identifier>RecordPotential_Issue_Aggression_To_People_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Potential_Issue_Fear__c</fieldItem>
+                <identifier>RecordPotential_Issue_Fear_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Potential_Issue_High_Arousal__c</fieldItem>
+                <identifier>RecordPotential_Issue_High_Arousal_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Potential_Issue_Other__c</fieldItem>
+                <identifier>RecordPotential_Issue_Other_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Potential_Issue_Other_Notes__c</fieldItem>
+                <identifier>RecordPotential_Issue_Other_Notes_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-1e9bcf94-12ed-4b13-856e-6633d7bad0a7</name>
@@ -237,22 +261,11 @@
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
-                    <name>columns</name>
-                    <value>Facet-6f8de509-73db-4211-a1c9-7e2584d63fd4</value>
+                    <name>height</name>
+                    <value>400</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>label</name>
-                    <value>Initials</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:fieldSection</componentName>
-                <identifier>flexipage_fieldSection2</identifier>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>height</name>
-                    <value>400</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>pageName</name>
@@ -264,6 +277,20 @@
                 </componentInstanceProperties>
                 <componentName>flexipage:visualforcePage</componentName>
                 <identifier>flexipage_visualforcePage</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>columns</name>
+                    <value>Facet-6f8de509-73db-4211-a1c9-7e2584d63fd4</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>label</name>
+                    <value>Initials</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:fieldSection</componentName>
+                <identifier>flexipage_fieldSection2</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>
