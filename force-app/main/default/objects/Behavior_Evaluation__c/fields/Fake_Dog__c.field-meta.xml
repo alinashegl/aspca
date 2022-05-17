@@ -56,6 +56,16 @@
                 <label>Pushy-aggressive</label>
             </value>
             <value>
+                <fullName>Neutral, nervous/fearful or friendly—then aggressive</fullName>
+                <default>false</default>
+                <label>Neutral, nervous/fearful or friendly—then aggressive</label>
+            </value>
+            <value>
+                <fullName>Charges-aggressive</fullName>
+                <default>false</default>
+                <label>Charges-aggressive</label>
+            </value>
+            <value>
                 <fullName>Predatory-aggressive</fullName>
                 <default>false</default>
                 <label>Predatory-aggressive</label>
@@ -74,22 +84,6 @@
                 <fullName>Playful</fullName>
                 <default>false</default>
                 <label>Playful</label>
-            </value>
-            <value>
-                <fullName>Neutral, nervous/fearful or friendly-then aggressive</fullName>
-                <default>false</default>
-                <label>Neutral, nervous/fearful or friendly-then aggressive</label>
-            </value>
-            <value>
-                <fullName>Charged-aggressive</fullName>
-                <default>false</default>
-                <label>Charged-aggressive</label>
-            </value>
-            <value>
-                <fullName>Charges-aggressive</fullName>
-                <default>false</default>
-                <isActive>false</isActive>
-                <label>Charges-aggressive</label>
             </value>
         </valueSetDefinition>
     </valueSet>
