@@ -13,5 +13,15 @@
         <field>Meets_Adoptability_Date__c</field>
         <operation>notEqual</operation>
     </filters>
+    <filters>
+        <field>Active_Animal__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>Location_Filter__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
     <label>Animals available for Placement</label>
 </ListView>

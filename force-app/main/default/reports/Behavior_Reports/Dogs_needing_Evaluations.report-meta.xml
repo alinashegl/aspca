@@ -37,18 +37,25 @@
             <value></value>
         </criteriaItems>
         <criteriaItems>
-            <column>Animal__c$Evaluation_Due_Date__c</column>
-            <columnToColumn>false</columnToColumn>
-            <isUnlocked>true</isUnlocked>
-            <operator>lessOrEqual</operator>
-            <value>TODAY</value>
-        </criteriaItems>
-        <criteriaItems>
             <column>Animal__c$Location_Filter__c</column>
             <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Animal__c$Active_Animal__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Animal__c$Evaluation_Count__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>0</value>
         </criteriaItems>
     </filter>
     <format>Summary</format>
@@ -62,7 +69,7 @@
         <field>Animal__c$Name</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
-    <name>Dogs needing Evaluations</name>
+    <name>Dogs Needing Evaluations</name>
     <params>
         <name>co</name>
         <value>1</value>
