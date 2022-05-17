@@ -1,4 +1,4 @@
-global class SeizureEmailNotificationSchedulable  implements Schedulable  {
+global class SeizureEmailNotificationSchedulable  implements Schedulable  { 
  /*
     * This is a generic Schedulable class, it can be scheduled in the UI through 
     * Setup => Apex Classes => Schedule Apex
