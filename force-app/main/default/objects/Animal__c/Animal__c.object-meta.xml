@@ -147,7 +147,7 @@
         <type>Default</type>
     </actionOverrides>
     <allowInChatterGroups>false</allowInChatterGroups>
-    <compactLayoutAssignment>Behavior_Compact_Layout</compactLayoutAssignment>
+    <compactLayoutAssignment>Animal_Compact_Layout</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
     <description>This object will house all the details related to animals related to a case</description>
     <enableActivities>true</enableActivities>
@@ -168,8 +168,6 @@
         <type>Text</type>
     </nameField>
     <pluralLabel>Animals</pluralLabel>
-    <recordTypeTrackFeedHistory>false</recordTypeTrackFeedHistory>
-    <recordTypeTrackHistory>false</recordTypeTrackHistory>
     <searchLayouts>
         <customTabListAdditionalFields>Type_of_Animal__c</customTabListAdditionalFields>
         <customTabListAdditionalFields>Breed__c</customTabListAdditionalFields>

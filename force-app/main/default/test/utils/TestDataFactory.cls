@@ -529,7 +529,6 @@ public without sharing class TestDataFactory {
                     Gender__c = 'MN',
                     Animal_Name__c = 'Doggo123',
                     Shelter_Location2__c = 'MRC',
-                    Current_Location__c = 'MRC',
                     Current_Recent_Shelter_Location__c = 'MRC',
                     Play_Category__c = 'Unevaluated'
         );
@@ -551,7 +550,6 @@ public without sharing class TestDataFactory {
                   Gender__c = 'MN',
                   Animal_Name__c = name,
                   Shelter_Location2__c = 'MRC',
-                  Current_Location__c = 'MRC',
                   Current_Recent_Shelter_Location__c = 'MRC'
       );
       insert a;
@@ -669,6 +667,16 @@ public without sharing class TestDataFactory {
         insert session;
         return session;
     }
+    public static Treatment_Session__c createSessionWithAnimal(Id animalID){
+      Treatment_Session__c session = new Treatment_Session__c();
+      Treatment_Plan__c plan = createPlan();
+      Contact contact = createContact();
+      session.Treatment_Plan__c = plan.Id;
+      session.Session_Contact__c = contact.Id;
+      session.Animal__c =animalID;
+      insert session;
+      return session;
+  }
 
     public static List<Protocol__c> createProtocols() {
         List<Protocol__c> protocols = new List<Protocol__c>();
@@ -948,22 +956,9 @@ public without sharing class TestDataFactory {
         return fosterList;
     }
 
-    public static Daily_Care__c createDailyCareWithAnimalDailyCares(Integer animalCount){
-      Animal__c[] animals = new Animal__c[0];
-      for(Integer i = 0; i < animalCount; i++){
-        animals.add(createAnimalWithName('name' + i));
-      }
-      Daily_Care__c dc = createDailyCare();
-      Animal_Daily_Care__c[] adcs = new Animal_Daily_Care__c[0];
-      for(Animal__c a : animals){
-        adcs.add(new Animal_Daily_Care__c(
-          Animal__c = a.Id,
-          Daily_Care__c = dc.Id
-        ));
-      }
-
-      insert adcs;
-      return dc;
+    public static Daily_Care__c createDailyCareWithAnimalDailyCares(){
+      
+      return null;
     }
 
     public static Daily_Care__c createDailyCare(){
@@ -972,43 +967,5 @@ public without sharing class TestDataFactory {
       );
       insert dc;
       return dc;
-    }
-
-    public static Task[] createBehaviorTreatmentTasks(){
-      Animal__c dog = createAnimal();
-
-      Date startDate = AutoScheduleTasksUtil.startOfASPCAWeek(date.today());
-      Date activityDate1 = startDate.addDays(1);
-      Date activityDate2 = startDate.addDays(3);
-      Date activityDate3 = startDate.addDays(5);
-
-      Id rtId = Util.getRecordTypeId('Task', AutoScheduleTasksUtil.BEH_TREATMENT_TASK_RECORD_TYPE_NAME);
-
-      Task[] tasks = new Task[0];
-
-      Task t1 = new Task(
-        ActivityDate = activityDate1,
-        Animal__c = dog.Id,
-        RecordTypeId = rtId
-      );
-      tasks.add(t1);
-
-      Task t2 = new Task(
-        ActivityDate = activityDate2,
-        Animal__c = dog.Id,
-        RecordTypeId = rtId
-      );
-      tasks.add(t2);
-
-      Task t3 = new Task(
-        ActivityDate = activityDate3,
-        Animal__c = dog.Id,
-        RecordTypeId = rtId
-      );
-      tasks.add(t3);
-
-      insert tasks;
-      return tasks;
-
     }
 }
