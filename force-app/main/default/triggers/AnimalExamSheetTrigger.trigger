@@ -1,4 +1,4 @@
-trigger AnimalExamSheetTrigger on Animal_Exam_Sheet__c (after insert, after update) {
+trigger AnimalExamSheetTrigger on Animal_Exam_Sheet__c (after insert, after update, after delete, after Undelete) {
 
         if(Trigger.isInsert || Trigger.isAfter){
             try {
@@ -8,6 +8,6 @@ trigger AnimalExamSheetTrigger on Animal_Exam_Sheet__c (after insert, after upda
                 System.debug(e);
             }
         }
-
+		AnimalExamSheetTriggerHandler.updateStormAnxietyandMedicationonAnimal();
 
 }

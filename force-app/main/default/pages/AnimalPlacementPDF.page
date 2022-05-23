@@ -102,7 +102,7 @@
         <apex:variable value="{!$Resource.behvModerate}" var="behvModerate" />
         <apex:variable value="{!$Resource.behvSevere}" var="behvSevere" />
         
-        <div style="border:1px solid;">
+        <div style="border:1px solid;page-break-inside: avoid;page-break-after: always;">
             <center style="border-bottom:1px solid;">
                 <h3 style="font-weight:900">
                     <!--Top Header -->
@@ -134,32 +134,33 @@
                     </tbody>
                 </table>
              <br/>
-             <!--<table>
+             <table>
                     <thead>
                         <tr>
                             <th class="bottomline">Behavior Summary</th>
-                            <th class="bottomline">Status</th>
+                            <!--<th class="bottomline">Status</th>
                             <th class="bottomline">Cage Location</th>
                             <th class="bottomline">Case Type</th>
-                            <th class="bottomline">Case Worker</th>
+                            <th class="bottomline">Case Worker</th>-->
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>{!anmwrapper.animalD.Behavior_Summary__c}</td>
-                            <td>{!anmwrapper.animalD.Animal_Status__c}</td>
+                            <!--<td>{!anmwrapper.animalD.Animal_Status__c}</td>
                             <td>{!anmwrapper.animalD.Shelter_Kennel__c} &nbsp; {!anmwrapper.animalD.Shelter_Location__c}</td>
                             <td>{!anmwrapper.animalD.Case_Type__c}</td>
-                            <td>{!anmwrapper.animalD.Behavior_Case_Worker__r.Name}</td>
+                            <td>{!anmwrapper.animalD.Behavior_Case_Worker__r.Name}</td>-->
                         </tr>
                     </tbody>
-                </table>-->
+                </table>
             </div>
         
         </div>
         <!-- 2. Behavior Progress, section 1   -->
-        <div class="section" style="border:1px solid;">
+        
             <apex:repeat value="{!anmwrapper.obMap}" var="ob">
+                <div class="section" style="border:1px solid; page-break-inside: avoid;page-break-after: always;">
             <table>
                 <thead>
                     <tr>
@@ -193,83 +194,81 @@
                     </apex:repeat>
                 </tbody>
             </table>
+                </div>
             </apex:repeat>
-        </div>
-        <apex:outputPanel rendered="{! IF(ISBLANK(anmwrapper.animalD.Placement_Notes__r), false, true) }">
-        <div class="section" style="border:1px solid;">
-            
-            <table>
-                <thead>
-                    <tr>
-                        <th colspan="7">
-                            <center  style="border-bottom:1px solid;">
-                                <h3 style="font-weight:900">Foster Notes</h3>
-                            </center>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>Date</th>
-                        <th>Name</th>
-                        <th>Foster Notes</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <apex:repeat value="{!anmwrapper.animalD.Placement_Notes__r}" var="aor">
-                        <tr>
-                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">
-                                <apex:outputText value="{0, date, MM/dd/yy}">
-                                    <apex:param value="{!aor.Contact_Date__c}" />
-                                </apex:outputText>
-                            </td>
-                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!aor.Name}</td>
-                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!aor.Foster_Notes__c}</td>
-                        </tr>
-                    </apex:repeat>  
-                </tbody>
-            </table>
-        </div>
-        </apex:outputPanel>
-        <apex:outputPanel rendered="{! IF(ISBLANK(anmwrapper.animalD.Behavior_Foster_Notes__r), false, true) }">
-        <div class="section" style="border:1px solid;">
-            
-            <table>
-                <thead>
-                    <tr>
-                        <th colspan="7">
-                            <center  style="border-bottom:1px solid;">
-                                <h3 style="font-weight:900">Behavior Foster Notes</h3>
-                            </center>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>Date</th>
-                        <th>Foster Notes</th>
-                        <th>Reported By</th>
-                        <th>Behavior Lead Notes</th>
-                        <th>Behavior Lead Initials</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <apex:repeat value="{!anmwrapper.animalD.Behavior_Foster_Notes__r}" var="aor">
-                        <tr>
-                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">
-                                <apex:outputText value="{0, date, MM/dd/yy}">
-                                    <apex:param value="{!aor.Capture_Date__c}" />
-                                </apex:outputText>
-                            </td>
-                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!aor.Behavior_Foster_Note__c}</td>
-                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!aor.Initials__c}</td>
-                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;"></td>
-                            <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!aor.Initials__c}</td> 
-                        </tr>
-                    </apex:repeat>  
-                </tbody>
-            </table>
-        </div>
-        </apex:outputPanel>
         
+        <!--<apex:outputPanel rendered="{!anmwrapper.animalD.Behavior_Foster_Notes__r.size!=0}">-->
+            <div class="section" style="border:1px solid; page-break-inside: avoid;page-break-after: always;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th colspan="7">
+                                <center  style="border-bottom:1px solid;">
+                                    <h3 style="font-weight:900">Behavior Foster Notes</h3>
+                                </center>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>Date</th>
+                            <th>Behavior Foster Notes</th>
+                            <th>Reported By</th>
+                            <th>Behavior Lead Notes</th>
+                            <th>Behavior Lead Initials</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <apex:repeat value="{!anmwrapper.animalD.Behavior_Foster_Notes__r}" var="aor">
+                            <tr>
+                                <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">
+                                    <apex:outputText value="{0, date, MM/dd/yy}">
+                                        <apex:param value="{!aor.Capture_Date__c}" />
+                                    </apex:outputText>
+                                </td>
+                                <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!aor.Behavior_Foster_Note__c}</td>
+                                <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!aor.Initials__c}</td>
+                                <td class="topline" style="padding-top: .5em;padding-bottom: .5em;"></td>
+                                <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!aor.Initials__c}</td> 
+                            </tr>
+                        </apex:repeat>  
+                    </tbody>
+                </table>
+            </div>
+        <!--</apex:outputPanel>-->
+        <apex:outputPanel rendered="{!anmwrapper.animalD.Placement_Notes__r.size!=0}">
+            <div class="section" style="border:1px solid; page-break-inside: avoid;page-break-after: always;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th colspan="7">
+                                <center  style="border-bottom:1px solid;">
+                                    <h3 style="font-weight:900">Foster Notes</h3>
+                                </center>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>Date</th>
+                            <th>Name</th>
+                            <th>Foster Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <apex:repeat value="{!anmwrapper.animalD.Placement_Notes__r}" var="aor">
+                            <tr>
+                                <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">
+                                    <apex:outputText value="{0, date, MM/dd/yy}">
+                                        <apex:param value="{!aor.Contact_Date__c}" />
+                                    </apex:outputText>
+                                </td>
+                                <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">Name</td> 
+                                <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">{!aor.Foster_Notes__c}</td>
+                            </tr>
+                        </apex:repeat>  
+                    </tbody>
+                </table>
+            </div>
+        </apex:outputPanel>
         <!-- Shelter Notes -->
-		 <div class="section" style="border:1px solid;">
+		 <div class="section" style="border:1px solid; page-break-inside: avoid;page-break-after: always;">
             
             <table>
                 <thead>
@@ -308,7 +307,7 @@
             </table>
         </div>        
         <!-- Low Stress Notes -->
-         <div class="section" style="border:1px solid;">
+         <div class="section" style="border:1px solid; page-break-inside: avoid;page-break-after: always;">
             
             <table>
                 <thead>
@@ -369,7 +368,7 @@
             </table>
         </div>
         <!-- 3. Behavior Progress, section 2 Incident Object   -->
-        <div class="section" style="border:1px solid;">
+        <div class="section" style="border:1px solid; page-break-inside: avoid;page-break-after: always;">
             <table style="border-collapse: collapse;">
                 <thead>
                     <tr>
@@ -443,7 +442,7 @@
             </table>
         </div>
         <!--4. Play History -->
-        <div class="section" style="border:1px solid;">  
+        <div class="section" style="border:1px solid; page-break-inside: avoid;page-break-after: always;">  
             <table class="c_table">
                 <thead>
                     <tr>
@@ -505,7 +504,7 @@
                     <tr>
                         <th colspan="7">
                             <center style="border-bottom:1px solid;">
-                                <h3 style="font-weight:900"> Training Behavior Modification Behavior Mod.</h3>
+                                <h3 style="font-weight:900"> Training Behavior Modification Behavior Mod</h3>
                             </center>
                         </th>
                     </tr>  
@@ -568,7 +567,7 @@
         </div>
         
         <!-- Dog Behavior Grading Key: -->
-        <div class="section" style=" page-break-after: always; padding-top: .5em;">
+        <div class="section" style="">
             <table>
                 <tr>
                     <td>
