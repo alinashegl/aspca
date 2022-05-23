@@ -18,7 +18,7 @@
             <columnToColumn>false</columnToColumn>
             <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
-            <value>Grade Change Reason</value>
+            <value>Behavior Summary</value>
         </criteriaItems>
     </filter>
     <format>Summary</format>
@@ -27,7 +27,7 @@
         <field>EntityHistory__c.RecordName__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
-    <name>Grade Histories</name>
+    <name>Behavior Summary Histories</name>
     <params>
         <name>co</name>
         <value>1</value>
