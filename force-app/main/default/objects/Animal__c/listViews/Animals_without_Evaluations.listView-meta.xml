@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Animals_without_Evaluations</fullName>
+    <columns>NAME</columns>
+    <columns>Animal_Name__c</columns>
+    <columns>Evaluation_Due_Date__c</columns>
+    <columns>Breed__c</columns>
+    <columns>Color__c</columns>
+    <columns>Shelter_Location__c</columns>
+    <columns>Shelter_Color_Coding__c</columns>
+    <columns>Current_Animal_Age_Formatted__c</columns>
+    <columns>Gender__c</columns>
+    <columns>Behavior_Medication_Flag__c</columns>
+    <columns>Case__c</columns>
+    <columns>Intake_Date_Time__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Evaluation_Count__c</field>
+        <operation>greaterThan</operation>
+        <value>0</value>
+    </filters>
+    <filters>
+        <field>Active_Animal__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>Location_Filter__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <label>Animals without Evaluations</label>
+</ListView>

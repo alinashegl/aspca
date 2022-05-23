@@ -23,6 +23,12 @@ public with sharing class PlaygroupToDoListController {
                                     ORDER BY Id];
         return animals;
     }
+    //Neha
+    @AuraEnabled(cacheable=true)
+    public static Id getReportId(){
+        Id reportId = [Select Id From Report where DeveloperName ='Playgroup_To_Do_List_IiN'].Id;
+        return reportId;
+    }
 
     @AuraEnabled
     public static String createPlaygroup(List<String> animals) {

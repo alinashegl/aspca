@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Foster_Count__c</fullName>
+    <externalId>false</externalId>
+    <label>Foster Count</label>
+    <summaryFilterItems>
+        <field>Facility_Outcome__c.Facility_Outcome__c</field>
+        <operation>equals</operation>
+        <value>Foster Home</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Facility_Outcome__c.Animal__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

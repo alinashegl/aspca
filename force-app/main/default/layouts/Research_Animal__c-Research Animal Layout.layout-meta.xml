@@ -23,6 +23,10 @@
                 <behavior>Readonly</behavior>
                 <field>Case_Type__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Required</behavior>
+                <field>Research_Study__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -70,14 +74,12 @@
         <style>CustomLinks</style>
     </layoutSections>
     <relatedLists>
-        <excludeButtons>MassChangeOwner</excludeButtons>
-        <fields>Research_Study__c.NAME</fields>
-        <fields>Research_Study__c.Study_Name__c</fields>
-        <fields>Research_Study__c.Study_Box_URL__c</fields>
-        <fields>Research_Study__c.Study_Status__c</fields>
-        <relatedList>Research_Junction__c.Research_Animal__c</relatedList>
-        <sortField>Research_Study__c.Study_Name__c</sortField>
-        <sortOrder>Asc</sortOrder>
+        <fields>NAME</fields>
+        <fields>Study_Name__c</fields>
+        <fields>Principle_Researcher__c</fields>
+        <fields>Study_Box_URL__c</fields>
+        <fields>Study_Status__c</fields>
+        <relatedList>Research_Study__c.Research_Animal__c</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>
@@ -85,7 +87,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h8C000000MvLS</masterLabel>
+        <masterLabel>00h7h000000kgYj</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>

@@ -13,6 +13,13 @@ public with sharing class test_PlaygroupToDoListController {
         System.assertEquals(1, playgroupAnimals.size());
         System.assertEquals(a.Id, playgroupAnimals[0].Id);
     }
+    
+    @isTest
+    static void getReportId() {
+        Test.startTest();
+        Id getReportId = PlaygroupToDoListController.getReportId();
+        Test.stopTest();
+    }
 
     @isTest
     static void getPlaygroupAnimalsBadCategory() {
