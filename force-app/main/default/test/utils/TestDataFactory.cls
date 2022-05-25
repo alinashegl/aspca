@@ -680,11 +680,28 @@ public without sharing class TestDataFactory {
             protocol.IsActive__c = true;
             protocol.Protocol_Categories__c = 'Non Fear Protocols';
             protocols.add(protocol);
+
             i++;
         }
         insert protocols;
         return protocols;
     }
+
+    public static Protocol_Scale__c[] createProtocolScales(Integer count){
+      Protocol_Scale__c[] pScales = new Protocol_Scale__c[0];
+      count = count == null ? 3 : count;
+      for(Integer i = 0; i < count; i++){
+        pScales.add(new Protocol_Scale__c(
+          isActive__c = true,
+          isDefault__c = true,
+          Name = 'pScale' + i
+        ));
+      }
+
+      insert pScales;
+      return pScales;
+    }
+
     public static List<Session_Protocol__c> createSessionProtocols() {
         List<Protocol__c> protocols = createProtocols();
         Treatment_Session__c session = createSession();

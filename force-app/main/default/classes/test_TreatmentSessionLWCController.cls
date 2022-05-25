@@ -6,10 +6,10 @@ private class test_TreatmentSessionLWCController {
         Session_Protocol__c[] sessionProtocols = [SELECT Id, TreatmentSessionId__c FROM Session_Protocol__c WHERE TreatmentSessionId__c =: session.Id];
 
         Test.startTest();
-            Session_Protocol__c[] returnedList = TreatmentSessionLWCController.getActiveProtocols(session.Id);
+        TreatmentSessionLWCController.SessionInfo returnedInfo = TreatmentSessionLWCController.getActiveProtocolsForSession(session.Id);
         Test.stopTest();
 
-        System.assertEquals(sessionProtocols.size(), returnedList.size());
+        System.assertEquals(sessionProtocols.size(), returnedInfo.sessionProtocolInfos.size());
     }
 
     @isTest
@@ -29,10 +29,12 @@ private class test_TreatmentSessionLWCController {
         insert session;
 
         Test.startTest();
-            Session_Protocol__c[] returnedList = TreatmentSessionLWCController.getActiveProtocols(session.Id);
+        TreatmentSessionLWCController.SessionInfo returnedInfo = TreatmentSessionLWCController.getActiveProtocolsForSession(session.Id);
         Test.stopTest();
 
-        System.assert(returnedList.isEmpty(), 'list should have been empty: ' + returnedList);
+        System.assert(returnedInfo != null, 'should have returned a session info with blank lists, but was null');
+        System.assert(returnedInfo.requiredProtocols.isEmpty(), 'rrequiredProtocols should be an empty list, but was: ' + returnedInfo.requiredProtocols);
+        System.assert(returnedInfo.sessionProtocolInfos.isEmpty(),'sessionProtocolInfos should be an empty list, but was: ' + returnedInfo.sessionProtocolInfos);
     }
 
     @isTest
@@ -224,5 +226,29 @@ private class test_TreatmentSessionLWCController {
         test.stopTest();
 
         System.assertEquals(true, skippedInfo.IsSkipped__c);
+    }
+
+    @isTest
+    static void getProtocolStatus_Success(){
+        Session_Protocol__c[] protocols = TestDataFactory.createSessionProtocols();
+        Session_Protocol__c sp = [SELECT Id, Status_Text__c FROM Session_Protocol__c WHERE Id = :protocols[0].Id LIMIT 1];
+
+        test.startTest();
+            String status = TreatmentSessionLWCController.getProtocolStatus(protocols[0].Id);
+        test.stopTest();
+
+        System.assertEquals(sp.Status_Text__c, status);
+    }
+
+    @isTest
+    static void getProtocolStatus_NoProtocol(){
+        // Session_Protocol__c[] protocols = TestDataFactory.createSessionProtocols();
+        // Session_Protocol__c sp = [SELECT Id, Status_Text__c FROM Session_Protocol__c WHERE Id = :protocols[0].Id LIMIT 1];
+
+        test.startTest();
+            String status = TreatmentSessionLWCController.getProtocolStatus(null);
+        test.stopTest();
+
+        System.assertEquals(null, status);
     }
 }

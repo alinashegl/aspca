@@ -46,4 +46,24 @@ public with sharing class PlanProtocolSelector extends SObjectSelector{
         return lineItems;
     }
 
+    public Protocol__c[] getByPlan(Id planId) {
+        return [
+            SELECT 
+                Id,
+                (SELECT Id, Protocol_Scale__c, Protocol__c, Protocol_Scale__r.Required__c FROM Protocol_Scale_Junctions__r WHERE Protocol_Scale__r.isActive__c = true),
+                (SELECT Id, Bundle_Entry__c, IsRemoved__c FROM Plan_Protocols__r WHERE Treatment_Plan__c = :planId)
+            FROM Protocol__c
+            WHERE Id IN (SELECT Protocol__c FROM Plan_Protocol__c  WHERE Treatment_Plan__c = :planId)
+        ];
+    }
+    
+    public Protocol__c[] getByProtocolIds(Set<Id> protocolIds) {
+        return [
+            SELECT 
+                Id,
+                (SELECT Id, Protocol_Scale__c, Protocol__c, Protocol_Scale__r.Required__c FROM Protocol_Scale_Junctions__r WHERE Protocol_Scale__r.isActive__c = true)
+            FROM Protocol__c
+            WHERE Id IN  :protocolIds
+        ];
+    }
 }

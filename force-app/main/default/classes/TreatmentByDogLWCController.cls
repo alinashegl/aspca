@@ -204,7 +204,9 @@ public with sharing class TreatmentByDogLWCController {
                 sp.Overall_Score_Number__c == 4 ? 'Green' : null;
 
             this.txDate = sp.TreatmentSessionId__r.Session_Date__c;
-            this.txDateFormatted = (String) sp.TreatmentSessionId__r.Session_Date__c.format();
+            if(sp.TreatmentSessionId__r.Session_Date__c != null){
+                this.txDateFormatted = (String) sp.TreatmentSessionId__r.Session_Date__c.format();
+            }
         }
     }
 
