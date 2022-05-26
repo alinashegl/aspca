@@ -1,6 +1,6 @@
 public class AnimalExamSheetTriggerHandler {
     
-    public static void insertHandler(){
+    /*public static void insertHandler(){
         
         for (Animal_Exam_Sheet__c a : (List<Animal_Exam_Sheet__c>)Trigger.new){
                     
@@ -70,8 +70,8 @@ public class AnimalExamSheetTriggerHandler {
                     	system.debug(anim);
                     }
         
-    }
-    
+    }*/
+   
     public static void updateStormAnxietyandMedicationonAnimal(){
         Set<Id> animalIds = new Set<Id>();
         if(Trigger.isInsert || Trigger.isUndelete){
@@ -84,7 +84,7 @@ public class AnimalExamSheetTriggerHandler {
                 animalIds.add((Id)aes.get('Animal__c'));
             }
         }
-        List<Animal__c> anmList = [Select Id,Storm_Distress_Anxiety__c ,(Select id, Subjective__c, Exam_Type__c  from Animal_Exam_Sheets__r WHERE RecordType.Name = 'Behavior Exam' Order By CreatedDate DESC) from Animal__c where Id IN : animalIds];
+        List<Animal__c> anmList = [Select Id,Storm_Distress_Anxiety__c,Storm_Distress_Anxiety_Notes__c,Behavior_Medication_Flag__c, Behavior_Medication_Data_Time__c,(Select id, Subjective__c, Exam_Type__c  from Animal_Exam_Sheets__r WHERE RecordType.Name = 'Behavior Exam' Order By CreatedDate DESC) from Animal__c where Id IN : animalIds];
         for(Animal__c anm :anmList){
             for(Animal_Exam_Sheet__c aes : anm.Animal_Exam_Sheets__r){
                 anm.Storm_Distress_Anxiety__c = false;
@@ -97,6 +97,7 @@ public class AnimalExamSheetTriggerHandler {
                 }
                 if(aes.Exam_Type__c == 'Behavior Medications'){
                     anm.Behavior_Medication_Flag__c = true;
+                    anm.Behavior_Medication_Data_Time__c = system.now();
                     break;
                 }
             }
