@@ -48,6 +48,8 @@ public with sharing class TreatmentSessionLWCController {
             sInfo.sessionProtocolInfos = protocolInfos;
             return sInfo;
         } catch (Exception e) {
+            System.debug('error: ' + e.getMessage());
+            System.debug('stackTrace: ' + e.getStackTraceString());
             throw new AuraHandledException(e.getMessage());
         }
     }
@@ -151,7 +153,7 @@ public with sharing class TreatmentSessionLWCController {
     }
 
     @AuraEnabled
-    public static SpsInfo getAdditionalFields (Id id, String[] fields){
+    public static SpsInfo getSpsInfo (Id id, String[] fields){
         String query = 'SELECT Id';
         if(fields != null && !fields.isEmpty()){
             query += ', ' + String.join(fields, ',');
@@ -170,29 +172,19 @@ public with sharing class TreatmentSessionLWCController {
         if(sps != null){            
             info.currentScore = sps.Protocol_Score__c;
             info.fields = new SpsFieldsWrapper[0];
-            for(String field : fields){
-                SpsFieldsWrapper spsField = new SpsFieldsWrapper();
-                spsField.fieldName = field;
-                spsField.value = (String) sps.get(field);
-                spsField.fieldLabel = fieldMap.get(field).getDescribe().getLabel();
-                info.fields.add(spsField);
+            if(fields != null && !fields.isEmpty()){
+                for(String field : fields){
+                    SpsFieldsWrapper spsField = new SpsFieldsWrapper();
+                    spsField.fieldName = field;
+                    spsField.value = (String) sps.get(field);
+                    spsField.fieldLabel = fieldMap.get(field).getDescribe().getLabel();
+                    info.fields.add(spsField);
+                }
             }
         }
 
         return info;
     }
-
-    private class SpsInfo {
-        @AuraEnabled public String currentScore {get;set;}
-        @AuraEnabled public SpsFieldsWrapper[] fields {get;set;}
-    }
-
-    private class SpsFieldsWrapper{
-        @AuraEnabled public String fieldName {get;set;}
-        @AuraEnabled public String fieldLabel {get;set;}
-        @AuraEnabled public String value {get;set;}
-    }
-
 
     /******Private methods*********/
 
@@ -365,16 +357,6 @@ public with sharing class TreatmentSessionLWCController {
         return protocolsLists;
     }
 
-    // private static Plan_Protocol__c getPlanProtocol(Session_Protocol__c sessionProtocol){
-    //     Plan_Protocol__c pProtocol = [
-    //         SELECT Id, Protocol_Notes__c
-    //         FROM Plan_Protocol__c
-    //         WHERE Protocol__c =: sessionProtocol.ProtocolId__c
-    //         AND Treatment_Plan__c =: sessionProtocol.TreatmentSessionId__r.Treatment_Plan__c
-    //     ];
-    //     return pProtocol;
-    // }
-
     private static void addNewProtocolsToSessionAndPlan(String[] protocolIds, String sessionId){
         Treatment_Session__c session = [SELECT Id, Preferred_Motivators__c FROM Treatment_Session__c WHERE Id =: sessionId LIMIT 1];
         Session_Protocol__c[] newSProtocols = new Session_Protocol__c[0];
@@ -438,7 +420,9 @@ public with sharing class TreatmentSessionLWCController {
             this.category = scale.Protocol_Scale__r.Category__c;
             this.required = scale.Protocol_Scale__r.Required__c;
             this.score = scale.Protocol_Score__c;
-            this.options = scale.Protocol_Scale__r.Options__c.split(';');            
+            if(scale.Protocol_Scale__r.Options__c != null){
+                this.options = scale.Protocol_Scale__r.Options__c.split(';');            
+            }
         }
     }   
 
@@ -459,24 +443,13 @@ public with sharing class TreatmentSessionLWCController {
         @AuraEnabled public Boolean isSkipped { get; set; }
         @AuraEnabled public Boolean isRemoved { get; set; }
         @AuraEnabled public ScoringColumn[] columns {get; set;}
-
-        // @AuraEnabled public ScoreOptions[] aggressive {get; set;}
-        // @AuraEnabled public ScoreOptions[] arousal {get; set;}
-        // @AuraEnabled public ScoreOptions[] fear {get; set;}
-        // @AuraEnabled public ScoreOptions[] sociability {get; set;}
-        // @AuraEnabled public ScoreOptions[] other {get; set;}
         @AuraEnabled public String preferredMotivators { get; set; }
         @AuraEnabled public String novelPersonNotes { get; set; }
         @AuraEnabled public String protocolNotes { get; set; }
         @AuraEnabled public String managerReviewNotes { get; set; }
         @AuraEnabled public String boxLink {get; set;}
-        @AuraEnabled public String planProtocolId {get; set;}
-        @AuraEnabled public String planProtocolNotes {get; set;}
-        // @AuraEnabled public behavior_config__mdt arousalConfig {get; set;}
-        // @AuraEnabled public behavior_config__mdt fearConfig {get; set;}
-        // @AuraEnabled public behavior_config__mdt fearSociabilityConfig {get; set;}
-        // @AuraEnabled public behavior_config__mdt treatmentStagesConfig {get; set;}
-
+        // @AuraEnabled public String planProtocolId {get; set;}
+        // @AuraEnabled public String planProtocolNotes {get; set;}
 
         ProtocolInfo(Session_Protocol__c sp){
             this.id = sp.Id;
@@ -493,12 +466,6 @@ public with sharing class TreatmentSessionLWCController {
             this.managerReviewNotes = sp.Manager_Review_Notes__c;
             this.boxLink = sp.ProtocolId__r.Protocol_Box_Link__c;
             
-
-            // this.aggressive = new ScoreOptions[0];
-            // this.arousal = new ScoreOptions[0];
-            // this.fear = new ScoreOptions[0];
-            // this.sociability = new ScoreOptions[0];
-            // this.other = new ScoreOptions[0];
             Map<Decimal, ScoreOptions[]> scoringOptionsMap = new Map<Decimal, ScoreOptions[]>();
             for(Session_Protocol_Scale__c sps : sp.Session_Protocol_Scales__r){   
                 System.debug('**sps: ' + sps);
@@ -526,15 +493,7 @@ public with sharing class TreatmentSessionLWCController {
                 column.options = scoringOptionsMap.get(num);
                 column.scaleConfig = Behavior_Config__mdt.getInstance(scoringOptionsMap.get(num)[0].category + '_Dog');
                 this.columns.add(column);
-                // this.ScoringColumn.put(category, scoringOptionsMap.get(category));
             }
-
-            //get the scale configs
-            // this.arousalConfig = Behavior_Config__mdt.getInstance('Arousal_Scale');
-            // this.fearConfig = Behavior_Config__mdt.getInstance('Fear_Scales');
-            // this.fearSociabilityConfig = Behavior_Config__mdt.getInstance('Fear_Sociability_Scale');
-            // this.treatmentStagesConfig = Behavior_Config__mdt.getInstance('Treatment_Stages');
-            // this.treatmentStagesConfig = Behavior_Config__mdt.getInstance('Treatment_Stages');
         }
     }
 
@@ -576,5 +535,17 @@ public with sharing class TreatmentSessionLWCController {
             this.label = item;
             this.value = item;
         }
+    }
+
+    @testVisible
+    private class SpsInfo {
+        @AuraEnabled public String currentScore {get;set;}
+        @AuraEnabled public SpsFieldsWrapper[] fields {get;set;}
+    }
+
+    private class SpsFieldsWrapper{
+        @AuraEnabled public String fieldName {get;set;}
+        @AuraEnabled public String fieldLabel {get;set;}
+        @AuraEnabled public String value {get;set;}
     }
 }

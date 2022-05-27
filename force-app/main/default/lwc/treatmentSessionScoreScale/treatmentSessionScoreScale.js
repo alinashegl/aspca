@@ -1,6 +1,6 @@
 import { LightningElement, api, wire } from 'lwc';
 import { updateRecord } from 'lightning/uiRecordApi';
-import getAdditionalFields from '@salesforce/apex/TreatmentSessionLWCController.getAdditionalFields';
+import getSpsInfo from '@salesforce/apex/TreatmentSessionLWCController.getSpsInfo';
 import SystemModstamp from '@salesforce/schema/Account.SystemModstamp';
 
 export default class TreatmentSessionScoreScale extends LightningElement {
@@ -15,7 +15,7 @@ export default class TreatmentSessionScoreScale extends LightningElement {
     connectedCallback(){
         if(this.record.id != null && this.recordResponse == null){
             this.showSpinner = true;
-            getAdditionalFields({id: this.record.id, fields : this.additionalFields})
+            getSpsInfo({id: this.record.id, fields : this.additionalFields})
             .then((response) => {
                 if(response){
                     this.recordResponse = response;

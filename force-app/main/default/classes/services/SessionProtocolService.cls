@@ -158,9 +158,8 @@ public with sharing class SessionProtocolService {
 
             Treatment_Plan__c plan = (Treatment_Plan__c) request.Parameters.get('plan');
             Treatment_Session__c session = (Treatment_Session__c) request.Parameters.get('session');
-            PlanProtocolSelector planProtocolSelector = new PlanProtocolSelector();
-            List<Plan_Protocol__c> planProtocols = planProtocolSelector.GetByOpp(plan.Id);
-            Protocol__c[] protocols = planProtocolSelector.getByPlan(plan.Id);
+            ProtocolSelector protocolSelector = new ProtocolSelector();
+            Protocol__c[] protocols = protocolSelector.getByPlan(plan.Id);
             System.debug('protocols: ' + protocols);
             List<Session_Protocol__c> sProtocols = new List<Session_Protocol__c>();
 
@@ -205,7 +204,7 @@ public with sharing class SessionProtocolService {
         System.debug('in afterInserHandler');
         ServiceResponse response = new ServiceResponse(request);
         Session_Protocol__c[] sessionProtocols = (Session_Protocol__c[]) request.Parameters.get('protocols');
-        PlanProtocolSelector planProtocolSelector = new PlanProtocolSelector();
+        ProtocolSelector protocolSelector = new ProtocolSelector();
 
         //need a set of protocolIds so we can query them and create a map
         Set<Id> protocolIds = new Set<Id>();
@@ -216,7 +215,7 @@ public with sharing class SessionProtocolService {
         System.debug('protocolIds: ' + protocolIds);
         
         //query the protocols and their related Protocol Scale Junctions and put into a map
-        Map<Id, Protocol__c> protocolMap = new Map<Id, Protocol__c>(PlanProtocolSelector.getByProtocolIds(protocolIds));
+        Map<Id, Protocol__c> protocolMap = new Map<Id, Protocol__c>(protocolSelector.getProtocolWithChildProtocolScaleJunctionByIds(protocolIds));
         System.debug('protocolMap: ' + protocolMap);
 
         Session_Protocol_Scale__c[] protocolScales = new Session_Protocol_Scale__c[0];
