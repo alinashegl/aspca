@@ -22,14 +22,20 @@ public class AnimalPlacementPDFController {
                            Current_Location__c,Intake_Type__c,Behavior_Concerns__c, Shelter_Kennel__c , Shelter_Location__c, Behavior_Case_Worker__c,Behavior_Case_Worker__r.Name,Behavior_Summary__c,
                            (SELECT Id, Additional_Comments__c,Behaviors_Exhibited_by_the_Dog__c, Was_Bitten_Area_Covered_with_Clothing__c, Damage_Done_by_the_Dog__c, Incident_Date_Time__c, Incident_Description__c ,Name, Number_of_bites__c, Other_Damage_Done_by_the_Dog__c, Person_Involved__c, Please_explain_why_you_think_so__c, Report_Date__c, Specific_Target_of_Dog_s_Behavior__c, Type_of_Bite__c FROM Incidents__r),
                            (SELECT Id, Animal__c, Capture_Date__c, Behavior_Foster_Note__c, Initials__c, Name FROM Behavior_Foster_Notes__r),
-                           (SELECT Id, Contact_Date__c, Foster_Notes__c, Animal__c, Name FROM Placement_Notes__r Order by Contact_Date__c desc)
+                           (SELECT Id, Contact_Date__c, Foster_Notes__c, Animal__c, Name FROM Placement_Notes__r)
 						from Animal__C where ID = : animalId];
                 List<Observation__c> observations = [SELECT ID, NAME, Observation_Date__c, Observation_Notes__c, Observation_Reported_By__c,Behavior_Staff_Initials__c, Behavior_Response__c, Observation_Type__c, Animal__r.Behavior_Concerns__c from Observation__c  where animal__c = : animalId and Observation_Type__c != null order by Observation_Type__c];
-            	Map<String, List<Observation__c>> obMap = new Map<String, List<Observation__c>>();
-                List<Observation__c> obList;
+                Map<String, List<Observation__c>> obMap = new Map<String, List<Observation__c>>{
+                    'Happy Tail' => new List<Observation__c>(),
+                    'Concern' => new List<Observation__c>(),
+                    'Observation' => new List<Observation__c>()
+                };
+                List<Observation__c> obList = null;
                 for(Observation__c observation: observations){
                     if(!obMap.containsKey(observation.Observation_Type__c)){
                         obList = new List<Observation__c>();
+                    } else {
+                        obList = obMap.get(observation.Observation_Type__c);
                     }
                     obList.add(observation);
                     obMap.put(observation.Observation_Type__c, obList);
