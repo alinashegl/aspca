@@ -29,6 +29,7 @@ public with sharing class SessionProtocolScaleDomain extends DomainActionBase {
         for(Session_Protocol_Scale__c sps : newRecords){
             Session_Protocol_Scale__c oldRecord = oldMap.get(sps.Id);
             if(sps.Protocol_Scale_Name__c == 'Overall Score' && sps.Protocol_Score__c != oldRecord.Protocol_Score__c){
+                System.debug('**sps: ' + sps);
                 Session_Protocol__c sProtocol = new Session_Protocol__c(
                     Id = sps.Session_Protocol__c,
                     Overall_Score__c = sps.Protocol_Score__c
@@ -38,6 +39,7 @@ public with sharing class SessionProtocolScaleDomain extends DomainActionBase {
         }
 
         update sProtocols;
+        System.debug('sProtocols: ' + sProtocols);
     }
 
     public void beforeDelete (TriggerRequest request) { 

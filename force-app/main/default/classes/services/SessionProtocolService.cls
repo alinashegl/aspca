@@ -106,42 +106,6 @@ public with sharing class SessionProtocolService {
         return response;
     }
 
-    // @testVisible
-    // private static ServiceResponse handleSession(ServiceRequest request) {
-    //     Map<String, Map<String, Object>> resultMap = new Map<String, Map<String, Object>>();
-
-    //     TreatmentSessionSelector treatmentSessionSelector = new TreatmentSessionSelector();
-    //     Set<Id> idset = new Set<Id>();
-    //     idset.add((Id) request.Parameters.get('record'));
-    //     List<Treatment_Session__c> treatmentSessions = new List<Treatment_Session__c>();
-    //     treatmentSessions = treatmentSessionSelector.GetByIds(idset);
-    //     Treatment_Session__c session = treatmentSessions[0];
-    //     SessionProtocolSelector sessionProtocolSelector = new SessionProtocolSelector();
-    //     List<Session_Protocol__c> sessionProtocols = new List<Session_Protocol__c>();
-    //     sessionProtocols = [SELECT Id, TreatmentSessionId__c, InView__c from Session_Protocol__c];
-    //     // sessionProtocols = [SELECT Id, TreatmentSessionId__c, InView__c from Session_Protocol__c WHERE TreatmentSessionId__c IN: idset];
-    //     List<Session_Protocol__c> partOfView = new List<Session_Protocol__c>();
-    //     List<Session_Protocol__c> NotPartOfView = new List<Session_Protocol__c>();
-
-    //     for (Session_Protocol__c protocol : sessionProtocols) {
-    //         if (protocol.TreatmentSessionId__c == session.Id) {
-    //             partOfView.add(protocol);
-    //             protocol.InView__c = true;
-    //         }else {
-    //             NotPartOfView.add(protocol);
-    //             protocol.InView__c = false;
-    //         }
-    //     }
-    //     update partOfView;
-    //     update NotPartOfView;
-
-    //     ServiceResponse response = new ServiceResponse(request);
-    //     resultMap.put('PART OF VIEW', new Map<String, Object>{'IN VIEW' => partOfView});
-    //     resultMap.put('NOT IN VIEW', new Map<String, Object>{'NOT IN VIEW' => NotPartOfView});
-    //     response.Data = resultMap;
-    //     return response;
-    // }
-
     private static ServiceResponse beforeInsertHandler(ServiceRequest request) {
         ServiceResponse response = new ServiceResponse(request);
 
@@ -244,7 +208,6 @@ public with sharing class SessionProtocolService {
         Plan_Protocol__c[] newPlanProtocols = prepNewPlanProtocols(protocols);
         Plan_Protocol__c[] planProtocolsToRemove = removeHandler(protocols);
 
-        System.debug('planProtocolsToRemove: ' + planProtocolsToRemove);
         update planProtocolsToRemove;
         ServiceResponse response = new ServiceResponse(request);
 

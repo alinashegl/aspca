@@ -694,7 +694,7 @@ public without sharing class TestDataFactory {
         pScales.add(new Protocol_Scale__c(
           isActive__c = true,
           isDefault__c = true,
-          Name = 'pScale' + i,
+          Name = i == 0 ? 'Overall Score' : 'pScale' + i,
           Column_Order__c = 10 * i,
           Options__c = '1 Option 1; Option 2',
           Fields_to_Include__c = 'Duration__c'
