@@ -131,55 +131,55 @@ public class AnimalPlacementPDFController {
         private set;
     }
     
-    public List<Session_Protocol__c> aTreatmentSession {
+    public List<SessionProtocolWrapper> aTreatmentSession {
         public get {
-            List<Treatment_Session__c> lstTreatmentSession = [SELECT Id,Name from Treatment_Session__c where Animal__r.id =: animalId and CreatedDate = LAST_N_MONTHS:2];
+            List<Treatment_Session__c> lstTreatmentSession = [SELECT Id,Name from Treatment_Session__c where Animal__r.id =: animalId and CreatedDate >= LAST_N_MONTHS:2];
             Set<Id> treatmentIds =new set<Id>();
             for (Treatment_Session__c tsc : lstTreatmentSession) {
                 treatmentIds.add(tsc.Id);       
             }
+            SessionProtocolWrapper[] sessionProtocols = new SessionProtocolWrapper[0];
             if(treatmentIds.size()> 0) {
-                aTreatmentSession = [SELECT Aggressive_Worst__c,
-                                     Aggressive_Worst_Number__c,
-                                     Arousal_Best__c,
-                                     Arousal_Best_Number__c,
-                                     Arousal_Worst__c,
-                                     Arousal_Worst_Number__c,
-                                     Bundle_Entry__c,
-                                     Fear_Best__c,
-                                     Fear_Best_Number__c,
-                                     Social_Best__c,
-                                     Social_Best_Number__c,
-                                     Fear_Worst__c,
-                                     Fear_Worst_Number__c,
-                                     InView__c,
-                                     LastModifiedById,
-                                     Manager_Review_Notes__c,
-                                     Needs_Review__c,
-                                     Novel_Person__c,
-                                     Novel_Person_Notes__c,
-                                     Overall_Score__c,
-                                     Overall_Score_Number__c,
-                                     Overall_Score_Color__c,
-                                     Preferred_Motivators__c,
-                                     ProtocolId__c,
-                                     Protocol_Box_Link__c,
-                                     Protocol_Name__c,
-                                     Protocol_Notes__c,
-                                     IsRemoved__c,
-                                     Review_Complete__c,
-                                     Session_Date__c,
-                                     Name,
-                                     IsSkipped__c,
-                                     Solicitation__c,
-                                     Solicitation_Number__c,
-                                     Status__c,
-                                     Sum_of_Numbers__c,
-                                     TreatmentSessionId__c
-                                     FROM Session_Protocol__c  WHERE  TreatmentSessionId__c IN :  treatmentIds Limit 1 ];
-            }
-            
-            return aTreatmentSession;
+                for(Session_Protocol__c sProtocol : [
+                    SELECT 
+                    Bundle_Entry__c,
+                    InView__c,
+                    LastModifiedById,
+                    Manager_Review_Notes__c,
+                    Needs_Review__c,
+                    Novel_Person__c,
+                    Novel_Person_Notes__c,
+                    Overall_Score__c,
+                    Preferred_Motivators__c,
+                    ProtocolId__c,
+                    Protocol_Box_Link__c,
+                    Protocol_Name__c,
+                    Protocol_Notes__c,
+                    IsRemoved__c,
+                    Review_Complete__c,
+                    Session_Date__c,
+                    Name,
+                    IsSkipped__c,
+                    Solicitation__c,
+                    Solicitation_Number__c,
+                    Status__c,
+                    Sum_of_Numbers__c,
+                    TreatmentSessionId__c,
+                    (SELECT Id, Protocol_Score__c, Protocol_Scale_Name__c, Protocol_Scale__r.Category__c 
+                        FROM Session_Protocol_Scales__r 
+                        ORDER BY Protocol_Scale__r.Column_Number__c ASC, 
+                        Protocol_Scale__r.Column_Order__c ASC
+                    )
+                    FROM Session_Protocol__c  WHERE  TreatmentSessionId__c IN : treatmentIds
+                ]){
+                    SessionProtocolWrapper protoWrapper = new SessionProtocolWrapper(sProtocol);
+                    for(Session_Protocol_Scale__c sps : sProtocol.Session_Protocol_Scales__r){
+                    }
+
+                    sessionProtocols.add(protoWrapper);
+                }
+            }            
+            return sessionProtocols;
         }
         private set;
     }
@@ -788,16 +788,19 @@ public class AnimalPlacementPDFController {
             results = Database.query( query );
         }
         
-        for(Integer i = 0; i < results.size();i++){
-            AnimalGradeHistory agh = new AnimalGradeHistory();
-            agh.historyDate = DateTime.valueOf(results[i].get('CreatedDate'));
-            agh.historyName = String.valueOf(results[i].get('NewValue__c'));
-            agh.historyId = String.valueOf(results[i].get('ObjectId__c'));
-            if(String.valueof(results[i].get('RecordName__c')) == String.valueof(results[i+1].get('RecordName__c'))){
-                agh.historyReason = String.valueof(results[i+1].get('NewValue__c'));
-                i=i+1;
+        if(results != null && !results.isEmpty()){
+            Integer count = results.size();
+            for(Integer i = 0; i < results.size();i++){
+                AnimalGradeHistory agh = new AnimalGradeHistory();
+                agh.historyDate = DateTime.valueOf(results[i].get('CreatedDate'));
+                agh.historyName = String.valueOf(results[i].get('NewValue__c'));
+                agh.historyId = String.valueOf(results[i].get('ObjectId__c'));
+                if(i+1 < count && String.valueof(results[i].get('RecordName__c')) == String.valueof(results[i+1].get('RecordName__c'))){
+                    agh.historyReason = String.valueof(results[i+1].get('NewValue__c'));
+                    i=i+1;
+                }
+                animalHistories.add(agh);
             }
-            animalHistories.add(agh);
         }
         return animalHistories;
     }
@@ -1011,5 +1014,46 @@ public class AnimalPlacementPDFController {
         Public string PotentialIssueOther { get; set; }
         Public string PotentialIssueOtherNotes { get; set; }
         Public string PlacementRecommendations { get; set; }
+    }
+
+    public class SessionProtocolWrapper{
+        public String protocolName { get; set; }
+        public SessionCellWrapper[] cellInfosTopRow {get; set;}
+        public SessionCellWrapper[] cellInfosBottomRow {get; set;}
+
+        SessionProtocolWrapper(Session_Protocol__c sProtocol){
+            this.protocolName = sProtocol.Protocol_Name__c;
+            this.cellInfosTopRow = new SessionCellWrapper[0];
+            this.cellInfosBottomRow = new SessionCellWrapper[0];
+
+            this.cellInfosTopRow.add(new SessionCellWrapper('Name', sProtocol.Protocol_Name__c));
+            Integer topRowCount = (sProtocol.Session_Protocol_Scales__r.size() + 4) / 2;
+            for(Session_Protocol_Scale__c sps : sProtocol.Session_Protocol_Scales__r){
+                //we can skip overall score here becuase we're adding it later
+                if(sps.Protocol_Scale_Name__c == 'Overall Score') continue;
+                if(topRowCount > 0){
+                    cellInfosTopRow.add(new SessionCellWrapper(sps.Protocol_Scale_Name__c, sps.Protocol_Score__c));
+                } else {
+                    cellInfosBottomRow.add(new SessionCellWrapper(sps.Protocol_Scale_Name__c, sps.Protocol_Score__c));
+                }
+                topRowCount --;
+            }
+
+            cellInfosBottomRow.add(new SessionCellWrapper('Overall Score', sProtocol.Overall_Score__c));
+            cellInfosBottomRow.add(new SessionCellWrapper('Needs Review', String.valueOf(sProtocol.Needs_Review__c)));
+            cellInfosBottomRow.add(new SessionCellWrapper('Skip Protocol', String.valueOf(sProtocol.IsSkipped__c)));
+            cellInfosBottomRow.add(new SessionCellWrapper('Over stim w/ food, PC Tug', sProtocol.Overall_Score__c + ' ' + sProtocol.Protocol_Notes__c));
+
+        }
+    }
+
+    public class SessionCellWrapper{
+        public String label {get; set;}
+        public String value {get; set;}
+
+        SessionCellWrapper(String label, String value){
+            this.label = label;
+            this.value = value;
+        }
     }
 }

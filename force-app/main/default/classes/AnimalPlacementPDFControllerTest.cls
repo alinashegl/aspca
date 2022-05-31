@@ -43,9 +43,13 @@ public class AnimalPlacementPDFControllerTest {
         test.startTest();       
         AnimalPlacementPDFController.AnimalWrapper abc = apdf.anmwrapper;
         List<AnimalPlacementPDFController.animalPlaySummary> aPlayGroups = apdf.aPlayGroups;
-        List<Session_Protocol__c> aTreatmentSession = apdf.aTreatmentSession;
+        List<AnimalPlacementPDFController.SessionProtocolWrapper>  aTreatmentSession = apdf.aTreatmentSession;
         List<AnimalPlacementPDFController.AnimalGradeHistory>  gradeHistory = apdf.gradeHistory;
         List<AnimalPlacementPDFController.BehaviorEvaluation> behaviorEvaluations = apdf.behaviorEvaluations;
+        List<Shelter_Note__c> shelterNotes = apdf.shelterNotes;
+        List<Low_Stress_Note__c> lowStressNotes = apdf.lowStressNotes;
+
+        
         
         test.setCurrentPage(pageRef);                       
 
@@ -54,6 +58,9 @@ public class AnimalPlacementPDFControllerTest {
         System.assertNotEquals(null, apdf.aPlayGroups);
         System.assertNotEquals(null, apdf.gradeHistory);
         System.assertNotEquals(null, apdf.behaviorEvaluations);
+        System.assertNotEquals(null, aTreatmentSession);
+        System.assertNotEquals(null, shelterNotes);
+        System.assertNotEquals(null, lowStressNotes);
     }
     
     @isTest
@@ -91,9 +98,11 @@ public class AnimalPlacementPDFControllerTest {
         test.startTest();       
 		AnimalPlacementPDFController.AnimalWrapper abc = apdf.anmwrapper;
         List<AnimalPlacementPDFController.animalPlaySummary> aPlayGroups = apdf.aPlayGroups;
-        List<Session_Protocol__c> aTreatmentSession = apdf.aTreatmentSession;
+        List<AnimalPlacementPDFController.SessionProtocolWrapper>  aTreatmentSession = apdf.aTreatmentSession;
         List<AnimalPlacementPDFController.AnimalGradeHistory>  gradeHistory = apdf.gradeHistory;
         List<AnimalPlacementPDFController.BehaviorEvaluation> behaviorEvaluations = apdf.behaviorEvaluations;
+        List<Shelter_Note__c> shelterNotes = apdf.shelterNotes;
+        List<Low_Stress_Note__c> lowStressNotes = apdf.lowStressNotes;
         
         test.setCurrentPage(pageRef);                       
 
@@ -102,6 +111,29 @@ public class AnimalPlacementPDFControllerTest {
         System.assertNotEquals(null, apdf.aPlayGroups);
         System.assertNotEquals(null, apdf.gradeHistory);
         System.assertNotEquals(null, apdf.behaviorEvaluations);
+        System.assertNotEquals(null, aTreatmentSession);
+        System.assertNotEquals(null, shelterNotes);
+        System.assertNotEquals(null, lowStressNotes);
+    }
+
+    @isTest
+    static void testTreatmentSessionHistory(){
+        Session_Protocol_Scale__c[] spScales = TestDataFactory.createSessionProtocolScales();
+        Animal__c anm = [Select Id from Animal__c LIMIT 1];
+        
+        ApexPages.StandardController sc = new ApexPages.StandardController(anm);
+        ApexPages.currentPage().getParameters().put('id',anm.Id);
+        PageReference pageRef = sc.view();
+		
+        AnimalPlacementPDFController apdf = new AnimalPlacementPDFController(sc);                
+		
+        test.startTest();       
+        List<AnimalPlacementPDFController.SessionProtocolWrapper>  aTreatmentSession = apdf.aTreatmentSession;        
+        test.setCurrentPage(pageRef);
+        test.stopTest();
+
+        System.assertNotEquals(null, aTreatmentSession);
+        System.assertNotEquals(null, aTreatmentSession[0].cellInfosTopRow);
     }
     
     private static Playgroup_Session__c createPlaygroupSession(){
