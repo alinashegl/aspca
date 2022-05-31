@@ -680,16 +680,52 @@ public without sharing class TestDataFactory {
             protocol.IsActive__c = true;
             protocol.Protocol_Categories__c = 'Non Fear Protocols';
             protocols.add(protocol);
+
             i++;
         }
         insert protocols;
         return protocols;
     }
+
+    public static Protocol_Scale__c[] createProtocolScales(Integer count){
+      Protocol_Scale__c[] pScales = new Protocol_Scale__c[0];
+      count = count == null ? 3 : count;
+      for(Integer i = 0; i < count; i++){
+        pScales.add(new Protocol_Scale__c(
+          isActive__c = true,
+          isDefault__c = true,
+          Name = i == 0 ? 'Overall Score' : 'pScale' + i,
+          Column_Order__c = 10 * i,
+          Options__c = '1 Option 1; Option 2',
+          Fields_to_Include__c = 'Duration__c'
+        ));
+      }
+
+      insert pScales;
+      return pScales;
+    }
+
     public static List<Session_Protocol__c> createSessionProtocols() {
         List<Protocol__c> protocols = createProtocols();
         Treatment_Session__c session = createSession();
         Session_Protocol__c[] sessionProtocols = [SELECT Id, TreatmentSessionId__c, TreatmentSessionId__r.Treatment_Plan__c, ProtocolId__c FROM Session_Protocol__c WHERE TreatmentSessionId__c =: session.Id];
         return sessionProtocols;
+    }
+
+    public static Session_Protocol_Scale__c[] createSessionProtocolScales(){
+      Protocol_Scale__c[] pScales = createProtocolScales(3);
+      Session_Protocol__c[] sessionProtocols = createSessionProtocols();
+      Session_Protocol_Scale__c[] sessionProtoScales = new Session_Protocol_Scale__c[0];
+      for(Session_Protocol__c sessionProto : sessionProtocols){
+        for(Protocol_Scale__c protoScale : pScales){
+          sessionProtoScales.add(new Session_Protocol_Scale__c(
+            Protocol_Scale__c = protoScale.Id,
+            Session_Protocol__c = sessionProto.Id
+          ));
+        }
+      }
+      insert sessionProtoScales;
+      return sessionProtoScales;
     }
 
     public static Treatment_Bundle__c createTreatmentBundle() {
