@@ -2,13 +2,13 @@
 <ReportType xmlns="http://soap.sforce.com/2006/04/metadata">
     <baseObject>Animal__c</baseObject>
     <category>other</category>
-    <deployed>true</deployed>
-    <description>Animals with Facility/Outcome</description>
+    <deployed>false</deployed>
+    <description>Animals with or without Treatment Plans</description>
     <join>
         <outerJoin>true</outerJoin>
-        <relationship>Animal_Locations__r</relationship>
+        <relationship>Treatment_Plan__r</relationship>
     </join>
-    <label>Animals with Facility/Outcome</label>
+    <label>Animals and Treatment Plans</label>
     <sections>
         <columns>
             <checkedByDefault>false</checkedByDefault>
@@ -1352,6 +1352,11 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>Days_in_Treatment__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>Evaluation_Dog_Dog_Testing_Date__c</field>
             <table>Animal__c</table>
         </columns>
@@ -1371,108 +1376,148 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Id</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <table>Animal__c.Treatment_Plan__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Owner</field>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>true</checkedByDefault>
             <field>Name</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>CreatedDate</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>CreatedBy</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>LastModifiedDate</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>LastModifiedBy</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>LastActivityDate</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>End_Date__c</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <field>AssignedTreatmentBundleId__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Euthanasia_Reason__c</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <field>Description__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Facility_Outcome__c</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <field>IsActive__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Facility__c</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <field>MasterTreatmentBundleId__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Facility_or_Outcome__c</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <field>Plan_Notes__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Kennel_Location_Text__c</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <field>Preferred_Motivators__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Kennel_Location__c</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <field>Treatment_Priority__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Location_Duration__c</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <field>Enrichment_Priority__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Point_of_Contact__c</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <field>Shelter_Color_Code__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Return_Reason__c</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <field>Enrichment_Activities__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Start_Date__c</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <field>Custom_Schedule__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Follow_Up_Days__c</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <field>Problem_Behavior__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Follow_Up_Frequency__c</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <field>Problem_Behavior_Aggression__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Modify_Schedule__c</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <field>Problem_Behavior_Arousal__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
-        <masterLabel>Facilities/Outcomes</masterLabel>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Problem_Behavior_Fear__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Problem_Behavior_Miscellaneous__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Problem_Behavior_Aggression_Count__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Problem_Behavior_Arousal_Count__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Problem_Behavior_Fear_Count__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Problem_Behavior_Miscellaneous_Count__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Problem_Behavior_Count__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
+        </columns>
+        <masterLabel>Treatment Plans</masterLabel>
     </sections>
 </ReportType>
