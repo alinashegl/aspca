@@ -125,18 +125,14 @@
     </alerts>
     <alerts>
         <fullName>Behavior_Profile_Send_Email_Alert</fullName>
-        <ccEmails>arcandcarecaninebehavior@aspca.org</ccEmails>
-        <ccEmails>arcmedical.team@aspca.org</ccEmails>
-        <ccEmails>caremedicalteam@aspca.org</ccEmails>
-        <ccEmails>AdoptionsBehavior@aspca.org</ccEmails>
         <description>Behavior Profile Send Email Alert</description>
         <protected>false</protected>
         <recipients>
-            <recipient>neha.tabassum@aspca.org</recipient>
+            <recipient>blythe.boaz@aspcafir.org</recipient>
             <type>user</type>
         </recipients>
         <senderType>CurrentUser</senderType>
-        <template>unfiled$public/Behavior_Profile_Send_Email</template>
+        <template>unfiled$public/Behavior_Profile_Send_Emails</template>
     </alerts>
     <alerts>
         <fullName>Foster_Survey</fullName>
