@@ -41,6 +41,8 @@
     <showDetails>true</showDetails>
     <showGrandTotal>true</showGrandTotal>
     <showSubTotals>true</showSubTotals>
+    <sortColumn>Animal__c.Treatment_Sessions__r$Name</sortColumn>
+    <sortOrder>Desc</sortOrder>
     <timeFrameFilter>
         <dateColumn>Animal__c.Treatment_Sessions__r$CreatedDate</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

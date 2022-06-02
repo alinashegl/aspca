@@ -1,49 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Report xmlns="http://soap.sforce.com/2006/04/metadata">
     <columns>
-        <field>EntityHistory__c.Animal__c</field>
+        <field>Animal__c.Entity_Histories__r$Name</field>
     </columns>
     <columns>
-        <field>CUST_NAME</field>
+        <field>Animal__c.Entity_Histories__r$CreatedDate</field>
     </columns>
     <columns>
-        <field>CUST_CREATED_DATE</field>
+        <field>Animal__c.Entity_Histories__r$OldValue__c</field>
     </columns>
     <columns>
-        <field>EntityHistory__c.OldValue__c</field>
+        <field>Animal__c.Entity_Histories__r$NewValue__c</field>
     </columns>
     <columns>
-        <field>EntityHistory__c.NewValue__c</field>
+        <field>Animal__c$Current_Behavior_Grade__c</field>
     </columns>
     <filter>
         <criteriaItems>
-            <column>EntityHistory__c.FieldName__c</column>
+            <column>Animal__c.Entity_Histories__r$FieldName__c</column>
             <columnToColumn>false</columnToColumn>
-            <isUnlocked>true</isUnlocked>
-            <operator>contains</operator>
-            <value>Overall Evaluation Grade,Current Behavior Grade</value>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>Grade Change Reason</value>
         </criteriaItems>
     </filter>
     <format>Summary</format>
     <groupingsDown>
         <dateGranularity>Day</dateGranularity>
-        <field>EntityHistory__c.FieldName__c</field>
+        <field>Animal__c$Animal_Name_Id__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
-    <name>Grade Histories</name>
+    <name>Grade Tallies Report</name>
     <params>
         <name>co</name>
         <value>1</value>
     </params>
-    <reportType>CustomEntity$EntityHistory__c</reportType>
+    <reportType>Grade_Tallies__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
     <showGrandTotal>true</showGrandTotal>
-    <showSubTotals>false</showSubTotals>
-    <sortColumn>CUST_CREATED_DATE</sortColumn>
-    <sortOrder>Desc</sortOrder>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
-        <dateColumn>CUST_CREATED_DATE</dateColumn>
+        <dateColumn>Animal__c$CreatedDate</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>
     </timeFrameFilter>
 </Report>

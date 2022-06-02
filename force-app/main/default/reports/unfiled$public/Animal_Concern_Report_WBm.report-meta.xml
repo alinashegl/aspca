@@ -4,17 +4,10 @@
         <field>Animal__c$Animal_Name_Id__c</field>
     </columns>
     <columns>
-        <aggregateTypes>Sum</aggregateTypes>
-        <field>Animal__c$Animal_Age__c</field>
-    </columns>
-    <columns>
         <field>Animal__c$Breed__c</field>
     </columns>
     <columns>
         <field>Animal__c$Gender__c</field>
-    </columns>
-    <columns>
-        <field>Animal__c$Intake_Agency_Dept__c</field>
     </columns>
     <columns>
         <field>Animal__c$Case_Type__c</field>
@@ -24,6 +17,9 @@
     </columns>
     <columns>
         <field>Animal__c$Case_Number__c</field>
+    </columns>
+    <columns>
+        <field>Animal__c$Current_Animal_Age_Formatted__c</field>
     </columns>
     <filter>
         <criteriaItems>

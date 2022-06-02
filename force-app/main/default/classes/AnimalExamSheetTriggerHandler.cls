@@ -87,9 +87,9 @@ public class AnimalExamSheetTriggerHandler {
         List<Animal__c> anmList = [Select Id,Storm_Distress_Anxiety__c,Storm_Distress_Anxiety_Notes__c,Behavior_Medication_Flag__c, Behavior_Medication_Data_Time__c,(Select id, Subjective__c, Exam_Type__c  from Animal_Exam_Sheets__r WHERE RecordType.Name = 'Behavior Exam' Order By CreatedDate DESC) from Animal__c where Id IN : animalIds];
         for(Animal__c anm :anmList){
             for(Animal_Exam_Sheet__c aes : anm.Animal_Exam_Sheets__r){
-                anm.Storm_Distress_Anxiety__c = false;
-                anm.Storm_Distress_Anxiety_Notes__c = '';
-                anm.Behavior_Medication_Flag__c = false;
+                //anm.Storm_Distress_Anxiety__c = false;
+                //anm.Storm_Distress_Anxiety_Notes__c = '';
+                //anm.Behavior_Medication_Flag__c = false;
                 if(aes.Exam_Type__c == 'Storm Distress/Anxiety'){
                     anm.Storm_Distress_Anxiety__c = true;
                     anm.Storm_Distress_Anxiety_Notes__c = anm.Animal_Exam_Sheets__r[0].Subjective__c ;
