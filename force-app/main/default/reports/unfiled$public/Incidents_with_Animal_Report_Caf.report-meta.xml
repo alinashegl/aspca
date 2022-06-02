@@ -24,6 +24,9 @@
     <columns>
         <field>Incidents__c.Report_Date__c</field>
     </columns>
+    <columns>
+        <field>FK_$Animal__c.Current_Animal_Age_Formatted__c</field>
+    </columns>
     <filter>
         <criteriaItems>
             <column>Incidents__c.Report_Date__c</column>
@@ -31,6 +34,20 @@
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>LAST_N_DAYS:100</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>FK_$Animal__c.Active_Animal__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>FK_$Animal__c.Location_Filter__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
         </criteriaItems>
     </filter>
     <format>Tabular</format>
