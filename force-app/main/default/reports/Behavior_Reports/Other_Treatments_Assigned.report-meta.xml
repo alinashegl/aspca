@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <aggregates>
+        <calculatedFormula>IF(ISBLANK(Session_Protocol__c.Protocol_Name__c:UNIQUE),0,1)</calculatedFormula>
+        <datatype>number</datatype>
+        <developerName>FORMULA1</developerName>
+        <isActive>false</isActive>
+        <isCrossBlock>false</isCrossBlock>
+        <masterLabel>Count Other Protocols</masterLabel>
+        <scale>0</scale>
+    </aggregates>
     <columns>
-        <field>Animal__c$Evaluation_Date__c</field>
-    </columns>
-    <columns>
-        <field>Animal__c$Evaluation_Dog_Dog_Testing_Date__c</field>
-    </columns>
-    <columns>
-        <field>Animal__c$Play_Category__c</field>
+        <field>Animal__c.Treatment_Sessions__r.Session_Protocols__r$Protocol_Name__c</field>
     </columns>
     <filter>
         <criteriaItems>
@@ -25,50 +28,38 @@
             <value>1</value>
         </criteriaItems>
         <criteriaItems>
-            <column>Animal__c$Play_Category__c</column>
-            <columnToColumn>false</columnToColumn>
-            <isUnlocked>true</isUnlocked>
-            <operator>equals</operator>
-            <value>Unevaluated,New/Unknown</value>
-        </criteriaItems>
-        <criteriaItems>
-            <column>Animal__c$Evaluation_Dog_Dog_Testing_Date__c</column>
-            <columnToColumn>false</columnToColumn>
-            <isUnlocked>true</isUnlocked>
-            <operator>lessThan</operator>
-            <value>N_DAYS_AGO:7</value>
-        </criteriaItems>
-        <criteriaItems>
             <column>Animal__c$Active_Animal__c</column>
             <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
+        <criteriaItems>
+            <column>Animal__c.Treatment_Sessions__r.Session_Protocols__r$Protocol_Name__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>other</value>
+        </criteriaItems>
     </filter>
     <format>Summary</format>
     <groupingsDown>
         <dateGranularity>Day</dateGranularity>
-        <field>Animal__c$Current_Recent_Shelter_Location__c</field>
+        <field>Animal__c$Animal_Name_Id__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
-    <groupingsDown>
-        <dateGranularity>Day</dateGranularity>
-        <field>Animal__c$Name</field>
-        <sortOrder>Asc</sortOrder>
-    </groupingsDown>
-    <name>Play Category Unevaluated or New/Unknown</name>
+    <name>Other Treatments Assigned</name>
     <params>
         <name>co</name>
         <value>1</value>
     </params>
-    <reportType>Animals__c</reportType>
+    <reportType>Animals_with_Treatment_Sessions_and_Protocols__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
     <showGrandTotal>true</showGrandTotal>
     <showSubTotals>false</showSubTotals>
     <timeFrameFilter>
-        <dateColumn>Animal__c$Completed_Date__c</dateColumn>
+        <dateColumn>Animal__c.Treatment_Sessions__r$CreatedDate</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>
     </timeFrameFilter>
 </Report>
