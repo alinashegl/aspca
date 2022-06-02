@@ -42,6 +42,8 @@ public with sharing class SessionProtocolService {
                 response = beforeInsertHandler(request);
             }when 'beforeUpdateHandler' {
                 response = beforeUpdateHandler(request);
+            }when 'afterInsertHandler' {
+                response = afterInsertHandler(request);
             }when else {
                 return null;
             }
@@ -104,49 +106,15 @@ public with sharing class SessionProtocolService {
         return response;
     }
 
-    // @testVisible
-    // private static ServiceResponse handleSession(ServiceRequest request) {
-    //     Map<String, Map<String, Object>> resultMap = new Map<String, Map<String, Object>>();
-
-    //     TreatmentSessionSelector treatmentSessionSelector = new TreatmentSessionSelector();
-    //     Set<Id> idset = new Set<Id>();
-    //     idset.add((Id) request.Parameters.get('record'));
-    //     List<Treatment_Session__c> treatmentSessions = new List<Treatment_Session__c>();
-    //     treatmentSessions = treatmentSessionSelector.GetByIds(idset);
-    //     Treatment_Session__c session = treatmentSessions[0];
-    //     SessionProtocolSelector sessionProtocolSelector = new SessionProtocolSelector();
-    //     List<Session_Protocol__c> sessionProtocols = new List<Session_Protocol__c>();
-    //     sessionProtocols = [SELECT Id, TreatmentSessionId__c, InView__c from Session_Protocol__c];
-    //     // sessionProtocols = [SELECT Id, TreatmentSessionId__c, InView__c from Session_Protocol__c WHERE TreatmentSessionId__c IN: idset];
-    //     List<Session_Protocol__c> partOfView = new List<Session_Protocol__c>();
-    //     List<Session_Protocol__c> NotPartOfView = new List<Session_Protocol__c>();
-
-    //     for (Session_Protocol__c protocol : sessionProtocols) {
-    //         if (protocol.TreatmentSessionId__c == session.Id) {
-    //             partOfView.add(protocol);
-    //             protocol.InView__c = true;
-    //         }else {
-    //             NotPartOfView.add(protocol);
-    //             protocol.InView__c = false;
-    //         }
-    //     }
-    //     update partOfView;
-    //     update NotPartOfView;
-
-    //     ServiceResponse response = new ServiceResponse(request);
-    //     resultMap.put('PART OF VIEW', new Map<String, Object>{'IN VIEW' => partOfView});
-    //     resultMap.put('NOT IN VIEW', new Map<String, Object>{'NOT IN VIEW' => NotPartOfView});
-    //     response.Data = resultMap;
-    //     return response;
-    // }
-
     private static ServiceResponse beforeInsertHandler(ServiceRequest request) {
         ServiceResponse response = new ServiceResponse(request);
+
+        System.debug('**request.Parameters: ' + request.Parameters);
 
         if(request.Parameters.get('protocols') != null){
             Plan_Protocol__c[] planProtocols = prepNewPlanProtocols((Session_Protocol__c[]) request.Parameters.get('protocols'));
             insert planProtocols;
-            
+
             response.Data = planProtocols;
         }
 
@@ -154,23 +122,83 @@ public with sharing class SessionProtocolService {
 
             Treatment_Plan__c plan = (Treatment_Plan__c) request.Parameters.get('plan');
             Treatment_Session__c session = (Treatment_Session__c) request.Parameters.get('session');
-            PlanProtocolSelector planProtocolSelector = new PlanProtocolSelector();
-            List<Plan_Protocol__c> planProtocols = planProtocolSelector.GetByOpp(plan.Id);
-            List<Session_Protocol__c> protocols = new List<Session_Protocol__c>();
-            
-            for (Plan_Protocol__c lPlanProtocol : planProtocols) {
-                if(lPlanProtocol.IsRemoved__c) continue;
-                Session_Protocol__c protocol = new Session_Protocol__c();
-                protocol.TreatmentSessionId__c = session.Id;
-                protocol.ProtocolId__c = lPlanProtocol.Protocol__c;
-                protocol.Bundle_Entry__c = lPlanProtocol.Bundle_Entry__c;
-                protocol.Preferred_Motivators__c = session.Preferred_Motivators__c;
-                protocols.add(protocol);
-            }
-            insert protocols;
+            ProtocolSelector protocolSelector = new ProtocolSelector();
+            Protocol__c[] protocols = protocolSelector.getByPlan(plan.Id);
+            System.debug('protocols: ' + protocols);
+            List<Session_Protocol__c> sProtocols = new List<Session_Protocol__c>();
 
-            response.Data = protocols;
+            for(Protocol__c proto : protocols){
+                if(proto.Plan_Protocols__r[0].IsRemoved__c) continue;
+                Plan_Protocol__c planProto = proto.Plan_Protocols__r[0];
+                Session_Protocol__c sProto = new Session_Protocol__c(
+                    TreatmentSessionId__c = session.Id,
+                    ProtocolId__c = proto.Id,
+                    Bundle_Entry__c = planProto.Bundle_Entry__c,
+                    Preferred_Motivators__c = session.Preferred_Motivators__c
+                );
+                sProtocols.add(sProto);
+            }
+
+            insert sProtocols;
+
+            Map<Id, Id> protoIdToSProtoIdMap = new Map<Id, Id>();
+            for(Session_Protocol__c sProto : sProtocols){
+                protoIdToSProtoIdMap.put(sProto.ProtocolId__c, sProto.Id);
+            }
+
+            Session_Protocol_Scale__c[] protocolScales = new Session_Protocol_Scale__c[0];
+            for(Protocol__c proto : protocols){
+                for(Protocol_Scale_Junction__c junc : proto.Protocol_Scale_Junctions__r){
+                    Session_Protocol_Scale__c protoScale = new Session_Protocol_Scale__c(
+                        Protocol_Scale__c = junc.Protocol_Scale__c,
+                        Required__c = junc.Protocol_Scale__r.Required__c,
+                        Session_Protocol__c = protoIdToSProtoIdMap.get(junc.Protocol__c)
+                    );
+                    protocolScales.add(protoScale);
+                }
+            }
+
+            insert protocolScales;
+            response.Data = sProtocols;
         }
+        return response;
+    }
+
+    private static ServiceResponse afterInsertHandler(ServiceRequest request){
+        System.debug('in afterInserHandler');
+        ServiceResponse response = new ServiceResponse(request);
+        Session_Protocol__c[] sessionProtocols = (Session_Protocol__c[]) request.Parameters.get('protocols');
+        ProtocolSelector protocolSelector = new ProtocolSelector();
+
+        //need a set of protocolIds so we can query them and create a map
+        Set<Id> protocolIds = new Set<Id>();
+        for(Session_Protocol__c sp : sessionProtocols){
+            protocolIds.add(sp.ProtocolId__c);
+        }
+
+        System.debug('protocolIds: ' + protocolIds);
+        
+        //query the protocols and their related Protocol Scale Junctions and put into a map
+        Map<Id, Protocol__c> protocolMap = new Map<Id, Protocol__c>(protocolSelector.getProtocolWithChildProtocolScaleJunctionByIds(protocolIds));
+        System.debug('protocolMap: ' + protocolMap);
+
+        Session_Protocol_Scale__c[] protocolScales = new Session_Protocol_Scale__c[0];
+        for(Session_Protocol__c sProto : sessionProtocols){
+            if(protocolMap.containsKey(sProto.ProtocolId__c)){
+                for(Protocol_Scale_Junction__c junc : protocolMap.get(sProto.ProtocolId__c).Protocol_Scale_Junctions__r){
+                    Session_Protocol_Scale__c protoScale = new Session_Protocol_Scale__c(
+                        Protocol_Scale__c = junc.Protocol_Scale__c,
+                        Required__c = junc.Protocol_Scale__r.Required__c,
+                        Session_Protocol__c = sProto.Id
+                    );
+                    protocolScales.add(protoScale);
+                }
+            }
+        }
+
+        insert protocolScales;
+        response.Data = sessionProtocols;
+
         return response;
     }
 
@@ -180,7 +208,6 @@ public with sharing class SessionProtocolService {
         Plan_Protocol__c[] newPlanProtocols = prepNewPlanProtocols(protocols);
         Plan_Protocol__c[] planProtocolsToRemove = removeHandler(protocols);
 
-        System.debug('planProtocolsToRemove: ' + planProtocolsToRemove);
         update planProtocolsToRemove;
         ServiceResponse response = new ServiceResponse(request);
 

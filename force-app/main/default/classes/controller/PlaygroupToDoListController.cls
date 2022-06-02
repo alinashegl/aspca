@@ -26,7 +26,7 @@ public with sharing class PlaygroupToDoListController {
     //Neha
     @AuraEnabled(cacheable=true)
     public static Id getReportId(){
-        Id reportId = [Select Id From Report where DeveloperName ='Playgroup_To_Do_List_IiN'].Id;
+        Id reportId = [Select Id From Report where DeveloperName ='Playgroups_Last_2_Days'].Id;
         return reportId;
     }
 

@@ -169,6 +169,19 @@
                 <identifier>RecordEvaluation_Date_cField1</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Animal__c</fieldItem>
+                <identifier>RecordAnimal_cField</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!$User.Profile.Description}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>System Administrator</rightValue>
+                    </criteria>
+                </visibilityRule>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-8862fbf2-948e-4a80-b05f-b8ab232cb550</name>
         <type>Facet</type>
     </flexiPageRegions>

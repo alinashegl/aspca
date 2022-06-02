@@ -45,5 +45,4 @@ public with sharing class PlanProtocolSelector extends SObjectSelector{
         List<Plan_Protocol__c> lineItems = GetQueryFactory().WithCriteria(Criteria.Equals(Plan_Protocol__c.Treatment_Plan__c, key)).Execute();
         return lineItems;
     }
-
 }

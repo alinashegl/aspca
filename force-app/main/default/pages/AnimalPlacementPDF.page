@@ -513,26 +513,15 @@
                     <apex:repeat value="{!aTreatmentSession}" var="treat">
                         <thead>
                             <tr>
-                                <th style="border-top:thin #D4D4D4 solid;">Name</th>
-                                <!-- <th  style="border-top:thin #D4D4D4 solid;">Status</th> -->
-                                <th style="border-top:thin #D4D4D4 solid;">Fear-Best</th>
-                                <th style="border-top:thin #D4D4D4 solid;">Fear - Worst</th>
-                                <th style="border-top:thin #D4D4D4 solid;">Aggresive - Worst</th>
-                                <th style="border-top:thin #D4D4D4 solid;">Arousal - Best</th>
-                                <th style="border-top:thin #D4D4D4 solid;">Arousal - Worst</th>
+                                <apex:repeat value="{!treat.cellInfosTopRow}" var="cellInfo">
+                                    <th style="border-top:thin #D4D4D4 solid;">{!cellInfo.label}</th>
+                                </apex:repeat>
                             </tr>
                         </thead>
                         <tr style="page-break-inside:avoid">
-                            <td>{!treat.Protocol_Name__c }</td>
-                            <!-- <td>{!treat.Status__c }</td> -->
-                            <td>{!treat.Fear_Best__c }</td>
-                            <td>{!treat.Fear_Worst__c }</td>
-                            <td>{!treat.Aggressive_Worst__c }</td>
-                            <td>{!treat.Arousal_Best__c }</td>
-                            <td>{!treat.Arousal_Worst__c}</td>
-                        </tr>
-                        <tr>
-                            <td colspan="6">&nbsp;</td>
+                            <apex:repeat value="{!treat.cellInfosTopRow}" var="cellInfo">
+                                <td>{!cellInfo.value}</td>
+                            </apex:repeat>
                         </tr>
                         <tr>
                             <td class="bottomline"></td>
@@ -541,20 +530,16 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th>Social - Best</th>
-                                            <th>Overall Score</th>
-                                            <th>Needs Review</th>
-                                            <th>Skip Protocol</th>
-                                            <th>Over stim w/ food, PC Tug</th>
+                                            <apex:repeat value="{!treat.cellInfosBottomRow}" var="cellInfo">
+                                                <th>{!cellInfo.label}</th>
+                                            </apex:repeat>
                                         </tr>
                                     </thead>
                                     <tbod>
                                         <tr>
-                                            <td>{!treat.Social_Best__c}</td>
-                                            <td>{!treat.Overall_Score__c}</td>
-                                            <td>{!treat.Needs_Review__c}</td>
-                                            <td>{!treat.IsSkipped__c}</td>
-                                            <td>({!treat.Overall_Score__c}) &nbsp; {!treat.Protocol_Notes__c}</td>
+                                            <apex:repeat value="{!treat.cellInfosBottomRow}" var="cellInfo">
+                                                <td>{!cellInfo.value}</td>
+                                            </apex:repeat>
                                         </tr>
                                     </tbod>
                                 </table>

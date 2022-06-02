@@ -1,69 +1,238 @@
 public with sharing class TreatmentSessionLWCController {
+    /*
+    used by TreatmentSessionMain lwc to get the list of active and required
+    protocols and scores to display in the table
+    the list of requiredProtocols are the column headings
+    */
     @AuraEnabled (cacheable=true)
-    public static Session_Protocol__c[] getActiveProtocols(Id sessionId){
+    public static SessionInfo getActiveProtocolsForSession(Id sessionId){
+        Set<String> requiredProtocols = new Set<String>();
+        SessionProtocolInfo[] protocolInfos = new SessionProtocolInfo[0];
         try {
-            return [
+            for(Session_Protocol__c sp : [
                 SELECT 
-                    Id, 
-                    ProtocolId__r.Name,
-                    Aggressive_Worst__c,
-                    Aggressive_Movement__c,
-                    Arousal_Best__c,
-                    Arousal_Worst__c,
-                    Fear_Best__c,
-                    Fear_Worst__c,
+                    Id,
                     IsSkipped__c,
-                    Social_Best__c,
-                    Overall_Score__c,
                     Needs_Review__c,
                     Protocol_Name__c,
-                    Status__c
+                    Status__c,
+                    IsRemoved__c,
+                    (
+                        SELECT Id, 
+                            Protocol_Score__c,
+                            Protocol_Scale__r.Options__c,
+                            Protocol_Scale__r.Name,
+                            Protocol_Scale__r.Category__c,
+                            Protocol_Scale__r.Required__c,
+                            Protocol_Scale__r.Column_Order__c,
+                            Protocol_Scale__r.Column_Number__c
+                        FROM Session_Protocol_Scales__r
+                        WHERE Protocol_Scale__r.Column_Order__c != null
+                        ORDER BY Protocol_Scale__r.Column_Number__c ASC, Protocol_Scale__r.Column_Order__c ASC
+                    )
                 FROM Session_Protocol__c 
                 WHERE TreatmentSessionId__c =: sessionId
                 ORDER BY Protocol_Name__c ASC
-            ];
+            ]){
+                SessionProtocolInfo info = new SessionProtocolInfo(sp);
+                protocolInfos.add(info);
+                for(Session_Protocol_Scale__c sps : sp.Session_Protocol_Scales__r){
+                    if(sps.Protocol_Scale__r.Column_Order__c != null){
+                        requiredProtocols.add(sps.Protocol_Scale__r.Name);
+                    }
+                }
+            }
+
+            SessionInfo sInfo = new SessionInfo();
+            sInfo.requiredProtocols = new String[(requiredProtocols)];
+            sInfo.sessionProtocolInfos = protocolInfos;
+            return sInfo;
+        } catch (Exception e) {
+            System.debug('error: ' + e.getMessage());
+            System.debug('stackTrace: ' + e.getStackTraceString());
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
+
+    //used by treatmentSessionProtocol lwc to get the updated status of the protocol
+    @AuraEnabled
+    public static string getProtocolStatus(Id protocolId){
+        try {
+            if(protocolId != null){
+                return [SELECT Status_Text__c FROM Session_Protocol__c WHERE Id =: protocolId LIMIT 1].Status_Text__c;
+            } else {
+                return null;
+            }
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }
     }
 
-    @testVisible
-    private static Session_Protocol__c getProtocol(Id protocolId){
-        if(protocolId == null) return null;
-        return [
-            SELECT 
-                Id, 
-                ProtocolId__r.Name,
-                Aggressive_Worst__c,
-                Aggressive_Movement__c,
-                Arousal_Best__c,
-                Arousal_Worst__c,
-                Fear_Best__c,
-                Fear_Worst__c,
-                IsSkipped__c,
-                IsRemoved__c,
-                Social_Best__c,
-                Overall_Score__c,
-                Needs_Review__c,
-                Protocol_Name__c,
-                Protocol_Notes__c,
-                Novel_Person_Notes__c,
-                Manager_Review_Notes__c,
-                Preferred_Motivators__c,
-                ProtocolId__r.Protocol_Box_Link__c,
-                Solicitation__c,
-                TreatmentSessionId__r.Treatment_Plan__c
-            FROM Session_Protocol__c 
-            WHERE Id =: protocolId
-        ];
-    }
-
+    /*
+    used by treatmentModifySessionProtocol lwc
+    returns skipped/removed/add to plan session protocol by session protocol Id
+    */
     @AuraEnabled
     public static Session_Protocol__c getProtocolSkippedInfo(Id protocolId){
         Session_Protocol__c[] protocols = [SELECT Id, IsSkipped__c, IsRemoved__c, Add_to_Plan__c FROM Session_Protocol__c WHERE Id =: protocolId LIMIT 1];
         return !protocols.isEmpty() ? protocols[0] : null;
     }
 
+    /*
+    used by treatmentSessionChild lwc to return the child records of protocol Contacts or Additional Dogs Present
+    that are related to a session protocol
+    */
+    @AuraEnabled (cacheable=true)
+    public static sObject[] getChildList(Id protocolId, String objectApi){
+        if(protocolId == null || objectApi == null) return null;
+        try {
+            sObject[] childList = new sObject[0];
+            if(objectApi == 'Session_Protocol_Contact__c'){
+                childList = getProtocolContacts(protocolId);
+            }
+            else if(objectApi == 'Additional_Dog_Present__c'){
+                childList = getDogsPresent(protocolId);
+            }
+            return childList;
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
+
+    //used by the treatmentSessionProtocol lwc to get the info needed for a specific protocol
+    @AuraEnabled
+    public static protocolInfo getActiveProtocolAndFields(Id protocolId){
+        if(protocolId == null) return null;
+        try {
+            Session_Protocol__c sessionProtocol = getProtocol(protocolId);
+            ProtocolInfo protocolInfo = new ProtocolInfo(sessionProtocol);
+            return protocolInfo;
+
+        } catch (Exception e) {
+            System.debug('error: ' + e.getMessage());
+            System.debug('callstack: ' + e.getStackTraceString());
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
+
+    /*
+    used by treatmentModifySession lwc to get the lists of assigned and unassigned protocols
+    works for both session specific and plan specific
+    */
+    @AuraEnabled (cacheable=true)
+    public static protocolAssignment getProtocolLists(Id sessionId, Id planId){
+        protocolAssignment assignments = new protocolAssignment();   
+        if(sessionId != null)     {
+            assignments.assignedSessionProtocolsLists = getAssignedSessionProtocolsLists(sessionId);
+            assignments.unassignedProtocolsLists = getUnassignedProtocolsListsFromSessionProtocols(assignments.assignedSessionProtocolsLists);
+            assignments.preferredMotivators = getSessionPreferredMotivator(sessionId);
+        }
+        else if(planId != null){
+            assignments.assignedPlanProtocolsLists = getAssignedPlanProtocolsLists(planId);
+            assignments.unassignedProtocolsLists = getUnassignedProtocolsListsFromPlanProtocols(assignments.assignedPlanProtocolsLists);
+        }
+        
+        return assignments;
+    }
+
+    @AuraEnabled
+    public static String updateProtocolAssignments(Session_Protocol__c[] protocolsToUpdate, String[] protocolIds, String[] planProtocolIds, String sessionId, String planId){
+        try{
+            if(sessionId != null){
+                update protocolsToUpdate;
+                addNewProtocolsToSessionAndPlan(protocolIds, sessionId);
+            } 
+            else if(planId != null){
+                updatePlanProtocols(planProtocolIds);
+                addNewProtocolsToPlan(protocolIds, planId);
+            }
+            return 'success';
+        } catch (Exception e){
+            return 'Error occured: ' + e.getMessage();
+        }
+    }
+
+    @AuraEnabled
+    public static SpsInfo getSpsInfo (Id id, String[] fields){
+        String query = 'SELECT Id';
+        if(fields != null && !fields.isEmpty()){
+            query += ', ' + String.join(fields, ',');
+        }
+        query += ',Protocol_Score__c FROM Session_Protocol_Scale__c WHERE Id = :id';
+
+        Session_Protocol_Scale__c[] spsList = Database.query(query);
+        Session_Protocol_Scale__c sps = spsList.isEmpty() ? null : spsList[0];
+        
+        Map<String, Schema.SObjectType> schemaMap = Schema.getGlobalDescribe();
+        Schema.SObjectType spsSchema = schemaMap.get('Session_Protocol_Scale__c');
+        Map<String, Schema.SObjectField> fieldMap = spsSchema.getDescribe().fields.getMap();
+
+        SpsInfo info = new SpsInfo();
+
+        if(sps != null){            
+            info.currentScore = sps.Protocol_Score__c;
+            info.fields = new SpsFieldsWrapper[0];
+            if(fields != null && !fields.isEmpty()){
+                for(String field : fields){
+                    SpsFieldsWrapper spsField = new SpsFieldsWrapper();
+                    spsField.fieldName = field;
+                    spsField.value = (String) sps.get(field);
+                    spsField.fieldLabel = fieldMap.get(field).getDescribe().getLabel();
+                    info.fields.add(spsField);
+                }
+            }
+        }
+
+        return info;
+    }
+
+    /******Private methods*********/
+
+    //query session protocol by Id
+    @testVisible
+    private static Session_Protocol__c getProtocol(Id protocolId){
+        if(protocolId == null) return null;
+        try {
+            return [
+                SELECT 
+                    Id, 
+                    ProtocolId__r.Name,
+                    IsSkipped__c,
+                    Needs_Review__c,
+                    Protocol_Name__c,
+                    Status__c,
+                    Status_Text__c,
+                    IsRemoved__c,
+                    Preferred_Motivators__c,
+                    Novel_Person_Notes__c,
+                    Protocol_Notes__c,
+                    Manager_Review_Notes__c,
+                    ProtocolId__r.Protocol_Box_Link__c,
+                    (
+                        SELECT Id, 
+                            Protocol_Score__c,
+                            Protocol_Scale__r.Options__c,
+                            Protocol_Scale__r.Name,
+                            Protocol_Scale__r.Category__c,
+                            Protocol_Scale__r.Required__c,
+                            Protocol_Scale__r.Column_Order__c,
+                            Protocol_Scale__r.Column_Number__c,
+                            Protocol_Scale__r.Fields_to_include__c
+                        FROM Session_Protocol_Scales__r
+                        ORDER BY Protocol_Scale__r.Column_Number__c NULLS LAST, Protocol_Scale__r.Column_Order__c NULLS LAST
+                    )
+                FROM Session_Protocol__c 
+                WHERE Id =: protocolId
+            ];
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
+
+    /*
+    used by getProtocolLists()
+    returns a list of lists of session protocols by the session Id.  the list of lists is used to display the protocols in groups by category
+    */
     private static List<List<Session_Protocol__c>> getAssignedSessionProtocolsLists(Id sessionId){
         if(sessionId == null) return null;
         Map<String, Session_Protocol__c[]> protocolsMap = new Map<String, Session_Protocol__c[]>();
@@ -84,68 +253,40 @@ public with sharing class TreatmentSessionLWCController {
         return assignedSessionProtocolsLists;
     }
 
-    @AuraEnabled (cacheable=true)
-    public static sObject[] getChildList(Id protocolId, String objectApi){
-        if(protocolId == null || objectApi == null) return null;
-        try {
-            sObject[] childList = new sObject[0];
-            if(objectApi == 'Session_Protocol_Contact__c'){
-                childList = getProtocolContacts(protocolId);
-            }
-            else if(objectApi == 'Additional_Dog_Present__c'){
-                childList = getDogsPresent(protocolId);
-            }
-            return childList;
-        } catch (Exception e) {
-            throw new AuraHandledException(e.getMessage());
-        }
-    }
-
-    @AuraEnabled
-    public static Session_Protocol_Contact__c[] getProtocolContacts(Id protocolId){
+    //queries the list of related session protocol contacts by session protocol Id
+    private static Session_Protocol_Contact__c[] getProtocolContacts(Id protocolId){
         return [SELECT Id, Contact__c, Contact__r.Name, Novel_Not_Novel__c FROM Session_Protocol_Contact__c WHERE Session_Protocol__c =: protocolId];
     }
 
-    @AuraEnabled
-    public static Additional_Dog_Present__c[] getDogsPresent(Id protocolId){
+    //queries the list of related Additional Dogs Present by session protocol Id
+    private static Additional_Dog_Present__c[] getDogsPresent(Id protocolId){
         return [SELECT Id, Additional_Dog__c FROM Additional_Dog_Present__c WHERE Session_Protocol__c =: protocolId];
-    }
-
-    @AuraEnabled
-    public static protocolInfo getActiveProtocolAndFields(Id protocolId){
-        if(protocolId == null) return null;
-        try {
-            Session_Protocol__c sessionProtocol = getProtocol(protocolId);
-            ProtocolInfo protocolInfo = new ProtocolInfo(sessionProtocol);
-            Plan_Protocol__c pp = getPlanProtocol(sessionProtocol);
-            protocolInfo.planProtocolId = pp.Id;
-            protocolInfo.planProtocolNotes = pp.Protocol_Notes__c;
-
-            System.debug('protocolInfo = ' + protocolInfo);
-            return protocolInfo;
-        } catch (Exception e) {
-            throw new AuraHandledException(e.getMessage());
-        }
-    }
-
-    @AuraEnabled (cacheable=true)
-    public static protocolAssignment getProtocolLists(Id sessionId, Id planId){
-        protocolAssignment assignments = new protocolAssignment();   
-        if(sessionId != null)     {
-            assignments.assignedSessionProtocolsLists = getAssignedSessionProtocolsLists(sessionId);
-            assignments.unassignedProtocolsLists = getUnassignedProtocolsListsFromSessionProtocols(assignments.assignedSessionProtocolsLists);
-            assignments.preferredMotivators = getSessionPreferredMotivator(sessionId);
-        }
-        else if(planId != null){
-            assignments.assignedPlanProtocolsLists = getAssignedPlanProtocolsLists(planId);
-            assignments.unassignedProtocolsLists = getUnassignedProtocolsListsFromPlanProtocols(assignments.assignedPlanProtocolsLists);
-        }
-        
-        return assignments;
     }
 
     private static String getSessionPreferredMotivator(Id sessionId){
         return [SELECT Preferred_Motivators__c FROM Treatment_Session__c WHERE Id =: sessionId LIMIT 1].Preferred_Motivators__c;
+    }
+
+    private static void updatePlanProtocols(String[] planProtocolIds){
+        Plan_Protocol__c[] pProtocols = [SELECT Id, IsRemoved__c FROM Plan_Protocol__c WHERE Id IN: planProtocolIds];
+        for(Plan_Protocol__c p : pProtocols){
+            p.IsRemoved__c = !p.IsRemoved__c;
+        }
+        update pProtocols;
+    }
+
+
+    private static void addNewProtocolsToPlan(String[] protocolIds, String planId){
+        Plan_Protocol__c[] newPProtocols = new Plan_Protocol__c[0];
+        for(String pId : protocolIds){
+            Plan_Protocol__c pp = new Plan_Protocol__c(
+                Protocol__c = pId,
+                Treatment_Plan__c = planId
+            );
+            newPProtocols.add(pp);
+        }
+
+        insert newPProtocols;
     }
 
     private static List<List<Plan_Protocol__c>> getAssignedPlanProtocolsLists(Id planId){
@@ -216,55 +357,7 @@ public with sharing class TreatmentSessionLWCController {
         return protocolsLists;
     }
 
-    private static Plan_Protocol__c getPlanProtocol(Session_Protocol__c sessionProtocol){
-        Plan_Protocol__c pProtocol = [
-            SELECT Id, Protocol_Notes__c
-            FROM Plan_Protocol__c
-            WHERE Protocol__c =: sessionProtocol.ProtocolId__c
-            AND Treatment_Plan__c =: sessionProtocol.TreatmentSessionId__r.Treatment_Plan__c
-        ];
-        return pProtocol;
-    }
-
-    @AuraEnabled
-    public static String updateProtocolAssignments(Session_Protocol__c[] protocolsToUpdate, String[] protocolIds, String[] planProtocolIds, String sessionId, String planId){
-        try{
-            if(sessionId != null){
-                update protocolsToUpdate;
-                addNewProtocolsToSessionAndPlan(protocolIds, sessionId);
-            } 
-            else if(planId != null){
-                updatePlanProtocols(planProtocolIds);
-                addNewProtocolsToPlan(protocolIds, planId);
-            }
-            return 'success';
-        } catch (Exception e){
-            return 'Error occured: ' + e.getMessage();
-        }
-    }
-
-    private static void updatePlanProtocols(String[] planProtocolIds){
-        Plan_Protocol__c[] pProtocols = [SELECT Id, IsRemoved__c FROM Plan_Protocol__c WHERE Id IN: planProtocolIds];
-        for(Plan_Protocol__c p : pProtocols){
-            p.IsRemoved__c = !p.IsRemoved__c;
-        }
-        update pProtocols;
-    }
-
-    private static void addNewProtocolsToPlan(String[] protocolIds, String planId){
-        Plan_Protocol__c[] newPProtocols = new Plan_Protocol__c[0];
-        for(String pId : protocolIds){
-            Plan_Protocol__c pp = new Plan_Protocol__c(
-                Protocol__c = pId,
-                Treatment_Plan__c = planId
-            );
-            newPProtocols.add(pp);
-        }
-
-        insert newPProtocols;
-    }
-
-    public static void addNewProtocolsToSessionAndPlan(String[] protocolIds, String sessionId){
+    private static void addNewProtocolsToSessionAndPlan(String[] protocolIds, String sessionId){
         Treatment_Session__c session = [SELECT Id, Preferred_Motivators__c FROM Treatment_Session__c WHERE Id =: sessionId LIMIT 1];
         Session_Protocol__c[] newSProtocols = new Session_Protocol__c[0];
 
@@ -282,6 +375,57 @@ public with sharing class TreatmentSessionLWCController {
         insert newSProtocols;
     }
 
+    /************** Inner Classes************/
+
+    //Used by getActiveProtocolsForSession()
+    public class SessionInfo{
+        @AuraEnabled public String[] requiredProtocols;
+        @AuraEnabled public SessionProtocolInfo[] sessionProtocolInfos;
+    }
+
+    public class SessionProtocolInfo {
+        @AuraEnabled public Id id;
+        @AuraEnabled public String name;
+        @AuraEnabled public Boolean skipped;
+        @AuraEnabled public Boolean needsReview;
+        @AuraEnabled public String status;
+        @AuraEnabled public ScaleInfo[] scaleInfos;
+        @AuraEnabled public String overallScore;
+
+        public SessionProtocolInfo(Session_Protocol__c sp){
+            this.id = sp.Id;
+            this.name = sp.Protocol_Name__c;
+            this.skipped = sp.IsSkipped__c;
+            this.needsReview = sp.Needs_Review__c;
+            this.status = sp.Status__c;
+            this.scaleInfos = new ScaleInfo[0];
+            for(Session_Protocol_Scale__c scale : sp.Session_Protocol_Scales__r){
+                this.scaleInfos.add(new ScaleInfo(scale));
+                if(scale.Protocol_Scale__r.Name == 'Overall Score'){
+                    this.overallScore = scale.Protocol_Score__c;
+                }
+            }
+        }
+    }
+
+    public class ScaleInfo {
+        @AuraEnabled public Decimal columnOrder;
+        @AuraEnabled public String category;
+        @AuraEnabled public Boolean required;
+        @AuraEnabled public String score;
+        @AuraEnabled public String[] options;        
+
+        public ScaleInfo(Session_Protocol_Scale__c scale){
+            this.columnOrder = scale.Protocol_Scale__r.Column_Order__c;
+            this.category = scale.Protocol_Scale__r.Category__c;
+            this.required = scale.Protocol_Scale__r.Required__c;
+            this.score = scale.Protocol_Score__c;
+            if(scale.Protocol_Scale__r.Options__c != null){
+                this.options = scale.Protocol_Scale__r.Options__c.split(';');            
+            }
+        }
+    }   
+
     public class protocolAssignment {
         @AuraEnabled public List<List<Session_Protocol__c>> assignedSessionProtocolsLists { get; set; }
         @AuraEnabled public List<List<Protocol__c>> unassignedProtocolsLists { get; set; }
@@ -293,80 +437,90 @@ public with sharing class TreatmentSessionLWCController {
         @AuraEnabled public String id { get; set; }
         @AuraEnabled public String name { get; set; }
         @AuraEnabled public String nameUrl {get; set;}
+        @AuraEnabled public String status {get;set;}
+        @AuraEnabled public String statusText {get;set;}
         @AuraEnabled public Boolean needsReview { get; set; }
         @AuraEnabled public Boolean isSkipped { get; set; }
         @AuraEnabled public Boolean isRemoved { get; set; }
-        @AuraEnabled public picklistField[] picklistFields {get; set;}
+        @AuraEnabled public ScoringColumn[] columns {get; set;}
         @AuraEnabled public String preferredMotivators { get; set; }
         @AuraEnabled public String novelPersonNotes { get; set; }
         @AuraEnabled public String protocolNotes { get; set; }
         @AuraEnabled public String managerReviewNotes { get; set; }
         @AuraEnabled public String boxLink {get; set;}
-        @AuraEnabled public String planProtocolId {get; set;}
-        @AuraEnabled public String planProtocolNotes {get; set;}
-        @AuraEnabled public behavior_config__mdt arousalConfig {get; set;}
-        @AuraEnabled public behavior_config__mdt fearConfig {get; set;}
-        @AuraEnabled public behavior_config__mdt fearSociabilityConfig {get; set;}
-        @AuraEnabled public behavior_config__mdt treatmentStagesConfig {get; set;}
-
+        // @AuraEnabled public String planProtocolId {get; set;}
+        // @AuraEnabled public String planProtocolNotes {get; set;}
 
         ProtocolInfo(Session_Protocol__c sp){
             this.id = sp.Id;
             this.name = sp.Protocol_Name__c;
             this.nameUrl = '/' + sp.Id;
+            this.status = sp.Status__c;
             this.needsReview = sp.Needs_Review__c;
             this.isSkipped = sp.IsSkipped__c;
             this.isRemoved = sp.IsRemoved__c;
-            this.picklistFields = new PicklistField[0];
+            this.statusText = sp.Status_Text__c;
             this.preferredMotivators = sp.Preferred_Motivators__c;
             this.novelPersonNotes = sp.Novel_Person_Notes__c;
             this.protocolNotes = sp.Protocol_Notes__c;
             this.managerReviewNotes = sp.Manager_Review_Notes__c;
             this.boxLink = sp.ProtocolId__r.Protocol_Box_Link__c;
+            
+            Map<Decimal, ScoreOptions[]> scoringOptionsMap = new Map<Decimal, ScoreOptions[]>();
+            for(Session_Protocol_Scale__c sps : sp.Session_Protocol_Scales__r){   
+                System.debug('**sps: ' + sps);
+                ScoreOptions options = new ScoreOptions(sps);
 
-            String[] fieldList = new String[]{
-                'Aggressive_Worst__c',
-                'Aggressive_Movement__c',
-                'Arousal_Best__c',
-                'Arousal_Worst__c',
-                'Fear_Best__c',
-                'Fear_Worst__c',
-                'Social_Best__c',
-                'Overall_Score__c',
-                'Solicitation__c'
-            };
+                if(sps.Protocol_Scale__r.Fields_to_include__c != null){
+                    options.additionalFields = new String[0];
+                    String[] tempList = sps.Protocol_Scale__r.Fields_to_include__c.split(';');
+                    for(String field : tempList){
+                        options.additionalFields.add(field.trim());
+                    }                    
+                }
 
-            for(String fieldAPI : fieldList){
-                PicklistField pf = new PicklistField(fieldAPI, String.valueOf(sp.get(fieldAPI)));
-                this.picklistFields.add(pf);
+                if(scoringOptionsMap.containsKey(sps.Protocol_Scale__r.Column_Number__c)){
+                    scoringOptionsMap.get(sps.Protocol_Scale__r.Column_Number__c).add(options);
+                } else {
+                    scoringOptionsMap.put(sps.Protocol_Scale__r.Column_Number__c, new ScoreOptions[]{options});
+                }
             }
 
-            //get the scale configs
-            this.arousalConfig = Behavior_Config__mdt.getInstance('Arousal_Scale');
-            this.fearConfig = Behavior_Config__mdt.getInstance('Fear_Scales');
-            this.fearSociabilityConfig = Behavior_Config__mdt.getInstance('Fear_Sociability_Scale');
-            this.treatmentStagesConfig = Behavior_Config__mdt.getInstance('Treatment_Stages');
+            this.columns = new ScoringColumn[0];
+            for(Decimal num : scoringOptionsMap.keySet()){
+                ScoringColumn column = new ScoringColumn();
+                column.columnNum = num;
+                column.options = scoringOptionsMap.get(num);
+                column.scaleConfig = Behavior_Config__mdt.getInstance(scoringOptionsMap.get(num)[0].category + '_Dog');
+                this.columns.add(column);
+            }
         }
     }
 
-    public class PicklistField{
-        @AuraEnabled public String name { get; set; }
-        @AuraEnabled public String apiName { get; set; }
-        @AuraEnabled public String currentValue { get; set; }
-        @AuraEnabled public String initialValue { get; set; }
+    public class ScoringColumn{
+        @AuraEnabled public Decimal columnNum {get; set;}
+        @AuraEnabled public behavior_config__mdt scaleConfig {get; set;}
+        @AuraEnabled public ScoreOptions[] options {get; set;}
+    }
+
+    public class ScoreOptions{
+        @AuraEnabled public Id id {get; set;}
+        @AuraEnabled public String name {get; set;}
+        @AuraEnabled public Decimal order {get; set;}
         @AuraEnabled public selectionOption[] options { get; set; }
+        @AuraEnabled public String currentSelection {get; set;}
+        @AuraEnabled public String category {get; set;}
+        @AuraEnabled public String[] additionalFields {get; set;}
 
-        PicklistField(String fieldAPI, String currentValue){
-            this.apiName = fieldAPI;
-            String objectAPI = 'Session_Protocol__c';
-            this.currentValue = currentValue;
-            this.initialValue = currentValue;
-            this.name = String.valueOf(Schema.getGlobalDescribe().get(ObjectApi).getDescribe().fields.getMap().get(FieldApi).getDescribe().getLabel());
+        private ScoreOptions(Session_Protocol_Scale__c sps){
+            this.id = sps.Id;
+            this.name = sps.Protocol_Scale__r.Name;
+            this.order = sps.Protocol_Scale__r.Column_Order__c;
+            this.currentSelection = sps.Protocol_Score__c;
+            this.category = sps.Protocol_Scale__r.Category__c;
 
-            Schema.SObjectField fieldInfo = SchemaHelper.DetermineSObjectFieldByLabel(objectAPI, name);            
-            String[] picklistValues = SchemaHelper.GetPicklistValues(fieldInfo);
-            this.options = new SelectionOption[0];
-            for(String option : picklistValues){
+            this.options = new selectionOption[0];
+            for(String option : sps.Protocol_Scale__r.Options__c.split(';')){
                 this.options.add(new SelectionOption(option));
             }
         }
@@ -377,8 +531,21 @@ public with sharing class TreatmentSessionLWCController {
         @AuraEnabled public String value;
 
         selectionOption(String item){
+            item = item.trim();
             this.label = item;
             this.value = item;
         }
+    }
+
+    @testVisible
+    private class SpsInfo {
+        @AuraEnabled public String currentScore {get;set;}
+        @AuraEnabled public SpsFieldsWrapper[] fields {get;set;}
+    }
+
+    private class SpsFieldsWrapper{
+        @AuraEnabled public String fieldName {get;set;}
+        @AuraEnabled public String fieldLabel {get;set;}
+        @AuraEnabled public String value {get;set;}
     }
 }

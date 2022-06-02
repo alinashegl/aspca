@@ -912,11 +912,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Foster_Count__c</field>
-            <table>Animal__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Controlled_Food_Program__c</field>
             <table>Animal__c</table>
         </columns>
@@ -1357,12 +1352,17 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Foster_Length__c</field>
+            <field>Evaluation_Dog_Dog_Testing_Date__c</field>
             <table>Animal__c</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Evaluation_Dog_Dog_Testing_Date__c</field>
+            <field>Active_Animal__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Foster_Duration__c</field>
             <table>Animal__c</table>
         </columns>
         <masterLabel>Animals</masterLabel>
