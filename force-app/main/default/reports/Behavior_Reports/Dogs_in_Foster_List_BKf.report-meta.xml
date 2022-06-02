@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Report xmlns="http://soap.sforce.com/2006/04/metadata">
     <columns>
-        <field>Animal__c$Animal_Name_Id__c</field>
+        <field>Animal__c$Name</field>
+    </columns>
+    <columns>
+        <field>Animal__c$Animal_Name__c</field>
     </columns>
     <columns>
         <field>Animal__c$Breed__c</field>
