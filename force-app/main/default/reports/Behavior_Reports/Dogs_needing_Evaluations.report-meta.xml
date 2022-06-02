@@ -69,6 +69,11 @@
         <field>Animal__c$Name</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Animal__c$Animal_Name__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
     <name>Dogs Needing Evaluations</name>
     <params>
         <name>co</name>

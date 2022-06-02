@@ -1,8 +1,9 @@
-import { LightningElement, api } from 'lwc';
-import { updateRecord } from 'lightning/uiRecordApi';
+import { LightningElement, api, wire } from 'lwc';
+import { getRecord, updateRecord } from 'lightning/uiRecordApi';
 import { NavigationMixin } from "lightning/navigation";
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import getActiveProtocolAndFields from '@salesforce/apex/TreatmentSessionLWCController.getActiveProtocolAndFields';
+import getProtocolStatus from '@salesforce/apex/TreatmentSessionLWCController.getProtocolStatus';
 import PROTOCOL_ID_FIELD from '@salesforce/schema/Session_Protocol__c.Id';
 import IS_SKIPPED_FIELD from '@salesforce/schema/Session_Protocol__c.IsSkipped__c';
 import IS_REMOVED_FIELD from '@salesforce/schema/Session_Protocol__c.IsRemoved__c';
@@ -28,12 +29,8 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
     loading = true;
     isSkipped = false;
     isRemoved = false;
+    protocolStatus = 'Incomplete';
     toggleView = false;
-    col1Fields = [];
-    col2Fields = [];
-    col3Fields = [];
-    col4Fields = [];
-    col5Fields = [];
 
     _refresh;
     @api
@@ -65,34 +62,22 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
         });
     }
 
-    setFieldValues(data){
-        this.fieldValues = [];
-        this.col1Fields = [];
-        this.col2Fields = [];
-        this.col3Fields = [];
-        this.col4Fields = [];
-        this.col5Fields = [];
-
-        data.picklistFields.forEach(element => {
-            this.fieldValues.push({name: element.apiName, value: element.currentValue});
-            if(element.apiName.includes('Aggressive')){
-                this.col1Fields.push(element);
-            } else 
-            if(element.apiName.includes('Arousal')){
-                this.col2Fields.push(element);
-            } else 
-            if(element.apiName == 'Fear_Best__c' || element.apiName == 'Fear_Worst__c'){
-                this.col3Fields.push(element);
-            } else 
-            if(element.apiName == 'Social_Best__c' || element.apiName == 'Solicitation__c'){
-                this.col4Fields.push(element);
-            } else 
-            if(element.apiName == 'Overall_Score__c'){
-                this.col5Fields.push(element);
+    handleRefresh(){
+        window.console.log("handleRefreshStatus");
+        getProtocolStatus({protocolId: this.recordId})
+        .then((result) => {
+            if(result) {
+                this.protocolStatus = result;
+            } else if (result.error) {
+                this.error = result.error;
             }
         });
+    }
+
+    setFieldValues(data){
         this.isSkipped = data.isSkipped;
         this.isRemoved = data.isRemoved;
+        this.protocolStatus = data.statusText;
         this.loading = false;
     }
 
@@ -258,7 +243,7 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
         return this.toggleView ? 'utility:chevrondown' : 'utility:chevronright';
     }
 
-    get sessionStatusIconName(){
+    get protocolStatusIconName(){
         if(this.protocolInfo == undefined){
             return 'utility:spinner'
         }
@@ -273,7 +258,7 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
         }
     }
 
-    get sessionStatusIconVariant(){
+    get protocolStatusIconVariant(){
         if(this.protocolInfo == undefined){
             return ''
         }
@@ -288,7 +273,7 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
         }
     }
 
-    get sessionStatusIconText(){
+    get protocolStatusIconText(){
         if(this.protocolInfo == undefined){
             return ''
         }
@@ -304,8 +289,7 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
     }
 
     get isComplete(){
-        const incompleteField = this.fieldValues.find(field => field.value == null  && field.name != 'Solicitation__c');
-        return  incompleteField == null;
+        return this.protocolStatus == 'Complete';
     }
 
     get showSkipButton(){

@@ -1,6 +1,6 @@
 import { LightningElement, api, wire } from 'lwc';
 import { NavigationMixin } from "lightning/navigation";
-import getActiveProtocols from '@salesforce/apex/TreatmentSessionLWCController.getActiveProtocols';
+import getActiveProtocols from '@salesforce/apex/TreatmentSessionLWCController.getActiveProtocolsForSession';
 import hasRemoveFromPlanPermission from '@salesforce/customPermission/Remove_Protocol_From_Plan';
 import FORM_FACTOR from '@salesforce/client/formFactor'
 import { refreshApex } from '@salesforce/apex';
@@ -16,25 +16,24 @@ export default class TreatmentSessionMain extends NavigationMixin(LightningEleme
     wireResponse;
     showModifySession = false;
     refresh = false;
-    refereshProtocolStatus = false;
     refreshProtocolLists = false;
     sessionListRefresh = false;
 
+    requiredProtocols = [];
     @wire(getActiveProtocols, {sessionId: '$recordId', refresh: '$refresh'})
     response(result){
         this.wireResponse = result;
         this.activeProtocols = [];
         if(result.data){
-            this.setIconAndAltText(result.data);
-            this.refereshProtocolStatus = !this.refereshProtocolStatus;
-            window.console.log('getActiveProtocols.length: ', result.data.length);
+            this.requiredProtocols = result.data.requiredProtocols;
+            this.setIconAndAltText(result.data.sessionProtocolInfos);
         }
     }
 
     setIconAndAltText(data){
         this.activeProtocols = JSON.parse(JSON.stringify(data));
         this.activeProtocols.forEach(protocol => {
-            let urlIcon = protocol.Status__c.replace('<img src="', '');
+            let urlIcon = protocol.status.replace('<img src="', '');
             protocol.urlIcon = urlIcon;
         })
     }

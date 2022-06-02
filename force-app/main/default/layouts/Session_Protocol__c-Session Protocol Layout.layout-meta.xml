@@ -22,6 +22,22 @@
                 <behavior>Edit</behavior>
                 <field>Session_Date__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Sum_of_Numbers_Rollup__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Scored_Count__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Required_Count__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Status_Text__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -182,6 +198,13 @@
         <fields>UPDATEDBY_USER</fields>
         <fields>LAST_UPDATE</fields>
         <relatedList>Additional_Dog_Present__c.Session_Protocol__c</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <fields>NAME</fields>
+        <fields>Protocol_Scale__c</fields>
+        <fields>Protocol_Score__c</fields>
+        <fields>Protocol_Score_Number__c</fields>
+        <relatedList>Session_Protocol_Scale__c.Session_Protocol__c</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>
