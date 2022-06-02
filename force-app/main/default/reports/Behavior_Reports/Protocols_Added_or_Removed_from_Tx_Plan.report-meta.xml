@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Report xmlns="http://soap.sforce.com/2006/04/metadata">
     <columns>
-        <field>Animal__c$Evaluation_Date__c</field>
+        <field>Animal__c.Treatment_Plan__r.Plan_Protocols__r$Protocol_Name__c</field>
     </columns>
     <columns>
-        <field>Animal__c$Evaluation_Dog_Dog_Testing_Date__c</field>
+        <field>Animal__c.Treatment_Plan__r.Plan_Protocols__r$LastModifiedDate</field>
     </columns>
     <columns>
-        <field>Animal__c$Play_Category__c</field>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Animal__c.Treatment_Plan__r.Plan_Protocols__r$IsRemoved__c</field>
     </columns>
     <filter>
         <criteriaItems>
@@ -18,6 +19,13 @@
             <value></value>
         </criteriaItems>
         <criteriaItems>
+            <column>Animal__c$Active_Animal__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
             <column>Animal__c$Location_Filter__c</column>
             <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
@@ -25,21 +33,14 @@
             <value>1</value>
         </criteriaItems>
         <criteriaItems>
-            <column>Animal__c$Play_Category__c</column>
+            <column>Animal__c.Treatment_Plan__r.Plan_Protocols__r$LastModifiedDate</column>
             <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
-            <value>Unevaluated,New/Unknown</value>
+            <value>TODAY</value>
         </criteriaItems>
         <criteriaItems>
-            <column>Animal__c$Evaluation_Dog_Dog_Testing_Date__c</column>
-            <columnToColumn>false</columnToColumn>
-            <isUnlocked>true</isUnlocked>
-            <operator>lessThan</operator>
-            <value>N_DAYS_AGO:7</value>
-        </criteriaItems>
-        <criteriaItems>
-            <column>Animal__c$Active_Animal__c</column>
+            <column>Animal__c.Treatment_Plan__r$IsActive__c</column>
             <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
@@ -49,26 +50,21 @@
     <format>Summary</format>
     <groupingsDown>
         <dateGranularity>Day</dateGranularity>
-        <field>Animal__c$Current_Recent_Shelter_Location__c</field>
+        <field>Animal__c$Animal_Name_Id__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
-    <groupingsDown>
-        <dateGranularity>Day</dateGranularity>
-        <field>Animal__c$Name</field>
-        <sortOrder>Asc</sortOrder>
-    </groupingsDown>
-    <name>Play Category Unevaluated or New/Unknown</name>
+    <name>Protocols Added or Removed from Tx Plan</name>
     <params>
         <name>co</name>
         <value>1</value>
     </params>
-    <reportType>Animals__c</reportType>
+    <reportType>Animals_with_Tx_Plans_and_Plan_Protocols__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
     <showGrandTotal>true</showGrandTotal>
     <showSubTotals>false</showSubTotals>
     <timeFrameFilter>
-        <dateColumn>Animal__c$Completed_Date__c</dateColumn>
+        <dateColumn>Animal__c$Behavior_Play_Pause_Date__c</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>
     </timeFrameFilter>
 </Report>

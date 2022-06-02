@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Report xmlns="http://soap.sforce.com/2006/04/metadata">
     <columns>
-        <field>Animal__c$Evaluation_Date__c</field>
+        <field>Animal__c.Animal_Playgroups__r$Playgroup_Session__c.Playgroup_Notes__c</field>
     </columns>
     <columns>
-        <field>Animal__c$Evaluation_Dog_Dog_Testing_Date__c</field>
-    </columns>
-    <columns>
-        <field>Animal__c$Play_Category__c</field>
+        <field>Animal__c.Animal_Playgroups__r$Playgroup_Individual_Notes__c</field>
     </columns>
     <filter>
+        <booleanFilter>1 AND 2 AND 3 AND (4 OR 5)</booleanFilter>
         <criteriaItems>
             <column>Animal__c$Current_Recent_Shelter_Location__c</column>
             <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value></value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Animal__c$Active_Animal__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
         </criteriaItems>
         <criteriaItems>
             <column>Animal__c$Location_Filter__c</column>
@@ -25,50 +30,38 @@
             <value>1</value>
         </criteriaItems>
         <criteriaItems>
-            <column>Animal__c$Play_Category__c</column>
+            <column>Animal__c.Animal_Playgroups__r$Playgroup_Session__c.Playgroup_Notes__c</column>
             <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
-            <operator>equals</operator>
-            <value>Unevaluated,New/Unknown</value>
+            <operator>notEqual</operator>
+            <value></value>
         </criteriaItems>
         <criteriaItems>
-            <column>Animal__c$Evaluation_Dog_Dog_Testing_Date__c</column>
+            <column>Animal__c.Animal_Playgroups__r$Playgroup_Individual_Notes__c</column>
             <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
-            <operator>lessThan</operator>
-            <value>N_DAYS_AGO:7</value>
-        </criteriaItems>
-        <criteriaItems>
-            <column>Animal__c$Active_Animal__c</column>
-            <columnToColumn>false</columnToColumn>
-            <isUnlocked>true</isUnlocked>
-            <operator>equals</operator>
-            <value>1</value>
+            <operator>notEqual</operator>
+            <value></value>
         </criteriaItems>
     </filter>
     <format>Summary</format>
     <groupingsDown>
         <dateGranularity>Day</dateGranularity>
-        <field>Animal__c$Current_Recent_Shelter_Location__c</field>
+        <field>Animal__c$Animal_Name_Id__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
-    <groupingsDown>
-        <dateGranularity>Day</dateGranularity>
-        <field>Animal__c$Name</field>
-        <sortOrder>Asc</sortOrder>
-    </groupingsDown>
-    <name>Play Category Unevaluated or New/Unknown</name>
+    <name>Playgroup Notes</name>
     <params>
         <name>co</name>
         <value>1</value>
     </params>
-    <reportType>Animals__c</reportType>
+    <reportType>Animals_with_Playgroups__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
     <showGrandTotal>true</showGrandTotal>
     <showSubTotals>false</showSubTotals>
     <timeFrameFilter>
-        <dateColumn>Animal__c$Completed_Date__c</dateColumn>
-        <interval>INTERVAL_CUSTOM</interval>
+        <dateColumn>Animal__c.Animal_Playgroups__r$Playgroup_Session__c.Playgroup_Date__c</dateColumn>
+        <interval>INTERVAL_TODAY</interval>
     </timeFrameFilter>
 </Report>
