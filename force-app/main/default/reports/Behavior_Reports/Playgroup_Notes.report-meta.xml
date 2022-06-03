@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Report xmlns="http://soap.sforce.com/2006/04/metadata">
     <columns>
+        <field>Animal__c.Animal_Playgroups__r$Playgroup_Session__c.Name</field>
+    </columns>
+    <columns>
+        <field>Animal__c.Animal_Playgroups__r$Name</field>
+    </columns>
+    <columns>
         <field>Animal__c.Animal_Playgroups__r$Playgroup_Session__c.Playgroup_Notes__c</field>
     </columns>
     <columns>
@@ -47,7 +53,17 @@
     <format>Summary</format>
     <groupingsDown>
         <dateGranularity>Day</dateGranularity>
-        <field>Animal__c$Animal_Name_Id__c</field>
+        <field>Animal__c$Current_Recent_Shelter_Location__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Animal__c$Name</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Animal__c$Animal_Name__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
     <name>Playgroup Notes</name>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Report xmlns="http://soap.sforce.com/2006/04/metadata">
     <columns>
-        <field>CUST_ID</field>
+        <field>CUST_NAME</field>
     </columns>
     <columns>
         <field>Incidents__c.Incident_Date_Time__c</field>
@@ -88,7 +88,17 @@
     <format>Summary</format>
     <groupingsDown>
         <dateGranularity>Day</dateGranularity>
-        <field>FK_$Animal__c.Animal_Name_Id__c</field>
+        <field>FK_$Animal__c.Current_Recent_Shelter_Location__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>FK_NAME</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>FK_$Animal__c.Animal_Name__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
     <name>All Incident Reports for Today</name>

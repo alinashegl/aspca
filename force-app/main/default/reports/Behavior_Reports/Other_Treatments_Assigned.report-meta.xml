@@ -10,6 +10,15 @@
         <scale>0</scale>
     </aggregates>
     <columns>
+        <field>Animal__c.Treatment_Sessions__r$Name</field>
+    </columns>
+    <columns>
+        <field>Animal__c.Treatment_Sessions__r.Session_Protocols__r$Name</field>
+    </columns>
+    <columns>
+        <field>Animal__c.Treatment_Sessions__r.Session_Protocols__r$CreatedDate</field>
+    </columns>
+    <columns>
         <field>Animal__c.Treatment_Sessions__r.Session_Protocols__r$Protocol_Name__c</field>
     </columns>
     <filter>
@@ -41,11 +50,28 @@
             <operator>contains</operator>
             <value>other</value>
         </criteriaItems>
+        <criteriaItems>
+            <column>Animal__c.Treatment_Sessions__r.Session_Protocols__r$CreatedDate</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>TODAY</value>
+        </criteriaItems>
     </filter>
     <format>Summary</format>
     <groupingsDown>
         <dateGranularity>Day</dateGranularity>
-        <field>Animal__c$Animal_Name_Id__c</field>
+        <field>Animal__c$Current_Recent_Shelter_Location__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Animal__c$Name</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Animal__c$Animal_Name__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
     <name>Other Treatments Assigned</name>
