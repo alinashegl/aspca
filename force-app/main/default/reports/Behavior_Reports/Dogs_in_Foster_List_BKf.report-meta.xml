@@ -7,12 +7,6 @@
         <field>Animal__c$Animal_Name__c</field>
     </columns>
     <columns>
-        <field>Animal__c.Treatment_Sessions__r$Name</field>
-    </columns>
-    <columns>
-        <field>Animal__c$Current_Animal_Age_Formatted__c</field>
-    </columns>
-    <columns>
         <field>Animal__c$Breed__c</field>
     </columns>
     <columns>
@@ -27,13 +21,19 @@
     <columns>
         <field>Animal__c$Case_Type__c</field>
     </columns>
+    <columns>
+        <field>Animal__c$Current_Location__c</field>
+    </columns>
+    <columns>
+        <field>Animal__c$Current_Animal_Age_Formatted__c</field>
+    </columns>
     <filter>
         <criteriaItems>
-            <column>Animal__c$Location_Filter__c</column>
+            <column>Animal__c$Current_Location__c</column>
             <columnToColumn>false</columnToColumn>
-            <isUnlocked>true</isUnlocked>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
-            <value>1</value>
+            <value>Foster Home</value>
         </criteriaItems>
         <criteriaItems>
             <column>Animal__c$Active_Animal__c</column>
@@ -42,27 +42,27 @@
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
+        <criteriaItems>
+            <column>Animal__c$Location_Filter__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
     </filter>
-    <format>Summary</format>
-    <groupingsDown>
-        <dateGranularity>Day</dateGranularity>
-        <field>Animal__c$Animal_Name_Id__c</field>
-        <sortOrder>Asc</sortOrder>
-    </groupingsDown>
-    <name>Treatment Performed By Dog</name>
+    <format>Tabular</format>
+    <name>Dogs in Foster List</name>
     <params>
         <name>co</name>
         <value>1</value>
     </params>
-    <reportType>Animal_with_Treatment__c</reportType>
+    <reportType>Animals__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
     <showGrandTotal>true</showGrandTotal>
-    <showSubTotals>false</showSubTotals>
-    <sortColumn>Animal__c.Treatment_Sessions__r$Name</sortColumn>
-    <sortOrder>Desc</sortOrder>
+    <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
-        <dateColumn>Animal__c.Treatment_Sessions__r$CreatedDate</dateColumn>
+        <dateColumn>Animal__c$Completed_Date__c</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>
     </timeFrameFilter>
 </Report>
