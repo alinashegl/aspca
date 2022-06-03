@@ -1,31 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Report xmlns="http://soap.sforce.com/2006/04/metadata">
     <columns>
-        <aggregateTypes>Sum</aggregateTypes>
-        <field>CDF1</field>
+        <field>Animal__c.Treatment_Plan__r$Treatment_Priority__c</field>
     </columns>
     <columns>
         <aggregateTypes>Sum</aggregateTypes>
-        <field>Animal__c$Foster_Count__c</field>
+        <field>Animal__c.Treatment_Plan__r$IsActive__c</field>
     </columns>
     <columns>
         <aggregateTypes>Sum</aggregateTypes>
-        <field>Animal__c$Foster_Duration__c</field>
+        <field>Animal__c$Number_of_Treatments__c</field>
     </columns>
-    <customDetailFormulas>
-        <calculatedFormula>IF(Animal__c.Current_Location__c = &quot;Foster Home&quot;,1,0)</calculatedFormula>
-        <dataType>Double</dataType>
-        <developerName>CDF1</developerName>
-        <label>In Foster</label>
-        <scale>0</scale>
-    </customDetailFormulas>
     <filter>
         <criteriaItems>
-            <column>Animal__c$Current_Recent_Shelter_Location__c</column>
+            <column>Animal__c.Treatment_Plan__r$IsActive__c</column>
             <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
-            <operator>notEqual</operator>
-            <value></value>
+            <operator>equals</operator>
+            <value>1</value>
         </criteriaItems>
         <criteriaItems>
             <column>Animal__c$Location_Filter__c</column>
@@ -41,6 +33,20 @@
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
+        <criteriaItems>
+            <column>Animal__c$Current_Recent_Shelter_Location__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value></value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Animal__c.Treatment_Plan__r$Treatment_Priority__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Daily – 7 days,High – 5 days,Medium – 4 days,Low – 3 days</value>
+        </criteriaItems>
     </filter>
     <format>Summary</format>
     <groupingsDown>
@@ -48,23 +54,18 @@
         <field>Animal__c$Animal_Name_Id__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
-    <groupingsDown>
-        <dateGranularity>Day</dateGranularity>
-        <field>Animal__c$Current_Behavior_Grade__c</field>
-        <sortOrder>Asc</sortOrder>
-    </groupingsDown>
-    <name>Animals in Foster Care</name>
+    <name>Treatment Priority vs Treatment Sessions</name>
     <params>
         <name>co</name>
         <value>1</value>
     </params>
-    <reportType>Animals__c</reportType>
+    <reportType>Animals_and_Treatment_Plans__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
     <showGrandTotal>true</showGrandTotal>
     <showSubTotals>false</showSubTotals>
     <timeFrameFilter>
-        <dateColumn>Animal__c$Completed_Date__c</dateColumn>
+        <dateColumn>Animal__c$CreatedDate</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>
     </timeFrameFilter>
 </Report>
