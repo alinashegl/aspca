@@ -33,6 +33,11 @@ public without sharing class LogHistory {
                     }
                     history.ObjectId__c = record.Id;
                     history.ObjectName__c = getObjectLabel(record.Id);
+                    if(history.ObjectName__c.equalsIgnoreCase('Animal')){
+                        history.Animal__c = record.Id;
+                    } else {
+                        history.Animal__c = history.ParentId__c;
+                    }
                     histories.add(history);
                 }
             }
@@ -108,7 +113,7 @@ public without sharing class LogHistory {
     }
     
     private static Map<String, Set<String>> objectFieldMap = new Map<String, Set<String>>{
-        'animal__c' => new Set<String> {'handling_instructions__c', 'shelter_color_coding__c', 'play_style_notes__c','designated_handler_reason__c','current_behavior_grade__c','grade_change_reason__c'},  
+        'animal__c' => new Set<String> {'handling_instructions__c', 'shelter_color_coding__c', 'play_style_notes__c','designated_handler_reason__c','current_behavior_grade__c','grade_change_reason__c','behavior_summary__c'},  
         'behavior_evaluation__c' => new Set<String> {'overall_evaluation_grade__c','grade_change_reason__c'}
     };    
         

@@ -12,6 +12,9 @@
     <columns>
         <field>EntityHistory__c.NewValue__c</field>
     </columns>
+    <columns>
+        <field>EntityHistory__c.Animal__c</field>
+    </columns>
     <filter>
         <criteriaItems>
             <column>EntityHistory__c.FieldName__c</column>
