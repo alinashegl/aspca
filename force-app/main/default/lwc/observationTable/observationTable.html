@@ -20,7 +20,7 @@
             </p>
             <template if:true={addNewObservation}>
                 <lightning-layout multiple-rows>
-                    <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="3" large-device-size="3" class="slds-p-around_xx-small">
+                    <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="3" large-device-size="2" class="slds-p-around_xx-small">
                         <div class="slds-form-element">
                             <div class="slds-form-element__static">
                                 <lightning-input required type="date" label="Date" name="dateInput" value={dateValue} data-name="dateInput"></lightning-input>
@@ -30,18 +30,35 @@
                     <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="3" large-device-size="3" class="slds-p-around_xx-small">
                         <div class="slds-form-element">
                             <div class="slds-form-element__static">
-                                <lightning-textarea required label="Notes" type="text-area" name="descriptionInput" data-name="descriptionInput"></lightning-textarea>
+                                <lightning-textarea required label="Notes" type="text-area" name="descriptionInput" data-name="descriptionInput" maxlength="10000"></lightning-textarea>
                             </div>
                         </div>
                     </lightning-layout-item>
-                    <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="3" large-device-size="3" class="slds-p-around_xx-small">
+                    <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="3" large-device-size="1" class="slds-p-around_xx-small">
                         <div class="slds-form-element">
                             <div class="slds-form-element__static">
                                 <lightning-input required label="Initials" type="text" name="initialInput" data-name="initialInput" maxlength="10"></lightning-input>
                             </div>
                         </div>
                     </lightning-layout-item>
-                    <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="3" large-device-size="3" class="slds-p-around_xx-small">
+
+                    <template if:true={isConcernType}>                    
+                        <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="3" large-device-size="3" class="slds-p-around_xx-small">
+                                <div class="slds-form-element">
+                                    <div class="slds-form-element__static">
+                                        <lightning-textarea label="Response" type="text" name="responseInput" data-name="responseInput" maxlength="2500"></lightning-textarea>
+                                    </div>
+                                </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item flexibility="auto" size="12" small-device-size="6" medium-device-size="3" large-device-size="1" class="slds-p-around_xx-small">
+                            <div class="slds-form-element">
+                                <div class="slds-form-element__static">
+                                    <lightning-input label="Beh Initials" type="text" name="behInitialInput" data-name="behInitialInput" maxlength="10"></lightning-input>
+                                </div>
+                            </div>
+                        </lightning-layout-item>
+                    </template>
+                    <lightning-layout-item flexibility="auto" size="12" small-device-size="6" medium-device-size="3" large-device-size="2" class="slds-p-around_xx-small">
                         <div class="slds-form-element">
                             <div class={addNewButtonClass}>
                                 <lightning-button label='Add' onclick={handleInsertNewObservation} disabled={saveButtonDisabled} class="slds-m-left_x-small"></lightning-button>
