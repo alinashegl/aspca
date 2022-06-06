@@ -193,6 +193,12 @@
                 <identifier>RecordFinal_Outcome__cField</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.FM_Record_Status__c</fieldItem>
+                <identifier>RecordFM_Record_Status_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-e5579d48-b9f2-4b15-8b6e-a48742f9fd0a</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -587,8 +593,36 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>readonly</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Behavior_Medication_Flag__c</fieldItem>
                 <identifier>RecordBehavior_Medication_Flag__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Storm_Distress_Anxiety__c</fieldItem>
+                <identifier>RecordStorm_Distress_Anxiety_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Storm_Distress_Anxiety_Notes__c</fieldItem>
+                <identifier>RecordStorm_Distress_Anxiety_Notes_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Confirmed_Helper_Dog__c</fieldItem>
+                <identifier>RecordConfirmed_Helper_Dog_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Potential_Helper_Dog__c</fieldItem>
+                <identifier>RecordPotential_Helper_Dog_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-0e4ad15a-202e-41de-ab60-adf4bbb665ca</name>
@@ -664,24 +698,6 @@
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Treatment_Bundles__c</fieldItem>
-                <identifier>RecordTreatment_Bundles__cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Treatments_Assigned__c</fieldItem>
-                <identifier>RecordTreatments_Assigned__cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.No_B_Mod__c</fieldItem>
-                <identifier>RecordNo_B_Mod__cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
                 <fieldItem>Record.Controlled_Food_Program__c</fieldItem>
                 <identifier>RecordControlled_Food_Program__cField</identifier>
             </fieldInstance>
@@ -706,6 +722,12 @@
                 <identifier>RecordFeeding_Notes__cField</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Meets_Adoptability_Date__c</fieldItem>
+                <identifier>RecordMeets_Adoptability_Date__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-22f0ecff-c012-42b5-aab4-e3d5d0e054f6</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -724,14 +746,14 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Number_of_Weeks_in_Treatment__c</fieldItem>
-                <identifier>RecordNumber_of_Weeks_in_Treatment__cField</identifier>
+                <fieldItem>Record.Days_in_Treatment__c</fieldItem>
+                <identifier>RecordDays_in_Treatment_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Meets_Adoptability_Date__c</fieldItem>
-                <identifier>RecordMeets_Adoptability_Date__cField</identifier>
+                <fieldItem>Record.Number_of_Weeks_in_Treatment__c</fieldItem>
+                <identifier>RecordNumber_of_Weeks_in_Treatment__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-7908e8cc-38a2-4a24-a5be-8b338e9e8b99</name>
@@ -1433,6 +1455,12 @@
                 <identifier>RecordFinal_Outcome_cField1</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.FM_Record_Status__c</fieldItem>
+                <identifier>RecordFM_Record_Status_cField2</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-d9fa8867-3cc1-4725-98ce-d9c66159505f</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -1616,6 +1644,18 @@
                 <identifier>RecordBRC_Decline_Reason_cField1</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Confirmed_Helper_Dog__c</fieldItem>
+                <identifier>RecordConfirmed_Helper_Dog_cField2</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Potential_Helper_Dog__c</fieldItem>
+                <identifier>RecordPotential_Helper_Dog_cField2</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-1c2d9594-eea1-42f4-b0ca-0b6c49f7bf0d</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -1743,8 +1783,8 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.No_B_Mod__c</fieldItem>
-                <identifier>RecordNo_B_Mod_cField1</identifier>
+                <fieldItem>Record.Days_in_Treatment__c</fieldItem>
+                <identifier>RecordDays_in_Treatment_cField2</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-62312784-87fe-46fe-966f-e2f272e5d5e2</name>

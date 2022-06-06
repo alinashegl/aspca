@@ -28,7 +28,7 @@ public without sharing class LogHistory {
                     history.OldValue__c = String.valueOf(oldRecord.get(record.Id).get(fieldName));
                     history.NewValue__c = String.valueOf(record.get(fieldName));
                     if(fieldName == 'current_behavior_grade__c' || fieldName == 'overall_evaluation_grade__c'){
-                        history.OldValue__c = String.valueOf(oldRecord.get(record.Id).get(fieldName)) ;//+ ' - ' + String.valueOf(oldRecord.get(record.Id).get('grade_change_reason__c'));
+                        history.OldValue__c = String.valueOf(oldRecord.get(record.Id).get(fieldName)) + ' - ' + String.valueOf(oldRecord.get(record.Id).get('grade_change_reason__c'));
                         history.NewValue__c = String.valueOf(record.get(fieldName)) + ' - ' + String.valueOf(record.get('grade_change_reason__c'));
                     }
                     history.ObjectId__c = record.Id;
