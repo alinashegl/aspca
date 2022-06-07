@@ -9,6 +9,9 @@ export default class TreatmentTabHeader extends NavigationMixin(LightningElement
     showModal = false;
     showNewSessionModal = false;
     showNewTreatmentModal = false;
+    @api showTreatmentPlanButton;
+    @api showTreatmentSessionButton;
+    @api showLast5TreatmentsReport;
     url = 'https://aspca.app.box.com/s/uuxtitu6j2pypol7vdj7qk3fa0tbkk4m';
     handleClick() {
         this.showModal = true;

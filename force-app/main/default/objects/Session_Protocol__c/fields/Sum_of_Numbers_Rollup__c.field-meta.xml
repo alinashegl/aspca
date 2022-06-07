@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sum_of_Numbers_Rollup__c</fullName>
+    <externalId>false</externalId>
+    <label>Sum of Numbers Rollup</label>
+    <summarizedField>Session_Protocol_Scale__c.Protocol_Score_Number__c</summarizedField>
+    <summaryForeignKey>Session_Protocol_Scale__c.Session_Protocol__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

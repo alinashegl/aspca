@@ -1,3 +1,4 @@
+
 /**
  * 
  * Trigger Description
@@ -11,5 +12,6 @@ trigger ProtocolTrigger on Protocol__c (before insert, before update, before del
         TriggerRequest request = new TriggerRequest(Protocol__c.SObjectType);        
        ProtocolTriggerHandler objProtocolTriggerHandler = new ProtocolTriggerHandler();
        objProtocolTriggerHandler.ProcessAction(request);
+
     }
 }

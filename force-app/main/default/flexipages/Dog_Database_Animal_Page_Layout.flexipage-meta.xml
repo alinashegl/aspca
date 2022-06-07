@@ -115,6 +115,12 @@
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
+                <fieldItem>Record.Play_Category__c</fieldItem>
+                <identifier>RecordPlay_Category_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
                 <fieldInstanceProperties>
                     <name>uiBehavior</name>
                     <value>readonly</value>
@@ -806,6 +812,24 @@
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
+                    <name>showLast5TreatmentsReport</name>
+                    <value>false</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>showTreatmentPlanButton</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>showTreatmentSessionButton</name>
+                    <value>false</value>
+                </componentInstanceProperties>
+                <componentName>treatmentTabHeader</componentName>
+                <identifier>c_treatmentTabHeader</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
                     <name>parentFieldApiName</name>
                     <value>Animal__c.Id</value>
                 </componentInstanceProperties>
@@ -823,7 +847,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>showActionBar</name>
-                    <value>true</value>
+                    <value>false</value>
                 </componentInstanceProperties>
                 <componentName>force:relatedListSingleContainer</componentName>
                 <identifier>force_relatedListSingleContainer14</identifier>
@@ -2079,6 +2103,18 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
+                <componentInstanceProperties>
+                    <name>showLast5TreatmentsReport</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>showTreatmentPlanButton</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>showTreatmentSessionButton</name>
+                    <value>true</value>
+                </componentInstanceProperties>
                 <componentName>treatmentTabHeader</componentName>
                 <identifier>c_treatmentTabHeader1</identifier>
             </componentInstance>

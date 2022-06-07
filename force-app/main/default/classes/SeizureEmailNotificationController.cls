@@ -36,7 +36,7 @@ public class SeizureEmailNotificationController {
         string strDate = dtTodayDateTime.format('MM/dd/yyyy');
         //for (Id conId : contactByIdEmail.keySet()) {
             Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
-            mail.setToAddresses(new List<String>{'kavya.reddy@aspca.org'});
+            mail.setToAddresses(new List<String>{'scott.silvestro@aspca.org','Lauren.Zverina@aspca.org','katy.mahaley@aspca.org'});
             //mail.setToAddresses(contactByIdEmail.get(conId));
             //mail.setCcAddresses(new List<String> {'CRCBehaviorMgmt@aspca.org'});
             mail.setSubject('Animal surrender notification');

@@ -104,6 +104,11 @@
             <field>Enrichment_Activities__c</field>
             <table>Treatment_Plan__c</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Problem_Behavior_Count__c</field>
+            <table>Treatment_Plan__c</table>
+        </columns>
         <masterLabel>Treatment Plans</masterLabel>
     </sections>
     <sections>

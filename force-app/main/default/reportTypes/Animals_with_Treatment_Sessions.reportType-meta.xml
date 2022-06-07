@@ -196,6 +196,11 @@
             <table>Animal__c</table>
         </columns>
         <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Active_Animal__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Response_Partner_Outcome__c</field>
             <table>Animal__c</table>
@@ -1357,12 +1362,10 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Active_Animal__c</field>
             <table>Animal__c</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Foster_Duration__c</field>
             <table>Animal__c</table>
         </columns>
         <masterLabel>Animals</masterLabel>
