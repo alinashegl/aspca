@@ -176,7 +176,7 @@ public with sharing class ScheduleAnimalFoster {
                 Description = 'Foster Follow Up for: ' + animal.Animal_Name_Id__c + ' (' + animal.Current_Recent_Shelter_Location__c + ')',
                 IsReminderSet = true,
                 Status = 'Not Started',
-                WhoId = animal.Behavior_Case_Worker__c != null ? animal.Behavior_Case_Worker__c : genericConId,
+                WhoId = animal.Behavior_Case_Worker__c != null ? animal.Behavior_Case_Worker__c : (genericCon != null ? genericCon.Id : null),
                 OwnerId = genericConId,
                 Subject = 'Foster Follow Up',
                 Species__c = 'Dog',
