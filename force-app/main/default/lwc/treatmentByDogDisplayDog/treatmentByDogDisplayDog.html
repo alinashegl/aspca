@@ -67,10 +67,22 @@
                                     <div class="slds-col">
                                         <lightning-layout multiple-rows>
                                             <lightning-layout-item class="custom-box">
-                                                <b>Protocol:</b> {protocol.name}
+                                                <template if:false={protocol.isActive}>
+                                                    <lightning-icon 
+                                                        icon-name="utility:error" 
+                                                        alternative-text="Error!" 
+                                                        variant="error"
+                                                        title="error variant x-small" 
+                                                        size="x-small"
+                                                    ></lightning-icon>
+                                                </template>
+                                                <b>Protocol: </b>{protocol.name}
                                             </lightning-layout-item>
                                             <lightning-layout-item class="custom-box">
-                                                <b>Category:</b> {protocol.category}
+                                                <b>Category: </b>{protocol.category}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item class="custom-box">
+                                                <b>Date Added To Plan: </b>{protocol.dateAddedToPlan}
                                             </lightning-layout-item>
                                         </lightning-layout>
                                     </div>

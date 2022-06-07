@@ -10,6 +10,7 @@ export default class TreatmentByDogDisplayDog extends LightningElement {
     response(result){
         if(result.data){
             this.dog = result.data;
+            window.console.log('this.dog: ', JSON.stringify(this.dog));
             this.showSpinner = false;
         } else if(result.error){
             this.error = result.error;

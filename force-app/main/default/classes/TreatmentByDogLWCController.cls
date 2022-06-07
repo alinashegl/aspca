@@ -69,6 +69,8 @@ public with sharing class TreatmentByDogLWCController {
             if(protocolByDogMap.containsKey(dog.Id)){
                 dogInfo.protocols = protocolByDogMap.get(dog.Id);
             }
+
+
             
             dogInfos.add(dogInfo);
         }
@@ -106,15 +108,59 @@ public with sharing class TreatmentByDogLWCController {
 
     @testVisible
     private static Map<Id, TxProtocolWrapper[]> getDogTreatments(Id[] dogIds){
-        Map<Id, Map<String, Session_Protocol__c[]>> sessionProtocolsByDogMap = new Map<Id, Map<String, Session_Protocol__c[]>>();
+        Map<Id, Map<String, Session_Protocol__c[]>> sessionProtocolsByDogMap = getSessionProtocolsByDog(dogIds);
+        Map<Id, Map<Id, Plan_Protocol__c>> planProtocolByDogMap = getActivePlanProtocols(dogIds);        
 
+        Map<Id, TxProtocolWrapper[]> protocolWrapperByDogMap = new Map<Id, TxProtocolWrapper[]>();
+
+        for(Id dogId : planProtocolByDogMap.keySet()){
+            Map<String, Session_Protocol__c[]> protoToSessionProtoMap = sessionProtocolsByDogMap.containsKey(dogId) ? sessionProtocolsByDogMap.get(dogId) : new Map<String, Session_Protocol__c[]>();
+            Map<Id, Plan_Protocol__c> protoToPlanProtoMap = planProtocolByDogMap.get(dogId);
+            TxProtocolWrapper[] protocols = new TxProtocolWrapper[0];
+            // TxProtocolWrapper[] removedProtocols = new TxProtocolWrapper[0];
+
+            for(Plan_Protocol__c pProtocol : protoToPlanProtoMap.values()){
+                String pName = pProtocol.Protocol__r.Name;
+                Session_Protocol__c[] sessionProtocols = protoToSessionProtoMap.containsKey(pName) ? protoToSessionProtoMap.get(pName) : new Session_Protocol__c[0];
+
+                TxProtocolWrapper txP = new TxProtocolWrapper();
+                txP.name = pName;
+                txP.category = pProtocol.Protocol__r.Protocol_Categories__c;
+                txP.dateAddedToPlan = (String) Date.valueOf(pProtocol.CreatedDate).format(); 
+
+                System.debug('dateAddedToPlan: ' + txP.dateAddedToPlan);
+                txP.isActive = !pProtocol.isRemoved__c;
+                txP.treatments = new TreatmentWrapper[0];
+                txP.removedTreatments = new TreatmentWrapper[0];
+
+                for(Session_Protocol__c sp : sessionProtocols){
+                    if(txp.isActive){
+                        txP.treatments.add(new TreatmentWrapper(sp));
+                    } else {
+                        txP.removedTreatments.add(new TreatmentWrapper(sp));
+                    }
+                }
+                protocols.add(txp);
+            }
+
+            //compile the list of protocols with active first and then removed
+            // TxProtocolWrapper[] protocols = activeProtocols;
+            // protocols.addAll(removedProtocols);
+            protocolWrapperByDogMap.put(dogId, protocols);
+        }
+        
+        return protocolWrapperByDogMap;
+    }
+
+    private static Map<Id, Map<String, Session_Protocol__c[]>> getSessionProtocolsByDog(Id[] dogIds){
+        Map<Id, Map<String, Session_Protocol__c[]>> sessionProtocolsByDogMap = new Map<Id, Map<String, Session_Protocol__c[]>>();
         for(Session_Protocol__c protocol : [
-            SELECT Id, Protocol_Name__c, TreatmentSessionId__c, Overall_Score__c, Overall_Score_Number__c, Overall_Score_Color__c, 
+            SELECT Id, Protocol_Name__c, isRemoved__c, TreatmentSessionId__c, Overall_Score__c, Overall_Score_Number__c, Overall_Score_Color__c, 
             TreatmentSessionId__r.Session_Date__c, ProtocolId__r.Protocol_Categories__c, TreatmentSessionId__r.Animal__c
             FROM Session_Protocol__c
             WHERE TreatmentSessionId__r.Animal__c IN: dogIds
             AND Overall_Score__c != null
-            ORDER BY ProtocolId__r.Protocol_Categories__c ASC, Protocol_Name__c ASC, TreatmentSessionId__r.Session_Date__c ASC
+            ORDER BY ProtocolId__r.Protocol_Categories__c ASC, Protocol_Name__c ASC, TreatmentSessionId__r.Session_Date__c DESC
         ]){
             Id dogId = protocol.TreatmentSessionId__r.Animal__c;
             if(sessionProtocolsByDogMap.containsKey(dogId)){
@@ -132,27 +178,25 @@ public with sharing class TreatmentByDogLWCController {
                 );
             }
         }
+        return sessionProtocolsByDogMap;
+    }
 
-        Map<Id, TxProtocolWrapper[]> protocolWrapperByDogMap = new Map<Id, TxProtocolWrapper[]>();
-
-        for(Id dogId : sessionProtocolsByDogMap.keySet()){
-            TxProtocolWrapper[] protocols = new TxProtocolWrapper[0];
-            Map<String, Session_Protocol__c[]> protocolMap = sessionProtocolsByDogMap.get(dogId);
-            for(String pName : protocolMap.Keyset()){
-                TxProtocolWrapper txP = new TxProtocolWrapper();
-                txP.name = pName;
-                txP.category = protocolMap.get(pName)[0].ProtocolId__r.Protocol_Categories__c;
-                txP.treatments = new TreatmentWrapper[0];
-                for(Session_Protocol__c sp : protocolMap.get(pName)){
-                    txP.treatments.add(new TreatmentWrapper(sp));
-                }
-                protocols.add(txP);
+    private static Map<Id, Map<Id, Plan_Protocol__c>> getActivePlanProtocols(Id[] dogIds){
+        Plan_Protocol__c[] pProtocols = [
+            SELECT Id, CreatedDate, isRemoved__c, Treatment_Plan__r.Animal__c, Protocol__c, Protocol__r.Protocol_Categories__c, Protocol__r.Name
+            FROM Plan_Protocol__c 
+            WHERE Treatment_Plan__r.IsActive__c  = true 
+            AND  Treatment_Plan__r.Animal__c IN :dogIds
+        ];
+        Map<Id, Map<Id, Plan_Protocol__c>> protocolMap = new Map<Id, Map<Id, Plan_Protocol__c>>();
+        for(Plan_Protocol__c proto : pProtocols){
+            if(protocolMap.containsKey(proto.Treatment_Plan__r.Animal__c)){
+                protocolMap.get(proto.Treatment_Plan__r.Animal__c).put(proto.Protocol__c, proto);
+            } else {
+                protocolMap.put(proto.Treatment_Plan__r.Animal__c, new Map<Id, Plan_Protocol__c>{proto.Protocol__c => proto});
             }
-
-            protocolWrapperByDogMap.put(dogId, protocols);
         }
-        
-        return protocolWrapperByDogMap;
+        return protocolMap;
     }
 
     public class DogInfoWrapper{
@@ -183,6 +227,14 @@ public with sharing class TreatmentByDogLWCController {
     public class TxProtocolWrapper{
         @AuraEnabled public String name {get;set;}
         @AuraEnabled public String category {get;set;}
+        @AuraEnabled public String dateAddedToPlan {get;set;}
+        @AuraEnabled public Boolean isActive {get;set;}
+        // @AuraEnabled public SessionProtocol[] sessionProtocols {get; set;}
+        @AuraEnabled public TreatmentWrapper[] treatments {get;set;}
+        @AuraEnabled public TreatmentWrapper[] removedTreatments {get;set;}
+    }
+
+    public class SessionProtocol{
         @AuraEnabled public TreatmentWrapper[] treatments {get;set;}
     }
 
