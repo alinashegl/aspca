@@ -22,9 +22,10 @@ public with sharing class ScheduleAnimalBRCMRC {
     public static void completeBRCMRCTasks(){
         List<Task> taskList = new List<Task>();
         List<Animal__c> animals = getAnimalsForTaskUpdate();
-        List<Task> tasks = [Select Id, Status from Task where recordTypeId =:recordTypeId and WhatId IN : animals];
+        List<Task> tasks = [Select Id, Status,Owner.name from Task where recordTypeId =:recordTypeId and WhatId IN : animals];
         for(Task t : tasks){
             t.status = 'Completed';
+            t.Completed_By_Text__c  = t.Owner.Name;
             taskList.add(t);
         }
         update taskList;
@@ -34,7 +35,7 @@ public with sharing class ScheduleAnimalBRCMRC {
     * prepares and returns the new task
     */
     public static Task prepTask(Animal__c animal, Date taskDate, Boolean isAutoScheduled){
-        //get the genericCon for the animal's location        
+        //get the genericCon for the animal's location
         Contact genericCon = AutoScheduleTasksUtil.genericContactMap.get(animal.Current_Recent_Shelter_Location__c);
 
         //determine the task subject prefix
@@ -53,7 +54,7 @@ public with sharing class ScheduleAnimalBRCMRC {
             Description = subjectPrefix + ' Accepted follow up for: ' + animal.Animal_Name_Id__c,
             IsReminderSet = false,
             Status = 'Not Started',
-            WhoId = animal.Behavior_Case_Worker__c != null ? animal.Behavior_Case_Worker__c : genericCon.Id,
+            WhoId = animal.Behavior_Case_Worker__c != null ? animal.Behavior_Case_Worker__c : (genericCon != null ? genericCon.Id : null),
             Subject = subjectPrefix+' Accepted follow up for: ' + animal.Animal_Name_Id__c,
             Species__c = 'Dog',
             Auto_Scheduled_Task__c = isAutoScheduled
