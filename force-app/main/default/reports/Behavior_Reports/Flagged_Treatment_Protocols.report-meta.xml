@@ -10,11 +10,17 @@
         <scale>0</scale>
     </aggregates>
     <columns>
-        <aggregateTypes>Sum</aggregateTypes>
-        <field>Animal__c.Treatment_Sessions__r.Session_Protocols__r$Needs_Review__c</field>
+        <field>Animal__c.Treatment_Sessions__r.Session_Protocols__r$CreatedDate</field>
+    </columns>
+    <columns>
+        <field>Animal__c.Treatment_Sessions__r.Session_Protocols__r$Name</field>
     </columns>
     <columns>
         <field>Animal__c.Treatment_Sessions__r.Session_Protocols__r$Protocol_Name__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Animal__c.Treatment_Sessions__r.Session_Protocols__r$Needs_Review__c</field>
     </columns>
     <filter>
         <criteriaItems>
@@ -45,11 +51,28 @@
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
+        <criteriaItems>
+            <column>Animal__c.Treatment_Sessions__r.Session_Protocols__r$CreatedDate</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>TODAY</value>
+        </criteriaItems>
     </filter>
     <format>Summary</format>
     <groupingsDown>
         <dateGranularity>Day</dateGranularity>
-        <field>Animal__c$Animal_Name_Id__c</field>
+        <field>Animal__c$Current_Recent_Shelter_Location__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Animal__c$Name</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Animal__c$Animal_Name__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
     <name>Flagged Treatment Protocols</name>
