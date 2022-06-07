@@ -543,10 +543,6 @@
         <fields>Study_Animal_Box_URL__c</fields>
         <relatedList>Research_Animal__c.Animal__c</relatedList>
     </relatedLists>
-    <relatedLists>
-        <fields>NAME</fields>
-        <relatedList>Animal_to_Entity_Junction__c.Animal__c</relatedList>
-    </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>
     <showInteractionLogPanel>false</showInteractionLogPanel>
