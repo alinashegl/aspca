@@ -799,6 +799,18 @@
         </itemInstances>
         <itemInstances>
             <componentInstance>
+                <componentInstanceProperties>
+                    <name>showLast5TreatmentsReport</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>showTreatmentPlanButton</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>showTreatmentSessionButton</name>
+                    <value>true</value>
+                </componentInstanceProperties>
                 <componentName>treatmentTabHeader</componentName>
                 <identifier>c_treatmentTabHeader</identifier>
             </componentInstance>
@@ -823,7 +835,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>showActionBar</name>
-                    <value>true</value>
+                    <value>false</value>
                 </componentInstanceProperties>
                 <componentName>force:relatedListSingleContainer</componentName>
                 <identifier>force_relatedListSingleContainer14</identifier>
@@ -1836,6 +1848,18 @@
         </itemInstances>
         <itemInstances>
             <componentInstance>
+                <componentInstanceProperties>
+                    <name>showLast5TreatmentsReport</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>showTreatmentPlanButton</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>showTreatmentSessionButton</name>
+                    <value>true</value>
+                </componentInstanceProperties>
                 <componentName>treatmentTabHeader</componentName>
                 <identifier>c_treatmentTabHeader2</identifier>
             </componentInstance>
@@ -2079,6 +2103,18 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
+                <componentInstanceProperties>
+                    <name>showLast5TreatmentsReport</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>showTreatmentPlanButton</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>showTreatmentSessionButton</name>
+                    <value>true</value>
+                </componentInstanceProperties>
                 <componentName>treatmentTabHeader</componentName>
                 <identifier>c_treatmentTabHeader1</identifier>
             </componentInstance>
