@@ -1,0 +1,17 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:appHostable">
+    <lightning:card title = "To Do List" iconName = "standard:task">
+        <aura:set attribute="actions">
+            <c:todoList/>
+            <c:OutOfOffice/>
+        </aura:set>
+    </lightning:card>
+    <div class="slds-p-top_small">
+        <c:playgroupToDoList/>
+    </div>
+    <div class="slds-p-top_small">
+        <c:treatmentPriorityToDoList/>
+    </div>
+    <div class="slds-p-top_small">
+        <c:dailyCareMain/>
+    </div>
+</aura:component>
