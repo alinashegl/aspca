@@ -3,12 +3,12 @@
     <baseObject>Animal__c</baseObject>
     <category>other</category>
     <deployed>true</deployed>
-    <description>Animals that have Incident reports</description>
+    <description>Animals with Treatment Plans</description>
     <join>
         <outerJoin>false</outerJoin>
-        <relationship>Incidents__r</relationship>
+        <relationship>Treatment_Plan__r</relationship>
     </join>
-    <label>Animals with Incidents</label>
+    <label>Animals with Treatment Plans</label>
     <sections>
         <columns>
             <checkedByDefault>false</checkedByDefault>
@@ -912,6 +912,11 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>Foster_Duration__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>Controlled_Food_Program__c</field>
             <table>Animal__c</table>
         </columns>
@@ -1362,7 +1367,7 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Foster_Duration__c</field>
+            <field>Foster_Count__c</field>
             <table>Animal__c</table>
         </columns>
         <columns>
@@ -1381,138 +1386,153 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Id</field>
-            <table>Animal__c.Incidents__r</table>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Owner</field>
-            <table>Animal__c.Incidents__r</table>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>true</checkedByDefault>
             <field>Name</field>
-            <table>Animal__c.Incidents__r</table>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>CreatedDate</field>
-            <table>Animal__c.Incidents__r</table>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>CreatedBy</field>
-            <table>Animal__c.Incidents__r</table>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>LastModifiedDate</field>
-            <table>Animal__c.Incidents__r</table>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>LastModifiedBy</field>
-            <table>Animal__c.Incidents__r</table>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Additional_Comments__c</field>
-            <table>Animal__c.Incidents__r</table>
+            <field>LastActivityDate</field>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Behaviors_Exhibited_by_the_Dog__c</field>
-            <table>Animal__c.Incidents__r</table>
+            <field>AssignedTreatmentBundleId__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Clothing_Worn_at_Bite_Site__c</field>
-            <table>Animal__c.Incidents__r</table>
+            <field>Description__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Damage_Done_by_the_Dog__c</field>
-            <table>Animal__c.Incidents__r</table>
+            <field>IsActive__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>If_dog_did_not_bite__c</field>
-            <table>Animal__c.Incidents__r</table>
+            <field>MasterTreatmentBundleId__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Incident_Date_Time__c</field>
-            <table>Animal__c.Incidents__r</table>
+            <field>Plan_Notes__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Incident_Description__c</field>
-            <table>Animal__c.Incidents__r</table>
+            <field>Preferred_Motivators__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Number_of_bites__c</field>
-            <table>Animal__c.Incidents__r</table>
+            <field>Treatment_Priority__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Other_Damage_Done_by_the_Dog__c</field>
-            <table>Animal__c.Incidents__r</table>
+            <field>Enrichment_Priority__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Was_defensive_handling_used__c</field>
-            <table>Animal__c.Incidents__r</table>
+            <field>Shelter_Color_Code__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Please_explain_why_you_think_so__c</field>
-            <table>Animal__c.Incidents__r</table>
+            <field>Enrichment_Activities__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Report_Date__c</field>
-            <table>Animal__c.Incidents__r</table>
+            <field>Custom_Schedule__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Specific_Target_of_Dog_s_Behavior__c</field>
-            <table>Animal__c.Incidents__r</table>
+            <field>Problem_Behavior__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Type_of_Bite__c</field>
-            <table>Animal__c.Incidents__r</table>
+            <field>Problem_Behavior_Aggression__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Was_Bitten_Area_Covered_with_Clothing__c</field>
-            <table>Animal__c.Incidents__r</table>
+            <field>Problem_Behavior_Arousal__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Witnesses__c</field>
-            <table>Animal__c.Incidents__r</table>
+            <field>Problem_Behavior_Fear__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Person_Involved__c</field>
-            <table>Animal__c.Incidents__r</table>
+            <field>Problem_Behavior_Miscellaneous__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Supervisor_Team_Lead__c</field>
-            <table>Animal__c.Incidents__r</table>
+            <field>Problem_Behavior_Aggression_Count__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Would_dog_have_bitten_w_o_this_handling__c</field>
-            <table>Animal__c.Incidents__r</table>
+            <field>Problem_Behavior_Arousal_Count__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Position_Title__c</field>
-            <table>Animal__c.Incidents__r</table>
+            <field>Problem_Behavior_Fear_Count__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
         </columns>
-        <masterLabel>Incidents</masterLabel>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Problem_Behavior_Miscellaneous_Count__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Problem_Behavior_Count__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Num_of_Treatment_Sessions__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
+        </columns>
+        <masterLabel>Treatment Plans</masterLabel>
     </sections>
 </ReportType>
