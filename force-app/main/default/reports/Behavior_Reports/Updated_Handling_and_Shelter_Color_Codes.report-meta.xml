@@ -67,6 +67,6 @@
     <showSubTotals>false</showSubTotals>
     <timeFrameFilter>
         <dateColumn>EntityHistory__c$CreatedDate</dateColumn>
-        <interval>INTERVAL_CUSTOM</interval>
+        <interval>INTERVAL_TODAY</interval>
     </timeFrameFilter>
 </Report>
