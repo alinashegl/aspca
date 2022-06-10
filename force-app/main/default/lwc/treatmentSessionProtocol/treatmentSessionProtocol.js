@@ -200,7 +200,7 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
         .catch(error => {
             this.dispatchEvent(
                 new ShowToastEvent({
-                    title: 'Unable to upate plan protocol',
+                    title: 'Unable to update plan protocol',
                     message: error.body.message,
                     variant: 'error',
                 }),

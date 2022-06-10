@@ -196,7 +196,6 @@ public with sharing class TreatmentSessionLWCController {
             return [
                 SELECT 
                     Id, 
-                    ProtocolId__r.Name,
                     IsSkipped__c,
                     Needs_Review__c,
                     Protocol_Name__c,
@@ -207,7 +206,10 @@ public with sharing class TreatmentSessionLWCController {
                     Novel_Person_Notes__c,
                     Protocol_Notes__c,
                     Manager_Review_Notes__c,
-                    ProtocolId__r.Protocol_Box_Link__c,
+                    ProtocolId__c,
+                    ProtocolId__r.Protocol_Box_Link__c,                    
+                    ProtocolId__r.Name,
+                    TreatmentSessionId__r.Treatment_Plan__c,
                     (
                         SELECT Id, 
                             Protocol_Score__c,
@@ -448,8 +450,8 @@ public with sharing class TreatmentSessionLWCController {
         @AuraEnabled public String protocolNotes { get; set; }
         @AuraEnabled public String managerReviewNotes { get; set; }
         @AuraEnabled public String boxLink {get; set;}
-        // @AuraEnabled public String planProtocolId {get; set;}
-        // @AuraEnabled public String planProtocolNotes {get; set;}
+        @AuraEnabled public String planProtocolId {get; set;}
+        @AuraEnabled public String planProtocolNotes {get; set;}
 
         ProtocolInfo(Session_Protocol__c sp){
             this.id = sp.Id;
@@ -465,6 +467,12 @@ public with sharing class TreatmentSessionLWCController {
             this.protocolNotes = sp.Protocol_Notes__c;
             this.managerReviewNotes = sp.Manager_Review_Notes__c;
             this.boxLink = sp.ProtocolId__r.Protocol_Box_Link__c;
+
+            Plan_Protocol__c[] pp = [SELECT Id, Protocol_Notes__c FROM Plan_Protocol__c WHERE Treatment_Plan__c = :sp.TreatmentSessionId__r.Treatment_Plan__c AND Protocol__c = :sp.ProtocolId__c LIMIT 1];
+            if(!pp.isEmpty()){
+                this.planProtocolId = pp[0].Id;
+                this.planProtocolNotes = pp[0].Protocol_Notes__c;
+            }
             
             Map<Decimal, ScoreOptions[]> scoringOptionsMap = new Map<Decimal, ScoreOptions[]>();
             for(Session_Protocol_Scale__c sps : sp.Session_Protocol_Scales__r){   

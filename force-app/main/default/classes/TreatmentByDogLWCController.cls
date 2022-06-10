@@ -51,9 +51,8 @@ public with sharing class TreatmentByDogLWCController {
     @testVisible
     private static DogInfoWrapper[] getDogInfo(Id[] dogIds){
         Map<Id, Set<String>>  medicationsByDogMap = getDogMedications(dogIds);
-        Map<Id, TxProtocolWrapper[]> protocolByDogMap = getDogTreatments(dogIds);
-
         DogInfoWrapper[] dogInfos = new DogInfoWrapper[0];
+        Map<Id, Map<String, TxProtocolWrapper>> treatmentsByDogMap = getDogTreatments(dogIds);
 
         for(Animal__c dog : [
             SELECT Id, Animal_Name_Id__c, Gender__c, Breed__c, Current_Animal_Age_Formatted__c, Current_Location__c, 
@@ -66,12 +65,11 @@ public with sharing class TreatmentByDogLWCController {
             if(medicationsByDogMap.containsKey(dog.Id)){
                 dogInfo.medications = string.join(new List<String>(medicationsByDogMap.get(dog.Id)), '; ');
             }
-            if(protocolByDogMap.containsKey(dog.Id)){
-                dogInfo.protocols = protocolByDogMap.get(dog.Id);
-            }
 
-
-            
+            if(treatmentsByDogMap.containsKey(dog.Id)){
+                Map<String, TxProtocolWrapper> dogTreatments = treatmentsByDogMap.get(dog.Id);
+                dogInfo.txProtocols = dogTreatments.values();
+            }            
             dogInfos.add(dogInfo);
         }
         return dogInfos;
@@ -100,86 +98,330 @@ public with sharing class TreatmentByDogLWCController {
         return dogToMedicationMap;
     }
 
-    @testVisible
-    private static TxProtocolWrapper[] getDogTreatments(Id dogId){
-        return
-            getDogTreatments(new Id[]{dogId}).get(dogId);        
-    }
+    // @testVisible
+    // private static TxProtocolWrapper[] getDogTreatments(Id dogId){
+    //     return
+    //         getDogTreatments(new Id[]{dogId}).get(dogId);        
+    // }
 
-    @testVisible
-    private static Map<Id, TxProtocolWrapper[]> getDogTreatments(Id[] dogIds){
-        Map<Id, Map<String, Session_Protocol__c[]>> sessionProtocolsByDogMap = getSessionProtocolsByDog(dogIds);
-        Map<Id, Map<Id, Plan_Protocol__c>> planProtocolByDogMap = getActivePlanProtocols(dogIds);        
+    // @testVisible
+    // private static Map<Id, Map<String, TxProtocolWrapper[]>> getDogTreatments(Id[] dogIds){
+        // Map<Id, Map<String, Session_Protocol__c[]>> sessionProtocolsByDogMap = getSessionProtocolsByDog(dogIds);
+        // Map<Id, Map<Id, Plan_Protocol__c>> planProtocolByDogMap = getActivePlanProtocols(dogIds);        
 
-        Map<Id, TxProtocolWrapper[]> protocolWrapperByDogMap = new Map<Id, TxProtocolWrapper[]>();
+        // Map<Id, TxProtocolWrapper[]> protocolWrapperByDogMap = new Map<Id, TxProtocolWrapper[]>();
 
-        for(Id dogId : planProtocolByDogMap.keySet()){
-            Map<String, Session_Protocol__c[]> protoToSessionProtoMap = sessionProtocolsByDogMap.containsKey(dogId) ? sessionProtocolsByDogMap.get(dogId) : new Map<String, Session_Protocol__c[]>();
-            Map<Id, Plan_Protocol__c> protoToPlanProtoMap = planProtocolByDogMap.get(dogId);
-            TxProtocolWrapper[] protocols = new TxProtocolWrapper[0];
-            // TxProtocolWrapper[] removedProtocols = new TxProtocolWrapper[0];
+        // for(Id dogId : planProtocolByDogMap.keySet()){
+        //     Map<String, Session_Protocol__c[]> protoToSessionProtoMap = sessionProtocolsByDogMap.containsKey(dogId) ? sessionProtocolsByDogMap.get(dogId) : new Map<String, Session_Protocol__c[]>();
+        //     Map<Id, Plan_Protocol__c> protoToPlanProtoMap = planProtocolByDogMap.get(dogId);
+        //     TxProtocolWrapper[] protocols = new TxProtocolWrapper[0];
 
-            for(Plan_Protocol__c pProtocol : protoToPlanProtoMap.values()){
-                String pName = pProtocol.Protocol__r.Name;
-                Session_Protocol__c[] sessionProtocols = protoToSessionProtoMap.containsKey(pName) ? protoToSessionProtoMap.get(pName) : new Session_Protocol__c[0];
+        //     for(Plan_Protocol__c pProtocol : protoToPlanProtoMap.values()){
+        //         String pName = pProtocol.Protocol__r.Name;
+        //         Session_Protocol__c[] sessionProtocols = protoToSessionProtoMap.containsKey(pName) ? protoToSessionProtoMap.get(pName) : new Session_Protocol__c[0];
 
-                TxProtocolWrapper txP = new TxProtocolWrapper();
-                txP.name = pName;
-                txP.category = pProtocol.Protocol__r.Protocol_Categories__c;
-                txP.dateAddedToPlan = (String) Date.valueOf(pProtocol.CreatedDate).format(); 
+        //         TxProtocolWrapper txP = new TxProtocolWrapper();
+        //         txP.name = pName;
+        //         txP.category = pProtocol.Protocol__r.Protocol_Categories__c;
+        //         txP.dateAddedToPlan = (String) Date.valueOf(pProtocol.CreatedDate).format(); 
 
-                System.debug('dateAddedToPlan: ' + txP.dateAddedToPlan);
-                txP.isActive = !pProtocol.isRemoved__c;
-                txP.treatments = new TreatmentWrapper[0];
-                txP.removedTreatments = new TreatmentWrapper[0];
+        //         System.debug('dateAddedToPlan: ' + txP.dateAddedToPlan);
+        //         txP.isActive = !pProtocol.isRemoved__c;
+        //         txP.treatments = new TreatmentWrapper[0];
+        //         txP.removedTreatments = new TreatmentWrapper[0];
 
-                for(Session_Protocol__c sp : sessionProtocols){
-                    if(txp.isActive){
-                        txP.treatments.add(new TreatmentWrapper(sp));
-                    } else {
-                        txP.removedTreatments.add(new TreatmentWrapper(sp));
-                    }
+        //         for(Session_Protocol__c sp : sessionProtocols){
+        //             if(txp.isActive){
+        //                 txP.treatments.add(new TreatmentWrapper(sp));
+        //             } else {
+        //                 txP.removedTreatments.add(new TreatmentWrapper(sp));
+        //             }
+        //         }
+        //         protocols.add(txp);
+        //     }
+
+        //     //compile the list of protocols with active first and then removed
+        //     // TxProtocolWrapper[] protocols = activeProtocols;
+        //     // protocols.addAll(removedProtocols);
+        //     protocolWrapperByDogMap.put(dogId, protocols);
+        // }
+        
+        // return protocolWrapperByDogMap;
+    //     return null;
+    // }
+
+    // @testVisible
+    // private static Map<Id, TxProtocolWrapper[]> getDogTreatments(Id[] dogIds){
+    //     Map<Id, Map<String, Session_Protocol__c[]>> sessionProtocolsByDogMap = getSessionProtocolsByDog(dogIds);
+    //     Map<Id, Map<Id, Plan_Protocol__c>> planProtocolByDogMap = getActivePlanProtocols(dogIds);        
+
+    //     Map<Id, TxProtocolWrapper[]> protocolWrapperByDogMap = new Map<Id, TxProtocolWrapper[]>();
+
+    //     for(Id dogId : planProtocolByDogMap.keySet()){
+    //         Map<String, Session_Protocol__c[]> protoToSessionProtoMap = sessionProtocolsByDogMap.containsKey(dogId) ? sessionProtocolsByDogMap.get(dogId) : new Map<String, Session_Protocol__c[]>();
+    //         Map<Id, Plan_Protocol__c> protoToPlanProtoMap = planProtocolByDogMap.get(dogId);
+    //         TxProtocolWrapper[] protocols = new TxProtocolWrapper[0];
+
+    //         for(Plan_Protocol__c pProtocol : protoToPlanProtoMap.values()){
+    //             String pName = pProtocol.Protocol__r.Name;
+    //             Session_Protocol__c[] sessionProtocols = protoToSessionProtoMap.containsKey(pName) ? protoToSessionProtoMap.get(pName) : new Session_Protocol__c[0];
+
+    //             TxProtocolWrapper txP = new TxProtocolWrapper();
+    //             txP.name = pName;
+    //             txP.category = pProtocol.Protocol__r.Protocol_Categories__c;
+    //             txP.dateAddedToPlan = (String) Date.valueOf(pProtocol.CreatedDate).format(); 
+
+    //             System.debug('dateAddedToPlan: ' + txP.dateAddedToPlan);
+    //             txP.isActive = !pProtocol.isRemoved__c;
+    //             txP.treatments = new TreatmentWrapper[0];
+    //             txP.removedTreatments = new TreatmentWrapper[0];
+
+    //             for(Session_Protocol__c sp : sessionProtocols){
+    //                 if(txp.isActive){
+    //                     txP.treatments.add(new TreatmentWrapper(sp));
+    //                 } else {
+    //                     txP.removedTreatments.add(new TreatmentWrapper(sp));
+    //                 }
+    //             }
+    //             protocols.add(txp);
+    //         }
+
+    //         //compile the list of protocols with active first and then removed
+    //         // TxProtocolWrapper[] protocols = activeProtocols;
+    //         // protocols.addAll(removedProtocols);
+    //         protocolWrapperByDogMap.put(dogId, protocols);
+    //     }
+        
+    //     return protocolWrapperByDogMap;
+    // }
+
+    public static Map<Id, Map<String, TxProtocolWrapper>> getDogTreatments(Id[] dogIds){
+        //map of active plans (if the values contains a set a of Ids, they are the ids of removed protocols at the plan level)
+        Map<Id, Set<Id>> m_activePlansProtocolIds = new Map<Id, Set<Id>>();
+        Map<Id, Set<Id>> m_activePlansRemovedProtocols = new Map<Id, Set<Id>>();
+        for(Treatment_Plan__c plan : [
+            SELECT Id, Animal__c, 
+            (SELECT Id, Protocol__c, isRemoved__c FROM Plan_Protocols__r)
+            FROM Treatment_Plan__c
+            WHERE isActive__c = true
+            AND Animal__c IN :dogIds
+        ]){
+            Set<Id> protocolIds = new Set<Id>();
+            Set<Id> removedProtocolIds = new Set<Id>();
+            for(Plan_Protocol__c protocol : plan.Plan_Protocols__r){
+                protocolIds.add(protocol.Protocol__c);
+
+                if(protocol.isRemoved__c){
+                    removedProtocolIds.add(protocol.Protocol__c);
                 }
-                protocols.add(txp);
+            }
+            m_activePlansProtocolIds.put(plan.Animal__c, protocolIds);
+            m_activePlansRemovedProtocols.put(plan.Animal__c, removedProtocolIds);
+        }
+
+        System.debug('m_activePlansProtocolIds: ' + m_activePlansProtocolIds);
+        System.debug('m_activePlansRemovedProtocols: ' + m_activePlansRemovedProtocols);
+          
+        Map<Id, Map<String, TxProtocolWrapper>> sessionProtocolsByDogMap = new Map<Id, Map<String, TxProtocolWrapper>>();
+
+        for(Session_Protocol__c protocol : [
+            SELECT Id, Protocol_Name__c, isRemoved__c, Overall_Score__c, Overall_Score_Number__c, Overall_Score_Color__c, TreatmentSessionId__r.Treatment_Plan__c,
+            TreatmentSessionId__c, TreatmentSessionId__r.Session_Date__c, ProtocolId__c, ProtocolId__r.Protocol_Categories__c, TreatmentSessionId__r.Animal__c,
+            TreatmentSessionId__r.Treatment_Plan__r.IsActive__c
+            FROM Session_Protocol__c
+            WHERE TreatmentSessionId__r.Animal__c IN :dogIds
+            AND Overall_Score__c != null
+            ORDER BY ProtocolId__r.Protocol_Categories__c ASC, Protocol_Name__c ASC, TreatmentSessionId__r.Session_Date__c DESC
+        ]){
+            Id dogId = protocol.TreatmentSessionId__r.Animal__c;
+            Id treatmentPlanId = protocol.TreatmentSessionId__r.Treatment_Plan__c;
+
+            //instantiate the sessionProtocolsMap
+            Map<String, TxProtocolWrapper> sessionProtocolsMap = new Map<String, TxProtocolWrapper>();
+
+            //if this dog Id already has been added to sessionProtocolsByDogMap get the SessionProtocolsForDog
+            if(sessionProtocolsByDogMap.containsKey(dogId)){
+                sessionProtocolsMap = sessionProtocolsByDogMap.get(dogId);
             }
 
-            //compile the list of protocols with active first and then removed
-            // TxProtocolWrapper[] protocols = activeProtocols;
-            // protocols.addAll(removedProtocols);
-            protocolWrapperByDogMap.put(dogId, protocols);
+            //get the TxProtocolWrapper by the protocol name, if the key exists, otherwise instanitae a new one
+            TxProtocolWrapper protocolInfo = new TxProtocolWrapper();            
+            if(sessionProtocolsMap.containsKey(protocol.Protocol_Name__c)){
+                protocolInfo = sessionProtocolsMap.get(protocol.Protocol_Name__c);
+            } else {
+                protocolInfo.name = protocol.Protocol_Name__c;
+                protocolInfo.category = protocol.ProtocolId__r.Protocol_Categories__c;
+                //todo: need to come back and fix this later
+                protocolInfo.dateAddedToPlan = (String) Date.valueOf(date.today()).format();
+                sessionProtocolsMap.put(protocol.Protocol_Name__c, protocolInfo);
+            }
+
+            //get the active plan protocol Ids for this dog to compare the session protocols against
+            Set<Id> activePlanProtocolIds = m_activePlansProtocolIds.containsKey(dogId) ? 
+                m_activePlansProtocolIds.get(dogId) : 
+                new Set<Id>();
+
+            //get the removed plan protocol Ids for this dog to compare the session protocols against
+            Set<Id> removedPlanProtocolIds = m_activePlansRemovedProtocols.containsKey(dogId) ? 
+                m_activePlansRemovedProtocols.get(dogId) : 
+                new Set<Id>();  
+
+            Boolean removedAtPlanLevel = removedPlanProtocolIds.contains(protocol.ProtocolId__c);
+
+            Boolean showDebug = protocol.Protocol_Name__c == 'Handling Non-Sensitive Areas';
+
+            if(showDebug){
+                System.debug('startDebugging here: ' + protocol);
+                System.debug('activePlanProtocolIds: ' + activePlanProtocolIds.contains(protocol.ProtocolId__c));
+                System.debug('IsActive__c): ' + protocol.TreatmentSessionId__r.Treatment_Plan__r.IsActive__c);
+                System.debug('protocol.IsRemoved__c: ' + protocol.IsRemoved__c);
+                System.debug('removedAtPlanLevel: ' + removedAtPlanLevel);
+            }
+            
+            //if the protocolId is in the active plan
+            if(activePlanProtocolIds.contains(protocol.ProtocolId__c)){
+                protocolInfo.isActiveProtocol = true;
+                //if the protocol was completed in the current plan
+                if(protocol.TreatmentSessionId__r.Treatment_Plan__r.IsActive__c){
+                    //if the session protocol has not been removed from the current plan
+                    if(!protocol.IsRemoved__c && !removedAtPlanLevel){
+                        //add to list of active protocols that have not been removed
+                        protocolInfo.activePlanSessionProtocols.add(new TreatmentWrapper(protocol));
+                    } else {
+                        //add to list of active protocols that have been removed
+                        protocolInfo.activePlanRemovedSessionProtocols.add(new TreatmentWrapper(protocol));
+                    }
+                //not completed in current plan, so it's an historical session protocol
+                }else{
+                    if(!protocol.IsRemoved__c && !removedAtPlanLevel){
+                        //add to list of historical protocols that have not been removed
+                        protocolInfo.historicalActiveSessionProtocols.add(new TreatmentWrapper(protocol));
+                    } else {
+                        //add to list of historical protocols that have been removed
+                        protocolInfo.historicalRemovedSessionProtocols.add(new TreatmentWrapper(protocol));
+                    }
+                }
+            } else {
+                //protocol Id is not one of the active protocols, so it's historical
+                protocolInfo.historicalSessionProtocols.add(new TreatmentWrapper(protocol));                  
+            }
+            if(showDebug){
+                System.debug('ProtocolInfo: ' + protocolInfo);
+                System.debug('activePlanSessionProtocols: ' + protocolInfo.activePlanSessionProtocols);
+                System.debug('historicalActiveSessionProtocols: ' + protocolInfo.historicalActiveSessionProtocols);
+                System.debug('activePlanRemovedSessionProtocols: ' + protocolInfo.activePlanRemovedSessionProtocols);
+                System.debug('historicalRemovedSessionProtocols: ' + protocolInfo.historicalRemovedSessionProtocols);
+                System.debug('historicalSessionProtocols: ' + protocolInfo.historicalSessionProtocols);
+            }
+
+            sessionProtocolsByDogMap.put(dogId, sessionProtocolsMap);
         }
-        
-        return protocolWrapperByDogMap;
+        return sessionProtocolsByDogMap;
     }
 
-    private static Map<Id, Map<String, Session_Protocol__c[]>> getSessionProtocolsByDog(Id[] dogIds){
-        Map<Id, Map<String, Session_Protocol__c[]>> sessionProtocolsByDogMap = new Map<Id, Map<String, Session_Protocol__c[]>>();
+    private class SessionProtocolsForDog{
+        Map<String, TxProtocolWrapper> protocolInfo;
+        TreatmentWrapper[] activePlanSessionProtocols = new TreatmentWrapper[0];
+        TreatmentWrapper[] historicalActiveSessionProtocols = new TreatmentWrapper[0];
+        TreatmentWrapper[] activePlanRemovedSessionProtocols = new TreatmentWrapper[0];
+        TreatmentWrapper[] historicalRemovedSessionProtocols = new TreatmentWrapper[0];
+        TreatmentWrapper[] historicalSessionProtocols = new TreatmentWrapper[0];
+
+
+        // Session_Protocol__c[] activePlanSessionProtocols = new Session_Protocol__c[0];
+        // Session_Protocol__c[] historicalActiveSessionProtocols = new Session_Protocol__c[0];
+        // Session_Protocol__c[] activePlanRemovedSessionProtocols = new Session_Protocol__c[0];
+        // Session_Protocol__c[] historicalRemovedSessionProtocols = new Session_Protocol__c[0];
+        // Session_Protocol__c[] historicalSessionProtocols = new Session_Protocol__c[0];
+    }
+
+    private static Map<Id, SessionProtocolsForDog> getActiveRemovedSessionProtocolsByDog(){
+        
+        return null;
+    }
+
+    private static Map<Id, SessionProtocolsForDog> getHistoricalSessionProtocolsByDog(){
+        return null;
+    }
+
+    private static Map<Id, SessionProtocolsForDog> getSessionProtocolsByDog(Id[] dogIds){
+        Map<Id, SessionProtocolsForDog> sessionProtocolsByDogMap = new Map<Id, SessionProtocolsForDog>();
         for(Session_Protocol__c protocol : [
-            SELECT Id, Protocol_Name__c, isRemoved__c, TreatmentSessionId__c, Overall_Score__c, Overall_Score_Number__c, Overall_Score_Color__c, 
-            TreatmentSessionId__r.Session_Date__c, ProtocolId__r.Protocol_Categories__c, TreatmentSessionId__r.Animal__c
+            SELECT Id, Protocol_Name__c, isRemoved__c, Overall_Score__c, Overall_Score_Number__c, Overall_Score_Color__c, 
+            TreatmentSessionId__c, TreatmentSessionId__r.Session_Date__c, ProtocolId__r.Protocol_Categories__c, TreatmentSessionId__r.Animal__c,
+            TreatmentSessionId__r.Treatment_Plan__r.IsActive__c
             FROM Session_Protocol__c
             WHERE TreatmentSessionId__r.Animal__c IN: dogIds
             AND Overall_Score__c != null
             ORDER BY ProtocolId__r.Protocol_Categories__c ASC, Protocol_Name__c ASC, TreatmentSessionId__r.Session_Date__c DESC
         ]){
             Id dogId = protocol.TreatmentSessionId__r.Animal__c;
-            if(sessionProtocolsByDogMap.containsKey(dogId)){
-                Map<String, Session_Protocol__c[]> protocolMap = sessionProtocolsByDogMap.get(dogId);
-                if(protocolMap.containsKey(protocol.Protocol_Name__c)){
-                    protocolMap.get(protocol.Protocol_Name__c).add(protocol);
-                } else {
-                    protocolMap.put(protocol.Protocol_Name__c, new Session_Protocol__c[]{protocol});
-                }
-            }else {
-                sessionProtocolsByDogMap.put(dogId, 
-                    new Map<String, Session_Protocol__c[]>{
-                        protocol.Protocol_Name__c => new Session_Protocol__c[]{protocol}
-                    }
-                );
-            }
+            SessionProtocolsForDog dogSessionProtocols = sessionProtocolsByDogMap.containsKey(dogId) ? sessionProtocolsByDogMap.get(dogId) : new SessionProtocolsForDog();
+
+            // if(protocol.TreatmentSessionId__r.Treatment_Plan__r.IsActive__c){
+            //     if(!protocol.isRemoved__c){
+            //         if(activePlanSessionProtocols.containsKey(protocol.Protocol_Name__c)){
+            //             activePlanSessionProtocols.get(protocol.Protocol_Name__c).add(protocol);
+            //         } else {
+            //             activePlanSessionProtocols.put(protocol.Protocol_Name__c, new Session_Protocol__c[]{protocol});
+            //         }
+            //     } else {
+            //         if(activePlanRemovedSessionProtocols.containsKey(protocol.Protocol_Name__c)){
+            //             activePlanRemovedSessionProtocols.get(protocol.Protocol_Name__c).add(protocol);
+            //         } else {
+            //             activePlanRemovedSessionProtocols.put(protocol.Protocol_Name__c, new Session_Protocol__c[]{protocol});
+            //         }
+            //     }
+            // } else {
+            //     if(activePlanSessionProtocols.containsKey(protocol.Protocol_Name__c)){
+            //         if(activePlanHistoricalSessionProtocols.containsKey(protocol.Protocol_Name__c)){
+            //             activePlanHistoricalSessionProtocols.get(protocol.Protocol_Name__c).add(protocol);
+            //         } else {
+            //             activePlanHistoricalSessionProtocols.put(protocol.Protocol_Name__c, new Session_Protocol__c[]{protocol});
+            //         }
+            //     } else if(activePlanRemovedSessionProtocols.containsKey(protocol.Protocol_Name__c)){
+            //         if (activePlanRemovedHistoricalSessionProtocols.containsKey(protocol.Protocol_Name__c)){
+            //             activePlanRemovedHistoricalSessionProtocols.get(protocol.Protocol_Name__c).add(protocol);
+            //         } else {
+            //             activePlanRemovedHistoricalSessionProtocols.put(protocol.Protocol_Name__c, new Session_Protocol__c[]{protocol});
+            //         }
+            //     } else {
+            //         if (historicalSessionProtocols.containsKey(protocol.Protocol_Name__c)){
+            //             historicalSessionProtocols.get(protocol.Protocol_Name__c).add(protocol);
+            //         } else {
+            //             historicalSessionProtocols.put(protocol.Protocol_Name__c, new Session_Protocol__c[]{protocol});
+            //         }
+            //     }
+            // }
+            // if(sessionProtocolsByDogMap.containsKey(dogId)){
+            //     Map<String, Session_Protocol__c[]> protocolMap = sessionProtocolsByDogMap.get(dogId);
+            //     if(protocolMap.containsKey(protocol.Protocol_Name__c)){
+            //         protocolMap.get(protocol.Protocol_Name__c).add(protocol);
+            //     } else {
+            //         protocolMap.put(protocol.Protocol_Name__c, new Session_Protocol__c[]{protocol});
+            //     }
+            // }else {
+            //     sessionProtocolsByDogMap.put(dogId, 
+            //         new Map<String, Session_Protocol__c[]>{
+            //             protocol.Protocol_Name__c => new Session_Protocol__c[]{protocol}
+            //         }
+            //     );
+            // }
         }
         return sessionProtocolsByDogMap;
     }
+
+        //key is protocol name
+    //     Map<String, Session_Protocol__c[]> activePlanSessionProtocols = new Map<String, Session_Protocol__c[]>();
+    //     Map<String, Session_Protocol__c[]> activePlanHistoricalSessionProtocols = new Map<String, Session_Protocol__c[]>();
+
+    //     Map<String, Session_Protocol__c[]> activePlanRemovedSessionProtocols = new Map<String, Session_Protocol__c[]>();
+    //     Map<String, Session_Protocol__c[]> activePlanRemovedHistoricalSessionProtocols = new Map<String, Session_Protocol__c[]>();
+
+    //     Map<String, Session_Protocol__c[]> historicalSessionProtocols = new Map<String, Session_Protocol__c[]>();
+    // }
+
+
 
     private static Map<Id, Map<Id, Plan_Protocol__c>> getActivePlanProtocols(Id[] dogIds){
         Plan_Protocol__c[] pProtocols = [
@@ -209,7 +451,9 @@ public with sharing class TreatmentByDogLWCController {
         @AuraEnabled public String evalGrade {get;set;}
         @AuraEnabled public String medications {get;set;}
         @AuraEnabled public String txPriority {get;set;}
-        @AuraEnabled public TxProtocolWrapper[] protocols {get;set;}
+        @AuraEnabled public TxProtocolWrapper[] txProtocols {get;set;}
+        // @AuraEnabled public TxProtocolWrapper[] activePlanRemovedProtocols {get;set;}
+        // @AuraEnabled public TxProtocolWrapper[] historicalPlanProtocols {get;set;}
 
         public DogInfoWrapper(Animal__c dog){
             this.id = dog.Id;
@@ -228,10 +472,17 @@ public with sharing class TreatmentByDogLWCController {
         @AuraEnabled public String name {get;set;}
         @AuraEnabled public String category {get;set;}
         @AuraEnabled public String dateAddedToPlan {get;set;}
-        @AuraEnabled public Boolean isActive {get;set;}
+        @AuraEnabled public Boolean isActiveProtocol {get; set;}
+        // @AuraEnabled public Boolean isActive {get;set;}
         // @AuraEnabled public SessionProtocol[] sessionProtocols {get; set;}
-        @AuraEnabled public TreatmentWrapper[] treatments {get;set;}
-        @AuraEnabled public TreatmentWrapper[] removedTreatments {get;set;}
+        // @AuraEnabled public TreatmentWrapper[] treatments {get;set;}
+        // @AuraEnabled public TreatmentWrapper[] removedTreatments {get;set;}
+
+        @AuraEnabled public TreatmentWrapper[] activePlanSessionProtocols = new TreatmentWrapper[0];
+        @AuraEnabled public TreatmentWrapper[] historicalActiveSessionProtocols = new TreatmentWrapper[0];
+        @AuraEnabled public TreatmentWrapper[] activePlanRemovedSessionProtocols = new TreatmentWrapper[0];
+        @AuraEnabled public TreatmentWrapper[] historicalRemovedSessionProtocols = new TreatmentWrapper[0];
+        @AuraEnabled public TreatmentWrapper[] historicalSessionProtocols = new TreatmentWrapper[0];
     }
 
     public class SessionProtocol{

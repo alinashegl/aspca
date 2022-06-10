@@ -60,50 +60,113 @@
 
             <lightning-accordion allow-multiple-sections-open="true">
                 <lightning-accordion-section name="labels" label="Protocols:">
-                    <template for:each={dog.protocols} for:item='protocol'>
-                        <div key={protocol.name} class="slds-card slds-card_boundary card-custom">
-                            <div  class="slds-grid slds-wrap">
-                                <div class="slds-size_1-of-1 slds-var-m-left_x-small">
-                                    <div class="slds-col">
-                                        <lightning-layout multiple-rows>
-                                            <lightning-layout-item class="custom-box">
-                                                <template if:false={protocol.isActive}>
-                                                    <lightning-icon 
-                                                        icon-name="utility:error" 
-                                                        alternative-text="Error!" 
-                                                        variant="error"
-                                                        title="error variant x-small" 
-                                                        size="x-small"
-                                                    ></lightning-icon>
-                                                </template>
-                                                <b>Protocol: </b>{protocol.name}
-                                            </lightning-layout-item>
-                                            <lightning-layout-item class="custom-box">
-                                                <b>Category: </b>{protocol.category}
-                                            </lightning-layout-item>
-                                            <lightning-layout-item class="custom-box">
-                                                <b>Date Added To Plan: </b>{protocol.dateAddedToPlan}
-                                            </lightning-layout-item>
-                                        </lightning-layout>
+
+                    <template if:true={showActiveNotRemoved}>
+                        <template for:each={dog.txProtocols} for:item='protocol'>
+                            <template if:true={protocol.isActiveProtocol}>
+                                <div key={protocol.name} class="slds-card slds-card_boundary card-custom">
+                                    <div  class="slds-grid slds-wrap">
+                                        <div class="slds-size_1-of-1 slds-var-m-left_x-small">
+                                            <div class="slds-col">
+                                                <lightning-layout multiple-rows>
+                                                    <lightning-layout-item class="custom-box">
+                                                        <b>Protocol: </b>{protocol.name}
+                                                    </lightning-layout-item>
+                                                    <lightning-layout-item class="custom-box">
+                                                        <b>Category: </b>{protocol.category}
+                                                    </lightning-layout-item>
+                                                    <lightning-layout-item class="custom-box">
+                                                        <b>Date Added To Plan: </b>{protocol.dateAddedToPlan}
+                                                    </lightning-layout-item>
+                                                </lightning-layout>
+                                            </div>
+                                        </div>
+                                        <div class="slds-size_1-of-1 slds-var-m-top_x-small slds-var-m-left_x-small slds-var-p-right_small">
+                                            <div class="slds-col">
+                                                <lightning-layout class="slds-var-m-bottom_x-small">
+                                                    <template if:true={protocol.activePlanSessionProtocols}>
+                                                        <template for:each={protocol.activePlanSessionProtocols} for:item='treatment'>
+                                                            <lightning-layout-item size="2" padding="around-x-small" key={treatment.id}>
+                                                                <div class="slds-var-m-bottom_xx-small">
+                                                                    {treatment.txDateFormatted} {treatment.color}
+                                                                </div>
+                                                                {treatment.score}
+                                                            </lightning-layout-item>
+                                                        </template>
+                                                    </template>
+                                                </lightning-layout>
+                                                <lightning-layout class="slds-var-m-bottom_x-small">
+                                                    <template if:true={protocol.historicalActiveSessionProtocols}>
+                                                        <template for:each={protocol.historicalActiveSessionProtocols} for:item='treatment'>
+                                                            <lightning-layout-item size="2" padding="around-x-small" key={treatment.id}>
+                                                                <div class="slds-var-m-bottom_xx-small">
+                                                                    <lightning-icon 
+                                                                        icon-name="utility:error" 
+                                                                        alternative-text="Error!" 
+                                                                        variant="error"
+                                                                        title="error variant x-small" 
+                                                                        size="x-small"
+                                                                    ></lightning-icon>
+                                                                    {treatment.txDateFormatted} {treatment.color}
+                                                                </div>
+                                                                {treatment.score}
+                                                            </lightning-layout-item>
+                                                        </template>
+                                                    </template>
+                                                </lightning-layout>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="slds-size_1-of-1 slds-var-m-top_x-small slds-var-m-left_x-small slds-var-p-right_small">
-                                    <div class="slds-col">
-                                        <lightning-layout class="slds-var-m-bottom_x-small">
-                                            <template for:each={protocol.treatments} for:item='treatment'>
-                                                <lightning-layout-item size="2" padding="around-x-small" key={treatment.id}>
-                                                    <div class="slds-var-m-bottom_xx-small">
-                                                        {treatment.txDateFormatted} {treatment.color}
-                                                    </div>
-                                                    {treatment.score}
+                            </template>
+                        </template>
+
+                        <!-- <template for:each={dog.protocols} for:item='protocol'>
+                            <div key={protocol.name} class="slds-card slds-card_boundary card-custom">
+                                <div  class="slds-grid slds-wrap">
+                                    <div class="slds-size_1-of-1 slds-var-m-left_x-small">
+                                        <div class="slds-col">
+                                            <lightning-layout multiple-rows>
+                                                <lightning-layout-item class="custom-box">
+                                                    <template if:false={protocol.isActive}>
+                                                        <lightning-icon 
+                                                            icon-name="utility:error" 
+                                                            alternative-text="Error!" 
+                                                            variant="error"
+                                                            title="error variant x-small" 
+                                                            size="x-small"
+                                                        ></lightning-icon>
+                                                    </template>
+                                                    <b>Protocol: </b>{protocol.name}
                                                 </lightning-layout-item>
-                                            </template>
-                                        </lightning-layout>
+                                                <lightning-layout-item class="custom-box">
+                                                    <b>Category: </b>{protocol.category}
+                                                </lightning-layout-item>
+                                                <lightning-layout-item class="custom-box">
+                                                    <b>Date Added To Plan: </b>{protocol.dateAddedToPlan}
+                                                </lightning-layout-item>
+                                            </lightning-layout>
+                                        </div>
+                                    </div>
+                                    <div class="slds-size_1-of-1 slds-var-m-top_x-small slds-var-m-left_x-small slds-var-p-right_small">
+                                        <div class="slds-col">
+                                            <lightning-layout class="slds-var-m-bottom_x-small">
+                                                <template for:each={protocol.treatments} for:item='treatment'>
+                                                    <lightning-layout-item size="2" padding="around-x-small" key={treatment.id}>
+                                                        <div class="slds-var-m-bottom_xx-small">
+                                                            {treatment.txDateFormatted} {treatment.color}
+                                                        </div>
+                                                        {treatment.score}
+                                                    </lightning-layout-item>
+                                                </template>
+                                            </lightning-layout>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </template> -->
                     </template>
+
                 </lightning-accordion-section>
             </lightning-accordion>
         </template>
