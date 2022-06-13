@@ -6,7 +6,7 @@
     <description>Only Animals with Treatment Plans and Sessions</description>
     <join>
         <join>
-            <outerJoin>false</outerJoin>
+            <outerJoin>true</outerJoin>
             <relationship>Treatment_Sessions__r</relationship>
         </join>
         <outerJoin>false</outerJoin>
@@ -1369,6 +1369,16 @@
             <field>Foster_Duration__c</field>
             <table>Animal__c</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Days_in_Treatment__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>FM_Record_Status__c</field>
+            <table>Animal__c</table>
+        </columns>
         <masterLabel>Animals</masterLabel>
     </sections>
     <sections>
@@ -1492,6 +1502,11 @@
             <field>Problem_Behavior_Miscellaneous__c</field>
             <table>Animal__c.Treatment_Plan__r</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Num_of_Treatment_Sessions__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
+        </columns>
         <masterLabel>Treatment Plans</masterLabel>
     </sections>
     <sections>
@@ -1553,6 +1568,11 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Overall_Session_Grade__c</field>
+            <table>Animal__c.Treatment_Plan__r.Treatment_Sessions__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Current_Week__c</field>
             <table>Animal__c.Treatment_Plan__r.Treatment_Sessions__r</table>
         </columns>
         <masterLabel>Treatment Sessions</masterLabel>

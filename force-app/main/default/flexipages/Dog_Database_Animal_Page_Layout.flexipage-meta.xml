@@ -115,12 +115,6 @@
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Play_Category__c</fieldItem>
-                <identifier>RecordPlay_Category_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
                 <fieldInstanceProperties>
                     <name>uiBehavior</name>
                     <value>readonly</value>
@@ -805,15 +799,9 @@
         </itemInstances>
         <itemInstances>
             <componentInstance>
-                <componentName>treatmentTabHeader</componentName>
-                <identifier>c_treatmentTabHeader</identifier>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
-            <componentInstance>
                 <componentInstanceProperties>
                     <name>showLast5TreatmentsReport</name>
-                    <value>false</value>
+                    <value>true</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>showTreatmentPlanButton</name>
@@ -821,7 +809,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>showTreatmentSessionButton</name>
-                    <value>false</value>
+                    <value>true</value>
                 </componentInstanceProperties>
                 <componentName>treatmentTabHeader</componentName>
                 <identifier>c_treatmentTabHeader</identifier>
@@ -1860,6 +1848,18 @@
         </itemInstances>
         <itemInstances>
             <componentInstance>
+                <componentInstanceProperties>
+                    <name>showLast5TreatmentsReport</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>showTreatmentPlanButton</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>showTreatmentSessionButton</name>
+                    <value>true</value>
+                </componentInstanceProperties>
                 <componentName>treatmentTabHeader</componentName>
                 <identifier>c_treatmentTabHeader2</identifier>
             </componentInstance>

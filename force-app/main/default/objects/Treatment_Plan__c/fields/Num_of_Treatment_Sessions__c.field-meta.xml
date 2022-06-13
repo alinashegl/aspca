@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Num_of_Treatment_Sessions__c</fullName>
+    <externalId>false</externalId>
+    <label># of Treatment Sessions</label>
+    <summaryForeignKey>Treatment_Session__c.Treatment_Plan__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>
