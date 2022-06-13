@@ -253,6 +253,10 @@ public with sharing class TreatmentByDogLWCController {
                 protocolInfo.category = protocol.ProtocolId__r.Protocol_Categories__c;
                 //todo: need to come back and fix this later
                 protocolInfo.dateAddedToPlan = (String) Date.valueOf(date.today()).format();
+                //set defaults to false
+                protocolInfo.isActiveNotRemoved = false;
+                protocolInfo.isActiveRemoved = false;
+                protocolInfo.isHistorical = false;
                 sessionProtocolsMap.put(protocol.Protocol_Name__c, protocolInfo);
             }
 
@@ -286,23 +290,30 @@ public with sharing class TreatmentByDogLWCController {
                     //if the session protocol has not been removed from the current plan
                     if(!protocol.IsRemoved__c && !removedAtPlanLevel){
                         //add to list of active protocols that have not been removed
+                        protocolInfo.isActiveNotRemoved = true;
                         protocolInfo.activePlanSessionProtocols.add(new TreatmentWrapper(protocol));
                     } else {
                         //add to list of active protocols that have been removed
+                        protocolInfo.isActiveRemoved = true;
+                        protocolInfo.isActiveNotRemoved = false;
                         protocolInfo.activePlanRemovedSessionProtocols.add(new TreatmentWrapper(protocol));
                     }
                 //not completed in current plan, so it's an historical session protocol
                 }else{
                     if(!protocol.IsRemoved__c && !removedAtPlanLevel){
                         //add to list of historical protocols that have not been removed
+                        protocolInfo.isActiveNotRemoved = true;
                         protocolInfo.historicalActiveSessionProtocols.add(new TreatmentWrapper(protocol));
                     } else {
                         //add to list of historical protocols that have been removed
+                        protocolInfo.isActiveRemoved = true;
+                        protocolInfo.isActiveNotRemoved = false;
                         protocolInfo.historicalRemovedSessionProtocols.add(new TreatmentWrapper(protocol));
                     }
                 }
             } else {
                 //protocol Id is not one of the active protocols, so it's historical
+                protocolInfo.isHistorical = true;
                 protocolInfo.historicalSessionProtocols.add(new TreatmentWrapper(protocol));                  
             }
             if(showDebug){
@@ -473,6 +484,10 @@ public with sharing class TreatmentByDogLWCController {
         @AuraEnabled public String category {get;set;}
         @AuraEnabled public String dateAddedToPlan {get;set;}
         @AuraEnabled public Boolean isActiveProtocol {get; set;}
+
+        @AuraEnabled public Boolean isActiveNotRemoved {get; set;}
+        @AuraEnabled public Boolean isActiveRemoved {get; set;}
+        @AuraEnabled public Boolean isHistorical {get; set;}
         // @AuraEnabled public Boolean isActive {get;set;}
         // @AuraEnabled public SessionProtocol[] sessionProtocols {get; set;}
         // @AuraEnabled public TreatmentWrapper[] treatments {get;set;}

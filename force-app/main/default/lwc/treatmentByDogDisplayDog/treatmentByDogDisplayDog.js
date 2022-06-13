@@ -7,8 +7,9 @@ export default class TreatmentByDogDisplayDog extends LightningElement {
     showSpinner = true;
 
     showActiveNotRemoved = true;
+
     showActiveRemoved = true;
-    showHistorical = true;
+    showHistorical = false;
 
     @wire(getDogInfo, {recordId: '$dogId'})
     response(result){
@@ -22,9 +23,4 @@ export default class TreatmentByDogDisplayDog extends LightningElement {
             this.showSpinner = false;
         }
     }
-
-    // @wire(getProtocolsToDisplay, {dogId: '$dogId', planFilter: '$planFilter', removedFilter: '$removedFilter'})
-    // response(result){
-
-    // }
 }
