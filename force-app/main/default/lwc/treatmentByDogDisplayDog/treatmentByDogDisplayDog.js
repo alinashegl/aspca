@@ -7,7 +7,6 @@ export default class TreatmentByDogDisplayDog extends LightningElement {
     showSpinner = true;
 
     showActiveNotRemoved = true;
-
     showActiveRemoved = true;
     showHistorical = false;
 
@@ -22,5 +21,41 @@ export default class TreatmentByDogDisplayDog extends LightningElement {
             window.console.log('error: ', result.error);
             this.showSpinner = false;
         }
+    }
+
+    handleToggleCurrent(){
+        this.showActiveNotRemoved = !this.showActiveNotRemoved;
+    }
+
+    handleToggleRemoved(){
+        this.showActiveRemoved = !this.showActiveRemoved;
+    }
+
+    handleToggleHistorical(){
+        this.showHistorical = !this.showHistorical;
+    }
+
+    get currentProtocols(){
+        return this.showActiveNotRemoved ? 'Hide Current' : 'Show Current';
+    }
+
+    get currentRemovedProtocols(){
+        return this.showActiveRemoved ? 'Hide Current Removed' : 'Show Current Removed';
+    }
+
+    get historicalProtocols(){
+        return this.showHistorical ? 'Hide Historical' : 'Show Historical';
+    }
+
+    get currentProtocolsButton(){
+        return this.showActiveNotRemoved ? 'brand' : 'neutral';
+    }
+
+    get currentRemovedProtocolsButton(){
+        return this.showActiveRemoved ? 'brand' : 'neutral';
+    }
+
+    get historicalProtocolsButton(){
+        return this.showHistorical ? 'brand' : 'neutral';
     }
 }
