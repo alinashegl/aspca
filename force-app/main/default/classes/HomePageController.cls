@@ -27,14 +27,14 @@ public with sharing class HomePageController {
     
     @AuraEnabled(cacheable=true)
     public static List<animalTreatmentRec> getAnmialTreatement(){
-        List<Treatment_Plan__c> treatmentPlans = [Select Id, Animal__r.Name, Animal__r.Animal_Name_Id__c, Animal__r.Shelter_Location__c,Treatment_Priority__c,(Select Id,Name, Protocol_Name__c,Protocol_Description__c from Plan_Protocols__r)  FROM Treatment_Plan__c
+        List<Treatment_Plan__c> treatmentPlans = [Select Id, Animal__r.Name, Animal__r.Animal_Name_Id__c, Animal__r.Current_Location__c,Treatment_Priority__c,(Select Id,Name, Protocol_Name__c,Protocol_Description__c from Plan_Protocols__r)  FROM Treatment_Plan__c
                 WHERE IsActive__c = true AND Treatment_Priority__c != 'No Treatment' AND Animal__c != null AND Animal__r.Active_Animal__c  = true AND Animal__r.Location_Filter__c = true];
        	List<animalTreatmentRec> aRecds = new List<animalTreatmentRec>();
         for(Treatment_Plan__c tp: treatmentPlans){
             animalTreatmentRec ar = new animalTreatmentRec();
             ar.TreatmentId = tp.Id;
             ar.Name = tp.Animal__r.Animal_Name_Id__c;
-            ar.location = tp.Animal__r.Shelter_Location__c;
+            ar.location = tp.Animal__r.Current_Location__c;
             ar.treatmentPriority = tp.Treatment_Priority__c;
             List<planProtocol> ptcRecds = new List<planProtocol>();
             for(Plan_Protocol__c pp: tp.Plan_Protocols__r){
