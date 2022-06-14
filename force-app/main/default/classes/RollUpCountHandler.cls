@@ -50,9 +50,9 @@ public with sharing class RollUpCountHandler extends DomainActionBase {
                     animal.Treatment_Start_Date__c = Date.newinstance(animal.Treatment_Sessions__r[0].CreatedDate.year(), animal.Treatment_Sessions__r[0].CreatedDate.month(), animal.Treatment_Sessions__r[0].CreatedDate.day());
                     animal.Days_in_Treatment__c=animal.Treatment_Sessions__r.size();
                     if(animal.Final_Outcome_Date__c != null){
-                        animal.Number_of_Weeks_in_Treatment__c = (animal.Final_Outcome_Date__c.daysBetween(animal.Treatment_Start_Date__c))/7;
+                        animal.Number_of_Weeks_in_Treatment__c = (animal.Treatment_Start_Date__c.daysBetween(animal.Final_Outcome_Date__c))/7;
                     } else {
-                        animal.Number_of_Weeks_in_Treatment__c = (System.Today().daysBetween(animal.Treatment_Start_Date__c))/7;
+                        animal.Number_of_Weeks_in_Treatment__c = (animal.Treatment_Start_Date__c.daysBetween(System.Today()))/7;
                     }
                     listOfAnimals.add(animal);
                 }
