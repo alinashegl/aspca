@@ -6,18 +6,23 @@
         <developerName>FORMULA1</developerName>
         <isActive>true</isActive>
         <isCrossBlock>false</isCrossBlock>
-        <masterLabel>% of Animals with Evals</masterLabel>
+        <masterLabel>% of Animals in Foster</masterLabel>
         <scale>2</scale>
     </aggregates>
     <columns>
         <aggregateTypes>Sum</aggregateTypes>
         <field>CDF1</field>
     </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <aggregateTypes>Average</aggregateTypes>
+        <field>Animal__c$Foster_Duration__c</field>
+    </columns>
     <customDetailFormulas>
-        <calculatedFormula>IF(ISBLANK(Animal__c.Evaluation_Date__c),0,1)</calculatedFormula>
+        <calculatedFormula>IF(Animal__c.Current_Location__c = &quot;Foster Home&quot;,1,0)</calculatedFormula>
         <dataType>Double</dataType>
         <developerName>CDF1</developerName>
-        <label>Had Evaluation</label>
+        <label>In Foster</label>
         <scale>0</scale>
     </customDetailFormulas>
     <filter>
@@ -35,6 +40,13 @@
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
+        <criteriaItems>
+            <column>Animal__c$Active_Animal__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
     </filter>
     <format>Summary</format>
     <groupingsDown>
@@ -42,7 +54,7 @@
         <field>Animal__c$Current_Recent_Shelter_Location__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
-    <name>Animals with Behavior Evaluations</name>
+    <name>Animals in Foster Care by Location</name>
     <params>
         <name>co</name>
         <value>1</value>
@@ -51,7 +63,7 @@
     <scope>organization</scope>
     <showDetails>false</showDetails>
     <showGrandTotal>true</showGrandTotal>
-    <showSubTotals>true</showSubTotals>
+    <showSubTotals>false</showSubTotals>
     <timeFrameFilter>
         <dateColumn>Animal__c$Completed_Date__c</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>
