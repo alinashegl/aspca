@@ -3,7 +3,7 @@
     <baseObject>Animal__c</baseObject>
     <category>other</category>
     <deployed>true</deployed>
-    <description>Only Animals with Playgroup information</description>
+    <description>Only Animals with Animal Playgroup information and lookups to Playgroup Sessions</description>
     <join>
         <outerJoin>false</outerJoin>
         <relationship>Animal_Playgroups__r</relationship>
@@ -1486,6 +1486,11 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Playgroup_Session__c.Name</field>
+            <table>Animal__c.Animal_Playgroups__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Playgroup_Count__c</field>
             <table>Animal__c.Animal_Playgroups__r</table>
         </columns>
         <masterLabel>Animal Playgroups</masterLabel>
