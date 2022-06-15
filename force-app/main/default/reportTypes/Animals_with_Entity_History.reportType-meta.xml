@@ -5,7 +5,7 @@
     <deployed>true</deployed>
     <description>Animals with Entity History</description>
     <join>
-        <outerJoin>false</outerJoin>
+        <outerJoin>true</outerJoin>
         <relationship>Entity_Histories__r</relationship>
     </join>
     <label>Animals with Entity History</label>
@@ -1378,6 +1378,16 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>FM_Record_Status__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Active_Animal_True__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Active_Animal_False__c</field>
             <table>Animal__c</table>
         </columns>
         <masterLabel>Animals</masterLabel>

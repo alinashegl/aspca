@@ -172,6 +172,16 @@
             <field>Current_Week__c</field>
             <table>Treatment_Plan__c.Treatment_Sessions__r</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Overall_Session_Grade__c</field>
+            <table>Treatment_Plan__c.Treatment_Sessions__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Current_Week_Number__c</field>
+            <table>Treatment_Plan__c.Treatment_Sessions__r</table>
+        </columns>
         <masterLabel>Treatment Sessions</masterLabel>
     </sections>
     <sections>
@@ -378,6 +388,16 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Sum_of_Numbers__c</field>
+            <table>Treatment_Plan__c.Treatment_Sessions__r.Session_Protocols__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Aggressive_Movement__c</field>
+            <table>Treatment_Plan__c.Treatment_Sessions__r.Session_Protocols__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Aggressive_Movement_Number__c</field>
             <table>Treatment_Plan__c.Treatment_Sessions__r.Session_Protocols__r</table>
         </columns>
         <masterLabel>Session Protocols</masterLabel>
