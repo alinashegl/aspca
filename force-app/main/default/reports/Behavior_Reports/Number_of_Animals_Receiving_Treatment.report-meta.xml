@@ -36,6 +36,11 @@
     <format>Summary</format>
     <groupingsDown>
         <dateGranularity>Day</dateGranularity>
+        <field>Animal__c$Current_Recent_Shelter_Location__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
         <field>Animal__c$Animal_Name_Id__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
