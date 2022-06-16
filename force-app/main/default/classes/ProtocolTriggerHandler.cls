@@ -6,6 +6,10 @@
  * @version 1.0.0
  */
 
+ /*
+ This can be deleted, it has been merged with ProtocolDomain
+ */
+
 public with sharing class ProtocolTriggerHandler extends DomainActionBase {
     public override void ProcessAction(TriggerRequest request) {
         if (request.targetSObject == Protocol__c.SObjectType) {

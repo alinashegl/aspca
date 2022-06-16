@@ -1,4 +1,3 @@
-
 /**
  * 
  * Trigger Description
@@ -10,7 +9,7 @@ trigger ProtocolTrigger on Protocol__c (before insert, before update, before del
     Trigger_Config__c config = Trigger_Config__c.getInstance();
     if (!config.Disable_Triggers__c) {
         TriggerRequest request = new TriggerRequest(Protocol__c.SObjectType);        
-       ProtocolTriggerHandler objProtocolTriggerHandler = new ProtocolTriggerHandler();
+        ProtocolDomain objProtocolTriggerHandler = new ProtocolDomain();
        objProtocolTriggerHandler.ProcessAction(request);
 
     }
