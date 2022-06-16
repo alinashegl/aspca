@@ -172,7 +172,8 @@ export default class TreatmentModifySession extends LightningElement {
     handleSubmitProtocol(event){
         event.preventDefault();
         const fields = event.detail.fields;
-        fields.Name = 'Other ' + fields.Name
+        fields.Name = 'Other ' + fields.Name;
+        fields.IsActive__c = true;
         this.template
         .querySelector('lightning-record-edit-form').submit(fields);
     }

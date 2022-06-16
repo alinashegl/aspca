@@ -147,11 +147,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Active_Animal__c</field>
-            <table>Animal__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Behavior_Play_Pause__c</field>
             <table>Animal__c</table>
         </columns>
@@ -212,6 +207,11 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>Days_in_Treatment__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>Bergh_Animal_Tracking_Number__c</field>
             <table>Animal__c</table>
         </columns>
@@ -223,6 +223,11 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Box_Folder__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Active_Animal__c</field>
             <table>Animal__c</table>
         </columns>
         <columns>
@@ -262,6 +267,16 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>Foster_Duration__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Behavior_Medication_Data_Time__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>BRC_Status__c</field>
             <table>Animal__c</table>
         </columns>
@@ -274,6 +289,11 @@
             <checkedByDefault>false</checkedByDefault>
             <field>Id</field>
             <table>Animal__c.Treatment_Sessions__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>FM_Record_Status__c</field>
+            <table>Animal__c</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
@@ -1432,9 +1452,27 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Behavior_Medication_Data_Time__c</field>
+            <field>Active_Animal_True__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Active_Animal_False__c</field>
             <table>Animal__c</table>
         </columns>
         <masterLabel>Animals</masterLabel>
+    </sections>
+    <sections>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Current_Week_Number__c</field>
+            <table>Animal__c.Treatment_Sessions__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Current_Week__c</field>
+            <table>Animal__c.Treatment_Sessions__r</table>
+        </columns>
+        <masterLabel>Treatment Sessions</masterLabel>
     </sections>
 </ReportType>
