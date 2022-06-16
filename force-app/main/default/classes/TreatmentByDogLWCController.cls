@@ -1,14 +1,4 @@
 public with sharing class TreatmentByDogLWCController {
-    // public DogInfoWrapper[] dogInfoWrapperList {get; set;}
-    // public String dogList{get;set;}
-
-    // public TreatmentByDogLWCController(){        
-    //     dogList = apexpages.currentpage().getparameters().get('dogList');
-    //     Id[] dogList = dogList.split(',');
-    //     System.debug('dogList: ' + dogList);
-    //     dogInfoWrapperList = getDogInfo(dogList);        
-    // }
-
     @AuraEnabled
     public static string[] getUserLocation(){
         try {
@@ -102,39 +92,41 @@ public with sharing class TreatmentByDogLWCController {
         //map of active plans (if the values contains a set a of Ids, they are the ids of removed protocols at the plan level)
         Map<Id, Set<Id>> m_activePlansProtocolIds = new Map<Id, Set<Id>>();
         Map<Id, Set<Id>> m_activePlansRemovedProtocols = new Map<Id, Set<Id>>();
+        Map<Id, Map<Id, String>> m_activePlanToCreatedDate = new Map<Id, Map<Id, String>>();
         for(Treatment_Plan__c plan : [
             SELECT Id, Animal__c, 
-            (SELECT Id, Protocol__c, isRemoved__c FROM Plan_Protocols__r)
+            (SELECT Id, Protocol__c, isRemoved__c, CreatedDate FROM Plan_Protocols__r)
             FROM Treatment_Plan__c
             WHERE isActive__c = true
             AND Animal__c IN :dogIds
         ]){
             Set<Id> protocolIds = new Set<Id>();
             Set<Id> removedProtocolIds = new Set<Id>();
+            Map<Id, String> m_planProtolCreatedDate = new Map<Id, String>();
             for(Plan_Protocol__c protocol : plan.Plan_Protocols__r){
                 protocolIds.add(protocol.Protocol__c);
 
                 if(protocol.isRemoved__c){
                     removedProtocolIds.add(protocol.Protocol__c);
                 }
+
+                m_planProtolCreatedDate.put(protocol.Protocol__c, (String) Date.valueOf(protocol.CreatedDate).format());
+                
             }
             m_activePlansProtocolIds.put(plan.Animal__c, protocolIds);
             m_activePlansRemovedProtocols.put(plan.Animal__c, removedProtocolIds);
+            m_activePlanToCreatedDate.put(plan.Animal__c, m_planProtolCreatedDate);
         }
           
         Map<Id, Map<String, TxProtocolWrapper>> sessionProtocolsByDogMap = new Map<Id, Map<String, TxProtocolWrapper>>();
 
-        for(Session_Protocol__c protocol : [
-            SELECT Id, Protocol_Name__c, isRemoved__c, Overall_Score__c, Overall_Score_Number__c, Overall_Score_Color__c, TreatmentSessionId__r.Treatment_Plan__c,
-            TreatmentSessionId__c, TreatmentSessionId__r.Session_Date__c, ProtocolId__c, ProtocolId__r.Protocol_Categories__c, TreatmentSessionId__r.Animal__c,
-            TreatmentSessionId__r.Treatment_Plan__r.IsActive__c
-            FROM Session_Protocol__c
-            WHERE TreatmentSessionId__r.Animal__c IN :dogIds
-            AND Overall_Score__c != null
-            ORDER BY ProtocolId__r.Protocol_Categories__c ASC, Protocol_Name__c ASC, TreatmentSessionId__r.Session_Date__c DESC
-        ]){
+        for(Session_Protocol__c protocol : getSessionProtocols(dogIds)){
             Id dogId = protocol.TreatmentSessionId__r.Animal__c;
             Id treatmentPlanId = protocol.TreatmentSessionId__r.Treatment_Plan__c;
+            Map<Id, String> m_planProtolCreatedDate = 
+                m_activePlanToCreatedDate.containsKey(protocol.TreatmentSessionId__r.Animal__c) ?
+                m_activePlanToCreatedDate.get(protocol.TreatmentSessionId__r.Animal__c) :
+                new Map<Id, String>();
 
             //instantiate the sessionProtocolsMap
             Map<String, TxProtocolWrapper> sessionProtocolsMap = new Map<String, TxProtocolWrapper>();
@@ -152,7 +144,7 @@ public with sharing class TreatmentByDogLWCController {
                 protocolInfo.name = protocol.Protocol_Name__c;
                 protocolInfo.category = protocol.ProtocolId__r.Protocol_Categories__c;
                 //todo: need to come back and fix this later
-                protocolInfo.dateAddedToPlan = (String) Date.valueOf(date.today()).format();
+                protocolInfo.dateAddedToPlan = m_planProtolCreatedDate.containsKey(protocol.ProtocolId__c) ? m_planProtolCreatedDate.get(protocol.ProtocolId__c) : null;
                 //set defaults to false
                 protocolInfo.isActiveNotRemoved = false;
                 protocolInfo.isActiveRemoved = false;
@@ -212,22 +204,16 @@ public with sharing class TreatmentByDogLWCController {
         return sessionProtocolsByDogMap;
     }
 
-     private static Map<Id, Map<Id, Plan_Protocol__c>> getActivePlanProtocols(Id[] dogIds){
-        Plan_Protocol__c[] pProtocols = [
-            SELECT Id, CreatedDate, isRemoved__c, Treatment_Plan__r.Animal__c, Protocol__c, Protocol__r.Protocol_Categories__c, Protocol__r.Name
-            FROM Plan_Protocol__c 
-            WHERE Treatment_Plan__r.IsActive__c  = true 
-            AND  Treatment_Plan__r.Animal__c IN :dogIds
+     private static Session_Protocol__c[] getSessionProtocols(Id[] dogIds){
+        return [
+            SELECT Id, Protocol_Name__c, isRemoved__c, Overall_Score__c, Overall_Score_Number__c, Overall_Score_Color__c, TreatmentSessionId__r.Treatment_Plan__c,
+            TreatmentSessionId__c, TreatmentSessionId__r.Session_Date__c, ProtocolId__c, ProtocolId__r.Protocol_Categories__c, TreatmentSessionId__r.Animal__c,
+            TreatmentSessionId__r.Treatment_Plan__r.IsActive__c
+            FROM Session_Protocol__c
+            WHERE TreatmentSessionId__r.Animal__c IN :dogIds
+            AND Overall_Score__c != null
+            ORDER BY ProtocolId__r.Protocol_Categories__c ASC, Protocol_Name__c ASC, TreatmentSessionId__r.Session_Date__c DESC
         ];
-        Map<Id, Map<Id, Plan_Protocol__c>> protocolMap = new Map<Id, Map<Id, Plan_Protocol__c>>();
-        for(Plan_Protocol__c proto : pProtocols){
-            if(protocolMap.containsKey(proto.Treatment_Plan__r.Animal__c)){
-                protocolMap.get(proto.Treatment_Plan__r.Animal__c).put(proto.Protocol__c, proto);
-            } else {
-                protocolMap.put(proto.Treatment_Plan__r.Animal__c, new Map<Id, Plan_Protocol__c>{proto.Protocol__c => proto});
-            }
-        }
-        return protocolMap;
     }
 
     public class DogInfoWrapper{

@@ -190,8 +190,6 @@
                         </template>
                     </template>
 
-
-
                     <template if:true={showHistorical}>
                         <template for:each={dog.txProtocols} for:item='protocol'>
                             <template if:true={protocol.isHistorical}>
@@ -201,13 +199,6 @@
                                             <div class="slds-col">
                                                 <lightning-layout multiple-rows>
                                                     <lightning-layout-item class="custom-box">
-                                                        <lightning-icon 
-                                                            icon-name="utility:error" 
-                                                            alternative-text="Error!" 
-                                                            variant="error"
-                                                            title="error variant x-small" 
-                                                            size="x-small"
-                                                        ></lightning-icon>
                                                         <b>Protocol: </b>{protocol.name}
                                                     </lightning-layout-item>
                                                     <lightning-layout-item class="custom-box">
@@ -245,49 +236,3 @@
         </template>
     </div>
 </template>
-
-
-<!-- <template for:each={dog.protocols} for:item='protocol'>
-    <div key={protocol.name} class="slds-card slds-card_boundary card-custom">
-        <div  class="slds-grid slds-wrap">
-            <div class="slds-size_1-of-1 slds-var-m-left_x-small">
-                <div class="slds-col">
-                    <lightning-layout multiple-rows>
-                        <lightning-layout-item class="custom-box">
-                            <template if:false={protocol.isActive}>
-                                <lightning-icon 
-                                    icon-name="utility:error" 
-                                    alternative-text="Error!" 
-                                    variant="error"
-                                    title="error variant x-small" 
-                                    size="x-small"
-                                ></lightning-icon>
-                            </template>
-                            <b>Protocol: </b>{protocol.name}
-                        </lightning-layout-item>
-                        <lightning-layout-item class="custom-box">
-                            <b>Category: </b>{protocol.category}
-                        </lightning-layout-item>
-                        <lightning-layout-item class="custom-box">
-                            <b>Date Added To Plan: </b>{protocol.dateAddedToPlan}
-                        </lightning-layout-item>
-                    </lightning-layout>
-                </div>
-            </div>
-            <div class="slds-size_1-of-1 slds-var-m-top_x-small slds-var-m-left_x-small slds-var-p-right_small">
-                <div class="slds-col">
-                    <lightning-layout class="slds-var-m-bottom_x-small">
-                        <template for:each={protocol.treatments} for:item='treatment'>
-                            <lightning-layout-item size="2" padding="around-x-small" key={treatment.id}>
-                                <div class="slds-var-m-bottom_xx-small">
-                                    {treatment.txDateFormatted} {treatment.color}
-                                </div>
-                                {treatment.score}
-                            </lightning-layout-item>
-                        </template>
-                    </lightning-layout>
-                </div>
-            </div>
-        </div>
-    </div>
-</template> -->
