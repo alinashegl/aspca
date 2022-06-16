@@ -163,6 +163,11 @@
             <field>Playgroup_Session_Notes__c</field>
             <table>Playgroup_Session__c.Animal_Playgroups__r</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Playgroup_Count__c</field>
+            <table>Playgroup_Session__c.Animal_Playgroups__r</table>
+        </columns>
         <masterLabel>Animal Playgroups</masterLabel>
     </sections>
 </ReportType>
