@@ -114,6 +114,10 @@ export default class TreatmentSessionChild extends LightningElement {
         return this.isContactList ? 'Contact' : 'Animal__c';
     }
 
+    get customLookUpObjectIsAnimal(){
+        return this.customLookUpObject == 'Animal__c';
+    }
+
     get customLookupFields(){
         return this.isContactList ? ['Name','Email','Phone'] : ['Animal_Name__c', 'Name'];
     }
@@ -143,6 +147,7 @@ export default class TreatmentSessionChild extends LightningElement {
     get customLookupFieldToQuery(){
         return this.isContactList ? 'Name' : 'Animal_Name__c';
     }
+
     get customLookupLabelName(){
         return this.isContactList ? 'Protocol Contact' : 'Helper Dog';
     }

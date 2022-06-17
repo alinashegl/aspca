@@ -74,6 +74,9 @@
             </lightning-messages>
             <div class="slds-grid slds-wrap">
                 <div class="slds-col slds-size_1-of-1 slds-medium-size_3-of-6 slds-large-size_1-of-6" data-id='customlookupcreatenew'>
+                    <template if:true={customLookUpObjectIsAnimal}>
+                        add filter buttons here
+                    </template>
                     <c-custom-lookup
                         obj-name={customLookUpObject}
                         icon-name={customLookupIcon}
@@ -90,7 +93,7 @@
                         allow-create-new={customLookupAllowCreateNew}
                         initial-col-size='slds-col slds-size_1-of-1 slds-medium-size_3-of-6 slds-large-size_1-of-6'
                     >
-                    </c-custom-lookup>
+                    </c-custom-lookup>                    
                 </div>
                 <template if:true={isContactList}>
                     <div class="slds-col slds-size_1-of-1 slds-medium-size_3-of-6 slds-large-size_1-of-6 slds-p-left_x-small">
