@@ -149,7 +149,8 @@ export default class TreatmentSessionChild extends LightningElement {
 
     get customLookupWhereClause(){
         if(!this.isContactList){
-            return ' Current_Recent_Shelter_Location__c = \'' + this.location + '\'';
+            return ' Current_Recent_Shelter_Location__c = \'' + this.location + '\' AND Active_Animal__c = true ' +
+            'AND (Confirmed_Helper_Dog__c = true OR Potential_Helper_Dog__c = true) ';
         }
     }
 
