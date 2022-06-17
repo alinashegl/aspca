@@ -47,13 +47,13 @@ public with sharing class ProtocolTriggerHandler extends DomainActionBase {
         }
         if(!setActiveProtocolIDs.isEmpty()){
             List<Bundle_Entry__c> lstBundleEntry = new List<Bundle_Entry__c>();
-                    Treatment_Bundle__c treatmentBundle = [SELECT id, Name FROM Treatment_Bundle__c WHERE Name ='Master' LIMIT 1];
-                    if(treatmentBundle!=null){
-                       // List<Bundle_Entry__c> lstBundleEntry = new List<Bundle_Entry__c>();
+                    Treatment_Bundle__c[] treatmentBundles = [SELECT id, Name FROM Treatment_Bundle__c WHERE Name ='Master' LIMIT 1];
+
+                    if(treatmentBundles!=null && !treatmentBundles.isEmpty()){
                         for(ID pID: setActiveProtocolIDs){
                             Bundle_Entry__c obj = new Bundle_Entry__c();
                             obj.Protocol__c= pID;
-                            obj.Treatment_Bundle__c= treatmentBundle.id;
+                            obj.Treatment_Bundle__c= treatmentBundles[0].id;
                             lstBundleEntry.add(obj);
                         }
                 try {

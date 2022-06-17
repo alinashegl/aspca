@@ -20,23 +20,18 @@
             <operator>equals</operator>
             <values>MRC</values>
         </dashboardFilterOptions>
-        <dashboardFilterOptions>
-            <operator>contains</operator>
-            <values>ARC,CARE</values>
-        </dashboardFilterOptions>
-        <dashboardFilterOptions>
-            <operator>equals</operator>
-            <values>ARC</values>
-        </dashboardFilterOptions>
-        <dashboardFilterOptions>
-            <operator>equals</operator>
-            <values>CARE</values>
-        </dashboardFilterOptions>
-        <dashboardFilterOptions>
-            <operator>equals</operator>
-            <values>ARC/CARE</values>
-        </dashboardFilterOptions>
         <name>Current/Recent Shelter Location</name>
+    </dashboardFilters>
+    <dashboardFilters>
+        <dashboardFilterOptions>
+            <operator>equals</operator>
+            <values>1</values>
+        </dashboardFilterOptions>
+        <dashboardFilterOptions>
+            <operator>equals</operator>
+            <values>0</values>
+        </dashboardFilterOptions>
+        <name>Active Animal</name>
     </dashboardFilters>
     <dashboardGridLayout>
         <dashboardGridComponents>
@@ -53,6 +48,9 @@
                 <componentType>Bar</componentType>
                 <dashboardFilterColumns>
                     <column>Animal__c$Current_Recent_Shelter_Location__c</column>
+                </dashboardFilterColumns>
+                <dashboardFilterColumns>
+                    <column>Animal__c$Active_Animal__c</column>
                 </dashboardFilterColumns>
                 <decimalPrecision>-1</decimalPrecision>
                 <displayUnits>Auto</displayUnits>
@@ -93,6 +91,9 @@
                 <componentType>BarGrouped</componentType>
                 <dashboardFilterColumns>
                     <column>Animal__c$Current_Recent_Shelter_Location__c</column>
+                </dashboardFilterColumns>
+                <dashboardFilterColumns>
+                    <column>Animal__c$Active_Animal__c</column>
                 </dashboardFilterColumns>
                 <decimalPrecision>-1</decimalPrecision>
                 <displayUnits>Auto</displayUnits>
@@ -137,6 +138,9 @@
                 <dashboardFilterColumns>
                     <column>Animal__c$Current_Recent_Shelter_Location__c</column>
                 </dashboardFilterColumns>
+                <dashboardFilterColumns>
+                    <column>Animal__c$Active_Animal__c</column>
+                </dashboardFilterColumns>
                 <decimalPrecision>-1</decimalPrecision>
                 <displayUnits>Auto</displayUnits>
                 <drillEnabled>false</drillEnabled>
@@ -175,6 +179,9 @@
                 <dashboardFilterColumns>
                     <column>Animal__c$Current_Recent_Shelter_Location__c</column>
                 </dashboardFilterColumns>
+                <dashboardFilterColumns>
+                    <column>Animal__c$Active_Animal__c</column>
+                </dashboardFilterColumns>
                 <decimalPrecision>-1</decimalPrecision>
                 <displayUnits>Auto</displayUnits>
                 <groupingSortProperties/>
@@ -204,6 +211,9 @@
                 <componentType>Column</componentType>
                 <dashboardFilterColumns>
                     <column>Animal__c$Current_Recent_Shelter_Location__c</column>
+                </dashboardFilterColumns>
+                <dashboardFilterColumns>
+                    <column>Animal__c$Active_Animal__c</column>
                 </dashboardFilterColumns>
                 <decimalPrecision>-1</decimalPrecision>
                 <displayUnits>Auto</displayUnits>
@@ -243,6 +253,9 @@
                 <dashboardFilterColumns>
                     <column>Animal__c$Current_Recent_Shelter_Location__c</column>
                 </dashboardFilterColumns>
+                <dashboardFilterColumns>
+                    <column>Animal__c$Active_Animal__c</column>
+                </dashboardFilterColumns>
                 <decimalPrecision>-1</decimalPrecision>
                 <displayUnits>Auto</displayUnits>
                 <gaugeMax>100.0</gaugeMax>
@@ -277,6 +290,9 @@
                 <componentType>Bar</componentType>
                 <dashboardFilterColumns>
                     <column>Animal__c$Current_Recent_Shelter_Location__c</column>
+                </dashboardFilterColumns>
+                <dashboardFilterColumns>
+                    <column>Animal__c$Active_Animal__c</column>
                 </dashboardFilterColumns>
                 <decimalPrecision>-1</decimalPrecision>
                 <displayUnits>Auto</displayUnits>
@@ -316,6 +332,9 @@
                 <dashboardFilterColumns>
                     <column>Animal__c$Current_Recent_Shelter_Location__c</column>
                 </dashboardFilterColumns>
+                <dashboardFilterColumns>
+                    <column>Animal__c$Active_Animal__c</column>
+                </dashboardFilterColumns>
                 <decimalPrecision>-1</decimalPrecision>
                 <displayUnits>Auto</displayUnits>
                 <groupingSortProperties/>
@@ -343,6 +362,9 @@
                 <componentType>Gauge</componentType>
                 <dashboardFilterColumns>
                     <column>Animal__c$Current_Recent_Shelter_Location__c</column>
+                </dashboardFilterColumns>
+                <dashboardFilterColumns>
+                    <column>Animal__c$Active_Animal__c</column>
                 </dashboardFilterColumns>
                 <decimalPrecision>-1</decimalPrecision>
                 <displayUnits>Auto</displayUnits>
@@ -378,6 +400,9 @@
                 <componentType>Bar</componentType>
                 <dashboardFilterColumns>
                     <column>Animal__c$Current_Recent_Shelter_Location__c</column>
+                </dashboardFilterColumns>
+                <dashboardFilterColumns>
+                    <column>Animal__c$Active_Animal__c</column>
                 </dashboardFilterColumns>
                 <decimalPrecision>-1</decimalPrecision>
                 <displayUnits>Auto</displayUnits>
@@ -417,6 +442,9 @@
                 <dashboardFilterColumns>
                     <column>Animal__c$Current_Recent_Shelter_Location__c</column>
                 </dashboardFilterColumns>
+                <dashboardFilterColumns>
+                    <column>Animal__c$Active_Animal__c</column>
+                </dashboardFilterColumns>
                 <decimalPrecision>-1</decimalPrecision>
                 <displayUnits>Auto</displayUnits>
                 <gaugeMax>100.0</gaugeMax>
@@ -451,6 +479,9 @@
                 <componentType>Column</componentType>
                 <dashboardFilterColumns>
                     <column>Animal__c$Current_Recent_Shelter_Location__c</column>
+                </dashboardFilterColumns>
+                <dashboardFilterColumns>
+                    <column>Animal__c$Active_Animal__c</column>
                 </dashboardFilterColumns>
                 <decimalPrecision>-1</decimalPrecision>
                 <displayUnits>Auto</displayUnits>
@@ -489,6 +520,9 @@
                 <dashboardFilterColumns>
                     <column>Animal__c$Current_Recent_Shelter_Location__c</column>
                 </dashboardFilterColumns>
+                <dashboardFilterColumns>
+                    <column>Animal__c$Active_Animal__c</column>
+                </dashboardFilterColumns>
                 <decimalPrecision>-1</decimalPrecision>
                 <displayUnits>Auto</displayUnits>
                 <groupingSortProperties/>
@@ -518,6 +552,9 @@
                 <componentType>Bar</componentType>
                 <dashboardFilterColumns>
                     <column>Animal__c$Current_Recent_Shelter_Location__c</column>
+                </dashboardFilterColumns>
+                <dashboardFilterColumns>
+                    <column>Animal__c$Active_Animal__c</column>
                 </dashboardFilterColumns>
                 <decimalPrecision>-1</decimalPrecision>
                 <displayUnits>Auto</displayUnits>
@@ -556,6 +593,9 @@
                 <componentType>Gauge</componentType>
                 <dashboardFilterColumns>
                     <column>Animal__c$Current_Recent_Shelter_Location__c</column>
+                </dashboardFilterColumns>
+                <dashboardFilterColumns>
+                    <column>Animal__c$Active_Animal__c</column>
                 </dashboardFilterColumns>
                 <decimalPrecision>-1</decimalPrecision>
                 <displayUnits>Auto</displayUnits>
