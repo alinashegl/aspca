@@ -17,7 +17,7 @@ public with sharing class TreatmentByDogLWCController {
     public static DogWrapper[] getDogList(String[] selectedLocations, String filterText){
         try {
             DogWrapper[] dogs = new DogWrapper[0];
-            String query = 'SELECT Id, Animal_Name_Id__c, Current_Location__c FROM Animal__c WHERE Current_Location__c IN: selectedLocations';
+            String query = 'SELECT Id, Animal_Name_Id__c, Current_Location__c FROM Animal__c WHERE Current_Location__c IN: selectedLocations AND Active_Animal__c = true';
             if(filterText != null){
                 query += ' AND Animal_Name_Id__c LIKE \'%' + filterText + '%\'';
             }

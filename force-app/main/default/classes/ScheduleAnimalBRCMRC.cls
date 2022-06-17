@@ -72,7 +72,8 @@ public with sharing class ScheduleAnimalBRCMRC {
             'Behavior_Case_Worker__r.Name, ' +
             '(SELECT Id, ActivityDate FROM Activities__r WHERE Record_Type__c =: recordTypeName AND ActivityDate != null ORDER BY ActivityDate DESC LIMIT 1) ' +
             'FROM Animal__c ' +
-            'WHERE (BRC_Status__c = \'BRC Accepted\' OR MRC_Status__c = \'MRC Accepted\')and (Current_Recent_Shelter_Location__c != \'BRC\' AND Current_Recent_Shelter_Location__c != \'MRC\')';
+            'WHERE (BRC_Status__c = \'BRC Accepted\' OR MRC_Status__c = \'MRC Accepted\')and (Current_Recent_Shelter_Location__c != \'BRC\' AND Current_Recent_Shelter_Location__c != \'MRC\')' + 
+            'AND Active_Animal__c = true';
 
         if(animalIds != null){
             queryString += ' AND Id IN: animalIds';
@@ -98,6 +99,8 @@ public with sharing class ScheduleAnimalBRCMRC {
     
     public static List<Animal__c> getAnimalsForTaskUpdate(){
         return [SELECT Id, BRC_Status__c, MRC_Status__c from Animal__c 
-                WHERE (BRC_Status__c = 'BRC Declined' OR MRC_Status__c = 'MRC Declined')];
+                WHERE (BRC_Status__c = 'BRC Declined' OR MRC_Status__c = 'MRC Declined')
+                AND Active_Animal__c = true
+                ];
     }
 }

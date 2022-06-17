@@ -48,6 +48,7 @@ public with sharing class ScheduleAnimalFoster {
                 'LIMIT 1) ' +
             'FROM Animal__c ' +
             'WHERE Current_Location__c = \'Foster Home\' ' +
+            'AND Active_Animal__c = true ' + 
             'AND Type_of_Animal__c = \'Dog\' ' +
             'AND Id IN ' +
                 '(SELECT Animal__c ' +
