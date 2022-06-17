@@ -14,7 +14,8 @@ public class PlaygroupToDoPdfController {
                     (SELECT Id FROM Medical_Conditions__r WHERE Medical_Condition__c = 'Babesia' AND Date_Diagnosed__c <= TODAY AND (Date_Resolved__c = null OR Date_Resolved__c > TODAY)),
                     (SELECT Id FROM Play_Pauses__r WHERE Type__c = 'Medical' AND Play_Pause_Reason__c = 'In Heat' AND Start_Date__c <= TODAY AND (End_Date__c = null OR End_Date__c > TODAY))
                 FROM Animal__c
-                WHERE Play_Category__c NOT IN ('Unevaluated', 'DO NOT PLAY')
+                WHERE Active_Animal__c = true 
+                    AND Play_Category__c NOT IN ('Unevaluated', 'DO NOT PLAY')
                     AND Id NOT IN (SELECT Animal__c FROM Play_Pause__c WHERE Type__c = 'Behavioral' AND Start_Date__c <= TODAY AND (End_Date__c = null OR End_Date__c >= TODAY))
                     AND Current_Recent_Shelter_Location__c IN :locationList
                 ORDER BY Id];

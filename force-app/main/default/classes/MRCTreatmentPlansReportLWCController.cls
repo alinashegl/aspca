@@ -38,7 +38,7 @@ public with sharing class MRCTreatmentPlansReportLWCController {
                 FROM Animal__c 
                 WHERE Type_of_Animal__c = 'Dog'
                 AND Current_Location__c IN ('MRC','CRC')
-                AND Final_Outcome__c = null
+                AND Active_Animal__c = true
             ];
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());

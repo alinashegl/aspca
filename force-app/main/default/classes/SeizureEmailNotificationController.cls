@@ -2,9 +2,14 @@ public class SeizureEmailNotificationController {
     public static void handleSeizureEmailNotificationSchedular(){
         Map<Id, List<Animal__c>> animalsRec = new  Map<Id, List<Animal__c>>();
 
-        List<Animal__c> lstAnimals =[SELECT Id ,Name, Animal_Name_Id__c,Animal_Name__c,Gender__c,Current_Behavior_Grade__c,Surrender_Type__c, Email_Notification__c,
-                               Play_Priority__c, Play_Category__c, Seizure_Surrender_Date__c,Current_Recent_Shelter_Location__c, Behavior_Case_Worker__c,
-                               (SELECT Id, Treatment_Priority__c FROM Treatment_Plan__r WHERE IsActive__c = true ORDER BY CreatedDate DESC LIMIT 1) FROM Animal__c where Email_Notification__c =: true and (Current_Recent_Shelter_Location__c ='CRC' OR Current_Recent_Shelter_Location__c ='MRC')];
+        List<Animal__c> lstAnimals =[
+            SELECT Id ,Name, Animal_Name_Id__c,Animal_Name__c,Gender__c,Current_Behavior_Grade__c,Surrender_Type__c, Email_Notification__c,
+            Play_Priority__c, Play_Category__c, Seizure_Surrender_Date__c,Current_Recent_Shelter_Location__c, Behavior_Case_Worker__c,
+            (SELECT Id, Treatment_Priority__c FROM Treatment_Plan__r WHERE IsActive__c = true ORDER BY CreatedDate DESC LIMIT 1) 
+            FROM Animal__c where Email_Notification__c =: true 
+            AND (Current_Recent_Shelter_Location__c ='CRC' OR Current_Recent_Shelter_Location__c ='MRC')
+            AND Active_Animal__c = true
+        ];
         List<Animal__c> animalValues = null;   
         if(!lstAnimals.isEmpty()){
         for(Animal__c anm : lstAnimals){
