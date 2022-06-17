@@ -47,6 +47,7 @@ public with sharing class ScheduleBoardAndTrainTask {
             'FROM Animal__c ' +
             'WHERE Current_Location__c = \'Board and Train\' ' +
             'AND Type_of_Animal__c = \'Dog\' ' +
+            'AND Active_Animal__c = true ' +
             'AND Id IN ( SELECT Animal__c ' +
                 'FROM Facility_Outcome__c ' +
                 'WHERE Facility_Outcome__c = \'Board and Train\' ' +
