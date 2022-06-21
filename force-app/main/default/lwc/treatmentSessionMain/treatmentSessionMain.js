@@ -8,7 +8,6 @@ import { refreshApex } from '@salesforce/apex';
 export default class TreatmentSessionMain extends NavigationMixin(LightningElement) {
     @api recordId;
 
-    location = 'MRC';
     activeProtocols = [];
     activeSession = false;
     allColumns = FORM_FACTOR == 'Large' ? true : false;

@@ -75,7 +75,23 @@
             <div class="slds-grid slds-wrap">
                 <div class="slds-col slds-size_1-of-1 slds-medium-size_3-of-6 slds-large-size_1-of-6" data-id='customlookupcreatenew'>
                     <template if:true={customLookUpObjectIsAnimal}>
-                        add filter buttons here
+                        <div class="slds-var-m-bottom_x-small">
+                            <lightning-button
+                                variant={potentialHelperDogButtonVariant}
+                                label="Potential Helper"
+                                title="Potential Helper"
+                                onclick={handlePotentialHelperClick}
+                            >
+                            </lightning-button>
+                            <lightning-button
+                                variant={potentialConfirmedDogButtonVariant}
+                                label="Confirmed Helper"
+                                title="Confirmed Helper"
+                                onclick={handleConfirmedHelperClick}
+                                class="slds-var-m-left_x-small"
+                            >
+                            </lightning-button>
+                        </div>
                     </template>
                     <c-custom-lookup
                         obj-name={customLookUpObject}
