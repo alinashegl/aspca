@@ -136,20 +136,39 @@
                 </tr>
             </table>
             <table width="100%" style="border-width: 1px 1px 0px;">
-                <!-- Displays values from potentBehIssue list --> 
                 <tr style="font-weight:900;">
-                    <td>Potential behavior concern(s):</td>
+                    <td>POTENTIAL BEHAVIOR ISSUES</td>
                 </tr>
-                <apex:repeat var="behIssue" value="{!potentBehIssue}">
-                    <tr>
-                        <td>{!behIssue}</td>
-                    </tr>
-                </apex:repeat>
-                <tr style="font-weight:900;">
-                    <td>Potential behavior concern other:</td>
-                </tr>
+                <tr></tr>
                 <tr>
-                    <td>{!behEval.Potential_Beh_Iss_Other__c}</td>
+                    <td width="30%" align="left" style="font-weight:900;">Aggression To Animals:</td>
+                    <td width="70%" align="left">{!behEval.Potential_Issue_Aggression_To_Animals__c}</td>
+                </tr>
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                    <td style="font-weight:900;">Aggression To People:</td>
+                    <td>{!behEval.Potential_Issue_Aggression_To_People__c}</td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td style="font-weight:900;">Fear:</td>
+                    <td>{!behEval.Potential_Issue_Fear__c}</td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td style="font-weight:900;">High Arousal:</td>
+                    <td>{!behEval.Potential_Issue_High_Arousal__c}</td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td style="font-weight:900;">Other:</td>
+                    <td>{!behEval.Potential_Issue_Other__c}</td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td style="font-weight:900;">Description of Other issue:</td>
+                    <td>{!behEval.Potential_Issue_Other_Notes__c}</td>
                 </tr>
             </table>
         </div>
