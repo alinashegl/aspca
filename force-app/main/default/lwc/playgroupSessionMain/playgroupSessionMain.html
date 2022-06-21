@@ -11,7 +11,6 @@
                 <c-playgroup-to-do-list
                     session-id={toDoListSessionId}
                     animals-to-add={toDoListAnimalIds}
-                    location={location}
                     action={toDoListAction}
                     oncopy={handleCopyEvent}
                     onedit={handleEditEvent}
@@ -141,7 +140,7 @@
                                 <div class="slds-form-element">
                                     <div class="slds-form-element__static">
                                         <label class="slds-form-element__label" for="form-element-01">Playgroup Location</label>
-                                        <lightning-output-field field-name="Population__c" data-id='Population__c' variant='label-hidden'> </lightning-output-field>
+                                        <lightning-input-field field-name="Population__c" data-id='Population__c' variant='label-hidden'> </lightning-input-field>
                                         <lightning-input-field field-name="Playgroup_Location__c" data-id='Playgroup_Location__c' onchange={handleOnChangeSessionInfo} variant='label-hidden'> </lightning-input-field>
                                     </div>
                                 </div>
