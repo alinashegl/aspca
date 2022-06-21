@@ -59,25 +59,23 @@
                     <lightning-layout-item size="6">
                         <template if:true={hasPlan}>
                             <div class="slds-col  slds-p-left_x-small slds-p-top_small"> 
-                                    <label class="slds-form-element__label" for="form-element-01">Animal</label>
-                                    <c-custom-lookup
-                                        obj-name='Animal__c'
-                                        value-id={animalId}
-                                        fields={customLookupTreatmentFields}
-                                        display-fields='Animal_Name_Id__c'
-                                        read-only=true
-                                    >
-                                    </c-custom-lookup>
+                                <label class="slds-form-element__label" for="form-element-01">Animal</label>
+                                <c-custom-lookup
+                                    obj-name='Animal__c'
+                                    value-id={animalId}
+                                    fields={customLookupTreatmentFields}
+                                    display-fields='Animal_Name_Id__c'
+                                    read-only=true
+                                >
+                                </c-custom-lookup>
                                </div>
                         </template>
                     </lightning-layout-item>
                     <lightning-layout-item size="6">
-                        <template if:true={hasPlan}>
-                           
-                                <div class="slds-col  slds-p-left_x-small slds-p-top_small"> 
-                                    <lightning-input-field field-name="Session_Notes__c"></lightning-input-field>
-                                </div> 
-                           
+                        <template if:true={hasPlan}>                           
+                            <div class="slds-col  slds-p-left_x-small slds-p-top_small"> 
+                                <lightning-input-field field-name="Session_Notes__c"></lightning-input-field>
+                            </div>
                         </template>
                     </lightning-layout-item>
                 </lightning-layout>
