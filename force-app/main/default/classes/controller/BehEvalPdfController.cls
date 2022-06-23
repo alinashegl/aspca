@@ -65,7 +65,13 @@ public class BehEvalPdfController {
                 Puppy_Dog_Interaction_P2__c, Puppy_Skipped_DI_P2__c,
                 Puppy_Comments_DI_P2__c, Puppy_Muzzled_DI_P2__c,
                 Puppy_Dog_Interaction_P3__c, Puppy_Skipped_DI_P3__c,
-                Puppy_Comments_DI_P3__c, Puppy_Muzzled_DI_P3__c
+                Puppy_Comments_DI_P3__c, Puppy_Muzzled_DI_P3__c,
+                   Potential_Issue_Aggression_To_Animals__c,
+                   Potential_Issue_Aggression_To_People__c,
+                   Potential_Issue_Fear__c,
+                   Potential_Issue_High_Arousal__c,
+                   Potential_Issue_Other__c,
+                   Potential_Issue_Other_Notes__c
         FROM Behavior_Evaluation__c
         WHERE Id = :ApexPages.currentPage().getParameters().get('Id')];
         
