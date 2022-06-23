@@ -72,19 +72,6 @@ private class Test_BehaviorUtil {
         System.assert(!locations.contains('CARE'));
     }
 
-    // @isTest
-    // static void getLocationGroup_FromUser_MRC() {
-    //     User u = [SELECT Id, Location__c FROM User WHERE Id =: userInfo.getUserId()];
-    //     u.Location__c = 'MRC';
-    //     update u;
-
-    //     String[] locations = BehaviorUtil.getLocationGroup();
-    //     System.assert(locations.contains('CRC'));
-    //     System.assert(locations.contains('MRC'));
-    //     System.assert(!locations.contains('ARC'));
-    //     System.assert(!locations.contains('CARE'));
-    // }
-
     @isTest
     static void getLocationGroup_FromUser_ARCCARE() {
         User u = [SELECT Id, Location__c FROM User WHERE Id =: userInfo.getUserId()];
