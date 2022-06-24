@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ARC_CARE_Active_Dogs_List</fullName>
+    <columns>NAME</columns>
+    <columns>Animal_Name__c</columns>
+    <columns>Gender__c</columns>
+    <columns>Intake_Date_Time__c</columns>
+    <columns>Evaluation_Due_Date__c</columns>
+    <columns>Evaluation_Date__c</columns>
+    <columns>Animal_Status__c</columns>
+    <columns>Behavior_Case_Worker__c</columns>
+    <columns>Behavior_Summary__c</columns>
+    <columns>Recommendations__c</columns>
+    <columns>Does_Not_Walk_on_a_Leash__c</columns>
+    <columns>Does_Not_Walk_on_a_Leash_Notes__c</columns>
+    <columns>Handling_Instructions__c</columns>
+    <columns>Days_in_Treatment__c</columns>
+    <columns>Number_of_Treatments__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Active_Animal__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>Location_Filter__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <label>ARC/CARE Active Dogs List</label>
+</ListView>
