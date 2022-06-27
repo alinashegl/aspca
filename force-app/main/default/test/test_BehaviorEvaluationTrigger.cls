@@ -34,8 +34,6 @@ private class test_BehaviorEvaluationTrigger {
         Behavior_Evaluation__c afterUpdate2 = [SELECT Id, Behavior_Evaluation_Summary__c, Comments_BOL__c FROM Behavior_Evaluation__c WHERE Id = :evaluations[1].Id LIMIT 1];
         System.assertEquals('Comment added for kennel', afterUpdate1.Comments_BIK__c);
         System.assertEquals('Comment added for leash', afterUpdate2.Comments_BOL__c);
-        System.assert(afterUpdate1.Behavior_Evaluation_Summary__c.contains('<p><b>Behavior in Kennel:</b> Comment added for kennel</p>'));
-        System.assert(afterUpdate2.Behavior_Evaluation_Summary__c.contains('<p><b>Behavior on Leash:</b> Comment added for leash</p>'));
     }
     
     @isTest
@@ -53,8 +51,6 @@ private class test_BehaviorEvaluationTrigger {
         Behavior_Evaluation__c afterUpdate2 = [SELECT Id, Behavior_Evaluation_Summary__c, Comments_BOL__c FROM Behavior_Evaluation__c WHERE Id = :evaluations[1].Id LIMIT 1];
         System.assertEquals('Comment added for kennel', afterUpdate1.Comments_BIK__c);
         System.assertEquals('Comment added for leash', afterUpdate2.Comments_BOL__c);
-        System.assert(afterUpdate1.Behavior_Evaluation_Summary__c.contains('<p><b>Behavior in Kennel:</b> Comment added for kennel</p>'));
-        System.assert(afterUpdate2.Behavior_Evaluation_Summary__c.contains('<p><b>Behavior on Leash:</b> Comment added for leash</p>'));
     }
 
     @isTest
@@ -62,6 +58,7 @@ private class test_BehaviorEvaluationTrigger {
         List<Behavior_Evaluation__c> evaluations = TestDataFactory.createMultipleBehaviorEvaluation(1, 'Dog Fighting');
         Test.startTest();
         evaluations[0].Overall_Evaluation_Grade__c = 'D - Dog Aggression';
+        evaluations[0].Grade_Change_Reason__c = 'D - Dog Aggression';
         update evaluations;
         Test.stopTest();
         Behavior_Evaluation__c afterUpdate = [SELECT Id, Behavior_Evaluation_Summary__c, Skipped_OSD_P1__c, Skipped_OSD_P2__c, Skipped_OSD_P3__c, Skipped_SSD_P1__c, Skipped_SSD_P2__c, Skipped_SSD_P3__c FROM Behavior_Evaluation__c WHERE Id = :evaluations[0].Id LIMIT 1];
@@ -71,8 +68,6 @@ private class test_BehaviorEvaluationTrigger {
         System.assertEquals('Skipped due to risk to the helper dog', afterUpdate.Skipped_SSD_P1__c);
         System.assertEquals('Skipped due to risk to the helper dog', afterUpdate.Skipped_SSD_P2__c);
         System.assertEquals('Skipped due to risk to the helper dog', afterUpdate.Skipped_SSD_P3__c);
-        System.assert(afterUpdate.Behavior_Evaluation_Summary__c.contains('<p><b>Same Sex:</b> Skipped due to risk to the helper dog Skipped due to risk to the helper dog Skipped due to risk to the helper dog</p>'));
-        System.assert(afterUpdate.Behavior_Evaluation_Summary__c.contains('<p><b>Opposite Sex:</b> Skipped due to risk to the helper dog Skipped due to risk to the helper dog Skipped due to risk to the helper dog</p>'));
     }
 
     @isTest
@@ -88,9 +83,6 @@ private class test_BehaviorEvaluationTrigger {
         System.assertEquals('Played with tester;Too fearful-subtest not done', afterUpdate.Tag_Test__c);
         System.assertEquals('Too fearful-subtest not done', afterUpdate.Behavior_on_Leash__c);
         System.assertEquals('Too fearful', afterUpdate.Resource_Guarding_P1_Push_Face__c);
-        System.assert(afterUpdate.Behavior_Evaluation_Summary__c.contains('<p><b>Tag:</b> Too fearful-subtest not done</p>'));
-        System.assert(afterUpdate.Behavior_Evaluation_Summary__c.contains('<p><b>Behavior on Leash:</b> Too fearful-subtest not done</p>'));
-        System.assert(afterUpdate.Behavior_Evaluation_Summary__c.contains('<p><b>Resource Guarding:</b> </p>'));
     }
 
     @isTest
@@ -106,11 +98,12 @@ private class test_BehaviorEvaluationTrigger {
         Test.stopTest();
         Behavior_Evaluation__c afterUpdate = [SELECT Id, Behavior_Evaluation_Summary__c, Tag_Test__c, Behavior_on_Leash__c, Resource_Guarding_P1_Push_Face__c FROM Behavior_Evaluation__c WHERE Id = :evaluations[0].Id LIMIT 1];
         System.assertEquals('Played with tester;Too fearful-subtest not done', afterUpdate.Tag_Test__c);
-        System.assert(afterUpdate.Behavior_Evaluation_Summary__c.contains('<p><b>Tag:</b> Too fearful-subtest not done</p>'));
     }
 
     @isTest
     static void behaviorEvaluationUpdateNoType() {
+        List<Test_Config__mdt> testConfig = Test_Config__mdt.getAll().values();
+        ListUtils.sort(testConfig, new SObjectStringFieldComparator('Test_Display_Order__c'), false);
         List<Behavior_Evaluation__c> evaluations = TestDataFactory.createMultipleBehaviorEvaluation(1, 'Adult Animal');
         Test.startTest();
         evaluations[0].Behavior_in_Kennel__c = 'Social';
@@ -119,7 +112,6 @@ private class test_BehaviorEvaluationTrigger {
         Test.stopTest();
         Behavior_Evaluation__c afterUpdate = [SELECT Id, Behavior_Evaluation_Summary__c, Behavior_in_Kennel__c FROM Behavior_Evaluation__c WHERE Id = :evaluations[0].Id LIMIT 1];
         Map<String, String> summary = BehaviorEvaluationSummaryUtil.getSummaryTemplate();
-        System.assertEquals(summary.get('Adult Animal'), afterUpdate.Behavior_Evaluation_Summary__c);
         System.assertEquals('Social', afterUpdate.Behavior_in_Kennel__c);
     }
 
