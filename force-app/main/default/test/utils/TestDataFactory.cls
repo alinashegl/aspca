@@ -673,16 +673,14 @@ public without sharing class TestDataFactory {
 
     public static List<Protocol__c> createProtocols() {
         List<Protocol__c> protocols = new List<Protocol__c>();
-        Integer i = 0;
-        while(i != 9) {
+        for(Integer i = 0; i< 9; i++) {
             Protocol__c protocol = new Protocol__c();
             protocol.Name = 'Test Protocol ' + i;
             protocol.IsActive__c = true;
             protocol.Protocol_Categories__c = 'Non Fear Protocols';
             protocols.add(protocol);
-
-            i++;
         }
+        
         insert protocols;
         return protocols;
     }

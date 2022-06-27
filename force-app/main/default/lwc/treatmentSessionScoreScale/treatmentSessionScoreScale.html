@@ -16,12 +16,12 @@
             onchange={handleRadioChange}
             >
         </lightning-radio-group>
-    </template>
-    <template if:true={additionalFields}>
-        <template for:each={additionalFields} for:item="field">
-            <div key={field.fieldName} class="slds-p-top_x-small"> 
-                <lightning-input type="text" label={field.fieldLabel} value={field.value} data-field={field.fieldName} onblur={handleInputBlur}></lightning-input>
-            </div>
+        <template if:true={recordResponse.fields}>
+            <template for:each={recordResponse.fields} for:item="field">
+                <div key={field.fieldName} class="slds-p-top_x-small"> 
+                    <lightning-input type="text" label={field.fieldLabel} value={field.value} data-field={field.fieldName} onblur={handleInputBlur}></lightning-input>
+                </div>
+            </template>
         </template>
     </template>
 </template>

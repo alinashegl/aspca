@@ -20,7 +20,6 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
     @api protocolName;
     @api showPicklist = false;
     @api canRemoveProtocol = false;
-    @api location;
 
     fieldValues = [];
     protocolInfo;
@@ -157,7 +156,6 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
         const fields ={};
         fields[PLAN_PROTOCOL_ID_FIELD.fieldApiName] = this.protocolInfo.planProtocolId;
         fields[PLAN_PROTOCOL_NOTES_FIELD.fieldApiName] = this.template.querySelector("lightning-textarea[data-name=planProtocolNotes]").value;
-        
         this.updatePlanProtocol(fields);
     }
 
@@ -200,7 +198,7 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
         .catch(error => {
             this.dispatchEvent(
                 new ShowToastEvent({
-                    title: 'Unable to upate plan protocol',
+                    title: 'Unable to update plan protocol',
                     message: error.body.message,
                     variant: 'error',
                 }),
