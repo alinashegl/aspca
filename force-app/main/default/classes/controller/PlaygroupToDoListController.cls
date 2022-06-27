@@ -1,7 +1,7 @@
 public with sharing class PlaygroupToDoListController {
     @AuraEnabled(cacheable=true)
     public static List<Animal__c> getPlaygroupAnimals(String location) {
-        String[] translatedLocation = util.translateLocation(location);
+        // String[] translatedLocation = util.translateLocation(location);
         List<Animal__c> animals = [SELECT Id, Name, Animal_Name__c, Gender__c, Shelter_Location__c, Playgroup_Priority_Level__c, Play_Style_Notes__c,
                                         Play_Category__c, Shelter_Color_Coding__c, Number_of_Playgroups__c, Does_Not_Walk_on_a_Leash__c, Does_Not_Walk_on_a_Leash_Notes__c,
                                         (SELECT Id FROM Medical_Conditions__r
@@ -17,9 +17,10 @@ public with sharing class PlaygroupToDoListController {
                                         WHERE Playgroup_Session__r.Playgroup_Date_Time__c >= TODAY
                                             AND Playgroup_Session__r.Playgroup_Date_Time__c < TOMORROW LIMIT 1)
                                     FROM Animal__c
-                                    WHERE Play_Category__c NOT IN ('Unevaluated', 'DO NOT PLAY')
+                                    WHERE Active_Animal__c = true
+                                        AND Play_Category__c NOT IN ('Unevaluated', 'DO NOT PLAY')
                                         AND Id NOT IN (SELECT Animal__c FROM Play_Pause__c WHERE Type__c = 'Behavioral' AND Start_Date__c <= TODAY AND (End_Date__c = null OR End_Date__c >= TODAY))
-                                        AND Current_Recent_Shelter_Location__c IN: translatedLocation
+                                        AND Location_Filter__c = true
                                     ORDER BY Id];
         return animals;
     }

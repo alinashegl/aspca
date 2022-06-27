@@ -15,7 +15,7 @@ public with sharing class playgroupSessionLWCController {
     @testVisible
     private static Playgroup_Session__c getPlaygroupSession (Id sessionId){
         Playgroup_Session__c[] sessions = [
-            SELECT Id, Name, Playgroup_Location__c, Playgroup_Leader__c, Contact_Ids__c
+            SELECT Id, Name, Playgroup_Location__c, Playgroup_Leader__c, Contact_Ids__c, Playgroup_Date_Time__c
             FROM Playgroup_Session__c 
             WHERE Id =: sessionId 
             LIMIT 1

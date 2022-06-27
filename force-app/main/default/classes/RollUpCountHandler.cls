@@ -44,10 +44,16 @@ public with sharing class RollUpCountHandler extends DomainActionBase {
             }
         }
         if(!animalsIds.isEmpty()){
-            List<Animal__c> listAnimals = [Select id, Name, Days_in_Treatment__c, (Select id from Treatment_Sessions__r) FROM Animal__c WHERE ID IN: animalsIds];
+            List<Animal__c> listAnimals = [Select id, Name, Days_in_Treatment__c,Final_Outcome_Date__c, Number_of_Weeks_in_Treatment__c, Treatment_Start_Date__c, (Select id, CreatedDate from Treatment_Sessions__r Order by CreatedDate ASC) FROM Animal__c WHERE ID IN: animalsIds];
             for(Animal__c animal: listAnimals){
                 if(animal.Treatment_Sessions__r.size()>0){
+                    animal.Treatment_Start_Date__c = Date.newinstance(animal.Treatment_Sessions__r[0].CreatedDate.year(), animal.Treatment_Sessions__r[0].CreatedDate.month(), animal.Treatment_Sessions__r[0].CreatedDate.day());
                     animal.Days_in_Treatment__c=animal.Treatment_Sessions__r.size();
+                    if(animal.Final_Outcome_Date__c != null){
+                        animal.Number_of_Weeks_in_Treatment__c = (animal.Treatment_Start_Date__c.daysBetween(animal.Final_Outcome_Date__c))/7;
+                    } else {
+                        animal.Number_of_Weeks_in_Treatment__c = (animal.Treatment_Start_Date__c.daysBetween(System.Today()))/7;
+                    }
                     listOfAnimals.add(animal);
                 }
             }
@@ -73,10 +79,16 @@ public with sharing class RollUpCountHandler extends DomainActionBase {
             }
         }
         if(!animalsIds.isEmpty()){
-            List<Animal__c> listAnimals = [Select id, Name, Days_in_Treatment__c, (Select id from Treatment_Sessions__r) FROM Animal__c WHERE ID IN: animalsIds];
+            List<Animal__c> listAnimals = [Select id, Name, Days_in_Treatment__c,Final_Outcome_Date__c, Number_of_Weeks_in_Treatment__c, Treatment_Start_Date__c, (Select id, CreatedDate from Treatment_Sessions__r Order by CreatedDate ASC) FROM Animal__c WHERE ID IN: animalsIds];
             for(Animal__c animal: listAnimals){
                 if(animal.Treatment_Sessions__r.size()>0){
+                    animal.Treatment_Start_Date__c = Date.newinstance(animal.Treatment_Sessions__r[0].CreatedDate.year(), animal.Treatment_Sessions__r[0].CreatedDate.month(), animal.Treatment_Sessions__r[0].CreatedDate.day());
                     animal.Days_in_Treatment__c=animal.Treatment_Sessions__r.size();
+                    if(animal.Final_Outcome_Date__c != null){
+                        animal.Number_of_Weeks_in_Treatment__c = (animal.Final_Outcome_Date__c.daysBetween(animal.Treatment_Start_Date__c))/7;
+                    } else {
+                        animal.Number_of_Weeks_in_Treatment__c = (System.Today().daysBetween(animal.Treatment_Start_Date__c))/7;
+                    }
                     listOfAnimals.add(animal);
                 }
             }

@@ -15,7 +15,7 @@ export default class TreatmentSessionScoreScale extends LightningElement {
     connectedCallback(){
         if(this.record.id != null && this.recordResponse == null){
             this.showSpinner = true;
-            getSpsInfo({id: this.record.id, fields : this.additionalFields})
+            getSpsInfo({id: this.record.id, fields : this.record.additionalFields})
             .then((response) => {
                 if(response){
                     this.recordResponse = response;

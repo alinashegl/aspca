@@ -1,4 +1,6 @@
 public class BehaviorEvaluationSummaryUtil {
+    private static final Boolean COMPARE_NUMBERS = true;
+
     public static Map<String, String> getSummaryTemplate() {
         Set<String> puppySet = new Set<String>();
         Set<String> adultSet = new Set<String>();
@@ -14,7 +16,7 @@ public class BehaviorEvaluationSummaryUtil {
         String dogOnlyString = '';
         Map<String, String> result = new Map<String, String>();
         List<Test_Config__mdt> testConfig = Test_Config__mdt.getAll().values();
-        ListUtils.sort(testConfig, new SObjectStringFieldComparator('Test_Display_Order__c'));
+        ListUtils.sort(testConfig, new SObjectStringFieldComparator('Test_Display_Order__c'), COMPARE_NUMBERS);
 
         for (Test_Config__mdt t : testConfig) {
             String testName = t.Overall_Test_Display_Name__c != null ? t.Overall_Test_Display_Name__c : t.Test_Name__c;
@@ -59,6 +61,7 @@ public class BehaviorEvaluationSummaryUtil {
         for (SummaryWrapper s : dogOnlySummary) {
             dogOnlyString += s.labelValue;
         }
+
         result.put('Puppy', puppyString);
         result.put('Adult Animal', adultString);
         result.put('Dog Fighting', fightingString);
@@ -76,7 +79,7 @@ public class BehaviorEvaluationSummaryUtil {
         Map<String, String[]> result = new Map<String, String[]>();
 
         List<Test_Config__mdt> testConfig = Test_Config__mdt.getAll().values();
-        ListUtils.sort(testConfig, new SObjectStringFieldComparator('Test_Display_Order__c'));
+        ListUtils.sort(testConfig, new SObjectStringFieldComparator('Test_Display_Order__c'), COMPARE_NUMBERS);
 
         for (Test_Config__mdt t : testConfig) {
             String testName = t.Overall_Test_Display_Name__c != null ? t.Overall_Test_Display_Name__c : t.Test_Name__c;
@@ -111,7 +114,7 @@ public class BehaviorEvaluationSummaryUtil {
         Map<String, Map<String, Test_Config__mdt[]>> commentFieldsMap = new Map<String, Map<String, Test_Config__mdt[]>>();
         List<Test_Config__mdt> testConfig = Test_Config__mdt.getAll().values();
 
-        ListUtils.sort(testConfig, new SObjectStringFieldComparator('Test_Display_Order__c'));
+        ListUtils.sort(testConfig, new SObjectStringFieldComparator('Test_Display_Order__c'), COMPARE_NUMBERS);
 
         Map<String, Test_Config__mdt[]> puppyConfigMap = new Map<String, Test_Config__mdt[]>();
         Map<String, Test_Config__mdt[]> adultConfigMap = new Map<String, Test_Config__mdt[]>();
