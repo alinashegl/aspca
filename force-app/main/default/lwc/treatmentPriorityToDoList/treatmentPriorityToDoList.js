@@ -6,7 +6,6 @@ import FORM_FACTOR from '@salesforce/client/formFactor';
 import getAnimalTreatments from '@salesforce/apex/TreatmentToDoListController.getAnimalTreatments';
 
 export default class TreatmentPriorityToDoList extends NavigationMixin(LightningElement) {
-    location = 'MRC';
     @track
     addedSort = [];
     @track
@@ -71,21 +70,25 @@ export default class TreatmentPriorityToDoList extends NavigationMixin(Lightning
         return FORM_FACTOR === 'Small';
     }
 
-    @wire(getAnimalTreatments, { location: '$location'})
-    wiredAnimalTreatments(result) {
-        this.animalTreatments = result;
-        if (result.data) {
-            this.animalTreatmentsData = result.data;
-            this.sortFilterData();
-        }
-        else if (result.error) {
-            const evt = new ShowToastEvent({
-                title: 'Error',
-                message: result.error,
-                variant: 'error',
+    connectedCallback(){
+        if(this.animalTreatments == null || this.animalTreatments == undefined){
+            getAnimalTreatments({})
+            .then((result) => {
+                this.animalTreatments = result;
+                if (result) {
+                    this.animalTreatmentsData = result;
+                    this.sortFilterData();
+                }
+                else if (result.error) {
+                    const evt = new ShowToastEvent({
+                        title: 'Error',
+                        message: result.error,
+                        variant: 'error',
+                    });
+                    this.dispatchEvent(evt);
+                }
             });
-            this.dispatchEvent(evt);
-        }
+        }    
     }
 
     optionsFieldLabel(fieldValue, fieldOptions) {

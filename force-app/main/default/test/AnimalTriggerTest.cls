@@ -153,6 +153,7 @@ public class AnimalTriggerTest {
         );
 
         test.startTest();
+            AnimalTriggerHandler.alreadyRan = false;
             AnimalTriggerHandler.onBeforeUpdateHandler(
                 new Animal__c[]{anim},
                 new Map<Id, Animal__c>{anim.Id => oldAnim}
