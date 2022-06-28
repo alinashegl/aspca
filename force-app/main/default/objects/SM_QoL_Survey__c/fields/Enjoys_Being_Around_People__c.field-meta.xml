@@ -3,11 +3,9 @@
     <fullName>Enjoys_Being_Around_People__c</fullName>
     <externalId>false</externalId>
     <label>Enjoys Being Around People</label>
+    <length>20</length>
     <required>false</required>
     <trackTrending>false</trackTrending>
-    <type>Picklist</type>
-    <valueSet>
-        <restricted>true</restricted>
-        <valueSetName>Survey_Agreement_Level</valueSetName>
-    </valueSet>
+    <type>Text</type>
+    <unique>false</unique>
 </CustomField>
