@@ -130,7 +130,7 @@ private class test_playgroupSessionLWCController {
 
         System.assertEquals('success', response);
         Playgroup_Contact__c[] cons = [SELECT Id, Contact__c FROM Playgroup_Contact__c WHERE Playgroup__r.Playgroup_Session__c =: session.Id];
-        System.assert(cons.isEmpty(), 'should have returned no playgroup contacts, instead returned: ' + cons);
+        System.assertEquals(initialCons.size() - 1, cons.size(), 'should have returned ' + (initialCons.size()) + ' playgroup contacts, instead returned: ' + cons);
     }    
 
     @isTest 
