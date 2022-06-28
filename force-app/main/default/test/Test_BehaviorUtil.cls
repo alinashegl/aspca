@@ -28,17 +28,17 @@ private class Test_BehaviorUtil {
 
     @isTest
     static void getLocationGroup_FromString() {
-        String[] locations = BehaviorUtil.getLocationGroup('CRC');
+        String[] locations = BehaviorUtil.getLocationGroup('CRC/MRC');
         System.assert(locations.contains('CRC'));
         System.assert(locations.contains('MRC'));
         System.assert(!locations.contains('ARC'));
         System.assert(!locations.contains('CARE'));
 
-        locations = BehaviorUtil.getLocationGroup('MRC');
-        System.assert(locations.contains('CRC'));
-        System.assert(locations.contains('MRC'));
-        System.assert(!locations.contains('ARC'));
-        System.assert(!locations.contains('CARE'));
+        // locations = BehaviorUtil.getLocationGroup('MRC');
+        // System.assert(locations.contains('CRC'));
+        // System.assert(locations.contains('MRC'));
+        // System.assert(!locations.contains('ARC'));
+        // System.assert(!locations.contains('CARE'));
 
         locations = BehaviorUtil.getLocationGroup('ARC/CARE');
         System.assert(locations.contains('ARC'));
