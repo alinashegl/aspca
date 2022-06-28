@@ -4,12 +4,55 @@
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
+                    <name>actionNames</name>
+                    <valueList>
+                        <valueListItems>
+                            <value>Edit</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Animal__c.Dog_Behavior_Profile</value>
+                            <visibilityRule>
+                                <criteria>
+                                    <leftValue>{!$User.Profile.Name}</leftValue>
+                                    <operator>NE</operator>
+                                    <rightValue>ASPCA - Behavior (CRC)</rightValue>
+                                </criteria>
+                            </visibilityRule>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Animal__c.Refresh_Dog_Schedule</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>CustomButton.Animal__c.Generate_Kennel_Card</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>CustomButton.Animal__c.Create_Animal_Cage_Card</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Animal__c.Create_Daily_Enrichment</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>CustomButton.Animal__c.Animal_Discover</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>CustomButton.Animal__c.New_Incident_Report</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>CustomButton.Animal__c.Animal_Placement</value>
+                        </valueListItems>
+                    </valueList>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
                     <name>collapsed</name>
                     <value>false</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>enableActionsConfiguration</name>
-                    <value>false</value>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>enableActionsInNative</name>
+                    <value>true</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>hideChatterActions</name>
