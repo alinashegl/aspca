@@ -1,4 +1,5 @@
 public with sharing class AnimalTriggerHandler {
+    @testVisible
     Private static Boolean alreadyRan = false;
 
     public static void Execute() {
