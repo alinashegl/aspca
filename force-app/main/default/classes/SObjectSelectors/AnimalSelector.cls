@@ -35,7 +35,6 @@ public with sharing class AnimalSelector extends SObjectSelector{
                 Animal__c.Case__c ,
                 Animal__c.Case_Type__c ,
                 Animal__c.Case_Number__c ,
-                Animal__c.Legacy_FM_Animal_ID__c ,
                 Animal__c.Confirmed_Helper_Dog__c ,
                 Animal__c.Potential_Helper_Dog__c ,
                 Animal__c.Handling_Instructions__c ,

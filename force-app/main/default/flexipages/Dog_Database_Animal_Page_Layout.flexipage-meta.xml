@@ -4,12 +4,55 @@
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
+                    <name>actionNames</name>
+                    <valueList>
+                        <valueListItems>
+                            <value>Edit</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Animal__c.Dog_Behavior_Profile</value>
+                            <visibilityRule>
+                                <criteria>
+                                    <leftValue>{!$User.Profile.Name}</leftValue>
+                                    <operator>NE</operator>
+                                    <rightValue>ASPCA - Behavior (CRC)</rightValue>
+                                </criteria>
+                            </visibilityRule>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Animal__c.Refresh_Dog_Schedule</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>CustomButton.Animal__c.Generate_Kennel_Card</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>CustomButton.Animal__c.Create_Animal_Cage_Card</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Animal__c.Create_Daily_Enrichment</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>CustomButton.Animal__c.Animal_Discover</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>CustomButton.Animal__c.New_Incident_Report</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>CustomButton.Animal__c.Animal_Placement</value>
+                        </valueListItems>
+                    </valueList>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
                     <name>collapsed</name>
                     <value>false</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>enableActionsConfiguration</name>
-                    <value>false</value>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>enableActionsInNative</name>
+                    <value>true</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>hideChatterActions</name>
@@ -298,6 +341,10 @@
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>readonly</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Shelter_Location__c</fieldItem>
                 <identifier>RecordShelter_Location_cField1</identifier>
             </fieldInstance>
@@ -585,12 +632,6 @@
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Behavior_Alert_Flag__c</fieldItem>
-                <identifier>RecordBehavior_Alert_Flag__cField</identifier>
-            </fieldInstance>
-        </itemInstances>
         <itemInstances>
             <fieldInstance>
                 <fieldInstanceProperties>
@@ -1417,8 +1458,8 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Impromed_ID__c</fieldItem>
-                <identifier>RecordImpromed_ID_cField1</identifier>
+                <fieldItem>Record.AAH_ID__c</fieldItem>
+                <identifier>RecordAAH_ID_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -1610,12 +1651,6 @@
                 <identifier>RecordBehavior_Medication_Flag_cField1</identifier>
             </fieldInstance>
         </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Behavior_Alert_Flag__c</fieldItem>
-                <identifier>RecordBehavior_Alert_Flag_cField1</identifier>
-            </fieldInstance>
-        </itemInstances>
         <name>Facet-2cb0a905-9519-421f-8720-058e6e7e5bdf</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -1713,58 +1748,6 @@
                 </componentInstanceProperties>
                 <componentName>flexipage:fieldSection</componentName>
                 <identifier>flexipage_fieldSection17</identifier>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>parentFieldApiName</name>
-                    <value>Animal__c.Id</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>relatedListApiName</name>
-                    <value>Low_Stress_Notes__r</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>relatedListComponentOverride</name>
-                    <value>ADVGRID</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>rowsToDisplay</name>
-                    <value>10</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>showActionBar</name>
-                    <value>true</value>
-                </componentInstanceProperties>
-                <componentName>force:relatedListSingleContainer</componentName>
-                <identifier>force_relatedListSingleContainer15</identifier>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>parentFieldApiName</name>
-                    <value>Animal__c.Id</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>relatedListApiName</name>
-                    <value>Shelter_Notes__r</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>relatedListComponentOverride</name>
-                    <value>ADVGRID</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>rowsToDisplay</name>
-                    <value>10</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>showActionBar</name>
-                    <value>true</value>
-                </componentInstanceProperties>
-                <componentName>force:relatedListSingleContainer</componentName>
-                <identifier>force_relatedListSingleContainer22</identifier>
             </componentInstance>
         </itemInstances>
         <name>Facet-03c94c6c-092b-46fc-8ba2-9aa8397d39d3</name>
@@ -1896,8 +1879,8 @@
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Play_Priority__c</fieldItem>
-                <identifier>RecordPlay_Priority_cField1</identifier>
+                <fieldItem>Record.Playgroup_Priority_Level__c</fieldItem>
+                <identifier>RecordPlaygroup_Priority_Level_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
