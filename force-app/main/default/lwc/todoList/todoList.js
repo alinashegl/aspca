@@ -1,6 +1,6 @@
 import { LightningElement } from 'lwc';
-import NoHeader from '@salesforce/resourceUrl/NoHeader';
-import { loadStyle } from 'lightning/platformResourceLoader';
+//import NoHeader from '@salesforce/resourceUrl/NoHeader';
+//import { loadStyle } from 'lightning/platformResourceLoader';
 import getButtonsInfo from '@salesforce/apex/HomeBannerLWCController.getButtonsInfo';
 import { NavigationMixin } from 'lightning/navigation';
 
@@ -8,7 +8,7 @@ export default class TodoList extends NavigationMixin(LightningElement) {
     toDisplay;
     
     connectedCallback(){
-        loadStyle(this, NoHeader);
+        //loadStyle(this, NoHeader);
         if(this.toDisplay == undefined){
             window.console.log('inConnectedCallback');
             getButtonsInfo()
