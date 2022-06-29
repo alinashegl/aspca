@@ -140,6 +140,12 @@
             </value>
         </inputAssignments>
         <inputAssignments>
+            <field>Grade_Change_Reason__c</field>
+            <value>
+                <elementReference>$Record.Grade_Change_Reason__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
             <field>Preliminary_Behavior_Grade__c</field>
             <value>
                 <elementReference>$Record.Overall_Evaluation_Grade__c</elementReference>
@@ -176,6 +182,12 @@
             <field>Current_Behavior_Grade__c</field>
             <value>
                 <elementReference>$Record.Overall_Evaluation_Grade__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Grade_Change_Reason__c</field>
+            <value>
+                <elementReference>$Record.Grade_Change_Reason__c</elementReference>
             </value>
         </inputAssignments>
         <object>Animal__c</object>
