@@ -57,7 +57,6 @@ global with sharing class DaybackRest {
         Set<Id> managerIds = new Set<Id>();
         Id currentUserId = UserInfo.getUserId();
         Contact[] contactList = queryContacts();
-        System.debug('**contactList: ' + contactList);
         //first loop through the contacts to pull out any contacts that have direct reports
         //ARC/CARE doesn't want to have their resources broken out so we skip this part for them
         if(userLocation != 'ARC/CARE'){
@@ -99,8 +98,6 @@ global with sharing class DaybackRest {
     }
 
     private static Contact[] queryContacts(){
-        System.debug('**locationGroup: ' + locationGroup);
-
         return [
             SELECT Id, Name, ReportsToId, ReportsTo.Name, ReportsTo.User__c, Contact_Type__c, User__c
             FROM Contact 
