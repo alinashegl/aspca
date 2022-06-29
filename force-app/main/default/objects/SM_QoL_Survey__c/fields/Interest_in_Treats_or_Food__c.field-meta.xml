@@ -3,11 +3,9 @@
     <fullName>Interest_in_Treats_or_Food__c</fullName>
     <externalId>false</externalId>
     <label>Interest in Treats or Food</label>
+    <length>20</length>
     <required>false</required>
     <trackTrending>false</trackTrending>
-    <type>Picklist</type>
-    <valueSet>
-        <restricted>true</restricted>
-        <valueSetName>Survey_Agreement_Level</valueSetName>
-    </valueSet>
+    <type>Text</type>
+    <unique>false</unique>
 </CustomField>
