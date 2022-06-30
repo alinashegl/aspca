@@ -9,7 +9,6 @@ public with sharing class PlaygroupToDoListController {
     };
     @AuraEnabled(cacheable=true)
     public static List<Animal__c> getPlaygroupAnimals(String location) {
-        // String[] translatedLocation = util.translateLocation(location);
         List<Animal__c> animals = [
             SELECT Id, Name, Animal_Name__c, Gender__c, Shelter_Location__c, Playgroup_Priority_Level__c, Play_Style_Notes__c,
             Play_Category__c, Shelter_Color_Coding__c, Number_of_Playgroups__c, Does_Not_Walk_on_a_Leash__c, Does_Not_Walk_on_a_Leash_Notes__c,
