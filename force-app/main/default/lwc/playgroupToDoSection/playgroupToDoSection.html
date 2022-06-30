@@ -41,13 +41,24 @@
                     <lightning-input type="checkbox" label="Playgroup today?" checked={playgroupAnimal.Animal_Playgroups__r} variant="label-hidden" disabled></lightning-input>
                 </div>
                 <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-large-size_1-of-12">
+                    <template if:true={error}>
+                        <c-error-panel errors={error} type='inlineMessage' friendly-message='Error updating animal'></c-error-panel>
+                    </template>
                     <label class="slds-form-element__legend slds-form-element__label">Does Not Walk on a Leash</label>
-                    <lightning-input type="checkbox" checked={playgroupAnimal.Does_Not_Walk_on_a_Leash__c} variant="label-hidden" disabled></lightning-input>
+                    <lightning-input type="checkbox" checked={playgroupAnimal.Does_Not_Walk_on_a_Leash__c} variant="label-hidden" onchange={handleWalkOnLeashChange}></lightning-input>
+                    <template if:true={showBooleanSpinner}>
+                        <lightning-icon icon-name="utility:spinner" alternative-text="Loading" size="x-small" title="spinner">
+                        </lightning-icon>
+                    </template>
                 </div>
                 <div class="slds-col slds-size_1-of-1 slds-medium-size_3-of-12 slds-large-size_2-of-12">
+                    <template if:true={showTextSpinner}>
+                        <lightning-icon icon-name="utility:spinner" alternative-text="Loading" size="x-small" title="spinner">
+                        </lightning-icon>
+                    </template>
                     <label class="slds-form-element__legend slds-form-element__label">Does Not Walk on a Leash Notes</label>
                     <div class="slds-form-element__static slds-var-p-right_x-small">
-                        <textarea class="slds-textarea" disabled readonly>{playgroupAnimal.Does_Not_Walk_on_a_Leash_Notes__c}</textarea>
+                        <textarea class="slds-textarea" onblur={handleLeashNotesChange}>{playgroupAnimal.Does_Not_Walk_on_a_Leash_Notes__c}</textarea>
                     </div>
                 </div>
                 <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-large-size_1-of-12">
