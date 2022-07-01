@@ -25,11 +25,7 @@
                                 <h3 class="label slds-truncate slds-var-p-around_x-small slds-theme_shade">
                                     <span title="Information" class="slds-truncate">Information</span>
                                 </h3>
-                            </template>
-
-                          
-                                
-        
+                            </template>        
                             <div class="slds-grid slds-wrap"> 
                                 <!-- <div class="slds-col slds-size_1-of-1"> 
                                     <lightning-input-field field-name="Problem_Behavior__c" required></lightning-input-field>
@@ -48,7 +44,7 @@
                                         fields={customLookupFields}
                                         display-fields={customLookupDisplayFields}
                                         field-to-query='Name'
-                                        where-clause='IsActive__c = true'
+                                        where-clause='IsActive__c = true AND IsMaster__c = false'
                                         label-name='Treatment Bundle'
                                         onlookup={customLookupEvent}
                                         onexpandfield={handleCustomLookupExpandSearch}
@@ -89,7 +85,12 @@
                                     <lightning-input-field field-name="Enrichment_Activities__c"></lightning-input-field>
                                 </div>
                             </div>
-                            <div  class="slds-align_absolute-center">
+                            <template if:true={error}>
+                                <div class="slds-align_absolute-center">
+                                    <c-error-panel errors={error} type='inlineMessage' friendly-message='Error Creating Treatment Plan'></c-error-panel>
+                                </div>
+                            </template>
+                            <div  class="slds-align_absolute-center">                                
                                 <lightning-button variant="neutral" label="Cancel" onclick={handleCancel}></lightning-button>
                                 <lightning-button variant="brand" class="slds-var-m-left_x-small" label="Save" type="submit"></lightning-button>
                             </div>
