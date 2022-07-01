@@ -4,7 +4,7 @@
     </template>
     <template if:true={showProtocols}>
         <lightning-card>
-            <lightning-button variant="Neutral" label="Update Protocol Assignments" title="Update Protocol Assignment" onclick={handleProtocolAssignmentUpdates} class="slds-m-left_small" disabled={isUpdateButtonDisabled}></lightning-button>
+            <lightning-button variant="destructive" label="Save Protocol Assignments" title="Save Protocol Assignment" onclick={handleProtocolAssignmentUpdates} class="slds-m-left_small" disabled={isUpdateButtonDisabled}></lightning-button>
             <p class="slds-p-top_medium sectionTitle">Assigned Protocols</p>
             <template if:true={categoriesListOfLists}>
                 <lightning-layout multiple-rows>
@@ -19,6 +19,8 @@
                                         refresh={refresh}
                                         protocol-type={protocolType}
                                         is-assigned="assigned"
+                                        plan-id={recordId}
+                                        session-id={sessionId}
                                     ></c-treatment-modify-session-protocol-list>
                                 </div>
                             </div>
@@ -51,14 +53,15 @@
                                 onprotocolassignment={handleProtocolAssignmentEvent}
                                 refresh={refresh}
                                 type="unassigned"
+                                plan-id={recordId}
+                                session-id={sessionId}
                             ></c-treatment-modify-session-protocol-list>
-
                         </lightning-layout-item>
                     </template>
                 </lightning-layout>
             </template>
             <div class="slds-m-left_small slds-m-top_medium">
-                <lightning-button variant="Neutral" label="Update Protocol Assignments" title="Update Protocol Assignment" onclick={handleProtocolAssignmentUpdates} disabled={isUpdateButtonDisabled}></lightning-button>
+                <lightning-button variant="destructive" label="Save Protocol Assignments" title="Save Protocol Assignment" onclick={handleProtocolAssignmentUpdates} disabled={isUpdateButtonDisabled}></lightning-button>
             </div>
         </lightning-card>
     </template>

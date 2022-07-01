@@ -3,6 +3,11 @@
         <div class="slds-col slds-size_4-of-6 slds-medium-size_8-of-12 slds-large-size_8-of-12">
             <div class="ptitle">
                 {protocolName}
+                <div>
+                    <template if:true={error}>
+                        <c-error-panel errors={error} type='inlineMessage' friendly-message='Error updating animal'></c-error-panel>
+                    </template>
+                </div>
             </div>
         </div>
         <template if:true={showLoading}>
