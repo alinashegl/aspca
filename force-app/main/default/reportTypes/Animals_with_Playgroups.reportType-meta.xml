@@ -3,7 +3,7 @@
     <baseObject>Animal__c</baseObject>
     <category>other</category>
     <deployed>true</deployed>
-    <description>Only Animals with Playgroup information</description>
+    <description>Only Animals with Animal Playgroup information and lookups to Playgroup Sessions</description>
     <join>
         <outerJoin>false</outerJoin>
         <relationship>Animal_Playgroups__r</relationship>
@@ -867,27 +867,7 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Behavior_Alert_Flag__c</field>
-            <table>Animal__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Behavior_Medication_Flag__c</field>
-            <table>Animal__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Behavior_Play_Pause_Date__c</field>
-            <table>Animal__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Behavior_Play_Pause_Reason__c</field>
-            <table>Animal__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Behavior_Play_Pause__c</field>
             <table>Animal__c</table>
         </columns>
         <columns>
@@ -967,32 +947,12 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Impromed_Additional_ID_s__c</field>
-            <table>Animal__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Impromed_ID__c</field>
-            <table>Animal__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Initial_Outcome__c</field>
             <table>Animal__c</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Legacy_FM_Animal_ID__c</field>
-            <table>Animal__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Legal_Status__c</field>
-            <table>Animal__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Location_History__c</field>
             <table>Animal__c</table>
         </columns>
         <columns>
@@ -1003,11 +963,6 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Meets_Adoptability_Date__c</field>
-            <table>Animal__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>No_B_Mod__c</field>
             <table>Animal__c</table>
         </columns>
         <columns>
@@ -1037,22 +992,7 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Play_Priority__c</field>
-            <table>Animal__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Treatment_Bundles__c</field>
-            <table>Animal__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Treatment_Start_Date__c</field>
-            <table>Animal__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Treatments_Assigned__c</field>
             <table>Animal__c</table>
         </columns>
         <columns>
@@ -1062,32 +1002,7 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Behavior_Play_Pause_Options__c</field>
-            <table>Animal__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Date_Playgroup_Assigned__c</field>
-            <table>Animal__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Did_Not_Attend_Playgroup__c</field>
-            <table>Animal__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Do_Not_Play_Request__c</field>
-            <table>Animal__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Handler__c</field>
-            <table>Animal__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Last_Playgroup_Assignment__c</field>
             <table>Animal__c</table>
         </columns>
         <columns>
@@ -1113,21 +1028,6 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Playgroup_Priority_Level__c</field>
-            <table>Animal__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Playgroup_Summary_Notes__c</field>
-            <table>Animal__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Walks_on_a_Leash_Notes__c</field>
-            <table>Animal__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Walks_on_a_Leash__c</field>
             <table>Animal__c</table>
         </columns>
         <columns>
@@ -1365,6 +1265,26 @@
             <field>Foster_Duration__c</field>
             <table>Animal__c</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Days_in_Treatment__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>FM_Record_Status__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Active_Animal_True__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Active_Animal_False__c</field>
+            <table>Animal__c</table>
+        </columns>
         <masterLabel>Animals</masterLabel>
     </sections>
     <sections>
@@ -1476,6 +1396,11 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Playgroup_Session__c.Name</field>
+            <table>Animal__c.Animal_Playgroups__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Playgroup_Count__c</field>
             <table>Animal__c.Animal_Playgroups__r</table>
         </columns>
         <masterLabel>Animal Playgroups</masterLabel>

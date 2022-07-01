@@ -364,7 +364,7 @@ export default class CustomLookup extends LightningElement {
 
     //when the user clicks on the icon in the text field, need to open the dropdown and query the recently viewed records
     handleInputIconClick(){
-        this.isLoading = true;
+        /*this.isLoading = true;
         if(this.selectedRecord == undefined && !this.editRecord){
             this.editRecord = true;
             this.handleQueryRecentlyViewed();
@@ -378,7 +378,9 @@ export default class CustomLookup extends LightningElement {
             } else {
                 this.handleToggleExpandSearch();
             }
-        }
+        }*/
+        this.selectedRecord = null;
+        this.searchKey = null;
     }
 
     //this is used by the event listener
