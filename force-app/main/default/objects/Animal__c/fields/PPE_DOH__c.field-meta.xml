@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Evaluation_Status__c</fullName>
+    <fullName>PPE_DOH__c</fullName>
     <externalId>false</externalId>
-    <label>Evaluation Status</label>
+    <label>PPE/DOH</label>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
     <trackHistory>false</trackHistory>
@@ -12,29 +12,24 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Complete</fullName>
+                <fullName>Yes – ACC/CIRDC</fullName>
                 <default>false</default>
-                <label>Complete</label>
+                <label>Yes – ACC/CIRDC</label>
             </value>
             <value>
-                <fullName>Pending</fullName>
+                <fullName>Yes – Parasites</fullName>
                 <default>false</default>
-                <label>Pending</label>
+                <label>Yes – Parasites</label>
             </value>
             <value>
-                <fullName>Incomplete</fullName>
+                <fullName>Yes – Other</fullName>
                 <default>false</default>
-                <label>Incomplete</label>
+                <label>Yes – Other</label>
             </value>
             <value>
-                <fullName>Needs Dog-Dog</fullName>
+                <fullName>DOH Hold</fullName>
                 <default>false</default>
-                <label>Needs Dog-Dog</label>
-            </value>
-            <value>
-                <fullName>N/A</fullName>
-                <default>false</default>
-                <label>N/A</label>
+                <label>DOH Hold</label>
             </value>
         </valueSetDefinition>
     </valueSet>
