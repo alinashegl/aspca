@@ -1306,6 +1306,11 @@
             <field>PPE_DOH__c</field>
             <table>Animal__c</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Hold_Status_ARC_CARE__c</field>
+            <table>Animal__c</table>
+        </columns>
         <masterLabel>Animals</masterLabel>
     </sections>
 </ReportType>
