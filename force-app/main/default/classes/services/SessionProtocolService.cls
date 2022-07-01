@@ -119,7 +119,6 @@ public with sharing class SessionProtocolService {
         }
 
         if(request.Parameters.get('plan') != null){
-
             Treatment_Plan__c plan = (Treatment_Plan__c) request.Parameters.get('plan');
             Treatment_Session__c session = (Treatment_Session__c) request.Parameters.get('session');
             ProtocolSelector protocolSelector = new ProtocolSelector();
@@ -128,15 +127,16 @@ public with sharing class SessionProtocolService {
             List<Session_Protocol__c> sProtocols = new List<Session_Protocol__c>();
 
             for(Protocol__c proto : protocols){
-                if(proto.Plan_Protocols__r[0].IsRemoved__c) continue;
-                Plan_Protocol__c planProto = proto.Plan_Protocols__r[0];
-                Session_Protocol__c sProto = new Session_Protocol__c(
-                    TreatmentSessionId__c = session.Id,
-                    ProtocolId__c = proto.Id,
-                    Bundle_Entry__c = planProto.Bundle_Entry__c,
-                    Preferred_Motivators__c = session.Preferred_Motivators__c
-                );
-                sProtocols.add(sProto);
+                if(!proto.Plan_Protocols__r[0].IsRemoved__c){
+                    Plan_Protocol__c planProto = proto.Plan_Protocols__r[0];
+                    Session_Protocol__c sProto = new Session_Protocol__c(
+                        TreatmentSessionId__c = session.Id,
+                        ProtocolId__c = proto.Id,
+                        Bundle_Entry__c = planProto.Bundle_Entry__c,
+                        Preferred_Motivators__c = session.Preferred_Motivators__c
+                    );
+                    sProtocols.add(sProto);
+                }
             }
 
             insert sProtocols;
@@ -149,12 +149,14 @@ public with sharing class SessionProtocolService {
             Session_Protocol_Scale__c[] protocolScales = new Session_Protocol_Scale__c[0];
             for(Protocol__c proto : protocols){
                 for(Protocol_Scale_Junction__c junc : proto.Protocol_Scale_Junctions__r){
-                    Session_Protocol_Scale__c protoScale = new Session_Protocol_Scale__c(
-                        Protocol_Scale__c = junc.Protocol_Scale__c,
-                        Required__c = junc.Protocol_Scale__r.Required__c,
-                        Session_Protocol__c = protoIdToSProtoIdMap.get(junc.Protocol__c)
-                    );
-                    protocolScales.add(protoScale);
+                    if(!proto.Plan_Protocols__r[0].IsRemoved__c){
+                        Session_Protocol_Scale__c protoScale = new Session_Protocol_Scale__c(
+                            Protocol_Scale__c = junc.Protocol_Scale__c,
+                            Required__c = junc.Protocol_Scale__r.Required__c,
+                            Session_Protocol__c = protoIdToSProtoIdMap.get(junc.Protocol__c)
+                        );
+                        protocolScales.add(protoScale);
+                    }
                 }
             }
 

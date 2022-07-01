@@ -20,7 +20,7 @@
             <field>Name</field>
             <table>Animal__c</table>
         </columns>
-               <columns>
+        <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>CreatedDate</field>
             <table>Animal__c</table>
@@ -910,7 +910,7 @@
             <field>Box_Folder__c</field>
             <table>Animal__c</table>
         </columns>
-                <columns>
+        <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Controlled_Food_Program__c</field>
             <table>Animal__c</table>
@@ -1180,6 +1180,16 @@
             <field>Email_Notification__c</field>
             <table>Animal__c</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Active_Animal_True__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Active_Animal_False__c</field>
+            <table>Animal__c</table>
+        </columns>
         <masterLabel>Animals</masterLabel>
     </sections>
     <sections>
@@ -1193,7 +1203,7 @@
             <field>Name</field>
             <table>Animal__c.Behavior_Evaluations__r</table>
         </columns>
-               <columns>
+        <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>CreatedDate</field>
             <table>Animal__c.Behavior_Evaluations__r</table>
@@ -1253,7 +1263,7 @@
             <field>Is_Skipped__c</field>
             <table>Animal__c.Behavior_Evaluations__r</table>
         </columns>
-               <columns>
+        <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Evaluation_Subtype__c</field>
             <table>Animal__c.Behavior_Evaluations__r</table>

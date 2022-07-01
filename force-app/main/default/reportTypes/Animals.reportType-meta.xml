@@ -223,6 +223,11 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>Behavior_Medication_Data_Time__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>Special_Placement_Candidate__c</field>
             <table>Animal__c</table>
         </columns>
@@ -1108,11 +1113,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Days_in_Treatment__c</field>
-            <table>Animal__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Intake_Agency_Dept__c</field>
             <table>Animal__c</table>
         </columns>
@@ -1369,6 +1369,26 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Foster_Duration__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Days_in_Treatment__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>FM_Record_Status__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Active_Animal_True__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Active_Animal_False__c</field>
             <table>Animal__c</table>
         </columns>
         <masterLabel>Animals</masterLabel>

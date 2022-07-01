@@ -54,8 +54,14 @@ public class ScheduleAnimalBRCMRCTest {
     
     @isTest
     static void testBRCMRCTasks(){
+        test.startTest();
         List<Task> tasks = ScheduleAnimalBRCMRC.scheduleBRCMRCTasks(null);
+        System.assertNotEquals(null, tasks, 'Should have returned tasks, instead was null');
         System.debug(tasks.size());
         ScheduleAnimalBRCMRC.completeBRCMRCTasks();
+        test.stopTest();
+
+        Task[] completedTasks = [SELECT Id FROM Task WHERE Status = 'Completed'];
+        System.assertEquals(1, completedTasks.size());
     }
 }

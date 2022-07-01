@@ -25,7 +25,7 @@ private class Test_ObservationController {
     @isTest 
     static void getUserLocationMRC(){
         User u = TestDataFactory.createUsersWithoutInserting(1)[0];
-        u.Location__c = 'MRC';
+        u.Location__c = 'CRC/MRC';
         insert u;
 
         Boolean isArcCare = true;

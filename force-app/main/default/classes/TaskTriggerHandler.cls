@@ -158,7 +158,9 @@ public with sharing class TaskTriggerHandler {
         Map<Id, Animal__c> animalMap = new Map<Id, Animal__c>([SELECT Animal_Name_Id__c, Current_Recent_Shelter_Location__c,
                                                            Behavior_Case_Worker__c,Behavior_Case_Worker__r.Name, 
                                                            Behavior_Case_Worker__r.Is_Generic_Contact__c 
-                                                           FROM ANimal__c where id in : taskMap.keySet()]);
+                                                           FROM ANimal__c where id in : taskMap.keySet()
+                                                           AND Active_Animal__c = true
+                                                           ]);
         Map<Id, Task> taskMapByAnimalId = new Map<Id, Task>();
             
         List<Task> tasks = [SELECT Id, IsRecurrence, CreatedDate, ActivityDate, RecurrenceStartDateOnly, 

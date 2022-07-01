@@ -9,6 +9,7 @@ export default class TreatmentTabHeader extends NavigationMixin(LightningElement
     showModal = false;
     showNewSessionModal = false;
     showNewTreatmentModal = false;
+    error;
     @api showTreatmentPlanButton;
     @api showTreatmentSessionButton;
     @api showLast5TreatmentsReport;
@@ -65,6 +66,7 @@ export default class TreatmentTabHeader extends NavigationMixin(LightningElement
     }
     handleError(event){
         console.log(JSON.stringify(event));
+        this.error = [event.detail.message, event.detail.detail, JSON.stringify(event.detail.output)];
     }
 
     handlePdf() {

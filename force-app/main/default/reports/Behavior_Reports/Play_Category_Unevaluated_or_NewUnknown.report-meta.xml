@@ -38,6 +38,13 @@
             <operator>lessThan</operator>
             <value>N_DAYS_AGO:7</value>
         </criteriaItems>
+        <criteriaItems>
+            <column>Animal__c$Active_Animal__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
     </filter>
     <format>Summary</format>
     <groupingsDown>
@@ -48,6 +55,11 @@
     <groupingsDown>
         <dateGranularity>Day</dateGranularity>
         <field>Animal__c$Name</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Animal__c$Animal_Name__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
     <name>Play Category Unevaluated or New/Unknown</name>

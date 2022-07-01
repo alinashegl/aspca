@@ -1352,11 +1352,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Days_in_Treatment__c</field>
-            <table>Animal__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Evaluation_Dog_Dog_Testing_Date__c</field>
             <table>Animal__c</table>
         </columns>
@@ -1368,6 +1363,26 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Foster_Duration__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Days_in_Treatment__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>FM_Record_Status__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Active_Animal_True__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Active_Animal_False__c</field>
             <table>Animal__c</table>
         </columns>
         <masterLabel>Animals</masterLabel>

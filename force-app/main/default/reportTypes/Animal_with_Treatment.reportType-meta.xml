@@ -142,6 +142,26 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>Behavior_Play_Pause__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Behavior_Play_Pause_Date__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Behavior_Play_Pause_Options__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Behavior_Play_Pause_Reason__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>CreatedBy</field>
             <table>Animal__c.Treatment_Sessions__r</table>
         </columns>
@@ -1361,6 +1381,27 @@
             <table>Animal__c</table>
         </columns>
         <masterLabel>Animals</masterLabel>
+    </sections>
+    <sections>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Current_Week_Number__c</field>
+            <table>Animal__c.Treatment_Sessions__r</table>
+            <field>Active_Animal_True__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Active_Animal_False__c</field>
+            <table>Animal__c</table>
+
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Current_Week__c</field>
+            <table>Animal__c.Treatment_Sessions__r</table>
+        </columns>
+        <masterLabel>Treatment Sessions</masterLabel>
     </sections>
     <sections>
         <columns>

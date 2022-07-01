@@ -27,9 +27,10 @@ public with sharing class ScheduleAnimalFoster {
                 //if the animal has an existing task already assign it here
                 Task task = animalToTaskMap.containsKey(animal.Id) ? animalToTaskMap.get(animal.Id) : null;
 
-                fosterTasks.addAll(
-                    prepTasks(animal, defaultConfig, task)
-                );
+                Task[] newTasks = prepTasks(animal, defaultConfig, task);
+                if(newTasks != null && !newTasks.isEmpty()){
+                    fosterTasks.addAll(newTasks);
+                }
             }
         }
         return fosterTasks;
@@ -47,6 +48,7 @@ public with sharing class ScheduleAnimalFoster {
                 'LIMIT 1) ' +
             'FROM Animal__c ' +
             'WHERE Current_Location__c = \'Foster Home\' ' +
+            'AND Active_Animal__c = true ' + 
             'AND Type_of_Animal__c = \'Dog\' ' +
             'AND Id IN ' +
                 '(SELECT Animal__c ' +
@@ -153,7 +155,11 @@ public with sharing class ScheduleAnimalFoster {
     */
     public static Task[] prepTasks(Animal__c animal, Calendar_Schedule_Config__mdt config, Task task){
         //get the genericCon for the animal's location
+        Id genericConId = UserInfo.getUserId();
         Contact genericCon = AutoScheduleTasksUtil.genericContactMap.get(animal.Current_Recent_Shelter_Location__c);
+        if(genericCon != null){
+            genericConId = genericCon.User__c;
+        }
         Task[] newTasks = new Task[0];
         
         //determine which dates need tasks
@@ -171,8 +177,8 @@ public with sharing class ScheduleAnimalFoster {
                 Description = 'Foster Follow Up for: ' + animal.Animal_Name_Id__c + ' (' + animal.Current_Recent_Shelter_Location__c + ')',
                 IsReminderSet = true,
                 Status = 'Not Started',
-                WhoId = animal.Behavior_Case_Worker__c != null ? animal.Behavior_Case_Worker__c : genericCon.Id,
-                OwnerId = genericCon.User__c,
+                WhoId = animal.Behavior_Case_Worker__c != null ? animal.Behavior_Case_Worker__c : (genericCon != null ? genericCon.Id : null),
+                OwnerId = genericConId,
                 Subject = 'Foster Follow Up',
                 Species__c = 'Dog',
                 Auto_Scheduled_Task__c = true

@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Report xmlns="http://soap.sforce.com/2006/04/metadata">
-    <columns>
-        <aggregateTypes>Sum</aggregateTypes>
-        <field>Animal__c$Foster_Count__c</field>
-    </columns>
-    <columns>
-        <aggregateTypes>Sum</aggregateTypes>
-        <field>Animal__c$Foster_Length__c</field>
-    </columns>
     <filter>
         <criteriaItems>
             <column>Animal__c$Current_Recent_Shelter_Location__c</column>

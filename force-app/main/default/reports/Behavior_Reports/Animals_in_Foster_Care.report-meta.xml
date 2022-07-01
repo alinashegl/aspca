@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Report xmlns="http://soap.sforce.com/2006/04/metadata">
     <columns>
-        <field>Animal__c$Animal_Name__c</field>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>CDF1</field>
     </columns>
     <columns>
         <aggregateTypes>Sum</aggregateTypes>
-        <field>CDF1</field>
+        <field>Animal__c$Foster_Count__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Animal__c$Foster_Duration__c</field>
     </columns>
     <customDetailFormulas>
         <calculatedFormula>IF(Animal__c.Current_Location__c = &quot;Foster Home&quot;,1,0)</calculatedFormula>
@@ -29,16 +34,23 @@
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
+        <criteriaItems>
+            <column>Animal__c$Active_Animal__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
     </filter>
     <format>Summary</format>
     <groupingsDown>
         <dateGranularity>Day</dateGranularity>
-        <field>Animal__c$Current_Recent_Shelter_Location__c</field>
+        <field>Animal__c$Animal_Name_Id__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
     <groupingsDown>
         <dateGranularity>Day</dateGranularity>
-        <field>Animal__c$Name</field>
+        <field>Animal__c$Current_Behavior_Grade__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
     <name>Animals in Foster Care</name>

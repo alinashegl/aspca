@@ -1369,6 +1369,26 @@
             <field>Foster_Duration__c</field>
             <table>Animal__c</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Days_in_Treatment__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>FM_Record_Status__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Active_Animal_True__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Active_Animal_False__c</field>
+            <table>Animal__c</table>
+        </columns>
         <masterLabel>Animals</masterLabel>
     </sections>
     <sections>
@@ -1430,6 +1450,16 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Overall_Session_Grade__c</field>
+            <table>Animal__c.Treatment_Sessions__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Current_Week__c</field>
+            <table>Animal__c.Treatment_Sessions__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Current_Week_Number__c</field>
             <table>Animal__c.Treatment_Sessions__r</table>
         </columns>
         <masterLabel>Treatment Sessions</masterLabel>

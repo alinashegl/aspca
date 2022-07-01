@@ -16,11 +16,6 @@
     <sections>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Days_in_Treatment__c</field>
-            <table>Animal__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Number_of_Playgroups__c</field>
             <table>Animal__c</table>
         </columns>
@@ -1379,6 +1374,26 @@
             <field>Y_N_Completed__c</field>
             <table>Animal__c</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Days_in_Treatment__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>FM_Record_Status__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Active_Animal_True__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Active_Animal_False__c</field>
+            <table>Animal__c</table>
+        </columns>
         <masterLabel>Animals</masterLabel>
     </sections>
     <sections>
@@ -1525,6 +1540,11 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Treatment_Priority__c</field>
+            <table>Animal__c.Treatment_Plan__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Num_of_Treatment_Sessions__c</field>
             <table>Animal__c.Treatment_Plan__r</table>
         </columns>
         <masterLabel>Treatment Plans</masterLabel>

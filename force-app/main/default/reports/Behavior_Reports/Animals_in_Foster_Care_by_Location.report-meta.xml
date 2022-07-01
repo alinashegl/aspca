@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <aggregates>
+        <calculatedFormula>CDF1:SUM/RowCount</calculatedFormula>
+        <datatype>percent</datatype>
+        <developerName>FORMULA1</developerName>
+        <isActive>true</isActive>
+        <isCrossBlock>false</isCrossBlock>
+        <masterLabel>% of Animals in Foster</masterLabel>
+        <scale>2</scale>
+    </aggregates>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>CDF1</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <aggregateTypes>Average</aggregateTypes>
+        <field>Animal__c$Foster_Duration__c</field>
+    </columns>
+    <customDetailFormulas>
+        <calculatedFormula>IF(Animal__c.Current_Location__c = &quot;Foster Home&quot;,1,0)</calculatedFormula>
+        <dataType>Double</dataType>
+        <developerName>CDF1</developerName>
+        <label>In Foster</label>
+        <scale>0</scale>
+    </customDetailFormulas>
+    <filter>
+        <criteriaItems>
+            <column>Animal__c$Current_Recent_Shelter_Location__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value></value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Animal__c$Location_Filter__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Animal__c$Active_Animal__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Animal__c$Current_Recent_Shelter_Location__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Animals in Foster Care by Location</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Animals__c</reportType>
+    <scope>organization</scope>
+    <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Animal__c$Completed_Date__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>
