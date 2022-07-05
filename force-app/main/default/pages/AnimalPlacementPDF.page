@@ -197,7 +197,7 @@
                 </div>
             </apex:repeat>
         
-        <!--<apex:outputPanel rendered="{!anmwrapper.animalD.Behavior_Foster_Notes__r.size!=0}">-->
+        <apex:outputPanel rendered="{!anmwrapper.animalD.Behavior_Foster_Notes__r.size!=0}">
             <div class="section" style="border:1px solid; page-break-inside: avoid;page-break-after: always;">
                 <table>
                     <thead>
@@ -233,7 +233,7 @@
                     </tbody>
                 </table>
             </div>
-        <!--</apex:outputPanel>-->
+        </apex:outputPanel>
         <apex:outputPanel rendered="{!anmwrapper.animalD.Placement_Notes__r.size!=0}">
             <div class="section" style="border:1px solid; page-break-inside: avoid;page-break-after: always;">
                 <table>
@@ -268,6 +268,7 @@
             </div>
         </apex:outputPanel>
         <!-- Shelter Notes -->
+        <apex:outputPanel rendered="{!shelterNotes.size!=0}">
 		 <div class="section" style="border:1px solid; page-break-inside: avoid;page-break-after: always;">
             
             <table>
@@ -305,8 +306,10 @@
                     </apex:repeat>  
                 </tbody>
             </table>
-        </div>        
+        </div>   
+        </apex:outputPanel>
         <!-- Low Stress Notes -->
+        <apex:outputPanel rendered="{!lowStressNotes.size!=0}">
          <div class="section" style="border:1px solid; page-break-inside: avoid;page-break-after: always;">
             
             <table>
@@ -367,7 +370,9 @@
                 </tbody>
             </table>
         </div>
+        </apex:outputPanel>
         <!-- 3. Behavior Progress, section 2 Incident Object   -->
+        <apex:outputPanel rendered="{!anmwrapper.animalD.Incidents__r.size!=0}">
         <div class="section" style="border:1px solid; page-break-inside: avoid;page-break-after: always;">
             <table style="border-collapse: collapse;">
                 <thead>
@@ -441,7 +446,9 @@
                 </tbody>
             </table>
         </div>
+        </apex:outputPanel>
         <!--4. Play History -->
+        <apex:outputPanel rendered="{!aPlayGroups.size!=0}">
         <div class="section" style="border:1px solid; page-break-inside: avoid;page-break-after: always;">  
             <table class="c_table">
                 <thead>
@@ -497,7 +504,8 @@
                 </tbody>
             </table>
         </div>
-        <!--3. Training & Behavior Modification Behavior Mod-->
+        </apex:outputPanel>
+            <!--3. Training & Behavior Modification Behavior Mod-->
         <div class="section" style="page-break-inside:avoid;page-break-inside:avoid; page-break-after: always; padding-top: .5em; border:1px solid;">
             <table class="c_table" width="100%">
                 <thead>
@@ -630,6 +638,7 @@
         </div>
         
         <!-- Behavior Evaluations Report: -->
+        <apex:outputPanel rendered="{!behaviorEvaluations.size!=0}">
         <div class="section" style="page-break-inside:avoid; page-break-after: always; padding-top: .5em;">
             <apex:variable var="rowNum" value="{!0}" />
             <apex:repeat value="{!behaviorEvaluations}" var="behEval">
@@ -1076,6 +1085,7 @@
                 <apex:variable var="rowNum" value="{!rowNum+1}"/>
             </apex:repeat>
         </div>
+        </apex:outputPanel>
     </body>
     
 </apex:page>
