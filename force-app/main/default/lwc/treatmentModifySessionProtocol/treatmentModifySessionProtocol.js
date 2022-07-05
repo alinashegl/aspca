@@ -6,9 +6,6 @@ import getProtocolSkippedInfo from '@salesforce/apex/TreatmentSessionLWCControll
 
 import SESSION_PROTOCOL_OBJECT from "@salesforce/schema/Session_Protocol__c";
 import PLAN_PROTOCOL_OBJECT from "@salesforce/schema/Plan_Protocol__c";
-
-import IsRemoved__c from '@salesforce/schema/OpportunityLineItem.IsRemoved__c';
-
 export default class TreatmentModifySessionProtocol extends LightningElement {
     @api protocol;
     @api isAssigned;
@@ -49,6 +46,8 @@ export default class TreatmentModifySessionProtocol extends LightningElement {
             .then(() =>{
                 this.loading = false;
             })
+        } else {
+            this.loading = false;
         }
     }
 
@@ -72,17 +71,6 @@ export default class TreatmentModifySessionProtocol extends LightningElement {
 
     handleToggleUpdateEvent(){
         this.updateProtocol();
-        // let eventDetails = {            
-        //     id: this.protocol.Id,
-        //     isAssigned: this.isAssignedType,
-        //     isSkipped: !this.notSkipped,
-        //     isRemoved: !this.notRemoved,
-        //     addToPlan: this.addToPlan
-        // };
-        // const event = new CustomEvent('protocolassignment', {
-        //     detail: eventDetails
-        // });
-        // this.dispatchEvent(event);
     }
 
     updateProtocol(){
@@ -99,14 +87,12 @@ export default class TreatmentModifySessionProtocol extends LightningElement {
             const recordUpdate = {fields: fields};
             this.handleUpdateRecord(recordUpdate);
         } else {
-            // if(!this.isAssignedType){
-                if(this.sessionId){
-                    this.prepSessionProtocol();
-                }
-                if(this.planId){
-                    this.prepPlanProtocol();
-                }
-            // }
+            if(this.sessionId){
+                this.prepSessionProtocol();
+            }
+            if(this.planId){
+                this.prepPlanProtocol();
+            }
         }
     }
 
@@ -127,7 +113,7 @@ export default class TreatmentModifySessionProtocol extends LightningElement {
         window.console.log("prepSessionProtocol");
         const fields = {};
         fields['ProtocolId__c'] = this.protocol.Id;
-        fields['TreatmentSessionId__c'] = this.sessionIdId;
+        fields['TreatmentSessionId__c'] = this.sessionId;
         const recordInput = { apiName: SESSION_PROTOCOL_OBJECT.objectApiName, fields };
         this.insertRecord(recordInput);        
     }
@@ -150,10 +136,19 @@ export default class TreatmentModifySessionProtocol extends LightningElement {
             this.error = error;
         })
         .finally(() => {
-            this.loading = false;
+            let eventDetails = {            
+                id: this.protocol.Id,
+                isAssigned: this.isAssignedType,
+                isSkipped: !this.notSkipped,
+                isRemoved: !this.notRemoved,
+                addToPlan: this.addToPlan
+            };
+            const event = new CustomEvent('protocolassignment', {
+                detail: eventDetails
+            });
+            this.dispatchEvent(event);
         });
     }
-
 
     get notSkippedValue(){
         return this.notSkipped;
@@ -164,7 +159,7 @@ export default class TreatmentModifySessionProtocol extends LightningElement {
     }
 
     get showLoading(){
-        return this.isAssignedType && this.loading;
+        return this.loading;
     }
 
     get isSessionProtocol(){
@@ -191,5 +186,9 @@ export default class TreatmentModifySessionProtocol extends LightningElement {
 
     get boxClass(){
         return FORM_FACTOR == 'Small' ? 'box slds-grid' : 'slds-box slds-grid';
+    }
+
+    get newProtocolClass(){
+        return this.protocol.New_Protocol__c < 60 ? 'newProtocol' : null;
     }
 }
