@@ -1,41 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Evaluation_Status__c</fullName>
+    <fullName>Hold_Status_ARC_CARE__c</fullName>
     <externalId>false</externalId>
-    <label>Evaluation Status</label>
+    <label>Hold Status ARC/CARE</label>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
     <trackHistory>false</trackHistory>
-    <type>Picklist</type>
+    <type>MultiselectPicklist</type>
     <valueSet>
         <restricted>true</restricted>
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Complete</fullName>
+                <fullName>RTA</fullName>
                 <default>false</default>
-                <label>Complete</label>
+                <label>RTA</label>
             </value>
             <value>
-                <fullName>Pending</fullName>
+                <fullName>RTO</fullName>
                 <default>false</default>
-                <label>Pending</label>
+                <label>RTO</label>
             </value>
             <value>
-                <fullName>Incomplete</fullName>
+                <fullName>Legal</fullName>
                 <default>false</default>
-                <label>Incomplete</label>
+                <label>Legal</label>
             </value>
             <value>
-                <fullName>Needs Dog-Dog</fullName>
+                <fullName>Medical</fullName>
                 <default>false</default>
-                <label>Needs Dog-Dog</label>
+                <label>Medical</label>
             </value>
             <value>
-                <fullName>N/A</fullName>
+                <fullName>Behavior</fullName>
                 <default>false</default>
-                <label>N/A</label>
+                <label>Behavior</label>
+            </value>
+            <value>
+                <fullName>Forensic</fullName>
+                <default>false</default>
+                <label>Forensic</label>
             </value>
         </valueSetDefinition>
     </valueSet>
+    <visibleLines>4</visibleLines>
 </CustomField>
