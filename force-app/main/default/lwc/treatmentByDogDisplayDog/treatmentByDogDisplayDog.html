@@ -62,19 +62,27 @@
                 <lightning-accordion-section name="labels" label="Protocols:">
                     <lightning-layout multiple-rows class="slds-m-bottom_x-small">
                         <lightning-layout-item >
-                            <lightning-button variant={currentProtocolsButton} label={currentProtocols} title="Current Protocols" onclick={handleToggleCurrent} class="slds-m-left_x-small"></lightning-button>
+                            <lightning-button variant={currentProtocolsButton} label={currentProtocols} title={currentProtocolsButtonTitle} onclick={handleToggleCurrent} class="slds-m-left_x-small"></lightning-button>
                         </lightning-layout-item>
                         <lightning-layout-item>
-                            <lightning-button variant={currentRemovedProtocolsButton} label={currentRemovedProtocols} title="Current Removed Protocols" onclick={handleToggleRemoved} class="slds-m-left_x-small"></lightning-button>
+                            <lightning-button variant={currentRemovedProtocolsButton} label={currentRemovedProtocols} title={currentRemovedProtocolsButtonTitle} onclick={handleToggleRemoved} class="slds-m-left_x-small"></lightning-button>
                         </lightning-layout-item>
                         <lightning-layout-item>
-                            <lightning-button variant={historicalProtocolsButton} label={historicalProtocols} title="Historical Protocols" onclick={handleToggleHistorical} class="slds-m-left_x-small"></lightning-button>
+                            <lightning-button variant={historicalProtocolsButton} label={historicalProtocols} title={historicalProtocolsButtonTitle} onclick={handleToggleHistorical} class="slds-m-left_x-small"></lightning-button>
                         </lightning-layout-item>
                     </lightning-layout>
                     <template if:true={showActiveNotRemoved}>
                         <template for:each={dog.txProtocols} for:item='protocol'>
+                            <c-treatment-by-dog-display-protocol
+                                key={protocol.name}
+                                protocol={protocol}
+                                is-current-protocol='TRUE'
+                                show-current='TRUE'
+                                show-historical='FALSE'
+                            >
+                            </c-treatment-by-dog-display-protocol>
                             <template if:true={protocol.isActiveNotRemoved}>
-                                <div key={protocol.name} class="slds-card slds-card_boundary card-custom">
+                            <!--    <div key={protocol.name} class="slds-card slds-card_boundary card-custom">
                                     <div  class="slds-grid slds-wrap">
                                         <div class="slds-size_1-of-1 slds-var-m-left_x-small">
                                             <div class="slds-col">
@@ -125,9 +133,9 @@
                                                 </template>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </template>
+                                    </div> 
+                                </div>-->
+                            </template> 
                         </template>
                     </template>
 
