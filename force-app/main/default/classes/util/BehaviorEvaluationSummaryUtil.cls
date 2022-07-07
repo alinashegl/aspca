@@ -123,36 +123,36 @@ public class BehaviorEvaluationSummaryUtil {
         Set<String> testNames = new Set<String>(); //use this set to make sure we don't duplicate comments
 
         for (Test_Config__mdt t : testConfig) {
-            String testName = t.Overall_Test_Display_Name__c != null ? t.Overall_Test_Display_Name__c : t.Test_Name__c;
-            if (testName != null) {
-                if(testNames.contains(testName)){
-                    continue;
-                }
-                testNames.add(testName);
-                testName = testName.replace(' P1', '').replace(' P2', '').replace(' P3', '');
-
-                if (t.IsPuppy__c) {
+            String fullTestName = t.Overall_Test_Display_Name__c != null ? t.Overall_Test_Display_Name__c : t.Test_Name__c;
+            if (fullTestName != null) {
+                String testName = fullTestName.replace(' P1', '').replace(' P2', '').replace(' P3', '');
+                
+                if (t.IsPuppy__c && !testNames.contains('puppy-'+fullTestName)) {
+                    testNames.add('puppy-'+fullTestName);
                     if(puppyConfigMap.containsKey(testName)){
                         puppyConfigMap.get(testName).add(t);
                     } else {
                         puppyConfigMap.put(testName, new Test_Config__mdt[]{t});
                     }
                 }
-                if (t.IsAdult__c) {
+                if (t.IsAdult__c && !testNames.contains('adult-'+fullTestName)) {
+                    testNames.add('adult-'+fullTestName);
                     if(adultConfigMap.containsKey(testName)){
                         adultConfigMap.get(testName).add(t);
                     } else {
                         adultConfigMap.put(testName, new Test_Config__mdt[]{t});
                     }
                 }
-                if (t.IsDogFighting__c) {
+                if (t.IsDogFighting__c && !testNames.contains('dogFighting-'+fullTestName)) {
+                    testNames.add('dogFighting-'+fullTestName);
                     if(fightingConfigMap.containsKey(testName)){
                         fightingConfigMap.get(testName).add(t);
                     } else {
                         fightingConfigMap.put(testName, new Test_Config__mdt[]{t});
                     }
                 }
-                if (t.IsDogOnly__c) {
+                if (t.IsDogOnly__c && !testNames.contains('dog-'+fullTestName)) {
+                    testNames.add('dog-'+fullTestName);
                     if(dogOnlyConfigMap.containsKey(testName)){
                         dogOnlyConfigMap.get(testName).add(t);
                     } else {
@@ -161,8 +161,6 @@ public class BehaviorEvaluationSummaryUtil {
                 }
             }
         }
-
-        System.debug('adultConfigMap: ' + adultConfigMap.get('Resource Guarding'));
 
         commentFieldsMap.put('Puppy', puppyConfigMap);
         commentFieldsMap.put('Adult Animal', adultConfigMap);
