@@ -4,8 +4,8 @@
     <assignments>
         <name>Clear_Final_Outcome</name>
         <label>Clear Final Outcome</label>
-        <locationX>50</locationX>
-        <locationY>1247</locationY>
+        <locationX>182</locationX>
+        <locationY>1583</locationY>
         <assignmentItems>
             <assignToReference>finalOutcome</assignToReference>
             <operator>Assign</operator>
@@ -24,7 +24,7 @@
     <assignments>
         <name>Set_Current_Recent_Shelter_Location</name>
         <label>Set Current/Recent Shelter Location</label>
-        <locationX>50</locationX>
+        <locationX>182</locationX>
         <locationY>575</locationY>
         <assignmentItems>
             <assignToReference>currentRecentShelterLocation</assignToReference>
@@ -41,13 +41,13 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Is_Kennel_Location_Set</targetReference>
+            <targetReference>Is_Facility_Foster_Home</targetReference>
         </connector>
     </assignments>
     <assignments>
         <name>Set_Final_Outcome</name>
         <label>Set Final Outcome</label>
-        <locationX>622</locationX>
+        <locationX>886</locationX>
         <locationY>1127</locationY>
         <assignmentItems>
             <assignToReference>finalOutcome</assignToReference>
@@ -68,9 +68,25 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Set_Foster_Name</name>
+        <label>Set Foster Name</label>
+        <locationX>182</locationX>
+        <locationY>911</locationY>
+        <assignmentItems>
+            <assignToReference>foster.Id</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Record.Point_of_Contact__r.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Is_Kennel_Location_Set</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Set_Initial_Outcome</name>
         <label>Set Initial Outcome</label>
-        <locationX>710</locationX>
+        <locationX>974</locationX>
         <locationY>575</locationY>
         <assignmentItems>
             <assignToReference>initialOutcome</assignToReference>
@@ -94,17 +110,26 @@
         <name>Set_Kennel_Location</name>
         <label>Set Kennel Location</label>
         <locationX>50</locationX>
-        <locationY>911</locationY>
+        <locationY>1247</locationY>
         <assignmentItems>
             <assignToReference>kennelLocation</assignToReference>
-            <operator>Add</operator>
+            <operator>Assign</operator>
             <value>
                 <elementReference>$Record.Kennel_Location__c</elementReference>
             </value>
         </assignmentItems>
+        <connector>
+            <targetReference>Is_Final_Outcome_set</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Set_Kennel_Location_Text</name>
+        <label>Set Kennel Location - Text</label>
+        <locationX>314</locationX>
+        <locationY>1247</locationY>
         <assignmentItems>
             <assignToReference>kennelLocation</assignToReference>
-            <operator>Add</operator>
+            <operator>Assign</operator>
             <value>
                 <elementReference>$Record.Kennel_Location_Text__c</elementReference>
             </value>
@@ -116,7 +141,7 @@
     <assignments>
         <name>Set_RTA_RTO</name>
         <label>Set RTA/RTO</label>
-        <locationX>490</locationX>
+        <locationX>754</locationX>
         <locationY>911</locationY>
         <assignmentItems>
             <assignToReference>RTO_RTA</assignToReference>
@@ -139,7 +164,7 @@
     <decisions>
         <name>Facility_or_Outcome</name>
         <label>Facility or Outcome</label>
-        <locationX>402</locationX>
+        <locationX>600</locationX>
         <locationY>335</locationY>
         <defaultConnector>
             <targetReference>Is_Initial_Outcome_Set</targetReference>
@@ -169,10 +194,35 @@
         </rules>
     </decisions>
     <decisions>
+        <name>Is_Facility_Foster_Home</name>
+        <label>Is Facility Foster Home?</label>
+        <locationX>314</locationX>
+        <locationY>791</locationY>
+        <defaultConnector>
+            <targetReference>Is_Kennel_Location_Set</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Facility_Foster_Home</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Facility_Outcome__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Foster Home</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Foster_Name</targetReference>
+            </connector>
+            <label>Facility = Foster Home</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>Is_Final_Outcome_set</name>
         <label>Is Final Outcome set?</label>
-        <locationX>182</locationX>
-        <locationY>1127</locationY>
+        <locationX>314</locationX>
+        <locationY>1463</locationY>
         <defaultConnector>
             <targetReference>Update_Animal</targetReference>
         </defaultConnector>
@@ -196,7 +246,7 @@
     <decisions>
         <name>Is_Initial_Outcome_Set</name>
         <label>Is Initial Outcome Set?</label>
-        <locationX>622</locationX>
+        <locationX>886</locationX>
         <locationY>455</locationY>
         <defaultConnector>
             <targetReference>Set_Initial_Outcome</targetReference>
@@ -221,24 +271,17 @@
     <decisions>
         <name>Is_Kennel_Location_Set</name>
         <label>Is Kennel Location Set?</label>
-        <locationX>182</locationX>
-        <locationY>791</locationY>
+        <locationX>314</locationX>
+        <locationY>1127</locationY>
         <defaultConnector>
             <targetReference>Is_Final_Outcome_set</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>Kennel Location Not Set</defaultConnectorLabel>
         <rules>
             <name>Kennel_Location_Set</name>
-            <conditionLogic>or</conditionLogic>
+            <conditionLogic>and</conditionLogic>
             <conditions>
                 <leftValueReference>$Record.Kennel_Location__c</leftValueReference>
-                <operator>IsNull</operator>
-                <rightValue>
-                    <booleanValue>false</booleanValue>
-                </rightValue>
-            </conditions>
-            <conditions>
-                <leftValueReference>$Record.Kennel_Location_Text__c</leftValueReference>
                 <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>false</booleanValue>
@@ -247,16 +290,31 @@
             <connector>
                 <targetReference>Set_Kennel_Location</targetReference>
             </connector>
-            <label>Kennel Location Set</label>
+            <label>Kennel Location Set - Picklist</label>
+        </rules>
+        <rules>
+            <name>Kennel_Location_Set_Text</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Kennel_Location_Text__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Kennel_Location_Text</targetReference>
+            </connector>
+            <label>Kennel Location Set - Text</label>
         </rules>
     </decisions>
     <decisions>
         <name>Is_Location_ASPCA_Shelter</name>
         <label>Is Location ASPCA Shelter?</label>
-        <locationX>182</locationX>
+        <locationX>314</locationX>
         <locationY>455</locationY>
         <defaultConnector>
-            <targetReference>Is_Kennel_Location_Set</targetReference>
+            <targetReference>Is_Facility_Foster_Home</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>Not ASPCA Location</defaultConnectorLabel>
         <rules>
@@ -320,7 +378,7 @@
     <decisions>
         <name>IS_RTA_RTO_Set</name>
         <label>IS RTA/RTO Set?</label>
-        <locationX>622</locationX>
+        <locationX>886</locationX>
         <locationY>791</locationY>
         <defaultConnector>
             <targetReference>Set_Final_Outcome</targetReference>
@@ -374,8 +432,8 @@
     <recordUpdates>
         <name>Update_Animal</name>
         <label>Update Animal</label>
-        <locationX>402</locationX>
-        <locationY>1559</locationY>
+        <locationX>600</locationX>
+        <locationY>1895</locationY>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -421,6 +479,12 @@
             </value>
         </inputAssignments>
         <inputAssignments>
+            <field>Foster_Name__c</field>
+            <value>
+                <elementReference>foster.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
             <field>Initial_Outcome_Date__c</field>
             <value>
                 <elementReference>initialOutcomeDate</elementReference>
@@ -444,10 +508,16 @@
                 <elementReference>RTO_RTA</elementReference>
             </value>
         </inputAssignments>
+        <inputAssignments>
+            <field>Shelter_Location__c</field>
+            <value>
+                <elementReference>kennelLocation</elementReference>
+            </value>
+        </inputAssignments>
         <object>Animal__c</object>
     </recordUpdates>
     <start>
-        <locationX>276</locationX>
+        <locationX>474</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Facility_or_Outcome</targetReference>
@@ -495,6 +565,9 @@
         <isCollection>false</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
+        <value>
+            <elementReference>$Record.Animal__r.Current_Recent_Shelter_Location_Date__c</elementReference>
+        </value>
     </variables>
     <variables>
         <name>finalOutcome</name>
@@ -512,6 +585,17 @@
         <isCollection>false</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
+        <value>
+            <elementReference>$Record.Animal__r.Final_Outcome_Date__c</elementReference>
+        </value>
+    </variables>
+    <variables>
+        <name>foster</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Contact</objectType>
     </variables>
     <variables>
         <name>initialOutcome</name>
@@ -529,6 +613,9 @@
         <isCollection>false</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
+        <value>
+            <elementReference>$Record.Animal__r.Initial_Outcome_Date__c</elementReference>
+        </value>
     </variables>
     <variables>
         <name>kennelLocation</name>
@@ -553,5 +640,8 @@
         <isCollection>false</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
+        <value>
+            <elementReference>$Record.Animal__r.RTA_RTO_Date__c</elementReference>
+        </value>
     </variables>
 </Flow>
