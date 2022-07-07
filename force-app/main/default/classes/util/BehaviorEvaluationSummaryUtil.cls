@@ -120,10 +120,15 @@ public class BehaviorEvaluationSummaryUtil {
         Map<String, Test_Config__mdt[]> adultConfigMap = new Map<String, Test_Config__mdt[]>();
         Map<String, Test_Config__mdt[]> fightingConfigMap = new Map<String, Test_Config__mdt[]>();
         Map<String, Test_Config__mdt[]> dogOnlyConfigMap = new Map<String, Test_Config__mdt[]>();
+        Set<String> testNames = new Set<String>(); //use this set to make sure we don't duplicate comments
 
         for (Test_Config__mdt t : testConfig) {
             String testName = t.Overall_Test_Display_Name__c != null ? t.Overall_Test_Display_Name__c : t.Test_Name__c;
             if (testName != null) {
+                if(testNames.contains(testName)){
+                    continue;
+                }
+                testNames.add(testName);
                 testName = testName.replace(' P1', '').replace(' P2', '').replace(' P3', '');
 
                 if (t.IsPuppy__c) {
@@ -156,6 +161,8 @@ public class BehaviorEvaluationSummaryUtil {
                 }
             }
         }
+
+        System.debug('adultConfigMap: ' + adultConfigMap.get('Resource Guarding'));
 
         commentFieldsMap.put('Puppy', puppyConfigMap);
         commentFieldsMap.put('Adult Animal', adultConfigMap);
@@ -226,15 +233,18 @@ public class BehaviorEvaluationSummaryUtil {
 
                 Boolean skipSubsequentParts = false;
                 String skipReason = null;
-                Test_Config__mdt p1Config = commentFieldsMap.get(summaryTitle)[0];
-                String currentFieldApi = p1Config.Test_Skip_Reason_Field__c;
 
-                //if skipping p1, skip the others for the same reason
-                if(currentFieldApi.contains('P1')){
-                    if(oldRecord.get(currentFieldApi) == null && b.get(currentFieldApi) != null){
-                        skipSubsequentParts = true;
-                        skipReason = (String) b.get(currentFieldApi);
-                    }                    
+                if(commentFieldsMap.containsKey(summaryTitle)){
+                    Test_Config__mdt p1Config = commentFieldsMap.get(summaryTitle)[0];
+                    String currentFieldApi = p1Config.Test_Skip_Reason_Field__c;
+
+                    //if skipping p1, skip the others for the same reason
+                    if(currentFieldApi.contains('P1')){
+                        if(oldRecord.get(currentFieldApi) == null && b.get(currentFieldApi) != null){
+                            skipSubsequentParts = true;
+                            skipReason = (String) b.get(currentFieldApi);
+                        }                    
+                    }
                 }
 
                 if(commentFieldsMap.containsKey(summaryTitle)){
