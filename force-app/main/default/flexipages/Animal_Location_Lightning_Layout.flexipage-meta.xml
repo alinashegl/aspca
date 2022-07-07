@@ -71,7 +71,7 @@
             <fieldInstance>
                 <fieldInstanceProperties>
                     <name>uiBehavior</name>
-                    <value>none</value>
+                    <value>required</value>
                 </fieldInstanceProperties>
                 <fieldItem>Record.Kennel_Location__c</fieldItem>
                 <identifier>RecordKennel_Location__cField</identifier>
@@ -94,15 +94,23 @@
             <fieldInstance>
                 <fieldInstanceProperties>
                     <name>uiBehavior</name>
-                    <value>none</value>
+                    <value>required</value>
                 </fieldInstanceProperties>
                 <fieldItem>Record.Kennel_Location_Text__c</fieldItem>
+
                 <identifier>RecordKennel_Location_Text__cField</identifier>
+
                 <visibilityRule>
+                    <booleanFilter>1 OR 2</booleanFilter>
                     <criteria>
                         <leftValue>{!Record.Facility_Outcome__c}</leftValue>
                         <operator>EQUAL</operator>
                         <rightValue>CRC</rightValue>
+                    </criteria>
+                    <criteria>
+                        <leftValue>{!Record.Facility_Outcome__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>CRC-MRC</rightValue>
                     </criteria>
                 </visibilityRule>
             </fieldInstance>
@@ -111,12 +119,29 @@
             <fieldInstance>
                 <fieldInstanceProperties>
                     <name>uiBehavior</name>
-                    <value>none</value>
+                    <value>required</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.NYPD_Freezer_Location__c</fieldItem>
+                <identifier>RecordAAH_Freezer_Location_cField1</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!Record.Facility_Outcome__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>NYPD Freezer</rightValue>
+                    </criteria>
+                </visibilityRule>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>required</value>
                 </fieldInstanceProperties>
                 <fieldItem>Record.Facility__c</fieldItem>
                 <identifier>RecordFacility__cField</identifier>
                 <visibilityRule>
-                    <booleanFilter>1 OR 2 OR 3 OR 4 OR 5 OR 6 OR 7 OR 8</booleanFilter>
+                    <booleanFilter>1 OR 2 OR 3 OR 4 OR 5 OR 6 OR 7 OR 8 OR 9 OR 10</booleanFilter>
                     <criteria>
                         <leftValue>{!Record.Facility_Outcome__c}</leftValue>
                         <operator>EQUAL</operator>
@@ -130,22 +155,7 @@
                     <criteria>
                         <leftValue>{!Record.Facility_Outcome__c}</leftValue>
                         <operator>EQUAL</operator>
-                        <rightValue>Partner Shelter</rightValue>
-                    </criteria>
-                    <criteria>
-                        <leftValue>{!Record.Facility_Outcome__c}</leftValue>
-                        <operator>EQUAL</operator>
                         <rightValue>Response Partner</rightValue>
-                    </criteria>
-                    <criteria>
-                        <leftValue>{!Record.Facility_Outcome__c}</leftValue>
-                        <operator>EQUAL</operator>
-                        <rightValue>Boarding</rightValue>
-                    </criteria>
-                    <criteria>
-                        <leftValue>{!Record.Facility_Outcome__c}</leftValue>
-                        <operator>EQUAL</operator>
-                        <rightValue>Clinic</rightValue>
                     </criteria>
                     <criteria>
                         <leftValue>{!Record.Facility_Outcome__c}</leftValue>
@@ -157,15 +167,44 @@
                         <operator>EQUAL</operator>
                         <rightValue>Board and Train</rightValue>
                     </criteria>
+                    <criteria>
+                        <leftValue>{!Record.Facility_Outcome__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>Animal Hospital</rightValue>
+                    </criteria>
+                    <criteria>
+                        <leftValue>{!Record.Facility_Outcome__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>Temporary Boarding</rightValue>
+                    </criteria>
+                    <criteria>
+                        <leftValue>{!Record.Facility_Outcome__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>Outside Agency</rightValue>
+                    </criteria>
+                    <criteria>
+                        <leftValue>{!Record.Facility_Outcome__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>Placement Partner</rightValue>
+                    </criteria>
+                    <criteria>
+                        <leftValue>{!Record.Facility_Outcome__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>Returned to Source Facility</rightValue>
+                    </criteria>
                 </visibilityRule>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>required</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Point_of_Contact__c</fieldItem>
                 <identifier>RecordPoint_of_Contact__cField</identifier>
                 <visibilityRule>
-                    <booleanFilter>1 OR 2 OR 3 OR 4</booleanFilter>
+                    <booleanFilter>1 OR 2 OR 3</booleanFilter>
                     <criteria>
                         <leftValue>{!Record.Facility_Outcome__c}</leftValue>
                         <operator>EQUAL</operator>
@@ -174,43 +213,80 @@
                     <criteria>
                         <leftValue>{!Record.Facility_Outcome__c}</leftValue>
                         <operator>EQUAL</operator>
-                        <rightValue>Returned to Caregiver</rightValue>
-                    </criteria>
-                    <criteria>
-                        <leftValue>{!Record.Facility_Outcome__c}</leftValue>
-                        <operator>EQUAL</operator>
-                        <rightValue>Returned to Owner</rightValue>
-                    </criteria>
-                    <criteria>
-                        <leftValue>{!Record.Facility_Outcome__c}</leftValue>
-                        <operator>EQUAL</operator>
                         <rightValue>Foster Home</rightValue>
+                    </criteria>
+                    <criteria>
+                        <leftValue>{!Record.Facility_Outcome__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>Returned to Owner/Caregiver</rightValue>
                     </criteria>
                 </visibilityRule>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>required</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Return_Reason__c</fieldItem>
                 <identifier>RecordReturn_Reason__cField</identifier>
                 <visibilityRule>
                     <criteria>
-                        <leftValue>{!Record.Facility_Outcome__c}</leftValue>
+                        <leftValue>{!Record.Facility_or_Outcome__c}</leftValue>
                         <operator>EQUAL</operator>
-                        <rightValue>Returned to ASPCA</rightValue>
+                        <rightValue>Return</rightValue>
                     </criteria>
                 </visibilityRule>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+
+                <fieldItem>Record.Return_Reason__c</fieldItem>
+                <identifier>RecordReturn_Reason__cField</identifier>
+
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!Record.Facility_Outcome__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>Deceased</rightValue>
+                    </criteria>
+                </visibilityRule>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>required</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Euthanasia_Reason__c</fieldItem>
+
                 <identifier>RecordEuthanasia_Reason__cField</identifier>
+
                 <visibilityRule>
                     <criteria>
                         <leftValue>{!Record.Facility_Outcome__c}</leftValue>
                         <operator>EQUAL</operator>
                         <rightValue>Euthanized</rightValue>
+                    </criteria>
+                </visibilityRule>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>required</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Lost_Address__c</fieldItem>
+                <identifier>RecordLost_Address_cField1</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!Record.Facility_Outcome__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>Lost</rightValue>
                     </criteria>
                 </visibilityRule>
             </fieldInstance>
@@ -266,6 +342,7 @@
                 <identifier>RecordFollow_Up_Days_cField1</identifier>
                 <visibilityRule>
                     <booleanFilter>(1 OR 2) AND 3</booleanFilter>
+
                     <criteria>
                         <leftValue>{!Record.Facility_Outcome__c}</leftValue>
                         <operator>EQUAL</operator>
@@ -289,7 +366,9 @@
                 <fieldItem>Record.Follow_Up_Frequency__c</fieldItem>
                 <identifier>RecordFollow_Up_Frequency_cField1</identifier>
                 <visibilityRule>
+
                     <booleanFilter>(1 OR 2) AND 3</booleanFilter>
+
                     <criteria>
                         <leftValue>{!Record.Facility_Outcome__c}</leftValue>
                         <operator>EQUAL</operator>
@@ -300,12 +379,14 @@
                         <operator>EQUAL</operator>
                         <rightValue>Board and Train</rightValue>
                     </criteria>
+
                     <criteria>
                         <leftValue>{!Record.Modify_Schedule__c}</leftValue>
                         <operator>EQUAL</operator>
                         <rightValue>true</rightValue>
                     </criteria>
                 </visibilityRule>
+
             </fieldInstance>
         </itemInstances>
         <name>Facet-030d19be-53c3-4c1a-8e51-f4a427e1eca1</name>
