@@ -187,7 +187,8 @@
               $A.get('e.force:refreshView').fire();
               var compEvent = comp.getEvent("skipSaveEvt");
               compEvent.setParams({
-                  behaviorEvalObj: response
+                  behaviorEvalObj: response,
+                  params: params
               });
               compEvent.fire();
           }
