@@ -76,7 +76,13 @@
     } ,
     handleSkip : function (cmp, event)
     {
-        cmp.set('v.showModal', true);
+        let skipVal = cmp.get("v.IsSkipped");
+        if(skipVal){
+            cmp.set('v.showModal', true);
+        } else {
+            cmp.set('v.skipReason', null);
+            this.putSkipReason(cmp, event);
+        }
     } ,
     handleModal: function(cmp, event)
     {
@@ -173,11 +179,17 @@
         //alert(JSON.stringify(params['apiName']));
 
         //this.sendRequest(cmp, 'c.updateEval', params);
-
+		var comp = cmp;
         this.sendPromise(cmp, mName, params, params[apiName])
         .then(
           function(response) {
               console.log('SENT VALUES RESPONSE', response);
+              $A.get('e.force:refreshView').fire();
+              var compEvent = comp.getEvent("skipSaveEvt");
+              compEvent.setParams({
+                  behaviorEvalObj: response
+              });
+              compEvent.fire();
           }
         ).catch(
             function(error) {

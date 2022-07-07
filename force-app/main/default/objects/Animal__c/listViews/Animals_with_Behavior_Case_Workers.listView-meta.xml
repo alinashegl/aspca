@@ -12,5 +12,15 @@
         <field>Behavior_Case_Worker__c</field>
         <operation>notEqual</operation>
     </filters>
+    <filters>
+        <field>Active_Animal__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>Location_Filter__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
     <label>Animals with Behavior Case Workers</label>
 </ListView>

@@ -9,9 +9,16 @@ public with sharing class test_PlaygroupToDoListController {
         List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals('MRC');
         Test.stopTest();
 
-        List<Animal__c> animals = [SELECT Id, Shelter_Location2__c, Play_Category__c, Behavior_Play_Pause__c, Behavior_Play_Pause_Date__c FROM Animal__c WHERE Id = :a.Id];
+        List<Animal__c> animals = [SELECT Id, Shelter_Location2__c, Play_Category__c FROM Animal__c WHERE Id = :a.Id];
         System.assertEquals(1, playgroupAnimals.size());
         System.assertEquals(a.Id, playgroupAnimals[0].Id);
+    }
+    
+    @isTest
+    static void getReportId() {
+        Test.startTest();
+        Id getReportId = PlaygroupToDoListController.getReportId();
+        Test.stopTest();
     }
 
     @isTest
@@ -26,9 +33,7 @@ public with sharing class test_PlaygroupToDoListController {
     @isTest
     static void getPlaygroupAnimalsBehaviorPause() {
         Animal__c a = TestDataFactory.createAnimal();
-        a.Play_Category__c = 'Small Mellow';
-        a.Behavior_Play_Pause__c = 'Aggression';
-        update a;
+        List<Play_Pause__c> playPauses = TestDataFactory.createPlayPauses(a);
         Test.startTest();
         List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals('MRC');
         Test.stopTest();
@@ -68,26 +73,6 @@ public with sharing class test_PlaygroupToDoListController {
     }
 
     @isTest
-    static void getMedicalIndicatorsSuccess() {
-        List<Medical_Conditions__c> medConditions = TestDataFactory.createMedicalConditions();
-        Test.startTest();
-        List<String> conditions = PlaygroupToDoListController.getMedicalIndicators(medConditions[0].Animal__c);
-        Test.stopTest();
-        System.assertEquals(2, conditions.size());
-        System.assert(conditions.contains('Babesia'));
-        System.assert(conditions.contains('In Heat'));
-    }
-
-    @isTest
-    static void getMedicalIndicatorsNoData() {
-        Animal__c a = TestDataFactory.createAnimal();
-        Test.startTest();
-        List<String> conditions = PlaygroupToDoListController.getMedicalIndicators(a.Id);
-        Test.stopTest();
-        System.assertEquals(0, conditions.size());
-    }
-
-    @isTest
     static void copyPlaygroupSessionSuccess() {
         Playgroup_Session__c playSession = TestDataFactory.createPlaygroupSessionWithAnimals();
         Animal__c a = [SELECT Id FROM Animal__c LIMIT 1];
@@ -116,5 +101,19 @@ public with sharing class test_PlaygroupToDoListController {
         }
         Test.stopTest();
         System.assert(!String.isEmpty(errorMsg));
+    }
+
+    @isTest
+    static void editPlaygroupSessionSuccess() {
+        Playgroup_Session__c playSession = TestDataFactory.createPlaygroupSessionWithAnimals();
+        Animal__c a = [SELECT Id FROM Animal__c LIMIT 1];
+        Animal__c b = TestDataFactory.createAnimalWithName('b');
+        Test.startTest();
+        Id sessionId = PlaygroupToDoListController.editPlaygroup(playSession.Id, new List<Id>{a.Id, b.Id});
+        Test.stopTest();
+        Playgroup_Session__c editSession = [SELECT Id, Playgroup_Location__c, Playgroup_Leader__c, (SELECT Id FROM Animal_Playgroups__r) FROM Playgroup_Session__c WHERE Id = :sessionId LIMIT 1];
+        System.assertEquals(playSession.Playgroup_Location__c, editSession.Playgroup_Location__c);
+        System.assertEquals(playSession.Playgroup_Leader__c, editSession.Playgroup_Leader__c);
+        System.assertEquals(2, editSession.Animal_Playgroups__r.size());
     }
 }

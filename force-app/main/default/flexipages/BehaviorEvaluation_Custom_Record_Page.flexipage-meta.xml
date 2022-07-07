@@ -12,6 +12,7 @@
                     <value>Animal__c.Update_Test</value>
                 </componentInstanceProperties>
                 <componentName>console:relatedRecord</componentName>
+                <identifier>console_relatedRecord</identifier>
             </componentInstance>
         </itemInstances>
         <name>header</name>
@@ -21,6 +22,7 @@
         <itemInstances>
             <componentInstance>
                 <componentName>BehaviorEvaluationPage</componentName>
+                <identifier>BehaviorEvaluationPage</identifier>
             </componentInstance>
         </itemInstances>
         <name>main</name>
@@ -30,6 +32,7 @@
         <itemInstances>
             <fieldInstance>
                 <fieldItem>Record.Evaluation_Behavior_Summary__c</fieldItem>
+                <identifier>RecordEvaluation_Behavior_Summary__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-d3de68a2-24a2-4545-aede-1b2b371d683e</name>
@@ -43,6 +46,7 @@
                     <value>Facet-d3de68a2-24a2-4545-aede-1b2b371d683e</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:column</componentName>
+                <identifier>flexipage_column</identifier>
             </componentInstance>
         </itemInstances>
         <name>Facet-7f489e48-f1b4-4817-903d-2110d0d4435b</name>
@@ -52,16 +56,19 @@
         <itemInstances>
             <fieldInstance>
                 <fieldItem>Record.Handler_Initials__c</fieldItem>
+                <identifier>RecordHandler_Initials__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
                 <fieldItem>Record.Scribe_Initials__c</fieldItem>
+                <identifier>RecordScribe_Initials__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
                 <fieldItem>Record.Tester_Initials__c</fieldItem>
+                <identifier>RecordTester_Initials__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-7d12224a-d732-4123-8367-db7fe4e26b04</name>
@@ -71,11 +78,13 @@
         <itemInstances>
             <fieldInstance>
                 <fieldItem>Record.Evaluation_Subtype__c</fieldItem>
+                <identifier>RecordEvaluation_Subtype__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
                 <fieldItem>Record.Animal__c</fieldItem>
+                <identifier>RecordAnimal__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-4b2794c6-a57e-4fc1-9b21-fb34d712f0b5</name>
@@ -89,6 +98,7 @@
                     <value>Facet-7d12224a-d732-4123-8367-db7fe4e26b04</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:column</componentName>
+                <identifier>flexipage_column2</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>
@@ -98,6 +108,7 @@
                     <value>Facet-4b2794c6-a57e-4fc1-9b21-fb34d712f0b5</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:column</componentName>
+                <identifier>flexipage_column3</identifier>
             </componentInstance>
         </itemInstances>
         <name>Facet-5925a9a5-6f44-41d1-8208-9d578adbbb75</name>
@@ -115,6 +126,7 @@
                     <value>Section</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:fieldSection</componentName>
+                <identifier>flexipage_fieldSection</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>
@@ -128,6 +140,7 @@
                     <value>Section</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:fieldSection</componentName>
+                <identifier>flexipage_fieldSection2</identifier>
             </componentInstance>
         </itemInstances>
         <name>sidebar</name>

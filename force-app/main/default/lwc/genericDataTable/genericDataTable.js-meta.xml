@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>49.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__RecordPage</target>
+    </targets>
+    <!-- Configuring the design attributes -->
+      <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+           <property name="iconName" type="String" required="true" label="Enter icon name" default="standard:related_list"/>
+            <property name="title" type="String" required="true" label="Enter title" default="Records"/>
+            <property name="objectName" type="String" required="true" label="Enter object API name"/>
+            <property name="columns" type="String" required="true" label="Enter columns JSON"/>
+            <property name="relatedFieldAPI" type="String" default="" label="Enter related field API Name"/>
+            <property name="whereClause" type="String" default="" label="Enter WHERE clause"/>
+            <property name="orderBy" type="String" default="CreatedDate DESC" label="Enter order by field followed by direction ASC|DESC"/>
+            <property name="limit" type="Integer" default="5" label="Enter number of records to display"/>
+            <property name="filterBy" type="String" default="" label="Enter comma separated field api names for filter"/>
+            <property name="paginate" type="Boolean" default="true" label="Pagination"/>
+        </targetConfig>
+      </targetConfigs>
+</LightningComponentBundle>

@@ -149,7 +149,7 @@
     <allowInChatterGroups>true</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
-    <enableActivities>false</enableActivities>
+    <enableActivities>true</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableFeeds>false</enableFeeds>
     <enableHistory>true</enableHistory>
@@ -160,7 +160,7 @@
     <enableStreamingApi>true</enableStreamingApi>
     <label>Treatment Plan</label>
     <nameField>
-        <displayFormat>P-{0000000000}</displayFormat>
+        <displayFormat>{YYYY}/{MM}/{DD}-{0}</displayFormat>
         <label>Treatment Plan Name</label>
         <trackHistory>true</trackHistory>
         <type>AutoNumber</type>

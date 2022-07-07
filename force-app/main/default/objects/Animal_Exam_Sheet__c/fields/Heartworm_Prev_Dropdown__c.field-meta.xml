@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Heartworm_Prev_Dropdown__c</fullName>
+    <externalId>false</externalId>
+    <label>Heartworm_Prev Dropdown</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Revolution - Puppies &lt;= 5lbs</fullName>
+                <default>false</default>
+                <label>Revolution - Puppies &lt;= 5lbs</label>
+            </value>
+            <value>
+                <fullName>Revolution - Dogs 5.1 - 10lbs</fullName>
+                <default>false</default>
+                <label>Revolution - Dogs 5.1 - 10lbs</label>
+            </value>
+            <value>
+                <fullName>Revolution - Dogs 10.1 - 20lbs</fullName>
+                <default>false</default>
+                <label>Revolution - Dogs 10.1 - 20lbs</label>
+            </value>
+            <value>
+                <fullName>Revolution - Dogs 20.1 - 40lbs</fullName>
+                <default>false</default>
+                <label>Revolution - Dogs 20.1 - 40lbs</label>
+            </value>
+            <value>
+                <fullName>Revolution - Dogs 40.1 - 85lbs</fullName>
+                <default>false</default>
+                <label>Revolution - Dogs 40.1 - 85lbs</label>
+            </value>
+            <value>
+                <fullName>Frontline - Dog up to 22lbs</fullName>
+                <default>false</default>
+                <label>Frontline - Dog up to 22lbs</label>
+            </value>
+            <value>
+                <fullName>Frontline - Dog 23-44 lbs</fullName>
+                <default>false</default>
+                <label>Frontline - Dog 23-44 lbs</label>
+            </value>
+            <value>
+                <fullName>Frontline - Dog 45-88 lbs</fullName>
+                <default>false</default>
+                <label>Frontline - Dog 45-88 lbs</label>
+            </value>
+            <value>
+                <fullName>Frontline - Dog 89-132 lbs</fullName>
+                <default>false</default>
+                <label>Frontline - Dog 89-132 lbs</label>
+            </value>
+            <value>
+                <fullName>Frontline - Dog 132 and up</fullName>
+                <default>false</default>
+                <label>Frontline - Dog 132 and up</label>
+            </value>
+            <value>
+                <fullName>Advantage Multi – Dogs 3-9 lbs</fullName>
+                <default>false</default>
+                <label>Advantage Multi – Dogs 3-9 lbs</label>
+            </value>
+            <value>
+                <fullName>Advantage Multi – Dogs 9.1 – 20 lbs</fullName>
+                <default>false</default>
+                <label>Advantage Multi – Dogs 9.1 – 20 lbs</label>
+            </value>
+            <value>
+                <fullName>Advantage Multi – Dogs 20.1 – 55 lbs</fullName>
+                <default>false</default>
+                <label>Advantage Multi – Dogs 20.1 – 55 lbs</label>
+            </value>
+            <value>
+                <fullName>Advantage Multi – Dogs 55.1 – 88 lbs</fullName>
+                <default>false</default>
+                <label>Advantage Multi – Dogs 55.1 – 88 lbs</label>
+            </value>
+            <value>
+                <fullName>Advantage Multi – Dogs 88.1 – 110 lbs</fullName>
+                <default>false</default>
+                <label>Advantage Multi – Dogs 88.1 – 110 lbs</label>
+            </value>
+            <value>
+                <fullName>Frontline – Kittens</fullName>
+                <default>false</default>
+                <label>Frontline – Kittens</label>
+            </value>
+            <value>
+                <fullName>Frontline – Cats</fullName>
+                <default>false</default>
+                <label>Frontline – Cats</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

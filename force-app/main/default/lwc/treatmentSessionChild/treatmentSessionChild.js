@@ -1,10 +1,10 @@
-import { RecordFieldDataType } from 'lightning/uiRecordApi';
 import { LightningElement, api, wire } from 'lwc';
 
 export default class TreatmentSessionChild extends LightningElement {
     @api record;
     @api objectApi;
     @api protocolId;
+
     customLookupNewId;
     isLoading = false;
 
@@ -18,7 +18,6 @@ export default class TreatmentSessionChild extends LightningElement {
     }
 
     handleSuccess(event){
-        window.console.log('successfully updated: ', event.detail.id);
         this.lookupIdChanged = false;
         this.fieldChanged = false;
         if(this.record == undefined){
@@ -40,7 +39,6 @@ export default class TreatmentSessionChild extends LightningElement {
     }
 
     handleNewRecordSubmit(event){
-        window.console.log('in handleNewRecordSubmit');
         this.isLoading = true;
         event.preventDefault(); 
         const fields = event.detail.fields;
@@ -51,12 +49,10 @@ export default class TreatmentSessionChild extends LightningElement {
         }
 
         fields['Session_Protocol__c'] = this.protocolId;
-        window.console.log('new contact: ', JSON.stringify(fields));
         this.template.querySelector('lightning-record-edit-form').submit(fields);
     }
 
     handleRemoveRecord(){
-        window.console.log('in handleRemoveRecord')
         let eventDetails = {id:this.record.Id};
         const event = new CustomEvent('deletechild', {
             detail: eventDetails
@@ -78,17 +74,31 @@ export default class TreatmentSessionChild extends LightningElement {
     }
 
     customLookupEvent(event){
-        window.console.log('handleLookup: ', JSON.stringify ( event.detail) );
         this.customLookupNewId = event.detail.data.recordId;
         this.lookupIdChanged = !this.record || (this.customLookupNewId != this.record.Id);
     }
 
     handleCustomLookupExpandSearch(event){
-        window.console.log('in handleCustomLookupExpandSearch: ', JSON.stringify ( event.detail.data) );
         let data = event.detail.data;
         let dataId = data.elementId;
         this.template.querySelector('[data-id="' + dataId + '"]').className =
            data.expandField ? 'slds-col slds-size_1-of-1' : data.initialColSize;
+    }
+
+    handlePotentialHelperClick(){
+        this.showPotentialHelperDogs = !this.showPotentialHelperDogs;
+    }
+
+    handleConfirmedHelperClick(){
+        this.showConfirmedHelperDogs = !this.showConfirmedHelperDogs;
+    }
+
+    get potentialHelperDogButtonVariant(){
+        return this.showPotentialHelperDogs ? 'brand' : 'neutral';
+    }
+
+    get potentialConfirmedDogButtonVariant(){
+        return this.showConfirmedHelperDogs ? 'brand' : 'neutral';
     }
 
     get isContactList(){
@@ -119,6 +129,10 @@ export default class TreatmentSessionChild extends LightningElement {
         return this.isContactList ? 'Contact' : 'Animal__c';
     }
 
+    get customLookUpObjectIsAnimal(){
+        return this.customLookUpObject == 'Animal__c';
+    }
+
     get customLookupFields(){
         return this.isContactList ? ['Name','Email','Phone'] : ['Animal_Name__c', 'Name'];
     }
@@ -128,7 +142,13 @@ export default class TreatmentSessionChild extends LightningElement {
     }
 
     get customLookupCreateNewFields(){
-        return this.isContactList ? ['FirstName', 'LastName', 'Title', 'Department', 'Email'] : undefined;
+        return this.isContactList ? [
+            {fieldAPI: 'FirstName', fieldLabel: 'First Name', required: true},
+            {fieldAPI: 'LastName', fieldLabel: 'Last Name', required: true},
+            {fieldAPI: 'Title', required: false},
+            {fieldAPI: 'Department', required: false},
+            {fieldAPI: 'Email', required: false}
+        ] : undefined;
     }
 
     get customLookupPlaceholder(){
@@ -142,8 +162,27 @@ export default class TreatmentSessionChild extends LightningElement {
     get customLookupFieldToQuery(){
         return this.isContactList ? 'Name' : 'Animal_Name__c';
     }
+
     get customLookupLabelName(){
         return this.isContactList ? 'Protocol Contact' : 'Helper Dog';
+    }
+
+    showPotentialHelperDogs = true;
+    showConfirmedHelperDogs = true;
+
+    get customLookupWhereClause(){
+        if(!this.isContactList){
+            let whereClause = ' Location_Filter__c = true AND Active_Animal__c = true ';
+            if(this.showPotentialHelperDogs && this.showConfirmedHelperDogs){
+                whereClause += 'AND (Confirmed_Helper_Dog__c = true OR Potential_Helper_Dog__c = true) ';
+            } 
+            else if(this.showPotentialHelperDogs){
+                whereClause += 'AND Potential_Helper_Dog__c = true ';
+            } else if(this.showConfirmedHelperDogs){
+                whereClause += 'AND Confirmed_Helper_Dog__c = true ';
+            }
+            return whereClause;          
+        }
     }
 
     get hasChanged(){

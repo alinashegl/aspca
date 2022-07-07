@@ -1,0 +1,27 @@
+<template>
+    <template if:true={error}>
+        <c-error-panel errors={error} type='inlineMessage' friendly-message={errorMessage}></c-error-panel>
+    </template>
+    <h2 class="slds-card__header-title">{record.name}
+        <template if:true={showSpinner}>
+            <lightning-icon icon-name="utility:spinner" alternative-text="Connected" size="x-small" title="large size" class="slds-var-m-left_x-small">
+            </lightning-icon>
+        </template>    
+    </h2>
+    <template if:true={showOptions}>
+        <lightning-radio-group
+            options={record.options}
+            value={recordResponse.currentScore}
+            type="radio"
+            onchange={handleRadioChange}
+            >
+        </lightning-radio-group>
+        <template if:true={recordResponse.fields}>
+            <template for:each={recordResponse.fields} for:item="field">
+                <div key={field.fieldName} class="slds-p-top_x-small"> 
+                    <lightning-input type="text" label={field.fieldLabel} value={field.value} data-field={field.fieldName} onblur={handleInputBlur}></lightning-input>
+                </div>
+            </template>
+        </template>
+    </template>
+</template>

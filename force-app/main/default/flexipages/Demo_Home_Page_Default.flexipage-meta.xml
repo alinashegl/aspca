@@ -3,12 +3,44 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>TreatmentToDoList</componentName>
+                <componentInstanceProperties>
+                    <name>enableInlineEdit</name>
+                    <value>false</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>entityName</name>
+                    <value>Animal__c</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>filterName</name>
+                    <value>Active_Animals</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>hideActionBar</name>
+                    <value>false</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>hideSearchBar</name>
+                    <value>false</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>pageSize</name>
+                    <value>10</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:filterListCard</componentName>
+                <identifier>flexipage_filterListCard</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>
             <componentInstance>
-                <componentName>home:recentRecordContainer</componentName>
+                <componentName>activeAnimalTasks</componentName>
+                <identifier>c_activeAnimalTasks</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentName>activeAnimalTreatment</componentName>
+                <identifier>c_activeAnimalTreatment</identifier>
             </componentInstance>
         </itemInstances>
         <name>main</name>

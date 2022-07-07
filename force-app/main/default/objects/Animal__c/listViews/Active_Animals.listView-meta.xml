@@ -5,16 +5,22 @@
     <columns>NAME</columns>
     <columns>Animal_Name__c</columns>
     <columns>Case__c</columns>
-    <columns>Type_of_Animal__c</columns>
     <columns>Breed__c</columns>
     <columns>Gender__c</columns>
     <columns>Current_Animal_Age_Formatted__c</columns>
     <columns>Current_Weight_in_lbs_Num__c</columns>
+    <columns>Current_Recent_Shelter_Location__c</columns>
+    <columns>Playgroup_Priority_Level__c</columns>
     <filterScope>Everything</filterScope>
     <filters>
-        <field>NAME</field>
-        <operation>contains</operation>
-        <value>ARC,CAR,2194</value>
+        <field>Location_Filter__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>Active_Animal__c</field>
+        <operation>equals</operation>
+        <value>1</value>
     </filters>
     <label>Active Animals</label>
 </ListView>

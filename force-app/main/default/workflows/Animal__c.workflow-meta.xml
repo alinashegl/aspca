@@ -44,31 +44,11 @@
             <type>user</type>
         </recipients>
         <recipients>
-            <recipient>erin.ferris@aspca.org</recipient>
-            <type>user</type>
-        </recipients>
-        <recipients>
-            <recipient>jasmine.holsinger@aspca.org</recipient>
-            <type>user</type>
-        </recipients>
-        <recipients>
             <recipient>jessica.rushin@aspca.org</recipient>
             <type>user</type>
         </recipients>
         <recipients>
-            <recipient>joe.hinkle@aspca.org</recipient>
-            <type>user</type>
-        </recipients>
-        <recipients>
             <recipient>katie.summers@aspca.org</recipient>
-            <type>user</type>
-        </recipients>
-        <recipients>
-            <recipient>laurie.millward@aspca.org</recipient>
-            <type>user</type>
-        </recipients>
-        <recipients>
-            <recipient>niki.curnell@aspca.org</recipient>
             <type>user</type>
         </recipients>
         <senderAddress>crc.medical@aspca.org</senderAddress>
@@ -92,36 +72,27 @@
             <type>user</type>
         </recipients>
         <recipients>
-            <recipient>erin.ferris@aspca.org</recipient>
-            <type>user</type>
-        </recipients>
-        <recipients>
-            <recipient>jasmine.holsinger@aspca.org</recipient>
-            <type>user</type>
-        </recipients>
-        <recipients>
             <recipient>jessica.rushin@aspca.org</recipient>
-            <type>user</type>
-        </recipients>
-        <recipients>
-            <recipient>joe.hinkle@aspca.org</recipient>
             <type>user</type>
         </recipients>
         <recipients>
             <recipient>katie.summers@aspca.org</recipient>
             <type>user</type>
         </recipients>
-        <recipients>
-            <recipient>laurie.millward@aspca.org</recipient>
-            <type>user</type>
-        </recipients>
-        <recipients>
-            <recipient>niki.curnell@aspca.org</recipient>
-            <type>user</type>
-        </recipients>
         <senderAddress>crc.medical@aspca.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>unfiled$public/Behavior_Grade_Change_Subsequent</template>
+    </alerts>
+    <alerts>
+        <fullName>Behavior_Profile_Send_Email_Alert</fullName>
+        <description>Behavior Profile Send Email Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>blythe.boaz@aspcafir.org</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Behavior_Profile_Send_Emails</template>
     </alerts>
     <alerts>
         <fullName>Foster_Survey</fullName>
@@ -557,7 +528,7 @@
             <name>Preserve_Preliminary_Behavior_Grade</name>
             <type>FieldUpdate</type>
         </actions>
-        <active>true</active>
+        <active>false</active>
         <description>This rule is run whenever &quot;Current Behavior Grade&quot; is changed from a blank value to any of the available dropdown values.</description>
         <formula>OR(  AND(  NOT(ISBLANK(TEXT(Current_Behavior_Grade__c))),  ISNEW()  ),  AND(  ISBLANK(PRIORVALUE(Current_Behavior_Grade__c)),  NOT(ISBLANK(TEXT(Current_Behavior_Grade__c)))  )  )</formula>
         <triggerType>onAllChanges</triggerType>

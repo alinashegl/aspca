@@ -1,6 +1,0 @@
-<aura:event type="COMPONENT" description="Data for Treatment Protocol Selection">
-    <aura:attribute name="protocolId" type="String" />
-    <aura:attribute name="sectionType" type="String" />
-    <aura:attribute name="inPlan" type="Boolean" />
-    <aura:attribute name="checked" type="Boolean" />
-</aura:event>

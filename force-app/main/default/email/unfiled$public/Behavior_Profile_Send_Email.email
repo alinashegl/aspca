@@ -1,0 +1,29 @@
+THIS EMAIL WAS SENT FROM A NOTIFICATION ONLY EMAIL ADDRESS THAT CANNOT ACCEPT INCOMING EMAIL. PLEASE DO NOT REPLY TO THIS MESSAGE.
+
+Name: {!Animal__c.Name}		
+Sex: {!Animal__c.Gender__c}
+Age group: {!Animal__c.Age__c}
+Color: {!Animal__c.Color__c}
+Breed: {!Animal__c.Breed__c}
+
+Case #: {!Animal__c.Case__c}
+A#:  {!Animal__c.Name}
+AAH#: {!Animal__c.AAH_ID__c}
+
+Updated on: {!Animal__c.LastModifiedDate}
+
+Behavior_Summary: {!Animal__c.Behavior_Summary__c}
+
+
+Placement Recommendations : {!Animal__c.Placement_Recommendations__c}
+
+
+Current Behavior Grade: {!Animal__c.Forensic_Behavior_Eval_Grade__c}
+Initial Evaluation Grade: {!Animal__c.Current_Behavior_Grade__c}
+Behavior Status: {!Animal__c.Behavior_Placement_Status__c}
+
+Approved for bath? : {!Animal__c.Approved_for_bath__c}
+Muzzle needed for bath? : {!Animal__c.Muzzle_needed_for_bath__c}
+Special instructions for bath : {!Animal__c.Special_instructions_for_bath__c}
+Approved for Revolution?: {!Animal__c.Approved_for_Revolution__c}
+Special instructions for Revolution if any: {!Animal__c.Special_instructions_for_Revolution}

@@ -160,7 +160,7 @@
     <enableStreamingApi>true</enableStreamingApi>
     <label>Treatment Session</label>
     <nameField>
-        <displayFormat>{000000000}</displayFormat>
+        <displayFormat>Tx-{YYYY}/{MM}/{DD}-{0}</displayFormat>
         <label>Treatment Session Number</label>
         <type>AutoNumber</type>
     </nameField>

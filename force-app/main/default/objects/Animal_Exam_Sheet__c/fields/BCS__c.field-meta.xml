@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BCS__c</fullName>
+    <externalId>false</externalId>
+    <label>BCS</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>1/9 Emaciated</fullName>
+                <default>false</default>
+                <label>1/9 Emaciated</label>
+            </value>
+            <value>
+                <fullName>2/9 Very Thin</fullName>
+                <default>false</default>
+                <label>2/9 Very Thin</label>
+            </value>
+            <value>
+                <fullName>2/9 Very Underweight</fullName>
+                <default>false</default>
+                <label>2/9 Very Underweight</label>
+            </value>
+            <value>
+                <fullName>3/9 Thin</fullName>
+                <default>false</default>
+                <label>3/9 Thin</label>
+            </value>
+            <value>
+                <fullName>4/9 Lean</fullName>
+                <default>false</default>
+                <label>4/9 Lean</label>
+            </value>
+            <value>
+                <fullName>5/9 Ideal</fullName>
+                <default>false</default>
+                <label>5/9 Ideal</label>
+            </value>
+            <value>
+                <fullName>6/9 Overweight</fullName>
+                <default>false</default>
+                <label>6/9 Overweight</label>
+            </value>
+            <value>
+                <fullName>7/9 Heavy</fullName>
+                <default>false</default>
+                <label>7/9 Heavy</label>
+            </value>
+            <value>
+                <fullName>7/9 Overweight</fullName>
+                <default>false</default>
+                <label>7/9 Overweight</label>
+            </value>
+            <value>
+                <fullName>8/9 Obese</fullName>
+                <default>false</default>
+                <label>8/9 Obese</label>
+            </value>
+            <value>
+                <fullName>8/9 Overweight</fullName>
+                <default>false</default>
+                <label>8/9 Overweight</label>
+            </value>
+            <value>
+                <fullName>9/9 Grossly Obese</fullName>
+                <default>false</default>
+                <label>9/9 Grossly Obese</label>
+            </value>
+            <value>
+                <fullName>9/9 Overweight</fullName>
+                <default>false</default>
+                <label>9/9 Overweight</label>
+            </value>
+            <value>
+                <fullName>Unspecified</fullName>
+                <default>false</default>
+                <label>Unspecified</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

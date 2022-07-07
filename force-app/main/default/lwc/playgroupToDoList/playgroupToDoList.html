@@ -1,120 +1,112 @@
 <template>
-    <lightning-card title="Playgroup To Do List">
-        <lightning-button label="Add" slot="actions" onclick={handleAdd}></lightning-button>
-        <div class="slds-scrollable_x slds-border_top slds-border_bottom">
-            <lightning-pill-container items={animalsToAddInternal} onitemremove={handleRemoveAnimal}> </lightning-pill-container>
-        </div>
-        <template if:true={playgroupAnimals}>
-            <template for:each={playgroupAnimals.data} for:item='animal'>
-                <div class="slds-var-p-around_small slds-border_bottom" key={animal.Id}>
-                    <lightning-tile>
-                        <lightning-button-icon-stateful
-                            class="slds-float_right"
-                            data-id={animal.Id}
-                            data-name={animal.Animal_Name__c}
-                            icon-name="utility:check"
-                            size="small"
-                            onclick={handleClick}
-                            alternative-text="Add to PG">
-                        </lightning-button-icon-stateful>
-                        <div class="slds-grid slds-wrap">
-                            <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-large-size_1-of-12">
-                                <lightning-input type="text" label="Name" value={animal.Animal_Name__c} read-only></lightning-input>
-                            </div>
-                            <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-large-size_1-of-12">
-                                <lightning-input type="text" label="ID#" value={animal.Name} read-only></lightning-input>
-                            </div>
-                            <!-- Desktop experience fields -->
-                            <template if:true={smallForm}>
-                                <lightning-accordion title="More fields" allow-multiple-sections-open>
-                                    <lightning-accordion-section title="Show more" name="fields" label="Show more">
-                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-large-size_1-of-12">
-                                            <lightning-input type="text" label="Sex" value={animal.Gender__c} read-only></lightning-input>
-                                        </div>
-                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-large-size_1-of-12">
-                                            <lightning-input type="text" label="Kennel location" value={animal.Shelter_Location__c} read-only></lightning-input>
-                                        </div>
-                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-large-size_1-of-12">
-                                            <lightning-input type="text" label="# of Playgroups" value={animal.Number_of_Playgroups__c} read-only></lightning-input>
-                                        </div>
-                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-large-size_1-of-12">
-                                            <lightning-input type="text" label="Play Priority" value={animal.Playgroup_Priority_Level__c} read-only></lightning-input>
-                                        </div>
-                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-large-size_1-of-12">
-                                            <lightning-input data-id="category" type="text" label="Play Category" value={animal.Play_Category__c} read-only></lightning-input>
-                                        </div>
-                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-large-size_1-of-12">
-                                            <lightning-record-edit-form object-api-name="Animal__c" record-id={animal.Id}>
-                                                <lightning-input-field field-name="Play_Style_Notes__c" readonly="true"></lightning-input-field>
-                                            </lightning-record-edit-form>
-                                        </div>
-                                        <template if:true={animal.Animal_Playgroups__r}>
-                                            <lightning-input type="checkbox" label="Playgroup today?" checked disabled></lightning-input>
-                                        </template>
-                                        <template if:false={animal.Animal_Playgroups__r}>
-                                            <lightning-input type="checkbox" label="Playgroup today?" disabled></lightning-input>
-                                        </template>
-                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-large-size_1-of-12 slds-box slds-var-m-right_x-small">
-                                            <c-playgroup-to-do-indicators animal-id={animal.Id} handler-code={animal.Handler__c}></c-playgroup-to-do-indicators>
-                                        </div>
-                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-large-size_2-of-12">
-                                            <lightning-input type="checkbox" label="Does NOT walk on leash" checked={animal.Does_Not_Walk_on_a_Leash__c} disabled></lightning-input>
-                                            <lightning-record-edit-form object-api-name="Animal__c" record-id={animal.Id}>
-                                                <lightning-input-field field-name="Does_Not_Walk_on_a_Leash_Notes__c" readonly="true"></lightning-input-field>
-                                            </lightning-record-edit-form>
-                                        </div>
-                                    </lightning-accordion-section>
-                                </lightning-accordion>
-                            </template>
-                            <!-- Mobile experience fields (end) -->
-                            <!-- Desktop experience fields -->
-                            <template if:false={smallForm}>
-                                <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-large-size_1-of-12">
-                                    <lightning-input type="text" label="Sex" value={animal.Gender__c} read-only></lightning-input>
-                                </div>
-                                <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-large-size_1-of-12">
-                                    <lightning-input type="text" label="Kennel location" value={animal.Shelter_Location__c} read-only></lightning-input>
-                                </div>
-                                <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-large-size_1-of-12">
-                                    <lightning-input type="text" label="# of Playgroups" value={animal.Number_of_Playgroups__c} read-only></lightning-input>
-                                </div>
-                                <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-large-size_1-of-12">
-                                    <lightning-input type="text" label="Play Priority" value={animal.Playgroup_Priority_Level__c} read-only></lightning-input>
-                                </div>
-                                <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-large-size_1-of-12">
-                                    <lightning-input data-id="category" type="text" label="Play Category" value={animal.Play_Category__c} read-only></lightning-input>
-                                </div>
-                                <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-large-size_1-of-12">
-                                    <lightning-record-edit-form object-api-name="Animal__c" record-id={animal.Id}>
-                                        <lightning-input-field field-name="Play_Style_Notes__c" readonly="true"></lightning-input-field>
-                                    </lightning-record-edit-form>
-                                </div>
-                                <template if:true={animal.Animal_Playgroups__r}>
-                                    <lightning-input type="checkbox" label="Playgroup today?" checked disabled></lightning-input>
-                                </template>
-                                <template if:false={animal.Animal_Playgroups__r}>
-                                    <lightning-input type="checkbox" label="Playgroup today?" disabled></lightning-input>
-                                </template>
-                                <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-large-size_1-of-12 slds-box slds-var-m-right_x-small">
-                                    <c-playgroup-to-do-indicators animal-id={animal.Id} handler-code={animal.Handler__c}></c-playgroup-to-do-indicators>
-                                </div>
-                                <div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-large-size_2-of-12">
-                                    <lightning-input type="checkbox" label="Does NOT walk on leash" checked={animal.Does_Not_Walk_on_a_Leash__c} disabled></lightning-input>
-                                    <lightning-record-edit-form object-api-name="Animal__c" record-id={animal.Id}>
-                                        <lightning-input-field field-name="Does_Not_Walk_on_a_Leash_Notes__c" readonly="true"></lightning-input-field>
-                                    </lightning-record-edit-form>
-                                </div>
-                            </template>
-                            <!-- Desktop experience fields (end) -->
-                        </div>
-                    </lightning-tile>
-                    <c-playgroup-to-do-section record-id={animal.Id} onupdate={handleUpdate}></c-playgroup-to-do-section>
+    <lightning-card>
+        <lightning-accordion allow-multiple-sections-open="true">
+            <lightning-accordion-section title="Playgroup To Do List" label="Playgroup To Do List" name="playgroupToDoList">
+                <div class="slds-var-p-left_small">
+                    <template if:true={sortActive}>
+                        <lightning-badge icon-alternative-text="Sorted" label="Sorted" icon-name="utility:sort"></lightning-badge>
+                    </template>
+                    <template if:true={filterActive}>
+                        <lightning-badge icon-alternative-text="Filtered" label="Filtered" icon-name="utility:filterList"></lightning-badge>
+                    </template>
                 </div>
-            </template>
-        </template>
-        <div class="slds-scrollable_x">
-            <lightning-pill-container items={animalsToAddInternal} onitemremove={handleRemoveAnimal}> </lightning-pill-container>
-        </div>
-        <lightning-button style="display: flex; justify-content: flex-end;" label="Add" slot="footer" onclick={handleAdd}></lightning-button>
+                <template if:false={smallForm}>
+                <lightning-button class="slds-var-m-right_x-small" label="PDF" slot="actions" onclick={handlePdf}></lightning-button>
+                </template>
+                <lightning-button class="slds-var-m-right_x-small" label={actionLabel} slot="actions" onclick={handleAction}></lightning-button>
+                
+                <template if:false={isNew}>
+                    <lightning-button class="slds-var-m-left_x-small" label="Cancel" slot="actions" onclick={handleCancel}></lightning-button>
+                    
+                </template>
+                <!--Neha  : -->
+                <lightning-button class="slds-var-m-right_x-small" label="Playgroups Last 2 Days" slot="actions" onclick={handleGetReportUrl}></lightning-button>
+                
+                <lightning-accordion allow-multiple-sections-open="true">
+                    <lightning-accordion-section title="Sort/Filter" label="Sort/Filter" name="sortfilter">
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                                <div class="slds-var-m-bottom_small">
+                                    Sorting
+                                    <lightning-combobox
+                                        name="sortfield"
+                                        label="Select sort field"
+                                        value={sortFieldValue}
+                                        placeholder="Select field"
+                                        options={sortFieldOptions}
+                                        onchange={handleSortFieldChange}>
+                                    </lightning-combobox>
+                                    <lightning-combobox
+                                        name="sortdirection"
+                                        label="Select sort direction"
+                                        value={sortDirectionValue}
+                                        placeholder="Select sort direction"
+                                        options={sortDirectionOptions}
+                                        onchange={handleSortDirectionChange}>
+                                    </lightning-combobox>
+                                </div>
+                                <lightning-button label="Add Sort" onclick={handleSortClick}></lightning-button>
+                                <lightning-button class="slds-var-m-left_x-small" label="Clear all" onclick={handleClearSortClick}></lightning-button>
+                                <div class="slds-scrollable_x slds-var-m-top_x-small">
+                                    <lightning-pill-container items={addedSort} onitemremove={handleRemoveSort}></lightning-pill-container>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                                <div class="slds-var-m-bottom_small">
+                                    Filtering
+                                    <lightning-combobox
+                                        name="filterfield"
+                                        label="Select filter field"
+                                        value={filterFieldValue}
+                                        placeholder="Select field"
+                                        options={filterFieldOptions}
+                                        onchange={handleFilterFieldChange}>
+                                    </lightning-combobox>
+                                    <lightning-combobox
+                                        name="filtervalue"
+                                        label="Select filter value"
+                                        value={filterValueValue}
+                                        placeholder="Select value"
+                                        options={filterValueOptions}
+                                        onchange={handleFilterValueChange}>
+                                    </lightning-combobox>
+                                </div>
+                                <lightning-button label="Add Filter" onclick={handleFilterClick}></lightning-button>
+                                <lightning-button class="slds-var-m-left_x-small" label="Clear all" onclick={handleClearFilterClick}></lightning-button>
+                                <div class="slds-scrollable_x slds-var-m-top_x-small">
+                                    <lightning-pill-container items={addedFilter} onitemremove={handleRemoveFilter}></lightning-pill-container>
+                                </div>
+                            </div>
+                        </div>
+                    </lightning-accordion-section>
+                </lightning-accordion>
+                <div class="slds-scrollable_x slds-border_top slds-border_bottom">
+                    <lightning-pill-container items={animalsToAddInternal} onitemremove={handleRemoveAnimal}></lightning-pill-container>
+                </div>
+                <template if:true={playgroupAnimalsSortFilter}>
+                    <template for:each={playgroupAnimalsSortFilter} for:item='animal'>
+                        <div class="slds-var-p-around_small slds-border_bottom" key={animal.Id}>
+                            <lightning-tile>
+                                <lightning-button-icon-stateful
+                                    class="slds-float_right"
+                                    data-id={animal.Id}
+                                    data-idname={animal.Name}
+                                    data-name={animal.Animal_Name__c}
+                                    icon-name="utility:check"
+                                    size="small"
+                                    onclick={handleClick}
+                                    alternative-text="Add to PG">
+                                </lightning-button-icon-stateful>
+                                <c-playgroup-to-do-section playgroup-animal={animal} onupdate={handleUpdate}></c-playgroup-to-do-section>
+                            </lightning-tile>
+                        </div>
+                    </template>
+                </template>
+                <div class="slds-scrollable_x">
+                    <lightning-pill-container items={animalsToAddInternal} onitemremove={handleRemoveAnimal}></lightning-pill-container>
+                </div>
+                <lightning-button style="display: flex; justify-content: flex-end;" label={actionLabel} slot="footer" onclick={handleAction}></lightning-button>        
+            </lightning-accordion-section>
+        </lightning-accordion>
     </lightning-card>
 </template>

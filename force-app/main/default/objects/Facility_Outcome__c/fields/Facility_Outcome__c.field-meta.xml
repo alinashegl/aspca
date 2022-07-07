@@ -133,6 +133,11 @@
                 <label>Returned to Owner</label>
             </value>
             <value>
+                <fullName>MRC</fullName>
+                <default>false</default>
+                <label>MRC</label>
+            </value>
+            <value>
                 <fullName>ASPCA Shelter</fullName>
                 <default>false</default>
                 <isActive>false</isActive>
@@ -191,6 +196,10 @@
         <valueSettings>
             <controllingFieldValue>Facility</controllingFieldValue>
             <valueName>Returned to ASPCA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Facility</controllingFieldValue>
+            <valueName>MRC</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Outcome</controllingFieldValue>

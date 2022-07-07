@@ -1,0 +1,121 @@
+<template>
+    <template if:true={showModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_large">
+            <div class="slds-modal__container">
+                <template if:true={showNewSessionModal}>
+                    <c-create-treatment-session
+                        animal-id={recordId}
+                        small-form={smallForm}
+                        oncancel={handleCancel}
+                    >
+                    </c-create-treatment-session>
+                </template>
+                <template if:true={showNewTreatmentModal}>
+                    <header class="slds-modal__header">
+                        <h2 class="slds-modal__title slds-hyphenate">
+                            New Treatment<template if:false={smallForm}>: Plan</template>
+                        </h2>
+                    </header>
+                    <div class="slds-modal__content slds-var-p-around_medium">
+                        <lightning-record-edit-form object-api-name="Treatment_Plan__c"
+                                                    onsubmit={handleSubmit}
+                                                    onsuccess={handleSuccess}
+                                                    onerror={handleError}>
+                            <template if:false={smallForm}>
+                                <h3 class="label slds-truncate slds-var-p-around_x-small slds-theme_shade">
+                                    <span title="Information" class="slds-truncate">Information</span>
+                                </h3>
+                            </template>        
+                            <div class="slds-grid slds-wrap"> 
+                                <!-- <div class="slds-col slds-size_1-of-1"> 
+                                    <lightning-input-field field-name="Problem_Behavior__c" required></lightning-input-field>
+                                </div>
+                                 -->
+                                 <div class="slds-col slds-size_1-of-1">
+                                    <lightning-button variant="brand" class="slds-p-top_small slds-float_right" onclick={handleOpenNewWindow} label ="Behavior Tx Eligibility Chart(TEC)"></lightning-button>
+                                 </div>
+                                 <div class="slds-col slds-size_1-of-2"> 
+                                    <!-- <lightning-input-field field-name="AssignedTreatmentBundleId__c"></lightning-input-field> -->
+                                    <label class="slds-form-element__label" for="form-element-01">Assigned Treatment Bundle</label>
+                                    <c-custom-lookup
+                                        obj-name='Treatment_Bundle__c'
+                                        icon-name='utility:case'
+                                        placeholder='Search Treatment Bundles...'
+                                        fields={customLookupFields}
+                                        display-fields={customLookupDisplayFields}
+                                        field-to-query='Name'
+                                        where-clause='IsActive__c = true AND IsMaster__c = false'
+                                        label-name='Treatment Bundle'
+                                        onlookup={customLookupEvent}
+                                        onexpandfield={handleCustomLookupExpandSearch}
+                                        element-id='customlookupcreatenew'
+                                        initial-col-size='slds-col slds-size_1-of-1 slds-medium-size_3-of-6 slds-large-size_1-of-6'
+                                    >
+                                    </c-custom-lookup>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2"> 
+                                    <lightning-input-field field-name="IsActive__c"></lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2"> 
+                                    <lightning-input-field field-name="Treatment_Priority__c"></lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2"> 
+                                    <lightning-input-field field-name="Preferred_Motivators__c"></lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2"> 
+                                    <lightning-input-field field-name="Enrichment_Priority__c"></lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2"> 
+                                    <lightning-input-field field-name="Plan_Notes__c"></lightning-input-field>
+                                </div>
+                                 <div class="slds-col slds-size_1-of-1"> 
+                                    <lightning-input-field field-name="Problem_Behavior_Aggression__c"></lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1"> 
+                                    <lightning-input-field field-name="Problem_Behavior_Arousal__c"></lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1"> 
+                                    <lightning-input-field field-name="Problem_Behavior_Fear__c"></lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1"> 
+                                    <lightning-input-field field-name="Problem_Behavior_Miscellaneous__c"></lightning-input-field>
+                                </div>
+                                                              
+                                <div class="slds-col slds-size_1-of-1"> 
+                                    <lightning-input-field field-name="Enrichment_Activities__c"></lightning-input-field>
+                                </div>
+                            </div>
+                            <template if:true={error}>
+                                <div class="slds-align_absolute-center">
+                                    <c-error-panel errors={error} type='inlineMessage' friendly-message='Error Creating Treatment Plan'></c-error-panel>
+                                </div>
+                            </template>
+                            <div  class="slds-align_absolute-center">                                
+                                <lightning-button variant="neutral" label="Cancel" onclick={handleCancel}></lightning-button>
+                                <lightning-button variant="brand" class="slds-var-m-left_x-small" label="Save" type="submit"></lightning-button>
+                            </div>
+                        </lightning-record-edit-form>
+                    </div>
+                </template>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        <template if:true={smallForm}>
+            <!-- In the mobile view for the containing tab, the visible area does not expand to show the modal -->
+            <div class="mobileBuffer"></div>
+        </template>
+    </template>
+    <lightning-card>
+        <template if:false={smallForm}>
+            <template if:true={showTreatmentPlanButton}>
+                <lightning-button title="New Treatment Plan" label="New Treatment Plan" slot="actions" onclick={handleClick}></lightning-button>
+            </template>
+            <template if:true={showTreatmentSessionButton}>
+                <lightning-button title="New Treatment Session" label="New Treatment Session" slot="actions" onclick={handleNewSession}></lightning-button>
+            </template>
+            <template if:true={showLast5TreatmentsReport}>
+                <lightning-button title="Last 5 Treatments Report" label="Last 5 Treatments Report" slot="actions" onclick={handlePdf}></lightning-button>
+            </template>
+        </template>
+    </lightning-card>
+</template>

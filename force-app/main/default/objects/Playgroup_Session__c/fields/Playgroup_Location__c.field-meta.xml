@@ -8,6 +8,7 @@
     <trackTrending>false</trackTrending>
     <type>Picklist</type>
     <valueSet>
+        <controllingField>Population__c</controllingField>
         <restricted>true</restricted>
         <valueSetDefinition>
             <sorted>false</sorted>
@@ -62,5 +63,45 @@
                 <label>Playroom 1 &amp; 2</label>
             </value>
         </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>CRC</controllingFieldValue>
+            <valueName>Indoor Play Yard</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CRC</controllingFieldValue>
+            <valueName>Outdoor Play Yard</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MRC</controllingFieldValue>
+            <valueName>MRC Indoor Play Yard</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MRC</controllingFieldValue>
+            <valueName>MRC Outdoor Play Yard</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ARC &amp; CARE</controllingFieldValue>
+            <valueName>Monster Park</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ARC &amp; CARE</controllingFieldValue>
+            <valueName>ARC Terrace</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ARC &amp; CARE</controllingFieldValue>
+            <valueName>SBR</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ARC &amp; CARE</controllingFieldValue>
+            <valueName>Playroom 1</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ARC &amp; CARE</controllingFieldValue>
+            <valueName>Playroom 2</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>ARC &amp; CARE</controllingFieldValue>
+            <valueName>Playroom 1 &amp; 2</valueName>
+        </valueSettings>
     </valueSet>
 </CustomField>

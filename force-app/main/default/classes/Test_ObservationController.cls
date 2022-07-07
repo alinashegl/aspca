@@ -21,4 +21,36 @@ private class Test_ObservationController {
 
         System.assertEquals(null, returnedObservations);
     }
+
+    @isTest 
+    static void getUserLocationMRC(){
+        User u = TestDataFactory.createUsersWithoutInserting(1)[0];
+        u.Location__c = 'CRC/MRC';
+        insert u;
+
+        Boolean isArcCare = true;
+        test.startTest();
+            system.runAs(u){
+                isArcCare = ObservationController.getUserLocation();
+            }
+        test.stopTest();
+
+        System.assertEquals(false, isArcCare);
+    }
+
+    @isTest 
+    static void getUserLocationARC(){
+        User u = TestDataFactory.createUsersWithoutInserting(1)[0];
+        u.Location__c = 'ARC/CARE';
+        insert u;
+
+        Boolean isArcCare = false;
+        test.startTest();
+            system.runAs(u){
+                isArcCare = ObservationController.getUserLocation();
+            }
+        test.stopTest();
+
+        System.assertEquals(true, isArcCare);
+    }
 }

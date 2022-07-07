@@ -154,7 +154,7 @@
     <enableStreamingApi>true</enableStreamingApi>
     <label>Behavior Foster Notes</label>
     <nameField>
-        <displayFormat>{0000}</displayFormat>
+        <displayFormat>{YYYY}/{MM}/{DD}-{0}</displayFormat>
         <label>Behavior Foster Number</label>
         <type>AutoNumber</type>
     </nameField>

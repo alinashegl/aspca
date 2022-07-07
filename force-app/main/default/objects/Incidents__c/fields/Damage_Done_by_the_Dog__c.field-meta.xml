@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Damage_Done_by_the_Dog__c</fullName>
+    <externalId>false</externalId>
+    <label>Damage Done by the Dog</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>N/A - there was NO bite or damage</fullName>
+                <default>false</default>
+                <label>N/A - there was NO bite or damage</label>
+            </value>
+            <value>
+                <fullName>Bruising</fullName>
+                <default>false</default>
+                <label>Bruising</label>
+            </value>
+            <value>
+                <fullName>Broken skin</fullName>
+                <default>false</default>
+                <label>Broken skin</label>
+            </value>
+            <value>
+                <fullName>Shallow scratch or abrasion</fullName>
+                <default>false</default>
+                <label>Shallow scratch or abrasion</label>
+            </value>
+            <value>
+                <fullName>Deep scratch or abrasion</fullName>
+                <default>false</default>
+                <label>Deep scratch or abrasion</label>
+            </value>
+            <value>
+                <fullName>Puncture</fullName>
+                <default>false</default>
+                <label>Puncture</label>
+            </value>
+            <value>
+                <fullName>Puncture with tearing</fullName>
+                <default>false</default>
+                <label>Puncture with tearing</label>
+            </value>
+            <value>
+                <fullName>Torn material (leash - clothing)</fullName>
+                <default>false</default>
+                <label>Torn material (leash - clothing)</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>Torn material (leash, clothing)</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Torn material (leash, clothing)</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

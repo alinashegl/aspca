@@ -20,6 +20,10 @@
                 <behavior>Edit</behavior>
                 <field>IsActive__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>CreatedById</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -29,6 +33,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Protocol_Box_Link__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Protocol_Categories__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
@@ -54,6 +62,15 @@
     </layoutSections>
     <relatedLists>
         <fields>NAME</fields>
+        <fields>Protocol_Scale__c</fields>
+        <fields>CREATED_DATE</fields>
+        <fields>CREATEDBY_USER</fields>
+        <relatedList>Protocol_Scale_Junction__c.Protocol__c</relatedList>
+        <sortField>CREATED_DATE</sortField>
+        <sortOrder>Desc</sortOrder>
+    </relatedLists>
+    <relatedLists>
+        <fields>NAME</fields>
         <fields>Treatment_Plan__c</fields>
         <relatedList>Plan_Protocol__c.Protocol__c</relatedList>
     </relatedLists>
@@ -63,7 +80,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h21000002IV6N</masterLabel>
+        <masterLabel>00h7j000000SKMJ</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>

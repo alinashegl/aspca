@@ -16,7 +16,10 @@
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
     <lightning:notificationsLibrary aura:id="lib" />
     <lightning:overlayLibrary aura:id="overlayLib" />
-
+    <aura:method name="updateEvaluation" action="{!c.handleAuraMethod}" access="public">
+        <aura:attribute name="evalObj" type="Object"/>
+    </aura:method>
+    <aura:registerEvent name="skipSaveEvt" type="c:skipSaveEvent"/>
     <table>
         <tr>
         <lightning:input type="checkbox" name="Skip" label="Skip?" checked="{!v.IsSkipped}" onchange="{!c.handleSkip}"/>

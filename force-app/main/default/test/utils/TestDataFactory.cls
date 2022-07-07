@@ -358,6 +358,37 @@ public without sharing class TestDataFactory {
         insert users;
     }
 
+    public static User[] createUsersWithoutInserting(Integer count) {
+      Integer userCount = count != null ? count : USERS_COUNT;
+      
+      List<User> users = new List<User>();
+
+      Profile p = getProfileFromDb('Standard User');
+
+      for(Integer i = 0; i < USERS_COUNT; i++) {
+          String name = (String)USER_PATTERN.get('name') + '_' + i;
+          String lastname = (String)USER_PATTERN.get('lastName') + '_' + i;
+          String uid = (String)USER_PATTERN.get('name') + '_' + i;
+
+          User u = new User(
+                  Alias = uid,
+                  Email = uid + '@' + (String)USER_PATTERN.get('domain'),
+                  EmailEncodingKey = (String)USER_PATTERN.get('emailEncodingKey'),
+                  //Name = name,
+                  LastName = lastname,
+                  LanguageLocaleKey = (String)USER_PATTERN.get('languageLocaleKey'),
+                  LocaleSidKey = (String)USER_PATTERN.get('localeSidKey'),
+                  ProfileId = p.Id,
+                  TimeZoneSidKey = (String)USER_PATTERN.get('timeZoneSidKey'),
+                  UserName = (uid + '@' +  (String)USER_PATTERN.get('domain'))
+          );
+          users.add(u);
+      }
+
+      return users;
+  }
+
+
     public static List<User> getUsersFromDb() {
         Set<String> standardUsers = new Set<String> {
                 'User',
@@ -497,11 +528,35 @@ public without sharing class TestDataFactory {
                     Animal_Age__c = 8,
                     Gender__c = 'MN',
                     Animal_Name__c = 'Doggo123',
-                    Shelter_Location2__c = 'MRC'
+                    Shelter_Location2__c = 'MRC',
+                    Current_Location__c = 'MRC',
+                    Current_Recent_Shelter_Location__c = 'MRC',
+                    Play_Category__c = 'Unevaluated'
         );
         insert a;
         return a;
     }
+
+    //adding this to avoid creating duplicate animals
+    public static Animal__c createAnimalWithName(String name) {
+      Case c = createCase();
+      Animal__c a = new Animal__c(
+                  Name = name,
+                  Case__c = c.Id,
+                  Type_of_Animal__c = 'Dog',
+                  Color__c = 'Black',
+                  Age__c = 'Unknown At Intake',
+                  Breed__c = 'Mix',
+                  Animal_Age__c = 8,
+                  Gender__c = 'MN',
+                  Animal_Name__c = name,
+                  Shelter_Location2__c = 'MRC',
+                  Current_Location__c = 'MRC',
+                  Current_Recent_Shelter_Location__c = 'MRC'
+      );
+      insert a;
+      return a;
+  }
 
     public static Behavior_Evaluation__c createPuppyBehaviorEvaluation() {
         Animal__c a = createAnimal();
@@ -588,13 +643,19 @@ public without sharing class TestDataFactory {
         Treatment_Bundle__c masterbundle = createMasterBundle();
         Treatment_Bundle__c planBundle = createTreatmentBundle();
         List<Bundle_Entry__c> planBundleEntries = assignEntries(planBundle, createProtocols(4));
-        Treatment_Plan__c plan = new Treatment_Plan__c(IsActive__c = true, Description__c = 'Test', Animal__c = a.Id, AssignedTreatmentBundleId__c = planBundle.Id);
+        Treatment_Plan__c plan = new Treatment_Plan__c(
+          IsActive__c = true, 
+          Description__c = 'Test', 
+          Animal__c = a.Id, 
+          AssignedTreatmentBundleId__c = planBundle.Id,
+          Problem_Behavior__c = 'Fear of People - Mild'
+        );
         insert plan;
         return plan;
     }
 
     public static Contact createContact() {
-        Contact c = new Contact(FirstName = 'Test', LastName = 'Contact');
+        Contact c = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'test@contact.com');
         insert c;
         return c;
     }
@@ -605,28 +666,64 @@ public without sharing class TestDataFactory {
         Contact contact = createContact();
         session.Treatment_Plan__c = plan.Id;
         session.Session_Contact__c = contact.Id;
+        session.Animal__c = plan.Animal__c;
         insert session;
         return session;
     }
 
     public static List<Protocol__c> createProtocols() {
         List<Protocol__c> protocols = new List<Protocol__c>();
-        Integer i = 0;
-        while(i != 9) {
+        for(Integer i = 0; i< 9; i++) {
             Protocol__c protocol = new Protocol__c();
             protocol.Name = 'Test Protocol ' + i;
             protocol.IsActive__c = true;
+            protocol.Protocol_Categories__c = 'Non Fear Protocols';
             protocols.add(protocol);
-            i++;
         }
+        
         insert protocols;
         return protocols;
     }
+
+    public static Protocol_Scale__c[] createProtocolScales(Integer count){
+      Protocol_Scale__c[] pScales = new Protocol_Scale__c[0];
+      count = count == null ? 3 : count;
+      for(Integer i = 0; i < count; i++){
+        pScales.add(new Protocol_Scale__c(
+          isActive__c = true,
+          isDefault__c = true,
+          Name = i == 0 ? 'Overall Score' : 'pScale' + i,
+          Column_Order__c = 10 * i,
+          Options__c = '1 Option 1; Option 2',
+          Fields_to_Include__c = 'Duration__c'
+        ));
+      }
+
+      insert pScales;
+      return pScales;
+    }
+
     public static List<Session_Protocol__c> createSessionProtocols() {
         List<Protocol__c> protocols = createProtocols();
         Treatment_Session__c session = createSession();
         Session_Protocol__c[] sessionProtocols = [SELECT Id, TreatmentSessionId__c, TreatmentSessionId__r.Treatment_Plan__c, ProtocolId__c FROM Session_Protocol__c WHERE TreatmentSessionId__c =: session.Id];
         return sessionProtocols;
+    }
+
+    public static Session_Protocol_Scale__c[] createSessionProtocolScales(){
+      Protocol_Scale__c[] pScales = createProtocolScales(3);
+      Session_Protocol__c[] sessionProtocols = createSessionProtocols();
+      Session_Protocol_Scale__c[] sessionProtoScales = new Session_Protocol_Scale__c[0];
+      for(Session_Protocol__c sessionProto : sessionProtocols){
+        for(Protocol_Scale__c protoScale : pScales){
+          sessionProtoScales.add(new Session_Protocol_Scale__c(
+            Protocol_Scale__c = protoScale.Id,
+            Session_Protocol__c = sessionProto.Id
+          ));
+        }
+      }
+      insert sessionProtoScales;
+      return sessionProtoScales;
     }
 
     public static Treatment_Bundle__c createTreatmentBundle() {
@@ -696,7 +793,8 @@ public without sharing class TestDataFactory {
         for(Session_Protocol__c protocol : protocolList){
           Session_Protocol_Contact__c sCon = new Session_Protocol_Contact__c(
             Session_Protocol__c = protocol.Id,
-            Contact__c = con.Id
+            Contact__c = con.Id,
+            Novel_Not_Novel__c = 'Familiar'
           );
           sContacts.add(sCon);
         }
@@ -750,8 +848,7 @@ public without sharing class TestDataFactory {
         return enrichment;
     }
 
-    public static List<Medical_Conditions__c> createMedicalConditions() {
-        Animal__c a = createAnimal();
+    public static List<Medical_Conditions__c> createMedicalConditions(Animal__c a) {
         List<Medical_Conditions__c> medConditions = new List<Medical_Conditions__c>{
             new Medical_Conditions__c(
                 Animal__c = a.Id,
@@ -760,14 +857,27 @@ public without sharing class TestDataFactory {
             new Medical_Conditions__c(
                 Animal__c = a.Id,
                 Medical_Condition__c = 'Dermatitis',
-                Date_Diagnosed__c = System.today()),
-            new Medical_Conditions__c(
-                Animal__c = a.Id,
-                Medical_Condition__c = 'In Heat',
                 Date_Diagnosed__c = System.today())
         };
         insert medConditions;
         return medConditions;
+    }
+
+    public static List<Play_Pause__c> createPlayPauses(Animal__c a) {
+        List<Play_Pause__c> playPauses = new List<Play_Pause__c>{
+            new Play_Pause__c(
+                Animal__c = a.Id,
+                Type__c = 'Medical',
+                Play_Pause_Reason__c = 'In Heat',
+                Start_Date__c = System.today()),
+            new Play_Pause__c(
+                Animal__c = a.Id,
+                Type__c = 'Behavioral',
+                Play_Pause_Reason__c = 'Needs a Break',
+                Start_Date__c = System.today())
+        };
+        insert playPauses;
+        return playPauses;
     }
 
     public static Playgroup_Session__c createPlaygroupSessionWithAnimals() {
@@ -775,24 +885,185 @@ public without sharing class TestDataFactory {
         Contact c = createContact();
         Playgroup_Session__c session = new Playgroup_Session__c(
             Playgroup_Location__c = 'MRC Indoor Play Yard',
-            Playgroup_Leader__c = c.Id
+            Population__c = 'MRC',
+            Playgroup_Leader__c = c.Id,
+            Contact_Ids__c = c.Id
         );
         insert session;
         Animal_Playgroup__c animalPlaygroup = new Animal_Playgroup__c(
             Animal__c = a.Id,
             Playgroup_Session__c = session.Id,
             Common_Playgroup_Note_Sections__c = 'Greeting',
-            Common_Playgroup_Notes__c = 'Defensive',
+            Common_Playgroup_Notes__c = 'Airhorn',
             Play_Rating__c = 'Green',
             Playgroup_Individual_Notes__c = 'Individual note'
         );
         insert animalPlaygroup;
         Playgroup_Contact__c playgroupContact = new Playgroup_Contact__c(
             Contact__c = c.Id,
-            Novel_Not_Novel__c = 'Novel',
+            Novel_Not_Novel__c = 'PG Leader',
             Playgroup__c = animalPlaygroup.Id
         );
-        insert playgroupContact;
+        Playgroup_Contact__c playgroupLeaderContact = new Playgroup_Contact__c(
+          Contact__c = createContact().Id,
+          Novel_Not_Novel__c = 'Novel',
+          Playgroup__c = animalPlaygroup.Id
+      );
+        insert new Playgroup_Contact__c[]{playgroupContact, playgroupLeaderContact};
         return session;
+    }
+
+    public static Facility_Outcome__c createFacilityOutcome() {
+        Animal__c a = createAnimal();
+        Contact c = createContact();
+        Facility_Outcome__c facility = new Facility_Outcome__c(
+            Animal__c = a.Id,
+            Facility_or_Outcome__c = 'Facility',
+            Facility_Outcome__c = 'Foster Home',
+            Point_of_Contact__c = c.Id,
+            Start_Date__c = System.today()
+        );
+        insert facility;
+        return facility;
+    }
+
+    public static List<Facility_Outcome__c> createWeeklyMonthlyFacilityOutcomes() {
+        Contact c = createContact();
+        List<Facility_Outcome__c> fosterList = new List<Facility_Outcome__c>{
+            new Facility_Outcome__c(
+                Animal__c = createAnimalWithName('Dog1').Id,
+                Facility_or_Outcome__c = 'Facility',
+                Facility_Outcome__c = 'Foster Home',
+                Point_of_Contact__c = c.Id,
+                Start_Date__c = System.today().addDays(-7)),
+            new Facility_Outcome__c(
+                Animal__c = createAnimalWithName('Dog2').Id,
+                Facility_or_Outcome__c = 'Facility',
+                Facility_Outcome__c = 'Foster Home',
+                Point_of_Contact__c = c.Id,
+                Start_Date__c = System.today().addDays(-14)),
+            new Facility_Outcome__c(
+                Animal__c = createAnimalWithName('Dog3').Id,
+                Facility_or_Outcome__c = 'Facility',
+                Facility_Outcome__c = 'Foster Home',
+                Point_of_Contact__c = c.Id,
+                Start_Date__c = System.today().addDays(-21)),
+            new Facility_Outcome__c(
+                Animal__c = createAnimalWithName('Dog4').Id,
+                Facility_or_Outcome__c = 'Facility',
+                Facility_Outcome__c = 'Foster Home',
+                Point_of_Contact__c = c.Id,
+                Start_Date__c = System.today().addDays(-28)),
+            new Facility_Outcome__c(
+                Animal__c = createAnimalWithName('Dog5').Id,
+                Facility_or_Outcome__c = 'Facility',
+                Facility_Outcome__c = 'Foster Home',
+                Point_of_Contact__c = c.Id,
+                Start_Date__c = System.today().addDays(-56)),
+            new Facility_Outcome__c(
+                Animal__c = createAnimalWithName('Dog6').Id,
+                Facility_or_Outcome__c = 'Facility',
+                Facility_Outcome__c = 'Foster Home',
+                Point_of_Contact__c = c.Id,
+                Start_Date__c = System.today().addDays(-5)),
+            new Facility_Outcome__c(
+                Animal__c = createAnimalWithName('Dog7').Id,
+                Facility_or_Outcome__c = 'Facility',
+                Facility_Outcome__c = 'Foster Home',
+                Point_of_Contact__c = c.Id,
+                Start_Date__c = System.today().addDays(-33)),
+            new Facility_Outcome__c(
+                Animal__c = createAnimalWithName('Dog8').Id,
+                Facility_or_Outcome__c = 'Facility',
+                Facility_Outcome__c = 'Foster Home',
+                Point_of_Contact__c = c.Id,
+                Start_Date__c = System.today().addDays(-26))
+        };
+        insert fosterList;
+        return fosterList;
+    }
+
+    public static Daily_Care__c createDailyCareWithAnimalDailyCares(Integer animalCount){
+      Animal__c[] animals = new Animal__c[0];
+      for(Integer i = 0; i < animalCount; i++){
+        animals.add(createAnimalWithName('name' + i));
+      }
+      Daily_Care__c dc = createDailyCare();
+      Animal_Daily_Care__c[] adcs = new Animal_Daily_Care__c[0];
+      for(Animal__c a : animals){
+        adcs.add(new Animal_Daily_Care__c(
+          Animal__c = a.Id,
+          Daily_Care__c = dc.Id
+        ));
+      }
+
+      insert adcs;
+      return dc;
+    }
+
+    public static Daily_Care__c createDailyCare(){
+      Daily_Care__c dc = new Daily_Care__c(
+        Date__c = date.today()
+      );
+      insert dc;
+      return dc;
+    }
+
+    public static Task[] createBehaviorTreatmentTasks(){
+      Animal__c dog = createAnimal();
+
+      Date startDate = AutoScheduleTasksUtil.startOfASPCAWeek(date.today());
+      Date activityDate1 = startDate.addDays(1);
+      Date activityDate2 = startDate.addDays(3);
+      Date activityDate3 = startDate.addDays(5);
+
+      Id rtId = Util.getRecordTypeId('Task', AutoScheduleTasksUtil.BEH_TREATMENT_TASK_RECORD_TYPE_NAME);
+
+      Task[] tasks = new Task[0];
+
+      Task t1 = new Task(
+        ActivityDate = activityDate1,
+        Animal__c = dog.Id,
+        RecordTypeId = rtId
+      );
+      tasks.add(t1);
+
+      Task t2 = new Task(
+        ActivityDate = activityDate2,
+        Animal__c = dog.Id,
+        RecordTypeId = rtId
+      );
+      tasks.add(t2);
+
+      Task t3 = new Task(
+        ActivityDate = activityDate3,
+        Animal__c = dog.Id,
+        RecordTypeId = rtId
+      );
+      tasks.add(t3);
+
+      insert tasks;
+      return tasks;
+
+    }
+
+    public static task createMedicationTask(Id animalId){
+      Id recordTypeId = Util.getRecordTypeId('Task',AutoScheduleTasksUtil.TREATMENT_TASK_RECORD_TYPE_NAME);
+
+      Medication_Drug__c drug = new Medication_Drug__c(
+        Name = 'testDrug'
+      ); 
+
+      insert drug;
+
+      Task t = new Task(
+        Animal__c = animalId,
+        RecordTypeId = recordTypeId,
+        ActivityDate = date.today().addDays(2),
+        Medication__c = drug.Id
+      );
+
+      insert t;
+      return t;
     }
 }

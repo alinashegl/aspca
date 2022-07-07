@@ -1,0 +1,52 @@
+<template>
+    <template if:true={showModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 class="slds-modal__title slds-hyphenate">
+                        New Behavior Evaluation<template if:false={smallForm}>: Default</template>
+                    </h2>
+                </header>
+                <div class="slds-modal__content slds-var-p-around_medium">
+                    <lightning-record-edit-form object-api-name="Behavior_Evaluation__c"
+                                                onsubmit={handleSubmit}
+                                                onsuccess={handleSuccess}>
+                        <template if:false={smallForm}>
+                            <h3 class="label slds-truncate slds-var-p-around_x-small slds-theme_shade">
+                                <span title="Evaluation Date" class="slds-truncate">Evaluation Date</span>
+                            </h3>
+                        </template>
+                        <lightning-input-field field-name="Evaluation_Date__c"></lightning-input-field>
+                        <template if:false={smallForm}>
+                            
+                            <h3 class="label slds-truncate slds-var-p-around_x-small slds-theme_shade">
+                                <span title="Initials" class="slds-truncate">Initials</span>
+                            </h3>
+                        </template>
+                        <lightning-input-field field-name="Scribe_Initials__c"></lightning-input-field>
+                        <lightning-input-field field-name="Handler_Initials__c"></lightning-input-field>
+                        <lightning-input-field field-name="Tester_Initials__c"></lightning-input-field>
+                        <template if:false={smallForm}>
+                            <h3 class="label slds-truncate slds-var-p-around_x-small slds-theme_shade">
+                                <span title="Evaluation Type" class="slds-truncate">Evaluation Type</span>
+                            </h3>
+                        </template>
+                        <lightning-input-field field-name="Evaluation_Subtype__c" required></lightning-input-field>
+                        <div  class="slds-align_absolute-center">
+                            <lightning-button variant="neutral" label="Cancel" onclick={handleCancel}></lightning-button>
+                            <lightning-button variant="brand" class="slds-var-m-left_x-small" label="Save" type="submit"></lightning-button>
+                        </div>
+                    </lightning-record-edit-form>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        <template if:true={smallForm}>
+            <!-- In the mobile view for the containing tab, the visible area does not expand to show the modal -->
+            <div class="mobileBuffer"></div>
+        </template>
+    </template>
+    <lightning-card>
+        <lightning-button title="New Evaluation" label="New Evaluation" slot="actions" onclick={handleClick}></lightning-button>
+    </lightning-card>
+</template>

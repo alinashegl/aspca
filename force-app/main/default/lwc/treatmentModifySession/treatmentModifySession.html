@@ -4,28 +4,29 @@
     </template>
     <template if:true={showProtocols}>
         <lightning-card>
-                <lightning-button variant="Neutral" label="Update Protocol Assignments" title="Update Protocol Assignment" onclick={handleProtocolAssignmentUpdates} class="slds-m-left_small" disabled={isUpdateButtonDisabled}></lightning-button>
-                <p class="slds-p-top_medium sectionTitle">Assigned Protocols</p>
-                <template if:true={assignedProtocols}>
-                    <lightning-layout multiple-rows>
-                        <template for:each={assignedProtocols} for:item='protocol'>
-                            <lightning-layout-item flexibility="auto" key={protocol.Id} size="12" small-device-size="12" medium-device-size="6" large-device-size="3" class="slds-p-around_xx-small">
-                                <div class="slds-form-element">
-                                    <div class="slds-form-element__static">
-                                        <c-treatment-modify-session-protocol
-                                            is-assigned="assigned"
-                                            protocol={protocol}
-                                            onprotocolassignment={handleProtocolAssignmentEvent}
-                                            refresh={refresh}
-                                            protocol-type={protocolType}
-                                        >
-                                        </c-treatment-modify-session-protocol>
-                                    </div>
+            <p class="slds-p-top_medium sectionTitle">Assigned Protocols</p>
+            <template if:true={categoriesListOfLists}>
+                <lightning-layout multiple-rows>
+                    <template for:each={categoriesListOfLists} for:item='list'>
+                        <lightning-layout-item flexibility="auto" key={list} size="12" small-device-size="12" medium-device-size="12" large-device-size="12" class="slds-p-around_xx-small">
+                            <div class="slds-form-element">
+                                <div class="slds-form-element__static">
+                                    <c-treatment-modify-session-protocol-list 
+                                        key={list}
+                                        protocol-list={list}
+                                        onprotocolassignment={handleProtocolAssignmentEvent}
+                                        refresh={refresh}
+                                        protocol-type={protocolType}
+                                        is-assigned="assigned"
+                                        plan-id={recordId}
+                                        session-id={sessionId}
+                                    ></c-treatment-modify-session-protocol-list>
                                 </div>
-                            </lightning-layout-item>
-                        </template>
-                    </lightning-layout>
-                </template>
+                            </div>
+                        </lightning-layout-item>
+                    </template>
+                </lightning-layout>
+            </template>
         </lightning-card>
         <lightning-card>
             <p class="sectionTitle">
@@ -43,21 +44,21 @@
             </p>
             <template if:true={showUnassignedProtocols}>
                 <lightning-layout multiple-rows>
-                    <template for:each={unassignedProtocols} for:item='protocol'>
-                        <lightning-layout-item key={protocol.Id} size="12" small-device-size="12" medium-device-size="6" large-device-size="3" class="slds-p-around_xx-small">
-                            <c-treatment-modify-session-protocol
-                                type="unassigned"
-                                protocol={protocol}
+                    <template for:each={unassignedProtocolsCategoriesLists} for:item='list'>
+                        <lightning-layout-item key={list} size="12" small-device-size="12" medium-device-size="12" large-device-size="12" class="slds-p-around_xx-small">
+                            <c-treatment-modify-session-protocol-list 
+                                key={list}
+                                protocol-list={list}
                                 onprotocolassignment={handleProtocolAssignmentEvent}
-                            >
-                            </c-treatment-modify-session-protocol>
+                                refresh={refresh}
+                                type="unassigned"
+                                plan-id={recordId}
+                                session-id={sessionId}
+                            ></c-treatment-modify-session-protocol-list>
                         </lightning-layout-item>
                     </template>
                 </lightning-layout>
             </template>
-            <div class="slds-m-left_small slds-m-top_medium">
-                <lightning-button variant="Neutral" label="Update Protocol Assignments" title="Update Protocol Assignment" onclick={handleProtocolAssignmentUpdates} disabled={isUpdateButtonDisabled}></lightning-button>
-            </div>
         </lightning-card>
     </template>
     <lightning-card>

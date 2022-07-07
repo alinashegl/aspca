@@ -1,0 +1,49 @@
+@page { 
+        size: letter landscape;
+    @top-right {
+      content: "Page " counter(page) " of " counter(pages);
+          font-weight: lighter;
+          font-size:8pt;
+        }
+}
+
+tr>td {
+  	padding: 3px;
+}
+
+tr.one>td {
+    border: 1px solid black; 
+    background-color: White;
+    vertical-align:Top;
+    height: 1in;
+}
+
+tr.half>td {
+    border: 1px solid black; 
+    background-color: White;
+    vertical-align:Top;
+    height: .5in;
+}
+
+.line{
+	border-bottom: .5px solid black;
+}
+
+table {
+	-fs-table-paginate: paginate;
+    border: 1px solid black;
+    padding: 5px;
+    vertical-align:Top;
+    font-size: small;
+    width: 100%;
+    page-break-inside: avoid;
+    font-size:12pt;
+}
+
+h2, h3, h4, th {
+  text-align:center;  
+}
+
+hr {
+  margin: 5px;
+}

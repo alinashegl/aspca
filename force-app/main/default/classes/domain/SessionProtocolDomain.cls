@@ -102,6 +102,25 @@ public with sharing class SessionProtocolDomain extends DomainActionBase {
     @SuppressWarnings('ApexUnresolvableReference')
     public void afterInsert(TriggerRequest request) {
         System.debug('SESSION PROTOCOL AFTER INSERT IS EXECUTING');
+        Session_Protocol__c[] newProtocols = (Session_Protocol__c[]) request.newRecords;
+        Session_Protocol__c[] sessionProtocolsForProcessing = new Session_Protocol__c[0];
+        for(Session_Protocol__c sp : newProtocols){
+            if(sp.Add_to_Plan__c == true){
+                sessionProtocolsForProcessing.add(sp);
+            }
+        }
+        ServiceRequest serviceRequest = new ServiceRequest();
+        if (!sessionProtocolsForProcessing.isEmpty()) {
+
+            System.debug('sessionProtocolsForProcessing: ' + sessionProtocolsForProcessing);
+
+            serviceRequest.Action = 'afterInsertHandler';
+            serviceRequest.withParams('protocols', sessionProtocolsForProcessing);
+
+            ServiceResponse serviceResponse = SessionProtocolService.processReq(serviceRequest);
+            System.debug(serviceResponse);
+        }
+
     }
 
     public void afterUpdate (TriggerRequest request) {

@@ -20,9 +20,8 @@ export default class TreatmentModifySession extends LightningElement {
     @api sessionId = null;
     @api recordId = null;
     wireResponse;
-    assignedProtocols = [];
+
     planProtocolsToUpdate = [];
-    unassignedProtocols = [];
     assignedProtocolUpdates = [];
     protocolsToAssign = [];
     addNewProtocol = false;
@@ -30,6 +29,9 @@ export default class TreatmentModifySession extends LightningElement {
     preferredMotivators;
     updating = false;
     toggleShowUnassignedProtocols = false;
+    
+    categoriesListOfLists = [];
+    unassignedProtocolsCategoriesLists = [];
 
     _refresh;
     @api
@@ -44,8 +46,8 @@ export default class TreatmentModifySession extends LightningElement {
     response(result){
         this.wireResponse = result;
         if(result.data){
-            this.assignedProtocols = result.data.assignedSessionProtocols ? result.data.assignedSessionProtocols : result.data.assignedPlanProtocols; 
-            this.unassignedProtocols = result.data.unassignedProtocols;
+            this.categoriesListOfLists = result.data.assignedSessionProtocolsLists ? result.data.assignedSessionProtocolsLists : result.data.assignedPlanProtocolsLists;
+            this.unassignedProtocolsCategoriesLists = result.data.unassignedProtocolsLists;
             this.preferredMotivators = result.data.preferredMotivators;
         }
     }
@@ -55,49 +57,11 @@ export default class TreatmentModifySession extends LightningElement {
     }
 
     handleProtocolAssignmentEvent(event){
-        window.console.log('handleProtocolAssignmentEvent: ', JSON.stringify(event.detail));
-        let protocol = event.detail;
-        if(protocol.isAssigned && this.protocolType == 'session'){
-            let prUpdate = {
-                sObjectType: SESSION_PROTOCOL_OBJECT.objectApiName,
-                Id : protocol.id,
-                IsSkipped__c: protocol.isSkipped,
-                IsRemoved__c: protocol.isRemoved
-            }
-            if(this.assignedProtocolUpdates.find(pr => pr.Id == protocol.id)){
-                this.assignedProtocolUpdates.find(pr => pr.Id == protocol.id).IsSkipped__c = prUpdate.IsSkipped__c;
-                this.assignedProtocolUpdates.find(pr => pr.Id == protocol.id).IsRemoved__c = prUpdate.IsRemoved__c;
-            } else {
-                this.assignedProtocolUpdates.push(prUpdate);
-            }
-            window.console.log('assignedProtocolUpdates: ' + JSON.stringify(this.assignedProtocolUpdates));
-            window.console.log('assignedProtocolUpdates.length: ' + this.assignedProtocolUpdates.length);
-        }
-        else if(protocol.isAssigned && this.protocolType == 'protocol'){
-            let index = this.planProtocolsToUpdate.indexOf(protocol.id);
-            if(index != -1){
-                this.planProtocolsToUpdate.splice(index, 1);
-            } else {
-                this.planProtocolsToUpdate.push(protocol.id);
-            }
-            window.console.log('planProtocolsToUpdate: ' + JSON.stringify(this.planProtocolsToUpdate));
-            window.console.log('planProtocolsToUpdate.length: ' + this.planProtocolsToUpdate.length);
-        }
-        else if(!protocol.isAssigned){
-            let index = this.protocolsToAssign.indexOf(protocol.id);
-            if(index != -1){
-                this.protocolsToAssign.splice(index, 1);
-            } else {
-                this.protocolsToAssign.push(protocol.id);
-            }
-            window.console.log('protocolsToAssign: ' + JSON.stringify(this.protocolsToAssign));
-            window.console.log('protocolsToAssign.length: ' + this.protocolsToAssign.length);
-        }
-        this.isUpdateButtonDisabled = (this.assignedProtocolUpdates.length > 0 || this.protocolsToAssign.length > 0 || this.planProtocolsToUpdate.length > 0) ? false : true;
+        refreshApex(this.wireResponse);
+        this.refreshProtocolView();
     }
 
     handleProtocolAssignmentUpdates(){
-        window.console.log('in handleProtocolAssignmentUpdates');
         this.updating = true;
         updateProtocolAssignments({
             protocolsToUpdate: this.assignedProtocolUpdates, 
@@ -108,10 +72,8 @@ export default class TreatmentModifySession extends LightningElement {
         })
             .then((response) => {
                 if(response == 'success'){
-                    window.console.log('response = ', response);
                     this.handleToastEvent("Success", 'Session Protocols have been updated!', "success");
                 } else {
-                    window.console.log('errors: ', error);
                     this.handleToastEvent("Error updating protocols", response, "error");
                 }
                 this.assignedProtocolUpdates = [];
@@ -120,7 +82,6 @@ export default class TreatmentModifySession extends LightningElement {
                 this.isUpdateButtonDisabled = true;
             })
             .catch((error) => {
-                window.console.log('errors: ', error);
                 this.handleToastEvent("Error updating protocols", error, "error");
             })
             .then(() => {
@@ -133,7 +94,6 @@ export default class TreatmentModifySession extends LightningElement {
     }
 
     refreshProtocolView() {
-        window.console.log('refreshProtocolView', this.template.querySelector("c-treatment-modify-session-protocol"));
         if(this.template.querySelector("c-treatment-modify-session-protocol")){
             this.template.querySelector("c-treatment-modify-session-protocol").refreshProtocol();
         }
@@ -142,7 +102,6 @@ export default class TreatmentModifySession extends LightningElement {
     handleInsertProtocolResponse(event){
         this.updating = true;
         let protocolId = event.detail.id;
-        window.console.log('newProtocolId: ', protocolId);
         let successMessage = 'success';
         let recordInput;
         const fields = {};
@@ -166,7 +125,6 @@ export default class TreatmentModifySession extends LightningElement {
 
         createRecord(recordInput)
             .then((response) => {
-                window.console.log('sessionProtocolId = ', response)
                 this.handleToastEvent('Success', successMessage, 'success' );
             })
             .catch((error) => {
@@ -184,7 +142,8 @@ export default class TreatmentModifySession extends LightningElement {
     handleSubmitProtocol(event){
         event.preventDefault();
         const fields = event.detail.fields;
-        fields.Name = 'Other ' + fields.Name
+        fields.Name = 'Other ' + fields.Name;
+        fields.IsActive__c = true;
         this.template
         .querySelector('lightning-record-edit-form').submit(fields);
     }
@@ -208,7 +167,7 @@ export default class TreatmentModifySession extends LightningElement {
     }
 
     get showProtocols(){
-        return this.assignedProtocols || this.unassignedProtocols ? true : false;
+        return this.categoriesListOfLists || this.unassignedProtocolsCategoriesLists ? true : false;
     }
 
     get showLoading(){
@@ -220,6 +179,6 @@ export default class TreatmentModifySession extends LightningElement {
     }
 
     get showUnassignedProtocols(){
-        return this.unassignedProtocols && this.toggleShowUnassignedProtocols;
+        return this.unassignedProtocolsCategoriesLists && this.toggleShowUnassignedProtocols;
     }
 }
