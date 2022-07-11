@@ -220,7 +220,7 @@ public class AnimalPlacementPDFController {
                                                            Animal__r.Current_Recent_Shelter_Location__c,
                                                            Animal_Age__c,Animal_Breed__c,Animal_Color__c,
                                                            Animal_ID__c,Animal_Name__c,Animal_Sex__c,Animal__c,
-                                                           Assistant_Initials__c,Behavior_Evaluation_Summary__c,
+                                                           Behavior_Evaluation_Summary__c,
                                                            Facility_Outcome__c, Evaluation_Date__c,Case_Number__c,
                                                            Scribe_Initials__c,Tester_Initials__c,createdDate,
                                                            Overall_Evaluation_Grade__c,Evaluation_Subtype__c,
