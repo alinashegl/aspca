@@ -54,7 +54,6 @@
         }else {
 
             var s = cmp.get('v.options');
-            //ps = s[0];
             console.log('Opt Param 1 ',s[0]);
             p = s[0].pleApiName;
             var x = {
@@ -70,42 +69,7 @@
 
         console.log(p + ' ===>' + result);
         this.putSelections(cmp, p, result, recordid);
-        if(clearSkipReason){
-            this.sendValues(cmp, recordId, apiName.id, reason, 'c.updateEval');
-        }
         $A.get('e.force:refreshView').fire();
-    } ,
-
-    sendValues: function(cmp, recordId, apiName, values, methodName) {
-        var params = {
-            apiName: apiName ,
-            values: values ,
-            recordId: recordId
-        };
-
-        var mName = methodName;
-
-        //alert(JSON.stringify(params['apiName']));
-
-        //this.sendRequest(cmp, 'c.updateEval', params);
-		var comp = cmp;
-        this.sendPromise(cmp, mName, params, params[apiName])
-        .then(
-          function(response) {
-              console.log('SENT VALUES RESPONSE', response);
-              $A.get('e.force:refreshView').fire();
-              var compEvent = comp.getEvent("skipSaveEvt");
-              compEvent.setParams({
-                  behaviorEvalObj: response,
-                  params: params
-              });
-              compEvent.fire();
-          }
-        ).catch(
-            function(error) {
-                console.log(error)
-            }
-        );
     } ,
 
     putSelections : function(cmp, p, result, recordid) {
@@ -145,6 +109,5 @@
             }
         });
         $A.enqueueAction(action);
-    }
-
+    },
 });
