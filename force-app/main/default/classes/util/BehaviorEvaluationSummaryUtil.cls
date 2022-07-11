@@ -120,34 +120,39 @@ public class BehaviorEvaluationSummaryUtil {
         Map<String, Test_Config__mdt[]> adultConfigMap = new Map<String, Test_Config__mdt[]>();
         Map<String, Test_Config__mdt[]> fightingConfigMap = new Map<String, Test_Config__mdt[]>();
         Map<String, Test_Config__mdt[]> dogOnlyConfigMap = new Map<String, Test_Config__mdt[]>();
+        Set<String> testNames = new Set<String>(); //use this set to make sure we don't duplicate comments
 
         for (Test_Config__mdt t : testConfig) {
-            String testName = t.Overall_Test_Display_Name__c != null ? t.Overall_Test_Display_Name__c : t.Test_Name__c;
-            if (testName != null) {
-                testName = testName.replace(' P1', '').replace(' P2', '').replace(' P3', '');
-
-                if (t.IsPuppy__c) {
+            String fullTestName = t.Overall_Test_Display_Name__c != null ? t.Overall_Test_Display_Name__c : t.Test_Name__c;
+            if (fullTestName != null) {
+                String testName = fullTestName.replace(' P1', '').replace(' P2', '').replace(' P3', '');
+                
+                if (t.IsPuppy__c && !testNames.contains('puppy-'+fullTestName)) {
+                    testNames.add('puppy-'+fullTestName);
                     if(puppyConfigMap.containsKey(testName)){
                         puppyConfigMap.get(testName).add(t);
                     } else {
                         puppyConfigMap.put(testName, new Test_Config__mdt[]{t});
                     }
                 }
-                if (t.IsAdult__c) {
+                if (t.IsAdult__c && !testNames.contains('adult-'+fullTestName)) {
+                    testNames.add('adult-'+fullTestName);
                     if(adultConfigMap.containsKey(testName)){
                         adultConfigMap.get(testName).add(t);
                     } else {
                         adultConfigMap.put(testName, new Test_Config__mdt[]{t});
                     }
                 }
-                if (t.IsDogFighting__c) {
+                if (t.IsDogFighting__c && !testNames.contains('dogFighting-'+fullTestName)) {
+                    testNames.add('dogFighting-'+fullTestName);
                     if(fightingConfigMap.containsKey(testName)){
                         fightingConfigMap.get(testName).add(t);
                     } else {
                         fightingConfigMap.put(testName, new Test_Config__mdt[]{t});
                     }
                 }
-                if (t.IsDogOnly__c) {
+                if (t.IsDogOnly__c && !testNames.contains('dog-'+fullTestName)) {
+                    testNames.add('dog-'+fullTestName);
                     if(dogOnlyConfigMap.containsKey(testName)){
                         dogOnlyConfigMap.get(testName).add(t);
                     } else {
@@ -226,15 +231,18 @@ public class BehaviorEvaluationSummaryUtil {
 
                 Boolean skipSubsequentParts = false;
                 String skipReason = null;
-                Test_Config__mdt p1Config = commentFieldsMap.get(summaryTitle)[0];
-                String currentFieldApi = p1Config.Test_Skip_Reason_Field__c;
 
-                //if skipping p1, skip the others for the same reason
-                if(currentFieldApi.contains('P1')){
-                    if(oldRecord.get(currentFieldApi) == null && b.get(currentFieldApi) != null){
-                        skipSubsequentParts = true;
-                        skipReason = (String) b.get(currentFieldApi);
-                    }                    
+                if(commentFieldsMap.containsKey(summaryTitle)){
+                    Test_Config__mdt p1Config = commentFieldsMap.get(summaryTitle)[0];
+                    String currentFieldApi = p1Config.Test_Skip_Reason_Field__c;
+
+                    //if skipping p1, skip the others for the same reason
+                    if(currentFieldApi.contains('P1')){
+                        if(oldRecord.get(currentFieldApi) == null && b.get(currentFieldApi) != null){
+                            skipSubsequentParts = true;
+                            skipReason = (String) b.get(currentFieldApi);
+                        }                    
+                    }
                 }
 
                 if(commentFieldsMap.containsKey(summaryTitle)){
