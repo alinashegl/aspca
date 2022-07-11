@@ -31,6 +31,7 @@
         var variable = cmp.get('v.options');
         var p =  ''; //options[0].get('v.name');
         var recordid = cmp.get('v.recordId');
+        var clearSkipReason = false;
 
         //alert(p);
         var result = [];
@@ -41,6 +42,9 @@
                    label: options[i].get('v.label') ,
                     isSelected: options[i].get('v.checked')
                };
+               if(r.isSelected){
+                clearSkipReason = true;
+               }
                try {
                  result.push(JSON.stringify(r));
                }catch(err) {
@@ -66,7 +70,42 @@
 
         console.log(p + ' ===>' + result);
         this.putSelections(cmp, p, result, recordid);
+        if(clearSkipReason){
+            this.sendValues(cmp, recordId, apiName.id, reason, 'c.updateEval');
+        }
         $A.get('e.force:refreshView').fire();
+    } ,
+
+    sendValues: function(cmp, recordId, apiName, values, methodName) {
+        var params = {
+            apiName: apiName ,
+            values: values ,
+            recordId: recordId
+        };
+
+        var mName = methodName;
+
+        //alert(JSON.stringify(params['apiName']));
+
+        //this.sendRequest(cmp, 'c.updateEval', params);
+		var comp = cmp;
+        this.sendPromise(cmp, mName, params, params[apiName])
+        .then(
+          function(response) {
+              console.log('SENT VALUES RESPONSE', response);
+              $A.get('e.force:refreshView').fire();
+              var compEvent = comp.getEvent("skipSaveEvt");
+              compEvent.setParams({
+                  behaviorEvalObj: response,
+                  params: params
+              });
+              compEvent.fire();
+          }
+        ).catch(
+            function(error) {
+                console.log(error)
+            }
+        );
     } ,
 
     putSelections : function(cmp, p, result, recordid) {
