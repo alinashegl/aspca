@@ -119,10 +119,6 @@ public with sharing class playgroupSessionLWCController {
 
     }
 
-    public static Animal__c getAnimal(Id animalId){
-        return [SELECT Id, Animal_Name__c, Play_Rating__c FROM Animal__c WHERE Id =: animalId LIMIT 1];
-    }
-
     public static Playgroup_Contact__c[] getAnimalContacts(Id playgroupAnimalId){
         Playgroup_Contact__c[] contactList = [SELECT Id, Contact__r.Name, Novel_Not_Novel__c FROM Playgroup_Contact__c WHERE Playgroup__c =: playgroupAnimalId AND Novel_Not_Novel__c != 'PG Leader' ORDER BY Contact__r.Name ASC];
         return !contactList.isEmpty() ? contactList : null;

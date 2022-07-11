@@ -276,12 +276,19 @@ public class BehaviorEvaluationSummaryUtil {
                             (string) b.get(config.Test_Skip_Reason_Field__c),
                             !highValueSelections.isEmpty() ? string.join(highValueSelections, ';') : null
                         ));
+
+                        //unskip if score was added
+                        if(oldRecord.get(config.Picklist_API_Name__c) == null && b.get(config.Picklist_API_Name__c) != null){
+                            System.debug('**setting skip field to null');
+                            b.put(config.Test_Skip_Reason_Field__c, null);
+                        }
                     }
                     commentMap.put(summaryTitle, commentList);
                 }
                // if(String.valueof(b.get(c.skipField)) == '@@'){
                  //  b.Behavior_Evaluation_Summary__c = ' ';
                // }
+
             }
 
             String summary = '';
