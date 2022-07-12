@@ -13,22 +13,22 @@
         <field>Animal__c$Intake_Date_Time__c</field>
     </columns>
     <columns>
-        <field>Animal__c$Treatment_Start_Date__c</field>
-    </columns>
-    <columns>
-        <aggregateTypes>Sum</aggregateTypes>
-        <field>Animal__c$Behavior_Medication_Flag__c</field>
-    </columns>
-    <columns>
-        <field>Animal__c$Meets_Adoptability_Date__c</field>
-    </columns>
-    <columns>
         <aggregateTypes>Sum</aggregateTypes>
         <field>Animal__c$Number_of_Weeks_in_Treatment__c</field>
     </columns>
     <columns>
         <aggregateTypes>Sum</aggregateTypes>
         <field>Animal__c$Days_in_Treatment__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Animal__c$Behavior_Medication_Flag__c</field>
+    </columns>
+    <columns>
+        <field>Animal__c$Treatment_Start_Date__c</field>
+    </columns>
+    <columns>
+        <field>Animal__c$Meets_Adoptability_Date__c</field>
     </columns>
     <columns>
         <field>Animal__c$Final_Outcome__c</field>
