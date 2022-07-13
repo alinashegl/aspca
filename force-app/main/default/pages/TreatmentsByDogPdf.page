@@ -6,7 +6,7 @@
 
         <style>
             @page {
-                size: portrait;
+                size: landscape;
                 @bottom-left {
                     content: "Page " counter(page) " of " counter(pages);
                     font-family: sans-serif;
@@ -68,6 +68,7 @@
     <body>
         <div>
             <apex:repeat value="{!dogInfoWrapperList}" var="record">
+                
                 <table class="tableSpcae c_table" cellspacing="0">
                     <thead>
                         <tr>
@@ -124,11 +125,12 @@
                         </td>
                     </tr>
                 </table>
+<div style="page-break-after:always;">
                 <table class="tableSpcae c_table" cellspacing="0">
                     <tr style="page-break-inside:avoid">
                         <td class="line" style="border-bottom: 1px solid;">
                             <table>
-                                <apex:repeat value="{!record.protocols}" var="protocolWrapper">
+                                <apex:repeat value="{!record.txProtocols}" var="protocolWrapper">
                                     <tr>
                                         <td width="20%">
                                             <b>{!UPPER(protocolWrapper.name )}</b><br/>
@@ -138,7 +140,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <apex:repeat value="{!protocolWrapper.treatments}" var="treatment">
+                                        <apex:repeat value="{!protocolWrapper.historicalSessionProtocols}" var="treatment">
                                             <td>  
                                                 {!treatment.txDateFormatted} ({!treatment.colorText}) <br/>
                                                 {!treatment.score}                                                    
@@ -150,6 +152,7 @@
                         </td>
                     </tr>
                 </table>
+                </div>
             </apex:repeat>
         </div>
     </body>
