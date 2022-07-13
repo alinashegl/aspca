@@ -19,23 +19,23 @@ public class AnimalExamSheetTriggerTest {
         Id devRecordTypeId = Schema.SObjectType.Animal_Exam_Sheet__c.getRecordTypeInfosByName().get('Behavior Exam').getRecordTypeId();
 
 
-        Animal_Exam_Sheet__c objAnimalExam = new Animal_Exam_Sheet__c (Species_PL__c  = 'Dog', Sex__c = 'FS', recordtypeId = devRecordTypeId,Exam_Type__c = 'Storm Distress/Anxiety', Animal__c =anim.id,Heartworm__c=true,FIV__c=true,FIV_Results__c='FIVResult',Heartworm_Results__c='heartwormResult',Babesia__c=true,Babesia_Results__c='babesiaResult',Felv_FIV_Results__c='FelvFIV',Include_in_discharge__c ='Yes',Editor__c='AS');
+        Animal_Exam_Sheet__c objAnimalExam = new Animal_Exam_Sheet__c (Subjective__c = 'Test', Species_PL__c  = 'Dog', Sex__c = 'FS', recordtypeId = devRecordTypeId,Exam_Type__c = 'Storm Distress/Anxiety', Animal__c =anim.id,Heartworm__c=true,FIV__c=true,FIV_Results__c='FIVResult',Heartworm_Results__c='heartwormResult',Babesia__c=true,Babesia_Results__c='babesiaResult',Felv_FIV_Results__c='FelvFIV',Include_in_discharge__c ='Yes',Editor__c='AS');
         insert objAnimalExam;
         
-        objAnimalExam.Exam_Type__c = 'Behavior Medications';
-        
-        //Animal_Exam_Sheet__c objAnimalExam2 = new Animal_Exam_Sheet__c (recordtypeId = devRecordTypeId,Exam_Type__c = 'Behavior Medications', Animal__c =anim.id,Heartworm__c=true,FIV__c=true,FIV_Results__c='FIVResult',Heartworm_Results__c='heartwormResult',Babesia__c=true,Babesia_Results__c='babesiaResult',Felv_FIV_Results__c='FelvFIV',Include_in_discharge__c ='Yes',Editor__c='AS');
-        update objAnimalExam;
     }
     
     @isTest
     static void testFlags(){
-        List<Animal_Exam_Sheet__c> aesList = new List<Animal_Exam_Sheet__c>();
-        Animal__c a = [Select Id,Storm_Distress_Anxiety__c,Storm_Distress_Anxiety_Notes__c,Behavior_Medication_Flag__c, Behavior_Medication_Data_Time__c,(Select id, Subjective__c, Exam_Type__c  from Animal_Exam_Sheets__r WHERE RecordType.Name = 'Behavior Exam' Order By CreatedDate DESC) from Animal__c];
-        for(Animal_Exam_Sheet__c aes : a.Animal_Exam_Sheets__r){
-            aes.Subjective__c = 'Test';
-            aesList.add(aes);
-        }
-        update aesList;
+        Animal__c anim = [Select Id,Storm_Distress_Anxiety__c,Storm_Distress_Anxiety_Notes__c,Behavior_Medication_Flag__c, Behavior_Medication_Data_Time__c FROM Animal__c];
+        System.assertEquals(anim.Storm_Distress_Anxiety__c,true);
+        System.assertNotEquals(anim.Storm_Distress_Anxiety_Notes__c,null);
+        
+        Animal_Exam_Sheet__c objAnimalExam = [Select Exam_Type__c from Animal_Exam_Sheet__c];
+        objAnimalExam.Exam_Type__c = 'Behavior Medications';
+        update objAnimalExam;
+        
+        Animal__c updatedAnimal = [Select Id,Storm_Distress_Anxiety__c,Storm_Distress_Anxiety_Notes__c,Behavior_Medication_Flag__c, Behavior_Medication_Data_Time__c FROM Animal__c];
+        System.assertEquals(updatedAnimal.Behavior_Medication_Flag__c, true);
+        System.assertNotEquals(updatedAnimal.Behavior_Medication_Data_Time__c, null);
     }
 }
