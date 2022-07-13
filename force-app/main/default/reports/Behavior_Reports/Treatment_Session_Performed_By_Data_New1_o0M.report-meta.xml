@@ -39,6 +39,9 @@
     <columns>
         <field>Animal__c.Treatment_Sessions__r.Session_Protocols__r$Overall_Score__c</field>
     </columns>
+    <columns>
+        <field>Animal__c.Treatment_Sessions__r.Session_Protocols__r$Protocol_Notes__c</field>
+    </columns>
     <filter>
         <criteriaItems>
             <column>Animal__c$Active_Animal__c</column>
@@ -61,7 +64,11 @@
         <field>Animal__c$Name</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
-    <name>Treatment Session Performed By Data New1</name>
+    <groupingsDown>
+        <field>Animal__c.Treatment_Sessions__r$Session_Date__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Treatment Session Performed By Date</name>
     <params>
         <name>co</name>
         <value>1</value>
