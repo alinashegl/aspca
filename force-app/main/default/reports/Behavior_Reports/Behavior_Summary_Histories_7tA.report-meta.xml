@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Report xmlns="http://soap.sforce.com/2006/04/metadata">
     <columns>
+        <field>EntityHistory__c.Animal__c</field>
+    </columns>
+    <columns>
         <field>CUST_NAME</field>
     </columns>
     <columns>
@@ -11,9 +14,6 @@
     </columns>
     <columns>
         <field>EntityHistory__c.NewValue__c</field>
-    </columns>
-    <columns>
-        <field>EntityHistory__c.Animal__c</field>
     </columns>
     <filter>
         <criteriaItems>
