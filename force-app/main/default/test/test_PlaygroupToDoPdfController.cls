@@ -13,10 +13,8 @@ public class test_PlaygroupToDoPdfController {
         Test.startTest();
         PlaygroupToDoPdfController controller = new PlaygroupToDoPdfController();
         List<Animal__c> animals = controller.getAnimals();
-        // String location = controller.getLocation();
         Test.stopTest();
         
         System.assertEquals(1, animals.size());
-        // System.assertEquals('MRC', location);
     }
 }

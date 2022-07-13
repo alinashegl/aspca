@@ -80,9 +80,10 @@ public class BehaviorEvaluationSummaryUtil {
 
         List<Test_Config__mdt> testConfig = Test_Config__mdt.getAll().values();
         ListUtils.sort(testConfig, new SObjectStringFieldComparator('Test_Display_Order__c'), COMPARE_NUMBERS);
-
+        
         for (Test_Config__mdt t : testConfig) {
-            String testName = t.Overall_Test_Display_Name__c != null ? t.Overall_Test_Display_Name__c : t.Test_Name__c;
+            String testName = t.Parent_Test_Api_Name__c != null ? t.Parent_Test_Api_Name__c : 
+                t.Overall_Test_Display_Name__c != null ? t.Overall_Test_Display_Name__c : t.Test_Name__c;
             if (testName != null) {
                 testName = testName.replace(' P1', '').replace(' P2', '').replace(' P3', '');
                 if (t.IsPuppy__c) {
@@ -102,6 +103,28 @@ public class BehaviorEvaluationSummaryUtil {
                 }
             }
         }
+
+        // for (Test_Config__mdt t : testConfig) {
+        //     String testName = t.Overall_Test_Display_Name__c != null ? t.Overall_Test_Display_Name__c : t.Test_Name__c;
+        //     if (testName != null) {
+        //         testName = testName.replace(' P1', '').replace(' P2', '').replace(' P3', '');
+        //         if (t.IsPuppy__c) {
+        //             puppySet.add(testName);
+        //         }
+
+        //         if (t.IsAdult__c) {
+        //             adultSet.add(testName);
+        //         }
+
+        //         if (t.IsDogFighting__c) {
+        //             fightingSet.add(testName);
+        //         }
+
+        //         if (t.IsDogOnly__c) {
+        //             dogOnlySet.add(testName);
+        //         }
+        //     }
+        // }
 
         result.put('Puppy', new List<String>(puppySet));
         result.put('Adult Animal', new List<String>(adultSet));
@@ -125,7 +148,8 @@ public class BehaviorEvaluationSummaryUtil {
         for (Test_Config__mdt t : testConfig) {
             String fullTestName = t.Overall_Test_Display_Name__c != null ? t.Overall_Test_Display_Name__c : t.Test_Name__c;
             if (fullTestName != null) {
-                String testName = fullTestName.replace(' P1', '').replace(' P2', '').replace(' P3', '');
+                // String testName = fullTestName.replace(' P1', '').replace(' P2', '').replace(' P3', '');
+                String testName = t.Parent_Test_Api_Name__c != null ? t.Parent_Test_Api_Name__c : fullTestName.replace(' P1', '').replace(' P2', '').replace(' P3', '');
                 
                 if (t.IsPuppy__c && !testNames.contains('puppy-'+fullTestName)) {
                     testNames.add('puppy-'+fullTestName);
@@ -206,6 +230,12 @@ public class BehaviorEvaluationSummaryUtil {
     public static void handleUpdate(List<Behavior_Evaluation__c> triggerNew, Map<Id, Behavior_Evaluation__c> triggerOldMap) {
         //List of comment and skip field names per test config
         Map<String, Map<String, Test_Config__mdt[]>> commentFieldsMapMap = getCommentSkipFieldsMap();
+
+        for(String key : commentFieldsMapMap.get('Adult Animal').keySet()){
+            System.debug('Keys: ' + key);
+        }
+        
+        System.debug('adult commentFieldsMap: ' + commentFieldsMapMap.get('Adult Animal'));
 
         //List of picklist fields/values that have a value category of 4
         Map<String, String[]> highValueMap = getHighValueCategoryMap();

@@ -1,4 +1,14 @@
 public with sharing class TreatmentByDogLWCController {
+    public DogInfoWrapper[] dogInfoWrapperList {get; set;}
+    public String dogList{get;set;}
+
+    public TreatmentByDogLWCController(){        
+        dogList = apexpages.currentpage().getparameters().get('dogList');
+        Id[] dogList = dogList.split(',');
+        System.debug('dogList: ' + dogList);
+        dogInfoWrapperList = getDogInfo(dogList);        
+    }
+
     @AuraEnabled
     public static string[] getUserLocation(){
         try {
@@ -137,7 +147,7 @@ public with sharing class TreatmentByDogLWCController {
             }
 
             //get the TxProtocolWrapper by the protocol name, if the key exists, otherwise instanitae a new one
-            TxProtocolWrapper protocolInfo = new TxProtocolWrapper();            
+            TxProtocolWrapper protocolInfo = new TxProtocolWrapper();
             if(sessionProtocolsMap.containsKey(protocol.Protocol_Name__c)){
                 protocolInfo = sessionProtocolsMap.get(protocol.Protocol_Name__c);
             } else {
@@ -249,11 +259,19 @@ public with sharing class TreatmentByDogLWCController {
         @AuraEnabled public Boolean isActiveRemoved {get; set;}
         @AuraEnabled public Boolean isHistorical {get; set;}
 
-        @AuraEnabled public TreatmentWrapper[] activePlanSessionProtocols = new TreatmentWrapper[0];
-        @AuraEnabled public TreatmentWrapper[] historicalActiveSessionProtocols = new TreatmentWrapper[0];
-        @AuraEnabled public TreatmentWrapper[] activePlanRemovedSessionProtocols = new TreatmentWrapper[0];
-        @AuraEnabled public TreatmentWrapper[] historicalRemovedSessionProtocols = new TreatmentWrapper[0];
-        @AuraEnabled public TreatmentWrapper[] historicalSessionProtocols = new TreatmentWrapper[0];
+        @AuraEnabled public TreatmentWrapper[] activePlanSessionProtocols {get; set;}
+        @AuraEnabled public TreatmentWrapper[] historicalActiveSessionProtocols {get; set;}
+        @AuraEnabled public TreatmentWrapper[] activePlanRemovedSessionProtocols {get; set;}
+        @AuraEnabled public TreatmentWrapper[] historicalRemovedSessionProtocols {get; set;}
+        @AuraEnabled public TreatmentWrapper[] historicalSessionProtocols {get; set;}
+
+        public TxProtocolWrapper(){
+            this.activePlanSessionProtocols = new TreatmentWrapper[0];
+            this.historicalActiveSessionProtocols = new TreatmentWrapper[0];
+            this.activePlanRemovedSessionProtocols = new TreatmentWrapper[0];
+            this.historicalRemovedSessionProtocols = new TreatmentWrapper[0];
+            this.historicalSessionProtocols = new TreatmentWrapper[0];
+        }    
     }
 
     public class TreatmentWrapper{

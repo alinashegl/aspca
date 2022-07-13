@@ -7,13 +7,13 @@
  */
 @IsTest
 private class test_cq {
-    @isTest
-    private static void simpleRegression() {
-        Test.startTest();
-        iUnitOfWork uow = cq.App.UoW;
-        cq.App.MockSelectorBinding(Account.getSObjectType(), AccountSelector.class);
-        Test.stopTest();
-    }
+    // @isTest
+    // private static void simpleRegression() {
+    //     Test.startTest();
+    //     iUnitOfWork uow = cq.App.UoW;
+    //     cq.App.MockSelectorBinding(Account.getSObjectType(), AccountSelector.class);
+    //     Test.stopTest();
+    // }
 
     private class AccountSelector extends SObjectSelector {
         public AccountSelector() {
