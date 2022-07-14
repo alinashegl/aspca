@@ -41,5 +41,6 @@ public class OutOfOfficeControllerTest {
         OutOfOfficeController.handleOutOfOfficeSchedule();
         ControllerHelper.getFieldProperties(Contact.FirstName);
         ControllerHelper.Properties cp = new ControllerHelper.Properties('id', 'Test', new List<PicklistEntry>{}, Account.Type.getDescribe());
+    	System.assertNotEquals(cp, null);
     }
 }
