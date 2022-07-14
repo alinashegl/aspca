@@ -230,10 +230,6 @@ public class BehaviorEvaluationSummaryUtil {
     public static void handleUpdate(List<Behavior_Evaluation__c> triggerNew, Map<Id, Behavior_Evaluation__c> triggerOldMap) {
         //List of comment and skip field names per test config
         Map<String, Map<String, Test_Config__mdt[]>> commentFieldsMapMap = getCommentSkipFieldsMap();
-
-        for(String key : commentFieldsMapMap.get('Adult Animal').keySet()){
-            System.debug('Keys: ' + key);
-        }
         
         System.debug('adult commentFieldsMap: ' + commentFieldsMapMap.get('Adult Animal'));
 
@@ -278,7 +274,7 @@ public class BehaviorEvaluationSummaryUtil {
                 if(commentFieldsMap.containsKey(summaryTitle)){
                     for(Test_Config__mdt config : commentFieldsMap.get(summaryTitle)){
                         if (skipDogTests) {
-                            if (summaryTitle.startsWith('Same Sex') || summaryTitle.startsWith('Opposite Sex')) {
+                            if (summaryTitle.startsWith('Same Sex') || summaryTitle.startsWith('Opposite Sex') || summaryTitle.startsWith('Same_Sex') || summaryTitle.startsWith('Opposite_Sex')) {
                                 b.put(config.Test_Skip_Reason_Field__c, 'Skipped due to risk to the helper dog');
                             }
                         }

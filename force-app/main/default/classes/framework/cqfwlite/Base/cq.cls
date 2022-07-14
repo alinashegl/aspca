@@ -34,8 +34,6 @@ public inherited sharing virtual class cq {
         };
     }
 
-    // public iUnitOfWork UoW { get { return new UnitOfWork(uowPrecedence()); } }
-
     // START: SELECTOR BINDINGS
 
     public virtual DomainActionBindingSelector DomainActionBindings() {
