@@ -1,14 +1,7 @@
 public class PlaygroupToDoPdfController {
     private List<Animal__c> animals;
-    // private String location = 'MRC';
 
     public PlaygroupToDoPdfController() {
-        // if (ApexPages.currentPage().getParameters().get('location') != null) {
-        //     location = ApexPages.currentPage().getParameters().get('location');
-        // }
-
-        // String[] locationList = BehaviorUtil.getlocationGroup(location);
-
         animals = [SELECT Id, Name, Animal_Name__c, Shelter_Color_Coding__c, Playgroup_Priority_Level__c, Play_Category__c, Play_Style_Notes__c,
                     Gender__c, Shelter_Location__c, Number_of_Playgroups__c, Does_Not_Walk_on_a_Leash__c, Does_Not_Walk_on_a_Leash_Notes__c,
                     (SELECT Id FROM Medical_Conditions__r WHERE Medical_Condition__c = 'Babesia' AND Date_Diagnosed__c <= TODAY AND (Date_Resolved__c = null OR Date_Resolved__c > TODAY)),
@@ -24,8 +17,4 @@ public class PlaygroupToDoPdfController {
     public List<Animal__c> getAnimals() {
         return animals;
     }
-
-    // public String getLocation() {
-    //     return location;
-    // }
 }

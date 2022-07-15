@@ -4,17 +4,6 @@ private class test_ScheduleBoardAndTrainTask {
     static void testSetup(){
         Animal__c animal1 = TestDataFactory.createAnimalWithName('test1');
         Animal__c animal2 = TestDataFactory.createAnimalWithName('test2');
-        Facility_Outcome__c loc1 = new Facility_Outcome__c(
-            Animal__c = animal1.Id,
-            Facility_or_Outcome__c = 'Facility',
-            Facility_Outcome__c = 'Board and Train'
-        );
-        Facility_Outcome__c loc2 = new Facility_Outcome__c(
-            Animal__c = animal2.Id,
-            Facility_or_Outcome__c = 'Facility',
-            Facility_Outcome__c = 'Board and Train'
-        );
-        insert new Facility_Outcome__c[]{loc1, loc2};
         
         User u = [SELECT Id FROM User Where Profile.Name = 'System Administrator' AND isActive = true LIMIT 1];
         User u2 = [SELECT Id FROM User Where Division = 'MRC' AND isActive = true LIMIT 1];
@@ -34,6 +23,18 @@ private class test_ScheduleBoardAndTrainTask {
         animal1.Behavior_Case_Worker__c = con.Id;
         animal2.Behavior_Case_Worker__c = con.Id;
         update new Animal__c[]{animal1, animal2};
+
+        Facility_Outcome__c loc1 = new Facility_Outcome__c(
+            Animal__c = animal1.Id,
+            Facility_or_Outcome__c = 'Facility',
+            Facility_Outcome__c = 'Board and Train'
+        );
+        Facility_Outcome__c loc2 = new Facility_Outcome__c(
+            Animal__c = animal2.Id,
+            Facility_or_Outcome__c = 'Facility',
+            Facility_Outcome__c = 'Board and Train'
+        );
+        insert new Facility_Outcome__c[]{loc1, loc2};
         
     }
 

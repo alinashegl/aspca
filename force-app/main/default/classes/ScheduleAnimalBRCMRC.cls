@@ -22,10 +22,14 @@ public with sharing class ScheduleAnimalBRCMRC {
     public static void completeBRCMRCTasks(){
         List<Task> taskList = new List<Task>();
         List<Animal__c> animals = getAnimalsForTaskUpdate();
-        List<Task> tasks = [Select Id, Status,Owner.name from Task where recordTypeId =:recordTypeId and WhatId IN : animals];
+        //get the current user's infor in case t.Owner.Name is null
+        String userName = UserInfo.getName();
+        List<Task> tasks = [Select Id, Status,Owner.Name from Task where recordTypeId =:recordTypeId and WhatId IN : animals];
+        
         for(Task t : tasks){
             t.status = 'Completed';
-            t.Completed_By_Text__c  = t.Owner.Name;
+            t.Completed_By_Text__c = t.Owner.Name != null ? t.Owner.Name : userName;
+            t.Completed_By__c = 'Auto-completion Based on Discharge';
             taskList.add(t);
         }
         update taskList;

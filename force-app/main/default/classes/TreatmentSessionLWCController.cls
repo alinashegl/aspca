@@ -74,7 +74,7 @@ public with sharing class TreatmentSessionLWCController {
     */
     @AuraEnabled
     public static Session_Protocol__c getProtocolSkippedInfo(Id protocolId){
-        Session_Protocol__c[] protocols = [SELECT Id, IsSkipped__c, IsRemoved__c, Add_to_Plan__c FROM Session_Protocol__c WHERE Id =: protocolId LIMIT 1];
+        Session_Protocol__c[] protocols = [SELECT Id, IsSkipped__c, IsRemoved__c, Add_to_Plan__c, New_Protocol__c FROM Session_Protocol__c WHERE Id =: protocolId LIMIT 1];
         return !protocols.isEmpty() ? protocols[0] : null;
     }
 
@@ -238,7 +238,7 @@ public with sharing class TreatmentSessionLWCController {
     private static List<List<Session_Protocol__c>> getAssignedSessionProtocolsLists(Id sessionId){
         if(sessionId == null) return null;
         Map<String, Session_Protocol__c[]> protocolsMap = new Map<String, Session_Protocol__c[]>();
-        for(Session_Protocol__c protocol : [SELECT Id, ProtocolId__c, Protocol_Name__c, IsSkipped__c, IsRemoved__c, ProtocolId__r.Protocol_Categories__c FROM Session_Protocol__c WHERE TreatmentSessionId__c =: sessionId ORDER BY ProtocolId__r.Protocol_Categories__c ASC, Protocol_Name__c ASC]){
+        for(Session_Protocol__c protocol : [SELECT Id, ProtocolId__c, Protocol_Name__c, IsSkipped__c, IsRemoved__c, ProtocolId__r.Protocol_Categories__c, New_Protocol__c FROM Session_Protocol__c WHERE TreatmentSessionId__c =: sessionId ORDER BY ProtocolId__r.Protocol_Categories__c ASC, Protocol_Name__c ASC]){
             if(protocolsMap.containsKey(protocol.ProtocolId__r.Protocol_Categories__c)){
                 protocolsMap.get(protocol.ProtocolId__r.Protocol_Categories__c).add(protocol);
             }
@@ -293,7 +293,7 @@ public with sharing class TreatmentSessionLWCController {
 
     private static List<List<Plan_Protocol__c>> getAssignedPlanProtocolsLists(Id planId){
         Map<String, Plan_Protocol__c[]> protocolsMap = new Map<String, Plan_Protocol__c[]>();
-        for(Plan_Protocol__c protocol : [SELECT Id, Protocol__c, Protocol__r.Name, Protocol_Description__c, IsRemoved__c, Protocol__r.Protocol_Categories__c FROM Plan_Protocol__c WHERE Treatment_Plan__c =: planId ORDER BY Protocol__r.Protocol_Categories__c, Protocol__r.Name ASC]){
+        for(Plan_Protocol__c protocol : [SELECT Id, Protocol__c, Protocol__r.Name, Protocol_Description__c, IsRemoved__c, Protocol__r.Protocol_Categories__c, New_Protocol__c FROM Plan_Protocol__c WHERE Treatment_Plan__c =: planId ORDER BY Protocol__r.Protocol_Categories__c, Protocol__r.Name ASC]){
             if(protocolsMap.containsKey(protocol.Protocol__r.Protocol_Categories__c)){
                 protocolsMap.get(protocol.Protocol__r.Protocol_Categories__c).add(protocol);
             }

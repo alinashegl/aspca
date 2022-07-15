@@ -36,12 +36,9 @@ public with sharing class dao_BehaviorEvaluations extends sql_Dao{
         addField(Behavior_Evaluation__c.Puppy_Behavior_on_Leash__c);
         addField(Behavior_Evaluation__c.Puppy_Social_Behavior_P1__c);
         addField(Behavior_Evaluation__c.Puppy_Social_Behavior_P2__c);
-        addField(Behavior_Evaluation__c.Puppy_Play_Tug_P1__c);
-        addField(Behavior_Evaluation__c.Puppy_Skipped_Play_Tug_P1__c);
-        addField(Behavior_Evaluation__c.Puppy_Play_Tug_P2__c);
-        addField(Behavior_Evaluation__c.Puppy_Skipped_Play_Tug_P2__c);
+        addField(Behavior_Evaluation__c.Puppy_Play_Tug_P1__c);        
+        addField(Behavior_Evaluation__c.Puppy_Play_Tug_P2__c);        
         addField(Behavior_Evaluation__c.Puppy_Play_Tag__c);
-        addField(Behavior_Evaluation__c.Puppy_Comments_Play_Tag__c);
         addField(Behavior_Evaluation__c.Puppy_Restraint__c);
         addField(Behavior_Evaluation__c.Puppy_Comments_Restraint__c);
         addField(Behavior_Evaluation__c.Puppy_Skipped_Restraint__c);

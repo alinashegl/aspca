@@ -98,7 +98,6 @@ global with sharing class DaybackRest {
     }
 
     private static Contact[] queryContacts(){
-
         return [
             SELECT Id, Name, ReportsToId, ReportsTo.Name, ReportsTo.User__c, Contact_Type__c, User__c
             FROM Contact 
@@ -120,7 +119,7 @@ global with sharing class DaybackRest {
                 AND Current_Recent_Shelter_Location__c IN :locationgroup
                 AND Active_Animal__c = true
                 ORDER BY Current_Recent_Shelter_Location__c, Animal_Name_Id__c
-            ]){
+        ]){
             ResourceInfo res = new ResourceInfo();
             res.type = animal.Current_Recent_Shelter_Location__c;
             res.resourceName = animal.Animal_Name_Id__c;

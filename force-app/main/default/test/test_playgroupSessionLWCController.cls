@@ -77,22 +77,29 @@ private class test_playgroupSessionLWCController {
         Contact c = testDataFactory.createContact();
         Animal__c newAnimal = TestDataFactory.createAnimalWithName('Doggo1');
 
+        Playgroup_Contact__c[] initialCons = [SELECT Id, Contact__c FROM Playgroup_Contact__c WHERE Playgroup__r.Playgroup_Session__c =: session.Id];
+
         test.startTest();
             String response = playgroupSessionLWCController.addContact(session.Id, c.Id, new Id[]{newAnimal.Id});
         test.stopTest();
 
         System.assertEquals('success', response);
         Playgroup_Contact__c[] cons = [SELECT Id FROM Playgroup_Contact__c WHERE Playgroup__r.Playgroup_Session__c =: session.Id];
-        System.assertEquals(2, cons.size());
+        System.assertEquals(initialCons.size() + 1, cons.size());
     }
 
     @isTest 
     static void removeContact_success(){
         Playgroup_Session__c session = TestDataFactory.createPlaygroupSessionWithAnimals();
         Playgroup_Contact__c[] initialCons = [SELECT Id, Contact__c FROM Playgroup_Contact__c WHERE Playgroup__r.Playgroup_Session__c =: session.Id];
+        Set<Id> conIds = new Set<Id>();
+        for(Playgroup_Contact__c pc : initialCons){
+            conIds.add(pc.Id);
+        }
+        // List<Id> conIdList = new List<Id>(conids);
         Contact c1 = testDataFactory.createContact();
         Contact c2 = testDataFactory.createContact();
-        session.Contact_Ids__c = c1.Id + ',' + c2.Id + ',' + initialCons[0].Contact__c;
+        session.Contact_Ids__c = c1.Id + ',' + c2.Id + ',' + string.join(new List<Id>(conids),',');
         update session;
 
         test.startTest();
@@ -100,8 +107,12 @@ private class test_playgroupSessionLWCController {
         test.stopTest();
 
         System.assertEquals('success', response);
+        System.debug('c1: ' + c1.Id);
+        System.debug('c2: ' + c2.Id);
+        System.debug('initialCons: ' + initialCons);
         Playgroup_Contact__c[] cons = [SELECT Id, Contact__c FROM Playgroup_Contact__c WHERE Playgroup__r.Playgroup_Session__c =: session.Id];
-        System.assert(cons.isEmpty(), 'should have returned no playgroup contacts, instead returned: ' + cons);
+
+        System.assertEquals(initialCons.size() - 1, cons.size(), 'should have returned ' + (initialCons.size() - 1) + ' playgroup contacts, instead returned: ' + cons);
     }
 
     @isTest 
@@ -119,7 +130,7 @@ private class test_playgroupSessionLWCController {
 
         System.assertEquals('success', response);
         Playgroup_Contact__c[] cons = [SELECT Id, Contact__c FROM Playgroup_Contact__c WHERE Playgroup__r.Playgroup_Session__c =: session.Id];
-        System.assert(cons.isEmpty(), 'should have returned no playgroup contacts, instead returned: ' + cons);
+        System.assertEquals(initialCons.size() - 1, cons.size(), 'should have returned ' + (initialCons.size()) + ' playgroup contacts, instead returned: ' + cons);
     }    
 
     @isTest 
@@ -152,13 +163,15 @@ private class test_playgroupSessionLWCController {
     static void getAnimalContacts_noContacts(){
         Playgroup_Session__c session = TestDataFactory.createPlaygroupSessionWithAnimals();
         Playgroup_Contact__c[] initialCons = [SELECT Id, Contact__c, Playgroup__c FROM Playgroup_Contact__c WHERE Playgroup__r.Playgroup_Session__c =: session.Id];
-        playgroupSessionLWCController.removeContact(session.Id, initialCons[0].Contact__c);
+        for(Playgroup_Contact__c pg : initialCons){
+            playgroupSessionLWCController.removeContact(session.Id, pg.Contact__c);
+        }
 
         test.startTest();
         Playgroup_Contact__c[] pgContacts = playgroupSessionLWCController.getAnimalContacts(initialCons[0].Playgroup__c);
         test.stopTest();
 
-        System.assert(pgContacts.isEmpty(), 'Should have returned an emtpylist, instead returned: ' + pgContacts);
+        System.assertEquals(null, pgContacts, 'Should have returned an emtpylist, instead returned: ' + pgContacts);
     }
 
     @isTest 
@@ -177,6 +190,27 @@ private class test_playgroupSessionLWCController {
         System.assert(!sessionInfo.animalPlaygroups.isEmpty(), 'Should have returned some animal playgroups, instead: ' + sessionInfo.animalPlaygroups);
         System.assert(sessionInfo.playgroupSession != null, 'Should have returned some playgroup session info, instead: ' + sessionInfo.playgroupSession);
         System.assert(!sessionInfo.playgroupContacts.isEmpty(), 'Should have returned some playgroup contacts, instead: ' + sessionInfo.playgroupContacts);
+    }
+
+    @isTest 
+    static void getAnimalInfo_hasInfo(){
+        Playgroup_Session__c session = TestDataFactory.createPlaygroupSessionWithAnimals();
+        Contact c1 = testDataFactory.createContact();
+        Contact c2 = testDataFactory.createContact();
+        session.Contact_Ids__c = c1.Id + ',' + c2.Id;
+        update session;
+
+        Animal_Playgroup__c[] aPGList = [SELECT Id FROM Animal_Playgroup__c LIMIT 1];
+        System.assert(!aPGList.isEmpty(), 'Should have returned a list of animal playgroups, but was empty');
+
+        test.startTest();
+        playgroupSessionLWCController.playgroupAnimalInfo info = playgroupSessionLWCController.getAnimalInfo(aPGList[0].Id);
+        test.stopTest();
+
+        System.assertNotEquals(null, info, 'Should have returned playgroup animal info, but was null');
+        System.assertNotEquals(null, info.animal, 'Should have returned an Animal Playgroup record, but was null');
+        System.assertNotEquals(null, info.animalContacts, 'Should have returned animal contacts, but was null');
+
     }
 
 }

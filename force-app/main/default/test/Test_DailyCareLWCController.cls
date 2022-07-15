@@ -65,7 +65,7 @@ private class Test_DailyCareLWCController {
     static void getAnimalDailyCareInfo_NoAnimalDailyCare() {
         test.startTest();
             DailyCareLWCController.AnimalInfo aInfo = DailyCareLWCController.getAnimalDailyCareInfo(null);
-            System.assertEquals(null, aInfo.animalCareId);
+            System.assertEquals(null, aInfo);
         test.stopTest();
     }
 }
