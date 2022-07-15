@@ -125,34 +125,38 @@
                         </td>
                     </tr>
                 </table>
-<div style="page-break-after:always;">
-                <table class="tableSpcae c_table" cellspacing="0">
-                    <tr style="page-break-inside:avoid">
-                        <td class="line" style="border-bottom: 1px solid;">
-                            <table>
-                                <apex:repeat value="{!record.txProtocols}" var="protocolWrapper">
-                                    <tr>
-                                        <td width="20%">
-                                            <b>{!UPPER(protocolWrapper.name )}</b><br/>
-                                        </td>
-                                        <td width="20%">
-                                            {!protocolWrapper.category}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <apex:repeat value="{!protocolWrapper.historicalSessionProtocols}" var="treatment">
-                                            <td>  
-                                                {!treatment.txDateFormatted} ({!treatment.colorText}) <br/>
-                                                {!treatment.score}                                                    
+                <apex:outputPanel rendered="{!record.txProtocols.size!=0}">
+                <div style="page-break-after:always;">
+                    <table class="tableSpcae c_table" cellspacing="0">
+                        <tr style="page-break-inside:avoid">
+                            <td class="line" style="border-bottom: 1px solid;">
+                                <table>
+                                    <apex:repeat value="{!record.txProtocols}" var="protocolWrapper">
+                                        <tr>
+                                            <td width="20%">
+                                                <b>{!UPPER(protocolWrapper.name )}</b><br/>
                                             </td>
-                                        </apex:repeat>
-                                    </tr>
-                                </apex:repeat>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
+                                            <td width="20%">
+                                                {!protocolWrapper.category}
+                                            </td>
+                                        </tr>
+                                        <apex:outputPanel rendered="{!protocolWrapper.historicalSessionProtocols.size!=0}">
+                                            <tr>
+                                                <apex:repeat value="{!protocolWrapper.historicalSessionProtocols}" var="treatment">
+                                                    <td>  
+                                                        {!treatment.txDateFormatted} ({!treatment.colorText}) <br/>
+                                                        {!treatment.score}                                                    
+                                                    </td>
+                                                </apex:repeat>
+                                            </tr>
+                                        </apex:outputPanel>
+                                    </apex:repeat>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
+                </apex:outputPanel>
             </apex:repeat>
         </div>
     </body>
