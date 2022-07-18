@@ -64,7 +64,7 @@ public with sharing class ScheduleAnimalPlaygroups {
                 IsReminderSet = true,
                 Status = 'Not Started',
                 WhoId = animal.Behavior_Case_Worker__c != null ? animal.Behavior_Case_Worker__c : genericCon.Id,
-                OwnerId = genericCon.User__c,
+                OwnerId = genericCon == null ? null : genericCon.User__c,
                 Subject = 'Playgroup',
                 Species__c = 'Dog',
                 Auto_Scheduled_Task__c = true

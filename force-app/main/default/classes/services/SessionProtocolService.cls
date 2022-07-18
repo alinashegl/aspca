@@ -4,7 +4,7 @@
  *
  * @author barne
  * @version 1.0.0
- * Tests: test_InvocableActionHandler, test_SessionProtocolDomain,test_SessionProtocolService
+ * Tests: test_SessionProtocolDomain, test_SessionProtocolService
  */
 
 public with sharing class SessionProtocolService {
