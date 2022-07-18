@@ -97,8 +97,8 @@ private class test_SoqlHelper {
         System.assertEquals(padResults2, '6');
         System.assertEquals(padResults3, '');
 
-        System.assertEquals(StringHelper.Contains(listConversionResults, 'Peter'), true);
-        System.assertEquals(StringHelper.Contains(listConversionResults, ','), true);
+        System.assertEquals(listConversionResults.contains('Peter'), true);
+        System.assertEquals(listConversionResults.contains(','), true);
 
         System.assertEquals(formatResults1 == NULL_VALUE, false);
         System.assertEquals(formatResults2 == NULL_VALUE, false);

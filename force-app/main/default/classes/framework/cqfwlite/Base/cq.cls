@@ -34,13 +34,13 @@ public inherited sharing virtual class cq {
         };
     }
 
-    public iUnitOfWork UoW { get { return new UnitOfWork(uowPrecedence()); } }
+    // public iUnitOfWork UoW { get { return new UnitOfWork(uowPrecedence()); } }
 
     // START: SELECTOR BINDINGS
 
-    public virtual DomainActionBindingSelector DomainActionBindings() {
-        return (DomainActionBindingSelector) bindingFor(Domain_Action_Binding__mdt.SObjectType, DomainActionBindingSelector.class);
-    }
+    // public virtual DomainActionBindingSelector DomainActionBindings() {
+    //     return (DomainActionBindingSelector) bindingFor(Domain_Action_Binding__mdt.SObjectType, DomainActionBindingSelector.class);
+    // }
 
     public virtual BehaviorEvaluationDomain BehaviorEvaluationDomainBindings() {
         return (BehaviorEvaluationDomain) bindingFor(Behavior_Evaluation__c.SObjectType, BehaviorEvaluationDomain.class);

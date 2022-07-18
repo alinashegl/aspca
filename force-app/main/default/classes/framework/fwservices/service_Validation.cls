@@ -65,6 +65,7 @@ public with sharing class service_Validation
                         }
                 }
             } catch(Exception e) {
+                System.debug('error: ' + e.getStackTraceString());
                 response.put('errors', generateErrors(500, 'Internal Server Error', new List<String>{e.getMessage()}));
             }
       }

@@ -4,7 +4,7 @@
  *
  * @author barne
  * @version 1.0.0
- * Tests: test_InvocableActionHandler, Test_SessionProtocolDomain
+ * Tests: test_SessionProtocolDomain, Test_SessionProtocolDomain
  */
 
 public with sharing class SessionProtocolDomain extends DomainActionBase {
