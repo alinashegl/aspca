@@ -31,4 +31,7 @@ public with sharing class ServiceResponse {
         Status = stat;
         Data = dt;
     }
+
+    public class CriteriaException extends Exception {}
+    public class SelectorBindingException extends Exception {}
 }
