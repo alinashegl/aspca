@@ -159,14 +159,15 @@
         </div>
         <!-- 2. Behavior Progress, section 1   -->
         
-            <apex:repeat value="{!anmwrapper.obMap}" var="ob">
+            <apex:repeat value="{!anmwrapper.obWrapperList}" var="ob">
+			<apex:outputPanel rendered="{!ob.observationList.size!=0}">
                 <div class="section" style="border:1px solid; page-break-inside: avoid;page-break-after: always;">
             <table>
                 <thead>
                     <tr>
                         <th colspan="7">
                             <center  style="border-bottom:1px solid;">
-                                <h3 style="font-weight:900">{!ob}</h3>
+                                <h3 style="font-weight:900">{!ob.observationName}</h3>
                             </center>
                         </th>
                     </tr>
@@ -179,7 +180,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <apex:repeat value="{!anmwrapper.obMap[ob]}" var="obs">
+                    <apex:repeat value="{!ob.observationList}" var="obs">
                         <tr>
                             <td class="topline" style="padding-top: .5em;padding-bottom: .5em;">
                                 <apex:outputText value="{0, date, MM/dd/yy}">
@@ -195,7 +196,8 @@
                 </tbody>
             </table>
                 </div>
-            </apex:repeat>
+                </apex:outputPanel>
+                </apex:repeat>
         
         <apex:outputPanel rendered="{!anmwrapper.animalD.Behavior_Foster_Notes__r.size!=0}">
             <div class="section" style="border:1px solid; page-break-inside: avoid;page-break-after: always;">
@@ -506,6 +508,7 @@
         </div>
         </apex:outputPanel>
             <!--3. Training & Behavior Modification Behavior Mod-->
+        <apex:outputPanel rendered="{!aTreatmentSession.size!=0}">
         <div class="section" style="page-break-inside:avoid;page-break-inside:avoid; page-break-after: always; padding-top: .5em; border:1px solid;">
             <table class="c_table" width="100%">
                 <thead>
@@ -558,7 +561,7 @@
                 </tbody>
             </table>
         </div>
-        
+        </apex:outputPanel>
         <!-- Dog Behavior Grading Key: -->
         <div class="section" style="">
             <table>
