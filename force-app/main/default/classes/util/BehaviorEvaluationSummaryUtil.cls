@@ -278,7 +278,7 @@ public class BehaviorEvaluationSummaryUtil {
                 if(commentFieldsMap.containsKey(summaryTitle)){
                     for(Test_Config__mdt config : commentFieldsMap.get(summaryTitle)){
                         if (skipDogTests) {
-                            if (summaryTitle.startsWith('Same Sex') || summaryTitle.startsWith('Opposite Sex')) {
+                            if (summaryTitle.startsWith('Same Sex') || summaryTitle.startsWith('Opposite Sex') || summaryTitle.startsWith('Same_Sex') || summaryTitle.startsWith('Opposite_Sex')) {
                                 b.put(config.Test_Skip_Reason_Field__c, 'Skipped due to risk to the helper dog');
                             }
                         }
