@@ -58,8 +58,7 @@ public with sharing class SessionProtocolService {
         Map<String,Map<String,String>> resultMap = new Map<String, Map<String, String>>();
         String success = 'SUCCESS';
         if (treatmentSession != null) {
-            SessionProtocolSelector selector = new SessionProtocolSelector();
-            List<Session_Protocol__c> lineItems = selector.GetByQuote(treatmentSession.Id);
+            List<Session_Protocol__c> lineItems = getByTreatmentSessionId(treatmentSession.Id);
             System.debug(lineItems);
             ProtocolSelector protocolSelector = new ProtocolSelector();
 
@@ -305,5 +304,35 @@ public with sharing class SessionProtocolService {
         }
 
         return protocolIdToPlanProtocolMap;
+    }
+
+    private static List<Session_Protocol__c> getByTreatmentSessionId(Id treatmentSessionId){
+        return [
+            SELECT Id, 
+            Bundle_Entry__c,
+            CreatedById,
+            CreatedDate,
+            LastModifiedById,
+            LastModifiedDate,
+            Overall_Score__c,
+            Novel_Person_Notes__c,
+            Novel_Person__c,
+            Protocol_Notes__c,
+            Protocol_Box_Link__c,
+            IsSkipped__c,
+            IsRemoved__c,
+            IsDeleted ,
+            ProtocolId__c ,
+            TreatmentSessionId__c ,
+            Add_to_Plan__c,
+            Session_Protocol__c.Fear_Best__c,
+            Fear_Worst__c,
+            Aggressive_Worst__c,
+            Arousal_Best__c,
+            Arousal_Worst__c,
+            Social_Best__c
+            FROM Session_Protocol__c
+            WHERE TreatmentSessionId__c =:treatmentSessionId
+        ];
     }
 }
