@@ -66,9 +66,6 @@ private class test_BehaviorEvaluationTrigger {
             FROM Behavior_Evaluation__c 
             WHERE Id = :evaluations[0].Id LIMIT 1
         ];
-        
-        List<EntityHistory__c> historyResult = LogHistory.getBehaviorEvaluationHistory(evaluations[0].id, 'Grade Change Reason', '(CreatedDate > '+String.valueOf(System.today())+'T00:00:00Z AND CreatedDate < '+String.valueOf(System.today())+'T23:59:59Z)', 'CreatedDate', 'DESC');
-        List<EntityHistory__c> historyResult2 = LogHistory.getAnimalHistory(evaluations[0].Animal__c, 'Grade Change Reason', '(CreatedDate > '+String.valueOf(System.today())+'T00:00:00Z AND CreatedDate < '+String.valueOf(System.today())+'T23:59:59Z)', 'CreatedDate', 'DESC');
                 
         System.assertEquals('Skipped due to risk to the helper dog', afterUpdate.Skipped_OSD_P1__c);
         System.assertEquals('Skipped due to risk to the helper dog', afterUpdate.Skipped_OSD_P2__c);

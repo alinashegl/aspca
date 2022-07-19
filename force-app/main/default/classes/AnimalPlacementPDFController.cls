@@ -25,6 +25,7 @@ public class AnimalPlacementPDFController {
                            (SELECT Id, Contact_Date__c, Foster_Notes__c, Animal__c, Name FROM Placement_Notes__r)
 						from Animal__C where ID = : animalId];
                 List<Observation__c> observations = [SELECT ID, NAME, Observation_Date__c, Observation_Notes__c, Observation_Reported_By__c,Behavior_Staff_Initials__c, Behavior_Response__c, Observation_Type__c, Animal__r.Behavior_Concerns__c from Observation__c  where animal__c = : animalId and Observation_Type__c != null order by Observation_Type__c];
+                
                 Map<String, List<Observation__c>> obMap = new Map<String, List<Observation__c>>{
                     'Happy Tail' => new List<Observation__c>(),
                     'Concern' => new List<Observation__c>(),
@@ -40,7 +41,17 @@ public class AnimalPlacementPDFController {
                     obList.add(observation);
                     obMap.put(observation.Observation_Type__c, obList);
                 }
-                anmwrapper.obMap = obMap;
+                
+                List<obWrapper> obWrapperList = new List<obWrapper>();
+                
+                for(String key : obMap.keySet()){
+                    obWrapper obw = new obWrapper();
+					obw.observationName = key;
+                    obw.observationList = obMap.get(key);
+                    obWrapperList.add(obw);
+                }
+                
+                anmwrapper.obWrapperList = obWrapperList;
             }
             return anmwrapper;
         }
@@ -49,7 +60,12 @@ public class AnimalPlacementPDFController {
     
     public class AnimalWrapper{
         public Animal__c animalD {get; set;}
-        public Map<String, List<Observation__c>> obMap {get; set;}
+        public List<obWrapper> obWrapperList {get; set;}
+    }
+    
+    public class obWrapper {
+        public String observationName {get; set;}
+        public List<Observation__c> observationList {get; set;}
     }
     
     public List<animalPlaySummary>  aPlayGroups {

@@ -230,10 +230,6 @@ public class BehaviorEvaluationSummaryUtil {
     public static void handleUpdate(List<Behavior_Evaluation__c> triggerNew, Map<Id, Behavior_Evaluation__c> triggerOldMap) {
         //List of comment and skip field names per test config
         Map<String, Map<String, Test_Config__mdt[]>> commentFieldsMapMap = getCommentSkipFieldsMap();
-
-        for(String key : commentFieldsMapMap.get('Adult Animal').keySet()){
-            System.debug('Keys: ' + key);
-        }
         
         System.debug('adult commentFieldsMap: ' + commentFieldsMapMap.get('Adult Animal'));
 
