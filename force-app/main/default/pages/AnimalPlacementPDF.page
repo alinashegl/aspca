@@ -508,6 +508,7 @@
         </div>
         </apex:outputPanel>
             <!--3. Training & Behavior Modification Behavior Mod-->
+        <apex:outputPanel rendered="{!aTreatmentSession.size!=0}">
         <div class="section" style="page-break-inside:avoid;page-break-inside:avoid; page-break-after: always; padding-top: .5em; border:1px solid;">
             <table class="c_table" width="100%">
                 <thead>
@@ -560,7 +561,7 @@
                 </tbody>
             </table>
         </div>
-        
+        </apex:outputPanel>
         <!-- Dog Behavior Grading Key: -->
         <div class="section" style="">
             <table>
