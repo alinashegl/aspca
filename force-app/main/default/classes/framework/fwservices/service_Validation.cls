@@ -1,7 +1,8 @@
 public with sharing class service_Validation
 {
     public static void proccessRequest(Map<String, Object> config, Map<String, Object> response) {
-            response.put('status', AppConfig.STATUS.get('error'));
+            // response.put('status', AppConfig.STATUS.get('error'));
+            response.put('status', 'error');
             
             try {
                 List<Map<String, String>> validationErrors = new List<Map<String, String>>();
@@ -59,7 +60,8 @@ public with sharing class service_Validation
                             }
 
                             response.put('data', data);
-                            response.put('status', AppConfig.STATUS.get('success'));    
+                            // response.put('status', AppConfig.STATUS.get('success'));
+                            response.put('status', 'success');
                         } else  {
                             response.put('errors', generateErrors(500, 'Internal Server Error', new List<String>(result.Errors)));
                         }
