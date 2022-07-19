@@ -6,8 +6,6 @@ public with sharing class AnimalTriggerHandler {
         if (!Trigger.isExecuting) { return; }
         Trigger_Config__c config = Trigger_Config__c.getInstance();
         if (config != null  && config.Animal_Trigger_Enabled__c == false) { return; }
-        //System.debug('#### Running Animal Trigger');
-        //trigger_Controller.getInstance().process(Animal__c.SObjectType);
         if (Trigger.isUpdate && Trigger.isBefore ) {
             beforeUpdateHandler();
         }
