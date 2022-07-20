@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>no_of_weeks_in_treatment__c</fullName>
+    <externalId>false</externalId>
+    <formula>CEILING(IF( ISNULL(Treatment_Start_Date__c),0 , IF(ISNULL(Final_Outcome_Date__c), ((TODAY() - Treatment_Start_Date__c )+1) / 7, ((Final_Outcome_Date__c - Treatment_Start_Date__c )+1) / 7) ))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label># of Weeks in Treatment</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>
