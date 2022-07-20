@@ -29,13 +29,9 @@ public with sharing  class service_BehaviorEvaluation extends service_Base{
     }
 
     public void updateComments(service_Request request, service_Response response) {
-        //System.debug('#### Executing updateComments service!');
-        //System.debug('#### Service Request =====> ' + request);
-        //System.debug('#### Accepted Service Response ====> ' + response);
         String recordId = (String) request.Parameters.get('recordId');
         dao_BehaviorEvaluations daoBehaviorEvaluations = new dao_BehaviorEvaluations();
         Behavior_Evaluation__c evaluation = daoBehaviorEvaluations.findOne(recordId);
-        //System.debug('@@@ Selected Evaluation ===> ' + evaluation );
         String apiName = (String) request.Parameters.get('apiName');
         String values = (String) request.Parameters.get('values');
         Map<String, String> fieldValueMap = new Map<String, String>{
@@ -43,7 +39,6 @@ public with sharing  class service_BehaviorEvaluation extends service_Base{
         };
         Map<String, Schema.SObjectField> behaviorEvalFieldMap = SObjectFieldMapHelper.fieldMap('Behavior_Evaluation__c');
         for (String key : fieldValueMap.keySet()) {
-            //System.debug('@@## Current Key ===> ' +  key);
             if (behaviorEvalFieldMap.containsKey(key)) {
                 Schema.SObjectField field = behaviorEvalFieldMap.get(key);
                 evaluation.put(field, fieldValueMap.get(key));
@@ -53,27 +48,13 @@ public with sharing  class service_BehaviorEvaluation extends service_Base{
         List<Behavior_Evaluation__c> behaviorEvaluations = new List<Behavior_Evaluation__c>();
         behaviorEvaluations.add(evaluation);
         update behaviorEvaluations;
-        /*TriggerRequest beforeUpdateRequest = new TriggerRequest(Behavior_Evaluation__c.getSObjectType())
-                .SetBefore(true)
-                .SetUpdate(true)
-                .SetNewRecords(behaviorEvaluations)
-                .SetOldRecords(new List<Behavior_Evaluation__c>());
-        ServiceRequest req = new ServiceRequest().withParams('TriggerRequest', beforeUpdateRequest);
-        BehaviorEvaluationDomain evaluationDomain = new BehaviorEvaluationDomain();
-        ServiceResponse rep = evaluationDomain.Execute(req);
-        rep.Data = beforeUpdateRequest.newRecords;*/
         response.Parameters.put('item' , behaviorEvaluations);
     }
 
     public void updatePicklist(service_Request request, service_Response response) {
-        //System.debug('#### Executing Update Eval!');
-        //System.debug('#### Service Request =====> ' + request);
-        //System.debug('#### Accepted Service Response ====> ' + response);
-
         String recordId = (String) request.Parameters.get('recordId');
         dao_BehaviorEvaluations daoBehaviorEvaluations = new dao_BehaviorEvaluations();
         Behavior_Evaluation__c evaluation = daoBehaviorEvaluations.findOne(recordId);
-        //System.debug('@@@ Selected Evaluation ===> ' + evaluation );
         String message = '';
         String apiName = (String) request.Parameters.get('apiName');
         List<String> values = (List<String>) request.Parameters.get('values');
@@ -95,7 +76,6 @@ public with sharing  class service_BehaviorEvaluation extends service_Base{
                     List<String> nEntries = new List<String>();
                     List<String> rEntries = new List<String>();
                     Map<String, PicklistEntry> entriesByStrings = SObjectFieldMapHelper.entriesByStrings(field.getDescribe());
-                    //System.debug('@@@KEY SET => ' + entriesByStrings.keySet());
                     List<String> mStrings = fieldValueMap.get(key);
                     System.debug('@@@MSTRINGS ====> ' + mStrings);
                     for (String str : mStrings) {
@@ -116,7 +96,6 @@ public with sharing  class service_BehaviorEvaluation extends service_Base{
                         message = 'FIELD IS EMPTY - UPDATED FIELD';
                     }
 
-                    //String j = String.join(values, ';');
                     if (evaluation.get(field) == null) {
                         evaluation.put(field, String.join(nEntries, ';'));
                     }else {
@@ -205,15 +184,6 @@ public with sharing  class service_BehaviorEvaluation extends service_Base{
         evaluations.add(eval);
         update evaluations;
 
-        /*TriggerRequest beforeUpdateRequest = new TriggerRequest(Behavior_Evaluation__c.getSObjectType())
-                .SetBefore(true)
-                .SetUpdate(true)
-                .SetNewRecords(evaluations)
-                .SetOldRecords(new List<Behavior_Evaluation__c>());
-        ServiceRequest req = new ServiceRequest().withParams('TriggerRequest', beforeUpdateRequest);
-        BehaviorEvaluationDomain domain = new BehaviorEvaluationDomain();
-        ServiceResponse resp = domain.Execute(req);
-        resp.Data = beforeUpdateRequest.newRecords;*/
         response.Parameters.put('item', val);
     }
 

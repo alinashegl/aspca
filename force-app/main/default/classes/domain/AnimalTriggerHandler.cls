@@ -6,8 +6,6 @@ public with sharing class AnimalTriggerHandler {
         if (!Trigger.isExecuting) { return; }
         Trigger_Config__c config = Trigger_Config__c.getInstance();
         if (config != null  && config.Animal_Trigger_Enabled__c == false) { return; }
-        //System.debug('#### Running Animal Trigger');
-        //trigger_Controller.getInstance().process(Animal__c.SObjectType);
         if (Trigger.isUpdate && Trigger.isBefore ) {
             beforeUpdateHandler();
         }
@@ -172,20 +170,43 @@ public with sharing class AnimalTriggerHandler {
 
     @testVisible
     private static void createBrcMrcTasks(Animal__c[] animals){
-        //make sure we're not creating duplicate tasks
-        Map<Id, Animal__c> queriedAnimals = new Map<Id, Animal__c>([SELECT Id, (SELECT Id, ActivityDate, Record_Type__c FROM Activities__r WHERE Record_Type__c =: AutoScheduleTasksUtil.MRC_BRC_FOLLOW_UP_TASK_RECORD_TYPE_NAME ORDER BY ActivityDate DESC LIMIT 1) FROM Animal__c WHERE Id IN: animals]);
-        Task[] toInsert = new Task[0];
-        for(Animal__c anim : animals){
-            if(!queriedAnimals.get(anim.Id).Activities__r.isEmpty()){
-                if(queriedAnimals.get(anim.Id).Activities__r[0].ActivityDate < date.today()){
+        try {
+            //make sure we're not creating duplicate tasks
+            System.debug('**createBrcMrcTasks');
+            Map<Id, Animal__c> queriedAnimals = new Map<Id, Animal__c>([
+                SELECT Id, (
+                    SELECT Id, ActivityDate, Record_Type__c 
+                    FROM Activities__r 
+                    WHERE Record_Type__c =: AutoScheduleTasksUtil.MRC_BRC_FOLLOW_UP_TASK_RECORD_TYPE_NAME 
+                    ORDER BY ActivityDate DESC 
+                    LIMIT 1
+                ) 
+                FROM Animal__c WHERE Id IN: animals]
+            );
+            Task[] toInsert = new Task[0];
+            for(Animal__c anim : animals){
+                if(!queriedAnimals.get(anim.Id).Activities__r.isEmpty()){
+                    if(queriedAnimals.get(anim.Id).Activities__r[0].ActivityDate < date.today()){
+                        toInsert.add(ScheduleAnimalBRCMRC.prepTask(anim, date.today().addDays(14), false));
+                    }
+                }
+                else {
                     toInsert.add(ScheduleAnimalBRCMRC.prepTask(anim, date.today().addDays(14), false));
                 }
             }
-            else {
-                toInsert.add(ScheduleAnimalBRCMRC.prepTask(anim, date.today().addDays(14), false));
-            }
+            insert toInsert;
+        } catch (Exception e) {
+            Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+            mail.setToAddresses(new String[]{'steven.workman@aspca.com'});
+            mail.setSenderDisplayName('Animal Trigger Error:');
+            mail.setSubject('Animal Trigger Error');
+            mail.setHtmlBody(
+                'Error with createBrcMrcTasks: ' + e.getMessage() +' </br>'+
+                'StackTrace: ' + e.getStackTraceString() + '</br>' + 
+                'userName: ' + userInfo.getName()
+            );
+            Messaging.sendEmail(new Messaging.SingleEmailMessage[] { mail });
         }
-        insert toInsert;
     }
 
     private static void reviewForMRCDailyCare(Animal__c[] animals, Map<Id, Animal__c> oldAnimals){
