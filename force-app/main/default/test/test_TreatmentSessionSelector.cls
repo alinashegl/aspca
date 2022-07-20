@@ -1,18 +1,8 @@
-/**
- * 
- * Class Description
- *
- * @author barne
- * @version 1.0.0
- */
-
-@IsTest
-private class test_InvocableActionHandler {
+@isTest 
+private class test_TreatmentSessionSelector {
     @IsTest
     static void validateSessionCoverage() {
         InvocableActionHandler.InvocableActionRequest request = new InvocableActionHandler.InvocableActionRequest();
-
-
 
         List<Session_Protocol__c> sessionProtocols = TestDataFactory.createSessionProtocols();
         Treatment_Session__c session = new Treatment_Session__c();
@@ -55,22 +45,22 @@ private class test_InvocableActionHandler {
 
         Test.stopTest();
     }
-    @IsTest
-    static void validateAssignPlanActionWithNoPlan() {
-        Behavior_Evaluation__c evaluation = TestDataFactory.createAdultBehaviorEvaluation(false);
+    // @IsTest
+    // static void validateAssignPlanActionWithNoPlan() {
+    //     Behavior_Evaluation__c evaluation = TestDataFactory.createAdultBehaviorEvaluation(false);
 
 
-        InvocableActionHandler.InvocableActionRequest actionRequest = new InvocableActionHandler.InvocableActionRequest();
-        actionRequest.recordId = evaluation.Id;
-        actionRequest.targetSObject = 'Treatment_Plan__c';
-        actionRequest.name = 'assignPlanFromEval';
-        actionRequest.action = 'assignPlan';
-        InvocableActionHandler.InvocableActionResponse actionResponse = InvocableActionHandler.process(actionRequest);
-        Test.startTest();
-        System.assertEquals('NO PLAN FOUND', actionResponse.ResponseValue);
-        System.debug(actionResponse);
-        Test.stopTest();
-    }
+    //     InvocableActionHandler.InvocableActionRequest actionRequest = new InvocableActionHandler.InvocableActionRequest();
+    //     actionRequest.recordId = evaluation.Id;
+    //     actionRequest.targetSObject = 'Treatment_Plan__c';
+    //     actionRequest.name = 'assignPlanFromEval';
+    //     actionRequest.action = 'assignPlan';
+    //     InvocableActionHandler.InvocableActionResponse actionResponse = InvocableActionHandler.process(actionRequest);
+    //     Test.startTest();
+    //     System.assertEquals('NO PLAN FOUND', actionResponse.ResponseValue);
+    //     System.debug(actionResponse);
+    //     Test.stopTest();
+    // }
     @IsTest
     static void validateAssignPlanActionWithPlan() {
         Behavior_Evaluation__c evaluation = TestDataFactory.createAdultBehaviorEvaluation(false);

@@ -13,6 +13,7 @@ public with sharing class service_Controller
         catch (Exception ex)
         {
             response.Errors.add(ex.getMessage());
+            System.debug('stacktrace: ' + ex.getStackTraceString());
             System.debug('@@@ ERROR: ' + ex);
         }
         
