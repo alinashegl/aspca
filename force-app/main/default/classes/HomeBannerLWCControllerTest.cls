@@ -6,4 +6,11 @@ public class HomeBannerLWCControllerTest {
         HomeBannerLWCController.ButtonsToDisplay bd = HomeBannerLWCController.getButtonsInfo();
         System.assertNotEquals(bd, null);
     }
+
+    @isTest 
+    static void getToDoListVisibility(){
+        HomeBannerLWCController.TodoListVisibility vis = HomeBannerLWCController.getToDoListVisibility();
+
+        System.assertEquals(true, vis.mrcTodoList);
+    }
 }

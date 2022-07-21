@@ -102,9 +102,10 @@ public with sharing class ProtocolDomain extends DomainActionBase {
         }
         else if(!setActiveProtocolIDs.isEmpty()){
             List<Bundle_Entry__c> lstBundleEntry = new List<Bundle_Entry__c>();
-                    Treatment_Bundle__c treatmentBundle = [SELECT id, Name FROM Treatment_Bundle__c WHERE Name ='Master' LIMIT 1];
-                    if(treatmentBundle!=null){
-                       // List<Bundle_Entry__c> lstBundleEntry = new List<Bundle_Entry__c>();
+                    Treatment_Bundle__c[] treatmentBundles = [SELECT id, Name FROM Treatment_Bundle__c WHERE Name ='Master' LIMIT 1];
+
+                    if(treatmentBundles!=null && !treatmentBundles.isEmpty()){
+                        Treatment_Bundle__c treatmentBundle = treatmentBundles[0];
                         for(ID pID: setActiveProtocolIDs){
                             Bundle_Entry__c obj = new Bundle_Entry__c();
                             obj.Protocol__c= pID;

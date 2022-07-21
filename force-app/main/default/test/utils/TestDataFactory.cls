@@ -737,7 +737,7 @@ public without sharing class TestDataFactory {
 
     public static Treatment_Bundle__c createMasterBundle() {
         Treatment_Bundle__c bundle = new Treatment_Bundle__c();
-        bundle.Name = 'Test';
+        bundle.Name = 'Master';
         bundle.IsActive__c = true;
         bundle.IsMaster__c = true;
         insert bundle;
