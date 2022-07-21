@@ -156,23 +156,26 @@ public class BehaviorEvaluationMatrixController {
                                         WHERE Test_Skip_Reason_Field__c = :fieldName AND IsDogOnly__c = true LIMIT 1];
                     }
                 }
-                for (Test_Config__mdt testMetadata : testConfigSkip){
-                // for (Test_Config__mdt testMetadata : [SELECT Test_Skip_Reason_Field__c,MasterLabel,IsPuppy__c,Test_Name__c,Overall_Test_Display_Name__c FROM Test_Config__mdt
-                //                                       WHERE Test_Skip_Reason_Field__c = :fieldName AND IsPuppy__c = :evalType LIMIT 1 ]){
-                    String testName = '';
-                    if (testMetadata.Overall_Test_Display_Name__c != null){
-                        testName = testMetadata.Overall_Test_Display_Name__c;
+                
+                if(testConfigSkip != null){
+                    for (Test_Config__mdt testMetadata : testConfigSkip){
+                        // for (Test_Config__mdt testMetadata : [SELECT Test_Skip_Reason_Field__c,MasterLabel,IsPuppy__c,Test_Name__c,Overall_Test_Display_Name__c FROM Test_Config__mdt
+                        //                                       WHERE Test_Skip_Reason_Field__c = :fieldName AND IsPuppy__c = :evalType LIMIT 1 ]){
+                        String testName = '';
+                        if (testMetadata.Overall_Test_Display_Name__c != null){
+                            testName = testMetadata.Overall_Test_Display_Name__c;
+                        }
+                        else{
+                            testName = testMetadata.Test_Name__c;
+                        }
+                        
+                        if(behaviors.contains('not necessary') || behaviors.contains('appropriate helper dog')){
+                            testAndDisplayValues.put(testName, new List<String>{'---','---','---','---'});
+                        } else{
+                            testAndDisplayValues.put(testName, new List<String>{'❌','❌','❌','❌'});
+                        }
+                        
                     }
-                    else{
-                        testName = testMetadata.Test_Name__c;
-                    }
-
-                    if(behaviors.contains('not necessary') || behaviors.contains('appropriate helper dog')){
-                        testAndDisplayValues.put(testName, new List<String>{'---','---','---','---'});
-                    } else{
-                        testAndDisplayValues.put(testName, new List<String>{'❌','❌','❌','❌'});
-                    }
-                    
                 }
                 //system.debug('WITHIN SKIPPED IF: ' + testAndDisplayValues);
             }

@@ -82,8 +82,9 @@ public class BehaviorEvaluationSummaryUtil {
         ListUtils.sort(testConfig, new SObjectStringFieldComparator('Test_Display_Order__c'), COMPARE_NUMBERS);
         
         for (Test_Config__mdt t : testConfig) {
-            String testName = t.Parent_Test_Api_Name__c != null ? t.Parent_Test_Api_Name__c : 
-                t.Overall_Test_Display_Name__c != null ? t.Overall_Test_Display_Name__c : t.Test_Name__c;
+            String testName = t.Overall_Test_Display_Name__c != null ? t.Overall_Test_Display_Name__c : t.Test_Name__c;
+            // String testName = t.Parent_Test_Api_Name__c != null ? t.Parent_Test_Api_Name__c : 
+            //     t.Overall_Test_Display_Name__c != null ? t.Overall_Test_Display_Name__c : t.Test_Name__c;
             if (testName != null) {
                 testName = testName.replace(' P1', '').replace(' P2', '').replace(' P3', '');
                 if (t.IsPuppy__c) {
@@ -148,8 +149,8 @@ public class BehaviorEvaluationSummaryUtil {
         for (Test_Config__mdt t : testConfig) {
             String fullTestName = t.Overall_Test_Display_Name__c != null ? t.Overall_Test_Display_Name__c : t.Test_Name__c;
             if (fullTestName != null) {
-                // String testName = fullTestName.replace(' P1', '').replace(' P2', '').replace(' P3', '');
-                String testName = t.Parent_Test_Api_Name__c != null ? t.Parent_Test_Api_Name__c : fullTestName.replace(' P1', '').replace(' P2', '').replace(' P3', '');
+                String testName = fullTestName.replace(' P1', '').replace(' P2', '').replace(' P3', '');
+                // String testName = t.Parent_Test_Api_Name__c != null ? t.Parent_Test_Api_Name__c : fullTestName.replace(' P1', '').replace(' P2', '').replace(' P3', '');
                 
                 if (t.IsPuppy__c && !testNames.contains('puppy-'+fullTestName)) {
                     testNames.add('puppy-'+fullTestName);

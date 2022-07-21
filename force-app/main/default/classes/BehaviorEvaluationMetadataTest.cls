@@ -78,7 +78,7 @@ private class BehaviorEvaluationMetadataTest{
         List<List<String>> finalList = new List<List<String>>();
         testResults.add('Behavior on Leash: test test test');
         testResults.add('Behavior on Leash: Skipped to safeguard welfare of the animal');
-        testResults.add('Social Behavior (Loose In Room): Skipped not necessary');
+        testResults.add('Social Behavior P1: Skipped not necessary');
         finalList.add(testResults);
         
         system.assertEquals(finalList, BehaviorEvalMetadataCollection.getListOfStrings(flowInputs));
@@ -88,5 +88,4 @@ private class BehaviorEvaluationMetadataTest{
         
         
     }
-    
 }
