@@ -43,6 +43,11 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>no_of_weeks_in_treatment__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>Animal_Owner__c</field>
             <table>Animal__c</table>
         </columns>
@@ -743,11 +748,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Number_of_Weeks_in_Treatment__c</field>
-            <table>Animal__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Number_of_Treatments__c</field>
             <table>Animal__c</table>
         </columns>
@@ -1243,11 +1243,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Transition_Animal__c</field>
-            <table>Animal__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>FM_Legacy_Status__c</field>
             <table>Animal__c</table>
         </columns>
@@ -1309,6 +1304,11 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Hold_Status_ARC_CARE__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Walking_Notes__c</field>
             <table>Animal__c</table>
         </columns>
         <masterLabel>Animals</masterLabel>
