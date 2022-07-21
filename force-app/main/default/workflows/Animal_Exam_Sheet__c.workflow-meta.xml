@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Play_Pause_Notification</fullName>
+        <ccEmails>PlayPauseNotifications@aspca.org</ccEmails>
+        <ccEmails>GPDailyBehaviorReport@aspca.org</ccEmails>
+        <ccEmails>CRCBehaviorSummer@aspca.org</ccEmails>
+        <description>Play-Pause Notification</description>
+        <protected>false</protected>
+        <senderAddress>crc.medical@aspca.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/Play_Pause_Notification</template>
+    </alerts>
+    <alerts>
+        <fullName>Play_Pause_Release_Email</fullName>
+        <ccEmails>PlayPauseNotifications@aspca.org</ccEmails>
+        <ccEmails>jessica.stone@aspca.org</ccEmails>
+        <ccEmails>cinder.wilkinson@aspca.org</ccEmails>
+        <ccEmails>mariah.scheskie@aspca.org</ccEmails>
+        <ccEmails>CRCBehaviorSummer@aspca.org</ccEmails>
+        <description>Play-Pause Release Email</description>
+        <protected>false</protected>
+        <senderAddress>crc.medical@aspca.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/Play_Pause_Release_Notification</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Animal_status_discharged</fullName>
+        <field>Animal_Status__c</field>
+        <literalValue>Discharged</literalValue>
+        <name>Animal status discharged</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+        <targetObject>Animal__c</targetObject>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Avian_BCS</fullName>
+        <description>workflow to populate Animal record BCS</description>
+        <field>Intake_BCS__c</field>
+        <formula>text(Avian_BCS__c)</formula>
+        <name>Avian BCS</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+        <targetObject>Animal__c</targetObject>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>BCS</fullName>
+        <field>Intake_BCS__c</field>
+        <formula>text(BCS__c)</formula>
+        <name>BCS</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+        <targetObject>Animal__c</targetObject>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Euthanasia</fullName>
+        <description>When Euthanized is checked, Animal Status is updated to Euthanized</description>
+        <field>Animal_Status__c</field>
+        <literalValue>Euthanized</literalValue>
+        <name>Euthanasia</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+        <targetObject>Animal__c</targetObject>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Play_Pause_Date</fullName>
+        <field>Play_Pause_Update_Date__c</field>
+        <formula>Exam_Date_Time__c</formula>
+        <name>Play-Pause Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+        <targetObject>Animal__c</targetObject>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Play_Pause_Initiated</fullName>
+        <field>Play_Pause__c</field>
+        <literalValue>Yes</literalValue>
+        <name>Play-Pause Initiated</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+        <targetObject>Animal__c</targetObject>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Play_Pause_Initiation_Reason</fullName>
+        <field>Play_Pause_Reason__c</field>
+        <formula>TEXT(Play_Pause__c)</formula>
+        <name>Play-Pause Initiation Reason</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+        <targetObject>Animal__c</targetObject>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Remove_Play_Pause_All</fullName>
+        <field>Play_Pause__c</field>
+        <literalValue>No</literalValue>
+        <name>Remove Play-Pause</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+        <targetObject>Animal__c</targetObject>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Remove_Play_Pause_Date</fullName>
+        <field>Play_Pause_Update_Date__c</field>
+        <formula>Exam_Date_Time__c</formula>
+        <name>Remove Play-Pause Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+        <targetObject>Animal__c</targetObject>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Remove_Play_Pause_Reason</fullName>
+        <field>Play_Pause_Reason__c</field>
+        <formula>&quot;Released&quot;</formula>
+        <name>Remove Play-Pause Reason</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+        <targetObject>Animal__c</targetObject>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Shelter_Location</fullName>
+        <description>If euthanized, then change shelter location to &apos;empty&apos;</description>
+        <field>Shelter_Location__c</field>
+        <formula>&quot;Empty&quot;</formula>
+        <name>Shelter Location</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+        <targetObject>Animal__c</targetObject>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update</fullName>
+        <field>Discharge_Date_Time__c</field>
+        <formula>Exam_Date_Time__c</formula>
+        <name>Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+        <targetObject>Animal__c</targetObject>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Current_Animal_Weight</fullName>
+        <field>Current_Weight_in_lbs_Num__c</field>
+        <formula>IF(NOT(ISBLANK(Weight_in_lbs_Num__c)),Weight_in_lbs_Num__c, Weight_in_lbs_Calc__c)</formula>
+        <name>Update Current Animal Weight</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+        <targetObject>Animal__c</targetObject>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Current_Animal_Weight_Kgs</fullName>
+        <field>Current_Weight_in_kgs_Num__c</field>
+        <formula>IF(NOT(ISBLANK(Weight_in_kgs_Num__c)),Weight_in_kgs_Num__c, Weight_in_kgs_Calc__c)</formula>
+        <name>Update Current Animal Weight (Kgs)</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+        <targetObject>Animal__c</targetObject>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_discharge_date_time</fullName>
+        <field>Discharge_Date_Time__c</field>
+        <formula>Exam_Date_Time__c</formula>
+        <name>Update discharge date time</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+        <targetObject>Animal__c</targetObject>
+    </fieldUpdates>
+    <rules>
+        <fullName>Automatically schedule ear cytology</fullName>
+        <actions>
+            <name>Ear_Cytology</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <booleanFilter>1</booleanFilter>
+        <criteriaItems>
+            <field>Animal_Exam_Sheet__c.Otic_Ears__c</field>
+            <operation>contains</operation>
+            <value>Moderate black/brown waxy debris,Severe black/brown waxy debris</value>
+        </criteriaItems>
+        <description>If &quot;Otic/Ears&quot; is equal to either moderate or severe waxy debris, automatically create an ear cytology task assigned to Med Admin</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Automatically schedule nail trim</fullName>
+        <actions>
+            <name>Nail_Trim</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <booleanFilter>1</booleanFilter>
+        <criteriaItems>
+            <field>Animal_Exam_Sheet__c.Nails__c</field>
+            <operation>includes</operation>
+            <value>Overgrown</value>
+        </criteriaItems>
+        <description>If &quot;Nails&quot; is equal to overgrown, automatically create a nail trim task assigned to Med Admin</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Avian BCS</fullName>
+        <actions>
+            <name>Avian_BCS</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Animal_Exam_Sheet__c.Avian_BCS__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>BCS</fullName>
+        <actions>
+            <name>BCS</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Animal_Exam_Sheet__c.BCS__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Euthanasia</fullName>
+        <actions>
+            <name>Euthanasia</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Animal_Exam_Sheet__c.Euthanisia__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>when an Animal is Euthanized in an exam it should automatically update it&apos;s status.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Play-Pause Identified</fullName>
+        <actions>
+            <name>Play_Pause_Notification</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Play_Pause_Date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Play_Pause_Initiated</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Play_Pause_Initiation_Reason</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Animal_Exam_Sheet__c.Play_Pause__c</field>
+            <operation>notEqual</operation>
+            <value>Released</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal_Exam_Sheet__c.Play_Pause__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Remove Play-Pause</fullName>
+        <actions>
+            <name>Play_Pause_Release_Email</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Remove_Play_Pause_All</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Remove_Play_Pause_Date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Remove_Play_Pause_Reason</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Animal_Exam_Sheet__c.Play_Pause__c</field>
+            <operation>equals</operation>
+            <value>Released</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Discharge Date</fullName>
+        <actions>
+            <name>Animal_status_discharged</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_discharge_date_time</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Animal_Exam_Sheet__c.Exam_Type__c</field>
+            <operation>equals</operation>
+            <value>Discharge</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Weight</fullName>
+        <actions>
+            <name>Update_Current_Animal_Weight</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>Animal_Exam_Sheet__c.Weight_in_lbs_Calc__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal_Exam_Sheet__c.Weight_in_lbs_Num__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Weight %28kgs%29</fullName>
+        <actions>
+            <name>Update_Current_Animal_Weight_Kgs</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>Animal_Exam_Sheet__c.Weight_in_kgs_Num__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal_Exam_Sheet__c.Weight_in_kgs_Calc__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <tasks>
+        <fullName>Ear_Cytology</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal_Exam_Sheet__c.Exam_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Ear Cytology</subject>
+    </tasks>
+    <tasks>
+        <fullName>Nail_Trim</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal_Exam_Sheet__c.Exam_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Nail Trim</subject>
+    </tasks>
+    <tasks>
+        <fullName>Recheck_Witness_Test</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Recheck pregnancy test</description>
+        <dueDateOffset>21</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal_Exam_Sheet__c.Exam_Date_Time__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Recheck Witness Test</subject>
+    </tasks>
+</Workflow>

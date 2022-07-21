@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Nails__c</fullName>
+    <externalId>false</externalId>
+    <label>Claws</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Adequate length</fullName>
+                <default>false</default>
+                <label>Adequate length</label>
+            </value>
+            <value>
+                <fullName>Short</fullName>
+                <default>false</default>
+                <label>Short</label>
+            </value>
+            <value>
+                <fullName>Overgrown</fullName>
+                <default>false</default>
+                <label>Overgrown</label>
+            </value>
+            <value>
+                <fullName>Embedded</fullName>
+                <default>false</default>
+                <label>Embedded</label>
+            </value>
+            <value>
+                <fullName>Frayed</fullName>
+                <default>false</default>
+                <label>Frayed</label>
+            </value>
+            <value>
+                <fullName>Avulsed</fullName>
+                <default>false</default>
+                <label>Avulsed</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

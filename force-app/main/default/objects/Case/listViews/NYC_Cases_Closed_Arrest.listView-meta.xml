@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NYC_Cases_Closed_Arrest</fullName>
+    <columns>CASES.CASE_NUMBER</columns>
+    <columns>NYPD_Complaint_Number__c</columns>
+    <columns>ACIS_Case_Number__c</columns>
+    <columns>Date_of_Complaint__c</columns>
+    <columns>Case_Type__c</columns>
+    <columns>Closed_Date__c</columns>
+    <columns>Closed_Reason__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CASES.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Case.NYC_Criminal_Case</value>
+    </filters>
+    <filters>
+        <field>CASES.STATUS</field>
+        <operation>equals</operation>
+        <value>Closed - Arrest</value>
+    </filters>
+    <label>NYC Cases - Closed (Arrest)</label>
+    <sharedTo>
+        <group>Forensics_NYC</group>
+        <group>Legal_Advocacy_NYC</group>
+    </sharedTo>
+</ListView>

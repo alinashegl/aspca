@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Deceased (Died in Care)</fullName>
+        <default>false</default>
+        <label>Deceased (Died in Care)</label>
+    </customValue>
+    <customValue>
+        <fullName>Deceased (DOA)</fullName>
+        <default>false</default>
+        <label>Deceased (DOA)</label>
+    </customValue>
+    <customValue>
+        <fullName>Deceased (Euthanized)</fullName>
+        <default>false</default>
+        <label>Deceased (Euthanized)</label>
+    </customValue>
+    <customValue>
+        <fullName>Forfeited</fullName>
+        <default>false</default>
+        <label>Forfeited</label>
+    </customValue>
+    <customValue>
+        <fullName>Legally Abandoned</fullName>
+        <default>false</default>
+        <label>Legally Abandoned</label>
+    </customValue>
+    <customValue>
+        <fullName>Never Received Animal</fullName>
+        <default>false</default>
+        <label>Never Received Animal</label>
+    </customValue>
+    <customValue>
+        <fullName>Owned</fullName>
+        <default>false</default>
+        <label>Owned</label>
+    </customValue>
+    <customValue>
+        <fullName>RTA</fullName>
+        <default>false</default>
+        <label>RTA</label>
+    </customValue>
+    <customValue>
+        <fullName>RTO</fullName>
+        <default>false</default>
+        <label>RTO</label>
+    </customValue>
+    <customValue>
+        <fullName>Seized</fullName>
+        <default>false</default>
+        <label>Seized</label>
+    </customValue>
+    <customValue>
+        <fullName>Surrendered</fullName>
+        <default>false</default>
+        <label>Surrendered</label>
+    </customValue>
+    <customValue>
+        <fullName>Unknown</fullName>
+        <default>false</default>
+        <label>Unknown</label>
+    </customValue>
+    <customValue>
+        <fullName>Waived Ownership</fullName>
+        <default>false</default>
+        <label>Waived Ownership</label>
+    </customValue>
+    <customValue>
+        <fullName>Forfeiture Pending</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Forfeiture Pending</label>
+    </customValue>
+    <customValue>
+        <fullName>Deceased</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Deceased</label>
+    </customValue>
+    <description>NYC animal statuses</description>
+    <masterLabel>Animal Status</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

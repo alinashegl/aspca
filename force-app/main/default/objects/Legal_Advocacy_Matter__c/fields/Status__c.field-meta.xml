@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <externalId>false</externalId>
+    <label>Status</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Open</fullName>
+                <default>true</default>
+                <label>Open</label>
+            </value>
+            <value>
+                <fullName>Closed</fullName>
+                <default>false</default>
+                <label>Closed</label>
+            </value>
+            <value>
+                <fullName>Appeal</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Appeal</label>
+            </value>
+            <value>
+                <fullName>Court Pending</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Court Pending</label>
+            </value>
+            <value>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>In Progress</label>
+            </value>
+            <value>
+                <fullName>Investigation</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Investigation</label>
+            </value>
+            <value>
+                <fullName>Pre-Litigation</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Pre-Litigation</label>
+            </value>
+            <value>
+                <fullName>Trial Court</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Trial Court</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

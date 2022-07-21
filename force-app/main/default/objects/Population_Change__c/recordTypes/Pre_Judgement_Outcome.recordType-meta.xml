@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pre_Judgement_Outcome</fullName>
+    <active>true</active>
+    <label>Pre-Judgement Outcome</label>
+    <picklistValues>
+        <picklist>Animal_Species__c</picklist>
+        <values>
+            <fullName>Cat%28s%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Chicken%28s%29 %28fighting inc%2E hens%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dog%28s%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Equine</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Exotic%28s%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fowl %28non-fighting%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Livestock</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other%28s%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rabbit%28s%29</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Pre_Judgment_Outcome__c</picklist>
+        <values>
+            <fullName>Died</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Euthanized</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Returned to Owner</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

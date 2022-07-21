@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Activity__c</fullName>
+    <externalId>false</externalId>
+    <label>Activity</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Cruelty</fullName>
+                <default>false</default>
+                <label>Cruelty</label>
+            </value>
+            <value>
+                <fullName>Puppy Mill</fullName>
+                <default>false</default>
+                <label>Puppy Mill</label>
+            </value>
+            <value>
+                <fullName>Hoarding</fullName>
+                <default>false</default>
+                <label>Hoarding</label>
+            </value>
+            <value>
+                <fullName>Cruelty - Other</fullName>
+                <default>false</default>
+                <label>Cruelty - Other</label>
+            </value>
+            <value>
+                <fullName>Dogfighting</fullName>
+                <default>false</default>
+                <label>Dogfighting</label>
+            </value>
+            <value>
+                <fullName>Cockfighting</fullName>
+                <default>false</default>
+                <label>Cockfighting</label>
+            </value>
+            <value>
+                <fullName>Bloodsports - Other</fullName>
+                <default>false</default>
+                <label>Bloodsports - Other</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

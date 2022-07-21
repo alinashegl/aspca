@@ -1,0 +1,41 @@
+@page { 
+        size: letter portrait;
+    	 margin-top: 170px;
+        margin-bottom: 100px;
+		
+    @top-left {
+        content: element(header_left);
+    }
+   
+    @bottom-center {
+        content: element(footer_center);
+    }
+
+   
+}
+
+.header_left {
+    text-align: left;
+    position: running(header_left);
+}
+
+
+.footer_center {
+    text-align: center;
+    position: running(footer_center);
+}
+
+
+
+.pageNumber:before {
+    content: counter(page); 
+}
+
+.pageCount:before {
+    content: counter(pages);  
+    }
+
+
+.mytblclass{
+       -fs-table-paginate: paginate;
+    }

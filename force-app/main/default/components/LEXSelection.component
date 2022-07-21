@@ -1,0 +1,87 @@
+<apex:component >
+    
+    <apex:attribute name="fieldTypeOptions" description="This is the value for the component." type="SelectOption[]" />
+    
+        <script>
+        function showPicklistValues(){
+            var el = document.getElementById("fieldSelection");
+            if (el.classList.contains("slds-is-open")){
+                el.classList.remove("slds-is-open");
+            }
+            else {
+                el.classList.add("slds-is-open");
+            }
+        }
+        
+        function selectPicklistValue(el){
+            
+            var lis = document.getElementById("fieldSelectionValues").getElementsByTagName("li");
+            for (i=0; i<lis.length; i++){
+                lis[i].classList.remove("slds-is-selected");
+            }
+
+            el.classList.add("slds-is-selected");
+            
+            var fieldSelection = document.getElementById("fieldSelection").getElementsByTagName("span");
+            debugger;
+            fieldSelection[0].innerHTML=el.getAttribute("value");
+            showPicklistValues();
+            
+        }
+        
+        function renderSVG(buttonElm, styleclass, url){
+            
+            var svgTag = document.createElement("svg");
+            var useTag = document.createElement("use");
+            svgTag.setAttribute("aria-hidden","true");
+            svgTag.setAttribute("class",styleclass);
+            useTag.setAttribute("xmlns:xlink", "http://www.w3.org/1999/xlink");
+            useTag.setAttribute("xlink:href", url);
+            svgTag.appendChild(useTag);
+            // var buttonElm = document.getElementById("selectButton");
+            //buttonElm.appendChild(svgTag);
+            buttonElm.insertBefore(svgTag, buttonElm.firstChild);
+            buttonElm.innerHTML = buttonElm.innerHTML;
+        }
+        
+          setTimeout(function(){ 
+              renderSVG(document.getElementById("selectButton"), "slds-icon","/resource/LDS_212/assets/icons/utility-sprite/svg/symbols.svg#down"); 
+              var lis = document.getElementById("fieldSelectionValues").getElementsByTagName("li");
+              for (i=0; i<lis.length; i++){
+                var anchorTag = lis[i].firstChild;
+                renderSVG(anchorTag.firstChild, "slds-icon slds-icon--selected slds-icon--x-small slds-icon-text-default slds-m-right--x-small","/resource/LDS_212/assets/icons/utility-sprite/svg/symbols.svg#check");
+            
+              }
+          });
+        
+        </script>
+
+
+
+        <div id="fieldSelection" class="slds-picklist slds-dropdown-trigger slds-dropdown-trigger--click">
+            <button id="selectButton" class="slds-button slds-button--neutral slds-picklist__label" aria-haspopup="true" onclick="showPicklistValues();">
+                <span class="slds-truncate">Please Select</span>
+            </button>
+            <div class="slds-dropdown slds-dropdown--left">
+                <ul id="fieldSelectionValues" class="dropdown__list slds-dropdown--length-5" role="menu">
+                    
+                    <apex:repeat value="{!fieldTypeOptions}" var="fieldTypeOption">
+                        
+                        <li value="{!fieldTypeOption.value}" class="slds-dropdown__item" role="presentation" onclick="selectPicklistValue(this)">
+                            <a href="javascript:void(0);" role="menuitemcheckbox" tabindex="-1">
+                                <span class="slds-truncate"><span>{!fieldTypeOption.label}</span></span>
+                                    <!--<svg aria-hidden="true" class="slds-icon slds-icon--selected slds-icon--x-small slds-icon-text-default slds-m-right--x-small">
+                                        
+                                        <use xlink:href="{!URLFOR($Resource.LDS_212, '/assets/icons/utility-sprite/svg/symbols.svg#check')}"></use>
+                                    </svg>-->
+
+                            </a>
+                        </li>
+                        
+                    </apex:repeat>
+                    
+                </ul>
+            </div>
+        </div>
+
+</apex:component>

@@ -1,0 +1,55 @@
+<apex:page standardController="Animal__c" recordSetVar="unused" sidebar="false">
+
+<!-- for this page to work with a specific custom object, change standController="entityname" to custom object api name  
+    For example, if custom object name is Warehouse__c, change first part of the first line to standardController="warehouse__c" -->
+
+    
+<apex:includeScript value="{!$Resource.UtilJS}" />
+<apex:form >
+<apex:pageBlock >
+<apex:pageMessages />
+<apex:pageBlock >
+Note: All modifications made on the page will be lost if Return button is clicked without clicking the Save button first. 
+</apex:pageBlock>
+<apex:pageBlockButtons >
+<apex:commandButton value="Save" action="{!save}"/>
+<apex:commandButton value="Return" action="{!cancel}"/>
+</apex:pageBlockButtons>
+<apex:pageBlockTable value="{!selected}" var="a" id="table">
+<apex:column headerValue="Name">
+<apex:inputField value="{!a.name}"/>
+</apex:column>
+  <apex:column headerValue="Discharged to Agency">
+ <apex:inputField value="{!a.Discharged_to_Agency__c}"/>
+ </apex:column>
+ <apex:column headerValue="Discharged Date/Time">
+ <apex:inputField value="{!a.Discharge_Date_Time__c}"/>
+ </apex:column>
+  <apex:column headerValue="Discharged to Contact">
+ <apex:inputField value="{!a.Discharged_to_Contact__c}"/>
+ </apex:column>
+  <apex:column headerValue="Discharge_Type__c">
+ <apex:inputField value="{!a.Discharge_Type__c}"/>
+ </apex:column>
+ <apex:column headerValue="Response Partner Outcome">
+ <apex:inputField value="{!a.Response_Partner_Outcome__c}"/>
+ </apex:column>
+  <apex:column headerValue="Microchip Administered">
+ <apex:inputField value="{!a.Microchip_Administered__c}"/>
+ </apex:column>
+  <apex:column headerValue="Outcome Notes">
+ <apex:inputField value="{!a.Outcome_Notes__c}"/>
+ </apex:column>
+   <apex:column headerValue="Administered Microchip Number">
+ <apex:inputField value="{!a.Administered_Microchip_Number__c}"/>
+ </apex:column>
+   <apex:column headerValue="Euthanasia Date">
+ <apex:inputField value="{!a.Euthanasia_Date__c}"/>
+ </apex:column>
+    <apex:column headerValue="Euthanisia Reason">
+ <apex:inputField value="{!a.Euthanisia_Reason__c}"/>
+ </apex:column>
+ </apex:pageBlockTable>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

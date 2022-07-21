@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Defendant__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <description>Person charged with violation of a federal, state or local crime.</description>
+    <externalId>false</externalId>
+    <label>Defendant</label>
+    <referenceTo>Contact</referenceTo>
+    <relationshipLabel>Charge Information</relationshipLabel>
+    <relationshipName>Charge_Information</relationshipName>
+    <required>true</required>
+    <trackHistory>false</trackHistory>
+    <type>Lookup</type>
+</CustomField>

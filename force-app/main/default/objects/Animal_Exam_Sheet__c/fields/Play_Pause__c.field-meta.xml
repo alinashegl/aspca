@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Play_Pause__c</fullName>
+    <externalId>false</externalId>
+    <label>Play-Pause Reason</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>In heat</fullName>
+                <default>false</default>
+                <label>In heat</label>
+            </value>
+            <value>
+                <fullName>Surgery</fullName>
+                <default>false</default>
+                <label>Surgery</label>
+            </value>
+            <value>
+                <fullName>SN - Complicated</fullName>
+                <default>false</default>
+                <label>SN - Complicated</label>
+            </value>
+            <value>
+                <fullName>Neuter - Simple</fullName>
+                <default>false</default>
+                <label>Neuter - Simple</label>
+            </value>
+            <value>
+                <fullName>Spay - Simple</fullName>
+                <default>false</default>
+                <label>Spay - Simple</label>
+            </value>
+            <value>
+                <fullName>Lameness</fullName>
+                <default>false</default>
+                <label>Lameness</label>
+            </value>
+            <value>
+                <fullName>Dental</fullName>
+                <default>false</default>
+                <label>Dental</label>
+            </value>
+            <value>
+                <fullName>Infectious disease</fullName>
+                <default>false</default>
+                <label>Infectious disease</label>
+            </value>
+            <value>
+                <fullName>Nursing Dam</fullName>
+                <default>false</default>
+                <label>Nursing Dam</label>
+            </value>
+            <value>
+                <fullName>Medical Quarantine</fullName>
+                <default>false</default>
+                <label>Medical Quarantine</label>
+            </value>
+            <value>
+                <fullName>Bite Quarantine</fullName>
+                <default>false</default>
+                <label>Bite Quarantine</label>
+            </value>
+            <value>
+                <fullName>Cardiac Condition</fullName>
+                <default>false</default>
+                <label>Cardiac Condition</label>
+            </value>
+            <value>
+                <fullName>Released</fullName>
+                <default>false</default>
+                <label>Released</label>
+            </value>
+            <value>
+                <fullName>Spay/Neuter</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Spay/Neuter</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

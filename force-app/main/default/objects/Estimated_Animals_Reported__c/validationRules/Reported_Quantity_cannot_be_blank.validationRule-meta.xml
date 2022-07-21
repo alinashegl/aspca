@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reported_Quantity_cannot_be_blank</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(Reported_Quantity__c = null, Case__r.RecordType.Id = &quot;0125A000001YZdo&quot;)</errorConditionFormula>
+    <errorDisplayField>Reported_Quantity__c</errorDisplayField>
+    <errorMessage>Reported Quantity cannot be left blank</errorMessage>
+</ValidationRule>

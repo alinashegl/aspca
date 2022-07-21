@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Medical_Condition__c</fullName>
+    <externalId>false</externalId>
+    <label>Medical Condition</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Allergy</fullName>
+                <default>false</default>
+                <label>Allergy</label>
+            </value>
+            <value>
+                <fullName>Anaplasma</fullName>
+                <default>false</default>
+                <label>Anaplasma</label>
+            </value>
+            <value>
+                <fullName>Anemia</fullName>
+                <default>false</default>
+                <label>Anemia</label>
+            </value>
+            <value>
+                <fullName>Angel Wing</fullName>
+                <default>false</default>
+                <label>Angel Wing</label>
+            </value>
+            <value>
+                <fullName>Appears Healthy on Forensic Exam</fullName>
+                <default>false</default>
+                <label>Appears Healthy on Forensic Exam</label>
+            </value>
+            <value>
+                <fullName>Avian Influenza</fullName>
+                <default>false</default>
+                <label>Avian Influenza</label>
+            </value>
+            <value>
+                <fullName>Avian Pox</fullName>
+                <default>false</default>
+                <label>Avian Pox</label>
+            </value>
+            <value>
+                <fullName>Babesia</fullName>
+                <default>false</default>
+                <label>Babesia</label>
+            </value>
+            <value>
+                <fullName>Beak (Clipped)</fullName>
+                <default>false</default>
+                <label>Beak (Clipped)</label>
+            </value>
+            <value>
+                <fullName>Beak (Malformed)</fullName>
+                <default>false</default>
+                <label>Beak (Malformed)</label>
+            </value>
+            <value>
+                <fullName>Beak (Overgrown)</fullName>
+                <default>false</default>
+                <label>Beak (Overgrown)</label>
+            </value>
+            <value>
+                <fullName>Behavior</fullName>
+                <default>false</default>
+                <label>Behavior</label>
+            </value>
+            <value>
+                <fullName>Blunt force trauma</fullName>
+                <default>false</default>
+                <label>Blunt force trauma</label>
+            </value>
+            <value>
+                <fullName>Bumblefoot (Pododermatitis)</fullName>
+                <default>false</default>
+                <label>Bumblefoot (Pododermatitis)</label>
+            </value>
+            <value>
+                <fullName>Canine Bordetella</fullName>
+                <default>false</default>
+                <label>Canine Bordetella</label>
+            </value>
+            <value>
+                <fullName>Canine Distemper</fullName>
+                <default>false</default>
+                <label>Canine Distemper</label>
+            </value>
+            <value>
+                <fullName>Canine Mycoplasma</fullName>
+                <default>false</default>
+                <label>Canine Mycoplasma</label>
+            </value>
+            <value>
+                <fullName>Canine Parvo</fullName>
+                <default>false</default>
+                <label>Canine Parvo</label>
+            </value>
+            <value>
+                <fullName>Cardiac disease</fullName>
+                <default>false</default>
+                <label>Cardiac disease</label>
+            </value>
+            <value>
+                <fullName>Coccidia</fullName>
+                <default>false</default>
+                <label>Coccidia</label>
+            </value>
+            <value>
+                <fullName>Crop Stasis</fullName>
+                <default>false</default>
+                <label>Crop Stasis</label>
+            </value>
+            <value>
+                <fullName>Cryptorchid</fullName>
+                <default>false</default>
+                <label>Cryptorchid</label>
+            </value>
+            <value>
+                <fullName>Dehydration</fullName>
+                <default>false</default>
+                <label>Dehydration</label>
+            </value>
+            <value>
+                <fullName>Demodex</fullName>
+                <default>false</default>
+                <label>Demodex</label>
+            </value>
+            <value>
+                <fullName>Dental Disease</fullName>
+                <default>false</default>
+                <label>Dental Disease</label>
+            </value>
+            <value>
+                <fullName>Dental Fracture</fullName>
+                <default>false</default>
+                <label>Dental Fracture</label>
+            </value>
+            <value>
+                <fullName>Dermatitis</fullName>
+                <default>false</default>
+                <label>Dermatitis</label>
+            </value>
+            <value>
+                <fullName>Dermatophyte</fullName>
+                <default>false</default>
+                <label>Dermatophyte</label>
+            </value>
+            <value>
+                <fullName>Egg Bound</fullName>
+                <default>false</default>
+                <label>Egg Bound</label>
+            </value>
+            <value>
+                <fullName>Ehrlichia</fullName>
+                <default>false</default>
+                <label>Ehrlichia</label>
+            </value>
+            <value>
+                <fullName>Endocrine</fullName>
+                <default>false</default>
+                <label>Endocrine</label>
+            </value>
+            <value>
+                <fullName>Feather Loss</fullName>
+                <default>false</default>
+                <label>Feather Loss</label>
+            </value>
+            <value>
+                <fullName>Feline Immunodeficiency Virus (FIV)</fullName>
+                <default>false</default>
+                <label>Feline Immunodeficiency Virus (FIV)</label>
+            </value>
+            <value>
+                <fullName>Feline Leukemia Virus (FeLV)</fullName>
+                <default>false</default>
+                <label>Feline Leukemia Virus (FeLV)</label>
+            </value>
+            <value>
+                <fullName>Fleas</fullName>
+                <default>false</default>
+                <label>Fleas</label>
+            </value>
+            <value>
+                <fullName>Fowl Cholera (P. Multocida)</fullName>
+                <default>false</default>
+                <label>Fowl Cholera (P. Multocida)</label>
+            </value>
+            <value>
+                <fullName>Fracture</fullName>
+                <default>false</default>
+                <label>Fracture</label>
+            </value>
+            <value>
+                <fullName>GI (Constipated)</fullName>
+                <default>false</default>
+                <label>GI (Constipated)</label>
+            </value>
+            <value>
+                <fullName>GI (Diarrhea)</fullName>
+                <default>false</default>
+                <label>GI (Diarrhea)</label>
+            </value>
+            <value>
+                <fullName>GI (Nausea)</fullName>
+                <default>false</default>
+                <label>GI (Nausea)</label>
+            </value>
+            <value>
+                <fullName>GI (Parasites)</fullName>
+                <default>false</default>
+                <label>GI (Parasites)</label>
+            </value>
+            <value>
+                <fullName>GI (Vomiting)</fullName>
+                <default>false</default>
+                <label>GI (Vomiting)</label>
+            </value>
+            <value>
+                <fullName>Giardia</fullName>
+                <default>false</default>
+                <label>Giardia</label>
+            </value>
+            <value>
+                <fullName>Healthy</fullName>
+                <default>false</default>
+                <label>Healthy</label>
+            </value>
+            <value>
+                <fullName>Heart Murmur</fullName>
+                <default>false</default>
+                <label>Heart Murmur</label>
+            </value>
+            <value>
+                <fullName>Heartworm</fullName>
+                <default>false</default>
+                <label>Heartworm</label>
+            </value>
+            <value>
+                <fullName>Hepatic disease</fullName>
+                <default>false</default>
+                <label>Hepatic disease</label>
+            </value>
+            <value>
+                <fullName>Hernia</fullName>
+                <default>false</default>
+                <label>Hernia</label>
+            </value>
+            <value>
+                <fullName>Hookworms</fullName>
+                <default>false</default>
+                <label>Hookworms</label>
+            </value>
+            <value>
+                <fullName>Infectious Bronchitis Virus</fullName>
+                <default>false</default>
+                <label>Infectious Bronchitis Virus</label>
+            </value>
+            <value>
+                <fullName>Infectious Choryza</fullName>
+                <default>false</default>
+                <label>Infectious Choryza</label>
+            </value>
+            <value>
+                <fullName>Infectious Disease</fullName>
+                <default>false</default>
+                <label>Infectious Disease</label>
+            </value>
+            <value>
+                <fullName>Infectious Laryngotracheitis</fullName>
+                <default>false</default>
+                <label>Infectious Laryngotracheitis</label>
+            </value>
+            <value>
+                <fullName>In Heat</fullName>
+                <default>false</default>
+                <label>In Heat</label>
+            </value>
+            <value>
+                <fullName>Lameness (Equine)</fullName>
+                <default>false</default>
+                <label>Lameness (Equine)</label>
+            </value>
+            <value>
+                <fullName>Lice</fullName>
+                <default>false</default>
+                <label>Lice</label>
+            </value>
+            <value>
+                <fullName>Lyme</fullName>
+                <default>false</default>
+                <label>Lyme</label>
+            </value>
+            <value>
+                <fullName>Lymph Node</fullName>
+                <default>false</default>
+                <label>Lymph Node</label>
+            </value>
+            <value>
+                <fullName>Mass</fullName>
+                <default>false</default>
+                <label>Mass</label>
+            </value>
+            <value>
+                <fullName>Matting</fullName>
+                <default>false</default>
+                <label>Matting</label>
+            </value>
+            <value>
+                <fullName>Mites</fullName>
+                <default>false</default>
+                <label>Mites</label>
+            </value>
+            <value>
+                <fullName>Mycoplasma Gallisepticum</fullName>
+                <default>false</default>
+                <label>Mycoplasma Gallisepticum</label>
+            </value>
+            <value>
+                <fullName>Mycoplasma Synoviae</fullName>
+                <default>false</default>
+                <label>Mycoplasma Synoviae</label>
+            </value>
+            <value>
+                <fullName>Neurologic</fullName>
+                <default>false</default>
+                <label>Neurologic</label>
+            </value>
+            <value>
+                <fullName>Newcastle (Paramyxovirus)</fullName>
+                <default>false</default>
+                <label>Newcastle (Paramyxovirus)</label>
+            </value>
+            <value>
+                <fullName>None</fullName>
+                <default>false</default>
+                <label>None</label>
+            </value>
+            <value>
+                <fullName>Ophthalmic</fullName>
+                <default>false</default>
+                <label>Ophthalmic</label>
+            </value>
+            <value>
+                <fullName>Oral</fullName>
+                <default>false</default>
+                <label>Oral</label>
+            </value>
+            <value>
+                <fullName>Oral Lesions</fullName>
+                <default>false</default>
+                <label>Oral Lesions</label>
+            </value>
+            <value>
+                <fullName>Orthopedic</fullName>
+                <default>false</default>
+                <label>Orthopedic</label>
+            </value>
+            <value>
+                <fullName>Otic</fullName>
+                <default>false</default>
+                <label>Otic</label>
+            </value>
+            <value>
+                <fullName>Overgrown Nails</fullName>
+                <default>false</default>
+                <label>Overgrown Nails</label>
+            </value>
+            <value>
+                <fullName>Pain</fullName>
+                <default>false</default>
+                <label>Pain</label>
+            </value>
+            <value>
+                <fullName>Pregnant</fullName>
+                <default>false</default>
+                <label>Pregnant</label>
+            </value>
+            <value>
+                <fullName>Prolapse</fullName>
+                <default>false</default>
+                <label>Prolapse</label>
+            </value>
+            <value>
+                <fullName>Prostatic disease</fullName>
+                <default>false</default>
+                <label>Prostatic disease</label>
+            </value>
+            <value>
+                <fullName>Rectal</fullName>
+                <default>false</default>
+                <label>Rectal</label>
+            </value>
+            <value>
+                <fullName>Recumbent</fullName>
+                <default>false</default>
+                <label>Recumbent</label>
+            </value>
+            <value>
+                <fullName>Renal disease</fullName>
+                <default>false</default>
+                <label>Renal disease</label>
+            </value>
+            <value>
+                <fullName>Respiratory disease</fullName>
+                <default>false</default>
+                <label>Respiratory disease</label>
+            </value>
+            <value>
+                <fullName>Roundworms</fullName>
+                <default>false</default>
+                <label>Roundworms</label>
+            </value>
+            <value>
+                <fullName>Salmonella</fullName>
+                <default>false</default>
+                <label>Salmonella</label>
+            </value>
+            <value>
+                <fullName>Salmonella Pullorum-typhoid</fullName>
+                <default>false</default>
+                <label>Salmonella Pullorum-typhoid</label>
+            </value>
+            <value>
+                <fullName>Sarcoptes</fullName>
+                <default>false</default>
+                <label>Sarcoptes</label>
+            </value>
+            <value>
+                <fullName>Scaly Leg Mites</fullName>
+                <default>false</default>
+                <label>Scaly Leg Mites</label>
+            </value>
+            <value>
+                <fullName>Spleen</fullName>
+                <default>false</default>
+                <label>Spleen</label>
+            </value>
+            <value>
+                <fullName>Swelling</fullName>
+                <default>false</default>
+                <label>Swelling</label>
+            </value>
+            <value>
+                <fullName>Tapeworms</fullName>
+                <default>false</default>
+                <label>Tapeworms</label>
+            </value>
+            <value>
+                <fullName>Ticks</fullName>
+                <default>false</default>
+                <label>Ticks</label>
+            </value>
+            <value>
+                <fullName>Urinary tract disease</fullName>
+                <default>false</default>
+                <label>Urinary tract disease</label>
+            </value>
+            <value>
+                <fullName>Uropygial Gland Disease</fullName>
+                <default>false</default>
+                <label>Uropygial Gland Disease</label>
+            </value>
+            <value>
+                <fullName>Vaccine Reaction (Please list vaccine in details section)</fullName>
+                <default>false</default>
+                <label>Vaccine Reaction (Please list vaccine in details section)</label>
+            </value>
+            <value>
+                <fullName>Vaginal Prolapse</fullName>
+                <default>false</default>
+                <label>Vaginal Prolapse</label>
+            </value>
+            <value>
+                <fullName>Weight/BCS</fullName>
+                <default>false</default>
+                <label>Weight/BCS</label>
+            </value>
+            <value>
+                <fullName>Whipworms</fullName>
+                <default>false</default>
+                <label>Whipworms</label>
+            </value>
+            <value>
+                <fullName>Wound</fullName>
+                <default>false</default>
+                <label>Wound</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

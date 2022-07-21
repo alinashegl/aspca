@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>51.0</apiVersion>
+    <assignments>
+        <description>Add formatted animal name from CombinedAnimalName formula to AnimalNameList text variable</description>
+        <name>Add_Animal_Names_to_List</name>
+        <label>Add Animal Names to List</label>
+        <locationX>396</locationX>
+        <locationY>911</locationY>
+        <assignmentItems>
+            <assignToReference>AnimalNameList</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <stringValue>{!CombinedAnimalName}, </stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>AnimalAAHList</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <stringValue>{!LoopThroughAnimals.AAH_ID__c}, </stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>LoopThroughAnimals</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Add_Status_to_List</name>
+        <label>Add Status to List</label>
+        <locationX>264</locationX>
+        <locationY>695</locationY>
+        <assignmentItems>
+            <assignToReference>AnimalStatusList</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <stringValue>{!LoopThroughAnimals.Current_Animal_Status__c}, </stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Add_Animal_Names_to_List</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <name>Unique_Animal_Status</name>
+        <label>Unique Animal Status</label>
+        <locationX>396</locationX>
+        <locationY>575</locationY>
+        <defaultConnector>
+            <targetReference>Add_Animal_Names_to_List</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>List_Does_Not_Contain_Current_Status</name>
+            <conditionLogic>NOT 1 AND 2</conditionLogic>
+            <conditions>
+                <leftValueReference>AnimalStatusList</leftValueReference>
+                <operator>Contains</operator>
+                <rightValue>
+                    <elementReference>LoopThroughAnimals.Current_Animal_Status__c</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>LoopThroughAnimals.Current_Animal_Status__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Add_Status_to_List</targetReference>
+            </connector>
+            <label>List Does Not Contain Current Status</label>
+        </rules>
+    </decisions>
+    <description>For NYC criminal cases, write all associated animal names, AAH#, and statuses to the &quot;Animal Name(s)&quot;, &quot;Animal AAH #(s)&quot;, and &quot;Current Animal Status(es)&quot; fields on the case record</description>
+    <formulas>
+        <description>Format each individual animal&apos;s name. If an animal has both ASPCA and original names, will display &quot;ASPCAName (OriginalName)&quot;; otherwise will display the individual name that has a value</description>
+        <name>CombinedAnimalName</name>
+        <dataType>String</dataType>
+        <expression>IF(AND(NOT(ISBLANK({!LoopThroughAnimals.Animal_Name__c})),NOT(ISBLANK({!LoopThroughAnimals.Original_Animal_Name__c}))),{!LoopThroughAnimals.Animal_Name__c}&amp;&apos; (&apos;&amp;{!LoopThroughAnimals.Original_Animal_Name__c}&amp;&apos;)&apos;,{!LoopThroughAnimals.Animal_Name__c}&amp;{!LoopThroughAnimals.Original_Animal_Name__c})</expression>
+    </formulas>
+    <formulas>
+        <name>FormattedAnimalAAHList</name>
+        <dataType>String</dataType>
+        <expression>LEFT({!AnimalAAHList}, LEN({!AnimalAAHList})-2)</expression>
+    </formulas>
+    <formulas>
+        <description>After loop is completed, format final animal list by removing last 2 characters (comma and space)</description>
+        <name>FormattedAnimalNameList</name>
+        <dataType>String</dataType>
+        <expression>LEFT({!AnimalNameList}, LEN({!AnimalNameList})-2)</expression>
+    </formulas>
+    <formulas>
+        <name>FormattedAnimalStatusList</name>
+        <dataType>String</dataType>
+        <expression>LEFT({!AnimalStatusList}, LEN({!AnimalStatusList})-2)</expression>
+    </formulas>
+    <interviewLabel>Update Animal Names List on NYC Cases {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Animal - Update Animal Names List on NYC Cases</label>
+    <loops>
+        <description>Iterate over animals tied to the current case to add their names to a text field</description>
+        <name>LoopThroughAnimals</name>
+        <label>Loop Through Animals</label>
+        <locationX>176</locationX>
+        <locationY>455</locationY>
+        <collectionReference>Get_Animal_Records_Tied_to_Case</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Unique_Animal_Status</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Update_Animal_Name_and_Status_Fields_on_Case</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>Retrieve all animals related to the original animal&apos;s case</description>
+        <name>Get_Animal_Records_Tied_to_Case</name>
+        <label>Get Animal Records Tied to Case</label>
+        <locationX>176</locationX>
+        <locationY>335</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>LoopThroughAnimals</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Case__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Case__r.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Animal__c</object>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>Animal_Name__c</queriedFields>
+        <queriedFields>Original_Animal_Name__c</queriedFields>
+        <queriedFields>Current_Animal_Status__c</queriedFields>
+        <queriedFields>AAH_ID__c</queriedFields>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <description>Update &quot;Animal Name(s)&quot; and &quot;Current Animal Status(es)&quot; fields on the case record with all current animal names and statuses</description>
+        <name>Update_Animal_Name_and_Status_Fields_on_Case</name>
+        <label>Update Animal Name and Status Fields on Case</label>
+        <locationX>176</locationX>
+        <locationY>1127</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Case__r.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Animal_AAH_s__c</field>
+            <value>
+                <elementReference>FormattedAnimalAAHList</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Animal_Name__c</field>
+            <value>
+                <elementReference>FormattedAnimalNameList</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Current_Animal_Status_es__c</field>
+            <value>
+                <elementReference>FormattedAnimalStatusList</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Case</object>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Animal_Records_Tied_to_Case</targetReference>
+        </connector>
+        <filterLogic>1 AND (2 OR 3 OR 4)</filterLogic>
+        <filters>
+            <field>Case_Type__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>NYC Criminal Case</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Animal_Name__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Original_Animal_Name__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Current_Animal_Status__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <object>Animal__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>AnimalAAHList</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>AnimalNameList</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <name>AnimalStatusList</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>All animals tied to a case</description>
+        <name>CaseAnimals</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

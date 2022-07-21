@@ -1,0 +1,12 @@
+<apex:page standardController="Animal__c" extensions="box.DisplayWidget" action="{!getLoginToken}" showHeader="false" sidebar="false" standardStylesheets="false">
+    <apex:stylesheet value="{!URLFOR($Resource.box__BoxEmbed, 'BoxEmbed/style.css')}"/>
+    <apex:variable var="isClassic" value="{!AND($User.UIThemeDisplayed != 'Theme4d', $User.UIThemeDisplayed != 'Theme4t')}" />
+    <!-- LOGIN or CREATE FOLDER or JOIN FOLDER --> 
+    <apex:iframe id="classicBoxSection" src="/apex/box__BOXSection?id={!Animal__c.Id}&param=Custom_Object_Box_Section" rendered="{!AND(displayBoxSection, isClassic)}" html-allowfullscreen="true" html-webkitallowfullscreen="true" html-msallowfullscreen="true" />
+    <apex:iframe id="lightningBoxSection" src="/apex/box__BOXSection?id={!Animal__c.Id}&param=Custom_Object_Box_Section" rendered="{!AND(displayBoxSection, NOT(isClassic))}" html-allowfullscreen="true" html-webkitallowfullscreen="true" html-msallowfullscreen="true" /> 
+    <!-- /LOGIN or CREATE FOLDER or JOIN FOLDER --> 
+    <!-- BOX EMBED WIDGET --> 
+    <apex:iframe id="classicBoxWidget" src="{!folderShareLink}" rendered="{!AND(displayBoxWidget, isClassic)}" html-allowfullscreen="true" html-webkitallowfullscreen="true" html-msallowfullscreen="true" scrolling="true" />
+    <apex:iframe id="lightningBoxWidget" src="{!folderShareLink}" rendered="{!AND(displayBoxWidget, NOT(isClassic))}" html-allowfullscreen="true" html-webkitallowfullscreen="true" html-msallowfullscreen="true" scrolling="true" /> 
+    <!-- /BOX EMBED WIDGET --> 
+</apex:page>

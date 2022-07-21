@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CASE_STATUS_SUBTYPE__c</fullName>
+    <externalId>false</externalId>
+    <label>Case Sub-Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Case Review</fullName>
+                <default>false</default>
+                <label>Case Review</label>
+            </value>
+            <value>
+                <fullName>Complete</fullName>
+                <default>false</default>
+                <label>Complete</label>
+            </value>
+            <value>
+                <fullName>Consultation</fullName>
+                <default>false</default>
+                <label>Consultation</label>
+            </value>
+            <value>
+                <fullName>Court Charges Filed</fullName>
+                <default>false</default>
+                <label>Court Charges Filed</label>
+            </value>
+            <value>
+                <fullName>Deployment</fullName>
+                <default>false</default>
+                <label>Deployment</label>
+            </value>
+            <value>
+                <fullName>Forensic Analysis</fullName>
+                <default>false</default>
+                <label>Forensic Analysis</label>
+            </value>
+            <value>
+                <fullName>Investigation</fullName>
+                <default>false</default>
+                <label>Investigation</label>
+            </value>
+            <value>
+                <fullName>Placement</fullName>
+                <default>false</default>
+                <label>Placement</label>
+            </value>
+            <value>
+                <fullName>Transport</fullName>
+                <default>false</default>
+                <label>Transport</label>
+            </value>
+            <value>
+                <fullName>Emergency Sheltering</fullName>
+                <default>false</default>
+                <label>Emergency Sheltering</label>
+            </value>
+            <value>
+                <fullName>Supply Request</fullName>
+                <default>false</default>
+                <label>Supply Request</label>
+            </value>
+            <value>
+                <fullName>Crime Scene Assistance</fullName>
+                <default>false</default>
+                <label>Crime Scene Assistance</label>
+            </value>
+            <value>
+                <fullName>Case Packaging</fullName>
+                <default>false</default>
+                <label>Case Packaging</label>
+            </value>
+            <value>
+                <fullName>Expert Testimony</fullName>
+                <default>false</default>
+                <label>Expert Testimony</label>
+            </value>
+            <value>
+                <fullName>General Case Consultation</fullName>
+                <default>false</default>
+                <label>General Case Consultation</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Add_Diagnostic</fullName>
+    <availability>online</availability>
+    <displayType>massActionButton</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>Add Diagnostic</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <requireRowSelection>false</requireRowSelection>
+    <url>/a15/e?CF00N5A00000LvH9J={!Animal__c.Name}&amp;CF00N5A00000LvH9J_lkid={!Animal__c.Id}&amp;CF00N5A00000LvH9n={!Animal_Exam_Sheet__c.Name}&amp;CF00N5A00000LvH9n_lkid={!Animal_Exam_Sheet__c.Id}&amp;00N5A00000LvH9s={!Animal_Exam_Sheet__c.Exam_Date__c }</url>
+</WebLink>

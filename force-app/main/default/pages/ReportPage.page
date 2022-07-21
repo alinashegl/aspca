@@ -1,0 +1,28 @@
+<apex:page controller="ReportController" >
+    <head><style type="text/css">
+        html,body{width: 100%;}
+        #labelTable {
+        	margin: 0 auto;
+            border-spacing:0;
+            font-family: "sans-serif";
+            font-size:15px;
+        	border: 1px black solid;
+        	border-collapse:collapse;}
+        .blankRow{height:10px !important;}
+	</style></head>
+
+    
+    <table id="labelTable">
+        <apex:form >
+        	<tr class="blankRow"><td colspan="2"></td></tr> 
+          	<tr><td colspan="2" align="center">All reports being used must be in the <b>Medicine Labels</b> folder</td></tr>
+        	<tr border-bottom="1" ><td colspan="2">The <b>first filter</b> must be <b>Frequency Of Treatment equals SID,BID,TID</b></td></tr>
+      		<tr class="blankRow"><td colspan="2"></td></tr>  
+ 			<tr><td align="right">Select report:      </td><td> <apex:selectList value="{!reportId}" size="1" style="width:150px"><apex:selectOptions value="{!reps}"/></apex:selectList><p/>     </td> </tr>
+ 			<tr><td align="right">Select time of day:    </td><td>  <apex:selectList value="{!freq}" size="1" style="width:150px"><apex:selectOptions value="{!items}"/></apex:selectList><p/></td> </tr>
+     		<tr><td colspan="2" align="center"><apex:commandButton value="Generate labels" action="{!genReport}"/></td> </tr>
+        	<tr class="blankRow"><td colspan="2"></td></tr> 
+  		</apex:form>
+    </table>
+    
+</apex:page>

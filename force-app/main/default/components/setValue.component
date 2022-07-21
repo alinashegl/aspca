@@ -1,0 +1,4 @@
+<apex:component >
+    <apex:attribute name="from" type="String" assignTo="{!to}" description="TODO: Describe me"/>
+    <apex:attribute name="to" type="String" description="TODO: Describe me"/>   
+</apex:component>

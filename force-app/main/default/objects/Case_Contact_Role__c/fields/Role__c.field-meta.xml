@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Role__c</fullName>
+    <externalId>false</externalId>
+    <label>Role</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Alternative Contact/Relative</fullName>
+                <default>false</default>
+                <label>Alternative Contact/Relative</label>
+            </value>
+            <value>
+                <fullName>Animal Control Officer</fullName>
+                <default>false</default>
+                <label>Animal Control Officer</label>
+            </value>
+            <value>
+                <fullName>Animal Discharge Contact</fullName>
+                <default>false</default>
+                <label>Animal Discharge Contact</label>
+            </value>
+            <value>
+                <fullName>Animal Owner</fullName>
+                <default>false</default>
+                <label>Animal Owner</label>
+            </value>
+            <value>
+                <fullName>Arresting Officer</fullName>
+                <default>false</default>
+                <label>Arresting Officer</label>
+            </value>
+            <value>
+                <fullName>ASPCA Liaison</fullName>
+                <default>false</default>
+                <label>ASPCA Liaison</label>
+            </value>
+            <value>
+                <fullName>Borough Liaison</fullName>
+                <default>false</default>
+                <label>Borough Liaison</label>
+            </value>
+            <value>
+                <fullName>Civil Attorney</fullName>
+                <default>false</default>
+                <label>Civil Attorney</label>
+            </value>
+            <value>
+                <fullName>Code Enforcement Officer</fullName>
+                <default>false</default>
+                <label>Code Enforcement Officer</label>
+            </value>
+            <value>
+                <fullName>Complainant/Caller</fullName>
+                <default>false</default>
+                <label>Complainant/Caller</label>
+            </value>
+            <value>
+                <fullName>Confidential Informant</fullName>
+                <default>false</default>
+                <label>Confidential Informant</label>
+            </value>
+            <value>
+                <fullName>County Attorney</fullName>
+                <default>false</default>
+                <label>County Attorney</label>
+            </value>
+            <value>
+                <fullName>Court Clerk</fullName>
+                <default>false</default>
+                <label>Court Clerk</label>
+            </value>
+            <value>
+                <fullName>Court Reporter</fullName>
+                <default>false</default>
+                <label>Court Reporter</label>
+            </value>
+            <value>
+                <fullName>Defendant</fullName>
+                <default>false</default>
+                <label>Defendant</label>
+            </value>
+            <value>
+                <fullName>Defense Attorney</fullName>
+                <default>false</default>
+                <label>Defense Attorney</label>
+            </value>
+            <value>
+                <fullName>Defense Attorney (Resigned)</fullName>
+                <default>false</default>
+                <label>Defense Attorney (Resigned)</label>
+            </value>
+            <value>
+                <fullName>DSE</fullName>
+                <default>false</default>
+                <label>DSE</label>
+            </value>
+            <value>
+                <fullName>Expert</fullName>
+                <default>false</default>
+                <label>Expert</label>
+            </value>
+            <value>
+                <fullName>Former Lead Detective/LEO</fullName>
+                <default>false</default>
+                <label>Former Lead Detective/LEO</label>
+            </value>
+            <value>
+                <fullName>Former Prosecutor</fullName>
+                <default>false</default>
+                <label>Former Prosecutor</label>
+            </value>
+            <value>
+                <fullName>Foster</fullName>
+                <default>false</default>
+                <label>Foster</label>
+            </value>
+            <value>
+                <fullName>Judge</fullName>
+                <default>false</default>
+                <label>Judge</label>
+            </value>
+            <value>
+                <fullName>Lead Animal Control Officer</fullName>
+                <default>false</default>
+                <label>Lead Animal Control Officer</label>
+            </value>
+            <value>
+                <fullName>Lead Detective/LEO</fullName>
+                <default>false</default>
+                <label>Lead Detective/LEO</label>
+            </value>
+            <value>
+                <fullName>Local Counsel</fullName>
+                <default>false</default>
+                <label>Local Counsel</label>
+            </value>
+            <value>
+                <fullName>Plaintiff</fullName>
+                <default>false</default>
+                <label>Plaintiff</label>
+            </value>
+            <value>
+                <fullName>Plaintiff Attorney</fullName>
+                <default>false</default>
+                <label>Plaintiff Attorney</label>
+            </value>
+            <value>
+                <fullName>Prosecutor</fullName>
+                <default>false</default>
+                <label>Prosecutor</label>
+            </value>
+            <value>
+                <fullName>Public Information Officer (PIO)</fullName>
+                <default>false</default>
+                <label>Public Information Officer (PIO)</label>
+            </value>
+            <value>
+                <fullName>Requesting Agency Contact</fullName>
+                <default>false</default>
+                <label>Requesting Agency Contact</label>
+            </value>
+            <value>
+                <fullName>Responding Officer</fullName>
+                <default>false</default>
+                <label>Responding Officer</label>
+            </value>
+            <value>
+                <fullName>Shelter Intake Contact</fullName>
+                <default>false</default>
+                <label>Shelter Intake Contact</label>
+            </value>
+            <value>
+                <fullName>Shelter Placement Contact</fullName>
+                <default>false</default>
+                <label>Shelter Placement Contact</label>
+            </value>
+            <value>
+                <fullName>Subject</fullName>
+                <default>false</default>
+                <label>Subject</label>
+            </value>
+            <value>
+                <fullName>Witness</fullName>
+                <default>false</default>
+                <label>Witness</label>
+            </value>
+            <value>
+                <fullName>County/Civil Attorney</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>County/Civil Attorney</label>
+            </value>
+            <value>
+                <fullName>Officer</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Officer</label>
+            </value>
+            <value>
+                <fullName>Officer/Complainant</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Officer/Complainant</label>
+            </value>
+            <value>
+                <fullName>Placement Shelter Contact</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Placement Shelter Contact</label>
+            </value>
+            <value>
+                <fullName>Receiving Shelter Contact</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Receiving Shelter Contact</label>
+            </value>
+            <value>
+                <fullName>Subject/Defendant</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Subject/Defendant</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

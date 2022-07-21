@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Exercise_Report</fullName>
+    <availability>online</availability>
+    <description>This report will summarize exercise by month</description>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>Exercise Report</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <url>https://na15.salesforce.com/00Oi00000055LAO?pv0={!Animal__c.Id}</url>
+</WebLink>

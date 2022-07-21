@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sentence_Details_Picklist__c</fullName>
+    <externalId>false</externalId>
+    <label>Sentence Details</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <controllingField>Court_Disposition__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Animal Ban</fullName>
+                <default>false</default>
+                <label>Animal Ban</label>
+            </value>
+            <value>
+                <fullName>Anger Management Counseling</fullName>
+                <default>false</default>
+                <label>Anger Management Counseling</label>
+            </value>
+            <value>
+                <fullName>Animals Forfeited</fullName>
+                <default>false</default>
+                <label>Animals Forfeited</label>
+            </value>
+            <value>
+                <fullName>Community Service</fullName>
+                <default>false</default>
+                <label>Community Service</label>
+            </value>
+            <value>
+                <fullName>Conditional Discharge</fullName>
+                <default>false</default>
+                <label>Conditional Discharge</label>
+            </value>
+            <value>
+                <fullName>Drug/Alcohol Counseling</fullName>
+                <default>false</default>
+                <label>Drug/Alcohol Counseling</label>
+            </value>
+            <value>
+                <fullName>Fine</fullName>
+                <default>false</default>
+                <label>Fine</label>
+            </value>
+            <value>
+                <fullName>FOOP</fullName>
+                <default>false</default>
+                <label>FOOP</label>
+            </value>
+            <value>
+                <fullName>Home Confinement/House Arrest</fullName>
+                <default>false</default>
+                <label>Home Confinement/House Arrest</label>
+            </value>
+            <value>
+                <fullName>Jail</fullName>
+                <default>false</default>
+                <label>Jail</label>
+            </value>
+            <value>
+                <fullName>Other (Describe in Notes)</fullName>
+                <default>false</default>
+                <label>Other (Describe in Notes)</label>
+            </value>
+            <value>
+                <fullName>Prison</fullName>
+                <default>false</default>
+                <label>Prison</label>
+            </value>
+            <value>
+                <fullName>Probation (Supervised)</fullName>
+                <default>false</default>
+                <label>Probation (Supervised)</label>
+            </value>
+            <value>
+                <fullName>Probation (Unsupervised)</fullName>
+                <default>false</default>
+                <label>Probation (Unsupervised)</label>
+            </value>
+            <value>
+                <fullName>Psychological Counseling</fullName>
+                <default>false</default>
+                <label>Psychological Counseling</label>
+            </value>
+            <value>
+                <fullName>Registry</fullName>
+                <default>false</default>
+                <label>Registry</label>
+            </value>
+            <value>
+                <fullName>Restitution</fullName>
+                <default>false</default>
+                <label>Restitution</label>
+            </value>
+            <value>
+                <fullName>Supervised Release</fullName>
+                <default>false</default>
+                <label>Supervised Release</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Convicted - Pleaded to Lesser Charge (See Notes)</controllingFieldValue>
+            <controllingFieldValue>Convicted - Alford Plea/No Contest</controllingFieldValue>
+            <controllingFieldValue>ACD</controllingFieldValue>
+            <controllingFieldValue>Convicted After Trial</controllingFieldValue>
+            <controllingFieldValue>Deferred</controllingFieldValue>
+            <controllingFieldValue>DP</controllingFieldValue>
+            <controllingFieldValue>Diversion</controllingFieldValue>
+            <controllingFieldValue>Convicted - Pled Guilty</controllingFieldValue>
+            <controllingFieldValue>Convicted - Trial</controllingFieldValue>
+            <controllingFieldValue>Abated</controllingFieldValue>
+            <controllingFieldValue>Grand Jury- Indicted</controllingFieldValue>
+            <controllingFieldValue>Grand Jury- No Bill</controllingFieldValue>
+            <controllingFieldValue>PG</controllingFieldValue>
+            <valueName>Animal Ban</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Convicted - Pleaded to Lesser Charge (See Notes)</controllingFieldValue>
+            <controllingFieldValue>Convicted - Alford Plea/No Contest</controllingFieldValue>
+            <controllingFieldValue>ACD</controllingFieldValue>
+            <controllingFieldValue>Convicted After Trial</controllingFieldValue>
+            <controllingFieldValue>Deferred</controllingFieldValue>
+            <controllingFieldValue>DP</controllingFieldValue>
+            <controllingFieldValue>Diversion</controllingFieldValue>
+            <controllingFieldValue>Convicted - Pled Guilty</controllingFieldValue>
+            <controllingFieldValue>Convicted - Trial</controllingFieldValue>
+            <controllingFieldValue>Abated</controllingFieldValue>
+            <controllingFieldValue>Grand Jury- Indicted</controllingFieldValue>
+            <controllingFieldValue>Grand Jury- No Bill</controllingFieldValue>
+            <controllingFieldValue>PG</controllingFieldValue>
+            <valueName>Anger Management Counseling</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Convicted - Pleaded to Lesser Charge (See Notes)</controllingFieldValue>
+            <controllingFieldValue>Convicted - Alford Plea/No Contest</controllingFieldValue>
+            <controllingFieldValue>ACD</controllingFieldValue>
+            <controllingFieldValue>Convicted After Trial</controllingFieldValue>
+            <controllingFieldValue>Deferred</controllingFieldValue>
+            <controllingFieldValue>DP</controllingFieldValue>
+            <controllingFieldValue>Diversion</controllingFieldValue>
+            <controllingFieldValue>Convicted - Pled Guilty</controllingFieldValue>
+            <controllingFieldValue>Convicted - Trial</controllingFieldValue>
+            <controllingFieldValue>Abated</controllingFieldValue>
+            <controllingFieldValue>Grand Jury- Indicted</controllingFieldValue>
+            <controllingFieldValue>Grand Jury- No Bill</controllingFieldValue>
+            <controllingFieldValue>PG</controllingFieldValue>
+            <valueName>Animals Forfeited</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Convicted - Pleaded to Lesser Charge (See Notes)</controllingFieldValue>
+            <controllingFieldValue>Convicted - Alford Plea/No Contest</controllingFieldValue>
+            <controllingFieldValue>ACD</controllingFieldValue>
+            <controllingFieldValue>Convicted After Trial</controllingFieldValue>
+            <controllingFieldValue>Deferred</controllingFieldValue>
+            <controllingFieldValue>DP</controllingFieldValue>
+            <controllingFieldValue>Diversion</controllingFieldValue>
+            <controllingFieldValue>Convicted - Pled Guilty</controllingFieldValue>
+            <controllingFieldValue>Convicted - Trial</controllingFieldValue>
+            <controllingFieldValue>Abated</controllingFieldValue>
+            <controllingFieldValue>Grand Jury- Indicted</controllingFieldValue>
+            <controllingFieldValue>Grand Jury- No Bill</controllingFieldValue>
+            <controllingFieldValue>PG</controllingFieldValue>
+            <valueName>Community Service</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Convicted - Pleaded to Lesser Charge (See Notes)</controllingFieldValue>
+            <controllingFieldValue>Convicted - Alford Plea/No Contest</controllingFieldValue>
+            <controllingFieldValue>ACD</controllingFieldValue>
+            <controllingFieldValue>Convicted After Trial</controllingFieldValue>
+            <controllingFieldValue>Deferred</controllingFieldValue>
+            <controllingFieldValue>DP</controllingFieldValue>
+            <controllingFieldValue>Diversion</controllingFieldValue>
+            <controllingFieldValue>Convicted - Pled Guilty</controllingFieldValue>
+            <controllingFieldValue>Convicted - Trial</controllingFieldValue>
+            <controllingFieldValue>Abated</controllingFieldValue>
+            <controllingFieldValue>Grand Jury- Indicted</controllingFieldValue>
+            <controllingFieldValue>Grand Jury- No Bill</controllingFieldValue>
+            <controllingFieldValue>PG</controllingFieldValue>
+            <valueName>Conditional Discharge</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Convicted - Pleaded to Lesser Charge (See Notes)</controllingFieldValue>
+            <controllingFieldValue>Convicted - Alford Plea/No Contest</controllingFieldValue>
+            <controllingFieldValue>ACD</controllingFieldValue>
+            <controllingFieldValue>Convicted After Trial</controllingFieldValue>
+            <controllingFieldValue>Deferred</controllingFieldValue>
+            <controllingFieldValue>DP</controllingFieldValue>
+            <controllingFieldValue>Diversion</controllingFieldValue>
+            <controllingFieldValue>Convicted - Pled Guilty</controllingFieldValue>
+            <controllingFieldValue>Convicted - Trial</controllingFieldValue>
+            <controllingFieldValue>Abated</controllingFieldValue>
+            <controllingFieldValue>Grand Jury- Indicted</controllingFieldValue>
+            <controllingFieldValue>Grand Jury- No Bill</controllingFieldValue>
+            <controllingFieldValue>PG</controllingFieldValue>
+            <valueName>Drug/Alcohol Counseling</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Convicted - Pleaded to Lesser Charge (See Notes)</controllingFieldValue>
+            <controllingFieldValue>Convicted - Alford Plea/No Contest</controllingFieldValue>
+            <controllingFieldValue>ACD</controllingFieldValue>
+            <controllingFieldValue>Convicted After Trial</controllingFieldValue>
+            <controllingFieldValue>Deferred</controllingFieldValue>
+            <controllingFieldValue>DP</controllingFieldValue>
+            <controllingFieldValue>Diversion</controllingFieldValue>
+            <controllingFieldValue>Convicted - Pled Guilty</controllingFieldValue>
+            <controllingFieldValue>Convicted - Trial</controllingFieldValue>
+            <controllingFieldValue>Abated</controllingFieldValue>
+            <controllingFieldValue>Grand Jury- Indicted</controllingFieldValue>
+            <controllingFieldValue>Grand Jury- No Bill</controllingFieldValue>
+            <controllingFieldValue>PG</controllingFieldValue>
+            <valueName>Fine</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Convicted - Pleaded to Lesser Charge (See Notes)</controllingFieldValue>
+            <controllingFieldValue>Convicted - Alford Plea/No Contest</controllingFieldValue>
+            <controllingFieldValue>ACD</controllingFieldValue>
+            <controllingFieldValue>Convicted After Trial</controllingFieldValue>
+            <controllingFieldValue>Deferred</controllingFieldValue>
+            <controllingFieldValue>DP</controllingFieldValue>
+            <controllingFieldValue>Diversion</controllingFieldValue>
+            <controllingFieldValue>Convicted - Pled Guilty</controllingFieldValue>
+            <controllingFieldValue>Convicted - Trial</controllingFieldValue>
+            <controllingFieldValue>Abated</controllingFieldValue>
+            <controllingFieldValue>Grand Jury- Indicted</controllingFieldValue>
+            <controllingFieldValue>Grand Jury- No Bill</controllingFieldValue>
+            <controllingFieldValue>PG</controllingFieldValue>
+            <valueName>FOOP</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Convicted - Pleaded to Lesser Charge (See Notes)</controllingFieldValue>
+            <controllingFieldValue>Convicted - Alford Plea/No Contest</controllingFieldValue>
+            <controllingFieldValue>ACD</controllingFieldValue>
+            <controllingFieldValue>Convicted After Trial</controllingFieldValue>
+            <controllingFieldValue>Deferred</controllingFieldValue>
+            <controllingFieldValue>DP</controllingFieldValue>
+            <controllingFieldValue>Diversion</controllingFieldValue>
+            <controllingFieldValue>Convicted - Pled Guilty</controllingFieldValue>
+            <controllingFieldValue>Convicted - Trial</controllingFieldValue>
+            <controllingFieldValue>Abated</controllingFieldValue>
+            <controllingFieldValue>Grand Jury- Indicted</controllingFieldValue>
+            <controllingFieldValue>Grand Jury- No Bill</controllingFieldValue>
+            <controllingFieldValue>PG</controllingFieldValue>
+            <valueName>Home Confinement/House Arrest</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Convicted - Pleaded to Lesser Charge (See Notes)</controllingFieldValue>
+            <controllingFieldValue>Convicted - Alford Plea/No Contest</controllingFieldValue>
+            <controllingFieldValue>ACD</controllingFieldValue>
+            <controllingFieldValue>Convicted After Trial</controllingFieldValue>
+            <controllingFieldValue>Deferred</controllingFieldValue>
+            <controllingFieldValue>DP</controllingFieldValue>
+            <controllingFieldValue>Diversion</controllingFieldValue>
+            <controllingFieldValue>Convicted - Pled Guilty</controllingFieldValue>
+            <controllingFieldValue>Convicted - Trial</controllingFieldValue>
+            <controllingFieldValue>Abated</controllingFieldValue>
+            <controllingFieldValue>Grand Jury- Indicted</controllingFieldValue>
+            <controllingFieldValue>Grand Jury- No Bill</controllingFieldValue>
+            <controllingFieldValue>PG</controllingFieldValue>
+            <valueName>Jail</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Convicted - Pleaded to Lesser Charge (See Notes)</controllingFieldValue>
+            <controllingFieldValue>Convicted - Alford Plea/No Contest</controllingFieldValue>
+            <controllingFieldValue>ACD</controllingFieldValue>
+            <controllingFieldValue>Convicted After Trial</controllingFieldValue>
+            <controllingFieldValue>Deferred</controllingFieldValue>
+            <controllingFieldValue>DP</controllingFieldValue>
+            <controllingFieldValue>Diversion</controllingFieldValue>
+            <controllingFieldValue>Convicted - Pled Guilty</controllingFieldValue>
+            <controllingFieldValue>Convicted - Trial</controllingFieldValue>
+            <controllingFieldValue>Abated</controllingFieldValue>
+            <controllingFieldValue>Grand Jury- Indicted</controllingFieldValue>
+            <controllingFieldValue>Grand Jury- No Bill</controllingFieldValue>
+            <controllingFieldValue>PG</controllingFieldValue>
+            <valueName>Other (Describe in Notes)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Convicted - Pleaded to Lesser Charge (See Notes)</controllingFieldValue>
+            <controllingFieldValue>Convicted - Alford Plea/No Contest</controllingFieldValue>
+            <controllingFieldValue>ACD</controllingFieldValue>
+            <controllingFieldValue>Convicted After Trial</controllingFieldValue>
+            <controllingFieldValue>Deferred</controllingFieldValue>
+            <controllingFieldValue>DP</controllingFieldValue>
+            <controllingFieldValue>Diversion</controllingFieldValue>
+            <controllingFieldValue>Convicted - Pled Guilty</controllingFieldValue>
+            <controllingFieldValue>Convicted - Trial</controllingFieldValue>
+            <controllingFieldValue>Abated</controllingFieldValue>
+            <controllingFieldValue>Grand Jury- Indicted</controllingFieldValue>
+            <controllingFieldValue>Grand Jury- No Bill</controllingFieldValue>
+            <controllingFieldValue>PG</controllingFieldValue>
+            <valueName>Prison</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Convicted - Pleaded to Lesser Charge (See Notes)</controllingFieldValue>
+            <controllingFieldValue>Convicted - Alford Plea/No Contest</controllingFieldValue>
+            <controllingFieldValue>ACD</controllingFieldValue>
+            <controllingFieldValue>Convicted After Trial</controllingFieldValue>
+            <controllingFieldValue>Deferred</controllingFieldValue>
+            <controllingFieldValue>DP</controllingFieldValue>
+            <controllingFieldValue>Diversion</controllingFieldValue>
+            <controllingFieldValue>Convicted - Pled Guilty</controllingFieldValue>
+            <controllingFieldValue>Convicted - Trial</controllingFieldValue>
+            <controllingFieldValue>Abated</controllingFieldValue>
+            <controllingFieldValue>Grand Jury- Indicted</controllingFieldValue>
+            <controllingFieldValue>Grand Jury- No Bill</controllingFieldValue>
+            <controllingFieldValue>PG</controllingFieldValue>
+            <valueName>Probation (Supervised)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Convicted - Pleaded to Lesser Charge (See Notes)</controllingFieldValue>
+            <controllingFieldValue>Convicted - Alford Plea/No Contest</controllingFieldValue>
+            <controllingFieldValue>ACD</controllingFieldValue>
+            <controllingFieldValue>Convicted After Trial</controllingFieldValue>
+            <controllingFieldValue>Deferred</controllingFieldValue>
+            <controllingFieldValue>DP</controllingFieldValue>
+            <controllingFieldValue>Diversion</controllingFieldValue>
+            <controllingFieldValue>Convicted - Pled Guilty</controllingFieldValue>
+            <controllingFieldValue>Convicted - Trial</controllingFieldValue>
+            <controllingFieldValue>Abated</controllingFieldValue>
+            <controllingFieldValue>Grand Jury- Indicted</controllingFieldValue>
+            <controllingFieldValue>Grand Jury- No Bill</controllingFieldValue>
+            <controllingFieldValue>PG</controllingFieldValue>
+            <valueName>Probation (Unsupervised)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Convicted - Pleaded to Lesser Charge (See Notes)</controllingFieldValue>
+            <controllingFieldValue>Convicted - Alford Plea/No Contest</controllingFieldValue>
+            <controllingFieldValue>ACD</controllingFieldValue>
+            <controllingFieldValue>Convicted After Trial</controllingFieldValue>
+            <controllingFieldValue>Deferred</controllingFieldValue>
+            <controllingFieldValue>DP</controllingFieldValue>
+            <controllingFieldValue>Diversion</controllingFieldValue>
+            <controllingFieldValue>Convicted - Pled Guilty</controllingFieldValue>
+            <controllingFieldValue>Convicted - Trial</controllingFieldValue>
+            <controllingFieldValue>Abated</controllingFieldValue>
+            <controllingFieldValue>Grand Jury- Indicted</controllingFieldValue>
+            <controllingFieldValue>Grand Jury- No Bill</controllingFieldValue>
+            <controllingFieldValue>PG</controllingFieldValue>
+            <valueName>Psychological Counseling</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Convicted - Pleaded to Lesser Charge (See Notes)</controllingFieldValue>
+            <controllingFieldValue>Convicted - Alford Plea/No Contest</controllingFieldValue>
+            <controllingFieldValue>ACD</controllingFieldValue>
+            <controllingFieldValue>Convicted After Trial</controllingFieldValue>
+            <controllingFieldValue>Deferred</controllingFieldValue>
+            <controllingFieldValue>DP</controllingFieldValue>
+            <controllingFieldValue>Diversion</controllingFieldValue>
+            <controllingFieldValue>Convicted - Pled Guilty</controllingFieldValue>
+            <controllingFieldValue>Convicted - Trial</controllingFieldValue>
+            <controllingFieldValue>Abated</controllingFieldValue>
+            <controllingFieldValue>Grand Jury- Indicted</controllingFieldValue>
+            <controllingFieldValue>Grand Jury- No Bill</controllingFieldValue>
+            <controllingFieldValue>PG</controllingFieldValue>
+            <valueName>Registry</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Convicted - Pleaded to Lesser Charge (See Notes)</controllingFieldValue>
+            <controllingFieldValue>Convicted - Alford Plea/No Contest</controllingFieldValue>
+            <controllingFieldValue>ACD</controllingFieldValue>
+            <controllingFieldValue>Convicted After Trial</controllingFieldValue>
+            <controllingFieldValue>Deferred</controllingFieldValue>
+            <controllingFieldValue>DP</controllingFieldValue>
+            <controllingFieldValue>Diversion</controllingFieldValue>
+            <controllingFieldValue>Convicted - Pled Guilty</controllingFieldValue>
+            <controllingFieldValue>Convicted - Trial</controllingFieldValue>
+            <controllingFieldValue>Abated</controllingFieldValue>
+            <controllingFieldValue>Grand Jury- Indicted</controllingFieldValue>
+            <controllingFieldValue>Grand Jury- No Bill</controllingFieldValue>
+            <controllingFieldValue>PG</controllingFieldValue>
+            <valueName>Restitution</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Convicted - Pleaded to Lesser Charge (See Notes)</controllingFieldValue>
+            <controllingFieldValue>Convicted - Alford Plea/No Contest</controllingFieldValue>
+            <controllingFieldValue>ACD</controllingFieldValue>
+            <controllingFieldValue>Convicted After Trial</controllingFieldValue>
+            <controllingFieldValue>Deferred</controllingFieldValue>
+            <controllingFieldValue>DP</controllingFieldValue>
+            <controllingFieldValue>Diversion</controllingFieldValue>
+            <controllingFieldValue>Convicted - Pled Guilty</controllingFieldValue>
+            <controllingFieldValue>Convicted - Trial</controllingFieldValue>
+            <controllingFieldValue>Abated</controllingFieldValue>
+            <controllingFieldValue>Grand Jury- Indicted</controllingFieldValue>
+            <controllingFieldValue>Grand Jury- No Bill</controllingFieldValue>
+            <controllingFieldValue>PG</controllingFieldValue>
+            <valueName>Supervised Release</valueName>
+        </valueSettings>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

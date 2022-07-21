@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NYPD_DA_Documents__c</fullName>
+    <externalId>false</externalId>
+    <label>NYPD/DA Documents</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>NYPD Complaint Report</fullName>
+                <default>false</default>
+                <label>NYPD Complaint Report</label>
+            </value>
+            <value>
+                <fullName>NYPD Arrest Report</fullName>
+                <default>false</default>
+                <label>NYPD Arrest Report</label>
+            </value>
+            <value>
+                <fullName>Criminal Complaint</fullName>
+                <default>false</default>
+                <label>Criminal Complaint</label>
+            </value>
+            <value>
+                <fullName>Warrant</fullName>
+                <default>false</default>
+                <label>Warrant</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Other_Enrichment_Coordinator</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(INCLUDES(Enrichment_Coordinator__c, &quot;Other&quot;), ISBLANK( Enrichment_Coordinator_Other__c ) )</errorConditionFormula>
+    <errorDisplayField>Enrichment_Coordinator_Other__c</errorDisplayField>
+    <errorMessage>Please enter your first and last name.</errorMessage>
+</ValidationRule>

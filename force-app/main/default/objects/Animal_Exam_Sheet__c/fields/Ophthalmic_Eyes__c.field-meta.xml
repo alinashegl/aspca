@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Ophthalmic_Eyes__c</fullName>
+    <externalId>false</externalId>
+    <label>Ophthalmic/Eyes</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Clear and bright</fullName>
+                <default>false</default>
+                <label>Clear and bright</label>
+            </value>
+            <value>
+                <fullName>Bright, clear OU, no discharge or inflammation</fullName>
+                <default>false</default>
+                <label>Bright, clear OU, no discharge or inflammation</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

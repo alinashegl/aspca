@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sentence__c</fullName>
+    <description>sentences for each count as ordered by the court</description>
+    <externalId>false</externalId>
+    <inlineHelpText>select all that apply to the defendant and charge</inlineHelpText>
+    <label>Sentence Test</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Probation</fullName>
+                <default>false</default>
+                <label>Probation</label>
+            </value>
+            <value>
+                <fullName>Jail- (&lt;year)</fullName>
+                <default>false</default>
+                <label>Jail- (&lt;year)</label>
+            </value>
+            <value>
+                <fullName>Prison (&gt; year)</fullName>
+                <default>false</default>
+                <label>Prison (&gt; year)</label>
+            </value>
+            <value>
+                <fullName>Fine</fullName>
+                <default>false</default>
+                <label>Fine</label>
+            </value>
+            <value>
+                <fullName>Restitution</fullName>
+                <default>false</default>
+                <label>Restitution</label>
+            </value>
+            <value>
+                <fullName>Behind the Shed</fullName>
+                <default>false</default>
+                <label>Behind the Shed</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>5</visibleLines>
+</CustomField>

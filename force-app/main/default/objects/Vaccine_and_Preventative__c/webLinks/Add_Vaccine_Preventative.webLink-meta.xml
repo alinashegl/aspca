@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Add_Vaccine_Preventative</fullName>
+    <availability>online</availability>
+    <displayType>massActionButton</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>Add Vaccine/Preventative</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <requireRowSelection>false</requireRowSelection>
+    <url>/a0h/e?CF00N5A00000IBfep={!Animal__c.Name}&amp;CF00N5A00000IBfep_lkid={!Animal__c.Id}&amp;CF00N5A00000IBfeu={!Animal_Exam_Sheet__c.Name}&amp;CF00N5A00000IBfeu_lkid={!Animal_Exam_Sheet__c.Id}&amp;00N5A00000IBfez={!Animal__c.Type_of_Animal__c}&amp;00N5A00000IBff4={!Animal_Exam_Sheet__c.Exam_Date__c	}&amp;00N5A00000IBff9={!Animal_Exam_Sheet__c.Doctor__c}&amp;retURL={!Animal_Exam_Sheet__c.Animal_Exam_SheetId__c}</url>
+</WebLink>

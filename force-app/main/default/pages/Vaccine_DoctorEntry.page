@@ -1,0 +1,28 @@
+<apex:page docType="html-5.0" standardController="Animal__c" extensions="VaccineCert_Controller" sidebar="false" showHeader="false">
+    <head><style type="text/css">
+        html,body{width: 100%;}
+        #labelTable {
+        	margin: 0 auto;
+            border-spacing:0;
+            font-family: "sans-serif";
+            font-size:15px;
+        	border: 1px black solid;
+        	border-collapse:collapse;}
+        .blankRow{height:10px !important;}
+	</style></head>
+
+    
+    <table id="labelTable">
+        <apex:form >
+        	<tr class="blankRow"><td colspan="2"></td></tr> 
+          	<tr><td colspan="2" align="center">Please enter doctor's name below.</td></tr>
+            <tr border-bottom="1" ><td colspan="2" align="center"><apex:input value="{!doctorValue}" id="doctorInput"/></td></tr>
+<!--      		<tr class="blankRow"><td colspan="2"></td></tr>  
+ 			<tr><td align="right">Select report:      </td><td> <apex:selectList value="{!reportId}" size="1" style="width:150px"><apex:selectOptions value="{!reps}"/></apex:selectList><p/>     </td> </tr>
+ 			<tr><td align="right">Select time of day:    </td><td>  <apex:selectList value="{!freq}" size="1" style="width:150px"><apex:selectOptions value="{!items}"/></apex:selectList><p/></td> </tr>
+-->     		<tr><td colspan="2" align="center"><apex:commandButton value="Generate Certificate" action="{!genCert}"/></td> </tr>
+<!--        	<tr class="blankRow"><td colspan="2"></td></tr> -->
+  		</apex:form>
+    </table>
+    
+</apex:page>

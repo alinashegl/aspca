@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Discharge_Inclusion__c</fullName>
+    <externalId>false</externalId>
+    <formula>CASE(Medical_Condition__c, &quot;Babesia&quot;, &quot;Yes&quot;,
+&quot;Canine Distemper&quot;,&quot;Yes&quot;, &quot;Canine Parvovirus&quot;,&quot;Yes&quot;, &quot;Demodex&quot;,&quot;Yes&quot;, &quot;Dental Disease&quot;,&quot;Yes&quot;, &quot;Dental Fracture&quot;,&quot;Yes&quot;, &quot;Ehrlichia&quot;,&quot;Yes&quot;, &quot;Feline Immunodeficiency Virus&quot;,&quot;Yes&quot;, &quot;Feline Leukemia&quot;,&quot;Yes&quot;, &quot;Giardia&quot;,&quot;Yes&quot;, &quot;Hookworms&quot;,&quot;Yes&quot;, &quot;Mass&quot;,&quot;Yes&quot;, &quot;Roundworms&quot;,&quot;Yes&quot;, &quot;Whipworms&quot;,&quot;Yes&quot;,TEXT(Include_in_discharge__c) )</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Discharge Inclusion</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

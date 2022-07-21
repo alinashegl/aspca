@@ -1,0 +1,238 @@
+<apex:page renderAs="pdf" controller="ClsEvidenceInformation">
+    <!-- Stylesheets -->
+    <apex:stylesheet value="{!$Resource.PDFDocumentStyle}" />
+    
+      <c:PDFHeaderFooter type="header" position="left">
+         <table width="100%" cellspacing="0" cellpadding="0" style="font-weigth:bold">
+        <tr> 
+            <td><img src="{!$Resource.Logo}" width="160" height="55"/></td>
+            <td width="30%" style="vertical-align:bottom"><b>ASPCA Case # </b><span style="text-decoration:underline">{!lstEvidence[0].Case__r.casenumber}</span></td>
+          </tr>
+          <tr> 
+            <td><b>520 8th Avenue, 7th Floor</b></td>
+            <td><b>Primary Agency</b> <span style="text-decoration:underline">{!lstEvidence[0].case__r.account.name}</span></td>
+          </tr>
+          <tr> 
+            <td><b>New York, NY 10018</b></td>
+            <td><b>Agency Case # </b> {!lstEvidence[0].case__r.Agency_Case__c}</td>
+          </tr>
+          <tr>
+           <td  colspan="2">
+           <h2 style="text-align: center;">
+                <strong>Evidence Receipt</strong>
+            </h2>
+            
+            </td>
+          </tr>
+    </table>
+    
+    </c:PDFHeaderFooter>
+   
+
+
+
+    <!-- All Pages Header -->
+    <c:PDFHeaderFooter type="header" position="left">
+     <br> </br>
+      <table width="100%" cellspacing="0" cellpadding="0" style="font-weigth:bold">
+        <tr> 
+       
+            <td><img src="{!$Resource.Logo}" width="160" height="55"/></td>
+            <td width="30%" style="vertical-align:bottom"><b>ASPCA Case # </b><span style="text-decoration:underline">{!lstEvidence[0].Case__r.casenumber}</span></td>
+          </tr>
+          <tr> 
+            <td><b>520 8th Avenue, 7th Floor</b></td>
+            <td><b>Primary Agency</b> <span style="text-decoration:underline">{!lstEvidence[0].case__r.account.name}</span></td>
+          </tr>
+          <tr> 
+            <td><b>New York, NY 10018</b></td>
+            <td><b>Agency Case # </b> {!lstEvidence[0].case__r.Agency_Case__c}</td>
+          </tr>
+          <tr>
+           <td  colspan="2">
+           <h2 style="text-align: center;">
+                <strong>Evidence Receipt</strong>
+            </h2>
+            
+            </td>
+          </tr>
+    </table>
+  
+    <table border="1" width="98%" align="center"  >   
+            <!--  PP: 10/07/13 - Per call with ASPCA Client - changed label Evidence Number to Item # -->
+            <tr>
+                <td  align="center" style="width:20%;background-color: #FF7800;">Item #</td>
+                <td  align="center" style="width:15%;background-color: #FF7800;">Category</td>
+                <td  align="center" style="width:15%;background-color: #FF7800;">Type</td>
+                <td  align="center"  style="width:50%;background-color: #FF7800;">Description</td>
+            </tr>
+       
+        </table>
+ 
+    </c:PDFHeaderFooter>
+   
+
+    <!-- All Pages Footer -->
+     
+     
+    <c:PDFHeaderFooter type="footer" position="center">
+      
+       <div align="center" style="border:1px solid black;margin:0 auto;;width:97%;">
+             <p ><strong><i>I hereby acknowledge that the above list represents all property released from my possession and that I have received a copy of this receipt.</i></strong></p>
+            <TABLE width="100%" cellspacing="1" cellpadding="1" style="font-weigth:bold;">
+                <tr> 
+                    <td width="40%"><b><i>Print Name:</i></b> _____________________</td>
+                    <td width="35%"><b><i>Signature:</i></b> ___________________</td>
+                    <td width="25%"><b><i>Date:</i></b> ______________</td>
+                  </tr>       
+            </TABLE>
+        </div>
+        <br/><br/>
+         <table width="97%" align="center"  border="1">
+          <thead>
+             <tr>
+                <th  align="center" style="width:30%">RECEIVED BY:</th>
+                <th  align="center" style="width:55%">REASON</th>
+                <th  align="center" style="width:15%">DATE &#38; TIME</th>
+             </tr>
+          </thead>
+          <tbody>
+         <tr>
+             <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> 
+         </tr>
+         <tr>
+             <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> 
+         </tr>
+         <tr>
+             <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> 
+         </tr>
+         <tr>
+             <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> 
+         </tr>
+       
+         
+         </tbody>
+         </table>
+        <br></br>
+       
+        <table width="97%" align="center" cellspacing="1" cellpadding="1">
+            <tr> 
+                <td width="20%"><b>Send Report To:</b></td>
+                <td width="65%">___________________________</td>
+                <td >&nbsp;</td>
+              </tr>
+              <tr> 
+                <td>&nbsp;</td>
+                <td>___________________________</td>
+                <td>&nbsp;</td>
+              </tr>
+              <tr> 
+                <td>&nbsp;</td>
+                <td>___________________________</td>
+                <td></td>
+              </tr>
+        </table>    
+        <!--
+        <br></br>
+        <br></br>     
+        -->
+        <div align="right">Page <span class="pageNumber"/> of <span class="pageCount"/> </div>
+
+
+    </c:PDFHeaderFooter>
+
+ 
+         
+         
+        
+        
+     <table class="mytblclass" border="1" width="100%"  valign="top"> 
+            <!--  PP: 10/07/13 - Per call with ASPCA Client - changed label Evidence Number to Item # --> 
+            <tr>
+                <td  align="center" style="width:20%;background-color: #FF7800;">Item #</td>
+                <td  align="center" style="width:15%;background-color: #FF7800;">Category</td>
+                <td  align="center" style="width:15%;background-color: #FF7800;">Type</td>
+                <td  align="center"  style="width:50%;background-color: #FF7800;">Description</td>
+            </tr>
+       
+         
+            <apex:repeat value="{!lstEvidence}" var="evd" >                            
+                    <tr >
+                        <td align="left" style="width:20%;" >{!evd.Name}</td>
+                        <td align="left" style="width:15%;">{!evd.Evidence_Category__c}</td>
+                        <td align="left" style="width:15%;">{!evd.Evidence_type__c}</td>
+                        <td align="left" style="width:*;">{!evd.Evidence_Description__c}</td>
+                    </tr> 
+            </apex:repeat>
+        
+    </table>
+    <!--
+    <c:PDFHeaderFooter type="footer" position="right" showPageNumbers="true"/>
+-->
+    <!-- Content -->
+    
+
+    <!-- Last Page Footer -->
+    <c:PDFHeaderFooter type="footer" position="center" >
+    <div align="center" style="border:1px solid black;margin:0 auto;;width:97%;">
+            <p style="margin-left: 1pt;"><strong><i>I hereby acknowledge that the above list represents all property released from my possession and that I have received a copy of this receipt.</i></strong></p>
+            <TABLE width="100%" cellspacing="1" cellpadding="1" style="font-weigth:bold;margin-left: 1pt;">
+                <tr> 
+                    <td width="40%"><b><i>Print Name:</i></b> _____________________</td>
+                    <td width="35%"><b><i>Signature:</i></b> ___________________</td>
+                    <td width="25%"><b><i>Date:</i></b> ______________</td>                    
+                  </tr>       
+            </TABLE>
+        </div>
+        <br/><br/>
+         <table width="97%" align="center" cellspacing="1" cellpadding="1" border="1">
+          <thead>
+             <tr>
+                <th  align="center" style="width:30%">RECEIVED BY:</th>
+                <th  align="center" style="width:55%">REASON</th>
+                <th  align="center" style="width:15%">DATE &#38; TIME</th>                
+             </tr>
+          </thead>
+          <tbody>
+         <tr>
+             <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> 
+         </tr>
+         <tr>
+             <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> 
+         </tr>
+         <tr>
+             <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> 
+         </tr>
+         <tr>
+             <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> 
+         </tr>
+       
+         
+         </tbody>
+         </table>
+        <br></br>
+       
+        <table align="center" width="97%" cellspacing="1" cellpadding="1">
+            <tr> 
+                <td width="20%"><b>Send Report To:</b></td>
+                <td width="65%">___________________________</td>
+                <td >&nbsp;</td>
+              </tr>
+              <tr> 
+                <td>&nbsp;</td>
+                <td>___________________________</td>
+                <td>&nbsp;</td>
+              </tr>
+              <tr> 
+                <td>&nbsp;</td>
+                <td>___________________________</td>
+                <td></td>
+              </tr>
+        </table>    
+        <!--
+        <br></br>
+        <br></br>  -->
+     <div align="right">Page <span class="pageNumber"/> of <span class="pageCount"/> </div>
+    </c:PDFHeaderFooter>
+   
+</apex:page>

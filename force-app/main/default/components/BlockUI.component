@@ -1,0 +1,28 @@
+<apex:component >
+    <apex:includeScript value="{!URLFOR($Resource.BlockUI, 'jquery.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.BlockUI, 'jquery-ui.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.BlockUI, 'jquery.blockUI.js')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.BlockUI, 'jquery-ui.css')}" />
+    
+    <script>
+     j$ = jQuery.noConflict(); 
+
+    function blockMe() {
+        j$.blockUI({ css: {
+            border: 'none',
+            padding: '15px',
+            backgroundColor: '#000',
+            '-webkit-border-radius': '10px',
+            '-moz-border-radius': '10px',
+            opacity: .5,
+            color: '#fff'
+            } }); 
+
+      }
+      
+     function unBlockMe() {
+         j$.unblockUI();
+     }
+     
+    </script>
+</apex:component>

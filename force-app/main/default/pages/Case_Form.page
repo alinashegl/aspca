@@ -1,0 +1,181 @@
+<apex:page standardController="Case" renderAs="pdf" extensions="CaseContactRoleExtension" applyBodyTag="false">
+<head><style type="text/css">
+    @page {
+    @bottom-left {font-family:"sans-serif"; font-size: 80%; content: "Investigative Report Page: " counter(page);};
+    @top-center {background: url('{!$Resource.IR_Logo}'); background-size: auto; background-repeat:no-repeat; background-position:center;};
+    margin-top: 70px; margin-left:15px; margin-right:15px;}
+    table {border-collapse: collapse; border-spacing: 0; border:1.5px solid black;padding: 7px;font-family:"sans-serif"; font-size:13.5px; page-break-inside: avoid;}
+    .blank{font-size: 13px; background-color:#8a949e; text-align: center;}
+    .hc{text-align:center;}
+    pre{font-family:"sans-serif"; margin: 0; white-space:pre-wrap;}
+</style></head>
+  	<table style="width:100%" border="1">
+    <tr>
+        <td><b>ASPCA CASE #:</b> {!objCase.CaseNumber}</td>
+        <td><b>REPORT COMPLETED BY: </b>{!objCase.Investigator__c}</td>
+        <td><b>DATE OF REPORT: </b>{!MONTH(TODAY())}/{!DAY(TODAY())}/{!YEAR(TODAY())}</td>
+    </tr>
+    <tr>
+        <td colspan="2"><b>LEAD AGENCY:</b> {!IF((ISNULL(objCase.Account.Name)),'Unknown', objCase.Account.Name)}</td>
+        <td><b>AGENCY CASE#:</b> {!IF((ISNULL(objCase.Agency_Case__c)),'Unknown', objCase.Agency_Case__c)}</td>
+    </tr>
+    <tr>
+        <td><b>ADDRESS:</b> {!IF((ISNULL(objCase.Account.BillingStreet)),'Unknown', objCase.Account.BillingStreet)}</td>
+        <td><b>CITY:</b> {!IF((ISNULL(objCase.Account.BillingCity)),'Unknown', objCase.Account.BillingCity)}</td>
+        <td><b>COUNTY:</b> {!IF((ISNULL(objCase.Account.County__c)),'Unknown', objCase.Account.County__c)}</td>
+    </tr>
+    <tr>
+        <td><b>STATE: </b>{!IF((ISNULL(objCase.Account.BillingState)),'Unknown', objCase.Account.BillingState)}</td>
+        <td><b>ZIP: </b>{!IF((ISNULL(objCase.Account.BillingPostalCode)),'Unknown', objCase.Account.BillingPostalCode)}</td>
+        <td class="blank"><i>Intentionally left blank</i></td>
+    </tr>
+    <tr>
+        <td colspan="2"><b>AGENCY CONTACT: </b>{!IF((ISNULL(objCase.Contact.Name)),'Unknown', objCase.Contact.Name)} </td>
+        <td><b>POSITION/TITLE: </b>{!IF((ISNULL(objCase.Contact.Title)),'Unknown', objCase.Contact.Title)}</td>
+    </tr>
+    <tr>
+        <td><b>OFC PH: </b>{!IF((ISNULL(objCase.Contact.Phone)),'Unknown', objCase.Contact.Phone)}</td>
+        <td><b>CELL: </b>{!IF((ISNULL(objCase.Contact.MobilePhone)),'Unknown', objCase.Contact.MobilePhone)}</td>
+        <td><b>FAX: </b>{!IF((ISNULL(objCase.Contact.Fax)),'Unknown', objCase.Contact.Fax)}</td>
+    </tr>
+    <tr>
+        <td colspan="2"><b>EMAIL: </b>{!IF((ISNULL(objCase.Contact.Email)),'Unknown', objCase.Contact.Email)}</td>
+        <td class="blank"><i>Intentionally left blank</i></td>
+    </tr>
+    </table>  
+    <br/>
+    
+<!--<div style="page-break-after: always"/> -->    
+    <apex:repeat value="{!ContactRoles}" var="ContactRole">
+    <table style="width:100%" border="1">
+        <th colspan="5" align="center">SUBJECT INFORMATION</th>
+        <tr style="width:100%">
+            <td colspan="2"><b>NAME:</b> {!IF((ISNULL(ContactRole.Contact.Name)),'Unknown', ContactRole.Contact.Name)}</td>
+            <td><b>SEX:</b> {!IF((ISNULL(ContactRole.Contact.Gender__c)),'Unknown', ContactRole.Contact.Gender__c)}</td>
+            <td colspan="2"><b>ALIAS:</b> {!IF((ISNULL(ContactRole.Contact.Alias__c)),'Unknown', ContactRole.Contact.Alias__c)}</td>
+        </tr>
+        <tr>
+            <td colspan="2"><b>ADDRESS:</b> {!IF((ISNULL(ContactRole.Contact.MailingStreet)),'Unknown', ContactRole.Contact.MailingStreet)}</td>
+            <td colspan="2"><b>CITY:</b> {!IF((ISNULL(ContactRole.Contact.MailingCity)),'Unknown', ContactRole.Contact.MailingCity)}</td>
+            <td><b>COUNTY:</b> {!IF((ISNULL(ContactRole.Contact.County__c)),'Unknown', ContactRole.Contact.County__c)}</td>
+        </tr>
+        <tr>
+            <td><b>STATE:</b> {!IF((ISNULL(ContactRole.Contact.MailingState)),'Unknown', ContactRole.Contact.MailingState)}</td>
+            <td><b>ZIP:</b> {!IF((ISNULL(ContactRole.Contact.MailingPostalCode)),'Unknown', ContactRole.Contact.MailingPostalCode)}</td>
+            <td><b>PH:</b> {!IF((ISNULL(ContactRole.Contact.Phone)),'Unknown', ContactRole.Contact.Phone)}</td>
+            <td><b>CELL:</b> {!IF((ISNULL(ContactRole.Contact.MobilePhone)),'Unknown', ContactRole.Contact.MobilePhone)}</td>
+            <td class="blank"><i>Intentionally left blank</i></td>
+        </tr>
+        <tr>
+        	<td colspan="2"><b>DL#:</b> {!IF((ISNULL(ContactRole.Contact.Drivers_License_or_State_ID__c)),'Unknown', ContactRole.Contact.Drivers_License_or_State_ID__c)}</td>
+        	<td><b>DL State:</b> {!IF((ISNULL(ContactRole.Contact.License_or_ID_State__c)),'Unknown', ContactRole.Contact.License_or_ID_State__c)}</td>
+        	<td colspan="2"><b>EMAIL:</b> {!IF((ISNULL(ContactRole.Contact.Email)),'Unknown', ContactRole.Contact.Email)}</td>
+        </tr>
+        <tr>
+            <td colspan="5" class="blank"><i>IF A BUSINESS OR ORGANIZATION IS ASSOCIATED TO THE SUBJECT PLEASE LIST INFORMATION BELOW:</i></td>
+        </tr>
+        <tr>
+            <td colspan="3"><b>SUBJECT AGENCY:</b> {!IF((ISNULL(ContactRole.Contact.Account.Name)),'Unknown', ContactRole.Contact.Account.Name)}</td>
+            <td colspan="2"><b>AGENCY WEBSITE:</b> {!IF((ISNULL(ContactRole.Contact.Account.Website)),'Unknown', ContactRole.Contact.Account.Website)}</td>
+        </tr>
+        <tr>
+            <td colspan="2"><b>ADDRESS:</b> {!IF((ISNULL(ContactRole.Contact.Account.BillingStreet)),'Unknown', ContactRole.Contact.Account.BillingStreet)}</td>
+            <td colspan="2"><b>CITY:</b> {!IF((ISNULL(ContactRole.Contact.Account.BillingCity)),'Unknown', ContactRole.Contact.Account.BillingCity)}</td>
+            <td><b>COUNTY:</b> {!IF((ISNULL(ContactRole.Contact.Account.County__c)),'Unknown', ContactRole.Contact.Account.County__c)}</td>
+        </tr>
+        <tr>
+            <td><b>STATE:</b> {!IF((ISNULL(ContactRole.Contact.Account.BillingState)),'Unknown', ContactRole.Contact.Account.BillingState)}</td>
+            <td><b>ZIP:</b> {!IF((ISNULL(ContactRole.Contact.Account.BillingPostalCode)),'Unknown', ContactRole.Contact.Account.BillingPostalCode)}</td>
+            <td colspan="2"><b>PH:</b> {!IF((ISNULL(ContactRole.Contact.Account.Phone)),'Unknown', ContactRole.Contact.Account.Phone)}</td>
+            <!--<td ><b>CELL:</b> </td>-->
+            <td><b>EIN#:</b> {!IF((ISNULL(ContactRole.Contact.Account.EIN_Number__c)),'Unknown', ContactRole.Contact.Account.EIN_Number__c)}</td>
+        </tr>
+        </table><br/>
+        </apex:repeat>
+    
+    <apex:repeat value="{!Locations}" var="Scene">
+    <table style="width:100%" border="1">
+        <th colspan="5" align="center">INCIDENT INFORMATION</th>
+        <tr>  
+            <td><b>ADDRESS:</b> {!IF((ISNULL(Scene.Address_1__c)),'Unknown', Scene.Address_1__c)} {!Scene.Address_Line_2__c} </td>
+            <td><b>CITY:</b> {!Scene.City__c} </td>
+            <td><b>COUNTY:</b> {!Scene.County__c} </td>
+        </tr>
+        <tr>  
+            <td><b>STATE:</b> {!Scene.State__c}</td>
+            <td><b>ZIP:</b> {!IF((ISNULL(Scene.Zipcode__c)),'Unknown', Scene.Zipcode__c)}</td>
+            <td><b>OTHER:</b> {!IF((ISNULL(Scene.Name)),'Unknown', Scene.Name)}</td>
+        </tr> 
+        </table> <br/>
+        </apex:repeat>
+
+    <apex:repeat value="{!CompRoles}" var="Comp">
+    <table style="width:100%" border="1">
+        <th colspan="5" align="center">COMPLAINANT INFORMATION</th>
+        <tr>  
+            <td colspan="2"><b>NAME:</b> {!Comp.Contact.Name} </td>
+            <td><b>PH:</b> {!IF((ISNULL(Comp.Contact.Phone)),'Unknown', Comp.Contact.Phone)}</td>
+            <td><b>CELL:</b> {!IF((ISNULL(Comp.Contact.MobilePhone)),'Unknown', Comp.Contact.MobilePhone)}</td>
+        </tr>
+        <tr>  
+            <td colspan="2"><b>ADDRESS:</b> {!IF((ISNULL(Comp.Contact.MailingStreet)),'Unknown', Comp.Contact.MailingStreet)}</td>
+            <td><b>CITY:</b> {!IF((ISNULL(Comp.Contact.MailingCity)),'Unknown', Comp.Contact.MailingCity)}</td>
+            <td><b>COUNTY:</b> {!IF((ISNULL(Comp.Contact.County__c)),'Unknown', Comp.Contact.County__c)}</td>
+        </tr>
+        <tr>  
+            <td><b>STATE:</b> {!IF((ISNULL(Comp.Contact.MailingState)),'Unknown', Comp.Contact.MailingState)}</td>
+            <td><b>ZIP:</b> {!IF((ISNULL(Comp.Contact.MailingPostalCode)),'Unknown', Comp.Contact.MailingPostalCode)}</td>
+            <td><b>EMAIL:</b> {!IF((ISNULL(Comp.Contact.Email)),'Unknown', Comp.Contact.Email)}</td>
+            <td class="blank"><i>Intentionally left blank</i></td>
+        </tr>
+        <tr>  
+            <td colspan="4"><b>COMPLAINT SUMMARY:</b> <pre>{!IF((ISNULL(objCase.Description)),'Unknown', objCase.Description)}</pre></td>
+        </tr>
+        </table><br/>
+        </apex:repeat>
+    
+    <apex:repeat value="{!WitnessRoles}" var="Witness">
+    <table style="width:100%" border="1">
+        <th colspan="5" align="center">WITNESS INFORMATION</th>
+        <tr>  
+            <td colspan="2"><b>NAME:</b> {!Witness.Contact.Name} </td>
+            <td><b>PH:</b> {!IF((ISNULL(Witness.Contact.Phone)),'Unknown', Witness.Contact.Phone)}</td>
+            <td><b>CELL:</b> {!IF((ISNULL(Witness.Contact.MobilePhone)),'Unknown', Witness.Contact.MobilePhone)}</td>
+        </tr>
+        <tr>  
+            <td colspan="2"><b>ADDRESS:</b> {!IF((ISNULL(Witness.Contact.MailingStreet)),'Unknown', Witness.Contact.MailingStreet)}</td>
+            <td><b>CITY:</b> {!IF((ISNULL(Witness.Contact.MailingCity)),'Unknown', Witness.Contact.MailingCity)}</td>
+            <td><b>COUNTY:</b> {!IF((ISNULL(Witness.Contact.County__c)),'Unknown', Witness.Contact.County__c)}</td>
+        </tr>
+        <tr>  
+            <td><b>STATE:</b> {!IF((ISNULL(Witness.Contact.MailingState)),'Unknown', Witness.Contact.MailingState)}</td>
+            <td><b>ZIP:</b> {!IF((ISNULL(Witness.Contact.MailingPostalCode)),'Unknown', Witness.Contact.MailingPostalCode)}</td>
+            <td><b>EMAIL:</b> {!IF((ISNULL(Witness.Contact.Email)),'Unknown', Witness.Contact.Email)}</td>
+            <td class="blank"><i>Intentionally left blank</i></td>
+        </tr>
+        <tr>  
+            <td colspan="4"><b>WITNESS SUMMARY:</b> </td>
+        </tr>
+        </table><br/>
+        </apex:repeat>    
+
+
+
+<apex:pageBlock >   
+    <apex:pageBlockTable value="{!Charges}" var="Charge" rendered="{!Charges.size > 0}" border="1" width="100%" headerClass="hc">
+        <apex:facet name="header">SUMMARY/LIST OF CHARGES</apex:facet>
+        <apex:column headerValue="CHARGE TITLE" value="{!Charge.Name}"/>
+        <apex:column headerValue="CHARGE CATEGORY" value="{!Charge.Charge_Level__c}"/>
+        <apex:column headerValue="COUNT(S)" value="{!Charge.Charge_Count__c}"/>
+    
+    
+    </apex:pageBlockTable>
+</apex:pageBlock> 
+    
+<br/><div align="center" style="font-family: sans-serif"><i>BEGIN REPORT NARRATIVE ON NEXT PAGE</i></div>
+
+<div style="page-break-after: always"/>
+<br/><div align="center" style="font-family: sans-serif"><b>REPORT NARRATIVE</b></div>
+
+    
+</apex:page>

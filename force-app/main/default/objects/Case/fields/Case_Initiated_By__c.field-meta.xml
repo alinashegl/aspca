@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Case_Initiated_By__c</fullName>
+    <externalId>false</externalId>
+    <label>Case Initiated By</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Case_Initiated_By_Partner__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>NYPD</fullName>
+                <default>false</default>
+                <label>NYPD</label>
+            </value>
+            <value>
+                <fullName>ADA</fullName>
+                <default>false</default>
+                <label>ADA</label>
+            </value>
+            <value>
+                <fullName>AAH</fullName>
+                <default>false</default>
+                <label>AAH</label>
+            </value>
+            <value>
+                <fullName>CE</fullName>
+                <default>false</default>
+                <label>CE</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>ACC</fullName>
+                <default>false</default>
+                <label>ACC</label>
+            </value>
+            <value>
+                <fullName>AMC</fullName>
+                <default>false</default>
+                <label>AMC</label>
+            </value>
+            <value>
+                <fullName>Blue Pearl BK</fullName>
+                <default>false</default>
+                <label>Blue Pearl BK</label>
+            </value>
+            <value>
+                <fullName>Blue Pearl D</fullName>
+                <default>false</default>
+                <label>Blue Pearl D</label>
+            </value>
+            <value>
+                <fullName>Blue Pearl M</fullName>
+                <default>false</default>
+                <label>Blue Pearl M</label>
+            </value>
+            <value>
+                <fullName>Blue Pearl Q</fullName>
+                <default>false</default>
+                <label>Blue Pearl Q</label>
+            </value>
+            <value>
+                <fullName>GSIVS</fullName>
+                <default>false</default>
+                <label>GSIVS</label>
+            </value>
+            <value>
+                <fullName>VEG</fullName>
+                <default>false</default>
+                <label>VEG</label>
+            </value>
+            <value>
+                <fullName>VERG</fullName>
+                <default>false</default>
+                <label>VERG</label>
+            </value>
+            <value>
+                <fullName>VERG North</fullName>
+                <default>false</default>
+                <label>VERG North</label>
+            </value>
+            <value>
+                <fullName>VERG South</fullName>
+                <default>false</default>
+                <label>VERG South</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Yes</controllingFieldValue>
+            <valueName>ACC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Yes</controllingFieldValue>
+            <valueName>AMC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Yes</controllingFieldValue>
+            <valueName>Blue Pearl BK</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Yes</controllingFieldValue>
+            <valueName>Blue Pearl D</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Yes</controllingFieldValue>
+            <valueName>Blue Pearl M</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Yes</controllingFieldValue>
+            <valueName>Blue Pearl Q</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Yes</controllingFieldValue>
+            <valueName>GSIVS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Yes</controllingFieldValue>
+            <valueName>VEG</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Yes</controllingFieldValue>
+            <valueName>VERG</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Yes</controllingFieldValue>
+            <valueName>VERG North</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Yes</controllingFieldValue>
+            <valueName>VERG South</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>No</controllingFieldValue>
+            <valueName>NYPD</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>No</controllingFieldValue>
+            <valueName>ADA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>No</controllingFieldValue>
+            <valueName>AAH</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>No</controllingFieldValue>
+            <valueName>CE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>No</controllingFieldValue>
+            <valueName>Other</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

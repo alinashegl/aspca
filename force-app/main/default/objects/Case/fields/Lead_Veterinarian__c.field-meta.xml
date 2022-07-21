@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Lead_Veterinarian__c</fullName>
+    <externalId>false</externalId>
+    <label>Lead Veterinarian</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>AL</fullName>
+                <default>false</default>
+                <label>AL</label>
+            </value>
+            <value>
+                <fullName>JB</fullName>
+                <default>false</default>
+                <label>JB</label>
+            </value>
+            <value>
+                <fullName>LNN</fullName>
+                <default>false</default>
+                <label>LNN</label>
+            </value>
+            <value>
+                <fullName>RR</fullName>
+                <default>false</default>
+                <label>RR</label>
+            </value>
+            <value>
+                <fullName>EP</fullName>
+                <default>false</default>
+                <label>EP</label>
+            </value>
+            <value>
+                <fullName>KJ</fullName>
+                <default>false</default>
+                <label>KJ</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

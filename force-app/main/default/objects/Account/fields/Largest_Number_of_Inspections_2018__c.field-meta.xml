@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Largest_Number_of_Inspections_2018__c</fullName>
+    <externalId>false</externalId>
+    <label>Largest Number of Inspections (2018)</label>
+    <summarizedField>Puppy_Mill_Inspection__c.Inspection_Count__c</summarizedField>
+    <summaryFilterItems>
+        <field>Puppy_Mill_Inspection__c.Inspection_Year__c</field>
+        <operation>equals</operation>
+        <value>2018</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Puppy_Mill_Inspection__c.Puppy_Mill_Agency__c</summaryForeignKey>
+    <summaryOperation>max</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

@@ -8,8 +8,8 @@ trigger CaseTrigger on Case (after insert, after update, before insert, before u
 		CaseTriggerHandler.updateHandler(Trigger.new, Trigger.oldMap);
     }
     
-    if(Trigger.isInsert && Trigger.isBefore){
-        ANH.AutoNumberHelper.OnBeforeInsert(Trigger.new);
-    }
+//    if(Trigger.isInsert && Trigger.isBefore){
+//        ANH.AutoNumberHelper.OnBeforeInsert(Trigger.new);
+//    }
         
 }

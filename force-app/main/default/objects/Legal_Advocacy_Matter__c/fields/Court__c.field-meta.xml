@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Court__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <inlineHelpText>The court relies on the state, jurisdiction, and district/circuit. If you are unsure, type the first three letters of the state and the court options will display.</inlineHelpText>
+    <label>Court</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Court_Name__c.Federal_State__c</field>
+            <operation>contains</operation>
+            <valueField>$Source.Jurisdiction__c</valueField>
+        </filterItems>
+        <filterItems>
+            <field>Court_Name__c.State__c</field>
+            <operation>contains</operation>
+            <valueField>$Source.State__c</valueField>
+        </filterItems>
+        <filterItems>
+            <field>Court_Name__c.District_Circuit__c</field>
+            <operation>equals</operation>
+            <valueField>$Source.District_Circuit__c</valueField>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Court_Name__c</referenceTo>
+    <relationshipLabel>Legal Advocacy Matters</relationshipLabel>
+    <relationshipName>Legal_Advocacy_Matters</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

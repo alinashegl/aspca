@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Medical</fullName>
+        <default>false</default>
+        <label>Medical</label>
+    </customValue>
+    <customValue>
+        <fullName>Behavior</fullName>
+        <default>false</default>
+        <label>Behavior</label>
+    </customValue>
+    <customValue>
+        <fullName>Medical/Behavior</fullName>
+        <default>false</default>
+        <label>Medical/Behavior</label>
+    </customValue>
+    <customValue>
+        <fullName>Quality of Life</fullName>
+        <default>false</default>
+        <label>Quality of Life</label>
+    </customValue>
+    <customValue>
+        <fullName>State-Reportable Disease</fullName>
+        <default>false</default>
+        <label>State-Reportable Disease</label>
+    </customValue>
+    <masterLabel>Euthanasia Reason</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>
