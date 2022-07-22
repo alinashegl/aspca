@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Fenbendazole_cannot_be_blank</fullName>
-    <active>true</active>
-    <description>Fenbendazole cannot be blank if Amount-1 in ml, Strength-1 or Administered-1 have values</description>
-    <errorConditionFormula>(!ISBLANK(Amount_1__c) || !ISPICKVAL(Administered_1__c, &quot;&quot;) || !ISBLANK(Strength_1__c)) &amp;&amp; Fenbendazole__c = false</errorConditionFormula>
-    <errorMessage>Fenbendazole cannot be blank if any of its corresponding fields (Amount-1 in ml, Strength-1 or Administered-1) have values</errorMessage>
-</ValidationRule>

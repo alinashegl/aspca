@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Pyrantel_Pamoate_PO_cannot_be_blank</fullName>
-    <active>true</active>
-    <description>Pyrantel Pamoate PO cannot be blank if Amount-4 in ml, Strength-4 or Administered-4 have values</description>
-    <errorConditionFormula>(!ISBLANK(Amount_4__c) || !ISPICKVAL(Administered_4__c, &quot;&quot;) || !ISBLANK(Strength_4__c)) &amp;&amp; Pyrantel_Pamoate_PO__c = false</errorConditionFormula>
-    <errorMessage>Pyrantel Pamoate PO cannot be blank if any of its corresponding fields (Amount-4 in ml, Strength-4 or Administered-4) have values</errorMessage>
-</ValidationRule>

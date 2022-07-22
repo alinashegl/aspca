@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Other_Vaccine_Desc_cannot_be_left_blank</fullName>
-    <active>true</active>
-    <description>If &quot;Other Vaccine&quot; is checked, &quot;Other Vaccine Desc&quot; must not be left blank</description>
-    <errorConditionFormula>Other_Vaccine__c  = true  &amp;&amp;  ISBLANK(Other_Vaccine_Desc__c)</errorConditionFormula>
-    <errorMessage>Other Vaccine Description cannot be left blank if &apos;Other Vaccine&apos; is checked</errorMessage>
-</ValidationRule>

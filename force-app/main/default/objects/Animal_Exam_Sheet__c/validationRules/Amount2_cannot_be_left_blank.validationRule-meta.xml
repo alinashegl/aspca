@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Amount2_cannot_be_left_blank</fullName>
-    <active>true</active>
-    <description>If &quot;Ponazuril&quot; is checked, &quot;Amount-2 in ml&quot; must not be left blank</description>
-    <errorConditionFormula>Ponazuril__c = true  &amp;&amp;  ISBLANK(Amount_2__c)</errorConditionFormula>
-    <errorMessage>Please specify a Ponazuril amount</errorMessage>
-</ValidationRule>
