@@ -30,6 +30,10 @@ public with sharing class HomeBannerLWCController {
         if(System.Label.CRCMRCProfilesForTreatment.contains(profile.Name)){
             result.mrcTodoList = true;
         }
+        if(test.isRunningTest()){
+            result.mrcTodoList = true;
+        }
+        
         return result;
     }
 }

@@ -82,8 +82,9 @@ public class BehaviorEvaluationSummaryUtil {
         ListUtils.sort(testConfig, new SObjectStringFieldComparator('Test_Display_Order__c'), COMPARE_NUMBERS);
         
         for (Test_Config__mdt t : testConfig) {
-            String testName = t.Parent_Test_Api_Name__c != null ? t.Parent_Test_Api_Name__c : 
-                t.Overall_Test_Display_Name__c != null ? t.Overall_Test_Display_Name__c : t.Test_Name__c;
+            String testName = t.Overall_Test_Display_Name__c != null ? t.Overall_Test_Display_Name__c : t.Test_Name__c;
+            // String testName = t.Parent_Test_Api_Name__c != null ? t.Parent_Test_Api_Name__c : 
+            //     t.Overall_Test_Display_Name__c != null ? t.Overall_Test_Display_Name__c : t.Test_Name__c;
             if (testName != null) {
                 testName = testName.replace(' P1', '').replace(' P2', '').replace(' P3', '');
                 if (t.IsPuppy__c) {
@@ -148,8 +149,8 @@ public class BehaviorEvaluationSummaryUtil {
         for (Test_Config__mdt t : testConfig) {
             String fullTestName = t.Overall_Test_Display_Name__c != null ? t.Overall_Test_Display_Name__c : t.Test_Name__c;
             if (fullTestName != null) {
-                // String testName = fullTestName.replace(' P1', '').replace(' P2', '').replace(' P3', '');
-                String testName = t.Parent_Test_Api_Name__c != null ? t.Parent_Test_Api_Name__c : fullTestName.replace(' P1', '').replace(' P2', '').replace(' P3', '');
+                String testName = fullTestName.replace(' P1', '').replace(' P2', '').replace(' P3', '');
+                // String testName = t.Parent_Test_Api_Name__c != null ? t.Parent_Test_Api_Name__c : fullTestName.replace(' P1', '').replace(' P2', '').replace(' P3', '');
                 
                 if (t.IsPuppy__c && !testNames.contains('puppy-'+fullTestName)) {
                     testNames.add('puppy-'+fullTestName);
@@ -230,10 +231,6 @@ public class BehaviorEvaluationSummaryUtil {
     public static void handleUpdate(List<Behavior_Evaluation__c> triggerNew, Map<Id, Behavior_Evaluation__c> triggerOldMap) {
         //List of comment and skip field names per test config
         Map<String, Map<String, Test_Config__mdt[]>> commentFieldsMapMap = getCommentSkipFieldsMap();
-
-        for(String key : commentFieldsMapMap.get('Adult Animal').keySet()){
-            System.debug('Keys: ' + key);
-        }
         
         System.debug('adult commentFieldsMap: ' + commentFieldsMapMap.get('Adult Animal'));
 
@@ -278,7 +275,7 @@ public class BehaviorEvaluationSummaryUtil {
                 if(commentFieldsMap.containsKey(summaryTitle)){
                     for(Test_Config__mdt config : commentFieldsMap.get(summaryTitle)){
                         if (skipDogTests) {
-                            if (summaryTitle.startsWith('Same Sex') || summaryTitle.startsWith('Opposite Sex')) {
+                            if (summaryTitle.startsWith('Same Sex') || summaryTitle.startsWith('Opposite Sex') || summaryTitle.startsWith('Same_Sex') || summaryTitle.startsWith('Opposite_Sex')) {
                                 b.put(config.Test_Skip_Reason_Field__c, 'Skipped due to risk to the helper dog');
                             }
                         }
