@@ -137,7 +137,7 @@ public class BehaviorEvaluationMatrixController {
 
             //Iterate through Skipped fields to pull out skip reason
             if (fieldName.contains('Skipped')){
-                List<Test_Config__mdt> testConfigSkip;
+                List<Test_Config__mdt> testConfigSkip = new List<Test_Config__mdt>();
                 switch on behaviorEvaluation.Evaluation_SubType__c {
                     when 'Puppy' {
                         testConfigSkip = [SELECT Test_Name__c,Overall_Test_Display_Name__c FROM Test_Config__mdt
@@ -157,7 +157,7 @@ public class BehaviorEvaluationMatrixController {
                     }
                 }
                 
-                if(testConfigSkip != null){
+                if(testConfigSkip.size() > 0){
                     for (Test_Config__mdt testMetadata : testConfigSkip){
                         // for (Test_Config__mdt testMetadata : [SELECT Test_Skip_Reason_Field__c,MasterLabel,IsPuppy__c,Test_Name__c,Overall_Test_Display_Name__c FROM Test_Config__mdt
                         //                                       WHERE Test_Skip_Reason_Field__c = :fieldName AND IsPuppy__c = :evalType LIMIT 1 ]){
@@ -238,7 +238,7 @@ public class BehaviorEvaluationMatrixController {
         // Iterate through subtests in testAndDisplayMap and order by Test_Display_Order__c
         // Add subtest and order combinations into testOrder Map
         for (String subtest : testAndDisplayValues.keySet()){
-            List<Test_Config__mdt> testMetadata;
+            List<Test_Config__mdt> testMetadata = new List<Test_Config__mdt>();
             switch on behaviorEvaluation.Evaluation_SubType__c {
                 when 'Puppy' {
                     testMetadata = [SELECT Test_Display_Order__c,Test_Name__c FROM Test_Config__mdt
@@ -264,7 +264,7 @@ public class BehaviorEvaluationMatrixController {
                 testOrder.put(Integer.valueOf(testMetadata[0].Test_Display_Order__c), testMetadata[0].Test_Name__c);
             }
             else{
-                List<Test_Config__mdt> overallTestMetadata;
+                List<Test_Config__mdt> overallTestMetadata = new List<Test_Config__mdt>();
                 switch on behaviorEvaluation.Evaluation_SubType__c {
                     when 'Puppy' {
                         overallTestMetadata = [SELECT Test_Display_Order__c,Overall_Test_Display_Name__c FROM Test_Config__mdt
