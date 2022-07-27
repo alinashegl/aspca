@@ -361,13 +361,13 @@
                             </tr>
                         </thead>
                         <tr style="page-break-inside:avoid">
-                            <td>{!treat.Protocol_Name__c }</td>
+                            <td>{!treat.sProto.Protocol_Name__c }</td>
                             <!-- <td>{!treat.Status__c }</td> -->
-                            <td>{!treat.Fear_Best__c }</td>
-                            <td>{!treat.Fear_Worst__c }</td>
-                            <td>{!treat.Aggressive_Worst__c }</td>
-                            <td>{!treat.Arousal_Best__c }</td>
-                            <td>{!treat.Arousal_Worst__c}</td>
+                            <td>{!treat.fearBest.score }</td>
+                            <td>{!treat.fearWorst.score }</td>
+                            <td>{!treat.aggressiveWorst.score }</td>
+                            <td>{!treat.arousalBest.score }</td>
+                            <td>{!treat.arousalWorst.score}</td>
                         </tr>
                         <tr>
                             <td colspan="6">&nbsp;</td>
@@ -388,11 +388,11 @@
                                     </thead>
                                     <tbod>
                                         <tr>
-                                            <td>{!treat.Social_Best__c}</td>
-                                            <td>{!treat.Overall_Score__c}</td>
-                                            <td>{!treat.Needs_Review__c}</td>
-                                            <td>{!treat.IsSkipped__c}</td>
-                                            <td>({!treat.Overall_Score__c}) &nbsp; {!treat.Protocol_Notes__c}</td>
+                                            <td>{!treat.socialBest.score}</td>
+                                            <td>{!treat.sProto.Overall_Score__c}</td>
+                                            <td>{!treat.sProto.Needs_Review__c}</td>
+                                            <td>{!treat.sProto.IsSkipped__c}</td>
+                                            <td>({!treat.sProto.Overall_Score__c}) &nbsp; {!treat.sProto.Protocol_Notes__c}</td>
                                         </tr>
                                     </tbod>
                                 </table>

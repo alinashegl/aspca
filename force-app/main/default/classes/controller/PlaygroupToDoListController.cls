@@ -59,6 +59,7 @@ public with sharing class PlaygroupToDoListController {
             }
             List<Database.SaveResult> animalSR = Database.insert(animalPlaygroups, false);
             for(Database.SaveResult s : animalSR) {
+                System.debug('error: ' + s.getErrors());
                 if (!s.isSuccess()) {
                     sessionResult = 'Error creating animal playgroups';
                     break;
