@@ -44,10 +44,6 @@
             <type>user</type>
         </recipients>
         <recipients>
-            <recipient>jessica.rushin@aspca.org</recipient>
-            <type>user</type>
-        </recipients>
-        <recipients>
             <recipient>katie.summers@aspca.org</recipient>
             <type>user</type>
         </recipients>
@@ -69,10 +65,6 @@
         </recipients>
         <recipients>
             <recipient>crcsheltering@aspca.org</recipient>
-            <type>user</type>
-        </recipients>
-        <recipients>
-            <recipient>jessica.rushin@aspca.org</recipient>
             <type>user</type>
         </recipients>
         <recipients>
@@ -547,7 +539,7 @@
             <name>Preserve_Preliminary_Behavior_Grade2</name>
             <type>FieldUpdate</type>
         </actions>
-        <active>true</active>
+        <active>false</active>
         <description>This rule is run whenever &quot;Current Behavior Grade&quot; is altered, after the initial change.</description>
         <formula>AND(ISCHANGED(Current_Behavior_Grade__c ), NOT(ISBLANK(PRIORVALUE(Current_Behavior_Grade__c))))</formula>
         <triggerType>onAllChanges</triggerType>
