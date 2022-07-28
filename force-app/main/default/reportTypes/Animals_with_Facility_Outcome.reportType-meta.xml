@@ -6,7 +6,7 @@
     <description>Animals with Facility/Outcome</description>
     <join>
         <outerJoin>true</outerJoin>
-        <relationship>Animal_Locations__r</relationship>
+        <relationship>Facilities_Outcomes__r</relationship>
     </join>
     <label>Animals with Facility/Outcome</label>
     <sections>
@@ -1321,107 +1321,107 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Id</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <table>Animal__c.Facilities_Outcomes__r</table>
         </columns>
         <columns>
             <checkedByDefault>true</checkedByDefault>
             <field>Name</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <table>Animal__c.Facilities_Outcomes__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>CreatedDate</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <table>Animal__c.Facilities_Outcomes__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>CreatedBy</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <table>Animal__c.Facilities_Outcomes__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>LastModifiedDate</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <table>Animal__c.Facilities_Outcomes__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>LastModifiedBy</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <table>Animal__c.Facilities_Outcomes__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>LastActivityDate</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <table>Animal__c.Facilities_Outcomes__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>End_Date__c</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <table>Animal__c.Facilities_Outcomes__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Euthanasia_Reason__c</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <table>Animal__c.Facilities_Outcomes__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Facility_Outcome__c</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <table>Animal__c.Facilities_Outcomes__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Facility__c</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <table>Animal__c.Facilities_Outcomes__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Facility_or_Outcome__c</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <table>Animal__c.Facilities_Outcomes__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Kennel_Location_Text__c</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <table>Animal__c.Facilities_Outcomes__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Kennel_Location__c</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <table>Animal__c.Facilities_Outcomes__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Location_Duration__c</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <table>Animal__c.Facilities_Outcomes__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Point_of_Contact__c</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <table>Animal__c.Facilities_Outcomes__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Return_Reason__c</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <table>Animal__c.Facilities_Outcomes__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Start_Date__c</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <table>Animal__c.Facilities_Outcomes__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Follow_Up_Days__c</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <table>Animal__c.Facilities_Outcomes__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Follow_Up_Frequency__c</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <table>Animal__c.Facilities_Outcomes__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Modify_Schedule__c</field>
-            <table>Animal__c.Animal_Locations__r</table>
+            <table>Animal__c.Facilities_Outcomes__r</table>
         </columns>
         <masterLabel>Facilities/Outcomes</masterLabel>
     </sections>
