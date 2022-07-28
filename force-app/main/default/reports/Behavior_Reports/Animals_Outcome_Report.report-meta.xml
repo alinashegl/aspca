@@ -53,7 +53,7 @@
     <showGrandTotal>true</showGrandTotal>
     <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
-        <dateColumn>Animal__c$Behavior_Play_Pause_Date__c</dateColumn>
+        <dateColumn>Animal__c$CreatedDate</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>
     </timeFrameFilter>
 </Report>

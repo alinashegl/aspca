@@ -1,6 +1,5 @@
 import { LightningElement, wire } from 'lwc';
 import getDailyCare from '@salesforce/apex/DailyCareLWCController.getDailyCare';
-import SystemModstamp from '@salesforce/schema/APXT_BPM__Conductor__c.SystemModstamp';
 
 import GENERAL_REMINDERS_FIELD from '@salesforce/schema/Daily_Care__c.General_Reminders__c';
 import AM_REMINDERS_FIELD from '@salesforce/schema/Daily_Care__c.AM_Reminders__c';

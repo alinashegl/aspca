@@ -26,13 +26,6 @@ public with sharing class TreatmentSessionSelector extends SObjectSelector {
         };
     }
 
-    public override List<iOrderBy> GetDefaultOrderBy() {
-        return new List<iOrderBy> {
-                OrderBy.Ascending(Quote.Name) ,
-                OrderBy.Ascending(Quote.Id)
-        };
-    }
-
     public List<Treatment_Session__c> GetByIds(Set<Id> ids) {
         return queryById(ids);
     }
