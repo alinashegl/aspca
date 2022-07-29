@@ -247,7 +247,6 @@
                                     <th>Types(s) of Bite</th>
                                     <th>Clothing Covering Site</th>
                                     <th>Damage Done</th>
-                                    <!-- <th>Bite if not Prevented?</th> -->
                                 </tr>
                             </thead>
                             <tr>
@@ -309,9 +308,6 @@
                         <td >{!adp.playRating}</td>
                         <td>&nbsp;</td>
                         <td>
-                           <!--<apex:repeat value="{!adp.playLocation}" var="location">
-                                {!location}
-                           </apex:repeat>-->
                             {! IF(adp.playLocation.size > 0, adp.playLocation[0], '') }
                         </td>
                         <td>&nbsp;</td>
@@ -364,7 +360,7 @@
                             <tr style="page-break-inside:avoid">
                                 <td>
                                     {!treat.sProto.Protocol_Name__c } <br/>
-                                    {!treat.sProto.Session_Date__c }
+                                    Date: {!treat.sessionDate }
                                 </td>
                                 <!-- <td>{!treat.Status__c }</td> -->
                                 <td>{!treat.fearBest.score }</td>
@@ -379,7 +375,7 @@
                             <tr>
                                 <td class="bottomline"></td>
                                 <td colspan="5" class="bottomline">
-                                    <br/>
+                                    <!-- <br/> -->
                                     <table>
                                         <thead>
                                             <tr>
@@ -620,19 +616,12 @@
                         </tr>
                     </table>
                     <table class="behavTable" width="100%">
-                        <!-- Displays values from potentBehIssue list -->
                         <tr style="font-weight:900;">
                             <td colspan="4">Potential behavior concern(s):</td>
                         </tr>
                         <tr>
                             <td style="padding-top: .5em;padding-bottom: .5em;">&nbsp;</td>
                             <td style="padding-top: .5em;padding-bottom: .5em;">
-                                <!--<apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
-                                <span style="vertical-align: top;"> Aggression to People </span> &nbsp;
-                                <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
-                                <span style="vertical-align: top;"> Fear </span> &nbsp;
-                                <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
-                                <span style="vertical-align: top;"> Other: </span>-->
                                 <b>Aggression to People: </b> &nbsp;
                                 <span style="vertical-align: top;"> {!behEval.PotentialIssueAggressionToPeople} </span>
                             </td>
@@ -649,10 +638,6 @@
                         <tr>
                              <td  style="padding-top: .5em;padding-bottom: .5em;">&nbsp;</td>
                             <td style="padding-top: .5em;padding-bottom: .5em;">
-                                <!--<apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
-                                <span style="vertical-align: top;"> Aggression to Dogs </span> &nbsp; &nbsp;
-                                <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
-                                <span style="vertical-align: top;"> High Arousal </span>-->
                                 <b>Aggression to Dogs: </b> &nbsp;
                                 <span style="vertical-align: top;"> {!behEval.PotentialIssueAggressionToAnimals}</span> &nbsp; &nbsp;
                             </td>
@@ -670,34 +655,9 @@
                         </tr>
                     </table>
                     <table class="behavTable" width="100%">
-                        <!-- Displays values from potentBehIssue list -->
                         <tr style="font-weight:900;">
                             <td>Placement recommendations: {!behEval.PlacementRecommendations}</td>
                         </tr>
-                        <!--<tr>
-                            <td>
-                                <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
-                                <span style="vertical-align: top;"> No kids under 10e </span> &nbsp;
-                                <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
-                                <span style="vertical-align: top;"> Experienced owner </span> &nbsp;
-                                <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
-                                <span style="vertical-align: top;"> Other: </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
-                                <span style="vertical-align: top;"> No other dogs</span> &nbsp; &nbsp; &nbsp; &nbsp;
-                                <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
-                                <span style="vertical-align: top;"> Quiet household </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <apex:image height="20px" width="20px" value="{!unchecked }" /> &nbsp;
-                                <span style="vertical-align: top;">With another dog</span>
-                            </td>
-                        </tr>-->
                     </table>
                     <table class="behavTable" width="100%">
                         <tr style="font-weight:900;">
@@ -764,21 +724,7 @@
                                             <th  width="5%" style="text-align: center;">Date</th>
                                             <th  width="5%" style="text-align: center;">Grade</th>
                                             <th  width="50%" style="text-align: center;">Reason</th>
-                                        </tr>
-                                
-                                    <!--<apex:repeat value="{!gradeHistory}" var="grade">
-                                        <tr>
-                                            <td width="5%"  style="text-align: center;">
-                                                <apex:outputText value="{0, date, MM/dd/yy}">
-                                                    <apex:param value="{!grade.historyDate}" />
-                                                </apex:outputText>
-                                            </td>
-                                            <td width="5%" style="text-align: center;">{!LEFT(grade.historyName,FIND(' ',grade.historyName))}</td>
-                                            <td width="50%"  style="text-align: center;">{!grade.historyReason}</td>
-                                        </tr>
-                                    </apex:repeat>-->
-                                    
-                                    
+                                        </tr>                                    
                                         <apex:repeat value="{!GradeHistories}" var="grade">
                                             <apex:outputText rendered="{!IF(grade.historyId ==  behEval.Id, true, false)}">
                                                 <tr>

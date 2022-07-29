@@ -102,7 +102,7 @@ public class AnimalDiscoverPDFController {
                 Protocol_Notes__c,
                 IsRemoved__c,
                 Review_Complete__c,
-                Session_Date__c,
+                TreatmentSessionId__r.Session_Date__c,
                 Name,
                 IsSkipped__c,
                 Solicitation__c,
@@ -130,6 +130,7 @@ public class AnimalDiscoverPDFController {
             for(SessionProtocol[] protos : treatmentSessionToProtocolsMap.values()){
                 aTreatmentSession.add(protos);
             }
+            System.debug('aTreatmentSessin: ' + aTreatmentSession);
             return aTreatmentSession;
         }
         private set;

@@ -1,5 +1,6 @@
 public with sharing class SessionProtocol {
     public Session_Protocol__c sProto {get; set;}
+    public String sessionDate {get; set;}
     public ProtocolScore aggressiveWorst {get; set;}
     public ProtocolScore arousalBest {get; set;}
     public ProtocolScore arousalWorst {get; set;}
@@ -9,6 +10,7 @@ public with sharing class SessionProtocol {
 
     public SessionProtocol(Session_Protocol__c sp){
         this.sProto = sp;
+        this.sessionDate = sp.TreatmentSessionId__r.Session_Date__c.format();
         for(Session_Protocol_Scale__c protoScale : sProto.Session_Protocol_Scales__r){
             switch on protoScale.Protocol_Scale_Name__c {
                 when 'Aggression - Movement' {
