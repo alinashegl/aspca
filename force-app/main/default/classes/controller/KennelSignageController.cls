@@ -21,16 +21,15 @@ public with sharing class KennelSignageController {
         currentAnimal = daoAnimal.findOne(page.getParameters().get('id'));
         System.debug('### Value of current animal  ' + currentAnimal);
 
-        if(currentAnimal != null){
-            m_animalName();
-            m_animalId();
-            m_animalSex();
-            m_animalColor();
-            m_animalBreed();
-            m_animalAge();
-            m_VolunteerReadingOkay();
-            //iBehaviorConcerns();
-        }
+        m_animalName();
+        m_animalId();
+        m_animalSex();
+        m_animalColor();
+        m_animalBreed();
+        m_animalAge();
+        m_VolunteerReadingOkay();
+        m_animalBehSumm();
+        //iBehaviorConcerns();
 
 
     }
@@ -48,6 +47,7 @@ public with sharing class KennelSignageController {
     public String animalAge {get; set; }
     public String animalSex { get; set; }
     public String animalColor { get; set; }
+    public String animalBehSumm { get; set; }
 
     public String m_animalName(){
         String defaultName = 'Default';
@@ -104,6 +104,13 @@ public with sharing class KennelSignageController {
         return animalColor;
     }
 
+    public String m_animalBehSumm() {
+        String defaultBehSumm = '';
+
+        animalBehSumm = currentAnimal.Behavior_Summary__c;
+        if (animalBehSumm == null ) { animalBehSumm = defaultBehSumm ; }
+        return animalBehSumm;
+    }
 
 
     /******************************************************************************************************************/
