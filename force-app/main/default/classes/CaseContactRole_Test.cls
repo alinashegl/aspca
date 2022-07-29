@@ -5,7 +5,7 @@
         Case cs = new Case();
         insert cs;
         
-        Contact c = new Contact(LastName='Test', MailingCity='Test', MailingState='WA',County__c='US');
+        Contact c = new Contact(LastName='Test', MailingCity='Test', MailingState='WA',County__c='United States');
         insert c;
         ApexPages.StandardController sc = new ApexPages.standardController(c);
         CaseContactRole_ContactsExt e = new CaseContactRole_ContactsExt(sc);
