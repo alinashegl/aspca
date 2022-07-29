@@ -21,6 +21,7 @@ public with sharing class KennelSignageController {
         currentAnimal = daoAnimal.findOne(page.getParameters().get('id'));
         System.debug('### Value of current animal  ' + currentAnimal);
 
+        if(currentAnimal != null){
         m_animalName();
         m_animalId();
         m_animalSex();
@@ -30,6 +31,7 @@ public with sharing class KennelSignageController {
         m_VolunteerReadingOkay();
         m_animalBehSumm();
         //iBehaviorConcerns();
+        }
 
 
     }
