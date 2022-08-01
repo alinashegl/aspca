@@ -363,7 +363,7 @@ public without sharing class TestDataFactory {
         Profile p = getProfileFromDb(profile);
         String name = (String)USER_PATTERN.get('name') + '_' + 0;
           String lastname = (String)USER_PATTERN.get('lastName') + '_' + 0;
-          String uid = (String)USER_PATTERN.get('name') + '_' + 0;
+          String uid = (String)USER_PATTERN.get('name') + '_' + String.valueOf(Integer.valueof((Math.random() * 1000)));
 
           User u = new User(
                   Alias = uid,
@@ -557,7 +557,7 @@ public without sharing class TestDataFactory {
         insert a;
         
         User u = createUserWithProfile('ASPCA - Behavior (CRC)');
-        u.Location__c = a.Current_Recent_Shelter_Location__c;
+        u.Location__c = u.Division = a.Current_Recent_Shelter_Location__c;
         insert u;
         
         return a;
