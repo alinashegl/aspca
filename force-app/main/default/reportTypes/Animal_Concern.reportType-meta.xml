@@ -892,11 +892,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Number_of_Weeks_in_Treatment__c</field>
-            <table>Animal__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Treatment_Start_Date__c</field>
             <table>Animal__c</table>
         </columns>
@@ -912,12 +907,27 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>no_of_weeks_in_treatment__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>BRC_Candidate_Survey_Completed__c</field>
             <table>Animal__c</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Walking_Equipment__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>PPE_DOH__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Foster_Name__c</field>
             <table>Animal__c</table>
         </columns>
         <columns>
@@ -933,6 +943,16 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Volunteer_Reading_Okay__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Important_Notes_ARC_CARE__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Hold_Status_ARC_CARE__c</field>
             <table>Animal__c</table>
         </columns>
         <columns>
@@ -1247,11 +1267,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Transition_Animal__c</field>
-            <table>Animal__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Foster_Count__c</field>
             <table>Animal__c</table>
         </columns>
@@ -1293,6 +1308,11 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Foster_Duration__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Walking_Notes__c</field>
             <table>Animal__c</table>
         </columns>
         <masterLabel>Animals</masterLabel>

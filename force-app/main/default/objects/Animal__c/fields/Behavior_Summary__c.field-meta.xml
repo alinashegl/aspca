@@ -3,8 +3,9 @@
     <fullName>Behavior_Summary__c</fullName>
     <externalId>false</externalId>
     <label>Behavior Summary</label>
-    <required>false</required>
+    <length>3000</length>
     <trackFeedHistory>false</trackFeedHistory>
     <trackHistory>false</trackHistory>
-    <type>TextArea</type>
+    <type>LongTextArea</type>
+    <visibleLines>5</visibleLines>
 </CustomField>

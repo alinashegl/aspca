@@ -1,7 +1,8 @@
 public with sharing class service_Validation
 {
     public static void proccessRequest(Map<String, Object> config, Map<String, Object> response) {
-            response.put('status', AppConfig.STATUS.get('error'));
+            // response.put('status', AppConfig.STATUS.get('error'));
+            response.put('status', 'error');
             
             try {
                 List<Map<String, String>> validationErrors = new List<Map<String, String>>();
@@ -32,6 +33,9 @@ public with sharing class service_Validation
                             fieldValue = defaultValue;
                         }
                     }
+
+                    System.debug('validationErrors: ' + validationErrors);
+
                     if(valid) {
                         request.Parameters.put(fieldName, fieldValue);
                     } else {
@@ -40,6 +44,8 @@ public with sharing class service_Validation
                     }                               
                 }
 
+                System.debug('validationErrors: ' + validationErrors);
+                
                 if(validationErrors.size() > 0) {
                         response.put('errors', generateErrors(400, 'Invalid parameters', validationErrors));
                 } else {
@@ -59,12 +65,14 @@ public with sharing class service_Validation
                             }
 
                             response.put('data', data);
-                            response.put('status', AppConfig.STATUS.get('success'));    
+                            // response.put('status', AppConfig.STATUS.get('success'));
+                            response.put('status', 'success');
                         } else  {
                             response.put('errors', generateErrors(500, 'Internal Server Error', new List<String>(result.Errors)));
                         }
                 }
             } catch(Exception e) {
+                System.debug('error: ' + e.getStackTraceString());
                 response.put('errors', generateErrors(500, 'Internal Server Error', new List<String>{e.getMessage()}));
             }
       }
@@ -81,7 +89,7 @@ public with sharing class service_Validation
             if(valid && availableTypes != null  && !availableTypes.contains(fieldValue)) {
                 valid = false;
             }
-
+            System.debug('fieldType: ' + fieldType);
             switch on fieldType {
                 when 'boolean' {     
                     if(fieldOperation != null) {
@@ -160,6 +168,7 @@ public with sharing class service_Validation
             return valid;
       }
 
+      @testVisible
       private static void updateValidationErrors(Map<String, Object> field, List<Map<String,String>> validationErrors) {
             String errorType = 'ValidationError';
             String errorMessage = '';
@@ -217,20 +226,20 @@ public with sharing class service_Validation
      * @param  t The Type of the sObject to compare against
      * @return Returns true if the ID is valid, false if it is not.
      */
-    public static Boolean isValidSalesforceId(String newId, System.Type t) {
-        //isValidSalesforceID(theId, Account.class)
-        try {
-            if (Pattern.compile('[a-zA-Z0-9]{15}|[a-zA-Z0-9]{18}').matcher(newId).matches()) {
-                Id id = newId;
-                sObject sObj = (sObject)t.newInstance();
-                sObj.Id = id;
+    // public static Boolean isValidSalesforceId(String newId, System.Type t) {
+    //     //isValidSalesforceID(theId, Account.class)
+    //     try {
+    //         if (Pattern.compile('[a-zA-Z0-9]{15}|[a-zA-Z0-9]{18}').matcher(newId).matches()) {
+    //             Id id = newId;
+    //             sObject sObj = (sObject)t.newInstance();
+    //             sObj.Id = id;
 
-                return true;
-            }
-        } catch (Exception e) {
-            // StringException, TypeException
-        }
+    //             return true;
+    //         }
+    //     } catch (Exception e) {
+    //         // StringException, TypeException
+    //     }
 
-        return false;
-    }
+    //     return false;
+    // }
 }

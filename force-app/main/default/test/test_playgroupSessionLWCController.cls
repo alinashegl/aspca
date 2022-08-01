@@ -192,4 +192,25 @@ private class test_playgroupSessionLWCController {
         System.assert(!sessionInfo.playgroupContacts.isEmpty(), 'Should have returned some playgroup contacts, instead: ' + sessionInfo.playgroupContacts);
     }
 
+    @isTest 
+    static void getAnimalInfo_hasInfo(){
+        Playgroup_Session__c session = TestDataFactory.createPlaygroupSessionWithAnimals();
+        Contact c1 = testDataFactory.createContact();
+        Contact c2 = testDataFactory.createContact();
+        session.Contact_Ids__c = c1.Id + ',' + c2.Id;
+        update session;
+
+        Animal_Playgroup__c[] aPGList = [SELECT Id FROM Animal_Playgroup__c LIMIT 1];
+        System.assert(!aPGList.isEmpty(), 'Should have returned a list of animal playgroups, but was empty');
+
+        test.startTest();
+        playgroupSessionLWCController.playgroupAnimalInfo info = playgroupSessionLWCController.getAnimalInfo(aPGList[0].Id);
+        test.stopTest();
+
+        System.assertNotEquals(null, info, 'Should have returned playgroup animal info, but was null');
+        System.assertNotEquals(null, info.animal, 'Should have returned an Animal Playgroup record, but was null');
+        System.assertNotEquals(null, info.animalContacts, 'Should have returned animal contacts, but was null');
+
+    }
+
 }

@@ -147,6 +147,11 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>no_of_weeks_in_treatment__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>Discharged_to_Contact__c</field>
             <table>Animal__c</table>
         </columns>
@@ -162,6 +167,16 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>PPE_DOH__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Hold_Status_ARC_CARE__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>Gender__c</field>
             <table>Animal__c</table>
         </columns>
@@ -173,6 +188,11 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Image__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Important_Notes_ARC_CARE__c</field>
             <table>Animal__c</table>
         </columns>
         <columns>
@@ -202,6 +222,11 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>Foster_Count__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>Medical_Grade__c</field>
             <table>Animal__c</table>
         </columns>
@@ -217,7 +242,17 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>Foster_Name__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>Number_of_Offspring__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Behavior_Medication_Data_Time__c</field>
             <table>Animal__c</table>
         </columns>
         <columns>
@@ -977,11 +1012,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Number_of_Weeks_in_Treatment__c</field>
-            <table>Animal__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Petpoint_ID__c</field>
             <table>Animal__c</table>
         </columns>
@@ -1237,11 +1267,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Transition_Animal__c</field>
-            <table>Animal__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>FM_Legacy_Status__c</field>
             <table>Animal__c</table>
         </columns>
@@ -1283,6 +1308,11 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Active_Animal_False__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Walking_Notes__c</field>
             <table>Animal__c</table>
         </columns>
         <masterLabel>Animals</masterLabel>

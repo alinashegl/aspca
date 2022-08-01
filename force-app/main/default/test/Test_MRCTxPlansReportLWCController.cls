@@ -250,4 +250,17 @@ private class Test_MRCTxPlansReportLWCController {
 
         System.assert(returnedGd == null, 'Should have returned a null value, but was: ' + returnedGd);
     }
+
+    @isTest 
+    static void instantiate_MRCTreatmentPlansReportLWCController(){
+        Treatment_Plan__c tp = TestDataFactory.createPlan();        
+        
+        test.startTest();
+            MRCTreatmentPlansReportLWCController cont = new MRCTreatmentPlansReportLWCController();
+            MRCTreatmentPlansReportLWCController.AnimalInfo[] infos = MRCTreatmentPlansReportLWCController.getMRCDogsForPDF();
+            cont.infoWrapper = infos;
+        test.stopTest();
+
+        System.assertEquals(false, infos.isEmpty());
+    }
 }

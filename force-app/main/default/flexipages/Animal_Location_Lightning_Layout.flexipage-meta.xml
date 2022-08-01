@@ -76,7 +76,7 @@
                 <fieldItem>Record.Kennel_Location__c</fieldItem>
                 <identifier>RecordKennel_Location__cField</identifier>
                 <visibilityRule>
-                    <booleanFilter>1 OR 2</booleanFilter>
+                    <booleanFilter>1 OR 2 OR 3</booleanFilter>
                     <criteria>
                         <leftValue>{!Record.Facility_Outcome__c}</leftValue>
                         <operator>EQUAL</operator>
@@ -86,6 +86,11 @@
                         <leftValue>{!Record.Facility_Outcome__c}</leftValue>
                         <operator>EQUAL</operator>
                         <rightValue>CARE</rightValue>
+                    </criteria>
+                    <criteria>
+                        <leftValue>{!Record.Facility_Outcome__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>BRC</rightValue>
                     </criteria>
                 </visibilityRule>
             </fieldInstance>

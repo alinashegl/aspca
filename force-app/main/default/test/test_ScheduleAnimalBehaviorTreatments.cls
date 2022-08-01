@@ -2,6 +2,20 @@
 private class test_ScheduleAnimalBehaviorTreatments {
     @TestSetUp
     static void testSetup(){
+        User[] users = [SELECT Id, Location__c FROM User WHERE Profile.Name = 'System Administrator' AND isActive = true LIMIT 3];
+        System.assertEquals(true, users.size() >= 3, 'should have returned a list of users greater than 3, but was: ' + users.size());
+
+        User uMRC = users[0];
+        uMRC.Location__c = 'CRC/MRC';
+
+        User uCRC = users[1];
+        uCRC.Location__c = 'CRC/MRC';
+
+        User uARC = users[2];
+        uMRC.Location__c = 'ARC/CARE';
+
+        update users;
+
         Animal__c animalARC = TestDataFactory.createAnimalWithName('animalARC');
         animalARC.Current_Recent_Shelter_Location__c = 'ARC';
 
@@ -35,10 +49,6 @@ private class test_ScheduleAnimalBehaviorTreatments {
         con.Contact_Type__c = 'Behavior Case Worker';
         con.Email = 'testEmail@testEmail.com';
         update con;
-
-        User uMRC = [SELECT Id FROM User Where Division = 'MRC' AND isActive = true LIMIT 1];
-        User uCRC = [SELECT Id FROM User Where Division = 'CRC' AND isActive = true LIMIT 1];
-        User uARC = [SELECT Id FROM User Where Division = 'ARC/CARE' AND isActive = true LIMIT 1];
 
         Contact genericContactMRC = new Contact(
             LastName = 'genericContactMRC',

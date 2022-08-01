@@ -53,7 +53,7 @@ public with sharing class TaskTriggerHandler {
         Id[] recordTypeIds = getRTIds();
         for(Task task : taskList){
             //skip any tasks that don't have the correct record type
-            if(!recordTypeIds.contains(task.RecordTypeId) && task.Species__c == 'Dog') continue;
+            if(!recordTypeIds.contains(task.RecordTypeId) || task.Species__c != 'Dog') continue;
 
             Task oldTask = oldMap.get(task.Id);
             if(task.Assigned_Resources__c != oldTask.Assigned_Resources__c){
