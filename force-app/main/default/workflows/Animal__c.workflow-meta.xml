@@ -14,9 +14,8 @@
     </alerts>
     <alerts>
         <fullName>Animal_SN_Status_Change_Notification</fullName>
-        <ccEmails>SBPStaff@aspca.org</ccEmails>
-        <ccEmails>jessica.stone@aspca.org</ccEmails>
-        <ccEmails>cinder.wilkinson@aspca.org</ccEmails>
+        <ccEmails>kavya.reddy@aspca.org</ccEmails>
+        
         <description>Animal SN Status Change Notification</description>
         <protected>false</protected>
         <recipients>
@@ -29,22 +28,11 @@
     </alerts>
     <alerts>
         <fullName>Behavior_Grade_Change_Notification_Initial</fullName>
-        <ccEmails>SBPStaff@aspca.org</ccEmails>
-        <ccEmails>lindsey.cooke@aspca.org</ccEmails>
-        <ccEmails>jessica.stone@aspca.org</ccEmails>
-        <ccEmails>cinder.wilkinson@aspca.org</ccEmails>
+        <ccEmails>kavya.reddy@aspca.org</ccEmails>
         <description>Behavior Grade Change Notification - Initial</description>
         <protected>false</protected>
         <recipients>
-            <recipient>behavioradmin@aspca.org</recipient>
-            <type>user</type>
-        </recipients>
-        <recipients>
-            <recipient>crcsheltering@aspca.org</recipient>
-            <type>user</type>
-        </recipients>
-        <recipients>
-            <recipient>katie.summers@aspca.org</recipient>
+            <recipient>kavya.reddy@aspca.org</recipient>
             <type>user</type>
         </recipients>
         <senderAddress>crc.medical@aspca.org</senderAddress>
@@ -53,25 +41,14 @@
     </alerts>
     <alerts>
         <fullName>Behavior_Grade_Change_Notification_Subsequent</fullName>
-        <ccEmails>SBPStaff@aspca.org</ccEmails>
-        <ccEmails>lindsey.cooke@aspca.org</ccEmails>
-        <ccEmails>jessica.stone@aspca.org</ccEmails>
-        <ccEmails>cinder.wilkinson@aspca.org</ccEmails>
+       <ccEmails>kavya.reddy@aspca.org</ccEmails>
         <description>Behavior Grade Change Notification - Subsequent</description>
         <protected>false</protected>
         <recipients>
-            <recipient>behavioradmin@aspca.org</recipient>
+            <recipient>kavya.reddy@aspca.org</recipient>
             <type>user</type>
         </recipients>
-        <recipients>
-            <recipient>crcsheltering@aspca.org</recipient>
-            <type>user</type>
-        </recipients>
-        <recipients>
-            <recipient>katie.summers@aspca.org</recipient>
-            <type>user</type>
-        </recipients>
-        <senderAddress>crc.medical@aspca.org</senderAddress>
+                <senderAddress>crc.medical@aspca.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>unfiled$public/Behavior_Grade_Change_Subsequent</template>
     </alerts>
@@ -121,9 +98,7 @@
     <alerts>
         <fullName>Play_Pause_Cleared_Notification_Email</fullName>
         <ccEmails>PlayPauseNotifications@aspca.org</ccEmails>
-        <ccEmails>jessica.stone@aspca.org</ccEmails>
-        <ccEmails>cinder.wilkinson@aspca.org</ccEmails>
-        <description>Play-Pause Cleared Notification Email</description>
+                <description>Play-Pause Cleared Notification Email</description>
         <protected>false</protected>
         <senderAddress>crc.medical@aspca.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>

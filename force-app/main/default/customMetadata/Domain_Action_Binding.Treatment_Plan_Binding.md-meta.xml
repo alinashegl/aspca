@@ -8,7 +8,7 @@
     </values>
     <values>
         <field>SObject__c</field>
-        <value xsi:type="xsd:string">Opportunity</value>
+        <value xsi:type="xsd:string">Treatment_Plan__c</value>
     </values>
     <values>
         <field>Sequence__c</field>
@@ -16,7 +16,7 @@
     </values>
     <values>
         <field>TriggeredWhen__c</field>
-        <value xsi:type="xsd:string">Insert</value>
+        <value xsi:type="xsd:string">Update</value>
     </values>
     <values>
         <field>WhenToProcess__c</field>
