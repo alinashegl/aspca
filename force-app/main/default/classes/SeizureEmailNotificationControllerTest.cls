@@ -20,6 +20,8 @@ public class SeizureEmailNotificationControllerTest {
         Test.startTest();
         SeizureEmailNotificationController.handleSeizureEmailNotificationSchedular();
         Test.stopTest();
+        Animal__c anm = [Select Email_Notification__c from Animal__c where id =: anim.Id];
+        System.assertNotEquals(null, anm);
     }
      private static Contact createGenericContact(String location){
         User u = [SELECT Id, Location__c FROM User WHERE isActive = true AND Location__c =: location LIMIT 1];

@@ -359,23 +359,16 @@ public without sharing class TestDataFactory {
         insert users;
     }
 
-    public static User[] createUsersWithoutInserting(Integer count) {
-      Integer userCount = count != null ? count : USERS_COUNT;
-      
-      List<User> users = new List<User>();
-
-      Profile p = getProfileFromDb('Standard User');
-
-      for(Integer i = 0; i < USERS_COUNT; i++) {
-          String name = (String)USER_PATTERN.get('name') + '_' + i;
-          String lastname = (String)USER_PATTERN.get('lastName') + '_' + i;
-          String uid = (String)USER_PATTERN.get('name') + '_' + i;
+    public static User createUserWithProfile(String profile){
+        Profile p = getProfileFromDb(profile);
+        String name = (String)USER_PATTERN.get('name') + '_' + 0;
+          String lastname = (String)USER_PATTERN.get('lastName') + '_' + 0;
+          String uid = (String)USER_PATTERN.get('name') + '_' + String.valueOf(Integer.valueof((Math.random() * 1000)));
 
           User u = new User(
                   Alias = uid,
                   Email = uid + '@' + (String)USER_PATTERN.get('domain'),
                   EmailEncodingKey = (String)USER_PATTERN.get('emailEncodingKey'),
-                  //Name = name,
                   LastName = lastname,
                   LanguageLocaleKey = (String)USER_PATTERN.get('languageLocaleKey'),
                   LocaleSidKey = (String)USER_PATTERN.get('localeSidKey'),
@@ -383,13 +376,9 @@ public without sharing class TestDataFactory {
                   TimeZoneSidKey = (String)USER_PATTERN.get('timeZoneSidKey'),
                   UserName = (uid + '@' +  (String)USER_PATTERN.get('domain'))
           );
-          users.add(u);
-      }
-
-      return users;
-  }
-
-
+        return u;
+    }
+    
     public static List<User> getUsersFromDb() {
         Set<String> standardUsers = new Set<String> {
                 'User',
@@ -535,6 +524,9 @@ public without sharing class TestDataFactory {
                     Play_Category__c = 'Unevaluated'
         );
         insert a;
+        User u = createUserWithProfile('ASPCA - Behavior (CRC)');
+        u.Location__c = u.Division = a.Current_Recent_Shelter_Location__c;
+        insert u;
         return a;
     }
 
