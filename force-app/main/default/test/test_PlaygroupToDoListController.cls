@@ -14,16 +14,9 @@ public with sharing class test_PlaygroupToDoListController {
         List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals('MRC');
         Test.stopTest();
 
-        List<Animal__c> animals = [SELECT Id, Shelter_Location2__c, Play_Category__c FROM Animal__c WHERE Id = :a.Id];
+        List<Animal__c> animals = [SELECT Id, Shelter_Location2__c, Play_Category__c, Behavior_Play_Pause__c, Behavior_Play_Pause_Date__c FROM Animal__c WHERE Id = :a.Id];
         System.assertEquals(1, playgroupAnimals.size());
         System.assertEquals(a.Id, playgroupAnimals[0].Id);
-    }
-    
-    @isTest
-    static void getReportId() {
-        Test.startTest();
-        Id getReportId = PlaygroupToDoListController.getReportId();
-        Test.stopTest();
     }
 
     @isTest
