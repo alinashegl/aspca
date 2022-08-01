@@ -46,6 +46,10 @@ private class test_ScheduleAnimalMedCheck {
     @isTest
     static void prepTaskSuccess(){
         Animal__c anim = TestDataFactory.createAnimalWithName('anim');
+        User u = TestDataFactory.createUserWithProfile('ASPCA - Behavior (CRC)');
+        u.Division = anim.Current_Recent_Shelter_Location__c;
+        u.Location__c = 'CRC/MRC';
+        insert u;
         createGenericContact(anim);
         Task treatmentTask = insertTask(false, anim);
         treatmentTask = [SELECT Id, Animal__c, Animal__r.Animal_Name_ID__c, Animal__r.Behavior_Case_Worker__r.Is_Generic_Contact__c, Animal__r.Current_Recent_Shelter_Location__c, Animal_Exam_Sheet_Lookup__c, Medication__c FROM Task WHERE Id =: treatmentTask.Id LIMIT 1];
@@ -60,8 +64,11 @@ private class test_ScheduleAnimalMedCheck {
     @isTest
     static void prepTaskNoTreatmentTask(){
         Animal__c anim = TestDataFactory.createAnimalWithName('anim');
+        User u = TestDataFactory.createUserWithProfile('ASPCA - Behavior (CRC)');
+        u.Division = anim.Current_Recent_Shelter_Location__c;
+        u.Location__c = 'CRC/MRC';
+        insert u;
         createGenericContact(anim);
-
         test.startTest();
             Task[] newTasks = ScheduleAnimalMedCheck.prepTask(null, new Date[]{date.today().addDays(3)});
         test.stopTest();
@@ -72,6 +79,10 @@ private class test_ScheduleAnimalMedCheck {
     @isTest
     static void calculateTaskDateNotRecurringSuccess(){
         Animal__c anim = TestDataFactory.createAnimalWithName('anim');
+        User u = TestDataFactory.createUserWithProfile('ASPCA - Behavior (CRC)');
+        u.Division = anim.Current_Recent_Shelter_Location__c;
+        u.Location__c = 'CRC/MRC';
+        insert u;
         createGenericContact(anim);
         Task treatmentTask = insertTask(false, anim);
         treatmentTask = [SELECT Id, IsRecurrence, RecurrenceStartDateOnly, ActivityDate FROM Task WHERE Id =: treatmentTask.Id LIMIT 1];
@@ -87,6 +98,10 @@ private class test_ScheduleAnimalMedCheck {
     @isTest
     static void calculateTaskDateRecurringSuccess(){
         Animal__c anim = TestDataFactory.createAnimalWithName('anim');
+        User u = TestDataFactory.createUserWithProfile('ASPCA - Behavior (CRC)');
+        u.Division = anim.Current_Recent_Shelter_Location__c;
+        u.Location__c = 'CRC/MRC';
+        insert u;
         createGenericContact(anim);
         Task treatmentTask = insertTask(true, anim);
         treatmentTask = [SELECT Id, IsRecurrence, RecurrenceStartDateOnly, ActivityDate FROM Task WHERE Id =: treatmentTask.Id LIMIT 1];
@@ -103,9 +118,17 @@ private class test_ScheduleAnimalMedCheck {
     static void scheduleMedCheckSuccess(){        
         Animal__c anim1 = TestDataFactory.createAnimalWithName('anim1');
         Task treatmentTask1 = insertTask(false, anim1);
+        User u = TestDataFactory.createUserWithProfile('ASPCA - Behavior (CRC)');
+        u.Division = anim1.Current_Recent_Shelter_Location__c;
+        u.Location__c = 'CRC/MRC';
+        insert u;
         createGenericContact(anim1);
 
         Animal__c anim2 = TestDataFactory.createAnimalWithName('anim2');
+        User u2 = TestDataFactory.createUserWithProfile('ASPCA - Behavior (CRC)');
+        u2.Division = anim2.Current_Recent_Shelter_Location__c;
+        u2.Location__c = 'CRC/MRC';
+        insert u2;
         Task treatmentTask2 = insertTask(true, anim2);
         createGenericContact(anim2);
 
@@ -129,9 +152,17 @@ private class test_ScheduleAnimalMedCheck {
     static void scheduleMedCheckSpecificDogSuccess(){        
         Animal__c anim1 = TestDataFactory.createAnimalWithName('anim1');
         Task treatmentTask1 = insertTask(false, anim1);
+        User u = TestDataFactory.createUserWithProfile('ASPCA - Behavior (CRC)');
+        u.Division = anim1.Current_Recent_Shelter_Location__c;
+        u.Location__c = 'CRC/MRC';
+        insert u;
         createGenericContact(anim1);
 
         Animal__c anim2 = TestDataFactory.createAnimalWithName('anim2');
+        User u2 = TestDataFactory.createUserWithProfile('ASPCA - Behavior (CRC)');
+        u2.Division = anim2.Current_Recent_Shelter_Location__c;
+        u2.Location__c = 'CRC/MRC';
+        insert u2;
         Task treatmentTask2 = insertTask(true, anim2);
         createGenericContact(anim2);
 
@@ -162,7 +193,8 @@ private class test_ScheduleAnimalMedCheck {
         Contact con = new Contact(
             LastName = 'generic',
             User__c = u.Id,
-            Is_Generic_Contact__c = true
+            Is_Generic_Contact__c = true,
+            Active__c = true
         );
         insert con;
     }
