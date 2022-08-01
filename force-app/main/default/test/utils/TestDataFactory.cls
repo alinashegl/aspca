@@ -350,7 +350,8 @@ public without sharing class TestDataFactory {
                     LocaleSidKey = (String)USER_PATTERN.get('localeSidKey'),
                     ProfileId = p.Id,
                     TimeZoneSidKey = (String)USER_PATTERN.get('timeZoneSidKey'),
-                    UserName = (uid + '@' +  (String)USER_PATTERN.get('domain'))
+                    UserName = (uid + '@' +  (String)USER_PATTERN.get('domain')),
+                    Location__c = 'CRC/MRC'
             );
             users.add(u);
         }

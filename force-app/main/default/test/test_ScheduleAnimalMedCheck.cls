@@ -46,7 +46,7 @@ private class test_ScheduleAnimalMedCheck {
     @isTest
     static void prepTaskSuccess(){
         Animal__c anim = TestDataFactory.createAnimalWithName('anim');
-        createGenericContact(anim);
+        createGenericContact(new Animal__c[]{anim});
         Task treatmentTask = insertTask(false, anim);
         treatmentTask = [SELECT Id, Animal__c, Animal__r.Animal_Name_ID__c, Animal__r.Behavior_Case_Worker__r.Is_Generic_Contact__c, Animal__r.Current_Recent_Shelter_Location__c, Animal_Exam_Sheet_Lookup__c, Medication__c FROM Task WHERE Id =: treatmentTask.Id LIMIT 1];
 
@@ -60,7 +60,7 @@ private class test_ScheduleAnimalMedCheck {
     @isTest
     static void prepTaskNoTreatmentTask(){
         Animal__c anim = TestDataFactory.createAnimalWithName('anim');
-        createGenericContact(anim);
+        createGenericContact(new Animal__c[]{anim});
 
         test.startTest();
             Task[] newTasks = ScheduleAnimalMedCheck.prepTask(null, new Date[]{date.today().addDays(3)});
@@ -72,7 +72,7 @@ private class test_ScheduleAnimalMedCheck {
     @isTest
     static void calculateTaskDateNotRecurringSuccess(){
         Animal__c anim = TestDataFactory.createAnimalWithName('anim');
-        createGenericContact(anim);
+        createGenericContact(new Animal__c[]{anim});
         Task treatmentTask = insertTask(false, anim);
         treatmentTask = [SELECT Id, IsRecurrence, RecurrenceStartDateOnly, ActivityDate FROM Task WHERE Id =: treatmentTask.Id LIMIT 1];
 
@@ -87,7 +87,7 @@ private class test_ScheduleAnimalMedCheck {
     @isTest
     static void calculateTaskDateRecurringSuccess(){
         Animal__c anim = TestDataFactory.createAnimalWithName('anim');
-        createGenericContact(anim);
+        createGenericContact(new Animal__c[]{anim});
         Task treatmentTask = insertTask(true, anim);
         treatmentTask = [SELECT Id, IsRecurrence, RecurrenceStartDateOnly, ActivityDate FROM Task WHERE Id =: treatmentTask.Id LIMIT 1];
 
@@ -103,11 +103,11 @@ private class test_ScheduleAnimalMedCheck {
     static void scheduleMedCheckSuccess(){        
         Animal__c anim1 = TestDataFactory.createAnimalWithName('anim1');
         Task treatmentTask1 = insertTask(false, anim1);
-        createGenericContact(anim1);
 
         Animal__c anim2 = TestDataFactory.createAnimalWithName('anim2');
         Task treatmentTask2 = insertTask(true, anim2);
-        createGenericContact(anim2);
+
+        createGenericContact(new Animal__c[]{anim1, anim2});
 
         test.startTest();
             Task[] taskList = ScheduleAnimalMedCheck.scheduleMedCheck(null);
@@ -129,11 +129,11 @@ private class test_ScheduleAnimalMedCheck {
     static void scheduleMedCheckSpecificDogSuccess(){        
         Animal__c anim1 = TestDataFactory.createAnimalWithName('anim1');
         Task treatmentTask1 = insertTask(false, anim1);
-        createGenericContact(anim1);
 
         Animal__c anim2 = TestDataFactory.createAnimalWithName('anim2');
         Task treatmentTask2 = insertTask(true, anim2);
-        createGenericContact(anim2);
+
+        createGenericContact(new Animal__c[]{anim1, anim2});
 
         test.startTest();
             Task[] toInsert = ScheduleAnimalMedCheck.scheduleMedCheck(new Id[]{anim1.Id});
@@ -157,14 +157,33 @@ private class test_ScheduleAnimalMedCheck {
         System.assert(!taskMap.containsKey(anim2.Id));
     }
 
-    private static void createGenericContact(Animal__c anim){
-        User u = [SELECT Id FROM User WHERE Division =: anim.Current_Recent_Shelter_Location__c AND isActive = true LIMIT 1];
-        Contact con = new Contact(
-            LastName = 'generic',
-            User__c = u.Id,
-            Is_Generic_Contact__c = true
-        );
-        insert con;
+    private static void createGenericContact(Animal__c[] animals){
+        // User u = [SELECT Id FROM User WHERE Division =: anim.Current_Recent_Shelter_Location__c AND isActive = true LIMIT 1];
+        User[] usersToInsert = new User[0];
+        for(Animal__c anim : animals){
+            String location = 'ARC/CARE';
+            if(anim.Current_Recent_Shelter_Location__c.contains('CRC') || anim.Current_Recent_Shelter_Location__c.contains('MRC')){
+                location = 'CRC/MRC';
+            }
+            User[] userList = TestDataFactory.createUsersWithoutInserting(1);
+            userList[0].UserName = anim.Id + userList[0].UserName;
+            System.debug('user.Username: ' + userList[0].UserName);
+            userList[0].Location__c = location;
+            usersToInsert.add(userList[0]);
+        }
+        
+        insert usersToInsert;
+        
+        Contact[] consToInsert = new Contact[0];
+        for(User  u : usersToInsert){
+            consToInsert.add(new Contact(
+                LastName = 'generic',
+                User__c = u.Id,
+                Is_Generic_Contact__c = true
+            ));
+        }
+        
+        insert consToInsert;
     }
 
     private static Task insertTask(Boolean recurring, Animal__c anim){
