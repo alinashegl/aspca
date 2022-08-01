@@ -358,26 +358,6 @@ public without sharing class TestDataFactory {
         insert users;
     }
 
-    public static User createUserWithProfile(String profile){
-        Profile p = getProfileFromDb(profile);
-        String name = (String)USER_PATTERN.get('name') + '_' + 0;
-          String lastname = (String)USER_PATTERN.get('lastName') + '_' + 0;
-          String uid = (String)USER_PATTERN.get('name') + '_' + 0;
-
-          User u = new User(
-                  Alias = uid,
-                  Email = uid + '@' + (String)USER_PATTERN.get('domain'),
-                  EmailEncodingKey = (String)USER_PATTERN.get('emailEncodingKey'),
-                  LastName = lastname,
-                  LanguageLocaleKey = (String)USER_PATTERN.get('languageLocaleKey'),
-                  LocaleSidKey = (String)USER_PATTERN.get('localeSidKey'),
-                  ProfileId = p.Id,
-                  TimeZoneSidKey = (String)USER_PATTERN.get('timeZoneSidKey'),
-                  UserName = (uid + '@' +  (String)USER_PATTERN.get('domain'))
-          );
-        return u;
-    }
-    
     public static User[] createUsersWithoutInserting(Integer count) {
       Integer userCount = count != null ? count : USERS_COUNT;
       
@@ -550,15 +530,10 @@ public without sharing class TestDataFactory {
                     Animal_Name__c = 'Doggo123',
                     Shelter_Location2__c = 'MRC',
                     Current_Location__c = 'MRC',
-                    Current_Recent_Shelter_Location__c = 'CRC/MRC',
+                    Current_Recent_Shelter_Location__c = 'MRC',
                     Play_Category__c = 'Unevaluated'
         );
         insert a;
-        
-        User u = createUserWithProfile('ASPCA - Behavior (CRC)');
-        u.Location__c = a.Current_Recent_Shelter_Location__c;
-        insert u;
-        
         return a;
     }
 
@@ -691,64 +666,29 @@ public without sharing class TestDataFactory {
         Contact contact = createContact();
         session.Treatment_Plan__c = plan.Id;
         session.Session_Contact__c = contact.Id;
-        session.Animal__c = plan.Animal__c;
         insert session;
         return session;
     }
 
     public static List<Protocol__c> createProtocols() {
         List<Protocol__c> protocols = new List<Protocol__c>();
-        for(Integer i = 0; i< 9; i++) {
+        Integer i = 0;
+        while(i != 9) {
             Protocol__c protocol = new Protocol__c();
             protocol.Name = 'Test Protocol ' + i;
             protocol.IsActive__c = true;
             protocol.Protocol_Categories__c = 'Non Fear Protocols';
             protocols.add(protocol);
+            i++;
         }
-        
         insert protocols;
         return protocols;
     }
-
-    public static Protocol_Scale__c[] createProtocolScales(Integer count){
-      Protocol_Scale__c[] pScales = new Protocol_Scale__c[0];
-      count = count == null ? 3 : count;
-      for(Integer i = 0; i < count; i++){
-        pScales.add(new Protocol_Scale__c(
-          isActive__c = true,
-          isDefault__c = true,
-          Name = i == 0 ? 'Overall Score' : 'pScale' + i,
-          Column_Order__c = 10 * i,
-          Options__c = '1 Option 1; Option 2',
-          Fields_to_Include__c = 'Duration__c'
-        ));
-      }
-
-      insert pScales;
-      return pScales;
-    }
-
     public static List<Session_Protocol__c> createSessionProtocols() {
         List<Protocol__c> protocols = createProtocols();
         Treatment_Session__c session = createSession();
         Session_Protocol__c[] sessionProtocols = [SELECT Id, TreatmentSessionId__c, TreatmentSessionId__r.Treatment_Plan__c, ProtocolId__c FROM Session_Protocol__c WHERE TreatmentSessionId__c =: session.Id];
         return sessionProtocols;
-    }
-
-    public static Session_Protocol_Scale__c[] createSessionProtocolScales(){
-      Protocol_Scale__c[] pScales = createProtocolScales(3);
-      Session_Protocol__c[] sessionProtocols = createSessionProtocols();
-      Session_Protocol_Scale__c[] sessionProtoScales = new Session_Protocol_Scale__c[0];
-      for(Session_Protocol__c sessionProto : sessionProtocols){
-        for(Protocol_Scale__c protoScale : pScales){
-          sessionProtoScales.add(new Session_Protocol_Scale__c(
-            Protocol_Scale__c = protoScale.Id,
-            Session_Protocol__c = sessionProto.Id
-          ));
-        }
-      }
-      insert sessionProtoScales;
-      return sessionProtoScales;
     }
 
     public static Treatment_Bundle__c createTreatmentBundle() {
@@ -762,7 +702,7 @@ public without sharing class TestDataFactory {
 
     public static Treatment_Bundle__c createMasterBundle() {
         Treatment_Bundle__c bundle = new Treatment_Bundle__c();
-        bundle.Name = 'Master';
+        bundle.Name = 'Test';
         bundle.IsActive__c = true;
         bundle.IsMaster__c = true;
         insert bundle;
@@ -1032,63 +972,5 @@ public without sharing class TestDataFactory {
       );
       insert dc;
       return dc;
-    }
-
-    public static Task[] createBehaviorTreatmentTasks(){
-      Animal__c dog = createAnimal();
-
-      Date startDate = AutoScheduleTasksUtil.startOfASPCAWeek(date.today());
-      Date activityDate1 = startDate.addDays(1);
-      Date activityDate2 = startDate.addDays(3);
-      Date activityDate3 = startDate.addDays(5);
-
-      Id rtId = Util.getRecordTypeId('Task', AutoScheduleTasksUtil.BEH_TREATMENT_TASK_RECORD_TYPE_NAME);
-
-      Task[] tasks = new Task[0];
-
-      Task t1 = new Task(
-        ActivityDate = activityDate1,
-        Animal__c = dog.Id,
-        RecordTypeId = rtId
-      );
-      tasks.add(t1);
-
-      Task t2 = new Task(
-        ActivityDate = activityDate2,
-        Animal__c = dog.Id,
-        RecordTypeId = rtId
-      );
-      tasks.add(t2);
-
-      Task t3 = new Task(
-        ActivityDate = activityDate3,
-        Animal__c = dog.Id,
-        RecordTypeId = rtId
-      );
-      tasks.add(t3);
-
-      insert tasks;
-      return tasks;
-
-    }
-
-    public static task createMedicationTask(Id animalId){
-      Id recordTypeId = Util.getRecordTypeId('Task',AutoScheduleTasksUtil.TREATMENT_TASK_RECORD_TYPE_NAME);
-
-      Medication_Drug__c drug = new Medication_Drug__c(
-        Name = 'testDrug'
-      ); 
-
-      insert drug;
-
-      Task t = new Task(
-        Animal__c = animalId,
-        RecordTypeId = recordTypeId,
-        ActivityDate = date.today().addDays(2),
-        Medication__c = drug.Id
-      );
-
-      insert t;
-      return t;
     }
 }
