@@ -2,6 +2,18 @@
 private class test_ScheduleAnimalPlaygroups {
     @TestSetUp
     static void testSetup(){
+        User[] userList = TestDataFactory.createUsersWithoutInserting(3);
+        User uMRC = userList[0];
+        uMRC.Location__c = 'CRC/MRC';
+
+        User uCRC = userList[1];
+        uCRC.Location__c = 'CRC/MRC';
+
+        User uARC = userList[2];
+        uARC.Location__c = 'ARC/CARE';
+
+        insert userList;
+
         Animal__c animalARC = TestDataFactory.createAnimalWithName('animalARC');
         animalARC.Playgroup_Priority_Level__c = 'Low – 2 days';
         animalARC.Current_Recent_Shelter_Location__c = 'ARC';
@@ -20,10 +32,6 @@ private class test_ScheduleAnimalPlaygroups {
         con.Contact_Type__c = 'Behavior Case Worker';
         con.Email = 'testEmail@testEmail.com';
         update con;
-
-        User uMRC = [SELECT Id FROM User Where Division = 'MRC' AND isActive = true LIMIT 1];
-        User uCRC = [SELECT Id FROM User Where Division = 'CRC' AND isActive = true LIMIT 1];
-        User uARC = [SELECT Id FROM User Where Division = 'ARC/CARE' AND isActive = true LIMIT 1];
 
         Contact genericContactMRC = new Contact(
             LastName = 'genericContactMRC',

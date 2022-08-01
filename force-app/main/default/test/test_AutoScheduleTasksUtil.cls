@@ -46,7 +46,11 @@ private class test_AutoScheduleTasksUtil {
     @isTest
     static void genericContactMapSuccess(){
         Map<String, Contact> contactMap = new Map<String, Contact>();
-        User[] userList = [SELECT Id, Location__c FROM User WHERE isActive = true AND Location__c != null LIMIT 2];
+        User[] userList = TestDataFactory.createUsersWithoutInserting(2);
+        userList[0].Location__c = 'CRC/MRC';
+        userList[0].Location__c = 'ARC/CARE';
+        insert userList;
+
         Contact[] genericContacts = new Contact[0];
         for(User u : userList){
             Contact con = new Contact(

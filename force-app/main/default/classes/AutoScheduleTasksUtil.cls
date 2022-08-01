@@ -119,6 +119,10 @@ public class AutoScheduleTasksUtil {
             if(con.User_Location__c == 'ARC/CARE'){
                 contactMap.put('ARC', con);
                 contactMap.put('CARE', con);    
+            } 
+            else if(con.User_Location__c == 'CRC/MRC'){
+                contactMap.put('CRC', con);
+                contactMap.put('MRC', con);
             } else {
                 contactMap.put(con.User_Location__c, con);
             }
