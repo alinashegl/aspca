@@ -210,6 +210,7 @@ public with sharing class TreatmentSessionLWCController {
                     ProtocolId__r.Protocol_Box_Link__c,                    
                     ProtocolId__r.Name,
                     TreatmentSessionId__r.Treatment_Plan__c,
+                    TreatmentSessionId__r.Animal__r.Current_Recent_Shelter_Location__c,
                     (
                         SELECT Id, 
                             Protocol_Score__c,
@@ -452,6 +453,7 @@ public with sharing class TreatmentSessionLWCController {
         @AuraEnabled public String boxLink {get; set;}
         @AuraEnabled public String planProtocolId {get; set;}
         @AuraEnabled public String planProtocolNotes {get; set;}
+        @AuraEnabled public Boolean isNonMRC {get;set;}
 
         ProtocolInfo(Session_Protocol__c sp){
             this.id = sp.Id;
@@ -467,6 +469,7 @@ public with sharing class TreatmentSessionLWCController {
             this.protocolNotes = sp.Protocol_Notes__c;
             this.managerReviewNotes = sp.Manager_Review_Notes__c;
             this.boxLink = sp.ProtocolId__r.Protocol_Box_Link__c;
+            this.isNonMRC = sp.TreatmentSessionId__r?.Animal__r?.Current_Recent_Shelter_Location__c != 'MRC';
 
             Plan_Protocol__c[] pp = [SELECT Id, Protocol_Notes__c FROM Plan_Protocol__c WHERE Treatment_Plan__c = :sp.TreatmentSessionId__r.Treatment_Plan__c AND Protocol__c = :sp.ProtocolId__c LIMIT 1];
             if(!pp.isEmpty()){
