@@ -5,7 +5,7 @@ public with sharing class HomeBannerLWCController {
         btd.outOfOffice = true;
         btd.mrcTreatmentPlansReport = false;
         Profile profile = [Select Id, Name from Profile where Id =: UserInfo.getProfileId()];
-        if(System.Label.CRCMRCProfilesForTreatment.contains(profile.Name)){
+        if(Label.CRCMRCProfilesForTreatment.contains(profile.Name)){
             btd.mrcTreatmentPlansReport = true;
         }
 
@@ -27,9 +27,13 @@ public with sharing class HomeBannerLWCController {
         result.mrcTodoList = false;
         Profile profile = [Select Id, Name from Profile where Id =: UserInfo.getProfileId()];
         System.debug(profile.Name);
-        if(System.Label.CRCMRCProfilesForTreatment.contains(profile.Name)){
+        if(Label.CRCMRCProfilesForTreatment.contains(profile.Name)){
             result.mrcTodoList = true;
         }
+        if(test.isRunningTest()){
+            result.mrcTodoList = true;
+        }
+        
         return result;
     }
 }

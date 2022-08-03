@@ -21,14 +21,16 @@ public with sharing class KennelSignageController {
         currentAnimal = daoAnimal.findOne(page.getParameters().get('id'));
         System.debug('### Value of current animal  ' + currentAnimal);
 
-        m_animalName();
-        m_animalId();
-        m_animalSex();
-        m_animalColor();
-        m_animalBreed();
-        m_animalAge();
-        m_VolunteerReadingOkay();
-        //iBehaviorConcerns();
+        if(currentAnimal != null){
+            m_animalName();
+            m_animalId();
+            m_animalSex();
+            m_animalColor();
+            m_animalBreed();
+            m_animalAge();
+            m_VolunteerReadingOkay();
+            //iBehaviorConcerns();
+        }
 
 
     }

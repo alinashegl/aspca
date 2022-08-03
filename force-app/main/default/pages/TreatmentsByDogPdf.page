@@ -1,163 +1,122 @@
 <apex:page controller="TreatmentByDogLWCController" sidebar="false" showHeader="false" readOnly="true" applyHtmlTag="false"
-    cache="true" renderAs="advanced_pdf" docType="html-5.0" standardStylesheets="false">
-
+           cache="true" renderAs="advanced_pdf" docType="html-5.0" standardStylesheets="false">
+    
     <head>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-
         <style>
             @page {
-                size: landscape;
-                @bottom-left {
-                    content: "Page " counter(page) " of " counter(pages);
-                    font-family: sans-serif;
-                    font-size: 80%;
-                }
-                @bottom-right {
-                    content: "Date: {!MONTH(TODAY())}/{!DAY(TODAY())}/{!YEAR(TODAY())}";
-                    font-family: sans-serif;
-                    font-size: 80%;
-                }
+            size: landscape;
+            @bottom-left {
+            content: "Page " counter(page) " of " counter(pages);
+            font-size: small;
             }
-
+            @bottom-right {
+            content: "Date: {!MONTH(TODAY())}/{!DAY(TODAY())}/{!YEAR(TODAY())}";
+            font-size: small;
+            }
+            }
+            
             table {
-                width: 100%;
-                padding: 5px;
-                vertical-align: Top;
-                font-size: small;
+            width: 100%;
+            vertical-align: Top;
+            font-size: small;
+            table-layout: fixed
             }
-
-            table thead>tr>th {
-                word-wrap: break-word;
-                font-weight: bold;
-                text-align: left;
-            }
-
+            
             table tbody>tr>td {
-                word-wrap: break-word;
-                text-align: left;
+            word-wrap: break-word;
+            text-align: left;
             }
-
-            .section {
-                margin-top: 20px;
-                width: 100%;
-            }
-
-            .tableSpace {
-                border-collapse: separate;
-                border-spacing: 0 5px;
-            }
-
-            .bottomline {
-                border-bottom: thin #D4D4D4 solid;
-                padding-top: .5em;
-                padding-bottom: .5em;
-            }
-
-            .topline {
-                border-top: thin #D4D4D4 solid;
-            }
-
-            .c_table {
-                -fs-table-paginate: paginate;
-                border-spacing: 0;
-                table-layout: fixed
-            }
-
         </style>
     </head>
     <body>
-        <div>
+        <apex:variable var="cnt" value="{!0}" />
             <apex:repeat value="{!dogInfoWrapperList}" var="record">
-                
-                <table class="tableSpcae c_table" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th width="12%" class="bottomline"></th>
-                            <th width="12%" class="bottomline"></th>
-                            <th width="12%" class="bottomline"></th>
-                            <th width="12%" class="bottomline"></th>
-                            <th width="12%" class="bottomline"></th>
-                            <th width="12%" class="bottomline"></th>
-                            <th width="12%" class="bottomline"></th>
-                        </tr>
-                    </thead>
-                
-                    <tr style="page-break-inside:avoid, border-around: 1px solid;">
-                        <td sclass="line">
+        <div style="{!if(cnt < 1, 'page-break-before:avoid;','page-break-before:always;')}">
+                <table class="c_table" bgcolor="silver">
+                    <tr>
+                        <td>
                             <b>Name:</b> 
-                            <br/>
+                        </td>
+                        <td>
+                            <b>Sex:</b> 
+                        </td>
+                        <td>
+                            <b>Breed:</b> 
+                        </td>
+                        <td>
+                            <b>Age:</b> 
+                        </td>
+                        <td>
+                            <b>Location:</b> 
+                        </td>
+                        <td>
+                            <b>Eval Grade:</b> 
+                        </td>
+                        <td>
+                            <b>TX Priority:</b> 
+                        </td>
+                        <td>
+                            <b>Medications:</b> 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
                             {!record.name}
                         </td>
-                        <td class="line">
-                            <b>Sex:</b> 
-                            <br/>
+                        <td>
                             {!record.gender}
                         </td>
-                        <td class="line">
-                            <b>Breed:</b> 
-                            <br/>
+                        <td>
                             {!record.breed}
                         </td>
-                        <td class="line">
-                            <b>Age:</b> 
-                            <br/>
+                        <td>
                             {!record.age}
                         </td>
-                        <td class="line">
-                            <b>Location:</b> 
-                            <br/>
+                        <td>
                             {!record.location}
                         </td>
-                        <td class="line">
-                            <b>Eval Grade:</b> 
-                            <br/>
+                        <td>
                             {!record.evalGrade}
                         </td>
-                        <td class="line">
-                            <b>TX Priority:</b> 
-                            <br/>
+                        <td>
                             {!record.txPriority}
                         </td>
-                        <td class="line">
-                            <b>Mediations:</b> 
-                            <br/>
+                        <td>
                             {!record.medications}
                         </td>
                     </tr>
                 </table>
+                <br/>
                 <apex:outputPanel rendered="{!record.txProtocols.size!=0}">
-                <div style="page-break-after:always;">
-                    <table class="tableSpcae c_table" cellspacing="0">
-                        <tr style="page-break-inside:avoid">
-                            <td class="line" style="border-bottom: 1px solid;">
-                                <table>
-                                    <apex:repeat value="{!record.txProtocols}" var="protocolWrapper">
-                                        <tr>
-                                            <td width="20%">
-                                                <b>{!UPPER(protocolWrapper.name )}</b><br/>
+                            <apex:repeat value="{!record.txProtocols}" var="protocolWrapper">
+                    <div style="page-break-after:avoid;">
+                        <table class="c_table" cellspacing="0">
+                                <tr>
+                                    <td width="20%">
+                                        <b>{!UPPER(protocolWrapper.name )}</b>
+                                    </td>
+                                    <td width="20%">
+                                        {!protocolWrapper.category}
+                                    </td>
+                                </tr>
+                                <apex:outputPanel rendered="{!protocolWrapper.historicalSessionProtocols.size!=0}">
+                                    <tr>
+                                        <apex:repeat value="{!protocolWrapper.historicalSessionProtocols}" var="treatment">
+                                            <td>  
+                                                {!treatment.txDateFormatted} ({!treatment.colorText}) <br/>
+                                                {!treatment.score}                                                    
                                             </td>
-                                            <td width="20%">
-                                                {!protocolWrapper.category}
-                                            </td>
-                                        </tr>
-                                        <apex:outputPanel rendered="{!protocolWrapper.historicalSessionProtocols.size!=0}">
-                                            <tr>
-                                                <apex:repeat value="{!protocolWrapper.historicalSessionProtocols}" var="treatment">
-                                                    <td>  
-                                                        {!treatment.txDateFormatted} ({!treatment.colorText}) <br/>
-                                                        {!treatment.score}                                                    
-                                                    </td>
-                                                </apex:repeat>
-                                            </tr>
-                                        </apex:outputPanel>
-                                    </apex:repeat>
-                                </table>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
+                                        </apex:repeat>
+                                    </tr>
+                                </apex:outputPanel>
+                                <br/>
+                        </table>
+                    </div>
+                            </apex:repeat>
                 </apex:outputPanel>
-            </apex:repeat>
         </div>
+                        <apex:variable var="cnt" value="{!cnt+1}"/>
+            </apex:repeat>
     </body>
 </apex:page>

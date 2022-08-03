@@ -22,7 +22,7 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Number_of_Weeks_in_Treatment__c</field>
+            <field>no_of_weeks_in_treatment__c</field>
             <table>Animal__c</table>
         </columns>
         <columns>
@@ -142,26 +142,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Behavior_Play_Pause__c</field>
-            <table>Animal__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Behavior_Play_Pause_Date__c</field>
-            <table>Animal__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Behavior_Play_Pause_Options__c</field>
-            <table>Animal__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Behavior_Play_Pause_Reason__c</field>
-            <table>Animal__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>CreatedBy</field>
             <table>Animal__c.Treatment_Sessions__r</table>
         </columns>
@@ -207,6 +187,11 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>PPE_DOH__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>Bergh_Animal_Tracking_Number__c</field>
             <table>Animal__c</table>
         </columns>
@@ -223,6 +208,16 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Active_Animal__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Important_Notes_ARC_CARE__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Hold_Status_ARC_CARE__c</field>
             <table>Animal__c</table>
         </columns>
         <columns>
@@ -244,6 +239,11 @@
             <checkedByDefault>false</checkedByDefault>
             <field>Preferred_Motivators__c</field>
             <table>Animal__c.Treatment_Sessions__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Foster_Name__c</field>
+            <table>Animal__c</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
@@ -1322,11 +1322,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Transition_Animal__c</field>
-            <table>Animal__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Transport_Date__c</field>
             <table>Animal__c</table>
         </columns>
@@ -1380,28 +1375,12 @@
             <field>Active_Animal_False__c</field>
             <table>Animal__c</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Walking_Notes__c</field>
+            <table>Animal__c</table>
+        </columns>
         <masterLabel>Animals</masterLabel>
-    </sections>
-    <sections>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Current_Week_Number__c</field>
-            <table>Animal__c.Treatment_Sessions__r</table>
-            <field>Active_Animal_True__c</field>
-            <table>Animal__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Active_Animal_False__c</field>
-            <table>Animal__c</table>
-
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Current_Week__c</field>
-            <table>Animal__c.Treatment_Sessions__r</table>
-        </columns>
-        <masterLabel>Treatment Sessions</masterLabel>
     </sections>
     <sections>
         <columns>

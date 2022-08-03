@@ -89,4 +89,34 @@ private class test_TreatmentPlanService {
         update plan;
 
     }
+
+    @isTest 
+    static void assignPlanTest(){
+        Treatment_Plan__c plan = TestDataFactory.createPlan();
+        Behavior_Evaluation__c be = new Behavior_Evaluation__c(
+            Puppy_Behavior_in_Kennel__c = 'Social;Excited',
+            Puppy_Behavior_on_Leash__c = 'Mildly fearful;Panicked',
+            Animal__c = plan.Animal__c,
+            Scribe_Initials__c = 'SI',
+            Tester_Initials__c = 'TI',
+            Handler_Initials__c = 'HI',
+            Comments_BIK__c = 'Test Comments for Unit Test',
+            Comments_BOL__c = 'Other Test Comments for Unit Test',
+            Puppy_Skipped_DI_P1__c = 'Skipped not necessary',
+            Puppy_Skipped_DI_P2__c = 'Skipped not necessary',
+            Puppy_Skipped_DI_P3__c = 'Skipped not necessary',
+            Evaluation_Subtype__c = 'Puppy',
+            Potential_Behavior_Issues__c = 'Aggression to People;Other'
+        );
+        insert be;
+
+        ServiceRequest req = new ServiceRequest('test request','assignPlan',null);
+        req.Parameters.put('recordId',(Object) be.Id);
+
+        test.startTest();
+            ServiceResponse response = TreatmentPlanService.process(req);
+        test.stopTest();
+        System.AssertEquals('SUCCESS', response.Data);
+
+    }
 }

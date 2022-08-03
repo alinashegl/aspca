@@ -12,6 +12,11 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
+                <fullName>Complete</fullName>
+                <default>false</default>
+                <label>Complete</label>
+            </value>
+            <value>
                 <fullName>Pending</fullName>
                 <default>false</default>
                 <label>Pending</label>
@@ -22,9 +27,9 @@
                 <label>Incomplete</label>
             </value>
             <value>
-                <fullName>Complete</fullName>
+                <fullName>Needs Dog-Dog</fullName>
                 <default>false</default>
-                <label>Complete</label>
+                <label>Needs Dog-Dog</label>
             </value>
             <value>
                 <fullName>N/A</fullName>

@@ -51,7 +51,7 @@
     },
     handleSkipSaveEvent: function(cmp, event, helper) {
         var behaviorEvalObj = event.getParam("behaviorEvalObj");
-        cmp.set("v.behaviorEvaluation",behaviorEvalObj);
+        cmp.set("v.behaviorEvaluation",behaviorEvalObj);        
+        helper.handleSkipSubsequentTest(cmp, event);
     }
-
 });

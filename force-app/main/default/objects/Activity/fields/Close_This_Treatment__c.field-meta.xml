@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Close_This_Treatment__c</fullName>
+    <externalId>false</externalId>
+    <formula>AND(
+ActivityDate + 1 = TODAY(),
+NOT(ISPICKVAL(Status, &quot;Waiting for Foster&quot;)),
+NOT(ISPICKVAL(Status, &quot;Waiting for Foster (Internal)&quot;)),
+NOT(ISPICKVAL(Status, &quot;Completed&quot;)),
+RecordType.Name = &quot;Treatments&quot;
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Close This Treatment</label>
+    <type>Checkbox</type>
+</CustomField>

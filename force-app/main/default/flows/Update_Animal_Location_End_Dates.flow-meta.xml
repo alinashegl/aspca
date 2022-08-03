@@ -4,8 +4,8 @@
     <decisions>
         <name>Previous_Record_ID_Null</name>
         <label>Previous Record ID Null</label>
-        <locationX>394</locationX>
-        <locationY>381</locationY>
+        <locationX>388</locationX>
+        <locationY>380</locationY>
         <defaultConnector>
             <targetReference>Update_End_Date_on_Previous_Location</targetReference>
         </defaultConnector>
@@ -50,7 +50,7 @@
         <name>Get_Previous_Animal_Location</name>
         <label>Get Previous Animal Location</label>
         <locationX>177</locationX>
-        <locationY>379</locationY>
+        <locationY>378</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Previous_Record_ID_Null</targetReference>
@@ -86,10 +86,27 @@
         <sortOrder>Desc</sortOrder>
     </recordLookups>
     <recordUpdates>
+        <description>Update Previous Facility/Outcome on new record</description>
+        <name>Set_Previous_Facility_Outcome</name>
+        <label>Set Previous Facility/Outcome</label>
+        <locationX>783</locationX>
+        <locationY>371</locationY>
+        <inputAssignments>
+            <field>Previous_Facility_Outcome__c</field>
+            <value>
+                <elementReference>previousAnimalId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
         <name>Update_End_Date_on_Previous_Location</name>
         <label>Update End Date on Previous Location</label>
         <locationX>621</locationX>
         <locationY>372</locationY>
+        <connector>
+            <targetReference>Set_Previous_Facility_Outcome</targetReference>
+        </connector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
