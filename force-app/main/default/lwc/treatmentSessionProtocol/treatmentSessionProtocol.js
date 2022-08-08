@@ -155,7 +155,9 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
     prepPlanProtocolFields(){
         const fields ={};
         fields[PLAN_PROTOCOL_ID_FIELD.fieldApiName] = this.protocolInfo.planProtocolId;
-        fields[PLAN_PROTOCOL_NOTES_FIELD.fieldApiName] = this.template.querySelector("lightning-textarea[data-name=planProtocolNotes]").value;
+        if(this.protocolInfo.isNonMRC){
+            fields[PLAN_PROTOCOL_NOTES_FIELD.fieldApiName] = this.template.querySelector("lightning-textarea[data-name=planProtocolNotes]").value;
+        }
         this.updatePlanProtocol(fields);
     }
 

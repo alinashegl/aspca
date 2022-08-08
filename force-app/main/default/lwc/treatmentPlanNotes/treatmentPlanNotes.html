@@ -1,0 +1,19 @@
+<template>
+    <lightning-card  title="Plan Notes">
+       <template if:true={error}>
+        <div class="slds-p-left_medium">
+            <c-error-panel errors={error} type='inlineMessage' friendly-message={errorMessage}></c-error-panel>
+        </div>
+        </template>
+    <lightning-record-edit-form
+                object-api-name="Treatment_Plan__c"
+                record-id={treatmentPlanId}
+            >         
+            <lightning-textarea value={planNotes} class="slds-p-left_small slds-p-right_small" data-field={planNotesApiName} onblur={handleInputBlur}></lightning-textarea>
+            <template if:true={showSpinner}>
+                <lightning-icon icon-name="utility:spinner" alternative-text="Connected" size="small" title="large size">
+                </lightning-icon>
+            </template>
+        </lightning-record-edit-form>
+    </lightning-card>
+</template>
