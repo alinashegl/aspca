@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X2826_NY_Animals</fullName>
+    <columns>NAME</columns>
+    <columns>Animal_Status__c</columns>
+    <columns>Shelter_Location__c</columns>
+    <columns>Estimated_Date_of_Birth__c</columns>
+    <columns>Age__c</columns>
+    <columns>Intake_BCS__c</columns>
+    <columns>Animal_Name__c</columns>
+    <columns>Breed__c</columns>
+    <columns>Current_Weight_in_kgs_Num__c</columns>
+    <columns>Microchip_Results__c</columns>
+    <columns>Gender__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>NAME</field>
+        <operation>contains</operation>
+        <value>2826</value>
+    </filters>
+    <label>2826 NY DF</label>
+</ListView>
