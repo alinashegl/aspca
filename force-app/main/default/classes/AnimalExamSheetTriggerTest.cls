@@ -7,10 +7,10 @@ public class AnimalExamSheetTriggerTest {
         Case cs = new Case();
         insert cs;
         
-        Contact con = new Contact(LastName='Test', MailingCity='Test', MailingState='AK',County__c='Test');
+        Contact con = new Contact(LastName='Test', MailingCity='Test', MailingState='AK',MailingCountry='United States');
         insert con;
         
-        Contact con2 = new Contact(LastName='Test2', MailingCity='Test2', MailingState='AK',County__c='Test2', Contact_Type__c='Behavior Case Worker', Email='test5@domain.com');
+        Contact con2 = new Contact(LastName='Test2', MailingCity='Test2', MailingState='AK',MailingCountry='United States', Contact_Type__c='Behavior Case Worker', Email='test5@domain.com');
         insert con2;
         
         Animal__c anim = new Animal__c(Name='Test', Case__c=cs.Id, Behavior_Case_Worker__c=con2.Id,Discharged_to_Contact__c=con.Id,Type_of_Animal__c = 'Dog',Age__c='Unknown At Intake');

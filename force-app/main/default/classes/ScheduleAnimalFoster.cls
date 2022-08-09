@@ -41,7 +41,7 @@ public with sharing class ScheduleAnimalFoster {
         String queryString = 'SELECT Id, Animal_Name_Id__c, Current_Recent_Shelter_Location__c, Current_Location__c, ' +
             'Behavior_Case_Worker__c, Behavior_Case_Worker__r.Name, Behavior_Case_Worker__r.Is_Generic_Contact__c, ' +
                 '(SELECT Id, Follow_Up_Days__c, Follow_Up_Frequency__c, CreatedDate, Start_Date__c ' +
-                'FROM Animal_Locations__r ' +
+                'FROM Facilities_Outcomes__r ' +
                 'WHERE Facility_Outcome__c = \'Foster Home\' ' +
                 'AND (End_Date__c = null OR End_Date__c >= TODAY) ' +
                 'ORDER BY CreatedDate DESC ' +
@@ -88,7 +88,7 @@ public with sharing class ScheduleAnimalFoster {
         */
         Date startDateWeekStart = AutoScheduleTasksUtil.startOfASPCAWeek(AutoScheduleTasksUtil.startDate);
         Date endDateWeekStart = AutoScheduleTasksUtil.startOfASPCAWeek(AutoScheduleTasksUtil.endDate);
-        Facility_Outcome__c location = animal.Animal_Locations__r[0];
+        Facility_Outcome__c location = animal.Facilities_Outcomes__r[0];
 
         Date[] dateList = new Date[0];
 
@@ -165,7 +165,7 @@ public with sharing class ScheduleAnimalFoster {
         //determine which dates need tasks
         Date[] dateList = datesForTasks(animal, config, task);
         
-        Facility_Outcome__c location = animal.Animal_Locations__r[0];
+        Facility_Outcome__c location = animal.Facilities_Outcomes__r[0];
 
         //loop through the dates and prep the tasks, adding them to the list of newTasks to return
         for(Date day : dateList){

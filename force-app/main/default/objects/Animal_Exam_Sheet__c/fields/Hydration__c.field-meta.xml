@@ -13,9 +13,24 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Hydrated</fullName>
+                <fullName>Euhydrated (normal)</fullName>
                 <default>false</default>
-                <label>Hydrated</label>
+                <label>Euhydrated (normal)</label>
+            </value>
+            <value>
+                <fullName>Mild dehydration (~5%) - Minimal loss of skin turgor, semidry mucous membranes and normal eye</fullName>
+                <default>false</default>
+                <label>Mild dehydration (~5%) - Minimal loss of skin turgor, semidry mucous membranes and normal eye</label>
+            </value>
+            <value>
+                <fullName>Moderate dehydration (~8%) - Moderate loss of skin turgor, dry mucous membranes, weak rapid pulses, enopthalmus.</fullName>
+                <default>false</default>
+                <label>Moderate dehydration (~8%) - Moderate loss of skin turgor, dry mucous membranes, weak rapid pulses, enopthalmus.</label>
+            </value>
+            <value>
+                <fullName>Severe dehydration (&gt;10%) - Considerable loss of skin turgor, severe enophthalmos, tachycardia, extremely dry mucous membranes, weak/thready pulses, and altered level of consciousness.</fullName>
+                <default>false</default>
+                <label>Severe dehydration (&gt;10%) - Considerable loss of skin turgor, severe enophthalmos, tachycardia, extremely dry mucous membranes, weak/thready pulses, and altered level of consciousness.</label>
             </value>
             <value>
                 <fullName>Other</fullName>

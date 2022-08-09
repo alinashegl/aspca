@@ -128,6 +128,18 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldItem>Record.Animal_Age__c</fieldItem>
+                <identifier>RecordAnimal_Age_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Animal_Age_Units__c</fieldItem>
+                <identifier>RecordAnimal_Age_Units_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
                 <fieldInstanceProperties>
                     <name>uiBehavior</name>
                     <value>required</value>
@@ -238,6 +250,10 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>readonly</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.FM_Record_Status__c</fieldItem>
                 <identifier>RecordFM_Record_Status_cField</identifier>
             </fieldInstance>
@@ -291,7 +307,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>relatedListApiName</name>
-                    <value>Animal_Locations__r</value>
+                    <value>Facilities_Outcomes__r</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>relatedListComponentOverride</name>
@@ -1390,6 +1406,18 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldItem>Record.Animal_Age__c</fieldItem>
+                <identifier>RecordAnimal_Age_cField2</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Animal_Age_Units__c</fieldItem>
+                <identifier>RecordAnimal_Age_Units_cField2</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
                 <fieldItem>Record.Intake_Date_Time__c</fieldItem>
                 <identifier>RecordIntake_Date_Time_cField1</identifier>
             </fieldInstance>
@@ -1569,7 +1597,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>relatedListApiName</name>
-                    <value>Animal_Locations__r</value>
+                    <value>Facilities_Outcomes__r</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>relatedListComponentOverride</name>
@@ -1585,6 +1613,32 @@
                 </componentInstanceProperties>
                 <componentName>force:relatedListSingleContainer</componentName>
                 <identifier>force_relatedListSingleContainer12</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>parentFieldApiName</name>
+                    <value>Animal__c.Id</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>relatedListApiName</name>
+                    <value>Behavior_Case_Workers__r</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>relatedListComponentOverride</name>
+                    <value>ADVGRID</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>rowsToDisplay</name>
+                    <value>10</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>showActionBar</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentName>force:relatedListSingleContainer</componentName>
+                <identifier>force_relatedListSingleContainer15</identifier>
             </componentInstance>
         </itemInstances>
         <name>Facet-262bada4-8598-49be-ad47-7e5fe26a326c</name>
@@ -1707,6 +1761,12 @@
             <fieldInstance>
                 <fieldItem>Record.Potential_Helper_Dog__c</fieldItem>
                 <identifier>RecordPotential_Helper_Dog_cField2</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Behavior_Medication_Notes__c</fieldItem>
+                <identifier>RecordBehavior_Medication_Notes_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-1c2d9594-eea1-42f4-b0ca-0b6c49f7bf0d</name>
@@ -2250,6 +2310,13 @@
                 </componentInstanceProperties>
                 <componentName>force:relatedListSingleContainer</componentName>
                 <identifier>force_relatedListSingleContainer13</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!$User.Profile.Name}</leftValue>
+                        <operator>NE</operator>
+                        <rightValue>ASPCA - Behavior (ARC/CARE)</rightValue>
+                    </criteria>
+                </visibilityRule>
             </componentInstance>
         </itemInstances>
         <name>Facet-abm4gkw6dcm</name>

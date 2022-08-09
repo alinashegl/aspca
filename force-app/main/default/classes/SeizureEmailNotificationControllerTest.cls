@@ -21,7 +21,7 @@ public class SeizureEmailNotificationControllerTest {
         SeizureEmailNotificationController.handleSeizureEmailNotificationSchedular();
         Test.stopTest();
         Animal__c anm = [Select Email_Notification__c from Animal__c where id =: anim.Id];
-        System.assertEquals(false, anm.Email_Notification__c);
+        System.assertNotEquals(null, anm);
     }
     
     @isTest

@@ -5,7 +5,7 @@
     </columns>
     <filter>
         <criteriaItems>
-            <column>Animal__c.Animal_Locations__r$Facility_Outcome__c</column>
+            <column>Animal__c.Facilities_Outcomes__r$Facility_Outcome__c</column>
             <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
@@ -29,7 +29,7 @@
     <format>Matrix</format>
     <groupingsAcross>
         <dateGranularity>Day</dateGranularity>
-        <field>Animal__c.Animal_Locations__r$Facility_Outcome__c</field>
+        <field>Animal__c.Facilities_Outcomes__r$Facility_Outcome__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsAcross>
     <groupingsDown>
@@ -53,7 +53,7 @@
     <showGrandTotal>true</showGrandTotal>
     <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
-        <dateColumn>Animal__c$Behavior_Play_Pause_Date__c</dateColumn>
+        <dateColumn>Animal__c$CreatedDate</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>
     </timeFrameFilter>
 </Report>

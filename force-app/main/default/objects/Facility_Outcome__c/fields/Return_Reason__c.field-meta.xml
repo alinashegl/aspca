@@ -21,6 +21,30 @@
                 <default>false</default>
                 <label>option2</label>
             </value>
+            <value>
+                <fullName>Behavior</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Behavior</label>
+            </value>
+            <value>
+                <fullName>Medical</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Medical</label>
+            </value>
+            <value>
+                <fullName>Medical/Behavior</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Medical/Behavior</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Other</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>

@@ -25,5 +25,5 @@
         <field>DUE_DATE</field>
         <operation>equals</operation>
     </filters>
-    <label>Unscheduled Tasks</label>
+    <label>ENCODED:{!FilterNames.Task_UnscheduledTasks}</label>
 </ListView>

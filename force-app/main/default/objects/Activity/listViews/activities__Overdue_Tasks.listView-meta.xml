@@ -10,7 +10,7 @@
     <columns>CORE.USERS.ALIAS</columns>
     <columns>TASK.LAST_UPDATE</columns>
     <columns>UPDATEDBY_USER.ALIAS</columns>
-    <filterScope>Mine</filterScope>
+    <filterScope>Everything</filterScope>
     <filters>
         <field>ACTIVITY.TASK</field>
         <operation>equals</operation>
