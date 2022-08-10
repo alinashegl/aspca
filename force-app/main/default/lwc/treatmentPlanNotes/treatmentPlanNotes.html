@@ -1,5 +1,10 @@
 <template>
     <lightning-card  title="Plan Notes">
+       <template if:true={error}>
+        <div class="slds-p-left_medium">
+            <c-error-panel errors={error} type='inlineMessage' friendly-message={errorMessage}></c-error-panel>
+        </div>
+        </template>
     <lightning-record-edit-form
                 object-api-name="Treatment_Plan__c"
                 record-id={treatmentPlanId}

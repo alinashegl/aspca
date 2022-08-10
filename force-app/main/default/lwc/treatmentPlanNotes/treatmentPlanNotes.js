@@ -10,6 +10,9 @@ export default class TreatmentPlanNotes extends LightningElement {
     showSpinner = false;
     planNotesApiName = PLAN_NOTES_FIELD.fieldApiName;
 
+    error;
+    errorMessage;
+
     @wire(getRecord, { recordId: '$recordId', fields: [TREATMENT_PLAN_FIELD] })
     wiredTreatmentSessionRecord({ error, data }) {
         if (data) {
@@ -39,7 +42,7 @@ export default class TreatmentPlanNotes extends LightningElement {
         })
         .catch(error => {
             window.console.log('error: ', error.body.message);
-            this.errorMessage = 'Error updating Animal Daily Care:';
+            this.errorMessage = 'Error updating Plan Notes';
             this.error = error;
         })
         .finally(() => {
