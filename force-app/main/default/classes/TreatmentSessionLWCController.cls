@@ -74,7 +74,7 @@ public with sharing class TreatmentSessionLWCController {
     */
     @AuraEnabled
     public static Session_Protocol__c getProtocolSkippedInfo(Id protocolId){
-        Session_Protocol__c[] protocols = [SELECT Id, IsSkipped__c, IsRemoved__c, Add_to_Plan__c, New_Protocol__c FROM Session_Protocol__c WHERE Id =: protocolId LIMIT 1];
+        Session_Protocol__c[] protocols = [SELECT Id, IsSkipped__c, IsRemoved__c, Add_to_Plan__c FROM Session_Protocol__c WHERE Id =: protocolId LIMIT 1];
         return !protocols.isEmpty() ? protocols[0] : null;
     }
 
@@ -210,6 +210,7 @@ public with sharing class TreatmentSessionLWCController {
                     ProtocolId__r.Protocol_Box_Link__c,                    
                     ProtocolId__r.Name,
                     TreatmentSessionId__r.Treatment_Plan__c,
+                    TreatmentSessionId__r.Animal__r.Current_Recent_Shelter_Location__c,
                     (
                         SELECT Id, 
                             Protocol_Score__c,
@@ -238,7 +239,7 @@ public with sharing class TreatmentSessionLWCController {
     private static List<List<Session_Protocol__c>> getAssignedSessionProtocolsLists(Id sessionId){
         if(sessionId == null) return null;
         Map<String, Session_Protocol__c[]> protocolsMap = new Map<String, Session_Protocol__c[]>();
-        for(Session_Protocol__c protocol : [SELECT Id, ProtocolId__c, Protocol_Name__c, IsSkipped__c, IsRemoved__c, ProtocolId__r.Protocol_Categories__c, New_Protocol__c FROM Session_Protocol__c WHERE TreatmentSessionId__c =: sessionId ORDER BY ProtocolId__r.Protocol_Categories__c ASC, Protocol_Name__c ASC]){
+        for(Session_Protocol__c protocol : [SELECT Id, ProtocolId__c, Protocol_Name__c, IsSkipped__c, IsRemoved__c, ProtocolId__r.Protocol_Categories__c FROM Session_Protocol__c WHERE TreatmentSessionId__c =: sessionId ORDER BY ProtocolId__r.Protocol_Categories__c ASC, Protocol_Name__c ASC]){
             if(protocolsMap.containsKey(protocol.ProtocolId__r.Protocol_Categories__c)){
                 protocolsMap.get(protocol.ProtocolId__r.Protocol_Categories__c).add(protocol);
             }
@@ -293,7 +294,7 @@ public with sharing class TreatmentSessionLWCController {
 
     private static List<List<Plan_Protocol__c>> getAssignedPlanProtocolsLists(Id planId){
         Map<String, Plan_Protocol__c[]> protocolsMap = new Map<String, Plan_Protocol__c[]>();
-        for(Plan_Protocol__c protocol : [SELECT Id, Protocol__c, Protocol__r.Name, Protocol_Description__c, IsRemoved__c, Protocol__r.Protocol_Categories__c, New_Protocol__c FROM Plan_Protocol__c WHERE Treatment_Plan__c =: planId ORDER BY Protocol__r.Protocol_Categories__c, Protocol__r.Name ASC]){
+        for(Plan_Protocol__c protocol : [SELECT Id, Protocol__c, Protocol__r.Name, Protocol_Description__c, IsRemoved__c, Protocol__r.Protocol_Categories__c FROM Plan_Protocol__c WHERE Treatment_Plan__c =: planId ORDER BY Protocol__r.Protocol_Categories__c, Protocol__r.Name ASC]){
             if(protocolsMap.containsKey(protocol.Protocol__r.Protocol_Categories__c)){
                 protocolsMap.get(protocol.Protocol__r.Protocol_Categories__c).add(protocol);
             }
@@ -452,6 +453,7 @@ public with sharing class TreatmentSessionLWCController {
         @AuraEnabled public String boxLink {get; set;}
         @AuraEnabled public String planProtocolId {get; set;}
         @AuraEnabled public String planProtocolNotes {get; set;}
+        @AuraEnabled public Boolean isNonMRC {get;set;}
 
         ProtocolInfo(Session_Protocol__c sp){
             this.id = sp.Id;
@@ -467,6 +469,7 @@ public with sharing class TreatmentSessionLWCController {
             this.protocolNotes = sp.Protocol_Notes__c;
             this.managerReviewNotes = sp.Manager_Review_Notes__c;
             this.boxLink = sp.ProtocolId__r.Protocol_Box_Link__c;
+            this.isNonMRC = sp.TreatmentSessionId__r?.Animal__r?.Current_Recent_Shelter_Location__c == 'MRC';
 
             Plan_Protocol__c[] pp = [SELECT Id, Protocol_Notes__c FROM Plan_Protocol__c WHERE Treatment_Plan__c = :sp.TreatmentSessionId__r.Treatment_Plan__c AND Protocol__c = :sp.ProtocolId__c LIMIT 1];
             if(!pp.isEmpty()){

@@ -5,8 +5,19 @@ private class test_ScheduleBoardAndTrainTask {
         Animal__c animal1 = TestDataFactory.createAnimalWithName('test1');
         Animal__c animal2 = TestDataFactory.createAnimalWithName('test2');
         
-        User u = [SELECT Id FROM User Where Profile.Name = 'System Administrator' AND isActive = true LIMIT 1];
-        User u2 = [SELECT Id FROM User Where Division = 'MRC' AND isActive = true LIMIT 1];
+        // User u = [SELECT Id FROM User Where Profile.Name = 'System Administrator' AND isActive = true LIMIT 1];
+        // User u2 = [SELECT Id FROM User Where Division = 'MRC' AND isActive = true LIMIT 1];
+
+        User[] userList = TestDataFactory.createUsersWithoutInserting(2);
+        User u = userList[0];
+        u.Location__c = 'All';
+
+        User u2 = userList[1];
+        u2.Location__c = 'CRC/MRC';
+
+        insert userList;
+
+
         Contact con = TestDataFactory.createContact();
         con.User__c = u.Id;
         con.Contact_Type__c = 'Behavior Case Worker';

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Mild Concern</label>
+    <protected>false</protected>
+    <values>
+        <field>Grade__c</field>
+        <value xsi:type="xsd:string">B</value>
+    </values>
+    <values>
+        <field>Title__c</field>
+        <value xsi:type="xsd:string">Dog Behavior Grading Key</value>
+    </values>
+    <values>
+        <field>customHeader__c</field>
+        <value xsi:type="xsd:string">&quot;B Dogs&quot; exhibit mild fear, anxiety or aggression</value>
+    </values>
+    <values>
+        <field>customSubject__c</field>
+        <value xsi:type="xsd:string">Some of these dogs show signs of mild fear or anxiety throught the evaluation. Others show mild fear in response to a certain situation of stimulus and do
+not recover immediately. Some show mild aggressive behaviour, such as growling or freezing in a response to a person touching them while they eat or
+yelping and mouthing or orienting to a person&apos;s hand during uncomfortable handling. However,B Dogs do not bite or attemp to bite during the evaluation.</value>
+    </values>
+    <values>
+        <field>customText__c</field>
+        <value xsi:type="xsd:string">Mild Concern(s)</value>
+    </values>
+</CustomMetadata>

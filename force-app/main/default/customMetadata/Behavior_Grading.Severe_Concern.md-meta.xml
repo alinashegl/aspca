@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Severe Concern</label>
+    <protected>false</protected>
+    <values>
+        <field>Grade__c</field>
+        <value xsi:type="xsd:string">D</value>
+    </values>
+    <values>
+        <field>Title__c</field>
+        <value xsi:type="xsd:string">Dog Behavior Grading Key</value>
+    </values>
+    <values>
+        <field>customHeader__c</field>
+        <value xsi:type="xsd:string">&quot;D Dogs&quot; exhibit severe fear or aggression.</value>
+    </values>
+    <values>
+        <field>customSubject__c</field>
+        <value xsi:type="xsd:string">They fall into two categories: (1) dogs that are too aggressive toware people or other animals to place in an adoptive home ot (2) dogs that aresuooering
+from an extremely poor quanity of life due to extreme fear or anxiety. if D Dogs fall into the secons category, they show no social behaviour toward
+people during the evaluation. they may exhibit feral behavior. In our opinion, prognosis is poor in either case, and euthanasia is the most appropriate
+outcome.</value>
+    </values>
+    <values>
+        <field>customText__c</field>
+        <value xsi:type="xsd:string">Severe Concern(s)</value>
+    </values>
+</CustomMetadata>

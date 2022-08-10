@@ -28,6 +28,7 @@ public with sharing class dao_Animal extends sql_Dao{
         addField(Animal__c.Location__c);
         addField(Animal__c.Shelter_Kennel__c);
         addField(Animal__c.Shelter_Location2__c);
+        addField(Animal__c.Behavior_Summary__c);
     }
 
     public List<Animal__c> findAll() {
