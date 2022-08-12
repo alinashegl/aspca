@@ -79,59 +79,64 @@ public class AnimalDiscoverPDFController {
         }
         private set;
     }
-    
-    public List<Session_Protocol__c> aTreatmentSession {
+
+    public List<SessionProtocol[]> aTreatmentSession {
         public get {
-            List<Treatment_Session__c> lstTreatmentSession = [SELECT Id,Name from Treatment_Session__c where Animal__r.id =: animalId];
-            Set<Id> treatmentIds =new set<Id>();
-            for (Treatment_Session__c tsc : lstTreatmentSession) {
-                treatmentIds.add(tsc.Id);       
+            Map<Id, SessionProtocol[]> treatmentSessionToProtocolsMap = new Map<Id, SessionProtocol[]>();
+            List<SessionProtocol[]> aTreatmentSession = new List<SessionProtocol[]>();
+            for(Session_protocol__c sp : [
+                SELECT Id, 
+                InView__c,
+                LastModifiedById,
+                Manager_Review_Notes__c,
+                Needs_Review__c,
+                Novel_Person__c,
+                Novel_Person_Notes__c,
+                Overall_Score__c,
+                Overall_Score_Number__c,
+                Overall_Score_Color__c,
+                Preferred_Motivators__c,
+                ProtocolId__c,
+                Protocol_Box_Link__c,
+                Protocol_Name__c,
+                Protocol_Notes__c,
+                IsRemoved__c,
+                Review_Complete__c,
+                TreatmentSessionId__r.Session_Date__c,
+                Name,
+                IsSkipped__c,
+                Solicitation__c,
+                Solicitation_Number__c,
+                Status__c,
+                Sum_of_Numbers__c,
+                TreatmentSessionId__c,
+                (
+                    SELECT Id, Protocol_Scale_Name__c, Protocol_Score__c, Protocol_Score_Number__c 
+                    FROM Session_Protocol_Scales__r 
+                    WHERE Protocol_Scale__r.isDefault__c = true
+                )
+                FROM Session_Protocol__c
+                WHERE TreatmentSessionId__r.Animal__c = :animalId
+                AND TreatmentSessionId__r.Session_Date__c = LAST_N_DAYS:60
+                ORDER BY TreatmentSessionId__r.Session_Date__c DESC
+            ]){
+                if(treatmentSessionToProtocolsMap.containsKey(sp.TreatmentSessionId__c)){
+                    treatmentSessionToProtocolsMap.get(sp.TreatmentSessionId__c).add(new SessionProtocol(sp));
+                } else {
+                    treatmentSessionToProtocolsMap.put(sp.TreatmentSessionId__c, new SessionProtocol[]{new SessionProtocol(sp)});
+                }                
             }
-            if(treatmentIds.size()> 0) {
-                aTreatmentSession = [SELECT Aggressive_Worst__c,
-                                     Aggressive_Worst_Number__c,
-                                     Arousal_Best__c,
-                                     Arousal_Best_Number__c,
-                                     Arousal_Worst__c,
-                                     Arousal_Worst_Number__c,
-                                     Bundle_Entry__c,
-                                     Fear_Best__c,
-                                     Fear_Best_Number__c,
-                                     Social_Best__c,
-                                     Social_Best_Number__c,
-                                     Fear_Worst__c,
-                                     Fear_Worst_Number__c,
-                                     InView__c,
-                                     LastModifiedById,
-                                     Manager_Review_Notes__c,
-                                     Needs_Review__c,
-                                     Novel_Person__c,
-                                     Novel_Person_Notes__c,
-                                     Overall_Score__c,
-                                     Overall_Score_Number__c,
-                                     Overall_Score_Color__c,
-                                     Preferred_Motivators__c,
-                                     ProtocolId__c,
-                                     Protocol_Box_Link__c,
-                                     Protocol_Name__c,
-                                     Protocol_Notes__c,
-                                     IsRemoved__c,
-                                     Review_Complete__c,
-                                     Session_Date__c,
-                                     Name,
-                                     IsSkipped__c,
-                                     Solicitation__c,
-                                     Solicitation_Number__c,
-                                     Status__c,
-                                     Sum_of_Numbers__c,
-                                     TreatmentSessionId__c
-                                     FROM Session_Protocol__c  WHERE  TreatmentSessionId__c IN :  treatmentIds Limit 1 ];
+
+            for(SessionProtocol[] protos : treatmentSessionToProtocolsMap.values()){
+                aTreatmentSession.add(protos);
             }
-            
+            System.debug('aTreatmentSessin: ' + aTreatmentSession);
             return aTreatmentSession;
         }
         private set;
     }
+
+
     
     public List<AnimalGradeHistory> gradeHistory {
         public get {

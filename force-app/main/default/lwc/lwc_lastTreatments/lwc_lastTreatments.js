@@ -31,6 +31,7 @@ export default class Lwc_lastTreatments extends LightningElement {
     lastTreatments;
 
     handleToggle() {
+        window.console.log('lastTreatments: ', JSON.stringify(this.lastTreatments));
         this.allFields = !this.allFields;
     }
 
