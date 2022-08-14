@@ -144,7 +144,7 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
         fields[IS_REMOVED_FIELD.fieldApiName] = this.isRemoved;
         fields[NEEDS_REVIEW_FIELD.fieldApiName] = this.template.querySelector("lightning-input[data-name=needsReview]").checked;
         fields[PROTOCOL_NOTES_FIELD.fieldApiName] = this.template.querySelector("lightning-textarea[data-name=protocolNotes]").value;
-        //fields[PREFERRED_MOTIVATORS_FIELD.fieldApiName] = this.template.querySelector("lightning-input[data-name=preferredMotivators]").value;
+        fields[PREFERRED_MOTIVATORS_FIELD.fieldApiName] = this.template.querySelector("lightning-input[data-name=preferredMotivators]").value;
         
         this.fieldValues.forEach(element => {
             fields[element.name] = element.value;
