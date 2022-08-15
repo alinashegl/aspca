@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cannot_Update_Initial_Weight</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+OR(
+ISCHANGED(Initial_Weight_in_kgs__c),
+ISCHANGED(Initial_Weight_in_lbs__c)
+),
+NOT(ISBLANK(PRIORVALUE(Initial_Weight_in_kgs__c))),
+NOT(ISBLANK(PRIORVALUE(Initial_Weight_in_lbs__c)))
+)</errorConditionFormula>
+    <errorMessage>The animal&apos;s initial weight cannot be changed.</errorMessage>
+</ValidationRule>

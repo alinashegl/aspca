@@ -1,5 +1,6 @@
 public class SeizureEmailNotificationController { 
     public static void handleSeizureEmailNotificationSchedular(){
+        String[] locations = new String[]{'CRC','MRC','CRC/MRC'};
         Map<Id, List<Animal__c>> animalsRec = new  Map<Id, List<Animal__c>>();
 
         List<Animal__c> lstAnimals =[
@@ -7,7 +8,7 @@ public class SeizureEmailNotificationController {
             Play_Category__c, Seizure_Surrender_Date__c,Current_Recent_Shelter_Location__c, Behavior_Case_Worker__c,
             (SELECT Id, Treatment_Priority__c FROM Treatment_Plan__r WHERE IsActive__c = true ORDER BY CreatedDate DESC LIMIT 1) 
             FROM Animal__c where Email_Notification__c =: true 
-            AND (Current_Recent_Shelter_Location__c ='CRC' OR Current_Recent_Shelter_Location__c ='MRC')
+            AND Current_Recent_Shelter_Location__c IN :locations
             AND Active_Animal__c = true
         ];
         List<Animal__c> animalValues = null;   
