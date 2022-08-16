@@ -1,31 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
-        <members>HomePageController</members>
-        <members>PlaygroupToDoListController</members>
-        <members>test_PlaygroupToDoListController</members>
-        <members>test_TreatmentToDoListController</members>
-        <members>TreatmentSessionLWCController</members>
-        <members>TreatmentToDoListController</members>
+        <members>TaskTriggerHandler</members>
+        <members>TaskTriggerHandlerTest</members>
         <name>ApexClass</name>
     </types>
     <types>
-		<members>Update_Grade_Fields</members>
-        <members>Update_Evaluation_Date_and_Create_Evaluation_Task</members>
-        <name>Flow</name>
-    </types>
-    <types>
-        <members>activeAnimalTasks</members>
-        <members>treatmentModifySession</members>
-        <members>activeAnimalTreatment</members>
-        <members>treatmentSessionProtocol</members>
-        <members>observationTable</members>
-        <members>treatmentPlanNotes</members>
-        <name>LightningComponentBundle</name>
+        <members>TaskTrigger</members>
+        <name>ApexTrigger</name>
     </types>
 		<version>53.0</version>
 </Package>
 
 <!--
-sfdx force:source:deploy --checkonly -x manifest/post_deploy_package.xml --testlevel -r test_PlaygroupToDoListController,test_TreatmentToDoListController,HomePageControllerTest,test_TreatmentSessionLWCController
+sfdx force:source:deploy --checkonly -x manifest/post_deploy_package.xml --testlevel RunSpecifiedTests -r TaskTriggerHandlerTest,test_BehEvalPdfController
 -->
