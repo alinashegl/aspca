@@ -379,6 +379,31 @@ public without sharing class TestDataFactory {
         return u;
     }
     
+    public static User[] createUsersWithoutInserting(Integer count) {
+      Integer userCount = count != null ? count : USERS_COUNT;
+      
+      List<User> users = new List<User>();
+
+      Profile p = getProfileFromDb('Standard User');
+
+      for(Integer i = 0; i < USERS_COUNT; i++) {
+          String name = (String)USER_PATTERN.get('name') + '_' + i;
+          String lastname = (String)USER_PATTERN.get('lastName') + '_' + i;
+          String uid = (String)USER_PATTERN.get('name') + '_' + i;
+          User u = new User(
+                  Alias = uid,
+                  Email = uid + '@' + (String)USER_PATTERN.get('domain'),
+                  EmailEncodingKey = (String)USER_PATTERN.get('emailEncodingKey'),
+                  LastName = lastname,
+                  LanguageLocaleKey = (String)USER_PATTERN.get('languageLocaleKey'),
+                  LocaleSidKey = (String)USER_PATTERN.get('localeSidKey'),
+                  ProfileId = p.Id,
+                  TimeZoneSidKey = (String)USER_PATTERN.get('timeZoneSidKey'),
+                  UserName = (uid + '@' +  (String)USER_PATTERN.get('domain'))
+          );
+        return u;
+    }
+    
     public static List<User> getUsersFromDb() {
         Set<String> standardUsers = new Set<String> {
                 'User',
@@ -520,13 +545,15 @@ public without sharing class TestDataFactory {
                     Animal_Name__c = 'Doggo123',
                     Shelter_Location2__c = 'MRC',
                     Current_Location__c = 'MRC',
-                    Current_Recent_Shelter_Location__c = 'MRC',
+                    Current_Recent_Shelter_Location__c = 'CRC/MRC',
                     Play_Category__c = 'Unevaluated'
         );
         insert a;
+        
         User u = createUserWithProfile('ASPCA - Behavior (CRC)');
         u.Location__c = u.Division = a.Current_Recent_Shelter_Location__c;
         insert u;
+        
         return a;
     }
 

@@ -3,10 +3,12 @@ public class CaseTriggerTest {
 
     static testMethod void validateCaseTrigger(){
         
-        Contact con = new Contact(LastName='Test', MailingCity='Test', MailingState='Test',County__c='Test');
+
+        Contact con = new Contact(LastName='Test', MailingCity='Test', MailingState='NY',County__c='Test');
         insert con;
         
-        Contact con2 = new Contact(LastName='Test2', MailingCity='Test2', MailingState='Test2',County__c='Test2');
+        Contact con2 = new Contact(LastName='Test2', MailingCity='Test2', MailingState='CA',County__c='Test2');
+
         insert con2;
         
         Case cs = new Case(ContactId=con.Id);

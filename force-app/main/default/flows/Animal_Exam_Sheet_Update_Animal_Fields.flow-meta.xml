@@ -355,10 +355,10 @@
                 </rightValue>
             </conditions>
             <conditions>
-                <leftValueReference>$Record__Prior.Breed__c</leftValueReference>
+                <leftValueReference>$Record__Prior.Breed_Text__c</leftValueReference>
                 <operator>NotEqualTo</operator>
                 <rightValue>
-                    <elementReference>$Record.Breed__c</elementReference>
+                    <elementReference>$Record.Breed_Text__c</elementReference>
                 </rightValue>
             </conditions>
             <conditions>
@@ -836,7 +836,7 @@
         <inputAssignments>
             <field>Breed__c</field>
             <value>
-                <elementReference>$Record.Breed__c</elementReference>
+                <elementReference>$Record.Breed_Text__c</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>

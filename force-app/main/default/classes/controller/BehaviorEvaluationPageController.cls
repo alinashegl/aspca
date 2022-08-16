@@ -54,6 +54,7 @@ public with sharing class BehaviorEvaluationPageController {
     private static EvaluationWrapper newWrapper(SObjectField field, Behavior_Evaluation__c evaluation) {
         ControllerHelper.Properties prop = ControllerHelper.getFieldProperties(field);
         List<Picklist_Description_Config__mdt> sConfigs = MetadataUtil.getFieldValues(prop.id);
+        System.debug('***sConfigs: ' + sConfigs);
         Map<String, Integer> hashMap = new Map<String, Integer>();
         for (Picklist_Description_Config__mdt config : sConfigs) {
             hashMap.put(config.DeveloperName, sConfigs.indexOf(config));

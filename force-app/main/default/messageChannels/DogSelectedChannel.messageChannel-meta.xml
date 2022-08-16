@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<LightningMessageChannel xmlns="http: soap.sforce.com 2006 04 metadata">
-    <masterLabel>DogSelectedMessage</masterLabel>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
     <description>Message channel for passing a selected dog to the Treatment By Dog Report.</description>
     <isExposed>true</isExposed>
     <lightningMessageFields>
@@ -11,4 +10,5 @@
         <description>Is true if selected/ false if removed</description>
         <fieldName>isSelected</fieldName>
     </lightningMessageFields>
+    <masterLabel>DogSelectedMessage</masterLabel>
 </LightningMessageChannel>

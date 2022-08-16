@@ -47,7 +47,9 @@ private class test_TreatmentSessionLWCController {
             SObject[] returnedContacts = TreatmentSessionLWCController.getChildList(sContacts[0].Session_Protocol__c, 'Session_Protocol_Contact__c');
         Test.stopTest();
 
-        System.assertEquals(2, returnedContacts.size());
+        Session_Protocol_Contact__c[] spsList = [SELECT Id FROM Session_Protocol_Contact__c WHERE Session_Protocol__c =: sContacts[0].Session_Protocol__c];
+
+        System.assertEquals(spsList.size(), returnedContacts.size());
     }
 
     @isTest

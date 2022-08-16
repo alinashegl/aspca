@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mammary__c</fullName>
+    <externalId>false</externalId>
+    <label>Mammary</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Mammary glands developed, consistent with previous litters. No overt masses or lesions.</fullName>
+                <default>false</default>
+                <label>Mammary glands developed, consistent with previous litters. No overt masses or lesions.</label>
+            </value>
+            <value>
+                <fullName>Mammary glands minimally developed. No overt masses or lesions.</fullName>
+                <default>false</default>
+                <label>Mammary glands minimally developed. No overt masses or lesions.</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -3,6 +3,9 @@ public class HomePageControllerTest {
 
     @testSetup
     static void setupData(){
+        User cU = [SELECT Id, Location__c FROM User WHERE Id = :UserInfo.getUserId() LIMIT 1];
+        cU.Location__c = 'All';
+        update cU;
         
         User u = new User(firstname= 'Test',
                           lastname='XXXX',
@@ -20,18 +23,21 @@ public class HomePageControllerTest {
         Case cs = new Case();
         insert cs;
         
-        Contact con = new Contact(LastName='Test', MailingCity='Test', MailingState='AK',County__c='Test');
+        Contact con = new Contact(LastName='Test', MailingCity='Test', MailingState='AK',MailingCountry='United States');
         insert con;
         
-        Contact con2 = new Contact(LastName='Test2', MailingCity='Test2', MailingState='AK',County__c='Test2', Contact_Type__c='Behavior Case Worker', Email='test5@domain.com');
+        Contact con2 = new Contact(LastName='Test2', MailingCity='Test2', MailingState='AK',MailingCountry='United States', Contact_Type__c='Behavior Case Worker', Email='test5@domain.com');
         insert con2;
         
         System.runAs(u) {
             
         
-        
-        Animal__c anim = new Animal__c(Name='Test', Case__c=cs.Id, Behavior_Case_Worker__c=con2.Id,Discharged_to_Contact__c=con.Id,Type_of_Animal__c = 'Dog',Age__c='Unknown At Intake');
-        insert anim;
+        Animal__c anim = TestDataFactory.createAnimalWithName('Test');
+        anim.Behavior_Case_Worker__c = con2.Id;
+        anim.Discharged_to_Contact__c = con.Id;
+        anim.Age__c = 'Unknown At Intake';
+
+        update anim;
         
         Medication_Drug__c drug = new Medication_Drug__c(Name='drug1', Behavior_Medication__c=true);
         insert drug;
@@ -66,9 +72,13 @@ public class HomePageControllerTest {
         insert newProtocol;
             
         }
-        
-        Animal__c anim2 = new Animal__c(Name='Test2', Case__c=cs.Id, Behavior_Case_Worker__c=con2.Id,Discharged_to_Contact__c=con.Id,Type_of_Animal__c = 'Dog',Age__c='Unknown At Intake');
-        insert anim2;
+
+        Animal__c anim2 = TestDataFactory.createAnimalWithName('Test2');
+        anim2.Behavior_Case_Worker__c = con2.Id;
+        anim2.Discharged_to_Contact__c = con.Id;
+        anim2.Age__c = 'Unknown At Intake';
+
+        update anim2;
         
         Task treatmentTask = new Task();
         treatmentTask.Subject = 'Animal Treatment';
