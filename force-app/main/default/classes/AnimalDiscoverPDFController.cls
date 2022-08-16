@@ -105,8 +105,6 @@ public class AnimalDiscoverPDFController {
                 TreatmentSessionId__r.Session_Date__c,
                 Name,
                 IsSkipped__c,
-                Solicitation__c,
-                Solicitation_Number__c,
                 Status__c,
                 Sum_of_Numbers__c,
                 TreatmentSessionId__c,
