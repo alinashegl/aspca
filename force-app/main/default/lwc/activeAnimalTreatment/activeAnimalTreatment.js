@@ -23,11 +23,11 @@ export default class ActiveAnimalTreatment extends LightningElement {
         //     fieldName: 'PlanId',
         //     label: 'ID',
         // },
-        {
+        /*{
             type: 'text',
             fieldName: 'ProtocolName',
             label: 'Protocol Name',
-        },
+        },*/
         {
             type: 'text',
             fieldName: 'Protocol',

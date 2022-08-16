@@ -7,7 +7,8 @@ public with sharing class TreatmentToDoListController {
                 AssignedTreatmentBundleId__c, AssignedTreatmentBundleId__r.Name, Shelter_Color_Code__c
                 FROM Treatment_Plan__c
                 WHERE Animal__r.Location_Filter__c = true
-                    AND IsActive__c = TRUE
+                AND IsActive__c = TRUE
+                AND Treatment_Priority__c != null
                 ORDER BY Id];
         return treatmentPlans;
     }
