@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Discharge_Type_Euthanized_or_Deceased</fullName>
+    <active>false</active>
+    <description>If an animal has been euthanized or deceased, must create a Discharge Exam (that will automatically update the Discharge Type)</description>
+    <errorConditionFormula>OR(ISPICKVAL(Discharge_Type__c,&quot;Deceased&quot;) ,ISPICKVAL(Discharge_Type__c,&quot;Euthanized&quot;))</errorConditionFormula>
+    <errorDisplayField>Discharge_Type__c</errorDisplayField>
+    <errorMessage>You must create a Discharge Exam if an animal has been euthanized or deceased.</errorMessage>
+</ValidationRule>

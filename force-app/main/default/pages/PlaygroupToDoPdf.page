@@ -32,7 +32,7 @@
                             <td width="20%">{!IF(NOT(BEGINS(animal.Shelter_Color_Coding__c, 'Green')), animal.Shelter_Color_Coding__c, '')}</td>
                             <td width="10%">{!animal.Playgroup_Priority_Level__c}</td>
                             <td width="10%">{!animal.Play_Category__c}</td>
-                            <td width="10%">{!IF((animal.Medical_Conditions__r.size > 0), IF((animal.Play_Pauses__r.size > 0), 'Babesia +, In Heat', 'Babesia +'), IF((animal.Play_Pauses__r.size > 0), 'In Heat', ''))}</td>
+                            <td width="10%">{!IF((animal.Medical_Conditions__r.size != 0), IF((animal.Play_Pauses__r.size != 0), 'Babesia +, In Heat', 'Babesia +'), IF((animal.Play_Pauses__r.size != 0), 'In Heat', ''))}</td>
                         </tr>
                         <tr class="spaceUnder">
                             <td width="10%" style="vertical-align:top;"><strong>Play style notes:</strong></td>

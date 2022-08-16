@@ -26,5 +26,5 @@
         <operation>equals</operation>
         <value>TODAY,LAST_N_DAYS:30</value>
     </filters>
-    <label>Completed Tasks</label>
+    <label>ENCODED:{!FilterNames.Task_CompletedTasks}</label>
 </ListView>

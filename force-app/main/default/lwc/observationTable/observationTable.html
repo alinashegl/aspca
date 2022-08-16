@@ -70,11 +70,11 @@
             </template>
 
             <template if:true={observationList}>
-                <lightning-layout multiple-rows>
+                <lightning-layout multiple-rows class="slds-p-left_small slds-p-right_small" >
                     <lightning-layout-item flexibility="auto" size="12" small-device-size="6" medium-device-size="3" large-device-size="1" class="slds-p-around_xx-small">
                         <div class="slds-form-element custom-class">
                             <div class="slds-form-element__static">
-                                View
+                                Edit
                             </div>
                         </div>
                     </lightning-layout-item>
@@ -117,7 +117,7 @@
                         <lightning-layout-item key={row.Id} flexibility="auto" size="12" small-device-size="6" medium-device-size="3" large-device-size="1" class="slds-p-around_xx-small">
                             <div class="slds-form-element">
                                 <div class="slds-form-element__static">
-                                    <lightning-button variant="base" label="View" title="View Observation" data-id={row.Id} onclick={goToObservation} class="slds-m-left_x-small"></lightning-button>
+                                    <lightning-button variant="base" label="Edit" title="Edit Observation" data-id={row.Id} onclick={goToObservation} ></lightning-button>
                                 </div>
                             </div>
                         </lightning-layout-item>

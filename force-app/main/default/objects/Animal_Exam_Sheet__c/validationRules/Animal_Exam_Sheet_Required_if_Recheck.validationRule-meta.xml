@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Animal_Exam_Sheet_Required_if_Recheck</fullName>
-    <active>true</active>
+    <active>false</active>
     <description>Displays an error if &quot;Exam Type&quot; = &quot;Recheck&quot; and &quot;Animal Exam Sheet&quot; lookup is blank.</description>
     <errorConditionFormula>AND(ISPICKVAL(Exam_Type__c,&apos;Recheck&apos;), ISBLANK(Animal_Exam_Sheet__c))</errorConditionFormula>
     <errorDisplayField>Animal_Exam_Sheet__c</errorDisplayField>
