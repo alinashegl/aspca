@@ -13,9 +13,43 @@
         <template>unfiled$public/Behavior_CaseWorker_Assignmen_Email</template>
     </alerts>
     <alerts>
+        <fullName>Animal_Forensic_Status_Change_Notification</fullName>
+        <ccEmails>jessica.stone@aspca.org</ccEmails>
+        <ccEmails>cinder.wilkinson@aspca.org</ccEmails>
+        <ccEmails>mariah.scheskie@aspca.org</ccEmails>
+        <ccEmails>crcbehaviormgmt@aspca.org</ccEmails>
+        <description>Animal Forensic Status Change Notification</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>alyssa.williamson@aspca.org</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>crcsheltering@aspca.org</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>katie.summers@aspca.org</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>laurie.millward@aspca.org</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>leah.finstad@aspca.org</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>niki.curnell@aspca.org</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Forensic_Status_Change</template>
+    </alerts>
+    <alerts>
         <fullName>Animal_SN_Status_Change_Notification</fullName>
-        <ccEmails>kavya.reddy@aspca.org</ccEmails>
-        
+        <ccEmails>blythe.boaz@aspca.org</ccEmails>
         <description>Animal SN Status Change Notification</description>
         <protected>false</protected>
         <recipients>
@@ -28,11 +62,11 @@
     </alerts>
     <alerts>
         <fullName>Behavior_Grade_Change_Notification_Initial</fullName>
-        <ccEmails>kavya.reddy@aspca.org</ccEmails>
+        <ccEmails>blythe.boaz@aspca.org</ccEmails>
         <description>Behavior Grade Change Notification - Initial</description>
         <protected>false</protected>
         <recipients>
-            <recipient>kavya.reddy@aspca.org</recipient>
+            <recipient>blythe.boaz@aspcafir.org</recipient>
             <type>user</type>
         </recipients>
         <senderAddress>crc.medical@aspca.org</senderAddress>
@@ -40,15 +74,16 @@
         <template>unfiled$public/Behavior_Grade_Change_Initial</template>
     </alerts>
     <alerts>
+<<<<<<< HEAD
         <fullName>Behavior_Grade_Change_Notification_Subsequent</fullName>
-       <ccEmails>kavya.reddy@aspca.org</ccEmails>
+        <ccEmails>blythe.boaz@aspca.org</ccEmails>
         <description>Behavior Grade Change Notification - Subsequent</description>
         <protected>false</protected>
         <recipients>
-            <recipient>kavya.reddy@aspca.org</recipient>
+            <recipient>blythe.boaz@aspcafir.org</recipient>
             <type>user</type>
         </recipients>
-                <senderAddress>crc.medical@aspca.org</senderAddress>
+        <senderAddress>crc.medical@aspca.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>unfiled$public/Behavior_Grade_Change_Subsequent</template>
     </alerts>
@@ -98,7 +133,7 @@
     <alerts>
         <fullName>Play_Pause_Cleared_Notification_Email</fullName>
         <ccEmails>PlayPauseNotifications@aspca.org</ccEmails>
-                <description>Play-Pause Cleared Notification Email</description>
+        <description>Play-Pause Cleared Notification Email</description>
         <protected>false</protected>
         <senderAddress>crc.medical@aspca.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
@@ -234,6 +269,16 @@
         <field>Previous_Behavior_Grade__c</field>
         <formula>TEXT(PRIORVALUE( Current_Behavior_Grade__c ))</formula>
         <name>Preserve Preliminary Behavior Grade</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Preserve_Previous_Forensic_Status</fullName>
+        <field>Previous_Forensic_Hold_Status__c</field>
+        <formula>TEXT(PRIORVALUE(  Forensic_Status__c  ))</formula>
+        <name>Preserve Previous Forensic Status</name>
         <notifyAssignee>false</notifyAssignee>
         <operation>Formula</operation>
         <protected>false</protected>
@@ -424,6 +469,21 @@
         </workflowTimeTriggers>
     </rules>
     <rules>
+        <fullName>Animal Forensic Status Changed</fullName>
+        <actions>
+            <name>Animal_Forensic_Status_Change_Notification</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Preserve_Previous_Forensic_Status</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Notifies Behavior team if Forensic Hold Status or Charge Animal fields have been updated.</description>
+        <formula>OR(ISCHANGED(Forensic_Status__c), ISCHANGED( Charge_Animal__c))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
         <fullName>Animal SN Status Changed</fullName>
         <actions>
             <name>Animal_SN_Status_Change_Notification</name>
@@ -539,6 +599,16 @@
             <field>Animal__c.Age__c</field>
             <operation>notEqual</operation>
             <value>Unknown At Intake</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Cats%2FDogs %286 Months%29</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>.5</value>
         </criteriaItems>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
@@ -890,6 +960,32 @@
         </workflowTimeTriggers>
     </rules>
     <rules>
+        <fullName>Play-Pause Initiated %28Dental%29</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>Animal__c.Play_Pause_Reason__c</field>
+            <operation>equals</operation>
+            <value>Dental</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Clear_Play_Pause_Date</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <actions>
+                <name>Clear_Play_Pause_Reason</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <actions>
+                <name>Remove_Play_Pause</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <timeLength>5</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
         <fullName>Play-Pause Initiated %28In Heat%29</fullName>
         <actions>
             <name>Play_Pause_Follow_up</name>
@@ -926,6 +1022,10 @@
             <type>FieldUpdate</type>
         </actions>
         <actions>
+            <name>DVM_Incision_Recheck_10_Days</name>
+            <type>Task</type>
+        </actions>
+        <actions>
             <name>Incision_Recheck</name>
             <type>Task</type>
         </actions>
@@ -935,6 +1035,10 @@
         </actions>
         <actions>
             <name>Incision_Recheck3</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Incision_Recheck_2_Days</name>
             <type>Task</type>
         </actions>
         <active>true</active>
@@ -971,9 +1075,9 @@
         </workflowTimeTriggers>
     </rules>
     <rules>
-        <fullName>Play-Pause Initiated %28Spay%29</fullName>
+        <fullName>Play-Pause Initiated %28Simple Neuter%29</fullName>
         <actions>
-            <name>Animal_Sex_FS</name>
+            <name>Animal_Sex_MN</name>
             <type>FieldUpdate</type>
         </actions>
         <actions>
@@ -985,7 +1089,97 @@
             <type>Task</type>
         </actions>
         <actions>
+            <name>Incision_Recheck_10_Days</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Incision_Recheck_2_Days</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Animal__c.Play_Pause_Reason__c</field>
+            <operation>equals</operation>
+            <value>Neuter - Simple</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Gender__c</field>
+            <operation>equals</operation>
+            <value>MI,MN,MU</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <timeLength>4</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Play-Pause Initiated %28Simple Spay%29</fullName>
+        <actions>
+            <name>Animal_Sex_FS</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>DVM_Incision_Recheck_7_Days</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Incision_Recheck</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Incision_Recheck_10_Days</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Incision_Recheck_2_Days</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Incision_Recheck_Day_5</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Animal__c.Play_Pause_Reason__c</field>
+            <operation>equals</operation>
+            <value>Spay - Simple</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Gender__c</field>
+            <operation>equals</operation>
+            <value>FI,FU,FS</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <timeLength>7</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Play-Pause Initiated %28Spay%29</fullName>
+        <actions>
+            <name>Animal_Sex_FS</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>DVM_Incision_Recheck_10_Days</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Incision_Recheck</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Incision_Recheck2</name>
+            <type>Task</type>
+        </actions>
+        <actions>
             <name>Incision_Recheck3</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Incision_Recheck_2_Days</name>
             <type>Task</type>
         </actions>
         <active>true</active>
@@ -2055,6 +2249,30 @@ Please schedule next annual exam in one year.</description>
         <subject>DHPP Booster</subject>
     </tasks>
     <tasks>
+        <fullName>DVM_Incision_Recheck_10_Days</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check incision for signs of redness, swelling or discharge. Assess need to continue pain meds.</description>
+        <dueDateOffset>10</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>DVM Incision Recheck (Day 10)</subject>
+    </tasks>
+    <tasks>
+        <fullName>DVM_Incision_Recheck_7_Days</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check incision for signs of redness, swelling or discharge. Assess need to continue pain meds.</description>
+        <dueDateOffset>7</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>DVM Incision Recheck (Day 7)</subject>
+    </tasks>
+    <tasks>
         <fullName>Daily_Weights</fullName>
         <assignedTo>medical_user@aspca.org</assignedTo>
         <assignedToType>user</assignedToType>
@@ -2273,6 +2491,42 @@ Use the following comment: Record weight in grams or kgs, compare to birth weigh
         <protected>false</protected>
         <status>Not Started</status>
         <subject>Incision Recheck</subject>
+    </tasks>
+    <tasks>
+        <fullName>Incision_Recheck_10_Days</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check incision for signs of redness, swelling or discharge. Report any concerns to DVM.</description>
+        <dueDateOffset>10</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Incision Recheck (Day 10)</subject>
+    </tasks>
+    <tasks>
+        <fullName>Incision_Recheck_2_Days</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check incision for signs of redness, swelling or discharge. Report any concerns to DVM.</description>
+        <dueDateOffset>2</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Incision Recheck (Day 2)</subject>
+    </tasks>
+    <tasks>
+        <fullName>Incision_Recheck_Day_5</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check incision for signs of redness, swelling or discharge. Report any concerns to DVM.</description>
+        <dueDateOffset>5</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Incision Recheck (Day 5)</subject>
     </tasks>
     <tasks>
         <fullName>Kennel_Change_Follow_up</fullName>
@@ -2531,6 +2785,18 @@ Use the following comment: Record weight in grams or kgs, compare to birth weigh
         <protected>false</protected>
         <status>Not Started</status>
         <subject>Rabies (DVM) @ 12 Weeks</subject>
+    </tasks>
+    <tasks>
+        <fullName>Recheck_Fecal</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>31</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Intake_Date_Time__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Recheck Fecal</subject>
     </tasks>
     <tasks>
         <fullName>Switch_to_Adult_Food</fullName>

@@ -161,7 +161,7 @@
                                             <strong>Rest Days:</strong>{!record.restDays}</span>
                                     </div>
                                 </td>
-								<apex:repeat value="{!record.categoryProtocol}" var="cat">
+                                <apex:repeat value="{!record.categoryProtocol}" var="cat">
                                 <td class="line" style="border-top: 1px solid;">
                                     <table>
                                         <apex:repeat value="{!cat.protocols}" var="innerProtocol">

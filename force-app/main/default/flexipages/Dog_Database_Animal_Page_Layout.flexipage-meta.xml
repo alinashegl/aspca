@@ -128,6 +128,18 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldItem>Record.Animal_Age__c</fieldItem>
+                <identifier>RecordAnimal_Age_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Animal_Age_Units__c</fieldItem>
+                <identifier>RecordAnimal_Age_Units_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
                 <fieldInstanceProperties>
                     <name>uiBehavior</name>
                     <value>required</value>
@@ -238,6 +250,10 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>readonly</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.FM_Record_Status__c</fieldItem>
                 <identifier>RecordFM_Record_Status_cField</identifier>
             </fieldInstance>
@@ -1386,6 +1402,18 @@
             <fieldInstance>
                 <fieldItem>Record.Current_Animal_Age_Formatted__c</fieldItem>
                 <identifier>RecordCurrent_Animal_Age_Formatted_cField1</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Animal_Age__c</fieldItem>
+                <identifier>RecordAnimal_Age_cField2</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Animal_Age_Units__c</fieldItem>
+                <identifier>RecordAnimal_Age_Units_cField2</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>

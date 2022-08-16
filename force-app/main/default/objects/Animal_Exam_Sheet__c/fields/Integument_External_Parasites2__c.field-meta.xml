@@ -2,7 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Integument_External_Parasites2__c</fullName>
     <externalId>false</externalId>
-    <label>Integument/External Parasites</label>
+    <label>Integument</label>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
     <trackHistory>false</trackHistory>
@@ -13,14 +13,9 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>No ectoparasites observed</fullName>
+                <fullName>Clean shiny coat</fullName>
                 <default>false</default>
-                <label>No ectoparasites observed</label>
-            </value>
-            <value>
-                <fullName>No parasites seen. Clean, shiny haircoat</fullName>
-                <default>false</default>
-                <label>No parasites seen. Clean, shiny haircoat</label>
+                <label>Clean shiny coat</label>
             </value>
             <value>
                 <fullName>Other</fullName>
@@ -28,18 +23,33 @@
                 <label>Other</label>
             </value>
             <value>
+                <fullName>Lice found</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Lice found</label>
+            </value>
+            <value>
                 <fullName>Mites found</fullName>
                 <default>false</default>
+                <isActive>false</isActive>
                 <label>Mites found</label>
             </value>
             <value>
-                <fullName>Lice found</fullName>
+                <fullName>No ectoparasites observed</fullName>
                 <default>false</default>
-                <label>Lice found</label>
+                <isActive>false</isActive>
+                <label>No ectoparasites observed</label>
+            </value>
+            <value>
+                <fullName>No parasites seen. Clean, shiny haircoat</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>No parasites seen. Clean, shiny haircoat</label>
             </value>
             <value>
                 <fullName>Scaly leg mites found or suspected</fullName>
                 <default>false</default>
+                <isActive>false</isActive>
                 <label>Scaly leg mites found or suspected</label>
             </value>
         </valueSetDefinition>

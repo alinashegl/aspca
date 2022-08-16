@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Current_Location__c</fullName>
+    <externalId>false</externalId>
+    <label>Current Location</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Disposed</fullName>
+                <default>false</default>
+                <label>Disposed</label>
+            </value>
+            <value>
+                <fullName>Sent for Analysis</fullName>
+                <default>false</default>
+                <label>Sent for Analysis</label>
+            </value>
+            <value>
+                <fullName>Storage - Temp Shelter</fullName>
+                <default>false</default>
+                <label>Storage - Temp Shelter</label>
+            </value>
+            <value>
+                <fullName>Storage - CRC</fullName>
+                <default>false</default>
+                <label>Storage - CRC</label>
+            </value>
+            <value>
+                <fullName>AVFSC - Chest Freezer</fullName>
+                <default>false</default>
+                <label>AVFSC - Chest Freezer</label>
+            </value>
+            <value>
+                <fullName>AVFSC - Upright Freezer</fullName>
+                <default>false</default>
+                <label>AVFSC - Upright Freezer</label>
+            </value>
+            <value>
+                <fullName>AVFSC - Refrigerator</fullName>
+                <default>false</default>
+                <label>AVFSC - Refrigerator</label>
+            </value>
+            <value>
+                <fullName>AVFSC - Cabinet 1</fullName>
+                <default>false</default>
+                <label>AVFSC - Cabinet 1</label>
+            </value>
+            <value>
+                <fullName>AVFSC - Cabinet 2</fullName>
+                <default>false</default>
+                <label>AVFSC - Cabinet 2</label>
+            </value>
+            <value>
+                <fullName>AVFSC - Cabinet 3</fullName>
+                <default>false</default>
+                <label>AVFSC - Cabinet 3</label>
+            </value>
+            <value>
+                <fullName>AVFSC - Flammables Cabinet</fullName>
+                <default>false</default>
+                <label>AVFSC - Flammables Cabinet</label>
+            </value>
+            <value>
+                <fullName>AVFSC - Evidence Room General</fullName>
+                <default>false</default>
+                <label>AVFSC - Evidence Room General</label>
+            </value>
+            <value>
+                <fullName>Returned to LEA</fullName>
+                <default>false</default>
+                <label>Returned to LEA</label>
+            </value>
+            <value>
+                <fullName>AVFSC - Processing</fullName>
+                <default>false</default>
+                <label>AVFSC - Processing</label>
+            </value>
+            <value>
+                <fullName>Consumed in Testing</fullName>
+                <default>false</default>
+                <label>Consumed in Testing</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
