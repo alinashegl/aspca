@@ -40,7 +40,7 @@ public with sharing class HomePageController {
             for(Plan_Protocol__c pp: tp.Plan_Protocols__r){
                 planProtocol ptc = new planProtocol();
                 ptc.PlanId = pp.Id;
-                ptc.ProtocolName = pp.Name ;
+                //ptc.ProtocolName = pp.Name ;
                 ptc.Protocol = pp.Protocol_Name__c;
                 ptcRecds.add(ptc);
             }

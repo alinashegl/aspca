@@ -55,6 +55,17 @@ public with sharing class test_PlaygroupToDoListController {
     }
 
     @isTest
+    static void getPlaygroupAnimalsNoPlayCategory() {
+        Animal__c a = TestDataFactory.createAnimal();
+        a.Play_Category__c = null;
+        update a;
+        Test.startTest();
+        List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals('MRC');
+        Test.stopTest();
+        System.assertEquals(0, playgroupAnimals.size());
+    }
+
+    @isTest
     static void createPlaygroupSuccess() {
         Animal__c a = TestDataFactory.createAnimal();
         Test.startTest();

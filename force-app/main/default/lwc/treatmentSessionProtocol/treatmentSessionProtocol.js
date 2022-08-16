@@ -9,7 +9,7 @@ import IS_SKIPPED_FIELD from '@salesforce/schema/Session_Protocol__c.IsSkipped__
 import IS_REMOVED_FIELD from '@salesforce/schema/Session_Protocol__c.IsRemoved__c';
 import NEEDS_REVIEW_FIELD from '@salesforce/schema/Session_Protocol__c.Needs_Review__c';
 import PROTOCOL_NOTES_FIELD from '@salesforce/schema/Session_Protocol__c.Protocol_Notes__c';
-import PREFERRED_MOTIVATORS_FIELD from '@salesforce/schema/Session_Protocol__c.Preferred_Motivators__c';
+//import PREFERRED_MOTIVATORS_FIELD from '@salesforce/schema/Session_Protocol__c.Preferred_Motivators__c';
 import PLAN_PROTOCOL_ID_FIELD from '@salesforce/schema/Plan_Protocol__c.Id';
 import PLAN_PROTOCOL_NOTES_FIELD from '@salesforce/schema/Plan_Protocol__c.Protocol_Notes__c';
 import SystemModstamp from '@salesforce/schema/Account.SystemModstamp';
@@ -144,7 +144,7 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
         fields[IS_REMOVED_FIELD.fieldApiName] = this.isRemoved;
         fields[NEEDS_REVIEW_FIELD.fieldApiName] = this.template.querySelector("lightning-input[data-name=needsReview]").checked;
         fields[PROTOCOL_NOTES_FIELD.fieldApiName] = this.template.querySelector("lightning-textarea[data-name=protocolNotes]").value;
-        fields[PREFERRED_MOTIVATORS_FIELD.fieldApiName] = this.template.querySelector("lightning-input[data-name=preferredMotivators]").value;
+        //fields[PREFERRED_MOTIVATORS_FIELD.fieldApiName] = this.template.querySelector("lightning-input[data-name=preferredMotivators]").value;
         
         this.fieldValues.forEach(element => {
             fields[element.name] = element.value;
@@ -155,7 +155,9 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
     prepPlanProtocolFields(){
         const fields ={};
         fields[PLAN_PROTOCOL_ID_FIELD.fieldApiName] = this.protocolInfo.planProtocolId;
-        fields[PLAN_PROTOCOL_NOTES_FIELD.fieldApiName] = this.template.querySelector("lightning-textarea[data-name=planProtocolNotes]").value;
+        if(this.protocolInfo.isNonMRC){
+            fields[PLAN_PROTOCOL_NOTES_FIELD.fieldApiName] = this.template.querySelector("lightning-textarea[data-name=planProtocolNotes]").value;
+        }
         this.updatePlanProtocol(fields);
     }
 
