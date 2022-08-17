@@ -1,6 +1,7 @@
 public with sharing class LastTreatmentsController {
     @AuraEnabled(cacheable=true)
     public static SessionProtocol[] getLastTreatments(Id treatmentPlanId, Id protocolId, Integer recordCount) {
+        System.debug('**lastTreatments');
         List<SessionProtocol[]> protocolLists = new List<SessionProtocol[]>();
         Map<Id, SessionProtocol[]> sProtocolMap = new Map<Id, SessionProtocol[]>();
         SessionProtocol[] sProtocolList = new SessionProtocol[0];
@@ -17,7 +18,9 @@ public with sharing class LastTreatmentsController {
             ORDER BY TreatmentSessionId__r.Session_Date__c DESC
             LIMIT :recordCount
         ]){
-            sProtocolList.add(new SessionProtocol(sp));
+            SessionProtocol proto = new SessionProtocol(sp);
+            System.debug('proto: ' + proto);
+            sProtocolList.add(proto);
             // if(sProtocolMap.containsKey(sp.TreatmentSessionId__c)){
             //     sProtocolMap.get(sp.TreatmentSessionId__c).add(new SessionProtocol(sp));
             // } else {

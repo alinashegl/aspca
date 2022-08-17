@@ -8,7 +8,7 @@ public with sharing class SessionProtocol {
     public ProtocolScore fearWorst {get; set;}
     public ProtocolScore socialBest {get; set;}
 
-    public SessionProtocol(Session_Protocol__c sp){
+    public SessionProtocol SessionProtocol(Session_Protocol__c sp){
         this.sProto = sp;
         this.sessionDate = sp.TreatmentSessionId__r.Session_Date__c.format();
         for(Session_Protocol_Scale__c protoScale : sProto.Session_Protocol_Scales__r){
