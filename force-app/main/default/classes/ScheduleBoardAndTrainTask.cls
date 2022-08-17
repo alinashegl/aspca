@@ -36,6 +36,7 @@ public with sharing class ScheduleBoardAndTrainTask {
 
     //queries and returns a list of animals wit the related Board and Train Facility_Outcome__c's, will query specific animals if the animalIds param is not null
     public static Animal__c[] getAnimals(Id[] animalIds){
+        String[] dogPopulations = AutoScheduleTasksUtil.dogPopulations;
         String queryString = 'SELECT Id, Animal_Name_Id__c, Current_Recent_Shelter_Location__c, Current_Location__c, ' +
             'Behavior_Case_Worker__c, Behavior_Case_Worker__r.Name, Behavior_Case_Worker__r.Is_Generic_Contact__c, ' +
                 '(SELECT Id, Follow_Up_Days__c, Follow_Up_Frequency__c, CreatedDate, Start_Date__c ' +
@@ -47,6 +48,7 @@ public with sharing class ScheduleBoardAndTrainTask {
             'FROM Animal__c ' +
             'WHERE Current_Location__c = \'Board and Train\' ' +
             'AND Type_of_Animal__c = \'Dog\' ' +
+            'AND Current_Recent_Shelter_Location__c IN: dogPopulations ' +
             'AND Active_Animal__c = true ' +
             'AND Id IN ( SELECT Animal__c ' +
                 'FROM Facility_Outcome__c ' +
