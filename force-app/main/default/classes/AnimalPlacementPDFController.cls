@@ -177,7 +177,6 @@ public class AnimalPlacementPDFController {
                     Name,
                     IsSkipped__c,
                     Status__c,
-                    Sum_of_Numbers__c,
                     TreatmentSessionId__c,
                     (SELECT Id, Protocol_Score__c, Protocol_Scale_Name__c, Protocol_Scale__r.Category__c 
                         FROM Session_Protocol_Scales__r 

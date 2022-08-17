@@ -44,6 +44,8 @@ public with sharing class SessionProtocolService {
                 response = beforeUpdateHandler(request);
             }when 'afterInsertHandler' {
                 response = afterInsertHandler(request);
+            }when 'afterUpdateHandler' {
+                response = afterUpdateHandler(request);
             }when else {
                 return null;
             }
@@ -58,36 +60,36 @@ public with sharing class SessionProtocolService {
         Map<String,Map<String,String>> resultMap = new Map<String, Map<String, String>>();
         String success = 'SUCCESS';
         if (treatmentSession != null) {
-            List<Session_Protocol__c> lineItems = getByTreatmentSessionId(treatmentSession.Id);
+            List<SessionProtocol> lineItems = getByTreatmentSessionId(treatmentSession.Id);
             System.debug(lineItems);
             ProtocolSelector protocolSelector = new ProtocolSelector();
 
-            for (Session_Protocol__c item : lineItems) {
+            for (SessionProtocol item : lineItems) {
                 Map<String, String> result = new Map<String, String>();
                 Set<Id> idset = new Set<Id>();
-                idset.add(item.ProtocolId__c);
+                idset.add(item.sProto.ProtocolId__c);
                 Protocol__c protocol = protocolSelector.GetById(idset)[0];
                 String invalid = 'INVALID';
                 try {
-                    if (item.Fear_Best__c == null) {
+                    if (item.fearBest.score == null) {
                         result.put('Fear Best', invalid);
                     }
-                    if (item.Fear_Worst__c == null) {
+                    if (item.fearWorst.score == null) {
                         result.put('Fear Worst', invalid);
                     }
-                    if (item.Arousal_Best__c == null) {
+                    if (item.arousalBest.score == null) {
                         result.put('AROUSAL BEST', invalid);
                     }
-                    if(item.Arousal_Worst__c == null) {
+                    if(item.arousalWorst.score == null) {
                         result.put('AROUSAL WORST', invalid);
                     }
-                    if (item.Social_Best__c == null) {
+                    if (item.socialBest.score == null) {
                         result.put('SOCIAL BEST', invalid);
                     }
-                    if (item.Aggressive_Worst__c == null) {
+                    if (item.aggressiveWorst.score == null) {
                         result.put('AGGRESSIVE WORST', invalid);
                     }
-                    if (item.Overall_Score__c == null) {
+                    if (item.sProto.Overall_Score__c == null) {
                         result.put('OVERALL SCORE', invalid);
                     }
                 }catch (Exception e) {
@@ -212,12 +214,18 @@ public with sharing class SessionProtocolService {
         update planProtocolsToRemove;
         ServiceResponse response = new ServiceResponse(request);
 
-
         insert newPlanProtocols;
         response.Data = newPlanProtocols;
 
         return response;
+    }
 
+    private static ServiceResponse afterUpdateHandler(ServiceRequest request){
+        List<Session_Protocol__c> protocols = (List<Session_Protocol__c>) request.Parameters.get('protocols');
+        ServiceResponse response = new ServiceResponse(request);
+        clearProtocolScores(protocols);
+
+        return response;
     }
 
     private static Plan_Protocol__c[] prepNewPlanProtocols(Session_Protocol__c[] sessionProtocols){
@@ -306,8 +314,33 @@ public with sharing class SessionProtocolService {
         return protocolIdToPlanProtocolMap;
     }
 
-    private static List<Session_Protocol__c> getByTreatmentSessionId(Id treatmentSessionId){
-        return [
+    private static void clearProtocolScores(Session_Protocol__c[] protocols){
+        Set<Id> skippedProtoIds = new Set<Id>();
+        for(Session_Protocol__c proto : protocols){
+            if(proto.IsSkipped__c == true){
+                skippedProtoIds.add(proto.Id);
+            }
+        }
+
+        if(!skippedProtoIds.isEmpty()){
+            Session_Protocol_Scale__c[] scales = [
+                SELECT Id, Protocol_Score__c 
+                FROM Session_Protocol_Scale__c 
+                WHERE Session_Protocol__c IN :skippedProtoIds
+            ];
+            for(Session_Protocol_Scale__c sps : scales){
+                if(sps.Protocol_Score__c != null){
+                    sps.Protocol_Score__c = null;
+                }
+            }
+
+            update scales;
+        }
+    }
+
+    private static List<SessionProtocol> getByTreatmentSessionId(Id treatmentSessionId){
+        SessionProtocol[] sProtocolList = new SessionProtocol[0];
+        for(Session_Protocol__c sp : [
             SELECT Id, 
             Bundle_Entry__c,
             CreatedById,
@@ -325,14 +358,17 @@ public with sharing class SessionProtocolService {
             ProtocolId__c ,
             TreatmentSessionId__c ,
             Add_to_Plan__c,
-            Session_Protocol__c.Fear_Best__c,
-            Fear_Worst__c,
-            Aggressive_Worst__c,
-            Arousal_Best__c,
-            Arousal_Worst__c,
-            Social_Best__c
+            (SELECT Id, Protocol_Score__c, Protocol_Scale_Name__c, Protocol_Scale__r.Category__c 
+                FROM Session_Protocol_Scales__r 
+                ORDER BY Protocol_Scale__r.Column_Number__c ASC, 
+                Protocol_Scale__r.Column_Order__c ASC
+            )
             FROM Session_Protocol__c
             WHERE TreatmentSessionId__c =:treatmentSessionId
-        ];
+        ]){
+            sProtocolList.add(new SessionProtocol(sp));
+        }
+
+        return sProtocolList;
     }
 }
