@@ -21,31 +21,10 @@ public with sharing class LastTreatmentsController {
             SessionProtocol proto = new SessionProtocol(sp);
             System.debug('proto: ' + proto);
             sProtocolList.add(proto);
-            // if(sProtocolMap.containsKey(sp.TreatmentSessionId__c)){
-            //     sProtocolMap.get(sp.TreatmentSessionId__c).add(new SessionProtocol(sp));
-            // } else {
-            //     sProtocolMap.put(sp.TreatmentSessionId__c, new SessionProtocol[]{new SessionProtocol(sp)});
-            // }   
         }
-        // for(SessionProtocol[] protos : sProtocolMap.values()){
-        //     protocolLists.add(protos);
-        // }
+
         System.debug('sProtocolList: ' + sProtocolList);
 
         return sProtocolList;
     }
-
-
-    // public static List<Session_Protocol__c> getLastTreatments(Id treatmentPlanId, Id protocolId, Integer recordCount) {
-    //     List<Session_Protocol__c> treatments = [
-    //         SELECT Id, Overall_Score__c, Protocol_Notes__c, CreatedDate, Novel_Person__c
-    //         FROM Session_Protocol__c
-    //         WHERE TreatmentSessionId__r.Treatment_Plan__c = :treatmentPlanId
-    //         AND ProtocolId__c = :protocolId
-    //         AND Status_Text__c = 'Complete'
-    //         ORDER BY CreatedDate DESC
-    //         LIMIT :recordCount
-    //     ];
-    //     return treatments;
-    // }
 }

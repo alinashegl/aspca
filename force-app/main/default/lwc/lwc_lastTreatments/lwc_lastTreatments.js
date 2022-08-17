@@ -28,48 +28,14 @@ export default class Lwc_lastTreatments extends LightningElement {
         return getFieldValue(this.sessionProtocol.data, PROTOCOL_ID_FIELD);
     }
 
-    @track lastTreatments = [];
     @wire(getLastTreatments, { treatmentPlanId: '$treatmentPlanId', protocolId: '$protocolId', recordCount: '$recordCount'})
-    response(result){
-        if(result.data){
-            window.console.log('result: ', JSON.stringify(result));
-            console.table(result.data[0]);
-            this.lastTreatments = result.data;
-        }
-    }
-
-    // connectedCallback(){
-    //     window.console.log('**in connectedCallback');
-    //     window.console.log('**treatmentPlanId: ', this.treatmentPlanId);
-    //     window.console.log('**protocolId: ', this.protocolId);
-    //     window.console.log('**recordCount: ', this.recordCount);
-    //     this.recordCount = 5;
-    //     if(this.treatmentPlanId != null && this.protocolId != null && this.recordCount != null){
-    //         getLastTreatments({
-    //             treatmentPlanId: this.treatmentPlanId,
-    //             protocolId: this.protocolId,
-    //             recordCount: this.recordCount
-    //         })
-    //         .then((result) =>{
-    //             window.console.log('result: ', JSON.stringify(result));
-    //             this.lastTreatments = result;
-    //         })
-    //         .catch(error => {
-    //             // this.error = error;
-    //         })
-    //         .finally(() =>{
-    //             // this.showSpinner = false;
-    //         });
-    //     }
-    // }
-        
+    lastTreatments;
 
     handleToggle() {
         window.console.log('lastTreatments: ', JSON.stringify(this.lastTreatments));
         this.allFields = !this.allFields;
     }
 
-    //This can likely go away when moving to the detail page layout since it should always have a record by virtue of being on that detail page
     get hasData() {
         return this.lastTreatments.data != undefined && this.lastTreatments.data.length > 0;
     }
