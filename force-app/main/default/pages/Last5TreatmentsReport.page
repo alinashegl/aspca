@@ -20,7 +20,7 @@
             <apex:repeat value="{!sProtocolsMap}" var="sessions">
                 <table>
                     <thead>
-                        <td class="line"><strong>{!sProtocolsMap[sessions][0].sProto.ProtocolId__r.Name}</strong></td>
+                        <td class="line"><strong>{!sProtocolsMap[sessions][0].sProto.Protocol_Name__c}</strong></td>
                         <td class="line"><strong>Overall Score</strong></td>
                         <td class="line"><strong>Aggressive Worst</strong></td>
                         <td class="line"><strong>Arousal Best</strong></td>

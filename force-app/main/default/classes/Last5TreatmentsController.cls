@@ -17,7 +17,7 @@ public class Last5TreatmentsController {
             ];
             for(Session_protocol__c sp : [
                 SELECT Id, Name, TreatmentSessionId__r.Session_Date__c, Solicitation__c, Overall_Score__c, Protocol_Notes__c, 
-                IsSkipped__c, Session_Date__c, ProtocolId__c, ProtocolId__r.Name,
+                IsSkipped__c, Session_Date__c, ProtocolId__c, Protocol_Name__c,
                 (
                     SELECT Id, Protocol_Scale_Name__c, Protocol_Score__c, Protocol_Score_Number__c 
                     FROM Session_Protocol_Scales__r 
@@ -26,10 +26,10 @@ public class Last5TreatmentsController {
                 FROM Session_Protocol__c
                 WHERE TreatmentSessionId__c IN :sessions
             ]){
-                if(sProtocolsMap.containsKey(sp.ProtocolId__r.Name)){
-                    sProtocolsMap.get(sp.ProtocolId__r.Name).add(new SessionProtocol(sp));
+                if(sProtocolsMap.containsKey(sp.Protocol_Name__c)){
+                    sProtocolsMap.get(sp.Protocol_Name__c).add(new SessionProtocol(sp));
                 } else {
-                    sProtocolsMap.put(sp.ProtocolId__r.Name, new SessionProtocol[]{new SessionProtocol(sp)});
+                    sProtocolsMap.put(sp.Protocol_Name__c, new SessionProtocol[]{new SessionProtocol(sp)});
                 }
             }
         }
