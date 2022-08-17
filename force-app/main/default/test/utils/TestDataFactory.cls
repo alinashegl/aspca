@@ -679,11 +679,17 @@ public without sharing class TestDataFactory {
         insert c;
         return c;
     }
+    
+    public static Contact createBehaviorCaseWorkerContact() {
+        Contact c = new Contact(FirstName = 'Test', LastName = 'BCW', Email = 'test@contactbcw.com', Contact_Type__c = 'Behavior Case Worker');
+        insert c;
+        return c;
+    }
 
     public static Treatment_Session__c createSession(){
         Treatment_Session__c session = new Treatment_Session__c();
         Treatment_Plan__c plan = createPlan();
-        Contact contact = createContact();
+        Contact contact = createBehaviorCaseWorkerContact();
         session.Treatment_Plan__c = plan.Id;
         session.Session_Contact__c = contact.Id;
         insert session;
