@@ -38,6 +38,7 @@ public with sharing class ScheduleAnimalFoster {
 
     //queries and returns a list of animals wit the related foster Facility_Outcome__c's, will query specific animals if the animalIds param is not null
     public static Animal__c[] getAnimals(Id[] animalIds){
+        String[] dogPopulations = AutoScheduleTasksUtil.dogPopulations;
         String queryString = 'SELECT Id, Animal_Name_Id__c, Current_Recent_Shelter_Location__c, Current_Location__c, ' +
             'Behavior_Case_Worker__c, Behavior_Case_Worker__r.Name, Behavior_Case_Worker__r.Is_Generic_Contact__c, ' +
                 '(SELECT Id, Follow_Up_Days__c, Follow_Up_Frequency__c, CreatedDate, Start_Date__c ' +
@@ -50,6 +51,7 @@ public with sharing class ScheduleAnimalFoster {
             'WHERE Current_Location__c = \'Foster Home\' ' +
             'AND Active_Animal__c = true ' + 
             'AND Type_of_Animal__c = \'Dog\' ' +
+            'AND Current_Recent_Shelter_Location__c IN: dogPopulations ' +
             'AND Id IN ' +
                 '(SELECT Animal__c ' +
                 'FROM Facility_Outcome__c ' +
