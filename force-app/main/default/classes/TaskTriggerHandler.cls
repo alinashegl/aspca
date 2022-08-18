@@ -135,7 +135,7 @@ public with sharing class TaskTriggerHandler {
         TaskWrapper wrapper = getTreatmentTasks(taskMap);
         for(Task t : wrapper.taskMapByAnimal.values()){
             System.debug(String.valueOf(t.WhatId)+String.valueOf(t.Medication__c));
-            if(!existingTaskMap.containsKey(String.valueOf(t.WhatId)+String.valueOf(t.Medication__c))){
+            if(!existingTaskMap.containsKey(String.valueOf(t.WhatId)+String.valueOf(t.Medication__c)) && t.ActivityDate != null){
                 Date activityDate = t.ActivityDate;
                 List<Integer> dayEntries = new List<Integer>{0, 1, 3};
                     for(Integer i : dayEntries){
