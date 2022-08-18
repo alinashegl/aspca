@@ -9,7 +9,7 @@ public class AnimalDiscoverPDFControllerTest {
         Treatment_Plan__c plan = new Treatment_Plan__c();
         insert plan;
 
-        Contact con = TestDataFactory.createContact();
+        Contact con = TestDataFactory.createBehaviorCaseWorkerContact();
 
         Treatment_Session__c session = new Treatment_Session__c(
             Treatment_Plan__c = plan.Id,
@@ -65,7 +65,7 @@ public class AnimalDiscoverPDFControllerTest {
         Treatment_Plan__c plan = new Treatment_Plan__c();
         insert plan;
 
-        Contact con = TestDataFactory.createContact();
+        Contact con = TestDataFactory.createBehaviorCaseWorkerContact();
 
         Treatment_Session__c session = new Treatment_Session__c(
             Treatment_Plan__c = plan.Id,
