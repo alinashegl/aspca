@@ -12,32 +12,107 @@
                 <lightning-layout multiple-rows>
                     <template if:true={lastTreatments}>
                         <template for:each={lastTreatments.data} for:item='protocol'>
-                            <lightning-layout-item key={protocol.Id} size="12" small-device-size="6" medium-device-size="4" large-device-size="3" padding="around-small">
+                            <lightning-layout-item key={protocol.sProto.Id} size="12" small-device-size="6" medium-device-size="4" large-device-size="3" padding="around-small">
                                 <lightning-card title="Session Protocol" icon-name="utility:list">
                                     <lightning-record-form
                                         object-api-name="Session_Protocol__c"
-                                        record-id={protocol.Id}
+                                        record-id={protocol.sProto.Id}
                                         layout-type="Full"
                                         density="comfy"
                                         mode="readonly">
                                     </lightning-record-form>
                                 </lightning-card>
+                                <lightning-card title="Scores">   </lightning-card>
+                                <lightning-layout multiple-rows>
+                                    <lightning-layout-item key={protocol.sProto.Id} size="12" padding="around-small">
+                                        <div class="slds-form-element">
+                                            <div class="slds-border_bottom">
+                                                <label class="slds-form-element__label">{protocol.aggressiveWorst.name}</label>
+                                                <div class="slds-form-element__static">
+                                                    {protocol.aggressiveWorst.score}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </lightning-layout-item>
+                                    <lightning-layout-item key={protocol.sProto.Id} size="12" padding="around-small">
+                                        <div class="slds-form-element">
+                                            <div class="slds-border_bottom">
+                                                <label class="slds-form-element__label">{protocol.arousalBest.name}</label>
+                                                <div class="slds-form-element__static">
+                                                    {protocol.arousalBest.score}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item key={protocol.sProto.Id} size="12" padding="around-small">
+                                        <div class="slds-form-element">
+                                            <div class="slds-border_bottom">
+                                                <label class="slds-form-element__label">{protocol.arousalWorst.name}</label>
+                                                <div class="slds-form-element__static">
+                                                    {protocol.arousalWorst.score}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item key={protocol.sProto.Id} size="12" padding="around-small">
+                                        <div class="slds-form-element">
+                                            <div class="slds-border_bottom">
+                                                <label class="slds-form-element__label">{protocol.fearBest.name}</label>
+                                                <div class="slds-form-element__static">
+                                                    {protocol.fearBest.score}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item key={protocol.sProto.Id} size="12" padding="around-small">
+                                        <div class="slds-form-element">
+                                            <div class="slds-border_bottom">
+                                                <label class="slds-form-element__label">{protocol.fearWorst.name}</label>
+                                                <div class="slds-form-element__static">
+                                                    {protocol.fearWorst.score}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item key={protocol.sProto.Id} size="12" padding="around-small">
+                                        <div class="slds-form-element">
+                                            <div class="slds-border_bottom">
+                                                <label class="slds-form-element__label">{protocol.socialBest.name}</label>
+                                                <div class="slds-form-element__static">
+                                                    {protocol.socialBest.score}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item key={protocol.sProto.Id} size="12" padding="around-small">
+                                        <div class="slds-form-element">
+                                            <div class="slds-border_bottom">
+                                                <label class="slds-form-element__label">{protocol.solicitation.name}</label>
+                                                <div class="slds-form-element__static">
+                                                    {protocol.solicitation.score}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </lightning-layout-item>
+                                </lightning-layout>
                             </lightning-layout-item>
                         </template>
                     </template>
                 </lightning-layout>
             </template>
+       
             <template if:false={allFields}>
-                <template if:true={lastTreatments}>
+                <template if:true={lastTreatments.data}>
                     <template for:each={lastTreatments.data} for:item='protocol'>
-                        <lightning-card key={protocol.Id}>
+                        <lightning-card key={protocol.sProto.Id}>
                             <div class="slds-border_bottom">
                                 <lightning-layout multiple-rows>
                                     <lightning-layout-item size="12" small-device-size="4" medium-device-size="2" large-device-size="2" padding="horizontal-small">
                                         <div class="slds-form-element">
                                             <label class="slds-form-element__label">Overall Score</label>
                                             <div class="slds-form-element__static">
-                                                {protocol.Overall_Score__c}
+                                                {protocol.sProto.Overall_Score__c}
                                             </div>
                                         </div>
                                     </lightning-layout-item>
@@ -45,7 +120,7 @@
                                         <div class="slds-form-element">
                                             <label class="slds-form-element__label">Protocol Notes</label>
                                             <div class="slds-form-element__static">
-                                                {protocol.Protocol_Notes__c}
+                                                {protocol.sProto.Protocol_Notes__c}
                                             </div>
                                         </div>
                                     </lightning-layout-item>
@@ -53,7 +128,7 @@
                                         <div class="slds-form-element">
                                             <label class="slds-form-element__label">Date</label>
                                             <div class="slds-form-element__static">
-                                                <lightning-formatted-date-time value={protocol.CreatedDate}></lightning-formatted-date-time>
+                                                <lightning-formatted-date-time value={protocol.sProto.TreatmentSessionId__r.Session_Date__c}></lightning-formatted-date-time>
                                             </div>
                                         </div>
                                     </lightning-layout-item>
@@ -61,7 +136,7 @@
                                         <div class="slds-form-element">
                                             <label class="slds-form-element__label">Novel Person</label>
                                             <div class="slds-form-element__static">
-                                                <template if:true={protocol.Novel_Person__c}>
+                                                <template if:true={protocol.sProto.Novel_Person__c}>
                                                     <lightning-icon icon-name="utility:check" size="x-small"></lightning-icon>
                                                 </template>
                                             </div>
@@ -70,6 +145,7 @@
                                 </lightning-layout>
                             </div>
                         </lightning-card>
+                   
                     </template>
                 </template>
             </template>
