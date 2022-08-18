@@ -665,7 +665,7 @@ public without sharing class TestDataFactory {
         Animal__c a = createAnimal();
         Treatment_Bundle__c masterbundle = createMasterBundle();
         Treatment_Bundle__c planBundle = createTreatmentBundle();
-        List<Bundle_Entry__c> planBundleEntries = assignEntries(planBundle, createProtocols(4));
+        List<Bundle_Entry__c> planBundleEntries = assignEntries(planBundle, createProtocols());
         Treatment_Plan__c plan = new Treatment_Plan__c(
           IsActive__c = true, 
           Description__c = 'Test', 
@@ -695,6 +695,7 @@ public without sharing class TestDataFactory {
     }
 
     public static List<Protocol__c> createProtocols() {
+        createProtocolScales();
         List<Protocol__c> protocols = new List<Protocol__c>();
         for(Integer i = 0; i< 9; i++) {
             Protocol__c protocol = new Protocol__c();
@@ -725,6 +726,143 @@ public without sharing class TestDataFactory {
       insert pScales;
       return pScales;
     }
+
+    public static Protocol_Scale__c[] createProtocolScales(){
+      Protocol_Scale__c[] pScales = new Protocol_Scale__c[]{
+        new Protocol_Scale__c(
+          Name =  'Fear - Sociability Best',
+          isActive__c =  true,
+          Category__c =  'Sociability',
+          Column_Order__c =  10,
+          Fields_to_include__c =  null,
+          isDefault__c =  true,
+          Options__c =  '1. Solicitation, sustained proximity;\n2. Solicitation, short proximity;\n3. Solicitation, no proximity;\n4. No Solicitation, sustained proximity;\n5. No Solicitation, short proximity;\n6. No Solicitation, no proximity;\nNot Applicable',
+          Required__c =  true
+        ),
+        new Protocol_Scale__c(
+          Name =  'Fear Walking - Worst',
+          isActive__c =  true,
+          Category__c =  'Leashing',
+          Column_Order__c =  50,
+          Fields_to_include__c =  null,
+          isDefault__c =  false,
+          Options__c =  '1. Excited/energetic;\n2. Walks and pulls;\n3. Walks calmly;\n4. Walks, nervous body language;\n5. Crawls, hesitates, balks;\n6. Does not walk, immobile;\n7. Gator rolls or flees',
+          Required__c =  false
+        ),
+        new Protocol_Scale__c(
+          Name =  'Overall Score',
+          isActive__c =  true,
+          Category__c =  'Other',
+          Column_Order__c =  80,
+          Fields_to_include__c =  null,
+          isDefault__c =  true,
+          Options__c =  '1. Beginning/Acquisition;\n2. Catching On/ Fluency;\n3. Almost There/ Generalization;\n4. Maintenance',
+          Required__c =  true
+        ),
+        new Protocol_Scale__c(
+          Name =  'Arousal - Worst',
+          isActive__c =  true,
+          Category__c =  'Arousal',
+          Column_Order__c =  20,
+          Fields_to_include__c =  null,
+          isDefault__c =  true,
+          Options__c =  '1. Low/Neutral;\n2. Mild;\n3. Moderate;\n4. Extreme;\nNot Applicable',
+          Required__c =  true
+        ),
+        new Protocol_Scale__c(
+          Name =  'Arousal - Best',
+          isActive__c =  true,
+          Category__c =  'Arousal',
+          Column_Order__c =  10,
+          Fields_to_include__c =  null,
+          isDefault__c =  true,
+          Options__c =  '1. Low/Neutral;\n2. Mild;\n3. Moderate;\n4. Extreme;\nNot Applicable',
+          Required__c =  true
+        ),
+        new Protocol_Scale__c(
+          Name =  'Solicitation - Non-Fearful Treatment',
+          isActive__c =  true,
+          Category__c =  'Sociability',
+          Column_Order__c =  20,
+          Fields_to_include__c =  null,
+          isDefault__c =  true,
+          Options__c =  '1. No;\n2. Yes;\nNot Applicable',
+          Required__c =  true
+        ),
+        new Protocol_Scale__c(
+          Name =  'Aggression - Movement',
+          isActive__c =  true,
+          Category__c =  'Aggressive',
+          Column_Order__c =  20,
+          Fields_to_include__c =  null,
+          isDefault__c =  true,
+          Options__c =  '1. Stayed in place;\n2. Retreated or leaned away;\n3. Moved toward target;\nNot Applicable',
+          Required__c =  true
+        ),
+        new Protocol_Scale__c(
+          Name =  'Fear Walking - Best',
+          isActive__c =  true,
+          Category__c =  'Leashing',
+          Column_Order__c =  40,
+          Fields_to_include__c =  null,
+          isDefault__c =  false,
+          Options__c =  '1. Excited/energetic;\n2. Walks and pulls;\n3. Walks calmly;\n4. Walks, nervous body language;\n5. Crawls, hesitates, balks;\n6. Does not walk, immobile;\n7. Gator rolls or flees;',
+          Required__c =  false
+        ),
+        new Protocol_Scale__c(
+          Name =  'Aggressive - Worst',
+          isActive__c =  true,
+          Category__c =  'Aggressive',
+          Column_Order__c =  10,
+          Fields_to_include__c =  null,
+          isDefault__c =  true,
+          Options__c =  '1. None Observed;\n2. Hard stare, whale eye, rigid, freezes;\n3. Head whips, lifts lip, growls or alarm barks;\n4. Air snaps or muzzle punches;\n5. Tries to bite or bites;',
+          Required__c =  true
+        ),
+        new Protocol_Scale__c(
+          Name =  'Fear - Best',
+          isActive__c =  true,
+          Category__c =  'Fear',
+          Column_Order__c =  10,
+          Fields_to_include__c =  null,
+          isDefault__c =  true,
+          Options__c =  '1. Excited, playful, interested;\n2. Neutral;\n2. Mildly fearful;\n3. Moderately fearful;\n4. Extremely fearful;\nNot Applicable',
+          Required__c =  true
+        ),
+        new Protocol_Scale__c(
+          Name =  'Fear - Containment Method Used',
+          isActive__c =  true,
+          Category__c =  'Fear',
+          Column_Order__c =  60,
+          Fields_to_include__c =  'Duration__c',
+          isDefault__c =  false,
+          Options__c =  '1. Willingly went in;\n2. Lured;\n3. Blocked;\n4. Lifted;\n5. Leash pressure',
+          Required__c =  false
+        ),
+        new Protocol_Scale__c(
+          Name =  'Fear - Worst',
+          isActive__c =  true,
+          Category__c =  'Fear',
+          Column_Order__c =  20,
+          Fields_to_include__c =  null,
+          isDefault__c =  true,
+          Options__c =  '1. Excited, playful, interested;\n2. Neutral;\n2. Mildly fearful;\n3. Moderately fearful;\n4. Extremely fearful;\nNot Applicable',
+          Required__c =  true
+        ),
+        new Protocol_Scale__c(
+          Name =  'Leash – How Attached',
+          isActive__c =  true,
+          Category__c =  'Leashing',
+          Column_Order__c =  30,
+          Fields_to_include__c =  null,
+          isDefault__c =  false,
+          Options__c =  '1. Dog stayed near or approached (handler stands);2. Dog stayed near or approached (handler squats);\n3. Tester walked forward normally;\n4. Tester crept slowly forward;\n5. Tester crept slowly backward;\n6. With stealth (dog evasive or aggressive);\n7. Leashing attempts failed. Dog not moved;\n8. Leashing attempts failed. Dog moved in crate, chute, or carried;\n9. No leashing attempt made. Dog moved in crate, chute, or carried;',
+          Required__c =  false
+        )
+    };
+    insert pScales;
+    return pScales;
+  }
 
     public static List<Session_Protocol__c> createSessionProtocols() {
         List<Protocol__c> protocols = createProtocols();
@@ -797,7 +935,8 @@ public without sharing class TestDataFactory {
     public static List<Plan_Protocol__c> createPlanProtocols(Integer numRecords) {
         List<Plan_Protocol__c> planProtocolList = new List<Plan_Protocol__c>();
         Treatment_Plan__c plan = createPlan();
-        List<Protocol__c> protocolList = createProtocols(numRecords);
+        // List<Protocol__c> protocolList = createProtocols(numRecords);
+        List<Protocol__c> protocolList = createProtocols();
         for (Integer i = 0; i < numRecords; i++) {
             Plan_Protocol__c newProtocol = new Plan_Protocol__c(Treatment_Plan__c = plan.Id, Protocol__c = protocolList[i].Id, IsRemoved__c = Math.mod(i, 2) != 0);
             planProtocolList.add(newProtocol);

@@ -11,7 +11,7 @@ public class test_Last5TreatmentsController {
 
         Test.startTest();
         Last5TreatmentsController controller = new Last5TreatmentsController();
-        Map<Id, List<Session_Protocol__c>> sessionProtocolMap = controller.getSessionProtocolMap();
+        Map<String, SessionProtocol[]> sessionProtocolMap = controller.getSProtocolsMap();
         Animal__c animal = controller.getAnimal();
         Test.stopTest();
         

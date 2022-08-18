@@ -357,8 +357,9 @@ public with sharing class SessionProtocolService {
             IsDeleted ,
             ProtocolId__c ,
             TreatmentSessionId__c ,
+            TreatmentSessionId__r.Session_Date__c,
             Add_to_Plan__c,
-            (SELECT Id, Protocol_Score__c, Protocol_Scale_Name__c, Protocol_Scale__r.Category__c 
+            (SELECT Id, Protocol_Score__c, Protocol_Scale_Name__c, Protocol_Scale__r.Category__c
                 FROM Session_Protocol_Scales__r 
                 ORDER BY Protocol_Scale__r.Column_Number__c ASC, 
                 Protocol_Scale__r.Column_Order__c ASC
