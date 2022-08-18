@@ -16,7 +16,7 @@ public class Last5TreatmentsController {
                 LIMIT 5
             ];
             for(Session_protocol__c sp : [
-                SELECT Id, Name, TreatmentSessionId__r.Session_Date__c, Solicitation__c, Overall_Score__c, Protocol_Notes__c, 
+                SELECT Id, Name, TreatmentSessionId__r.Session_Date__c, Overall_Score__c, Protocol_Notes__c, 
                 IsSkipped__c, Session_Date__c, ProtocolId__c, Protocol_Name__c,
                 (
                     SELECT Id, Protocol_Scale_Name__c, Protocol_Score__c, Protocol_Score_Number__c 

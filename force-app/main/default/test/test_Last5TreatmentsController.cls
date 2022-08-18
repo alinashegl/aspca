@@ -16,7 +16,7 @@ public class test_Last5TreatmentsController {
         Test.stopTest();
         
         //Test data creates 4 protocols
-        System.assertEquals(4, sessionProtocolMap.size());
+        System.assertEquals(9, sessionProtocolMap.size());
         System.assertEquals(plan.Animal__c, animal.Id);
     }
 }
