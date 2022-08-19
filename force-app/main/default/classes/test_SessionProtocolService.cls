@@ -24,13 +24,7 @@ private class test_SessionProtocolService {
     @isTest 
     static void afterInsertHandlerSuccess(){
         Treatment_Session__c session = TestDataFactory.createSession();
-        Protocol_Scale__c[] pScales = TestDataFactory.createProtocolScales(1);
         Protocol__c proto = [SELECT Id FROM Protocol__c LIMIT 1];
-        Protocol_Scale_Junction__c psj = new Protocol_Scale_Junction__c(
-            Protocol__c = proto.Id,
-            Protocol_Scale__c = pScales[0].Id
-        );
-        insert psj;
 
         test.startTest();
         Session_Protocol__c sp = new Session_Protocol__c(
@@ -44,8 +38,7 @@ private class test_SessionProtocolService {
 
         Session_Protocol_Scale__c[] scales = [SELECT Id FROM Session_Protocol_Scale__c WHERE Session_Protocol__c = :sp.Id];
         System.assertNotEquals(null, scales);
-        System.assertEquals(1, scales.size());
-
+        System.assertEquals(9, scales.size());
     }
 
     @isTest 
