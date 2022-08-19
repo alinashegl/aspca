@@ -549,7 +549,7 @@ public without sharing class TestDataFactory {
                     Shelter_Location2__c = 'MRC',
                     Current_Location__c = 'MRC',
                     Current_Recent_Shelter_Location__c = 'CRC/MRC',
-                    Play_Category__c = 'Unevaluated'
+                    Play_Category__c = 'Unspecified'
         );
         insert a;
         
