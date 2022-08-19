@@ -1,8 +1,9 @@
-import { LightningElement, api, wire } from 'lwc';
+import { LightningElement, track, api, wire } from 'lwc';
 import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
 import TREATMENT_PLAN_ID_FIELD from '@salesforce/schema/Session_Protocol__c.TreatmentSessionId__r.Treatment_Plan__c';
 import PROTOCOL_ID_FIELD from '@salesforce/schema/Session_Protocol__c.ProtocolId__c';
 import getLastTreatments from '@salesforce/apex/LastTreatmentsController.getLastTreatments';
+import SystemModstamp from '@salesforce/schema/ANH__AutoNumberConfigurationSetting__c.SystemModstamp';
 
 const fields = [TREATMENT_PLAN_ID_FIELD, PROTOCOL_ID_FIELD];
 
@@ -31,10 +32,10 @@ export default class Lwc_lastTreatments extends LightningElement {
     lastTreatments;
 
     handleToggle() {
+        window.console.log('lastTreatments: ', JSON.stringify(this.lastTreatments));
         this.allFields = !this.allFields;
     }
 
-    //This can likely go away when moving to the detail page layout since it should always have a record by virtue of being on that detail page
     get hasData() {
         return this.lastTreatments.data != undefined && this.lastTreatments.data.length > 0;
     }

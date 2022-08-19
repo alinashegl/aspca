@@ -348,57 +348,59 @@
                     </tr>  
                 </thead>
                 <tbody>
-                    <apex:repeat value="{!aTreatmentSession}" var="treat">
-                        <thead>
-                            <tr>
-                                <th style="border-top:thin #D4D4D4 solid;">Name</th>
-                                <!-- <th  style="border-top:thin #D4D4D4 solid;">Status</th> -->
-                                <th style="border-top:thin #D4D4D4 solid;">Fear-Best</th>
-                                <th style="border-top:thin #D4D4D4 solid;">Fear - Worst</th>
-                                <th style="border-top:thin #D4D4D4 solid;">Aggresive - Worst</th>
-                                <th style="border-top:thin #D4D4D4 solid;">Arousal - Best</th>
-                                <th style="border-top:thin #D4D4D4 solid;">Arousal - Worst</th>
+                    <apex:repeat value="{!aTreatmentSession}" var="treatment">
+                        <apex:repeat value="{!treatment}" var="treat">
+                            <thead>
+                                <tr>
+                                    <th style="border-top:thin #D4D4D4 solid;">Name</th>
+                                    <!-- <th  style="border-top:thin #D4D4D4 solid;">Status</th> -->
+                                    <th style="border-top:thin #D4D4D4 solid;">Fear-Best</th>
+                                    <th style="border-top:thin #D4D4D4 solid;">Fear - Worst</th>
+                                    <th style="border-top:thin #D4D4D4 solid;">Aggresive - Worst</th>
+                                    <th style="border-top:thin #D4D4D4 solid;">Arousal - Best</th>
+                                    <th style="border-top:thin #D4D4D4 solid;">Arousal - Worst</th>
+                                </tr>
+                            </thead>
+                            <tr style="page-break-inside:avoid">
+                                <td>{!treat.sProto.Protocol_Name__c }</td>
+                                <!-- <td>{!treat.Status__c }</td> -->
+                                <td>{!treat.fearBest.score }</td>
+                                <td>{!treat.fearWorst.score }</td>
+                                <td>{!treat.aggressiveWorst.score }</td>
+                                <td>{!treat.arousalBest.score }</td>
+                                <td>{!treat.arousalWorst.score}</td>
                             </tr>
-                        </thead>
-                        <tr style="page-break-inside:avoid">
-                            <td>{!treat.Protocol_Name__c }</td>
-                            <!-- <td>{!treat.Status__c }</td> -->
-                            <td>{!treat.Fear_Best__c }</td>
-                            <td>{!treat.Fear_Worst__c }</td>
-                            <td>{!treat.Aggressive_Worst__c }</td>
-                            <td>{!treat.Arousal_Best__c }</td>
-                            <td>{!treat.Arousal_Worst__c}</td>
-                        </tr>
-                        <tr>
-                            <td colspan="6">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="bottomline"></td>
-                            <td colspan="5" class="bottomline">
-                                <br/>
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Social - Best</th>
-                                            <th>Overall Score</th>
-                                            <th>Needs Review</th>
-                                            <th>Skip Protocol</th>
-                                            <th>Over stim w/ food, PC Tug</th>
-                                        </tr>
-                                    </thead>
-                                    <tbod>
-                                        <tr>
-                                            <td>{!treat.Social_Best__c}</td>
-                                            <td>{!treat.Overall_Score__c}</td>
-                                            <td>{!treat.Needs_Review__c}</td>
-                                            <td>{!treat.IsSkipped__c}</td>
-                                            <td>({!treat.Overall_Score__c}) &nbsp; {!treat.Protocol_Notes__c}</td>
-                                        </tr>
-                                    </tbod>
-                                </table>
-                            </td>
-                            <td></td>
-                        </tr>
+                            <tr>
+                                <td colspan="6">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td class="bottomline"></td>
+                                <td colspan="5" class="bottomline">
+                                    <br/>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Social - Best</th>
+                                                <th>Overall Score</th>
+                                                <th>Needs Review</th>
+                                                <th>Skip Protocol</th>
+                                                <th>Over stim w/ food, PC Tug</th>
+                                            </tr>
+                                        </thead>
+                                        <tbod>
+                                            <tr>
+                                                <td>{!treat.socialBest.score}</td>
+                                                <td>{!treat.sProto.Overall_Score__c}</td>
+                                                <td>{!treat.sProto.Needs_Review__c}</td>
+                                                <td>{!treat.sProto.IsSkipped__c}</td>
+                                                <td>({!treat.sProto.Overall_Score__c}) &nbsp; {!treat.sProto.Protocol_Notes__c}</td>
+                                            </tr>
+                                        </tbod>
+                                    </table>
+                                </td>
+                                <td></td>
+                            </tr>
+                        </apex:repeat>
                     </apex:repeat>
                 </tbody>
             </table>

@@ -25,21 +25,26 @@ public with sharing class SessionProtocolScaleDomain extends DomainActionBase {
         Session_Protocol_Scale__c[] newRecords = (Session_Protocol_Scale__c[]) request.newRecords;
         Map<Id, Session_Protocol_Scale__c> oldMap = (Map<Id, Session_Protocol_Scale__c>) request.oldRecordMap;
         //need to update the overall score field on the session protocol if it was updated
-        Session_Protocol__c[] sProtocols = new Session_Protocol__c[0];
+        // Session_Protocol__c[] sProtocols = new Session_Protocol__c[0];
+        Map<Id, Session_Protocol__c> sProtocolMap = new Map<Id, Session_Protocol__c>();
         for(Session_Protocol_Scale__c sps : newRecords){
             Session_Protocol_Scale__c oldRecord = oldMap.get(sps.Id);
             if(sps.Protocol_Scale_Name__c == 'Overall Score' && sps.Protocol_Score__c != oldRecord.Protocol_Score__c){
                 System.debug('**sps: ' + sps);
-                Session_Protocol__c sProtocol = new Session_Protocol__c(
-                    Id = sps.Session_Protocol__c,
-                    Overall_Score__c = sps.Protocol_Score__c
-                );
-                sProtocols.add(sProtocol);
+                if(sProtocolMap.containsKey(sps.Session_Protocol__c)){
+                    sProtocolMap.get(sps.Session_Protocol__c).Overall_Score__c = sps.Protocol_Score__c;
+                } else {
+                    Session_Protocol__c sProtocol = new Session_Protocol__c(
+                        Id = sps.Session_Protocol__c,
+                        Overall_Score__c = sps.Protocol_Score__c
+                    );
+                    sProtocolMap.put(sps.Session_Protocol__c, sProtocol);
+                }
             }
         }
 
-        update sProtocols;
-        System.debug('sProtocols: ' + sProtocols);
+        update sProtocolMap.values();
+        System.debug('sProtocolMap: ' + sProtocolMap);
     }
 
     public void beforeDelete (TriggerRequest request) { 
