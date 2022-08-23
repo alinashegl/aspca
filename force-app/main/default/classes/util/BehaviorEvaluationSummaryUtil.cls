@@ -250,10 +250,18 @@ public class BehaviorEvaluationSummaryUtil {
             }
 
             String[] summaryList = summaryListMap.get(b.Evaluation_Subtype__c);
+            System.debug('summaryList: ' + summaryList);
+
             Map<String, CommentSkipWrapper[]> commentMap = new Map<String, CommentSkipWrapper[]>();
+
+            // Map<String, String> summaryDiffMap = parseSummary(b.Behavior_Evaluation_Summary__c,oldRecord.Behavior_Evaluation_Summary__c);
+
+            Map<String, String> summaryDiffMap = parseSummaryList(b.Behavior_Evaluation_Summary__c,oldRecord.Behavior_Evaluation_Summary__c, summaryList);
 
             for(String summaryTitle : summaryList){
                 System.debug('summaryTitle: ' + summaryTitle);
+                System.debug('category comments: ' + summaryDiffMap.get(summaryTitle));
+                String parsedComments = summaryDiffMap.containsKey(summaryTitle) ? summaryDiffMap.get(summaryTitle) : null;
                 CommentSkipWrapper[] commentList = new CommentSkipWrapper[0];
 
                 Boolean skipSubsequentParts = false;
@@ -297,11 +305,28 @@ public class BehaviorEvaluationSummaryUtil {
                             }
                         }
 
+                        String testCommentsText = (string) b.get(config.Test_Comment_Field_Name__c);
+                        String skipReasonText = (string) b.get(config.Test_Skip_Reason_Field__c);
+
+                        //clear skip reason and comments from comment field from the parsed comments
+                        if(parsedComments != null){
+                            if(testCommentsText != null){
+                                parsedComments = parsedComments.replaceAll(testCommentsText, '');
+                            }
+
+                            if(skipReasonText != null){
+                                parsedComments = parsedComments.replaceAll(skipReasonText, '');
+                            }
+                        }
+
+                        System.debug('parsedComments: ' + parsedComments);
+
                         commentList.add(new CommentSkipWrapper(
                             config.Test_Name__c,
-                            (string) b.get(config.Test_Comment_Field_Name__c), 
-                            (string) b.get(config.Test_Skip_Reason_Field__c),
-                            !highValueSelections.isEmpty() ? string.join(highValueSelections, ';') : null
+                            testCommentsText, 
+                            skipReasonText,
+                            !highValueSelections.isEmpty() ? string.join(highValueSelections, ';') : null,
+                            parsedComments
                         ));
 
                         //unskip if score was added
@@ -321,7 +346,7 @@ public class BehaviorEvaluationSummaryUtil {
             String summary = '';
             
             for(String testName: summaryList){
-                summary += '<p><b>' + testName + ': </b>';
+                summary += '<p><b>' + testName + ':</b>&nbsp;';
                 if(commentMap.containsKey(testName)){
                     String[] tempCommentList = new String[0];
                     for(CommentSkipWrapper comments : commentMap.get(testName)){
@@ -335,7 +360,12 @@ public class BehaviorEvaluationSummaryUtil {
 
                         if(comments.highValueField != null) {
                             tempCommentList.add(comments.highValueField);
-                        }                        
+                        }
+
+                        if(String.isNotBlank(comments.summaryField)) {
+                            System.debug('comments.summaryField: ' + comments.summaryField);
+                            tempCommentList.add(comments.summaryField);
+                        }   
                     }
                     if(!tempCommentList.isEmpty()){
                         summary += string.join(tempCommentList, ',');
@@ -350,5 +380,110 @@ public class BehaviorEvaluationSummaryUtil {
 
     public static void handleAfterUpdate(List<Behavior_Evaluation__c> triggerNew, Map<Id, Behavior_Evaluation__c> triggerOldMap) {
         LogHistory.LogHistory(triggerOldMap, triggerNew);
+    }
+
+    // public static Map<String, String> parseSummary(String newSummary, String oldSummary){
+    //     Map<String, String> summaryDifferencesMap = new Map<String, String>();
+
+    //     if(newSummary != oldSummary){
+    //         Map<String, String> newCategoryCommentMap = summaryToMap(newSummary);
+    //         Map<String, String> oldCategoryCommentMap = summaryToMap(oldSummary);
+
+    //         for(String category : newCategoryCommentMap.keySet()){
+    //             String newCatComments = newCategoryCommentMap.get(category);
+    //             String oldCatComments = oldCategoryCommentMap.get(category);
+
+    //             if(newCatComments != oldCatComments){
+    //                 summaryDifferencesMap.put(category, newCatComments);
+    //             }
+    //         }
+    //     }
+    //     System.debug('summaryDifferencesMap: ' + summaryDifferencesMap);
+    //     return summaryDifferencesMap;
+    // }
+
+    // public static Map<String, String> summaryToMap(String summary){
+    //     Map<String, String> categoryMap = new Map<String, String>();
+
+    //     summary = summary.replaceAll('<b>', '<strong>');
+
+    //     for(String category : summary.split('</p><p><strong>')){
+    //         category = category.replaceAll(':</strong>', ' :break: ');
+    //         category = category.replaceAll(':</b>', ' :break: ');
+    //         category = category.stripHtmlTags();
+
+    //         String[] catSplit = category.split(':break:');
+    //         String catKey = catSplit[0];
+    //         catSplit.remove(0);
+    //         categoryMap.put(catKey.trim(), String.join( catSplit, ',' ).trim());
+    //     }
+    //     return categoryMap;
+    // }
+
+    public static Map<String, String> parseSummaryList(String newSummary, String oldSummary, String[] summaryList){
+        Map<String, String> summaryMap = new Map<String, String>();
+        System.debug('summaryList.size(): ' + summaryList.size());
+        
+        for(Integer i = 0; i < summaryList.size(); i++){
+            Integer newSummaryIndexStart = newSummary.indexOf(summaryList[i]);
+            Integer newSummaryIndexEnd = i + 1 >= summaryList.size() ? null : newSummary.indexOf(summaryList[i+1]);
+
+            Integer oldSummaryIndexStart = oldSummary.indexOf(summaryList[i]);
+            Integer oldSummaryIndexEnd = i + 1 >= summaryList.size() ? null : oldSummary.indexOf(summaryList[i+1]);
+
+            String newSubSummary;
+            if(newSummaryIndexEnd == null){
+                newSubSummary = newSummary.substring(newSummaryIndexStart);
+            } else {
+                newSubSummary = newSummary.substring(newSummaryIndexStart, newSummaryIndexEnd);
+            }
+
+            String oldSubSummary;
+            if(newSummaryIndexEnd == null){
+                oldSubSummary = oldSummary.substring(oldSummaryIndexStart);
+            } else {
+                oldSubSummary = oldSummary.substring(oldSummaryIndexStart, oldSummaryIndexEnd);
+            }
+
+            if(newSubSummary != oldSubSummary){
+                Integer index = newSubSummary.indexOf(':');
+                String summaryKey = cleanString(newSubSummary.substring(0, index));
+                String summaryValue = cleanString(newSubSummary.substring(index));
+
+                System.debug('summaryKey: ' + summaryKey);
+                System.debug('summaryValue: ' + summaryValue);
+
+                summaryMap.put(summaryKey, summaryValue);
+            }
+        }
+
+        System.debug('summarymap: ' + summaryMap);
+        return summaryMap;
+    }
+
+    public static String cleanString(String toClean){
+        toClean = toClean.stripHtmlTags();
+        toClean = toclean.normalizeSpace();
+        System.debug('toClean: ' + toClean);
+        if(toClean != null && String.isNotEmpty(toClean)){
+            System.debug('toClean length: ' + toClean.length());
+            Boolean isAlphanumeric = false;
+            if(toClean.length() == 1){
+                while(!isAlphanumeric){
+                    toClean = toClean.isAlphanumeric() ? toClean : null;
+                }
+            } else {
+                isAlphanumeric = toClean.substring(0, 1).isAlphanumeric();
+                if(!isAlphanumeric){
+                    toClean = toClean.subString(1);
+                }
+            }
+        }
+
+        // if(toClean != null){
+
+        // }
+
+        return toClean;
     }
 }
