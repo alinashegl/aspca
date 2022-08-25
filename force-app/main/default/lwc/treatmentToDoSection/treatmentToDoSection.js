@@ -8,7 +8,7 @@ import ID_FIELD from '@salesforce/schema/Treatment_Plan__c.Id';
 import BUNDLE_ID_FIELD from '@salesforce/schema/Treatment_Plan__c.AssignedTreatmentBundleId__c';
 import TREATMENT_OBJECT from '@salesforce/schema/Treatment_Plan__c';
 import PRIORITY_FIELD from '@salesforce/schema/Treatment_Plan__c.Treatment_Priority__c';
-import updateTreatment from '@salesforce/apex/TreatmentToDoListController.updateTreatment';
+// import updateTreatment from '@salesforce/apex/TreatmentToDoListController.updateTreatment';
 
 export default class TreatmentToDoSection extends NavigationMixin(LightningElement) {
     @api
@@ -21,6 +21,10 @@ export default class TreatmentToDoSection extends NavigationMixin(LightningEleme
     urlBundle;
     treatmentPriority;
     isConfirmationVisible = false;
+    showSpinner = false;
+
+    error;
+    errorMessage;
 
     @wire(getObjectInfo, { objectApiName: TREATMENT_OBJECT })
     treatmentMetadata;
@@ -151,15 +155,22 @@ export default class TreatmentToDoSection extends NavigationMixin(LightningEleme
             //trigger update logic and send update event to parent
             if (this.customLookupNewId !== this.animalTreatment.AssignedTreatmentBundleId__c || 
                 this.treatmentPriority !== this.animalTreatment.Treatment_Priority__c) {
+                this.showSpinner = true;
                 const fields = {};
+                fields[ID_FIELD.fieldApiName] = this.animalTreatment.Id;
                 fields[BUNDLE_ID_FIELD.fieldApiName] = this.customLookupNewId;
                 fields[PRIORITY_FIELD.fieldApiName] = this.treatmentPriority;
-                updateTreatment({recordId: this.animalTreatment.Id, fieldMap: fields})
+                const recordInput = { fields };
+                updateRecord(recordInput)
                 .then(() => {
                     this.dispatchEvent(new CustomEvent('update'));
                 })
                 .catch(error => {
-                    console.log('error', JSON.stringify(error));
+                    this.errorMessage = 'Error updating Treatment Plan:';
+                    this.error = error;
+                })
+                .finally(() => {
+                    this.showSpinner = false;
                 });
             }
         }
