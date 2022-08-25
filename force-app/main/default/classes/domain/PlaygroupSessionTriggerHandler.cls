@@ -12,18 +12,17 @@ public with sharing class PlaygroupSessionTriggerHandler {
     
     //Neha :#376 Card
     public static void UpdateNoteToAnimal(Map<Id, Playgroup_Session__c> newDataMap,Map<Id, Playgroup_Session__c> olDataMap){
-        Map<String,String> animalIdToNotes = new Map<String,String>();
         List<Animal_Playgroup__c> animalToUpdate = new List<Animal_Playgroup__c>();
+        Set<Id> psIdSet = new Set<Id>();
         for(Playgroup_Session__c ps : newDataMap.values()){
-            if(ps.Animal_Playgroup__c!= null){
-               if(newDataMap.get(ps.id).Playgroup_Notes__c != olDataMap.get(ps.id).Playgroup_Notes__c) {
-                   animalIdToNotes.put(ps.Animal_Playgroup__c, newDataMap.get(ps.id).Playgroup_Notes__c);
-               }
+            if(ps.Playgroup_Notes__c != olDataMap.get(ps.id).Playgroup_Notes__c) {
+                psIdSet.add(ps.Id);
             }
         }
-        if(animalIdToNotes.keyset().size() >0){
-            for(Animal_Playgroup__c animal : [Select id,Playgroup_Session_Notes__c from Animal_Playgroup__c where id in : animalIdToNotes.keyset()] ){
-                animal.Playgroup_Session_Notes__c  = animalIdToNotes.get(animal.id);
+
+        if(!psIdSet.isEmpty()){
+            for(Animal_Playgroup__c animal : [SELECT Id,Playgroup_Session_Notes__c, Playgroup_Session__c FROM Animal_Playgroup__c WHERE Playgroup_Session__c IN : psIdSet] ){
+                animal.Playgroup_Session_Notes__c = newDataMap.get(animal.Playgroup_Session__c)?.Playgroup_Notes__c;
                 animalToUpdate.add(animal);
             }
             Update animalToUpdate;

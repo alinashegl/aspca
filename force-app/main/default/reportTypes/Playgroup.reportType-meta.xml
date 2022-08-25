@@ -72,11 +72,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Animal_Playgroup__c</field>
-            <table>Playgroup_Session__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Contact_Ids__c</field>
             <table>Playgroup_Session__c</table>
         </columns>
@@ -166,6 +161,11 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Playgroup_Count__c</field>
+            <table>Playgroup_Session__c.Animal_Playgroups__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Current_Week__c</field>
             <table>Playgroup_Session__c.Animal_Playgroups__r</table>
         </columns>
         <masterLabel>Animal Playgroups</masterLabel>
