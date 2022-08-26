@@ -43,7 +43,7 @@
                                         fields={customLookupContactFields}
                                         display-fields={customLookupContactDisplayFields}
                                         field-to-query='Name'
-                                        where-clause='Active__c = true'
+                                        where-clause={whereClause}
                                         label-name='Session Contact'
                                         onlookup={customLookupEvent}
                                         onexpandfield={handleCustomLookupExpandSearch}
