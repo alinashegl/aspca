@@ -176,10 +176,7 @@ public class AnimalPlacementPDFController {
                     Session_Date__c,
                     Name,
                     IsSkipped__c,
-                    Solicitation__c,
-                    Solicitation_Number__c,
                     Status__c,
-                    Sum_of_Numbers__c,
                     TreatmentSessionId__c,
                     (SELECT Id, Protocol_Score__c, Protocol_Scale_Name__c, Protocol_Scale__r.Category__c 
                         FROM Session_Protocol_Scales__r 
@@ -409,7 +406,7 @@ public class AnimalPlacementPDFController {
             //system.debug(behaviors);
             //Iterate through Skipped fields to pull out skip reason
             if (fieldName.contains('Skipped')){
-                List<Test_Config__mdt> testConfigSkip;
+                List<Test_Config__mdt> testConfigSkip = new List<Test_Config__mdt>();
                 switch on behaviorEvaluation.Evaluation_SubType__c {
                     when 'Puppy' {
                         testConfigSkip = [SELECT Test_Name__c,Overall_Test_Display_Name__c FROM Test_Config__mdt
@@ -495,7 +492,7 @@ public class AnimalPlacementPDFController {
         // Iterate through subtests in testAndDisplayMap and order by Test_Display_Order__c
         // Add subtest and order combinations into testOrder Map
         for (String subtest : testAndDisplayValues.keySet()){
-            List<Test_Config__mdt> testMetadata;
+            List<Test_Config__mdt> testMetadata = new List<Test_Config__mdt>();
             switch on behaviorEvaluation.Evaluation_SubType__c {
                 when 'Puppy' {
                     testMetadata = [SELECT Test_Display_Order__c,Test_Name__c FROM Test_Config__mdt
@@ -518,7 +515,7 @@ public class AnimalPlacementPDFController {
                 testOrder.put(Integer.valueOf(testMetadata[0].Test_Display_Order__c), testMetadata[0].Test_Name__c);
             }
             else{
-                List<Test_Config__mdt> overallTestMetadata;
+                List<Test_Config__mdt> overallTestMetadata = new List<Test_Config__mdt>();
                 switch on behaviorEvaluation.Evaluation_SubType__c {
                     when 'Puppy' {
                         overallTestMetadata = [SELECT Test_Display_Order__c,Overall_Test_Display_Name__c FROM Test_Config__mdt
@@ -581,7 +578,7 @@ public class AnimalPlacementPDFController {
                 summary = summary.substring(0, oppositeStart) + summary.substring(oppositeEnd + 4);
             }
         }
-        List<Test_Config__mdt> testConfigMetadata;
+        List<Test_Config__mdt> testConfigMetadata = new List<Test_Config__mdt>();
         switch on behEval.Evaluation_SubType__c {
             when 'Puppy' {
                 testConfigMetadata = [SELECT MasterLabel, Test_Display_Order__c, Test_Name__c, Test_Description__c, IsPuppy__c, IsAdult__c, IsDogFighting__c, IsDogOnly__c,

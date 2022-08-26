@@ -453,6 +453,18 @@
                 <identifier>RecordBRC_ID_cField1</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Petpoint_ID__c</fieldItem>
+                <identifier>RecordPetpoint_ID_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.AAH_ID__c</fieldItem>
+                <identifier>RecordAAH_ID_cField2</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-7bb7e173-8e35-42e8-bb80-b8d39a3ada43</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -1705,6 +1717,24 @@
                 <identifier>RecordBehavior_Medication_Flag_cField1</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Behavior_Medication_Notes__c</fieldItem>
+                <identifier>RecordBehavior_Medication_Notes_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Approved_for_Revolution__c</fieldItem>
+                <identifier>RecordApproved_for_Revolution_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Special_instructions_for_Revolution__c</fieldItem>
+                <identifier>RecordSpecial_instructions_for_Revolution_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-2cb0a905-9519-421f-8720-058e6e7e5bdf</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -1765,8 +1795,20 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Behavior_Medication_Notes__c</fieldItem>
-                <identifier>RecordBehavior_Medication_Notes_cField</identifier>
+                <fieldItem>Record.Approved_for_bath__c</fieldItem>
+                <identifier>RecordApproved_for_bath_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Muzzle_needed_for_bath__c</fieldItem>
+                <identifier>RecordMuzzle_needed_for_bath_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Special_instructions_for_bath__c</fieldItem>
+                <identifier>RecordSpecial_instructions_for_bath_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-1c2d9594-eea1-42f4-b0ca-0b6c49f7bf0d</name>

@@ -1,5 +1,5 @@
 public with sharing class TreatmentToDoListController {
-    @AuraEnabled(cacheable=true)
+    @AuraEnabled
     public static List<Treatment_Plan__c> getAnimalTreatments() {
         List<Treatment_Plan__c> treatmentPlans = [SELECT Id, Name, Treatment_Priority__c, Animal__c, IsActive__c,
                 Animal__r.Animal_Name__c, Animal__r.Name, Animal__r.Location__c, Animal__r.Number_of_Treatments__c,
