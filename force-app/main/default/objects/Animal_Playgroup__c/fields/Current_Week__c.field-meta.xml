@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Current_Week__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( Playgroup_Session__r.Playgroup_Date__c &gt;=
+(CASE(MOD(TODAY() - DATE(1900, 1, 2), 7),
+0, TODAY() +0,
+1, TODAY() -1,
+2, TODAY() -2,
+3, TODAY() -3,
+4, TODAY() -4,
+5, TODAY() -5,
+6, TODAY() -6,
+TODAY())), TRUE, FALSE)</formula>
+    <label>Current Week</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>
