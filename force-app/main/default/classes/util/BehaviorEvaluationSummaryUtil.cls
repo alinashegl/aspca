@@ -141,7 +141,16 @@ public class BehaviorEvaluationSummaryUtil {
                 parentConfigSet.add(parentTestName);
 
                 if(parentToTemplateListMap.containsKey(parentTestName)){
-                    parentToTemplateListMap.get(parentTestName).add(testName);
+                    // if(allowDuplicateTestNames(testName)){
+                        parentToTemplateListMap.get(parentTestName).add(testName);
+                    // } else 
+                    // {
+                    //     String[] testNameList = parentToTemplateListMap.get(parentTestName);
+                    //     if(!testNameList.contains(testName)){
+                    //         testNameList.add(testName);
+                    //     }
+                    // }
+                    
                 } else {
                     parentToTemplateListMap.put(parentTestName, new String[]{testName});
                 }
@@ -156,7 +165,9 @@ public class BehaviorEvaluationSummaryUtil {
                 testName = fullTestName.replace(' P1', '').replace(' P2', '').replace(' P3', '');
 
                 if(configMap.containsKey(testName)){
-                    configMap.get(testName).add(t);
+                    if(allowDuplicateSkipReasons(testName)){
+                        configMap.get(testName).add(t);
+                    }
                 } else {
                     configMap.put(testName, new Test_Config__mdt[]{t});
                 }
@@ -526,6 +537,15 @@ public class BehaviorEvaluationSummaryUtil {
         }
 
         return toClean;
+    }
+
+    private static Boolean allowDuplicateSkipReasons(String testName){
+        String[] nonDupeList = new String[]{
+            'Food Bowl',
+            'Chewy'
+        };
+        return !nonDupeList.contains(testName);
+
     }
 }
 
