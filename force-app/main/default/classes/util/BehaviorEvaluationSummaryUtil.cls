@@ -265,7 +265,7 @@ public class BehaviorEvaluationSummaryUtil {
                 Test_Config__mdt t = Test_Config__mdt.getInstance(p.Test_Config__c);
                 String testName = t.Overall_Test_Display_Name__c != null ? t.Overall_Test_Display_Name__c : t.Test_Name__c;
                 testName = testName.replace(' P1', '').replace(' P2', '').replace(' P3', '');
-                if (!testName.startsWith('Resource Guarding')) {
+                if (!testName.startsWith('Food Bowl') && !testName.startsWith('Chewy')) {
                     if(highValueMap.containsKey(p.Field_API_Name__c)){
                         highValueMap.get(p.Field_API_Name__c).add(p.Field_Value__c);
                     }else {
@@ -342,102 +342,98 @@ public class BehaviorEvaluationSummaryUtil {
 
             for(String parentSummaryTitle : parentSummaryMap.keySet()){
                 System.debug('parentSummaryTitle: ' + parentSummaryTitle);
+
+                Boolean skipSubsequentParts = false;
+                String skipReason = null;
                 
                 for(String summaryTitle : parentSummaryMap.get(parentSummaryTitle)){
                     System.debug('summaryTitle: ' + summaryTitle);
                     System.debug('category comments: ' + summaryDiffMap.get(summaryTitle));
+
+                    String parsedComments = summaryDiffMap.containsKey(summaryTitle) ? summaryDiffMap.get(summaryTitle) : null;
+                    CommentSkipWrapper[] commentList = new CommentSkipWrapper[0];
+
+                    Test_Config__mdt p1Config = commentFieldsMap.get(summaryTitle)[0];
+                    String currentFieldApi = p1Config.Test_Skip_Reason_Field__c;
+
+                    //if skipping p1, skip the others for the same reason
+                    if(currentFieldApi.contains('P1')){
+                        if(oldRecord.get(currentFieldApi) == null && b.get(currentFieldApi) != null){
+                            skipSubsequentParts = true;
+                            skipReason = (String) b.get(currentFieldApi);
+                        }
+                    }
+
+                    if(commentFieldsMap.containsKey(summaryTitle)){
+                        for(Test_Config__mdt config : commentFieldsMap.get(summaryTitle)){
+                            if (skipDogTests) {
+                                if (summaryTitle.startsWith('Same Sex') || summaryTitle.startsWith('Opposite Sex') || summaryTitle.startsWith('Same_Sex') || summaryTitle.startsWith('Opposite_Sex')) {
+                                    b.put(config.Test_Skip_Reason_Field__c, 'Skipped due to risk to the helper dog');
+                                }
+                            }
+                            else if(skipSubsequentParts && b.get(config.Test_Skip_Reason_Field__c) == null){
+                                b.put(config.Test_Skip_Reason_Field__c, skipReason);
+                            }
+
+                            String picklistString = (string) b.get(config.Picklist_API_Name__c);
+                            String[] highValueSelections = new String[0];
+                            if(picklistString != null){
+                                String[] picklistSelections = picklistString.split(';');
+                                String[] highValueList = highValueMap.containsKey(config.Picklist_API_Name__c) ? highValueMap.get(config.Picklist_API_Name__c) : null;
+                                if(highValueList != null){
+                                    for(String selection : picklistSelections){
+                                        if(highValueList.contains(selection)){
+                                            highValueSelections.add(selection);
+                                        }
+                                    }
+                                }
+                            }
+
+                            String testCommentsText = (string) b.get(config.Test_Comment_Field_Name__c);
+                            String skipReasonText = (string) b.get(config.Test_Skip_Reason_Field__c);
+                            String oldSkipReasonTest = (string) oldRecord.get(config.Test_Skip_Reason_Field__c);
+
+                            //clear skip reason and comments from comment field from the parsed comments
+                            if(parsedComments != null){
+                                if(testCommentsText != null){
+                                    parsedComments = parsedComments.replaceAll(testCommentsText, '');
+                                }
+
+                                if(skipReasonText != null){
+                                    parsedComments = parsedComments.replaceAll(skipReasonText, '');
+                                }
+
+                                if(oldSkipReasonTest != null){
+                                    parsedComments = parsedComments.replaceAll(oldSkipReasonTest, '');
+                                }
+
+                                parsedComments = cleanString(parsedComments);
+                            }
+
+                            System.debug('parsedComments: ' + parsedComments);
+
+                            commentList.add(new CommentSkipWrapper(
+                                config.Test_Name__c,
+                                testCommentsText, 
+                                skipReasonText,
+                                !highValueSelections.isEmpty() ? string.join(highValueSelections, ';') : null,
+                                parsedComments
+                            ));
+
+                            //unskip if score was added
+                            if(oldRecord.get(config.Picklist_API_Name__c) == null && b.get(config.Picklist_API_Name__c) != null){
+                                System.debug('**setting skip field to null');
+                                b.put(config.Test_Skip_Reason_Field__c, null);
+                            }
+                        }
+                        commentMap.put(summaryTitle, commentList);
+                    }
+
+
+                // if(String.valueof(b.get(c.skipField)) == '@@'){
+                    //  b.Behavior_Evaluation_Summary__c = ' ';
+                // }
                 }
-
-                // String parsedComments = summaryDiffMap.containsKey(summaryTitle) ? summaryDiffMap.get(summaryTitle) : null;
-                // CommentSkipWrapper[] commentList = new CommentSkipWrapper[0];
-
-                // Boolean skipSubsequentParts = false;
-                // String skipReason = null;
-
-                // if(commentFieldsMap.containsKey(summaryTitle)){
-                //     for(Test_Config__mdt subconfig : commentFieldsMap.get(summaryTitle)){
-                //         //code goes here!
-                //         System.debug('config.Test_Name__c: ' + subconfig.Test_Name__c);
-                //     }
-
-
-                //     Test_Config__mdt p1Config = commentFieldsMap.get(summaryTitle)[0];
-                //     String currentFieldApi = p1Config.Test_Skip_Reason_Field__c;
-
-                //     //if skipping p1, skip the others for the same reason
-                //     if(currentFieldApi.contains('P1')){
-                //         if(oldRecord.get(currentFieldApi) == null && b.get(currentFieldApi) != null){
-                //             skipSubsequentParts = true;
-                //             skipReason = (String) b.get(currentFieldApi);
-                //         }                    
-                //     }
-                // }
-
-                // if(commentFieldsMap.containsKey(summaryTitle)){
-                //     for(Test_Config__mdt config : commentFieldsMap.get(summaryTitle)){
-                //         if (skipDogTests) {
-                //             if (summaryTitle.startsWith('Same Sex') || summaryTitle.startsWith('Opposite Sex') || summaryTitle.startsWith('Same_Sex') || summaryTitle.startsWith('Opposite_Sex')) {
-                //                 b.put(config.Test_Skip_Reason_Field__c, 'Skipped due to risk to the helper dog');
-                //             }
-                //         }
-                //         else if(skipSubsequentParts && b.get(config.Test_Skip_Reason_Field__c) == null){
-                //             b.put(config.Test_Skip_Reason_Field__c, skipReason);
-                //         }
-
-                //         String picklistString = (string) b.get(config.Picklist_API_Name__c);
-                //         String[] highValueSelections = new String[0];
-                //         if(picklistString != null){
-                //             String[] picklistSelections = picklistString.split(';');
-                //             String[] highValueList = highValueMap.containsKey(config.Picklist_API_Name__c) ? highValueMap.get(config.Picklist_API_Name__c) : null;
-                //             if(highValueList != null){
-                //                 for(String selection : picklistSelections){
-                //                     if(highValueList.contains(selection)){
-                //                         highValueSelections.add(selection);
-                //                     }
-                //                 }
-                //             }
-                //         }
-
-                //         String testCommentsText = (string) b.get(config.Test_Comment_Field_Name__c);
-                //         String skipReasonText = (string) b.get(config.Test_Skip_Reason_Field__c);
-
-                //         //clear skip reason and comments from comment field from the parsed comments
-                //         if(parsedComments != null){
-                //             if(testCommentsText != null){
-                //                 parsedComments = parsedComments.replaceAll(testCommentsText, '');
-                //             }
-
-                //             if(skipReasonText != null){
-                //                 parsedComments = parsedComments.replaceAll(skipReasonText, '');
-                //             }
-
-                //             parsedComments = cleanString(parsedComments);
-                //         }
-
-                //         System.debug('parsedComments: ' + parsedComments);
-
-                //         commentList.add(new CommentSkipWrapper(
-                //             config.Test_Name__c,
-                //             testCommentsText, 
-                //             skipReasonText,
-                //             !highValueSelections.isEmpty() ? string.join(highValueSelections, ';') : null,
-                //             parsedComments
-                //         ));
-
-                //         //unskip if score was added
-                //         if(oldRecord.get(config.Picklist_API_Name__c) == null && b.get(config.Picklist_API_Name__c) != null){
-                //             System.debug('**setting skip field to null');
-                //             b.put(config.Test_Skip_Reason_Field__c, null);
-                //         }
-                //     }
-                //     commentMap.put(summaryTitle, commentList);
-                // }
-
-
-               // if(String.valueof(b.get(c.skipField)) == '@@'){
-                 //  b.Behavior_Evaluation_Summary__c = ' ';
-               // }
-
             }
 
             String summary = '';
