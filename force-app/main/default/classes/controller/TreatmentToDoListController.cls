@@ -13,17 +13,6 @@ public with sharing class TreatmentToDoListController {
         return treatmentPlans;
     }
 
-    // @AuraEnabled(cacheable=false)
-    // public static void updateTreatment(ID recordId, Map<String, Object> fieldMap){
-    //     // sObject sObj = cloneRecord(recordId);
-    //     Treatment_Plan__c sobj = new SObject();
-    //     sobj.Id = recordId;
-    //     for(String field : fieldMap.keySet()){
-    //         sObj.put(field, fieldMap.get(field));
-    //     }
-    //     update sObj;
-    // }
-
     public static SObject cloneRecord(ID recordId){
         DescribeSObjectResult describeResult = recordId.getSObjectType().getDescribe();
         List<String> fieldNames = new List<String>( describeResult.fields.getMap().keySet() );

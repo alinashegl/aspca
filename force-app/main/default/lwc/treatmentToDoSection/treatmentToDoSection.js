@@ -8,7 +8,6 @@ import ID_FIELD from '@salesforce/schema/Treatment_Plan__c.Id';
 import BUNDLE_ID_FIELD from '@salesforce/schema/Treatment_Plan__c.AssignedTreatmentBundleId__c';
 import TREATMENT_OBJECT from '@salesforce/schema/Treatment_Plan__c';
 import PRIORITY_FIELD from '@salesforce/schema/Treatment_Plan__c.Treatment_Priority__c';
-// import updateTreatment from '@salesforce/apex/TreatmentToDoListController.updateTreatment';
 
 export default class TreatmentToDoSection extends NavigationMixin(LightningElement) {
     @api
