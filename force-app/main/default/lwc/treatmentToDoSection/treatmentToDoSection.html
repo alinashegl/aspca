@@ -1,6 +1,10 @@
 <template>
     <div class="slds-grid slds-wrap">
         <div class="slds-col slds-size_1-of-2 slds-medium-size_2-of-12 slds-large-size_1-of-12">
+            <template if:true={showSpinner}>
+                <lightning-icon icon-name="utility:spinner" alternative-text="Connected" size="x-small" title="large size">
+                </lightning-icon>
+            </template>
             <label class="slds-form-element__legend slds-form-element__label">Name</label>
             <template if:true={smallForm}>
                 <lightning-helptext icon-name="utility:info" content="Click animal name to toggle fields"></lightning-helptext>
@@ -114,6 +118,9 @@
                 selected={isSelected}
                 onclick={handleClick}>
             </lightning-button-stateful>
+            <template if:true={error}>
+                <c-error-panel errors={error} type='inlineMessage' friendly-message={errorMessage}></c-error-panel>
+            </template>
             <template if:true={isEdit}>
                 <div class="slds-col slds-size_1-of-1 slds-var-m-top_medium">
                     <lightning-button

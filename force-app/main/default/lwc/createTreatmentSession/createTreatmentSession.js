@@ -14,6 +14,7 @@ export default class CreateTreatmentSession extends NavigationMixin(LightningEle
     customLookupContactId;
     requiredContact = true;
     noPlan = true;
+    whereClause = 'Active__c = true AND Contact_Type__c = \'Behavior Case Worker\'';
 
     get hasPlan(){
         return  this.planId != undefined && this.planId != null;
