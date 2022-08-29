@@ -1319,16 +1319,6 @@
             <field>Walking_Notes__c</field>
             <table>Animal__c</table>
         </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Current_Legal_Status_Changed_Date__c</field>
-            <table>Animal__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Case_Record_Type__c</field>
-            <table>Animal__c</table>
-        </columns>
         <masterLabel>Animals</masterLabel>
     </sections>
     <sections>
@@ -1400,6 +1390,11 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Current_Week_Number__c</field>
+            <table>Animal__c.Treatment_Sessions__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>ASPCA_Animal_Name__c</field>
             <table>Animal__c.Treatment_Sessions__r</table>
         </columns>
         <masterLabel>Treatment Sessions</masterLabel>
