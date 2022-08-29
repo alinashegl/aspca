@@ -45,6 +45,9 @@
                     <template if:true={displayBoxLink}>
                         <lightning-button variant="Neutral" label="Box Link" title="Box Link" onclick={handleBoxLink} class="slds-m-left_x-small"></lightning-button>
                     </template>
+                    <template if:true={error}>
+                        <c-error-panel errors={error} type='inlineMessage' friendly-message={errorMessage}></c-error-panel>
+                    </template>
                     <template if:true={protocolInfo}>
                         <template if:false={protocolInfo.isSkipped}>
                                 <div class='slds-grid slds-wrap'>
@@ -76,16 +79,51 @@
                                         </div>
                                     </template>
                                 </div>
-                                <h2 class="slds-p-top_large slds-card__header-title">Needs Review
+
+                                <template if:true={errorManagerReivew}>
+                                    <c-error-panel errors={errorManagerReivew} type='inlineMessage' friendly-message={errorMessage}></c-error-panel>
+                                </template>
+                                <h2 class="slds-p-top_large slds-card__header-title">Needs Manager Review
                                     <lightning-input class="slds-p-left_medium" data-name="needsReview" type="checkbox" name="needsReview" checked={protocolInfo.needsReview}></lightning-input>
                                 </h2>
-                                <!--<h2 class="slds-p-top_large slds-card__header-title">Preferred Motivators</h2>
-                                <lightning-input class="slds-p-left_medium" data-name="preferredMotivators" type="text" name="preferredMotivators" value={protocolInfo.preferredMotivators}></lightning-input>-->
+                                <template if:true={showManagerReiviewSpinner}>
+                                    <lightning-icon icon-name="utility:spinner" alternative-text="Connected" size="x-small" title="large size">
+                                    </lightning-icon>
+                                </template>
+
                                 <h2 class="slds-p-top_large slds-card__header-title">Protocol Notes</h2>
-                                <lightning-textarea class="slds-p-left_medium" data-name="protocolNotes" type="text" name="protocolNotes" value={protocolInfo.protocolNotes}></lightning-textarea>
+                                <template if:true={showProtocolNotesSpinner}>
+                                    <lightning-icon icon-name="utility:spinner" alternative-text="Connected" size="x-small" title="large size">
+                                    </lightning-icon>
+                                </template>
+                                <template if:true={errorProtocol}>
+                                    <c-error-panel errors={errorProtocol} type='inlineMessage' friendly-message={errorMessage}></c-error-panel>
+                                </template>
+                                <lightning-textarea 
+                                    class="slds-p-left_medium" 
+                                    data-name="protocolNotes" 
+                                    type="text" 
+                                    name="protocolNotes" 
+                                    value={protocolInfo.protocolNotes}
+                                    onblur={handleProtocolNotesUpdate}
+                                ></lightning-textarea>
                                 <template if:true={protocolInfo.isNonMRC}>
                                     <h2 class="slds-p-top_large slds-card__header-title">Plan Protocol Notes</h2>
-                                    <lightning-textarea class="slds-p-left_medium" data-name="planProtocolNotes" type="text" name="planProtocolNotes" value={protocolInfo.planProtocolNotes}></lightning-textarea>
+                                    <template if:true={showPlanProtocolNotesSpinner}>
+                                        <lightning-icon icon-name="utility:spinner" alternative-text="Connected" size="x-small" title="large size">
+                                        </lightning-icon>
+                                    </template>
+                                    <template if:true={errorPlanProtocol}>
+                                        <c-error-panel errors={errorPlanProtocol} type='inlineMessage' friendly-message={errorMessage}></c-error-panel>
+                                    </template>
+                                    <lightning-textarea 
+                                        class="slds-p-left_medium" 
+                                        data-name="planProtocolNotes" 
+                                        type="text" 
+                                        name="planProtocolNotes" 
+                                        value={protocolInfo.planProtocolNotes}
+                                        onblur={handlePlanProtocolNotesUpdate}
+                                    ></lightning-textarea>
                                 </template>
                                 <div class="slds-p-top_large">
                                     <c-treatment-session-child-list
@@ -113,12 +151,12 @@
                     </template>
                 </div>
                 <!-- Modal/Popup Box LWC footer starts here -->
-                <footer class="slds-modal__footer">
+                <!-- <footer class="slds-modal__footer">
                     <lightning-button variant="neutral" label={closeButtonLabel} title="Close Modal" onclick={handleToggleView} class="slds-m-left_x-small"></lightning-button>
                     <template if:false={isSkipped}>
                         <lightning-button variant="brand" label="Save and Close" title="Save and Close" onclick={handleSubmit} class="slds-m-left_x-small"></lightning-button>
                     </template>
-                </footer>
+                </footer> -->
             </div>
         </lightning-card>
     </template>
