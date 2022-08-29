@@ -1393,6 +1393,11 @@
             <field>Current_Week__c</field>
             <table>Animal__c.Treatment_Sessions__r</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>ASPCA_Animal_Name__c</field>
+            <table>Animal__c.Treatment_Sessions__r</table>
+        </columns>
         <masterLabel>Treatment Sessions</masterLabel>
     </sections>
 </ReportType>

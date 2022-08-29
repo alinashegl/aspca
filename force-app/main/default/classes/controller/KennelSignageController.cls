@@ -24,6 +24,7 @@ public with sharing class KennelSignageController {
         if(currentAnimal != null){
         m_animalName();
         m_animalId();
+//        m_animalPetpointId();
         m_animalSex();
         m_animalColor();
         m_animalBreed();
@@ -52,7 +53,7 @@ public with sharing class KennelSignageController {
     public String animalBehSumm { get; set; }
 
     public String m_animalName(){
-        String defaultName = 'Default';
+        String defaultName = '';
 
         animalName = currentAnimal.Animal_Name__c;
 
@@ -63,9 +64,9 @@ public with sharing class KennelSignageController {
     }
 
     public String m_animalId() {
-        String defaultId = '123456';
+        String defaultId = '';
 
-        animalId = currentAnimal.Animal_Field_ID__c;
+        animalId = currentAnimal.Name;
         if (animalId == null) {
             animalId = defaultId;
         }
@@ -73,7 +74,7 @@ public with sharing class KennelSignageController {
     }
 
     public String m_animalBreed() {
-         String defaultBreed = 'Dog';
+         String defaultBreed = '';
 
         animalBreed = currentAnimal.Breed__c;
         if (animalBreed == null) {
@@ -83,15 +84,15 @@ public with sharing class KennelSignageController {
     }
 
     public String m_animalAge() {
-        String defaultAge = 'Unknown';
+        String defaultAge = '';
 
-        animalAge = currentAnimal.Age__c;
+        animalAge = currentAnimal.Current_Animal_Age_Formatted__c;
         if (animalAge == null) { animalAge = defaultAge ;}
         return animalAge;
     }
 
     public String m_animalSex() {
-        String defaultSex = 'M';
+        String defaultSex = '';
 
         animalSex = currentAnimal.Gender__c;
         if (animalSex == null) { animalSex = defaultSex ;}
@@ -99,7 +100,7 @@ public with sharing class KennelSignageController {
     }
 
     public String m_animalColor() {
-        String defaultColor = 'Brown';
+        String defaultColor = '';
 
         animalColor = currentAnimal.Color__c;
         if (animalColor == null ) { animalColor = defaultColor ; }
