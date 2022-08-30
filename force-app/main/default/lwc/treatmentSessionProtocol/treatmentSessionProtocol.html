@@ -79,26 +79,17 @@
                                         </div>
                                     </template>
                                 </div>
-
-                                <template if:true={errorManagerReivew}>
-                                    <c-error-panel errors={errorManagerReivew} type='inlineMessage' friendly-message={errorMessage}></c-error-panel>
+                                <template if:true={updateError}>
+                                    <c-error-panel errors={updateError} type='inlineMessage' friendly-message={errorMessage}></c-error-panel>
+                                </template>
+                                <template if:true={showUpdatingSpinner}>
+                                    <lightning-icon icon-name="utility:spinner" alternative-text="Connected" size="x-small" title="large size">
+                                    </lightning-icon>
                                 </template>
                                 <h2 class="slds-p-top_large slds-card__header-title">Needs Manager Review
-                                    <lightning-input class="slds-p-left_medium" data-name="needsReview" type="checkbox" name="needsReview" checked={protocolInfo.needsReview}></lightning-input>
+                                    <lightning-input class="slds-p-left_medium" data-name="needsReview" type="checkbox" name="needsReview" checked={protocolInfo.needsReview} onchange={handleManagerReviewChange}></lightning-input>
                                 </h2>
-                                <template if:true={showManagerReiviewSpinner}>
-                                    <lightning-icon icon-name="utility:spinner" alternative-text="Connected" size="x-small" title="large size">
-                                    </lightning-icon>
-                                </template>
-
                                 <h2 class="slds-p-top_large slds-card__header-title">Protocol Notes</h2>
-                                <template if:true={showProtocolNotesSpinner}>
-                                    <lightning-icon icon-name="utility:spinner" alternative-text="Connected" size="x-small" title="large size">
-                                    </lightning-icon>
-                                </template>
-                                <template if:true={errorProtocol}>
-                                    <c-error-panel errors={errorProtocol} type='inlineMessage' friendly-message={errorMessage}></c-error-panel>
-                                </template>
                                 <lightning-textarea 
                                     class="slds-p-left_medium" 
                                     data-name="protocolNotes" 
@@ -109,13 +100,6 @@
                                 ></lightning-textarea>
                                 <template if:true={protocolInfo.isNonMRC}>
                                     <h2 class="slds-p-top_large slds-card__header-title">Plan Protocol Notes</h2>
-                                    <template if:true={showPlanProtocolNotesSpinner}>
-                                        <lightning-icon icon-name="utility:spinner" alternative-text="Connected" size="x-small" title="large size">
-                                        </lightning-icon>
-                                    </template>
-                                    <template if:true={errorPlanProtocol}>
-                                        <c-error-panel errors={errorPlanProtocol} type='inlineMessage' friendly-message={errorMessage}></c-error-panel>
-                                    </template>
                                     <lightning-textarea 
                                         class="slds-p-left_medium" 
                                         data-name="planProtocolNotes" 
@@ -151,12 +135,9 @@
                     </template>
                 </div>
                 <!-- Modal/Popup Box LWC footer starts here -->
-                <!-- <footer class="slds-modal__footer">
+                <footer class="slds-modal__footer">
                     <lightning-button variant="neutral" label={closeButtonLabel} title="Close Modal" onclick={handleToggleView} class="slds-m-left_x-small"></lightning-button>
-                    <template if:false={isSkipped}>
-                        <lightning-button variant="brand" label="Save and Close" title="Save and Close" onclick={handleSubmit} class="slds-m-left_x-small"></lightning-button>
-                    </template>
-                </footer> -->
+                </footer>
             </div>
         </lightning-card>
     </template>
