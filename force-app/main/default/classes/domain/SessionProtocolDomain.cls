@@ -99,10 +99,9 @@ public with sharing class SessionProtocolDomain extends DomainActionBase {
         Session_Protocol__c[] newProtocols = (Session_Protocol__c[]) request.newRecords;
         Session_Protocol__c[] sessionProtocolsForProcessing = new Session_Protocol__c[0];
         for(Session_Protocol__c sp : newProtocols){
-            if(sp.Add_to_Plan__c == true){
-                sessionProtocolsForProcessing.add(sp);
-            }
+            sessionProtocolsForProcessing.add(sp);
         }
+        
         ServiceRequest serviceRequest = new ServiceRequest();
         if (!sessionProtocolsForProcessing.isEmpty()) {
 
