@@ -14,22 +14,42 @@
             <value>
                 <fullName>BRC Candidate</fullName>
                 <default>false</default>
-                <label>BRC Candidate</label>
+                <label>New Candidate</label>
+            </value>
+            <value>
+                <fullName>BRC Survey Requested</fullName>
+                <default>false</default>
+                <label>Survey Requested</label>
+            </value>
+            <value>
+                <fullName>BRC Survey Sent / Records Requested</fullName>
+                <default>false</default>
+                <label>Survey Sent / Records Requested</label>
             </value>
             <value>
                 <fullName>BRC Survey Complete</fullName>
                 <default>false</default>
-                <label>BRC Survey Complete</label>
+                <label>Survey Submitted</label>
+            </value>
+            <value>
+                <fullName>BRC Pending Review</fullName>
+                <default>false</default>
+                <label>Pending Review</label>
+            </value>
+            <value>
+                <fullName>BRC Accepted – Waitlist</fullName>
+                <default>false</default>
+                <label>Accepted – Waitlist</label>
             </value>
             <value>
                 <fullName>BRC Accepted</fullName>
                 <default>false</default>
-                <label>BRC Accepted</label>
+                <label>Accepted</label>
             </value>
             <value>
                 <fullName>BRC Declined</fullName>
                 <default>false</default>
-                <label>BRC Declined</label>
+                <label>Declined</label>
             </value>
             <value>
                 <fullName>Accepted</fullName>

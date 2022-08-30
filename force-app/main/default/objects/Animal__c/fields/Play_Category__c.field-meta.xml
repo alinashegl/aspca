@@ -17,6 +17,21 @@
                 <label>Unevaluated</label>
             </value>
             <value>
+                <fullName>Playgroup Eligible</fullName>
+                <default>false</default>
+                <label>Playgroup Eligible</label>
+            </value>
+            <value>
+                <fullName>Foster Playgroup Eligible</fullName>
+                <default>false</default>
+                <label>Foster Playgroup Eligible</label>
+            </value>
+            <value>
+                <fullName>DO NOT PLAY</fullName>
+                <default>false</default>
+                <label>DO NOT PLAY</label>
+            </value>
+            <value>
                 <fullName>Puppy &lt; 5 mo</fullName>
                 <default>false</default>
                 <label>Puppy &lt; 5 mo</label>
@@ -75,11 +90,6 @@
                 <fullName>New/Unknown</fullName>
                 <default>false</default>
                 <label>New/Unknown</label>
-            </value>
-            <value>
-                <fullName>DO NOT PLAY</fullName>
-                <default>false</default>
-                <label>DO NOT PLAY</label>
             </value>
             <value>
                 <fullName>Unspecified</fullName>
