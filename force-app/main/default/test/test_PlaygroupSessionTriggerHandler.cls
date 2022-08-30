@@ -216,6 +216,23 @@ private class test_PlaygroupSessionTriggerHandler {
         System.assertEquals(con.Id, pgCListUpdated[0].Contact__c);
     }
 
+    @isTest 
+    static void getAnimalSessionNoteToPlaygroup(){
+        Playgroup_Session__c pgs = TestDataFactory.createPlaygroupSessionWithAnimals();
+
+        test.startTest();
+        pgs.Playgroup_Notes__c = 'test';
+        update pgs;
+        test.stopTest();
+
+        for(Animal_Playgroup__c ap : [SELECT Id, Playgroup_Session_Notes__c FROM Animal_Playgroup__c WHERE Playgroup_Session__c = :pgs.Id]){
+            System.assertEquals(
+                'test', 
+                ap.Playgroup_Session_Notes__c, 
+                'Playgroup_Session_Notes__c for each Animal_Playgroup__c should be test, but was: ' + ap.Playgroup_Session_Notes__c);
+        }        
+    }
+
     private static Playgroup_Session__c createPlaygroupSession(){
         Contact con = TestDataFactory.createContact();
         Playgroup_Session__c playgroup = new Playgroup_Session__c(
@@ -239,18 +256,5 @@ private class test_PlaygroupSessionTriggerHandler {
         }
         insert aPgList;
         return aPgList;
-    }
-    
-    //Neha :     
-    @isTest 
-    static void getAnimalSessionNoteToPlaygroup(){
-        Playgroup_Session__c pgs = TestDataFactory.createPlaygroupSessionWithAnimals();
-        Animal_Playgroup__c apg = [SELECT id from Animal_Playgroup__c limit 1];
-        pgs.Animal_Playgroup__c = apg.id;
-        test.startTest();
-        pgs.Playgroup_Notes__c = 'test';
-        update pgs;
-        test.stopTest();
-        
     }
 }
