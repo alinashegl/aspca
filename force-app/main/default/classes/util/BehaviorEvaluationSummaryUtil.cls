@@ -63,16 +63,6 @@ public class BehaviorEvaluationSummaryUtil {
         set;
     }
 
-    public static ConfigTypeWrapper adultConfigInfo{
-        get{
-            if(adultConfigInfo == null){
-                adultConfigInfo = getConfigInfo(ADULT_TYPE);
-            }
-            return adultConfigInfo;            
-        }
-        set;
-    }
-
     public static Test_Config__mdt[] fightingConfigList{
         get{
             if(fightingConfigList == null || fightingConfigList.isEmpty()){
@@ -95,6 +85,46 @@ public class BehaviorEvaluationSummaryUtil {
         set;
     }
 
+    public static ConfigTypeWrapper adultConfigInfo{
+        get{
+            if(adultConfigInfo == null){
+                adultConfigInfo = getConfigInfo(ADULT_TYPE);
+            }
+            return adultConfigInfo;            
+        }
+        set;
+    }
+
+    public static ConfigTypeWrapper puppyConfigInfo{
+        get{
+            if(puppyConfigInfo == null){
+                puppyConfigInfo = getConfigInfo(PUPPY_TYPE);
+            }
+            return puppyConfigInfo;            
+        }
+        set;
+    }
+
+    public static ConfigTypeWrapper fightingConfigInfo{
+        get{
+            if(fightingConfigInfo == null){
+                fightingConfigInfo = getConfigInfo(FIGIHTING_TYPE);
+            }
+            return fightingConfigInfo;            
+        }
+        set;
+    }
+
+    public static ConfigTypeWrapper dogOnlyConfigInfo{
+        get{
+            if(dogOnlyConfigInfo == null){
+                dogOnlyConfigInfo = getConfigInfo(DOG_ONLY_TYPE);
+            }
+            return dogOnlyConfigInfo;            
+        }
+        set;
+    }
+
     public class ConfigTypeWrapper {
         public String summaryTemplate;
         public String[] templateList;
@@ -113,6 +143,15 @@ public class BehaviorEvaluationSummaryUtil {
         Test_Config__mdt[] testConfigList = new Test_Config__mdt[0];
         if(type == ADULT_TYPE){
             testConfigList = adultConfigList;
+        }
+        else if(type == PUPPY_TYPE){
+            testConfigList = PUPPYConfigList;
+        }
+        else if(type == FIGIHTING_TYPE){
+            testConfigList = fightingConfigList;
+        }
+        else if(type == DOG_ONLY_TYPE){
+            testConfigList = dogOnlyConfigList;
         }
 
         Set<String> configNameSet = new Set<String>();
@@ -141,31 +180,19 @@ public class BehaviorEvaluationSummaryUtil {
                 parentConfigSet.add(parentTestName);
 
                 if(parentToTemplateListMap.containsKey(parentTestName)){
-                    // if(allowDuplicateTestNames(testName)){
-                        parentToTemplateListMap.get(parentTestName).add(testName);
-                    // } else 
-                    // {
-                    //     String[] testNameList = parentToTemplateListMap.get(parentTestName);
-                    //     if(!testNameList.contains(testName)){
-                    //         testNameList.add(testName);
-                    //     }
-                    // }
-                    
+                    parentToTemplateListMap.get(parentTestName).add(testName);
                 } else {
                     parentToTemplateListMap.put(parentTestName, new String[]{testName});
                 }
             }
 
-
             //getCommentSkipFieldsMap
             String fullTestName = t.Overall_Test_Display_Name__c != null ? t.Overall_Test_Display_Name__c : t.Test_Name__c;
-            // testName = t.Parent_Test_Api_Name__c != null ? t.Parent_Test_Api_Name__c : 
-            //     t.Overall_Test_Display_Name__c != null ? t.Overall_Test_Display_Name__c : t.Test_Name__c;
             if (fullTestName != null) {
                 testName = fullTestName.replace(' P1', '').replace(' P2', '').replace(' P3', '');
 
                 if(configMap.containsKey(testName)){
-                    if(t.Overall_Test_Display_Name__c == null){
+                    if(!t.is_Child__c){
                         configMap.get(testName).add(t);
                     }
                 } else {
@@ -186,86 +213,6 @@ public class BehaviorEvaluationSummaryUtil {
 
         return configInfo;
         
-    }
-
-    public static String getSummaryTemplate(String type) {
-        Test_Config__mdt[] testConfigList = new Test_Config__mdt[0];
-        if(type == ADULT_TYPE){
-            testConfigList = adultConfigList;
-        }
-
-        Set<String> configNameSet = new Set<String>();
-        List<SummaryWrapper> configSummary = new List<SummaryWrapper>();
-        String summaryString = '';
-
-        Map<String, String> result = new Map<String, String>();
-
-        for (Test_Config__mdt t : testConfigList) {
-            String testName = t.Overall_Test_Display_Name__c != null ? t.Overall_Test_Display_Name__c : t.Test_Name__c;
-
-            if (testName != null) {
-                testName = testName.replace(' P1', '').replace(' P2', '').replace(' P3', '');
-                if (!configNameSet.contains(testName)) {
-                    configNameSet.add(testName);
-                    configSummary.add(new SummaryWrapper(Integer.valueOf(t.Test_Display_Order__c), '<p><b>' + testName + ':</b> </p>'));
-                }
-            }
-        }
-
-        for (SummaryWrapper s : configSummary) {
-            summaryString += s.labelValue;
-        }
-
-        return summaryString;
-    }
-
-    public static String[] getSummaryTemplateList(String type) {
-        Set<String> configSet = new Set<String>();
-
-        Test_Config__mdt[] testConfigList = new Test_Config__mdt[0];
-        if(type == ADULT_TYPE){
-            testConfigList = adultConfigList;
-        }
-
-        for (Test_Config__mdt t : testConfigList) {
-            // String testName = t.Overall_Test_Display_Name__c != null ? t.Overall_Test_Display_Name__c : t.Test_Name__c;
-            String testName = t.Parent_Test_Api_Name__c != null ? t.Parent_Test_Api_Name__c : 
-                t.Overall_Test_Display_Name__c != null ? t.Overall_Test_Display_Name__c : t.Test_Name__c;
-            if (testName != null) {
-                // testName = testName.replace(' P1', '').replace(' P2', '').replace(' P3', '');
-                configSet.add(testName);
-            }
-        }
-        return new List<String>(configSet);
-    }
-
-    public static Map<String, Test_Config__mdt[]> getCommentSkipFieldsMap(String type) {
-        Map<String, Test_Config__mdt[]> configMap = new Map<String, Test_Config__mdt[]>();
-
-        Test_Config__mdt[] testConfigList = new Test_Config__mdt[0];
-        if(type == ADULT_TYPE){
-            testConfigList = adultConfigList;
-        }
-
-        for (Test_Config__mdt t : testConfigList) {
-            // String fullTestName = t.Overall_Test_Display_Name__c != null ? t.Overall_Test_Display_Name__c : t.Test_Name__c;
-            String testName = t.Parent_Test_Api_Name__c != null ? t.Parent_Test_Api_Name__c : 
-                t.Overall_Test_Display_Name__c != null ? t.Overall_Test_Display_Name__c : t.Test_Name__c;
-            if (testName != null) {
-                // String testName = fullTestName.replace(' P1', '').replace(' P2', '').replace(' P3', '');
-
-                if(configMap.containsKey(testName)){
-                    configMap.get(testName).add(t);
-                } else {
-                    configMap.put(testName, new Test_Config__mdt[]{t});
-                }
-            }
-        }
-
-        System.debug('configMap: ' + configMap);
-        System.debug('configMap: ' + configMap.keySet());
-
-        return configMap;
     }
 
     public static Map<String, String[]> getHighValueCategoryMap() {
@@ -297,36 +244,18 @@ public class BehaviorEvaluationSummaryUtil {
         for (Behavior_Evaluation__c b : triggerNew) {
             if (b.Evaluation_Subtype__c != null) {
                 //Assign default set of summary items for the current type
-                // b.Behavior_Evaluation_Summary__c = summary.get(b.Evaluation_Subtype__c);
-                // b.Behavior_Evaluation_Summary__c = getSummaryTemplate(b.Evaluation_Subtype__c);
-
-                ConfigTypeWrapper configInfos = new ConfigTypeWrapper();
-
-                if(b.Evaluation_Subtype__c == ADULT_TYPE){
-                    configInfos = adultConfigInfo;
-                }
-
+                ConfigTypeWrapper configInfos = getConfigInfos(b.Evaluation_Subtype__c);
                 b.Behavior_Evaluation_Summary__c = configInfos.summaryTemplate;
             }
         }
     }
 
     public static void handleUpdate(List<Behavior_Evaluation__c> triggerNew, Map<Id, Behavior_Evaluation__c> triggerOldMap) {
-        //List of comment and skip field names per test config
-        // Map<String, Map<String, Test_Config__mdt[]>> commentFieldsMapMap = getCommentSkipFieldsMap();
-
         //List of picklist fields/values that have a value category of 4
         Map<String, String[]> highValueMap = getHighValueCategoryMap();
 
-        // Map<String, String[]> summaryListMap = getSummaryTemplateMap();
-        
-
         for (Behavior_Evaluation__c b : triggerNew) {
-            ConfigTypeWrapper configInfos = new ConfigTypeWrapper();
-
-            if(b.Evaluation_Subtype__c == ADULT_TYPE){
-                configInfos = adultConfigInfo;
-            }
+            ConfigTypeWrapper configInfos = getConfigInfo(b.Evaluation_Subtype__c);
 
             Map<String, Test_Config__mdt[]> commentFieldsMap = configInfos.commentSkipFieldsMap;
             String[] summaryList = configInfos.templateList;
@@ -347,20 +276,13 @@ public class BehaviorEvaluationSummaryUtil {
 
             Map<String, CommentSkipWrapper[]> commentMap = new Map<String, CommentSkipWrapper[]>();
 
-            // Map<String, String> summaryDiffMap = parseSummary(b.Behavior_Evaluation_Summary__c,oldRecord.Behavior_Evaluation_Summary__c);
-
             Map<String, String> summaryDiffMap = parseSummaryList(b.Behavior_Evaluation_Summary__c,oldRecord.Behavior_Evaluation_Summary__c, summaryList);
 
             for(String parentSummaryTitle : parentSummaryMap.keySet()){
-                System.debug('parentSummaryTitle: ' + parentSummaryTitle);
-
                 Boolean skipSubsequentParts = false;
                 String skipReason = null;
                 
                 for(String summaryTitle : parentSummaryMap.get(parentSummaryTitle)){
-                    System.debug('summaryTitle: ' + summaryTitle);
-                    System.debug('category comments: ' + summaryDiffMap.get(summaryTitle));
-
                     String parsedComments = summaryDiffMap.containsKey(summaryTitle) ? summaryDiffMap.get(summaryTitle) : null;
                     CommentSkipWrapper[] commentList = new CommentSkipWrapper[0];
 
@@ -439,11 +361,6 @@ public class BehaviorEvaluationSummaryUtil {
                         }
                         commentMap.put(summaryTitle, commentList);
                     }
-
-
-                // if(String.valueof(b.get(c.skipField)) == '@@'){
-                    //  b.Behavior_Evaluation_Summary__c = ' ';
-                // }
                 }
             }
 
@@ -487,6 +404,28 @@ public class BehaviorEvaluationSummaryUtil {
 
     public static void handleAfterUpdate(List<Behavior_Evaluation__c> triggerNew, Map<Id, Behavior_Evaluation__c> triggerOldMap) {
         LogHistory.LogHistory(triggerOldMap, triggerNew);
+    }
+
+    public static ConfigTypeWrapper getConfigInfos(String type){
+        ConfigTypeWrapper configInfos = new ConfigTypeWrapper();
+
+        if(type == ADULT_TYPE){
+            configInfos = adultConfigInfo;
+        }
+
+        else if(type == PUPPY_TYPE){
+            configInfos = puppyConfigInfo;
+        }
+
+        else if(type == FIGIHTING_TYPE){
+            configInfos = fightingConfigInfo;
+        }
+
+        else if(type == DOG_ONLY_TYPE){
+            configInfos = dogOnlyConfigInfo;
+        }
+
+        return configInfos;
     }
 
     public static Map<String, String> parseSummaryList(String newSummary, String oldSummary, String[] summaryList){
@@ -538,3 +477,92 @@ public class BehaviorEvaluationSummaryUtil {
         return toClean;
     }
 }
+
+    // public static String getSummaryTemplate(String type) {
+    //     Test_Config__mdt[] testConfigList = new Test_Config__mdt[0];
+    //     if(type == ADULT_TYPE){
+    //         testConfigList = adultConfigList;
+    //     }
+    //     else if(type == PUPPY_TYPE){
+    //         testConfigList = PUPPYConfigList;
+    //     }
+    //     else if(type == FIGIHTING_TYPE){
+    //         testConfigList = fightingConfigList;
+    //     }
+    //     else if(type == DOG_ONLY_TYPE){
+    //         testConfigList = dogOnlyConfigList;
+    //     }
+
+    //     Set<String> configNameSet = new Set<String>();
+    //     List<SummaryWrapper> configSummary = new List<SummaryWrapper>();
+    //     String summaryString = '';
+
+    //     Map<String, String> result = new Map<String, String>();
+
+    //     for (Test_Config__mdt t : testConfigList) {
+    //         String testName = t.Overall_Test_Display_Name__c != null ? t.Overall_Test_Display_Name__c : t.Test_Name__c;
+
+    //         if (testName != null) {
+    //             testName = testName.replace(' P1', '').replace(' P2', '').replace(' P3', '');
+    //             if (!configNameSet.contains(testName)) {
+    //                 configNameSet.add(testName);
+    //                 configSummary.add(new SummaryWrapper(Integer.valueOf(t.Test_Display_Order__c), '<p><b>' + testName + ':</b> </p>'));
+    //             }
+    //         }
+    //     }
+
+    //     for (SummaryWrapper s : configSummary) {
+    //         summaryString += s.labelValue;
+    //     }
+
+    //     return summaryString;
+    // }
+
+    // public static String[] getSummaryTemplateList(String type) {
+    //     Set<String> configSet = new Set<String>();
+
+    //     Test_Config__mdt[] testConfigList = new Test_Config__mdt[0];
+    //     if(type == ADULT_TYPE){
+    //         testConfigList = adultConfigList;
+    //     }
+    //     else if(type == PUPPY_TYPE){
+    //         testConfigList = PUPPYConfigList;
+    //     }
+    //     else if(type == FIGIHTING_TYPE){
+    //         testConfigList = fightingConfigList;
+    //     }
+    //     else if(type == DOG_ONLY_TYPE){
+    //         testConfigList = dogOnlyConfigList;
+    //     }
+
+    //     for (Test_Config__mdt t : testConfigList) {
+    //         String testName = t.Parent_Test_Api_Name__c != null ? t.Parent_Test_Api_Name__c : 
+    //             t.Overall_Test_Display_Name__c != null ? t.Overall_Test_Display_Name__c : t.Test_Name__c;
+    //         if (testName != null) {
+    //             configSet.add(testName);
+    //         }
+    //     }
+    //     return new List<String>(configSet);
+    // }
+
+    // public static Map<String, Test_Config__mdt[]> getCommentSkipFieldsMap(String type) {
+    //     Map<String, Test_Config__mdt[]> configMap = new Map<String, Test_Config__mdt[]>();
+
+    //     Test_Config__mdt[] testConfigList = new Test_Config__mdt[0];
+    //     if(type == ADULT_TYPE){
+    //         testConfigList = adultConfigList;
+    //     }
+
+    //     for (Test_Config__mdt t : testConfigList) {
+    //         String testName = t.Parent_Test_Api_Name__c != null ? t.Parent_Test_Api_Name__c : 
+    //             t.Overall_Test_Display_Name__c != null ? t.Overall_Test_Display_Name__c : t.Test_Name__c;
+    //         if (testName != null) {
+    //             if(configMap.containsKey(testName)){
+    //                 configMap.get(testName).add(t);
+    //             } else {
+    //                 configMap.put(testName, new Test_Config__mdt[]{t});
+    //             }
+    //         }
+    //     }
+    //     return configMap;
+    // }
