@@ -4,7 +4,7 @@
             <c-error-panel errors={error} type='inlineMessage' friendly-message='Error updating animal'></c-error-panel>
         </template>
         <div class='slds-grid'>
-            <div class="slds-col slds-size_5-of-6 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+            <div class="slds-col slds-size_5-of-6 slds-medium-size_1-of-2 slds-large-size_2-of-6">
                 <div class="slds-form-element">
                     <div class="slds-form-element__control">
                         <lightning-combobox
@@ -18,10 +18,14 @@
                     </div>
                 </div>
             </div>
-            <div class="slds-col slds-align-bottom slds-size_1-of-6 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+            <div class="slds-col slds-align-bottom slds-size_1-of-6 slds-medium-size_1-of-2 slds-large-size_1-of-6">
                 <template if:true={categorySuccessfullyUpdated}>
                     <lightning-icon icon-name="action:approval" alternative-text="Approved" title="Approved" size="xx-small" class='slds-m-left_xx-small'></lightning-icon>
                 </template>
+            </div>
+            <div class="slds-col slds-align-bottom slds-size_1-of-6 slds-medium-size_1-of-2 slds-large-size_3-of-6">
+                <lightning-button variant={lockedVariant} label={lockedLabel} title="Primary action with lighter look" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
+                <!-- <lightning-button variant="destructive" label="Evaluation Locked" title="Destructive action" onclick={handleClick} class="slds-m-left_x-small"></lightning-button> -->
             </div>
         </div>
     </div>

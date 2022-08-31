@@ -43,4 +43,17 @@ export default class PlayCategoryPicklist extends LightningElement {
         return getFieldValue(this.eval.data, ANIMAL_PLAY_CATEGORY);
     }
 
+
+    locked = false;
+    get lockedVariant(){
+        return this.locked? 'destructive' : 'brand-outline';
+    }
+    get lockedLabel(){
+        return this.locked? 'Evaluation Locked' : 'Lock Evaluation';
+    }
+
+    handleClick(){
+        this.locked = !this.locked;
+    }
+
 }
