@@ -101,7 +101,6 @@ public with sharing class SessionProtocolDomain extends DomainActionBase {
         for(Session_Protocol__c sp : newProtocols){
             sessionProtocolsForProcessing.add(sp);
         }
-        
         ServiceRequest serviceRequest = new ServiceRequest();
         if (!sessionProtocolsForProcessing.isEmpty()) {
 
