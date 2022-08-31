@@ -39,18 +39,22 @@ private class test_BehaviorEvaluationTrigger {
     @isTest
     static void behaviorEvaluationUpdateNoSummary() {
         List<Behavior_Evaluation__c> evaluations = TestDataFactory.createMultipleBehaviorEvaluation(2, 'Dog Fighting');
-        Test.startTest();
         evaluations[0].Behavior_Evaluation_Summary__c = null;
         evaluations[1].Behavior_Evaluation_Summary__c = ' ';
         update evaluations;
+
+        Test.startTest();
         evaluations[0].Comments_BIK__c = 'Comment added for kennel';
         evaluations[1].Comments_BOL__c = 'Comment added for leash';
         update evaluations;
         Test.stopTest();
+
         Behavior_Evaluation__c afterUpdate1 = [SELECT Id, Behavior_Evaluation_Summary__c, Comments_BIK__c FROM Behavior_Evaluation__c WHERE Id = :evaluations[0].Id LIMIT 1];
         Behavior_Evaluation__c afterUpdate2 = [SELECT Id, Behavior_Evaluation_Summary__c, Comments_BOL__c FROM Behavior_Evaluation__c WHERE Id = :evaluations[1].Id LIMIT 1];
         System.assertEquals('Comment added for kennel', afterUpdate1.Comments_BIK__c);
+        System.assertEquals(true, afterUpdate1.Behavior_Evaluation_Summary__c.contains('Comment added for kennel'));
         System.assertEquals('Comment added for leash', afterUpdate2.Comments_BOL__c);
+        System.assertEquals(true, afterUpdate2.Behavior_Evaluation_Summary__c.contains('Comment added for leash'));
     }
 
     @isTest
@@ -107,8 +111,6 @@ private class test_BehaviorEvaluationTrigger {
 
     @isTest
     static void behaviorEvaluationUpdateNoType() {
-        List<Test_Config__mdt> testConfig = Test_Config__mdt.getAll().values();
-        ListUtils.sort(testConfig, new SObjectStringFieldComparator('Test_Display_Order__c'), false);
         List<Behavior_Evaluation__c> evaluations = TestDataFactory.createMultipleBehaviorEvaluation(1, 'Adult Animal');
         Test.startTest();
         evaluations[0].Behavior_in_Kennel__c = 'Social';
@@ -116,7 +118,6 @@ private class test_BehaviorEvaluationTrigger {
         update evaluations;
         Test.stopTest();
         Behavior_Evaluation__c afterUpdate = [SELECT Id, Behavior_Evaluation_Summary__c, Behavior_in_Kennel__c FROM Behavior_Evaluation__c WHERE Id = :evaluations[0].Id LIMIT 1];
-        Map<String, String> summary = BehaviorEvaluationSummaryUtil.getSummaryTemplate();
         System.assertEquals('Social', afterUpdate.Behavior_in_Kennel__c);
     }
 
