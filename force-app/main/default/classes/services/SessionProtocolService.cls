@@ -141,27 +141,6 @@ public with sharing class SessionProtocolService {
             }
 
             insert sProtocols;
-
-            Map<Id, Id> protoIdToSProtoIdMap = new Map<Id, Id>();
-            for(Session_Protocol__c sProto : sProtocols){
-                protoIdToSProtoIdMap.put(sProto.ProtocolId__c, sProto.Id);
-            }
-
-            Session_Protocol_Scale__c[] protocolScales = new Session_Protocol_Scale__c[0];
-            for(Protocol__c proto : protocols){
-                for(Protocol_Scale_Junction__c junc : proto.Protocol_Scale_Junctions__r){
-                    if(!proto.Plan_Protocols__r[0].IsRemoved__c){
-                        Session_Protocol_Scale__c protoScale = new Session_Protocol_Scale__c(
-                            Protocol_Scale__c = junc.Protocol_Scale__c,
-                            Required__c = junc.Protocol_Scale__r.Required__c,
-                            Session_Protocol__c = protoIdToSProtoIdMap.get(junc.Protocol__c)
-                        );
-                        protocolScales.add(protoScale);
-                    }
-                }
-            }
-
-            insert protocolScales;
             response.Data = sProtocols;
         }
         return response;
