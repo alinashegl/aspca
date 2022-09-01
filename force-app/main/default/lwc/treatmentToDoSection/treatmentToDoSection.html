@@ -1,6 +1,10 @@
 <template>
     <div class="slds-grid slds-wrap">
         <div class="slds-col slds-size_1-of-2 slds-medium-size_2-of-12 slds-large-size_1-of-12">
+            <template if:true={showSpinner}>
+                <lightning-icon icon-name="utility:spinner" alternative-text="Connected" size="x-small" title="large size">
+                </lightning-icon>
+            </template>
             <label class="slds-form-element__legend slds-form-element__label">Name</label>
             <template if:true={smallForm}>
                 <lightning-helptext icon-name="utility:info" content="Click animal name to toggle fields"></lightning-helptext>
@@ -106,6 +110,17 @@
                     <span>{animalTreatment.Animal__r.Shelter_Location__c}</span>
                 </div>
             </div>
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_3-of-12 slds-large-size_1-of-12">
+                <label class="slds-form-element__legend slds-form-element__label">Behavior Case Worker</label>
+                <div class="slds-form-element__static">
+                    <template if:true={animalTreatment.isBehCaseWorker}>
+                        <span>{animalTreatment.Animal__r.Behavior_Case_Worker__r.Name}</span>
+                    </template>
+                </div>
+            </div>
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_3-of-12 slds-large-size_1-of-12">
+                <div class="slds-form-element__static">
+                    <span>
             <lightning-button-stateful
                 label-when-off="Show protocols"
                 label-when-on="Hide protocols"
@@ -114,6 +129,12 @@
                 selected={isSelected}
                 onclick={handleClick}>
             </lightning-button-stateful>
+            </span>
+            </div>
+        </div>
+            <template if:true={error}>
+                <c-error-panel errors={error} type='inlineMessage' friendly-message={errorMessage}></c-error-panel>
+            </template>
             <template if:true={isEdit}>
                 <div class="slds-col slds-size_1-of-1 slds-var-m-top_medium">
                     <lightning-button
@@ -131,7 +152,7 @@
             </template>
             <template if:true={isConfirmationVisible}>
                 <c-confirmation-dialog title='Confirmation'
-                           message='This will create a new active treatment plan for this dog and will deactivate the current plan. Do you want to proceed?'
+                           message='Do you want to make this change?'
                            confirm-label='Yes'
                            cancel-label='No'
                            visible={isConfirmationVisible}

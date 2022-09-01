@@ -13,10 +13,13 @@ export default class TreatmentPriorityToDoList extends NavigationMixin(Lightning
     @track
     filterValueOptions = [];
     //result for refreshApex
+    @track
     animalTreatments;
     //holds actual data from server call
+    @track
     animalTreatmentsData;
     //displayed data that sorts/filters on client side
+    @track
     animalTreatmentSortFilter;
     sortFieldValue;
     sortDirectionValue = 'ASC';
@@ -77,6 +80,12 @@ export default class TreatmentPriorityToDoList extends NavigationMixin(Lightning
                 this.animalTreatments = result;
                 if (result) {
                     this.animalTreatmentsData = result;
+                    this.animalTreatmentsData.forEach(element => {
+                        element.isBehCaseWorker = false;
+                        if(element.Animal__r.hasOwnProperty('Behavior_Case_Worker__r')){
+                            element.isBehCaseWorker = true;
+                        }
+                    });
                     this.sortFilterData();
                 }
                 else if (result.error) {
@@ -267,10 +276,23 @@ export default class TreatmentPriorityToDoList extends NavigationMixin(Lightning
     }
 
     handleUpdate() {
-        this.resetFilterValues();
-        refreshApex(this.animalTreatments)
-        .then(() => {
-            this.sortFilterData();
-        });
+        this.resetFilterValues()
+        getAnimalTreatments({})
+            .then((result) => {
+                this.animalTreatments = result;
+                if (result) {
+                    this.animalTreatmentsData = result;
+                    console.table(this.animalTreatmentsData);
+                    this.sortFilterData();
+                }
+                else if (result.error) {
+                    const evt = new ShowToastEvent({
+                        title: 'Error',
+                        message: result.error,
+                        variant: 'error',
+                    });
+                    this.dispatchEvent(evt);
+                }
+            });
     }
 }
