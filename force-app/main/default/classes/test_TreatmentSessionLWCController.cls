@@ -22,7 +22,7 @@ private class test_TreatmentSessionLWCController {
 
         insert plan;
 
-        Contact con = TestDataFactory.createContact();
+        Contact con = TestDataFactory.createBehaviorCaseWorkerContact();
 
         Treatment_Session__c session = new Treatment_Session__c(
             Treatment_Plan__c = plan.Id,
@@ -47,7 +47,9 @@ private class test_TreatmentSessionLWCController {
             SObject[] returnedContacts = TreatmentSessionLWCController.getChildList(sContacts[0].Session_Protocol__c, 'Session_Protocol_Contact__c');
         Test.stopTest();
 
-        System.assertEquals(2, returnedContacts.size());
+        Session_Protocol_Contact__c[] spsList = [SELECT Id FROM Session_Protocol_Contact__c WHERE Session_Protocol__c =: sContacts[0].Session_Protocol__c];
+
+        System.assertEquals(spsList.size(), returnedContacts.size());
     }
 
     @isTest

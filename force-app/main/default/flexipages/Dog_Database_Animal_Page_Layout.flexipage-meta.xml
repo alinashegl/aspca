@@ -122,8 +122,26 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldItem>Record.Estimated_Date_of_Birth__c</fieldItem>
+                <identifier>RecordEstimated_Date_of_Birth_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
                 <fieldItem>Record.Current_Animal_Age_Formatted__c</fieldItem>
                 <identifier>RecordCurrent_Animal_Age_Formatted__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Animal_Age__c</fieldItem>
+                <identifier>RecordAnimal_Age_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Animal_Age_Units__c</fieldItem>
+                <identifier>RecordAnimal_Age_Units_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -238,6 +256,10 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>readonly</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.FM_Record_Status__c</fieldItem>
                 <identifier>RecordFM_Record_Status_cField</identifier>
             </fieldInstance>
@@ -435,6 +457,18 @@
             <fieldInstance>
                 <fieldItem>Record.BRC_ID__c</fieldItem>
                 <identifier>RecordBRC_ID_cField1</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Petpoint_ID__c</fieldItem>
+                <identifier>RecordPetpoint_ID_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.AAH_ID__c</fieldItem>
+                <identifier>RecordAAH_ID_cField2</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-7bb7e173-8e35-42e8-bb80-b8d39a3ada43</name>
@@ -1390,6 +1424,18 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldItem>Record.Animal_Age__c</fieldItem>
+                <identifier>RecordAnimal_Age_cField2</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Animal_Age_Units__c</fieldItem>
+                <identifier>RecordAnimal_Age_Units_cField2</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
                 <fieldItem>Record.Intake_Date_Time__c</fieldItem>
                 <identifier>RecordIntake_Date_Time_cField1</identifier>
             </fieldInstance>
@@ -1587,6 +1633,32 @@
                 <identifier>force_relatedListSingleContainer12</identifier>
             </componentInstance>
         </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>parentFieldApiName</name>
+                    <value>Animal__c.Id</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>relatedListApiName</name>
+                    <value>Behavior_Case_Workers__r</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>relatedListComponentOverride</name>
+                    <value>ADVGRID</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>rowsToDisplay</name>
+                    <value>10</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>showActionBar</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentName>force:relatedListSingleContainer</componentName>
+                <identifier>force_relatedListSingleContainer15</identifier>
+            </componentInstance>
+        </itemInstances>
         <name>Facet-262bada4-8598-49be-ad47-7e5fe26a326c</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -1651,6 +1723,30 @@
                 <identifier>RecordBehavior_Medication_Flag_cField1</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Behavior_Medication_Notes__c</fieldItem>
+                <identifier>RecordBehavior_Medication_Notes_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Important_Notes_ARC_CARE__c</fieldItem>
+                <identifier>RecordImportant_Notes_ARC_CARE_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Handling_Instructions__c</fieldItem>
+                <identifier>RecordHandling_Instructions_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.PPE_DOH__c</fieldItem>
+                <identifier>RecordPPE_DOH_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-2cb0a905-9519-421f-8720-058e6e7e5bdf</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -1681,6 +1777,12 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldItem>Record.Walking_Notes__c</fieldItem>
+                <identifier>RecordWalking_Notes_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
                 <fieldItem>Record.Volunteer_Reading_Okay__c</fieldItem>
                 <identifier>RecordVolunteer_Reading_Okay_cField1</identifier>
             </fieldInstance>
@@ -1707,6 +1809,36 @@
             <fieldInstance>
                 <fieldItem>Record.Potential_Helper_Dog__c</fieldItem>
                 <identifier>RecordPotential_Helper_Dog_cField2</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Approved_for_bath__c</fieldItem>
+                <identifier>RecordApproved_for_bath_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Muzzle_needed_for_bath__c</fieldItem>
+                <identifier>RecordMuzzle_needed_for_bath_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Special_instructions_for_bath__c</fieldItem>
+                <identifier>RecordSpecial_instructions_for_bath_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Approved_for_Revolution__c</fieldItem>
+                <identifier>RecordApproved_for_Revolution_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Special_instructions_for_Revolution__c</fieldItem>
+                <identifier>RecordSpecial_instructions_for_Revolution_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-1c2d9594-eea1-42f4-b0ca-0b6c49f7bf0d</name>
@@ -1887,12 +2019,6 @@
             <fieldInstance>
                 <fieldItem>Record.Play_Category__c</fieldItem>
                 <identifier>RecordPlay_Category_cField1</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Current_Playgroup_Summary_Notes__c</fieldItem>
-                <identifier>RecordCurrent_Playgroup_Summary_Notes_cField2</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-960dc250-eb62-44e0-ab8e-4230b9f330d2</name>
@@ -2250,6 +2376,13 @@
                 </componentInstanceProperties>
                 <componentName>force:relatedListSingleContainer</componentName>
                 <identifier>force_relatedListSingleContainer13</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!$User.Profile.Name}</leftValue>
+                        <operator>NE</operator>
+                        <rightValue>ASPCA - Behavior (ARC/CARE)</rightValue>
+                    </criteria>
+                </visibilityRule>
             </componentInstance>
         </itemInstances>
         <name>Facet-abm4gkw6dcm</name>

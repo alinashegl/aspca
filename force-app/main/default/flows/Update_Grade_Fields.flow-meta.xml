@@ -25,10 +25,38 @@
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>IsNewBeh</name>
-            <conditionLogic>and</conditionLogic>
+            <conditionLogic>1 OR 2 OR (3 AND 4 AND 5)</conditionLogic>
             <conditions>
                 <leftValueReference>IsNew</leftValueReference>
                 <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Overall_Evaluation_Grade__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record__Prior.Overall_Evaluation_Grade__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Overall_Evaluation_Grade__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Grade_Change_Reason__c</leftValueReference>
+                <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>true</booleanValue>
                 </rightValue>
@@ -248,12 +276,6 @@
             <field>Current_Behavior_Grade_Initials__c</field>
             <value>
                 <elementReference>$Record.Tester_Initials__c</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Preliminary_Behavior_Grade__c</field>
-            <value>
-                <elementReference>$Record.Overall_Evaluation_Grade__c</elementReference>
             </value>
         </inputAssignments>
         <object>Animal__c</object>

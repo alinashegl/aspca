@@ -1382,6 +1382,11 @@
             <field>Current_Week_Number__c</field>
             <table>Animal__c.Treatment_Sessions__r</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>ASPCA_Animal_Name__c</field>
+            <table>Animal__c.Treatment_Sessions__r</table>
+        </columns>
         <masterLabel>Treatment Sessions</masterLabel>
     </sections>
     <sections>
@@ -1413,41 +1418,6 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>LastModifiedBy</field>
-            <table>Animal__c.Treatment_Sessions__r.Session_Protocols__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Aggressive_Worst__c</field>
-            <table>Animal__c.Treatment_Sessions__r.Session_Protocols__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Arousal_Best_Number__c</field>
-            <table>Animal__c.Treatment_Sessions__r.Session_Protocols__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Arousal_Best__c</field>
-            <table>Animal__c.Treatment_Sessions__r.Session_Protocols__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Arousal_Worst_Number__c</field>
-            <table>Animal__c.Treatment_Sessions__r.Session_Protocols__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Arousal_Worst__c</field>
-            <table>Animal__c.Treatment_Sessions__r.Session_Protocols__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Fear_Best__c</field>
-            <table>Animal__c.Treatment_Sessions__r.Session_Protocols__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Fear_Worst__c</field>
             <table>Animal__c.Treatment_Sessions__r.Session_Protocols__r</table>
         </columns>
         <columns>
@@ -1522,37 +1492,12 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Social_Best__c</field>
-            <table>Animal__c.Treatment_Sessions__r.Session_Protocols__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Bundle_Entry__c</field>
             <table>Animal__c.Treatment_Sessions__r.Session_Protocols__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>InView__c</field>
-            <table>Animal__c.Treatment_Sessions__r.Session_Protocols__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Fear_Best_Number__c</field>
-            <table>Animal__c.Treatment_Sessions__r.Session_Protocols__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Social_Best_Number__c</field>
-            <table>Animal__c.Treatment_Sessions__r.Session_Protocols__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Aggressive_Worst_Number__c</field>
-            <table>Animal__c.Treatment_Sessions__r.Session_Protocols__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Fear_Worst_Number__c</field>
             <table>Animal__c.Treatment_Sessions__r.Session_Protocols__r</table>
         </columns>
         <columns>

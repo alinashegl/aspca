@@ -138,18 +138,109 @@
                 <label>MRC</label>
             </value>
             <value>
+                <fullName>Animal Hospital</fullName>
+                <default>false</default>
+                <label>Animal Hospital</label>
+            </value>
+            <value>
+                <fullName>Animal Shelter</fullName>
+                <default>false</default>
+                <label>Animal Shelter</label>
+            </value>
+            <value>
+                <fullName>ASNA</fullName>
+                <default>false</default>
+                <label>ASNA</label>
+            </value>
+            <value>
+                <fullName>Bronx CVC</fullName>
+                <default>false</default>
+                <label>Bronx CVC</label>
+            </value>
+            <value>
+                <fullName>Brooklyn CVC</fullName>
+                <default>false</default>
+                <label>Brooklyn CVC</label>
+            </value>
+            <value>
+                <fullName>Community Medicine</fullName>
+                <default>false</default>
+                <label>Community Medicine</label>
+            </value>
+            <value>
+                <fullName>Cremation</fullName>
+                <default>false</default>
+                <label>Cremation</label>
+            </value>
+            <value>
+                <fullName>Hound Hotel</fullName>
+                <default>false</default>
+                <label>Hound Hotel</label>
+            </value>
+            <value>
+                <fullName>Kitten Nursery</fullName>
+                <default>false</default>
+                <label>Kitten Nursery</label>
+            </value>
+            <value>
+                <fullName>Lost</fullName>
+                <default>false</default>
+                <label>Lost</label>
+            </value>
+            <value>
+                <fullName>NYPD Freezer</fullName>
+                <default>false</default>
+                <label>NYPD Freezer</label>
+            </value>
+            <value>
+                <fullName>NYPD Refrigerator</fullName>
+                <default>false</default>
+                <label>NYPD Refrigerator</label>
+            </value>
+            <value>
+                <fullName>Outside Agency</fullName>
+                <default>false</default>
+                <label>Outside Agency</label>
+            </value>
+            <value>
+                <fullName>Placement Partner</fullName>
+                <default>false</default>
+                <label>Placement Partner</label>
+            </value>
+            <value>
+                <fullName>Returned to Owner/Caregiver</fullName>
+                <default>false</default>
+                <label>Returned to Owner/Caregiver</label>
+            </value>
+            <value>
+                <fullName>Returned to Source Facility</fullName>
+                <default>false</default>
+                <label>Returned to Source Facility</label>
+            </value>
+            <value>
+                <fullName>Temporary Boarding</fullName>
+                <default>false</default>
+                <label>Temporary Boarding</label>
+            </value>
+            <value>
+                <fullName>Transferred to Another Agency</fullName>
+                <default>false</default>
+                <label>Transferred to Another Agency</label>
+            </value>
+            <value>
                 <fullName>ASPCA Shelter</fullName>
                 <default>false</default>
-                <isActive>false</isActive>
                 <label>ASPCA Shelter</label>
             </value>
         </valueSetDefinition>
         <valueSettings>
             <controllingFieldValue>Facility</controllingFieldValue>
+            <controllingFieldValue>Return</controllingFieldValue>
             <valueName>AAH</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Facility</controllingFieldValue>
+            <controllingFieldValue>Return</controllingFieldValue>
             <valueName>ARC</valueName>
         </valueSettings>
         <valueSettings>
@@ -162,6 +253,7 @@
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Facility</controllingFieldValue>
+            <controllingFieldValue>Return</controllingFieldValue>
             <valueName>CARE</valueName>
         </valueSettings>
         <valueSettings>
@@ -170,10 +262,12 @@
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Facility</controllingFieldValue>
+            <controllingFieldValue>Return</controllingFieldValue>
             <valueName>CRC</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Facility</controllingFieldValue>
+            <controllingFieldValue>Return</controllingFieldValue>
             <valueName>CRC-MRC</valueName>
         </valueSettings>
         <valueSettings>
@@ -203,26 +297,33 @@
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Outcome</controllingFieldValue>
+            <controllingFieldValue>Post-Placement Outcome</controllingFieldValue>
             <valueName>Adopted</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Outcome</controllingFieldValue>
+            <controllingFieldValue>Post-Placement Outcome</controllingFieldValue>
+            <controllingFieldValue>Return</controllingFieldValue>
             <valueName>Adoption Center</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Outcome</controllingFieldValue>
+            <controllingFieldValue>Return</controllingFieldValue>
             <valueName>BRC</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Outcome</controllingFieldValue>
+            <controllingFieldValue>Post-Placement Outcome</controllingFieldValue>
             <valueName>Deceased</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Outcome</controllingFieldValue>
+            <controllingFieldValue>Post-Placement Outcome</controllingFieldValue>
             <valueName>Euthanized</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Outcome</controllingFieldValue>
+            <controllingFieldValue>Post-Placement Outcome</controllingFieldValue>
             <valueName>Foster-Based Rescue</valueName>
         </valueSettings>
         <valueSettings>
@@ -236,6 +337,30 @@
         <valueSettings>
             <controllingFieldValue>Outcome</controllingFieldValue>
             <valueName>Returned to Owner</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Post-Placement Outcome</controllingFieldValue>
+            <valueName>Lost</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Post-Placement Outcome</controllingFieldValue>
+            <valueName>Placement Partner</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Post-Placement Outcome</controllingFieldValue>
+            <valueName>Returned to Owner/Caregiver</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Post-Placement Outcome</controllingFieldValue>
+            <valueName>Returned to Source Facility</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Post-Placement Outcome</controllingFieldValue>
+            <valueName>Transferred to Another Agency</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Return</controllingFieldValue>
+            <valueName>ASNA</valueName>
         </valueSettings>
     </valueSet>
 </CustomField>

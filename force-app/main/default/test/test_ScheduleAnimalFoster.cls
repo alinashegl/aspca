@@ -4,6 +4,17 @@ private class test_ScheduleAnimalFoster {
     static void testSetup(){
         Animal__c animal1 = TestDataFactory.createAnimalWithName('test1');
         Animal__c animal2 = TestDataFactory.createAnimalWithName('test2');
+        Facility_Outcome__c loc1 = new Facility_Outcome__c(
+            Animal__c = animal1.Id,
+            Facility_or_Outcome__c = 'Facility',
+            Facility_Outcome__c = 'Foster Home'
+        );
+        Facility_Outcome__c loc2 = new Facility_Outcome__c(
+            Animal__c = animal2.Id,
+            Facility_or_Outcome__c = 'Facility',
+            Facility_Outcome__c = 'Foster Home'
+        );
+        insert new Facility_Outcome__c[]{loc1, loc2};
         
         User u = [SELECT Id FROM User Where Profile.Name = 'System Administrator' AND isActive = true LIMIT 1];
         User u2 = TestDataFactory.createUserWithProfile('ASPCA - Behavior (CRC)');
@@ -27,18 +38,6 @@ private class test_ScheduleAnimalFoster {
         animal1.Behavior_Case_Worker__c = con.Id;
         animal2.Behavior_Case_Worker__c = con.Id;
         update new Animal__c[]{animal1, animal2};
-
-        Facility_Outcome__c loc1 = new Facility_Outcome__c(
-            Animal__c = animal1.Id,
-            Facility_or_Outcome__c = 'Facility',
-            Facility_Outcome__c = 'Foster Home'
-        );
-        Facility_Outcome__c loc2 = new Facility_Outcome__c(
-            Animal__c = animal2.Id,
-            Facility_or_Outcome__c = 'Facility',
-            Facility_Outcome__c = 'Foster Home'
-        );
-        insert new Facility_Outcome__c[]{loc1, loc2};
     }
 
     @isTest
@@ -94,7 +93,6 @@ private class test_ScheduleAnimalFoster {
         insert existingTasks;
         test.startTest();
             Task[] toInsert = ScheduleAnimalFoster.scheduleFollowUps(null);
-            System.debug('**toInsert: ' + toInsert);
         test.stopTest();
 
         //with default frequency new tasks should still be created for each animal
@@ -255,7 +253,6 @@ private class test_ScheduleAnimalFoster {
 
     //need to calculate the number of tasks needed from today through tuesday
     private static Integer taskCount(Facility_Outcome__c loc){
-        System.debug('**loc: ' + loc);
         Date[] dateList = new Date[0];
         if(loc.Follow_Up_Days__c != null){
             dateList = AutoScheduleTasksUtil.getDateList(loc.Follow_Up_Days__c);
@@ -267,7 +264,6 @@ private class test_ScheduleAnimalFoster {
             ];
 
             dateList = AutoScheduleTasksUtil.getDateList(config);
-            System.debug('**dateLlist: ' + dateList);
         }
 
         return !dateList.isEmpty() ? dateList.size() : 0;

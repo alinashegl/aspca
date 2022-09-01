@@ -28,6 +28,10 @@
                 <behavior>Edit</behavior>
                 <field>Overall_Session_Grade__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>ASPCA_Animal_Name__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

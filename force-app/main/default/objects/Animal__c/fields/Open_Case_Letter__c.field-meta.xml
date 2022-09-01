@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Open_Case_Letter__c</fullName>
+    <externalId>false</externalId>
+    <formula>OR(
+ISPICKVAL(Case__r.Status, &quot;Open&quot;),
+ISPICKVAL(Case__r.Status, &quot;Bench Warrant Ordered&quot;),
+ISPICKVAL(Case__r.Status, &quot;Court Pending&quot;),
+ISPICKVAL(Case__r.Status, &quot;Court Pending - Appeal&quot;)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Open Case Letter</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

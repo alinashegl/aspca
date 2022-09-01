@@ -31,6 +31,30 @@
                 <default>false</default>
                 <label>BRC Declined</label>
             </value>
+            <value>
+                <fullName>Accepted</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Accepted</label>
+            </value>
+            <value>
+                <fullName>Candidate</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Candidate</label>
+            </value>
+            <value>
+                <fullName>Declined</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Declined</label>
+            </value>
+            <value>
+                <fullName>Survey Complete</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Survey Complete</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>

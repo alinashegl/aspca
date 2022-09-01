@@ -85,6 +85,13 @@
             <componentInstance>
                 <componentName>activeAnimalTreatment</componentName>
                 <identifier>c_activeAnimalTreatment</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!$User.Profile.Name}</leftValue>
+                        <operator>NE</operator>
+                        <rightValue>ASPCA - Behavior (ARC/CARE)</rightValue>
+                    </criteria>
+                </visibilityRule>
             </componentInstance>
         </itemInstances>
         <name>main</name>
