@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Problem_Behavior_Fear__c</fullName>
+    <externalId>false</externalId>
+    <label>Problem Behavior - Fear</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Fear of People - Mild</fullName>
+                <default>false</default>
+                <label>Fear of People - Mild</label>
+            </value>
+            <value>
+                <fullName>Fear of People - Moderate</fullName>
+                <default>false</default>
+                <label>Fear of People - Moderate</label>
+            </value>
+            <value>
+                <fullName>Fear of People - Severe</fullName>
+                <default>false</default>
+                <label>Fear of People - Severe</label>
+            </value>
+            <value>
+                <fullName>Fear of Handling - Mild</fullName>
+                <default>false</default>
+                <label>Fear of Handling - Mild</label>
+            </value>
+            <value>
+                <fullName>Fear of Handling - Moderate</fullName>
+                <default>false</default>
+                <label>Fear of Handling - Moderate</label>
+            </value>
+            <value>
+                <fullName>Fear of Handling - Severe</fullName>
+                <default>false</default>
+                <label>Fear of Handling - Severe</label>
+            </value>
+            <value>
+                <fullName>Fear of Leashing, Leash Pressure, Walking on Leash - Mild</fullName>
+                <default>false</default>
+                <label>Fear of Leashing, Leash Pressure, Walking on Leash - Mild</label>
+            </value>
+            <value>
+                <fullName>Fear of Leashing, Leash Pressure, Walking on Leash - Moderate</fullName>
+                <default>false</default>
+                <label>Fear of Leashing, Leash Pressure, Walking on Leash - Moderate</label>
+            </value>
+            <value>
+                <fullName>Fear of Leashing, Leash Pressure, Walking on Leash - Severe</fullName>
+                <default>false</default>
+                <label>Fear of Leashing, Leash Pressure, Walking on Leash - Severe</label>
+            </value>
+            <value>
+                <fullName>Fear of Places, Objects, Novelty - Mild</fullName>
+                <default>false</default>
+                <label>Fear of Places, Objects, Novelty - Mild</label>
+            </value>
+            <value>
+                <fullName>Fear of Places, Objects, Novelty - Moderate</fullName>
+                <default>false</default>
+                <label>Fear of Places, Objects, Novelty - Moderate</label>
+            </value>
+            <value>
+                <fullName>Fear of Places, Objects, Novelty - Severe</fullName>
+                <default>false</default>
+                <label>Fear of Places, Objects, Novelty - Severe</label>
+            </value>
+            <value>
+                <fullName>Fear of Noises - Mild</fullName>
+                <default>false</default>
+                <label>Fear of Noises - Mild</label>
+            </value>
+            <value>
+                <fullName>Fear of Noises - Moderate</fullName>
+                <default>false</default>
+                <label>Fear of Noises - Moderate</label>
+            </value>
+            <value>
+                <fullName>Fear of Noises - Severe</fullName>
+                <default>false</default>
+                <label>Fear of Noises - Severe</label>
+            </value>
+            <value>
+                <fullName>Fear of Dogs - Mild</fullName>
+                <default>false</default>
+                <label>Fear of Dogs - Mild</label>
+            </value>
+            <value>
+                <fullName>Fear of Dogs - Moderate</fullName>
+                <default>false</default>
+                <label>Fear of Dogs - Moderate</label>
+            </value>
+            <value>
+                <fullName>Fear of Dogs - Severe</fullName>
+                <default>false</default>
+                <label>Fear of Dogs - Severe</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

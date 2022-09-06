@@ -9,15 +9,16 @@
     <aura:attribute name="isRecordTypeSelectionVisible" type="Boolean" default="true"/>
     <lightning:notificationsLibrary aura:id="notificationsLibrary"/>
     
-    <div>
-        <lightning:card>
-            <aura:set attribute="actions">
+    
+       <!-- <lightning:card>
+            <aura:set attribute="actions">-->
                 <lightning:button variant="brand"
                                   label="Out of Office"
                                   title="Out of Office"
-                                  onclick="{! c.openModel }" />
-            </aura:set>
-        </lightning:card>
+                                  onclick="{! c.openModel }" 
+                                  class="slds-var-m-left_x-small"/>
+           <!-- </aura:set>
+        </lightning:card>-->
         <!--Use aura:if tag to display/hide popup based on isModalOpen value-->  
         <aura:if isTrue="{!v.isModalOpen}">
             
@@ -59,9 +60,9 @@
                                             <!--<lightning:input name="contact" label="Contact" aura:id="contactName" value="{!v.recordName}" disabled="true"/> -->
                                             <lightning:inputField fieldName="Contact__c" value="{!v.recordId}"/>
                                         </div>  
-                                        <div class="slds-col slds-size_2-of-2">  
+                                        <!--<div class="slds-col slds-size_2-of-2">  
                                             <lightning:inputField fieldName="IsEnabled__c"/>
-                                        </div>  
+                                        </div>  -->
                                         <aura:if isTrue="{!v.selectedRecordTypeLabel == 'Weekly OOO'}">
                                             <div class="slds-col slds-size_2-of-2">                              
                                                 <lightning:inputField fieldName="Days__c"/>
@@ -95,6 +96,6 @@
             </section>
             <div class="slds-backdrop slds-backdrop_open"></div>
         </aura:if>
-    </div>
+    
     
 </aura:component>

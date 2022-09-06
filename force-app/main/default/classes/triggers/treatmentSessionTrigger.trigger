@@ -12,5 +12,7 @@ trigger treatmentSessionTrigger on Treatment_Session__c (before insert, before u
         TriggerRequest request = new TriggerRequest(Treatment_Session__c.SObjectType);
         TreatmentSessionDomain domain = new TreatmentSessionDomain();
         domain.ProcessAction(request);
+       RollUpCountHandler rollup = new RollUpCountHandler();
+       rollup.ProcessAction(request);
     }
 }

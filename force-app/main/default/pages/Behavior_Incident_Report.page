@@ -118,25 +118,6 @@
                         </apex:dataTable>
                     </apex:pageBlock>
                 </apex:form>
-<!--                <tr><td></td></tr>
-                <tr><td></td></tr>
-                <tr><th>WHAT BEHAVIORS WERE EXHIBITED BY THE DOG (CHECK ALL THAT APPLY):</th></tr>
-                <tr><td></td></tr>
-                <tr><td></td></tr>
-                <apex:form >
-                    <apex:pageBlock >
-                        <apex:dataTable columns="2" value="{!behaviorsExhibited}" var="b">
-                            <apex:column >
-                                <apex:inputCheckbox value="{!b.selected}" label="{!b.label}" rendered="true">
-                                    <apex:image value="{!IF(B.selected == true , checked, unchecked)}" width="20" height="20"/>
-                                    &nbsp; &nbsp; &nbsp;
-                                    {!b.label}
-                                </apex:inputCheckbox>
-                            </apex:column>
-                        </apex:dataTable>
-                    </apex:pageBlock>
-                </apex:form>
--->
             </table>
             <table>
                 <tr><th>PLEASE DESCRIBE/IDENTIFY THE SPECIFIC TARGET OF THE DOG'S BEHAVIOR</th></tr>
@@ -175,7 +156,7 @@
                 <tr>
                     <td>Number of bites</td>
                 </tr>
-                <tr class="one">
+                <tr class="half">
                     <td>{!inc.Number_of_bites__c}</td>
                 </tr>
                 <tr><td></td></tr>
@@ -206,7 +187,7 @@
                 <tr>
                     <td>If YES, describe clothing worn at the site of the bite:</td>
                 </tr>
-                <tr class="one">
+                <tr class="half">
                     <td>{!inc.Clothing_Worn_at_Bite_Site__c}</td>
                 </tr>
                 <tr><td></td></tr>
@@ -236,12 +217,21 @@
                         </apex:dataTable>
                     </apex:pageBlock>
                 </apex:form>
-                <tr width="80%" class="one">
+                <tr>
+                    <td>Describe Other Damage Done by the Dog</td>
+                </tr>
+                <tr width="80%" class="half">
                     <td colspan="4">{!inc.Other_Damage_Done_by_the_Dog__c}</td>
                 </tr>
+                <tr><td></td></tr>
+                <tr><td></td></tr>
             </table>
                  <table>
                 <tr><th colspan="4">IF THE DOG DID NOT BITE, DO YOU THINK IT WOULD HAVE DONE SO IF YOU HADN'T TAKEN EVASIVE ACTION OR USED DEFENSIVE HANDING?</th></tr>
+                <tr>
+                    <td>Was defensive handling used?</td>
+                    <td>Would dog have bitten without this handling?</td>
+                </tr>
                 <tr>
                     <td>
                         <apex:form >
@@ -259,19 +249,38 @@
                             </apex:pageBlock>
                         </apex:form>
                     </td>
+                    <td>
+                        <apex:form >
+                            <apex:pageBlock >
+                                <apex:dataTable value="{!Defensive}" var="D">
+                                    <apex:column >
+                                        <apex:inputCheckbox value="{!D.selected}" label="{!D.label}" rendered="true">
+                                            <apex:image value="{!IF(D.selected == true , checked, unchecked)}" width="20" height="20"/>
+                                            &nbsp; &nbsp; &nbsp;
+                                            {!D.label}
+                                        </apex:inputCheckbox>
+                                    </apex:column>
+                                    <apex:column />
+                                </apex:dataTable>
+                            </apex:pageBlock>
+                        </apex:form>
+                    </td>
                 </tr>
                 <tr>
-                    <td>Please Explain Why You Think So:</td>
+                    <td colspan="2">Please Explain Why You Think So:</td>
                 </tr>
-                <tr class="one">
-                    <td>{!inc.Clothing_Worn_at_Bite_Site__c}</td>
+                <tr class="half">
+                    <td colspan="2">{!inc.Clothing_Worn_at_Bite_Site__c}</td>
                 </tr>
+                <tr><td></td></tr>
+                <tr><td></td></tr>
             </table>
       <table bgcolor="#D3D3D3">
                 <tr><th>PLEASE PROVIDE ANY ADDITIONAL COMMENTS YOU MAY HAVE:</th></tr>
                 <tr width="80%" class="one">
                     <td>{!inc.Additional_Comments__c}</td>
                 </tr>
+                <tr><td></td></tr>
             </table>
         </body>
     </html>

@@ -13,7 +13,8 @@ public class Behavior_Incident_Report_Controller {
                     , Behaviors_Exhibited_by_the_Dog__c
                     , Clothing_Worn_at_Bite_Site__c
                     , Damage_Done_by_the_Dog__c
-                    , If_dog_did_not_bite__c
+                    , Was_defensive_handling_used__c
+                    , Would_dog_have_bitten_w_o_this_handling__c
                     , Incident_Date_Time__c
                     , Incident_Description__c
                     , Name
@@ -30,7 +31,7 @@ public class Behavior_Incident_Report_Controller {
                     , Animal__r.Animal_Name__c
                     , Supervisor_Team_Lead__c
         FROM Incidents__c
-        WHERE Name = '2022/01/20-0'];
+        WHERE Id = :ApexPages.currentPage().getParameters().get('Id')];
 
         MultiselectPicklist = (Incidents__c)controller.getRecord();
     }
@@ -241,19 +242,19 @@ public class Behavior_Incident_Report_Controller {
     public Option[] getHandling(){
         Handling = new Option[0];
         String objectAPI = 'Incidents__c';
-        String fieldAPI = 'If_dog_did_not_bite__c';
+        String fieldAPI = 'Was_defensive_handling_used__c';
         String name = String.valueOf(Schema.getGlobalDescribe().get(objectAPI).getDescribe().fields.getMap().get(fieldAPI).getDescribe().getLabel());
         Schema.SObjectField fieldInfo = SchemaHelper.DetermineSObjectFieldByLabel(objectAPI, name);  
 
         String[] picklistValues = SchemaHelper.GetPicklistValues(fieldInfo);
 
-        DescribeFieldResult fieldResult = Incidents__c.If_dog_did_not_bite__c.getDescribe();
+        DescribeFieldResult fieldResult = Incidents__c.Was_defensive_handling_used__c.getDescribe();
         PicklistEntry[] entries = fieldResult.getPicklistValues();
 
 
         String value = '';
-        if(!String.isEmpty(incident.If_dog_did_not_bite__c)) {
-            value = incident.If_dog_did_not_bite__c;
+        if(!String.isEmpty(incident.Was_defensive_handling_used__c)) {
+            value = incident.Was_defensive_handling_used__c;
         }
         String[] values = (String[]) value.split(';');
 
@@ -268,6 +269,39 @@ public class Behavior_Incident_Report_Controller {
         }
 
         return Handling;
+    }
+
+    Option[] Defensive { get; set; }
+    public Option[] getDefensive(){
+        Defensive = new Option[0];
+        String objectAPI = 'Incidents__c';
+        String fieldAPI = 'Would_dog_have_bitten_w_o_this_handling__c';
+        String name = String.valueOf(Schema.getGlobalDescribe().get(objectAPI).getDescribe().fields.getMap().get(fieldAPI).getDescribe().getLabel());
+        Schema.SObjectField fieldInfo = SchemaHelper.DetermineSObjectFieldByLabel(objectAPI, name);  
+
+        String[] picklistValues = SchemaHelper.GetPicklistValues(fieldInfo);
+
+        DescribeFieldResult fieldResult = Incidents__c.Would_dog_have_bitten_w_o_this_handling__c.getDescribe();
+        PicklistEntry[] entries = fieldResult.getPicklistValues();
+
+
+        String value = '';
+        if(!String.isEmpty(incident.Would_dog_have_bitten_w_o_this_handling__c)) {
+
+        }
+        String[] values = (String[]) value.split(';');
+
+        for (PicklistEntry entry : entries) {
+            String label = entry.label;
+
+            Boolean isSelected = (!values.isEmpty() && values.contains(label)) ? true : false;
+            Option opt = new Option();
+            opt.label = label;
+            opt.selected = isSelected;
+            Defensive.add(opt);
+        }
+
+        return Defensive;
     }
 
     public class Option{

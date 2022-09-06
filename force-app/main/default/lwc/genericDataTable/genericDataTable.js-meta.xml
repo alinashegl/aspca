@@ -16,6 +16,7 @@
             <property name="whereClause" type="String" default="" label="Enter WHERE clause"/>
             <property name="orderBy" type="String" default="CreatedDate DESC" label="Enter order by field followed by direction ASC|DESC"/>
             <property name="limit" type="Integer" default="5" label="Enter number of records to display"/>
+            <property name="filterBy" type="String" default="" label="Enter comma separated field api names for filter"/>
             <property name="paginate" type="Boolean" default="true" label="Pagination"/>
         </targetConfig>
       </targetConfigs>

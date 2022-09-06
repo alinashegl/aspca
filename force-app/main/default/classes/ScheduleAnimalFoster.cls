@@ -27,9 +27,10 @@ public with sharing class ScheduleAnimalFoster {
                 //if the animal has an existing task already assign it here
                 Task task = animalToTaskMap.containsKey(animal.Id) ? animalToTaskMap.get(animal.Id) : null;
 
-                fosterTasks.addAll(
-                    prepTasks(animal, defaultConfig, task)
-                );
+                Task[] newTasks = prepTasks(animal, defaultConfig, task);
+                if(newTasks != null && !newTasks.isEmpty()){
+                    fosterTasks.addAll(newTasks);
+                }
             }
         }
         return fosterTasks;
@@ -37,17 +38,20 @@ public with sharing class ScheduleAnimalFoster {
 
     //queries and returns a list of animals wit the related foster Facility_Outcome__c's, will query specific animals if the animalIds param is not null
     public static Animal__c[] getAnimals(Id[] animalIds){
+        String[] dogPopulations = AutoScheduleTasksUtil.dogPopulations;
         String queryString = 'SELECT Id, Animal_Name_Id__c, Current_Recent_Shelter_Location__c, Current_Location__c, ' +
             'Behavior_Case_Worker__c, Behavior_Case_Worker__r.Name, Behavior_Case_Worker__r.Is_Generic_Contact__c, ' +
                 '(SELECT Id, Follow_Up_Days__c, Follow_Up_Frequency__c, CreatedDate, Start_Date__c ' +
-                'FROM Animal_Locations__r ' +
+                'FROM Facilities_Outcomes__r ' +
                 'WHERE Facility_Outcome__c = \'Foster Home\' ' +
                 'AND (End_Date__c = null OR End_Date__c >= TODAY) ' +
                 'ORDER BY CreatedDate DESC ' +
                 'LIMIT 1) ' +
             'FROM Animal__c ' +
             'WHERE Current_Location__c = \'Foster Home\' ' +
+            'AND Active_Animal__c = true ' + 
             'AND Type_of_Animal__c = \'Dog\' ' +
+            'AND Current_Recent_Shelter_Location__c IN: dogPopulations ' +
             'AND Id IN ' +
                 '(SELECT Animal__c ' +
                 'FROM Facility_Outcome__c ' +
@@ -86,7 +90,7 @@ public with sharing class ScheduleAnimalFoster {
         */
         Date startDateWeekStart = AutoScheduleTasksUtil.startOfASPCAWeek(AutoScheduleTasksUtil.startDate);
         Date endDateWeekStart = AutoScheduleTasksUtil.startOfASPCAWeek(AutoScheduleTasksUtil.endDate);
-        Facility_Outcome__c location = animal.Animal_Locations__r[0];
+        Facility_Outcome__c location = animal.Facilities_Outcomes__r[0];
 
         Date[] dateList = new Date[0];
 
@@ -153,13 +157,17 @@ public with sharing class ScheduleAnimalFoster {
     */
     public static Task[] prepTasks(Animal__c animal, Calendar_Schedule_Config__mdt config, Task task){
         //get the genericCon for the animal's location
+        Id genericConId = UserInfo.getUserId();
         Contact genericCon = AutoScheduleTasksUtil.genericContactMap.get(animal.Current_Recent_Shelter_Location__c);
+        if(genericCon != null){
+            genericConId = genericCon.User__c;
+        }
         Task[] newTasks = new Task[0];
         
         //determine which dates need tasks
         Date[] dateList = datesForTasks(animal, config, task);
         
-        Facility_Outcome__c location = animal.Animal_Locations__r[0];
+        Facility_Outcome__c location = animal.Facilities_Outcomes__r[0];
 
         //loop through the dates and prep the tasks, adding them to the list of newTasks to return
         for(Date day : dateList){
@@ -171,8 +179,8 @@ public with sharing class ScheduleAnimalFoster {
                 Description = 'Foster Follow Up for: ' + animal.Animal_Name_Id__c + ' (' + animal.Current_Recent_Shelter_Location__c + ')',
                 IsReminderSet = true,
                 Status = 'Not Started',
-                WhoId = animal.Behavior_Case_Worker__c != null ? animal.Behavior_Case_Worker__c : genericCon.Id,
-                OwnerId = genericCon.User__c,
+                WhoId = animal.Behavior_Case_Worker__c != null ? animal.Behavior_Case_Worker__c : (genericCon != null ? genericCon.Id : null),
+                OwnerId = genericConId,
                 Subject = 'Foster Follow Up',
                 Species__c = 'Dog',
                 Auto_Scheduled_Task__c = true

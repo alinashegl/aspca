@@ -11,12 +11,12 @@ public class test_Last5TreatmentsController {
 
         Test.startTest();
         Last5TreatmentsController controller = new Last5TreatmentsController();
-        Map<Id, List<Session_Protocol__c>> sessionProtocolMap = controller.getSessionProtocolMap();
+        Map<String, SessionProtocol[]> sessionProtocolMap = controller.getSProtocolsMap();
         Animal__c animal = controller.getAnimal();
         Test.stopTest();
         
         //Test data creates 4 protocols
-        System.assertEquals(4, sessionProtocolMap.size());
+        System.assertEquals(9, sessionProtocolMap.size());
         System.assertEquals(plan.Animal__c, animal.Id);
     }
 }

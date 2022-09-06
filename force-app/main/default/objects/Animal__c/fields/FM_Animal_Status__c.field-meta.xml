@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FM_Animal_Status__c</fullName>
+    <externalId>false</externalId>
+    <label>FM Animal Status</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>On-Site</fullName>
+                <default>false</default>
+                <label>On-Site</label>
+            </value>
+            <value>
+                <fullName>Foster</fullName>
+                <default>false</default>
+                <label>Foster</label>
+            </value>
+            <value>
+                <fullName>Off Site</fullName>
+                <default>false</default>
+                <label>Off Site</label>
+            </value>
+            <value>
+                <fullName>Outside Temp Boarding</fullName>
+                <default>false</default>
+                <label>Outside Temp Boarding</label>
+            </value>
+            <value>
+                <fullName>Placed</fullName>
+                <default>false</default>
+                <label>Placed</label>
+            </value>
+            <value>
+                <fullName>Returned to Owner</fullName>
+                <default>false</default>
+                <label>Returned to Owner</label>
+            </value>
+            <value>
+                <fullName>Deceased</fullName>
+                <default>false</default>
+                <label>Deceased</label>
+            </value>
+            <value>
+                <fullName>Unspecified</fullName>
+                <default>false</default>
+                <label>Unspecified</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

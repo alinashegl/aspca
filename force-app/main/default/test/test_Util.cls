@@ -16,7 +16,7 @@ public class test_Util {
         Id recordTypeId;
         System.assertEquals(null, recordTypeId);
         Test.startTest();
-        recordTypeId = Util.getRecordTypeId('Animal__c', 'Behavior');
+        recordTypeId = Util.getRecordTypeId('Case', 'Action_Item');
         Test.stopTest();
         System.assertNotEquals(null, recordTypeId);
     }

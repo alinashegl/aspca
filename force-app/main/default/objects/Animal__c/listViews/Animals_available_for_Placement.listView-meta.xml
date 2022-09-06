@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Animals_available_for_Placement</fullName>
+    <columns>Animal_Name__c</columns>
+    <columns>NAME</columns>
+    <columns>Current_Behavior_Grade__c</columns>
+    <columns>Breed__c</columns>
+    <columns>Current_Animal_Age_Formatted__c</columns>
+    <columns>Gender__c</columns>
+    <columns>Meets_Adoptability_Date__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Meets_Adoptability_Date__c</field>
+        <operation>notEqual</operation>
+    </filters>
+    <filters>
+        <field>Active_Animal__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>Location_Filter__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <label>Animals available for Placement</label>
+</ListView>

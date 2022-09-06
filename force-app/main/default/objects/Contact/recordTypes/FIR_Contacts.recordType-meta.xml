@@ -2,8 +2,44 @@
 <RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>FIR_Contacts</fullName>
     <active>false</active>
+    <compactLayoutAssignment>Contact_Compact_Layout</compactLayoutAssignment>
     <description>This record type can consist of Suspects, Animal Owners or Complainants</description>
     <label>FIR Contacts</label>
+    <picklistValues>
+        <picklist>Borough__c</picklist>
+        <values>
+            <fullName>Bronx</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Brooklyn</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Long Island</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Manhattan</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Out-of-State</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Queens</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Staten Island</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unknown</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
     <picklistValues>
         <picklist>Contact_Type__c</picklist>
         <values>
@@ -202,6 +238,37 @@
         </values>
         <values>
             <fullName>Sr%2E</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>WeeklyOff__c</picklist>
+        <values>
+            <fullName>Friday</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Monday</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Saturday</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sunday</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Thursday</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tuesday</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Wednesday</fullName>
             <default>false</default>
         </values>
     </picklistValues>

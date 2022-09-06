@@ -10,6 +10,22 @@
         </template>
         <!-- Data table  -->
         <template if:true={data}>
+          <template if:true={showFilter}>
+            <lightning-layout>
+              <lightning-layout-item size="3">
+              </lightning-layout-item>
+              <lightning-layout-item size="3">
+                  <lightning-combobox variant="label-inline" name="filterBy" label="Filter By" value={filterByValue} options={filterOptions} onchange={handleFilterChange} ></lightning-combobox>
+              </lightning-layout-item>
+              <lightning-layout-item size="3">
+                <template if:true={filterInputType}>
+                   <lightning-input variant="label-hidden" class="filterInp" type={filterInputType} name="filterInput" value={filterInputValue} onchange={handleFilterInputValueChange}></lightning-input>
+                  </template>
+              </lightning-layout-item>
+              <lightning-layout-item size="3">
+              </lightning-layout-item>
+          </lightning-layout>
+          </template>
           <lightning-datatable key-field="id" data={data} columns={columns} onrowaction={handleRowAction}
             hide-checkbox-column>
           </lightning-datatable>

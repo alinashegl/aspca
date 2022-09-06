@@ -1,0 +1,44 @@
+<template>
+    <lightning-card>
+        <div class="demo-only demo-only--sizing slds-grid slds-wrap">
+            <div class="slds-size_1-of-3">
+                <div class="slds-var-p-left_x-small">
+                    <b>Tip of the month:</b>
+                    <template if:true={showSpinner}>
+                        <lightning-button-icon icon-name="utility:spinner" variant="bare"  alternative-text="Edit Helper Dogs" class="slds-m-left_xx-small" title="Helper Dogs" ></lightning-button-icon>
+                    </template>
+                    <template if:true={tipOfMonth}>
+                        <lightning-textarea value={tipOfMonth.Text__c} onblur={handleTOMBlur}></lightning-textarea>
+                    </template>
+                    <template if:true={error}>
+                        <c-error-panel errors={error} type='inlineMessage' friendly-message={errorMessage}></c-error-panel>
+                    </template>
+                </div>
+            </div>
+            <div class="slds-size_2-of-3">
+                <lightning-button label="PDF" onclick={exportAsPdf} class="slds-float_right slds-var-p-right_x-small"></lightning-button>
+            </div>
+        </div>        
+        
+        <div class="slds-var-p-left_x-small slds-var-p-right_x-small slds-var-p-top_small">
+            <b>Total Animals: {animalListLength}</b>
+            <template if:false={animalInfoList}>
+                <lightning-icon icon-name="utility:spinner" alternative-text="Connected" size="xx-small" title="large size">
+                </lightning-icon>
+            </template>
+            <template if:true={animalInfoList}>
+                <div class="slds-var-p-top_small">
+                    <template for:each={animalInfoList} for:item='animalInfo'>
+                        <div class="slds-var-p-bottom_x-small" key={animalInfo.dog.Id}>
+                            <c-mrc-Treatment-Plans-Animal
+                                record-id={animalInfo.dog.Id}
+                                animal-info={animalInfo}
+                            >
+                        </c-mrc-Treatment-Plans-Animal>
+                        </div>
+                    </template>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

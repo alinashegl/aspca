@@ -11,9 +11,9 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Repetitive behavior (pacing, licking, drooling)</fullName>
+                <fullName>Repetitive behavior (pacing - licking - drooling)</fullName>
                 <default>false</default>
-                <label>Repetitive behavior (pacing, licking, drooling)</label>
+                <label>Repetitive behavior (pacing - licking - drooling)</label>
             </value>
             <value>
                 <fullName>Staring at wall or corner of kennel</fullName>
@@ -21,9 +21,9 @@
                 <label>Staring at wall or corner of kennel</label>
             </value>
             <value>
-                <fullName>High arousal/excitement (intense, energetic activity)</fullName>
+                <fullName>High arousal/excitement (intense - energetic activity)</fullName>
                 <default>false</default>
-                <label>High arousal/excitement (intense, energetic activity)</label>
+                <label>High arousal/excitement (intense - energetic activity)</label>
             </value>
             <value>
                 <fullName>Tugging or climbing the leash</fullName>
@@ -114,6 +114,18 @@
                 <fullName>Biting</fullName>
                 <default>false</default>
                 <label>Biting</label>
+            </value>
+            <value>
+                <fullName>High arousal/excitement (intense, energetic activity)</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>High arousal/excitement (intense, energetic activity)</label>
+            </value>
+            <value>
+                <fullName>Repetitive behavior (pacing, licking, drooling)</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Repetitive behavior (pacing, licking, drooling)</label>
             </value>
         </valueSetDefinition>
     </valueSet>

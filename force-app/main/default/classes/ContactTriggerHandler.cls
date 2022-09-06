@@ -11,6 +11,7 @@ public class ContactTriggerHandler {
     
     public static void createOutOfOfficeEntries(Map<Id, Contact> newRecordMap){
         List<OutOfOffice__c> weeklyOffList = new List<OutOfOffice__c>();
+        Id recordTypeId = Schema.SObjectType.OutOfOffice__c.getRecordTypeInfosByName().get('Weekly OOO').getRecordTypeId();
         for(Id recordId : newRecordMap.keySet()){
             Contact c = newRecordMap.get(recordId);
             if(String.isNotBlank(c.WeeklyOff__c)){
@@ -23,6 +24,7 @@ public class ContactTriggerHandler {
                     weeklyOff.Contact__c = c.Id;
                     weeklyOff.StartDate__c = weeklyOff.EndDate__c = offDate;
                     weeklyOff.Message__c = 'Week Off';
+                    weeklyOff.RecordTypeId = recordTypeId;
                     weeklyOffList.add(weeklyOff);
                 }
             }

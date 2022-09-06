@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Type_of_Sample__c</fullName>
+    <externalId>false</externalId>
+    <label>Type of Sample</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Limb (In Freezer)</fullName>
+                <default>false</default>
+                <label>Limb (In Freezer)</label>
+            </value>
+            <value>
+                <fullName>Whole Body</fullName>
+                <default>false</default>
+                <label>Whole Body</label>
+            </value>
+            <value>
+                <fullName>Histopathology</fullName>
+                <default>false</default>
+                <label>Histopathology</label>
+            </value>
+            <value>
+                <fullName>Lab Samples</fullName>
+                <default>false</default>
+                <label>Lab Samples</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

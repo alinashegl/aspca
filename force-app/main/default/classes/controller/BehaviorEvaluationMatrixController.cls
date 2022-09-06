@@ -100,30 +100,14 @@ public class BehaviorEvaluationMatrixController {
                               Pleasant_Touch_Test__c,
                               Play_Test_P2__c,
                               Play_Test_P1__c,
-                              Overall_Evaluation_Grade__c,
-                              Puppy_Skipped_SB_P2__c,
-                              Puppy_Skipped_SB_P1__c,
-                              Puppy_Skipped_Restraint__c,
-                              Puppy_Skipped_RG_P2__c,
-                              Puppy_Skipped_RG_P2_TN__c,
-                              Puppy_Skipped_RG_P2_TF__c,
-                              Puppy_Skipped_RG_P2_TB__c,
-                              Puppy_Skipped_RG_P2_PF__c,
-                              Puppy_Skipped_RG_P1__c,
-                              Puppy_Skipped_RG_P1_TN__c,
-                              Puppy_Skipped_RG_P1_TF__c,
-                              Puppy_Skipped_RG_P1_TB__c,
-                              Puppy_Skipped_RG_P1_PF__c,
-                              Puppy_Skipped_Play_Tug_P2__c,
-                              Puppy_Skipped_Play_Tug_P1__c,
-                              Puppy_Skipped_Play_Tag__c,
+                              Overall_Evaluation_Grade__c,                                                           
+                              Puppy_Skipped_Restraint__c,                                                                                                                    
+                                                      
                               Puppy_Skipped_DI_P3__c,
                               Puppy_Skipped_DI_P2__c,
                               Puppy_Skipped_DI_P1__c,
                               Puppy_Skipped_CD_P2__c,
-                              Puppy_Skipped_CD_P1__c,
-                              Puppy_Skipped_BOL__c,
-                              Puppy_Skipped_BIK__c,
+                              Puppy_Skipped_CD_P1__c,                              
                               Puppy_BIK_Housing__c
                               FROM Behavior_Evaluation__c
                               WHERE Id = :ApexPages.currentPage().getparameters().get('Id')];
@@ -153,7 +137,7 @@ public class BehaviorEvaluationMatrixController {
 
             //Iterate through Skipped fields to pull out skip reason
             if (fieldName.contains('Skipped')){
-                List<Test_Config__mdt> testConfigSkip;
+                List<Test_Config__mdt> testConfigSkip = new List<Test_Config__mdt>();
                 switch on behaviorEvaluation.Evaluation_SubType__c {
                     when 'Puppy' {
                         testConfigSkip = [SELECT Test_Name__c,Overall_Test_Display_Name__c FROM Test_Config__mdt
@@ -172,23 +156,26 @@ public class BehaviorEvaluationMatrixController {
                                         WHERE Test_Skip_Reason_Field__c = :fieldName AND IsDogOnly__c = true LIMIT 1];
                     }
                 }
-                for (Test_Config__mdt testMetadata : testConfigSkip){
-                // for (Test_Config__mdt testMetadata : [SELECT Test_Skip_Reason_Field__c,MasterLabel,IsPuppy__c,Test_Name__c,Overall_Test_Display_Name__c FROM Test_Config__mdt
-                //                                       WHERE Test_Skip_Reason_Field__c = :fieldName AND IsPuppy__c = :evalType LIMIT 1 ]){
-                    String testName = '';
-                    if (testMetadata.Overall_Test_Display_Name__c != null){
-                        testName = testMetadata.Overall_Test_Display_Name__c;
+                
+                if(testConfigSkip.size() > 0){
+                    for (Test_Config__mdt testMetadata : testConfigSkip){
+                        // for (Test_Config__mdt testMetadata : [SELECT Test_Skip_Reason_Field__c,MasterLabel,IsPuppy__c,Test_Name__c,Overall_Test_Display_Name__c FROM Test_Config__mdt
+                        //                                       WHERE Test_Skip_Reason_Field__c = :fieldName AND IsPuppy__c = :evalType LIMIT 1 ]){
+                        String testName = '';
+                        if (testMetadata.Overall_Test_Display_Name__c != null){
+                            testName = testMetadata.Overall_Test_Display_Name__c;
+                        }
+                        else{
+                            testName = testMetadata.Test_Name__c;
+                        }
+                        
+                        if(behaviors.contains('not necessary') || behaviors.contains('appropriate helper dog')){
+                            testAndDisplayValues.put(testName, new List<String>{'---','---','---','---'});
+                        } else{
+                            testAndDisplayValues.put(testName, new List<String>{'❌','❌','❌','❌'});
+                        }
+                        
                     }
-                    else{
-                        testName = testMetadata.Test_Name__c;
-                    }
-
-                    if(behaviors.contains('not necessary') || behaviors.contains('appropriate helper dog')){
-                        testAndDisplayValues.put(testName, new List<String>{'---','---','---','---'});
-                    } else{
-                        testAndDisplayValues.put(testName, new List<String>{'❌','❌','❌','❌'});
-                    }
-                    
                 }
                 //system.debug('WITHIN SKIPPED IF: ' + testAndDisplayValues);
             }
@@ -251,7 +238,7 @@ public class BehaviorEvaluationMatrixController {
         // Iterate through subtests in testAndDisplayMap and order by Test_Display_Order__c
         // Add subtest and order combinations into testOrder Map
         for (String subtest : testAndDisplayValues.keySet()){
-            List<Test_Config__mdt> testMetadata;
+            List<Test_Config__mdt> testMetadata = new List<Test_Config__mdt>();
             switch on behaviorEvaluation.Evaluation_SubType__c {
                 when 'Puppy' {
                     testMetadata = [SELECT Test_Display_Order__c,Test_Name__c FROM Test_Config__mdt
@@ -277,7 +264,7 @@ public class BehaviorEvaluationMatrixController {
                 testOrder.put(Integer.valueOf(testMetadata[0].Test_Display_Order__c), testMetadata[0].Test_Name__c);
             }
             else{
-                List<Test_Config__mdt> overallTestMetadata;
+                List<Test_Config__mdt> overallTestMetadata = new List<Test_Config__mdt>();
                 switch on behaviorEvaluation.Evaluation_SubType__c {
                     when 'Puppy' {
                         overallTestMetadata = [SELECT Test_Display_Order__c,Overall_Test_Display_Name__c FROM Test_Config__mdt

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BRC_MRC_candidates</fullName>
+    <booleanFilter>(1 OR 2) AND 3 AND 4</booleanFilter>
+    <columns>NAME</columns>
+    <columns>Animal_Name__c</columns>
+    <columns>Current_Recent_Shelter_Location__c</columns>
+    <columns>Shelter_Location__c</columns>
+    <columns>Current_Behavior_Grade__c</columns>
+    <columns>Case__c</columns>
+    <columns>Case_Type__c</columns>
+    <columns>Current_Animal_Age_Formatted__c</columns>
+    <columns>Gender__c</columns>
+    <columns>Breed__c</columns>
+    <columns>MRC_Status__c</columns>
+    <columns>BRC_Status__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>MRC_Status__c</field>
+        <operation>equals</operation>
+        <value>MRC Candidate</value>
+    </filters>
+    <filters>
+        <field>BRC_Status__c</field>
+        <operation>equals</operation>
+        <value>BRC Candidate</value>
+    </filters>
+    <filters>
+        <field>Location_Filter__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>Active_Animal__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <label>BRC &amp; MRC candidates</label>
+</ListView>

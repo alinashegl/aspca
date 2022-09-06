@@ -9,6 +9,9 @@
     </targets>
     <targetConfigs>
         <targetConfig targets="lightning__RecordPage">
+            <property name="showTreatmentPlanButton" label="Show New Treatment Plan" type="boolean" default="true"/>
+            <property name="showTreatmentSessionButton" label="Show New Treatment Session" type="boolean" default="true"/>
+            <property name="showLast5TreatmentsReport" label="Last 5 Treatments Report" type="boolean" default="true"/>
             <supportedFormFactors>
                 <supportedFormFactor type="Small" />
                 <supportedFormFactor type="Large" />

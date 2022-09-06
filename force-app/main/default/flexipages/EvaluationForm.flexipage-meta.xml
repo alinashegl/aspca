@@ -69,20 +69,50 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldItem>Record.Grade_Change_Reason__c</fieldItem>
+                <identifier>RecordGrade_Change_Reason_cField1</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
                 <fieldItem>Record.Caution__c</fieldItem>
                 <identifier>RecordCaution__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Potential_Behavior_Issues__c</fieldItem>
-                <identifier>RecordPotential_Behavior_Issues__cField</identifier>
+                <fieldItem>Record.Potential_Issue_Aggression_To_Animals__c</fieldItem>
+                <identifier>RecordPotential_Issue_Aggression_To_Animals_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Potential_Beh_Iss_Other__c</fieldItem>
-                <identifier>RecordPotential_Beh_Iss_Other__cField</identifier>
+                <fieldItem>Record.Potential_Issue_Aggression_To_People__c</fieldItem>
+                <identifier>RecordPotential_Issue_Aggression_To_People_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Potential_Issue_Fear__c</fieldItem>
+                <identifier>RecordPotential_Issue_Fear_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Potential_Issue_High_Arousal__c</fieldItem>
+                <identifier>RecordPotential_Issue_High_Arousal_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Potential_Issue_Other__c</fieldItem>
+                <identifier>RecordPotential_Issue_Other_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Potential_Issue_Other_Notes__c</fieldItem>
+                <identifier>RecordPotential_Issue_Other_Notes_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-1e9bcf94-12ed-4b13-856e-6633d7bad0a7</name>
@@ -131,6 +161,25 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.Handler_Initials__c</fieldItem>
                 <identifier>RecordHandler_Initials__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Evaluation_Date__c</fieldItem>
+                <identifier>RecordEvaluation_Date_cField1</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Animal__c</fieldItem>
+                <identifier>RecordAnimal_cField</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!$User.Profile.Description}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>System Administrator</rightValue>
+                    </criteria>
+                </visibilityRule>
             </fieldInstance>
         </itemInstances>
         <name>Facet-8862fbf2-948e-4a80-b05f-b8ab232cb550</name>
@@ -225,22 +274,11 @@
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
-                    <name>columns</name>
-                    <value>Facet-6f8de509-73db-4211-a1c9-7e2584d63fd4</value>
+                    <name>height</name>
+                    <value>400</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>label</name>
-                    <value>Initials</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:fieldSection</componentName>
-                <identifier>flexipage_fieldSection2</identifier>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>height</name>
-                    <value>400</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>pageName</name>
@@ -252,6 +290,20 @@
                 </componentInstanceProperties>
                 <componentName>flexipage:visualforcePage</componentName>
                 <identifier>flexipage_visualforcePage</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>columns</name>
+                    <value>Facet-6f8de509-73db-4211-a1c9-7e2584d63fd4</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>label</name>
+                    <value>Initials</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:fieldSection</componentName>
+                <identifier>flexipage_fieldSection2</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>

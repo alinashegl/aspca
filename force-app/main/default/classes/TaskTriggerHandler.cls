@@ -53,7 +53,7 @@ public with sharing class TaskTriggerHandler {
         Id[] recordTypeIds = getRTIds();
         for(Task task : taskList){
             //skip any tasks that don't have the correct record type
-            if(!recordTypeIds.contains(task.RecordTypeId) && task.Species__c == 'Dog') continue;
+            if(!recordTypeIds.contains(task.RecordTypeId) || task.Species__c != 'Dog') continue;
 
             Task oldTask = oldMap.get(task.Id);
             if(task.Assigned_Resources__c != oldTask.Assigned_Resources__c){
@@ -135,7 +135,7 @@ public with sharing class TaskTriggerHandler {
         TaskWrapper wrapper = getTreatmentTasks(taskMap);
         for(Task t : wrapper.taskMapByAnimal.values()){
             System.debug(String.valueOf(t.WhatId)+String.valueOf(t.Medication__c));
-            if(!existingTaskMap.containsKey(String.valueOf(t.WhatId)+String.valueOf(t.Medication__c))){
+            if(!existingTaskMap.containsKey(String.valueOf(t.WhatId)+String.valueOf(t.Medication__c)) && t.ActivityDate != null){
                 Date activityDate = t.ActivityDate;
                 List<Integer> dayEntries = new List<Integer>{0, 1, 3};
                     for(Integer i : dayEntries){
@@ -158,7 +158,9 @@ public with sharing class TaskTriggerHandler {
         Map<Id, Animal__c> animalMap = new Map<Id, Animal__c>([SELECT Animal_Name_Id__c, Current_Recent_Shelter_Location__c,
                                                            Behavior_Case_Worker__c,Behavior_Case_Worker__r.Name, 
                                                            Behavior_Case_Worker__r.Is_Generic_Contact__c 
-                                                           FROM ANimal__c where id in : taskMap.keySet()]);
+                                                           FROM ANimal__c where id in : taskMap.keySet()
+                                                           AND Active_Animal__c = true
+                                                           ]);
         Map<Id, Task> taskMapByAnimalId = new Map<Id, Task>();
             
         List<Task> tasks = [SELECT Id, IsRecurrence, CreatedDate, ActivityDate, RecurrenceStartDateOnly, 
@@ -191,7 +193,7 @@ public with sharing class TaskTriggerHandler {
             newTask.Animal__c = animal.Id;
             newTask.RecordTypeId = recordTypeId;
             newTask.ActivityDate = taskDate;
-            newTask.Description = 'Med Check is needed for: ' + animal.Animal_Name_Id__c + ' (' + animal.Current_Recent_Shelter_Location__c + ')';
+            newTask.Description = AutoScheduleTasksUtil.BMED_DESCRIPTION + animal.Animal_Name_Id__c + ' (' + animal.Current_Recent_Shelter_Location__c + ')';
             newTask.IsReminderSet = false;
             newTask.Status = 'Not Started';
             newTask.WhoId = animal.Behavior_Case_Worker__c != null ? animal.Behavior_Case_Worker__c : genericCon.Id;

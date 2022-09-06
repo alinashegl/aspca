@@ -14,22 +14,46 @@
             <value>
                 <fullName>BRC Candidate</fullName>
                 <default>false</default>
-                <label>Candidate</label>
+                <label>BRC Candidate</label>
             </value>
             <value>
                 <fullName>BRC Survey Complete</fullName>
                 <default>false</default>
-                <label>Survey Complete</label>
+                <label>BRC Survey Complete</label>
             </value>
             <value>
                 <fullName>BRC Accepted</fullName>
                 <default>false</default>
-                <label>Accepted</label>
+                <label>BRC Accepted</label>
             </value>
             <value>
                 <fullName>BRC Declined</fullName>
                 <default>false</default>
+                <label>BRC Declined</label>
+            </value>
+            <value>
+                <fullName>Accepted</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Accepted</label>
+            </value>
+            <value>
+                <fullName>Candidate</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Candidate</label>
+            </value>
+            <value>
+                <fullName>Declined</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
                 <label>Declined</label>
+            </value>
+            <value>
+                <fullName>Survey Complete</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Survey Complete</label>
             </value>
         </valueSetDefinition>
     </valueSet>

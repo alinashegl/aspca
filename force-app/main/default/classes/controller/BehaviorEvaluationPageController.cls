@@ -15,8 +15,8 @@ public with sharing class BehaviorEvaluationPageController {
                 Puppy_Skipped_DI_P2__c, Puppy_Skipped_DI_P3__c, Puppy_Comments_DI_P1__c, Puppy_Comments_DI_P2__c,
                 Puppy_Comments_DI_P3__c, Puppy_Dog_Interaction_P1__c, Puppy_Dog_Interaction_P2__c, Puppy_Dog_Interaction_P3__c,
                 Puppy_BIK_Housing__c, Puppy_Behavior_in_Kennel__c, Puppy_Behavior_on_Leash__c, Puppy_Social_Behavior_P1__c,
-                Puppy_Social_Behavior_P2__c, Puppy_Play_Tug_P1__c, Puppy_Skipped_Play_Tug_P1__c, Puppy_Play_Tug_P2__c,
-                Puppy_Skipped_Play_Tug_P2__c, Puppy_Play_Tag__c, Puppy_Comments_Play_Tag__c, Puppy_Restraint__c,
+                Puppy_Social_Behavior_P2__c, Puppy_Play_Tug_P1__c, Puppy_Play_Tug_P2__c,
+                 Puppy_Play_Tag__c, Puppy_Restraint__c,
                 Puppy_Comments_Restraint__c, Puppy_Skipped_Restraint__c, Puppy_Child_Doll_P1__c, Puppy_Comments_CD_P1__c,
                 Puppy_Skipped_CD_P1__c, Puppy_Resource_Guarding_P1_Push_Face__c, Puppy_Resource_Guarding_P1_Touch_Body__c,
                 Puppy_Resource_Guarding_P1_Touch_Neck__c, Puppy_Resource_Guarding_P1_Touch_Face__c, Puppy_Resource_Guarding_P2_Push_Face__c,
@@ -54,6 +54,7 @@ public with sharing class BehaviorEvaluationPageController {
     private static EvaluationWrapper newWrapper(SObjectField field, Behavior_Evaluation__c evaluation) {
         ControllerHelper.Properties prop = ControllerHelper.getFieldProperties(field);
         List<Picklist_Description_Config__mdt> sConfigs = MetadataUtil.getFieldValues(prop.id);
+        System.debug('***sConfigs: ' + sConfigs);
         Map<String, Integer> hashMap = new Map<String, Integer>();
         for (Picklist_Description_Config__mdt config : sConfigs) {
             hashMap.put(config.DeveloperName, sConfigs.indexOf(config));

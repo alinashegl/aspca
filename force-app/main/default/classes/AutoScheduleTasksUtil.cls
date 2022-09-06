@@ -17,9 +17,22 @@ public class AutoScheduleTasksUtil {
         MRC_BRC_FOLLOW_UP_TASK_RECORD_TYPE_NAME
     };
     public static final String NO_CONTACT_RESOURCE = 'unassigned';
-    public static final String[] dogPopulations = new String[]{'ARC','CARE','CRC','MRC'};
+    public static final String BMED_DESCRIPTION = 'Bmed Check is needed for: ';
     public static Date startDate;
     public static Date endDate;
+
+    public static final String[] dogPopulations {
+        get{
+            if(Test.isRunningTest()){
+                dogPopulations = new String[]{'ARC','CARE','CRC','MRC'};
+            }
+            else {
+                dogPopulations = new String[]{'ARC','CARE'};
+            }
+            return dogPopulations;
+        }
+        set;
+    }
 
     public static Map<String, Contact> genericContactMap {
         get{
@@ -118,6 +131,10 @@ public class AutoScheduleTasksUtil {
             if(con.User_Location__c == 'ARC/CARE'){
                 contactMap.put('ARC', con);
                 contactMap.put('CARE', con);    
+            } 
+            else if(con.User_Location__c == 'CRC/MRC'){
+                contactMap.put('CRC', con);
+                contactMap.put('MRC', con);
             } else {
                 contactMap.put(con.User_Location__c, con);
             }

@@ -9,9 +9,12 @@ export default class CreateTreatmentSession extends NavigationMixin(LightningEle
     @api smallForm;
 
     planId;
+    preferredMotivators;
     showSpinner = false;
     customLookupContactId;
     requiredContact = true;
+    noPlan = true;
+    whereClause = 'Active__c = true AND Contact_Type__c = \'Behavior Case Worker\'';
 
     get hasPlan(){
         return  this.planId != undefined && this.planId != null;
@@ -27,7 +30,13 @@ export default class CreateTreatmentSession extends NavigationMixin(LightningEle
         getActiveTreatmentPlan({animalId: this.animalId})
         .then((result) => {
             window.console.log('result: ', JSON.stringify(result));
-            this.planId = result;
+            if(result){
+                this.planId = result.Id;
+                this.preferredMotivators = result.Preferred_Motivators__c;
+                this.noPlan = false;
+            } else {
+                this.noPlan = true;
+            }
         });
     }
 

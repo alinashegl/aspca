@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Evaluation_Dog_Dog_Testing_Date__c</fullName>
+    <externalId>false</externalId>
+    <label>Evaluation Dog/Dog Testing Date</label>
+    <summarizedField>Behavior_Evaluation__c.Dog_Dog_Testing_Date__c</summarizedField>
+    <summaryForeignKey>Behavior_Evaluation__c.Animal__c</summaryForeignKey>
+    <summaryOperation>min</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

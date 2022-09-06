@@ -22,9 +22,14 @@ public with sharing class ScheduleAnimalBRCMRC {
     public static void completeBRCMRCTasks(){
         List<Task> taskList = new List<Task>();
         List<Animal__c> animals = getAnimalsForTaskUpdate();
-        List<Task> tasks = [Select Id, Status from Task where recordTypeId =:recordTypeId and WhatId IN : animals];
+        //get the current user's infor in case t.Owner.Name is null
+        String userName = UserInfo.getName();
+        List<Task> tasks = [Select Id, Status,Owner.Name from Task where recordTypeId =:recordTypeId and WhatId IN : animals];
+        
         for(Task t : tasks){
             t.status = 'Completed';
+            t.Completed_By_Text__c = t.Owner.Name != null ? t.Owner.Name : userName;
+            t.Completed_By__c = 'Auto-completion Based on Discharge';
             taskList.add(t);
         }
         update taskList;
@@ -34,7 +39,7 @@ public with sharing class ScheduleAnimalBRCMRC {
     * prepares and returns the new task
     */
     public static Task prepTask(Animal__c animal, Date taskDate, Boolean isAutoScheduled){
-        //get the genericCon for the animal's location        
+        //get the genericCon for the animal's location
         Contact genericCon = AutoScheduleTasksUtil.genericContactMap.get(animal.Current_Recent_Shelter_Location__c);
 
         //determine the task subject prefix
@@ -53,7 +58,7 @@ public with sharing class ScheduleAnimalBRCMRC {
             Description = subjectPrefix + ' Accepted follow up for: ' + animal.Animal_Name_Id__c,
             IsReminderSet = false,
             Status = 'Not Started',
-            WhoId = animal.Behavior_Case_Worker__c != null ? animal.Behavior_Case_Worker__c : genericCon.Id,
+            WhoId = animal.Behavior_Case_Worker__c != null ? animal.Behavior_Case_Worker__c : (genericCon != null ? genericCon.Id : null),
             Subject = subjectPrefix+' Accepted follow up for: ' + animal.Animal_Name_Id__c,
             Species__c = 'Dog',
             Auto_Scheduled_Task__c = isAutoScheduled
@@ -71,7 +76,8 @@ public with sharing class ScheduleAnimalBRCMRC {
             'Behavior_Case_Worker__r.Name, ' +
             '(SELECT Id, ActivityDate FROM Activities__r WHERE Record_Type__c =: recordTypeName AND ActivityDate != null ORDER BY ActivityDate DESC LIMIT 1) ' +
             'FROM Animal__c ' +
-            'WHERE (BRC_Status__c = \'BRC Accepted\' OR MRC_Status__c = \'MRC Accepted\')and (Current_Recent_Shelter_Location__c != \'BRC\' AND Current_Recent_Shelter_Location__c != \'MRC\')';
+            'WHERE (BRC_Status__c = \'BRC Accepted\' OR MRC_Status__c = \'MRC Accepted\')and (Current_Recent_Shelter_Location__c != \'BRC\' AND Current_Recent_Shelter_Location__c != \'MRC\')' + 
+            'AND Active_Animal__c = true';
 
         if(animalIds != null){
             queryString += ' AND Id IN: animalIds';
@@ -97,6 +103,8 @@ public with sharing class ScheduleAnimalBRCMRC {
     
     public static List<Animal__c> getAnimalsForTaskUpdate(){
         return [SELECT Id, BRC_Status__c, MRC_Status__c from Animal__c 
-                WHERE (BRC_Status__c = 'BRC Declined' OR MRC_Status__c = 'MRC Declined')];
+                WHERE (BRC_Status__c = 'BRC Declined' OR MRC_Status__c = 'MRC Declined')
+                AND Active_Animal__c = true
+                ];
     }
 }

@@ -14,7 +14,7 @@
                     <lightning-layout-item size="6">
                         <template if:true={hasPlan}>
                             <div class="slds-col slds-p-left_x-small slds-p-top_small"> 
-                                    <label class="slds-form-element__label" for="form-element-01">Treatmen Plan</label></br>
+                                    <label class="slds-form-element__label" for="form-element-01">Treatment Plan</label></br>
                                     <c-custom-lookup
                                         obj-name='Treatment_Plan__c'
                                         value-id={planId}
@@ -43,7 +43,7 @@
                                         fields={customLookupContactFields}
                                         display-fields={customLookupContactDisplayFields}
                                         field-to-query='Name'
-                                        where-clause='Active__c = true'
+                                        where-clause={whereClause}
                                         label-name='Session Contact'
                                         onlookup={customLookupEvent}
                                         onexpandfield={handleCustomLookupExpandSearch}
@@ -59,25 +59,23 @@
                     <lightning-layout-item size="6">
                         <template if:true={hasPlan}>
                             <div class="slds-col  slds-p-left_x-small slds-p-top_small"> 
-                                    <label class="slds-form-element__label" for="form-element-01">Animal</label>
-                                    <c-custom-lookup
-                                        obj-name='Animal__c'
-                                        value-id={animalId}
-                                        fields={customLookupTreatmentFields}
-                                        display-fields='Animal_Name_Id__c'
-                                        read-only=true
-                                    >
-                                    </c-custom-lookup>
+                                <label class="slds-form-element__label" for="form-element-01">Animal</label>
+                                <c-custom-lookup
+                                    obj-name='Animal__c'
+                                    value-id={animalId}
+                                    fields={customLookupTreatmentFields}
+                                    display-fields='Animal_Name_Id__c'
+                                    read-only=true
+                                >
+                                </c-custom-lookup>
                                </div>
                         </template>
                     </lightning-layout-item>
                     <lightning-layout-item size="6">
-                        <template if:true={hasPlan}>
-                           
-                                <div class="slds-col  slds-p-left_x-small slds-p-top_small"> 
-                                    <lightning-input-field field-name="Session_Notes__c"></lightning-input-field>
-                                </div> 
-                           
+                        <template if:true={hasPlan}>                           
+                            <div class="slds-col  slds-p-left_x-small slds-p-top_small"> 
+                                <lightning-input-field field-name="Session_Notes__c"></lightning-input-field>
+                            </div>
                         </template>
                     </lightning-layout-item>
                 </lightning-layout>
@@ -85,7 +83,7 @@
                     <lightning-layout-item size="12">
                         <template if:true={hasPlan}>
                             <div>
-                                <lightning-input-field field-name="Preferred_Motivators__c"></lightning-input-field>
+                                <lightning-input-field field-name="Preferred_Motivators__c" value={preferredMotivators}></lightning-input-field>
                             </div>
                         </template>
                         
@@ -93,7 +91,7 @@
                 </lightning-layout>
                 <lightning-layout>
                     <lightning-layout-item size="12">
-                        <template if:true={hasPlan}>
+                        <template if:true={noPlan}>
                             <div>
                                 Please create a Treatment Plan first.
                             </div>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FM_Age__c</fullName>
+    <externalId>false</externalId>
+    <label>FM Age</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Puppy (&lt; 5 mos)</fullName>
+                <default>false</default>
+                <label>Puppy (&lt; 5 mos)</label>
+            </value>
+            <value>
+                <fullName>Juvenile (5 -12 mos)</fullName>
+                <default>false</default>
+                <label>Juvenile (5 -12 mos)</label>
+            </value>
+            <value>
+                <fullName>Adult (1 - 8 yrs)</fullName>
+                <default>false</default>
+                <label>Adult (1 - 8 yrs)</label>
+            </value>
+            <value>
+                <fullName>Senior (8 yrs+)</fullName>
+                <default>false</default>
+                <label>Senior (8 yrs+)</label>
+            </value>
+            <value>
+                <fullName>Adult (1-8 yrs)</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Adult (1-8 yrs)</label>
+            </value>
+            <value>
+                <fullName>Juvenile (5-12 mos)</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Juvenile (5-12 mos)</label>
+            </value>
+            <value>
+                <fullName>Puppy (&lt;5 mos)</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Puppy (&lt;5 mos)</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Dog_Dog_Testing_Done__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+(IF(ISBLANK(Same_Sex_P1__c),0,1) + 
+IF(ISBLANK(Same_Sex_P2__c),0,1) + 
+IF(ISBLANK(Same_Sex_P3__c),0,1) + 
+IF(ISBLANK(Opposite_Sex_P1__c),0,1) + 
+IF(ISBLANK(Opposite_Sex_P2__c),0,1) + 
+IF(ISBLANK(Opposite_Sex_P3__c),0,1))&gt;0,TRUE,FALSE)</formula>
+    <label>Dog/Dog Testing Done</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

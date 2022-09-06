@@ -1,0 +1,118 @@
+<template>
+    <div class="slds-card slds-card_boundary card-custom">
+        <template if:true={showSpinner}>
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </template>
+        <template if:true={error}>
+            <c-error-panel errors={error} type='inlineMessage' friendly-message='We have encountered the following error:'></c-error-panel>
+        </template>
+        <template if:true={dog}>
+            <div class="slds-grid slds-var-m-top_x-small">
+                <div class="slds-size_3-of-12 slds-var-m-left_x-small">
+                    <div>
+                        <b>Name:</b>
+                    </div>
+                    {dog.name}
+                </div>
+                <div class="slds-size_1-of-12 slds-var-m-left_x-small">
+                    <div>
+                        <b>Sex:</b>
+                    </div>
+                    {dog.gender}
+                </div>
+                <div class="slds-size_1-of-12 slds-var-m-left_x-small">
+                    <div>
+                        <b>Breed:</b>
+                    </div>
+                    {dog.breed}
+                </div>
+                <div class="slds-size_1-of-12 slds-var-m-left_x-small">
+                    <div>
+                        <b>Age:</b>
+                    </div>
+                    {dog.age}
+                </div>
+                <div class="slds-size_1-of-12 slds-var-m-left_x-small">
+                    <div>
+                        <b>Location:</b>
+                    </div>
+                    {dog.location}
+                </div>
+                <div class="slds-size_1-of-12 slds-var-m-left_x-small">
+                    <div>
+                        <b>Eval Grade:</b>
+                    </div>
+                    {dog.evalGrade}
+                </div>
+                <div class="slds-size_1-of-12 slds-var-m-left_x-small">
+                    <div>
+                        <b>TX Priority:</b>
+                    </div>
+                    {dog.txPriority}
+                </div>
+                <div class="slds-size_2-of-12 slds-var-m-left_x-small">
+                    <div>
+                        <b>Medications:</b>
+                    </div>
+                    {dog.medications}
+                </div>
+            </div>
+            <lightning-accordion allow-multiple-sections-open="true">
+                <lightning-accordion-section name="labels" label="Protocols:">
+                    <lightning-layout multiple-rows class="slds-m-bottom_x-small">
+                        <lightning-layout-item >
+                            <lightning-button variant={currentProtocolsButton} label={currentProtocols} title={currentProtocolsButtonTitle} onclick={handleToggleCurrent} class="slds-m-left_x-small"></lightning-button>
+                        </lightning-layout-item>
+                        <lightning-layout-item>
+                            <lightning-button variant={currentRemovedProtocolsButton} label={currentRemovedProtocols} title={currentRemovedProtocolsButtonTitle} onclick={handleToggleRemoved} class="slds-m-left_x-small"></lightning-button>
+                        </lightning-layout-item>
+                        <lightning-layout-item>
+                            <lightning-button variant={historicalProtocolsButton} label={historicalProtocols} title={historicalProtocolsButtonTitle} onclick={handleToggleHistorical} class="slds-m-left_x-small"></lightning-button>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                    <template if:true={showActiveNotRemoved}>                        
+                        <template for:each={dog.txProtocols} for:item='protocol'>
+                            <template if:true={protocol.isActiveNotRemoved}>
+                                <c-treatment-by-dog-display-protocol
+                                    key={protocol.name}
+                                    protocol={protocol}
+                                    protocol-type="current"
+                                    show-current={showActiveNotRemoved}
+                                    show-historical={showHistorical}
+                                >                            
+                                </c-treatment-by-dog-display-protocol>
+                            </template>
+                        </template>
+                    </template>
+                    <template if:true={showActiveRemoved}>
+                        <template for:each={dog.txProtocols} for:item='protocol'>
+                            <template if:true={protocol.isActiveRemoved}>
+                                <c-treatment-by-dog-display-protocol
+                                    key={protocol.name}
+                                    protocol={protocol}
+                                    protocol-type="removed"
+                                    show-current={showActiveNotRemoved}
+                                    show-historical={showHistorical}
+                                >                            
+                                </c-treatment-by-dog-display-protocol>
+                            </template>
+                        </template>
+                    </template>
+                    <template if:true={showHistorical}>
+                        <template for:each={dog.txProtocols} for:item='protocol'>
+                            <template if:true={protocol.isHistorical}>
+                                <c-treatment-by-dog-display-protocol
+                                    key={protocol.name}
+                                    protocol={protocol}
+                                    protocol-type="historical"
+                                    show-historical={showHistorical}
+                                >                            
+                                </c-treatment-by-dog-display-protocol>
+                            </template>
+                        </template>
+                    </template>
+                </lightning-accordion-section>
+            </lightning-accordion>
+        </template>
+    </div>
+</template>

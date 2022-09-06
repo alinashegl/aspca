@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Moderate Concern</label>
+    <protected>false</protected>
+    <values>
+        <field>Grade__c</field>
+        <value xsi:type="xsd:string">C</value>
+    </values>
+    <values>
+        <field>Title__c</field>
+        <value xsi:type="xsd:string">Dog Behavior Grading Key</value>
+    </values>
+    <values>
+        <field>customHeader__c</field>
+        <value xsi:type="xsd:string">&quot;C Dogs&quot; exhibit moderate fear, anxiety or aggression</value>
+    </values>
+    <values>
+        <field>customSubject__c</field>
+        <value xsi:type="xsd:string">Fearful C Dogs show signs of moderate fer or anxiety for the majority of or during the entire evluation. if started, they do not recover--they reamin
+fearful and may attempt to hide or become immobile. Most do show at least some sign of social behaviour towards people during the evaluation, however
+some are undersocialized to people and only show social behaviour toward them when in the presence of other dogs.
+Aggressive C Dogs may (1) show aggression during the majority of the evaluation, in response to multiple situations or stimuli, (2) bite or attempt to bite
+at some point during the evaluation or both
+C Dogs may need long-term behaviour modification and/or management. Foster care may be necessary for some fearful C Dogs. Adopter counseling
+before placement is strongly recommended. Placement restrictions (no young children, no other dogs, experienced owner, etc.) are often appropriate</value>
+    </values>
+    <values>
+        <field>customText__c</field>
+        <value xsi:type="xsd:string">Moderate Concern(s)</value>
+    </values>
+</CustomMetadata>

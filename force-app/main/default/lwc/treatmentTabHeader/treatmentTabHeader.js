@@ -1,7 +1,7 @@
 import { api, LightningElement } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
 import FORM_FACTOR from '@salesforce/client/formFactor';
-
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 export default class TreatmentTabHeader extends NavigationMixin(LightningElement) {
     @api
@@ -9,12 +9,19 @@ export default class TreatmentTabHeader extends NavigationMixin(LightningElement
     showModal = false;
     showNewSessionModal = false;
     showNewTreatmentModal = false;
-
+    error;
+    @api showTreatmentPlanButton;
+    @api showTreatmentSessionButton;
+    @api showLast5TreatmentsReport;
+    url = 'https://aspca.app.box.com/s/uuxtitu6j2pypol7vdj7qk3fa0tbkk4m';
     handleClick() {
         this.showModal = true;
         this.showNewTreatmentModal = true;
     }
-
+    handleOpenNewWindow(event){
+        window.open(this.url, '_blank');
+        event.preventDefault();
+    }
     handleCancel() {
         const inputFields = this.template.querySelectorAll('lightning-input-field');
         if (inputFields) {
@@ -47,6 +54,19 @@ export default class TreatmentTabHeader extends NavigationMixin(LightningElement
                 actionName: 'view',
             }
         });
+
+        this.dispatchEvent(
+            new ShowToastEvent({
+                title: "",
+                message: "Treatment plan was created.",
+                variant: "success"
+            })
+        );
+
+    }
+    handleError(event){
+        console.log(JSON.stringify(event));
+        this.error = [event.detail.message, event.detail.detail, JSON.stringify(event.detail.output)];
     }
 
     handlePdf() {

@@ -11,12 +11,17 @@
                     </template>
                 </div>
                 <template if:false={smallForm}>
-                    <lightning-button class="slds-var-m-right_x-small" label="PDF" slot="actions" onclick={handlePdf}></lightning-button>
+                <lightning-button class="slds-var-m-right_x-small" label="PDF" slot="actions" onclick={handlePdf}></lightning-button>
                 </template>
-                <lightning-button label={actionLabel} slot="actions" onclick={handleAction}></lightning-button>
+                <lightning-button class="slds-var-m-right_x-small" label={actionLabel} slot="actions" onclick={handleAction}></lightning-button>
+                
                 <template if:false={isNew}>
                     <lightning-button class="slds-var-m-left_x-small" label="Cancel" slot="actions" onclick={handleCancel}></lightning-button>
+                    
                 </template>
+                <!--Neha  : -->
+                <lightning-button class="slds-var-m-right_x-small" label="Playgroups Last 2 Days" slot="actions" onclick={handleGetReportUrl}></lightning-button>
+                
                 <lightning-accordion allow-multiple-sections-open="true">
                     <lightning-accordion-section title="Sort/Filter" label="Sort/Filter" name="sortfilter">
                         <div class="slds-grid slds-wrap">

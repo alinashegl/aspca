@@ -32,6 +32,7 @@ public with sharing class ScheduleAnimalPlaygroups {
             'FROM Animal__c ' +
             'WHERE Playgroup_Priority_Level__c != null ' +
             'AND Current_Recent_Shelter_Location__c IN: dogPopulations ' +
+            'AND Active_Animal__c = true ' +
             'AND Type_of_Animal__c = \'Dog\'';
         if(animalIds != null){
             queryString += ' AND Id IN: animalIds';
@@ -63,7 +64,7 @@ public with sharing class ScheduleAnimalPlaygroups {
                 IsReminderSet = true,
                 Status = 'Not Started',
                 WhoId = animal.Behavior_Case_Worker__c != null ? animal.Behavior_Case_Worker__c : genericCon.Id,
-                OwnerId = genericCon.User__c,
+                OwnerId = genericCon == null ? null : genericCon.User__c,
                 Subject = 'Playgroup',
                 Species__c = 'Dog',
                 Auto_Scheduled_Task__c = true

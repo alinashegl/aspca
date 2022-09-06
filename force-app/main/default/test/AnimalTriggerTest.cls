@@ -153,6 +153,7 @@ public class AnimalTriggerTest {
         );
 
         test.startTest();
+            AnimalTriggerHandler.alreadyRan = false;
             AnimalTriggerHandler.onBeforeUpdateHandler(
                 new Animal__c[]{anim},
                 new Map<Id, Animal__c>{anim.Id => oldAnim}
@@ -164,17 +165,19 @@ public class AnimalTriggerTest {
     }
 
     private static Contact createGenericContact(String location){
-        User u = [SELECT Id, Location__c FROM User WHERE isActive = true AND Location__c =: location LIMIT 1];
-        
-        Contact con = new Contact(
-            LastName = 'genericContact',
-            Is_Generic_Contact__c = true,
-            User__c = u.Id,
-            Active__c = true
-        );
-
-        insert con;
-
-        return con;
+        List<User> u = [SELECT Id, Location__c FROM User WHERE isActive = true AND Location__c =: location LIMIT 1];
+        if(u.size() > 0){
+            Contact con = new Contact(
+                LastName = 'genericContact',
+                Is_Generic_Contact__c = true,
+                User__c = u[0].Id,
+                Active__c = true
+            );
+            
+            insert con;
+            
+            return con;
+        }
+        return null;
     }
 }

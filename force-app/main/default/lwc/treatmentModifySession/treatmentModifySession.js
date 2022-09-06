@@ -57,38 +57,8 @@ export default class TreatmentModifySession extends LightningElement {
     }
 
     handleProtocolAssignmentEvent(event){
-        let protocol = event.detail;
-        if(protocol.isAssigned && this.protocolType == 'session'){
-            let prUpdate = {
-                sObjectType: SESSION_PROTOCOL_OBJECT.objectApiName,
-                Id : protocol.id,
-                IsSkipped__c: protocol.isSkipped,
-                IsRemoved__c: protocol.isRemoved
-            }
-            if(this.assignedProtocolUpdates.find(pr => pr.Id == protocol.id)){
-                this.assignedProtocolUpdates.find(pr => pr.Id == protocol.id).IsSkipped__c = prUpdate.IsSkipped__c;
-                this.assignedProtocolUpdates.find(pr => pr.Id == protocol.id).IsRemoved__c = prUpdate.IsRemoved__c;
-            } else {
-                this.assignedProtocolUpdates.push(prUpdate);
-            }
-        }
-        else if(protocol.isAssigned && this.protocolType == 'protocol'){
-            let index = this.planProtocolsToUpdate.indexOf(protocol.id);
-            if(index != -1){
-                this.planProtocolsToUpdate.splice(index, 1);
-            } else {
-                this.planProtocolsToUpdate.push(protocol.id);
-            }
-        }
-        else if(!protocol.isAssigned){
-            let index = this.protocolsToAssign.indexOf(protocol.id);
-            if(index != -1){
-                this.protocolsToAssign.splice(index, 1);
-            } else {
-                this.protocolsToAssign.push(protocol.id);
-            }
-        }
-        this.isUpdateButtonDisabled = (this.assignedProtocolUpdates.length > 0 || this.protocolsToAssign.length > 0 || this.planProtocolsToUpdate.length > 0) ? false : true;
+        refreshApex(this.wireResponse);
+        this.refreshProtocolView();
     }
 
     handleProtocolAssignmentUpdates(){
@@ -172,7 +142,8 @@ export default class TreatmentModifySession extends LightningElement {
     handleSubmitProtocol(event){
         event.preventDefault();
         const fields = event.detail.fields;
-        fields.Name = 'Other ' + fields.Name
+        fields.Name = 'Other ' + fields.Name;
+        fields.IsActive__c = true;
         this.template
         .querySelector('lightning-record-edit-form').submit(fields);
     }

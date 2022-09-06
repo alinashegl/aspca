@@ -4,7 +4,6 @@ export default class TreatmentSessionChild extends LightningElement {
     @api record;
     @api objectApi;
     @api protocolId;
-    @api location;
 
     customLookupNewId;
     isLoading = false;
@@ -86,6 +85,22 @@ export default class TreatmentSessionChild extends LightningElement {
            data.expandField ? 'slds-col slds-size_1-of-1' : data.initialColSize;
     }
 
+    handlePotentialHelperClick(){
+        this.showPotentialHelperDogs = !this.showPotentialHelperDogs;
+    }
+
+    handleConfirmedHelperClick(){
+        this.showConfirmedHelperDogs = !this.showConfirmedHelperDogs;
+    }
+
+    get potentialHelperDogButtonVariant(){
+        return this.showPotentialHelperDogs ? 'brand' : 'neutral';
+    }
+
+    get potentialConfirmedDogButtonVariant(){
+        return this.showConfirmedHelperDogs ? 'brand' : 'neutral';
+    }
+
     get isContactList(){
         return this.objectApi === 'Session_Protocol_Contact__c' ? true : false;
     }
@@ -112,6 +127,10 @@ export default class TreatmentSessionChild extends LightningElement {
 
     get customLookUpObject(){
         return this.isContactList ? 'Contact' : 'Animal__c';
+    }
+
+    get customLookUpObjectIsAnimal(){
+        return this.customLookUpObject == 'Animal__c';
     }
 
     get customLookupFields(){
@@ -143,13 +162,26 @@ export default class TreatmentSessionChild extends LightningElement {
     get customLookupFieldToQuery(){
         return this.isContactList ? 'Name' : 'Animal_Name__c';
     }
+
     get customLookupLabelName(){
         return this.isContactList ? 'Protocol Contact' : 'Helper Dog';
     }
 
+    showPotentialHelperDogs = true;
+    showConfirmedHelperDogs = true;
+
     get customLookupWhereClause(){
         if(!this.isContactList){
-            return ' Current_Recent_Shelter_Location__c = \'' + this.location + '\'';
+            let whereClause = ' Location_Filter__c = true AND Active_Animal__c = true ';
+            if(this.showPotentialHelperDogs && this.showConfirmedHelperDogs){
+                whereClause += 'AND (Confirmed_Helper_Dog__c = true OR Potential_Helper_Dog__c = true) ';
+            } 
+            else if(this.showPotentialHelperDogs){
+                whereClause += 'AND Potential_Helper_Dog__c = true ';
+            } else if(this.showConfirmedHelperDogs){
+                whereClause += 'AND Confirmed_Helper_Dog__c = true ';
+            }
+            return whereClause;          
         }
     }
 

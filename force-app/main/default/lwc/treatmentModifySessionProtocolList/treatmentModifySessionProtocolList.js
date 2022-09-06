@@ -4,6 +4,8 @@ export default class TreatmentModifySessionProtocolList extends LightningElement
     @api protocolList = [];
     @api protocolType;
     @api isAssigned;
+    @api planId;
+    @api sessionId;
 
     handleProtocolAssignmentEvent(event){
         window.console.log('TreatmentModifySessionProtocolList event: ', JSON.stringify(event.detail));

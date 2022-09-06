@@ -42,12 +42,9 @@ public with sharing class BehaviorEvaluationsSelector extends SObjectSelector {
                 Behavior_Evaluation__c.Puppy_Behavior_on_Leash__c,
                 Behavior_Evaluation__c.Puppy_Social_Behavior_P1__c,
                 Behavior_Evaluation__c.Puppy_Social_Behavior_P2__c,
-                Behavior_Evaluation__c.Puppy_Play_Tug_P1__c,
-                Behavior_Evaluation__c.Puppy_Skipped_Play_Tug_P1__c,
-                Behavior_Evaluation__c.Puppy_Play_Tug_P2__c,
-                Behavior_Evaluation__c.Puppy_Skipped_Play_Tug_P2__c,
+                Behavior_Evaluation__c.Puppy_Play_Tug_P1__c,                
+                Behavior_Evaluation__c.Puppy_Play_Tug_P2__c,                
                 Behavior_Evaluation__c.Puppy_Play_Tag__c,
-                Behavior_Evaluation__c.Puppy_Comments_Play_Tag__c,
                 Behavior_Evaluation__c.Puppy_Restraint__c,
                 Behavior_Evaluation__c.Puppy_Comments_Restraint__c,
                 Behavior_Evaluation__c.Puppy_Skipped_Restraint__c,
@@ -180,16 +177,5 @@ public with sharing class BehaviorEvaluationsSelector extends SObjectSelector {
 
     public List<Behavior_Evaluation__c> GetSome(Integer rowLimit) {
         return querySome(rowLimit);
-    }
-
-    public Behavior_Evaluation__c GetOneById(Id key) {
-        List<Behavior_Evaluation__c> evaluations =  GetQueryFactory().WithCriteria(Criteria.Equals
-                (Behavior_Evaluation__c.Id, key)).Execute();
-        return evaluations[0];
-    }
-    public Behavior_Evaluation__c GetOneByName(String key) {
-        List<Behavior_Evaluation__c> e = GetQueryFactory().WithCriteria(Criteria.Equals
-                (Behavior_Evaluation__c.Name, key)).Execute();
-        return e[0];
     }
 }

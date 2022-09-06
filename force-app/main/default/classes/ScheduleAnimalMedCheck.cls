@@ -93,7 +93,7 @@ public with sharing class ScheduleAnimalMedCheck {
                     Animal__c = treatmentTask.Animal__c,
                     RecordTypeId = recordTypeId,
                     ActivityDate = d,
-                    Description = 'Bmed Check is needed for: ' + treatmentTask.Animal__r.Animal_Name_Id__c + ' (' + treatmentTask.Animal__r.Current_Recent_Shelter_Location__c + ')',
+                    Description = AutoScheduleTasksUtil.BMED_DESCRIPTION + treatmentTask.Animal__r.Animal_Name_Id__c + ' (' + treatmentTask.Animal__r.Current_Recent_Shelter_Location__c + ')',
                     IsReminderSet = false,
                     Status = 'Not Started',
                     WhoId = treatmentTask.Animal__r.Behavior_Case_Worker__c != null ? treatmentTask.Animal__r.Behavior_Case_Worker__c : genericCon.Id,
@@ -111,6 +111,7 @@ public with sharing class ScheduleAnimalMedCheck {
 
     @testVisible
     public static Task[] getTreatmentTasks(Id[] animalIds){
+        String[] dogPopulations = AutoScheduleTasksUtil.dogPopulations;
         Date tempEndDate = Date.today().addDays(-7);
         String queryString = 'SELECT Id, IsRecurrence, CreatedDate, ActivityDate, RecurrenceStartDateOnly, RecurrenceEndDateOnly, RecurrenceActivityId, ' +
             'WhatId, WhoId, OwnerId, Animal__c, Animal__r.Animal_Name_Id__c, Animal__r.Current_Recent_Shelter_Location__c, ' +
@@ -118,6 +119,7 @@ public with sharing class ScheduleAnimalMedCheck {
             'Animal_Exam_Sheet_Lookup__c, Medication__c ' +
             'FROM Task WHERE RecordType.Name = \'Treatments\' ' +
             'AND Animal__r.Type_of_Animal__c = \'Dog\' ' +
+            'AND Animal__r.Current_Recent_Shelter_Location__c IN: dogPopulations ' +
             'AND Medication__r.Behavior_Medication__c = true ' +
             'AND ((IsRecurrence = true AND RecurrenceEndDateOnly >= : tempEndDate) ' +
             'OR (RecurrenceActivityId = null AND ActivityDate >= : tempEndDate))';

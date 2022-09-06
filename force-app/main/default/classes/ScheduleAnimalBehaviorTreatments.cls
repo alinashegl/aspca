@@ -82,7 +82,7 @@ public with sharing class ScheduleAnimalBehaviorTreatments {
                 IsReminderSet = true,
                 Status = 'Not Started',
                 WhoId = treatment.Animal__r.Behavior_Case_Worker__c != null ? treatment.Animal__r.Behavior_Case_Worker__c : genericCon.Id,
-                OwnerId = genericCon.User__c,
+                OwnerId = genericCon == null ? null : genericCon.User__c,
                 Subject = 'Treatment',
                 Species__c = 'Dog',
                 Auto_Scheduled_Task__c = true

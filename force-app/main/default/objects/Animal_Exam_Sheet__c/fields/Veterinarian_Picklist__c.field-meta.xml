@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Veterinarian_Picklist__c</fullName>
+    <externalId>false</externalId>
+    <label>Veterinarian</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Rachel Touroo</fullName>
+                <default>false</default>
+                <label>Rachel Touroo</label>
+            </value>
+            <value>
+                <fullName>Elizabeth Pearlman</fullName>
+                <default>false</default>
+                <label>Elizabeth Pearlman</label>
+            </value>
+            <value>
+                <fullName>Alison Liu</fullName>
+                <default>false</default>
+                <label>Alison Liu</label>
+            </value>
+            <value>
+                <fullName>Jasmine Bruno</fullName>
+                <default>false</default>
+                <label>Jasmine Bruno</label>
+            </value>
+            <value>
+                <fullName>Laura Niestat</fullName>
+                <default>false</default>
+                <label>Laura Niestat</label>
+            </value>
+            <value>
+                <fullName>Robert Reisman</fullName>
+                <default>false</default>
+                <label>Robert Reisman</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
