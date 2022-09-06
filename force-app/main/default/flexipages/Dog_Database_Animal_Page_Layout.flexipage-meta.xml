@@ -893,6 +893,21 @@
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
+                    <name>actionNames</name>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>adminFilters</name>
+                    <valueList>
+                        <valueListItems>
+                            <value>IsActive__c|EQUALS|true</value>
+                        </valueListItems>
+                    </valueList>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>maxRecordsToDisplay</name>
+                    <value>10</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
                     <name>parentFieldApiName</name>
                     <value>Animal__c.Id</value>
                 </componentInstanceProperties>
@@ -901,19 +916,62 @@
                     <value>Treatment_Plan__r</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
-                    <name>relatedListComponentOverride</name>
+                    <name>relatedListDisplayType</name>
                     <value>ADVGRID</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
-                    <name>rowsToDisplay</name>
-                    <value>10</value>
+                    <name>relatedListFieldAliases</name>
+                    <valueList>
+                        <valueListItems>
+                            <value>NAME</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>IsActive__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Treatment_Priority__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Problem_Behavior_Aggression__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Problem_Behavior_Arousal__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Problem_Behavior_Fear__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Problem_Behavior_Miscellaneous__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Enrichment_Priority__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Enrichment_Activities__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>LAST_UPDATE</value>
+                        </valueListItems>
+                    </valueList>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>relatedListLabel</name>
+                    <value>Treatment Plans</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>showActionBar</name>
                     <value>false</value>
                 </componentInstanceProperties>
-                <componentName>force:relatedListSingleContainer</componentName>
-                <identifier>force_relatedListSingleContainer14</identifier>
+                <componentInstanceProperties>
+                    <name>sortFieldAlias</name>
+                    <value>NAME</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>sortFieldOrder</name>
+                    <value>Descending</value>
+                </componentInstanceProperties>
+                <componentName>lst:dynamicRelatedList</componentName>
+                <identifier>lst_dynamicRelatedList</identifier>
             </componentInstance>
         </itemInstances>
         <name>Facet-0tcmc3536esk</name>
@@ -1982,6 +2040,21 @@
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
+                    <name>actionNames</name>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>adminFilters</name>
+                    <valueList>
+                        <valueListItems>
+                            <value>IsActive__c|EQUALS|true</value>
+                        </valueListItems>
+                    </valueList>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>maxRecordsToDisplay</name>
+                    <value>10</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
                     <name>parentFieldApiName</name>
                     <value>Animal__c.Id</value>
                 </componentInstanceProperties>
@@ -1990,19 +2063,62 @@
                     <value>Treatment_Plan__r</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
-                    <name>relatedListComponentOverride</name>
+                    <name>relatedListDisplayType</name>
                     <value>ADVGRID</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
-                    <name>rowsToDisplay</name>
-                    <value>10</value>
+                    <name>relatedListFieldAliases</name>
+                    <valueList>
+                        <valueListItems>
+                            <value>NAME</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>IsActive__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Treatment_Priority__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Problem_Behavior_Aggression__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Problem_Behavior_Arousal__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Problem_Behavior_Fear__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Problem_Behavior_Miscellaneous__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Enrichment_Priority__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Enrichment_Activities__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>LAST_UPDATE</value>
+                        </valueListItems>
+                    </valueList>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>relatedListLabel</name>
+                    <value>Treatment Plans</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>showActionBar</name>
                     <value>true</value>
                 </componentInstanceProperties>
-                <componentName>force:relatedListSingleContainer</componentName>
-                <identifier>force_relatedListSingleContainer23</identifier>
+                <componentInstanceProperties>
+                    <name>sortFieldAlias</name>
+                    <value>NAME</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>sortFieldOrder</name>
+                    <value>Descending</value>
+                </componentInstanceProperties>
+                <componentName>lst:dynamicRelatedList</componentName>
+                <identifier>lst_dynamicRelatedList2</identifier>
             </componentInstance>
         </itemInstances>
         <name>Facet-d310bffd-547f-4c07-abd3-2d18335abaa0</name>
@@ -2231,6 +2347,21 @@
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
+                    <name>actionNames</name>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>adminFilters</name>
+                    <valueList>
+                        <valueListItems>
+                            <value>IsActive__c|EQUALS|true</value>
+                        </valueListItems>
+                    </valueList>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>maxRecordsToDisplay</name>
+                    <value>10</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
                     <name>parentFieldApiName</name>
                     <value>Animal__c.Id</value>
                 </componentInstanceProperties>
@@ -2239,19 +2370,62 @@
                     <value>Treatment_Plan__r</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
-                    <name>relatedListComponentOverride</name>
+                    <name>relatedListDisplayType</name>
                     <value>ADVGRID</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
-                    <name>rowsToDisplay</name>
-                    <value>10</value>
+                    <name>relatedListFieldAliases</name>
+                    <valueList>
+                        <valueListItems>
+                            <value>NAME</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>IsActive__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Treatment_Priority__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Problem_Behavior_Aggression__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Problem_Behavior_Arousal__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Problem_Behavior_Fear__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Problem_Behavior_Miscellaneous__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Enrichment_Priority__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Enrichment_Activities__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>LAST_UPDATE</value>
+                        </valueListItems>
+                    </valueList>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>relatedListLabel</name>
+                    <value>Treatment Plans</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>showActionBar</name>
                     <value>false</value>
                 </componentInstanceProperties>
-                <componentName>force:relatedListSingleContainer</componentName>
-                <identifier>force_relatedListSingleContainer3</identifier>
+                <componentInstanceProperties>
+                    <name>sortFieldAlias</name>
+                    <value>NAME</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>sortFieldOrder</name>
+                    <value>Descending</value>
+                </componentInstanceProperties>
+                <componentName>lst:dynamicRelatedList</componentName>
+                <identifier>lst_dynamicRelatedList3</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>
