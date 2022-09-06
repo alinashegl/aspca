@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Message channel for passing the Behavior Summary Lock status change.</description>
+    <isExposed>true</isExposed>
+    <lightningMessageFields>
+        <description>Is the record locked</description>
+        <fieldName>isLocked</fieldName>
+    </lightningMessageFields>
+    <masterLabel>BehaviorLockMessage</masterLabel>
+</LightningMessageChannel>

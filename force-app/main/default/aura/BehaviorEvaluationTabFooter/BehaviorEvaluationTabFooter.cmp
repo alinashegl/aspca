@@ -7,6 +7,7 @@
     <aura:attribute name="skipVal" type="Object" description="API Name of Skip Reason " />
     <aura:attribute name="tabContent" type="Object[]" default="[]" />
     <aura:attribute name="IsSkipped" type="Boolean" />
+    <aura:attribute name="isLocked" type="Boolean"/>
     <aura:attribute name="showModal" type="Boolean" default="false" />
     <aura:attribute name="skipReasons" description="List of Skip Reasons" type="List" />
     <aura:attribute name="skipReason" type="String" />
@@ -22,7 +23,7 @@
     <aura:registerEvent name="skipSaveEvt" type="c:skipSaveEvent"/>
     <table>
         <tr>
-        <lightning:input type="checkbox" name="Skip" label="Skip?" checked="{!v.IsSkipped}" onchange="{!c.handleSkip}"/>
+        <lightning:input type="checkbox" name="Skip" label="Skip?" checked="{!v.IsSkipped}" onchange="{!c.handleSkip}" disabled="{!v.isLocked}"/>
         <c:BehaviorEvaluationModal title="Select Skip Reason" isActive="{!v.showModal}"  recordId="{!v.recordId}">
             <aura:set attribute="body">
                 <lightning:select label="Select a Skip Reasons" name="skipReason"
@@ -51,10 +52,10 @@
         </c:BehaviorEvaluationModal>
         </tr>
         <tr>
-        <lightning:textarea label="Comments"  name="{!v.testName.id}" aura:id="testComments" value="{!v.testName.value}" />
+        <lightning:textarea label="Comments"  name="{!v.testName.id}" aura:id="testComments" value="{!v.testName.value}" disabled="{!v.isLocked}"/>
         </tr>
         <tr>
-        <lightning:button variant="brand-outline" label="Add Comment to Summary" name="updateComment"
+        <lightning:button variant="brand-outline" label="Add Comment to Summary" name="updateComment" disabled="{!v.isLocked}"
                           onclick="{!c.handleTabSave}" />
         </tr>
     </table>
