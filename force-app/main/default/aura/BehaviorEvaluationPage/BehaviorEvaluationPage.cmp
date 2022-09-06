@@ -83,7 +83,7 @@
     <aura:attribute name="MuzzleSSD3" type="Boolean" />
     <aura:attribute name="MuzzleOSD3" type="Boolean" />
     <aura:attribute name="spinner" type="boolean" default="false"/>
-
+    <aura:attribute name="isLocked" type="boolean" default="true"/>
 
     <!-- attribute for component attributes -->
     <aura:attribute name="notConcerningOptions" type="List"/>
@@ -94,6 +94,9 @@
     <aura:method name="handleClick"  action="{!c.handleClick}" access="public" />
     <aura:handler name="skipSaveEvt" event="c:skipSaveEvent" action="{!c.handleSkipSaveEvent}"/>
     <aura:attribute name="behaviorEvaluation" type="Object"/>
+
+    <!-- <aura:handler event="aura:locationChange" action="{!c.handleLocationChange}"/> -->
+
     <!--loading spinner start-->
     <aura:if isTrue="{!v.spinner}">
         <div aura:id="spinnerId" class="slds-spinner_container">
@@ -109,7 +112,11 @@
     <lightning:notificationsLibrary aura:id="lib" />
     <lightning:overlayLibrary aura:id="overlayLib" />
 
-
+    <lightning:messageChannel 
+        type="BehaviorLockChannel__c"
+        onMessage="{!c.handleMessage}" 
+        scope="APPLICATION"
+    />
 
         <lightning:tabset variant="vertical" selectedTabId="{!v.tabId}" aura:id="tabs">
             <lightning:recordEditForm class="slds-grid slds-theme_shade" objectApiName="Behavior_Evaluation__c"
@@ -157,21 +164,21 @@
                                     <aura:iteration items="{!v.behaviorInKennelTest}" var="variable">
                                         <table>
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
-                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                                                            index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                             </c:BehaviorEvaluationOptionGroup>
                                             &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
-                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                                                            index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                             </c:BehaviorEvaluationOptionGroup>
                                             &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{#variable.mAlertOptions}"
-                                                                            index="{!index}"  recordId="{!v.recordId}">
+                                                                            index="{!index}"  recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationOptionGroup>
                                             <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
                                             &nbsp;
                                                 <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                                 index="{!index}"
-                                                                                recordId="{!v.recordId}">
+                                                                                recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                                 </c:BehaviorEvaluationOptionGroup>
                                             </aura:if>
                                         </table>
@@ -181,7 +188,7 @@
                                     <lightning:layout >
                                         <aura:iteration items="{!v.behaviorInKennelTest}" var="variable">
                                             <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
-                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}" isLocked="{!v.isLocked}"
                                                                         skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                         </aura:iteration>
                                     </lightning:layout>
@@ -198,21 +205,21 @@
                                     <aura:iteration items="{!v.behaviorOnLeashTest}" var="variable">
                                         <table>
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
-                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                                                            index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationOptionGroup>
                                             &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
-                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                                                            index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                             </c:BehaviorEvaluationOptionGroup>
                                             &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
-                                                                            index="{!index}"  recordId="{!v.recordId}">
+                                                                            index="{!index}"  recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationOptionGroup>
                                             <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
                                             &nbsp;
                                                 <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                                 index="{!index}"
-                                                                                recordId="{!v.recordId}">
+                                                                                recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                                 </c:BehaviorEvaluationOptionGroup>
                                             </aura:if>
                                         </table>
@@ -222,7 +229,7 @@
                                     <lightning:layout >
                                         <aura:iteration items="{!v.behaviorOnLeashTest}" var="variable">
                                             <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
-                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}" isLocked="{!v.isLocked}"
                                                                         skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                         </aura:iteration>
                                         &nbsp; &nbsp;
@@ -243,21 +250,21 @@
                                     <aura:iteration items="{!v.socialBehaviorTestPart1}" var="variable">
                                         <table>
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
-                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                                                            index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                             </c:BehaviorEvaluationOptionGroup>
                                             &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
-                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                                                            index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                             </c:BehaviorEvaluationOptionGroup>
                                             &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
-                                                                            index="{!index}"  recordId="{!v.recordId}">
+                                                                            index="{!index}"  recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationOptionGroup>
                                             <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
                                             &nbsp;
                                                 <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                                 index="{!index}"
-                                                                                recordId="{!v.recordId}">
+                                                                                recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                                 </c:BehaviorEvaluationOptionGroup>
                                             </aura:if>
                                         </table>
@@ -267,7 +274,7 @@
                                     <lightning:layout >
                                         <aura:iteration items="{!v.socialBehaviorTestPart1}" var="variable">
                                             <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
-                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}" isLocked="{!v.isLocked}"
                                                                         skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                         </aura:iteration>>
                                         &nbsp; &nbsp;
@@ -288,19 +295,19 @@
                                     <aura:iteration items="{!v.socialBehaviorTestPart2}" var="variable">
                                         <table>
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
-                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                                                            index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                             </c:BehaviorEvaluationOptionGroup>
                                             &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
-                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                                                            index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                             </c:BehaviorEvaluationOptionGroup>
                                             &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
-                                                                            index="{!index}"  recordId="{!v.recordId}">
+                                                                            index="{!index}"  recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationOptionGroup>
                                             <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
                                             &nbsp;
-                                                <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
+                                                <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}" isLocked="{!v.isLocked}"
                                                                                 index="{!index}"
                                                                                 recordId="{!v.recordId}">
                                                 </c:BehaviorEvaluationOptionGroup>
@@ -312,7 +319,7 @@
                                     <lightning:layout >
                                         <aura:iteration items="{!v.socialBehaviorTestPart2}" var="variable">
                                             <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
-                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}" isLocked="{!v.isLocked}"
                                                                         skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                         </aura:iteration>
                                         &nbsp; &nbsp;
@@ -333,21 +340,21 @@
                                     <aura:iteration items="{!v.pleasantTouchTest}" var="variable">
                                         <table>
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
-                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                                                            index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                             </c:BehaviorEvaluationOptionGroup>
                                             &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
-                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                                                            index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                             </c:BehaviorEvaluationOptionGroup>
                                             &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
-                                                                            index="{!index}"  recordId="{!v.recordId}">
+                                                                            index="{!index}"  recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationOptionGroup>
                                             <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
                                             &nbsp;
                                                 <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                                 index="{!index}"
-                                                                                recordId="{!v.recordId}">
+                                                                                recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                                 </c:BehaviorEvaluationOptionGroup>
                                             </aura:if>
                                         </table>
@@ -357,7 +364,7 @@
                                     <lightning:layout >
                                         <aura:iteration items="{!v.pleasantTouchTest}" var="variable">
                                             <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
-                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}" isLocked="{!v.isLocked}"
                                                                         skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                         </aura:iteration>
                                         &nbsp; &nbsp;
@@ -405,6 +412,7 @@
                                                             onchange="{!c.handleUnpleasantTouch}"
                                                             aura:id="UnpleasantTouch1stFlankInput"
                                                             checked="{!v.UnpleasantTouch1stFlank}"
+                                                            disabled="{!v.isLocked}"
                                                         />
                                                     </td>
                                                     <td width="5%">
@@ -413,6 +421,7 @@
                                                             onchange="{!c.handleUnpleasantTouch}"
                                                             aura:id="UnpleasantTouch2ndFlankInput"
                                                             checked="{!v.UnpleasantTouch2ndFlank}"
+                                                            disabled="{!v.isLocked}"
                                                         />
                                                     </td>
                                                     <td width="89%" style="font-weight:900;">Rear flank pinch instead</td>
@@ -427,30 +436,30 @@
                                             <c:BehaviorEvaluationMultipleOptionGroup colNumber="2" type="unpleasantTouch"
                                                                                     options="{!variable.VC0}"
                                                                                     index="{!index}"
-                                                                                    recordId="{!v.recordId}">
+                                                                                    recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationMultipleOptionGroup>
                                         </aura:if>
                                             &nbsp;
                                             <c:BehaviorEvaluationMultipleOptionGroup type="unpleasantTouch" colNumber="2"
                                                                                     options="{!variable.VC1}"
-                                                                                    index="{!index}" recordId="{!v.recordId}" >
+                                                                                    index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationMultipleOptionGroup>
                                             &nbsp;
                                             <c:BehaviorEvaluationMultipleOptionGroup type="unpleasantTouch" colNumber="2"
                                                                                     options="{!variable.VC2}"
-                                                                                    index="{!index}" recordId="{!v.recordId}" >
+                                                                                    index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                             </c:BehaviorEvaluationMultipleOptionGroup>
                                             &nbsp;
                                             <c:BehaviorEvaluationMultipleOptionGroup type="unpleasantTouch" colNumber="2"
                                                                                     options="{!variable.VC3}"
-                                                                                    index="{!index}"  recordId="{!v.recordId}">
+                                                                                    index="{!index}"  recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationMultipleOptionGroup>
                                             <aura:if isTrue="{!not(empty(variable.VC4))}">
                                             &nbsp;
                                                 <c:BehaviorEvaluationMultipleOptionGroup type="unpleasantTouch" colNumber="2"
                                                                                         options="{!variable.VC4}"
                                                                                         index="{!index}"
-                                                                                        recordId="{!v.recordId}">
+                                                                                        recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                                 </c:BehaviorEvaluationMultipleOptionGroup>
                                             </aura:if>
                                         </table>
@@ -460,7 +469,7 @@
                                     <lightning:layout >
                                         <aura:iteration items="{!v.unpleasantTouchTest}" var="variable">
                                             <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
-                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}" isLocked="{!v.isLocked}"
                                                                         skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                         </aura:iteration>
                                         &nbsp; &nbsp;
@@ -481,19 +490,19 @@
                                     <aura:iteration items="{!v.playTestPart1}" var="variable">
                                         <table>
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
-                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                                                            index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationOptionGroup>
                                             &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
-                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                                                            index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationOptionGroup>
                                             &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
-                                                                            index="{!index}"  recordId="{!v.recordId}">
+                                                                            index="{!index}"  recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationOptionGroup>
                                             <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
                                             &nbsp;
-                                                <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
+                                                <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}" isLocked="{!v.isLocked}"
                                                                                 index="{!index}"
                                                                                 recordId="{!v.recordId}">
                                                 </c:BehaviorEvaluationOptionGroup>
@@ -505,7 +514,7 @@
                                     <lightning:layout >
                                         <aura:iteration items="{!v.playTestPart1}" var="variable">
                                             <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
-                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}" isLocked="{!v.isLocked}"
                                                                         skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                         </aura:iteration>
                                         &nbsp; &nbsp;
@@ -526,21 +535,21 @@
                                     <aura:iteration items="{!v.playTestPart2}" var="variable">
                                         <table>
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
-                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                                                            index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationOptionGroup>
                                             &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
-                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                                                            index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationOptionGroup>
                                             &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
-                                                                            index="{!index}"  recordId="{!v.recordId}">
+                                                                            index="{!index}"  recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationOptionGroup>
                                             <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
                                             &nbsp;
                                                 <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                                 index="{!index}"
-                                                                                recordId="{!v.recordId}">
+                                                                                recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                                 </c:BehaviorEvaluationOptionGroup>
                                             </aura:if>
                                         </table>
@@ -550,7 +559,7 @@
                                     <lightning:layout >
                                         <aura:iteration items="{!v.playTestPart2}" var="variable">
                                             <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
-                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}" isLocked="{!v.isLocked}"
                                                                         skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                         </aura:iteration>
                                         &nbsp; &nbsp;
@@ -571,22 +580,22 @@
                                     <aura:iteration items="{!v.tagTest}" var="variable">
                                         <table>
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
-                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                                                            index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationOptionGroup>
                                             &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
-                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                                                            index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationOptionGroup>
                                             &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
-                                                                            index="{!index}"  recordId="{!v.recordId}">
+                                                                            index="{!index}"  recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationOptionGroup>
                                             &nbsp;
                                             <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
                                             &nbsp;
                                                 <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                                 index="{!index}"
-                                                                                recordId="{!v.recordId}">
+                                                                                recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                                 </c:BehaviorEvaluationOptionGroup>
                                             </aura:if>
 
@@ -597,7 +606,7 @@
                                     <lightning:layout >
                                         <aura:iteration items="{!v.tagTest}" var="variable">
                                             <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
-                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}" isLocked="{!v.isLocked}"
                                                                         skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                         </aura:iteration>
                                         &nbsp; &nbsp;
@@ -645,21 +654,21 @@
                                     <aura:iteration items="{!v.resourceGuardingTestPart1}" var="variable">
                                         <table>
                                             <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingOne" colNumber="4" options="{!variable.VC1}"
-                                                                                    index="{!index}" recordId="{!v.recordId}" >
+                                                                                    index="{!index}" recordId="{!v.recordId}"  isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationMultipleOptionGroup>
                                             &nbsp;
                                             <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingOne" colNumber="4" options="{!variable.VC2}"
-                                                                                    index="{!index}" recordId="{!v.recordId}" >
+                                                                                    index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                             </c:BehaviorEvaluationMultipleOptionGroup>
                                             &nbsp;
                                             <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingOne" colNumber="4" options="{!variable.VC3}"
-                                                                                    index="{!index}"  recordId="{!v.recordId}">
+                                                                                    index="{!index}"  recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationMultipleOptionGroup>
                                             <aura:if isTrue="{!not(empty(variable.VC4))}">
                                             &nbsp;
                                                 <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingOne" colNumber="4" options="{!variable.VC4}"
                                                                                         index="{!index}"
-                                                                                        recordId="{!v.recordId}">
+                                                                                        recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                                 </c:BehaviorEvaluationMultipleOptionGroup>
                                             </aura:if>
                                         </table>
@@ -669,7 +678,7 @@
                                     <lightning:layout >
                                         <aura:iteration items="{!v.resourceGuardingTestPart1}" var="variable">
                                             <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
-                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}" isLocked="{!v.isLocked}"
                                                                         skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                         </aura:iteration>
                                         &nbsp; &nbsp;
@@ -718,21 +727,21 @@
                                     <aura:iteration items="{!v.resourceGuardingTestPart2}" var="variable">
                                         <table>
                                             <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingTwo" colNumber="4" options="{!variable.VC1}"
-                                                                                    index="{!index}" recordId="{!v.recordId}" >
+                                                                                    index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                             </c:BehaviorEvaluationMultipleOptionGroup>
                                             &nbsp;
                                             <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingTwo" colNumber="4" options="{!variable.VC2}"
-                                                                                    index="{!index}" recordId="{!v.recordId}" >
+                                                                                    index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                             </c:BehaviorEvaluationMultipleOptionGroup>
                                             &nbsp;
                                             <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingTwo" colNumber="4" options="{!variable.VC3}"
-                                                                                    index="{!index}"  recordId="{!v.recordId}">
+                                                                                    index="{!index}"  recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationMultipleOptionGroup>
                                             <aura:if isTrue="{!not(empty(variable.VC4))}">
                                             &nbsp;
                                                 <c:BehaviorEvaluationMultipleOptionGroup type="resourceGuardingTwo" colNumber="4" options="{!variable.VC4}"
                                                                                         index="{!index}"
-                                                                                        recordId="{!v.recordId}">
+                                                                                        recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                                 </c:BehaviorEvaluationMultipleOptionGroup>
                                             </aura:if>
                                         </table>
@@ -742,7 +751,7 @@
                                     <lightning:layout >
                                         <aura:iteration items="{!v.resourceGuardingTestPart2}" var="variable">
                                             <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
-                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}" isLocked="{!v.isLocked}"
                                                                         skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                         </aura:iteration>
                                         &nbsp; &nbsp;
@@ -763,20 +772,20 @@
                                     <aura:iteration items="{!v.toddlerDollTestPart1}" var="variable">
                                         <table>
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
-                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                                                            index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                             </c:BehaviorEvaluationOptionGroup>
                                             &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
-                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                                                            index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                             </c:BehaviorEvaluationOptionGroup>
                                             &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
-                                                                            index="{!index}"  recordId="{!v.recordId}">
+                                                                            index="{!index}"  recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationOptionGroup>
                                             <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
                                             &nbsp;
                                                 <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
-                                                                                index="{!index}"
+                                                                                index="{!index}" isLocked="{!v.isLocked}"
                                                                                 recordId="{!v.recordId}">
                                                 </c:BehaviorEvaluationOptionGroup>
                                             </aura:if>
@@ -787,7 +796,7 @@
                                     <lightning:layout >
                                         <aura:iteration items="{!v.toddlerDollTestPart1}" var="variable">
                                             <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
-                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}" isLocked="{!v.isLocked}"
                                                                         skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                         </aura:iteration>
                                         &nbsp; &nbsp;
@@ -808,21 +817,21 @@
                                     <aura:iteration items="{!v.toddlerDollTestP2}" var="variable">
                                         <table>
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
-                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                                                            index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                             </c:BehaviorEvaluationOptionGroup>
                                             &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
-                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                                                            index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                             </c:BehaviorEvaluationOptionGroup>
                                             &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
-                                                                            index="{!index}"  recordId="{!v.recordId}">
+                                                                            index="{!index}"  recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationOptionGroup>
                                             <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
                                             &nbsp;
                                                 <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                                 index="{!index}"
-                                                                                recordId="{!v.recordId}">
+                                                                                recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                                 </c:BehaviorEvaluationOptionGroup>
                                             </aura:if>
                                         </table>
@@ -832,7 +841,7 @@
                                     <lightning:layout >
                                         <aura:iteration items="{!v.toddlerDollTestP2}" var="variable">
                                             <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
-                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}" isLocked="{!v.isLocked}"
                                                                         skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                         </aura:iteration>
                                         &nbsp; &nbsp;
@@ -853,15 +862,15 @@
                                     <aura:iteration items="{!v.scoldingPersonTestP1}" var="variable">
                                         <table>
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
-                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                                                            index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                             </c:BehaviorEvaluationOptionGroup>
                                             &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
-                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                                                            index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                             </c:BehaviorEvaluationOptionGroup>
                                             &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
-                                                                            index="{!index}"  recordId="{!v.recordId}">
+                                                                            index="{!index}"  recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationOptionGroup>
                                             &nbsp;
 
@@ -869,7 +878,7 @@
                                             &nbsp;
                                                 <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                                 index="{!index}"
-                                                                                recordId="{!v.recordId}">
+                                                                                recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                                 </c:BehaviorEvaluationOptionGroup>
                                             </aura:if>
                                         </table>
@@ -879,7 +888,7 @@
                                     <lightning:layout >
                                         <aura:iteration items="{!v.scoldingPersonTestP1}" var="variable">
                                             <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
-                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}" isLocked="{!v.isLocked}"
                                                                         skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                         </aura:iteration>
                                         &nbsp; &nbsp;
@@ -900,21 +909,21 @@
                                     <aura:iteration items="{!v.scoldingPersonTestP2}" var="variable">
                                         <table>
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
-                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                                                            index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                             </c:BehaviorEvaluationOptionGroup>
                                             &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
-                                                                            index="{!index}" recordId="{!v.recordId}" >
+                                                                            index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                             </c:BehaviorEvaluationOptionGroup>
                                             &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
-                                                                            index="{!index}"  recordId="{!v.recordId}">
+                                                                            index="{!index}"  recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationOptionGroup>
                                             <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
                                             &nbsp;
                                                 <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                                 index="{!index}"
-                                                                                recordId="{!v.recordId}">
+                                                                                recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                                 </c:BehaviorEvaluationOptionGroup>
                                             </aura:if>
                                         </table>
@@ -924,7 +933,7 @@
                                     <lightning:layout >
                                         <aura:iteration items="{!v.scoldingPersonTestP2}" var="variable">
                                             <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
-                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}" isLocked="{!v.isLocked}"
                                                                         skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                         </aura:iteration>
                                         &nbsp; &nbsp;
@@ -944,15 +953,15 @@
                                             <table>
 
                                                 <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
-                                                                                index="{!index}" recordId="{!v.recordId}" >
+                                                                                index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                                 </c:BehaviorEvaluationOptionGroup>
                                                 &nbsp;
                                                 <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
-                                                                                index="{!index}" recordId="{!v.recordId}" >
+                                                                                index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                                 </c:BehaviorEvaluationOptionGroup>
                                                 &nbsp;
                                                 <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
-                                                                                index="{!index}"  recordId="{!v.recordId}">
+                                                                                index="{!index}"  recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                                 </c:BehaviorEvaluationOptionGroup>
                                                 &nbsp;
                                                 <div style="font-weight:900; -webkit-text-fill-color:#FF0000; ">
@@ -963,7 +972,8 @@
                                                                     label="Use Caution for Real Dog Test"
                                                                     checked="{!v.UseCaution}"
                                                                     onchange="{!c.handleCaution}"
-                                                                    aura:id="cautionInput"/></td>
+                                                                    aura:id="cautionInput"
+                                                                    disabled="{!v.isLocked}"/></td>
                                                     <td width="90%"><label>Use Caution for Real Dog Test</label></td>
                                                     </tr>
                                                 </table>
@@ -973,7 +983,7 @@
                                             &nbsp;
                                                     <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                                     index="{!index}"
-                                                                                    recordId="{!v.recordId}">
+                                                                                    recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                                     </c:BehaviorEvaluationOptionGroup>
                                                 </aura:if>
                                             </table>
@@ -983,7 +993,7 @@
                                         <lightning:layout >
                                             <aura:iteration items="{!v.fakeDogInteractionTest}" var="variable">
                                                 <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
-                                                                            IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                            IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}" isLocked="{!v.isLocked}"
                                                                             skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                             </aura:iteration>
                                             &nbsp; &nbsp;
@@ -1006,21 +1016,21 @@
                                 <aura:iteration items="{!v.sameSexDogTestPart1}" var="variable">
                                     <table>
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
-                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                                                         index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
-                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                                                         index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
-                                                                         index="{!index}"  recordId="{!v.recordId}">
+                                                                         index="{!index}"  recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
                                         &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
-                                                                             recordId="{!v.recordId}">
+                                                                             recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
                                     </table>
@@ -1030,7 +1040,7 @@
                                 <lightning:layout >
                                     <aura:iteration items="{!v.sameSexDogTestPart1}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
-                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}" isLocked="{!v.isLocked}"
                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>
                                     &nbsp; &nbsp;
@@ -1051,21 +1061,21 @@
                                 <aura:iteration items="{!v.sameSexDogTestPart2}" var="variable">
                                     <table>
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
-                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                                                         index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
-                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                                                         index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
-                                                                         index="{!index}"  recordId="{!v.recordId}">
+                                                                         index="{!index}"  recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
                                         &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
-                                                                             recordId="{!v.recordId}">
+                                                                             recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
                                     </table>
@@ -1075,7 +1085,7 @@
                                 <lightning:layout >
                                     <aura:iteration items="{!v.sameSexDogTestPart2}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
-                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}" isLocked="{!v.isLocked}"
                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>
                                     &nbsp; &nbsp;
@@ -1095,9 +1105,27 @@
                                 <br></br>
                                 <table class="slds-align_absolute-center">
                                     <tr>
-                                        <td style="padding-right: 30px;"><input type="radio" id="SMuzzled3" name="sameMuzzled3" value="Muzzled" checked="{!v.MuzzleSSD3}" onchange="{!c.handleMuzzle}"></input>
+                                        <td style="padding-right: 30px;">
+                                            <input 
+                                                type="radio" 
+                                                id="SMuzzled3" 
+                                                name="sameMuzzled3" 
+                                                value="Muzzled" 
+                                                checked="{!v.MuzzleSSD3}" 
+                                                onchange="{!c.handleMuzzle}"
+                                                disabled="{!v.isLocked}"
+                                            ></input>
                                             <strong><label for="SMuzzled3"> Muzzled</label></strong></td>
-                                        <td><input type="radio" id="SNotMuzzled3" name="sameMuzzled3" value="Not Muzzled" checked="{!not(v.MuzzleSSD3)}" onchange="{!c.handleMuzzle}"></input>
+                                        <td>
+                                            <input 
+                                                type="radio" 
+                                                id="SNotMuzzled3" 
+                                                name="sameMuzzled3" 
+                                                value="Not Muzzled" 
+                                                checked="{!not(v.MuzzleSSD3)}" 
+                                                onchange="{!c.handleMuzzle}"
+                                                disabled="{!v.isLocked}"
+                                            ></input>
                                             <strong><label for="SNotMuzzled3"> Not Muzzled</label></strong></td>
                                     </tr>
                                 </table>
@@ -1105,21 +1133,21 @@
                                 <aura:iteration items="{!v.sameSexDogTestPart3}" var="variable">
                                     <table>
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
-                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                                                         index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
-                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                                                         index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
-                                                                         index="{!index}"  recordId="{!v.recordId}">
+                                                                         index="{!index}"  recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
                                         &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
-                                                                             recordId="{!v.recordId}">
+                                                                             recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
                                     </table>
@@ -1129,7 +1157,7 @@
                                 <lightning:layout >
                                     <aura:iteration items="{!v.sameSexDogTestPart3}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
-                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}" isLocked="{!v.isLocked}"
                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>
                                     &nbsp; &nbsp;
@@ -1150,21 +1178,21 @@
                                 <aura:iteration items="{!v.oppositeSexDogTestPart1}" var="variable">
                                     <table>
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
-                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                                                         index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
-                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                                                         index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
-                                                                         index="{!index}"  recordId="{!v.recordId}">
+                                                                         index="{!index}"  recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
                                         &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
-                                                                             recordId="{!v.recordId}">
+                                                                             recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
                                     </table>
@@ -1174,7 +1202,7 @@
                                 <lightning:layout >
                                     <aura:iteration items="{!v.oppositeSexDogTestPart1}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
-                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}" isLocked="{!v.isLocked}"
                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>
                                     &nbsp; &nbsp;
@@ -1195,21 +1223,21 @@
                                 <aura:iteration items="{!v.oppositeSexDogTestPart2}" var="variable">
                                     <table>
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
-                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                                                         index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
-                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                                                         index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
-                                                                         index="{!index}"  recordId="{!v.recordId}">
+                                                                         index="{!index}"  recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
                                         &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
-                                                                             recordId="{!v.recordId}">
+                                                                             recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
                                     </table>
@@ -1219,7 +1247,7 @@
                                 <lightning:layout >
                                     <aura:iteration items="{!v.oppositeSexDogTestPart2}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
-                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}" isLocked="{!v.isLocked}"
                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>
                                     &nbsp; &nbsp;
@@ -1239,9 +1267,27 @@
                                 <br></br>
                                 <table class="slds-align_absolute-center">
                                     <tr>
-                                        <td style="padding-right: 30px;"><input type="radio" id="OMuzzled3" name="oppositeMuzzled3" value="Muzzled" checked="{!v.MuzzleOSD3}" onchange="{!c.handleMuzzle}"></input>
+                                        <td style="padding-right: 30px;">
+                                            <input 
+                                                type="radio" 
+                                                id="OMuzzled3" 
+                                                name="oppositeMuzzled3" 
+                                                value="Muzzled" 
+                                                checked="{!v.MuzzleOSD3}" 
+                                                onchange="{!c.handleMuzzle}"
+                                                disabled="{!v.isLocked}"
+                                            ></input>
                                             <strong><label for="OMuzzled3"> Muzzled</label></strong></td>
-                                        <td><input type="radio" id="ONotMuzzled3" name="oppositeMuzzled3" value="Not Muzzled" checked="{!not(v.MuzzleOSD3)}" onchange="{!c.handleMuzzle}"></input>
+                                        <td>
+                                            <input 
+                                                type="radio" 
+                                                id="ONotMuzzled3" 
+                                                name="oppositeMuzzled3" 
+                                                value="Not Muzzled" 
+                                                checked="{!not(v.MuzzleOSD3)}" 
+                                                onchange="{!c.handleMuzzle}"
+                                                disabled="{!v.isLocked}"
+                                            ></input>
                                             <strong><label for="ONotMuzzled3"> Not Muzzled</label></strong></td>
                                     </tr>
                                 </table>
@@ -1249,21 +1295,21 @@
                                 <aura:iteration items="{!v.oppositeSexDogTestPart3}" var="variable">
                                     <table>
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
-                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                                                         index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
-                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                                                         index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
-                                                                         index="{!index}"  recordId="{!v.recordId}">
+                                                                         index="{!index}"  recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
                                         &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
-                                                                             recordId="{!v.recordId}">
+                                                                             recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
                                     </table>
@@ -1273,7 +1319,7 @@
                                 <lightning:layout >
                                     <aura:iteration items="{!v.oppositeSexDogTestPart3}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
-                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}" isLocked="{!v.isLocked}"
                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>
                                     &nbsp; &nbsp;
@@ -1295,9 +1341,11 @@
                                 <br></br>
                                 <table class="slds-align_absolute-center">
                                     <tr>
-                                        <td style="padding-right: 30px;"><input type="radio" id="singly" name="kennel" value="singly" checked="{!v.PuppySingly}" onchange="{!c.handleHousing}"></input>
+                                        <td style="padding-right: 30px;">
+                                            <input type="radio" id="singly" name="kennel" value="singly" checked="{!v.PuppySingly}" onchange="{!c.handleHousing}" disabled="{!v.isLocked}"></input>
                                             <strong><label for="singly"> Singly-housed</label></strong></td>
-                                        <td><input type="radio" id="CoHouse" name="kennel" value="CoHouse" checked="{!v.PuppyCoHoused}" onchange="{!c.handleHousing}"></input>
+                                        <td>
+                                            <input type="radio" id="CoHouse" name="kennel" value="CoHouse" checked="{!v.PuppyCoHoused}" onchange="{!c.handleHousing}" disabled="{!v.isLocked}"></input>
                                             <strong><label for="CoHouse"> Co-housed</label></strong></td>
                                     </tr>
                                 </table>
@@ -1305,21 +1353,21 @@
                                 <aura:iteration items="{!v.puppyBehaviorInKennel}" var="variable">
                                     <table>
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
-                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                                                         index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
-                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                                                         index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
-                                                                         index="{!index}"  recordId="{!v.recordId}">
+                                                                         index="{!index}"  recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
                                         &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
-                                                                             recordId="{!v.recordId}">
+                                                                             recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
                                     </table>
@@ -1329,7 +1377,7 @@
                                 <lightning:layout >
                                     <aura:iteration items="{!v.puppyBehaviorInKennel}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
-                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}" isLocked="{!v.isLocked}"
                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>&nbsp; &nbsp;
                                 </lightning:layout>
@@ -1349,21 +1397,21 @@
                                 <aura:iteration items="{!v.puppyBehaviorOnLeash}" var="variable">
                                     <table>
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
-                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                                                         index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
-                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                                                         index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
-                                                                         index="{!index}"  recordId="{!v.recordId}">
+                                                                         index="{!index}"  recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
                                         &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
-                                                                             recordId="{!v.recordId}">
+                                                                             recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
                                     </table>
@@ -1373,7 +1421,7 @@
                                 <lightning:layout >
                                     <aura:iteration items="{!v.puppyBehaviorOnLeash}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
-                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}" isLocked="{!v.isLocked}"
                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>&nbsp; &nbsp;
                                 </lightning:layout>
@@ -1393,21 +1441,21 @@
                                 <aura:iteration items="{!v.puppySocialBehaviorPart1}" var="variable">
                                     <table>
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
-                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                                                         index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
-                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                                                         index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
-                                                                         index="{!index}"  recordId="{!v.recordId}">
+                                                                         index="{!index}"  recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
                                         &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
-                                                                             recordId="{!v.recordId}">
+                                                                             recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
                                     </table>
@@ -1417,7 +1465,7 @@
                                 <lightning:layout >
                                     <aura:iteration items="{!v.puppySocialBehaviorPart1}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
-                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}" isLocked="{!v.isLocked}"
                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>&nbsp; &nbsp;
                                 </lightning:layout>
@@ -1437,21 +1485,21 @@
                                 <aura:iteration items="{!v.puppySocialBehaviorPart2}" var="variable">
                                     <table>
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
-                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                                                         index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
-                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                                                         index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
-                                                                         index="{!index}"  recordId="{!v.recordId}">
+                                                                         index="{!index}"  recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
                                         &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
-                                                                             recordId="{!v.recordId}">
+                                                                             recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
                                     </table>
@@ -1461,7 +1509,7 @@
                                 <lightning:layout >
                                     <aura:iteration items="{!v.puppySocialBehaviorPart2}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
-                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}" isLocked="{!v.isLocked}"
                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>&nbsp; &nbsp;
                                 </lightning:layout>
@@ -1483,21 +1531,21 @@
                                 <aura:iteration items="{!v.puppyPlayTestTugPart1}" var="variable">
                                     <table>
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
-                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                                                         index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
-                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                                                         index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
-                                                                         index="{!index}"  recordId="{!v.recordId}">
+                                                                         index="{!index}"  recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
                                         &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
-                                                                             recordId="{!v.recordId}">
+                                                                             recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
                                     </table>
@@ -1507,7 +1555,7 @@
                                 <lightning:layout >
                                     <aura:iteration items="{!v.puppyPlayTestTugPart1}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
-                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}" isLocked="{!v.isLocked}"
                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>&nbsp; &nbsp;
                                 </lightning:layout>
@@ -1527,21 +1575,21 @@
                                 <aura:iteration items="{!v.puppyPlayTestTugPart2}" var="variable">
                                     <table>
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
-                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                                                         index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
-                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                                                         index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
-                                                                         index="{!index}"  recordId="{!v.recordId}">
+                                                                         index="{!index}"  recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
                                         &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
-                                                                             recordId="{!v.recordId}">
+                                                                             recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
                                     </table>
@@ -1551,7 +1599,7 @@
                                 <lightning:layout >
                                     <aura:iteration items="{!v.puppyPlayTestTugPart2}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
-                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}" isLocked="{!v.isLocked}"
                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>&nbsp; &nbsp;
                                 </lightning:layout>
@@ -1571,21 +1619,21 @@
                                 <aura:iteration items="{!v.puppyPlayTestTag}" var="variable">
                                     <table>
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
-                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                                                         index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
-                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                                                         index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
-                                                                         index="{!index}"  recordId="{!v.recordId}">
+                                                                         index="{!index}"  recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
                                         &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
-                                                                             recordId="{!v.recordId}">
+                                                                             recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
                                     </table>
@@ -1595,7 +1643,7 @@
                                 <lightning:layout >
                                     <aura:iteration items="{!v.puppyPlayTestTag}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
-                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}" isLocked="{!v.isLocked}"
                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>&nbsp; &nbsp;
                                 </lightning:layout>
@@ -1615,21 +1663,21 @@
                                 <aura:iteration items="{!v.puppyRestraint}" var="variable">
                                     <table>
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
-                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                                                         index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
-                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                                                         index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
-                                                                         index="{!index}"  recordId="{!v.recordId}">
+                                                                         index="{!index}"  recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
                                         &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
-                                                                             recordId="{!v.recordId}">
+                                                                             recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
                                     </table>
@@ -1639,7 +1687,7 @@
                                 <lightning:layout >
                                     <aura:iteration items="{!v.puppyRestraint}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
-                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}" isLocked="{!v.isLocked}"
                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>&nbsp; &nbsp;
                                 </lightning:layout>
@@ -1691,21 +1739,21 @@
                                 <aura:iteration items="{!v.puppyResourceGuardingPart1}" var="variable">
                                     <table>
                                         <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingOne" colNumber="4" options="{!variable.VC1}"
-                                                                                 index="{!index}" recordId="{!v.recordId}" >
+                                                                                 index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationMultipleOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingOne" colNumber="4" options="{!variable.VC2}"
-                                                                                 index="{!index}" recordId="{!v.recordId}" >
+                                                                                 index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationMultipleOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingOne" colNumber="4" options="{!variable.VC3}"
-                                                                                 index="{!index}"  recordId="{!v.recordId}">
+                                                                                 index="{!index}"  recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                         </c:BehaviorEvaluationMultipleOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.VC4))}">
                                         &nbsp;
                                             <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingOne" colNumber="4" options="{!variable.VC4}"
                                                                                      index="{!index}"
-                                                                                     recordId="{!v.recordId}">
+                                                                                     recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationMultipleOptionGroup>
                                         </aura:if>
                                     </table>
@@ -1715,7 +1763,7 @@
                                 <lightning:layout >
                                     <aura:iteration items="{!v.puppyResourceGuardingPart1}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
-                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}" isLocked="{!v.isLocked}"
                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>&nbsp; &nbsp;
                                 </lightning:layout>
@@ -1766,21 +1814,21 @@
                                 <aura:iteration items="{!v.puppyResourceGuardingPart2}" var="variable">
                                     <table>
                                         <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingTwo" colNumber="4" options="{!variable.VC1}"
-                                                                                 index="{!index}" recordId="{!v.recordId}" >
+                                                                                 index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationMultipleOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingTwo" colNumber="4" options="{!variable.VC2}"
-                                                                                 index="{!index}" recordId="{!v.recordId}" >
+                                                                                 index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationMultipleOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingTwo" colNumber="4" options="{!variable.VC3}"
-                                                                                 index="{!index}"  recordId="{!v.recordId}">
+                                                                                 index="{!index}"  recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                         </c:BehaviorEvaluationMultipleOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.VC4))}">
                                         &nbsp;
                                             <c:BehaviorEvaluationMultipleOptionGroup type="puppyResourceGuardingTwo" colNumber="4" options="{!variable.VC4}"
                                                                                      index="{!index}"
-                                                                                     recordId="{!v.recordId}">
+                                                                                     recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationMultipleOptionGroup>
                                         </aura:if>
                                     </table>
@@ -1790,7 +1838,7 @@
                                 <lightning:layout >
                                     <aura:iteration items="{!v.puppyResourceGuardingPart2}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
-                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}" isLocked="{!v.isLocked}"
                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>&nbsp; &nbsp;
                                 </lightning:layout>
@@ -1810,21 +1858,21 @@
                                 <aura:iteration items="{!v.puppyChildDollPart1}" var="variable">
                                     <table>
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
-                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                                                         index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
-                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                                                         index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
-                                                                         index="{!index}"  recordId="{!v.recordId}">
+                                                                         index="{!index}"  recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
                                         &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
-                                                                             recordId="{!v.recordId}">
+                                                                             recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
                                     </table>
@@ -1834,7 +1882,7 @@
                                 <lightning:layout >
                                     <aura:iteration items="{!v.puppyChildDollPart1}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
-                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}" isLocked="{!v.isLocked}"
                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>&nbsp; &nbsp;
                                 </lightning:layout>
@@ -1854,21 +1902,21 @@
                                 <aura:iteration items="{!v.puppyChildDollPart2}" var="variable">
                                     <table>
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
-                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                                                         index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
-                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                                                         index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
-                                                                         index="{!index}"  recordId="{!v.recordId}">
+                                                                         index="{!index}"  recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
                                         &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
-                                                                             recordId="{!v.recordId}">
+                                                                             recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
                                     </table>
@@ -1878,7 +1926,7 @@
                                 <lightning:layout >
                                     <aura:iteration items="{!v.puppyChildDollPart2}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
-                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}" isLocked="{!v.isLocked}"
                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>&nbsp; &nbsp;
                                 </lightning:layout>
@@ -1897,9 +1945,11 @@
                                 <br></br>
                                 <table class="slds-align_absolute-center">
                                     <tr>
-                                        <td style="padding-right: 30px;"><input type="radio" id="PMuzzled1" name="puppyMuzzle1" value="Muzzled" checked="{!v.PuppyMuzzle1}" onchange="{!c.handleMuzzle}"></input>
+                                        <td style="padding-right: 30px;">
+                                            <input type="radio" id="PMuzzled1" name="puppyMuzzle1" value="Muzzled" checked="{!v.PuppyMuzzle1}" onchange="{!c.handleMuzzle}" disabled="{!v.isLocked}"></input>
                                             <strong><label for="PMuzzled1"> Muzzled</label></strong></td>
-                                        <td><input type="radio" id="PNotMuzzled1" name="puppyMuzzle1" value="Not Muzzled" checked="{!not(v.PuppyMuzzle1)}" onchange="{!c.handleMuzzle}"></input>
+                                        <td>
+                                            <input type="radio" id="PNotMuzzled1" name="puppyMuzzle1" value="Not Muzzled" checked="{!not(v.PuppyMuzzle1)}" onchange="{!c.handleMuzzle}" disabled="{!v.isLocked}"></input>
                                             <strong><label for="PNotMuzzled1"> Not Muzzled</label></strong></td>
                                     </tr>
                                 </table>
@@ -1907,21 +1957,21 @@
                                 <aura:iteration items="{!v.puppyDogInteractionPart1}" var="variable">
                                     <table>
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
-                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                                                         index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
-                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                                                         index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
-                                                                         index="{!index}"  recordId="{!v.recordId}">
+                                                                         index="{!index}"  recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
                                         &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
-                                                                             recordId="{!v.recordId}">
+                                                                             recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
                                     </table>
@@ -1931,7 +1981,7 @@
                                 <lightning:layout >
                                     <aura:iteration items="{!v.puppyDogInteractionPart1}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
-                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}" isLocked="{!v.isLocked}"
                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>&nbsp; &nbsp;
                                 </lightning:layout>
@@ -1950,9 +2000,11 @@
                                 <br></br>
                                 <table class="slds-align_absolute-center">
                                     <tr>
-                                        <td style="padding-right: 30px;"><input type="radio" id="PMuzzled2" name="puppyMuzzle2" value="Muzzled" checked="{!v.PuppyMuzzle2}" onchange="{!c.handleMuzzle}"></input>
+                                        <td style="padding-right: 30px;">
+                                            <input type="radio" id="PMuzzled2" name="puppyMuzzle2" value="Muzzled" checked="{!v.PuppyMuzzle2}" onchange="{!c.handleMuzzle}" disabled="{!v.isLocked}"></input>
                                             <strong><label for="PMuzzled2"> Muzzled</label></strong></td>
-                                        <td><input type="radio" id="PNotMuzzled2" name="puppyMuzzle2" value="Not Muzzled" checked="{!not(v.PuppyMuzzle2)}" onchange="{!c.handleMuzzle}"></input>
+                                        <td>
+                                            <input type="radio" id="PNotMuzzled2" name="puppyMuzzle2" value="Not Muzzled" checked="{!not(v.PuppyMuzzle2)}" onchange="{!c.handleMuzzle}" disabled="{!v.isLocked}"></input>
                                             <strong><label for="PNotMuzzled2"> Not Muzzled</label></strong></td>
                                     </tr>
                                 </table>
@@ -1960,21 +2012,21 @@
                                 <aura:iteration items="{!v.puppyDogInteractionPart2}" var="variable">
                                     <table>
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
-                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                                                         index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
-                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                                                         index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
-                                                                         index="{!index}"  recordId="{!v.recordId}">
+                                                                         index="{!index}"  recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
                                         &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
-                                                                             recordId="{!v.recordId}">
+                                                                             recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
                                     </table>
@@ -1985,7 +2037,7 @@
                                     <aura:iteration items="{!v.puppyDogInteractionPart2}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
                                                                        IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
-                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
+                                                                       skipVal="{!variable.skipField}" aura:id="behEvalTabFooter" isLocked="{!v.isLocked}"/>
                                     </aura:iteration>&nbsp; &nbsp;
                                 </lightning:layout>
                             </lightning:layoutItem>
@@ -2003,9 +2055,11 @@
                                 <br></br>
                                 <table class="slds-align_absolute-center">
                                     <tr>
-                                        <td style="padding-right: 30px;"><input type="radio" id="PMuzzled3" name="puppyMuzzle3" value="Muzzled" checked="{!v.PuppyMuzzle3}" onchange="{!c.handleMuzzle}"></input>
+                                        <td style="padding-right: 30px;">
+                                            <input type="radio" id="PMuzzled3" name="puppyMuzzle3" value="Muzzled" checked="{!v.PuppyMuzzle3}" onchange="{!c.handleMuzzle}" disabled="{!v.isLocked}"></input>
                                             <strong><label for="PMuzzled3"> Muzzled</label></strong></td>
-                                        <td><input type="radio" id="PNotMuzzled3" name="puppyMuzzle3" value="Not Muzzled" checked="{!not(v.PuppyMuzzle3)}" onchange="{!c.handleMuzzle}"></input>
+                                        <td>
+                                            <input type="radio" id="PNotMuzzled3" name="puppyMuzzle3" value="Not Muzzled" checked="{!not(v.PuppyMuzzle3)}" onchange="{!c.handleMuzzle}" disabled="{!v.isLocked}"></input>
                                             <strong><label for="PNotMuzzled3"> Not Muzzled</label></strong></td>
                                     </tr>
                                 </table>
@@ -2013,21 +2067,21 @@
                                 <aura:iteration items="{!v.puppyDogInteractionPart3}" var="variable">
                                     <table>
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
-                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                                                         index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
-                                                                         index="{!index}" recordId="{!v.recordId}" >
+                                                                         index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
                                         </c:BehaviorEvaluationOptionGroup>
                                         &nbsp;
                                         <c:BehaviorEvaluationOptionGroup options="{!variable.mAlertOptions}"
-                                                                         index="{!index}"  recordId="{!v.recordId}">
+                                                                         index="{!index}"  recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                         </c:BehaviorEvaluationOptionGroup>
                                         <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
                                         &nbsp;
                                             <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
                                                                              index="{!index}"
-                                                                             recordId="{!v.recordId}">
+                                                                             recordId="{!v.recordId}" isLocked="{!v.isLocked}">
                                             </c:BehaviorEvaluationOptionGroup>
                                         </aura:if>
                                     </table>
@@ -2037,7 +2091,7 @@
                                 <lightning:layout >
                                     <aura:iteration items="{!v.puppyDogInteractionPart3}" var="variable">
                                         <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
-                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}"
+                                                                       IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}" isLocked="{!v.isLocked}"
                                                                        skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
                                     </aura:iteration>&nbsp; &nbsp;
                                 </lightning:layout>
@@ -2072,7 +2126,7 @@
                         </lightning:layoutItem>
                         <lightning:layoutItem size="4">
                             <div class="slds-align_absolute-center">
-                                <lightning:button class="slds-float_right" type="submit" label="Save and Complete Evaluation" variant="destructive" onclick="{!c.refresh}" />
+                                <lightning:button class="slds-float_right" type="submit" label="Save and Complete Evaluation" variant="destructive" onclick="{!c.refresh}" disabled="{!v.isLocked}"/>
                             </div>
                         </lightning:layoutItem>
                         <lightning:layoutItem size="4">

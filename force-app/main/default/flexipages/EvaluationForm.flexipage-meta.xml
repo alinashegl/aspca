@@ -21,7 +21,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>numVisibleActions</name>
-                    <value>3</value>
+                    <value>4</value>
                 </componentInstanceProperties>
                 <componentName>force:highlightsPanel</componentName>
                 <identifier>force_highlightsPanel</identifier>
@@ -57,60 +57,218 @@
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>readonly</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Behavior_Evaluation_Summary__c</fieldItem>
+                <identifier>RecordBehavior_Evaluation_Summary_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>readonly</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Overall_Evaluation_Grade__c</fieldItem>
+                <identifier>RecordOverall_Evaluation_Grade_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>readonly</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Grade_Change_Reason__c</fieldItem>
+                <identifier>RecordGrade_Change_Reason_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>readonly</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Caution__c</fieldItem>
+                <identifier>RecordCaution_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>readonly</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Potential_Issue_Aggression_To_Animals__c</fieldItem>
+                <identifier>RecordPotential_Issue_Aggression_To_Animals_cField2</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>readonly</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Potential_Issue_Aggression_To_People__c</fieldItem>
+                <identifier>RecordPotential_Issue_Aggression_To_People_cField2</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>readonly</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Potential_Issue_Fear__c</fieldItem>
+                <identifier>RecordPotential_Issue_Fear_cField2</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>readonly</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Potential_Issue_High_Arousal__c</fieldItem>
+                <identifier>RecordPotential_Issue_High_Arousal_cField2</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>readonly</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Potential_Issue_Other__c</fieldItem>
+                <identifier>RecordPotential_Issue_Other_cField2</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>readonly</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Potential_Issue_Other_Notes__c</fieldItem>
+                <identifier>RecordPotential_Issue_Other_Notes_cField2</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <name>Facet-6aef3de2-453e-41d0-8114-1f92c9ed8b7d</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-6aef3de2-453e-41d0-8114-1f92c9ed8b7d</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:column</componentName>
+                <identifier>flexipage_column4</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-fbba09ee-528e-4ab8-893f-f08ea47479c5</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Behavior_Evaluation_Summary__c</fieldItem>
                 <identifier>RecordBehavior_Evaluation_Summary__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Overall_Evaluation_Grade__c</fieldItem>
                 <identifier>RecordOverall_Evaluation_Grade__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Grade_Change_Reason__c</fieldItem>
                 <identifier>RecordGrade_Change_Reason_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Caution__c</fieldItem>
                 <identifier>RecordCaution__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Potential_Issue_Aggression_To_Animals__c</fieldItem>
                 <identifier>RecordPotential_Issue_Aggression_To_Animals_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Potential_Issue_Aggression_To_People__c</fieldItem>
                 <identifier>RecordPotential_Issue_Aggression_To_People_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Potential_Issue_Fear__c</fieldItem>
                 <identifier>RecordPotential_Issue_Fear_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Potential_Issue_High_Arousal__c</fieldItem>
                 <identifier>RecordPotential_Issue_High_Arousal_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Potential_Issue_Other__c</fieldItem>
                 <identifier>RecordPotential_Issue_Other_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Potential_Issue_Other_Notes__c</fieldItem>
                 <identifier>RecordPotential_Issue_Other_Notes_cField</identifier>
             </fieldInstance>
@@ -165,12 +323,20 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Evaluation_Date__c</fieldItem>
                 <identifier>RecordEvaluation_Date_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Animal__c</fieldItem>
                 <identifier>RecordAnimal_cField</identifier>
                 <visibilityRule>
@@ -230,24 +396,24 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>playCategoryPicklist</componentName>
-                <identifier>c_playCategoryPicklist1</identifier>
+                <componentName>behaviorEvaluationSummaryHeader</componentName>
+                <identifier>c_behaviorEvaluationSummaryHeader</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
                     <name>columns</name>
-                    <value>Facet-75322f3b-1020-4c6e-8fbd-5b0c535dead2</value>
+                    <value>Facet-fbba09ee-528e-4ab8-893f-f08ea47479c5</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>label</name>
-                    <value>Evaluation Summary</value>
+                    <value>Evaluation Summary locked</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:fieldSection</componentName>
-                <identifier>flexipage_fieldSection</identifier>
+                <identifier>flexipage_fieldSection4</identifier>
                 <visibilityRule>
-                    <booleanFilter>1 OR 2 OR 3 OR 4</booleanFilter>
+                    <booleanFilter>(1 OR 2 OR 3 OR 4) AND 5</booleanFilter>
                     <criteria>
                         <leftValue>{!Record.Evaluation_Subtype__c}</leftValue>
                         <operator>EQUAL</operator>
@@ -267,6 +433,53 @@
                         <leftValue>{!Record.Evaluation_Subtype__c}</leftValue>
                         <operator>EQUAL</operator>
                         <rightValue>Dog/Dog Only</rightValue>
+                    </criteria>
+                    <criteria>
+                        <leftValue>{!Record.IsLocked__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>true</rightValue>
+                    </criteria>
+                </visibilityRule>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>columns</name>
+                    <value>Facet-75322f3b-1020-4c6e-8fbd-5b0c535dead2</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>label</name>
+                    <value>Evaluation Summary</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:fieldSection</componentName>
+                <identifier>flexipage_fieldSection</identifier>
+                <visibilityRule>
+                    <booleanFilter>(1 OR 2 OR 3 OR 4) AND 5</booleanFilter>
+                    <criteria>
+                        <leftValue>{!Record.Evaluation_Subtype__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>Puppy</rightValue>
+                    </criteria>
+                    <criteria>
+                        <leftValue>{!Record.Evaluation_Subtype__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>Dog Fighting</rightValue>
+                    </criteria>
+                    <criteria>
+                        <leftValue>{!Record.Evaluation_Subtype__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>Adult Animal</rightValue>
+                    </criteria>
+                    <criteria>
+                        <leftValue>{!Record.Evaluation_Subtype__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>Dog/Dog Only</rightValue>
+                    </criteria>
+                    <criteria>
+                        <leftValue>{!Record.IsLocked__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>false</rightValue>
                     </criteria>
                 </visibilityRule>
             </componentInstance>

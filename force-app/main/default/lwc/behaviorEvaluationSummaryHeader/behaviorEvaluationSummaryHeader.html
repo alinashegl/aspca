@@ -1,0 +1,25 @@
+<template>
+    <div class='slds-card slds-p-around_small'>
+        <div class='slds-grid'>
+            <div class="slds-col slds-size_6-of-6 slds-medium-size_1-of-2 slds-large-size_3-of-6">
+                <c-play-category-picklist
+                    record-id={recordId}
+                ></c-play-category-picklist>
+            </div>
+            <div class="slds-col slds-size_6-of-6 slds-medium-size_1-of-2 slds-large-size_1-of-6"></div>
+            <div class="slds-col slds-size_6-of-6 slds-medium-size_1-of-2 slds-large-size_2-of-6 slds-align-middle">
+                <lightning-button 
+                    variant={lockedVariant} 
+                    label={lockedLabel} 
+                    title="Primary action with lighter look" 
+                    onclick={handleClick} 
+                    class="slds-m-left_x-small"
+                    disabled={disableLockButton}
+                ></lightning-button>
+            </div>
+        </div>
+        <template if:true={error}>
+            <c-error-panel errors={error} type='inlineMessage' friendly-message='Error updating evaluation'></c-error-panel>
+        </template>
+    </div>
+</template>

@@ -8,10 +8,13 @@ export default class PlayCategoryPicklist extends LightningElement {
     @api recordId
     error;
     categorySuccessfullyUpdated = false;
+    showSpinner = false;
 
     options=[
-        {label: 'New/Unknown', value: 'New/Unknown'},
+        {label: 'Unevaluated', value: 'Unevaluated'},
         {label: 'PG Re-Eval', value: 'PG Re-Eval'},
+        {label: 'Playgroup Eligible', value: 'Playgroup Eligible'},
+        {label: 'Foster Playgroup Eligible', value: 'Foster Playgroup Eligible'},
         {label: 'DO NOT PLAY', value: 'DO NOT PLAY'}
     ]
 
@@ -20,6 +23,7 @@ export default class PlayCategoryPicklist extends LightningElement {
 
     selectionChangeHandler(event){
         window.console.log('selectionChangeHandler: ', event.target.value);
+        this.showSpinner = true;
         this.categorySuccessfullyUpdated = false;
         const fields = {};
         fields['Id'] = this.animalId;
@@ -32,7 +36,10 @@ export default class PlayCategoryPicklist extends LightningElement {
         })
         .catch(error => {
             this.error = error;
-        });
+        })
+        .finally(() =>{
+            this.showSpinner = false;
+        })
     }
 
     get animalId() {
@@ -40,20 +47,8 @@ export default class PlayCategoryPicklist extends LightningElement {
     }
 
     get playCategory() {
-        return getFieldValue(this.eval.data, ANIMAL_PLAY_CATEGORY);
+        return getFieldValue(this.eval.data, ANIMAL_PLAY_CATEGORY) == null ?
+            'Unevaluated' :
+            getFieldValue(this.eval.data, ANIMAL_PLAY_CATEGORY);
     }
-
-
-    locked = false;
-    get lockedVariant(){
-        return this.locked? 'destructive' : 'brand-outline';
-    }
-    get lockedLabel(){
-        return this.locked? 'Evaluation Locked' : 'Lock Evaluation';
-    }
-
-    handleClick(){
-        this.locked = !this.locked;
-    }
-
 }
