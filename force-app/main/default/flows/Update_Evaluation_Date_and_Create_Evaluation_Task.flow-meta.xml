@@ -642,7 +642,7 @@
     <formulas>
         <name>EvaluationDueDate</name>
         <dataType>Date</dataType>
-        <expression>{!varFacilityOutcome.CreatedDate} + 4</expression>
+        <expression>{!varFacilityOutcome.Start_Date__c} + 4</expression>
     </formulas>
     <formulas>
         <name>MRC2ndReminderDate</name>
