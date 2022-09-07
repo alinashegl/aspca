@@ -257,6 +257,7 @@ public class BehaviorEvaluationSummaryUtil {
 
         for (Behavior_Evaluation__c b : triggerNew) {
             ConfigTypeWrapper configInfos = getConfigInfo(b.Evaluation_Subtype__c);
+            System.debug('heap size: ' + system.Limits.getHeapSize());
 
             Map<String, Test_Config__mdt[]> commentFieldsMap = configInfos.commentSkipFieldsMap;
             String[] summaryList = configInfos.templateList;
@@ -273,6 +274,7 @@ public class BehaviorEvaluationSummaryUtil {
             }            
 
             Map<String, CommentSkipWrapper[]> commentMap = new Map<String, CommentSkipWrapper[]>();
+            Map<String, Set<String>> parsedCommentsMap = new Map<String, Set<String>>();
 
             Map<String, String> summaryDiffMap = parseSummaryList(b.Behavior_Evaluation_Summary__c, summaryList);
 
@@ -296,7 +298,7 @@ public class BehaviorEvaluationSummaryUtil {
                             skipSubsequentParts = true;
                             skipReason = (String) b.get(currentFieldApi);
                         }
-                    }
+                    }                    
 
                     if(commentFieldsMap.containsKey(summaryTitle)){
                         for(Test_Config__mdt config : commentFieldsMap.get(summaryTitle)){
@@ -348,12 +350,17 @@ public class BehaviorEvaluationSummaryUtil {
 
                                 System.debug('parsedComments: ' + parsedComments);
 
+                                if(parsedCommentsMap.containsKey(summaryTitle)){
+                                    parsedCommentsMap.get(summaryTitle).add(parsedComments);
+                                } else {
+                                    parsedCommentsMap.put(summaryTitle, new Set<String>{parsedComments});
+                                }
+
                             commentList.add(new CommentSkipWrapper(
                                 config.Test_Name__c,
                                 testCommentsText, 
                                 skipReasonText,
-                                !highValueSelections.isEmpty() ? string.join(highValueSelections, ';') : null,
-                                parsedComments
+                                !highValueSelections.isEmpty() ? string.join(highValueSelections, ';') : null
                             ));
 
                             //unskip if score was added
@@ -367,14 +374,16 @@ public class BehaviorEvaluationSummaryUtil {
                 }
             }
 
-            String summary = '';
+            String[] summaryCommentList = new String[0];
             
             if(summaryDiffMap.containsKey('preText')){
-                summary += '<p>' + summaryDiffMap.get('preText') + '</p>';
+                summaryCommentList.add('<p>' + summaryDiffMap.get('preText') + '</p>');
             }
 
             for(String testName: summaryList){
-                summary += '<p><b>' + testName + ':</b>&nbsp;';
+                System.debug('testName: ' + testName);
+                System.debug('heap size: ' + system.Limits.getHeapSize());
+                String summary = '<p><b>' + testName + ':</b>&nbsp;';
                 if(commentMap.containsKey(testName)){
                     String[] tempCommentList = new String[0];
                     for(CommentSkipWrapper comments : commentMap.get(testName)){
@@ -402,11 +411,27 @@ public class BehaviorEvaluationSummaryUtil {
                         summary += string.join(tempCommentList, ', ');
                     }
                 }
+
+                if(parsedCommentsMap.containsKey(testName)){
+                    summary += addParsedComments(summary, parsedCommentsMap.get(testName));
+                }
                 summary += '<p>';
+                summaryCommentList.add(summary);
             }
 
-            b.Behavior_Evaluation_Summary__c = summary;
+            b.Behavior_Evaluation_Summary__c = String.join(summaryCommentList, '');
         }
+    }
+
+    public static String addParsedComments(String summary, Set<String> parsedComments){
+        String comments = string.join(new List<String>(parsedComments), ', ');
+        if(summary != null && String.isNotEmpty(summary)){
+            summary += ', ' + comments;
+        } else {
+            summary = comments;
+        }
+
+        return summary;
     }
 
     public static void handleAfterUpdate(List<Behavior_Evaluation__c> triggerNew, Map<Id, Behavior_Evaluation__c> triggerOldMap) {
