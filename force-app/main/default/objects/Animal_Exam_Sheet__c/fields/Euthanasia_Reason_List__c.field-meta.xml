@@ -10,33 +10,6 @@
     <type>Picklist</type>
     <valueSet>
         <restricted>true</restricted>
-        <valueSetDefinition>
-            <sorted>false</sorted>
-            <value>
-                <fullName>Medical</fullName>
-                <default>false</default>
-                <label>Medical</label>
-            </value>
-            <value>
-                <fullName>Behavior</fullName>
-                <default>false</default>
-                <label>Behavior</label>
-            </value>
-            <value>
-                <fullName>Medical/Behavior</fullName>
-                <default>false</default>
-                <label>Medical/Behavior</label>
-            </value>
-            <value>
-                <fullName>Quality of Life</fullName>
-                <default>false</default>
-                <label>Quality of Life</label>
-            </value>
-            <value>
-                <fullName>State-Reportable Disease</fullName>
-                <default>false</default>
-                <label>State-Reportable Disease</label>
-            </value>
-        </valueSetDefinition>
+        <valueSetName>Euthanasia_Reason</valueSetName>
     </valueSet>
 </CustomField>

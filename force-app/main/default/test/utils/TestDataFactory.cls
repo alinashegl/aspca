@@ -350,7 +350,8 @@ public without sharing class TestDataFactory {
                     LocaleSidKey = (String)USER_PATTERN.get('localeSidKey'),
                     ProfileId = p.Id,
                     TimeZoneSidKey = (String)USER_PATTERN.get('timeZoneSidKey'),
-                    UserName = (uid + '@' +  (String)USER_PATTERN.get('domain'))
+                    UserName = (uid + '@' +  (String)USER_PATTERN.get('domain')),
+                    Location__c = 'CRC/MRC'
             );
             users.add(u);
         }
@@ -358,6 +359,26 @@ public without sharing class TestDataFactory {
         insert users;
     }
 
+    public static User createUserWithProfile(String profile){
+        Profile p = getProfileFromDb(profile);
+        String name = (String)USER_PATTERN.get('name') + '_' + 0;
+          String lastname = (String)USER_PATTERN.get('lastName') + '_' + 0;
+          String uid = (String)USER_PATTERN.get('name') + '_' + String.valueOf(Integer.valueof((Math.random() * 1000)));
+
+          User u = new User(
+                  Alias = uid,
+                  Email = uid + '@' + (String)USER_PATTERN.get('domain'),
+                  EmailEncodingKey = (String)USER_PATTERN.get('emailEncodingKey'),
+                  LastName = lastname,
+                  LanguageLocaleKey = (String)USER_PATTERN.get('languageLocaleKey'),
+                  LocaleSidKey = (String)USER_PATTERN.get('localeSidKey'),
+                  ProfileId = p.Id,
+                  TimeZoneSidKey = (String)USER_PATTERN.get('timeZoneSidKey'),
+                  UserName = (uid + '@' +  (String)USER_PATTERN.get('domain'))
+          );
+        return u;
+    }
+    
     public static User[] createUsersWithoutInserting(Integer count) {
       Integer userCount = count != null ? count : USERS_COUNT;
       
@@ -384,11 +405,8 @@ public without sharing class TestDataFactory {
           );
           users.add(u);
       }
-
       return users;
   }
-
-
     public static List<User> getUsersFromDb() {
         Set<String> standardUsers = new Set<String> {
                 'User',
@@ -529,10 +547,16 @@ public without sharing class TestDataFactory {
                     Gender__c = 'MN',
                     Animal_Name__c = 'Doggo123',
                     Shelter_Location2__c = 'MRC',
-                    Current_Recent_Shelter_Location__c = 'MRC',
-                    Play_Category__c = 'Unevaluated'
+                    Current_Location__c = 'MRC',
+                    Current_Recent_Shelter_Location__c = 'CRC/MRC',
+                    Play_Category__c = 'Unspecified'
         );
         insert a;
+        
+        User u = createUserWithProfile('ASPCA - Behavior (CRC)');
+        u.Location__c = u.Division = a.Current_Recent_Shelter_Location__c;
+        insert u;
+        
         return a;
     }
 
@@ -550,6 +574,7 @@ public without sharing class TestDataFactory {
                   Gender__c = 'MN',
                   Animal_Name__c = name,
                   Shelter_Location2__c = 'MRC',
+                  Current_Location__c = 'MRC',
                   Current_Recent_Shelter_Location__c = 'MRC'
       );
       insert a;
@@ -640,7 +665,7 @@ public without sharing class TestDataFactory {
         Animal__c a = createAnimal();
         Treatment_Bundle__c masterbundle = createMasterBundle();
         Treatment_Bundle__c planBundle = createTreatmentBundle();
-        List<Bundle_Entry__c> planBundleEntries = assignEntries(planBundle, createProtocols(4));
+        List<Bundle_Entry__c> planBundleEntries = assignEntries(planBundle, createProtocols());
         Treatment_Plan__c plan = new Treatment_Plan__c(
           IsActive__c = true, 
           Description__c = 'Test', 
@@ -657,36 +682,215 @@ public without sharing class TestDataFactory {
         insert c;
         return c;
     }
+    
+    public static Contact createBehaviorCaseWorkerContact() {
+        Contact c = new Contact(FirstName = 'Test', LastName = 'BCW', Email = 'test@contactbcw.com', Contact_Type__c = 'Behavior Case Worker');
+        insert c;
+        return c;
+    }
 
     public static Treatment_Session__c createSession(){
         Treatment_Session__c session = new Treatment_Session__c();
         Treatment_Plan__c plan = createPlan();
-        Contact contact = createContact();
+        Contact contact = createBehaviorCaseWorkerContact();
         session.Treatment_Plan__c = plan.Id;
         session.Session_Contact__c = contact.Id;
+        session.Animal__c = plan.Animal__c;
         insert session;
         return session;
     }
 
     public static List<Protocol__c> createProtocols() {
+        createProtocolScales();
         List<Protocol__c> protocols = new List<Protocol__c>();
-        Integer i = 0;
-        while(i != 9) {
+        for(Integer i = 0; i< 9; i++) {
             Protocol__c protocol = new Protocol__c();
             protocol.Name = 'Test Protocol ' + i;
             protocol.IsActive__c = true;
             protocol.Protocol_Categories__c = 'Non Fear Protocols';
             protocols.add(protocol);
-            i++;
         }
+        
         insert protocols;
         return protocols;
     }
+
+    public static Protocol_Scale__c[] createProtocolScales(Integer count){
+      Protocol_Scale__c[] pScales = new Protocol_Scale__c[0];
+      count = count == null ? 3 : count;
+      for(Integer i = 0; i < count; i++){
+        pScales.add(new Protocol_Scale__c(
+          isActive__c = true,
+          isDefault__c = true,
+          Name = i == 0 ? 'Overall Score' : 'pScale' + i,
+          Column_Order__c = 10 * i,
+          Options__c = '1. Beginning/Acquisition;2. Catching On/ Fluency',
+          Fields_to_Include__c = 'Duration__c'
+        ));
+      }
+
+      insert pScales;
+      return pScales;
+    }
+
+    public static Protocol_Scale__c[] createProtocolScales(){
+      Protocol_Scale__c[] pScales = new Protocol_Scale__c[]{
+        new Protocol_Scale__c(
+          Name =  'Fear - Sociability Best',
+          isActive__c =  true,
+          Category__c =  'Sociability',
+          Column_Order__c =  10,
+          Fields_to_include__c =  null,
+          isDefault__c =  true,
+          Options__c =  '1. Solicitation, sustained proximity;\n2. Solicitation, short proximity;\n3. Solicitation, no proximity;\n4. No Solicitation, sustained proximity;\n5. No Solicitation, short proximity;\n6. No Solicitation, no proximity;\nNot Applicable',
+          Required__c =  true
+        ),
+        new Protocol_Scale__c(
+          Name =  'Fear Walking - Worst',
+          isActive__c =  true,
+          Category__c =  'Leashing',
+          Column_Order__c =  50,
+          Fields_to_include__c =  null,
+          isDefault__c =  false,
+          Options__c =  '1. Excited/energetic;\n2. Walks and pulls;\n3. Walks calmly;\n4. Walks, nervous body language;\n5. Crawls, hesitates, balks;\n6. Does not walk, immobile;\n7. Gator rolls or flees',
+          Required__c =  false
+        ),
+        new Protocol_Scale__c(
+          Name =  'Overall Score',
+          isActive__c =  true,
+          Category__c =  'Other',
+          Column_Order__c =  80,
+          Fields_to_include__c =  null,
+          isDefault__c =  true,
+          Options__c =  '1. Beginning/Acquisition;\n2. Catching On/ Fluency;\n3. Almost There/ Generalization;\n4. Maintenance',
+          Required__c =  true
+        ),
+        new Protocol_Scale__c(
+          Name =  'Arousal - Worst',
+          isActive__c =  true,
+          Category__c =  'Arousal',
+          Column_Order__c =  20,
+          Fields_to_include__c =  null,
+          isDefault__c =  true,
+          Options__c =  '1. Low/Neutral;\n2. Mild;\n3. Moderate;\n4. Extreme;\nNot Applicable',
+          Required__c =  true
+        ),
+        new Protocol_Scale__c(
+          Name =  'Arousal - Best',
+          isActive__c =  true,
+          Category__c =  'Arousal',
+          Column_Order__c =  10,
+          Fields_to_include__c =  null,
+          isDefault__c =  true,
+          Options__c =  '1. Low/Neutral;\n2. Mild;\n3. Moderate;\n4. Extreme;\nNot Applicable',
+          Required__c =  true
+        ),
+        new Protocol_Scale__c(
+          Name =  'Solicitation - Non-Fearful Treatment',
+          isActive__c =  true,
+          Category__c =  'Sociability',
+          Column_Order__c =  20,
+          Fields_to_include__c =  null,
+          isDefault__c =  true,
+          Options__c =  '1. No;\n2. Yes;\nNot Applicable',
+          Required__c =  true
+        ),
+        new Protocol_Scale__c(
+          Name =  'Aggression - Movement',
+          isActive__c =  true,
+          Category__c =  'Aggressive',
+          Column_Order__c =  20,
+          Fields_to_include__c =  null,
+          isDefault__c =  true,
+          Options__c =  '1. Stayed in place;\n2. Retreated or leaned away;\n3. Moved toward target;\nNot Applicable',
+          Required__c =  true
+        ),
+        new Protocol_Scale__c(
+          Name =  'Fear Walking - Best',
+          isActive__c =  true,
+          Category__c =  'Leashing',
+          Column_Order__c =  40,
+          Fields_to_include__c =  null,
+          isDefault__c =  false,
+          Options__c =  '1. Excited/energetic;\n2. Walks and pulls;\n3. Walks calmly;\n4. Walks, nervous body language;\n5. Crawls, hesitates, balks;\n6. Does not walk, immobile;\n7. Gator rolls or flees;',
+          Required__c =  false
+        ),
+        new Protocol_Scale__c(
+          Name =  'Aggressive - Worst',
+          isActive__c =  true,
+          Category__c =  'Aggressive',
+          Column_Order__c =  10,
+          Fields_to_include__c =  null,
+          isDefault__c =  true,
+          Options__c =  '1. None Observed;\n2. Hard stare, whale eye, rigid, freezes;\n3. Head whips, lifts lip, growls or alarm barks;\n4. Air snaps or muzzle punches;\n5. Tries to bite or bites;',
+          Required__c =  true
+        ),
+        new Protocol_Scale__c(
+          Name =  'Fear - Best',
+          isActive__c =  true,
+          Category__c =  'Fear',
+          Column_Order__c =  10,
+          Fields_to_include__c =  null,
+          isDefault__c =  true,
+          Options__c =  '1. Excited, playful, interested;\n2. Neutral;\n2. Mildly fearful;\n3. Moderately fearful;\n4. Extremely fearful;\nNot Applicable',
+          Required__c =  true
+        ),
+        new Protocol_Scale__c(
+          Name =  'Fear - Containment Method Used',
+          isActive__c =  true,
+          Category__c =  'Fear',
+          Column_Order__c =  60,
+          Fields_to_include__c =  'Duration__c',
+          isDefault__c =  false,
+          Options__c =  '1. Willingly went in;\n2. Lured;\n3. Blocked;\n4. Lifted;\n5. Leash pressure',
+          Required__c =  false
+        ),
+        new Protocol_Scale__c(
+          Name =  'Fear - Worst',
+          isActive__c =  true,
+          Category__c =  'Fear',
+          Column_Order__c =  20,
+          Fields_to_include__c =  null,
+          isDefault__c =  true,
+          Options__c =  '1. Excited, playful, interested;\n2. Neutral;\n2. Mildly fearful;\n3. Moderately fearful;\n4. Extremely fearful;\nNot Applicable',
+          Required__c =  true
+        ),
+        new Protocol_Scale__c(
+          Name =  'Leash – How Attached',
+          isActive__c =  true,
+          Category__c =  'Leashing',
+          Column_Order__c =  30,
+          Fields_to_include__c =  null,
+          isDefault__c =  false,
+          Options__c =  '1. Dog stayed near or approached (handler stands);2. Dog stayed near or approached (handler squats);\n3. Tester walked forward normally;\n4. Tester crept slowly forward;\n5. Tester crept slowly backward;\n6. With stealth (dog evasive or aggressive);\n7. Leashing attempts failed. Dog not moved;\n8. Leashing attempts failed. Dog moved in crate, chute, or carried;\n9. No leashing attempt made. Dog moved in crate, chute, or carried;',
+          Required__c =  false
+        )
+    };
+    insert pScales;
+    return pScales;
+  }
+
     public static List<Session_Protocol__c> createSessionProtocols() {
         List<Protocol__c> protocols = createProtocols();
         Treatment_Session__c session = createSession();
         Session_Protocol__c[] sessionProtocols = [SELECT Id, TreatmentSessionId__c, TreatmentSessionId__r.Treatment_Plan__c, ProtocolId__c FROM Session_Protocol__c WHERE TreatmentSessionId__c =: session.Id];
         return sessionProtocols;
+    }
+
+    public static Session_Protocol_Scale__c[] createSessionProtocolScales(){
+      Protocol_Scale__c[] pScales = createProtocolScales(3);
+      Session_Protocol__c[] sessionProtocols = createSessionProtocols();
+      Session_Protocol_Scale__c[] sessionProtoScales = new Session_Protocol_Scale__c[0];
+      for(Session_Protocol__c sessionProto : sessionProtocols){
+        for(Protocol_Scale__c protoScale : pScales){
+          sessionProtoScales.add(new Session_Protocol_Scale__c(
+            Protocol_Scale__c = protoScale.Id,
+            Session_Protocol__c = sessionProto.Id
+          ));
+        }
+      }
+      insert sessionProtoScales;
+      return sessionProtoScales;
     }
 
     public static Treatment_Bundle__c createTreatmentBundle() {
@@ -700,7 +904,7 @@ public without sharing class TestDataFactory {
 
     public static Treatment_Bundle__c createMasterBundle() {
         Treatment_Bundle__c bundle = new Treatment_Bundle__c();
-        bundle.Name = 'Test';
+        bundle.Name = 'Master';
         bundle.IsActive__c = true;
         bundle.IsMaster__c = true;
         insert bundle;
@@ -737,7 +941,8 @@ public without sharing class TestDataFactory {
     public static List<Plan_Protocol__c> createPlanProtocols(Integer numRecords) {
         List<Plan_Protocol__c> planProtocolList = new List<Plan_Protocol__c>();
         Treatment_Plan__c plan = createPlan();
-        List<Protocol__c> protocolList = createProtocols(numRecords);
+        // List<Protocol__c> protocolList = createProtocols(numRecords);
+        List<Protocol__c> protocolList = createProtocols();
         for (Integer i = 0; i < numRecords; i++) {
             Plan_Protocol__c newProtocol = new Plan_Protocol__c(Treatment_Plan__c = plan.Id, Protocol__c = protocolList[i].Id, IsRemoved__c = Math.mod(i, 2) != 0);
             planProtocolList.add(newProtocol);
@@ -944,5 +1149,89 @@ public without sharing class TestDataFactory {
         };
         insert fosterList;
         return fosterList;
+    }
+
+    public static Daily_Care__c createDailyCareWithAnimalDailyCares(Integer animalCount){
+      Animal__c[] animals = new Animal__c[0];
+      for(Integer i = 0; i < animalCount; i++){
+        animals.add(createAnimalWithName('name' + i));
+      }
+      Daily_Care__c dc = createDailyCare();
+      Animal_Daily_Care__c[] adcs = new Animal_Daily_Care__c[0];
+      for(Animal__c a : animals){
+        adcs.add(new Animal_Daily_Care__c(
+          Animal__c = a.Id,
+          Daily_Care__c = dc.Id
+        ));
+      }
+
+      insert adcs;
+      return dc;
+    }
+
+    public static Daily_Care__c createDailyCare(){
+      Daily_Care__c dc = new Daily_Care__c(
+        Date__c = date.today()
+      );
+      insert dc;
+      return dc;
+    }
+
+    public static Task[] createBehaviorTreatmentTasks(){
+      Animal__c dog = createAnimal();
+
+      Date startDate = AutoScheduleTasksUtil.startOfASPCAWeek(date.today());
+      Date activityDate1 = startDate.addDays(1);
+      Date activityDate2 = startDate.addDays(3);
+      Date activityDate3 = startDate.addDays(5);
+
+      Id rtId = Util.getRecordTypeId('Task', AutoScheduleTasksUtil.BEH_TREATMENT_TASK_RECORD_TYPE_NAME);
+
+      Task[] tasks = new Task[0];
+
+      Task t1 = new Task(
+        ActivityDate = activityDate1,
+        Animal__c = dog.Id,
+        RecordTypeId = rtId
+      );
+      tasks.add(t1);
+
+      Task t2 = new Task(
+        ActivityDate = activityDate2,
+        Animal__c = dog.Id,
+        RecordTypeId = rtId
+      );
+      tasks.add(t2);
+
+      Task t3 = new Task(
+        ActivityDate = activityDate3,
+        Animal__c = dog.Id,
+        RecordTypeId = rtId
+      );
+      tasks.add(t3);
+
+      insert tasks;
+      return tasks;
+
+    }
+
+    public static task createMedicationTask(Id animalId){
+      Id recordTypeId = Util.getRecordTypeId('Task',AutoScheduleTasksUtil.TREATMENT_TASK_RECORD_TYPE_NAME);
+
+      Medication_Drug__c drug = new Medication_Drug__c(
+        Name = 'testDrug'
+      ); 
+
+      insert drug;
+
+      Task t = new Task(
+        Animal__c = animalId,
+        RecordTypeId = recordTypeId,
+        ActivityDate = date.today().addDays(2),
+        Medication__c = drug.Id
+      );
+
+      insert t;
+      return t;
     }
 }

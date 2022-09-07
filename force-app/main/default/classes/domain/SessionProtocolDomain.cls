@@ -4,7 +4,7 @@
  *
  * @author barne
  * @version 1.0.0
- * Tests: test_InvocableActionHandler, Test_SessionProtocolDomain
+ * Tests: test_SessionProtocolDomain, Test_SessionProtocolDomain
  */
 
 public with sharing class SessionProtocolDomain extends DomainActionBase {
@@ -53,16 +53,11 @@ public with sharing class SessionProtocolDomain extends DomainActionBase {
         Map<Id, Session_Protocol__c> oldRecordMap = (Map<Id, Session_Protocol__c>) request.oldRecordMap;
 
         List<Session_Protocol__c> sessionProtocolsForProcessing = new List<Session_Protocol__c>();
+        Set<Id>skippedProtocolIds = new Set<Id>();
         for (Session_Protocol__c protocol : newRecordMap.values()) {
             Session_Protocol__c oldProtocol = oldRecordMap.get(protocol.Id);
             if(protocol.IsSkipped__c == true) {
                 protocol.Preferred_Motivators__c = null;
-                protocol.Arousal_Best__c = null;
-                protocol.Arousal_Worst__c = null;
-                protocol.Fear_Best__c = null;
-                protocol.Fear_Worst__c = null;
-                protocol.Social_Best__c = null;
-                protocol.Aggressive_Worst__c = null;
                 protocol.Overall_Score__c = null;
             }
             if (protocol.Add_to_Plan__c == true) {
@@ -94,21 +89,59 @@ public with sharing class SessionProtocolDomain extends DomainActionBase {
             ServiceResponse serviceResponse = SessionProtocolService.processReq(serviceRequest);
             System.debug(serviceResponse);
         }
-
-
     }
+
     public void beforeDelete (TriggerRequest request) { System.debug('SESSION PROTOCOL BEFORE DELETE IS EXECUTING'); }
 
     @SuppressWarnings('ApexUnresolvableReference')
     public void afterInsert(TriggerRequest request) {
         System.debug('SESSION PROTOCOL AFTER INSERT IS EXECUTING');
+        Session_Protocol__c[] newProtocols = (Session_Protocol__c[]) request.newRecords;
+        Session_Protocol__c[] sessionProtocolsForProcessing = new Session_Protocol__c[0];
+        for(Session_Protocol__c sp : newProtocols){
+            sessionProtocolsForProcessing.add(sp);
+        }
+        ServiceRequest serviceRequest = new ServiceRequest();
+        if (!sessionProtocolsForProcessing.isEmpty()) {
+
+            System.debug('sessionProtocolsForProcessing: ' + sessionProtocolsForProcessing);
+
+            serviceRequest.Action = 'afterInsertHandler';
+            serviceRequest.withParams('protocols', sessionProtocolsForProcessing);
+
+            ServiceResponse serviceResponse = SessionProtocolService.processReq(serviceRequest);
+            System.debug(serviceResponse);
+        }
+
     }
 
     public void afterUpdate (TriggerRequest request) {
         System.debug('SESSION PROTOCOL AFTER UPDATE IS EXECUTING');
         Map<Id, Session_Protocol__c> newRecordMap = (Map<Id, Session_Protocol__c>) request.newRecordMap;
+        Map<Id, Session_Protocol__c> oldRecordMap = (Map<Id, Session_Protocol__c>) request.oldRecordMap;
 
+        List<Session_Protocol__c> sessionProtocolsForProcessing = new List<Session_Protocol__c>();
+        Set<Id>skippedProtocolIds = new Set<Id>();
+        for (Session_Protocol__c protocol : newRecordMap.values()) {
+            Session_Protocol__c oldProtocol = oldRecordMap.get(protocol.Id);
+            if(protocol.IsSkipped__c == true && oldProtocol.IsSkipped__c == false) {
+                sessionProtocolsForProcessing.add(protocol);
+            }
+        }
+
+        ServiceRequest serviceRequest = new ServiceRequest();
+        if (!sessionProtocolsForProcessing.isEmpty()) {
+
+            System.debug('sessionProtocolsForProcessing: ' + sessionProtocolsForProcessing);
+
+            serviceRequest.Action = 'afterUpdateHandler';
+            serviceRequest.withParams('protocols', sessionProtocolsForProcessing);
+
+            ServiceResponse serviceResponse = SessionProtocolService.processReq(serviceRequest);
+            System.debug(serviceResponse);
+        }
     }
+    
     public void afterDelete (TriggerRequest request) { System.debug('SESSION PROTOCOL AFTER INSERT IS EXECUTING'); }
 
 }

@@ -1,0 +1,72 @@
+<template>
+    <lightning-card>
+        <template if:true={error}>
+            <c-error-panel errors={error} type='inlineMessage' friendly-message='We have encountered the following error:'></c-error-panel>
+        </template>
+        <div class="slds-grid slds-grid_align-space">
+            <template for:each={locationsDisplay} for:item='loc'>
+                <div class="slds-col" key={loc.location}>
+                    <template if:true={loc.selected}>
+                        <lightning-button
+                            variant="brand"
+                            label={loc.location}
+                            title={loc.location}
+                            data-loc={loc.location}
+                            onclick={handleLocationToggle}
+                            class="slds-var-m-left_x-small"
+                        >
+                        </lightning-button>
+                    </template>
+                    <template if:false={loc.selected}>
+                        <lightning-button
+                            variant="neutral"
+                            label={loc.location}
+                            title={loc.location}
+                            data-loc={loc.location}
+                            onclick={handleLocationToggle}
+                            class="slds-var-m-left_x-small"
+                        >
+                        </lightning-button>
+                    </template>
+                </div>
+            </template>
+        </div>
+        
+        <div class="slds-var-m-around_medium">
+            <div class="slds-grid">
+                <div class="slds-size_5-of-6">
+                    <lightning-input type="text" label="Filter by Name or Id" onkeyup={handleInputChange} onkeydown={handleInputChange}></lightning-input>
+                </div>
+                <div class="slds-size_1-of-6 slds-align-bottom">
+                    <template if:true={showSpinner}>
+                        <lightning-icon icon-name="utility:spinner" alternative-text="Loading" title="Loading" size="small" class="slds-var-p-around_small"></lightning-icon>
+                    </template>
+                </div>
+            </div>
+        </div>
+
+        <div class="slds-var-m-top_medium slds-var-m-left_small">
+            <template for:each={dogList} for:item='dog'>
+                <div class="slds-grid slds-var-m-top_x-small" key={dog.id}>
+                    <div class="slds-size_3-of-6">
+                        {dog.name}
+                    </div>
+                    <div class="slds-size_2-of-6">
+                        {dog.location}
+                    </div>
+                    <div class="slds-size_1-of-6">
+                        <lightning-input 
+                            type="toggle"
+                            checked={dog.selected}
+                            message-toggle-active='Added'
+                            message-toggle-inactive='Excluded'
+                            onchange={handleToggleChange}
+                            data-id={dog.id}
+                        >
+                        </lightning-input>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

@@ -36,10 +36,11 @@ public with sharing class ScheduleBoardAndTrainTask {
 
     //queries and returns a list of animals wit the related Board and Train Facility_Outcome__c's, will query specific animals if the animalIds param is not null
     public static Animal__c[] getAnimals(Id[] animalIds){
+        String[] dogPopulations = AutoScheduleTasksUtil.dogPopulations;
         String queryString = 'SELECT Id, Animal_Name_Id__c, Current_Recent_Shelter_Location__c, Current_Location__c, ' +
             'Behavior_Case_Worker__c, Behavior_Case_Worker__r.Name, Behavior_Case_Worker__r.Is_Generic_Contact__c, ' +
                 '(SELECT Id, Follow_Up_Days__c, Follow_Up_Frequency__c, CreatedDate, Start_Date__c ' +
-                'FROM Animal_Locations__r ' +
+                'FROM Facilities_Outcomes__r ' +
                 'WHERE Facility_Outcome__c = \'Board and Train\' ' +
                 'AND (End_Date__c = null OR End_Date__c >= TODAY) ' +
                 'ORDER BY CreatedDate DESC ' +
@@ -47,6 +48,8 @@ public with sharing class ScheduleBoardAndTrainTask {
             'FROM Animal__c ' +
             'WHERE Current_Location__c = \'Board and Train\' ' +
             'AND Type_of_Animal__c = \'Dog\' ' +
+            'AND Current_Recent_Shelter_Location__c IN: dogPopulations ' +
+            'AND Active_Animal__c = true ' +
             'AND Id IN ( SELECT Animal__c ' +
                 'FROM Facility_Outcome__c ' +
                 'WHERE Facility_Outcome__c = \'Board and Train\' ' +
@@ -85,7 +88,7 @@ public with sharing class ScheduleBoardAndTrainTask {
         */
         Date startDateWeekStart = AutoScheduleTasksUtil.startOfASPCAWeek(AutoScheduleTasksUtil.startDate);
         Date endDateWeekStart = AutoScheduleTasksUtil.startOfASPCAWeek(AutoScheduleTasksUtil.endDate);
-        Facility_Outcome__c location = animal.Animal_Locations__r[0];
+        Facility_Outcome__c location = animal.Facilities_Outcomes__r[0];
 
         Date[] dateList = new Date[0];
 
@@ -157,7 +160,7 @@ public with sharing class ScheduleBoardAndTrainTask {
         //determine which dates need tasks
         Date[] dateList = datesForTasks(animal, config, task);
 
-        Facility_Outcome__c location = animal.Animal_Locations__r[0];
+        Facility_Outcome__c location = animal.Facilities_Outcomes__r[0];
 
         //loop through the dates and prep the tasks, adding them to the list of newTasks to return
         for(Date day : dateList){

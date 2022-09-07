@@ -19,6 +19,7 @@ public with sharing class AutoScheduleController {
         tasksToInsert.addAll(ScheduleAnimalFoster.scheduleFollowUps(animalIds));
         tasksToInsert.addAll(ScheduleBoardAndTrainTask.scheduleFollowUps(animalIds));
         tasksToInsert.addAll(ScheduleAnimalBRCMRC.scheduleBRCMRCTasks(animalIds));
+        OutOfOfficeController.handleOutOfOfficeSchedule();
 
         //update existing BRCMRC tasks
         ScheduleAnimalBRCMRC.completeBRCMRCTasks();

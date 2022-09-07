@@ -4,21 +4,12 @@
     <deleteConstraint>SetNull</deleteConstraint>
     <externalId>false</externalId>
     <label>Behavior Case Worker</label>
-    <lookupFilter>
-        <active>true</active>
-        <filterItems>
-            <field>Contact.Contact_Type__c</field>
-            <operation>equals</operation>
-            <value>Behavior Case Worker</value>
-        </filterItems>
-        <isOptional>false</isOptional>
-    </lookupFilter>
     <referenceTo>Contact</referenceTo>
     <relationshipLabel>Animals (Behavior Case Worker)</relationshipLabel>
     <relationshipName>Beh_Case_Worker_Animals</relationshipName>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
-    <trackHistory>true</trackHistory>
+    <trackHistory>false</trackHistory>
     <trackTrending>true</trackTrending>
     <type>Lookup</type>
 </CustomField>

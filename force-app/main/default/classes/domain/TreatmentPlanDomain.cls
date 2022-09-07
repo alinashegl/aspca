@@ -42,6 +42,10 @@ public with sharing class TreatmentPlanDomain extends DomainActionBase{
             if (plan.Animal__c != null) {
                 planAnimals.add(plan.Animal__c);
             }
+            plan.Problem_Behavior_Aggression_Count__c = getMSPCount('Problem_Behavior_Aggression__c', plan);
+            plan.Problem_Behavior_Arousal_Count__c = getMSPCount('Problem_Behavior_Arousal__c', plan);
+            plan.Problem_Behavior_Fear_Count__c = getMSPCount('Problem_Behavior_Fear__c', plan);
+            plan.Problem_Behavior_Miscellaneous_Count__c = getMSPCount('Problem_Behavior_Miscellaneous__c', plan);
         }
         if (!planAnimals.isEmpty()) {
             TreatmentPlanService.deactivateAnimalPlans(planAnimals);
@@ -68,6 +72,10 @@ public with sharing class TreatmentPlanDomain extends DomainActionBase{
             if (p.AssignedTreatmentBundleId__c != null && oldValue.AssignedTreatmentBundleId__c != p.AssignedTreatmentBundleId__c) {
                 assignedBundles.add(p);
             }
+            p.Problem_Behavior_Aggression_Count__c = getMSPCount('Problem_Behavior_Aggression__c', p);
+            p.Problem_Behavior_Arousal_Count__c = getMSPCount('Problem_Behavior_Arousal__c', p);
+            p.Problem_Behavior_Fear_Count__c = getMSPCount('Problem_Behavior_Fear__c', p);
+            p.Problem_Behavior_Miscellaneous_Count__c = getMSPCount('Problem_Behavior_Miscellaneous__c', p);
         }
         if (!planAnimals.isEmpty()) {
             TreatmentPlanService.deactivateAnimalPlans(planAnimals);
@@ -154,4 +162,13 @@ public with sharing class TreatmentPlanDomain extends DomainActionBase{
         //System.debug('After Update is Executing');
     }
     public void afterDelete(TriggerRequest request) { /* System.debug('After Delete is Executing'); */ }
+    
+    public static Decimal getMSPCount(string mspField, SObject sObj){
+        Decimal count = 0;
+        if(String.isNotBlank(String.valueOf(sObj.get(mspField)))){
+            List<String> mspSize = String.valueOf(sObj.get(mspField)).split(';');
+            count = mspSize.size();
+        }
+        return count;
+    }
 }

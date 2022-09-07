@@ -377,6 +377,12 @@
                 cmp.set('v.IsDogFighting', response[attr].IsDogFighting);
                 cmp.set('v.IsDogOnly', response[attr].IsDogOnly);
                 cmp.set('v.IsPuppy', response[attr].IsPuppy);
+                let isLocked = response[attr].isLocked;
+                cmp.set('v.isLocked', isLocked);
+
+                if(isLocked == false){
+                    alert('You are going to edit this evaluation - are you sure you want to proceed?');
+                }
 
                 if (response[attr].IsAdult) {
                     if (response[attr].IsDogOnly) {
@@ -874,5 +880,52 @@
               console.log('Error Message', error);
           }
         );
+    },
+
+    handleSkipSubsequentTest: function(cmp, event){
+        var params = event.getParam("params");
+        console.log('**params: ', JSON.stringify(params));
+        if(params.values != null){
+            let subTests = this.getSubsequentTests(params.apiName);
+            console.log('subTests: ', subTests);
+
+            for (let i = 0; i < subTests.length; i++) {
+                let subTest = subTests[i];
+                let subTestObj = cmp.get("v."+subTest)[0];
+
+                subTestObj.isSkipped = true;
+                cmp.set("v." + subTest, subTestObj);
+            }
+        }
+    },
+
+    getSubsequentTests: function(apiName){
+        let subTests = [];
+        switch(apiName) {
+            case 'Skipped_SB_P1__c':
+                subTests = ['socialBehaviorTestPart2'];
+                break;
+            case 'Skipped_Play_Tug_P1__c':
+                subTests = ['playTestPart2'];
+                break;
+            case 'Skipped_RG_P1__c':
+                subTests = ['resourceGuardingTestPart2'];
+                break;
+            case 'Puppy_Skipped_CD_P1__c':
+                subTests = ['toddlerDollTestP2'];                
+                break;
+            case 'Skipped_SP_P1__c':
+                subTests = ['scoldingPersonTestP2'];
+                break;
+            case 'Skipped_SSD_P1__c':
+                subTests = ['sameSexDogTestPart2', 'sameSexDogTestPart3'];
+                break;
+            case 'Skipped_OSD_P1__c':
+                subTests = ['oppositeSexDogTestPart2','oppositeSexDogTestPart3'];
+                break;
+
+            default:
+        }
+        return subTests;
     }
 });

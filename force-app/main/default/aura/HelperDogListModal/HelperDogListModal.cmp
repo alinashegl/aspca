@@ -1,0 +1,8 @@
+<aura:component implements="force:lightningQuickAction" >
+	<lightning:listView objectApiName="Animal__c" 
+                        listName="Helper_Dog_List" 
+                        rows="5"
+                        showActionBar="false" 
+                        showRowLevelActions="false" 
+                        showSearchBar="false" />
+</aura:component>

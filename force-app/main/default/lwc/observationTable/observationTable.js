@@ -9,6 +9,8 @@ import OBSERVATION_OBJECT from "@salesforce/schema/Observation__c";
 import OBSERVATION_DATE_FIELD from '@salesforce/schema/Observation__c.Observation_Date__c';
 import OBSERVATION_NOTES_FIELD from '@salesforce/schema/Observation__c.Observation_Notes__c';
 import OBSERVATION_BY_FIELD from '@salesforce/schema/Observation__c.Observation_Reported_By__c';
+import OBSERVATION_RESPONSE_FIELD from '@salesforce/schema/Observation__c.Behavior_Response__c';
+import OBSERVATION_BEH_FIELD from '@salesforce/schema/Observation__c.Behavior_Staff_Initials__c';
 import OBSERVATION_TYPE_FIELD from '@salesforce/schema/Observation__c.Observation_Type__c';
 import OBSERVATION_ANIMAL_FIELD from '@salesforce/schema/Observation__c.Animal__c';
 
@@ -56,6 +58,18 @@ export default class ObservationTable extends NavigationMixin(LightningElement) 
         }
     }
 
+    goToObservation(event){
+        this[NavigationMixin.GenerateUrl]({
+            type: 'standard__recordPage',
+            attributes: {
+                recordId: event.target.dataset.id,
+                objectApiName: 'Observation__c',
+                actionName: 'view'
+            }
+        })
+        .then(url => { window.open(url) });
+    }
+
     updateActiveList(){
         if(this.count == 5 && this.returnedList && this.returnedList.length > 5){
             this.observationList = this.returnedList.slice(0, 5)
@@ -99,6 +113,10 @@ export default class ObservationTable extends NavigationMixin(LightningElement) 
         fields[OBSERVATION_DATE_FIELD.fieldApiName] = this.template.querySelector("lightning-input[data-name=dateInput]").value;
         fields[OBSERVATION_NOTES_FIELD.fieldApiName] = this.template.querySelector("lightning-textarea[data-name=descriptionInput]").value;
         fields[OBSERVATION_BY_FIELD.fieldApiName] = this.template.querySelector("lightning-input[data-name=initialInput]").value;
+        if(this.isConcernType){
+            fields[OBSERVATION_RESPONSE_FIELD.fieldApiName] = this.template.querySelector("lightning-textarea[data-name=responseInput]").value;
+            fields[OBSERVATION_BEH_FIELD.fieldApiName] = this.template.querySelector("lightning-input[data-name=behInitialInput]").value;
+        }
         fields[OBSERVATION_ANIMAL_FIELD.fieldApiName] = this.recordId;
 
         const recordInput = { apiName: OBSERVATION_OBJECT.objectApiName, fields };
@@ -181,5 +199,9 @@ export default class ObservationTable extends NavigationMixin(LightningElement) 
 
     get moreThan5(){
         return this.returnedList && this.returnedList.length > 5 ? true: false;
+    }
+
+    get isConcernType(){
+        return this.observationType == 'Concern';
     }
 }

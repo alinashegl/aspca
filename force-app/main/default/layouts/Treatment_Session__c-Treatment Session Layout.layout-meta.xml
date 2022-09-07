@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customButtons>Daily_Care_Dog_Interaction_Form</customButtons>
+    <customButtons>Medical_Observation_Form</customButtons>
     <excludeButtons>ChangeOwnerOne</excludeButtons>
     <excludeButtons>ChangeRecordType</excludeButtons>
     <excludeButtons>IsotopeSubscription</excludeButtons>
@@ -21,6 +23,14 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Animal__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Overall_Session_Grade__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>ASPCA_Animal_Name__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -86,7 +96,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h21000002IV6c</masterLabel>
+        <masterLabel>00h7h000000yb7J</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>

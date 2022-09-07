@@ -33,10 +33,6 @@
                 <behavior>Edit</behavior>
                 <field>Playgroup_Notes__c</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Animal_Playgroup__c</field>
-            </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
     </layoutSections>
@@ -64,7 +60,9 @@
         <fields>Animal__c</fields>
         <fields>Animal_Name__c</fields>
         <fields>Play_Rating__c</fields>
+        <fields>Playgroup_Session_Notes__c</fields>
         <fields>Playgroup_Individual_Notes__c</fields>
+        <fields>Common_Playgroup_Notes__c</fields>
         <relatedList>Animal_Playgroup__c.Playgroup_Session__c</relatedList>
         <sortField>NAME</sortField>
         <sortOrder>Desc</sortOrder>

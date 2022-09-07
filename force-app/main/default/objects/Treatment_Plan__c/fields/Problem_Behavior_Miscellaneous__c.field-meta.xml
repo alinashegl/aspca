@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Problem_Behavior_Miscellaneous__c</fullName>
+    <externalId>false</externalId>
+    <label>Problem Behavior - Miscellaneous</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Nuisance Barking - Mild</fullName>
+                <default>false</default>
+                <label>Nuisance Barking - Mild</label>
+            </value>
+            <value>
+                <fullName>Nuisance Barking - Moderate</fullName>
+                <default>false</default>
+                <label>Nuisance Barking - Moderate</label>
+            </value>
+            <value>
+                <fullName>Nuisance Barking - Severe</fullName>
+                <default>false</default>
+                <label>Nuisance Barking - Severe</label>
+            </value>
+            <value>
+                <fullName>Separation Anxiety - Mild</fullName>
+                <default>false</default>
+                <label>Separation Anxiety - Mild</label>
+            </value>
+            <value>
+                <fullName>Separation Anxiety - Moderate</fullName>
+                <default>false</default>
+                <label>Separation Anxiety - Moderate</label>
+            </value>
+            <value>
+                <fullName>Separation Anxiety - Severe</fullName>
+                <default>false</default>
+                <label>Separation Anxiety - Severe</label>
+            </value>
+            <value>
+                <fullName>House Soiling - Mild</fullName>
+                <default>false</default>
+                <label>House Soiling - Mild</label>
+            </value>
+            <value>
+                <fullName>House Soiling - Moderate</fullName>
+                <default>false</default>
+                <label>House Soiling - Moderate</label>
+            </value>
+            <value>
+                <fullName>House Soiling - Severe</fullName>
+                <default>false</default>
+                <label>House Soiling - Severe</label>
+            </value>
+            <value>
+                <fullName>Repetitive Behavior - Mild</fullName>
+                <default>false</default>
+                <label>Repetitive Behavior - Mild</label>
+            </value>
+            <value>
+                <fullName>Repetitive Behavior - Moderate</fullName>
+                <default>false</default>
+                <label>Repetitive Behavior - Moderate</label>
+            </value>
+            <value>
+                <fullName>Repetitive Behavior - Severe</fullName>
+                <default>false</default>
+                <label>Repetitive Behavior - Severe</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

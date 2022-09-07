@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Walking_List</fullName>
+    <columns>Animal_Name__c</columns>
+    <columns>NAME</columns>
+    <columns>Petpoint_ID__c</columns>
+    <columns>AAH_ID__c</columns>
+    <columns>Walking_Status__c</columns>
+    <columns>Walking_Notes__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Active_Animal__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>Location_Filter__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>Walking_Status__c</field>
+        <operation>includes</operation>
+        <value>Behavior Only,No Handle</value>
+    </filters>
+    <label>Walking List</label>
+</ListView>

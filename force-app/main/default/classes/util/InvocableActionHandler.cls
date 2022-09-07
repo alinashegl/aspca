@@ -45,13 +45,13 @@ global with sharing class InvocableActionHandler{
             when 'Quote' {
                 switch on request.action {
                     when 'validateSession' {
-                        resp = quoteRequest(request);
+                        // resp = quoteRequest(request);
                     }
                 }
             }when 'Treatment_Plan__c' {
                 switch on request.action {
                     when 'assignPlan' {
-                        resp = assignPlanFromEval(request);
+                        // resp = assignPlanFromEval(request);
                     }
                 }
             }
@@ -59,50 +59,50 @@ global with sharing class InvocableActionHandler{
         return resp;
     }
 
-    private static InvocableActionResponse quoteRequest(InvocableActionRequest request) {
-        ServiceRequest serviceRequest = new ServiceRequest();
-        serviceRequest.Name = request.name;
-        serviceRequest.Action = request.action;
-        serviceRequest.withParams('recordId', request.recordId);
+    // private static InvocableActionResponse quoteRequest(InvocableActionRequest request) {
+    //     ServiceRequest serviceRequest = new ServiceRequest();
+    //     serviceRequest.Name = request.name;
+    //     serviceRequest.Action = request.action;
+    //     serviceRequest.withParams('recordId', request.recordId);
 
-        ServiceResponse serviceResponse = TreatmentSessionService.processReq(serviceRequest);
-        InvocableActionResponse response = new InvocableActionResponse();
-        response.RequestName = 'Validate Treatment Session';
-        Map<String, Map<String, String>> responsesStrings = (Map<String, Map<String, String>>) serviceResponse.Data;
-        String resp = '<p>';
-        String brk = '<br>';
-        for (String str : responsesStrings.keySet()) {
-            if (responsesStrings.size() == 1 && str == 'SUCCESS') {
-                resp = str;
-            }else if(responsesStrings.size() > 1){
-                resp = resp + str + brk + '---------------' + brk;
-                Map<String, String> stringMap = responsesStrings.get(str);
-                for (String rng : stringMap.keySet()) {
-                    resp = resp + rng + ' = ' + stringMap.get(rng) + brk;
-                }
-            }
-            resp = resp + brk + brk;
-        }
-        response.ResponseValue = resp;
-        return response;
-    }
+    //     ServiceResponse serviceResponse = TreatmentSessionService.processReq(serviceRequest);
+    //     InvocableActionResponse response = new InvocableActionResponse();
+    //     response.RequestName = 'Validate Treatment Session';
+    //     Map<String, Map<String, String>> responsesStrings = (Map<String, Map<String, String>>) serviceResponse.Data;
+    //     String resp = '<p>';
+    //     String brk = '<br>';
+    //     for (String str : responsesStrings.keySet()) {
+    //         if (responsesStrings.size() == 1 && str == 'SUCCESS') {
+    //             resp = str;
+    //         }else if(responsesStrings.size() > 1){
+    //             resp = resp + str + brk + '---------------' + brk;
+    //             Map<String, String> stringMap = responsesStrings.get(str);
+    //             for (String rng : stringMap.keySet()) {
+    //                 resp = resp + rng + ' = ' + stringMap.get(rng) + brk;
+    //             }
+    //         }
+    //         resp = resp + brk + brk;
+    //     }
+    //     response.ResponseValue = resp;
+    //     return response;
+    // }
 
-    private static InvocableActionResponse assignPlanFromEval(InvocableActionRequest request) {
-        //TreatmentPlanService service = new TreatmentPlanService();
+    // private static InvocableActionResponse assignPlanFromEval(InvocableActionRequest request) {
+    //     //TreatmentPlanService service = new TreatmentPlanService();
 
-        ServiceRequest serviceRequest = new ServiceRequest();
-        serviceRequest.Action = 'assignPlan';
-        serviceRequest.withParams('recordId', request.recordId);
-        serviceRequest.Name = 'AssignPlanFlow';
-        ServiceResponse serviceResponse = TreatmentPlanService.process(serviceRequest);
+    //     ServiceRequest serviceRequest = new ServiceRequest();
+    //     serviceRequest.Action = 'assignPlan';
+    //     serviceRequest.withParams('recordId', request.recordId);
+    //     serviceRequest.Name = 'AssignPlanFlow';
+    //     ServiceResponse serviceResponse = TreatmentPlanService.process(serviceRequest);
 
-        InvocableActionResponse response = new InvocableActionResponse();
-        System.debug(request);
-        response.RequestName = request.name;
-        response.ResponseValue = (String) serviceResponse.Data;
+    //     InvocableActionResponse response = new InvocableActionResponse();
+    //     System.debug(request);
+    //     response.RequestName = request.name;
+    //     response.ResponseValue = (String) serviceResponse.Data;
 
-        System.debug(response);
-        return response;
+    //     System.debug(response);
+    //     return response;
 
-    }
+    // }
 }

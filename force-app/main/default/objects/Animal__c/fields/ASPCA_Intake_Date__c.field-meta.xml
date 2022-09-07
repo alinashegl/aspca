@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ASPCA_Intake_Date__c</fullName>
+    <externalId>false</externalId>
+    <label>ASPCA Intake Date</label>
+    <summarizedField>Facility_Outcome__c.Start_Date__c</summarizedField>
+    <summaryFilterItems>
+        <field>Facility_Outcome__c.Facility_Outcome__c</field>
+        <operation>equals</operation>
+        <value>AAH, Adoption Center, ARC, CARE</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Facility_Outcome__c.Animal__c</summaryForeignKey>
+    <summaryOperation>min</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

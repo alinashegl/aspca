@@ -28,6 +28,7 @@ export default class GenericDataTable extends NavigationMixin(
   @api orderBy;
   @api limit = 5;
   @api recordTypeList;
+  @api filterBy;
   @api paginate;
   
   // Private Property
@@ -41,6 +42,11 @@ export default class GenericDataTable extends NavigationMixin(
   @track defaultRecrodType;
   @track parentObjectName;
   @track relationShipName;
+  @track filterOptions = [];
+  @track showFilter = false;
+  @track filterByValue = 'none';
+  @track filterInputType = null;
+  @track filterInputValue;
 
   // Do init funtion
   connectedCallback() {
@@ -73,6 +79,26 @@ export default class GenericDataTable extends NavigationMixin(
         this.relationShipName = result.relationShipName;
       });
     }
+    
+    if(this.filterBy){
+      let filterApiNames = this.filterBy.replaceAll(' ','').split(',');
+      let result = this.columns.filter(obj=> filterApiNames.includes(obj.fieldName));
+      if(result.length > 0){
+        this.filterOptions.push({
+          label : '--None--',
+          value : 'none'
+        });
+        result.forEach((item)=>{
+          this.filterOptions.push({
+            label : item.label,
+            value : item.fieldName
+          });
+        });
+        this.showFilter = true;
+      } else {
+        this.showFilter = false;
+      }
+    }
   }
 
   fetchRecords() {
@@ -90,6 +116,7 @@ export default class GenericDataTable extends NavigationMixin(
             }
           });
           this.data = data;
+          console.log(JSON.stringify(data));
         }
       })
       .catch((error) => {
@@ -267,12 +294,30 @@ export default class GenericDataTable extends NavigationMixin(
 
   appendWhere() {
     let where = " WHERE ";
-    if (this.relatedFieldAPI)
+    if (this.relatedFieldAPI){
       where += `${this.relatedFieldAPI} = '${this.recordId}'`;
-    if (this.whereClause && this.relatedFieldAPI)
+    }
+    if (this.whereClause && this.relatedFieldAPI){
       where += ` AND ${this.whereClause}`;
-    else if (this.whereClause) where += `${this.whereClause}`;
+    }
+    else if (this.whereClause) {
+      where += `${this.whereClause}`;
+    }
+
+    if(this.filterByValue && this.filterByValue != 'none' && this.filterBy){
+      let result = this.columns.filter(obj=> obj.fieldName === this.filterByValue);
+      if(result.length > 0){
+        if(result[0].type === 'text'){
+          where += ` AND ${this.filterByValue} LIKE '${this.filterInputValue}%'`;
+        } else if(result[0].type === 'date' && this.filterInputValue){
+          let maxDate = (new Date(this.filterInputValue)).toISOString().split('T')[0];
+          where += ` AND (${this.filterByValue} > ${this.filterInputValue}T00:00:00Z AND ${this.filterByValue} < ${maxDate}T23:59:59Z)`;
+        }
+      }
+    }
+
     return where === " WHERE " ? "" : where;
+
   }
 
   appendOrderBy() {
@@ -327,5 +372,28 @@ export default class GenericDataTable extends NavigationMixin(
             actionName: 'view'
         },
     });*/
+  }
+
+  handleFilterChange(event){
+    this.filterByValue = event.detail.value;
+    if(this.filterByValue === 'none'){
+      this.filterInputType = null;
+      this.buildSOQL();
+      this.fetchRecords();
+    } else {
+      let result = this.columns.filter(obj=> obj.fieldName === this.filterByValue);
+      this.filterInputType = result.length > 0 ? result[0].type : null;
+    }
+    let filterInp = this.template.querySelector('.filterInp');
+    if(filterInp){
+      filterInp.value = '';
+    }
+  }
+
+  handleFilterInputValueChange(event){
+    this.filterInputValue = event.detail.value;
+    this.buildSOQL();
+    console.log(this.soql);
+    this.fetchRecords();
   }
 }

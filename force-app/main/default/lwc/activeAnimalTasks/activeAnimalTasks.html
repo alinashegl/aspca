@@ -1,0 +1,35 @@
+<template>
+    <template if:true={showSpinner}>
+        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+    </template>
+    <lightning-card variant="Narrow">
+        <div class="slds-panel" aria-hidden="false">
+            <div class="slds-panel__header">
+                <h2 class="slds-panel__header-title slds-text-heading_small slds-truncate" title="Panel Header">
+                    <strong>All Tasks for Today</strong>
+                </h2>
+            </div>
+            <template if:true={totalRecordCount}>
+                <div class="slds-panel__body">
+                    <div class="scrollContainer" onscroll={handleScroll}>
+                        <div class="scrollArea">
+
+                            <lightning-datatable data={taskList} columns={columns} key-field="TaskId"
+                                hide-checkbox-column="true" show-row-number-column="true">
+                            </lightning-datatable>
+
+                        </div>
+                    </div>
+                </div>
+            </template>
+            <template if:false={totalRecordCount}>
+                <div class="slds-p-around_small">
+                    No records found.
+                </div>
+            </template>
+            <template if:true={error}>
+                {error}
+            </template>
+        </div>
+    </lightning-card>
+</template>

@@ -16,19 +16,26 @@
                 <label>ARC/CARE</label>
             </value>
             <value>
-                <fullName>MRC</fullName>
+                <fullName>CRC/MRC</fullName>
                 <default>false</default>
-                <label>MRC</label>
-            </value>
-            <value>
-                <fullName>CRC</fullName>
-                <default>false</default>
-                <label>CRC</label>
+                <label>CRC/MRC</label>
             </value>
             <value>
                 <fullName>All</fullName>
                 <default>false</default>
                 <label>All</label>
+            </value>
+            <value>
+                <fullName>CRC</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CRC</label>
+            </value>
+            <value>
+                <fullName>MRC</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>MRC</label>
             </value>
         </valueSetDefinition>
     </valueSet>

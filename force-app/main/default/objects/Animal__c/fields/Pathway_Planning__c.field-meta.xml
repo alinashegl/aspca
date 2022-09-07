@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pathway_Planning__c</fullName>
+    <externalId>false</externalId>
+    <label>Pathway Planning</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Adoption Center</fullName>
+                <default>false</default>
+                <label>Adoption Center</label>
+            </value>
+            <value>
+                <fullName>Euthanasia (Behavior)</fullName>
+                <default>false</default>
+                <label>Euthanasia (Behavior)</label>
+            </value>
+            <value>
+                <fullName>Euthanasia (Medical)</fullName>
+                <default>false</default>
+                <label>Euthanasia (Medical)</label>
+            </value>
+            <value>
+                <fullName>Euthanasia (Medical/Behavior)</fullName>
+                <default>false</default>
+                <label>Euthanasia (Medical/Behavior)</label>
+            </value>
+            <value>
+                <fullName>Foster (Behavior)</fullName>
+                <default>false</default>
+                <label>Foster (Behavior)</label>
+            </value>
+            <value>
+                <fullName>Foster (Forensic)</fullName>
+                <default>false</default>
+                <label>Foster (Forensic)</label>
+            </value>
+            <value>
+                <fullName>Foster (Legal)</fullName>
+                <default>false</default>
+                <label>Foster (Legal)</label>
+            </value>
+            <value>
+                <fullName>Foster (Medical)</fullName>
+                <default>false</default>
+                <label>Foster (Medical)</label>
+            </value>
+            <value>
+                <fullName>Placement Partner</fullName>
+                <default>false</default>
+                <label>Placement Partner</label>
+            </value>
+            <value>
+                <fullName>Placement Partner (Behavior)</fullName>
+                <default>false</default>
+                <label>Placement Partner (Behavior)</label>
+            </value>
+            <value>
+                <fullName>Placement Partner (Medical)</fullName>
+                <default>false</default>
+                <label>Placement Partner (Medical)</label>
+            </value>
+            <value>
+                <fullName>Return to Owner</fullName>
+                <default>false</default>
+                <label>Return to Owner</label>
+            </value>
+            <value>
+                <fullName>Return to Rescue</fullName>
+                <default>false</default>
+                <label>Return to Rescue</label>
+            </value>
+            <value>
+                <fullName>Undetermined</fullName>
+                <default>false</default>
+                <label>Undetermined</label>
+            </value>
+            <value>
+                <fullName>BRC</fullName>
+                <default>false</default>
+                <label>BRC</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

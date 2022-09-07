@@ -15,7 +15,7 @@ public with sharing class playgroupSessionLWCController {
     @testVisible
     private static Playgroup_Session__c getPlaygroupSession (Id sessionId){
         Playgroup_Session__c[] sessions = [
-            SELECT Id, Name, Playgroup_Location__c, Playgroup_Leader__c, Contact_Ids__c
+            SELECT Id, Name, Playgroup_Location__c, Playgroup_Leader__c, Contact_Ids__c, Playgroup_Date_Time__c
             FROM Playgroup_Session__c 
             WHERE Id =: sessionId 
             LIMIT 1
@@ -117,10 +117,6 @@ public with sharing class playgroupSessionLWCController {
     public static Animal_Playgroup__c getAnimalPlaygroupById(Id playgroupAnimalId){
         return [SELECT Id, Animal__c, Animal_Name__c, Play_Rating__c FROM Animal_Playgroup__c WHERE Id =: playgroupAnimalId LIMIT 1];
 
-    }
-
-    public static Animal__c getAnimal(Id animalId){
-        return [SELECT Id, Animal_Name__c, Play_Rating__c FROM Animal__c WHERE Id =: animalId LIMIT 1];
     }
 
     public static Playgroup_Contact__c[] getAnimalContacts(Id playgroupAnimalId){

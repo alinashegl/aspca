@@ -6,7 +6,6 @@ import getPlaygroupSessionInfo from '@salesforce/apex/playgroupSessionLWCControl
 
 export default class PlaygroupSessionMain extends NavigationMixin(LightningElement) {
     @api recordId;
-    location = 'MRC';
     wireResponse;
     showSpinner = true;
     animals = [];
@@ -178,12 +177,6 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
 
     get smallForm(){
         return FORM_FACTOR == 'Small';
-    }
-
-    get currentDateTime(){
-        if(!this.session){
-            return (new Date().toISOString());
-        }
     }
 
     get customLookupValueId(){

@@ -65,7 +65,13 @@ public class BehEvalPdfController {
                 Puppy_Dog_Interaction_P2__c, Puppy_Skipped_DI_P2__c,
                 Puppy_Comments_DI_P2__c, Puppy_Muzzled_DI_P2__c,
                 Puppy_Dog_Interaction_P3__c, Puppy_Skipped_DI_P3__c,
-                Puppy_Comments_DI_P3__c, Puppy_Muzzled_DI_P3__c
+                Puppy_Comments_DI_P3__c, Puppy_Muzzled_DI_P3__c,
+                Potential_Issue_Aggression_To_Animals__c,
+                Potential_Issue_Aggression_To_People__c,
+                Potential_Issue_Fear__c,
+                Potential_Issue_High_Arousal__c,
+                Potential_Issue_Other__c,
+                Potential_Issue_Other_Notes__c
         FROM Behavior_Evaluation__c
         WHERE Id = :ApexPages.currentPage().getParameters().get('Id')];
         
@@ -79,17 +85,24 @@ public class BehEvalPdfController {
         }
 
         summary = behEval.Behavior_Evaluation_Summary__c;
-        if (paramForensic != null && paramForensic == true) {
+        if (summary != null && paramForensic != null && paramForensic == true) {
             //remove same sex and opposite sex entries
-            Integer sameStart = summary.indexOf('<p><b>Same Sex');
-            if (sameStart != -1) {
-                Integer sameEnd = summary.indexOf('</p>', sameStart);
+            Integer sameStart = 0;
+            Integer sameEnd = 0;
+            if(summary.contains('<p><b>Same Sex')){
+                sameStart = summary.indexOf('<p><b>Same Sex');
+            }
+            if (summary.contains('</p>') && sameStart != -1) {
+                sameEnd = summary.indexOf('</p>', sameStart);
                 summary = summary.substring(0, sameStart) + summary.substring(sameEnd + 4);
             }
-            Integer oppositeStart = summary.indexOf('<p><b>Opposite Sex');
-            if (oppositeStart != -1) {
-                Integer oppositeEnd = summary.indexOf('</p>', oppositeStart);
-                summary = summary.substring(0, oppositeStart) + summary.substring(oppositeEnd + 4);
+
+            if(summary.contains('<p><b>Opposite Sex')){
+                Integer oppositeStart = summary.indexOf('<p><b>Opposite Sex');
+                if (oppositeStart != -1) {
+                    Integer oppositeEnd = summary.indexOf('</p>', oppositeStart);
+                    summary = summary.substring(0, oppositeStart) + summary.substring(oppositeEnd + 4);
+                }
             }
         }
         

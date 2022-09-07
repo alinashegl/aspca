@@ -7,7 +7,7 @@
 
 public with sharing class BehaviorEvaluationPageController {
 
-    @AuraEnabled(cacheable=true)
+    @AuraEnabled
     public static Behavior_Evaluation__c getOne (String key) {
         List<Behavior_Evaluation__c> behaviorEvaluation = [SELECT Animal__c, Animal_Age__c, Animal_Breed__c, Animal_ID__c,
                 Animal_Sex__c, Animal_Name__c, Name, Id, Caution__c, Muzzled_SSD_P3__c, Muzzled_OSD_P3__c, Is_Muzzled__c,
@@ -15,8 +15,8 @@ public with sharing class BehaviorEvaluationPageController {
                 Puppy_Skipped_DI_P2__c, Puppy_Skipped_DI_P3__c, Puppy_Comments_DI_P1__c, Puppy_Comments_DI_P2__c,
                 Puppy_Comments_DI_P3__c, Puppy_Dog_Interaction_P1__c, Puppy_Dog_Interaction_P2__c, Puppy_Dog_Interaction_P3__c,
                 Puppy_BIK_Housing__c, Puppy_Behavior_in_Kennel__c, Puppy_Behavior_on_Leash__c, Puppy_Social_Behavior_P1__c,
-                Puppy_Social_Behavior_P2__c, Puppy_Play_Tug_P1__c, Puppy_Skipped_Play_Tug_P1__c, Puppy_Play_Tug_P2__c,
-                Puppy_Skipped_Play_Tug_P2__c, Puppy_Play_Tag__c, Puppy_Comments_Play_Tag__c, Puppy_Restraint__c,
+                Puppy_Social_Behavior_P2__c, Puppy_Play_Tug_P1__c, Puppy_Play_Tug_P2__c,
+                 Puppy_Play_Tag__c, Puppy_Restraint__c,
                 Puppy_Comments_Restraint__c, Puppy_Skipped_Restraint__c, Puppy_Child_Doll_P1__c, Puppy_Comments_CD_P1__c,
                 Puppy_Skipped_CD_P1__c, Puppy_Resource_Guarding_P1_Push_Face__c, Puppy_Resource_Guarding_P1_Touch_Body__c,
                 Puppy_Resource_Guarding_P1_Touch_Neck__c, Puppy_Resource_Guarding_P1_Touch_Face__c, Puppy_Resource_Guarding_P2_Push_Face__c,
@@ -37,7 +37,8 @@ public with sharing class BehaviorEvaluationPageController {
                 Skipped_RG_P2_PF__c, Skipped_RG_P2_TB__c, Skipped_RG_P2_TF__c, Skipped_RG_P2_TN__c, Skipped_UT_1st__c, Skipped_UT_2nd__c,
                 Skipped_TD_P1__c, Skipped_TD_P2__c, Skipped_Tag__c, Skipped_SSD_P1__c, Skipped_SSD_P2__c, Skipped_SSD_P3__c, Skipped_Pleasant__c,
                 Skipped_SB_P1__c, Skipped_SB_P2__c, Skipped_SP_P1__c, Skipped_SP_P2__c, Skipped_Play_Tug_P1__c, Skipped_Play_Tug_P2__c,
-                Comments_UT__c, Comments_Play_Tug_P1__c, Comments_Play_Tug_P2__c, Unpleasant_Touch_1st_Flank__c, Unpleasant_Touch_2nd_Flank__c
+                Comments_UT__c, Comments_Play_Tug_P1__c, Comments_Play_Tug_P2__c, Unpleasant_Touch_1st_Flank__c, Unpleasant_Touch_2nd_Flank__c,
+                IsLocked__c
             FROM Behavior_Evaluation__c
             WHERE Id =: key LIMIT 1];
         if (behaviorEvaluation.size() > 0) {
@@ -54,6 +55,7 @@ public with sharing class BehaviorEvaluationPageController {
     private static EvaluationWrapper newWrapper(SObjectField field, Behavior_Evaluation__c evaluation) {
         ControllerHelper.Properties prop = ControllerHelper.getFieldProperties(field);
         List<Picklist_Description_Config__mdt> sConfigs = MetadataUtil.getFieldValues(prop.id);
+        System.debug('***sConfigs: ' + sConfigs);
         Map<String, Integer> hashMap = new Map<String, Integer>();
         for (Picklist_Description_Config__mdt config : sConfigs) {
             hashMap.put(config.DeveloperName, sConfigs.indexOf(config));
@@ -178,6 +180,7 @@ public with sharing class BehaviorEvaluationPageController {
         utils.UseCaution = behaviorEvaluation.Caution__c;
         utils.IsAdult = behaviorEvaluation.Evaluation_Subtype__c == 'Adult Animal' ? true : false;
         utils.IsPuppy = behaviorEvaluation.Evaluation_Subtype__c == 'Puppy' ? true : false;
+        utils.isLocked = behaviorEvaluation.isLocked__c;
 
         utils.UnpleasantTouch1stFlank = behaviorEvaluation.Unpleasant_Touch_1st_Flank__c;
         utils.UnpleasantTouch2ndFlank = behaviorEvaluation.Unpleasant_Touch_2nd_Flank__c;

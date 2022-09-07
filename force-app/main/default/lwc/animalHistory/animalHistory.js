@@ -72,7 +72,9 @@ export default class AnimalHistory extends LightningElement {
         {label : "Designated Handler Reason", value: "Designated Handler Reason"},
         {label : "Handling Instructions", value: "Handling Instructions"},
         {label : "Play Style Notes", value: "Play Style Notes"},
-        {label : "Shelter Color Coding", value: "Shelter Color Coding"}
+        {label : "Shelter Color Coding", value: "Shelter Color Coding"},
+        {label : "Current Behavior Grade", value: "Current Behavior Grade"},
+        {label : "Grade Change Reason", value: "Grade Change Reason"}
     ];
     @wire(getRecords, {recordId : '$recordId', searchKey: '$searchKey', dateFilter: '$filterDateValue', sortBy: '$sortedBy', sortDirection: '$sortedDirection'})
     wiredData({ error, data }) {

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Behavior_Grade_Change_Notification_Subsequent</name>
+        <label>Animal__c.Behavior_Grade_Change_Notification_Subsequent</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>Animal__c.Behavior_Grade_Change_Notification_Subsequent</actionName>
+        <actionType>emailAlert</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <apiVersion>55.0</apiVersion>
+    <description>Migrated from the: Behavior Grade Change - Subsequent workflow rule
+Workflow rule description: This rule is run whenever &quot;Current Behavior Grade&quot; is altered, after the initial change.&quot;</description>
+    <formulas>
+        <name>Preserve_Preliminary_Behavior_Grade2Formula</name>
+        <dataType>String</dataType>
+        <expression>TEXT(PRIORVALUE( $Record.Current_Behavior_Grade__c ))</expression>
+    </formulas>
+    <label>Behavior Grade Change - Subsequent</label>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <description>Update the &quot;Grade Change&quot; field to &quot;Yes&quot;
+Store the preliminary behavior grade in &quot;Previous Behavior Grade&quot; field.</description>
+        <name>mainUpdate</name>
+        <label>mainUpdate</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Behavior_Grade_Change_Notification_Subsequent</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Grade_Change__c</field>
+            <value>
+                <stringValue>Yes</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Previous_Behavior_Grade__c</field>
+            <value>
+                <elementReference>Preserve_Preliminary_Behavior_Grade2Formula</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>mainUpdate</targetReference>
+        </connector>
+        <object>Animal__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Draft</status>
+</Flow>

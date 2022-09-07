@@ -2,7 +2,11 @@
 private  class test_TreatmentToDoPDFController {
     @isTest 
     static void TreatmentToDoPDFController_hasData(){
-        //create treatment plan, pan protocols, animla, etc
+        User u = [SELECT Id, Location__c FROM User WHERE Id = :UserInfo.getUserId() LIMIT 1];
+        u.Location__c = 'All';
+        update u;
+
+        //create treatment plan, pan protocols, animal, etc
         TestDataFactory.createPlanProtocols(2);
 
         test.startTest();

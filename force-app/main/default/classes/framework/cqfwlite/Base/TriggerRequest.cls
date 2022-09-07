@@ -27,22 +27,6 @@ public without sharing class TriggerRequest {
         }
     }
 
-
-    /**
-     * TODO: Implement ENUMS for TriggerProcess
-     <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
-     <><><><> Template for Implementing ENUMS for Trigger Processing <><><><><><><><><><><><><><><><><><><><><><><><><>
-     <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
-    public TriggerProcess triggerProcess {
-        get {
-            return isBefore ? isInsert ? TriggerProcess.BeforeInsert : isUpdate ? TriggerProcess.BeforeUpdate :
-                                isDelete ? TriggerProcess.BeforeDelete : TriggerProcess.Unknown :
-                    isInsert ? TriggerProcess.AfterInsert : isUpdate ? TriggerProcess.AfterUpdate :
-                                    isDelete ? TriggerProcess.AfterDelete : TriggerProcess.Unknown;
-        }
-    }
-    */
-
     public TriggerRequest(SObjectType target) {
         targetSObject = target;
         isBefore = false;

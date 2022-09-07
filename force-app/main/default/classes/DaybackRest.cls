@@ -2,28 +2,8 @@
 global with sharing class DaybackRest {
     public static Set<String> folderNames = new Set<String>();
     public static String sfObject;
-    public static String[] locationGroup{
-        get{
-            if(locationGroup == null){
-                return getLocationGroup();
-            }
-            else {
-                return locationGroup;
-            }
-        }
-        set;
-    }
-
-    public static String userLocation{
-        get {
-            if(userLocation == null){
-                return getUserLocation();
-            }
-            else {
-                return userLocation;
-            }
-        }
-    }
+    public static String[] locationGroup = BehaviorUtil.locationGroup;
+    public static String userLocation = BehaviorUtil.userLocation;
 
     @HttpGet
     global static DaybackResponse getResources() {
@@ -72,23 +52,6 @@ global with sharing class DaybackRest {
         return genResources;
     }
 
-    private static String[] getLocationGroup(){
-        String[] tempLocationGroup = new String[]{'CRC', 'MRC'};
-            String tempLocation = userLocation;
-            if(tempLocation == 'All'){
-                tempLocationGroup = new String[]{'ARC', 'CARE', 'ARC/CARE', 'CRC', 'MRC'};
-            }
-            if(tempLocation == 'ARC/CARE'){
-                tempLocationGroup = new String[]{'ARC', 'CARE', 'ARC/CARE'};
-            }
-        return tempLocationGroup;
-    }
-
-    private static String getUserLocation(){
-        User u = [SELECT Id, Location__c FROM User WHERE Id =: userInfo.getUserId()];
-        return u.Location__c;
-    }
-
     public static ResourceInfo[] prepContactResources(){
         ResourceInfo[] infos = new ResourceInfo[0];
         Set<Id> managerIds = new Set<Id>();
@@ -135,7 +98,6 @@ global with sharing class DaybackRest {
     }
 
     private static Contact[] queryContacts(){
-
         return [
             SELECT Id, Name, ReportsToId, ReportsTo.Name, ReportsTo.User__c, Contact_Type__c, User__c
             FROM Contact 
@@ -154,10 +116,10 @@ global with sharing class DaybackRest {
                 SELECT Id, Animal_Name_Id__c, Current_Location__c, Current_Recent_Shelter_Location__c 
                 FROM Animal__c 
                 WHERE Type_of_Animal__c = 'Dog' 
-                AND Current_Recent_Shelter_Location__c 
-                IN :locationgroup 
+                AND Current_Recent_Shelter_Location__c IN :locationgroup
+                AND Active_Animal__c = true
                 ORDER BY Current_Recent_Shelter_Location__c, Animal_Name_Id__c
-            ]){
+        ]){
             ResourceInfo res = new ResourceInfo();
             res.type = animal.Current_Recent_Shelter_Location__c;
             res.resourceName = animal.Animal_Name_Id__c;

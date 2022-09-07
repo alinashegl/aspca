@@ -31,6 +31,7 @@
         var variable = cmp.get('v.options');
         var p =  ''; //options[0].get('v.name');
         var recordid = cmp.get('v.recordId');
+        var clearSkipReason = false;
 
         //alert(p);
         var result = [];
@@ -41,6 +42,9 @@
                    label: options[i].get('v.label') ,
                     isSelected: options[i].get('v.checked')
                };
+               if(r.isSelected){
+                clearSkipReason = true;
+               }
                try {
                  result.push(JSON.stringify(r));
                }catch(err) {
@@ -50,7 +54,6 @@
         }else {
 
             var s = cmp.get('v.options');
-            //ps = s[0];
             console.log('Opt Param 1 ',s[0]);
             p = s[0].pleApiName;
             var x = {
@@ -106,6 +109,5 @@
             }
         });
         $A.enqueueAction(action);
-    }
-
+    },
 });

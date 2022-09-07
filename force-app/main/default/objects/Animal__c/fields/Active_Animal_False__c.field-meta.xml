@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Active_Animal_False__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(AND(ISBLANK(Final_Outcome__c),Current_Location__c &lt;&gt; &quot;NYPD Freezer&quot;,Current_Location__c &lt;&gt; &quot;NYPD Refrigerator&quot;),0,1)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Active Animal False</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

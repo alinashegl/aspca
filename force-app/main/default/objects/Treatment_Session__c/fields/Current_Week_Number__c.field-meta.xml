@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Current_Week_Number__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(Session_Date__c &gt;=
+(CASE(MOD(TODAY() - DATE(1900, 1, 2), 7),
+0, TODAY() +0,
+1, TODAY() -1,
+2, TODAY() -2,
+3, TODAY() -3,
+4, TODAY() -4,
+5, TODAY() -5,
+6, TODAY() -6,
+TODAY())), 1, 0)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Current Week Number</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

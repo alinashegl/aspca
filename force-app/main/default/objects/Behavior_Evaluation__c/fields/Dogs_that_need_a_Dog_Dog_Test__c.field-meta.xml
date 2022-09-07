@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Dogs_that_need_a_Dog_Dog_Test__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(AND(TEXT(Overall_Evaluation_Grade__c)=&apos;D - Dog Aggression&apos;, Caution__c = True), True, IF(AND(TEXT(Overall_Evaluation_Grade__c)=&apos;D - Dog Aggression&apos;, Caution__c = False), False, True))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Dogs that need a Dog /Dog Test</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

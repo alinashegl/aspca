@@ -3,8 +3,8 @@
     <actionCalls>
         <name>Refresh_Page</name>
         <label>Refresh Page</label>
-        <locationX>1060</locationX>
-        <locationY>256</locationY>
+        <locationX>1267</locationX>
+        <locationY>255</locationY>
         <actionName>c:redirectFlow</actionName>
         <actionType>component</actionType>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -187,6 +187,31 @@
             <stringValue>Yearly Specific</stringValue>
         </value>
     </choices>
+    <decisions>
+        <name>Latest_End_Date_Checked</name>
+        <label>Latest End Date Checked?</label>
+        <locationX>914</locationX>
+        <locationY>257</locationY>
+        <defaultConnector>
+            <targetReference>Create_Task</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Not Latest End Date</defaultConnectorLabel>
+        <rules>
+            <name>Latest_End_Date</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Use_Latest_End_Date</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_General_Task_Record_Type</targetReference>
+            </connector>
+            <label>Latest End Date</label>
+        </rules>
+    </decisions>
     <dynamicChoiceSets>
         <name>Calendar_Days</name>
         <dataType>Picklist</dataType>
@@ -257,6 +282,63 @@
         <expression>IF({!Create_Recurring_Series_of_Tasks} = false, {!Due_Date}, null)</expression>
     </formulas>
     <formulas>
+        <name>latestEndDate</name>
+        <dataType>Date</dataType>
+        <expression>IF({!Daily_Recurrence} = &quot;Every weekday&quot;, {!latestEndDateWeekday},
+IF({!Frequency} = &quot;Weekly&quot;, {!latestEndDateWeekly},
+IF({!Frequency} = &quot;Monthly&quot;, {!latestEndDateMonthly},
+IF({!Frequency} = &quot;Yearly&quot;,  {!latestEndDateYearly},  {!latestEndDateDaily}))))</expression>
+    </formulas>
+    <formulas>
+        <name>latestEndDateDaily</name>
+        <dataType>Date</dataType>
+        <expression>{!Recurrence_Start} + (100 * {!Days}) - {!Days}</expression>
+    </formulas>
+    <formulas>
+        <name>latestEndDateMonthly</name>
+        <dataType>Date</dataType>
+        <expression>{!Recurrence_Start} + (1825 * {!Months}) - (31 * {!Months})</expression>
+    </formulas>
+    <formulas>
+        <name>latestEndDateWeekday</name>
+        <dataType>Date</dataType>
+        <expression>{!Recurrence_Start} + 139</expression>
+    </formulas>
+    <formulas>
+        <name>latestEndDateWeekly</name>
+        <dataType>Date</dataType>
+        <expression>{!Recurrence_Start} + ((365 * {!Weeks}) / {!latestEndDateWeeklyMask}) - 7</expression>
+    </formulas>
+    <formulas>
+        <name>latestEndDateWeeklyDayOfWeek</name>
+        <dataType>Number</dataType>
+        <expression>IF(CONTAINS({!Weekly_Day_of_Week}, &quot;Saturday&quot;), 1,
+IF(CONTAINS({!Weekly_Day_of_Week}, &quot;Friday&quot;), 2,
+IF(CONTAINS({!Weekly_Day_of_Week}, &quot;Thursday&quot;), 3,
+IF(CONTAINS({!Weekly_Day_of_Week}, &quot;Wednesday&quot;), 4,
+IF(CONTAINS({!Weekly_Day_of_Week}, &quot;Tuesday&quot;), 5,
+IF(CONTAINS({!Weekly_Day_of_Week}, &quot;Monday&quot;), 6,
+IF(CONTAINS({!Weekly_Day_of_Week}, &quot;Sunday&quot;), 7, 0)))))))</expression>
+        <scale>0</scale>
+    </formulas>
+    <formulas>
+        <name>latestEndDateWeeklyMask</name>
+        <dataType>Number</dataType>
+        <expression>IF(CONTAINS({!Weekly_Day_of_Week}, &quot;Sunday&quot;), 1, 0) +
+IF(CONTAINS({!Weekly_Day_of_Week}, &quot;Monday&quot;), 1, 0) +
+IF(CONTAINS({!Weekly_Day_of_Week}, &quot;Tuesday&quot;), 1, 0) +
+IF(CONTAINS({!Weekly_Day_of_Week}, &quot;Wednesday&quot;), 1, 0) +
+IF(CONTAINS({!Weekly_Day_of_Week}, &quot;Thursday&quot;), 1, 0) +
+IF(CONTAINS({!Weekly_Day_of_Week}, &quot;Friday&quot;), 1, 0) +
+IF(CONTAINS({!Weekly_Day_of_Week}, &quot;Saturday&quot;), 1, 0)</expression>
+        <scale>0</scale>
+    </formulas>
+    <formulas>
+        <name>latestEndDateYearly</name>
+        <dataType>Date</dataType>
+        <expression>{!Recurrence_Start} + 3287</expression>
+    </formulas>
+    <formulas>
         <name>Monthly_Mask_Calculation</name>
         <dataType>Number</dataType>
         <expression>IF({!Monthly_Day_of_Week} = &quot;Sunday&quot;, 1,
@@ -316,6 +398,11 @@ IF({!Yearly_Recurrence} = {!Yearly_Relative}, &quot;RecursYearlyNth&quot;, null)
 IF(ISPICKVAL({!Get_Animal_Exam_Sheet.Animal__r.Type_of_Animal__c}, &quot;Feline&quot;), &quot;Cat&quot;, TEXT({!Get_Animal_Exam_Sheet.Animal__r.Type_of_Animal__c})))</expression>
     </formulas>
     <formulas>
+        <name>taskEndDate</name>
+        <dataType>Date</dataType>
+        <expression>IF({!Use_Latest_End_Date} = TRUE, {!latestEndDate}, {!Recurrence_End})</expression>
+    </formulas>
+    <formulas>
         <name>Weekly_Mask_Calculation</name>
         <dataType>Number</dataType>
         <expression>IF(CONTAINS({!Weekly_Day_of_Week}, &quot;Sunday&quot;), 1, 0) +
@@ -361,10 +448,81 @@ IF({!Yearly_Day_of_Week} = &quot;Saturday&quot;, 64, null)))))))</expression>
     </processMetadataValues>
     <processType>Flow</processType>
     <recordCreates>
+        <name>Create_Meds_Ending_Task</name>
+        <label>Create Meds Ending Task</label>
+        <locationX>1120</locationX>
+        <locationY>462</locationY>
+        <connector>
+            <targetReference>Create_Task</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>ActivityDate</field>
+            <value>
+                <elementReference>taskEndDate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Animal_Exam_Sheet_Lookup__c</field>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Animal__c</field>
+            <value>
+                <elementReference>Get_Animal_Exam_Sheet.Animal__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <stringValue>Long term medication ending today, reassess and extend if needed.</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>$User.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Priority</field>
+            <value>
+                <stringValue>Normal</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>RecordTypeId</field>
+            <value>
+                <elementReference>Get_General_Task_Record_Type.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Not Started</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <stringValue>DVM - Meds Ending</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>WhatId</field>
+            <value>
+                <elementReference>Get_Animal_Exam_Sheet.Animal__c</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
         <name>Create_Task</name>
         <label>Create Task</label>
-        <locationX>913</locationX>
-        <locationY>256</locationY>
+        <locationX>1120</locationX>
+        <locationY>255</locationY>
         <connector>
             <targetReference>Refresh_Page</targetReference>
         </connector>
@@ -470,7 +628,7 @@ IF({!Yearly_Day_of_Week} = &quot;Saturday&quot;, 64, null)))))))</expression>
         <inputAssignments>
             <field>RecurrenceEndDateOnly</field>
             <value>
-                <elementReference>Recurrence_End</elementReference>
+                <elementReference>taskEndDate</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -534,7 +692,7 @@ IF({!Yearly_Day_of_Week} = &quot;Saturday&quot;, 64, null)))))))</expression>
         <name>Get_Animal_Exam_Sheet</name>
         <label>Get Animal Exam Sheet</label>
         <locationX>451</locationX>
-        <locationY>256</locationY>
+        <locationY>255</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Get_Treatments_Record_Type</targetReference>
@@ -552,10 +710,39 @@ IF({!Yearly_Day_of_Week} = &quot;Saturday&quot;, 64, null)))))))</expression>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
+        <name>Get_General_Task_Record_Type</name>
+        <label>Get General Task Record Type</label>
+        <locationX>922</locationX>
+        <locationY>462</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Create_Meds_Ending_Task</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>General Task</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>SobjectType</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Task</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>RecordType</object>
+        <queriedFields>Id</queriedFields>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
         <name>Get_Treatments_Record_Type</name>
         <label>Get Treatments Record Type</label>
         <locationX>604</locationX>
-        <locationY>256</locationY>
+        <locationY>255</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>New_Task</targetReference>
@@ -583,8 +770,8 @@ IF({!Yearly_Day_of_Week} = &quot;Saturday&quot;, 64, null)))))))</expression>
     <screens>
         <name>Error_Screen</name>
         <label>Error Screen</label>
-        <locationX>913</locationX>
-        <locationY>50</locationY>
+        <locationX>1120</locationX>
+        <locationY>49</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -600,12 +787,12 @@ IF({!Yearly_Day_of_Week} = &quot;Saturday&quot;, 64, null)))))))</expression>
         <name>New_Task</name>
         <label>New Task</label>
         <locationX>760</locationX>
-        <locationY>256</locationY>
+        <locationY>255</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
-            <targetReference>Create_Task</targetReference>
+            <targetReference>Latest_End_Date_Checked</targetReference>
         </connector>
         <fields>
             <name>Task_Information</name>
@@ -810,7 +997,7 @@ IF({!Yearly_Day_of_Week} = &quot;Saturday&quot;, 64, null)))))))</expression>
             </defaultValue>
             <fieldText>Day(s)</fieldText>
             <fieldType>InputField</fieldType>
-            <isRequired>false</isRequired>
+            <isRequired>true</isRequired>
             <scale>0</scale>
             <visibilityRule>
                 <conditionLogic>and</conditionLogic>
@@ -842,7 +1029,7 @@ IF({!Yearly_Day_of_Week} = &quot;Saturday&quot;, 64, null)))))))</expression>
             <dataType>Number</dataType>
             <fieldText>Recurs every ___ week(s)</fieldText>
             <fieldType>InputField</fieldType>
-            <isRequired>false</isRequired>
+            <isRequired>true</isRequired>
             <scale>0</scale>
             <visibilityRule>
                 <conditionLogic>and</conditionLogic>
@@ -1031,7 +1218,7 @@ IF({!Yearly_Day_of_Week} = &quot;Saturday&quot;, 64, null)))))))</expression>
             <dataType>Number</dataType>
             <fieldText>Month(s)</fieldText>
             <fieldType>InputField</fieldType>
-            <isRequired>false</isRequired>
+            <isRequired>true</isRequired>
             <scale>0</scale>
             <visibilityRule>
                 <conditionLogic>and</conditionLogic>
@@ -1233,6 +1420,30 @@ IF({!Yearly_Day_of_Week} = &quot;Saturday&quot;, 64, null)))))))</expression>
             <name>Recurrence_End</name>
             <dataType>Date</dataType>
             <fieldText>Recurrence End</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>Create_Recurring_Series_of_Tasks</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+                <conditions>
+                    <leftValueReference>Use_Latest_End_Date</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>false</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>Use_Latest_End_Date</name>
+            <dataType>Boolean</dataType>
+            <fieldText>Use Latest End Date</fieldText>
             <fieldType>InputField</fieldType>
             <isRequired>true</isRequired>
             <visibilityRule>

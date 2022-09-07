@@ -46,14 +46,20 @@
                 <label>Puncture with tearing</label>
             </value>
             <value>
-                <fullName>Torn material (leash, clothing)</fullName>
+                <fullName>Torn material (leash - clothing)</fullName>
                 <default>false</default>
-                <label>Torn material (leash, clothing)</label>
+                <label>Torn material (leash - clothing)</label>
             </value>
             <value>
                 <fullName>Other</fullName>
                 <default>false</default>
                 <label>Other</label>
+            </value>
+            <value>
+                <fullName>Torn material (leash, clothing)</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Torn material (leash, clothing)</label>
             </value>
         </valueSetDefinition>
     </valueSet>

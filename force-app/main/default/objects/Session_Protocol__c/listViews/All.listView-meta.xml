@@ -4,11 +4,13 @@
     <columns>NAME</columns>
     <columns>Protocol_Name__c</columns>
     <columns>Status__c</columns>
+    <columns>Required_Count__c</columns>
+    <columns>Scored_Count__c</columns>
     <filterScope>Everything</filterScope>
     <filters>
         <field>TreatmentSessionId__c</field>
         <operation>equals</operation>
-        <value>000000010</value>
+        <value>Tx-2022/05/12-52</value>
     </filters>
     <label>All</label>
 </ListView>

@@ -189,7 +189,13 @@ export default class CustomLookup extends LightningElement {
         document.addEventListener('click', this._handler = this.close.bind(this));
         getRecentlyViewedRecords({objectAPI: this.objName, whereClause: this.whereClause})
         .then((result) =>{
-            this.handleResponse(result);
+            if(result && result.length > 0){
+                this.handleResponse(result);
+            } else {
+                this.delayTimeout = setTimeout(() => {
+                    this.handleQuery();
+                }, DELAY);
+            }
         })
         .finally( ()=>{
             this.showRecent = true;
@@ -364,6 +370,8 @@ export default class CustomLookup extends LightningElement {
 
     //when the user clicks on the icon in the text field, need to open the dropdown and query the recently viewed records
     handleInputIconClick(){
+        this.selectedRecord = null;
+        this.searchKey = '';
         this.isLoading = true;
         if(this.selectedRecord == undefined && !this.editRecord){
             this.editRecord = true;
@@ -379,6 +387,7 @@ export default class CustomLookup extends LightningElement {
                 this.handleToggleExpandSearch();
             }
         }
+        
     }
 
     //this is used by the event listener

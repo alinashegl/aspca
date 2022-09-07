@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Photographer__c</fullName>
+    <externalId>false</externalId>
+    <label>Intake Exam Photographer</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Alison Kennedy-Benson</fullName>
+                <default>false</default>
+                <label>Alison Kennedy-Benson</label>
+            </value>
+            <value>
+                <fullName>Amanda Fitch</fullName>
+                <default>false</default>
+                <label>Amanda Fitch</label>
+            </value>
+            <value>
+                <fullName>Elizabeth Pearlman</fullName>
+                <default>false</default>
+                <label>Elizabeth Pearlman</label>
+            </value>
+            <value>
+                <fullName>Kristina Baucom</fullName>
+                <default>false</default>
+                <label>Kristina Baucom</label>
+            </value>
+            <value>
+                <fullName>Rachel Touroo</fullName>
+                <default>false</default>
+                <label>Rachel Touroo</label>
+            </value>
+            <value>
+                <fullName>Adrianna Ruiz</fullName>
+                <default>false</default>
+                <label>Adrianna Ruiz</label>
+            </value>
+            <value>
+                <fullName>Alison Liu</fullName>
+                <default>false</default>
+                <label>Alison Liu</label>
+            </value>
+            <value>
+                <fullName>Eric Lee</fullName>
+                <default>false</default>
+                <label>Eric Lee</label>
+            </value>
+            <value>
+                <fullName>Jasmine Bruno</fullName>
+                <default>false</default>
+                <label>Jasmine Bruno</label>
+            </value>
+            <value>
+                <fullName>Laura Niestat</fullName>
+                <default>false</default>
+                <label>Laura Niestat</label>
+            </value>
+            <value>
+                <fullName>Matthew DePouli</fullName>
+                <default>false</default>
+                <label>Matthew DePouli</label>
+            </value>
+            <value>
+                <fullName>Robert Reisman</fullName>
+                <default>false</default>
+                <label>Robert Reisman</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

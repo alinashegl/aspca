@@ -17,7 +17,11 @@ private class test_ScheduleAnimalFoster {
         insert new Facility_Outcome__c[]{loc1, loc2};
         
         User u = [SELECT Id FROM User Where Profile.Name = 'System Administrator' AND isActive = true LIMIT 1];
-        User u2 = [SELECT Id FROM User Where Division = 'MRC' AND isActive = true LIMIT 1];
+        User u2 = TestDataFactory.createUserWithProfile('ASPCA - Behavior (CRC)');
+        u2.Division = 'MRC';
+        insert u2;
+        
+        //User u2 = [SELECT Id FROM User Where Division = 'MRC' AND isActive = true LIMIT 1];
         Contact con = TestDataFactory.createContact();
         con.User__c = u.Id;
         con.Contact_Type__c = 'Behavior Case Worker';

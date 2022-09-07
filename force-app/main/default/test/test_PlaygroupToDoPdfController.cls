@@ -6,6 +6,10 @@ public class test_PlaygroupToDoPdfController {
         a.Play_Category__c = 'Small Mellow';
         update a;
 
+        User u = [SELECT Id, Location__c FROM User WHERE Id = :UserInfo.getUserId() LIMIT 1];
+        u.Location__c = 'All';
+        update u;
+
         PageReference toDoPdf = Page.PlaygroupToDoPdf;
         toDoPdf.getParameters().put('location', 'MRC');
         Test.setCurrentPage(toDoPdf);

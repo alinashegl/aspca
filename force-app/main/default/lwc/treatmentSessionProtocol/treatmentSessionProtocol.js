@@ -1,14 +1,16 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement, api, wire } from 'lwc';
 import { updateRecord } from 'lightning/uiRecordApi';
 import { NavigationMixin } from "lightning/navigation";
-import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import getActiveProtocolAndFields from '@salesforce/apex/TreatmentSessionLWCController.getActiveProtocolAndFields';
+import getProtocolStatus from '@salesforce/apex/TreatmentSessionLWCController.getProtocolStatus';
 import PROTOCOL_ID_FIELD from '@salesforce/schema/Session_Protocol__c.Id';
 import IS_SKIPPED_FIELD from '@salesforce/schema/Session_Protocol__c.IsSkipped__c';
 import IS_REMOVED_FIELD from '@salesforce/schema/Session_Protocol__c.IsRemoved__c';
 import NEEDS_REVIEW_FIELD from '@salesforce/schema/Session_Protocol__c.Needs_Review__c';
 import PROTOCOL_NOTES_FIELD from '@salesforce/schema/Session_Protocol__c.Protocol_Notes__c';
-import PREFERRED_MOTIVATORS_FIELD from '@salesforce/schema/Session_Protocol__c.Preferred_Motivators__c';
+import PLAN_PROTOCOL_ID_FIELD from '@salesforce/schema/Plan_Protocol__c.Id';
+import PLAN_PROTOCOL_NOTES_FIELD from '@salesforce/schema/Plan_Protocol__c.Protocol_Notes__c';
+import SystemModstamp from '@salesforce/schema/Account.SystemModstamp';
 
 export default class TreatmentSessionProtocol extends NavigationMixin(LightningElement) {
     @api recordId;
@@ -16,20 +18,20 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
     @api protocolName;
     @api showPicklist = false;
     @api canRemoveProtocol = false;
-    @api location;
 
     fieldValues = [];
     protocolInfo;
+
     error;
+    updateError;
+    errorMessage;
+
+    showUpdatingSpinner = false;
     loading = true;
     isSkipped = false;
     isRemoved = false;
+    protocolStatus = 'Incomplete';
     toggleView = false;
-    col1Fields = [];
-    col2Fields = [];
-    col3Fields = [];
-    col4Fields = [];
-    col5Fields = [];
 
     _refresh;
     @api
@@ -53,6 +55,7 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
                 this.setFieldValues(result);
             } else if (result.error) {
                 this.error = result.error;
+                this.errorMessage = 'Error retrieving Protocol Info:';
                 this.protocolInfo = undefined;
             }
         })
@@ -61,40 +64,24 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
         });
     }
 
-    setFieldValues(data){
-        this.fieldValues = [];
-        this.col1Fields = [];
-        this.col2Fields = [];
-        this.col3Fields = [];
-        this.col4Fields = [];
-        this.col5Fields = [];
-
-        data.picklistFields.forEach(element => {
-            this.fieldValues.push({name: element.apiName, value: element.currentValue});
-            if(element.apiName == 'Aggressive_Worst__c'){
-                this.col1Fields.push(element);
-            } else 
-            if(element.apiName.includes('Arousal')){
-                this.col2Fields.push(element);
-            } else 
-            if(element.apiName == 'Fear_Best__c' || element.apiName == 'Fear_Worst__c'){
-                this.col3Fields.push(element);
-            } else 
-            if(element.apiName == 'Social_Best__c' || element.apiName == 'Solicitation__c'){
-                this.col4Fields.push(element);
-            } else 
-            if(element.apiName == 'Overall_Score__c'){
-                this.col5Fields.push(element);
+    handleRefresh(){
+        window.console.log("handleRefreshStatus");
+        getProtocolStatus({protocolId: this.recordId})
+        .then((result) => {
+            if(result) {
+                this.protocolStatus = result;
+            } else if (result.error) {
+                this.error = result.error;
+                this.errorMessage = 'Error refreshing Protocol Info:';
             }
         });
-        this.isSkipped = data.isSkipped;
-        this.isRemoved = data.isRemoved;
-        this.loading = false;
     }
 
-    handleSubmit(){
-        this.prepProtocolFields();
-        this.toggleView = !this.toggleView;
+    setFieldValues(data){
+        this.isSkipped = data.isSkipped;
+        this.isRemoved = data.isRemoved;
+        this.protocolStatus = data.statusText;
+        this.loading = false;
     }
 
     handleSkip(){
@@ -106,7 +93,7 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
             const fields = {};
             fields[PROTOCOL_ID_FIELD.fieldApiName] = this.recordId;
             fields[IS_SKIPPED_FIELD.fieldApiName] = this.isSkipped;
-            this.updateProtocol(fields);
+            this.updateProtocol(fields, true);
         }
     }
 
@@ -122,18 +109,8 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
             fields[PROTOCOL_ID_FIELD.fieldApiName] = this.recordId;
             fields[IS_SKIPPED_FIELD.fieldApiName] = this.isSkipped;
             fields[IS_REMOVED_FIELD.fieldApiName] = this.isRemoved;
-            this.updateProtocol(fields);
+            this.updateProtocol(fields, true);
         }
-    }
-
-    handleRadioChange(event) {
-        const selectedOption = event.detail.value;
-        const fieldName = event.target.dataset.fname;
-        this.updateProtocolInfo(selectedOption, fieldName);
-    }
-
-    updateProtocolInfo(selectedOption, fieldName){
-        this.fieldValues.find(field => field.name == fieldName).value = selectedOption;
     }
 
     resetProtocol(action){
@@ -145,46 +122,38 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
             fields[IS_REMOVED_FIELD.fieldApiName] = this.isRemoved;
         }
 
-        this.updateProtocol(fields);
+        this.updateProtocol(fields, true);
     }
 
-    prepProtocolFields(){
-        const fields = {};
-        fields[PROTOCOL_ID_FIELD.fieldApiName] = this.recordId;
-        fields[IS_SKIPPED_FIELD.fieldApiName] = this.isSkipped;
-        fields[IS_REMOVED_FIELD.fieldApiName] = this.isRemoved;
-        fields[NEEDS_REVIEW_FIELD.fieldApiName] = this.template.querySelector("lightning-input[data-name=needsReview]").checked;
-        fields[PROTOCOL_NOTES_FIELD.fieldApiName] = this.template.querySelector("lightning-textarea[data-name=protocolNotes]").value;
-        fields[PREFERRED_MOTIVATORS_FIELD.fieldApiName] = this.template.querySelector("lightning-input[data-name=preferredMotivators]").value;
-        
-        this.fieldValues.forEach(element => {
-            fields[element.name] = element.value;
-        });
-        this.updateProtocol(fields);
-    }
-
-    updateProtocol(fields){
+    updateProtocol(fields, refresh){
         const recordUpdate = {fields};
-        updateRecord(recordUpdate).then(recordUpdate => {
-            this.dispatchEvent(
-                new ShowToastEvent({
-                    title: 'Success',
-                    message: 'Protocol updated',
-                    variant: 'success',
-                }),
-            );
+        updateRecord(recordUpdate)
+        .then(() => {
         })
         .catch(error => {
-            this.dispatchEvent(
-                new ShowToastEvent({
-                    title: 'Unable to upate protocol',
-                    message: error.body.message,
-                    variant: 'error',
-                }),
-            );
+            this.updateError = error;
+            this.errorMessage = 'Error updating Porotocol:';
         })
         .finally(() => {
-            this.getProtocolInfo();
+            this.showUpdatingSpinner = false;
+            this.loading = false;
+            if(refresh){
+                this.getProtocolInfo();
+            }
+        });
+    }
+
+    updatePlanProtocol(fields){
+        const recordUpdate = {fields};
+        updateRecord(recordUpdate)
+        .then(() => {
+        })
+        .catch(error => {
+            this.updateError = error;
+            this.errorMessage = 'Error updating Porotocol:';
+        })
+        .finally(() => {
+            this.showUpdatingSpinner = false;
         });
     }
 
@@ -202,6 +171,56 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
         this[NavigationMixin.Navigate](config);
     }
 
+    handleConfigLink(event){
+        const config = {
+            type: 'standard__webPage',
+            attributes: {
+                url: event.target.dataset.link
+            }
+        };
+        this[NavigationMixin.Navigate](config);
+    }
+
+    handleManagerReviewChange(event){
+        this.showUpdatingSpinner = true;
+        const fields = {};
+        fields[PROTOCOL_ID_FIELD.fieldApiName] = this.recordId;
+        fields[NEEDS_REVIEW_FIELD.fieldApiName] = event.target.checked;
+
+        this.updateProtocol(fields, false);
+    }
+
+    handleProtocolNotesUpdate(event){
+        let newValue = event.target.value;
+
+        if(newValue != this.protocolInfo.protocolNotes){
+            this.protocolInfo.protocolNotes = newValue;
+            this.showUpdatingSpinner = true;
+
+            const fields = {};
+            fields[PROTOCOL_ID_FIELD.fieldApiName] = this.recordId;
+            fields[PROTOCOL_NOTES_FIELD.fieldApiName] = newValue;
+
+            this.updateProtocol(fields, false);
+        }
+    }
+
+    handlePlanProtocolNotesUpdate(event){
+        let newValue = event.target.value;
+
+        if(newValue != this.protocolInfo.protocolNotes){
+            this.protocolInfo.planProtocolNotes = newValue;
+            this.showUpdatingSpinner = true;
+
+            const fields = {};
+            fields[PLAN_PROTOCOL_ID_FIELD.fieldApiName] = this.protocolInfo.planProtocolId;
+            fields[PLAN_PROTOCOL_NOTES_FIELD.fieldApiName] = newValue;
+
+            this.updatePlanProtocol(fields);
+        }
+
+    }
+
     get displayBoxLink(){
         return this.protocolInfo && this.protocolInfo.boxLink;
     }
@@ -210,7 +229,7 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
         return this.toggleView ? 'utility:chevrondown' : 'utility:chevronright';
     }
 
-    get sessionStatusIconName(){
+    get protocolStatusIconName(){
         if(this.protocolInfo == undefined){
             return 'utility:spinner'
         }
@@ -225,7 +244,7 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
         }
     }
 
-    get sessionStatusIconVariant(){
+    get protocolStatusIconVariant(){
         if(this.protocolInfo == undefined){
             return ''
         }
@@ -240,7 +259,7 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
         }
     }
 
-    get sessionStatusIconText(){
+    get protocolStatusIconText(){
         if(this.protocolInfo == undefined){
             return ''
         }
@@ -256,8 +275,7 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
     }
 
     get isComplete(){
-        const incompleteField = this.fieldValues.find(field => field.value == null  && field.name != 'Solicitation__c');
-        return  incompleteField == null;
+        return this.protocolStatus == 'Complete';
     }
 
     get showSkipButton(){
@@ -277,6 +295,6 @@ export default class TreatmentSessionProtocol extends NavigationMixin(LightningE
     }
 
     get closeButtonLabel(){
-        return this.isSkipped ? 'Close' : 'Close Without Saving';
+        return 'Close';
     }
 }
