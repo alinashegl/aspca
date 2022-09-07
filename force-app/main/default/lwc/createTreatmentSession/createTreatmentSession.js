@@ -101,5 +101,14 @@ export default class CreateTreatmentSession extends NavigationMixin(LightningEle
         return 'Name, Email, Phone';
     }
 
-
+    get customLookupCreateNewFields(){
+        return [
+            {fieldAPI: 'FirstName', fieldLabel: 'First Name', required: false},
+            {fieldAPI: 'LastName', fieldLabel: 'Last Name', required: true},
+            {fieldAPI: 'Title', required: false},
+            {fieldAPI: 'Department', required: false},
+            {fieldAPI: 'Email', required: false},
+            {fieldAPI: 'Contact_Type__c', required: false}
+        ];
+    }
 }
