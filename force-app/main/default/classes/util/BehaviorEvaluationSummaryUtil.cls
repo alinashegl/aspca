@@ -171,7 +171,6 @@ public class BehaviorEvaluationSummaryUtil {
                     configSummary.add(new SummaryWrapper(Integer.valueOf(t.Test_Display_Order__c), '<p><b>' + testName + ':</b> </p>'));
                 }
             }
-
             
             //getSummaryTemplateList
             String parentTestName = t.Parent_Test_Api_Name__c != null ? t.Parent_Test_Api_Name__c : 
@@ -180,7 +179,10 @@ public class BehaviorEvaluationSummaryUtil {
                 parentConfigSet.add(parentTestName);
 
                 if(parentToTemplateListMap.containsKey(parentTestName)){
-                    parentToTemplateListMap.get(parentTestName).add(testName);
+                    String[] testNameList = parentToTemplateListMap.get(parentTestName);
+                    Set<String> testNameSet = new Set<String>(testNameList);
+                    testNameSet.add(testName);
+                    parentToTemplateListMap.put(parentTestName, new String[(testNameSet)]);
                 } else {
                     parentToTemplateListMap.put(parentTestName, new String[]{testName});
                 }
@@ -211,8 +213,7 @@ public class BehaviorEvaluationSummaryUtil {
         configInfo.commentSkipFieldsMap = configMap;
         configInfo.parentToTemplateListMap = parentToTemplateListMap;
 
-        return configInfo;
-        
+        return configInfo;        
     }
 
     public static Map<String, String[]> getHighValueCategoryMap() {
@@ -259,10 +260,8 @@ public class BehaviorEvaluationSummaryUtil {
 
             Map<String, Test_Config__mdt[]> commentFieldsMap = configInfos.commentSkipFieldsMap;
             String[] summaryList = configInfos.templateList;
-            System.debug('summaryList: ' + summaryList);
 
             String[] parentSummaryList = configInfos.templateParentList;
-            System.debug('parentSummaryList: ' + parentSummaryList);
 
             Map<String, String[]> parentSummaryMap = configInfos.parentToTemplateListMap;
 
@@ -277,12 +276,15 @@ public class BehaviorEvaluationSummaryUtil {
 
             Map<String, String> summaryDiffMap = parseSummaryList(b.Behavior_Evaluation_Summary__c, summaryList);
 
+            String[] doNotDuplicateCustomComments = new String[]{'Same_Sex', 'Opposite_Sex'};
+
             for(String parentSummaryTitle : parentSummaryMap.keySet()){
+                System.debug('parentSummaryTitle: ' + parentSummaryTitle);
                 Boolean skipSubsequentParts = false;
                 String skipReason = null;
                 
                 for(String summaryTitle : parentSummaryMap.get(parentSummaryTitle)){
-                    String parsedComments = summaryDiffMap.containsKey(summaryTitle) ? summaryDiffMap.get(summaryTitle) : null;
+                    System.debug('summaryTitle: ' + summaryTitle);
                     CommentSkipWrapper[] commentList = new CommentSkipWrapper[0];
 
                     Test_Config__mdt p1Config = commentFieldsMap.get(summaryTitle)[0];
@@ -298,6 +300,7 @@ public class BehaviorEvaluationSummaryUtil {
 
                     if(commentFieldsMap.containsKey(summaryTitle)){
                         for(Test_Config__mdt config : commentFieldsMap.get(summaryTitle)){
+                            System.debug('config: ' + config.DeveloperName);
                             if (skipDogTests) {
                                 if (summaryTitle.startsWith('Same Sex') || summaryTitle.startsWith('Opposite Sex') || summaryTitle.startsWith('Same_Sex') || summaryTitle.startsWith('Opposite_Sex')) {
                                     b.put(config.Test_Skip_Reason_Field__c, 'Skipped due to risk to the helper dog');
@@ -324,25 +327,26 @@ public class BehaviorEvaluationSummaryUtil {
                             String testCommentsText = (string) b.get(config.Test_Comment_Field_Name__c);
                             String skipReasonText = (string) b.get(config.Test_Skip_Reason_Field__c);
                             String oldSkipReasonTest = (string) oldRecord.get(config.Test_Skip_Reason_Field__c);
+                            String parsedComments = summaryDiffMap.containsKey(summaryTitle) ? summaryDiffMap.get(summaryTitle) : null;
 
-                            //clear skip reason and comments from comment field from the parsed comments
-                            if(parsedComments != null){
-                                if(testCommentsText != null){
-                                    parsedComments = parsedComments.replaceAll(testCommentsText, '');
+                                //clear skip reason and comments from comment field from the parsed comments
+                                if(parsedComments != null){
+                                    if(testCommentsText != null){
+                                        parsedComments = parsedComments.replaceAll(testCommentsText, '');
+                                    }
+
+                                    if(skipReasonText != null){
+                                        parsedComments = parsedComments.replaceAll(skipReasonText, '');
+                                    }
+
+                                    if(oldSkipReasonTest != null){
+                                        parsedComments = parsedComments.replaceAll(oldSkipReasonTest, '');
+                                    }
+
+                                    parsedComments = cleanString(parsedComments);
                                 }
 
-                                if(skipReasonText != null){
-                                    parsedComments = parsedComments.replaceAll(skipReasonText, '');
-                                }
-
-                                if(oldSkipReasonTest != null){
-                                    parsedComments = parsedComments.replaceAll(oldSkipReasonTest, '');
-                                }
-
-                                parsedComments = cleanString(parsedComments);
-                            }
-
-                            System.debug('parsedComments: ' + parsedComments);
+                                System.debug('parsedComments: ' + parsedComments);
 
                             commentList.add(new CommentSkipWrapper(
                                 config.Test_Name__c,
@@ -365,6 +369,10 @@ public class BehaviorEvaluationSummaryUtil {
 
             String summary = '';
             
+            if(summaryDiffMap.containsKey('preText')){
+                summary += '<p>' + summaryDiffMap.get('preText') + '</p>';
+            }
+
             for(String testName: summaryList){
                 summary += '<p><b>' + testName + ':</b>&nbsp;';
                 if(commentMap.containsKey(testName)){
@@ -430,10 +438,15 @@ public class BehaviorEvaluationSummaryUtil {
     public static Map<String, String> parseSummaryList(String newSummary, String[] summaryList){
         Map<String, String> summaryMap = new Map<String, String>();
 
-        if(String.isNotEmpty(newSummary)){
-        
+        if(String.isNotEmpty(newSummary)){        
             for(Integer i = 0; i < summaryList.size(); i++){
                 Integer newSummaryIndexStart = newSummary.indexOf(summaryList[i]);
+                if(i == 0 && newSummaryIndexStart > 0){
+                    String preText = newSummary.substring(0, newSummaryIndexStart);
+                    preText = cleanString(preText);
+                    System.debug('preText: ' + preText);
+                    summaryMap.put('preText', preText);
+                }
                 if(newSummaryIndexStart == -1) continue;
                 Integer newSummaryIndexEnd = i + 1 >= summaryList.size() ? null : newSummary.indexOf(summaryList[i+1]);
 
