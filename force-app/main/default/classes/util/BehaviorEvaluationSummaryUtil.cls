@@ -384,8 +384,8 @@ public class BehaviorEvaluationSummaryUtil {
                 System.debug('testName: ' + testName);
                 System.debug('heap size: ' + system.Limits.getHeapSize());
                 String summary = '<p><b>' + testName + ':</b>&nbsp;';
-                if(commentMap.containsKey(testName)){
-                    String[] tempCommentList = new String[0];
+                String[] tempCommentList = new String[0];
+                if(commentMap.containsKey(testName)){                    
                     for(CommentSkipWrapper comments : commentMap.get(testName)){
                         if(comments.commentField != null) {
                             System.debug('comments.commentField: ' + comments.commentField);
@@ -407,15 +407,23 @@ public class BehaviorEvaluationSummaryUtil {
                             tempCommentList.add(comments.summaryField);
                         }   
                     }
-                    if(!tempCommentList.isEmpty()){
-                        summary += string.join(tempCommentList, ', ');
+                }
+
+
+                if(parsedCommentsMap.containsKey(testName)){
+                    String parsedComments = addParsedComments(parsedCommentsMap.get(testName));
+                    if(parsedComments != null && String.isNotBlank(parsedComments)){
+                        tempCommentList.add(parsedComments);
                     }
                 }
 
-                if(parsedCommentsMap.containsKey(testName)){
-                    summary += addParsedComments(summary, parsedCommentsMap.get(testName));
+                if(!tempCommentList.isEmpty()){
+                    System.debug('tempCommentList: ' + tempCommentList);
+                    summary += string.join(tempCommentList, ', ');
                 }
+
                 summary += '<p>';
+                System.debug('summary: ' + summary);
                 summaryCommentList.add(summary);
             }
 
@@ -423,14 +431,13 @@ public class BehaviorEvaluationSummaryUtil {
         }
     }
 
-    public static String addParsedComments(String summary, Set<String> parsedComments){
-        String comments = string.join(new List<String>(parsedComments), ', ');
-        if(summary != null && String.isNotEmpty(summary)){
-            summary += ', ' + comments;
-        } else {
-            summary = comments;
-        }
+    public static String addParsedComments(Set<String> parsedComments){
+        String summary = null;
+        String[] parsedList = new List<String>(parsedComments);
 
+        if(parsedList != null && !parsedList.isEmpty()){
+            summary = cleanString(string.join(parsedList, ', '));
+        }
         return summary;
     }
 
@@ -495,9 +502,12 @@ public class BehaviorEvaluationSummaryUtil {
     public static String cleanString(String toClean){
         toClean = toClean.stripHtmlTags();
         toClean = toclean.normalizeSpace();
-        System.debug('toClean: ' + toClean);
+        String[] toCleanList = toClean.split(',');
+        Set<String> toCleanSet = new Set<String>(toCleanList);
+        toCleanSet.remove('');
+        toCleanSet.remove(null);
+        toClean = string.join(new List<String>(toCleanSet), ', ');
         if(toClean != null && String.isNotEmpty(toClean)){
-            System.debug('toClean length: ' + toClean.length());
             Boolean isAlphanumeric = false;
 
             while(!isAlphanumeric){
