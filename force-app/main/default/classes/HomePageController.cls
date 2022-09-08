@@ -4,7 +4,7 @@ public with sharing class HomePageController {
         List<Task> tasks = [SELECT Id,Type, Animal__c,Animal__r.Name,Animal__r.Animal_Name_Id__c, animal__r.Current_Location__c,
                             subject, Animal__r.Gender__c, Animal__r.Shelter_Location__c, Animal__r.Shelter_Color_Coding__c
                             from Task where Animal__C != null AND Animal__r.Active_Animal__c  = true AND Animal__r.Location_Filter__c = true
-                            and CreatedDate = today and OwnerId =: UserInfo.getUserId()
+                            and ActivityDate = today and OwnerId =: UserInfo.getUserId()
                       LIMIT :limitSize  OFFSET :offset  ];
         //LIMIT :limitSize  OFFSET :offset     and CreatedDate = today
         List<animalTaskRec> aTaskRecds = new List<animalTaskRec>();
