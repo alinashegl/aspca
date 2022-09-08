@@ -326,15 +326,26 @@ public class BehaviorEvaluationSummaryUtil {
                                 }
                             }
 
+                            
                             String testCommentsText = (string) b.get(config.Test_Comment_Field_Name__c);
+                            String oldTestCommentsText = (string) oldRecord.get(config.Test_Comment_Field_Name__c);
                             String skipReasonText = (string) b.get(config.Test_Skip_Reason_Field__c);
                             String oldSkipReasonTest = (string) oldRecord.get(config.Test_Skip_Reason_Field__c);
                             String parsedComments = summaryDiffMap.containsKey(summaryTitle) ? summaryDiffMap.get(summaryTitle) : null;
 
+                            if(
+                                (summaryTitle != 'Same Sex Dog' && summaryTitle != 'Opposite Sex Dog') || 
+                                ((summaryTitle == 'Same Sex Dog' || summaryTitle != 'Opposite Sex Dog') && 
+                                config.DeveloperName.contains('1'))
+                            ){
                                 //clear skip reason and comments from comment field from the parsed comments
                                 if(parsedComments != null){
                                     if(testCommentsText != null){
                                         parsedComments = parsedComments.replaceAll(testCommentsText, '');
+                                    }
+
+                                    if(oldTestCommentsText != null){
+                                        parsedComments = parsedComments.replaceAll(oldTestCommentsText, '');
                                     }
 
                                     if(skipReasonText != null){
@@ -355,6 +366,7 @@ public class BehaviorEvaluationSummaryUtil {
                                 } else {
                                     parsedCommentsMap.put(summaryTitle, new Set<String>{parsedComments});
                                 }
+                            }
 
                             commentList.add(new CommentSkipWrapper(
                                 config.Test_Name__c,
