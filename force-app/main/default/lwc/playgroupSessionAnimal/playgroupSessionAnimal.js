@@ -34,11 +34,14 @@ export default class PlaygroupSessionAnimal extends LightningElement {
     confirmDelete = false;
     modalClass = FORM_FACTOR == 'Small' ? 'slds-fade-in-open' : 'slds-modal slds-fade-in-open';
     error;
+    errorMessage;
+    showSpinner = false;
 
     wireResponse;
     animalContacts = [];
-    animalNameResponse;
+    // animalNameResponse;
     playRatingValue;
+    animalInfo = {};
 
     @wire(getAnimalInfo, {playgroupAnimalId: '$playgroupAnimalId'})
     response(result){
@@ -48,10 +51,10 @@ export default class PlaygroupSessionAnimal extends LightningElement {
             this.animalContacts = [];
 
             contactList = result.data.animalContacts;
-            if(result.data.animal != null){
-                window.console.log('animal response: ', result.data.animal.Animal_Name__c);
-                this.animalNameResponse = result.data.animal.Animal_Name__c;
-                this.playRatingValue = result.data.animal.Play_Rating__c;
+            if(result.data != null){
+                window.console.log('animal response: ', result.data.animalName);
+                this.playRatingValue = result.data.playRating;
+                this.animalInfo = result.data;
             }
 
             if(contactList != null && contactList.length > 0){
@@ -70,56 +73,100 @@ export default class PlaygroupSessionAnimal extends LightningElement {
     }
 
     handleOnChangeAnimal(event){
-        const target = event.target;
-        this.animalChanges[target.dataset.id] = target.value;
-        this.animalPendingUpdate = true;
+        this.showSpinner = true;
+
+        const fields = {};
+        fields[event.target.dataset.id] = event.target.value;
+        fields['Id'] = this.animalId;
+
+        this.handleUpdateRecord(fields);
     }
 
+    // handleOnChangeAnimal(event){
+    //     const target = event.target;
+    //     this.animalChanges[target.dataset.id] = target.value;
+    //     this.animalPendingUpdate = true;
+    // }
+
     handleOnChangeAnimalPlaygroup(event){
-        const target = event.target;
-        this.animalPlaygroupChanges[target.dataset.id] = target.value;
-        this.animalPlaygroupPendingUpdate = true;
+        // const target = event.target;
+        // this.animalPlaygroupChanges[target.dataset.id] = target.value;
+        // this.animalPlaygroupPendingUpdate = true;
+
+        this.showSpinner = true;
+
+        const fields = {};
+        fields[event.target.dataset.id] = event.target.value;
+        fields['Id'] = this.playgroupAnimalId;
+
+        this.handleUpdateRecord(fields);
     }
 
     handleOnChangeAnimalPlayRating(event){
         const target = event.target;
-        this.animalPlaygroupChanges[target.dataset.id] = target.value;
-        this.animalPlaygroupPendingUpdate = true;
+        // this.animalPlaygroupChanges[target.dataset.id] = target.value;
+        // this.animalPlaygroupPendingUpdate = true;
         this.playRatingValue = target.value;
+
+        this.showSpinner = true;
+
+        const fields = {};
+        fields[event.target.dataset.id] = target.value;
+        fields['Id'] = this.playgroupAnimalId;
+
+        this.handleUpdateRecord(fields);
     }
 
-    handleSaveDog(event){
-        event.preventDefault();
-        const form = this.template.querySelectorAll('lightning-record-edit-form');
-        if(this.animalPendingUpdate){
-            this.animalUpdateInProgress = true;
-            form[0].submit(this.animalChanges);
-        }
-        if(this.animalPlaygroupPendingUpdate){
-            this.playgroupUpdteInProgress = true;
-            form[1].submit(this.animalPlaygroupChanges);
-        }
+    handleUpdateRecord(fields){
+        window.console.log('handleUpdateRecords: ', JSON.stringify(fields));
+        const recordInput = { fields };
+
+        updateRecord(recordInput)
+        .then(() => {
+            window.console.log('success');
+        })
+        .catch(error => {
+            window.console.log('error: ', error.body.message);
+            this.errorMessage = 'Error updating Animal:';
+            this.error = error;
+        })
+        .finally(() => {
+            this.showSpinner = false;
+        });
     }
 
-    handleAnimalUpdateSuccess(){
-        this.animalPendingUpdate = false;
-        this.animalUpdateInProgress = false;
-        this.animalChanges = {Type_of_Animal__c: 'Dog'};
-    }
+    // handleSaveDog(event){
+    //     event.preventDefault();
+    //     const form = this.template.querySelectorAll('lightning-record-edit-form');
+    //     if(this.animalPendingUpdate){
+    //         this.animalUpdateInProgress = true;
+    //         form[0].submit(this.animalChanges);
+    //     }
+    //     if(this.animalPlaygroupPendingUpdate){
+    //         this.playgroupUpdteInProgress = true;
+    //         form[1].submit(this.animalPlaygroupChanges);
+    //     }
+    // }
 
-    handleAnimalPlaygroupUpdateSuccess(){
-        this.animalPlaygroupPendingUpdate = false;
-        this.playgroupUpdteInProgress = false;
-        this.animalPlaygroupChanges = {};
-    }
+    // handleAnimalUpdateSuccess(){
+    //     this.animalPendingUpdate = false;
+    //     this.animalUpdateInProgress = false;
+    //     this.animalChanges = {Type_of_Animal__c: 'Dog'};
+    // }
 
-    handleAnimalUpdateError(event){
-        const error = event.detail.detail;
-        console.log('Animal update error: ', error);
-        this.animalUpdateInProgress = false;
-        this.playgroupUpdteInProgress = false;
-        this.error = error;
-    }
+    // handleAnimalPlaygroupUpdateSuccess(){
+    //     this.animalPlaygroupPendingUpdate = false;
+    //     this.playgroupUpdteInProgress = false;
+    //     this.animalPlaygroupChanges = {};
+    // }
+
+    // handleAnimalUpdateError(event){
+    //     const error = event.detail.detail;
+    //     console.log('Animal update error: ', error);
+    //     this.animalUpdateInProgress = false;
+    //     this.playgroupUpdteInProgress = false;
+    //     this.error = error;
+    // }
 
     handleToggleChange(event){
         const evt = event.target;
@@ -162,21 +209,21 @@ export default class PlaygroupSessionAnimal extends LightningElement {
         });
     }
 
-    get showSpinner(){
-        return this.animalUpdateInProgress || this.playgroupUpdteInProgress;
-    }
+    // get showSpinner(){
+    //     return this.animalUpdateInProgress || this.playgroupUpdteInProgress;
+    // }
 
     get layoutItemPadding(){
         return FORM_FACTOR == 'small' ? 'around-small' : 'around-medium';
     }
 
-    get updateDogButtonLabel() {
-        return 'Update ' + this.animalNameResponse;
-    }
+    // get updateDogButtonLabel() {
+    //     return 'Update ' + this.animalNameResponse;
+    // }
 
-    get animalName() {
-        return this.animalNameResponse;
-    }
+    // get animalName() {
+    //     return this.animalNameResponse;
+    // }
 
     get playRating(){
         if(this.playRatingValue == 'Green'){
