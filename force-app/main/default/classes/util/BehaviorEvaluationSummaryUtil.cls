@@ -171,7 +171,6 @@ public class BehaviorEvaluationSummaryUtil {
                     configSummary.add(new SummaryWrapper(Integer.valueOf(t.Test_Display_Order__c), '<p><b>' + testName + ':</b> </p>'));
                 }
             }
-
             
             //getSummaryTemplateList
             String parentTestName = t.Parent_Test_Api_Name__c != null ? t.Parent_Test_Api_Name__c : 
@@ -180,7 +179,10 @@ public class BehaviorEvaluationSummaryUtil {
                 parentConfigSet.add(parentTestName);
 
                 if(parentToTemplateListMap.containsKey(parentTestName)){
-                    parentToTemplateListMap.get(parentTestName).add(testName);
+                    String[] testNameList = parentToTemplateListMap.get(parentTestName);
+                    Set<String> testNameSet = new Set<String>(testNameList);
+                    testNameSet.add(testName);
+                    parentToTemplateListMap.put(parentTestName, new String[(testNameSet)]);
                 } else {
                     parentToTemplateListMap.put(parentTestName, new String[]{testName});
                 }
@@ -211,8 +213,7 @@ public class BehaviorEvaluationSummaryUtil {
         configInfo.commentSkipFieldsMap = configMap;
         configInfo.parentToTemplateListMap = parentToTemplateListMap;
 
-        return configInfo;
-        
+        return configInfo;        
     }
 
     public static Map<String, String[]> getHighValueCategoryMap() {
@@ -256,13 +257,12 @@ public class BehaviorEvaluationSummaryUtil {
 
         for (Behavior_Evaluation__c b : triggerNew) {
             ConfigTypeWrapper configInfos = getConfigInfo(b.Evaluation_Subtype__c);
+            System.debug('heap size: ' + system.Limits.getHeapSize());
 
             Map<String, Test_Config__mdt[]> commentFieldsMap = configInfos.commentSkipFieldsMap;
             String[] summaryList = configInfos.templateList;
-            System.debug('summaryList: ' + summaryList);
 
             String[] parentSummaryList = configInfos.templateParentList;
-            System.debug('parentSummaryList: ' + parentSummaryList);
 
             Map<String, String[]> parentSummaryMap = configInfos.parentToTemplateListMap;
 
@@ -274,15 +274,19 @@ public class BehaviorEvaluationSummaryUtil {
             }            
 
             Map<String, CommentSkipWrapper[]> commentMap = new Map<String, CommentSkipWrapper[]>();
+            Map<String, Set<String>> parsedCommentsMap = new Map<String, Set<String>>();
 
             Map<String, String> summaryDiffMap = parseSummaryList(b.Behavior_Evaluation_Summary__c, summaryList);
 
+            String[] doNotDuplicateCustomComments = new String[]{'Same_Sex', 'Opposite_Sex'};
+
             for(String parentSummaryTitle : parentSummaryMap.keySet()){
+                System.debug('parentSummaryTitle: ' + parentSummaryTitle);
                 Boolean skipSubsequentParts = false;
                 String skipReason = null;
                 
                 for(String summaryTitle : parentSummaryMap.get(parentSummaryTitle)){
-                    String parsedComments = summaryDiffMap.containsKey(summaryTitle) ? summaryDiffMap.get(summaryTitle) : null;
+                    System.debug('summaryTitle: ' + summaryTitle);
                     CommentSkipWrapper[] commentList = new CommentSkipWrapper[0];
 
                     Test_Config__mdt p1Config = commentFieldsMap.get(summaryTitle)[0];
@@ -294,10 +298,11 @@ public class BehaviorEvaluationSummaryUtil {
                             skipSubsequentParts = true;
                             skipReason = (String) b.get(currentFieldApi);
                         }
-                    }
+                    }                    
 
                     if(commentFieldsMap.containsKey(summaryTitle)){
                         for(Test_Config__mdt config : commentFieldsMap.get(summaryTitle)){
+                            System.debug('config: ' + config.DeveloperName);
                             if (skipDogTests) {
                                 if (summaryTitle.startsWith('Same Sex') || summaryTitle.startsWith('Opposite Sex') || summaryTitle.startsWith('Same_Sex') || summaryTitle.startsWith('Opposite_Sex')) {
                                     b.put(config.Test_Skip_Reason_Field__c, 'Skipped due to risk to the helper dog');
@@ -321,35 +326,53 @@ public class BehaviorEvaluationSummaryUtil {
                                 }
                             }
 
+                            
                             String testCommentsText = (string) b.get(config.Test_Comment_Field_Name__c);
+                            String oldTestCommentsText = (string) oldRecord.get(config.Test_Comment_Field_Name__c);
                             String skipReasonText = (string) b.get(config.Test_Skip_Reason_Field__c);
                             String oldSkipReasonTest = (string) oldRecord.get(config.Test_Skip_Reason_Field__c);
+                            String parsedComments = summaryDiffMap.containsKey(summaryTitle) ? summaryDiffMap.get(summaryTitle) : null;
 
-                            //clear skip reason and comments from comment field from the parsed comments
-                            if(parsedComments != null){
-                                if(testCommentsText != null){
-                                    parsedComments = parsedComments.replaceAll(testCommentsText, '');
+                            if(
+                                (summaryTitle != 'Same Sex Dog' && summaryTitle != 'Opposite Sex Dog') || 
+                                ((summaryTitle == 'Same Sex Dog' || summaryTitle != 'Opposite Sex Dog') && 
+                                config.DeveloperName.contains('1'))
+                            ){
+                                //clear skip reason and comments from comment field from the parsed comments
+                                if(parsedComments != null){
+                                    if(testCommentsText != null){
+                                        parsedComments = parsedComments.replaceAll(testCommentsText, '');
+                                    }
+
+                                    if(oldTestCommentsText != null){
+                                        parsedComments = parsedComments.replaceAll(oldTestCommentsText, '');
+                                    }
+
+                                    if(skipReasonText != null){
+                                        parsedComments = parsedComments.replaceAll(skipReasonText, '');
+                                    }
+
+                                    if(oldSkipReasonTest != null){
+                                        parsedComments = parsedComments.replaceAll(oldSkipReasonTest, '');
+                                    }
+
+                                    parsedComments = cleanString(parsedComments);
                                 }
 
-                                if(skipReasonText != null){
-                                    parsedComments = parsedComments.replaceAll(skipReasonText, '');
-                                }
+                                System.debug('parsedComments: ' + parsedComments);
 
-                                if(oldSkipReasonTest != null){
-                                    parsedComments = parsedComments.replaceAll(oldSkipReasonTest, '');
+                                if(parsedCommentsMap.containsKey(summaryTitle)){
+                                    parsedCommentsMap.get(summaryTitle).add(parsedComments);
+                                } else {
+                                    parsedCommentsMap.put(summaryTitle, new Set<String>{parsedComments});
                                 }
-
-                                parsedComments = cleanString(parsedComments);
                             }
-
-                            System.debug('parsedComments: ' + parsedComments);
 
                             commentList.add(new CommentSkipWrapper(
                                 config.Test_Name__c,
                                 testCommentsText, 
                                 skipReasonText,
-                                !highValueSelections.isEmpty() ? string.join(highValueSelections, ';') : null,
-                                parsedComments
+                                !highValueSelections.isEmpty() ? string.join(highValueSelections, ';') : null
                             ));
 
                             //unskip if score was added
@@ -363,12 +386,18 @@ public class BehaviorEvaluationSummaryUtil {
                 }
             }
 
-            String summary = '';
+            String[] summaryCommentList = new String[0];
             
+            if(summaryDiffMap.containsKey('preText')){
+                summaryCommentList.add('<p>' + summaryDiffMap.get('preText') + '</p>');
+            }
+
             for(String testName: summaryList){
-                summary += '<p><b>' + testName + ':</b>&nbsp;';
-                if(commentMap.containsKey(testName)){
-                    String[] tempCommentList = new String[0];
+                System.debug('testName: ' + testName);
+                System.debug('heap size: ' + system.Limits.getHeapSize());
+                String summary = '<p><b>' + testName + ':</b>&nbsp;';
+                String[] tempCommentList = new String[0];
+                if(commentMap.containsKey(testName)){                    
                     for(CommentSkipWrapper comments : commentMap.get(testName)){
                         if(comments.commentField != null) {
                             System.debug('comments.commentField: ' + comments.commentField);
@@ -390,15 +419,38 @@ public class BehaviorEvaluationSummaryUtil {
                             tempCommentList.add(comments.summaryField);
                         }   
                     }
-                    if(!tempCommentList.isEmpty()){
-                        summary += string.join(tempCommentList, ', ');
+                }
+
+
+                if(parsedCommentsMap.containsKey(testName)){
+                    String parsedComments = addParsedComments(parsedCommentsMap.get(testName));
+                    if(parsedComments != null && String.isNotBlank(parsedComments)){
+                        tempCommentList.add(parsedComments);
                     }
                 }
+
+                if(!tempCommentList.isEmpty()){
+                    System.debug('tempCommentList: ' + tempCommentList);
+                    summary += string.join(tempCommentList, ', ');
+                }
+
                 summary += '<p>';
+                System.debug('summary: ' + summary);
+                summaryCommentList.add(summary);
             }
 
-            b.Behavior_Evaluation_Summary__c = summary;
+            b.Behavior_Evaluation_Summary__c = String.join(summaryCommentList, '');
         }
+    }
+
+    public static String addParsedComments(Set<String> parsedComments){
+        String summary = null;
+        String[] parsedList = new List<String>(parsedComments);
+
+        if(parsedList != null && !parsedList.isEmpty()){
+            summary = cleanString(string.join(parsedList, ', '));
+        }
+        return summary;
     }
 
     public static void handleAfterUpdate(List<Behavior_Evaluation__c> triggerNew, Map<Id, Behavior_Evaluation__c> triggerOldMap) {
@@ -430,10 +482,15 @@ public class BehaviorEvaluationSummaryUtil {
     public static Map<String, String> parseSummaryList(String newSummary, String[] summaryList){
         Map<String, String> summaryMap = new Map<String, String>();
 
-        if(String.isNotEmpty(newSummary)){
-        
+        if(String.isNotEmpty(newSummary)){        
             for(Integer i = 0; i < summaryList.size(); i++){
                 Integer newSummaryIndexStart = newSummary.indexOf(summaryList[i]);
+                if(i == 0 && newSummaryIndexStart > 0){
+                    String preText = newSummary.substring(0, newSummaryIndexStart);
+                    preText = cleanString(preText);
+                    System.debug('preText: ' + preText);
+                    summaryMap.put('preText', preText);
+                }
                 if(newSummaryIndexStart == -1) continue;
                 Integer newSummaryIndexEnd = i + 1 >= summaryList.size() ? null : newSummary.indexOf(summaryList[i+1]);
 
@@ -457,9 +514,12 @@ public class BehaviorEvaluationSummaryUtil {
     public static String cleanString(String toClean){
         toClean = toClean.stripHtmlTags();
         toClean = toclean.normalizeSpace();
-        System.debug('toClean: ' + toClean);
+        String[] toCleanList = toClean.split(',');
+        Set<String> toCleanSet = new Set<String>(toCleanList);
+        toCleanSet.remove('');
+        toCleanSet.remove(null);
+        toClean = string.join(new List<String>(toCleanSet), ', ');
         if(toClean != null && String.isNotEmpty(toClean)){
-            System.debug('toClean length: ' + toClean.length());
             Boolean isAlphanumeric = false;
 
             while(!isAlphanumeric){
