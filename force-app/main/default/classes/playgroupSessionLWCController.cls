@@ -118,9 +118,7 @@ public with sharing class playgroupSessionLWCController {
     }
 
     public class PlaygroupAnimalInfo{
-        @AuraEnabled public Playgroup_Contact__c[] animalContacts {get; set;}
-
-        
+        @AuraEnabled public Playgroup_Contact__c[] animalContacts {get; set;}        
         @AuraEnabled public String animalName;
         @AuraEnabled public String playStyleNotes;
         @AuraEnabled public String dogPGNotes;
