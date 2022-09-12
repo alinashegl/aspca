@@ -6,10 +6,17 @@ public with sharing class test_TreatmentToDoListController {
         u.Location__c = 'All';
         update u;
         Treatment_Plan__c treatmentPlan = TestDataFactory.createPlan();
+        Animal__c a = new Animal__c(Id=treatmentPlan.Animal__c, Current_Recent_Shelter_Location__c = 'CARE', Current_Location__c = 'Test');
+        update a;
+        treatmentPlan.IsActive__c = TRUE;
+        treatmentPlan.Treatment_Priority__c = 'Daily – 7 days';
+        update treatmentPlan;
         Test.startTest();
         List<Treatment_Plan__c> treatmentPlans = TreatmentToDoListController.getAnimalTreatments();
         Test.stopTest();
         System.assertEquals(1, treatmentPlans.size());
+        
+        
     }
 
     @isTest
@@ -36,11 +43,9 @@ public with sharing class test_TreatmentToDoListController {
     }
     
     @isTest
-    static void updateAnimalTreatment() {
+    static void testCloneRecord() {
         Treatment_Plan__c treatmentPlan = TestDataFactory.createPlan();
-        Test.startTest();
-        Map<String, Object> objMap = new Map<String, Object>{'Description__c'=> (Object)'Test'};
-        TreatmentToDoListController.updateTreatment(treatmentPlan.Id, objMap);
-        Test.stopTest();
+        SObject obj = TreatmentToDoListController.cloneRecord(treatmentPlan.Id);
+        System.assertNotEquals(null, obj);
     }
 }

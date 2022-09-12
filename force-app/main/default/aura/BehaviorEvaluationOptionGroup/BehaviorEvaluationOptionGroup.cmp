@@ -7,6 +7,7 @@
     <aura:attribute name="index" type="Integer" />
     <aura:attribute name="selections" type="String" />
     <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="isLocked" type="Boolean"/>
     <aura:attribute name="image" type="Aura.Component[]" />
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
     <lightning:notificationsLibrary aura:id="lib" />
@@ -20,7 +21,8 @@
                         <tr class="spaceUnder" align="left">
                             <td  class="float slds-theme_shade">
                                 <lightning:input name="{!options.pleApiName}" label="{!options.label}" type="checkbox-button"
-                                                 variant="label-hidden" aura:id="opts" onchange="{!c.handleSelect}" checked="{!options.IsSelected}"/>
+                                                 variant="label-hidden" aura:id="opts" onchange="{!c.handleSelect}" checked="{!options.IsSelected}"
+                                                 disabled="{!v.isLocked}"/>
                             </td>
                             <td  style="vertical-align: top" align="left">
                                 <strong> {!options.label}</strong>

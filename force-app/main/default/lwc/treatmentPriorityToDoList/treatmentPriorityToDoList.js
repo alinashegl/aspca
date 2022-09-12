@@ -80,6 +80,12 @@ export default class TreatmentPriorityToDoList extends NavigationMixin(Lightning
                 this.animalTreatments = result;
                 if (result) {
                     this.animalTreatmentsData = result;
+                    this.animalTreatmentsData.forEach(element => {
+                        element.isBehCaseWorker = false;
+                        if(element.Animal__r.hasOwnProperty('Behavior_Case_Worker__r')){
+                            element.isBehCaseWorker = true;
+                        }
+                    });
                     this.sortFilterData();
                 }
                 else if (result.error) {

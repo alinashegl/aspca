@@ -377,6 +377,12 @@
                 cmp.set('v.IsDogFighting', response[attr].IsDogFighting);
                 cmp.set('v.IsDogOnly', response[attr].IsDogOnly);
                 cmp.set('v.IsPuppy', response[attr].IsPuppy);
+                let isLocked = response[attr].isLocked;
+                cmp.set('v.isLocked', isLocked);
+
+                if(isLocked == false){
+                    alert('You are going to edit this evaluation - are you sure you want to proceed?');
+                }
 
                 if (response[attr].IsAdult) {
                     if (response[attr].IsDogOnly) {

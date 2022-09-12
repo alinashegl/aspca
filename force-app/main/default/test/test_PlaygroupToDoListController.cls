@@ -14,14 +14,23 @@ public with sharing class test_PlaygroupToDoListController {
         List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals('MRC');
         Test.stopTest();
 
-        List<Animal__c> animals = [SELECT Id, Shelter_Location2__c, Play_Category__c, Behavior_Play_Pause__c, Behavior_Play_Pause_Date__c FROM Animal__c WHERE Id = :a.Id];
+        List<Animal__c> animals = [SELECT Id, Shelter_Location2__c, Play_Category__c FROM Animal__c WHERE Id = :a.Id];
         System.assertEquals(1, playgroupAnimals.size());
         System.assertEquals(a.Id, playgroupAnimals[0].Id);
+    }
+    
+    @isTest
+    static void getReportId() {
+        Test.startTest();
+        Id getReportId = PlaygroupToDoListController.getReportId();
+        Test.stopTest();
     }
 
     @isTest
     static void getPlaygroupAnimalsBadCategory() {
         Animal__c a = TestDataFactory.createAnimal();
+        Animal__c a1 = new Animal__c(id = a.id, Current_Location__c = 'Boarding', Play_Category__c = 'Unevaluated');
+        update a1;
         Test.startTest();
         List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals('MRC');
         Test.stopTest();
@@ -31,6 +40,9 @@ public with sharing class test_PlaygroupToDoListController {
     @isTest
     static void getPlaygroupAnimalsBehaviorPause() {
         Animal__c a = TestDataFactory.createAnimal();
+        Animal__c a1 = new Animal__c(Id=a.Id, Current_Recent_Shelter_Location__c = 'MRC', Type_of_Animal__c = 'Dog',
+                                     Play_Category__c = 'PG Re-Eval', Current_Location__c = 'Test');
+        update a1;
         List<Play_Pause__c> playPauses = TestDataFactory.createPlayPauses(a);
         Test.startTest();
         List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals('MRC');
@@ -41,6 +53,8 @@ public with sharing class test_PlaygroupToDoListController {
     @isTest
     static void getPlaygroupAnimalsBadLocation() {
         Animal__c a = TestDataFactory.createAnimal();
+        Animal__c a1 = new Animal__c(id = a.id, Current_Location__c = 'Boarding');
+        update a1;
         Test.startTest();
         List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals('Not MRC');
         Test.stopTest();
@@ -50,8 +64,8 @@ public with sharing class test_PlaygroupToDoListController {
     @isTest
     static void getPlaygroupAnimalsNoPlayCategory() {
         Animal__c a = TestDataFactory.createAnimal();
-        a.Play_Category__c = null;
-        update a;
+        Animal__c a1 = new Animal__c(id = a.id, Current_Location__c = 'Boarding', Play_Category__c = 'Unevaluated');
+        update a1;
         Test.startTest();
         List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals('MRC');
         Test.stopTest();

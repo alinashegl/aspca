@@ -15,6 +15,7 @@
     <aura:attribute name="selections" type="String" />
     <aura:attribute name="recordId" type="String" />
     <aura:attribute name="image" type="Aura.Component[]" />
+    <aura:attribute name="isLocked" type="Boolean"/>
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
 
     <table class="slds-box slds-p-top_medium" width="100%">
@@ -27,12 +28,14 @@
                             <td class="float slds-theme_shade">
                                 <lightning:input name="{!v.col1API}" label="{!options.column1.label}"
                                                  type="checkbox-button"
+                                                 disabled="{!v.isLocked}"
                                                  variant="label-hidden" aura:id="opts" onchange="{!c.handleSelect}" checked="{!options.column1.IsSelected}"/>
                             </td>
                             <aura:if isTrue="{!v.colNumber >= 2}">
                             <td class="float slds-theme_shade">
                                 <lightning:input name="{!v.col2API}" label="{!options.column2.label}"
                                                  type="checkbox-button"
+                                                 disabled="{!v.isLocked}"
                                                  variant="label-hidden" aura:id="opts2" onchange="{!c.handleSelect2}" checked="{!options.column2.IsSelected}" />
                             </td>
                             </aura:if>
@@ -40,6 +43,7 @@
                             <td class="float slds-theme_shade">
                                 <lightning:input name="{!v.col3API}" label="{!options.column3.label}"
                                                  type="checkbox-button"
+                                                 disabled="{!v.isLocked}"
                                                  variant="label-hidden" aura:id="opts3" onchange="{!c.handleSelect3}" checked="{!options.column3.IsSelected}" />
                             </td>
                             </aura:if>
@@ -47,6 +51,7 @@
                             <td class="float slds-theme_shade">
                                 <lightning:input name="{!v.col4API}" label="{!options.column4.label}"
                                                  type="checkbox-button"
+                                                 disabled="{!v.isLocked}"
                                                  variant="label-hidden" aura:id="opts4" onchange="{!c.handleSelect4}" checked="{!options.column4.IsSelected}" />
                             </td>
                             </aura:if>

@@ -53,5 +53,41 @@
         var behaviorEvalObj = event.getParam("behaviorEvalObj");
         cmp.set("v.behaviorEvaluation",behaviorEvalObj);        
         helper.handleSkipSubsequentTest(cmp, event);
-    }
+    },
+
+    // handleLocationChange : function (cmp, event, helper) {
+    //     // confirm('You have unsaved data. Do you want to leave?');
+    //     var rid = cmp.get('v.recordId');
+    //     var apiName = 'IsLocked__c';
+    //     var state = true;
+    //     var status = 'status';
+    //     var t;
+
+    //     var params = {
+    //         apiName: apiName ,
+    //         values: state ,
+    //         recordId : rid
+    //     };
+    //     helper.sendPromise(cmp, 'c.putBoolean', params, status)
+    //     .then(
+    //         function(response) {
+    //         }
+    //     ).catch(
+    //       function(error) {
+    //           console.log('Error Message', error);
+    //       }
+    //     );
+    //     event.preventDefault();
+    //  },
+
+     handleMessage : function(component, message, helper) {
+        try{
+            if (message != null){
+                helper.loadBehaviorReport(component);
+            }
+        }
+        catch(exp){
+            console.log(exp.message);
+        }
+    },
 });
