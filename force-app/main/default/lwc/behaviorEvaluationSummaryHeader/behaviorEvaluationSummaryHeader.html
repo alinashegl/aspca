@@ -6,16 +6,33 @@
                     record-id={recordId}
                 ></c-play-category-picklist>
             </div>
-            <div class="slds-col slds-size_6-of-6 slds-medium-size_1-of-2 slds-large-size_1-of-6"></div>
+            <div class="slds-col slds-size_6-of-6 slds-medium-size_1-of-2 slds-large-size_1-of-6">
+            </div>
             <div class="slds-col slds-size_6-of-6 slds-medium-size_1-of-2 slds-large-size_2-of-6 slds-align-middle">
-                <lightning-button 
-                    variant={lockedVariant} 
-                    label={lockedLabel} 
-                    title="Primary action with lighter look" 
-                    onclick={handleClick} 
-                    class="slds-m-left_x-small"
-                    disabled={disableLockButton}
-                ></lightning-button>
+                <template if:true={showEditButton}>
+                    <div class="slds-var-m-bottom_x-small">
+                        <lightning-button 
+                            variant={lockedVariant} 
+                            label="Edit Evaluation" 
+                            title="Primary action with lighter look" 
+                            onclick={handleTempUnlock} 
+                            class="slds-m-left_x-small"
+                            disabled={showTempLock}
+                        ></lightning-button>
+                    </div>
+                </template>
+                <template if:true={showLockButton}>
+                    <div>
+                        <lightning-button 
+                            variant={lockedVariant} 
+                            label={lockedLabel} 
+                            title="Primary action with lighter look" 
+                            onclick={handleUnlock} 
+                            class="slds-m-left_x-small"
+                            disabled={disableLockButton}
+                        ></lightning-button>
+                    </div>
+                </template>
             </div>
         </div>
         <template if:true={error}>
