@@ -356,7 +356,7 @@
                                     <!-- <th  style="border-top:thin #D4D4D4 solid;">Status</th> -->
                                     <th style="border-top:thin #D4D4D4 solid;">Fear-Best</th>
                                     <th style="border-top:thin #D4D4D4 solid;">Fear - Worst</th>
-                                    <th style="border-top:thin #D4D4D4 solid;">Aggresive - Worst</th>
+                                    <th style="border-top:thin #D4D4D4 solid;">Aggressive - Worst</th>
                                     <th style="border-top:thin #D4D4D4 solid;">Arousal - Best</th>
                                     <th style="border-top:thin #D4D4D4 solid;">Arousal - Worst</th>
                                 </tr>
@@ -380,20 +380,36 @@
                                     <table>
                                         <thead>
                                             <tr>
+                                                <th>Protocol Date</th>
                                                 <th>Social - Best</th>
                                                 <th>Overall Score</th>
                                                 <th>Needs Review</th>
                                                 <th>Skip Protocol</th>
-                                                <th>Over stim w/ food, PC Tug</th>
                                             </tr>
                                         </thead>
                                         <tbod>
                                             <tr>
+                                                <td>
+                                                    <apex:outputText value="{0, date, MM/dd/yy}">
+                                                        <apex:param value="{!treat.sProto.Session_Date__c}" />
+                                                    </apex:outputText>
+                                                </td>
                                                 <td>{!treat.socialBest.score}</td>
                                                 <td>{!treat.sProto.Overall_Score__c}</td>
                                                 <td>{!treat.sProto.Needs_Review__c}</td>
                                                 <td>{!treat.sProto.IsSkipped__c}</td>
-                                                <td>({!treat.sProto.Overall_Score__c}) &nbsp; {!treat.sProto.Protocol_Notes__c}</td>
+                                            </tr>
+                                        </tbod>
+                                    </table>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                            	<th>Protocol Notes</th>
+                                            </tr>
+                                        </thead>
+                                        <tbod>
+                                            <tr>
+                                            	<td>{!treat.sProto.Protocol_Notes__c}</td>
                                             </tr>
                                         </tbod>
                                     </table>

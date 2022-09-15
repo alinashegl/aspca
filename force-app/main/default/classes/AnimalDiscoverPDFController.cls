@@ -107,6 +107,7 @@ public class AnimalDiscoverPDFController {
                 IsSkipped__c,
                 Status__c,
                 TreatmentSessionId__c,
+                Session_Date__c,
                 (
                     SELECT Id, Protocol_Scale_Name__c, Protocol_Score__c, Protocol_Score_Number__c 
                     FROM Session_Protocol_Scales__r 
