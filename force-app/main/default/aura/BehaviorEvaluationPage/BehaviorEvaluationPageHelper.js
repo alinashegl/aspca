@@ -930,9 +930,6 @@
         return subTests;
     },
     handleMessage : function(cmp, message, helper) {
-        console.log('message: ', JSON.stringify(message));
-        console.log('tempLocked: ', message.getParam('isTempLocked'));
-        console.log('permLock: ', message.getParam('isLocked'));
         let tempLock = message.getParam('isTempLocked');
         let permLock = message.getParam('isLocked');
 

@@ -52,7 +52,7 @@
     handleSkipSaveEvent: function(cmp, event, helper) {
         var behaviorEvalObj = event.getParam("behaviorEvalObj");
         cmp.set("v.behaviorEvaluation",behaviorEvalObj);        
-        helper.handleSkipSubsequentTest(cmp, event);
+        // helper.handleSkipSubsequentTest(cmp, event);
     },
 
     handleLocationChange : function (cmp, event, helper) {

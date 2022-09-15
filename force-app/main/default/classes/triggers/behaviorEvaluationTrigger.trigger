@@ -9,7 +9,7 @@ trigger behaviorEvaluationTrigger on Behavior_Evaluation__c (before insert, befo
             BehaviorEvaluationSummaryUtil.handleInsert(Trigger.new);
         }
         else if (Trigger.isUpdate) {
-            BehaviorEvaluationSummaryUtil.handleUpdate(Trigger.new, Trigger.oldMap);
+            // BehaviorEvaluationSummaryUtil.handleUpdate(Trigger.new, Trigger.oldMap);
         }
     }
 
