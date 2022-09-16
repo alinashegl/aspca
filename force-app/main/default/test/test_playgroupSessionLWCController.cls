@@ -36,6 +36,7 @@ private class test_playgroupSessionLWCController {
         Contact c = testDataFactory.createContact();
 
         Playgroup_Session__c session = new Playgroup_Session__c(
+            Population__c = 'MRC',
             Playgroup_Location__c = 'MRC Indoor Play Yard',
             Playgroup_Leader__c = c.Id
         );
