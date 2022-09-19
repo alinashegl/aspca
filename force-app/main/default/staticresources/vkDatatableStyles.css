@@ -1,0 +1,36 @@
+.vk-data-table .slds-input {
+    height: inherit;
+    min-height: inherit;
+    line-height: inherit;
+    padding: 0 .5rem;
+}
+.vk-data-table [role=combobox] input[readonly] {
+    padding-left: 0.5rem;
+}
+.vk-data-table .slds-combobox__input {
+    padding: 0 1.5rem;
+    padding-left: .5rem;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.vk-cell-edit:hover .table-edit-icon{
+    visibility: visible !important;
+}
+.vk-pagination-search input{
+    height: 1.5rem;
+    min-height: 1.5rem;
+}
+.vk-pagination-input input{
+    height: 1.5rem;
+    min-height: 1.5rem;
+    width: 3rem;
+    text-align: center;
+    padding: .5rem;
+}
+.slds-datepicker .slds-day:hover {
+    border-radius: 50%;
+    margin: auto;
+    background-color: #ecebea;
+}
