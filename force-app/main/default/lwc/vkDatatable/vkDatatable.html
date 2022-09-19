@@ -1,0 +1,189 @@
+<template>
+    <div if:true={showTable} class="slds-is-relative">
+        <c-spinner if:true={isLoading} size="small" message={spinnerMsg} alternative-text="Loading"></c-spinner>
+        <div if:false={isEdited} class="slds-p-around_small">
+            <div class="slds-clearfix">
+                <div class="slds-float_right">
+                <lightning-input label="" type="search" placeholder={placeHolder} variant="label-hidden" onchange={handleSearch} class="vk-pagination-search"></lightning-input>
+            </div>
+            </div>
+         </div>
+        <lightning-layout if:true={showPagination} horizontal-align="spread" vertical-align="center" class="slds-border_top">
+
+            <lightning-layout-item class="slds-p-vertical_xx-small">
+                <lightning-layout style={controlPagination} vertical-align="center">
+                    <lightning-layout-item>
+                        <span if:true={showRowNumber} style="padding-left:40px;"></span>
+                        <span if:true={showCheckbox} class="slds-checkbox" title="Select/Deselect All" style="text-align:center;width:40px;">
+                            <input style={controlPagination} type="checkbox" class="select-all-checkbox" id="selectAll" name="" onchange={handleAllRowsSelection}></input>
+                            <label class="slds-checkbox__label" for="selectAll" style="cursor:pointer;">
+                                <span class="slds-checkbox_faux"></span>
+                            </label>
+                        </span>
+                    </lightning-layout-item>
+                    <lightning-layout-item>
+                        <div class="slds-list_inline customSelect">
+                            <label class="slds-text-color_weak slds-p-left_x-small slds-p-right_xx-small" for="recordsPerPage">Show:</label> 
+                            <div class="slds-select_container">
+                                <select class="slds-select" id="recordsPerPage" onchange={handleRecordsPerPage}>
+                                    <template for:each={pageSizeOptions} for:item="option">
+                                        <option key={option} value={option}>{option}</option>
+                                    </template>
+                                </select>
+                            </div><label class="slds-text-color_weak slds-p-left_xx-small" for="recordsPerPage">of<b>&nbsp;{records.length}&nbsp;</b>records</label>
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>                
+            </lightning-layout-item>
+            <lightning-layout-item class="slds-p-vertical_xx-small">
+                <lightning-layout vertical-align="center">
+                    <lightning-layout-item class="slds-p-right_x-small">
+                        <lightning-input label="" type="search" placeholder={placeHolder} variant="label-hidden" onchange={handleSearch} class="vk-pagination-search"></lightning-input>
+                    </lightning-layout-item>
+                    <lightning-layout-item>
+                        <lightning-layout style={controlPagination} vertical-align="center">
+                            <lightning-layout-item>
+                                <span style={controlPrevious}>
+                                    <lightning-button-icon icon-name="utility:chevronleft" variant="" alternative-text="Previous Page" onclick={previousPage} class="vk-btn-icon"></lightning-button-icon>
+                                </span>
+                            </lightning-layout-item>
+                            <lightning-layout-item>
+                                <lightning-layout vertical-align="center">
+                                    <lightning-layout-item>
+                                        <label class="slds-text-color_weak slds-p-horizontal_xx-small" for="pageNum">Page:</label>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item>
+                                        <lightning-input type="number" value={pageNumber} variant="label-hidden" class="vk-pagination-input" onkeypress={handlePageNumberChange}></lightning-input>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item>
+                                        <label class="slds-text-color_weak slds-p-horizontal_xx-small" for="pageNum">of</label><b id="totalPages">{totalPages}</b></span>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </lightning-layout-item>
+                            <lightning-layout-item>
+                                <span style={controlNext}>
+                                    <lightning-button-icon icon-name="utility:chevronright" variant="" alternative-text="Next Page" onclick={nextPage} class="vk-btn-icon slds-p-horizontal_x-small"></lightning-button-icon>
+                                </span>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+        </lightning-layout>
+
+        <div class="slds-scrollable_x" onmouseup={stopColumnResizing}>
+            <div if:true={isEdited} class="slds-p-right_x-small">
+                <div class="slds-grid slds-grid_align-center">
+					<lightning-button label="Cancel" onclick={cancelChanges} class="slds-p-right_x-small"></lightning-button>
+					<lightning-button label="Save" variant="brand" onclick={handleSave}></lightning-button>
+                </div>
+            </div>
+            <div if:true={isEdited} >
+                <br/>
+                <br/>
+            </div> 
+            <div class="tableFixHead">
+            <table id="custTable" class="vk-data-table table table-bordered"  role="grid">
+                <thead>
+                    <tr>
+                        <th if:true={showRowNumber} style="text-align:right;width:40px;padding-right:.4rem"></th>
+                        <th if:true={showCheckbox} style="text-align:center;width:40px;font-weight: normal;">                            
+                            <span class="slds-checkbox" title="Select/Deselect All Page Rows">
+                                <input type="checkbox" class="page-checkbox" id="pageCheckbox" onchange={handlePageRowsSelection}></input>                          
+                                <label class="slds-checkbox__label" for="pageCheckbox" style="cursor:pointer;">
+                                    <span class="slds-checkbox_faux"></span>
+                                </label>
+                            </span>
+                        </th>
+                        <template for:each={columns} for:item="col">
+                            <th key={col} id={col.sortBy} aria-label={col.label} class={col.thClass} style={col.style}>
+                                <div class="slds-grid">
+                                    <div class="slds-col" style="width:100%" onmousemove={setNewWidth}>
+                                        <span if:false={col.sortable} class="slds-truncate" title={col.label}>
+                                            <abbr if:true={col.required} class="vk-dt-required" title="required">*</abbr>
+                                            {col.label}
+                                        </span>
+                                        <a if:true={col.sortable} class="slds-text-link_reset" role="button" onclick={handleSorting}>
+                                            <span class="slds-assistive-text">Sort by: {col.label}</span>
+                                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate" title={col.sortByTitle}>
+                                                <span class="slds-truncate slds-p-right_xx-small" title={col.label}>
+                                                    <abbr if:true={col.required} class="vk-dt-required" title="required">*</abbr>
+                                                    {col.label}
+                                                </span>
+                                                <span class={col.sortIconClass} style={col.sortIconStyle}>
+                                                    <svg class="slds-button__icon slds-button__icon_small" aria-hidden="true">
+                                                        <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#arrowup"></use>
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div if:true={col.resizable} class="slds-col slds-resizable" title="resize">
+                                        <div class="vk-resizable__handle" onmousedown={calculateWidth} onmousemove={setNewWidth} onmouseup={stopColumnResizing}>
+                                            <div class="vk-resizable__divider" style={resizerStyle}></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </th>
+                        </template>
+                    </tr>
+                </thead>
+                <tbody onmousemove={stopColumnResizing}>
+                    <template for:each={pageData} for:item="row">
+                        <tr key={row.id} class={row.rowClass}>
+                            <td if:true={showRowNumber} style="text-align:right;width:40px;padding-right:0.4rem;" class="slds-text-color_weak">{row.rowNumber}</td>
+                            <td if:true={showCheckbox} style="text-align:center;width:40px;">
+                                <span class="slds-checkbox" title="Select/Deselect">
+                                    <input type="checkbox" name="isSelected" id={row.index} checked={row.isSelected} onchange={handleRowSelection}></input>
+                                    <label class="slds-checkbox__label" for={row.index} style="cursor:pointer;">
+                                        <span class="slds-checkbox_faux"></span>
+                                    </label>
+                                </span>
+                            </td>
+                            <template for:each={row.fields} for:item="field" for:index="colIndex">
+                                <td key={row.index} headers={field.name} class={field.tdClass} role="gridcell">
+                                    <c-form-element 
+                                        table-element 
+                                        row-index={row.index} 
+                                        col-index={field.index}
+                                        mode={row.mode}
+                                        type={field.type}
+                                        label={field.label}
+                                        value={field.value}
+                                        variant={_variant}
+                                        required={field.required} 
+                                        read-only={field.readOnly}
+                                        name={field.name} 
+                                        place-holder={field.placeHolder} 
+                                        options={field.options} 
+                                        title={field.title} 
+                                        link-label={field.linkLabel} 
+                                        image-source={field.imageSource} 
+                                        target={field.target}
+                                        icon-name={field.iconName} 
+                                        icon-size={field.iconSize} 
+                                        action-name={field.actionName}
+                                        min-value={field.minValue} 
+                                        max-value={field.maxValue}
+                                        min-fraction-digits={field.minFractionDigits} 
+                                        max-fraction-digits={field.maxFractionDigits}
+                                        onedit={handleCellEdit} 
+                                        onvaluechange={handleCellChange} 
+                                        onmultiselectchange={handleCellChange} 
+                                        disabled ={field.disabled}
+                                        onaction={handleRowAction}>
+                                    </c-form-element>
+                                </td>
+                            </template>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+            </div>
+            <div if:false={totalRecords} class="slds-var-p-vertical_xx-small slds-var-p-left_small slds-border_bottom">
+                No records found to display.
+            </div>
+            
+        </div>
+    </div>
+</template>

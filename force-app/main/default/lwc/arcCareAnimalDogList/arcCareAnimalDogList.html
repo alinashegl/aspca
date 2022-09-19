@@ -1,0 +1,17 @@
+<template>
+    <c-spinner if:true={isLoading} variant="brand" message={loadMessage}></c-spinner>
+    <lightning-card title="ARC/CARE Active Dogs List">
+        <div if:true={error} class="slds-var-p-around_small slds-text-color_error">{error}</div>
+        <c-vk-datatable if:true={showTable}
+            columns={columns} 
+            records={anms}
+            show-row-number
+            show-checkbox
+            show-search
+            place-holder="Search..." 
+            page-size-options={pageSizeOptions} 
+            onrowselection={handleRowSelection} 
+            onsave={saveRecords}>
+        </c-vk-datatable>
+    </lightning-card>
+</template>
