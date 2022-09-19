@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <content>ARC_CARE_Homepage</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+        <pageOrSobjectType>standard-home</pageOrSobjectType>
+    </actionOverrides>
+    <brand>
+        <headerColor>#79BDE8</headerColor>
+        <logo>AspcaOrg</logo>
+        <logoVersion>1</logoVersion>
+        <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
+    </brand>
+    <description>This will provide the structure of Salesforce objects required to support the ARC/CARE Dog DB project.</description>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <label>ARC/CARE Dog Database</label>
+    <navType>Standard</navType>
+    <tabs>standard-home</tabs>
+    <tabs>To_Do_List</tabs>
+    <tabs>dbk__DayBack</tabs>
+    <tabs>Animal__c</tabs>
+    <tabs>standard-report</tabs>
+    <tabs>standard-Dashboard</tabs>
+    <tabs>Treatment_Session__c</tabs>
+    <tabs>Protocol__c</tabs>
+    <tabs>standard-Case</tabs>
+    <tabs>Treatments_By_Dog</tabs>
+    <tabs>Treatment_Bundle__c</tabs>
+    <tabs>Treatment_Plan__c</tabs>
+    <uiType>Lightning</uiType>
+    <utilityBar>ARC_CARE_Dog_Database_UtilityBar</utilityBar>
+</CustomApplication>
