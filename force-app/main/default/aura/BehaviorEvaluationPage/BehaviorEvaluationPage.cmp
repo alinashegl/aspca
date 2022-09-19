@@ -84,6 +84,8 @@
     <aura:attribute name="MuzzleOSD3" type="Boolean" />
     <aura:attribute name="spinner" type="boolean" default="false"/>
     <aura:attribute name="isLocked" type="boolean" default="true"/>
+    <aura:attribute name="isTempLock" type="boolean" default="true"/>
+    <aura:attribute name="isPermLock" type="boolean" default="true"/>
 
     <!-- attribute for component attributes -->
     <aura:attribute name="notConcerningOptions" type="List"/>
