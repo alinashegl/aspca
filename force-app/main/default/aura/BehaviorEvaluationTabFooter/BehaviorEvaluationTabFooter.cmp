@@ -13,6 +13,7 @@
     <aura:attribute name="skipReason" type="String" />
     <aura:attribute name="sReasons" type="List" />
     <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="skipDisplay" type="String" />
 
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
     <lightning:notificationsLibrary aura:id="lib" />
@@ -23,41 +24,44 @@
     <aura:registerEvent name="skipSaveEvt" type="c:skipSaveEvent"/>
     <table>
         <tr>
-        <lightning:input type="checkbox" name="Skip" label="Skip?" checked="{!v.IsSkipped}" onchange="{!c.handleSkip}" disabled="{!v.isLocked}"/>
-        <c:BehaviorEvaluationModal title="Select Skip Reason" isActive="{!v.showModal}"  recordId="{!v.recordId}">
-            <aura:set attribute="body">
-                <lightning:select label="Select a Skip Reasons" name="skipReason"
-                                  value="{!v.skipReason}"
-                                    aura:id="reasons">
-                    <aura:iteration items="{!v.skipReasons}" var="reason">
-                        <option> {!reason.label}</option>
-                    </aura:iteration>
-                </lightning:select>
-                <!--
-                                <lightning:checkboxGroup name="Skip Reason"
-                                                         label="Select Skip Reasons"
-                                                         options="{!v.skipReasons}"
-                                                         value="{!v.sReasons}"
-                                                         onchange="{!c.handleNewSkip}" aura:id="newReasons"/>
-
-                {!v.testName.id}
-                &nbsp;
-                {!v.skipVal.id}
-                -->
-            </aura:set>
-            <aura:set attribute="footer">
-                <lightning:button variant="neutral" label="Cancel" onclick="{!c.handleCancel}" />
-                <lightning:button variant="brand" label="Save" onclick="{!c.handleSave}" />
-            </aura:set>
-        </c:BehaviorEvaluationModal>
+            <td style="width:auto">
+                <lightning:input type="checkbox" name="Skip" label="Skip?" checked="{!v.IsSkipped}" onchange="{!c.handleSkip}" disabled="{!v.isLocked}"/>
+            </td>
+            <td>
+                {!v.skipDisplay}
+            </td>
+            <c:BehaviorEvaluationModal title="Select Skip Reason" isActive="{!v.showModal}"  recordId="{!v.recordId}">
+                <aura:set attribute="body">
+                    <lightning:select label="Select a Skip Reasons" name="skipReason"
+                                    value="{!v.skipReason}"
+                                        aura:id="reasons">
+                        <aura:iteration items="{!v.skipReasons}" var="reason">
+                            <option> {!reason.label}</option>
+                        </aura:iteration>
+                    </lightning:select>
+                </aura:set>
+                <aura:set attribute="footer">
+                    <lightning:button variant="neutral" label="Cancel" onclick="{!c.handleCancel}" />
+                    <lightning:button variant="brand" label="Save" onclick="{!c.handleSave}" />
+                </aura:set>
+            </c:BehaviorEvaluationModal>
         </tr>
         <tr>
-        <lightning:textarea label="Comments"  name="{!v.testName.id}" aura:id="testComments" value="{!v.testName.value}" disabled="{!v.isLocked}"/>
+            <td colspan="2">
+                <lightning:textarea 
+                    label="Comments"  
+                    name="{!v.testName.id}" 
+                    aura:id="testComments" 
+                    value="{!v.testName.value}" 
+                    disabled="{!v.isLocked}"
+                    onblur="{!c.handleTabSave}"
+                />
+            </td>
         </tr>
-        <tr>
-        <lightning:button variant="brand-outline" label="Add Comment to Summary" name="updateComment" disabled="{!v.isLocked}"
+        <!-- <tr>
+            <lightning:button variant="brand-outline" label="Add Comment to Summary" name="updateComment" disabled="{!v.isLocked}"
                           onclick="{!c.handleTabSave}" />
-        </tr>
+        </tr> -->
     </table>
 
 

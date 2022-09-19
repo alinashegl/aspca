@@ -38,7 +38,7 @@ public with sharing class BehaviorEvaluationPageController {
                 Skipped_TD_P1__c, Skipped_TD_P2__c, Skipped_Tag__c, Skipped_SSD_P1__c, Skipped_SSD_P2__c, Skipped_SSD_P3__c, Skipped_Pleasant__c,
                 Skipped_SB_P1__c, Skipped_SB_P2__c, Skipped_SP_P1__c, Skipped_SP_P2__c, Skipped_Play_Tug_P1__c, Skipped_Play_Tug_P2__c,
                 Comments_UT__c, Comments_Play_Tug_P1__c, Comments_Play_Tug_P2__c, Unpleasant_Touch_1st_Flank__c, Unpleasant_Touch_2nd_Flank__c,
-                IsLocked__c
+                IsLocked__c, CreatedDate, LastModifiedDate
             FROM Behavior_Evaluation__c
             WHERE Id =: key LIMIT 1];
         if (behaviorEvaluation.size() > 0) {
@@ -181,6 +181,7 @@ public with sharing class BehaviorEvaluationPageController {
         utils.IsAdult = behaviorEvaluation.Evaluation_Subtype__c == 'Adult Animal' ? true : false;
         utils.IsPuppy = behaviorEvaluation.Evaluation_Subtype__c == 'Puppy' ? true : false;
         utils.isLocked = behaviorEvaluation.isLocked__c;
+        utils.tempLock = behaviorEvaluation.CreatedDate != behaviorEvaluation.LastModifiedDate;
 
         utils.UnpleasantTouch1stFlank = behaviorEvaluation.Unpleasant_Touch_1st_Flank__c;
         utils.UnpleasantTouch2ndFlank = behaviorEvaluation.Unpleasant_Touch_2nd_Flank__c;
