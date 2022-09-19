@@ -1,0 +1,144 @@
+<template>
+    <dl class={listClass}>
+        <dt if:false={isTableElement} class="slds-item_label slds-text-color_weak">
+            <div class="slds-grid">
+                <div class="slds-truncate" title={_label}>
+                    <template if:true={editMode}>
+                        <abbr if:true={isRequired} class="slds-required vk-ip-required" title="required">*</abbr>
+                    </template>
+                    {_label}
+                </div>
+                <div if:true={_helpText} class={helpTextClass}>
+                    <lightning-helptext content={_helpText} class="vk-helptext"></lightning-helptext>
+                </div>
+            </div>
+        </dt>
+
+        <dd class={detailClass}>
+            <div if:false={editMode} class="slds-grid">
+                <div if:true={isText} class="slds-cell-wrap">{_value}</div>
+                <div if:true={isPicklist} class="slds-truncate">{_value}</div>
+                <div if:true={isMultiSelect}>{_value}</div>
+                <div if:true={isLookup} class="slds-truncate">
+                    <a href={href} target={target} title={title} class="vk-lookup-link">{linkLabel}</a>
+                </div>
+                <div if:true={isTextArea} class="slds-truncate">
+                    
+                    <lightning-textarea  variant="label-hidden"  value={_value}></lightning-textarea>
+                </div>
+                <div if:true={isCheckbox} class="slds-truncate">
+                    <lightning-input type="checkbox" variant="label-hidden" name="formCheckbox" checked={_value}
+                        disabled></lightning-input>
+                </div>
+                <div if:true={isDate} class="slds-truncate">
+                    <lightning-formatted-date-time value={_value} year="numeric" month="2-digit" day="2-digit"
+                        time-zone="UTC"></lightning-formatted-date-time>
+                </div>
+                <div if:true={isDateTime} class="slds-truncate">
+                    <lightning-formatted-date-time value={_value} year="numeric" month="2-digit" day="2-digit"
+                        hour="2-digit" minute="2-digit" hour12="true"></lightning-formatted-date-time>
+                </div>
+                <div if:true={isNumber} class="slds-truncate">
+                    <lightning-formatted-number value={_value} minimum-fraction-digits={minFractionDigits}
+                        maximum-fraction-digits={maxFractionDigits}></lightning-formatted-number>
+                </div>
+                <div if:true={isCurrency} class="slds-truncate">
+                    <lightning-formatted-number value={_value} format-style="currency" currency-code={currencyCode}
+                        minimum-fraction-digits={minFractionDigits} maximum-fraction-digits={maxFractionDigits}>
+                    </lightning-formatted-number>
+                </div>
+                <div if:true={isPercent} class="slds-truncate">
+                    <lightning-formatted-number value={_value} format-style="percent-fixed"
+                        minimum-fraction-digits={minFractionDigits} maximum-fraction-digits={maxFractionDigits}>
+                    </lightning-formatted-number>
+                </div>
+                <div if:true={isLink} class="slds-truncate">
+                    <a href={href} target={target} title={title}>{linkLabel}</a>
+                </div>
+                <div if:true={isLinkAction} class="slds-truncate">
+                    <a name={actionName} title={title} onclick={handleAction}>{linkLabel}</a>
+                </div>
+                <div if:true={isImageAction} style="text-align:center;">
+                    <a name={actionName} title={title} onclick={handleAction}>
+                        <img src={imageSource} class="slds-button__icon"></img>
+                    </a>
+                </div>
+                <div if:true={isButtonIcon}>
+                    <lightning-button-icon icon-name={iconName} variant={iconVariant} alternative-text={title}
+                        title={title} name={actionName} onclick={handleAction}></lightning-button-icon>
+                </div>
+                <div if:false={isReadOnly} class="slds-col_bump-left">
+                    <button class={editIconClass} title="Edit" onclick={editElement}>
+                        <svg class="vk-edit-icon slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                            <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                        </svg>
+                        <div class="slds-assistive-text">Edit</div>
+                    </button>
+                </div>
+            </div>
+            <div if:true={editMode}>
+                <div if:true={isText}>
+                    <lightning-input class="inpElm" value={_value} variant="label-hidden" required={isRequired}
+                    disabled={disabled} onchange={sendValue}></lightning-input>
+                </div>
+                <div if:true={isTextArea} class="inpElm">
+                    <lightning-textarea variant="label-hidden" equired={isRequired}  value={_value} 
+                    onchange={sendValue}></lightning-textarea>
+                </div>
+                <div if:true={isCheckbox}>
+                    <lightning-input class="inpElm" type="checkbox" value={_value} checked={_value}
+                        variant="label-hidden" required={isRequired} onchange={sendValue}></lightning-input>
+                </div>
+                <div if:true={isPicklist}>
+                    <lightning-combobox class="inpElm" value={_value} options={_options} variant="label-hidden"
+                        onchange={sendValue}></lightning-combobox>
+                </div>
+                <div if:true={isMultiSelect}>
+                    <c-mutli-select-picklist class="inpElm" values={_options} required={isRequired} value="_value"
+                    variant="label-hidden" onmultiselchange={handleMultiSelectChange}>
+                    </c-mutli-select-picklist>
+                </div>
+                <div if:true={isLookup}>
+                    <c-lookup class="inpElm" is-table-element={isTableElement} required={isRequired} value={_value}
+                        options={_options} variant="label-hidden" place-holder={placeHolder} icon-name={iconName}
+                        icon-size={iconSize} onchange={handleLookupChange}></c-lookup>
+                </div>
+                <div if:true={isDate}>
+                    <lightning-input class="inpElm" type="date" value={_value} variant="label-hidden"
+                        required={isRequired} date-style="short" onchange={sendValue}></lightning-input>
+                </div>
+                <div if:true={isDateTime}>
+                    <lightning-input class="inpElm" type="date-time" value={_value} variant="label-hidden"
+                        required={isRequired} date-style="short" onchange={sendValue}></lightning-input>
+                </div>
+                <div if:true={isNumber}>
+                    <lightning-input class="inpElm" type="number" value={_value} variant="label-hidden"
+                        required={isRequired} onchange={sendValue}></lightning-input>
+                </div>
+                <div if:true={isCurrency}>
+                    <lightning-input class="inpElm" type="number" value={_value} variant="label-hidden"
+                        required={isRequired} formatter="currency" onchange={sendValue}></lightning-input>
+                </div>
+                <div if:true={isPercent}>
+                    <lightning-input class="inpElm" type="number" value={_value} variant="label-hidden"
+                        required={isRequired} formatter="percent-fixed" onchange={sendValue}></lightning-input>
+                </div>
+                <div if:true={isLink} class="slds-truncate">
+                    <a href={href} target={target} title={title}>{linkLabel}</a>
+                </div>
+                <div if:true={isLinkAction} class="slds-truncate">
+                    <a name={actionName} title={title} onclick={handleAction}>{linkLabel}</a>
+                </div>
+                <div if:true={isImageAction} class="slds-truncate" style="text-align:center;">
+                    <a name={actionName} title={title} onclick={handleAction}>
+                        <img src={imageSource} class="slds-button__icon"></img>
+                    </a>
+                </div>
+                <div if:true={isButtonIcon} class="slds-truncate">
+                    <lightning-button-icon icon-name={iconName} variant={iconVariant} alternative-text={title}
+                        title={title} name={actionName} onclick={handleAction}></lightning-button-icon>
+                </div>
+            </div>
+        </dd>
+    </dl>
+</template>

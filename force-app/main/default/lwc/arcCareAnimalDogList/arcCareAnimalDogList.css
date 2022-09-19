@@ -1,0 +1,26 @@
+.vk-pagination-search input{
+    height: 1.5rem;
+    min-height: 1.5rem;
+    padding: 0px !important;
+}
+
+.vk-height-datatable {
+    height: 300px;
+    overflow-y: scroll;
+}
+
+.scrollingtable {
+    box-sizing: border-box;
+    vertical-align: middle;
+    overflow-y: auto;
+    min-width: 0;
+    height: 300px/*100%*/; /*set table height here; can be fixed value or %*/
+    min-height: 0/*104px*/; /*if using % height, make this large enough to fit scrollbar arrows + caption + thead*/
+    line-height: 20px;
+    padding: 20px 0 20px 0; /*need enough padding to make room for caption*/
+    text-align: left;
+  }
+  .scrollingtable thead th {
+    position: sticky;
+    top: 0;
+  }
