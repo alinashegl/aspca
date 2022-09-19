@@ -1,0 +1,35 @@
+.slds-spinner{
+    left: 48%;
+}
+.spinner-msg{
+    position: absolute;
+    top: 50%;
+    left: 48%;
+    margin-top: -10px;
+}
+.spinner-msg_small{
+    margin-left: 1.25rem;
+    font-size: medium;
+}
+.spinner-msg_medium{
+    margin-left: 2rem;
+    font-size: large;
+}
+.spinner-msg_large{
+	margin-left: 2.75rem;
+	margin-top: -20px;
+    font-size: xx-large;
+}
+.slds-color_brand{
+    color: var(--lwc-brandPrimary);
+}
+.slds-color_inverse{
+    color: var(--lwc-colorBackgroundAlt);
+}
+.slds-color_base{
+    color: #b0adab;
+}
+.slds-inverse_background{
+    background-color: var(--lwc-colorBackgroundAltInverse);
+    opacity: 0.5;
+}
