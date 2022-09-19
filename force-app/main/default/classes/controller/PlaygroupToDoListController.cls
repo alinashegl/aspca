@@ -29,7 +29,8 @@ public with sharing class PlaygroupToDoListController {
             AND Type_of_Animal__c = 'Dog'
             AND Current_Location__c NOT IN :locationsToExclude
             AND Play_Category__c NOT IN ('Unevaluated', 'DO NOT PLAY', '')
-            AND Id NOT IN (SELECT Animal__c FROM Play_Pause__c WHERE Type__c = 'Behavioral' AND Start_Date__c <= TODAY AND (End_Date__c = null OR End_Date__c >= TODAY))
+            AND Id NOT IN (SELECT Animal__c FROM Play_Pause__c WHERE ((Type__c != 'Medical' AND Play_Pause_Reason__c != 'In Heat') OR
+           (Type__c != 'Medical' and Play_Pause_Reason__c = 'In Heat' AND End_Play_Pause__c = false ) OR (Type__c != 'Behavioral' and End_Play_Pause__c = false))) 
             AND Location_Filter__c = true
             ORDER BY Id
         ];

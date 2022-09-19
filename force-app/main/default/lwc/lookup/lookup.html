@@ -1,0 +1,79 @@
+<template>
+    <div class={formElementClass}>
+        <div if:false={isLabelHidden}>
+            <label class="slds-form-element__label" for="combobox-input">
+                <template if:true={_required}>
+                    <abbr class="slds-required vk-cs-required" title="required">🞲</abbr>
+                </template>
+                {label}
+            </label>
+            <lightning-helptext if:true={showHelpText} content={_helpText}></lightning-helptext>
+        </div>
+        <div class="slds-form-element__control">
+            <div class={cbContainerClassClass}>
+                <div class={cbComputedClass} aria-expanded={isAriaExpanded} aria-haspopup="listbox" role="combobox" onclick={handleTriggerClick}>
+                    <div class={cfeComputedClass} role="none">
+                        <span if:true={isOptionSelected}>
+                            <span if:true={hasIcon} class={entityIcon.class} title={entityIcon.title}>
+                                <svg class={entityIcon.iconClass} aria-hidden="true">
+                                    <use xlink:href={entityIcon.url}></use>
+                                </svg>
+                                <span class="slds-assistive-text">{entityIcon.title}</span>
+                            </span>
+                        </span> 
+                        <input id="combobox-input" 
+                            type="text" 
+                            role="textbox" 
+                            value={selectedOption.label} 
+                            readonly={_readOnly} 
+                            required={_required} 
+                            placeholder={_placeHolder} 
+                            autocomplete="off"
+                            aria-controls="listbox-id" 
+                            class={inputClass}
+                            onkeyup={handleKeyUp} 
+                            onfocus={handleFocus}
+                            onblur={handleBlur} />
+                        <div class="slds-input__icon-group slds-input__icon-group_right">
+                            <span if:false={isOptionSelected} class="slds-icon_container slds-icon-utility-search slds-input__icon slds-input__icon_right" title="Search">
+                                <svg class={searchIconClass} aria-hidden="true">
+                                    <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#search"></use>
+                                </svg>
+                                <span class="slds-assistive-text">Search</span>
+                            </span>
+                            <button if:true={isOptionSelected} class="slds-button slds-button_icon slds-input__icon slds-input__icon_right" title="Remove selected option" onclick={removeSelectedOption}>
+                                <svg class={closeIconClass} aria-hidden="true">
+                                    <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#close"></use>
+                                </svg>
+                                <span class="slds-assistive-text">Remove selected option</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="listbox-id" role="listbox" class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid" style="margin-top: 0;"
+						onmousedown={handleDropdownMouseDown} onmouseup={handleDropdownMouseUp} onmouseleave={handleDropdownMouseLeave}>
+                        <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                            <template for:each={optionsToDisplay} for:item="option">
+                                <li role="presentation" class={option.outerClass} key={option.index} id={option.index} onclick={handleSelection}>
+                                    <div class={option.innerClass} role="option">
+                                        <span if:true={hasIcon} class="slds-media__figure slds-listbox__option-icon">
+                                            <span class="slds-icon_container">
+                                                <lightning-icon icon-name={iconName} size={_iconSize} class="slds-icon-text-default"></lightning-icon>
+                                            </span>
+                                        </span>
+                                        <span class="slds-media__body">
+                                            <span class="slds-listbox__option-text slds-listbox__option-text_entity">
+                                                {option.label}
+                                            </span>
+                                        </span>
+                                    </div>
+                                </li>
+                            </template>
+                            <li if:true={noResultsFound} class="slds-p-left_small">&#9785; No results found</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div if:true={showMessage} role="alert" class="slds-form-element__help slds-is-absolute">{errorMessage}</div>
+        </div>        
+    </div>
+</template>
