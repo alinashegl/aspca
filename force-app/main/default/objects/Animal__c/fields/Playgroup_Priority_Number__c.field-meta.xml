@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Playgroup_Priority_Number__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(ISPICKVAL(Playgroup_Priority_Level__c, &apos;Daily – 7 days&apos;), 7, IF(ISPICKVAL(Playgroup_Priority_Level__c, &apos;High – 4 days&apos;), 4, IF(ISPICKVAL(Playgroup_Priority_Level__c, &apos;Low – 2 days&apos;), 2, 0)))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Playgroup Priority Number</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

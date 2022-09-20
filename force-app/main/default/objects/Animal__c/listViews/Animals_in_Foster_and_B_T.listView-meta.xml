@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Animals_in_Foster_and_B_T</fullName>
+    <columns>Animal_Name__c</columns>
+    <columns>Petpoint_AAH_Id__c</columns>
+    <columns>NAME</columns>
+    <columns>Current_Location__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Current_Recent_Shelter_Location__c</field>
+        <operation>notEqual</operation>
+    </filters>
+    <filters>
+        <field>Active_Animal__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>Location_Filter__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>Current_Location__c</field>
+        <operation>contains</operation>
+        <value>Board and Train,Foster</value>
+    </filters>
+    <label>Animals in Foster and B&amp;T</label>
+</ListView>
