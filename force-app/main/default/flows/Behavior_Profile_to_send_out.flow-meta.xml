@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionCalls>
-        <name>Behavior_Profile_Send_Email_action</name>
-        <label>Behavior Profile Send Email action</label>
-        <locationX>585</locationX>
-        <locationY>343</locationY>
-        <actionName>Animal__c.Behavior_Profile_Send_Email_Alert</actionName>
-        <actionType>emailAlert</actionType>
+        <name>Send_Behavior_Email_Alert</name>
+        <label>Send Behavior Email Alert</label>
+        <locationX>771</locationX>
+        <locationY>198</locationY>
+        <actionName>BehaviorProfileSendEmail</actionName>
+        <actionType>apex</actionType>
         <connector>
             <targetReference>screen_1</targetReference>
         </connector>
-        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <flowTransactionModel>Automatic</flowTransactionModel>
         <inputParameters>
-            <name>SObjectRowId</name>
+            <name>behEvaluations</name>
             <value>
-                <elementReference>get_animal.Id</elementReference>
+                <elementReference>Get_Behavior_Summary</elementReference>
             </value>
         </inputParameters>
     </actionCalls>
@@ -44,11 +44,11 @@
     <recordLookups>
         <name>get_animal</name>
         <label>get animal</label>
-        <locationX>584</locationX>
-        <locationY>174</locationY>
+        <locationX>411</locationX>
+        <locationY>197</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Behavior_Profile_Send_Email_action</targetReference>
+            <targetReference>Get_Behavior_Summary</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -62,11 +62,34 @@
         <object>Animal__c</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
+    <recordLookups>
+        <name>Get_Behavior_Summary</name>
+        <label>Get Behavior Summary</label>
+        <locationX>624</locationX>
+        <locationY>198</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Send_Behavior_Email_Alert</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Animal__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Behavior_Evaluation__c</object>
+        <sortField>Name</sortField>
+        <sortOrder>Desc</sortOrder>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
     <screens>
         <name>screen_1</name>
         <label>screen 1</label>
-        <locationX>570</locationX>
-        <locationY>533</locationY>
+        <locationX>900</locationX>
+        <locationY>198</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -87,6 +110,16 @@
         </connector>
     </start>
     <status>Active</status>
+    <variables>
+        <name>BehSumm</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+        <value>
+            <elementReference>Get_Behavior_Summary.Behavior_Evaluation_Summary__c</elementReference>
+        </value>
+    </variables>
     <variables>
         <name>recordId</name>
         <dataType>String</dataType>
