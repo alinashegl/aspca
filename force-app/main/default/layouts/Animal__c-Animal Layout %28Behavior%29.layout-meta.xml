@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customButtons>Upload_Photo</customButtons>
     <excludeButtons>ChangeOwnerOne</excludeButtons>
     <excludeButtons>ChangeRecordType</excludeButtons>
     <excludeButtons>Delete</excludeButtons>
@@ -114,6 +115,18 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Walking_Notes__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Petpoint_AAH_Id__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Playgroup_Priority_Number__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>PG_Priority_Minus_This_Week__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -516,6 +529,7 @@
         <fields>Play_Pause_Reason__c</fields>
         <fields>Start_Date__c</fields>
         <fields>End_Date__c</fields>
+        <fields>End_Play_Pause__c</fields>
         <relatedList>Play_Pause__c.Animal__c</relatedList>
     </relatedLists>
     <relatedLists>
@@ -549,7 +563,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h7h000000ybln</masterLabel>
+        <masterLabel>00h6u000000Eome</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>
