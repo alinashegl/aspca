@@ -14,6 +14,7 @@ export default class TreatmentTabHeader extends NavigationMixin(LightningElement
     @api showTreatmentSessionButton;
     @api showLast5TreatmentsReport;
     url = 'https://aspca.app.box.com/s/uuxtitu6j2pypol7vdj7qk3fa0tbkk4m';
+    errorMessage;
     handleClick() {
         this.showModal = true;
         this.showNewTreatmentModal = true;
@@ -37,6 +38,12 @@ export default class TreatmentTabHeader extends NavigationMixin(LightningElement
     handleSubmit(event){
         event.preventDefault();
         const fields = event.detail.fields;
+        this.errorMessage = null;
+        if(!fields.Problem_Behavior_Aggression__c && !fields.Problem_Behavior_Arousal__c && !fields.Problem_Behavior_Fear__c && !fields.Problem_Behavior_Miscellaneous__c){
+            this.errorMessage = 'Choose any one of the problem behaviors';
+            return;
+        }
+
         fields.Animal__c = this.recordId;
         if(this.customLookupNewId != undefined){
             fields.AssignedTreatmentBundleId__c = this.customLookupNewId;

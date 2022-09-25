@@ -64,6 +64,10 @@ export default class CreateTreatmentSession extends NavigationMixin(LightningEle
         this.template.querySelector('lightning-record-edit-form').submit(fields);
     }
 
+    handleError(event) {
+        console.log(event.detail.detail);
+    }
+
     handleSuccess(event) {
         let sessionId = event.detail.id;
         this[NavigationMixin.Navigate]({

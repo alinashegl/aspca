@@ -68,6 +68,7 @@
                                 <div class="slds-col slds-size_1-of-2"> 
                                     <lightning-input-field field-name="Plan_Notes__c"></lightning-input-field>
                                 </div>
+                                
                                  <div class="slds-col slds-size_1-of-1"> 
                                     <lightning-input-field field-name="Problem_Behavior_Aggression__c"></lightning-input-field>
                                 </div>
@@ -88,6 +89,11 @@
                             <template if:true={error}>
                                 <div class="slds-align_absolute-center">
                                     <c-error-panel errors={error} type='inlineMessage' friendly-message='Error Creating Treatment Plan'></c-error-panel>
+                                </div>
+                            </template>
+                            <template if:true={errorMessage}>
+                                <div class="slds-col slds-size_1-of-1"> 
+                                    <c-error-panel type='inlineMessage' friendly-message={errorMessage}></c-error-panel>
                                 </div>
                             </template>
                             <div  class="slds-align_absolute-center">                                

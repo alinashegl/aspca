@@ -5,7 +5,9 @@ public class ArcCareAnimalDogListController {
                 Hold_Status_ARC_CARE__c, Behavior_Case_Worker__c, Behavior_Case_Worker__r.Name, Walking_Status__c, 
                 Walking_Notes__c, PPE_DOH__c, Important_Notes_ARC_CARE__c FROM Animal__c 
                 WHERE Active_Animal__c = true AND Location_Filter__c = true 
-                ORDER BY CreatedDate LIMIT 20];
+                AND (Current_Location__c like '%ARC%'OR Current_Location__c like '%CARE%')
+                
+                ORDER BY CreatedDate ];
     }
     
     @AuraEnabled

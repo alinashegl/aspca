@@ -22,9 +22,9 @@
                 <div if:true={isLookup} class="slds-truncate">
                     <a href={href} target={target} title={title} class="vk-lookup-link">{linkLabel}</a>
                 </div>
-                <div if:true={isTextArea} class="slds-truncate">
+                <div if:true={isTextArea} class="slds-truncate" style="width: 150px !important ;">
                     
-                    <lightning-textarea  variant="label-hidden"  value={_value}></lightning-textarea>
+                    <lightning-textarea  variant="label-hidden" disabled="true"  value={_value}></lightning-textarea>
                 </div>
                 <div if:true={isCheckbox} class="slds-truncate">
                     <lightning-input type="checkbox" variant="label-hidden" name="formCheckbox" checked={_value}
