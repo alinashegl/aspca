@@ -15,6 +15,8 @@ export default class CreateTreatmentSession extends NavigationMixin(LightningEle
     requiredContact = true;
     noPlan = true;
     whereClause = 'Active__c = true AND Contact_Type__c = \'Behavior Case Worker\'';
+    error;
+    errorMessage;
 
     get hasPlan(){
         return  this.planId != undefined && this.planId != null;
@@ -65,6 +67,8 @@ export default class CreateTreatmentSession extends NavigationMixin(LightningEle
     }
 
     handleError(event) {
+        this.errorMessage = 'Error creating treatment session' ;
+        this.error = event.detail.detail;
         console.log(event.detail.detail);
     }
 

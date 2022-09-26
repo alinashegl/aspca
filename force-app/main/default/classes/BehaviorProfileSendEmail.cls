@@ -2,19 +2,21 @@ public class BehaviorProfileSendEmail {
 
 @InvocableMethod(label='Send Behavior Email Alert' description='Behavior Profile Send Email')
     public static void sendEmail(List<EmailRequest> requestList) {
-		Behavior_Evaluation__c inputCollection = requestList[0].behEvaluations;
-        List<Behavior_Evaluation__c> behEvaluations = [SELECT Animal__r.Gender__c, Animal__r.Current_Animal_Age_Formatted__c, Animal__r.Name, Animal__r.Animal_Name__c,
-                                                       Animal__r.Color__c, Animal__r.Breed__c, Animal__r.Case__c, Animal__r.Petpoint_ID__c, 
-                                                       Animal__r.AAH_ID__c, Animal__r.LastModifiedDate, Behavior_Evaluation_Summary__c, Animal__r.Placement_Recommendations__c,
-                                                       Animal__r.Current_Behavior_Grade__c, Animal__r.Forensic_Behavior_Eval_Grade__c, 
-                                                       Animal__r.Behavior_Placement_Status__c, Animal__r.Approved_for_bath__c, Animal__r.Muzzle_needed_for_bath__c, 
-                                                       Animal__r.Special_instructions_for_bath__c, Animal__r.Approved_for_Revolution__c, 
-                                                       Animal__r.Special_instructions_for_Revolution__c,Animal__r.Meets_Adoptability_Date__c
-                                                       FROM Behavior_Evaluation__c
-                                                       WHERE Id = : inputCollection.id];
-        
-    	for(Behavior_Evaluation__c behEval: behEvaluations){
-            sendEmailAlert(behEval);
+        if(requestList.size() > 0 && requestList[0].behEvaluations != null){
+            Behavior_Evaluation__c inputCollection = requestList[0].behEvaluations;
+            List<Behavior_Evaluation__c> behEvaluations = [SELECT Animal__r.Gender__c, Animal__r.Current_Animal_Age_Formatted__c, Animal__r.Name, Animal__r.Animal_Name__c,
+                                                           Animal__r.Color__c, Animal__r.Breed__c, Animal__r.Case__c, Animal__r.Petpoint_ID__c, 
+                                                           Animal__r.AAH_ID__c, Animal__r.LastModifiedDate, Behavior_Evaluation_Summary__c, Animal__r.Placement_Recommendations__c,
+                                                           Animal__r.Current_Behavior_Grade__c, Animal__r.Forensic_Behavior_Eval_Grade__c, 
+                                                           Animal__r.Behavior_Placement_Status__c, Animal__r.Approved_for_bath__c, Animal__r.Muzzle_needed_for_bath__c, 
+                                                           Animal__r.Special_instructions_for_bath__c, Animal__r.Approved_for_Revolution__c, 
+                                                           Animal__r.Special_instructions_for_Revolution__c,Animal__r.Meets_Adoptability_Date__c
+                                                           FROM Behavior_Evaluation__c
+                                                           WHERE Id = : inputCollection.id];
+            
+            for(Behavior_Evaluation__c behEval: behEvaluations){
+                sendEmailAlert(behEval);
+            }
         }
     }
     
