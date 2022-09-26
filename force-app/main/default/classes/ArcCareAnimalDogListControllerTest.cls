@@ -22,10 +22,10 @@ public class ArcCareAnimalDogListControllerTest {
     
     @isTest
     static void testRecords(){
-        List<SObject> objs = ArcCareAnimalDogListController.getRecords();
+        List<Animal__c> objs = ArcCareAnimalDogListController.getRecords();
         System.assertNotEquals(objs, null);
         if(!objs.isEmpty()){
-            Animal__c anm = (Animal__c)objs[0];
+            Animal__c anm = objs[0];
             anm.Behavior_Case_Worker__c = [Select Id from Contact Where LastName = 'Test1'].Id;
             update anm;
             String result = ArcCareAnimalDogListController.saveRecords(JSON.serialize(new List<Animal__c>{anm}));

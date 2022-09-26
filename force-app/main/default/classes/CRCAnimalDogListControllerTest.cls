@@ -30,7 +30,7 @@ public class CRCAnimalDogListControllerTest {
     
     @isTest
     static void testRecords(){
-        List<SObject> objs = CRCAnimalDogListController.getRecords();
+        List<Treatment_Plan__c> objs = CRCAnimalDogListController.getRecords();
         System.assertNotEquals(objs, null);
         String result = CRCAnimalDogListController.saveRecords(JSON.serialize(objs));
         System.assertEquals('success', result);

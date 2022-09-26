@@ -1,7 +1,7 @@
 public class CRCAnimalDogListController {
 	@AuraEnabled
-    public static List<SObject> getRecords() {
-        List<SObject> objs = [SELECT Animal__c, Treatment_Priority__c, Enrichment_Priority__c, 
+    public static List<Treatment_Plan__c> getRecords() {
+        List<Treatment_Plan__c> objs = [SELECT Animal__c, Treatment_Priority__c, Enrichment_Priority__c, 
                 Animal__r.Shelter_Color_Coding__c, Animal__r.Behavior_Summary_Change_Date__c,
                 Animal__r.Name, Animal__r.Animal_Name__c, Animal__r.Animal_Name_Id__c,
                 Animal__r.Meets_Adoptability_Date__c, Animal__r.Playgroup_Priority_Level__c, Animal__r.Current_Location__c,
@@ -10,9 +10,9 @@ public class CRCAnimalDogListController {
                 AND Animal__r.Current_Location__c like '%CRC%'
                 AND Animal__c IN (Select Animal__c from Play_Pause__c where End_Play_Pause__c != true) ];
         
-        List<SObject> objList = new List<SObject>();
-        for(SObject obj : objs){
-            if(String.valueOf(obj.get('Current_Location__c')).containsIgnoreCase('CRC')){
+        List<Treatment_Plan__c> objList = new List<Treatment_Plan__c>();
+        for(Treatment_Plan__c obj : objs){
+            if(obj.Animal__r != null && obj.Animal__r.Current_Location__c.containsIgnoreCase('CRC')){
                 objList.add(obj);
             }
         }
