@@ -521,26 +521,6 @@
                 <identifier>RecordBRC_ID_cField1</identifier>
             </fieldInstance>
         </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Petpoint_ID__c</fieldItem>
-                <identifier>RecordPetpoint_ID_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.AAH_ID__c</fieldItem>
-                <identifier>RecordAAH_ID_cField2</identifier>
-            </fieldInstance>
-        </itemInstances>
         <name>Facet-7bb7e173-8e35-42e8-bb80-b8d39a3ada43</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -2135,26 +2115,6 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Behavior_Medication_Flag__c</fieldItem>
-                <identifier>RecordBehavior_Medication_Flag_cField1</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Behavior_Medication_Notes__c</fieldItem>
-                <identifier>RecordBehavior_Medication_Notes_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
                 <fieldItem>Record.Important_Notes_ARC_CARE__c</fieldItem>
                 <identifier>RecordImportant_Notes_ARC_CARE_cField</identifier>
             </fieldInstance>
@@ -2191,56 +2151,6 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.Evaluation_Date__c</fieldItem>
                 <identifier>RecordEvaluation_Date_cField1</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Behavior_Concerns__c</fieldItem>
-                <identifier>RecordBehavior_Concerns_cField1</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Walking_Equipment__c</fieldItem>
-                <identifier>RecordWalking_Equipment_cField1</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Walking_Status__c</fieldItem>
-                <identifier>RecordWalking_Status_cField1</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Walking_Notes__c</fieldItem>
-                <identifier>RecordWalking_Notes_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Volunteer_Reading_Okay__c</fieldItem>
-                <identifier>RecordVolunteer_Reading_Okay_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -2331,6 +2241,26 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.Special_instructions_for_Revolution__c</fieldItem>
                 <identifier>RecordSpecial_instructions_for_Revolution_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Behavior_Medication_Flag__c</fieldItem>
+                <identifier>RecordBehavior_Medication_Flag_cField1</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Behavior_Medication_Notes__c</fieldItem>
+                <identifier>RecordBehavior_Medication_Notes_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-1c2d9594-eea1-42f4-b0ca-0b6c49f7bf0d</name>
@@ -2695,6 +2625,135 @@
     </flexiPageRegions>
     <flexiPageRegions>
         <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Behavior_Concerns__c</fieldItem>
+                <identifier>RecordBehavior_Concerns_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Behavior_Concern_Notes__c</fieldItem>
+                <identifier>RecordBehavior_Concern_Notes_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Volunteer_Reading_Okay__c</fieldItem>
+                <identifier>RecordVolunteer_Reading_Okay_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.In_Kennel_Socialization__c</fieldItem>
+                <identifier>RecordIn_Kennel_Socialization_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <name>Facet-94d55216-8028-4f64-8df5-878dc0e55786</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Walking_Status__c</fieldItem>
+                <identifier>RecordWalking_Status_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Walking_Notes__c</fieldItem>
+                <identifier>RecordWalking_Notes_cField2</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Walking_Equipment__c</fieldItem>
+                <identifier>RecordWalking_Equipment_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Walking_Equipment_Notes__c</fieldItem>
+                <identifier>RecordWalking_Equipment_Notes_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <name>Facet-892063a9-acff-4f82-8b02-48ac6f315c60</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-94d55216-8028-4f64-8df5-878dc0e55786</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:column</componentName>
+                <identifier>flexipage_column9</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-892063a9-acff-4f82-8b02-48ac6f315c60</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:column</componentName>
+                <identifier>flexipage_column10</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-d86a7cdb-df3c-40a3-ac07-2c247c350979</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>columns</name>
+                    <value>Facet-d86a7cdb-df3c-40a3-ac07-2c247c350979</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>label</name>
+                </componentInstanceProperties>
+                <componentName>flexipage:fieldSection</componentName>
+                <identifier>flexipage_fieldSection5</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-931d2e58-6f8b-4047-9dc7-16a3010748e0</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
                     <name>active</name>
@@ -2752,6 +2811,20 @@
                 </componentInstanceProperties>
                 <componentName>flexipage:tab</componentName>
                 <identifier>flexipage_tab5</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-931d2e58-6f8b-4047-9dc7-16a3010748e0</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Kennel Card</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tab</componentName>
+                <identifier>flexipage_tab</identifier>
             </componentInstance>
         </itemInstances>
         <name>Facet-4028f5e9-24ba-4e89-937a-933a217ba27d</name>
