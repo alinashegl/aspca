@@ -1,6 +1,8 @@
 <!-- sldsValidatorIgnore -->
 <template>
-    <c-error-panel errors={error} type='inlineMessage' friendly-message={errorMessage}></c-error-panel>
+    <template if:true={error}>
+        <c-error-panel errors={error} type='inlineMessage' friendly-message={errorMessage}></c-error-panel>
+    </template>
     <lightning-record-edit-form object-api-name="Treatment_Session__c" onsubmit={handleSubmit}
         onsuccess={handleSuccess} onerror={handleError}
         >

@@ -73,6 +73,7 @@ export default class CreateTreatmentSession extends NavigationMixin(LightningEle
     }
 
     handleSuccess(event) {
+        this.error = null;
         let sessionId = event.detail.id;
         this[NavigationMixin.Navigate]({
             type: 'standard__recordPage',
