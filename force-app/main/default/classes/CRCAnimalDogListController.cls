@@ -11,9 +11,9 @@ public class CRCAnimalDogListController {
         
         List<Treatment_Plan__c> objList = new List<Treatment_Plan__c>();
         for(Treatment_Plan__c obj : objs){
-            if(obj.Animal__r != null && obj.Animal__r.Current_Location__c != null && 
-               obj.Animal__r.Current_Location__c.equalsIgnoreCase('CRC - CRC') &&
-               obj.Animal__r.Current_Location__c.equalsIgnoreCase('CRC-MRC')){
+            if((obj.Animal__r != null && String.isNotBlank(obj.Animal__r.Current_Location__c)) && 
+               (obj.Animal__r.Current_Location__c.equalsIgnoreCase('CRC - CRC') ||obj.Animal__r.Current_Location__c.equalsIgnoreCase('CRC-MRC') || 
+               obj.Animal__r.Current_Location__c.equalsIgnoreCase('CRC- MRC') || obj.Animal__r.Current_Location__c.equalsIgnoreCase('CRC'))){
                 objList.add(obj);
             }
         }
