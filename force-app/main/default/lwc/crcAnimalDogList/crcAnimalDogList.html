@@ -1,6 +1,6 @@
 <template>
     <c-spinner if:true={isLoading} variant="brand" message={loadMessage}></c-spinner>
-    <lightning-card title="ARC/CARE Active Dogs List">
+    <lightning-card title="CRC Active Dogs List">
         <div if:true={error} class="slds-var-p-around_small slds-text-color_error">{error}</div>
         <c-vk-datatable if:true={showTable}
             columns={columns} 

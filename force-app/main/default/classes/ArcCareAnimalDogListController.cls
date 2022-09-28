@@ -1,11 +1,20 @@
 public class ArcCareAnimalDogListController {
     @AuraEnabled
-    public static List<SObject> getRecords() {
-        return [Select Id, Name, Animal_Name__c, Animal_Name_Id__c, Petpoint_ID__c,Gender__c, Evaluation_Status__c, Current_Location__c, 
+    public static List<Animal__c> getRecords() {
+        List<Animal__c> objs = [Select Id, Name, Animal_Name__c, Animal_Name_Id__c, Petpoint_ID__c,Gender__c, Evaluation_Status__c, Current_Location__c, 
                 Hold_Status_ARC_CARE__c, Behavior_Case_Worker__c, Behavior_Case_Worker__r.Name, Walking_Status__c, 
                 Walking_Notes__c, PPE_DOH__c, Important_Notes_ARC_CARE__c FROM Animal__c 
-                WHERE Active_Animal__c = true AND Location_Filter__c = true 
-                ORDER BY CreatedDate LIMIT 20];
+                WHERE Active_Animal__c = true AND Location_Filter__c = true
+                ORDER BY CreatedDate ];
+        
+        List<Animal__c> objList = new List<Animal__c>();
+        for(Animal__c obj : objs){
+            if(obj.Current_Location__c != null && (obj.Current_Location__c.equalsIgnoreCase('ARC') || 
+              obj.Current_Location__c.equalsIgnoreCase('CARE'))){
+                objList.add(obj);
+            }
+        }
+        return objList;
     }
     
     @AuraEnabled

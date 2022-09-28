@@ -1,7 +1,10 @@
 <!-- sldsValidatorIgnore -->
 <template>
+    <template if:true={error}>
+        <c-error-panel errors={error} type='inlineMessage' friendly-message={errorMessage}></c-error-panel>
+    </template>
     <lightning-record-edit-form object-api-name="Treatment_Session__c" onsubmit={handleSubmit}
-        onsuccess={handleSuccess}
+        onsuccess={handleSuccess} onerror={handleError}
         >
         <div class="slds-modal__content">
             <header class="slds-modal__header">
@@ -76,12 +79,13 @@
                     <lightning-layout-item size="6">
                         <template if:true={hasPlan}>                           
                             <div class="slds-col  slds-p-left_x-small slds-p-top_small"> 
-                                <lightning-input-field field-name="Session_Notes__c"></lightning-input-field>
+                                <!--<lightning-input-field field-name="Session_Notes__c"></lightning-input-field>-->
+                                <lightning-input-field field-name="Preferred_Motivators__c" value={preferredMotivators}></lightning-input-field>
                             </div>
                         </template>
                     </lightning-layout-item>
                 </lightning-layout>
-                <lightning-layout>
+                <!--<lightning-layout>
                     <lightning-layout-item size="12">
                         <template if:true={hasPlan}>
                             <div>
@@ -90,7 +94,7 @@
                         </template>
                         
                     </lightning-layout-item>
-                </lightning-layout>
+                </lightning-layout>-->
                 <lightning-layout>
                     <lightning-layout-item size="12">
                         <template if:true={noPlan}>
@@ -120,4 +124,5 @@
             </footer>
         </div>
     </lightning-record-edit-form>
+
 </template>
