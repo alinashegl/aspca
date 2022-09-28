@@ -1,0 +1,61 @@
+<template>
+     <div class={newProtocolClass}>
+        <div class={boxClass}>       
+            <div class="slds-col slds-size_4-of-6 slds-medium-size_8-of-12 slds-large-size_8-of-12">
+                <div class="ptitle">
+                    {protocolName}
+                    <div>
+                        <template if:true={error}>
+                            <c-error-panel errors={error} type='inlineMessage' friendly-message='Error updating animal'></c-error-panel>
+                        </template>
+                    </div>
+                </div>
+            </div>
+            <template if:true={showLoading}>
+                <lightning-icon icon-name='utility:spinner' alternative-text='Getting Info' title="loading variant" size="small"></lightning-icon>
+            </template>
+            <template if:false={showLoading}>
+                <template if:true={isAssignedType}>
+                    <div class="slds-col slds-size_1-of-6 slds-medium-size_2-of-12 slds-large-size_2-of-12">
+                        <template if:true={isSessionProtocol}>
+                            <lightning-input 
+                                type="toggle"
+                                checked={notSkippedValue}
+                                message-toggle-active='Active'
+                                message-toggle-inactive='Skipped'
+                                onchange={toggleIsSkipped}
+                                disabled={isDisabled}
+                                >
+                            </lightning-input>
+                        </template>
+                    </div>
+                    <div class="slds-col slds-size_1-of-6 slds-medium-size_2-of-12 slds-large-size_2-of-12">
+                        <template if:false={isSessionProtocol}>
+                            <lightning-input
+                                type="toggle"
+                                checked={notRemovedValue}
+                                message-toggle-active='Assigned'
+                                message-toggle-inactive='Removed'
+                                onchange={toggleIsRemoved}
+                                disabled={disableToggle}
+                                >
+                            </lightning-input>
+                        </template>
+                    </div>
+                </template>
+                <template if:false={isAssignedType}>
+                    <div class="slds-col slds-size_1-of-6 slds-medium-size_2-of-12 slds-large-size_2-of-12"></div>
+                    <div class="slds-col slds-size_1-of-6 slds-medium-size_2-of-12 slds-large-size_2-of-12">
+                        <lightning-input type="toggle"
+                            checked={addToPlan}
+                            message-toggle-active='Add'
+                            message-toggle-inactive='Unassigned'
+                            onchange={toggleAddToPlan}
+                            >
+                        </lightning-input>
+                    </div>
+                </template>
+            </template>
+        </div>
+    </div>
+</template>

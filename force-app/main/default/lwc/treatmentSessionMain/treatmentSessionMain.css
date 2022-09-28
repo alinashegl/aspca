@@ -1,0 +1,12 @@
+th {
+    word-break: break-word;
+}
+
+table {
+    table-layout: fixed;
+    width: 100%;
+}
+
+.wrapped-content{
+    overflow-wrap: break-word;
+}

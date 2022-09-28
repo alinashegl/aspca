@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Total_M_I__c</fullName>
+    <externalId>false</externalId>
+    <formula>M_I__c + B_M_I__c + C_M_I__c + D_M_I__c + E_M_I__c + F_M_I__c + G_M_I__c + H_M_I__c + I_M_I__c + J_M_I__c + K_M_I__c + L_M_I__c + M_M_I__c + N_M_I__c + O_M_I__c + P_M_I__c + Q_M_I__c + R_M_I__c + S_M_I__c + T_M_I__c + U_M_I__c + V_M_I__c + W_M_I__c + X_M_I__c + Y_M_I__c + Z_M_I__c + Cats_M_I__c +  Floor_Lead_Numbers_M_I__c +  SP_Responder_Numbers_M_I__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Total M&amp;I</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Foster_Overdue_Email</fullName>
+        <description>Foster Overdue Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Foster_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <recipient>niki.curnell@aspca.org</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>crc.fostermedical@aspca.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/Foster_Overdue_Reminder_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>Foster_Reminder_Email</fullName>
+        <description>Foster Reminder Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Foster_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <recipient>niki.curnell@aspca.org</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>crc.fostermedical@aspca.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/Foster_Reminder_Email</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Update_Foster_Email</fullName>
+        <field>Foster_Email__c</field>
+        <formula>IF(!ISBLANK(Animal__r.Discharged_to_Contact__c), Animal__r.Discharged_to_Contact__r.Email, Animal__r.Discharged_to_Agency__r.Email__c)</formula>
+        <name>Update Foster Email</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Record_Type_Task</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>General_Task</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Update Record Type - Task</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Task_Record_Type</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>General_Task</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Update Task Record Type</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_record_type_for_Treatment</fullName>
+        <description>update record type for Treatment</description>
+        <field>RecordTypeId</field>
+        <lookupValue>Treatments</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>Update record type for Treatment</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Change record type - Task</fullName>
+        <actions>
+            <name>Update_Record_Type_Task</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Task.Record_Type__c</field>
+            <operation>equals</operation>
+            <value>General Task</value>
+        </criteriaItems>
+        <description>Change record type to Task</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Change record type - Treatment</fullName>
+        <actions>
+            <name>Update_record_type_for_Treatment</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Task.Record_Type__c</field>
+            <operation>equals</operation>
+            <value>Treatment</value>
+        </criteriaItems>
+        <description>Change record type to Treatment</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Foster Task Reminders</fullName>
+        <actions>
+            <name>Update_Foster_Email</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Task.Status</field>
+            <operation>equals</operation>
+            <value>Waiting for Foster</value>
+        </criteriaItems>
+        <description>If task status is &quot;Waiting for Foster&quot;, sets foster email and sets an email reminder 30 days before due date to foster, and overdue alert is status is still &quot;Waiting for Foster&quot; 14 days after due date.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Foster_Overdue_Email</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>Task.ActivityDate</offsetFromField>
+            <timeLength>14</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Foster_Reminder_Email</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>Task.ActivityDate</offsetFromField>
+            <timeLength>-30</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Update Task Record Type</fullName>
+        <actions>
+            <name>Update_Task_Record_Type</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Task.Record_Type__c</field>
+            <operation>equals</operation>
+            <value>General Task</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Task.RecordTypeId</field>
+            <operation>notEqual</operation>
+            <value>General Task</value>
+        </criteriaItems>
+        <description>This workflow rule is needed to update the tasks mass-created by FIR medical to &quot;General Tasks&quot;</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+</Workflow>

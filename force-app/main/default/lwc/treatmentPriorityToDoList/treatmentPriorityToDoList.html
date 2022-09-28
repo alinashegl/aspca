@@ -1,0 +1,89 @@
+<template>
+    <lightning-card>
+        <lightning-accordion allow-multiple-sections-open="true">
+            <lightning-accordion-section title="Treatment Priority To Do List" label="Treatment Priority To Do List" name="treatmentPriorityToDoList">
+                <div class="slds-var-p-left_small">
+                    <template if:true={sortActive}>
+                        <lightning-badge icon-alternative-text="Sorted" label="Sorted" icon-name="utility:sort"></lightning-badge>
+                    </template>
+                    <template if:true={filterActive}>
+                        <lightning-badge icon-alternative-text="Filtered" label="Filtered" icon-name="utility:filterList"></lightning-badge>
+                    </template>
+                </div>
+                <template if:false={smallForm}>
+                    <lightning-button label="PDF" slot="actions" onclick={handlePdf}></lightning-button>
+                </template>
+                <lightning-accordion allow-multiple-sections-open="true">
+                    <lightning-accordion-section title="Sort/Filter" label="Sort/Filter" name="sortfilter">
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                                <div class="slds-var-m-bottom_small">
+                                    Sorting
+                                    <lightning-combobox
+                                        name="sortfield"
+                                        label="Select sort field"
+                                        value={sortFieldValue}
+                                        placeholder="Select field"
+                                        options={sortFieldOptions}
+                                        onchange={handleSortFieldChange}>
+                                    </lightning-combobox>
+                                    <lightning-combobox
+                                        name="sortdirection"
+                                        label="Select sort direction"
+                                        value={sortDirectionValue}
+                                        placeholder="Select sort direction"
+                                        options={sortDirectionOptions}
+                                        onchange={handleSortDirectionChange}>
+                                    </lightning-combobox>
+                                </div>
+                                <lightning-button label="Add Sort" onclick={handleSortClick}></lightning-button>
+                                <lightning-button class="slds-var-m-left_x-small" label="Clear all" onclick={handleClearSortClick}></lightning-button>
+                                <div class="slds-scrollable_x slds-var-m-top_x-small">
+                                    <lightning-pill-container items={addedSort} onitemremove={handleRemoveSort}></lightning-pill-container>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                                <div class="slds-var-m-bottom_small">
+                                    Filtering
+                                    <lightning-combobox
+                                        name="filterfield"
+                                        label="Select filter field"
+                                        value={filterFieldValue}
+                                        placeholder="Select field"
+                                        options={filterFieldOptions}
+                                        onchange={handleFilterFieldChange}>
+                                    </lightning-combobox>
+                                    <lightning-combobox
+                                        name="filtervalue"
+                                        label="Select filter value"
+                                        value={filterValueValue}
+                                        placeholder="Select value"
+                                        options={filterValueOptions}
+                                        onchange={handleFilterValueChange}>
+                                    </lightning-combobox>
+                                </div>
+                                <lightning-button label="Add Filter" onclick={handleFilterClick}></lightning-button>
+                                <lightning-button class="slds-var-m-left_x-small" label="Clear all" onclick={handleClearFilterClick}></lightning-button>
+                                <div class="slds-scrollable_x slds-var-m-top_x-small">
+                                    <lightning-pill-container items={addedFilter} onitemremove={handleRemoveFilter}></lightning-pill-container>
+                                </div>
+                            </div>
+                        </div>
+                    </lightning-accordion-section>
+                </lightning-accordion>
+                <template if:true={animalTreatmentSortFilter}>
+                    <template for:each={animalTreatmentSortFilter} for:item='treatment'>
+                        <div class="slds-var-p-around_small slds-border_bottom" key={treatment.Id}>
+                            <lightning-tile>
+                                <c-treatment-to-do-section
+                                    animal-treatment={treatment}
+                                    onupdate={handleUpdate}>
+                                </c-treatment-to-do-section>
+                            </lightning-tile>
+                        </div>
+                    </template>
+                </template>
+            </lightning-accordion-section>
+        </lightning-accordion>
+    </lightning-card>
+</template>

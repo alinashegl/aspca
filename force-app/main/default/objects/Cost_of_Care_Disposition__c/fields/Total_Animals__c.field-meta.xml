@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Total_Animals__c</fullName>
+    <externalId>false</externalId>
+    <formula>Number_of_Cats__c +   Dogs__c  +   Number_of_Equine__c +  Number_of_Chickens_fighting_inc_hens__c +  Number_of_Exotics__c +  Number_of_Fowl_non_fighting__c +  Number_of_Livestock__c +  Number_of_Other_Animals__c +  Number_of_Rabbits__c + Number_of_Cows__c + Number_of_Goats__c + Number_of_Pigs__c + Number_of_Reptiles__c + Number_of_Sheep__c + Number_of_Wildlife__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Total Animals</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,125 @@
+<template>
+    <div class="slds-p-left_medium">
+        <lightning-button-icon 
+            icon-name={toggleButtonIconName} 
+            alternative-text="open" 
+            onclick={handleToggleView} 
+            title="Open"
+            variant="bare"
+            size="small"
+        >
+        </lightning-button-icon>
+        <lightning-button variant="base" label={protocolName} title={protocolName} onclick={handleToggleView} disabled={protocolButtonStatus} class="slds-m-left_xx-small"></lightning-button>        
+        <lightning-icon icon-name={protocolStatusIconName} alternative-text={protocolStatusIconText} variant={protocolStatusIconVariant} title="success variant x-small" size="x-small"></lightning-icon>
+    </div>
+
+    <template if:true={toggleView}>
+        <lightning-card>
+            <div class='slds-box'>
+                <!-- Modal/Popup Box LWC header here -->
+                <header class="slds-modal__header">
+                    <lightning-button-icon 
+                        icon-name="action:close"
+                        alternative-text="close" 
+                        onclick={handleToggleView} 
+                        title="close"
+                        size="small"
+                        variant='brand'
+                    >
+                    </lightning-button-icon>
+                </header>
+                <!-- Modal/Popup Box LWC body starts here -->
+                <template if:true={loading}>
+                    <lightning-spinner
+                        alternative-text="Loading session data"
+                        variant="brand"
+                    ></lightning-spinner>
+                </template>
+                <div class="slds-modal__content" id="modal-content-id-2">
+                    <template if:true={showSkipButton}>
+                        <lightning-button variant="Neutral" label={skipButtonLabel} title="skipProtocol" onclick={handleSkip} class="slds-m-left_x-small"></lightning-button>
+                    </template>
+                    <template if:true={canRemoveProtocol}>
+                        <lightning-button variant="Neutral" label={removeButtonLabel} title="skipAndRemove" onclick={handleSkipAndRemove} class="slds-m-left_x-small"></lightning-button>
+                    </template>
+                    <template if:true={displayBoxLink}>
+                        <lightning-button variant="Neutral" label="Box Link" title="Box Link" onclick={handleBoxLink} class="slds-m-left_x-small"></lightning-button>
+                    </template>
+                    <template if:true={protocolInfo}>
+                        <template if:false={protocolInfo.isSkipped}>
+                                <div class='slds-grid slds-wrap'>
+                                    <template for:each={protocolInfo.columns} for:item="column">
+                                        <div key={column.name} class='slds-col slds-size_1-of-1 slds-medium-size_3-of-6 slds-large-size_1-of-6'>
+                                            <div class="slds-var-m-top_small">
+                                                <template if:true={column.scaleConfig}>
+                                                    <lightning-button 
+                                                        variant="Neutral" 
+                                                        label={column.scaleConfig.Label} 
+                                                        data-link={column.scaleConfig.Value__c} 
+                                                        title={column.scaleConfig.Label} 
+                                                        onclick={handleConfigLink}
+                                                    ></lightning-button>
+                                                </template>
+                                                <template if:false={column.scaleConfig}>
+                                                    <div class="slds-var-p-top_large"></div>
+                                                </template>
+                                            </div>
+                                            <template for:each={column.options} for:item="field">
+                                                <div key={field.name} class="slds-p-top_large"> 
+                                                    <c-treatment-session-score-scale
+                                                        record={field}
+                                                        onstatusrefresh={handleRefresh}
+                                                    >
+                                                    </c-treatment-session-score-scale>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </template>
+                                </div>
+                                <h2 class="slds-p-top_large slds-card__header-title">Needs Review
+                                    <lightning-input class="slds-p-left_medium" data-name="needsReview" type="checkbox" name="needsReview" checked={protocolInfo.needsReview}></lightning-input>
+                                </h2>
+                                <!--<h2 class="slds-p-top_large slds-card__header-title">Preferred Motivators</h2>
+                                <lightning-input class="slds-p-left_medium" data-name="preferredMotivators" type="text" name="preferredMotivators" value={protocolInfo.preferredMotivators}></lightning-input>-->
+                                <h2 class="slds-p-top_large slds-card__header-title">Protocol Notes</h2>
+                                <lightning-textarea class="slds-p-left_medium" data-name="protocolNotes" type="text" name="protocolNotes" value={protocolInfo.protocolNotes}></lightning-textarea>
+                                <template if:true={protocolInfo.isNonMRC}>
+                                    <h2 class="slds-p-top_large slds-card__header-title">Plan Protocol Notes</h2>
+                                    <lightning-textarea class="slds-p-left_medium" data-name="planProtocolNotes" type="text" name="planProtocolNotes" value={protocolInfo.planProtocolNotes}></lightning-textarea>
+                                </template>
+                                <div class="slds-p-top_large">
+                                    <c-treatment-session-child-list
+                                        protocol-id={recordId}
+                                        object-api='Session_Protocol_Contact__c'
+                                    >
+                                    </c-treatment-session-child-list>
+                                </div>
+                                <div class="slds-p-top_large">
+                                    <c-treatment-session-child-list
+                                        protocol-id={recordId}
+                                        object-api='Additional_Dog_Present__c'
+                                    >
+                                    </c-treatment-session-child-list>
+                                </div>
+                                <div class="slds-p-top_large">
+                                    <c-lwc_last-treatments
+                                        record-id={recordId}
+                                        object-api-name='Session_Protocol__c'
+                                        record-count=5
+                                    >
+                                    </c-lwc_last-treatments>
+                                </div>
+                        </template>
+                    </template>
+                </div>
+                <!-- Modal/Popup Box LWC footer starts here -->
+                <footer class="slds-modal__footer">
+                    <lightning-button variant="neutral" label={closeButtonLabel} title="Close Modal" onclick={handleToggleView} class="slds-m-left_x-small"></lightning-button>
+                    <template if:false={isSkipped}>
+                        <lightning-button variant="brand" label="Save and Close" title="Save and Close" onclick={handleSubmit} class="slds-m-left_x-small"></lightning-button>
+                    </template>
+                </footer>
+            </div>
+        </lightning-card>
+    </template>
+</template>

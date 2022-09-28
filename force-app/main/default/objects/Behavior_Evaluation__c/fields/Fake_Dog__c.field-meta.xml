@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Fake_Dog__c</fullName>
+    <externalId>false</externalId>
+    <label>Fake Dog</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Greeted-friendly</fullName>
+                <default>false</default>
+                <label>Greeted-friendly</label>
+            </value>
+            <value>
+                <fullName>Greeted-submissive</fullName>
+                <default>false</default>
+                <label>Greeted-submissive</label>
+            </value>
+            <value>
+                <fullName>Neutral</fullName>
+                <default>false</default>
+                <label>Neutral</label>
+            </value>
+            <value>
+                <fullName>Greeted-sexual behavior</fullName>
+                <default>false</default>
+                <label>Greeted-sexual behavior</label>
+            </value>
+            <value>
+                <fullName>Nervous/fearful</fullName>
+                <default>false</default>
+                <label>Nervous/fearful</label>
+            </value>
+            <value>
+                <fullName>Defensive</fullName>
+                <default>false</default>
+                <label>Defensive</label>
+            </value>
+            <value>
+                <fullName>Predatory-not aggressive</fullName>
+                <default>false</default>
+                <label>Predatory-not aggressive</label>
+            </value>
+            <value>
+                <fullName>Pushy-not aggressive</fullName>
+                <default>false</default>
+                <label>Pushy-not aggressive</label>
+            </value>
+            <value>
+                <fullName>Pushy-aggressive</fullName>
+                <default>false</default>
+                <label>Pushy-aggressive</label>
+            </value>
+            <value>
+                <fullName>Neutral, nervous/fearful or friendly-then aggressive</fullName>
+                <default>false</default>
+                <label>Neutral, nervous/fearful or friendly-then aggressive</label>
+            </value>
+            <value>
+                <fullName>Charged-aggressive</fullName>
+                <default>false</default>
+                <label>Charged-aggressive</label>
+            </value>
+            <value>
+                <fullName>Predatory-aggressive</fullName>
+                <default>false</default>
+                <label>Predatory-aggressive</label>
+            </value>
+            <value>
+                <fullName>Extremely fearful</fullName>
+                <default>false</default>
+                <label>Extremely fearful</label>
+            </value>
+            <value>
+                <fullName>Investigated-not fooled</fullName>
+                <default>false</default>
+                <label>Investigated-not fooled</label>
+            </value>
+            <value>
+                <fullName>Playful</fullName>
+                <default>false</default>
+                <label>Playful</label>
+            </value>
+            <value>
+                <fullName>Charges-aggressive</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Charges-aggressive</label>
+            </value>
+            <value>
+                <fullName>Neutral, nervous/fearful or friendly—then aggressive</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Neutral, nervous/fearful or friendly—then aggressive</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

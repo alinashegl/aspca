@@ -5,7 +5,7 @@
     <columns>Animal_Name__c</columns>
     <columns>Shelter_Location__c</columns>
     <columns>Gender__c</columns>
-    <columns>Placement_Status__c</columns>
+    <columns>Medical_Status__c</columns>
     <columns>Estimated_Date_of_Birth__c</columns>
     <columns>Intake_BCS__c</columns>
     <columns>Current_Weight_in_kgs_Num__c</columns>
@@ -15,16 +15,17 @@
     <columns>Microchip_Number__c</columns>
     <columns>Color__c</columns>
     <columns>Secondary_Color__c</columns>
+    <columns>Shelter_Location2__c</columns>
     <filterScope>Everything</filterScope>
     <filters>
         <field>Shelter_Location2__c</field>
         <operation>equals</operation>
-        <value>Marysville</value>
+        <value>CRC</value>
     </filters>
     <filters>
         <field>Animal_Status__c</field>
         <operation>equals</operation>
         <value>In Shelter</value>
     </filters>
-    <label>Active Marysville Animals</label>
+    <label>Active CRC Animals</label>
 </ListView>

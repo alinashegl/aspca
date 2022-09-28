@@ -6,7 +6,6 @@
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
     <trackHistory>false</trackHistory>
-    <trackTrending>false</trackTrending>
     <type>Picklist</type>
     <valueSet>
         <restricted>true</restricted>
@@ -81,6 +80,11 @@
                 <fullName>Undetermined</fullName>
                 <default>false</default>
                 <label>Undetermined</label>
+            </value>
+            <value>
+                <fullName>BRC</fullName>
+                <default>false</default>
+                <label>BRC</label>
             </value>
         </valueSetDefinition>
     </valueSet>

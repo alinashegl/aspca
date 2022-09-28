@@ -1,0 +1,214 @@
+<apex:page controller="ClsEvidenceInformation">
+   
+<script>
+    function checkAll(cb)
+    {
+       var inputElem = document.getElementsByTagName("input");
+         for(var i=0;i<inputElem.length;i++)
+         {
+                 if(inputElem[i].id.indexOf("isselected")!=-1)
+                       inputElem[i].checked = cb.checked;
+          }
+          
+    }
+    
+    function findChildRow(className,imageid) {
+
+        var childElem = document.getElementById(className);
+          if(childElem.style.display == 'none')
+          {
+             imageid.src='{!$Resource.minus}'; 
+             childElem.style.display = 'table-row';
+          }
+          else
+          {
+             imageid.src='{!$Resource.plus}'; 
+             childElem.style.display = 'none';
+          }
+    }
+    
+    function dummy(imageid) {
+        var trs = document.getElementsByTagName("tr");
+          for(var i=0;i<trs.length;i++)
+          {
+          
+           if (trs[i].id.indexOf("child") !=-1)
+           {
+                if(trs[i].style.display == 'none')
+                {
+                    //imageid.src='{!$Resource.minus}'; 
+                    trs[i].style.display = 'table-row';
+                }
+                else
+                {
+                    //imageid.src='{!$Resource.plus}'; 
+                    trs[i].style.display = 'none';
+                }
+            }
+        }
+
+    }
+</script>
+   
+   <apex:form >
+          
+       <apex:pageBlock title="Evidence Infomation for Case# {!strCaseNumber}">
+       <apex:pageMessages id="pgeMsg"/>
+           <apex:pageBlockSection columns="2">
+               <apex:pageBlockSectionItem > 
+                  <apex:outputLabel value="Evidence Category:" ></apex:outputLabel>
+                  <apex:inputField value="{!objEvidenceCategory.Evidence_Category__c}"/>
+              </apex:pageBlockSectionItem>
+             
+              <apex:pageBlockSectionItem >
+                  <apex:outputLabel value="Evidence Type:" ></apex:outputLabel>
+                  <apex:inputField value="{!objEvidenceCategory.Evidence_Type__c}"/>
+              </apex:pageBlockSectionItem>        
+
+              <apex:pageBlockSectionItem > 
+                    <apex:outputLabel value="Tracking Disposition Start Date:" ></apex:outputLabel>
+                    <apex:inputField value="{!objEvidenceStartDate.Disposition_Date__c}"/>
+              </apex:pageblockSectionItem>
+                
+              <apex:pageBlockSectionItem > 
+                    <apex:outputLabel value="Tracking Disposition End Date:" ></apex:outputLabel>
+                    <apex:inputField value="{!objEvidenceEndDate.Disposition_Date__c}"/>
+              </apex:pageblockSectionItem>
+            
+            </apex:pageBlockSection>
+            
+             <apex:pageBlockButtons location="bottom" >
+             
+           
+           
+              <apex:commandButton value="Search" action="{!Search}" reRender="pbSearch,pgeMsg" status="actionStatusId"/>
+              <apex:commandButton value="Back" action="{!BackToCase}" />
+              <apex:commandButton value="View Report"  status="actionStatusId" action="{!CallFullReport}"  />
+              
+                    <apex:actionStatus id="actionStatusId" stopText="">
+               <apex:facet name="start">
+                 <img src="/apexpages/devmode/img/saveStatus.gif"/>
+               </apex:facet> 
+           </apex:actionStatus>
+            </apex:pageBlockButtons>
+            
+            
+           
+      </apex:pageBlock>
+
+            
+           
+     
+
+
+            <apex:pageBlock id="pbSearch" title="Evidence Search Result">
+         
+         
+           <table cellspacing="0" cellpadding="0" border="0" id="searchResults" width="100%" class="list">
+          
+                    <thead class="rich-table-thead">
+                        <tr class="headerRow">
+                            <th colspan="1" scope="col" class="headerRow" style="width:6%;background-color: #FF7800;"> 
+                             <apex:inputCheckbox onclick="checkAll(this)" /> Select
+                             
+                             </th>
+                             
+                            <th colspan="1" scope="col" class="headerRow" style="width:20%;background-color: #FF7800;">
+                             <!--<apex:image value="{!$Resource.plus}" onclick="Backup(this)" id="imageId1" style="cursor: pointer;vertical-align: middle;" /> -->
+                             <!--  PP: 10/07/13 - Per call with ASPCA Client - changed label Evidence Number to Item # -->
+                            Item #</th>
+                             <th colspan="1" scope="col" class="headerRow" style="width:20%;background-color: #FF7800;">Evidence Category</th>
+                            <th colspan="1" scope="col" class="headerRow" style="width:20%;background-color: #FF7800;">Evidence Type</th>
+                            <th colspan="1" scope="col" class="headerRow" style="width:20%;background-color: #FF7800;">Description</th>
+                            <th colspan="1" scope="col" class="headerRow" style="width:20%;background-color: #FF7800;">Received Date/Time</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                    <apex:variable value="{!1}" var="num"/>
+                        <apex:repeat value="{!lstWrpperEvidence}" var="evd" >
+                                
+                         
+                            <tr  style="background-color: #;" onfocus="if (window.hiOn){hiOn(this);}" onblur="if (window.hiOff){hiOff(this);}" onmouseout="if (window.hiOff){hiOff(this);} " onmouseover="if (window.hiOn){hiOn(this);} " class="dataRow even  first">
+                                 <td>
+                                    <apex:inputcheckbox value="{!evd.isSelected}" id="isselected"> </apex:inputcheckbox>
+                                  </td>
+                                  
+                                  
+                                 <td >
+                                   <apex:image value="{!$Resource.plus}" onclick="findChildRow('child'+{!num}, this)" id="imageId" style="cursor: pointer;vertical-align: middle;" />
+                                     {!evd.ObjEvidence.Name}  
+                                     
+                                 </td>
+                                 <td> 
+                                       {!evd.ObjEvidence.Evidence_Category__c}
+                                 </td>
+                                <td>
+                                       {!evd.ObjEvidence.Evidence_Type__c}
+                                 </td>
+                                <td>
+                                     {!evd.ObjEvidence.Evidence_Description__c}
+                                 </td>
+                                 
+                               <td>
+                                    <apex:outputText value="{0,date,MM/dd/yyyy}">
+                                        <apex:param value="{!evd.ObjEvidence.Received_Date_Time__c}" />
+                                    </apex:outputText>
+                                 </td>  
+                            </tr>
+                         
+                          <tr id="child{!num}" style="display: none;">
+                              <td>
+                                 &nbsp;
+                              </td>
+                          
+                          <td colspan="5">
+                              <table width="60%">
+                                   <thead class="rich-table-thead">
+                                        <tr class="headerRow">
+                                            <th align="center" style="width:20%;background-color: #CAC2BB;">Tracking Name </th>
+                                            <th align="center" style="width:20%;background-color: #CAC2BB;">Disposition</th>
+                                            <th align="center" style="width:20%;background-color: #CAC2BB;">Date</th>
+                                        </tr>
+                                    </thead>
+                                    
+                                    <tbody>
+                                   <apex:repeat value="{!evd.ObjEvidence.Evidence_Tracking__r}" var="evdTracking">
+                                        <tr  >
+                                            <td  class="dataCell">&nbsp;&nbsp;{!evdTracking.Name}</td>
+                                            <td  class="dataCell">{!evdTracking.Disposition__c}</td>  
+                                            <td class="dataCell">  
+                                                <apex:outputText value="{0,date,MM/dd/yyyy}">
+                                                    <apex:param value="{!evdTracking.Disposition_Date__c}" />
+                                                </apex:outputText>
+                                            </td>                               
+                                        </tr> 
+                            </apex:repeat>
+                            </tbody>
+                              </table>
+                          
+                          </td>
+                          
+                          </tr>               
+                         
+                            
+                           <apex:variable value="{!num+1}" var="num"/>
+                        </apex:repeat>
+                      
+                    </tbody>
+                    
+                </table>
+                 
+       </apex:pageBlock>
+   </apex:form>
+   <script>
+   function CallReport(Id){
+       var url="/apex/GenerateEvidenceReport?Id=" + Id;
+       window.open(url);
+       return false;
+   }
+   
+   //function setFocusOnLoad() {}
+   </script>
+   
+</apex:page>

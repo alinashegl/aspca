@@ -1,0 +1,23 @@
+.animal-card {
+    display: block;
+}
+.custom-box {
+    background-color: #f4f6f9;
+}
+
+.card-custom{
+    --sds-c-card-sizing-border: 4px;
+    --sds-c-card-color-border: #808080;
+}
+
+.play-rating-green{
+    color: green;
+}
+
+.play-rating-yellow{
+    color: rgb(175, 150, 9);
+}
+
+.play-rating-red{
+    color: red;
+}

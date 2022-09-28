@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Matter_Update_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Matter Update Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Matter_Update__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Bench</fullName>
+                <default>false</default>
+                <label>Bench</label>
+            </value>
+            <value>
+                <fullName>Briefs</fullName>
+                <default>false</default>
+                <label>Briefs</label>
+            </value>
+            <value>
+                <fullName>Case Review</fullName>
+                <default>false</default>
+                <label>Case Review</label>
+            </value>
+            <value>
+                <fullName>Complainant</fullName>
+                <default>false</default>
+                <label>Complainant</label>
+            </value>
+            <value>
+                <fullName>Conference</fullName>
+                <default>false</default>
+                <label>Conference</label>
+            </value>
+            <value>
+                <fullName>Correspondence</fullName>
+                <default>false</default>
+                <label>Correspondence</label>
+            </value>
+            <value>
+                <fullName>Court</fullName>
+                <default>false</default>
+                <label>Court</label>
+            </value>
+            <value>
+                <fullName>Depositions</fullName>
+                <default>false</default>
+                <label>Depositions</label>
+            </value>
+            <value>
+                <fullName>Fact Sheets</fullName>
+                <default>false</default>
+                <label>Fact Sheets</label>
+            </value>
+            <value>
+                <fullName>Initial Disclosures</fullName>
+                <default>false</default>
+                <label>Initial Disclosures</label>
+            </value>
+            <value>
+                <fullName>Internal</fullName>
+                <default>false</default>
+                <label>Internal</label>
+            </value>
+            <value>
+                <fullName>Interrogatories</fullName>
+                <default>false</default>
+                <label>Interrogatories</label>
+            </value>
+            <value>
+                <fullName>Jury</fullName>
+                <default>false</default>
+                <label>Jury</label>
+            </value>
+            <value>
+                <fullName>Jury Selection</fullName>
+                <default>false</default>
+                <label>Jury Selection</label>
+            </value>
+            <value>
+                <fullName>Law Enforcement</fullName>
+                <default>false</default>
+                <label>Law Enforcement</label>
+            </value>
+            <value>
+                <fullName>Legislation</fullName>
+                <default>false</default>
+                <label>Legislation</label>
+            </value>
+            <value>
+                <fullName>Legislator</fullName>
+                <default>false</default>
+                <label>Legislator</label>
+            </value>
+            <value>
+                <fullName>Memo</fullName>
+                <default>false</default>
+                <label>Memo</label>
+            </value>
+            <value>
+                <fullName>Motions</fullName>
+                <default>false</default>
+                <label>Motions</label>
+            </value>
+            <value>
+                <fullName>Opposing Counsel</fullName>
+                <default>false</default>
+                <label>Opposing Counsel</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>Outside Counsel</fullName>
+                <default>false</default>
+                <label>Outside Counsel</label>
+            </value>
+            <value>
+                <fullName>Party</fullName>
+                <default>false</default>
+                <label>Party</label>
+            </value>
+            <value>
+                <fullName>Pleadings</fullName>
+                <default>false</default>
+                <label>Pleadings</label>
+            </value>
+            <value>
+                <fullName>Potential Plaintiff</fullName>
+                <default>false</default>
+                <label>Potential Plaintiff</label>
+            </value>
+            <value>
+                <fullName>Prep</fullName>
+                <default>false</default>
+                <label>Prep</label>
+            </value>
+            <value>
+                <fullName>Pretrial</fullName>
+                <default>false</default>
+                <label>Pretrial</label>
+            </value>
+            <value>
+                <fullName>Production</fullName>
+                <default>false</default>
+                <label>Production</label>
+            </value>
+            <value>
+                <fullName>Prosecutor</fullName>
+                <default>false</default>
+                <label>Prosecutor</label>
+            </value>
+            <value>
+                <fullName>Sponsor</fullName>
+                <default>false</default>
+                <label>Sponsor</label>
+            </value>
+            <value>
+                <fullName>Stakeholders</fullName>
+                <default>false</default>
+                <label>Stakeholders</label>
+            </value>
+            <value>
+                <fullName>Victim</fullName>
+                <default>false</default>
+                <label>Victim</label>
+            </value>
+            <value>
+                <fullName>Witness</fullName>
+                <default>false</default>
+                <label>Witness</label>
+            </value>
+            <value>
+                <fullName>Witness Prep</fullName>
+                <default>false</default>
+                <label>Witness Prep</label>
+            </value>
+            <value>
+                <fullName>Complaint</fullName>
+                <default>false</default>
+                <label>Complaint</label>
+            </value>
+            <value>
+                <fullName>Amended Complaint</fullName>
+                <default>false</default>
+                <label>Amended Complaint</label>
+            </value>
+            <value>
+                <fullName>Declarations</fullName>
+                <default>false</default>
+                <label>Declarations</label>
+            </value>
+            <value>
+                <fullName>Memorandum</fullName>
+                <default>false</default>
+                <label>Memorandum</label>
+            </value>
+            <value>
+                <fullName>Answer</fullName>
+                <default>false</default>
+                <label>Answer</label>
+            </value>
+            <value>
+                <fullName>Response</fullName>
+                <default>false</default>
+                <label>Response</label>
+            </value>
+            <value>
+                <fullName>Reply</fullName>
+                <default>false</default>
+                <label>Reply</label>
+            </value>
+            <value>
+                <fullName>Motion – Pro hac</fullName>
+                <default>false</default>
+                <label>Motion – Pro hac</label>
+            </value>
+            <value>
+                <fullName>Motion – Discovery</fullName>
+                <default>false</default>
+                <label>Motion – Discovery</label>
+            </value>
+            <value>
+                <fullName>Motion – Summary Judgment</fullName>
+                <default>false</default>
+                <label>Motion – Summary Judgment</label>
+            </value>
+            <value>
+                <fullName>Motion – To Dismiss</fullName>
+                <default>false</default>
+                <label>Motion – To Dismiss</label>
+            </value>
+            <value>
+                <fullName>Motion – In Limine</fullName>
+                <default>false</default>
+                <label>Motion – In Limine</label>
+            </value>
+            <value>
+                <fullName>Motion – Other</fullName>
+                <default>false</default>
+                <label>Motion – Other</label>
+            </value>
+            <value>
+                <fullName>Order</fullName>
+                <default>false</default>
+                <label>Order</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Filing</controllingFieldValue>
+            <valueName>Complaint</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Filing</controllingFieldValue>
+            <valueName>Amended Complaint</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Filing</controllingFieldValue>
+            <valueName>Declarations</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Filing</controllingFieldValue>
+            <valueName>Memorandum</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Filing</controllingFieldValue>
+            <valueName>Answer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Filing</controllingFieldValue>
+            <valueName>Response</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Filing</controllingFieldValue>
+            <valueName>Reply</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Filing</controllingFieldValue>
+            <valueName>Motion – Pro hac</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Filing</controllingFieldValue>
+            <valueName>Motion – Discovery</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Filing</controllingFieldValue>
+            <valueName>Motion – Summary Judgment</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Filing</controllingFieldValue>
+            <valueName>Motion – To Dismiss</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Filing</controllingFieldValue>
+            <valueName>Motion – In Limine</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Filing</controllingFieldValue>
+            <valueName>Motion – Other</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Filing</controllingFieldValue>
+            <valueName>Order</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Meetings (Amicus)</controllingFieldValue>
+            <controllingFieldValue>Meetings (Civil Litigation)</controllingFieldValue>
+            <controllingFieldValue>Meetings (Criminal)</controllingFieldValue>
+            <controllingFieldValue>Meetings (Legislation)</controllingFieldValue>
+            <valueName>Internal</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Meetings (Amicus)</controllingFieldValue>
+            <controllingFieldValue>Meetings (Civil Litigation)</controllingFieldValue>
+            <controllingFieldValue>Meetings (Criminal)</controllingFieldValue>
+            <controllingFieldValue>Meetings (Legislation)</controllingFieldValue>
+            <controllingFieldValue>Discovery</controllingFieldValue>
+            <controllingFieldValue>Drafting</controllingFieldValue>
+            <controllingFieldValue>Drafting (Legislation)</controllingFieldValue>
+            <controllingFieldValue>Hearings (Criminal)</controllingFieldValue>
+            <valueName>Other</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Meetings (Amicus)</controllingFieldValue>
+            <controllingFieldValue>Meetings (Civil Litigation)</controllingFieldValue>
+            <valueName>Outside Counsel</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Meetings (Amicus)</controllingFieldValue>
+            <valueName>Party</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Meetings (Amicus)</controllingFieldValue>
+            <controllingFieldValue>Meetings (Legislation)</controllingFieldValue>
+            <valueName>Stakeholders</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Meetings (Civil Litigation)</controllingFieldValue>
+            <valueName>Court</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Meetings (Civil Litigation)</controllingFieldValue>
+            <valueName>Opposing Counsel</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Meetings (Civil Litigation)</controllingFieldValue>
+            <valueName>Potential Plaintiff</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Meetings (Civil Litigation)</controllingFieldValue>
+            <controllingFieldValue>Meetings (Criminal)</controllingFieldValue>
+            <valueName>Witness</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Meetings (Criminal)</controllingFieldValue>
+            <valueName>Complainant</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Meetings (Criminal)</controllingFieldValue>
+            <valueName>Law Enforcement</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Meetings (Criminal)</controllingFieldValue>
+            <valueName>Prosecutor</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Meetings (Criminal)</controllingFieldValue>
+            <valueName>Victim</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Meetings (Legislation)</controllingFieldValue>
+            <valueName>Legislator</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Meetings (Legislation)</controllingFieldValue>
+            <valueName>Sponsor</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Trial (Civil Litigation)</controllingFieldValue>
+            <controllingFieldValue>Trial (Criminal)</controllingFieldValue>
+            <valueName>Bench</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Trial (Civil Litigation)</controllingFieldValue>
+            <controllingFieldValue>Trial (Criminal)</controllingFieldValue>
+            <valueName>Jury</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Trial (Civil Litigation)</controllingFieldValue>
+            <valueName>Jury Selection</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Trial (Civil Litigation)</controllingFieldValue>
+            <controllingFieldValue>Trial (Criminal)</controllingFieldValue>
+            <valueName>Witness Prep</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Discovery</controllingFieldValue>
+            <valueName>Depositions</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Discovery</controllingFieldValue>
+            <valueName>Initial Disclosures</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Discovery</controllingFieldValue>
+            <valueName>Interrogatories</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Discovery</controllingFieldValue>
+            <valueName>Production</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Drafting</controllingFieldValue>
+            <valueName>Briefs</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Drafting</controllingFieldValue>
+            <valueName>Correspondence</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Drafting</controllingFieldValue>
+            <valueName>Memo</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Drafting</controllingFieldValue>
+            <controllingFieldValue>Hearings (Civil Litigation)</controllingFieldValue>
+            <controllingFieldValue>Hearings (Criminal)</controllingFieldValue>
+            <valueName>Motions</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Drafting</controllingFieldValue>
+            <valueName>Pleadings</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Drafting (Legislation)</controllingFieldValue>
+            <valueName>Fact Sheets</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Drafting (Legislation)</controllingFieldValue>
+            <valueName>Legislation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Expert Witness</controllingFieldValue>
+            <valueName>Case Review</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Expert Witness</controllingFieldValue>
+            <valueName>Prep</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Hearings (Civil Litigation)</controllingFieldValue>
+            <valueName>Conference</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Hearings (Civil Litigation)</controllingFieldValue>
+            <valueName>Pretrial</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

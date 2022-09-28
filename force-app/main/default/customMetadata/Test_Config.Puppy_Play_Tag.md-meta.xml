@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Puppy Play Tag</label>
+    <protected>false</protected>
+    <values>
+        <field>Child_Test_Config__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Comment_Reference__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Comment_Reference_del__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>IsAdult__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>IsDogFighting__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>IsDogOnly__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>IsPuppy__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Is_Child__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>Object_Reference__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Overall_Test_Display_Name__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Parent_Test_Api_Name__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Picklist_API_Name__c</field>
+        <value xsi:type="xsd:string">Puppy_Play_Tag__c</value>
+    </values>
+    <values>
+        <field>Test_Comment_Field_Name__c</field>
+        <value xsi:type="xsd:string">Comments_Tag__c</value>
+    </values>
+    <values>
+        <field>Test_Description__c</field>
+        <value xsi:type="xsd:string">Play Tag: Off Leash or on Very Loose Leash</value>
+    </values>
+    <values>
+        <field>Test_Display_Order__c</field>
+        <value xsi:type="xsd:string">7</value>
+    </values>
+    <values>
+        <field>Test_Header_Description__c</field>
+        <value xsi:type="xsd:string">&lt;div&gt;Ask the puppy in friendly voice &quot;Do you wanna play?&quot; Assume a partly crouched, bouncy, playful posture. Move away from puppy, encouraging puppy to join game. Use 2 fingers to point at rear flank, saying, &quot;Wanna play?&quot; Only lag point while moving away from puppy. Attempt tag/point 3 times unless puppy becomes fearful. If puppy mouths hard, tester should yelp.&lt;/div&gt;</value>
+    </values>
+    <values>
+        <field>Test_Name__c</field>
+        <value xsi:type="xsd:string">Tag Game</value>
+    </values>
+    <values>
+        <field>Test_Optional_Field__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Test_Skip_Reason_Field__c</field>
+        <value xsi:type="xsd:string">Skipped_Tag__c</value>
+    </values>
+    <values>
+        <field>Test_Type_Description__c</field>
+        <value xsi:nil="true"/>
+    </values>
+</CustomMetadata>

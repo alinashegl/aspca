@@ -1,0 +1,2796 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Behavior_Exam</fullName>
+    <active>true</active>
+    <description>Use for Storm Distress/Anxiety and Behavior Medications</description>
+    <label>Behavior Exam</label>
+    <picklistValues>
+        <picklist>Abdomen_Gastrointestinal_Urogential__c</picklist>
+        <values>
+            <fullName>Cloaca clean</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Abdomen__c</picklist>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Soft%2C no obvious organomegaly or masses palpated</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Age_Estimate_Picklist__c</picklist>
+        <values>
+            <fullName>%3C 6 months</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>0-4 weeks</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>1 year - 2 years</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>11-15 years</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>12-16 weeks</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>15-20 years</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2-3 years</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2-5 years</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>20%2B years</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>4-5 years</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>4-6 months</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>4-8 weeks</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>5-7 years</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>6 months - 1 year</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>6 months - 2 years</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>6-10 years</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>7-10 years</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>8-12 weeks</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Adult %28%3E2 yrs%2E%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Adult%3A %3E2 YRS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Chick %280-10 wks%2E%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Chick%3A Up To 8 Weeks</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cockerel %3C1 yr</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Egg</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Foal %28with dam%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Foal %28without dam%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Hen %3E1 yr</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Juvenile %28%3C2 yrs%2E%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Juvenile w%2Fdam</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pullet %3C1 yr</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pullet%3A Female %3C 2 YRS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Stag%3A Male %3C2YRS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unknown At Intake</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Weanling</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yearling</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>greater than 10 yrs</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Aggressive_Details__c</picklist>
+        <values>
+            <fullName>Evasive%2FFearful</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Friendly%2FTolerant%2FEasy-Going</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Highly Aroused%2FRowdy%2FExcited</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Neutral%2FAloof%2FStocic</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Assessment2__c</picklist>
+        <values>
+            <fullName>Apparently healthy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Assistant__c</picklist>
+        <values>
+            <fullName>Josiah Mathews</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Maxi Lambert</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Scott Sherlock</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Attendees_Assistants__c</picklist>
+        <values>
+            <fullName>Adrianna Ruiz</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Alison Kennedy-Benson</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Amanda Fitch</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Elizabeth Pearlman</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Eric Lee</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Matthew DePouli</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rachel Touroo</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Authorized_by__c</picklist>
+        <values>
+            <fullName>Dr%2E Rachel Touroo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2E Rhonda Windham</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Avian_BCS__c</picklist>
+        <values>
+            <fullName>0</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>BCS__c</picklist>
+        <values>
+            <fullName>1%2F9 Emaciated</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2%2F9 Very Thin</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2%2F9 Very Underweight</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3%2F9 Thin</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>4%2F9 Lean</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>5%2F9 Ideal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>6%2F9 Overweight</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>7%2F9 Heavy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>7%2F9 Overweight</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>8%2F9 Obese</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>8%2F9 Overweight</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>9%2F9 Grossly Obese</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>9%2F9 Overweight</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unspecified</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Babesia_Results__c</picklist>
+        <values>
+            <fullName>Negative</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pending</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Positive</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Cardiac_Respiratory2__c</picklist>
+        <values>
+            <fullName>Lung sounds clear%2C eupneic%3B heart rate and rhythm normal%3B no murmur auscultated%3B strong%2C synchronous and symmetric pulses</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Normal rate and rhythm%2C lungs clear%2C no nasal discharge</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Comb__c</picklist>
+        <values>
+            <fullName>Intact</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Trimmed</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Current_Location__c</picklist>
+        <values>
+            <fullName>AVFSC - Cabinet 1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AVFSC - Cabinet 2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AVFSC - Cabinet 3</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AVFSC - Chest Freezer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AVFSC - Evidence Room General</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AVFSC - Flammables Cabinet</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AVFSC - Processing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AVFSC - Refrigerator</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AVFSC - Upright Freezer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Consumed in Testing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Disposed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Returned to LEA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sent for Analysis</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Storage - CRC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Storage - Temp Shelter</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Deceased_Reason__c</picklist>
+        <values>
+            <fullName>Died in Animal Shelter</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Died in Field</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Dehydration_Degree__c</picklist>
+        <values>
+            <fullName>Mild %285-7%25%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Moderate %288-10%25%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Severe %2810-12%25%29</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Dental_Grade__c</picklist>
+        <values>
+            <fullName>1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>1-2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2-3</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3-4</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>4</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Normal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Doctor_Tech__c</picklist>
+        <values>
+            <fullName>Alison Liu%2C DVM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2E Abra Foster%2C DVM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2E Amanda Hilliard%2C DVM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2E Audra Harthorn%2C DVM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2E Cathy Anderson%2C DVM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2E Cheryl Rausch%2C DVM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2E Colleen Shockling Dent</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2E Emily Amsler%2C DVM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2E Jennifer Betz%2C DVM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2E Jennifer Stressman%2C DVM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2E Jill Kirk%2C DVM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2E K%2E Fox%2C DVM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2E Kami Fox%2C DVM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2E Kristi Arnquist%2C DVM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2E Liz Pearlman%2C DVM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2E Mary Lummis</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2E Michelle Taylor%2C DVM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2E Nicole Eller%2C DVM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2E Rachel Barton%2C DVM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2E Rachel Touroo%2C DVM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2E Ryan Gaffke%2C DVM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2E Sarah Kirk%2C DVM</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Drug_Administered__c</picklist>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pentobarbital sodium</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TTD</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Ear_Lobes__c</picklist>
+        <values>
+            <fullName>Intact</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Trimmed</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Equine_Body_Pattern__c</picklist>
+        <values>
+            <fullName>Appaloosa</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Blanket</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dapple</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Leopard</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Overo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pinto</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Roan</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tobiano</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Varnish</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Equine_Dewormer__c</picklist>
+        <values>
+            <fullName>Fenbendazole</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ivermectin</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Moxidectin</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Oxybendazole</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Praziquantal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pyrantel</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Equine_Leg_Marking__c</picklist>
+        <values>
+            <fullName>%28none%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LF Coronet</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LF Partial Coronet</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LF Partial Pastern</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LF Pastern</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LF Sock</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LF Stocking</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LR Coronet</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LR Pastern</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LR Sock</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LR Stocking</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RF Coronet</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RF Pastern</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RF Sock</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RF Stocking</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RR Coronet</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RR Partial Sock</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RR Pastern</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RR Sock</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RR Stocking</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Euthanasia_Authorized_By__c</picklist>
+        <values>
+            <fullName>Dr%2E Mary Lummis%2C DVM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2E Nicole Eller-Medina%2C DVM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2E Rachel Touroo</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Euthanasia_Reason_List__c</picklist>
+        <values>
+            <fullName>Behavior</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Medical</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Medical%2FBehavior</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Quality of Life</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>State-Reportable Disease</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Exam_Tasks__c</picklist>
+        <values>
+            <fullName>DVM Recheck - Claro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Recheck CBC%2FChem%2C NSAIDs</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Recheck PCV</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Weight Check - Underweight</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Exam_Type__c</picklist>
+        <values>
+            <fullName>Annual</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Behavior Medications</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Concern</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Deceased</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Diagnostic</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Discharge</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Euthanasia</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Forensic</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Foster</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Health Cert</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Histopathology</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Hospitalized</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Intake</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lab Results</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MRI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Necropsy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Phone Consult</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Radiograph</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Recheck</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Reference Lab Consult</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Referral Feedback</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Shelter Note</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Specialist Consult</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Storm Distress%2FAnxiety</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Surgery</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tech Note</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transport</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Vaccine%2FPreventative</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Weight</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>External_Parasites__c</picklist>
+        <values>
+            <fullName>No parasites found</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>FIV_Results__c</picklist>
+        <values>
+            <fullName>Abnormal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Normal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pending</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Felv_FIV_Results__c</picklist>
+        <values>
+            <fullName>Abnormal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Normal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pending</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Forensic_Status__c</picklist>
+        <values>
+            <fullName>Forensic Hold</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Non-Criminal Case</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Released from Forensic Hold</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Health_Certificate__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>None</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Heartworm_Results__c</picklist>
+        <values>
+            <fullName>Negative</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pending</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Positive</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Hoof_condition__c</picklist>
+        <values>
+            <fullName>Fair</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Good</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Poor</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>How_Age_Was_Estimated__c</picklist>
+        <values>
+            <fullName>Bone Development</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dentition</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lenticular transillumination</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Hydration__c</picklist>
+        <values>
+            <fullName>Euhydrated %28normal%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mild dehydration %28%7E5%25%29 - Minimal loss of skin turgor%2C semidry mucous membranes and normal eye</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Moderate dehydration %28%7E8%25%29 - Moderate loss of skin turgor%2C dry mucous membranes%2C weak rapid pulses%2C enopthalmus%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Severe dehydration %28%3E10%25%29 - Considerable loss of skin turgor%2C severe enophthalmos%2C tachycardia%2C extremely dry mucous membranes%2C weak%2Fthready pulses%2C and altered level of consciousness%2E</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Include_in_discharge__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Insects_Puparia_Insect_Larvae_Eggs__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Intake_Exam_Veterinarian__c</picklist>
+        <values>
+            <fullName>Alison Liu</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ashley Saver</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Elizabeth Pearlman</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Jasmine Bruno</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Laura Niestat</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rachel Touroo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Robert Reisman</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Integument_External_Parasites2__c</picklist>
+        <values>
+            <fullName>Clean shiny coat</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Items_on_the_Body__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Left_Foot_Location__c</picklist>
+        <values>
+            <fullName>Between Digits 1 and 2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Between Digits 2 and 3</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Between Digits 3 and 4</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Left_Foot__c</picklist>
+        <values>
+            <fullName>Toe punch</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Webbing intact</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Webbing removed</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Left_Leg__c</picklist>
+        <values>
+            <fullName>Band present</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No band</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Left_Spur__c</picklist>
+        <values>
+            <fullName>Blunted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cut</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sharpened</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unaltered</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Left_Wing__c</picklist>
+        <values>
+            <fullName>Band Present</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Band</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Livor_Mortis__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Mammary__c</picklist>
+        <values>
+            <fullName>Mammary glands developed%2C consistent with previous litters%2E No overt masses or lesions%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mammary glands minimally developed%2E No overt masses or lesions%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Markings__c</picklist>
+        <values>
+            <fullName>Bald</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Belted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Black</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Blaze</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Blue Point</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Bluies</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Brindle</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Calico</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Chocolate Point</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dapple</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Double Dapple</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Harlequin</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mask</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Merle</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sable</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Seal Point</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Snip</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Speckled</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Spotted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Star</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Star%2FSnip</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Star%2FStrip%2FSnip</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Star%2FStripe</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Stripe</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tabby</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ticking</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tiger</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tortoiseshell</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tri-Color</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tuxedo</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Microchip_Results__c</picklist>
+        <values>
+            <fullName>Negative</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Positive</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Mucus_Membrane_Capillary_Refill_Time2__c</picklist>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pink</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pink%2C %3C2s</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Red%2C %3C2s</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Musculoskeletal2__c</picklist>
+        <values>
+            <fullName>Adequate muscling%2C ambulatory on all four legs</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Adequately muscled</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Well-muscled</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Nails__c</picklist>
+        <values>
+            <fullName>Adequate length</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Avulsed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Embedded</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Frayed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Overgrown</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Short</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Necropsy_Exam_Photographer__c</picklist>
+        <values>
+            <fullName>Adrianna Ruiz</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Alison Kennedy-Benson</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Alison Liu</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Amanda Fitch</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Elizabeth Pearlman</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Eric Lee</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Jasmine Bruno</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Laura Niestat</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Matthew DePouli</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rachel Touroo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Robert Reisman</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Necropsy_Exam_Veterinarian__c</picklist>
+        <values>
+            <fullName>Alison Liu</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ashley Saver</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Elizabeth Pearlman</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Jasmine Bruno</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Laura Niestat</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rachel Touroo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Robert Reisman</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Neurologic2__c</picklist>
+        <values>
+            <fullName>Appropriate mentation%2C no CN deficits%2C symmetric pupils</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Normal mentation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Nose_Throat2__c</picklist>
+        <values>
+            <fullName>No nasal discharge</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Obtained_Radiographs__c</picklist>
+        <values>
+            <fullName>Adrianna Ruiz</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Alison Kennedy-Benson</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Amanda Fitch</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Elizabeth Pearlman</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Eric Lee</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Matthew DePouli</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rachel Touroo</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Ophthalmic_Eyes__c</picklist>
+        <values>
+            <fullName>Bright%2C clear OU%2C no discharge or inflammation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Clear and bright</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Oral2__c</picklist>
+        <values>
+            <fullName>No gingival inflammation or periodontitis evident</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No plaques observed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Otic_Ears__c</picklist>
+        <values>
+            <fullName>Clean</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Clean AU%2C no debris or inflammation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Moderate black%2Fbrown waxy debris</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Severe black%2Fbrown waxy debris</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Overall_Post_Mortem_Condition__c</picklist>
+        <values>
+            <fullName>Fair</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Good</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Poor</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Pain2__c</picklist>
+        <values>
+            <fullName>Appears comfortable</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mild</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Moderate</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Severe</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Peripheral_Lymph_Nodes2__c</picklist>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Soft%2C symmetric%2C non-painful</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Photographer__c</picklist>
+        <values>
+            <fullName>Adrianna Ruiz</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Alison Kennedy-Benson</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Alison Liu</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Amanda Fitch</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Elizabeth Pearlman</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Eric Lee</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Jasmine Bruno</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Laura Niestat</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Matthew DePouli</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rachel Touroo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Robert Reisman</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Plan_Treatment_Instructions2__c</picklist>
+        <values>
+            <fullName>No treatment at this time</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Play_Pause__c</picklist>
+        <values>
+            <fullName>Bite Quarantine</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cardiac Condition</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dental</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>In heat</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Infectious disease</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lameness</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Medical Quarantine</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Neuter - Simple</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Nursing Dam</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Released</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SN - Complicated</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Spay - Simple</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Surgery</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Primary_Color__c</picklist>
+        <values>
+            <fullName>Bay</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Bay roan</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Beige</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Black</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Blue</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Blue roan</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Brindle</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Brown</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Buckskin</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Buff</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Calico</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Charcoal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Chestnut</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Chestnut%2FSorrel</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Chocolate</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cream</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dun</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fawn</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Golden</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Green</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Grey</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Grulla</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Hairless</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Liver chestnut</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Orange</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Palomino</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Red</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Red roan</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Roan</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Seal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Silver</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sorrel</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tabby</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tan</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tortoise shell</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unspecified</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>White</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yellow</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Right_Foot_Location__c</picklist>
+        <values>
+            <fullName>Between Digits 1 and 2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Between Digits 2 and 3</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Between Digits 3 and 4</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Right_Foot__c</picklist>
+        <values>
+            <fullName>Toe punch</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Webbing intact</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Webbing removed</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Right_Leg__c</picklist>
+        <values>
+            <fullName>Band present</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No band</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Right_Spur__c</picklist>
+        <values>
+            <fullName>Blunted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cut</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sharpened</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unaltered</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Right_Wing__c</picklist>
+        <values>
+            <fullName>Band present</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No band</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Rigor_Mortis__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Route__c</picklist>
+        <values>
+            <fullName>IP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IV</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Secondary_Color__c</picklist>
+        <values>
+            <fullName>Black</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Blue</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Brown</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Charcoal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cream</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Golden</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Green</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Grey</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Orange</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Red</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tan</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>White</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yellow</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Sedation_Drug_Administered__c</picklist>
+        <values>
+            <fullName>Ketamine</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Telazol</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Xylazine</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Sedation_Route__c</picklist>
+        <values>
+            <fullName>IM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IV</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Sex__c</picklist>
+        <values>
+            <fullName>Colt %28%3C3 years%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FU</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Female altered</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Female intact</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Female unknown</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Filly %28%3C3 years%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gelding</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MU</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Male altered</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Male intact</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Male unknown</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mare</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Stallion</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unknown</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Shelter_Lead__c</picklist>
+        <values>
+            <fullName>Colleen Yarborough %28not Porth%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>E%2EG%2E Agulier</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ehren Melius</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Hailey Kohl</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Heather Boothe</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Jasmine Holsinger</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Jason ONeail</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Jessi Biddle</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Jessica Drew</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Joanne Smith</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Joe Hinkle</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Katelynn Nussbaum</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lacie Davis</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lani Lococo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lindsey Cooke</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lois Michael</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Megan Arsenault</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Niki Curnell</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rachel Mjoen</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tom Griswold</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tony Rankin</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Species_PL__c</picklist>
+        <values>
+            <fullName>Avian</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cat</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Chinchilla</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cow</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dog</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Equine</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Exotic</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Farm Animal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fowl</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Goat</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Guinea Pig</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Hamster</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lizard</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pig</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rabbit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Reptile</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sheep</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Snake</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Turtle</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unknown</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Wildlife</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Storage__c</picklist>
+        <values>
+            <fullName>A1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>A2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>A3</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>A4</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>B1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>B2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>B3</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>B4</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>C1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>C2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>C3</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>C4</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>D1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>D2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>D3</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>E1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>E2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>E3</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>E4</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>F1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>F2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>F3</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>F4</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Floor</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Freezer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>G1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>G2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>G3</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>G4</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>On ice</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Refrigerator</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Subjective2__c</picklist>
+        <values>
+            <fullName>BAR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QAR</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Tattoos__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Tech__c</picklist>
+        <values>
+            <fullName>Alexis Mitchell</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Carol Mefferd</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cassie Gorbette</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cat Simpson</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Consie Von Gontard</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Jamie Flesch</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Janell Matthies</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Justin Berry</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Kelly Hickey</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lacie Davis</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lisa Madeux</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Michele Ortiz</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Niki Curnell</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pam Dickens</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pam Pearn</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Stephen Quandt</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Temp_Method__c</picklist>
+        <values>
+            <fullName>Aural</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rectal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Tertiary_Color__c</picklist>
+        <values>
+            <fullName>Black</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Blue</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Brown</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Charcoal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cream</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Golden</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Green</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Grey</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Orange</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Red</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tan</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>White</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yellow</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Thymus_Present__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Urogenital__c</picklist>
+        <values>
+            <fullName>Cryptorchid</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Evidence of previous litters</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>In heat</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No spay scar palpated or tattoo noted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Spay tattoo present</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Two testicles descended and palpate normally</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Veterinarian_Picklist__c</picklist>
+        <values>
+            <fullName>Alison Liu</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Elizabeth Pearlman</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Jasmine Bruno</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Laura Niestat</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rachel Touroo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Robert Reisman</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Wattles__c</picklist>
+        <values>
+            <fullName>Intact</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Trimmed</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

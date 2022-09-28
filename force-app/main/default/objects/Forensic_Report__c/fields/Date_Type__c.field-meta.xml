@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Date_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Date Type</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Certified Medical Record Created</fullName>
+                <default>false</default>
+                <label>Certified Medical Record Created</label>
+            </value>
+            <value>
+                <fullName>Discovery Record Completion</fullName>
+                <default>false</default>
+                <label>Discovery Record Completion</label>
+            </value>
+            <value>
+                <fullName>Testimony</fullName>
+                <default>false</default>
+                <label>Testimony</label>
+            </value>
+            <value>
+                <fullName>Snapshot</fullName>
+                <default>false</default>
+                <label>Snapshot</label>
+            </value>
+            <value>
+                <fullName>Medical Record Review</fullName>
+                <default>false</default>
+                <label>Medical Record Review</label>
+            </value>
+            <value>
+                <fullName>Veterinary Statement</fullName>
+                <default>false</default>
+                <label>Veterinary Statement</label>
+            </value>
+            <value>
+                <fullName>Video Review</fullName>
+                <default>false</default>
+                <label>Video Review</label>
+            </value>
+            <value>
+                <fullName>Final Statement</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Final Statement</label>
+            </value>
+            <value>
+                <fullName>Preliminary Statement</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Preliminary Statement</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

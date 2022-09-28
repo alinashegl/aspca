@@ -1,0 +1,91 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <div class="slds-card slds-card_boundary card-custom">
+        <template if:true={error}>
+            <c-error-panel errors={error} type='inlineMessage' friendly-message={errorMessage}></c-error-panel>
+        </template>
+        <template if:true={animalDailyCareInfo}>
+            <lightning-record-edit-form
+                object-api-name="Animal_Daily_Care__c"
+                record-id={recordId}
+            >
+                <lightning-layout multiple-rows pull-to-boundary="medium" class="slds-var-p-around_small">
+                    <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                        <b>Name</b>
+                        <div>
+                            {animalDailyCareInfo.animalName}
+                        </div>
+                        <div class="slds-var-p-top_small">
+                            <b>Kennel Location</b>
+                        </div>
+                        <div>
+                            {animalDailyCareInfo.animalKennelLocation}
+                        </div>
+                        <template if:true={showSpinner}>
+                            <lightning-icon icon-name="utility:spinner" alternative-text="Connected" size="small" title="large size">
+                            </lightning-icon>
+                        </template>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item flexibility="auto" size="2" small-device-size="6" medium-device-size="4" large-device-size="2" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                        <b>Daily Ration</b>
+                        <div>
+                            <lightning-input type="text" value={animalDailyCareInfo.dailyRations} data-field={feedingAmountFieldAPI} onblur={handleInputBlur}></lightning-input>
+                        </div>
+                        <div class="slds-var-p-top_small">
+                            <b>Rest Days</b>
+                        </div>                        
+                        <div>
+                            {animalDailyCareInfo.restDays}
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="auto" size="1" small-device-size="6" medium-device-size="4" large-device-size="1" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                        <b>Behavior Meds</b>
+                        <div>
+                            {animalDailyCareInfo.behaviorMeds}
+                        </div>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item flexibility="auto" size="4" small-device-size="12" medium-device-size="12" large-device-size="4" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                        <b>Special Care Notes</b>
+                        <div>
+                            <lightning-input type="text" value={animalDailyCareInfo.specialCareTreatment} label="Ration for Tx" data-field={specialCareFieldAPI} onblur={handleInputBlur}></lightning-input>
+                            <lightning-input type="text" value={animalDailyCareInfo.specialCareOutside} label="Ration Outside Tx" data-field={specialCareOutsideFieldAPI} onblur={handleInputBlur}></lightning-input>
+                            <lightning-input type="text" value={animalDailyCareInfo.specialCareOther} label="Special Care Other" data-field={specialCareOtherFieldAPI} onblur={handleInputBlur}></lightning-input>
+                        </div>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item flexibility="auto" size="3" small-device-size="6" medium-device-size="4" large-device-size="3" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                        <lightning-input type="text" value={animalDailyCareInfo.enrichment} label="Enrichment" data-field={enrichmentAPI} onblur={handleInputBlur}></lightning-input>
+                                             
+                    </lightning-layout-item>
+
+                    <lightning-layout-item flexibility="auto" size="1" small-device-size="6" medium-device-size="4" large-device-size="1" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                        <b>Round</b>
+                        <div>
+                            <template if:true={roundPicklist.data}>
+                                <lightning-combobox name="round" value={animalDailyCareInfo.round}
+                                    options={roundPicklist.data.values} data-field={roundFieldAPI} onchange={handleInputBlur}>
+                                </lightning-combobox>
+                            </template>
+                        </div>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item flexibility="auto" size="4" small-device-size="6" medium-device-size="4" large-device-size="4" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                        <b>Mvmt Round Notes & Cleaning Destination</b>
+                        <div>
+                            <lightning-textarea value={animalDailyCareInfo.movemntAndCleaningDestinationField} data-field={movemntAndCleaningDestinationFieldAPI} onblur={handleInputBlur}></lightning-textarea>
+                        </div>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item flexibility="auto" size="4" small-device-size="6" medium-device-size="4" large-device-size="4" padding="horizontal-medium" class="slds-var-p-bottom_small">
+                        <b>Handling Instructions</b>
+                        <div>
+                            <lightning-textarea value={animalDailyCareInfo.handlingInstructions} data-field={handlingInstructionsFieldAPI} onblur={handleInputBlur}></lightning-textarea>
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-record-edit-form>
+        </template>
+    </div>
+</template>

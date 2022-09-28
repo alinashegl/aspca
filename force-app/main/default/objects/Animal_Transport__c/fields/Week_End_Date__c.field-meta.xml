@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Week_End_Date__c</fullName>
+    <externalId>false</externalId>
+    <formula>Transport_Completed_Date__c + ( 6- (MOD( Transport_Completed_Date__c - DATE( 1900, 1, 7 ), 7 )))</formula>
+    <label>Week End Date</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

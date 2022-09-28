@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PPE_DOH__c</fullName>
+    <externalId>false</externalId>
+    <label>PPE/DOH</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Yes – ACC/CIRDC</fullName>
+                <default>false</default>
+                <label>Yes – ACC/CIRDC</label>
+            </value>
+            <value>
+                <fullName>Yes – Parasites</fullName>
+                <default>false</default>
+                <label>Yes – Parasites</label>
+            </value>
+            <value>
+                <fullName>Yes – Other</fullName>
+                <default>false</default>
+                <label>Yes – Other</label>
+            </value>
+            <value>
+                <fullName>DOH Hold</fullName>
+                <default>false</default>
+                <label>DOH Hold</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Walking_Equipment__c</fullName>
+    <externalId>false</externalId>
+    <label>Walking Equipment</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Easy Walk Harness</fullName>
+                <default>false</default>
+                <label>Easy Walk Harness</label>
+            </value>
+            <value>
+                <fullName>Gentle Leader</fullName>
+                <default>false</default>
+                <label>Gentle Leader</label>
+            </value>
+            <value>
+                <fullName>Prong</fullName>
+                <default>false</default>
+                <label>Prong</label>
+            </value>
+            <value>
+                <fullName>Regular Harness</fullName>
+                <default>false</default>
+                <label>Regular Harness</label>
+            </value>
+            <value>
+                <fullName>Regular Collar</fullName>
+                <default>false</default>
+                <label>Regular Collar</label>
+            </value>
+            <value>
+                <fullName>Chain Leash</fullName>
+                <default>false</default>
+                <label>Chain Leash</label>
+            </value>
+            <value>
+                <fullName>Walk with Toy</fullName>
+                <default>false</default>
+                <label>Walk with Toy</label>
+            </value>
+            <value>
+                <fullName>Walk with Muzzle</fullName>
+                <default>false</default>
+                <label>Walk with Muzzle</label>
+            </value>
+            <value>
+                <fullName>None Specified</fullName>
+                <default>true</default>
+                <label>None Specified</label>
+            </value>
+            <value>
+                <fullName>Kennel Rope</fullName>
+                <default>false</default>
+                <label>Kennel Rope</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

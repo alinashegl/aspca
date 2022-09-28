@@ -36,6 +36,33 @@
         </values>
     </picklistValues>
     <picklistValues>
+        <picklist>Behavior_Placement_Status__c</picklist>
+        <values>
+            <fullName>Behavior Hold</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Placement Partner OK - Foster</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Placement Partner OK - Foster-based Rescue</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Placement Partner OK - Shelter with Behavior Dept%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ready for Placement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rehab Candidate</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
         <picklist>CASE_STATUS_SUBTYPE__c</picklist>
         <values>
             <fullName>Case Packaging</fullName>
@@ -106,73 +133,6 @@
         </values>
         <values>
             <fullName>Yes</fullName>
-            <default>false</default>
-        </values>
-    </picklistValues>
-    <picklistValues>
-        <picklist>Case_Initiated_By__c</picklist>
-        <values>
-            <fullName>AAH</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>ACC</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>ADA</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>AMC</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Blue Pearl BK</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Blue Pearl D</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Blue Pearl M</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Blue Pearl Q</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>CE</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>GSIVS</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>NYPD</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Other</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>VEG</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>VERG</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>VERG North</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>VERG South</fullName>
             <default>false</default>
         </values>
     </picklistValues>
@@ -249,10 +209,6 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>Farm</fullName>
-            <default>false</default>
-        </values>
-        <values>
             <fullName>Fire</fullName>
             <default>false</default>
         </values>
@@ -265,15 +221,47 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>Inadequate Nutrition</fullName>
+            <fullName>Inadequate Food and%2For Water</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>Lack of Vet Care</fullName>
+            <fullName>Inappropriate Shelter %28Sanitation%29</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>None</fullName>
+            <fullName>Inappropriate Shelter %28Temperature%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lack of Grooming Care</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lack of Veterinary Care</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Large Scale Neglect %28Commercial Dog Breeder%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Large Scale Neglect %28Farm%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Large Scale Neglect %28Pet Store%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Large Scale Neglect %28Private Citizen%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Large Scale Neglect %28Rescue%2FSanctuary%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Large Scale Neglect %28Shelter%29</fullName>
             <default>false</default>
         </values>
         <values>
@@ -285,7 +273,15 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>Pet Store</fullName>
+            <fullName>Penetrating Trauma %28Dog Bite Injuries%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Penetrating Trauma %28Gunshot Injuries%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Penetrating Trauma %28Sharp Force Trauma%29</fullName>
             <default>false</default>
         </values>
         <values>
@@ -297,19 +293,7 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>Private Citizen</fullName>
-            <default>false</default>
-        </values>
-        <values>
             <fullName>Public</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Puppy Mill</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Rescue%2FSanctuary</fullName>
             <default>false</default>
         </values>
         <values>
@@ -321,11 +305,15 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>Shelter</fullName>
+            <fullName>Sharp Force Trauma</fullName>
             <default>false</default>
         </values>
         <values>
             <fullName>Tornado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unknown</fullName>
             <default>false</default>
         </values>
         <values>
@@ -348,10 +336,6 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>Hoarding</fullName>
-            <default>false</default>
-        </values>
-        <values>
             <fullName>Neglect</fullName>
             <default>false</default>
         </values>
@@ -360,11 +344,15 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>None</fullName>
+            <fullName>Other</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>Other</fullName>
+            <fullName>Sexual Abuse</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unknown</fullName>
             <default>false</default>
         </values>
     </picklistValues>
@@ -485,7 +473,15 @@
             <default>false</default>
         </values>
         <values>
+            <fullName>Ashley Saver%2C DVM</fullName>
+            <default>false</default>
+        </values>
+        <values>
             <fullName>Donna Lassa</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Elizabeth Brandler</fullName>
             <default>false</default>
         </values>
         <values>
@@ -549,6 +545,37 @@
         </values>
         <values>
             <fullName>Unassigned</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Lead_Forensic_Veterinarian__c</picklist>
+        <values>
+            <fullName>Alison Liu</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ashley Saver</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Elizabeth Pearlman</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Jasmine Bruno</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Laura Niestat</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rachel Touroo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Robert Reisman</fullName>
             <default>false</default>
         </values>
     </picklistValues>
@@ -747,6 +774,28 @@
         </values>
     </picklistValues>
     <picklistValues>
+        <picklist>Search_Warrant_Obtained__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Search_Warrant_Type__c</picklist>
+        <values>
+            <fullName>Animal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Premise</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
         <picklist>Secondary_Case_Type__c</picklist>
         <values>
             <fullName>Abandonment</fullName>
@@ -770,6 +819,17 @@
         </values>
         <values>
             <fullName>Non-Accidental Injury</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Treated_At__c</picklist>
+        <values>
+            <fullName>AAH</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ACC</fullName>
             <default>false</default>
         </values>
     </picklistValues>

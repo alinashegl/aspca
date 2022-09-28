@@ -1,0 +1,137 @@
+<apex:page standardController="Animal__c" extensions="VaccineCert_Controller"   renderAs="pdf"  applyBodyTag="false">
+    
+        <head>
+        <style type="text/css"> 
+            @page {font-family: "sans-serif";
+            		size: A4 portrait;
+            		border: 2px solid black;}
+            	
+            table {font-family: "sans-serif"; page-break-inside: avoid; font-size:14px;}
+            
+        </style>
+    </head>
+    
+    <table cellspacing="5" cellpadding="0" border="0" width="100%" style="border-style: solid;" valign="top">
+            <tr><td><table width="100%" border="0" style="border-bottom: solid;">
+                <tr>
+                    <td align="center"><strong style="font-size: 30px;">VACCINATION CERTIFICATE</strong></td>
+                </tr>
+                    </table>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="1">
+                        <tr><td>&nbsp;</td></tr>
+                        <tr><td>Animal: <b>{!objAnimal.Name} {!objAnimal.Animal_Name__c}</b></td></tr>
+                        <tr><td>Species: <b>{!objAnimal.Type_of_animal__c}</b></td></tr>
+                        <tr><td>Breed: <b>{!objAnimal.Breed__c}</b></td></tr>
+                        <tr><td>Color: <b>{!objAnimal.Color__c}</b></td></tr>
+                        <tr><td>Gender: <b>{!objAnimal.Gender__c}</b></td></tr>
+                        <tr><td>Birthdate: <b><apex:outputText value="{0,date,MM'/'dd'/'yyyy}"><apex:param value="{!objAnimal.Estimated_Date_of_Birth__c}" /> </apex:outputText> </b></td></tr>
+                        <tr><td>Age: <b>{!objAnimal.Current_Animal_Age_Formatted__c}</b></td></tr>
+                        <tr><td>Weight: <b>{!objAnimal.Current_Weight_in_kgs_Num__c}</b></td></tr>
+                        <tr><td>Chip #: <b>{!if(objAnimal.Microchip_Number__c == null,if(objAnimal.Administered_Microchip_Number__c == null,'',objAnimal.Administered_Microchip_Number__c),objAnimal.Microchip_Number__c)}</b></td></tr>
+
+
+                    </table>
+                </td>
+            </tr>
+        </table>
+    
+    
+    <br/>
+
+<!--    <table cellspacing="5" cellpadding="0" border="2" width="100%" style="border-style: solid;" valign="top">
+    
+    <apex:pageBlock>   
+	<apex:pageBlockTable value="{!vaccs}" var="v" width="100%" border="0" >
+<!--        <apex:facet name="header"><div align="center"><font size="10">Vaccines and Preventatives</font></div></apex:facet>   
+
+		<apex:column value="{!v.Date_Administered__c}" headerValue="Date" />
+        <apex:column value="{!v.Vaccine_Preventative__r.Name}" headerValue="Vaccine" />
+		<apex:column value="{!v.Vaccine_Preventative__r.Manufacturer__c}"/>    
+		<apex:column value="{!v.Vaccine_Preventative__r.Lot_Number__C}" headerValue="Serial #" />        
+        <apex:column value="{!v.Rabies_Tag__c}" headerValue="Tag #"/>
+	</apex:pageBlockTable>    
+            <br />
+</apex:pageBlock>  
+    </table> -->
+
+<!--        <apex:dataTable value="{!vaccs}" var="v" id="theTable" rowClasses="odd,even" styleClass="tableClass" width="100%">
+        <apex:facet name="caption">table caption</apex:facet>
+        <apex:facet name="header">table header</apex:facet>
+        <apex:facet name="footer">table footer</apex:facet>
+ 
+        <apex:column>
+            <apex:facet name="header">Date</apex:facet>
+            <apex:facet name="footer">column footer</apex:facet>
+            <apex:outputText value="{0,date,MM'/'dd'/'yyyy}"><apex:param value="{!v.Date_Administered__c}" /> </apex:outputText>
+        </apex:column>
+ 
+        <apex:column>
+            <apex:facet name="header">Vaccine</apex:facet>
+            <apex:facet name="footer">column footer</apex:facet>
+            <apex:outputText value="{!v.Vaccine_Preventative__r.Name}"/>
+        </apex:column>
+            
+        <apex:column>
+            <apex:facet name="header">Manufacturer</apex:facet>
+            <apex:facet name="footer">column footer</apex:facet>
+            <apex:outputText value="{!v.Vaccine_Preventative__r.Manufacturer__c}"/>
+        </apex:column>    
+
+        <apex:column>
+            <apex:facet name="header">Serial #</apex:facet>
+            <apex:facet name="footer">column footer</apex:facet>
+            <apex:outputText value="{!v.Vaccine_Preventative__r.Lot_Number__C}"/>
+        </apex:column>  
+            
+        <apex:column>
+            <apex:facet name="header">Tag #</apex:facet>
+            <apex:facet name="footer">column footer</apex:facet>
+            <apex:outputText value="{!v.Rabies_Tag__c}"/>
+        </apex:column>  
+ 
+    </apex:dataTable> -->
+    <apex:outputPanel >
+    <table width="100%" border="1" cellpadding="0" cellspacing="0">
+        <tr><td><table border="0" width="100%">
+            <tr style="color:#fff; background: black;">
+                <th><b>Date</b></th>
+                <th><b>Vaccine</b></th>
+                <th><b>Manufacturer</b></th>
+                <th><b>Serial #</b></th>
+                <th><b>Tag #</b></th>
+                <th><b>Due On</b></th>
+            </tr>
+            <apex:repeat value="{!vaccs}" var="v">
+                <tr>
+                    <td><apex:outputText value="{0,date,MM'/'dd'/'yyyy}"><apex:param value="{!v.Date_Administered__c}" /> </apex:outputText></td>
+                    <td>{!v.Vaccine_Preventative__r.Name}</td>
+                    <td>{!v.Vaccine_Preventative__r.Manufacturer__c}</td>
+                    <td>{!v.Vaccine_Preventative__r.Lot_Number__c}</td>
+                    <td>{!v.Rabies_Tag__c}</td>
+                    <td><apex:outputText value="{0,date,MM'/'dd'/'yyyy}"><apex:param value="{!v.Due_On__c}" /> </apex:outputText></td>
+                </tr>
+            </apex:repeat>
+        </table>            
+            </td></tr></table>
+
+        </apex:outputPanel>
+    <br/>
+    
+    
+    <table width="100%" border ="0" cellpadding="0" cellspacing="0">
+        <tr><td><strong style="font-size: 20px;"><i>ASPCA</i></strong></td></tr>
+        <tr><td><strong style="font-size: 20px;"><i>520 8th Avenue</i></strong></td></tr>
+        <tr><td><strong style="font-size: 20px;"><i>New York, NY 10018</i></strong></td><td style="border-bottom:1px solid black">&nbsp;</td><td style="border-bottom:1px solid black">&nbsp;</td></tr>
+        <tr><td><strong style="font-size: 20px;"><i>(212)876-7700</i></strong></td><td align="left"><strong>Dr. {!doctorValue}, DVM</strong></td><td align="right">{!MONTH(TODAY())}/{!DAY(TODAY())}/{!YEAR(TODAY())}</td></tr>
+        
+    </table>
+
+    
+    
+    
+    
+
+    
+    
+    
+</apex:page>

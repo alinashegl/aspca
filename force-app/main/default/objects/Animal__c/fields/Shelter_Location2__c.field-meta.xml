@@ -6,7 +6,6 @@
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
     <trackHistory>false</trackHistory>
-    <trackTrending>false</trackTrending>
     <type>Picklist</type>
     <valueSet>
         <restricted>true</restricted>
@@ -18,8 +17,43 @@
                 <label>Ohio Shelter - 3900 Groves Rd</label>
             </value>
             <value>
+                <fullName>CRC</fullName>
+                <default>false</default>
+                <label>CRC</label>
+            </value>
+            <value>
+                <fullName>MRC</fullName>
+                <default>false</default>
+                <label>MRC</label>
+            </value>
+            <value>
+                <fullName>ARC and CARE</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>ARC and CARE</label>
+            </value>
+            <value>
+                <fullName>BRC</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>BRC</label>
+            </value>
+            <value>
+                <fullName>Foster</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Foster</label>
+            </value>
+            <value>
+                <fullName>MRC - CRC</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>MRC - CRC</label>
+            </value>
+            <value>
                 <fullName>Marysville</fullName>
                 <default>false</default>
+                <isActive>false</isActive>
                 <label>Marysville</label>
             </value>
         </valueSetDefinition>

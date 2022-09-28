@@ -1,0 +1,3 @@
+<apex:page standardController="case" lightningStylesheets="true">
+     <flow:interview name="Case_Creation" finishLocation="{!URLFOR('/500/o')}"/>   
+</apex:page>

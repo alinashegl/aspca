@@ -13,19 +13,24 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>None</fullName>
+                <fullName>Unknown</fullName>
                 <default>false</default>
-                <label>None</label>
+                <label>Unknown</label>
             </value>
             <value>
-                <fullName>Inadequate Nutrition</fullName>
+                <fullName>Inadequate Food and/or Water</fullName>
                 <default>false</default>
-                <label>Inadequate Nutrition</label>
+                <label>Inadequate Food and/or Water</label>
             </value>
             <value>
-                <fullName>Lack of Vet Care</fullName>
+                <fullName>Lack of Veterinary Care</fullName>
                 <default>false</default>
-                <label>Lack of Vet Care</label>
+                <label>Lack of Veterinary Care</label>
+            </value>
+            <value>
+                <fullName>Lack of Grooming Care</fullName>
+                <default>false</default>
+                <label>Lack of Grooming Care</label>
             </value>
             <value>
                 <fullName>Environmental Conditions</fullName>
@@ -33,14 +38,44 @@
                 <label>Environmental Conditions</label>
             </value>
             <value>
-                <fullName>Pet Store</fullName>
+                <fullName>Inappropriate Shelter (Sanitation)</fullName>
                 <default>false</default>
-                <label>Pet Store</label>
+                <label>Inappropriate Shelter (Sanitation)</label>
             </value>
             <value>
-                <fullName>Puppy Mill</fullName>
+                <fullName>Inappropriate Shelter (Temperature)</fullName>
                 <default>false</default>
-                <label>Puppy Mill</label>
+                <label>Inappropriate Shelter (Temperature)</label>
+            </value>
+            <value>
+                <fullName>Large Scale Neglect (Commercial Dog Breeder)</fullName>
+                <default>false</default>
+                <label>Large Scale Neglect (Commercial Dog Breeder)</label>
+            </value>
+            <value>
+                <fullName>Large Scale Neglect (Pet Store)</fullName>
+                <default>false</default>
+                <label>Large Scale Neglect (Pet Store)</label>
+            </value>
+            <value>
+                <fullName>Large Scale Neglect (Farm)</fullName>
+                <default>false</default>
+                <label>Large Scale Neglect (Farm)</label>
+            </value>
+            <value>
+                <fullName>Large Scale Neglect (Shelter)</fullName>
+                <default>false</default>
+                <label>Large Scale Neglect (Shelter)</label>
+            </value>
+            <value>
+                <fullName>Large Scale Neglect (Private Citizen)</fullName>
+                <default>false</default>
+                <label>Large Scale Neglect (Private Citizen)</label>
+            </value>
+            <value>
+                <fullName>Large Scale Neglect (Rescue/Sanctuary)</fullName>
+                <default>false</default>
+                <label>Large Scale Neglect (Rescue/Sanctuary)</label>
             </value>
             <value>
                 <fullName>Multiple</fullName>
@@ -56,6 +91,26 @@
                 <fullName>Penetrating Trauma</fullName>
                 <default>false</default>
                 <label>Penetrating Trauma</label>
+            </value>
+            <value>
+                <fullName>Penetrating Trauma (Dog Bite Injuries)</fullName>
+                <default>false</default>
+                <label>Penetrating Trauma (Dog Bite Injuries)</label>
+            </value>
+            <value>
+                <fullName>Penetrating Trauma (Gunshot Injuries)</fullName>
+                <default>false</default>
+                <label>Penetrating Trauma (Gunshot Injuries)</label>
+            </value>
+            <value>
+                <fullName>Penetrating Trauma (Sharp Force Trauma)</fullName>
+                <default>false</default>
+                <label>Penetrating Trauma (Sharp Force Trauma)</label>
+            </value>
+            <value>
+                <fullName>Sharp Force Trauma</fullName>
+                <default>false</default>
+                <label>Sharp Force Trauma</label>
             </value>
             <value>
                 <fullName>Burn Injuries</fullName>
@@ -78,6 +133,11 @@
                 <label>Poisoning</label>
             </value>
             <value>
+                <fullName>Ritual Abuse</fullName>
+                <default>false</default>
+                <label>Ritual Abuse</label>
+            </value>
+            <value>
                 <fullName>Sexual Abuse</fullName>
                 <default>false</default>
                 <label>Sexual Abuse</label>
@@ -98,34 +158,9 @@
                 <label>Dog and Chicken Fighting</label>
             </value>
             <value>
-                <fullName>Ritual Abuse</fullName>
-                <default>false</default>
-                <label>Ritual Abuse</label>
-            </value>
-            <value>
                 <fullName>Breeder</fullName>
                 <default>false</default>
                 <label>Breeder</label>
-            </value>
-            <value>
-                <fullName>Farm</fullName>
-                <default>false</default>
-                <label>Farm</label>
-            </value>
-            <value>
-                <fullName>Private Citizen</fullName>
-                <default>false</default>
-                <label>Private Citizen</label>
-            </value>
-            <value>
-                <fullName>Rescue/Sanctuary</fullName>
-                <default>false</default>
-                <label>Rescue/Sanctuary</label>
-            </value>
-            <value>
-                <fullName>Shelter</fullName>
-                <default>false</default>
-                <label>Shelter</label>
             </value>
             <value>
                 <fullName>Private</fullName>
@@ -179,15 +214,15 @@
             </value>
         </valueSetDefinition>
         <valueSettings>
-            <controllingFieldValue>None</controllingFieldValue>
+            <controllingFieldValue>Unknown</controllingFieldValue>
             <controllingFieldValue>Animal Fighting</controllingFieldValue>
             <controllingFieldValue>Non-Accidental Injury</controllingFieldValue>
-            <controllingFieldValue>Hoarding</controllingFieldValue>
             <controllingFieldValue>Abandonment</controllingFieldValue>
             <controllingFieldValue>Disaster</controllingFieldValue>
+            <controllingFieldValue>Sexual Abuse</controllingFieldValue>
             <controllingFieldValue>Neglect</controllingFieldValue>
             <controllingFieldValue>Other</controllingFieldValue>
-            <valueName>None</valueName>
+            <valueName>Unknown</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Animal Fighting</controllingFieldValue>
@@ -204,20 +239,29 @@
         <valueSettings>
             <controllingFieldValue>Animal Fighting</controllingFieldValue>
             <controllingFieldValue>Non-Accidental Injury</controllingFieldValue>
-            <controllingFieldValue>Hoarding</controllingFieldValue>
             <controllingFieldValue>Abandonment</controllingFieldValue>
             <controllingFieldValue>Disaster</controllingFieldValue>
+            <controllingFieldValue>Sexual Abuse</controllingFieldValue>
             <controllingFieldValue>Neglect</controllingFieldValue>
             <controllingFieldValue>Other</controllingFieldValue>
             <valueName>Other</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Non-Accidental Injury</controllingFieldValue>
+            <controllingFieldValue>Sexual Abuse</controllingFieldValue>
             <valueName>Blunt Force Trauma</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Non-Accidental Injury</controllingFieldValue>
-            <valueName>Penetrating Trauma</valueName>
+            <valueName>Penetrating Trauma (Dog Bite Injuries)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Non-Accidental Injury</controllingFieldValue>
+            <valueName>Penetrating Trauma (Gunshot Injuries)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Non-Accidental Injury</controllingFieldValue>
+            <valueName>Penetrating Trauma (Sharp Force Trauma)</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Non-Accidental Injury</controllingFieldValue>
@@ -237,31 +281,7 @@
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Non-Accidental Injury</controllingFieldValue>
-            <valueName>Sexual Abuse</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Non-Accidental Injury</controllingFieldValue>
             <valueName>Ritual Abuse</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Hoarding</controllingFieldValue>
-            <valueName>Breeder</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Hoarding</controllingFieldValue>
-            <valueName>Farm</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Hoarding</controllingFieldValue>
-            <valueName>Private Citizen</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Hoarding</controllingFieldValue>
-            <valueName>Rescue/Sanctuary</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Hoarding</controllingFieldValue>
-            <valueName>Shelter</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Abandonment</controllingFieldValue>
@@ -300,28 +320,52 @@
             <valueName>Winter Storm</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Neglect</controllingFieldValue>
-            <valueName>Inadequate Nutrition</valueName>
+            <controllingFieldValue>Sexual Abuse</controllingFieldValue>
+            <valueName>Sharp Force Trauma</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Neglect</controllingFieldValue>
-            <valueName>Lack of Vet Care</valueName>
+            <valueName>Inadequate Food and/or Water</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Neglect</controllingFieldValue>
-            <valueName>Environmental Conditions</valueName>
+            <valueName>Lack of Veterinary Care</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Neglect</controllingFieldValue>
-            <valueName>Pet Store</valueName>
+            <valueName>Lack of Grooming Care</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Neglect</controllingFieldValue>
-            <valueName>Puppy Mill</valueName>
+            <valueName>Inappropriate Shelter (Sanitation)</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Neglect</controllingFieldValue>
-            <valueName>Multiple</valueName>
+            <valueName>Inappropriate Shelter (Temperature)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Neglect</controllingFieldValue>
+            <valueName>Large Scale Neglect (Commercial Dog Breeder)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Neglect</controllingFieldValue>
+            <valueName>Large Scale Neglect (Pet Store)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Neglect</controllingFieldValue>
+            <valueName>Large Scale Neglect (Farm)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Neglect</controllingFieldValue>
+            <valueName>Large Scale Neglect (Shelter)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Neglect</controllingFieldValue>
+            <valueName>Large Scale Neglect (Private Citizen)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Neglect</controllingFieldValue>
+            <valueName>Large Scale Neglect (Rescue/Sanctuary)</valueName>
         </valueSettings>
     </valueSet>
 </CustomField>

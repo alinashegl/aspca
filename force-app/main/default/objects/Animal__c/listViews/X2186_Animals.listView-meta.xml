@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X2186_Animals</fullName>
+    <columns>NAME</columns>
+    <columns>Animal_Age__c</columns>
+    <columns>Gender__c</columns>
+    <columns>Breed__c</columns>
+    <columns>Shelter_Location__c</columns>
+    <columns>Spayed_Neutured__c</columns>
+    <columns>Current_Weight_in_kgs__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Case_Number__c</field>
+        <operation>contains</operation>
+        <value>2186</value>
+    </filters>
+    <label>2186 NC DF</label>
+</ListView>

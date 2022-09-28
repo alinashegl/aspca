@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>Medical_Condition_Update</fullName>
+        <description>If Date Resolved then uncheck  &quot;Being Treated&quot;</description>
+        <field>Being_Treated__c</field>
+        <literalValue>0</literalValue>
+        <name>Medical Condition Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Medical Condition</fullName>
+        <actions>
+            <name>Medical_Condition_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Medical_Conditions__c.Date_Resolved__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <description>When &quot;Date Resolved&quot; is entered , &quot;Being Treated&quot; should be unchecked</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+</Workflow>

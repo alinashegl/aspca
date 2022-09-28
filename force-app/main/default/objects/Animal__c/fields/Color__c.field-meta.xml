@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Color__c</fullName>
+    <defaultValue>&quot;Unspecified&quot;</defaultValue>
     <externalId>false</externalId>
     <label>Primary Color</label>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
     <trackHistory>false</trackHistory>
-    <trackTrending>false</trackTrending>
     <type>Picklist</type>
     <valueSet>
         <controllingField>Type_of_Animal__c</controllingField>
@@ -179,11 +179,6 @@
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Cat</controllingFieldValue>
-            <controllingFieldValue>Dog</controllingFieldValue>
-            <valueName>Golden</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Cat</controllingFieldValue>
             <valueName>Hairless</valueName>
         </valueSettings>
         <valueSettings>
@@ -227,6 +222,10 @@
         <valueSettings>
             <controllingFieldValue>Dog</controllingFieldValue>
             <valueName>Fawn</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Golden</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Equine</controllingFieldValue>

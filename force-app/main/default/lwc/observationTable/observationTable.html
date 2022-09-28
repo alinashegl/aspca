@@ -1,0 +1,165 @@
+<template>
+    <article class='slds-card_boundary slds-m-left_xxx-small slds-m-right_xxx-small slds-m-top_small'>
+        <lightning-card class='card-border' variant="Narrow"  title={titleLabel} icon-name="custom:custom47">
+            <template if:false={isSmallDevice}>
+                <template if:true={moreThan5}>
+                    <lightning-button label={footerButtonLabel} slot="actions" onclick={toggleViewAll}></lightning-button>
+                </template>
+                <lightning-button label={newButtonLabel} slot="actions" onclick={handleNew} class="slds-m-left_x-small"></lightning-button>
+            </template>
+            <template if:true={isSmallDevice}>
+                <template if:true={moreThan5}>
+                    <lightning-button-icon icon-name={buttonIconToggleView} slot="actions" alternative-text="Togle View" class="slds-m-left_xx-small" title="Toggle View" onclick={toggleViewAll}></lightning-button-icon>
+                </template>
+                <lightning-button-icon icon-name={buttonIconAddNew} slot="actions" alternative-text="Add Observation" class="slds-m-left_xx-small" title="Add user" onclick={handleNew}></lightning-button-icon>
+            </template>
+            <p slot="footer">
+                <template if:true={moreThan5}>
+                    <lightning-button variant="base" label={footerButtonLabel} title="View All" onclick={toggleViewAll} ></lightning-button>
+                </template>
+            </p>
+            <template if:true={addNewObservation}>
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="3" large-device-size="2" class="slds-p-around_xx-small">
+                        <div class="slds-form-element">
+                            <div class="slds-form-element__static">
+                                <lightning-input required type="date" label="Date" name="dateInput" value={dateValue} data-name="dateInput"></lightning-input>
+                            </div>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="3" large-device-size="3" class="slds-p-around_xx-small">
+                        <div class="slds-form-element">
+                            <div class="slds-form-element__static">
+                                <lightning-textarea required label="Notes" type="text-area" name="descriptionInput" data-name="descriptionInput" maxlength="10000"></lightning-textarea>
+                            </div>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="3" large-device-size="1" class="slds-p-around_xx-small">
+                        <div class="slds-form-element">
+                            <div class="slds-form-element__static">
+                                <lightning-input required label="Initials" type="text" name="initialInput" data-name="initialInput" maxlength="10"></lightning-input>
+                            </div>
+                        </div>
+                    </lightning-layout-item>
+
+                    <template if:true={isConcernType}>                    
+                        <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="3" large-device-size="3" class="slds-p-around_xx-small">
+                                <div class="slds-form-element">
+                                    <div class="slds-form-element__static">
+                                        <lightning-textarea label="Response" type="text" name="responseInput" data-name="responseInput" maxlength="2500"></lightning-textarea>
+                                    </div>
+                                </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item flexibility="auto" size="12" small-device-size="6" medium-device-size="3" large-device-size="1" class="slds-p-around_xx-small">
+                            <div class="slds-form-element">
+                                <div class="slds-form-element__static">
+                                    <lightning-input label="Beh Initials" type="text" name="behInitialInput" data-name="behInitialInput" maxlength="10"></lightning-input>
+                                </div>
+                            </div>
+                        </lightning-layout-item>
+                    </template>
+                    <lightning-layout-item flexibility="auto" size="12" small-device-size="6" medium-device-size="3" large-device-size="2" class="slds-p-around_xx-small">
+                        <div class="slds-form-element">
+                            <div class={addNewButtonClass}>
+                                <lightning-button label='Add' onclick={handleInsertNewObservation} disabled={saveButtonDisabled} class="slds-m-left_x-small"></lightning-button>
+                                <lightning-button label='Cancel' onclick={handleNew} class="slds-m-left_x-small"></lightning-button>
+                            </div>
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </template>
+
+            <template if:true={observationList}>
+                <lightning-layout multiple-rows class="slds-p-left_small slds-p-right_small" >
+                    <lightning-layout-item flexibility="auto" size="12" small-device-size="6" medium-device-size="3" large-device-size="1" class="slds-p-around_xx-small">
+                        <div class="slds-form-element custom-class">
+                            <div class="slds-form-element__static">
+                                Edit
+                            </div>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="auto" size="12" small-device-size="6" medium-device-size="3" large-device-size="1" class="slds-p-around_xx-small">
+                        <div class="slds-form-element custom-class">
+                            <div class="slds-form-element__static">
+                                Date
+                            </div>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="auto" size="12" small-device-size="12" medium-device-size="12" large-device-size="4" class="slds-p-around_xx-small">
+                        <div class="slds-form-element custom-class">
+                            <div class="slds-form-element__static">
+                                Notes
+                            </div>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="auto" size="12" small-device-size="6" medium-device-size="3" large-device-size="1" class="slds-p-around_xx-small">
+                        <div class="slds-form-element custom-class">
+                            <div class="slds-form-element__static">
+                                Initials
+                            </div>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="auto" size="12" small-device-size="6" medium-device-size="3" large-device-size="4" class="slds-p-around_xx-small">
+                        <div class="slds-form-element custom-class">
+                            <div class="slds-form-element__static">
+                                Response
+                            </div>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="auto" size="12" small-device-size="6" medium-device-size="3" large-device-size="1" class="slds-p-around_xx-small">
+                        <div class="slds-form-element custom-class">
+                            <div class="slds-form-element__static">
+                                Beh Initials
+                            </div>
+                        </div>
+                    </lightning-layout-item>
+                    <template for:each={observationList} for:item='row'>
+                        <lightning-layout-item key={row.Id} flexibility="auto" size="12" small-device-size="6" medium-device-size="3" large-device-size="1" class="slds-p-around_xx-small">
+                            <div class="slds-form-element">
+                                <div class="slds-form-element__static">
+                                    <lightning-button variant="base" label="Edit" title="Edit Observation" data-id={row.Id} onclick={goToObservation} ></lightning-button>
+                                </div>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item key={row.Id} flexibility="auto" size="12" small-device-size="6" medium-device-size="3" large-device-size="1" class="slds-p-around_xx-small">
+                            <div class="slds-form-element">
+                                <div class="slds-form-element__static">
+                                    {row.Observation_Date__c}
+                                </div>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item key={row.Id} flexibility="auto" size="12" small-device-size="12" medium-device-size="12" large-device-size="4" class="slds-p-around_xx-small">
+                            <div class="slds-form-element">
+                                <div class="slds-form-element__static">
+                                    {row.Observation_Notes__c}
+                                </div>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item key={row.Id} flexibility="auto" size="12" small-device-size="6" medium-device-size="3" large-device-size="1" class="slds-p-around_xx-small">
+                            <div class="slds-form-element">
+                                <div class="slds-form-element__static">
+                                    {row.Observation_Reported_By__c}
+                                </div>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item key={row.Id} flexibility="auto" size="12" small-device-size="12" medium-device-size="12" large-device-size="4" class="slds-p-around_xx-small">
+                            <div class="slds-form-element">
+                                <div class="slds-form-element__static">
+                                    {row.Behavior_Response__c}
+                                </div>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item key={row.Id} flexibility="auto" size="12" small-device-size="6" medium-device-size="3" large-device-size="1" class="slds-p-around_xx-small">
+                            <div class="slds-form-element">
+                                <div class="slds-form-element__static">
+                                    {row.Behavior_Staff_Initials__c}
+                                </div>
+                            </div>
+                        </lightning-layout-item>
+                        
+                    </template>
+                </lightning-layout>
+            </template>
+        </lightning-card>
+    </article>
+</template>

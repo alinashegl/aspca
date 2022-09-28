@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Behavior_Placement_Status__c</fullName>
+    <externalId>false</externalId>
+    <label>Behavior Placement Status</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Ready for Placement</fullName>
+                <default>false</default>
+                <label>Ready for Placement</label>
+            </value>
+            <value>
+                <fullName>Behavior Hold</fullName>
+                <default>false</default>
+                <label>Behavior Hold</label>
+            </value>
+            <value>
+                <fullName>Rehab Candidate</fullName>
+                <default>false</default>
+                <label>Rehab Candidate</label>
+            </value>
+            <value>
+                <fullName>Placement Partner OK - Foster-based Rescue</fullName>
+                <default>false</default>
+                <label>Placement Partner OK - Foster-based Rescue</label>
+            </value>
+            <value>
+                <fullName>Placement Partner OK - Foster</fullName>
+                <default>false</default>
+                <label>Placement Partner OK - Foster</label>
+            </value>
+            <value>
+                <fullName>Placement Partner OK - Shelter with Behavior Dept.</fullName>
+                <default>false</default>
+                <label>Placement Partner OK - Shelter with Behavior Dept.</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

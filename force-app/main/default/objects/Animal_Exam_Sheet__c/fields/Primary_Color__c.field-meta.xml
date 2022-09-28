@@ -14,6 +14,7 @@
         <restricted>true</restricted>
         <valueSetName>Primary_Color</valueSetName>
         <valueSettings>
+            <controllingFieldValue>Sheep</controllingFieldValue>
             <controllingFieldValue>Goat</controllingFieldValue>
             <controllingFieldValue>Cow</controllingFieldValue>
             <controllingFieldValue>Reptile</controllingFieldValue>
@@ -24,12 +25,13 @@
             <controllingFieldValue>Exotic</controllingFieldValue>
             <controllingFieldValue>Fowl</controllingFieldValue>
             <controllingFieldValue>Other</controllingFieldValue>
+            <controllingFieldValue>Wildlife</controllingFieldValue>
             <controllingFieldValue>Avian</controllingFieldValue>
             <controllingFieldValue>Pig</controllingFieldValue>
-            <controllingFieldValue>Sheep</controllingFieldValue>
             <valueName>Black</valueName>
         </valueSettings>
         <valueSettings>
+            <controllingFieldValue>Sheep</controllingFieldValue>
             <controllingFieldValue>Goat</controllingFieldValue>
             <controllingFieldValue>Cow</controllingFieldValue>
             <controllingFieldValue>Reptile</controllingFieldValue>
@@ -39,12 +41,13 @@
             <controllingFieldValue>Exotic</controllingFieldValue>
             <controllingFieldValue>Fowl</controllingFieldValue>
             <controllingFieldValue>Other</controllingFieldValue>
+            <controllingFieldValue>Wildlife</controllingFieldValue>
             <controllingFieldValue>Avian</controllingFieldValue>
             <controllingFieldValue>Pig</controllingFieldValue>
-            <controllingFieldValue>Sheep</controllingFieldValue>
             <valueName>Brown</valueName>
         </valueSettings>
         <valueSettings>
+            <controllingFieldValue>Sheep</controllingFieldValue>
             <controllingFieldValue>Goat</controllingFieldValue>
             <controllingFieldValue>Reptile</controllingFieldValue>
             <controllingFieldValue>Rabbit</controllingFieldValue>
@@ -54,11 +57,12 @@
             <controllingFieldValue>Exotic</controllingFieldValue>
             <controllingFieldValue>Fowl</controllingFieldValue>
             <controllingFieldValue>Other</controllingFieldValue>
+            <controllingFieldValue>Wildlife</controllingFieldValue>
             <controllingFieldValue>Avian</controllingFieldValue>
-            <controllingFieldValue>Sheep</controllingFieldValue>
             <valueName>Grey</valueName>
         </valueSettings>
         <valueSettings>
+            <controllingFieldValue>Sheep</controllingFieldValue>
             <controllingFieldValue>Goat</controllingFieldValue>
             <controllingFieldValue>Cow</controllingFieldValue>
             <controllingFieldValue>Reptile</controllingFieldValue>
@@ -68,12 +72,13 @@
             <controllingFieldValue>Exotic</controllingFieldValue>
             <controllingFieldValue>Fowl</controllingFieldValue>
             <controllingFieldValue>Other</controllingFieldValue>
+            <controllingFieldValue>Wildlife</controllingFieldValue>
             <controllingFieldValue>Avian</controllingFieldValue>
             <controllingFieldValue>Pig</controllingFieldValue>
-            <controllingFieldValue>Sheep</controllingFieldValue>
             <valueName>Tan</valueName>
         </valueSettings>
         <valueSettings>
+            <controllingFieldValue>Sheep</controllingFieldValue>
             <controllingFieldValue>Goat</controllingFieldValue>
             <controllingFieldValue>Cow</controllingFieldValue>
             <controllingFieldValue>Reptile</controllingFieldValue>
@@ -84,12 +89,13 @@
             <controllingFieldValue>Exotic</controllingFieldValue>
             <controllingFieldValue>Fowl</controllingFieldValue>
             <controllingFieldValue>Other</controllingFieldValue>
+            <controllingFieldValue>Wildlife</controllingFieldValue>
             <controllingFieldValue>Avian</controllingFieldValue>
             <controllingFieldValue>Pig</controllingFieldValue>
-            <controllingFieldValue>Sheep</controllingFieldValue>
             <valueName>Unspecified</valueName>
         </valueSettings>
         <valueSettings>
+            <controllingFieldValue>Sheep</controllingFieldValue>
             <controllingFieldValue>Goat</controllingFieldValue>
             <controllingFieldValue>Cow</controllingFieldValue>
             <controllingFieldValue>Reptile</controllingFieldValue>
@@ -99,15 +105,14 @@
             <controllingFieldValue>Exotic</controllingFieldValue>
             <controllingFieldValue>Fowl</controllingFieldValue>
             <controllingFieldValue>Other</controllingFieldValue>
+            <controllingFieldValue>Wildlife</controllingFieldValue>
             <controllingFieldValue>Avian</controllingFieldValue>
             <controllingFieldValue>Pig</controllingFieldValue>
-            <controllingFieldValue>Sheep</controllingFieldValue>
             <valueName>White</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Cow</controllingFieldValue>
             <controllingFieldValue>Reptile</controllingFieldValue>
-            <controllingFieldValue>Cat</controllingFieldValue>
             <controllingFieldValue>Dog</controllingFieldValue>
             <controllingFieldValue>Exotic</controllingFieldValue>
             <controllingFieldValue>Fowl</controllingFieldValue>
@@ -128,8 +133,6 @@
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Reptile</controllingFieldValue>
-            <controllingFieldValue>Cat</controllingFieldValue>
-            <controllingFieldValue>Dog</controllingFieldValue>
             <controllingFieldValue>Exotic</controllingFieldValue>
             <controllingFieldValue>Fowl</controllingFieldValue>
             <controllingFieldValue>Other</controllingFieldValue>
@@ -139,7 +142,6 @@
         <valueSettings>
             <controllingFieldValue>Reptile</controllingFieldValue>
             <controllingFieldValue>Cat</controllingFieldValue>
-            <controllingFieldValue>Dog</controllingFieldValue>
             <controllingFieldValue>Exotic</controllingFieldValue>
             <controllingFieldValue>Fowl</controllingFieldValue>
             <controllingFieldValue>Other</controllingFieldValue>
@@ -159,7 +161,6 @@
         <valueSettings>
             <controllingFieldValue>Rabbit</controllingFieldValue>
             <controllingFieldValue>Cat</controllingFieldValue>
-            <controllingFieldValue>Dog</controllingFieldValue>
             <controllingFieldValue>Exotic</controllingFieldValue>
             <controllingFieldValue>Fowl</controllingFieldValue>
             <controllingFieldValue>Other</controllingFieldValue>
@@ -179,11 +180,32 @@
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Cat</controllingFieldValue>
+            <controllingFieldValue>Dog</controllingFieldValue>
             <valueName>Golden</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cat</controllingFieldValue>
+            <valueName>Hairless</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cat</controllingFieldValue>
+            <valueName>Seal</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cat</controllingFieldValue>
+            <valueName>Tabby</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cat</controllingFieldValue>
+            <valueName>Tortoise shell</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Dog</controllingFieldValue>
             <valueName>Beige</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Brindle</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Dog</controllingFieldValue>
@@ -208,12 +230,7 @@
             <valueName>Fawn</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Dog</controllingFieldValue>
-            <valueName>Seal</valueName>
-        </valueSettings>
-        <valueSettings>
             <controllingFieldValue>Equine</controllingFieldValue>
-            <controllingFieldValue>Other</controllingFieldValue>
             <valueName>Bay</valueName>
         </valueSettings>
         <valueSettings>
@@ -226,7 +243,6 @@
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Equine</controllingFieldValue>
-            <controllingFieldValue>Other</controllingFieldValue>
             <valueName>Chestnut</valueName>
         </valueSettings>
         <valueSettings>
@@ -247,7 +263,6 @@
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Equine</controllingFieldValue>
-            <controllingFieldValue>Other</controllingFieldValue>
             <valueName>Palomino</valueName>
         </valueSettings>
         <valueSettings>
@@ -256,8 +271,11 @@
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Equine</controllingFieldValue>
-            <controllingFieldValue>Other</controllingFieldValue>
             <valueName>Roan</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Equine</controllingFieldValue>
+            <valueName>Sorrel</valueName>
         </valueSettings>
     </valueSet>
 </CustomField>

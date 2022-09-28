@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sentence__c</fullName>
+    <description>Sentence per charge count</description>
+    <externalId>false</externalId>
+    <label>Charge Outcome</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <controllingField>Court_Disposition__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Probation (SUPERVISED)</fullName>
+                <default>false</default>
+                <label>Probation (SUPERVISED)</label>
+            </value>
+            <value>
+                <fullName>Jail</fullName>
+                <default>false</default>
+                <label>Jail</label>
+            </value>
+            <value>
+                <fullName>Prison</fullName>
+                <default>false</default>
+                <label>Prison</label>
+            </value>
+            <value>
+                <fullName>Fine</fullName>
+                <default>false</default>
+                <label>Fine</label>
+            </value>
+            <value>
+                <fullName>Restitution</fullName>
+                <default>false</default>
+                <label>Restitution</label>
+            </value>
+            <value>
+                <fullName>Community Service</fullName>
+                <default>false</default>
+                <label>Community Service</label>
+            </value>
+            <value>
+                <fullName>&quot;No Animal&quot; Order</fullName>
+                <default>false</default>
+                <label>&quot;No Animal&quot; Order</label>
+            </value>
+            <value>
+                <fullName>Probation (UNSUPERVISED)</fullName>
+                <default>false</default>
+                <label>Probation (UNSUPERVISED)</label>
+            </value>
+            <value>
+                <fullName>Psychological Counseling</fullName>
+                <default>false</default>
+                <label>Psychological Counseling</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other (Describe in Notes Section)</label>
+            </value>
+            <value>
+                <fullName>Supervised Release</fullName>
+                <default>false</default>
+                <label>Supervised Release</label>
+            </value>
+            <value>
+                <fullName>Drug/Alcohol Counseling</fullName>
+                <default>false</default>
+                <label>Drug/Alcohol Counseling</label>
+            </value>
+            <value>
+                <fullName>Home Confinement/House Arrest</fullName>
+                <default>false</default>
+                <label>Home Confinement/House Arrest</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>5</visibleLines>
+</CustomField>

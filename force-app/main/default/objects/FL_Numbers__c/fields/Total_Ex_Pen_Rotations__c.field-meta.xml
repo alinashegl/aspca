@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Total_Ex_Pen_Rotations__c</fullName>
+    <externalId>false</externalId>
+    <formula>Ex_Pen_Rotations__c +  B_Ex_Pen_Rotations__c + C_Ex_Pen_Rotations__c + D_Ex_Pen_Rotations__c + E_Ex_Pen_Rotations__c + F_Ex_Pen_Rotations__c + G_Ex_Pen_Rotations__c + H_Ex_Pen_Rotations__c + I_Ex_Pen_Rotations__c + J_Ex_Pen_Rotations__c + K_Ex_Pen_Rotations__c + L_Ex_Pen_Rotations__c + M_Ex_Pen_Rotations__c + N_Ex_Pen_Rotations__c + O_Ex_Pen_Rotations__c + P_Ex_Pen_Rotations__c + Q_Ex_Pen_Rotations__c + R_Ex_Pen_Rotations__c + S_Ex_Pen_Rotations__c + T_Ex_Pen_Rotations__c + U_Ex_Pen_Rotations__c + V_Ex_Pen_Rotations__c + W_Ex_Pen_Rotations__c + X_Ex_Pen_Rotations__c + Y_Ex_Pen_Rotations__c + Z_Ex_Pen_Rotations__c + Cats_Ex_Pen_Rotations__c +  Floor_Lead_Numbers__c +  SP_Responder_Numbers_Ex_Pen_Rotations__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Total Ex-Pen Rotations</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

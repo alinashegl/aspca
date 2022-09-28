@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Evidences_belong_to_Case</fullName>
+    <columns>NAME</columns>
+    <columns>Evidence_Category__c</columns>
+    <columns>Evidence_Type__c</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>Case__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Case__c</field>
+        <operation>equals</operation>
+        <value>00001009</value>
+    </filters>
+    <label>Evidences belong to Case</label>
+</ListView>

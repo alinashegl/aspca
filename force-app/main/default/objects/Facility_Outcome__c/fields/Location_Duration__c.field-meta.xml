@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Location_Duration__c</fullName>
+    <externalId>false</externalId>
+    <formula>if(ISNULL(End_Date__c), TODAY() - Start_Date__c, End_Date__c - Start_Date__c)</formula>
+    <label>Location Duration</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

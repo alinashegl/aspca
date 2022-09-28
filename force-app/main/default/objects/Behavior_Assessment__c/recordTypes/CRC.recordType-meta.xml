@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CRC</fullName>
+    <active>true</active>
+    <label>CRC</label>
+    <picklistValues>
+        <picklist>Assessment_Type__c</picklist>
+        <values>
+            <fullName>Daily Care</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Medical</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Test_Config__c</fullName>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Parent Test Config</label>
+    <referenceTo>Test_Config__mdt</referenceTo>
+    <relationshipLabel>Picklist Description Configs</relationshipLabel>
+    <relationshipName>Picklist_Description_Configs</relationshipName>
+    <required>false</required>
+    <type>MetadataRelationship</type>
+    <unique>false</unique>
+</CustomField>

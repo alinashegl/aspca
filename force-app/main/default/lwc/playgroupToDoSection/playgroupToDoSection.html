@@ -1,0 +1,135 @@
+<template>
+    <lightning-record-edit-form record-id={playgroupAnimal.Id} object-api-name="Animal__c" onsuccess={handleSuccess}>
+        <lightning-messages> </lightning-messages>
+        <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_1-of-2 slds-medium-size_2-of-12 slds-large-size_1-of-12">
+                <label class="slds-form-element__legend slds-form-element__label">Name</label>
+                <template if:true={smallForm}>
+                    <lightning-helptext icon-name="utility:info" content="Click animal name to toggle fields"></lightning-helptext>
+                </template>
+                <div class="slds-form-element__static">
+                    <span onclick={toggleExpand}>{playgroupAnimal.Animal_Name__c}</span>
+                </div>
+            </div>
+            <div class="slds-col slds-size_1-of-2 slds-medium-size_2-of-12 slds-large-size_1-of-12">
+                <label class="slds-form-element__legend slds-form-element__label">ID#</label>
+                <div class="slds-form-element__static">
+                    <a href={url}>{playgroupAnimal.Name}</a>
+                </div>
+            </div>
+            <template if:true={expanded}>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-large-size_1-of-12">
+                    <label class="slds-form-element__legend slds-form-element__label">Sex</label>
+                    <div class="slds-form-element__static">
+                        <span>{playgroupAnimal.Gender__c}</span>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-large-size_1-of-12">
+                    <label class="slds-form-element__legend slds-form-element__label">Kennel Location</label>
+                    <div class="slds-form-element__static">
+                        <span>{playgroupAnimal.Shelter_Location__c}</span>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-large-size_1-of-12">
+                    <label class="slds-form-element__legend slds-form-element__label"># of Playgroups</label>
+                    <div class="slds-form-element__static">
+                        <span>{playgroupAnimal.Number_of_Playgroups__c}</span>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-large-size_1-of-12">
+                    <label class="slds-form-element__legend slds-form-element__label">Playgroup today?</label>
+                    <lightning-input type="checkbox" label="Playgroup today?" checked={playgroupAnimal.Animal_Playgroups__r} variant="label-hidden" disabled></lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-large-size_1-of-12">
+                    <template if:true={error}>
+                        <c-error-panel errors={error} type='inlineMessage' friendly-message='Error updating animal'></c-error-panel>
+                    </template>
+                    <label class="slds-form-element__legend slds-form-element__label">Does Not Walk on a Leash</label>
+                    <lightning-input type="checkbox" checked={playgroupAnimal.Does_Not_Walk_on_a_Leash__c} variant="label-hidden" onchange={handleWalkOnLeashChange}></lightning-input>
+                    <template if:true={showBooleanSpinner}>
+                        <lightning-icon icon-name="utility:spinner" alternative-text="Loading" size="x-small" title="spinner">
+                        </lightning-icon>
+                    </template>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_3-of-12 slds-large-size_2-of-12">
+                    <template if:true={showTextSpinner}>
+                        <lightning-icon icon-name="utility:spinner" alternative-text="Loading" size="x-small" title="spinner">
+                        </lightning-icon>
+                    </template>
+                    <label class="slds-form-element__legend slds-form-element__label">Does Not Walk on a Leash Notes</label>
+                    <div class="slds-form-element__static slds-var-p-right_x-small">
+                        <textarea class="slds-textarea" onblur={handleLeashNotesChange}>{playgroupAnimal.Does_Not_Walk_on_a_Leash_Notes__c}</textarea>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-large-size_1-of-12">
+                    <template if:true={isEdit}>
+                        <lightning-input-field field-name="Playgroup_Priority_Level__c"></lightning-input-field>
+                    </template>
+                    <template if:false={isEdit}>
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__legend slds-form-element__label">
+                                Playgroup Priority Level
+                                <lightning-button-icon icon-name="utility:edit" variant="bare" onclick={handleEdit}></lightning-button-icon>
+                            </label>
+                            <div class="slds-form-element__static">
+                                <span>{playgroupAnimal.Playgroup_Priority_Level__c}</span>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-large-size_1-of-12">
+                    <template if:true={isEdit}>
+                        <lightning-input-field field-name="Play_Category__c"></lightning-input-field>
+                    </template>
+                    <template if:false={isEdit}>
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__legend slds-form-element__label">
+                                Playgroup Category
+                                <lightning-button-icon icon-name="utility:edit" variant="bare" onclick={handleEdit}></lightning-button-icon>
+                            </label>
+                            <div class={categoryClass}>
+                                <div class="slds-form-element__static">
+                                    <span>{playgroupAnimal.Play_Category__c}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-large-size_1-of-12">
+                    <c-playgroup-to-do-indicators babesia={playgroupAnimal.Medical_Conditions__r} in-heat={playgroupAnimal.Play_Pauses__r} handler-code={playgroupAnimal.Shelter_Color_Coding__c}></c-playgroup-to-do-indicators>
+                </div>
+                <div class="slds-col slds-size_1-of-1">
+                    <template if:true={isEdit}>
+                        <lightning-input-field field-name="Play_Style_Notes__c"></lightning-input-field>
+                    </template>
+                    <template if:false={isEdit}>
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__legend slds-form-element__label">
+                                Play Style Notes
+                                <lightning-button-icon icon-name="utility:edit" variant="bare" onclick={handleEdit}></lightning-button-icon>
+                            </label>
+                            <div class="slds-form-element__static">
+                                <span>{playgroupAnimal.Play_Style_Notes__c}</span>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+                <template if:true={isEdit}>
+                    <div class="slds-col slds-size_1-of-1 slds-var-m-top_medium">
+                        <lightning-button
+                            class="slds-var-m-top_small"
+                            label="Cancel"
+                            onclick={handleReset}
+                        ></lightning-button>
+                        <lightning-button
+                            class="slds-var-m-top_small slds-var-m-left_x-small"
+                            variant="brand"
+                            type="submit"
+                            label="Update"
+                        ></lightning-button>
+                    </div>
+                </template>
+            </template>
+        </div>
+    </lightning-record-edit-form>
+</template>

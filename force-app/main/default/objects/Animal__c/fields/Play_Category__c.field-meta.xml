@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Play_Category__c</fullName>
+    <externalId>false</externalId>
+    <label>Play Category</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Unevaluated</fullName>
+                <default>true</default>
+                <label>Unevaluated</label>
+            </value>
+            <value>
+                <fullName>Playgroup Eligible</fullName>
+                <default>false</default>
+                <label>Playgroup Eligible</label>
+            </value>
+            <value>
+                <fullName>Foster Playgroup Eligible</fullName>
+                <default>false</default>
+                <label>Foster Playgroup Eligible</label>
+            </value>
+            <value>
+                <fullName>DO NOT PLAY</fullName>
+                <default>false</default>
+                <label>DO NOT PLAY</label>
+            </value>
+            <value>
+                <fullName>Puppy &lt; 5 mo</fullName>
+                <default>false</default>
+                <label>Puppy &lt; 5 mo</label>
+            </value>
+            <value>
+                <fullName>Juvenile</fullName>
+                <default>false</default>
+                <label>Juvenile</label>
+            </value>
+            <value>
+                <fullName>Small Mellow</fullName>
+                <default>false</default>
+                <label>Small Mellow</label>
+            </value>
+            <value>
+                <fullName>Small Active</fullName>
+                <default>false</default>
+                <label>Small Active</label>
+            </value>
+            <value>
+                <fullName>Big Mellow</fullName>
+                <default>false</default>
+                <label>Big Mellow</label>
+            </value>
+            <value>
+                <fullName>Big Active</fullName>
+                <default>false</default>
+                <label>Big Active</label>
+            </value>
+            <value>
+                <fullName>Shy/Fearful</fullName>
+                <default>false</default>
+                <label>Shy/Fearful</label>
+            </value>
+            <value>
+                <fullName>Tricky Puppy &lt; 5 mo</fullName>
+                <default>false</default>
+                <label>Tricky Puppy &lt; 5 mo</label>
+            </value>
+            <value>
+                <fullName>Tricky Adult</fullName>
+                <default>false</default>
+                <label>Tricky Adult</label>
+            </value>
+            <value>
+                <fullName>Assigned Play Partner</fullName>
+                <default>false</default>
+                <label>Assigned Play Partner</label>
+            </value>
+            <value>
+                <fullName>PG Re-Eval</fullName>
+                <default>false</default>
+                <label>PG Re-Eval</label>
+            </value>
+            <value>
+                <fullName>New/Unknown</fullName>
+                <default>false</default>
+                <label>New/Unknown</label>
+            </value>
+            <value>
+                <fullName>Unspecified</fullName>
+                <default>false</default>
+                <label>Unspecified</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

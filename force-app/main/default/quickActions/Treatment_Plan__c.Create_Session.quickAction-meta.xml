@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QuickAction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Create a new treatment session</description>
+    <fieldOverrides>
+        <field>Animal__c</field>
+        <formula>Treatment_Plan__c.Animal__c</formula>
+    </fieldOverrides>
+    <fieldOverrides>
+        <field>Preferred_Motivators__c</field>
+        <formula>Treatment_Plan__c.Preferred_Motivators__c</formula>
+    </fieldOverrides>
+    <fieldOverrides>
+        <field>Treatment_Plan__c</field>
+        <formula>Treatment_Plan__c.Id</formula>
+    </fieldOverrides>
+    <label>Create Session</label>
+    <optionsCreateFeedItem>true</optionsCreateFeedItem>
+    <quickActionLayout>
+        <layoutSectionStyle>TwoColumnsLeftToRight</layoutSectionStyle>
+        <quickActionLayoutColumns>
+            <quickActionLayoutItems>
+                <emptySpace>false</emptySpace>
+                <field>Treatment_Plan__c</field>
+                <uiBehavior>Required</uiBehavior>
+            </quickActionLayoutItems>
+            <quickActionLayoutItems>
+                <emptySpace>false</emptySpace>
+                <field>Animal__c</field>
+                <uiBehavior>Edit</uiBehavior>
+            </quickActionLayoutItems>
+            <quickActionLayoutItems>
+                <emptySpace>false</emptySpace>
+                <field>Preferred_Motivators__c</field>
+                <uiBehavior>Edit</uiBehavior>
+            </quickActionLayoutItems>
+        </quickActionLayoutColumns>
+        <quickActionLayoutColumns>
+            <quickActionLayoutItems>
+                <emptySpace>false</emptySpace>
+                <field>Session_Contact__c</field>
+                <uiBehavior>Required</uiBehavior>
+            </quickActionLayoutItems>
+            <quickActionLayoutItems>
+                <emptySpace>false</emptySpace>
+                <field>Session_Notes__c</field>
+                <uiBehavior>Edit</uiBehavior>
+            </quickActionLayoutItems>
+        </quickActionLayoutColumns>
+    </quickActionLayout>
+    <targetObject>Treatment_Session__c</targetObject>
+    <targetParentField>Treatment_Plan__c</targetParentField>
+    <type>Create</type>
+</QuickAction>

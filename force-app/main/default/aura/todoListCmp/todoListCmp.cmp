@@ -1,0 +1,21 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:appHostable" controller="HomeBannerLWCController">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="isVisible" type="Boolean" default="false"/>
+    <lightning:card title = "To Do List" iconName = "standard:task">
+        <aura:set attribute="actions">
+            <c:todoList/>
+            <c:OutOfOffice/>
+        </aura:set>
+    </lightning:card>
+    <div class="slds-p-top_small">
+        <c:playgroupToDoList/>
+    </div>
+    <div class="slds-p-top_small">
+        <c:treatmentPriorityToDoList/>
+    </div>
+    <aura:if isTrue="{!v.isVisible}">
+        <div class="slds-p-top_small">
+            <c:dailyCareMain/>
+        </div>
+    </aura:if>
+</aura:component>

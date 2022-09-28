@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LA_County_Source_Shelter__c</fullName>
+    <externalId>false</externalId>
+    <formula>Source_Shelter_Lookup__r.LA_County_Agency__c</formula>
+    <label>LA County Source Shelter</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

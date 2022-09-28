@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Social_Behavior_P1__c</fullName>
+    <externalId>false</externalId>
+    <label>Social Behavior P1</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Approached tester readily-friendly</fullName>
+                <default>false</default>
+                <label>Approached tester readily-friendly</label>
+            </value>
+            <value>
+                <fullName>Approached tester readily—submissive</fullName>
+                <default>false</default>
+                <label>Approached tester readily—submissive</label>
+            </value>
+            <value>
+                <fullName>Approached tester—but distracted by environment</fullName>
+                <default>false</default>
+                <label>Approached tester—but distracted by environment</label>
+            </value>
+            <value>
+                <fullName>Approached tester-mildly fearful</fullName>
+                <default>false</default>
+                <label>Approached tester-mildly fearful</label>
+            </value>
+            <value>
+                <fullName>Did not approach tester-distracted by environment</fullName>
+                <default>false</default>
+                <label>Did not approach tester-distracted by environment</label>
+            </value>
+            <value>
+                <fullName>Frenetic movement</fullName>
+                <default>false</default>
+                <label>Frenetic movement</label>
+            </value>
+            <value>
+                <fullName>Did not approach tester-moderately fearful</fullName>
+                <default>false</default>
+                <label>Did not approach tester-moderately fearful</label>
+            </value>
+            <value>
+                <fullName>Did not approach tester-extremely fearful</fullName>
+                <default>false</default>
+                <label>Did not approach tester-extremely fearful</label>
+            </value>
+            <value>
+                <fullName>Became aggressive</fullName>
+                <default>false</default>
+                <label>Became aggressive</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

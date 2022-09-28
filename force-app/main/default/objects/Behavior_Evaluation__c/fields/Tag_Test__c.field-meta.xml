@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tag_Test__c</fullName>
+    <externalId>false</externalId>
+    <label>Tag Test</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Played with tester</fullName>
+                <default>false</default>
+                <label>Played with tester</label>
+            </value>
+            <value>
+                <fullName>Did not play but followed</fullName>
+                <default>false</default>
+                <label>Did not play but followed</label>
+            </value>
+            <value>
+                <fullName>Watched tester-did not follow</fullName>
+                <default>false</default>
+                <label>Watched tester-did not follow</label>
+            </value>
+            <value>
+                <fullName>Unresponsive-distracted by environment</fullName>
+                <default>false</default>
+                <label>Unresponsive-distracted by environment</label>
+            </value>
+            <value>
+                <fullName>Moderately fearful</fullName>
+                <default>false</default>
+                <label>Moderately fearful</label>
+            </value>
+            <value>
+                <fullName>Highly aroused</fullName>
+                <default>false</default>
+                <label>Highly aroused</label>
+            </value>
+            <value>
+                <fullName>Extremely fearful</fullName>
+                <default>false</default>
+                <label>Extremely fearful</label>
+            </value>
+            <value>
+                <fullName>Threatened</fullName>
+                <default>false</default>
+                <label>Threatened</label>
+            </value>
+            <value>
+                <fullName>Too fearful-subtest not done</fullName>
+                <default>false</default>
+                <label>Too fearful-subtest not done</label>
+            </value>
+            <value>
+                <fullName>Became aggressive</fullName>
+                <default>false</default>
+                <label>Became aggressive</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

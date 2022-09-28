@@ -1,0 +1,14 @@
+.ptitle{
+    white-space: initial;
+}
+
+.box{
+    padding: var(--lwc-spacingXxxSmall,1rem);
+    border-radius: var(--lwc-borderRadiusMedium,0.25rem);
+    border: var(--lwc-borderWidthThin,1px) solid
+    var(--lwc-colorBorder,rgb(221, 219, 218));
+}
+
+.newProtocol{
+    background-color:antiquewhite;
+}

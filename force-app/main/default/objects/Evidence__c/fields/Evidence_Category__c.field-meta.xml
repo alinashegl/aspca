@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Evidence_Category__c</fullName>
+    <externalId>false</externalId>
+    <label>Evidence Category</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Biological</fullName>
+                <default>false</default>
+                <label>Biological</label>
+            </value>
+            <value>
+                <fullName>Botany</fullName>
+                <default>false</default>
+                <label>Botany</label>
+            </value>
+            <value>
+                <fullName>Deceased Remains</fullName>
+                <default>false</default>
+                <label>Deceased Remains</label>
+            </value>
+            <value>
+                <fullName>Digital</fullName>
+                <default>false</default>
+                <label>Digital</label>
+            </value>
+            <value>
+                <fullName>Documents</fullName>
+                <default>false</default>
+                <label>Documents</label>
+            </value>
+            <value>
+                <fullName>Entomology</fullName>
+                <default>false</default>
+                <label>Entomology</label>
+            </value>
+            <value>
+                <fullName>Weapons</fullName>
+                <default>false</default>
+                <label>Weapons</label>
+            </value>
+            <value>
+                <fullName>Impression</fullName>
+                <default>false</default>
+                <label>Impression</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>Fighting Paraphernalia</fullName>
+                <default>false</default>
+                <label>Fighting Paraphernalia</label>
+            </value>
+            <value>
+                <fullName>Non-Fighting Paraphernalia</fullName>
+                <default>false</default>
+                <label>Non-Fighting Paraphernalia</label>
+            </value>
+            <value>
+                <fullName>Toxicology</fullName>
+                <default>false</default>
+                <label>Toxicology</label>
+            </value>
+            <value>
+                <fullName>Trace</fullName>
+                <default>false</default>
+                <label>Trace</label>
+            </value>
+            <value>
+                <fullName>Medication/Supplements</fullName>
+                <default>false</default>
+                <label>Medication/Supplements</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

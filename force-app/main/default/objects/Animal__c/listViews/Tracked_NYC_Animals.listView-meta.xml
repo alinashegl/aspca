@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tracked_NYC_Animals</fullName>
+    <columns>NAME</columns>
+    <columns>Animal_Name__c</columns>
+    <columns>Original_Animal_Name__c</columns>
+    <columns>Current_Weight_in_kgs_Num__c</columns>
+    <columns>Initial_Weight_in_kgs__c</columns>
+    <columns>Previous_Weight_in_kgs__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Track_This_Animal__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <label>Tracked NYC Animals</label>
+    <sharedTo>
+        <group>Forensics_NYC</group>
+    </sharedTo>
+</ListView>

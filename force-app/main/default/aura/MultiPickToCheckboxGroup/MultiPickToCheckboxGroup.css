@@ -1,0 +1,16 @@
+.THIS.multiSelect {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: 1px solid rgb(221, 219, 218);
+    border-radius: .25rem;
+    padding: 0 1rem 0 .75rem;
+}
+
+.THIS.multiSelect .slds-form-element__control {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+}
+
+.THIS.multiSelect .slds-form-element__label {
+    font-size: 12px;
+}

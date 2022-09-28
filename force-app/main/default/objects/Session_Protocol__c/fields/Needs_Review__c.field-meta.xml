@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Needs_Review__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Marks a Session Protocol as in Need of Review</description>
+    <externalId>false</externalId>
+    <label>Needs Review</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

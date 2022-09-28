@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Treatment_Priority__c</fullName>
+    <externalId>false</externalId>
+    <label>Treatment Priority</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>No Treatment</fullName>
+                <default>true</default>
+                <label>No Treatment</label>
+            </value>
+            <value>
+                <fullName>Daily – 7 days</fullName>
+                <default>false</default>
+                <label>Daily – 7 days</label>
+            </value>
+            <value>
+                <fullName>High – 5 days</fullName>
+                <default>false</default>
+                <label>High – 5 days</label>
+            </value>
+            <value>
+                <fullName>Medium – 4 days</fullName>
+                <default>false</default>
+                <label>Medium – 4 days</label>
+            </value>
+            <value>
+                <fullName>Low – 3 days</fullName>
+                <default>false</default>
+                <label>Low – 3 days</label>
+            </value>
+            <value>
+                <fullName>Daily (7 days/wk)</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Daily (7 days/wk)</label>
+            </value>
+            <value>
+                <fullName>High (5 days/wk)</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>High (5 days/wk)</label>
+            </value>
+            <value>
+                <fullName>Low ( 3 days/wk)</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Low ( 3 days/wk)</label>
+            </value>
+            <value>
+                <fullName>Medium (4 days/wk)</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Medium (4 days/wk)</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

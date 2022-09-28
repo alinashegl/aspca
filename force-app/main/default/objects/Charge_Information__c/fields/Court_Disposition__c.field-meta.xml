@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Court_Disposition__c</fullName>
+    <description>final outcome of court procedings for this charge</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Enter the final judgment for this charge</inlineHelpText>
+    <label>Court Disposition</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Abated</fullName>
+                <default>false</default>
+                <label>Abated</label>
+            </value>
+            <value>
+                <fullName>ACD</fullName>
+                <default>false</default>
+                <label>ACD</label>
+            </value>
+            <value>
+                <fullName>Acquitted</fullName>
+                <default>false</default>
+                <label>Acquitted</label>
+            </value>
+            <value>
+                <fullName>Convicted After Trial</fullName>
+                <default>false</default>
+                <label>Convicted After Trial</label>
+            </value>
+            <value>
+                <fullName>Convicted - Alford Plea/No Contest</fullName>
+                <default>false</default>
+                <label>Convicted - Alford Plea/No Contest</label>
+            </value>
+            <value>
+                <fullName>Convicted - Pleaded to Lesser Charge (See Notes)</fullName>
+                <default>false</default>
+                <label>Convicted - Pleaded to Lesser Charge (See Notes)</label>
+            </value>
+            <value>
+                <fullName>Convicted - Pled Guilty</fullName>
+                <default>false</default>
+                <label>Convicted - Pled Guilty</label>
+            </value>
+            <value>
+                <fullName>Convicted - Trial</fullName>
+                <default>false</default>
+                <label>Convicted - Trial</label>
+            </value>
+            <value>
+                <fullName>Deferred</fullName>
+                <default>false</default>
+                <label>Deferred</label>
+            </value>
+            <value>
+                <fullName>Dismissed</fullName>
+                <default>false</default>
+                <label>Dismissed</label>
+            </value>
+            <value>
+                <fullName>Dismissed – 30.30 (other)</fullName>
+                <default>false</default>
+                <label>Dismissed – 30.30 (other)</label>
+            </value>
+            <value>
+                <fullName>Dismissed – 30.30 (witness uncooperative)</fullName>
+                <default>false</default>
+                <label>Dismissed – 30.30 (witness uncooperative)</label>
+            </value>
+            <value>
+                <fullName>Dismissed – Defendant Deceased</fullName>
+                <default>false</default>
+                <label>Dismissed – Defendant Deceased</label>
+            </value>
+            <value>
+                <fullName>Dismissed – Insufficient evidence</fullName>
+                <default>false</default>
+                <label>Dismissed – Insufficient evidence</label>
+            </value>
+            <value>
+                <fullName>Dismissed - Pled to Other Charge</fullName>
+                <default>false</default>
+                <label>Dismissed - Pled to Other Charge</label>
+            </value>
+            <value>
+                <fullName>Dismissed - Prosecutor Discretion</fullName>
+                <default>false</default>
+                <label>Dismissed - Prosecutor Discretion</label>
+            </value>
+            <value>
+                <fullName>Dismissed – Witness uncooperative</fullName>
+                <default>false</default>
+                <label>Dismissed – Witness uncooperative</label>
+            </value>
+            <value>
+                <fullName>Diversion</fullName>
+                <default>false</default>
+                <label>Diversion</label>
+            </value>
+            <value>
+                <fullName>DP</fullName>
+                <default>false</default>
+                <label>DP</label>
+            </value>
+            <value>
+                <fullName>Found Unfit to Proceed</fullName>
+                <default>false</default>
+                <label>Found Unfit to Proceed</label>
+            </value>
+            <value>
+                <fullName>Grand Jury- Indicted</fullName>
+                <default>false</default>
+                <label>Grand Jury- Indicted</label>
+            </value>
+            <value>
+                <fullName>Grand Jury- No Bill</fullName>
+                <default>false</default>
+                <label>Grand Jury- No Bill</label>
+            </value>
+            <value>
+                <fullName>Nolle prosequi</fullName>
+                <default>false</default>
+                <label>Nolle prosequi</label>
+            </value>
+            <value>
+                <fullName>PG</fullName>
+                <default>false</default>
+                <label>PG</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

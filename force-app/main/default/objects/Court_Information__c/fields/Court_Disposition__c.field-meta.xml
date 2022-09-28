@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Court_Disposition__c</fullName>
+    <description>final outcome of court procedings for this charge</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Please enter the final judgemenbt for this charge.</inlineHelpText>
+    <label>Court Disposition</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Acquitted</fullName>
+                <default>false</default>
+                <label>Acquitted</label>
+            </value>
+            <value>
+                <fullName>Adjournment in Contemplation of Dismissal</fullName>
+                <default>false</default>
+                <label>Adjournment in Contemplation of Dismissal</label>
+            </value>
+            <value>
+                <fullName>Convicted – pled guilty</fullName>
+                <default>false</default>
+                <label>Convicted – pled guilty</label>
+            </value>
+            <value>
+                <fullName>Convicted – trial</fullName>
+                <default>false</default>
+                <label>Convicted – trial</label>
+            </value>
+            <value>
+                <fullName>Dismissed</fullName>
+                <default>false</default>
+                <label>Dismissed</label>
+            </value>
+            <value>
+                <fullName>Nolle prosequi</fullName>
+                <default>false</default>
+                <label>Nolle prosequi</label>
+            </value>
+            <value>
+                <fullName>Abated</fullName>
+                <default>false</default>
+                <label>Abated</label>
+            </value>
+            <value>
+                <fullName>Grand Jury - Indicted</fullName>
+                <default>false</default>
+                <label>Grand Jury - Indicted</label>
+            </value>
+            <value>
+                <fullName>Grand Jury - No Bill</fullName>
+                <default>false</default>
+                <label>Grand Jury - No Bill</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

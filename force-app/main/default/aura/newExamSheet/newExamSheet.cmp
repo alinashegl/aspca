@@ -1,0 +1,49 @@
+<aura:component implements="force:hasRecordId,lightning:actionOverride,lightning:isUrlAddressable,lightning:hasPageReference" >
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    <aura:handler name="change" value="{!v.pageReference}" action="{!c.reInit}" />
+	<aura:attribute name="animalId" type="String" />
+    <aura:attribute name="recordTypeId" type="String" />
+    <aura:attribute name="clearFields" type="Boolean" />
+    <lightning:navigation aura:id="navService"/>
+    
+    <lightning:card title="New Animal Exam Sheet">
+        <p class="slds-p-horizontal_small">
+            <lightning:recordEditForm objectApiName="Animal_Exam_Sheet__c" recordTypeId="{!v.recordType}"
+                                      onsuccess="{!c.success}" >
+                <lightning:messages />
+                <aura:if isTrue="{!or(or(v.recordTypeId == '0126e000001pLwmAAE', v.recordTypeId == '0126e000001pLwnAAE'), v.recordTypeId == '0126e000001pLwlAAE')}">
+                    <div class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning:inputField fieldName="Animal__c" value="{!v.animalId}" />
+                            <aura:if isTrue="{!or(v.recordTypeId == '0126e000001pLwmAAE', v.recordTypeId == '0126e000001pLwlAAE')}">
+                                <div class="slds-col slds-size_1-of-2">
+                                    <lightning:inputField fieldName="Clear_Default_Findings__c" value="{!v.clearFields}" />
+                                </div>
+                        	</aura:if>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning:inputField fieldName="RecordTypeId" value="{!v.recordTypeId}" />
+                        </div>
+                    </div>
+                <aura:set attribute="else">
+                    <div class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning:inputField fieldName="Animal__c" value="{!v.animalId}" />
+                            <lightning:inputField fieldName="Doctor__c" />
+                            <lightning:inputField fieldName="Handler__c" />
+                            <lightning:inputField fieldName="Scribe__c" />
+                            <lightning:inputField fieldName="Editor__c" />
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning:inputField fieldName="RecordTypeId" value="{!v.recordTypeId}" />
+                            <lightning:inputField fieldName="Exam_Date_Time__c" />
+                        </div>
+                    </div>
+                </aura:set>
+                </aura:if>
+                <lightning:button class="slds-m-top_small" label="Cancel" onclick="{!c.handleCancel}" />
+                <lightning:button class="slds-m-top_small" type="submit" label="Save" />
+            </lightning:recordEditForm>
+        </p>
+    </lightning:card>            
+</aura:component>

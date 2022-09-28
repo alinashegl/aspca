@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Test_Results__c</fullName>
+    <externalId>false</externalId>
+    <label>Test Results</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Test_Name__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Abnormal</fullName>
+                <default>false</default>
+                <label>Abnormal</label>
+            </value>
+            <value>
+                <fullName>Normal</fullName>
+                <default>false</default>
+                <label>Normal</label>
+            </value>
+            <value>
+                <fullName>Positive</fullName>
+                <default>false</default>
+                <label>Positive</label>
+            </value>
+            <value>
+                <fullName>Confirmed</fullName>
+                <default>false</default>
+                <label>Confirmed</label>
+            </value>
+            <value>
+                <fullName>Suspicious</fullName>
+                <default>false</default>
+                <label>Suspicious</label>
+            </value>
+            <value>
+                <fullName>Negative</fullName>
+                <default>false</default>
+                <label>Negative</label>
+            </value>
+            <value>
+                <fullName>Pending</fullName>
+                <default>false</default>
+                <label>Pending</label>
+            </value>
+            <value>
+                <fullName>Ready for Review</fullName>
+                <default>false</default>
+                <label>Ready for Review</label>
+            </value>
+            <value>
+                <fullName>Done at offsite clinic</fullName>
+                <default>false</default>
+                <label>Done at offsite clinic</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Urine Specific Gravity</controllingFieldValue>
+            <controllingFieldValue>T4</controllingFieldValue>
+            <controllingFieldValue>ACTH Stim</controllingFieldValue>
+            <controllingFieldValue>GI Panel w/ Spec fPL</controllingFieldValue>
+            <controllingFieldValue>Pathologist Review (CBC)</controllingFieldValue>
+            <controllingFieldValue>Blood Pressure</controllingFieldValue>
+            <controllingFieldValue>Blood Glucose</controllingFieldValue>
+            <controllingFieldValue>Parvo Titer</controllingFieldValue>
+            <controllingFieldValue>FNA</controllingFieldValue>
+            <controllingFieldValue>Impression Smear</controllingFieldValue>
+            <controllingFieldValue>Cortisol/Creatinine Ratio</controllingFieldValue>
+            <controllingFieldValue>PCV/TP</controllingFieldValue>
+            <controllingFieldValue>Radiograph</controllingFieldValue>
+            <controllingFieldValue>Respiratory PCR</controllingFieldValue>
+            <controllingFieldValue>CBC</controllingFieldValue>
+            <controllingFieldValue>Chem</controllingFieldValue>
+            <controllingFieldValue>Ear Cytology</controllingFieldValue>
+            <controllingFieldValue>Ear Swab for Mites</controllingFieldValue>
+            <controllingFieldValue>Canine GI Panel</controllingFieldValue>
+            <controllingFieldValue>Reticulocyte Count</controllingFieldValue>
+            <controllingFieldValue>Urinalysis</controllingFieldValue>
+            <controllingFieldValue>Other</controllingFieldValue>
+            <controllingFieldValue>Fructosamine</controllingFieldValue>
+            <controllingFieldValue>Histopathology</controllingFieldValue>
+            <controllingFieldValue>Fluorescein Stain</controllingFieldValue>
+            <controllingFieldValue>Schirmer Tear Test</controllingFieldValue>
+            <controllingFieldValue>Intraocular Pressure</controllingFieldValue>
+            <controllingFieldValue>Urine Protein Creatnine Ratio</controllingFieldValue>
+            <valueName>Abnormal</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Urine Specific Gravity</controllingFieldValue>
+            <controllingFieldValue>T4</controllingFieldValue>
+            <controllingFieldValue>ACTH Stim</controllingFieldValue>
+            <controllingFieldValue>GI Panel w/ Spec fPL</controllingFieldValue>
+            <controllingFieldValue>Pathologist Review (CBC)</controllingFieldValue>
+            <controllingFieldValue>Blood Pressure</controllingFieldValue>
+            <controllingFieldValue>Blood Glucose</controllingFieldValue>
+            <controllingFieldValue>Parvo Titer</controllingFieldValue>
+            <controllingFieldValue>FNA</controllingFieldValue>
+            <controllingFieldValue>Impression Smear</controllingFieldValue>
+            <controllingFieldValue>Cortisol/Creatinine Ratio</controllingFieldValue>
+            <controllingFieldValue>PCV/TP</controllingFieldValue>
+            <controllingFieldValue>Radiograph</controllingFieldValue>
+            <controllingFieldValue>Respiratory PCR</controllingFieldValue>
+            <controllingFieldValue>CBC</controllingFieldValue>
+            <controllingFieldValue>Chem</controllingFieldValue>
+            <controllingFieldValue>Ear Cytology</controllingFieldValue>
+            <controllingFieldValue>Ear Swab for Mites</controllingFieldValue>
+            <controllingFieldValue>Canine GI Panel</controllingFieldValue>
+            <controllingFieldValue>Reticulocyte Count</controllingFieldValue>
+            <controllingFieldValue>Urinalysis</controllingFieldValue>
+            <controllingFieldValue>Other</controllingFieldValue>
+            <controllingFieldValue>Fructosamine</controllingFieldValue>
+            <controllingFieldValue>Histopathology</controllingFieldValue>
+            <controllingFieldValue>Fluorescein Stain</controllingFieldValue>
+            <controllingFieldValue>Schirmer Tear Test</controllingFieldValue>
+            <controllingFieldValue>Intraocular Pressure</controllingFieldValue>
+            <controllingFieldValue>Urine Protein Creatnine Ratio</controllingFieldValue>
+            <valueName>Normal</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Urine Specific Gravity</controllingFieldValue>
+            <controllingFieldValue>T4</controllingFieldValue>
+            <controllingFieldValue>Coggins (EIA)</controllingFieldValue>
+            <controllingFieldValue>Western Blot</controllingFieldValue>
+            <controllingFieldValue>ACTH Stim</controllingFieldValue>
+            <controllingFieldValue>GI Panel w/ Spec fPL</controllingFieldValue>
+            <controllingFieldValue>Pathologist Review (CBC)</controllingFieldValue>
+            <controllingFieldValue>Blood Pressure</controllingFieldValue>
+            <controllingFieldValue>Blood Glucose</controllingFieldValue>
+            <controllingFieldValue>Parvo Titer</controllingFieldValue>
+            <controllingFieldValue>FNA</controllingFieldValue>
+            <controllingFieldValue>Testosterone</controllingFieldValue>
+            <controllingFieldValue>Fungal Culture</controllingFieldValue>
+            <controllingFieldValue>Wood&apos;s Lamp</controllingFieldValue>
+            <controllingFieldValue>Heartworm</controllingFieldValue>
+            <controllingFieldValue>Tick Panel</controllingFieldValue>
+            <controllingFieldValue>Impression Smear</controllingFieldValue>
+            <controllingFieldValue>Cortisol/Creatinine Ratio</controllingFieldValue>
+            <controllingFieldValue>Parvo Snap</controllingFieldValue>
+            <controllingFieldValue>Microfilaria</controllingFieldValue>
+            <controllingFieldValue>PCV/TP</controllingFieldValue>
+            <controllingFieldValue>Anabolic Steroid Testing</controllingFieldValue>
+            <controllingFieldValue>Radiograph</controllingFieldValue>
+            <controllingFieldValue>Respiratory PCR</controllingFieldValue>
+            <controllingFieldValue>Skin Scrape</controllingFieldValue>
+            <controllingFieldValue>Babesia</controllingFieldValue>
+            <controllingFieldValue>CBC</controllingFieldValue>
+            <controllingFieldValue>Chem</controllingFieldValue>
+            <controllingFieldValue>Ear Cytology</controllingFieldValue>
+            <controllingFieldValue>Ear Swab for Mites</controllingFieldValue>
+            <controllingFieldValue>Giardia SNAP</controllingFieldValue>
+            <controllingFieldValue>Fecal OP</controllingFieldValue>
+            <controllingFieldValue>FeLV</controllingFieldValue>
+            <controllingFieldValue>FIV</controllingFieldValue>
+            <controllingFieldValue>Relaxin</controllingFieldValue>
+            <controllingFieldValue>Canine GI Panel</controllingFieldValue>
+            <controllingFieldValue>Reticulocyte Count</controllingFieldValue>
+            <controllingFieldValue>Modified Knott&apos;s Test</controllingFieldValue>
+            <controllingFieldValue>Urinalysis</controllingFieldValue>
+            <controllingFieldValue>M. Gallisepticum PCR</controllingFieldValue>
+            <controllingFieldValue>M. Synoviae PCR</controllingFieldValue>
+            <controllingFieldValue>Avian Influenza PCR</controllingFieldValue>
+            <controllingFieldValue>Newcastle PCR</controllingFieldValue>
+            <controllingFieldValue>Bronchitis PCR</controllingFieldValue>
+            <controllingFieldValue>Infectious Laryngotracheitis PCR</controllingFieldValue>
+            <controllingFieldValue>Mareks Disease</controllingFieldValue>
+            <controllingFieldValue>Salmonella pullorum</controllingFieldValue>
+            <controllingFieldValue>Diarrhea PCR</controllingFieldValue>
+            <controllingFieldValue>Ringworm PCR</controllingFieldValue>
+            <controllingFieldValue>Other</controllingFieldValue>
+            <controllingFieldValue>Ehrlichia</controllingFieldValue>
+            <controllingFieldValue>Anaplasma</controllingFieldValue>
+            <controllingFieldValue>Lyme</controllingFieldValue>
+            <controllingFieldValue>Fructosamine</controllingFieldValue>
+            <controllingFieldValue>Histopathology</controllingFieldValue>
+            <controllingFieldValue>Fluorescein Stain</controllingFieldValue>
+            <controllingFieldValue>Schirmer Tear Test</controllingFieldValue>
+            <controllingFieldValue>Intraocular Pressure</controllingFieldValue>
+            <controllingFieldValue>Witness Pregnancy</controllingFieldValue>
+            <controllingFieldValue>Urine Culture</controllingFieldValue>
+            <controllingFieldValue>Urine Protein Creatnine Ratio</controllingFieldValue>
+            <controllingFieldValue>Culture &amp; Sensitivity</controllingFieldValue>
+            <valueName>Pending</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Urine Specific Gravity</controllingFieldValue>
+            <controllingFieldValue>T4</controllingFieldValue>
+            <controllingFieldValue>Coggins (EIA)</controllingFieldValue>
+            <controllingFieldValue>Western Blot</controllingFieldValue>
+            <controllingFieldValue>ACTH Stim</controllingFieldValue>
+            <controllingFieldValue>GI Panel w/ Spec fPL</controllingFieldValue>
+            <controllingFieldValue>Pathologist Review (CBC)</controllingFieldValue>
+            <controllingFieldValue>Blood Pressure</controllingFieldValue>
+            <controllingFieldValue>Blood Glucose</controllingFieldValue>
+            <controllingFieldValue>Parvo Titer</controllingFieldValue>
+            <controllingFieldValue>FNA</controllingFieldValue>
+            <controllingFieldValue>Testosterone</controllingFieldValue>
+            <controllingFieldValue>Fungal Culture</controllingFieldValue>
+            <controllingFieldValue>Wood&apos;s Lamp</controllingFieldValue>
+            <controllingFieldValue>Heartworm</controllingFieldValue>
+            <controllingFieldValue>Tick Panel</controllingFieldValue>
+            <controllingFieldValue>Impression Smear</controllingFieldValue>
+            <controllingFieldValue>Cortisol/Creatinine Ratio</controllingFieldValue>
+            <controllingFieldValue>Parvo Snap</controllingFieldValue>
+            <controllingFieldValue>Microfilaria</controllingFieldValue>
+            <controllingFieldValue>PCV/TP</controllingFieldValue>
+            <controllingFieldValue>Anabolic Steroid Testing</controllingFieldValue>
+            <controllingFieldValue>Radiograph</controllingFieldValue>
+            <controllingFieldValue>Respiratory PCR</controllingFieldValue>
+            <controllingFieldValue>Skin Scrape</controllingFieldValue>
+            <controllingFieldValue>Babesia</controllingFieldValue>
+            <controllingFieldValue>CBC</controllingFieldValue>
+            <controllingFieldValue>Chem</controllingFieldValue>
+            <controllingFieldValue>Ear Cytology</controllingFieldValue>
+            <controllingFieldValue>Ear Swab for Mites</controllingFieldValue>
+            <controllingFieldValue>Giardia SNAP</controllingFieldValue>
+            <controllingFieldValue>Fecal OP</controllingFieldValue>
+            <controllingFieldValue>FeLV</controllingFieldValue>
+            <controllingFieldValue>FIV</controllingFieldValue>
+            <controllingFieldValue>Relaxin</controllingFieldValue>
+            <controllingFieldValue>Canine GI Panel</controllingFieldValue>
+            <controllingFieldValue>Reticulocyte Count</controllingFieldValue>
+            <controllingFieldValue>Modified Knott&apos;s Test</controllingFieldValue>
+            <controllingFieldValue>Urinalysis</controllingFieldValue>
+            <controllingFieldValue>M. Gallisepticum PCR</controllingFieldValue>
+            <controllingFieldValue>M. Synoviae PCR</controllingFieldValue>
+            <controllingFieldValue>Avian Influenza PCR</controllingFieldValue>
+            <controllingFieldValue>Newcastle PCR</controllingFieldValue>
+            <controllingFieldValue>Bronchitis PCR</controllingFieldValue>
+            <controllingFieldValue>Infectious Laryngotracheitis PCR</controllingFieldValue>
+            <controllingFieldValue>Mareks Disease</controllingFieldValue>
+            <controllingFieldValue>Salmonella pullorum</controllingFieldValue>
+            <controllingFieldValue>Diarrhea PCR</controllingFieldValue>
+            <controllingFieldValue>Ringworm PCR</controllingFieldValue>
+            <controllingFieldValue>Other</controllingFieldValue>
+            <controllingFieldValue>Ehrlichia</controllingFieldValue>
+            <controllingFieldValue>Anaplasma</controllingFieldValue>
+            <controllingFieldValue>Lyme</controllingFieldValue>
+            <controllingFieldValue>Fructosamine</controllingFieldValue>
+            <controllingFieldValue>Histopathology</controllingFieldValue>
+            <controllingFieldValue>Fluorescein Stain</controllingFieldValue>
+            <controllingFieldValue>Schirmer Tear Test</controllingFieldValue>
+            <controllingFieldValue>Intraocular Pressure</controllingFieldValue>
+            <controllingFieldValue>Witness Pregnancy</controllingFieldValue>
+            <controllingFieldValue>Urine Culture</controllingFieldValue>
+            <controllingFieldValue>Urine Protein Creatnine Ratio</controllingFieldValue>
+            <controllingFieldValue>Culture &amp; Sensitivity</controllingFieldValue>
+            <valueName>Ready for Review</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Urine Specific Gravity</controllingFieldValue>
+            <controllingFieldValue>T4</controllingFieldValue>
+            <controllingFieldValue>Coggins (EIA)</controllingFieldValue>
+            <controllingFieldValue>Western Blot</controllingFieldValue>
+            <controllingFieldValue>ACTH Stim</controllingFieldValue>
+            <controllingFieldValue>GI Panel w/ Spec fPL</controllingFieldValue>
+            <controllingFieldValue>Pathologist Review (CBC)</controllingFieldValue>
+            <controllingFieldValue>Blood Pressure</controllingFieldValue>
+            <controllingFieldValue>Blood Glucose</controllingFieldValue>
+            <controllingFieldValue>Parvo Titer</controllingFieldValue>
+            <controllingFieldValue>FNA</controllingFieldValue>
+            <controllingFieldValue>Testosterone</controllingFieldValue>
+            <controllingFieldValue>Fungal Culture</controllingFieldValue>
+            <controllingFieldValue>Wood&apos;s Lamp</controllingFieldValue>
+            <controllingFieldValue>Heartworm</controllingFieldValue>
+            <controllingFieldValue>Impression Smear</controllingFieldValue>
+            <controllingFieldValue>Cortisol/Creatinine Ratio</controllingFieldValue>
+            <controllingFieldValue>Parvo Snap</controllingFieldValue>
+            <controllingFieldValue>Microfilaria</controllingFieldValue>
+            <controllingFieldValue>PCV/TP</controllingFieldValue>
+            <controllingFieldValue>Anabolic Steroid Testing</controllingFieldValue>
+            <controllingFieldValue>Radiograph</controllingFieldValue>
+            <controllingFieldValue>Respiratory PCR</controllingFieldValue>
+            <controllingFieldValue>Skin Scrape</controllingFieldValue>
+            <controllingFieldValue>Babesia</controllingFieldValue>
+            <controllingFieldValue>CBC</controllingFieldValue>
+            <controllingFieldValue>Chem</controllingFieldValue>
+            <controllingFieldValue>Ear Cytology</controllingFieldValue>
+            <controllingFieldValue>Ear Swab for Mites</controllingFieldValue>
+            <controllingFieldValue>Giardia SNAP</controllingFieldValue>
+            <controllingFieldValue>Fecal OP</controllingFieldValue>
+            <controllingFieldValue>FeLV</controllingFieldValue>
+            <controllingFieldValue>FIV</controllingFieldValue>
+            <controllingFieldValue>Canine GI Panel</controllingFieldValue>
+            <controllingFieldValue>Reticulocyte Count</controllingFieldValue>
+            <controllingFieldValue>Modified Knott&apos;s Test</controllingFieldValue>
+            <controllingFieldValue>Urinalysis</controllingFieldValue>
+            <controllingFieldValue>M. Gallisepticum PCR</controllingFieldValue>
+            <controllingFieldValue>M. Synoviae PCR</controllingFieldValue>
+            <controllingFieldValue>Avian Influenza PCR</controllingFieldValue>
+            <controllingFieldValue>Newcastle PCR</controllingFieldValue>
+            <controllingFieldValue>Bronchitis PCR</controllingFieldValue>
+            <controllingFieldValue>Infectious Laryngotracheitis PCR</controllingFieldValue>
+            <controllingFieldValue>Mareks Disease</controllingFieldValue>
+            <controllingFieldValue>Salmonella pullorum</controllingFieldValue>
+            <controllingFieldValue>Diarrhea PCR</controllingFieldValue>
+            <controllingFieldValue>Ringworm PCR</controllingFieldValue>
+            <controllingFieldValue>Other</controllingFieldValue>
+            <controllingFieldValue>Ehrlichia</controllingFieldValue>
+            <controllingFieldValue>Anaplasma</controllingFieldValue>
+            <controllingFieldValue>Lyme</controllingFieldValue>
+            <controllingFieldValue>Fructosamine</controllingFieldValue>
+            <controllingFieldValue>Histopathology</controllingFieldValue>
+            <controllingFieldValue>Fluorescein Stain</controllingFieldValue>
+            <controllingFieldValue>Schirmer Tear Test</controllingFieldValue>
+            <controllingFieldValue>Intraocular Pressure</controllingFieldValue>
+            <controllingFieldValue>Witness Pregnancy</controllingFieldValue>
+            <controllingFieldValue>Urine Culture</controllingFieldValue>
+            <controllingFieldValue>Urine Protein Creatnine Ratio</controllingFieldValue>
+            <controllingFieldValue>Culture &amp; Sensitivity</controllingFieldValue>
+            <valueName>Done at offsite clinic</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Coggins (EIA)</controllingFieldValue>
+            <controllingFieldValue>Western Blot</controllingFieldValue>
+            <controllingFieldValue>Testosterone</controllingFieldValue>
+            <controllingFieldValue>Fungal Culture</controllingFieldValue>
+            <controllingFieldValue>Wood&apos;s Lamp</controllingFieldValue>
+            <controllingFieldValue>Heartworm</controllingFieldValue>
+            <controllingFieldValue>Tick Panel</controllingFieldValue>
+            <controllingFieldValue>Parvo Snap</controllingFieldValue>
+            <controllingFieldValue>Microfilaria</controllingFieldValue>
+            <controllingFieldValue>Skin Scrape</controllingFieldValue>
+            <controllingFieldValue>Babesia</controllingFieldValue>
+            <controllingFieldValue>Giardia SNAP</controllingFieldValue>
+            <controllingFieldValue>Fecal OP</controllingFieldValue>
+            <controllingFieldValue>FeLV</controllingFieldValue>
+            <controllingFieldValue>FIV</controllingFieldValue>
+            <controllingFieldValue>Relaxin</controllingFieldValue>
+            <controllingFieldValue>Modified Knott&apos;s Test</controllingFieldValue>
+            <controllingFieldValue>M. Gallisepticum PCR</controllingFieldValue>
+            <controllingFieldValue>M. Synoviae PCR</controllingFieldValue>
+            <controllingFieldValue>Avian Influenza PCR</controllingFieldValue>
+            <controllingFieldValue>Newcastle PCR</controllingFieldValue>
+            <controllingFieldValue>Bronchitis PCR</controllingFieldValue>
+            <controllingFieldValue>Infectious Laryngotracheitis PCR</controllingFieldValue>
+            <controllingFieldValue>Mareks Disease</controllingFieldValue>
+            <controllingFieldValue>Salmonella pullorum</controllingFieldValue>
+            <controllingFieldValue>Diarrhea PCR</controllingFieldValue>
+            <controllingFieldValue>Ringworm PCR</controllingFieldValue>
+            <controllingFieldValue>Other</controllingFieldValue>
+            <controllingFieldValue>Ehrlichia</controllingFieldValue>
+            <controllingFieldValue>Anaplasma</controllingFieldValue>
+            <controllingFieldValue>Lyme</controllingFieldValue>
+            <controllingFieldValue>Witness Pregnancy</controllingFieldValue>
+            <controllingFieldValue>Urine Culture</controllingFieldValue>
+            <controllingFieldValue>Culture &amp; Sensitivity</controllingFieldValue>
+            <valueName>Positive</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Coggins (EIA)</controllingFieldValue>
+            <controllingFieldValue>Western Blot</controllingFieldValue>
+            <controllingFieldValue>Testosterone</controllingFieldValue>
+            <controllingFieldValue>Fungal Culture</controllingFieldValue>
+            <controllingFieldValue>Wood&apos;s Lamp</controllingFieldValue>
+            <controllingFieldValue>Heartworm</controllingFieldValue>
+            <controllingFieldValue>Tick Panel</controllingFieldValue>
+            <controllingFieldValue>Parvo Snap</controllingFieldValue>
+            <controllingFieldValue>Microfilaria</controllingFieldValue>
+            <controllingFieldValue>Anabolic Steroid Testing</controllingFieldValue>
+            <controllingFieldValue>Skin Scrape</controllingFieldValue>
+            <controllingFieldValue>Babesia</controllingFieldValue>
+            <controllingFieldValue>Giardia SNAP</controllingFieldValue>
+            <controllingFieldValue>Fecal OP</controllingFieldValue>
+            <controllingFieldValue>FeLV</controllingFieldValue>
+            <controllingFieldValue>FIV</controllingFieldValue>
+            <controllingFieldValue>Relaxin</controllingFieldValue>
+            <controllingFieldValue>Modified Knott&apos;s Test</controllingFieldValue>
+            <controllingFieldValue>M. Gallisepticum PCR</controllingFieldValue>
+            <controllingFieldValue>M. Synoviae PCR</controllingFieldValue>
+            <controllingFieldValue>Avian Influenza PCR</controllingFieldValue>
+            <controllingFieldValue>Newcastle PCR</controllingFieldValue>
+            <controllingFieldValue>Bronchitis PCR</controllingFieldValue>
+            <controllingFieldValue>Infectious Laryngotracheitis PCR</controllingFieldValue>
+            <controllingFieldValue>Mareks Disease</controllingFieldValue>
+            <controllingFieldValue>Salmonella pullorum</controllingFieldValue>
+            <controllingFieldValue>Diarrhea PCR</controllingFieldValue>
+            <controllingFieldValue>Ringworm PCR</controllingFieldValue>
+            <controllingFieldValue>Other</controllingFieldValue>
+            <controllingFieldValue>Ehrlichia</controllingFieldValue>
+            <controllingFieldValue>Anaplasma</controllingFieldValue>
+            <controllingFieldValue>Lyme</controllingFieldValue>
+            <controllingFieldValue>Witness Pregnancy</controllingFieldValue>
+            <controllingFieldValue>Urine Culture</controllingFieldValue>
+            <controllingFieldValue>Culture &amp; Sensitivity</controllingFieldValue>
+            <valueName>Negative</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FNA</controllingFieldValue>
+            <valueName>Other</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Anabolic Steroid Testing</controllingFieldValue>
+            <valueName>Confirmed</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Anabolic Steroid Testing</controllingFieldValue>
+            <valueName>Suspicious</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

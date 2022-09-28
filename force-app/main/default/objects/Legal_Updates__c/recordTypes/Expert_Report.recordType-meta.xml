@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Expert_Report</fullName>
+    <active>true</active>
+    <description>Relates to a request for an ASPCA expert witness</description>
+    <label>Expert Witness Request</label>
+    <picklistValues>
+        <picklist>Affidavit_Type__c</picklist>
+        <values>
+            <fullName>Costs</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Expert</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Warrant Support</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Civil_Proceeding_Type__c</picklist>
+        <values>
+            <fullName>Bond</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cost of Care</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Disposition</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fitness</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Forfeiture</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Court_Order__c</picklist>
+        <values>
+            <fullName>Animals Forfeited</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Animals Returned</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Bond</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Bond</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Expert__c</picklist>
+        <values>
+            <fullName>Adam Leath</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Amanda Fitch</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2E Jason Byrd</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2E Kristine Baucom</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2E Nicole Eller</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2E Pam Reid</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2E Rachel Touroo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2E Randy Lockwood</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2ERob Reisman</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Kathryn Destreza</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Kyle Held</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Leigh Anne Garrard</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Terry Mills</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Hearing_Outcome__c</picklist>
+        <values>
+            <fullName>Court decision pending</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Court orders animals be held</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Court orders bond</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Court orders forfeiture of animals to county</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No bond ordered</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Hearing_Type__c</picklist>
+        <values>
+            <fullName>Bond</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Civil Trial</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Criminal Trial</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Deposition</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Forfeiture</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Issuing_Court__c</picklist>
+        <values>
+            <fullName>Federal Circuit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Federal District Court</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Magistrate%2FTown</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>State Court of Appeals</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>State%2FDistrict</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Supreme Court</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>LA_Assigned__c</picklist>
+        <values>
+            <fullName>Donna Lassa</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Elizabeth Brandler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Erin Satterthwaite</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Jaime Olin</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Jennifer Chin</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Meredith Beach</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Robert Hensley</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sandy Christiansen</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Shannon Poindexter</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tamara Feliciano</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>MOU_Scope__c</picklist>
+        <values>
+            <fullName>Case Review</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Crime Scene Support</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Disposal of Remains</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Disposition</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Euthanasia</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Evidence Review</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Evidence Storage</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Forensic Testing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Forensic Veterinary Services</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Media and Communications</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Out-of-State Sheltering</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Second Chair Support</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sheltering</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Subject Matter Expert</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transport</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Sentence__c</picklist>
+        <values>
+            <fullName>Behind the Shed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fine</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Jail- %28%3Cyear%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Prison %28%3E year%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Probation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Restitution</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Subject_Matter__c</picklist>
+        <values>
+            <fullName>Animal Behavior</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Animal Cruelty%2FNeglect</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Animal Shelter Medicine</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Animal Sheltering</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Case Finances</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cockfighting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Crime Scene Process</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dogfighting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Forensic Veterinary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Veterinary Science- Companion Animal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Type_of_Update__c</picklist>
+        <values>
+            <fullName>Call</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Letter</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Memo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Research</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Update_Type__c</picklist>
+        <values>
+            <fullName>Appeal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>General Update</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Witness__c</picklist>
+        <values>
+            <fullName>Amanda Fitch</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Bekah Weitz</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Christina Lee</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2E Elizabeth Pearlman</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2E Katherine Miller</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2E Kristine Baucom</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2E Nicole Eller</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2E Pam Reid</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2E Rachel Touroo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dr%2E Rob Reisman</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Kathryn Destreza</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Kyle Held</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Leigh Anne Garrard</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Molly White</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Terry Mills</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

@@ -1,0 +1,201 @@
+<aura:component implements="force:hasRecordId,force:lightningQuickAction,lightning:isUrlAddressable" controller="updateChargesClass" access="global">
+    <aura:attribute name="caseID" type="String"/>
+    <aura:attribute name="chargeList" type="Charge_Information__c[]"/>
+    <aura:attribute name="dispositionOptions" type="String[]"/>
+    <aura:attribute name="sentenceOptions" type="String[]"/>
+    <aura:attribute name="blankOptions" type="String[]"/>
+    <lightning:navigation aura:id="navigationService" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+    
+    <lightning:card title="Charges">
+        <div class="slds-theme_default" style="height:60vh">
+            <div class="slds-scrollable" style="height:100%">
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered" >
+                    <thead>
+                        <tr class="slds-line-height_reset">
+                            <th class="slds-text-align_center" scope="col">
+                                <div class="slds-truncate" title="Defendant">Defendant</div>
+                            </th>
+                            <th class="slds-text-align_center" scope="col">
+                                <div class="slds-truncate" title="Statute">Statute</div>
+                            </th>
+                            <th class="slds-text-align_center" scope="col">
+                                <div class="slds-truncate" title="Charge Title">Charge Title</div>
+                            </th>
+                            <th class="slds-text-align_center" scope="col">
+                                <div class="slds-truncate" title="Number of Charges">Number of Charges</div>
+                            </th>
+                            <th class="slds-text-align_center" scope="col">
+                                <div class="slds-truncate" title="Court Disposition">Court Disposition</div>
+                            </th>
+                            <th class="slds-text-align_center" scope="col">
+                                <div class="slds-truncate" title="Court Disposition Date">Court Disposition Date</div>
+                            </th>
+                            <th class="slds-text-align_center" scope="col">
+                                <div class="slds-truncate" title="Sentence Details">Sentence Details</div>
+                            </th>
+                            <th class="slds-text-align_center" scope="col">
+                                <div class="slds-truncate" title="Counts Convicted">Counts Convicted</div>
+                            </th>
+                            <th class="slds-text-align_center" scope="col">
+                                <div class="slds-truncate" title="Counts Acquitted">Counts Acquitted</div>
+                            </th>
+                            <th class="slds-text-align_center" scope="col">
+                                <div class="slds-truncate" title="Counts Dismissed">Counts Dismissed</div>
+                            </th>
+                            <th class="slds-text-align_center" scope="col">
+                                <div class="slds-truncate" title="Counts ACD Given">Counts ACD Given</div>
+                            </th>
+                            <th class="slds-text-align_center" scope="col">
+                                <div class="slds-truncate" title="Length of Confinement">Length of Confinement (Months)</div>
+                            </th>
+                            <th class="slds-text-align_center" scope="col">
+                                <div class="slds-truncate" title="Community Service Hours">Community Service Hours</div>
+                            </th>
+                            <th class="slds-text-align_center" scope="col">
+                                <div class="slds-truncate" title="Length of Animal Ban">Length of No Animal Order (Years)</div>
+                            </th>
+                            <th class="slds-text-align_center" scope="col">
+                                <div class="slds-truncate" title="Amount of Fine">Amount of Fine (Dollars)</div>
+                            </th>
+                            <th class="slds-text-align_center" scope="col">
+                                <div class="slds-truncate" title="Length of Probation">Length of Probation (Months)</div>
+                            </th>
+                            <th class="slds-text-align_center" scope="col">
+                                <div class="slds-truncate" title="Length of Supervised Release">Length of Supervised Release (Years)</div>
+                            </th>
+                            <th class="slds-text-align_center" scope="col">
+                                <div class="slds-truncate" title="Charge(s) Closed">Charge(s) Closed</div>
+                            </th>
+                            <th class="slds-text-align_center" scope="col">
+                                <div class="slds-truncate" title="Appeal">Appeal</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <aura:iteration items="{!v.chargeList}" var="case" indexVar="index">
+                    		<tr class="slds-hint-parent">
+                      			<th data-label="Defendant" scope="row">
+                        			<div class="slds-truncate" title="columnDefendant" style="width:125px">
+                                        <lightning:formattedUrl value="{!'/' + case.Defendant__c}" label="{!case.Defendant__r.Name}" target="_blank" />
+                        			</div>
+                      			</th>
+                      			<td data-label="Statute">
+                        			<div class="slds-truncate" title="columnStatute" style="width:125px">
+                                        <aura:if isTrue="{!not(empty(case.Statute_Lookup__c))}">
+      										<lightning:formattedUrl value="{!'/' + case.Statute_Lookup__c}" label="{!case.Statute_Lookup__r.Name}" target="_blank" />
+                                        </aura:if>
+                        			</div>
+                      			</td>
+                      			<td data-label="Charge Title">
+                        			<div class="slds-truncate" title="columnChargeTitle" style="width:125px">
+                            			{!case.Charge_Title__c}
+                        			</div>
+                      			</td>
+                        		<td data-label="Number of Charges">
+                        			<div class="slds-truncate" title="columnNumberOfCharges" style="width:150px">
+                            			<ui:inputText value="{!case.Charge_Count__c}" class="field" />
+                       				</div>
+                      			</td>
+                        		<td data-label="Court Disposition">
+                        			<div class="slds-truncate" title="columnCourtDisposition" style="width:200px">
+                                        <lightning:Select value="{!case.Court_Disposition__c}" variant="label-hidden" class="label-hidden" name="courtDispositionInput" >
+                                        	<aura:iteration items="{!v.dispositionOptions}" var="dispositionOption">
+                                                <option text="{!dispositionOption}" value="{!dispositionOption}" />
+                                            </aura:iteration>
+                                        </lightning:Select>
+                        			</div>
+                      			</td>
+                        		<td data-label="Court Disposition Date">
+                        			<div class="slds-truncate" title="columnCourtDispositionDate" style="width:150px">
+                            			<ui:inputDate value="{!case.Courtdisposition_Date__c}" class="field" displayDatePicker="true" />
+                        			</div>
+                      			</td>
+                        		<td data-label="Sentence Details">
+                        			<div class="slds-truncate" title="columnSentenceDetails" style="width:400px">
+                                        <aura:if isTrue="{!or(or(or(or(or(or(or(or(or(or(or(case.Court_Disposition__c == 'Abated',case.Court_Disposition__c == 'Acquitted'), case.Court_Disposition__c == 'Dismissed'),
+                                                          case.Court_Disposition__c == 'Dismissed – 30.30 (other)'), case.Court_Disposition__c == 'Dismissed – 30.30 (witness uncooperative)'),
+                                                          case.Court_Disposition__c == 'Dismissed – Defendant Deceased'), case.Court_Disposition__c == 'Dismissed – Insufficient evidence'),
+                                                          case.Court_Disposition__c == 'Dismissed - Pled to Other Charge'), case.Court_Disposition__c == 'Dismissed - Prosecutor Discretion'),
+                                                          case.Court_Disposition__c == 'Dismissed – Witness uncooperative'), case.Court_Disposition__c == 'Found Unfit to Proceed'),
+                                                          case.Court_Disposition__c == 'Nolle prosequi')}">
+											<lightning:dualListBox value="{!case.Sentence_Details_Picklist__c}" options="{!v.blankOptions}" size="3" aura:id="sentencePicklist" />
+                                        <aura:set attribute="else">
+                                            <lightning:dualListBox value="{!case.Sentence_Details_Picklist__c}" options="{!v.sentenceOptions}" size="3" aura:id="sentencePicklist" />
+                                        </aura:set>
+                                        </aura:if>
+                        			</div>
+                      			</td>
+                        		<td data-label="Counts Convicted">
+                        			<div class="slds-truncate" title="columnCountsConvicted" style="width:150px">
+                            			<ui:inputText value="{!case.Counts_Convicted__c}" class="field" />
+                        			</div>
+                      			</td>
+                        		<td data-label="Counts Acquitted">
+                        			<div class="slds-truncate" title="columnCountsAcquitted" style="width:150px">
+                            			<ui:inputText value="{!case.Counts_Acquitted__c}" class="field" />
+                        			</div>
+                      			</td>
+                        		<td data-label="Counts Dismissed">
+                        			<div class="slds-truncate" title="columnCountsDismissed" style="width:150px">
+                            			<ui:inputText value="{!case.Counts_Dismissed__c}" class="field" />
+                        			</div>
+                      			</td>
+                                <td data-label="Counts ACD Given">
+                        			<div class="slds-truncate" title="columnCountsACDGiven" style="width:150px">
+                            			<ui:inputText value="{!case.Counts_ACD_Given__c}" class="field" />
+                        			</div>
+                      			</td>
+                        		<td data-label="Length of Confinement">
+                        			<div class="slds-truncate" title="columnLengthOfConfinement" style="width:210px">
+                            			<ui:inputText value="{!case.Length_of_Confinement_In_Months__c}" class="field" />
+                        			</div>
+                      			</td>
+                        		<td data-label="Community Service Hours">
+                        			<div class="slds-truncate" title="columnCommunityServiceHours" style="width:160px">
+                            			<ui:inputText value="{!case.Community_Service_Hours__c}" class="field" />
+                        			</div>
+                      			</td>
+                        		<td data-label="Length of Animal Ban">
+                        			<div class="slds-truncate" title="columnLengthOfAnimalBan" style="width:220px">
+                            			<ui:inputText value="{!case.Length_of_No_Animal_Order_In_Years__c}" class="field" />
+                        			</div>
+                      			</td>
+                        		<td data-label="Amount of Fine">
+                        			<div class="slds-truncate" title="columnAmountOfFine" style="width:160px">
+                            			<ui:inputText value="{!case.Amount_of_Fine_In_Dollars__c}" class="field" />
+                        			</div>
+                      			</td>
+                        		<td data-label="Length of Probation">
+                        			<div class="slds-truncate" title="columnLengthOfProbation" style="width:200px">
+                            			<ui:inputText value="{!case.Length_of_Probation_In_Months__c}" class="field" />
+                        			</div>
+                      			</td>
+                        		<td data-label="Length of Supervised Release">
+                        			<div class="slds-truncate" title="columnLengthOfSupervisedRelease" style="width:230px">
+                            			<ui:inputText value="{!case.Length_of_Supervised_Release_In_Years__c}" class="field" />
+                        			</div>
+                      			</td>
+                        		<td data-label="Charge(s) Closed">
+                        			<div class="slds-truncate" title="columnChargesClosed" style="width:125px">
+                            			<ui:inputCheckbox value="{!case.Defendant_Case_s_Closed__c}" class="field" />
+                        			</div>
+                      			</td>
+                        		<td data-label="Appeal">
+                        			<div class="slds-truncate" title="columnAppeal" style="width:100px">
+                            			<ui:inputCheckbox value="{!case.Appeal__c}" class="field" />
+                        			</div>
+                      			</td>
+                    		</tr>
+                  		</aura:iteration>
+                	</tbody>
+            	</table>
+            </div>
+        </div>
+        <lightning:buttonGroup class="slds-align_absolute-center">
+            <lightning:button label="Save" variant="brand" onclick="{!c.saveCharges}" />
+            <lightning:button label="Cancel" variant="neutral" onclick="{!c.cancelEdit}" />
+        </lightning:buttonGroup>
+    </lightning:card>
+</aura:component>

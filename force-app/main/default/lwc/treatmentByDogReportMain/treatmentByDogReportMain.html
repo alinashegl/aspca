@@ -1,0 +1,13 @@
+<template>
+    <lightning-card>
+        <lightning-button label="PDF" onclick={exportAsPdf} class="slds-float_right slds-var-p-right_x-small" slot="actions"></lightning-button>
+        <template for:each={dogList} for:item='dog'>
+                <div class="slds-var-p-bottom_x-small" key={dog}>
+                    <c-treatment-by-dog-display-dog
+                        dog-id={dog}
+                    >
+                    </c-treatment-by-dog-display-dog>
+                </div>
+        </template>
+    </lightning-card>
+</template>

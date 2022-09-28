@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Facility_Outcome__c</fullName>
+    <externalId>false</externalId>
+    <label>Facility/Outcome</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Facility_or_Outcome__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>AAH</fullName>
+                <default>false</default>
+                <label>AAH</label>
+            </value>
+            <value>
+                <fullName>Adopted</fullName>
+                <default>false</default>
+                <label>Adopted</label>
+            </value>
+            <value>
+                <fullName>Adoption Center</fullName>
+                <default>false</default>
+                <label>Adoption Center</label>
+            </value>
+            <value>
+                <fullName>Adoption Center (Temp Boarding)</fullName>
+                <default>false</default>
+                <label>Adoption Center (Temp Boarding)</label>
+            </value>
+            <value>
+                <fullName>Animal Hospital</fullName>
+                <default>false</default>
+                <label>Animal Hospital</label>
+            </value>
+            <value>
+                <fullName>Animal Shelter</fullName>
+                <default>false</default>
+                <label>Animal Shelter</label>
+            </value>
+            <value>
+                <fullName>ARC</fullName>
+                <default>false</default>
+                <label>ARC</label>
+            </value>
+            <value>
+                <fullName>ASNA</fullName>
+                <default>false</default>
+                <label>ASNA</label>
+            </value>
+            <value>
+                <fullName>ASPCA Shelter</fullName>
+                <default>false</default>
+                <label>ASPCA Shelter</label>
+            </value>
+            <value>
+                <fullName>Board and Train</fullName>
+                <default>false</default>
+                <label>Board and Train</label>
+            </value>
+            <value>
+                <fullName>Boarding</fullName>
+                <default>false</default>
+                <label>Boarding</label>
+            </value>
+            <value>
+                <fullName>BRC</fullName>
+                <default>false</default>
+                <label>BRC</label>
+            </value>
+            <value>
+                <fullName>Bronx CVC</fullName>
+                <default>false</default>
+                <label>Bronx CVC</label>
+            </value>
+            <value>
+                <fullName>Brooklyn CVC</fullName>
+                <default>false</default>
+                <label>Brooklyn CVC</label>
+            </value>
+            <value>
+                <fullName>CARE</fullName>
+                <default>false</default>
+                <label>CARE</label>
+            </value>
+            <value>
+                <fullName>Clinic</fullName>
+                <default>false</default>
+                <label>Clinic</label>
+            </value>
+            <value>
+                <fullName>Community Medicine</fullName>
+                <default>false</default>
+                <label>Community Medicine</label>
+            </value>
+            <value>
+                <fullName>CRC</fullName>
+                <default>false</default>
+                <label>CRC</label>
+            </value>
+            <value>
+                <fullName>CRC-MRC</fullName>
+                <default>false</default>
+                <label>CRC-MRC</label>
+            </value>
+            <value>
+                <fullName>Cremation</fullName>
+                <default>false</default>
+                <label>Cremation</label>
+            </value>
+            <value>
+                <fullName>Deceased</fullName>
+                <default>false</default>
+                <label>Deceased</label>
+            </value>
+            <value>
+                <fullName>Euthanized</fullName>
+                <default>false</default>
+                <label>Euthanized</label>
+            </value>
+            <value>
+                <fullName>Field Temp Shelter</fullName>
+                <default>false</default>
+                <label>Field Temp Shelter</label>
+            </value>
+            <value>
+                <fullName>Foster-Based Rescue</fullName>
+                <default>false</default>
+                <label>Foster-Based Rescue</label>
+            </value>
+            <value>
+                <fullName>Foster Home</fullName>
+                <default>false</default>
+                <label>Foster Home</label>
+            </value>
+            <value>
+                <fullName>Foster Home - Adoption Center</fullName>
+                <default>false</default>
+                <label>Foster Home - Adoption Center</label>
+            </value>
+            <value>
+                <fullName>Foster Home - ARC</fullName>
+                <default>false</default>
+                <label>Foster Home - ARC</label>
+            </value>
+            <value>
+                <fullName>Foster Home - CARE</fullName>
+                <default>false</default>
+                <label>Foster Home - CARE</label>
+            </value>
+            <value>
+                <fullName>Hound Hotel</fullName>
+                <default>false</default>
+                <label>Hound Hotel</label>
+            </value>
+            <value>
+                <fullName>Kitten Nursery</fullName>
+                <default>false</default>
+                <label>Kitten Nursery</label>
+            </value>
+            <value>
+                <fullName>Lost</fullName>
+                <default>false</default>
+                <label>Lost</label>
+            </value>
+            <value>
+                <fullName>MRC</fullName>
+                <default>false</default>
+                <label>MRC</label>
+            </value>
+            <value>
+                <fullName>NYPD Freezer</fullName>
+                <default>false</default>
+                <label>NYPD Freezer</label>
+            </value>
+            <value>
+                <fullName>NYPD Refrigerator</fullName>
+                <default>false</default>
+                <label>NYPD Refrigerator</label>
+            </value>
+            <value>
+                <fullName>Outside Agency</fullName>
+                <default>false</default>
+                <label>Outside Agency</label>
+            </value>
+            <value>
+                <fullName>Partner Hospital</fullName>
+                <default>false</default>
+                <label>Partner Hospital</label>
+            </value>
+            <value>
+                <fullName>Partner Shelter</fullName>
+                <default>false</default>
+                <label>Partner Shelter</label>
+            </value>
+            <value>
+                <fullName>Placement Partner</fullName>
+                <default>false</default>
+                <label>Placement Partner</label>
+            </value>
+            <value>
+                <fullName>Response Partner</fullName>
+                <default>false</default>
+                <label>Response Partner</label>
+            </value>
+            <value>
+                <fullName>Returned to Owner/Caregiver</fullName>
+                <default>false</default>
+                <label>Returned to Owner/Caregiver</label>
+            </value>
+            <value>
+                <fullName>Returned to Source Facility</fullName>
+                <default>false</default>
+                <label>Returned to Source Facility</label>
+            </value>
+            <value>
+                <fullName>Temporary Boarding</fullName>
+                <default>false</default>
+                <label>Temporary Boarding</label>
+            </value>
+            <value>
+                <fullName>Transferred to Another Agency</fullName>
+                <default>false</default>
+                <label>Transferred to Another Agency</label>
+            </value>
+            <value>
+                <fullName>Internal ASPCA Foster Transfer</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Internal ASPCA Foster Transfer</label>
+            </value>
+            <value>
+                <fullName>Internal ASPCA Placement Transfer</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Internal ASPCA Placement Transfer</label>
+            </value>
+            <value>
+                <fullName>Returned to ASPCA</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Returned to ASPCA</label>
+            </value>
+            <value>
+                <fullName>Returned to Caregiver</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Returned to Caregiver</label>
+            </value>
+            <value>
+                <fullName>Returned to Owner</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Returned to Owner</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Facility</controllingFieldValue>
+            <controllingFieldValue>Return</controllingFieldValue>
+            <valueName>AAH</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Facility</controllingFieldValue>
+            <controllingFieldValue>Post-Placement Outcome</controllingFieldValue>
+            <controllingFieldValue>Return</controllingFieldValue>
+            <valueName>Adoption Center</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Facility</controllingFieldValue>
+            <valueName>Animal Hospital</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Facility</controllingFieldValue>
+            <valueName>Animal Shelter</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Facility</controllingFieldValue>
+            <controllingFieldValue>Return</controllingFieldValue>
+            <valueName>ARC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Facility</controllingFieldValue>
+            <controllingFieldValue>Return</controllingFieldValue>
+            <valueName>ASNA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Facility</controllingFieldValue>
+            <valueName>Board and Train</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Facility</controllingFieldValue>
+            <valueName>Boarding</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Facility</controllingFieldValue>
+            <controllingFieldValue>Return</controllingFieldValue>
+            <valueName>BRC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Facility</controllingFieldValue>
+            <valueName>Bronx CVC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Facility</controllingFieldValue>
+            <valueName>Brooklyn CVC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Facility</controllingFieldValue>
+            <controllingFieldValue>Return</controllingFieldValue>
+            <valueName>CARE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Facility</controllingFieldValue>
+            <valueName>Community Medicine</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Facility</controllingFieldValue>
+            <controllingFieldValue>Return</controllingFieldValue>
+            <valueName>CRC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Facility</controllingFieldValue>
+            <controllingFieldValue>Return</controllingFieldValue>
+            <valueName>CRC-MRC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Facility</controllingFieldValue>
+            <valueName>Field Temp Shelter</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Facility</controllingFieldValue>
+            <valueName>Foster Home</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Facility</controllingFieldValue>
+            <valueName>Hound Hotel</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Facility</controllingFieldValue>
+            <valueName>Kitten Nursery</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Facility</controllingFieldValue>
+            <valueName>NYPD Freezer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Facility</controllingFieldValue>
+            <valueName>NYPD Refrigerator</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Facility</controllingFieldValue>
+            <valueName>Outside Agency</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Facility</controllingFieldValue>
+            <valueName>Partner Hospital</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Facility</controllingFieldValue>
+            <valueName>Response Partner</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Facility</controllingFieldValue>
+            <valueName>Temporary Boarding</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Outcome</controllingFieldValue>
+            <controllingFieldValue>Post-Placement Outcome</controllingFieldValue>
+            <valueName>Adopted</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Outcome</controllingFieldValue>
+            <valueName>Cremation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Outcome</controllingFieldValue>
+            <controllingFieldValue>Post-Placement Outcome</controllingFieldValue>
+            <valueName>Deceased</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Outcome</controllingFieldValue>
+            <controllingFieldValue>Post-Placement Outcome</controllingFieldValue>
+            <valueName>Euthanized</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Outcome</controllingFieldValue>
+            <controllingFieldValue>Post-Placement Outcome</controllingFieldValue>
+            <valueName>Foster-Based Rescue</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Outcome</controllingFieldValue>
+            <controllingFieldValue>Post-Placement Outcome</controllingFieldValue>
+            <valueName>Lost</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Outcome</controllingFieldValue>
+            <controllingFieldValue>Post-Placement Outcome</controllingFieldValue>
+            <valueName>Placement Partner</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Outcome</controllingFieldValue>
+            <controllingFieldValue>Post-Placement Outcome</controllingFieldValue>
+            <valueName>Returned to Owner/Caregiver</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Outcome</controllingFieldValue>
+            <controllingFieldValue>Post-Placement Outcome</controllingFieldValue>
+            <valueName>Returned to Source Facility</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Post-Placement Outcome</controllingFieldValue>
+            <valueName>Transferred to Another Agency</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

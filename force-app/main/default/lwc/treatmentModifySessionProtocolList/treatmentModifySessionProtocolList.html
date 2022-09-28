@@ -1,0 +1,21 @@
+<template>
+    <div class='slds-grid slds-wrap'>
+        <div class="slds-col slds-size_1-of-1 slds-p-top_x-small slds-p-left_medium">
+            <span class='categoryTitle'>{category}</span>
+        </div>
+        <template for:each={protocolList} for:item='protocol'>
+            <div key={protocol.Id} class="slds-col slds-p-around_xx-small slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_3-of-12">
+                <c-treatment-modify-session-protocol
+                    is-assigned={isAssigned}
+                    protocol={protocol}
+                    refresh={refresh}
+                    onprotocolassignment={handleProtocolAssignmentEvent}
+                    protocol-type={protocolType}
+                    plan-id={planId}
+                    session-id={sessionId}
+                >
+                </c-treatment-modify-session-protocol>
+            </div>
+        </template>
+    </div>
+</template>

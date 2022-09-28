@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Meets AG</fullName>
+        <default>false</default>
+        <label>Meets AG</label>
+    </customValue>
+    <customValue>
+        <fullName>Reference TEC</fullName>
+        <default>false</default>
+        <label>Reference TEC</label>
+    </customValue>
+    <customValue>
+        <fullName>Risk Assessment</fullName>
+        <default>false</default>
+        <label>Risk Assessment</label>
+    </customValue>
+    <customValue>
+        <fullName>Yellow</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Yellow</label>
+    </customValue>
+    <customValue>
+        <fullName>Green</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Green</label>
+    </customValue>
+    <customValue>
+        <fullName>Red</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Red</label>
+    </customValue>
+    <masterLabel>Assessment Scores</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

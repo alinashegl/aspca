@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pleasant_Touch__c</fullName>
+    <externalId>false</externalId>
+    <label>Pleasant Touch</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Enjoyed contact-sought it out</fullName>
+                <default>false</default>
+                <label>Enjoyed contact-sought it out</label>
+            </value>
+            <value>
+                <fullName>Accepted contact-relaxed</fullName>
+                <default>false</default>
+                <label>Accepted contact-relaxed</label>
+            </value>
+            <value>
+                <fullName>Tolerated handling—not relaxed</fullName>
+                <default>false</default>
+                <label>Tolerated handling—not relaxed</label>
+            </value>
+            <value>
+                <fullName>Oriented to tester&apos;s hand-mouthy</fullName>
+                <default>false</default>
+                <label>Oriented to tester&apos;s hand-mouthy</label>
+            </value>
+            <value>
+                <fullName>Moderately fearful</fullName>
+                <default>false</default>
+                <label>Moderately fearful</label>
+            </value>
+            <value>
+                <fullName>Unruly</fullName>
+                <default>false</default>
+                <label>Unruly</label>
+            </value>
+            <value>
+                <fullName>Tense</fullName>
+                <default>false</default>
+                <label>Tense</label>
+            </value>
+            <value>
+                <fullName>Extremely fearful</fullName>
+                <default>false</default>
+                <label>Extremely fearful</label>
+            </value>
+            <value>
+                <fullName>Became aggressive</fullName>
+                <default>false</default>
+                <label>Became aggressive</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

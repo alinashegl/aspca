@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Update_Type__c</fullName>
+    <description>type of legal update- search warrant, MOU, petition for custody</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Please select what this update is relevant to.</inlineHelpText>
+    <label>Update Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Affidavit</fullName>
+                <default>false</default>
+                <label>Affidavit</label>
+            </value>
+            <value>
+                <fullName>Appeal</fullName>
+                <default>false</default>
+                <label>Appeal</label>
+            </value>
+            <value>
+                <fullName>Case Tracking</fullName>
+                <default>false</default>
+                <label>Case Tracking</label>
+            </value>
+            <value>
+                <fullName>Civil Proceeding</fullName>
+                <default>false</default>
+                <label>Civil Proceeding</label>
+            </value>
+            <value>
+                <fullName>Deposition</fullName>
+                <default>false</default>
+                <label>Deposition</label>
+            </value>
+            <value>
+                <fullName>Grand Jury</fullName>
+                <default>false</default>
+                <label>Grand Jury</label>
+            </value>
+            <value>
+                <fullName>Hearing</fullName>
+                <default>false</default>
+                <label>Hearing</label>
+            </value>
+            <value>
+                <fullName>Investigation Related</fullName>
+                <default>false</default>
+                <label>Investigation Related</label>
+            </value>
+            <value>
+                <fullName>Memo</fullName>
+                <default>false</default>
+                <label>Memo</label>
+            </value>
+            <value>
+                <fullName>Motions</fullName>
+                <default>false</default>
+                <label>Motions</label>
+            </value>
+            <value>
+                <fullName>General Update</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>Petition</fullName>
+                <default>false</default>
+                <label>Petition</label>
+            </value>
+            <value>
+                <fullName>Preparation</fullName>
+                <default>false</default>
+                <label>Prep</label>
+            </value>
+            <value>
+                <fullName>Report</fullName>
+                <default>false</default>
+                <label>Report</label>
+            </value>
+            <value>
+                <fullName>Research</fullName>
+                <default>false</default>
+                <label>Research</label>
+            </value>
+            <value>
+                <fullName>Trial</fullName>
+                <default>false</default>
+                <label>Trial</label>
+            </value>
+            <value>
+                <fullName>Drafting</fullName>
+                <default>false</default>
+                <label>Drafting</label>
+            </value>
+            <value>
+                <fullName>Email</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Email</label>
+            </value>
+            <value>
+                <fullName>MOU</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>MOU</label>
+            </value>
+            <value>
+                <fullName>Media</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Media</label>
+            </value>
+            <value>
+                <fullName>Petition for Custody</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Petition for Custody</label>
+            </value>
+            <value>
+                <fullName>Phone</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Phone</label>
+            </value>
+            <value>
+                <fullName>Restitution Hearing</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Restitution Hearing</label>
+            </value>
+            <value>
+                <fullName>Search Warrant</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Search Warrant</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

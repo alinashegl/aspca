@@ -1,0 +1,44 @@
+.THIS {
+}
+.THIS thead th {
+  position: -webkit-sticky; /* for Safari */
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.THIS thead th:first-child {
+  left: 0;
+  z-index: 2;
+}
+.THIS thead th:nth-child(2) {
+  left: 157px;
+  z-index: 2;
+}
+.THIS thead th:nth-child(3) {
+  left: 299px;
+  z-index: 2;
+}
+.THIS tbody th {
+  position: -webkit-sticky; /* for Safari */
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background-color: #fafaf9;
+}
+.THIS tr td:nth-child(2) {
+  position: -webkit-sticky; /* for Safari */
+  position: sticky;
+  left: 157px;
+  z-index: 1;
+  background-color: #fafaf9;
+}
+.THIS tr td:nth-child(3) {
+  position: -webkit-sticky; /* for Safari */
+  position: sticky;
+  left: 299px;
+  z-index: 1;
+  background-color: #fafaf9;
+}
+.THIS .label-hidden > label {
+    display: none;
+}

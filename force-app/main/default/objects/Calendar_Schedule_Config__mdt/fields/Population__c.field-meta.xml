@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Population__c</fullName>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Population</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>CRC</fullName>
+                <default>true</default>
+                <label>CRC</label>
+            </value>
+            <value>
+                <fullName>MRC</fullName>
+                <default>false</default>
+                <label>MRC</label>
+            </value>
+            <value>
+                <fullName>ARC</fullName>
+                <default>false</default>
+                <label>ARC</label>
+            </value>
+            <value>
+                <fullName>Foster - All</fullName>
+                <default>false</default>
+                <label>Foster - All</label>
+            </value>
+            <value>
+                <fullName>Board And Train All</fullName>
+                <default>false</default>
+                <label>Board And Train All</label>
+            </value>
+            <value>
+                <fullName>CARE</fullName>
+                <default>false</default>
+                <label>CARE</label>
+            </value>
+            <value>
+                <fullName>ARC/CARE</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>ARC/CARE</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

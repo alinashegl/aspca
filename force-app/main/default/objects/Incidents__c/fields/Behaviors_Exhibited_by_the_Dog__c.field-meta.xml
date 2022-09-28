@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Behaviors_Exhibited_by_the_Dog__c</fullName>
+    <externalId>false</externalId>
+    <label>Behaviors Exhibited by the Dog</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Repetitive behavior (pacing - licking - drooling)</fullName>
+                <default>false</default>
+                <label>Repetitive behavior (pacing - licking - drooling)</label>
+            </value>
+            <value>
+                <fullName>Staring at wall or corner of kennel</fullName>
+                <default>false</default>
+                <label>Staring at wall or corner of kennel</label>
+            </value>
+            <value>
+                <fullName>High arousal/excitement (intense - energetic activity)</fullName>
+                <default>false</default>
+                <label>High arousal/excitement (intense - energetic activity)</label>
+            </value>
+            <value>
+                <fullName>Tugging or climbing the leash</fullName>
+                <default>false</default>
+                <label>Tugging or climbing the leash</label>
+            </value>
+            <value>
+                <fullName>Hard mouthing</fullName>
+                <default>false</default>
+                <label>Hard mouthing</label>
+            </value>
+            <value>
+                <fullName>Climbing or high jumping up kennel walls or fence</fullName>
+                <default>false</default>
+                <label>Climbing or high jumping up kennel walls or fence</label>
+            </value>
+            <value>
+                <fullName>Escaping from kennel</fullName>
+                <default>false</default>
+                <label>Escaping from kennel</label>
+            </value>
+            <value>
+                <fullName>Trying to get away</fullName>
+                <default>false</default>
+                <label>Trying to get away</label>
+            </value>
+            <value>
+                <fullName>Trying to get at another dog</fullName>
+                <default>false</default>
+                <label>Trying to get at another dog</label>
+            </value>
+            <value>
+                <fullName>Fighting with another dog</fullName>
+                <default>false</default>
+                <label>Fighting with another dog</label>
+            </value>
+            <value>
+                <fullName>Guarding food or chewy from person</fullName>
+                <default>false</default>
+                <label>Guarding food or chewy from person</label>
+            </value>
+            <value>
+                <fullName>Guarding non-food item from person</fullName>
+                <default>false</default>
+                <label>Guarding non-food item from person</label>
+            </value>
+            <value>
+                <fullName>Resisting medical restraint</fullName>
+                <default>false</default>
+                <label>Resisting medical restraint</label>
+            </value>
+            <value>
+                <fullName>Stiffening or freezing</fullName>
+                <default>false</default>
+                <label>Stiffening or freezing</label>
+            </value>
+            <value>
+                <fullName>Whipping head toward person - unsure if dog would bite</fullName>
+                <default>false</default>
+                <label>Whipping head toward person - unsure if dog would bite</label>
+            </value>
+            <value>
+                <fullName>Lunging toward a person</fullName>
+                <default>false</default>
+                <label>Lunging toward a person</label>
+            </value>
+            <value>
+                <fullName>Muzzle punching (forceful jab with nose)</fullName>
+                <default>false</default>
+                <label>Muzzle punching (forceful jab with nose)</label>
+            </value>
+            <value>
+                <fullName>Growling</fullName>
+                <default>false</default>
+                <label>Growling</label>
+            </value>
+            <value>
+                <fullName>Showing teeth</fullName>
+                <default>false</default>
+                <label>Showing teeth</label>
+            </value>
+            <value>
+                <fullName>Snapping</fullName>
+                <default>false</default>
+                <label>Snapping</label>
+            </value>
+            <value>
+                <fullName>Biting</fullName>
+                <default>false</default>
+                <label>Biting</label>
+            </value>
+            <value>
+                <fullName>High arousal/excitement (intense, energetic activity)</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>High arousal/excitement (intense, energetic activity)</label>
+            </value>
+            <value>
+                <fullName>Repetitive behavior (pacing, licking, drooling)</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Repetitive behavior (pacing, licking, drooling)</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

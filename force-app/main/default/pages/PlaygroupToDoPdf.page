@@ -1,0 +1,51 @@
+<apex:page controller="PlaygroupToDoPdfController" renderAs="pdf" applyHtmlTag="false" applyBodyTag="false" showHeader="false" standardStylesheets="false">
+    <apex:styleSheet value="{!URLFOR($Resource.TreatmentToDoPdfStyle)}"/>
+    <html>
+        <head>
+        <style type="text/css" media="print">
+        </style>
+        </head>
+        <body>
+            <div>
+                <h1 class="large">Playgroup To Do List</h1>
+            </div>
+            <table>
+                <thead>
+                    <td class="line"><strong>Animal name</strong></td>
+                    <td class="line"><strong>ID#</strong></td>
+                    <td class="line"><strong>Sex</strong></td>
+                    <td class="line"><strong>Kennel Location</strong></td>
+                    <td class="line"><strong># of Playgroups</strong></td>
+                    <td class="line"><strong>Shelter color code</strong></td>
+                    <td class="line"><strong>PG Priority</strong></td>
+                    <td class="line"><strong>Play category</strong></td>
+                    <td class="line"><strong>Medical Flag</strong></td>
+                </thead>
+                <apex:repeat value="{!animals}" var="animal" id="animalList">
+                    <tbody>
+                        <tr class="spaceUnder" style="vertical-align:top;">
+                            <td width="10%"><strong>{!animal.Animal_Name__c}</strong></td>
+                            <td width="15%"><strong>{!animal.Name}</strong></td>
+                            <td width="5%"><strong>{!animal.Gender__c}</strong></td>
+                            <td width="10%"><strong>{!animal.Shelter_Location__c}</strong></td>
+                            <td width="10%"><strong>{!animal.Number_of_Playgroups__c}</strong></td>
+                            <td width="20%">{!IF(NOT(BEGINS(animal.Shelter_Color_Coding__c, 'Green')), animal.Shelter_Color_Coding__c, '')}</td>
+                            <td width="10%">{!animal.Playgroup_Priority_Level__c}</td>
+                            <td width="10%">{!animal.Play_Category__c}</td>
+                            <td width="10%">{!IF((animal.Medical_Conditions__r.size != 0), IF((animal.Play_Pauses__r.size != 0), 'Babesia +, In Heat', 'Babesia +'), IF((animal.Play_Pauses__r.size != 0), 'In Heat', ''))}</td>
+                        </tr>
+                        <tr class="spaceUnder">
+                            <td width="10%" style="vertical-align:top;"><strong>Play style notes:</strong></td>
+                            <td width="90%" colspan="10">{!animal.Play_Style_Notes__c}</td>
+                        </tr>
+                        <tr class="spaceUnder" style="{!IF(animal.Does_Not_Walk_on_a_Leash__c, '', 'display: none;')}">
+                            <td width="10%" style="vertical-align:top;"><strong>Does Not Walk on a Leash Notes:</strong></td>
+                            <td width="90%" colspan="10">{!animal.Does_Not_Walk_on_a_Leash_Notes__c}</td>
+                        </tr>
+                        <hr />
+                    </tbody>
+                </apex:repeat>
+            </table>
+        </body>
+    </html>
+</apex:page>

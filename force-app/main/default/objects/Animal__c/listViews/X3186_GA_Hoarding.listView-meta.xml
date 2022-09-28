@@ -20,5 +20,10 @@
         <operation>contains</operation>
         <value>3186</value>
     </filters>
+    <filters>
+        <field>Animal_Status__c</field>
+        <operation>equals</operation>
+        <value>In Shelter</value>
+    </filters>
     <label>3186 GA Hoarding</label>
 </ListView>

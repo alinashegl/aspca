@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Walking_Status__c</fullName>
+    <externalId>false</externalId>
+    <label>Walking Status</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>No Walks</fullName>
+                <default>false</default>
+                <label>No Walks</label>
+            </value>
+            <value>
+                <fullName>Terrace Walks</fullName>
+                <default>false</default>
+                <label>Terrace Walks</label>
+            </value>
+            <value>
+                <fullName>Inside Walks</fullName>
+                <default>false</default>
+                <label>Inside Walks</label>
+            </value>
+            <value>
+                <fullName>Outside Walks</fullName>
+                <default>false</default>
+                <label>Outside Walks</label>
+            </value>
+            <value>
+                <fullName>2 person Walks</fullName>
+                <default>false</default>
+                <label>2 person Walks</label>
+            </value>
+            <value>
+                <fullName>Ok to take the Stairs</fullName>
+                <default>false</default>
+                <label>Ok to take the Stairs</label>
+            </value>
+            <value>
+                <fullName>Behavior Only</fullName>
+                <default>false</default>
+                <label>Behavior Only</label>
+            </value>
+            <value>
+                <fullName>No Handle</fullName>
+                <default>false</default>
+                <label>No Handle</label>
+            </value>
+            <value>
+                <fullName>None Specified</fullName>
+                <default>true</default>
+                <label>None Specified</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

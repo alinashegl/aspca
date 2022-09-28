@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>Update_case_location</fullName>
+        <field>Has_Primary_Location__c</field>
+        <literalValue>1</literalValue>
+        <name>Update case location</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+        <targetObject>Case__c</targetObject>
+    </fieldUpdates>
+    <rules>
+        <fullName>Must Have Scene Location</fullName>
+        <actions>
+            <name>Update_case_location</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Scene_Locations__c.Primary_Incident_Location__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>Must have a Primary Scene Location for each case</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+</Workflow>

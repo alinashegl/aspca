@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Borough__c</fullName>
+    <externalId>false</externalId>
+    <label>Borough (NYC Only)</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Bronx</fullName>
+                <default>false</default>
+                <label>Bronx</label>
+            </value>
+            <value>
+                <fullName>Brooklyn</fullName>
+                <default>false</default>
+                <label>Brooklyn</label>
+            </value>
+            <value>
+                <fullName>Manhattan</fullName>
+                <default>false</default>
+                <label>Manhattan</label>
+            </value>
+            <value>
+                <fullName>Queens</fullName>
+                <default>false</default>
+                <label>Queens</label>
+            </value>
+            <value>
+                <fullName>Staten Island</fullName>
+                <default>false</default>
+                <label>Staten Island</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

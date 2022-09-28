@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Evaluation_Subtype__c</fullName>
+    <externalId>false</externalId>
+    <label>Evaluations</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Puppy</fullName>
+                <default>false</default>
+                <label>Puppy</label>
+            </value>
+            <value>
+                <fullName>Dog Fighting</fullName>
+                <default>false</default>
+                <label>Dog Fighting</label>
+            </value>
+            <value>
+                <fullName>Adult Animal</fullName>
+                <default>false</default>
+                <label>Adult Dog</label>
+            </value>
+            <value>
+                <fullName>Dog/Dog Only</fullName>
+                <default>false</default>
+                <label>Dog/Dog Only</label>
+            </value>
+            <value>
+                <fullName>Fighting Dog Case</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Fighting Dog Case</label>
+            </value>
+            <value>
+                <fullName>Play Test P1</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Play Test P1</label>
+            </value>
+            <value>
+                <fullName>Play Test P2</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Play Test P2</label>
+            </value>
+            <value>
+                <fullName>Pleasant Touch Test</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Pleasant Touch Test</label>
+            </value>
+            <value>
+                <fullName>Social Test P1</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Social Test P1</label>
+            </value>
+            <value>
+                <fullName>Social Test P2</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Social Test P2</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

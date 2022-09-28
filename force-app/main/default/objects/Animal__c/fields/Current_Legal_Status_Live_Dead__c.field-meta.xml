@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Current_Legal_Status_Live_Dead__c</fullName>
+    <externalId>false</externalId>
+    <formula>Current_Legal_Status__c &amp; if( ISBLANK(TEXT(Live_or_Dead__c)),&quot;&quot; , &quot; (&quot; &amp; TEXT(Live_or_Dead__c) &amp; &quot;)&quot;)</formula>
+    <label>Current Legal Status (Live/Dead)</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>ARC_CARE_Case_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>ARC/CARE Case Sharing</label>
+        <sharedTo>
+            <group>ARC_CARE</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>NYC Criminal Case</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>FIR_Cases</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>FIR Cases</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>National Criminal Case,Natural Disaster Case</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>NYC_Cases</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>NYC Criminal Cases only shared with NYC Legal Advocates</description>
+        <label>NYC Cases</label>
+        <sharedTo>
+            <group>Legal_Advocacy_NYC</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>NYC Criminal Case</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>NYC_Forensics_Cases</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>NYC Forensics Cases</label>
+        <sharedTo>
+            <group>Forensics_NYC</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>NYC Criminal Case</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+</SharingRules>

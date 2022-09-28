@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Puppy Resource Guarding P2 - Push Face</label>
+    <protected>false</protected>
+    <values>
+        <field>Child_Test_Config__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Comment_Reference__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Comment_Reference_del__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>IsAdult__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>IsDogFighting__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>IsDogOnly__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>IsPuppy__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Is_Child__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Object_Reference__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Overall_Test_Display_Name__c</field>
+        <value xsi:type="xsd:string">Chewy</value>
+    </values>
+    <values>
+        <field>Parent_Test_Api_Name__c</field>
+        <value xsi:type="xsd:string">Resource_Guarding_P2</value>
+    </values>
+    <values>
+        <field>Picklist_API_Name__c</field>
+        <value xsi:type="xsd:string">Puppy_Resource_Guarding_P2_Push_Face__c</value>
+    </values>
+    <values>
+        <field>Test_Comment_Field_Name__c</field>
+        <value xsi:type="xsd:string">Comments_RG_P2__c</value>
+    </values>
+    <values>
+        <field>Test_Description__c</field>
+        <value xsi:type="xsd:string">Resource Guarding - Part 2: Chew</value>
+    </values>
+    <values>
+        <field>Test_Display_Order__c</field>
+        <value xsi:type="xsd:string">16</value>
+    </values>
+    <values>
+        <field>Test_Header_Description__c</field>
+        <value xsi:type="xsd:string">&lt;div&gt;Assistant continues to hold leash. Give puppy a pig&apos;s ear. Once dog is engaged in chewing approach then&lt;br/&gt;1. Stroke puppy&apos;s back and say curiously, &quot;Hey, whatcha got there?&quot;&lt;br/&gt;2. Touch collar and say curiously, &quot;Hey, whatcha got there?&quot;&lt;br/&gt;3. Touch puppy&apos;s muzzle and say curiously, &quot;Hey, whatcha got there?&quot;&lt;br/&gt;4. Firmly push puppy&apos;s muzzle as though to grasp chewy and say sternly, &quot;Hey get out of there!&quot;&lt;/div&gt;</value>
+    </values>
+    <values>
+        <field>Test_Name__c</field>
+        <value xsi:type="xsd:string">Chewy</value>
+    </values>
+    <values>
+        <field>Test_Optional_Field__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Test_Skip_Reason_Field__c</field>
+        <value xsi:type="xsd:string">Skipped_RG_P2__c</value>
+    </values>
+    <values>
+        <field>Test_Type_Description__c</field>
+        <value xsi:type="xsd:string">PF = Push Face</value>
+    </values>
+</CustomMetadata>

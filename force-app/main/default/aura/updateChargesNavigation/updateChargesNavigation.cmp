@@ -1,0 +1,5 @@
+<aura:component implements="force:hasRecordId,force:lightningQuickAction,lightning:hasPageReference">
+    <lightning:navigation aura:id="navService"/>
+    <aura:attribute name="recordId" type="String"/>
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+</aura:component>

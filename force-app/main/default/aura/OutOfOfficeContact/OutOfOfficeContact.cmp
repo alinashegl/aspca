@@ -1,0 +1,82 @@
+<aura:component controller="OutOfOfficeController" implements="force:lightningQuickActionWithoutHeader,force:hasRecordId">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="recordTypes" type="List" />
+    <aura:attribute name="selectedRecordType" type="String"/>
+    <aura:attribute name="selectedRecordTypeLabel" type="String"/>
+    <aura:attribute name="isRecordTypeSelectionVisible" type="Boolean" default="true"/>
+    <lightning:notificationsLibrary aura:id="notificationsLibrary"/>
+    <aura:html tag="style">
+        .slds-p-around–medium {
+        padding: 0rem !important;
+        }
+        .slds-modal__content{
+        overflow-y:hidden !important;
+        height:unset !important;
+        max-height:unset !important;
+        }
+        .cuf-content {
+        padding: 0 0rem !important;
+        }
+    </aura:html>
+    <div class="modal-header slds-modal__header slds-size_1-of-1">
+        <h4 class="title slds-text-heading–medium"><b>Out of Office</b></h4>
+    </div>
+    
+    <div class="slds-modal__content slds-p-around–x-small slds-align_absolute-center slds-size_1-of-1 slds-is-relative">
+        <form class="slds-form–stacked">
+            <aura:if isTrue="{!v.isRecordTypeSelectionVisible}">
+                <lightning:radioGroup name="recordTypes"
+                                      label="Select Record Type"
+                                      options="{! v.recordTypes }"
+                                      onchange="{! c.handleChange }"
+                                      class="slds-p-around_medium"
+                                      type="radio"/>
+                
+                <aura:set attribute="else">
+                    <lightning:recordEditForm
+                                              aura:id ="createooo"
+                                              objectApiName="OutOfOffice__c"
+                                              recordTypeId="{!v.selectedRecordType}"
+                                              onload="{!c.handleOnload}"
+                                              onsubmit="{!c.handleSubmit}"                 
+                                              onsuccess="{!c.handleSuccess}"
+                                              onerror="{!c.handleError}">
+                        
+                        <div class="slds-grid slds-wrap">  
+                            <div class="slds-col slds-size_2-of-2">                              
+                                <lightning:inputField fieldName="Contact__c" value="{!v.recordId}" disable="true"/>
+                            </div>  
+                            <div class="slds-col slds-size_2-of-2">  
+                                <lightning:inputField fieldName="IsEnabled__c"/>
+                            </div>  
+                            <aura:if isTrue="{!v.selectedRecordTypeLabel == 'Weekly OOO'}">
+                                <div class="slds-col slds-size_2-of-2">                              
+                                    <lightning:inputField fieldName="Days__c"/>
+                                </div>  
+                                <aura:set attribute="else">
+                                    <div class="slds-col slds-size_2-of-2">  
+                                        <lightning:inputField fieldName="StartDate__c"/>
+                                    </div>  
+                                    <div class="slds-col slds-size_2-of-2">  
+                                        <lightning:inputField fieldName="EndDate__c"/>
+                                    </div>  
+                                    <div class="slds-col slds-size_2-of-2">  
+                                        <lightning:inputField fieldName="Message__c"/>
+                                    </div> 
+                                </aura:set>
+                            </aura:if>    
+                        </div>  
+                        
+                    </lightning:recordEditForm>
+                </aura:set>
+            </aura:if>
+        </form>
+    </div>
+    <br/>
+    <div class="modal-footer slds-modal__footer slds-size_1-of-1">
+        <aura:if isTrue="{!not(empty(v.selectedRecordType))}">
+            <lightning:button variant="Brand" class="slds-button" label="Save" type="submit" onclick="{!c.handleSubmit}"/>
+        </aura:if>
+        <lightning:button variant="Neutral" class="slds-button" label="Cancel" onclick="{!c.handleCancel}"/>
+    </div>
+</aura:component>

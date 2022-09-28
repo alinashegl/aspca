@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Play_Pause_Reason__c</fullName>
+    <externalId>false</externalId>
+    <label>Play Pause Reason</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Type__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>In Heat</fullName>
+                <default>false</default>
+                <label>In Heat</label>
+            </value>
+            <value>
+                <fullName>Surgery</fullName>
+                <default>false</default>
+                <label>Surgery</label>
+            </value>
+            <value>
+                <fullName>Lameness</fullName>
+                <default>false</default>
+                <label>Lameness</label>
+            </value>
+            <value>
+                <fullName>Infectious Disease</fullName>
+                <default>false</default>
+                <label>Infectious Disease</label>
+            </value>
+            <value>
+                <fullName>Spay/Neuter</fullName>
+                <default>false</default>
+                <label>Spay/Neuter</label>
+            </value>
+            <value>
+                <fullName>Bite Quarantine</fullName>
+                <default>false</default>
+                <label>Bite Quarantine</label>
+            </value>
+            <value>
+                <fullName>Medical Quarantine</fullName>
+                <default>false</default>
+                <label>Medical Quarantine</label>
+            </value>
+            <value>
+                <fullName>Cardiac Condition</fullName>
+                <default>false</default>
+                <label>Cardiac Condition</label>
+            </value>
+            <value>
+                <fullName>Nursing Dam</fullName>
+                <default>false</default>
+                <label>Nursing Dam</label>
+            </value>
+            <value>
+                <fullName>Needs a Break</fullName>
+                <default>false</default>
+                <label>Needs a Break</label>
+            </value>
+            <value>
+                <fullName>Bad Session</fullName>
+                <default>false</default>
+                <label>Bad Session</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>Sick/Injured</fullName>
+                <default>false</default>
+                <label>Sick/Injured</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Medical</controllingFieldValue>
+            <valueName>In Heat</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical</controllingFieldValue>
+            <valueName>Surgery</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical</controllingFieldValue>
+            <valueName>Lameness</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical</controllingFieldValue>
+            <valueName>Infectious Disease</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical</controllingFieldValue>
+            <valueName>Spay/Neuter</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical</controllingFieldValue>
+            <valueName>Bite Quarantine</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical</controllingFieldValue>
+            <valueName>Medical Quarantine</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical</controllingFieldValue>
+            <valueName>Cardiac Condition</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical</controllingFieldValue>
+            <valueName>Nursing Dam</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical</controllingFieldValue>
+            <controllingFieldValue>Behavioral</controllingFieldValue>
+            <valueName>Other</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Medical</controllingFieldValue>
+            <valueName>Sick/Injured</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Behavioral</controllingFieldValue>
+            <valueName>Needs a Break</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Behavioral</controllingFieldValue>
+            <valueName>Bad Session</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

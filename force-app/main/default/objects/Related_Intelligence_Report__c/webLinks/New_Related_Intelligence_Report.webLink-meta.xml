@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>New_Related_Intelligence_Report</fullName>
+    <availability>online</availability>
+    <displayType>massActionButton</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>New Related Intelligence Report</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <requireRowSelection>false</requireRowSelection>
+    <url>/a0G/e?CF00Ni000000BeavJ={!Tips_Intel__c.Name}
+&amp;CF00Ni000000BeavJ_lkid={!Tips_Intel__c.Id}
+&amp;retURL=%2F{!Tips_Intel__c.Id}
+&amp;saveURL={!Tips_Intel__c.Id}</url>
+</WebLink>
