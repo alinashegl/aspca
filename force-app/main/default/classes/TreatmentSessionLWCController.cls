@@ -4,6 +4,16 @@ public with sharing class TreatmentSessionLWCController {
     protocols and scores to display in the table
     the list of requiredProtocols are the column headings
     */
+    public static final String[] protocolColumns = new String[]{
+        'Aggresive - Worst',
+        'Aggression - Movement',
+        'Arousal - Best',
+        'Arousal - Worst',
+        'Fear - Best',
+        'Fear - Worst',
+        'Fear - Sociability Best',
+        'Solicitation - Non-Fearful Treatment'
+    };
     @AuraEnabled (cacheable=true)
     public static SessionInfo getActiveProtocolsForSession(Id sessionId){
         Set<String> requiredProtocols = new Set<String>();
@@ -36,15 +46,10 @@ public with sharing class TreatmentSessionLWCController {
             ]){
                 SessionProtocolInfo info = new SessionProtocolInfo(sp);
                 protocolInfos.add(info);
-                for(Session_Protocol_Scale__c sps : sp.Session_Protocol_Scales__r){
-                    if(sps.Protocol_Scale__r.Column_Order__c != null){
-                        requiredProtocols.add(sps.Protocol_Scale__r.Name);
-                    }
-                }
             }
 
             SessionInfo sInfo = new SessionInfo();
-            sInfo.requiredProtocols = new String[(requiredProtocols)];
+            sInfo.requiredProtocols = protocolColumns;
             sInfo.sessionProtocolInfos = protocolInfos;
             return sInfo;
         } catch (Exception e) {
@@ -395,6 +400,8 @@ public with sharing class TreatmentSessionLWCController {
         @AuraEnabled public ScaleInfo[] scaleInfos;
         @AuraEnabled public String overallScore;
 
+        String[] columns = TreatmentSessionLWCController.protocolColumns;
+
         public SessionProtocolInfo(Session_Protocol__c sp){
             this.id = sp.Id;
             this.name = sp.Protocol_Name__c;
@@ -403,9 +410,12 @@ public with sharing class TreatmentSessionLWCController {
             this.status = sp.Status__c;
             this.scaleInfos = new ScaleInfo[0];
             for(Session_Protocol_Scale__c scale : sp.Session_Protocol_Scales__r){
-                this.scaleInfos.add(new ScaleInfo(scale));
+                if(columns.contains(scale.Protocol_Scale__r.Name)){
+                    this.scaleInfos.add(new ScaleInfo(scale));
+                }
                 if(scale.Protocol_Scale__r.Name == 'Overall Score'){
                     this.overallScore = scale.Protocol_Score__c;
+                    this.scaleInfos.add(new ScaleInfo(scale));
                 }
             }
         }
