@@ -9,8 +9,8 @@ public class ArcCareAnimalDogListController {
         
         List<Animal__c> objList = new List<Animal__c>();
         for(Animal__c obj : objs){
-            if(obj.Current_Location__c != null && (obj.Current_Location__c.containsIgnoreCase('ARC') || 
-              obj.Current_Location__c.containsIgnoreCase('CARE'))){
+            if(obj.Current_Location__c != null && (obj.Current_Location__c.equalsIgnoreCase('ARC - ARC') || 
+              obj.Current_Location__c.equalsIgnoreCase('CARE'))){
                 objList.add(obj);
             }
         }

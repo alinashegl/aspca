@@ -6,13 +6,14 @@ public class CRCAnimalDogListController {
                 Animal__r.Name, Animal__r.Animal_Name__c, Animal__r.Animal_Name_Id__c,
                 Animal__r.Meets_Adoptability_Date__c, Animal__r.Playgroup_Priority_Level__c, Animal__r.Current_Location__c,
                 Animal__r.Behavior_Case_Worker__c, Animal__r.Behavior_Case_Worker__r.Name from Treatment_Plan__c 
-                WHERE IsActive__c = true 
-                AND Animal__r.Current_Location__c like '%CRC%'
+                WHERE IsActive__c = true
                 AND Animal__c IN (Select Animal__c from Play_Pause__c where End_Play_Pause__c != true) ];
         
         List<Treatment_Plan__c> objList = new List<Treatment_Plan__c>();
         for(Treatment_Plan__c obj : objs){
-            if(obj.Animal__r != null && obj.Animal__r.Current_Location__c.containsIgnoreCase('CRC')){
+            if(obj.Animal__r != null && obj.Animal__r.Current_Location__c != null && 
+               obj.Animal__r.Current_Location__c.equalsIgnoreCase('CRC - CRC') &&
+               obj.Animal__r.Current_Location__c.equalsIgnoreCase('CRC-MRC')){
                 objList.add(obj);
             }
         }
