@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>City_and_State_required</fullName>
-    <active>false</active>
-    <errorConditionFormula>OR( BillingCity =&apos;&apos;, BillingState =&apos;&apos;)</errorConditionFormula>
-    <errorDisplayField>BillingCity</errorDisplayField>
-    <errorMessage>You must provide a City and State.</errorMessage>
-</ValidationRule>
