@@ -8,6 +8,7 @@ public class CRCAnimalDogListControllerTest {
         List<Treatment_Plan__c> planList = new List<Treatment_Plan__c>();
         for(Integer i = 1; i <= 5; i++){
             Animal__c a = TestDataFactory.createAnimalWithName('anm' + i);
+            a.Current_Location__c = 'CRC - CRC';
             animals.add(a);
             playPauses.addAll(TestDataFactory.createPlayPauses(a));
             
@@ -26,13 +27,15 @@ public class CRCAnimalDogListControllerTest {
         update playPauses;
         
         insert planList;
+        
+        update animals;
     }
     
     @isTest
     static void testRecords(){
-        List<Treatment_Plan__c> objs = CRCAnimalDogListController.getRecords();
+        CRCAnimalDogListController.CRCDogListResult objs = CRCAnimalDogListController.getRecords();
         System.assertNotEquals(objs, null);
-        String result = CRCAnimalDogListController.saveRecords(JSON.serialize(objs));
+        String result = CRCAnimalDogListController.saveRecords(JSON.serialize(objs.plans));
         System.assertEquals('success', result);
         
     }

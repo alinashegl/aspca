@@ -1036,11 +1036,13 @@ public without sharing class TestDataFactory {
             new Play_Pause__c(
                 Animal__c = a.Id,
                 Type__c = 'Medical',
+                End_Date__c = System.today(),
                 Play_Pause_Reason__c = 'In Heat',
                 Start_Date__c = System.today()),
             new Play_Pause__c(
                 Animal__c = a.Id,
                 Type__c = 'Behavioral',
+                End_Date__c = System.today(),
                 Play_Pause_Reason__c = 'Needs a Break',
                 Start_Date__c = System.today())
         };
