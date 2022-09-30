@@ -34,4 +34,27 @@ public class test_FacilityOutcomeTrigger {
         Test.stopTest();
         System.assertEquals(0, emailInvocations);
     }
+
+    @isTest 
+    static void handleEvaluationProcessTest(){
+        Animal__c dog = TestDataFactory.createAnimalWithName('Willow');
+        Contact c = TestDataFactory.createContact();
+        Facility_Outcome__c arcFO = new Facility_Outcome__c(
+            Animal__c = dog.Id,
+            Facility_or_Outcome__c = 'Facility',
+            Facility_Outcome__c = 'ARC',
+            Point_of_Contact__c = c.Id,
+            Start_Date__c = System.today()
+        );        
+
+        Test.startTest();
+        insert arcFO;
+        Test.stopTest();
+
+        dog = [SELECT Id, Evaluation_Due_Date__c FROM Animal__c WHERE Id = :dog.Id LIMIT 1];
+        System.assertEquals(true, dog.Evaluation_Due_Date__c != null, 'Should have an evaluation due date, but was null');
+
+        Task[] evalTasks = [SELECT Id FROM Task WHERE Animal__c = :dog.Id AND RecordTypeId = :Util.getRecordTypeId('Task',AutoScheduleTasksUtil.EVALUATION_RECORD_TYPE_NAME)];
+        System.assertEquals(1, evalTasks.size(), 'Should have returned one evaluation task, instead was: ' + evalTasks);
+    }
 }
