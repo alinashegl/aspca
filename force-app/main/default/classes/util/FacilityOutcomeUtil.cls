@@ -33,9 +33,9 @@ public class FacilityOutcomeUtil {
             WHERE Id IN :animalIds
             AND Type_of_Animal__c = 'Dog'
         ]){
-            //if there is only one facility outcome, we know we need to create update the evalu due date and create a follow up task
+            //if there is only one facility outcome, we know we need to update the evalu due date and create a follow up task
             if(dog.Facilities_Outcomes__r.isEmpty()){
-                dog.Evaluation_Date__c = evalDueDate;
+                dog.Evaluation_Due_Date__c = evalDueDate;
                 toUpdate.add(dog);
             
                 Task evalTask = new Task(

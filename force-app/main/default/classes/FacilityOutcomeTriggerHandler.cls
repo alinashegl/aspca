@@ -13,8 +13,7 @@ public with sharing class FacilityOutcomeTriggerHandler {
                 fosterIdList.add(foInsert.Id);
             }
 
-            //if is ARC/CARE facility outcome add to animalIdsForEvalProcess
-            
+            //if is ARC/CARE facility outcome add to animalIdsForEvalProcess            
             if(FacilityOutcomeUtil.EVAL_PROCESS_OUTCOME_OPTIONS.contains(foInsert.Facility_Outcome__c)){
                 animalIdsForEvalProcess.add(foInsert.Animal__c);
                 foIdsForEvalProcess.add(foInsert.Id);

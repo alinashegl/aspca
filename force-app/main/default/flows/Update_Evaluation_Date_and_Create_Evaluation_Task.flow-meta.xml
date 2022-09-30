@@ -5,7 +5,7 @@
         <name>Assign_BRC_1st_Reminder</name>
         <label>Assign BRC 1st Reminder</label>
         <locationX>314</locationX>
-        <locationY>1295</locationY>
+        <locationY>575</locationY>
         <assignmentItems>
             <assignToReference>varTaskRecord.ActivityDate</assignToReference>
             <operator>Assign</operator>
@@ -84,7 +84,7 @@
         <name>Assign_BRC_2nd_Reminder</name>
         <label>Assign BRC 2nd Reminder</label>
         <locationX>314</locationX>
-        <locationY>1535</locationY>
+        <locationY>815</locationY>
         <assignmentItems>
             <assignToReference>varTaskRecord.ActivityDate</assignToReference>
             <operator>Assign</operator>
@@ -163,7 +163,7 @@
         <name>Assign_BRC_MRC_1st_Reminder</name>
         <label>Assign BRC/MRC 1st Reminder</label>
         <locationX>50</locationX>
-        <locationY>1295</locationY>
+        <locationY>575</locationY>
         <assignmentItems>
             <assignToReference>varTaskRecord.ActivityDate</assignToReference>
             <operator>Assign</operator>
@@ -242,7 +242,7 @@
         <name>Assign_BRC_MRC_2nd_Reminder_0</name>
         <label>Assign BRC/MRC 2nd Reminder</label>
         <locationX>50</locationX>
-        <locationY>1535</locationY>
+        <locationY>815</locationY>
         <assignmentItems>
             <assignToReference>varTaskRecord.ActivityDate</assignToReference>
             <operator>Assign</operator>
@@ -321,7 +321,7 @@
         <name>Assign_MRC_1st_Reminder</name>
         <label>Assign MRC 1st Reminder</label>
         <locationX>578</locationX>
-        <locationY>1295</locationY>
+        <locationY>575</locationY>
         <assignmentItems>
             <assignToReference>varTaskRecord.ActivityDate</assignToReference>
             <operator>Assign</operator>
@@ -400,7 +400,7 @@
         <name>Assign_MRC_2nd_Reminder</name>
         <label>Assign MRC 2nd Reminder</label>
         <locationX>578</locationX>
-        <locationY>1535</locationY>
+        <locationY>815</locationY>
         <assignmentItems>
             <assignToReference>varTaskRecord.ActivityDate</assignToReference>
             <operator>Assign</operator>
@@ -479,7 +479,7 @@
         <name>Assign_Tasks_to_List</name>
         <label>Assign Tasks to List</label>
         <locationX>446</locationX>
-        <locationY>1751</locationY>
+        <locationY>1031</locationY>
         <assignmentItems>
             <assignToReference>varTaskList</assignToReference>
             <operator>Add</operator>
@@ -495,7 +495,7 @@
         <name>Assign_Tasks_to_List_0</name>
         <label>Assign Tasks to List</label>
         <locationX>314</locationX>
-        <locationY>1415</locationY>
+        <locationY>695</locationY>
         <assignmentItems>
             <assignToReference>varTaskList</assignToReference>
             <operator>Add</operator>
@@ -511,7 +511,7 @@
         <name>Assign_Tasks_to_List_0_0</name>
         <label>Assign Tasks to List</label>
         <locationX>578</locationX>
-        <locationY>1415</locationY>
+        <locationY>695</locationY>
         <assignmentItems>
             <assignToReference>varTaskList</assignToReference>
             <operator>Add</operator>
@@ -527,7 +527,7 @@
         <name>Assign_Tasks_to_List_0_0_0</name>
         <label>Assign Tasks to List</label>
         <locationX>50</locationX>
-        <locationY>1415</locationY>
+        <locationY>695</locationY>
         <assignmentItems>
             <assignToReference>varTaskList</assignToReference>
             <operator>Add</operator>
@@ -543,7 +543,7 @@
         <name>BRC_MRC_Candidate_Check</name>
         <label>BRC/MRC Candidate Check</label>
         <locationX>446</locationX>
-        <locationY>1175</locationY>
+        <locationY>455</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>BRC_MRC_Candidate</name>
@@ -598,32 +598,7 @@
             <label>MRC Candidate</label>
         </rules>
     </decisions>
-    <decisions>
-        <name>FacilityOutcomeDecision</name>
-        <label>FacilityOutcomeDecision</label>
-        <locationX>776</locationX>
-        <locationY>455</locationY>
-        <defaultConnector>
-            <isGoTo>true</isGoTo>
-            <targetReference>BRC_MRC_Candidate_Check</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
-        <rules>
-            <name>Facility_Outcome</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>varFacilityOutcome</leftValueReference>
-                <operator>IsNull</operator>
-                <rightValue>
-                    <booleanValue>false</booleanValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Populate_Evaluation_Due_Date</targetReference>
-            </connector>
-            <label>Facility Outcome</label>
-        </rules>
-    </decisions>
+    <description>Removed Evaluation date logic</description>
     <formulas>
         <name>BRCFollowupDescription</name>
         <dataType>String</dataType>
@@ -642,7 +617,7 @@
     <formulas>
         <name>EvaluationDueDate</name>
         <dataType>Date</dataType>
-        <expression>{!varFacilityOutcome.Start_Date__c} + 4</expression>
+        <expression>TODAY() + 4</expression>
     </formulas>
     <formulas>
         <name>MRC2ndReminderDate</name>
@@ -699,179 +674,14 @@
         <name>Create_BRC_MRC_FollowUp_tasks</name>
         <label>Create BRC/MRC FollowUp tasks</label>
         <locationX>446</locationX>
-        <locationY>1871</locationY>
+        <locationY>1151</locationY>
         <inputReference>varTaskList</inputReference>
     </recordCreates>
-    <recordCreates>
-        <name>Create_Evaluation_Task_0</name>
-        <label>Create Evaluation Task</label>
-        <locationX>446</locationX>
-        <locationY>935</locationY>
-        <connector>
-            <targetReference>Get_Task_MRC_MRC_Followup_Record_Type</targetReference>
-        </connector>
-        <inputAssignments>
-            <field>ActivityDate</field>
-            <value>
-                <elementReference>EvaluationDueDate</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Animal__c</field>
-            <value>
-                <elementReference>$Record.Id</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Description</field>
-            <value>
-                <elementReference>EvaluationDescription</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Priority</field>
-            <value>
-                <stringValue>Normal</stringValue>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>RecordTypeId</field>
-            <value>
-                <elementReference>TaskEvaluationRecordTypeId</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Species__c</field>
-            <value>
-                <stringValue>Dog</stringValue>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Status</field>
-            <value>
-                <stringValue>Not Started</stringValue>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Subject</field>
-            <value>
-                <stringValue>Evaluation Due</stringValue>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>WhatId</field>
-            <value>
-                <elementReference>$Record.Id</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>WhoId</field>
-            <value>
-                <elementReference>$Record.Behavior_Case_Worker__c</elementReference>
-            </value>
-        </inputAssignments>
-        <object>Task</object>
-        <storeOutputAutomatically>true</storeOutputAutomatically>
-    </recordCreates>
-    <recordCreates>
-        <name>Create_Evaluation_Task_0_0</name>
-        <label>Create Evaluation Task</label>
-        <locationX>446</locationX>
-        <locationY>815</locationY>
-        <connector>
-            <targetReference>Create_Evaluation_Task_0</targetReference>
-        </connector>
-        <inputAssignments>
-            <field>ActivityDate</field>
-            <value>
-                <elementReference>$Record.Intake_Date_Time__c</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Animal__c</field>
-            <value>
-                <elementReference>$Record.Id</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Description</field>
-            <value>
-                <elementReference>EvaluationDescription</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Priority</field>
-            <value>
-                <stringValue>Normal</stringValue>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>RecordTypeId</field>
-            <value>
-                <elementReference>TaskEvaluationRecordTypeId</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Species__c</field>
-            <value>
-                <stringValue>Dog</stringValue>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Status</field>
-            <value>
-                <stringValue>Not Started</stringValue>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Subject</field>
-            <value>
-                <stringValue>Evaluation Due</stringValue>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>WhatId</field>
-            <value>
-                <elementReference>$Record.Id</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>WhoId</field>
-            <value>
-                <elementReference>$Record.Behavior_Case_Worker__c</elementReference>
-            </value>
-        </inputAssignments>
-        <object>Task</object>
-        <storeOutputAutomatically>true</storeOutputAutomatically>
-    </recordCreates>
-    <recordLookups>
-        <name>Get_Task_Evaluation_RecordType_0</name>
-        <label>Get Task Evaluation RecordType</label>
-        <locationX>446</locationX>
-        <locationY>695</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
-        <connector>
-            <targetReference>Create_Evaluation_Task_0_0</targetReference>
-        </connector>
-        <filterLogic>and</filterLogic>
-        <filters>
-            <field>DeveloperName</field>
-            <operator>EqualTo</operator>
-            <value>
-                <stringValue>Evaluation</stringValue>
-            </value>
-        </filters>
-        <object>RecordType</object>
-        <outputAssignments>
-            <assignToReference>TaskEvaluationRecordTypeId</assignToReference>
-            <field>Id</field>
-        </outputAssignments>
-    </recordLookups>
     <recordLookups>
         <name>Get_Task_MRC_MRC_Followup_Record_Type</name>
         <label>Get Task BRC/MRC Followup RecordType</label>
         <locationX>446</locationX>
-        <locationY>1055</locationY>
+        <locationY>335</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>BRC_MRC_Candidate_Check</targetReference>
@@ -890,64 +700,11 @@
             <field>Id</field>
         </outputAssignments>
     </recordLookups>
-    <recordLookups>
-        <name>varFacilityOutcome</name>
-        <label>varFacilityOutcome</label>
-        <locationX>776</locationX>
-        <locationY>335</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
-        <connector>
-            <targetReference>FacilityOutcomeDecision</targetReference>
-        </connector>
-        <filterLogic>1 AND (2 OR 3)</filterLogic>
-        <filters>
-            <field>Animal__c</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>$Record.Id</elementReference>
-            </value>
-        </filters>
-        <filters>
-            <field>Facility_Outcome__c</field>
-            <operator>EqualTo</operator>
-            <value>
-                <stringValue>ARC</stringValue>
-            </value>
-        </filters>
-        <filters>
-            <field>Facility_Outcome__c</field>
-            <operator>EqualTo</operator>
-            <value>
-                <stringValue>CARE</stringValue>
-            </value>
-        </filters>
-        <getFirstRecordOnly>true</getFirstRecordOnly>
-        <object>Facility_Outcome__c</object>
-        <sortField>CreatedDate</sortField>
-        <sortOrder>Asc</sortOrder>
-        <storeOutputAutomatically>true</storeOutputAutomatically>
-    </recordLookups>
-    <recordUpdates>
-        <name>Populate_Evaluation_Due_Date</name>
-        <label>Populate Evaluation Due Date</label>
-        <locationX>446</locationX>
-        <locationY>575</locationY>
-        <connector>
-            <targetReference>Get_Task_Evaluation_RecordType_0</targetReference>
-        </connector>
-        <inputAssignments>
-            <field>Evaluation_Due_Date__c</field>
-            <value>
-                <elementReference>EvaluationDueDate</elementReference>
-            </value>
-        </inputAssignments>
-        <inputReference>$Record</inputReference>
-    </recordUpdates>
     <start>
-        <locationX>650</locationX>
+        <locationX>320</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>varFacilityOutcome</targetReference>
+            <targetReference>Get_Task_MRC_MRC_Followup_Record_Type</targetReference>
         </connector>
         <object>Animal__c</object>
         <recordTriggerType>CreateAndUpdate</recordTriggerType>
