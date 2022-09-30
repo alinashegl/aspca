@@ -1042,7 +1042,6 @@ public without sharing class TestDataFactory {
             new Play_Pause__c(
                 Animal__c = a.Id,
                 Type__c = 'Behavioral',
-                End_Date__c = System.today(),
                 Play_Pause_Reason__c = 'Needs a Break',
                 Start_Date__c = System.today(),
                 End_Date__c = Date.today().addDays(7))
