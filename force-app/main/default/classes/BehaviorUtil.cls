@@ -47,7 +47,7 @@ public with sharing class BehaviorUtil {
         Map<Id, String> restDaysMap = getAnimalRestDays(new Id[]{animalId});
         return restDaysMap.get(animalId);
     }
-    
+
     public static Map<Id, String> getAnimalRestDays (Id[] animalIds){
         Map<Id, String> restDaysMap = new Map<Id, String>();
 
@@ -69,7 +69,7 @@ public with sharing class BehaviorUtil {
                     }   
                     startDate = startDate.addDays(1);
                 }
-    
+
                 if(!restDaysSet.isEmpty()){
                     restDays = String.join(new List<String>(restDaysSet), ', ');
                 } else {
@@ -77,7 +77,7 @@ public with sharing class BehaviorUtil {
                 }
                 restDaysMap.put(animalId, restDays);
             }
-            
+
         }
 
         return restDaysMap;
