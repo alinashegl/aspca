@@ -54,9 +54,9 @@ const PPEOPTIONS = [
 ];
 
 const columns = [
-    {label: 'ASPCA Animal Name', fieldName: 'Animal_Name__c',type: 'text', editable: false, disabled: true},
+    {label: 'ASPCA Animal Name', fieldName: 'Animal_Name__c',type: 'text', editable: false, disabled: true, sortable: true},
     {label: 'Animal Name/Id', fieldName: 'Id', type: 'link', linkLabel: 'anmName'}, 
-    {label: 'Petpoint/AAH Id', fieldName: 'Petpoint_ID__c',linkLabel: 'petpint', type: 'text', editable: false, disabled: true},
+    {label: 'Petpoint/AAH Id', fieldName: 'Petpoint_ID__c',linkLabel: 'petpint', type: 'text', editable: false, disabled: true, sortable: true},
      //sortable: true, sortBy: 'anmName', resizable: true, title:'Click to view Animal', target:'_blank', editable: true},
     {label: 'Sex', fieldName: 'Gender__c', type: 'picklist', options: GENDEROPTIONS, sortable: true, resizable: true,editable: true},
     {label: 'Evaluation Status', fieldName: 'Evaluation_Status__c', type: 'picklist', options: EVALSTATUSOPTIONS, sortable: true, resizable: true, editable: true},
@@ -81,7 +81,7 @@ export default class VkDatatableUsage extends LightningElement {
     pageSizeOptions = PAGESIZEOPTIONS;
     isLoading = true;
     loadMessage = 'Loading...';
-
+    customStyle = 'height:700px !important';
     @wire(getBehCaseWorkers)
     wAccs({error,data}){
         if(data){
