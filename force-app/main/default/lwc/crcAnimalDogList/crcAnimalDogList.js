@@ -59,6 +59,7 @@ const columns = [
     {label: 'Playgroup Priority Level', fieldName: 'Playgroup_Priority_Level__c', type: 'picklist', options: PLAYGROUPPRIORITYOPTIONS, sortable: true, resizable: true, editable: true},
     {label: 'Behavior Case Worker', fieldName: 'Behavior_Case_Worker__c', type: 'link', linkLabel: 'behName'}, 
     {label: 'Behavior Summary Change Date', fieldName: 'Behavior_Summary_Change_Date__c',type: 'date', editable: false, disabled: true},
+    {label: 'Play Pause Reason', fieldName: 'Play_Pause_Reason',type: 'text', editable: false, disabled: true},
     
 ];
 const PAGESIZEOPTIONS = [5,10,20,40];
@@ -97,7 +98,10 @@ export default class VkDatatableUsage extends LightningElement {
         this.isLoading = true;
         this.error = '';
         getAnimals()
-        .then(data=>{
+        .then(resData=>{
+            let data = resData.plans;
+            let playPauseReasons = resData.playPauseReasons;
+            console.log('ppp'+playPauseReasons);
             this.anms = [];
             for(let i=0; i<data.length; i++){
                 let obj = {...data[i]};
@@ -125,6 +129,10 @@ export default class VkDatatableUsage extends LightningElement {
                         obj.behName = data[i].Animal__r.Behavior_Case_Worker__r.Name;
                         obj.Behavior_Case_Worker__c = data[i].Animal__r.Behavior_Case_Worker__r.Id;
                     }
+                    if(playPauseReasons.hasOwnProperty(data[i].Animal__c)){
+                        obj.Play_Pause_Reason = (playPauseReasons[data[i].Animal__c]).join(';');
+                    }
+                    
                 }    
                 this.anms.push(obj);
             }
@@ -177,6 +185,9 @@ export default class VkDatatableUsage extends LightningElement {
                 if(recs[i].hasOwnProperty('Meets_Adoptability_Date__c')){
                     recs[i].Animal__r.Meets_Adoptability_Date__c = recs[i]['Meets_Adoptability_Date__c'];
                     delete recs[i]['Meets_Adoptability_Date__c'];
+                }
+                if(recs[i].hasOwnProperty('Play_Pause_Reason')){
+                    delete recs[i]['Play_Pause_Reason'];
                 }
             }
         }
