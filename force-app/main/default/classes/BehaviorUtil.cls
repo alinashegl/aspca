@@ -1,6 +1,4 @@
 public with sharing class BehaviorUtil {
-    public static final String[] CRC_MRC_LOCATIONS = new String[]{'CRC', 'MRC', 'CRC-MRC'};
-    public static final String[] ARC_CARE_LOCATIONS = new String[]{'ARC', 'CARE'};
     public static String[] locationGroup{
         get{
             if(locationGroup == null){
@@ -29,13 +27,13 @@ public with sharing class BehaviorUtil {
     }
 
     public static String[] getLocationGroup(String location){
-        String[] tempLocationGroup = CRC_MRC_LOCATIONS;
+        String[] tempLocationGroup = new String[]{'CRC', 'MRC', 'CRC/MRC'};
             String tempLocation = location;
             if(tempLocation == 'All'){
-                tempLocationGroup.addAll(ARC_CARE_LOCATIONS);
+                tempLocationGroup = new String[]{'ARC', 'CARE', 'ARC/CARE', 'CRC', 'MRC', 'CRC/MRC'};
             }
             if(tempLocation == 'ARC/CARE'){
-                tempLocationGroup = ARC_CARE_LOCATIONS;
+                tempLocationGroup = new String[]{'ARC', 'CARE', 'ARC/CARE'};
             }
         return tempLocationGroup;
     }
