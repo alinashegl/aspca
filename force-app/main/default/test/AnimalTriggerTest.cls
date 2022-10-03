@@ -19,7 +19,9 @@ public class AnimalTriggerTest {
     @isTest 
     static void createBRCMRCTasksNoExistingTasks(){
         Animal__c anim = TestDataFactory.createAnimal();
-        Contact con = createGenericContact(anim.Current_Recent_Shelter_Location__c);
+        TestDataFactory.insertUsers();
+        Contact con = createGenericContact('CRC/MRC');
+        // Contact con = createGenericContact(anim.Current_Recent_Shelter_Location__c);
         anim.Behavior_Case_Worker__c = con.Id;
 
         test.startTest();
@@ -33,7 +35,9 @@ public class AnimalTriggerTest {
     @isTest 
     static void createBRCMRCTasksWithExistingTaskDoNotCreateNewTask(){
         Animal__c anim = TestDataFactory.createAnimal();
-        Contact con = createGenericContact(anim.Current_Recent_Shelter_Location__c);
+        TestDataFactory.insertUsers();
+        Contact con = createGenericContact('CRC/MRC');
+        // Contact con = createGenericContact(anim.Current_Recent_Shelter_Location__c);
         anim.Behavior_Case_Worker__c = con.Id;
 
         Task t = ScheduleAnimalBRCMRC.prepTask(anim, date.today().addDays(5), false);
@@ -50,7 +54,9 @@ public class AnimalTriggerTest {
     @isTest 
     static void createBRCMRCTasksWithExistingTaskCreateNewTask(){
         Animal__c anim = TestDataFactory.createAnimal();
-        Contact con = createGenericContact(anim.Current_Recent_Shelter_Location__c);
+        TestDataFactory.insertUsers();
+        Contact con = createGenericContact('CRC/MRC');
+        // Contact con = createGenericContact(anim.Current_Recent_Shelter_Location__c);
         anim.Behavior_Case_Worker__c = con.Id;
 
         Task t = ScheduleAnimalBRCMRC.prepTask(anim, date.today().addDays(-5), false);

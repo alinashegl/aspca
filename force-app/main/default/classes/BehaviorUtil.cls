@@ -27,10 +27,10 @@ public with sharing class BehaviorUtil {
     }
 
     public static String[] getLocationGroup(String location){
-        String[] tempLocationGroup = new String[]{'CRC', 'MRC', 'CRC/MRC'};
+        String[] tempLocationGroup = new String[]{'CRC','CRC-MRC'};
             String tempLocation = location;
             if(tempLocation == 'All'){
-                tempLocationGroup = new String[]{'ARC', 'CARE', 'ARC/CARE', 'CRC', 'MRC', 'CRC/MRC'};
+                tempLocationGroup = new String[]{'ARC', 'CARE', 'ARC/CARE', 'CRC','CRC-MRC'};
             }
             if(tempLocation == 'ARC/CARE'){
                 tempLocationGroup = new String[]{'ARC', 'CARE', 'ARC/CARE'};

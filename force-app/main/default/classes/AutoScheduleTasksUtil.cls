@@ -24,7 +24,7 @@ public class AutoScheduleTasksUtil {
     public static final String[] dogPopulations {
         get{
             if(Test.isRunningTest()){
-                dogPopulations = new String[]{'ARC','CARE','CRC','MRC'};
+                dogPopulations = new String[]{'ARC','CARE','CRC','CRC-MRC'};
             }
             else {
                 dogPopulations = new String[]{'ARC','CARE'};
@@ -134,7 +134,7 @@ public class AutoScheduleTasksUtil {
             } 
             else if(con.User_Location__c == 'CRC/MRC'){
                 contactMap.put('CRC', con);
-                contactMap.put('MRC', con);
+                contactMap.put('CRC-MRC', con);
             } else {
                 contactMap.put(con.User_Location__c, con);
             }
