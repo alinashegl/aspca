@@ -359,10 +359,7 @@ public without sharing class TestDataFactory {
         insert users;
     }
 
-    public static User 
-    
-    
-    WithProfile(String profile){
+    public static User createUserWithProfile(String profile){
         Profile p = getProfileFromDb(profile);
         String name = (String)USER_PATTERN.get('name') + '_' + 0;
           String lastname = (String)USER_PATTERN.get('lastName') + '_' + 0;

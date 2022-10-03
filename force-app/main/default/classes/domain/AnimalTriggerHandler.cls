@@ -74,7 +74,7 @@ public with sharing class AnimalTriggerHandler {
             System.debug('oldAnimal: ' + oldAnimal);
             if(
                 a.Type_of_Animal__c == 'Dog' &&
-                ((a.MRC_Status__c == 'MRC Accepted' && oldAnimal.MRC_Status__c != 'MRC Accepted' && a.Current_Recent_Shelter_Location__c != 'MRC') ||
+                ((a.MRC_Status__c == 'MRC Accepted' && oldAnimal.MRC_Status__c != 'MRC Accepted' && a.Current_Recent_Shelter_Location__c != 'CRC-MRC') ||
                 (a.BRC_Status__c == 'BRC Accepted' && oldAnimal.MRC_Status__c != 'BRC Accepted' && a.Current_Recent_Shelter_Location__c != 'BRC'))
             ){
                 brcMrcApprovedAnimals.add(a);
