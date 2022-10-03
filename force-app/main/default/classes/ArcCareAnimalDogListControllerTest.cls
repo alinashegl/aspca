@@ -11,6 +11,7 @@ public class ArcCareAnimalDogListControllerTest {
         
         Animal__c a = TestDataFactory.createAnimalWithName('anm');
         a.Behavior_Case_Worker__c = con2.Id;
+        a.Current_Location__c = 'CARE';
         update a;
         
         BehaviorCaseWorker__c bcw = new BehaviorCaseWorker__c();
