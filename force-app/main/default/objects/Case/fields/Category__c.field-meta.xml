@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Category__c</fullName>
+    <externalId>false</externalId>
+    <label>Category</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Investigations - Consultation</fullName>
+                <default>false</default>
+                <label>Investigations - Consultation</label>
+            </value>
+            <value>
+                <fullName>Investigations - Complaint</fullName>
+                <default>false</default>
+                <label>Investigations - Complaint</label>
+            </value>
+            <value>
+                <fullName>Investigations - Proactive</fullName>
+                <default>false</default>
+                <label>Investigations - Proactive</label>
+            </value>
+            <value>
+                <fullName>Expert Services - Legal Review</fullName>
+                <default>false</default>
+                <label>Expert Services - Legal Review</label>
+            </value>
+            <value>
+                <fullName>Expert Services - Subject Matter</fullName>
+                <default>false</default>
+                <label>Expert Services - Subject Matter</label>
+            </value>
+            <value>
+                <fullName>Expert Services - Forensic Science</fullName>
+                <default>false</default>
+                <label>Expert Services - Forensic Science</label>
+            </value>
+            <value>
+                <fullName>Sheltering Services</fullName>
+                <default>false</default>
+                <label>Sheltering Services</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

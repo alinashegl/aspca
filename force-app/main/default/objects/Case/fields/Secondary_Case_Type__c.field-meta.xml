@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Secondary_Case_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Secondary Case Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Neglect</fullName>
+                <default>false</default>
+                <label>Neglect</label>
+            </value>
+            <value>
+                <fullName>Non-Accidental Injury</fullName>
+                <default>false</default>
+                <label>Non-Accidental Injury</label>
+            </value>
+            <value>
+                <fullName>Animal Fighting</fullName>
+                <default>false</default>
+                <label>Animal Fighting</label>
+            </value>
+            <value>
+                <fullName>Hoarding</fullName>
+                <default>false</default>
+                <label>Hoarding</label>
+            </value>
+            <value>
+                <fullName>Abandonment</fullName>
+                <default>false</default>
+                <label>Abandonment</label>
+            </value>
+            <value>
+                <fullName>Disaster</fullName>
+                <default>false</default>
+                <label>Disaster</label>
+            </value>
+            <value>
+                <fullName>None</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>None</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Overall_Score__c</fullName>
+    <externalId>false</externalId>
+    <label>Overall Score</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>1. Beginning/Acquisition</fullName>
+                <default>false</default>
+                <label>1. Beginning/Acquisition</label>
+            </value>
+            <value>
+                <fullName>2. Catching On/ Fluency</fullName>
+                <default>false</default>
+                <label>2. Catching On/ Fluency</label>
+            </value>
+            <value>
+                <fullName>3. Almost There/ Generalization</fullName>
+                <default>false</default>
+                <label>3. Almost There/ Generalization</label>
+            </value>
+            <value>
+                <fullName>4. Maintenance</fullName>
+                <default>false</default>
+                <label>4. Maintenance</label>
+            </value>
+            <value>
+                <fullName>None</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>None</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

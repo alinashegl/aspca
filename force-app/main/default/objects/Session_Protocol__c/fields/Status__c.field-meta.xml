@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(IsSkipped__c = TRUE, IMAGE(&quot;/resource/1635172186000/small_noentry?&quot;, &quot;Skipped&quot;), (IF(Scored_Count__c  &lt; Required_Count__c , IMAGE(&quot;/resource/1635172201000/small_triangle?&quot;, &quot;Not Complete&quot;) ,IMAGE(&quot;/resource/1635172164000/small_check?&quot;, &quot;Complete&quot;))))</formula>
+    <label>Status</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

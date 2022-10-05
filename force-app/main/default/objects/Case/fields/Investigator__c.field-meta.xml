@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Investigator__c</fullName>
+    <externalId>false</externalId>
+    <label>Case Lead</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Unassigned</fullName>
+                <default>false</default>
+                <label>Unassigned</label>
+            </value>
+            <value>
+                <fullName>Kyle Held</fullName>
+                <default>false</default>
+                <label>Kyle Held</label>
+            </value>
+            <value>
+                <fullName>Terry Mills</fullName>
+                <default>false</default>
+                <label>Terry Mills</label>
+            </value>
+            <value>
+                <fullName>Leigh Anne Wilson</fullName>
+                <default>false</default>
+                <label>Leigh Anne Wilson</label>
+            </value>
+            <value>
+                <fullName>Donna Lassa</fullName>
+                <default>false</default>
+                <label>Donna Lassa</label>
+            </value>
+            <value>
+                <fullName>Teresa Ladner</fullName>
+                <default>false</default>
+                <label>Teresa Ladner</label>
+            </value>
+            <value>
+                <fullName>Nathan Zilak</fullName>
+                <default>false</default>
+                <label>Nathan Zilak</label>
+            </value>
+            <value>
+                <fullName>Elizabeth Brandler</fullName>
+                <default>false</default>
+                <label>Elizabeth Brandler</label>
+            </value>
+            <value>
+                <fullName>Rachel Touroo, DVM</fullName>
+                <default>false</default>
+                <label>Rachel Touroo, DVM</label>
+            </value>
+            <value>
+                <fullName>Alison Kennedy-Benson</fullName>
+                <default>false</default>
+                <label>Alison Kennedy-Benson</label>
+            </value>
+            <value>
+                <fullName>Amanda Fitch</fullName>
+                <default>false</default>
+                <label>Amanda Fitch</label>
+            </value>
+            <value>
+                <fullName>Elizabeth Pearlman, DVM</fullName>
+                <default>false</default>
+                <label>Elizabeth Pearlman, DVM</label>
+            </value>
+            <value>
+                <fullName>Kristina Baucom, DVM</fullName>
+                <default>false</default>
+                <label>Kristina Baucom, DVM</label>
+            </value>
+            <value>
+                <fullName>Ashley Saver, DVM</fullName>
+                <default>false</default>
+                <label>Ashley Saver, DVM</label>
+            </value>
+            <value>
+                <fullName>Tim Rickey</fullName>
+                <default>false</default>
+                <label>Tim Rickey</label>
+            </value>
+            <value>
+                <fullName>Susan Anderson</fullName>
+                <default>false</default>
+                <label>Susan Anderson</label>
+            </value>
+            <value>
+                <fullName>Wanda Merling</fullName>
+                <default>false</default>
+                <label>Wanda Merling</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

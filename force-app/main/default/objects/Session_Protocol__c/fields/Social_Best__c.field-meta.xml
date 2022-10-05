@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Social_Best__c</fullName>
+    <externalId>false</externalId>
+    <label>Fear - Sociability Best</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>1. Solicitation, sustained proximity</fullName>
+                <default>false</default>
+                <label>1. Solicitation, sustained proximity</label>
+            </value>
+            <value>
+                <fullName>2. Solicitation, short proximity</fullName>
+                <default>false</default>
+                <label>2. Solicitation, short proximity</label>
+            </value>
+            <value>
+                <fullName>3. Solicitation, no proximity</fullName>
+                <default>false</default>
+                <label>3. Solicitation, no proximity</label>
+            </value>
+            <value>
+                <fullName>4. No Solicitation, sustained proxmity</fullName>
+                <default>false</default>
+                <label>4. No Solicitation, sustained proxmity</label>
+            </value>
+            <value>
+                <fullName>5. No Solicitation, short proximity</fullName>
+                <default>false</default>
+                <label>5. No Solicitation, short proximity</label>
+            </value>
+            <value>
+                <fullName>6. No Solicitation, no proximity</fullName>
+                <default>false</default>
+                <label>6. No Solicitation, no proximity</label>
+            </value>
+            <value>
+                <fullName>Not Applicable</fullName>
+                <default>false</default>
+                <label>Not Applicable</label>
+            </value>
+            <value>
+                <fullName>None</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>None</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Case_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Case Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Unknown</fullName>
+                <default>false</default>
+                <label>Unknown</label>
+            </value>
+            <value>
+                <fullName>Neglect</fullName>
+                <default>false</default>
+                <label>Neglect</label>
+            </value>
+            <value>
+                <fullName>Non-Accidental Injury</fullName>
+                <default>false</default>
+                <label>Non-Accidental Injury</label>
+            </value>
+            <value>
+                <fullName>Animal Fighting</fullName>
+                <default>false</default>
+                <label>Animal Fighting</label>
+            </value>
+            <value>
+                <fullName>Abandonment</fullName>
+                <default>false</default>
+                <label>Abandonment</label>
+            </value>
+            <value>
+                <fullName>Sexual Abuse</fullName>
+                <default>false</default>
+                <label>Sexual Abuse</label>
+            </value>
+            <value>
+                <fullName>Disaster</fullName>
+                <default>false</default>
+                <label>Disaster</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

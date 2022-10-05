@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ai_Types_of_Interaction__c</fullName>
+    <externalId>false</externalId>
+    <label>Types of Interaction</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Advice/Touch</fullName>
+                <default>false</default>
+                <label>Advice/Touch</label>
+            </value>
+            <value>
+                <fullName>Removal</fullName>
+                <default>false</default>
+                <label>Removal</label>
+            </value>
+            <value>
+                <fullName>Scene Documentation</fullName>
+                <default>false</default>
+                <label>Scene Documentation</label>
+            </value>
+            <value>
+                <fullName>Behavior Eval</fullName>
+                <default>false</default>
+                <label>Behavior Eval</label>
+            </value>
+            <value>
+                <fullName>Legal Research</fullName>
+                <default>false</default>
+                <label>Legal Research</label>
+            </value>
+            <value>
+                <fullName>Draft Search Warrant</fullName>
+                <default>false</default>
+                <label>Draft Search Warrant</label>
+            </value>
+            <value>
+                <fullName>Draft Brief</fullName>
+                <default>false</default>
+                <label>Draft Brief</label>
+            </value>
+            <value>
+                <fullName>Sentencing Memo</fullName>
+                <default>false</default>
+                <label>Sentencing Memo</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

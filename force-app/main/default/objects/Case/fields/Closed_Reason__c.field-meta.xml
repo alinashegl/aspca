@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Closed_Reason__c</fullName>
+    <externalId>false</externalId>
+    <label>Closed Reason</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Status</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>B1 EDP/Aided</fullName>
+                <default>false</default>
+                <label>B1 EDP/Aided</label>
+            </value>
+            <value>
+                <fullName>B3 All Court Ref.</fullName>
+                <default>false</default>
+                <label>B3 All Court Ref.</label>
+            </value>
+            <value>
+                <fullName>B4 Non-Crim Inv.</fullName>
+                <default>false</default>
+                <label>B4 Non-Crim Inv.</label>
+            </value>
+            <value>
+                <fullName>B5 Ref. to other unit</fullName>
+                <default>false</default>
+                <label>B5 Ref. to other unit</label>
+            </value>
+            <value>
+                <fullName>B6 Unfounded</fullName>
+                <default>false</default>
+                <label>B6 Unfounded</label>
+            </value>
+            <value>
+                <fullName>B7 Inaccurate facts</fullName>
+                <default>false</default>
+                <label>B7 Inaccurate facts</label>
+            </value>
+            <value>
+                <fullName>B8 Enhancements</fullName>
+                <default>false</default>
+                <label>B8 Enhancements</label>
+            </value>
+            <value>
+                <fullName>B9 Improper Ref.</fullName>
+                <default>false</default>
+                <label>B9 Improper Ref.</label>
+            </value>
+            <value>
+                <fullName>C1 Prop. Crime Only</fullName>
+                <default>false</default>
+                <label>C1 Prop. Crime Only</label>
+            </value>
+            <value>
+                <fullName>C2 Comp. Witness unable to ID perp</fullName>
+                <default>false</default>
+                <label>C2 Comp. Witness unable to ID perp</label>
+            </value>
+            <value>
+                <fullName>C3 Uncoop. Complainant</fullName>
+                <default>false</default>
+                <label>C3 Uncoop. Complainant</label>
+            </value>
+            <value>
+                <fullName>C4 Inv. Leads Exhausted</fullName>
+                <default>false</default>
+                <label>C4 Inv. Leads Exhausted</label>
+            </value>
+            <value>
+                <fullName>C12 Only 1 Perp and Perp-Prob</fullName>
+                <default>false</default>
+                <label>C12 Only 1 Perp and Perp-Prob</label>
+            </value>
+            <value>
+                <fullName>Closed - No Reason Given</fullName>
+                <default>false</default>
+                <label>Closed - No Reason Given</label>
+            </value>
+            <value>
+                <fullName>Closed to Patrol</fullName>
+                <default>false</default>
+                <label>Closed to Patrol</label>
+            </value>
+            <value>
+                <fullName>Exceptional Clearance</fullName>
+                <default>false</default>
+                <label>Exceptional Clearance</label>
+            </value>
+            <value>
+                <fullName>I Card Issued</fullName>
+                <default>false</default>
+                <label>I Card Issued</label>
+            </value>
+            <value>
+                <fullName>Insufficient Evidence</fullName>
+                <default>false</default>
+                <label>Insufficient Evidence</label>
+            </value>
+            <value>
+                <fullName>Non Crime</fullName>
+                <default>false</default>
+                <label>Non Crime</label>
+            </value>
+            <value>
+                <fullName>Not enough information</fullName>
+                <default>false</default>
+                <label>Not enough information</label>
+            </value>
+            <value>
+                <fullName>Owner complied</fullName>
+                <default>false</default>
+                <label>Owner complied</label>
+            </value>
+            <value>
+                <fullName>Referred to local agency</fullName>
+                <default>false</default>
+                <label>Referred to local agency</label>
+            </value>
+            <value>
+                <fullName>Referred to other dept.</fullName>
+                <default>false</default>
+                <label>Referred to other dept.</label>
+            </value>
+            <value>
+                <fullName>Source stopped communications</fullName>
+                <default>false</default>
+                <label>Source stopped communications</label>
+            </value>
+            <value>
+                <fullName>Surrendered animals</fullName>
+                <default>false</default>
+                <label>Surrendered animals</label>
+            </value>
+            <value>
+                <fullName>Unable to locate</fullName>
+                <default>false</default>
+                <label>Unable to locate</label>
+            </value>
+            <value>
+                <fullName>Uncooperative agency</fullName>
+                <default>false</default>
+                <label>Uncooperative agency</label>
+            </value>
+            <value>
+                <fullName>Uncooperative complainant</fullName>
+                <default>false</default>
+                <label>Uncooperative complainant</label>
+            </value>
+            <value>
+                <fullName>Unfounded</fullName>
+                <default>false</default>
+                <label>Unfounded</label>
+            </value>
+            <value>
+                <fullName>Convicted - See Charge Information</fullName>
+                <default>false</default>
+                <label>Convicted - See Charge Information</label>
+            </value>
+            <value>
+                <fullName>Not Convicted - See Charge Information</fullName>
+                <default>false</default>
+                <label>Not Convicted - See Charge Information</label>
+            </value>
+            <value>
+                <fullName>ACD - See Charge Information</fullName>
+                <default>false</default>
+                <label>ACD - See Charge Information</label>
+            </value>
+            <value>
+                <fullName>Convicted - See Notes</fullName>
+                <default>false</default>
+                <label>Convicted - See Notes</label>
+            </value>
+            <value>
+                <fullName>Not Convicted - See Notes</fullName>
+                <default>false</default>
+                <label>Not Convicted - See Notes</label>
+            </value>
+            <value>
+                <fullName>No Further Involvement</fullName>
+                <default>false</default>
+                <label>No Further Involvement</label>
+            </value>
+            <value>
+                <fullName>Did not become a case</fullName>
+                <default>false</default>
+                <label>Did not become a case</label>
+            </value>
+            <value>
+                <fullName>Diversion</fullName>
+                <default>false</default>
+                <label>Diversion</label>
+            </value>
+            <value>
+                <fullName>Summons Issued</fullName>
+                <default>false</default>
+                <label>Summons Issued</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Closed - No Arrest</controllingFieldValue>
+            <valueName>B1 EDP/Aided</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - No Arrest</controllingFieldValue>
+            <valueName>B3 All Court Ref.</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - No Arrest</controllingFieldValue>
+            <valueName>B4 Non-Crim Inv.</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - No Arrest</controllingFieldValue>
+            <valueName>B5 Ref. to other unit</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - No Arrest</controllingFieldValue>
+            <valueName>B6 Unfounded</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - No Arrest</controllingFieldValue>
+            <valueName>B7 Inaccurate facts</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - No Arrest</controllingFieldValue>
+            <valueName>B8 Enhancements</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - No Arrest</controllingFieldValue>
+            <valueName>B9 Improper Ref.</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - No Arrest</controllingFieldValue>
+            <valueName>C1 Prop. Crime Only</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - No Arrest</controllingFieldValue>
+            <valueName>C2 Comp. Witness unable to ID perp</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - No Arrest</controllingFieldValue>
+            <valueName>C3 Uncoop. Complainant</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - No Arrest</controllingFieldValue>
+            <valueName>C4 Inv. Leads Exhausted</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - No Arrest</controllingFieldValue>
+            <valueName>C12 Only 1 Perp and Perp-Prob</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - No Arrest</controllingFieldValue>
+            <valueName>Closed - No Reason Given</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - No Arrest</controllingFieldValue>
+            <valueName>Closed to Patrol</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - No Arrest</controllingFieldValue>
+            <valueName>Exceptional Clearance</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - No Arrest</controllingFieldValue>
+            <valueName>I Card Issued</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - No Arrest</controllingFieldValue>
+            <valueName>Insufficient Evidence</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - No Arrest</controllingFieldValue>
+            <valueName>Non Crime</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - No Arrest</controllingFieldValue>
+            <valueName>Not enough information</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - No Arrest</controllingFieldValue>
+            <valueName>Owner complied</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - No Arrest</controllingFieldValue>
+            <valueName>Referred to local agency</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - No Arrest</controllingFieldValue>
+            <valueName>Referred to other dept.</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - No Arrest</controllingFieldValue>
+            <valueName>Source stopped communications</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - No Arrest</controllingFieldValue>
+            <valueName>Surrendered animals</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - No Arrest</controllingFieldValue>
+            <valueName>Unable to locate</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - No Arrest</controllingFieldValue>
+            <valueName>Uncooperative agency</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - No Arrest</controllingFieldValue>
+            <valueName>Uncooperative complainant</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - No Arrest</controllingFieldValue>
+            <valueName>Unfounded</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - No Arrest</controllingFieldValue>
+            <valueName>Did not become a case</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - No Arrest</controllingFieldValue>
+            <valueName>Summons Issued</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - No Arrest</controllingFieldValue>
+            <controllingFieldValue>Closed - Arrest</controllingFieldValue>
+            <valueName>Other</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - Arrest</controllingFieldValue>
+            <valueName>Convicted - See Charge Information</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - Arrest</controllingFieldValue>
+            <valueName>Not Convicted - See Charge Information</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - Arrest</controllingFieldValue>
+            <valueName>ACD - See Charge Information</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - Arrest</controllingFieldValue>
+            <valueName>Convicted - See Notes</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - Arrest</controllingFieldValue>
+            <valueName>Not Convicted - See Notes</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - Arrest</controllingFieldValue>
+            <valueName>No Further Involvement</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Closed - Arrest</controllingFieldValue>
+            <valueName>Diversion</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

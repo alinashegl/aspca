@@ -1,0 +1,2862 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Alert_to_Behavior_Case_Worker</fullName>
+        <ccEmails>lbarnett@meetveracity.com</ccEmails>
+        <description>Alert to Behavior Case Worker</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Behavior_Case_Worker__c</field>
+            <type>contactLookup</type>
+        </recipients>
+        <senderType>DefaultWorkflowUser</senderType>
+        <template>unfiled$public/Behavior_CaseWorker_Assignmen_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>Animal_Forensic_Status_Change_Notification</fullName>
+        <ccEmails>jessica.stone@aspca.org</ccEmails>
+        <ccEmails>cinder.wilkinson@aspca.org</ccEmails>
+        <ccEmails>mariah.scheskie@aspca.org</ccEmails>
+        <ccEmails>crcbehaviormgmt@aspca.org</ccEmails>
+        <description>Animal Forensic Status Change Notification</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>alyssa.williamson@aspca.org</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>crcsheltering@aspca.org</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>katie.summers@aspca.org</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>laurie.millward@aspca.org</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>leah.finstad@aspca.org</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>niki.curnell@aspca.org</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Forensic_Status_Change</template>
+    </alerts>
+    <alerts>
+        <fullName>Animal_SN_Status_Change_Notification</fullName>
+        <description>Animal SN Status Change Notification</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>katie.summers@aspca.org</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>crc.medical@aspca.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/SN_Status_Change</template>
+    </alerts>
+    <alerts>
+        <fullName>Behavior_Grade_Change_Notification_Initial</fullName>
+        <ccEmails>crcsheltering@aspca.org</ccEmails>
+        <ccEmails>crcbehaviormgmt@aspca.org</ccEmails>
+        <description>Behavior Grade Change Notification - Initial</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>behavioradmin@aspca.org</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>crcsheltering@aspca.org</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>katie.summers@aspca.org</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>laurie.millward@aspca.org</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>niki.curnell@aspca.org</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>crc.medical@aspca.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/Behavior_Grade_Change_Initial</template>
+    </alerts>
+    <alerts>
+        <fullName>Behavior_Grade_Change_Notification_Subsequent</fullName>
+        <ccEmails>crcsheltering@aspca.org</ccEmails>
+        <ccEmails>crcbehaviormgmt@aspca.org</ccEmails>
+        <description>Behavior Grade Change Notification - Subsequent</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>behavioradmin@aspca.org</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>crcsheltering@aspca.org</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>katie.summers@aspca.org</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>laurie.millward@aspca.org</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>niki.curnell@aspca.org</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>crc.medical@aspca.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/Behavior_Grade_Change_Subsequent</template>
+    </alerts>
+    <alerts>
+        <fullName>Behavior_Profile_Send_Email_Alert</fullName>
+        <description>Behavior Profile Send Email Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>arcandcarecaninebehavior@aspca.org</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>blythe.boaz@aspcafir.org</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Behavior_Profile_Send_Emails</template>
+    </alerts>
+    <alerts>
+        <fullName>Foster_Survey</fullName>
+        <description>Foster Survey</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Discharged_to_Contact__c</field>
+            <type>contactLookup</type>
+        </recipients>
+        <senderAddress>crcsheltering@aspca.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/Behavior_Grade_Change_Initial</template>
+    </alerts>
+    <alerts>
+        <fullName>Kennel_Change_Alert</fullName>
+        <ccEmails>alina.sheglov@aspca.org</ccEmails>
+        <description>Kennel Change Alert</description>
+        <protected>false</protected>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Kennel_Change_Email_Alert</template>
+    </alerts>
+    <alerts>
+        <fullName>Kennel_Change_Alert2</fullName>
+        <description>Kennel Change Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>crcsheltering@aspca.org</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>crcsheltering@aspca.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/Kennel_Change_Email_Alert</template>
+    </alerts>
+    <alerts>
+        <fullName>Play_Pause_Cleared_Notification_Email</fullName>
+        <ccEmails>PlayPauseNotifications@aspca.org</ccEmails>
+        <description>Play-Pause Cleared Notification Email</description>
+        <protected>false</protected>
+        <senderAddress>crc.medical@aspca.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/Play_Pause_Release_Notification</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_Email_to_the_new_Behavior_Case_Worker</fullName>
+        <ccEmails>lbarnett@meetveracity.com</ccEmails>
+        <description>Send Email to the new Behavior Case Worker</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Behavior_Case_Worker__c</field>
+            <type>contactLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Behavior_CaseWorker_Assignmen_Email</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Animal_Sex_FS</fullName>
+        <field>Gender__c</field>
+        <literalValue>FS</literalValue>
+        <name>Animal Sex - FS</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Animal_Sex_MN</fullName>
+        <field>Gender__c</field>
+        <literalValue>MN</literalValue>
+        <name>Animal Sex - MN</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Clear_Play_Pause_Date</fullName>
+        <field>Play_Pause_Update_Date__c</field>
+        <formula>TODAY()</formula>
+        <name>Clear Play-Pause Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Clear_Play_Pause_Date_S</fullName>
+        <field>Play_Pause_Update_Date__c</field>
+        <formula>TODAY()</formula>
+        <name>Clear Play-Pause Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Clear_Play_Pause_Date_SN</fullName>
+        <field>Play_Pause_Update_Date__c</field>
+        <formula>TODAY()</formula>
+        <name>Clear Play-Pause Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Clear_Play_Pause_Reason</fullName>
+        <field>Play_Pause_Reason__c</field>
+        <formula>&quot;Released&quot;</formula>
+        <name>Clear Play-Pause Reason</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Clear_Play_Pause_Reason_S</fullName>
+        <field>Play_Pause_Reason__c</field>
+        <formula>&quot;Released&quot;</formula>
+        <name>Clear Play-Pause Reason</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Clear_Play_Pause_Reason_SN</fullName>
+        <field>Play_Pause_Reason__c</field>
+        <formula>&quot;Released&quot;</formula>
+        <name>Clear Play-Pause Reason</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Clear_Preliminary_Behavior_Grade</fullName>
+        <description>Clear the text value from &quot;Preliminary Behavior Grade&quot;</description>
+        <field>Preliminary_Behavior_Grade__c</field>
+        <name>Clear Preliminary Behavior Grade</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Grade_Change_Yes</fullName>
+        <description>Update the &quot;Grade Change&quot; field to &quot;Yes&quot;</description>
+        <field>Grade_Change__c</field>
+        <literalValue>Yes</literalValue>
+        <name>Grade Change = Yes</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Preserve_Preliminary_Behavior_Grade</fullName>
+        <description>Store the preliminary behavior grade in &quot;Previous Behavior Grade&quot; field.</description>
+        <field>Previous_Behavior_Grade__c</field>
+        <formula>PRIORVALUE(Preliminary_Behavior_Grade__c)</formula>
+        <name>Preserve Preliminary Behavior Grade</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Preserve_Preliminary_Behavior_Grade2</fullName>
+        <description>Store the preliminary behavior grade in &quot;Previous Behavior Grade&quot; field.</description>
+        <field>Previous_Behavior_Grade__c</field>
+        <formula>TEXT(PRIORVALUE( Current_Behavior_Grade__c ))</formula>
+        <name>Preserve Preliminary Behavior Grade</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Preserve_Previous_Forensic_Status</fullName>
+        <field>Previous_Forensic_Hold_Status__c</field>
+        <formula>TEXT(PRIORVALUE(  Forensic_Status__c  ))</formula>
+        <name>Preserve Previous Forensic Status</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Preserve_Previous_Sex_Value</fullName>
+        <field>Previous_Sex__c</field>
+        <formula>TEXT(PRIORVALUE( Gender__c ))</formula>
+        <name>Preserve Previous Sex Value</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Remove_Play_Pause</fullName>
+        <field>Play_Pause__c</field>
+        <literalValue>No</literalValue>
+        <name>Remove Play-Pause</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Remove_Play_Pause_S</fullName>
+        <field>Play_Pause__c</field>
+        <name>Remove Play-Pause</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Remove_Play_Pause_SN</fullName>
+        <field>Play_Pause__c</field>
+        <literalValue>No</literalValue>
+        <name>Remove Play-Pause</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Adult Cat Auto-tasks</fullName>
+        <actions>
+            <name>FVRCP</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>FeLV_FIV_Recheck</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Animal__c.Type_of_Animal__c</field>
+            <operation>equals</operation>
+            <value>Cat</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Age__c</field>
+            <operation>equals</operation>
+            <value>4-6 months,6 months - 2 years,2-5 years,5-7 years,7-10 years,greater than 10 yrs</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Adult Cat and Dog Auto-tasks</fullName>
+        <actions>
+            <name>Advantage_Multi</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Advantage_Multi_2</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Advantage_Multi_3</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Advantage_Multi_4</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Advantage_Multi_5</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Advantage_Multi_6</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Advantage_Multi_7</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Advantage_Multi_8</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Advantage_Multi_9</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Pyrantel_Adult</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Animal__c.Type_of_Animal__c</field>
+            <operation>equals</operation>
+            <value>Dog,Cat</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Age__c</field>
+            <operation>equals</operation>
+            <value>4-6 months,6 months - 1 year,1 year - 2 years,2-5 years,5-7 years,7-10 years,greater than 10 yrs</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Advantage_Multi_10</name>
+                <type>Task</type>
+            </actions>
+            <actions>
+                <name>Advantage_Multi_11</name>
+                <type>Task</type>
+            </actions>
+            <actions>
+                <name>Advantage_Multi_12</name>
+                <type>Task</type>
+            </actions>
+            <timeLength>0</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Adult Cat and Dog Auto-tasks %288 years%29</fullName>
+        <actions>
+            <name>Annual_Senior_Bloodwork</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <booleanFilter>1 AND 2</booleanFilter>
+        <criteriaItems>
+            <field>Animal__c.Type_of_Animal__c</field>
+            <operation>equals</operation>
+            <value>Dog,Cat</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Age__c</field>
+            <operation>equals</operation>
+            <value>7-10 years,greater than 10 yrs</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Adult Dog Auto-tasks</fullName>
+        <actions>
+            <name>DHPP_Booster</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Lepto_Booster</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>X4Dx_Test</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Animal__c.Type_of_Animal__c</field>
+            <operation>equals</operation>
+            <value>Dog</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Age__c</field>
+            <operation>equals</operation>
+            <value>4-6 months,6 months - 1 year,1 year - 2 years,2-5 years,5-7 years,7-10 years,greater than 10 yrs</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <timeLength>0</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Animal Forensic Status Changed</fullName>
+        <actions>
+            <name>Animal_Forensic_Status_Change_Notification</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Preserve_Previous_Forensic_Status</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Notifies Behavior team if Forensic Hold Status or Charge Animal fields have been updated.</description>
+        <formula>AND(  Case_Record_Type__c = &quot;National Criminal Case&quot;,OR(ISCHANGED(Forensic_Status__c), ISCHANGED( Charge_Animal__c)))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Animal SN Status Changed</fullName>
+        <actions>
+            <name>Animal_SN_Status_Change_Notification</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Preserve_Previous_Sex_Value</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>AND(ISCHANGED( Gender__c ), NOT(ISBLANK(PRIORVALUE(Gender__c))))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Animal Transferred to Foster</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>Animal__c.Discharge_Type__c</field>
+            <operation>equals</operation>
+            <value>Transferred to Foster</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Foster_Survey</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>Animal__c.Discharge_Date__c</offsetFromField>
+            <timeLength>14</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <offsetFromField>Animal__c.Discharge_Date__c</offsetFromField>
+            <timeLength>180</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <offsetFromField>Animal__c.Discharge_Date__c</offsetFromField>
+            <timeLength>30</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <offsetFromField>Animal__c.Discharge_Date__c</offsetFromField>
+            <timeLength>90</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Behavior Case Worker Is Changed</fullName>
+        <actions>
+            <name>Send_Email_to_the_new_Behavior_Case_Worker</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <formula>ISCHANGED( Behavior_Case_Worker__c )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Behavior Grade Change - Initial</fullName>
+        <actions>
+            <name>Behavior_Grade_Change_Notification_Initial</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Clear_Preliminary_Behavior_Grade</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Preserve_Preliminary_Behavior_Grade</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>This rule is run whenever &quot;Current Behavior Grade&quot; is changed from a blank value to any of the available dropdown values.</description>
+        <formula>OR(  AND(  NOT(ISBLANK(TEXT(Current_Behavior_Grade__c))),  ISNEW()  ),  AND(  ISBLANK(PRIORVALUE(Current_Behavior_Grade__c)),  NOT(ISBLANK(TEXT(Current_Behavior_Grade__c)))  )  )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Behavior Grade Change - Subsequent</fullName>
+        <actions>
+            <name>Behavior_Grade_Change_Notification_Subsequent</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Grade_Change_Yes</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Preserve_Preliminary_Behavior_Grade2</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>This rule is run whenever &quot;Current Behavior Grade&quot; is altered, after the initial change.</description>
+        <formula>AND(ISCHANGED(Current_Behavior_Grade__c ), NOT(ISBLANK(PRIORVALUE(Current_Behavior_Grade__c))))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Cat and Dog Annual Auto-tasks</fullName>
+        <actions>
+            <name>Annual_Exam</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Annual_Vaccines</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Animal__c.Type_of_Animal__c</field>
+            <operation>equals</operation>
+            <value>Cat,Dog</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Age__c</field>
+            <operation>notEqual</operation>
+            <value>Unknown At Intake</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Cats%2FDogs %286 Months%29</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>.5</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Euthanasia2</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>Animal__c.Animal_Status__c</field>
+            <operation>equals</operation>
+            <value>Euthanized</value>
+        </criteriaItems>
+        <description>When Animal is euthanized, cancel tasks</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Kennel Change</fullName>
+        <actions>
+            <name>Kennel_Change_Alert2</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Kennel_Change_Follow_up</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <formula>AND( ISCHANGED( Shelter_Location__c ) , $User.Alias = &apos;fshel&apos; )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Kitten Auto-tasks %281 year%29</fullName>
+        <actions>
+            <name>Switch_to_Adult_Food</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Animal__c.Type_of_Animal__c</field>
+            <operation>equals</operation>
+            <value>Cat</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>lessThan</operation>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Kitten Auto-tasks %2810 wks%29</fullName>
+        <actions>
+            <name>FVRCP_10_Weeks</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Animal__c.Type_of_Animal__c</field>
+            <operation>equals</operation>
+            <value>Cat</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>lessThan</operation>
+            <value>0.191781</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Kitten Auto-tasks %2812 wks%29</fullName>
+        <actions>
+            <name>FVRCP_12_Weeks</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Rabies_12_Weeks</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Animal__c.Type_of_Animal__c</field>
+            <operation>equals</operation>
+            <value>Cat</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>lessThan</operation>
+            <value>0.230137</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Kitten Auto-tasks %2814 wks%29</fullName>
+        <actions>
+            <name>FVRCP_14_Weeks</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Animal__c.Type_of_Animal__c</field>
+            <operation>equals</operation>
+            <value>Cat</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>lessThan</operation>
+            <value>0.268493</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Kitten Auto-tasks %2816 wks%29</fullName>
+        <actions>
+            <name>FVRCP_16_Weeks</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Animal__c.Type_of_Animal__c</field>
+            <operation>equals</operation>
+            <value>Cat</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>lessThan</operation>
+            <value>0.306849</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Kitten Auto-tasks %2818 wks%29</fullName>
+        <actions>
+            <name>FVRCP_18_Weeks</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Animal__c.Type_of_Animal__c</field>
+            <operation>equals</operation>
+            <value>Cat</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>lessThan</operation>
+            <value>0.345205</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Kitten Auto-tasks %2820 wks%29</fullName>
+        <actions>
+            <name>FVRCP_20_Weeks</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Animal__c.Type_of_Animal__c</field>
+            <operation>equals</operation>
+            <value>Cat</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>lessThan</operation>
+            <value>0.383562</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Kitten Auto-tasks %284 wks%29</fullName>
+        <actions>
+            <name>EOD_Weight</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>FVRCP_4_Weeks</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Fecal_4_Weeks</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Pyrantel_4_Weeks</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Animal__c.Type_of_Animal__c</field>
+            <operation>equals</operation>
+            <value>Cat</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>lessThan</operation>
+            <value>0.0767123</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Kitten Auto-tasks %286 wks%29</fullName>
+        <actions>
+            <name>FVRCP_6_Weeks</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Ponazuril_Day_1</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Ponazuril_Day_2</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Ponazuril_Day_3</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Pyrantel_6_Weeks</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Weekly_Weight_6_Weeks</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Animal__c.Type_of_Animal__c</field>
+            <operation>equals</operation>
+            <value>Cat</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>lessThan</operation>
+            <value>0.115068</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Kitten Auto-tasks %288 wks%29</fullName>
+        <actions>
+            <name>Advantage_Multi_116_Days</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Advantage_Multi_146_Days</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Advantage_Multi_176_Days</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Advantage_Multi_206_Days</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Advantage_Multi_56_Days</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Advantage_Multi_86_Days</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>FVRCP_8_Weeks</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Weekly_Weight_8_Weeks</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Animal__c.Type_of_Animal__c</field>
+            <operation>equals</operation>
+            <value>Cat</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>lessThan</operation>
+            <value>0.153425</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Advantage_Multi_236_Days</name>
+                <type>Task</type>
+            </actions>
+            <actions>
+                <name>Advantage_Multi_266_Days</name>
+                <type>Task</type>
+            </actions>
+            <actions>
+                <name>Advantage_Multi_296_Days</name>
+                <type>Task</type>
+            </actions>
+            <actions>
+                <name>Advantage_Multi_326_Days</name>
+                <type>Task</type>
+            </actions>
+            <actions>
+                <name>Advantage_Multi_356_Days</name>
+                <type>Task</type>
+            </actions>
+            <actions>
+                <name>Advantage_Multi_386_Days</name>
+                <type>Task</type>
+            </actions>
+            <timeLength>0</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Play-Pause Initiated %28Dental%29</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>Animal__c.Play_Pause_Reason__c</field>
+            <operation>equals</operation>
+            <value>Dental</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Clear_Play_Pause_Date</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <actions>
+                <name>Clear_Play_Pause_Reason</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <actions>
+                <name>Remove_Play_Pause</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <timeLength>5</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Play-Pause Initiated %28In Heat%29</fullName>
+        <actions>
+            <name>Play_Pause_Follow_up</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Animal__c.Play_Pause_Reason__c</field>
+            <operation>equals</operation>
+            <value>In heat</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Clear_Play_Pause_Date</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <actions>
+                <name>Clear_Play_Pause_Reason</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <actions>
+                <name>Remove_Play_Pause</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <timeLength>28</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Play-Pause Initiated %28Neuter%29</fullName>
+        <actions>
+            <name>Animal_Sex_MN</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Animal__c.Play_Pause_Reason__c</field>
+            <operation>equals</operation>
+            <value>SN - Complicated</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Gender__c</field>
+            <operation>equals</operation>
+            <value>MI,MU,MN</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Play_Pause_Cleared_Notification_Email</name>
+                <type>Alert</type>
+            </actions>
+            <actions>
+                <name>Clear_Play_Pause_Date_SN</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <actions>
+                <name>Clear_Play_Pause_Reason_SN</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <actions>
+                <name>Remove_Play_Pause_SN</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <timeLength>11</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Play-Pause Initiated %28Simple Neuter%29</fullName>
+        <actions>
+            <name>Animal_Sex_MN</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Incision_Recheck</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Incision_Recheck2</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Incision_Recheck_10_Days</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Incision_Recheck_2_Days</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Animal__c.Play_Pause_Reason__c</field>
+            <operation>equals</operation>
+            <value>Neuter - Simple</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Gender__c</field>
+            <operation>equals</operation>
+            <value>MI,MN,MU</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <timeLength>4</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Play-Pause Initiated %28Simple Spay%29</fullName>
+        <actions>
+            <name>Animal_Sex_FS</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>DVM_Incision_Recheck_7_Days</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Incision_Recheck</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Incision_Recheck_10_Days</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Incision_Recheck_2_Days</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Incision_Recheck_Day_5</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Animal__c.Play_Pause_Reason__c</field>
+            <operation>equals</operation>
+            <value>Spay - Simple</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Gender__c</field>
+            <operation>equals</operation>
+            <value>FI,FU,FS</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <timeLength>7</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Play-Pause Initiated %28Spay%29</fullName>
+        <actions>
+            <name>Animal_Sex_FS</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Animal__c.Play_Pause_Reason__c</field>
+            <operation>equals</operation>
+            <value>SN - Complicated</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Gender__c</field>
+            <operation>equals</operation>
+            <value>FI,FU,FS</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Play_Pause_Cleared_Notification_Email</name>
+                <type>Alert</type>
+            </actions>
+            <actions>
+                <name>Clear_Play_Pause_Date_S</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <actions>
+                <name>Clear_Play_Pause_Reason_S</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <actions>
+                <name>Remove_Play_Pause_S</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <timeLength>11</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Puppy Auto-tasks %2810 wks%29</fullName>
+        <actions>
+            <name>DHPP_10_Weeks</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Animal__c.Type_of_Animal__c</field>
+            <operation>equals</operation>
+            <value>Dog</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>lessThan</operation>
+            <value>0.191781</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Puppy Auto-tasks %2812 wks%29</fullName>
+        <actions>
+            <name>DHPP_12_Weeks</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Lepto_12_Weeks</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Rabies_12_Weeks</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Animal__c.Type_of_Animal__c</field>
+            <operation>equals</operation>
+            <value>Dog</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>lessThan</operation>
+            <value>0.230137</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Puppy Auto-tasks %2814 wks%29</fullName>
+        <actions>
+            <name>DHPP_14_Weeks</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Lepto_14_Weeks</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Animal__c.Type_of_Animal__c</field>
+            <operation>equals</operation>
+            <value>Dog</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>lessThan</operation>
+            <value>0.268493</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Puppy Auto-tasks %2816 wks%29</fullName>
+        <actions>
+            <name>DHPP_16_Weeks</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Animal__c.Type_of_Animal__c</field>
+            <operation>equals</operation>
+            <value>Dog</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>lessThan</operation>
+            <value>0.306849</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Puppy Auto-tasks %2818 wks%29</fullName>
+        <actions>
+            <name>DHPP_18_Weeks</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Animal__c.Type_of_Animal__c</field>
+            <operation>equals</operation>
+            <value>Dog</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>lessThan</operation>
+            <value>0.345205</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Puppy Auto-tasks %2820 wks%29</fullName>
+        <actions>
+            <name>DHPP_20_Weeks</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Animal__c.Type_of_Animal__c</field>
+            <operation>equals</operation>
+            <value>Dog</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>lessThan</operation>
+            <value>0.383562</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Puppy Auto-tasks %284 wks%29</fullName>
+        <actions>
+            <name>Babesia_PCR</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Bordetella_IN</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>DHPP</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>EOD_Weight</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Fecal_4_Weeks</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Pyrantel_4_Weeks</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Animal__c.Type_of_Animal__c</field>
+            <operation>equals</operation>
+            <value>Dog</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>lessThan</operation>
+            <value>0.0767123</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Puppy Auto-tasks %286 Months%29</fullName>
+        <actions>
+            <name>Switch_to_Adult_Food</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>X4Dx_Test_6_Months</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Animal__c.Type_of_Animal__c</field>
+            <operation>equals</operation>
+            <value>Dog</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>lessThan</operation>
+            <value>.5</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Puppy Auto-tasks %286 wks%29</fullName>
+        <actions>
+            <name>DHPP_6_Weeks</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Ponazuril_Day_1</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Ponazuril_Day_2</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Ponazuril_Day_3</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Pyrantel_6_Weeks</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Weekly_Weight_6_Weeks</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Animal__c.Type_of_Animal__c</field>
+            <operation>equals</operation>
+            <value>Dog</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>lessThan</operation>
+            <value>0.115068</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Puppy Auto-tasks %288 wks%29</fullName>
+        <actions>
+            <name>Advantage_Multi_102_Days</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Advantage_Multi_132_Days</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Advantage_Multi_162_Days</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Advantage_Multi_192_Days</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Advantage_Multi_222_Days</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Advantage_Multi_42_Days</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Advantage_Multi_72_Days</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>DHPP_8_Weeks</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Weekly_Weight_8_Weeks</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Animal__c.Type_of_Animal__c</field>
+            <operation>equals</operation>
+            <value>Dog</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>lessThan</operation>
+            <value>0.153425</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Advantage_Multi_252_Days</name>
+                <type>Task</type>
+            </actions>
+            <actions>
+                <name>Advantage_Multi_282_Days</name>
+                <type>Task</type>
+            </actions>
+            <actions>
+                <name>Advantage_Multi_312_Days</name>
+                <type>Task</type>
+            </actions>
+            <actions>
+                <name>Advantage_Multi_342_Days</name>
+                <type>Task</type>
+            </actions>
+            <actions>
+                <name>Advantage_Multi_372_Days</name>
+                <type>Task</type>
+            </actions>
+            <timeLength>0</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Puppy and Kitten Auto-tasks %282 wks%29</fullName>
+        <actions>
+            <name>Daily_Weights</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Pyrantel_2_Weeks</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Animal__c.Type_of_Animal__c</field>
+            <operation>equals</operation>
+            <value>Cat,Dog</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>lessThan</operation>
+            <value>0.0383562</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Animal__c.Current_Animal_Age_Estimate__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <tasks>
+        <fullName>Advantage_Multi</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check weight, nails and collar. Apply Advantage Multi per weight.</description>
+        <dueDateOffset>30</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Intake_Date_Time__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Advantage Multi</subject>
+    </tasks>
+    <tasks>
+        <fullName>Advantage_Multi_10</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check weight, nails and collar. Apply Advantage Multi per weight.</description>
+        <dueDateOffset>300</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Intake_Date_Time__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Advantage Multi</subject>
+    </tasks>
+    <tasks>
+        <fullName>Advantage_Multi_102_Days</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check weight and record in kgs, check collar for appropriate fit, trim nails if needed. Apply Advantage Multi topically per weight.</description>
+        <dueDateOffset>102</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Advantage Multi</subject>
+    </tasks>
+    <tasks>
+        <fullName>Advantage_Multi_11</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check weight, nails and collar. Apply Advantage Multi per weight.</description>
+        <dueDateOffset>330</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Intake_Date_Time__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Advantage Multi</subject>
+    </tasks>
+    <tasks>
+        <fullName>Advantage_Multi_116_Days</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check weight and record in kgs, check collar for appropriate fit, trim nails if needed. Apply Advantage Multi topically per weight.</description>
+        <dueDateOffset>116</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Advantage Multi</subject>
+    </tasks>
+    <tasks>
+        <fullName>Advantage_Multi_12</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check weight, nails and collar. Apply Advantage Multi per weight.</description>
+        <dueDateOffset>360</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Intake_Date_Time__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Advantage Multi</subject>
+    </tasks>
+    <tasks>
+        <fullName>Advantage_Multi_132_Days</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check weight and record in kgs, check collar for appropriate fit, trim nails if needed. Apply Advantage Multi topically per weight.</description>
+        <dueDateOffset>132</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Advantage Multi</subject>
+    </tasks>
+    <tasks>
+        <fullName>Advantage_Multi_146_Days</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check weight and record in kgs, check collar for appropriate fit, trim nails if needed. Apply Advantage Multi topically per weight.</description>
+        <dueDateOffset>146</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Advantage Multi</subject>
+    </tasks>
+    <tasks>
+        <fullName>Advantage_Multi_162_Days</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check weight and record in kgs, check collar for appropriate fit, trim nails if needed. Apply Advantage Multi topically per weight.</description>
+        <dueDateOffset>162</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Advantage Multi</subject>
+    </tasks>
+    <tasks>
+        <fullName>Advantage_Multi_176_Days</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check weight and record in kgs, check collar for appropriate fit, trim nails if needed. Apply Advantage Multi topically per weight.</description>
+        <dueDateOffset>176</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Advantage Multi</subject>
+    </tasks>
+    <tasks>
+        <fullName>Advantage_Multi_192_Days</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check weight and record in kgs, check collar for appropriate fit, trim nails if needed. Apply Advantage Multi topically per weight.</description>
+        <dueDateOffset>192</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Advantage Multi</subject>
+    </tasks>
+    <tasks>
+        <fullName>Advantage_Multi_2</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check weight, nails and collar. Apply Advantage Multi per weight.</description>
+        <dueDateOffset>60</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Intake_Date_Time__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Advantage Multi</subject>
+    </tasks>
+    <tasks>
+        <fullName>Advantage_Multi_206_Days</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check weight and record in kgs, check collar for appropriate fit, trim nails if needed. Apply Advantage Multi topically per weight.</description>
+        <dueDateOffset>206</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Advantage Multi</subject>
+    </tasks>
+    <tasks>
+        <fullName>Advantage_Multi_222_Days</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check weight and record in kgs, check collar for appropriate fit, trim nails if needed. Apply Advantage Multi topically per weight.</description>
+        <dueDateOffset>222</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Advantage Multi</subject>
+    </tasks>
+    <tasks>
+        <fullName>Advantage_Multi_236_Days</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check weight and record in kgs, check collar for appropriate fit, trim nails if needed. Apply Advantage Multi topically per weight.</description>
+        <dueDateOffset>236</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Advantage Multi</subject>
+    </tasks>
+    <tasks>
+        <fullName>Advantage_Multi_252_Days</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check weight and record in kgs, check collar for appropriate fit, trim nails if needed. Apply Advantage Multi topically per weight.</description>
+        <dueDateOffset>252</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Advantage Multi</subject>
+    </tasks>
+    <tasks>
+        <fullName>Advantage_Multi_266_Days</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check weight and record in kgs, check collar for appropriate fit, trim nails if needed. Apply Advantage Multi topically per weight.</description>
+        <dueDateOffset>266</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Advantage Multi</subject>
+    </tasks>
+    <tasks>
+        <fullName>Advantage_Multi_282_Days</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check weight and record in kgs, check collar for appropriate fit, trim nails if needed. Apply Advantage Multi topically per weight.</description>
+        <dueDateOffset>282</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Advantage Multi</subject>
+    </tasks>
+    <tasks>
+        <fullName>Advantage_Multi_296_Days</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check weight and record in kgs, check collar for appropriate fit, trim nails if needed. Apply Advantage Multi topically per weight.</description>
+        <dueDateOffset>296</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Advantage Multi</subject>
+    </tasks>
+    <tasks>
+        <fullName>Advantage_Multi_3</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check weight, nails and collar. Apply Advantage Multi per weight.</description>
+        <dueDateOffset>90</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Intake_Date_Time__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Advantage Multi</subject>
+    </tasks>
+    <tasks>
+        <fullName>Advantage_Multi_312_Days</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check weight and record in kgs, check collar for appropriate fit, trim nails if needed. Apply Advantage Multi topically per weight.</description>
+        <dueDateOffset>312</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Advantage Multi</subject>
+    </tasks>
+    <tasks>
+        <fullName>Advantage_Multi_326_Days</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check weight and record in kgs, check collar for appropriate fit, trim nails if needed. Apply Advantage Multi topically per weight.</description>
+        <dueDateOffset>326</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Advantage Multi</subject>
+    </tasks>
+    <tasks>
+        <fullName>Advantage_Multi_342_Days</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check weight and record in kgs, check collar for appropriate fit, trim nails if needed. Apply Advantage Multi topically per weight.</description>
+        <dueDateOffset>342</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Advantage Multi</subject>
+    </tasks>
+    <tasks>
+        <fullName>Advantage_Multi_356_Days</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check weight and record in kgs, check collar for appropriate fit, trim nails if needed. Apply Advantage Multi topically per weight.</description>
+        <dueDateOffset>356</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Advantage Multi</subject>
+    </tasks>
+    <tasks>
+        <fullName>Advantage_Multi_372_Days</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check weight and record in kgs, check collar for appropriate fit, trim nails if needed. Apply Advantage Multi topically per weight.</description>
+        <dueDateOffset>372</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Advantage Multi</subject>
+    </tasks>
+    <tasks>
+        <fullName>Advantage_Multi_386_Days</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check weight and record in kgs, check collar for appropriate fit, trim nails if needed. Apply Advantage Multi topically per weight.</description>
+        <dueDateOffset>386</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Advantage Multi</subject>
+    </tasks>
+    <tasks>
+        <fullName>Advantage_Multi_4</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check weight, nails and collar. Apply Advantage Multi per weight.</description>
+        <dueDateOffset>120</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Intake_Date_Time__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Advantage Multi</subject>
+    </tasks>
+    <tasks>
+        <fullName>Advantage_Multi_42_Days</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check weight and record in kgs, check collar for appropriate fit, trim nails if needed. Apply Advantage Multi topically per weight.</description>
+        <dueDateOffset>42</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Advantage Multi</subject>
+    </tasks>
+    <tasks>
+        <fullName>Advantage_Multi_5</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check weight, nails and collar. Apply Advantage Multi per weight.</description>
+        <dueDateOffset>150</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Intake_Date_Time__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Advantage Multi</subject>
+    </tasks>
+    <tasks>
+        <fullName>Advantage_Multi_56_Days</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check weight and record in kgs, check collar for appropriate fit, trim nails if needed. Apply Advantage Multi topically per weight.</description>
+        <dueDateOffset>56</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Advantage Multi</subject>
+    </tasks>
+    <tasks>
+        <fullName>Advantage_Multi_6</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check weight, nails and collar. Apply Advantage Multi per weight.</description>
+        <dueDateOffset>180</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Intake_Date_Time__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Advantage Multi</subject>
+    </tasks>
+    <tasks>
+        <fullName>Advantage_Multi_7</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check weight, nails and collar. Apply Advantage Multi per weight.</description>
+        <dueDateOffset>210</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Intake_Date_Time__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Advantage Multi</subject>
+    </tasks>
+    <tasks>
+        <fullName>Advantage_Multi_72_Days</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check weight and record in kgs, check collar for appropriate fit, trim nails if needed. Apply Advantage Multi topically per weight.</description>
+        <dueDateOffset>72</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Advantage Multi</subject>
+    </tasks>
+    <tasks>
+        <fullName>Advantage_Multi_8</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check weight, nails and collar. Apply Advantage Multi per weight.</description>
+        <dueDateOffset>240</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Intake_Date_Time__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Advantage Multi</subject>
+    </tasks>
+    <tasks>
+        <fullName>Advantage_Multi_86_Days</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check weight and record in kgs, check collar for appropriate fit, trim nails if needed. Apply Advantage Multi topically per weight.</description>
+        <dueDateOffset>86</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Advantage Multi</subject>
+    </tasks>
+    <tasks>
+        <fullName>Advantage_Multi_9</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check weight, nails and collar. Apply Advantage Multi per weight.</description>
+        <dueDateOffset>270</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Intake_Date_Time__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Advantage Multi</subject>
+    </tasks>
+    <tasks>
+        <fullName>Annual_Exam</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Annual exam, review history and chronic medications.
+Please schedule next annual exam in one year.</description>
+        <dueDateOffset>365</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Intake_Date_Time__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Annual Exam</subject>
+    </tasks>
+    <tasks>
+        <fullName>Annual_Senior_Bloodwork</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Send CBC/Chem/UA to Antech.</description>
+        <dueDateOffset>365</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Intake_Date_Time__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Annual Senior Bloodwork</subject>
+    </tasks>
+    <tasks>
+        <fullName>Annual_Vaccines</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Please schedule next vaccines in one year.</description>
+        <dueDateOffset>365</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Intake_Date_Time__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Annual Vaccines</subject>
+    </tasks>
+    <tasks>
+        <fullName>Babesia_PCR</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Submit 1ml whole blood in LTT to NCSU VBDDL. Ship only Mon-Thurs.</description>
+        <dueDateOffset>28</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Babesia PCR</subject>
+    </tasks>
+    <tasks>
+        <fullName>Bordetella_IN</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Give intranasally, record expiration date and serial number.</description>
+        <dueDateOffset>28</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Bordetella IN</subject>
+    </tasks>
+    <tasks>
+        <fullName>DHPP</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Give SQ in RF shoulder, record expiration date and serial number.</description>
+        <dueDateOffset>28</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>DHPP @ 4 Weeks</subject>
+    </tasks>
+    <tasks>
+        <fullName>DHPP_10_Weeks</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Give SQ in RF shoulder, record expiration date and serial number.</description>
+        <dueDateOffset>70</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>DHPP @ 10 Weeks</subject>
+    </tasks>
+    <tasks>
+        <fullName>DHPP_12_Weeks</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Give SQ in RF shoulder, record expiration date and serial number.</description>
+        <dueDateOffset>84</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>DHPP @ 12 Weeks</subject>
+    </tasks>
+    <tasks>
+        <fullName>DHPP_14_Weeks</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Give SQ in RF shoulder, record expiration date and serial number.</description>
+        <dueDateOffset>98</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>DHPP @ 14 Weeks</subject>
+    </tasks>
+    <tasks>
+        <fullName>DHPP_16_Weeks</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Give SQ in RF shoulder, record expiration date and serial number.</description>
+        <dueDateOffset>112</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>DHPP @ 16 Weeks</subject>
+    </tasks>
+    <tasks>
+        <fullName>DHPP_18_Weeks</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Give SQ in RF shoulder, record expiration date and serial number.</description>
+        <dueDateOffset>126</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>DHPP @ 18 Weeks</subject>
+    </tasks>
+    <tasks>
+        <fullName>DHPP_20_Weeks</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Give SQ in RF shoulder, record expiration date and serial number.</description>
+        <dueDateOffset>140</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>DHPP @ 20 Weeks</subject>
+    </tasks>
+    <tasks>
+        <fullName>DHPP_6_Weeks</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Give SQ in RF shoulder, record expiration date and serial number.</description>
+        <dueDateOffset>42</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>DHPP @ 6 Weeks</subject>
+    </tasks>
+    <tasks>
+        <fullName>DHPP_8_Weeks</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Give SQ in RF shoulder, record expiration date and serial number.</description>
+        <dueDateOffset>56</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>DHPP @ 8 Weeks</subject>
+    </tasks>
+    <tasks>
+        <fullName>DHPP_Booster</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Give SQ in RF shoulder, record expiration date and serial number.</description>
+        <dueDateOffset>18</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Intake_Date_Time__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>DHPP Booster</subject>
+    </tasks>
+    <tasks>
+        <fullName>DVM_Incision_Recheck_10_Days</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check incision for signs of redness, swelling or discharge. Assess need to continue pain meds.</description>
+        <dueDateOffset>10</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>DVM Incision Recheck (Day 10)</subject>
+    </tasks>
+    <tasks>
+        <fullName>DVM_Incision_Recheck_7_Days</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check incision for signs of redness, swelling or discharge. Assess need to continue pain meds.</description>
+        <dueDateOffset>7</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>DVM Incision Recheck (Day 7)</subject>
+    </tasks>
+    <tasks>
+        <fullName>Daily_Weights</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Create series of daily weights for through two weeks of age. (Days 1-14). 
+
+Use the following comment: Record weight in grams or kgs, compare to birth weight. If puppy has not gained 10% of birthweight – report to medical lead immediately.</description>
+        <dueDateOffset>1</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Daily Weight Task Creation Reminder</subject>
+    </tasks>
+    <tasks>
+        <fullName>EOD_Weight</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Create series of EOD weights for through four weeks of age. (Days 16-28). 
+
+Use the following comment: Record weight in grams or kgs, compare to birth weight. If puppy has not gained 10% of birthweight – report to medical lead immediately.</description>
+        <dueDateOffset>1</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>EOD Weight Task Creation Reminder</subject>
+    </tasks>
+    <tasks>
+        <fullName>FVRCP</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Give SQ in RF shoulder, record expiration date and serial number.</description>
+        <dueDateOffset>18</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Intake_Date_Time__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>FVRCP</subject>
+    </tasks>
+    <tasks>
+        <fullName>FVRCP_10_Weeks</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Give SQ in RF shoulder, record expiration date and serial number.</description>
+        <dueDateOffset>70</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>FVRCP @ 10 Weeks</subject>
+    </tasks>
+    <tasks>
+        <fullName>FVRCP_12_Weeks</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Give SQ in RF shoulder, record expiration date and serial number.</description>
+        <dueDateOffset>84</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>FVRCP @ 12 Weeks</subject>
+    </tasks>
+    <tasks>
+        <fullName>FVRCP_14_Weeks</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Give SQ in RF shoulder, record expiration date and serial number.</description>
+        <dueDateOffset>98</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>FVRCP @14 Weeks</subject>
+    </tasks>
+    <tasks>
+        <fullName>FVRCP_16_Weeks</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Give SQ in RF shoulder, record expiration date and serial number.</description>
+        <dueDateOffset>112</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>FVRCP @ 16 Weeks</subject>
+    </tasks>
+    <tasks>
+        <fullName>FVRCP_18_Weeks</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Give SQ in RF shoulder, record expiration date and serial number.</description>
+        <dueDateOffset>126</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>FVRCP @ 18 Weeks</subject>
+    </tasks>
+    <tasks>
+        <fullName>FVRCP_20_Weeks</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Give SQ in RF shoulder, record expiration date and serial number.</description>
+        <dueDateOffset>140</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>FVRCP @ 20 Weeks</subject>
+    </tasks>
+    <tasks>
+        <fullName>FVRCP_4_Weeks</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Give SQ in RF shoulder, record expiration date and serial number.</description>
+        <dueDateOffset>28</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>FVRCP @ 4 Weeks</subject>
+    </tasks>
+    <tasks>
+        <fullName>FVRCP_6_Weeks</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Give SQ in RF shoulder, record expiration date and serial number.</description>
+        <dueDateOffset>42</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>FVRCP @ 6 Weeks</subject>
+    </tasks>
+    <tasks>
+        <fullName>FVRCP_8_Weeks</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Give SQ in RF shoulder, record expiration date and serial number.</description>
+        <dueDateOffset>56</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>FVRCP @ 8 Weeks</subject>
+    </tasks>
+    <tasks>
+        <fullName>FeLV_FIV_Recheck</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Recheck Idexx FeLV/FIV snap test three months post intake, record results in SF.</description>
+        <dueDateOffset>90</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Intake_Date_Time__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>FeLV/FIV Recheck</subject>
+    </tasks>
+    <tasks>
+        <fullName>Fecal_4_Weeks</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Fecal OP to Antech. (Combined group fecal okay for litters).</description>
+        <dueDateOffset>28</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Fecal OP</subject>
+    </tasks>
+    <tasks>
+        <fullName>Incision_Recheck</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check incision for signs of redness, swelling or discharge. Report any concerns to DVM.</description>
+        <dueDateOffset>1</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Incision Recheck</subject>
+    </tasks>
+    <tasks>
+        <fullName>Incision_Recheck2</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check incision for signs of redness, swelling or discharge. Assess need to continue pain meds.</description>
+        <dueDateOffset>4</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>DVM Incision Recheck</subject>
+    </tasks>
+    <tasks>
+        <fullName>Incision_Recheck3</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check incision for signs of redness, swelling or discharge. Report any concerns to DVM.</description>
+        <dueDateOffset>9</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Incision Recheck</subject>
+    </tasks>
+    <tasks>
+        <fullName>Incision_Recheck_10_Days</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check incision for signs of redness, swelling or discharge. Report any concerns to DVM.</description>
+        <dueDateOffset>10</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Incision Recheck (Day 10)</subject>
+    </tasks>
+    <tasks>
+        <fullName>Incision_Recheck_2_Days</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check incision for signs of redness, swelling or discharge. Report any concerns to DVM.</description>
+        <dueDateOffset>2</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Incision Recheck (Day 2)</subject>
+    </tasks>
+    <tasks>
+        <fullName>Incision_Recheck_Day_5</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Check incision for signs of redness, swelling or discharge. Report any concerns to DVM.</description>
+        <dueDateOffset>5</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Incision Recheck (Day 5)</subject>
+    </tasks>
+    <tasks>
+        <fullName>Kennel_Change_Follow_up</fullName>
+        <assignedTo>crcsheltering@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>You just changed the kennel location of this animal. If you haven’t done so already, please add a note in Salesforce with the reason for the move. Then, create a recurring task for the next week to check on the animal and address any issues or concerns.</description>
+        <dueDateOffset>1</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Kennel Change Follow-up</subject>
+    </tasks>
+    <tasks>
+        <fullName>Lepto_12_Weeks</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Give SQ in LH leg, record expiration date and serial number.</description>
+        <dueDateOffset>84</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Lepto @ 12 Weeks</subject>
+    </tasks>
+    <tasks>
+        <fullName>Lepto_14_Weeks</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Give SQ in LH leg, record expiration date and serial number.</description>
+        <dueDateOffset>98</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Lepto @ 14 Weeks</subject>
+    </tasks>
+    <tasks>
+        <fullName>Lepto_Booster</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Give SQ in LH leg, record expiration date and serial number.</description>
+        <dueDateOffset>18</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Intake_Date_Time__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Lepto Booster</subject>
+    </tasks>
+    <tasks>
+        <fullName>Play_Pause_Follow_up</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Please check on this animal. If play-pause can be removed, create a new Concern/Recheck exam and select &quot;Released&quot; as the &quot;Play-Pause Reason&quot;.</description>
+        <dueDateOffset>14</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Play-Pause Follow-up</subject>
+    </tasks>
+    <tasks>
+        <fullName>Ponazuril_Day_1</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Give 50mg/kg PO.</description>
+        <dueDateOffset>42</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Ponazuril 1 of 3</subject>
+    </tasks>
+    <tasks>
+        <fullName>Ponazuril_Day_2</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Give 50mg/kg PO.</description>
+        <dueDateOffset>43</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Ponazuril 2 of 3</subject>
+    </tasks>
+    <tasks>
+        <fullName>Ponazuril_Day_3</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Give 50mg/kg PO.</description>
+        <dueDateOffset>44</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Ponazuril 3 of 3</subject>
+    </tasks>
+    <tasks>
+        <fullName>Pyrantel_10_Weeks</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Give 0.25ml/kg PO.</description>
+        <dueDateOffset>70</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Pyrantel @ 10 Weeks</subject>
+    </tasks>
+    <tasks>
+        <fullName>Pyrantel_12_Weeks</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Give 0.25ml/kg PO.</description>
+        <dueDateOffset>84</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Pyrantel @ 12 Weeks</subject>
+    </tasks>
+    <tasks>
+        <fullName>Pyrantel_14_Weeks</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Give 0.25ml/kg PO.</description>
+        <dueDateOffset>98</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Pyrantel @ 14 Weeks</subject>
+    </tasks>
+    <tasks>
+        <fullName>Pyrantel_16_Weeks</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Give 0.25ml/kg PO.</description>
+        <dueDateOffset>112</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Pyrantel @ 16 Weeks</subject>
+    </tasks>
+    <tasks>
+        <fullName>Pyrantel_18_Weeks</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Give 0.25ml/kg PO.</description>
+        <dueDateOffset>126</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Pyrantel @ 18 Weeks</subject>
+    </tasks>
+    <tasks>
+        <fullName>Pyrantel_20_Weeks</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Give 0.25ml/kg PO.</description>
+        <dueDateOffset>140</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Pyrantel @ 20 Weeks</subject>
+    </tasks>
+    <tasks>
+        <fullName>Pyrantel_2_Weeks</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Give 0.25ml/kg PO.</description>
+        <dueDateOffset>14</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Pyrantel @ 2 Weeks</subject>
+    </tasks>
+    <tasks>
+        <fullName>Pyrantel_4_Weeks</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Give 0.25ml/kg PO.</description>
+        <dueDateOffset>28</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Pyrantel @ 4 Weeks</subject>
+    </tasks>
+    <tasks>
+        <fullName>Pyrantel_6_Weeks</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Give 0.25ml/kg PO.</description>
+        <dueDateOffset>42</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Pyrantel @ 6 Weeks</subject>
+    </tasks>
+    <tasks>
+        <fullName>Pyrantel_8_Weeks</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Give 0.25ml/kg PO.</description>
+        <dueDateOffset>56</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Pyrantel @ 8 Weeks</subject>
+    </tasks>
+    <tasks>
+        <fullName>Pyrantel_Adult</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Give 0.25ml/kg PO per weight.</description>
+        <dueDateOffset>18</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Intake_Date_Time__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Pyrantel</subject>
+    </tasks>
+    <tasks>
+        <fullName>Rabies_12_Weeks</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Give SQ in RH leg, record expiration date and serial number.</description>
+        <dueDateOffset>84</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Rabies (DVM) @ 12 Weeks</subject>
+    </tasks>
+    <tasks>
+        <fullName>Recheck_Fecal</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>31</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Intake_Date_Time__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Recheck Fecal</subject>
+    </tasks>
+    <tasks>
+        <fullName>Switch_to_Adult_Food</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Notify Sheltering to switch to adult food.</description>
+        <dueDateOffset>182</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Switch to Adult Food</subject>
+    </tasks>
+    <tasks>
+        <fullName>Weekly_Weight_6_Weeks</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Record weight in kgs.</description>
+        <dueDateOffset>42</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Weekly Weight</subject>
+    </tasks>
+    <tasks>
+        <fullName>Weekly_Weight_8_Weeks</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Record weight in kgs.</description>
+        <dueDateOffset>56</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Weekly Weight</subject>
+    </tasks>
+    <tasks>
+        <fullName>X4Dx_Test</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Recheck 4Dx test 6 months post intake.</description>
+        <dueDateOffset>182</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Intake_Date_Time__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>4Dx Test</subject>
+    </tasks>
+    <tasks>
+        <fullName>X4Dx_Test_6_Months</fullName>
+        <assignedTo>medical_user@aspca.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>4Dx Test; record results in SF. Notify medical lead of any positive results.</description>
+        <dueDateOffset>182</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Animal__c.Estimated_Date_of_Birth__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>4Dx Test</subject>
+    </tasks>
+</Workflow>

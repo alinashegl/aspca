@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Lead_Attorney__c</fullName>
+    <externalId>false</externalId>
+    <label>Lead Attorney</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Unassigned</fullName>
+                <default>false</default>
+                <label>Unassigned</label>
+            </value>
+            <value>
+                <fullName>Donna Lassa</fullName>
+                <default>false</default>
+                <label>Donna Lassa</label>
+            </value>
+            <value>
+                <fullName>Elizabeth Brandler</fullName>
+                <default>false</default>
+                <label>Elizabeth Brandler</label>
+            </value>
+            <value>
+                <fullName>Erin Satterthwaite</fullName>
+                <default>false</default>
+                <label>Erin Satterthwaite</label>
+            </value>
+            <value>
+                <fullName>Jennifer Chin</fullName>
+                <default>false</default>
+                <label>Jennifer Chin</label>
+            </value>
+            <value>
+                <fullName>Natasha Major</fullName>
+                <default>false</default>
+                <label>Natasha Major</label>
+            </value>
+            <value>
+                <fullName>Nathan Zilak</fullName>
+                <default>false</default>
+                <label>Nathan Zilak</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

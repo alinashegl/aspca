@@ -1,0 +1,905 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FIR_Case</fullName>
+    <active>true</active>
+    <businessProcess>National Criminal</businessProcess>
+    <label>National Criminal Case</label>
+    <picklistValues>
+        <picklist>Activity__c</picklist>
+        <values>
+            <fullName>Bloodsports - Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cockfighting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cruelty</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cruelty - Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dogfighting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Hoarding</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Puppy Mill</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Behavior_Placement_Status__c</picklist>
+        <values>
+            <fullName>Behavior Hold</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Placement Partner OK - Foster</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Placement Partner OK - Foster-based Rescue</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Placement Partner OK - Shelter with Behavior Dept%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ready for Placement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rehab Candidate</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>CASE_STATUS_SUBTYPE__c</picklist>
+        <values>
+            <fullName>Case Packaging</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Case Review</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Complete</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Consultation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Court Charges Filed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Crime Scene Assistance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Deployment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Emergency Sheltering</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Expert Testimony</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Forensic Analysis</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>General Case Consultation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Investigation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Placement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Supply Request</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transport</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Case_Initiated_By_Partner__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Case_Origin_2__c</picklist>
+        <values>
+            <fullName>Email</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Phone</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Web</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Case_Phase__c</picklist>
+        <values>
+            <fullName>Consultation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Deployment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Investigation</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Case_Subtype__c</picklist>
+        <values>
+            <fullName>Asphyxia</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Blunt Force Trauma</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Breeder</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Burn Injuries</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cockfighting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dog and Chicken Fighting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dogfighting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Drowning</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Earthquake</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Environmental Conditions</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fire</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flooding</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Hurricane</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Inadequate Food and%2For Water</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Inappropriate Shelter %28Sanitation%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Inappropriate Shelter %28Temperature%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lack of Grooming Care</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lack of Veterinary Care</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Large Scale Neglect %28Commercial Dog Breeder%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Large Scale Neglect %28Farm%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Large Scale Neglect %28Pet Store%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Large Scale Neglect %28Private Citizen%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Large Scale Neglect %28Rescue%2FSanctuary%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Large Scale Neglect %28Shelter%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Penetrating Trauma</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Penetrating Trauma %28Dog Bite Injuries%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Penetrating Trauma %28Gunshot Injuries%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Penetrating Trauma %28Sharp Force Trauma%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Poisoning</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Private</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Public</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ritual Abuse</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sexual Abuse</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sharp Force Trauma</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tornado</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unknown</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Volcano</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Winter Storm</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Case_Type__c</picklist>
+        <values>
+            <fullName>Abandonment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Animal Fighting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Neglect</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Non-Accidental Injury</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sexual Abuse</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unknown</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Category__c</picklist>
+        <values>
+            <fullName>Expert Services - Forensic Science</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Expert Services - Legal Review</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Expert Services - Subject Matter</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Investigations - Complaint</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Investigations - Consultation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Investigations - Proactive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sheltering Services</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Closed_Reason__c</picklist>
+        <values>
+            <fullName>Convicted - See Charge Information</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Convicted - See Notes</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Did not become a case</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Diversion</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Further Involvement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Convicted - See Charge Information</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Convicted - See Notes</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not enough information</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Owner complied</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Referred to local agency</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Referred to other dept%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Source stopped communications</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Surrendered animals</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unable to locate</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Uncooperative agency</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Uncooperative complainant</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unfounded</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Investigator__c</picklist>
+        <values>
+            <fullName>Alison Kennedy-Benson</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Amanda Fitch</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ashley Saver%2C DVM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Donna Lassa</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Elizabeth Brandler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Elizabeth Pearlman%2C DVM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Kristina Baucom%2C DVM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Kyle Held</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Leigh Anne Wilson</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Nathan Zilak</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rachel Touroo%2C DVM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Teresa Ladner</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Terry Mills</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unassigned</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Lead_Attorney__c</picklist>
+        <values>
+            <fullName>Donna Lassa</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Elizabeth Brandler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Erin Satterthwaite</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Jennifer Chin</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Nathan Zilak</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unassigned</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Lead_Forensic_Veterinarian__c</picklist>
+        <values>
+            <fullName>Alison Liu</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ashley Saver</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Elizabeth Pearlman</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Jasmine Bruno</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Laura Niestat</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rachel Touroo</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Robert Reisman</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Lead_Veterinarian__c</picklist>
+        <values>
+            <fullName>AL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>JB</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LNN</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RR</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>NYPD_DA_Documents__c</picklist>
+        <values>
+            <fullName>Criminal Complaint</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NYPD Arrest Report</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NYPD Complaint Report</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Warrant</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Origin</picklist>
+        <values>
+            <fullName>Email</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Phone</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Web</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Priority</picklist>
+        <values>
+            <fullName>High</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Low</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Medium</fullName>
+            <default>true</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Reason</picklist>
+        <values>
+            <fullName>Consultation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Disaster</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Investigation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Operations</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Relationship_of_Defendant_to_Victim__c</picklist>
+        <values>
+            <fullName>Boyfriend %28opposite-sex%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Boyfriend %28same-sex%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Brother</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Daughter</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ex-boyfriend %28opposite-sex%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ex-boyfriend %28same-sex%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ex-husband %28opposite-sex%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ex-husband %28same-sex%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ex-wife %28opposite-sex%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ex-wife %28same-sex%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Father</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fiancé</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Former boyfriend %28opposite-sex%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Former boyfriend %28same-sex%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Former girlfriend %28opposite-sex%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Former girlfriend %28same-sex%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Girlfriend %28opposite-sex%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Girlfriend %28same-sex%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Husband %28opposite-sex%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Husband %28same-sex%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mother</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other family member</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Roommate</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Son</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Wife %28opposite-sex%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Wife %28same-sex%29</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Search_Warrant_Obtained__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Search_Warrant_Type__c</picklist>
+        <values>
+            <fullName>Animal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Premise</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Secondary_Case_Type__c</picklist>
+        <values>
+            <fullName>Abandonment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Animal Fighting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Disaster</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Hoarding</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Neglect</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Non-Accidental Injury</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Treated_At__c</picklist>
+        <values>
+            <fullName>AAH</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ACC</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Type</picklist>
+        <values>
+            <fullName>Feature Request</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Problem</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Question</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>ai_Departments_Engaged__c</picklist>
+        <values>
+            <fullName>Behavior</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FIR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Forensics</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Legal Advocacy</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>ai_Types_of_Interaction__c</picklist>
+        <values>
+            <fullName>Advice%2FTouch</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Behavior Eval</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Draft Brief</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Draft Search Warrant</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Legal Research</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Removal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Scene Documentation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sentencing Memo</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>
