@@ -107,7 +107,7 @@ export default class VkDatatableUsage extends LightningElement {
         getPicklistValue({
             fieldname : 'Walking_Status__c'
         }).then(data=>{
-            this.columns[9].options = data;
+            this.columns[8].options = data;
         })
     }
 
