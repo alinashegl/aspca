@@ -1,29 +1,25 @@
 public class CRCAnimalDogListController {
 	@AuraEnabled
     public static CRCDogListResult getRecords() {
-        Set<Id> animalIds = new Set<Id>();
-        List<Treatment_Plan__c> objs = [SELECT Animal__c, Treatment_Priority__c, Enrichment_Priority__c, 
-                Animal__r.Shelter_Color_Coding__c, Animal__r.Behavior_Summary_Change_Date__c,
-                Animal__r.Name, Animal__r.Animal_Name__c, Animal__r.Animal_Name_Id__c,
-                Animal__r.Meets_Adoptability_Date__c, Animal__r.Playgroup_Priority_Level__c, Animal__r.Current_Location__c,
-                Animal__r.Behavior_Case_Worker__c, Animal__r.Behavior_Case_Worker__r.Name
-                from Treatment_Plan__c 
-                WHERE IsActive__c = true];
+        List<Animal__c> objs = [SELECT Id, Shelter_Color_Coding__c, Behavior_Summary_Change_Date__c,
+                                Name, Animal_Name__c, Animal_Name_Id__c,Meets_Adoptability_Date__c, 
+                                Playgroup_Priority_Level__c, Current_Location__c,
+                                Behavior_Case_Worker__c, Behavior_Case_Worker__r.Name,
+                                (Select Id, Animal__c, Treatment_Priority__c, Enrichment_Priority__c FROM Treatment_Plan__r where IsActive__c = true)
+                                from Animal__c where Active_Animal__c = true];
         
-        List<Treatment_Plan__c> objList = new List<Treatment_Plan__c>();
-        for(Treatment_Plan__c obj : objs){
-            if((obj.Animal__r != null && String.isNotBlank(obj.Animal__r.Current_Location__c)) && 
-               (obj.Animal__r.Current_Location__c.equalsIgnoreCase('CRC - CRC') ||obj.Animal__r.Current_Location__c.equalsIgnoreCase('CRC-MRC') || 
-               obj.Animal__r.Current_Location__c.equalsIgnoreCase('CRC- MRC') || obj.Animal__r.Current_Location__c.equalsIgnoreCase('CRC'))){
+        List<Animal__c> objList = new List<Animal__c>();
+        for(Animal__c obj : objs){
+            if((String.isNotBlank(obj.Current_Location__c)) && 
+               (obj.Current_Location__c.equalsIgnoreCase('CRC - CRC') ||obj.Current_Location__c.equalsIgnoreCase('CRC-MRC') || 
+               obj.Current_Location__c.equalsIgnoreCase('CRC- MRC') || obj.Current_Location__c.equalsIgnoreCase('CRC'))){
                 objList.add(obj);
             }
         }
         
-        for(Treatment_Plan__c plan : objList){
-            animalIds.add(plan.Animal__c);
-        }
+        System.debug('objList:'+objList.size());
         
-        List<Play_Pause__c> playPauses = [Select Animal__c, Play_Pause_Reason__c from Play_Pause__c where Animal__c in : animalIds AND End_Play_Pause__c != true]; 
+        List<Play_Pause__c> playPauses = [Select Animal__c, Play_Pause_Reason__c from Play_Pause__c where Animal__c in : objList AND End_Play_Pause__c != true]; 
 		Map<Id, Set<String>> playPauseReasonByAnimal = new Map<Id, Set<String>>();
         for(Play_Pause__c pp : playPauses){
             if(!playPauseReasonByAnimal.containsKey(pp.Animal__c)){
@@ -33,7 +29,7 @@ public class CRCAnimalDogListController {
             }
         }
         CRCDogListResult result = new CRCDogListResult();
-        result.plans = objList;
+        result.animals = objList;
         system.debug(playPauseReasonByAnimal);
         result.playPauseReasons = convertToMapList(playPauseReasonByAnimal);
         return result;
@@ -42,20 +38,23 @@ public class CRCAnimalDogListController {
     @AuraEnabled
     public static String saveRecords(String recsString) {
         System.debug(recsString);
-        List<Treatment_Plan__c> treatmentPlanList = (List<Treatment_Plan__c>) JSON.deserialize(recsString, List<Treatment_Plan__c>.class);
-        List<Animal__c> animalList = new List<Animal__c>();
-        for(Treatment_Plan__c plan: treatmentPlanList){
-            animalList.add(plan.Animal__r);
+        List<Animal__c> animals = (List<Animal__c>) JSON.deserialize(recsString, List<Animal__c>.class);
+        List<Treatment_Plan__c> treatmentPlanList = new List<Treatment_Plan__c>();
+        for(Animal__c anm: animals){
+            system.debug(anm.Treatment_Plan__r); 
+            if(anm.Treatment_Plan__r.size() > 0){ 
+                treatmentPlanList.add(anm.Treatment_Plan__r);
+            }
         }
         
         update treatmentPlanList;
-        update animalList;
+        update animals;
         return 'success';
     }
     
     public class CRCDogListResult {
         @AuraEnabled
-        public List<Treatment_Plan__c> plans;
+        public List<Animal__c> animals;
         @AuraEnabled
         public Map<Id, List<String>> playPauseReasons;
         
