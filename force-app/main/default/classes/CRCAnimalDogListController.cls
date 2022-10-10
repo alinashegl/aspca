@@ -6,7 +6,7 @@ public class CRCAnimalDogListController {
                                 Playgroup_Priority_Level__c, Current_Location__c,
                                 Behavior_Case_Worker__c, Behavior_Case_Worker__r.Name,
                                 (Select Id, Animal__c, Treatment_Priority__c, Enrichment_Priority__c FROM Treatment_Plan__r where IsActive__c = true)
-                                from Animal__c where Active_Animal__c = true];
+                                from Animal__c where Active_Animal__c = true AND Location_Filter__c = true];
         
         List<Animal__c> objList = new List<Animal__c>();
         for(Animal__c obj : objs){
@@ -19,7 +19,13 @@ public class CRCAnimalDogListController {
         
         System.debug('objList:'+objList.size());
         
-        List<Play_Pause__c> playPauses = [Select Animal__c, Play_Pause_Reason__c from Play_Pause__c where Animal__c in : objList AND End_Play_Pause__c != true]; 
+        Set<Id> animalSet = new Set<Id>();
+        
+        for(Animal__c an : objList){
+            animalSet.add(an.Id);
+        }
+        
+        List<Play_Pause__c> playPauses = [Select Animal__c, Play_Pause_Reason__c from Play_Pause__c where Animal__c in : animalSet AND End_Play_Pause__c != true]; 
 		Map<Id, Set<String>> playPauseReasonByAnimal = new Map<Id, Set<String>>();
         for(Play_Pause__c pp : playPauses){
             if(!playPauseReasonByAnimal.containsKey(pp.Animal__c)){
