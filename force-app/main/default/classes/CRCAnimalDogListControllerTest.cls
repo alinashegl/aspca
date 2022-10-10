@@ -35,7 +35,7 @@ public class CRCAnimalDogListControllerTest {
     static void testRecords(){
         CRCAnimalDogListController.CRCDogListResult objs = CRCAnimalDogListController.getRecords();
         System.assertNotEquals(objs, null);
-        String result = CRCAnimalDogListController.saveRecords(JSON.serialize(objs.plans));
+        String result = CRCAnimalDogListController.saveRecords(JSON.serialize(objs.animals));
         System.assertEquals('success', result);
         
     }
