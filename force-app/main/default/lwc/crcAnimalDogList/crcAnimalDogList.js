@@ -141,7 +141,7 @@ export default class VkDatatableUsage extends LightningElement {
                 let obj = {...data[i]};
                 
                 if(data[i].hasOwnProperty('Animal_Name__c')){
-                    obj.anmName = data[i].Animal_Name__c;
+                    obj.anmName = data[i].Animal_Name_Id__c;
                     obj.Animal__c = data[i].Id;
                     obj.Animal_Name__c = data[i].Animal_Name__c;
                 }
@@ -155,8 +155,8 @@ export default class VkDatatableUsage extends LightningElement {
                     obj.behName = data[i].Behavior_Case_Worker__r.Name;
                     obj.Behavior_Case_Worker__c = data[i].Behavior_Case_Worker__r.Id;
                 }
-                if(playPauseReasons.hasOwnProperty(data[i].Animal__c)){
-                    obj.Play_Pause_Reason = (playPauseReasons[data[i].Animal__c]).join(';');
+                if(playPauseReasons.hasOwnProperty(data[i].Id)){
+                    obj.Play_Pause_Reason = (playPauseReasons[data[i].Id]).join(';');
                 }
 
                 this.anms.push(obj);
