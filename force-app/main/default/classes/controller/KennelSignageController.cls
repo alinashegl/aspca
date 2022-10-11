@@ -22,16 +22,16 @@ public with sharing class KennelSignageController {
         System.debug('### Value of current animal  ' + currentAnimal);
 
         if(currentAnimal != null){
-            m_animalName();
-            m_animalId();
-            m_animalSex();
-            m_animalColor();
-            m_animalBreed();
-            m_animalAge();
-            m_VolunteerReadingOkay();
-            m_animalPetpointId();
-            m_behaviorEvaluationSummary();
-            //iBehaviorConcerns();
+        m_animalName();
+        m_animalId();
+//        m_animalPetpointId();
+        m_animalSex();
+        m_animalColor();
+        m_animalBreed();
+        m_animalAge();
+        m_VolunteerReadingOkay();
+        m_animalBehSumm();
+        //iBehaviorConcerns();
         }
 
 
@@ -50,11 +50,10 @@ public with sharing class KennelSignageController {
     public String animalAge {get; set; }
     public String animalSex { get; set; }
     public String animalColor { get; set; }
-    public String petpointid {get; set;}
-    public String behaviorEvaluationSummary {get; set;}
+    public String animalBehSumm { get; set; }
 
     public String m_animalName(){
-        String defaultName = 'Default';
+        String defaultName = '';
 
         animalName = currentAnimal.Animal_Name__c;
 
@@ -65,9 +64,9 @@ public with sharing class KennelSignageController {
     }
 
     public String m_animalId() {
-        String defaultId = '123456';
+        String defaultId = '';
 
-        animalId = currentAnimal.Animal_Field_ID__c;
+        animalId = currentAnimal.Name;
         if (animalId == null) {
             animalId = defaultId;
         }
@@ -75,7 +74,7 @@ public with sharing class KennelSignageController {
     }
 
     public String m_animalBreed() {
-         String defaultBreed = 'Dog';
+         String defaultBreed = '';
 
         animalBreed = currentAnimal.Breed__c;
         if (animalBreed == null) {
@@ -85,15 +84,15 @@ public with sharing class KennelSignageController {
     }
 
     public String m_animalAge() {
-        String defaultAge = 'Unknown';
+        String defaultAge = '';
 
-        animalAge = currentAnimal.Age__c;
+        animalAge = currentAnimal.Current_Animal_Age_Formatted__c;
         if (animalAge == null) { animalAge = defaultAge ;}
         return animalAge;
     }
 
     public String m_animalSex() {
-        String defaultSex = 'M';
+        String defaultSex = '';
 
         animalSex = currentAnimal.Gender__c;
         if (animalSex == null) { animalSex = defaultSex ;}
@@ -101,30 +100,21 @@ public with sharing class KennelSignageController {
     }
 
     public String m_animalColor() {
-        String defaultColor = 'Brown';
+        String defaultColor = '';
 
         animalColor = currentAnimal.Color__c;
         if (animalColor == null ) { animalColor = defaultColor ; }
         return animalColor;
     }
-    
-    public String m_animalPetpointId() {
-        String defaultPetpointId = '';
 
-        petpointId = currentAnimal.Petpoint_ID__c;
-        if (petpointId == null) { animalSex = defaultPetpointId ;}
-        return petpointId;
-    }
-    
-    public String m_behaviorEvaluationSummary() {
-        List<Behavior_Evaluation__c> behEvals = [SELECT Behavior_Evaluation_Summary__c FROM Behavior_Evaluation__c Where Animal__r.Id = :currentAnimal.ID Order by CreatedDate DESC LIMIT 1];
-        if(!behEvals.isEmpty()){
-            behaviorEvaluationSummary = behEvals[0].Behavior_Evaluation_Summary__c;
-        }
-        return behaviorEvaluationSummary;
+    public String m_animalBehSumm() {
+        String defaultBehSumm = '';
+
+        animalBehSumm = currentAnimal.Behavior_Summary__c;
+        if (animalBehSumm == null ) { animalBehSumm = defaultBehSumm ; }
+        return animalBehSumm;
     }
 
-	
 
     /******************************************************************************************************************/
     /**********************  Body Properties **************************************************************************/
@@ -162,8 +152,6 @@ public with sharing class KennelSignageController {
             behaviorConcerns.add(new behaviorConcern(label, isSelected));
             System.debug('Entry isActive value =====> ' + isSelected);
         }
-        behaviorConcerns.add(new behaviorConcern('Behavior Conern Notes: '+(currentAnimal.Behavior_Concern_Notes__c != null ?currentAnimal.Behavior_Concern_Notes__c:''), false));
-        
         return behaviorConcerns;
     }
     public PageReference showBC() {
@@ -204,7 +192,6 @@ public with sharing class KennelSignageController {
             //System.debug('Walking Equipment -> ' + entry);
             walkingEquipments.add(new walkingEquipment(label, isSelected));
         }
-        walkingEquipments.add(new walkingEquipment('Walking Equipment Notes: '+(currentAnimal.Walking_Equipment_Notes__c != null ?currentAnimal.Walking_Equipment_Notes__c:''), false));
         return walkingEquipments;
     }
     public PageReference showWE() {
@@ -245,8 +232,6 @@ public with sharing class KennelSignageController {
             System.debug('Walking Status -> ' + entry);
             walkingStatuses.add(new walkingStatus(label, isSelected));
         }
-        walkingStatuses.add(new walkingStatus('Behavior Conern Notes: '+(currentAnimal.Walking_Notes__c != null ?currentAnimal.Walking_Notes__c:''), false));
-
         return walkingStatuses;
     }
     public PageReference showWS() {
@@ -262,13 +247,6 @@ public with sharing class KennelSignageController {
         volunteerReadingOkay = level;
         return volunteerReadingOkay;
     }
-    
-    public Boolean inKennelSocialization{ get; set; }
-    public Boolean m_inKennelSocialization() {
-        Boolean level = currentAnimal.In_Kennel_Socialization__c;
-        inKennelSocialization = level;
-        return inKennelSocialization;
-    }
 
     /******************************************************************************************************/
     /*******  Evaluation Property *************************************************************************/
@@ -277,7 +255,7 @@ public with sharing class KennelSignageController {
     public String evaluation() {
         return null;
     }
-    
+
     /******************************************************************************************************************/
     /**************** PRIVATE METHODS *********************************************************************************/
     /******************************************************************************************************************/
