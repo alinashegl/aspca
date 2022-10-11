@@ -35,7 +35,7 @@ private class test_TreatmentSessionLWCController {
         Test.stopTest();
 
         System.assert(returnedInfo != null, 'should have returned a session info with blank lists, but was null');
-        System.assert(returnedInfo.requiredProtocols.isEmpty(), 'requiredProtocols should be an empty list, but was: ' + returnedInfo.requiredProtocols);
+        System.assert(!returnedInfo.requiredProtocols.isEmpty(), 'Should have returned a list of protocls but was empty: ' + returnedInfo.requiredProtocols);
         System.assert(returnedInfo.sessionProtocolInfos.isEmpty(),'sessionProtocolInfos should be an empty list, but was: ' + returnedInfo.sessionProtocolInfos);
     }
 

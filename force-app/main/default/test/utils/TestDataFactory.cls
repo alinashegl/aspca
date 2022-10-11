@@ -1036,16 +1036,27 @@ public without sharing class TestDataFactory {
             new Play_Pause__c(
                 Animal__c = a.Id,
                 Type__c = 'Medical',
+                End_Date__c = System.today(),
                 Play_Pause_Reason__c = 'In Heat',
                 Start_Date__c = System.today()),
             new Play_Pause__c(
                 Animal__c = a.Id,
                 Type__c = 'Behavioral',
                 Play_Pause_Reason__c = 'Needs a Break',
-                Start_Date__c = System.today())
+                Start_Date__c = System.today(),
+                End_Date__c = Date.today().addDays(7))
         };
         insert playPauses;
         return playPauses;
+    }
+
+    public static Play_Pause__c createPlayPause(Id animalId, String type, String reason) {
+      return new Play_Pause__c(
+        Animal__c = animalId,
+        Type__c = type,
+        Play_Pause_Reason__c = reason,
+        Start_Date__c = System.today()
+      );
     }
 
     public static Playgroup_Session__c createPlaygroupSessionWithAnimals() {

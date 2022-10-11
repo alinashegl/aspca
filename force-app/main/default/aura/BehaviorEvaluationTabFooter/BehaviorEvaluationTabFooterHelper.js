@@ -220,21 +220,16 @@
             function(response) {
                 console.log('PROMISE RESPONSE', response[a.id]);
                 $A.get('e.force:refreshView').fire();
-                cmp.find('lib').showToast({
-                            'title': 'Success' ,
-                            'message': 'Test Comments Were Saved Successfully, Proceed to the Next Tab to see the' +
-                            ' Change' ,
-                            'variant': 'success'
-                        });
             }
         ).catch(
             function(error) {
                 console.log(error)
+                cmp.find('lib').showToast({
+                    'title': 'Failure' ,
+                    'message': 'Test Comments did not save successfully: ' + error,
+                    'variant': 'success'
+                });
             }
         );
-
-        //this.sendValues(cmp, recordId, apiName.id, val);
-
-
     }
 });

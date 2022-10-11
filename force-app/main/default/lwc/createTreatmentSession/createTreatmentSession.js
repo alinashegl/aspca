@@ -15,6 +15,8 @@ export default class CreateTreatmentSession extends NavigationMixin(LightningEle
     requiredContact = true;
     noPlan = true;
     whereClause = 'Active__c = true AND Contact_Type__c = \'Behavior Case Worker\'';
+    error;
+    errorMessage;
 
     get hasPlan(){
         return  this.planId != undefined && this.planId != null;
@@ -64,7 +66,14 @@ export default class CreateTreatmentSession extends NavigationMixin(LightningEle
         this.template.querySelector('lightning-record-edit-form').submit(fields);
     }
 
+    handleError(event) {
+        this.errorMessage = 'Error creating treatment session' ;
+        this.error = event.detail.detail;
+        console.log(event.detail.detail);
+    }
+
     handleSuccess(event) {
+        this.error = null;
         let sessionId = event.detail.id;
         this[NavigationMixin.Navigate]({
             type: 'standard__recordPage',

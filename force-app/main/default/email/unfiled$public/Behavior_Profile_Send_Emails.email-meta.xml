@@ -6,39 +6,38 @@
     <letterhead>Behavior_Profile_Send_Emails</letterhead>
     <name>Behavior Profile Send Emails</name>
     <style>freeForm</style>
-    <subject>{!Animal__c.Animal_Name__c},{!Animal__c.Name} Behavior Summary / Evaluation</subject>
-    <textOnly>This is a test.
+    <subject>{!Behavior_Evaluation__c.Animal__c.Animal_Name__c},{!Behavior_Evaluation__c.Animal__c.Name} Behavior Summary / Evaluation</subject>
+    <textOnly>THIS EMAIL WAS SENT FROM A NOTIFICATION ONLY EMAIL ADDRESS THAT CANNOT ACCEPT INCOMING EMAIL. PLEASE DO NOT REPLY TO THIS MESSAGE.
 
 
-THIS EMAIL WAS SENT FROM A NOTIFICATION ONLY EMAIL ADDRESS THAT CANNOT ACCEPT INCOMING EMAIL. PLEASE DO NOT REPLY TO THIS MESSEGE
+Name: {!Behavior_Evaluation__c.Animal__c.Name}
+Sex: {!Behavior_Evaluation__c.Animal__c.Gender__c}
+Age Group: {!Behavior_Evaluation__c.Animal__c.Current_Animal_Age_Formatted__c}
+Color: {!Behavior_Evaluation__c.Animal__c.Color__c}
+Breed: {!Behavior_Evaluation__c.Animal__c.Breed__c}
 
-Name: {!Animal__c.Name}		
-Sex: {!Animal__c.Gender__c}
-Age group: {!Animal__c.Age__c}
-Color: {!Animal__c.Color__c}
-Breed: {!Animal__c.Breed__c}
+Case #: {!Behavior_Evaluation__c.Animal__c.Case__c}
+A#:  {!Behavior_Evaluation__c.Animal__c.Petpoint_ID__c}
+AAH#: {!Behavior_Evaluation__c.Animal__c.AAH_ID__c}
 
-Case #: {!Animal__c.Case__c}
-A#:  {!Animal__c.Name}
-AAH#: {!Animal__c.AAH_ID__c}
+Updated on: {!Behavior_Evaluation__c.Animal__c.LastModifiedDate}
 
-Updated on: {!Animal__c.LastModifiedDate}
-
-Behavior Summary: {!Animal__c.Behavior_Summary__c}
+Behavior Summary: {!Behavior_Evaluation__c.Behavior_Evaluation_Summary__c}
 
 
-Placement Recommendations : {!Animal__c.Placement_Recommendations__c}
+Placement Recommendations : {!Behavior_Evaluation__c.Animal__c.Placement_Recommendations__c}
 
 
-Current Behavior Grade: {!Animal__c.Forensic_Behavior_Eval_Grade__c}
-Initial Evaluation Grade: {!Animal__c.Current_Behavior_Grade__c}
-Behavior Status: {!Animal__c.Behavior_Placement_Status__c}
+Current Behavior Grade: {!Behavior_Evaluation__c.Animal__c.Current_Behavior_Grade__c}
+Initial Evaluation Grade: {!Behavior_Evaluation__c.Animal__c.Forensic_Behavior_Eval_Grade__c}
+Meets Adoptability Date: {!Behavior_Evaluation__c.Animal__c.Meets_Adoptability_Date__c}
+Behavior Status: {!Behavior_Evaluation__c.Animal__c.Behavior_Placement_Status__c}
 
-Approved for bath? : {!Animal__c.Approved_for_bath__c}
-Muzzle needed for bath? : {!Animal__c.Muzzle_needed_for_bath__c}
-Special instructions for bath : {!Animal__c.Special_instructions_for_bath__c}
-Approved for Revolution?: {!Animal__c.Approved_for_Revolution__c}
-Special instructions for Revolution if any: {!Animal__c.Special_instructions_for_Revolution}</textOnly>
+Approved for bath? : {!Behavior_Evaluation__c.Animal__c.Approved_for_bath__c}
+Muzzle needed for bath? : {!Behavior_Evaluation__c.Animal__c.Muzzle_needed_for_bath__c}
+Special instructions for bath : {!Behavior_Evaluation__c.Animal__c.Special_instructions_for_bath__c}
+Approved for Revolution?: {!Behavior_Evaluation__c.Animal__c.Approved_for_Revolution__c}
+Special instructions for Revolution if any: {!Behavior_Evaluation__c.Animal__c.Special_instructions_for_Revolution}</textOnly>
     <type>html</type>
     <uiType>Aloha</uiType>
 </EmailTemplate>
