@@ -79,7 +79,6 @@
             recordId: recordid
         };
         this.sendRequest(cmp, 'c.putSelections', params);
-
     } ,
 
     getAttribute : function(cmp, attr) {
@@ -96,6 +95,7 @@
             var state = response.getState();
             var result = response.getReturnValue();
             if(state == 'SUCCESS') {
+                this.handlePublishEvalUpdateMessage(cmp);
                 return result;
                 cmp.find('lib').showToast({
                             'title': 'Success' ,
@@ -110,4 +110,8 @@
         });
         $A.enqueueAction(action);
     },
+
+    handlePublishEvalUpdateMessage: function(cmp) {
+        cmp.find("evalSummaryUpdateMessage").publish();
+    }
 });
