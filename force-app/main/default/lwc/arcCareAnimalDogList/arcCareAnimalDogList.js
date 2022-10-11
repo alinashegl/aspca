@@ -2,7 +2,6 @@ import { LightningElement, wire } from 'lwc';
 import getBehCaseWorkers from '@salesforce/apex/ArcCareAnimalDogListController.getBehCaseWorkers';
 import getAnimals from '@salesforce/apex/ArcCareAnimalDogListController.getRecords';
 import updateRecords from '@salesforce/apex/ArcCareAnimalDogListController.saveRecords';
-import getPicklistValue from '@salesforce/apex/ArcCareAnimalDogListController.getPicklistValue';
 
 const GENDEROPTIONS = [
     { label: 'MI', value: 'MI' },
@@ -54,7 +53,7 @@ const PPEOPTIONS = [
     {value: 'DOH Hold', label: 'DOH Hold'},
 ];
 
- const columns = [
+const columns = [
     {label: 'ASPCA Animal Name', fieldName: 'Animal_Name__c',type: 'text', editable: false, disabled: true, sortable: true},
     {label: 'Animal Name/Id', fieldName: 'Id', type: 'link', linkLabel: 'anmName'}, 
     {label: 'Petpoint/AAH Id', fieldName: 'Petpoint_ID__c',linkLabel: 'petpint', type: 'text', editable: false, disabled: true, sortable: true},
@@ -62,11 +61,11 @@ const PPEOPTIONS = [
     {label: 'Sex', fieldName: 'Gender__c', type: 'picklist', options: GENDEROPTIONS, sortable: true, resizable: true,editable: true},
     {label: 'Evaluation Status', fieldName: 'Evaluation_Status__c', type: 'picklist', options: EVALSTATUSOPTIONS, sortable: true, resizable: true, editable: true},
     {label: 'Current Location', fieldName: 'Current_Location__c',type: 'text', disabled: true},
-    {label: 'Hold Status ARC/CARE', fieldName: 'Hold_Status_ARC_CARE__c', type: 'multi-select', sortable: true, resizable: true, editable: true},
+    {label: 'Hold Status ARC/CARE', fieldName: 'Hold_Status_ARC_CARE__c', type: 'multi-select', options: HOLDSTATUSOPTIONS, sortable: true, resizable: true, editable: true},
     // {label: 'Hold Status ARC/CARE', fieldName: 'Hold_Status_ARC_CARE__c', type: 'multi-select', options: HOLDSTATUSOPTIONS, sortable: true, resizable: true, editable: true},
     {label: 'Behavior Case Worker', fieldName: 'Behavior_Case_Worker__c', type: 'lookup', linkLabel: 'behName',
      sortable: true, resizable: true, editable: true,sortBy: 'behName', title:'Click to view Behavior Case Worker', iconName:'standard:contact'},
-    {label: 'Walking Status', fieldName: 'Walking_Status__c', type: 'multi-select', sortable: true, resizable: true, editable: true},
+    {label: 'Walking Status', fieldName: 'Walking_Status__c', type: 'multi-select', options: WALKINGSTATUSOPTIONS, sortable: true, resizable: true, editable: true},
     {label: 'Walking Notes', fieldName: 'Walking_Notes__c',type: 'textArea', resizable: true, editable: true, disabled: false},
     {label: 'PPE/DOH', fieldName: 'PPE_DOH__c', type: 'picklist', options: PPEOPTIONS, sortable: true, resizable: true,editable: true},
     {label: 'Important Notes ARC/CARE', fieldName: 'Important_Notes_ARC_CARE__c',type: 'textArea', resizable: true, editable: true},
@@ -99,24 +98,7 @@ export default class VkDatatableUsage extends LightningElement {
     }
 
     connectedCallback(){
-        this.getWalkingStatus();
-        this.getHoldStatus();
-    }
-
-    getWalkingStatus(){
-        getPicklistValue({
-            fieldname : 'Walking_Status__c'
-        }).then(data=>{
-            this.columns[8].options = data;
-        })
-    }
-
-    getHoldStatus(){
-        getPicklistValue({
-            fieldname : 'Hold_Status_ARC_CARE__c'
-        }).then(data=>{
-            this.columns[6].options = data;
-        })
+        //
     }
 
     getAnimals_(){
@@ -132,7 +114,7 @@ export default class VkDatatableUsage extends LightningElement {
                 if(data[i].hasOwnProperty('Behavior_Case_Worker__c')){
                     obj.behName = data[i].Behavior_Case_Worker__r.Name;
                 }
-                obj.petpint = (data[i].hasOwnProperty('Petpoint_ID__c') && data[i].Petpoint_ID__c) ? data[i].Petpoint_ID__c : (data[i].hasOwnProperty('AAH_ID__c') ? data[i].AAH_ID__c : '');
+                obj.petpint = data[i].hasOwnProperty('Petpoint_ID__c') ? data[i].Petpoint_ID__c : (data[i].hasOwnProperty('AAH_ID__c') ? data[i].AAH_ID__c : '');
                 obj.anmName = data[i].Animal_Name_Id__c;
                 this.anms.push(obj);
             }
