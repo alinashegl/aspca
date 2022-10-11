@@ -2,6 +2,7 @@ import { api, LightningElement } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
 import FORM_FACTOR from '@salesforce/client/formFactor';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import BehaviorTxEligibilityChartTEC from '@salesforce/label/c.Behavior_Tx_Eligibility_Chart_TEC';
 
 export default class TreatmentTabHeader extends NavigationMixin(LightningElement) {
     @api
@@ -13,14 +14,16 @@ export default class TreatmentTabHeader extends NavigationMixin(LightningElement
     @api showTreatmentPlanButton;
     @api showTreatmentSessionButton;
     @api showLast5TreatmentsReport;
-    url = 'https://aspca.app.box.com/s/uuxtitu6j2pypol7vdj7qk3fa0tbkk4m';
+    label = {
+        BehaviorTxEligibilityChartTEC
+    }
     errorMessage;
     handleClick() {
         this.showModal = true;
         this.showNewTreatmentModal = true;
     }
     handleOpenNewWindow(event){
-        window.open(this.url, '_blank');
+        window.open(this.label.BehaviorTxEligibilityChartTEC, '_blank');
         event.preventDefault();
     }
     handleCancel() {
