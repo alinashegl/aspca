@@ -1,0 +1,29 @@
+<template>
+  <template if:true={showSpinner}>
+    <lightning-icon icon-name="utility:spinner" alternative-text="Connected" size="small" title="large size">
+    </lightning-icon>
+  </template>
+  <template if:true={error}>
+    <c-error-panel errors={error} type='inlineMessage' friendly-message={errorMessage} class="slds-var-p-left_small"></c-error-panel>
+  </template>
+  <template if:true={configList}>
+    <template if:false={isLocked}>
+      <lightning-button 
+          variant="brand"
+          label="Save Summary" 
+          title="Save Summary" 
+          onclick={handleSaveSummary} 
+          class="slds-m-left_x-small, slds-var-p-top_x-small"
+          disabled={disableSaveSummary}
+      ></lightning-button>
+    </template>
+    <template for:each={configList} for:item='config'>
+      <c-behavior-evaluation-summary-child
+        key={config.Id}
+        record={config}
+        is-locked={isLocked}
+        onsummarychanged={handleSummaryChanged}
+      ></c-behavior-evaluation-summary-child>
+    </template>
+  </template>
+</template> 

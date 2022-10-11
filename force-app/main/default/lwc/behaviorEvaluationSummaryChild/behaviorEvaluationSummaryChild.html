@@ -1,0 +1,27 @@
+<template>
+    <template if:true={error}>
+        <c-error-panel errors={error} type='inlineMessage' friendly-message={errorMessage}></c-error-panel>
+    </template>
+    <template if:false={isLocked}>
+        <div class="slds-box slds-box_xx-small custom">
+            <h1>
+                {record.testName}
+            </h1>
+            <template if:false={useTextArea}>
+                <lightning-input type="text" value={unlockedDisplay} variant="label-hidden" onblur={handleCommentUpdate}></lightning-input>
+            </template>
+            <template if:true={useTextArea}>
+                <lightning-textarea type="text" value={unlockedDisplay} variant="label-hidden" onblur={handleCommentUpdate}></lightning-textarea>
+            </template>
+        </div>
+    </template>
+
+    <template if:true={isLocked}>
+        <template if:false={useTextArea}>
+            <lightning-input type="text" value={lockedDisplay} variant="label-hidden" disabled></lightning-input>
+        </template>
+        <template if:true={useTextArea}>
+            <lightning-textarea type="text" value={lockedDisplay} variant="label-hidden" disabled></lightning-textarea>
+        </template>
+    </template>
+</template>
