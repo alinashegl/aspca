@@ -25,7 +25,7 @@ export default class CustomTable extends LightningElement {
     @api showSearchBox = false;
     @api showSearch;
     @api placeHolder = 'Search Table...';
-    @api customStyle;
+    @api 
     set tableLayout(value){
         this._tableLayout = value ? value : 'fixed';
         //this.tableStyle = 'table-layout:'+this._tableLayout;
