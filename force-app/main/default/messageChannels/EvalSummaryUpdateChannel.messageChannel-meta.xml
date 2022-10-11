@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Message channel for notifying the other components the eval has been updated.</description>
+    <isExposed>true</isExposed>
+    <lightningMessageFields>
+        <description>Has the eval been updated</description>
+        <fieldName>isUpdated</fieldName>
+    </lightningMessageFields>
+    <masterLabel>BehaviorLockMessage</masterLabel>
+</LightningMessageChannel>
