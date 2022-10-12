@@ -37,24 +37,35 @@ private class test_BehaviorEvaluationTrigger {
     }
     
     @isTest
-    static void behaviorEvaluationUpdateNoSummary() {
+    static void behaviorEvaluationSummaryUpdate() {
         List<Behavior_Evaluation__c> evaluations = TestDataFactory.createMultipleBehaviorEvaluation(2, 'Dog Fighting');
-        evaluations[0].Behavior_Evaluation_Summary__c = null;
-        evaluations[1].Behavior_Evaluation_Summary__c = ' ';
-        update evaluations;
+
+        evaluations = [
+            SELECT Id,
+            (
+                SELECT Id, Summary_Comments__c, Test_Name__c FROM Behavior_Evaluation_Summaries__r
+            )
+            FROM Behavior_Evaluation__c
+            WHERE Id IN :evaluations
+        ];
+
+        Behavior_Evaluation_Summary__c[] summaries = new Behavior_Evaluation_Summary__c[0];
+        evaluations[0].Behavior_Evaluation_Summaries__r[0].Summary_Comments__c = 'eval 1 test comments';
+        summaries.add(evaluations[0].Behavior_Evaluation_Summaries__r[0]);
+        
+        evaluations[1].Behavior_Evaluation_Summaries__r[1].Summary_Comments__c = 'eval 2 test comments';
+        summaries.add(evaluations[1].Behavior_Evaluation_Summaries__r[1]);
+
+        update summaries;
 
         Test.startTest();
-        evaluations[0].Comments_BIK__c = 'Comment added for kennel';
-        evaluations[1].Comments_BOL__c = 'Comment added for leash';
         update evaluations;
         Test.stopTest();
 
-        Behavior_Evaluation__c afterUpdate1 = [SELECT Id, Behavior_Evaluation_Summary__c, Comments_BIK__c FROM Behavior_Evaluation__c WHERE Id = :evaluations[0].Id LIMIT 1];
-        Behavior_Evaluation__c afterUpdate2 = [SELECT Id, Behavior_Evaluation_Summary__c, Comments_BOL__c FROM Behavior_Evaluation__c WHERE Id = :evaluations[1].Id LIMIT 1];
-        System.assertEquals('Comment added for kennel', afterUpdate1.Comments_BIK__c);
-        System.assertEquals(true, afterUpdate1.Behavior_Evaluation_Summary__c.contains('Comment added for kennel'));
-        System.assertEquals('Comment added for leash', afterUpdate2.Comments_BOL__c);
-        System.assertEquals(true, afterUpdate2.Behavior_Evaluation_Summary__c.contains('Comment added for leash'));
+        Behavior_Evaluation__c afterUpdate1 = [SELECT Id, Behavior_Evaluation_Summary__c FROM Behavior_Evaluation__c WHERE Id = :evaluations[0].Id LIMIT 1];
+        Behavior_Evaluation__c afterUpdate2 = [SELECT Id, Behavior_Evaluation_Summary__c FROM Behavior_Evaluation__c WHERE Id = :evaluations[1].Id LIMIT 1];
+        System.assertEquals(true, afterUpdate1.Behavior_Evaluation_Summary__c.contains('eval 1 test comments'));
+        System.assertEquals(true, afterUpdate2.Behavior_Evaluation_Summary__c.contains('eval 2 test comments'));
     }
 
     @isTest
