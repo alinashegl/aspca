@@ -168,10 +168,9 @@ public class BehaviorEvaluationSummaryUtil {
                 testName = testName.replace(' P1', '').replace(' P2', '').replace(' P3', '');
                 if (!configNameSet.contains(testName)) {
                     configNameSet.add(testName);
-                    configSummary.add(new SummaryWrapper(Integer.valueOf(t.Test_Display_Order__c), '<p><b>' + testName + ':</b> </p>'));
+                    configSummary.add(new SummaryWrapper(Integer.valueOf(t.Test_Display_Order__c), '<p><b>' + testName + ':</b>&nbsp;</p>'));
                 }
             }
-
             
             //getSummaryTemplateList
             String parentTestName = t.Parent_Test_Api_Name__c != null ? t.Parent_Test_Api_Name__c : 
@@ -180,7 +179,10 @@ public class BehaviorEvaluationSummaryUtil {
                 parentConfigSet.add(parentTestName);
 
                 if(parentToTemplateListMap.containsKey(parentTestName)){
-                    parentToTemplateListMap.get(parentTestName).add(testName);
+                    String[] testNameList = parentToTemplateListMap.get(parentTestName);
+                    Set<String> testNameSet = new Set<String>(testNameList);
+                    testNameSet.add(testName);
+                    parentToTemplateListMap.put(parentTestName, new String[(testNameSet)]);
                 } else {
                     parentToTemplateListMap.put(parentTestName, new String[]{testName});
                 }
@@ -211,8 +213,7 @@ public class BehaviorEvaluationSummaryUtil {
         configInfo.commentSkipFieldsMap = configMap;
         configInfo.parentToTemplateListMap = parentToTemplateListMap;
 
-        return configInfo;
-        
+        return configInfo;        
     }
 
     public static Map<String, String[]> getHighValueCategoryMap() {
@@ -250,157 +251,6 @@ public class BehaviorEvaluationSummaryUtil {
         }
     }
 
-    public static void handleUpdate(List<Behavior_Evaluation__c> triggerNew, Map<Id, Behavior_Evaluation__c> triggerOldMap) {
-        //List of picklist fields/values that have a value category of 4
-        Map<String, String[]> highValueMap = getHighValueCategoryMap();
-
-        for (Behavior_Evaluation__c b : triggerNew) {
-            ConfigTypeWrapper configInfos = getConfigInfo(b.Evaluation_Subtype__c);
-
-            Map<String, Test_Config__mdt[]> commentFieldsMap = configInfos.commentSkipFieldsMap;
-            String[] summaryList = configInfos.templateList;
-            System.debug('summaryList: ' + summaryList);
-
-            String[] parentSummaryList = configInfos.templateParentList;
-            System.debug('parentSummaryList: ' + parentSummaryList);
-
-            Map<String, String[]> parentSummaryMap = configInfos.parentToTemplateListMap;
-
-            Boolean skipDogTests = false;
-            Behavior_Evaluation__c oldRecord = triggerOldMap.get(b.Id);
-            if (oldRecord.Overall_Evaluation_Grade__c == null && b.Overall_Evaluation_Grade__c == 'D - Dog Aggression') {
-                //Automates skipping dog tests
-                skipDogTests = true;
-            }            
-
-            Map<String, CommentSkipWrapper[]> commentMap = new Map<String, CommentSkipWrapper[]>();
-
-            Map<String, String> summaryDiffMap = parseSummaryList(b.Behavior_Evaluation_Summary__c, summaryList);
-
-            for(String parentSummaryTitle : parentSummaryMap.keySet()){
-                Boolean skipSubsequentParts = false;
-                String skipReason = null;
-                
-                for(String summaryTitle : parentSummaryMap.get(parentSummaryTitle)){
-                    String parsedComments = summaryDiffMap.containsKey(summaryTitle) ? summaryDiffMap.get(summaryTitle) : null;
-                    CommentSkipWrapper[] commentList = new CommentSkipWrapper[0];
-
-                    Test_Config__mdt p1Config = commentFieldsMap.get(summaryTitle)[0];
-                    String currentFieldApi = p1Config.Test_Skip_Reason_Field__c;
-
-                    //if skipping p1, skip the others for the same reason
-                    if(currentFieldApi.contains('P1')){
-                        if(oldRecord.get(currentFieldApi) == null && b.get(currentFieldApi) != null){
-                            skipSubsequentParts = true;
-                            skipReason = (String) b.get(currentFieldApi);
-                        }
-                    }
-
-                    if(commentFieldsMap.containsKey(summaryTitle)){
-                        for(Test_Config__mdt config : commentFieldsMap.get(summaryTitle)){
-                            if (skipDogTests) {
-                                if (summaryTitle.startsWith('Same Sex') || summaryTitle.startsWith('Opposite Sex') || summaryTitle.startsWith('Same_Sex') || summaryTitle.startsWith('Opposite_Sex')) {
-                                    b.put(config.Test_Skip_Reason_Field__c, 'Skipped due to risk to the helper dog');
-                                }
-                            }
-                            else if(skipSubsequentParts && b.get(config.Test_Skip_Reason_Field__c) == null){
-                                b.put(config.Test_Skip_Reason_Field__c, skipReason);
-                            }
-
-                            String picklistString = (string) b.get(config.Picklist_API_Name__c);
-                            String[] highValueSelections = new String[0];
-                            if(picklistString != null){
-                                String[] picklistSelections = picklistString.split(';');
-                                String[] highValueList = highValueMap.containsKey(config.Picklist_API_Name__c) ? highValueMap.get(config.Picklist_API_Name__c) : null;
-                                if(highValueList != null){
-                                    for(String selection : picklistSelections){
-                                        if(highValueList.contains(selection)){
-                                            highValueSelections.add(selection);
-                                        }
-                                    }
-                                }
-                            }
-
-                            String testCommentsText = (string) b.get(config.Test_Comment_Field_Name__c);
-                            String skipReasonText = (string) b.get(config.Test_Skip_Reason_Field__c);
-                            String oldSkipReasonTest = (string) oldRecord.get(config.Test_Skip_Reason_Field__c);
-
-                            //clear skip reason and comments from comment field from the parsed comments
-                            if(parsedComments != null){
-                                if(testCommentsText != null){
-                                    parsedComments = parsedComments.replaceAll(testCommentsText, '');
-                                }
-
-                                if(skipReasonText != null){
-                                    parsedComments = parsedComments.replaceAll(skipReasonText, '');
-                                }
-
-                                if(oldSkipReasonTest != null){
-                                    parsedComments = parsedComments.replaceAll(oldSkipReasonTest, '');
-                                }
-
-                                parsedComments = cleanString(parsedComments);
-                            }
-
-                            System.debug('parsedComments: ' + parsedComments);
-
-                            commentList.add(new CommentSkipWrapper(
-                                config.Test_Name__c,
-                                testCommentsText, 
-                                skipReasonText,
-                                !highValueSelections.isEmpty() ? string.join(highValueSelections, ';') : null,
-                                parsedComments
-                            ));
-
-                            //unskip if score was added
-                            if(oldRecord.get(config.Picklist_API_Name__c) == null && b.get(config.Picklist_API_Name__c) != null){
-                                System.debug('**setting skip field to null');
-                                b.put(config.Test_Skip_Reason_Field__c, null);
-                            }
-                        }
-                        commentMap.put(summaryTitle, commentList);
-                    }
-                }
-            }
-
-            String summary = '';
-            
-            for(String testName: summaryList){
-                summary += '<p><b>' + testName + ':</b>&nbsp;';
-                if(commentMap.containsKey(testName)){
-                    String[] tempCommentList = new String[0];
-                    for(CommentSkipWrapper comments : commentMap.get(testName)){
-                        if(comments.commentField != null) {
-                            System.debug('comments.commentField: ' + comments.commentField);
-                            tempCommentList.add(comments.commentField);
-                        }
-
-                        if(comments.skipField != null) {
-                            System.debug('comments.skipField: ' + comments.skipField);
-                            tempCommentList.add(comments.skipField);
-                        }
-
-                        if(comments.highValueField != null) {
-                            System.debug('comments.highValueField: ' + comments.highValueField);
-                            tempCommentList.add(comments.highValueField);
-                        }
-
-                        if(String.isNotBlank(comments.summaryField)) {
-                            System.debug('comments.summaryField: ' + comments.summaryField);
-                            tempCommentList.add(comments.summaryField);
-                        }   
-                    }
-                    if(!tempCommentList.isEmpty()){
-                        summary += string.join(tempCommentList, ', ');
-                    }
-                }
-                summary += '<p>';
-            }
-
-            b.Behavior_Evaluation_Summary__c = summary;
-        }
-    }
-
     public static void handleAfterUpdate(List<Behavior_Evaluation__c> triggerNew, Map<Id, Behavior_Evaluation__c> triggerOldMap) {
         LogHistory.LogHistory(triggerOldMap, triggerNew);
     }
@@ -427,55 +277,268 @@ public class BehaviorEvaluationSummaryUtil {
         return configInfos;
     }
 
-    public static Map<String, String> parseSummaryList(String newSummary, String[] summaryList){
-        Map<String, String> summaryMap = new Map<String, String>();
+    // public static void handleUpdateLegacy(List<Behavior_Evaluation__c> triggerNew, Map<Id, Behavior_Evaluation__c> triggerOldMap) {
+    //     //List of picklist fields/values that have a value category of 4
+    //     Map<String, String[]> highValueMap = getHighValueCategoryMap();
 
-        if(String.isNotEmpty(newSummary)){
+    //     for (Behavior_Evaluation__c b : triggerNew) {
+    //         ConfigTypeWrapper configInfos = getConfigInfo(b.Evaluation_Subtype__c);
+
+    //         Map<String, Test_Config__mdt[]> commentFieldsMap = configInfos.commentSkipFieldsMap;
+    //         String[] summaryList = configInfos.templateList;
+
+    //         String[] parentSummaryList = configInfos.templateParentList;
+
+    //         Map<String, String[]> parentSummaryMap = configInfos.parentToTemplateListMap;
+
+    //         Boolean skipDogTests = false;
+    //         Behavior_Evaluation__c oldRecord = triggerOldMap.get(b.Id);
+    //         if (oldRecord.Overall_Evaluation_Grade__c == null && b.Overall_Evaluation_Grade__c == 'D - Dog Aggression') {
+    //             //Automates skipping dog tests
+    //             skipDogTests = true;
+    //         }            
+
+    //         Map<String, CommentSkipWrapper[]> commentMap = new Map<String, CommentSkipWrapper[]>();
+    //         Map<String, Set<String>> parsedCommentsMap = new Map<String, Set<String>>();
+
+    //         Map<String, String> summaryDiffMap = parseSummaryList(b.Behavior_Evaluation_Summary__c, summaryList);
+
+    //         String[] doNotDuplicateCustomComments = new String[]{'Same_Sex', 'Opposite_Sex'};
+
+    //         for(String parentSummaryTitle : parentSummaryMap.keySet()){
+    //             System.debug('parentSummaryTitle: ' + parentSummaryTitle);
+    //             Boolean skipSubsequentParts = false;
+    //             String skipReason = null;
+                
+    //             for(String summaryTitle : parentSummaryMap.get(parentSummaryTitle)){
+    //                 System.debug('summaryTitle: ' + summaryTitle);
+    //                 CommentSkipWrapper[] commentList = new CommentSkipWrapper[0];
+
+    //                 Test_Config__mdt p1Config = commentFieldsMap.get(summaryTitle)[0];
+    //                 String currentFieldApi = p1Config.Test_Skip_Reason_Field__c;
+
+    //                 //if skipping p1, skip the others for the same reason
+    //                 if(currentFieldApi.contains('P1')){
+    //                     if(oldRecord.get(currentFieldApi) == null && b.get(currentFieldApi) != null){
+    //                         skipSubsequentParts = true;
+    //                         skipReason = (String) b.get(currentFieldApi);
+    //                     }
+    //                 }                    
+
+    //                 if(commentFieldsMap.containsKey(summaryTitle)){
+    //                     String parsedComments = summaryDiffMap.containsKey(summaryTitle) ? summaryDiffMap.get(summaryTitle) : null;
+    //                     parsedComments = parseSummaryComments(parsedComments, b, oldRecord, commentFieldsMap.get(summaryTitle));
+    //                     parsedCommentsMap.put(summaryTitle, new Set<String>{parsedComments});
+
+    //                     for(Test_Config__mdt config : commentFieldsMap.get(summaryTitle)){
+    //                         System.debug('config: ' + config.DeveloperName);
+    //                         if (skipDogTests) {
+    //                             if (summaryTitle.startsWith('Same Sex') || summaryTitle.startsWith('Opposite Sex') || summaryTitle.startsWith('Same_Sex') || summaryTitle.startsWith('Opposite_Sex')) {
+    //                                 b.put(config.Test_Skip_Reason_Field__c, 'Skipped due to risk to the helper dog');
+    //                             }
+    //                         }
+    //                         else if(skipSubsequentParts && b.get(config.Test_Skip_Reason_Field__c) == null){
+    //                             b.put(config.Test_Skip_Reason_Field__c, skipReason);
+    //                         }
+
+    //                         String picklistString = (string) b.get(config.Picklist_API_Name__c);
+    //                         String[] highValueSelections = new String[0];
+    //                         if(picklistString != null){
+    //                             String[] picklistSelections = picklistString.split(';');
+    //                             String[] highValueList = highValueMap.containsKey(config.Picklist_API_Name__c) ? highValueMap.get(config.Picklist_API_Name__c) : null;
+    //                             if(highValueList != null){
+    //                                 for(String selection : picklistSelections){
+    //                                     if(highValueList.contains(selection)){
+    //                                         highValueSelections.add(selection);
+    //                                     }
+    //                                 }
+    //                             }
+    //                         }
+                            
+    //                         String testCommentsText = (string) b.get(config.Test_Comment_Field_Name__c);
+    //                         String skipReasonText = (string) b.get(config.Test_Skip_Reason_Field__c);
+
+    //                         commentList.add(new CommentSkipWrapper(
+    //                             config.Test_Name__c,
+    //                             testCommentsText, 
+    //                             skipReasonText,
+    //                             !highValueSelections.isEmpty() ? string.join(highValueSelections, ';') : null
+    //                         ));
+
+    //                         //unskip if score was added
+    //                         if(oldRecord.get(config.Picklist_API_Name__c) == null && b.get(config.Picklist_API_Name__c) != null){
+    //                             System.debug('**setting skip field to null');
+    //                             b.put(config.Test_Skip_Reason_Field__c, null);
+    //                         }
+    //                     }
+    //                     commentMap.put(summaryTitle, commentList);
+    //                 }
+    //             }
+    //         }
+
+    //         String[] summaryCommentList = new String[0];
+            
+    //         if(summaryDiffMap.containsKey('preText')){
+    //             summaryCommentList.add('<p>' + summaryDiffMap.get('preText') + '</p>');
+    //         }
+
+    //         for(String testName: summaryList){
+    //             System.debug('testName: ' + testName);
+    //             System.debug('heap size: ' + system.Limits.getHeapSize());
+    //             String summary = '<p><b>' + testName + ':</b>&nbsp;';
+    //             String[] tempCommentList = new String[0];
+    //             if(commentMap.containsKey(testName)){                    
+    //                 for(CommentSkipWrapper comments : commentMap.get(testName)){
+    //                     if(comments.commentField != null) {
+    //                         System.debug('comments.commentField: ' + comments.commentField);
+    //                         tempCommentList.add(comments.commentField);
+    //                     }
+
+    //                     if(comments.skipField != null) {
+    //                         System.debug('comments.skipField: ' + comments.skipField);
+    //                         tempCommentList.add(comments.skipField);
+    //                     }
+
+    //                     if(comments.highValueField != null) {
+    //                         System.debug('comments.highValueField: ' + comments.highValueField);
+    //                         tempCommentList.add(comments.highValueField);
+    //                     }
+
+    //                     if(String.isNotBlank(comments.summaryField)) {
+    //                         System.debug('comments.summaryField: ' + comments.summaryField);
+    //                         tempCommentList.add(comments.summaryField);
+    //                     }   
+    //                 }
+    //             }
+
+
+    //             if(parsedCommentsMap.containsKey(testName)){
+    //                 String parsedComments = addParsedComments(parsedCommentsMap.get(testName));
+    //                 if(parsedComments != null && String.isNotBlank(parsedComments)){
+    //                     tempCommentList.add(parsedComments);
+    //                 }
+    //             }
+
+    //             if(!tempCommentList.isEmpty()){
+    //                 System.debug('tempCommentList: ' + tempCommentList);
+    //                 summary += string.join(tempCommentList, ', ');
+    //             }
+
+    //             summary += '<p>';
+    //             System.debug('summary: ' + summary);
+    //             summaryCommentList.add(summary);
+    //         }
+
+    //         b.Behavior_Evaluation_Summary__c = String.join(summaryCommentList, '');
+    //     }
+    // }
+
+    // public static String parseSummaryComments(String parsedComments, Behavior_Evaluation__c b, Behavior_Evaluation__c oldB, Test_Config__mdt[] configs){
+    //     if(parsedComments == null && string.isBlank(parsedComments)){
+    //         return parsedComments;
+    //     }
+
+    //     String[] testCommentsTextList = new String[0];
+    //     String[] oldTestCommentsTextList = new String[0];
+    //     String[] skipReasonTextList = new String[0];
+    //     String[] oldSkipReasonTextList = new String[0];
+
+    //     for(Test_Config__mdt config : configs){
+    //         testCommentsTextList.add((string) b.get(config.Test_Comment_Field_Name__c));
+    //         oldTestCommentsTextList.add((string) oldB.get(config.Test_Comment_Field_Name__c));
+    //         skipReasonTextList.add((string) b.get(config.Test_Skip_Reason_Field__c));
+    //         oldSkipReasonTextList.add((string) oldB.get(config.Test_Skip_Reason_Field__c));
+    //     }
         
-            for(Integer i = 0; i < summaryList.size(); i++){
-                Integer newSummaryIndexStart = newSummary.indexOf(summaryList[i]);
-                if(newSummaryIndexStart == -1) continue;
-                Integer newSummaryIndexEnd = i + 1 >= summaryList.size() ? null : newSummary.indexOf(summaryList[i+1]);
+    //     // clear skip reason and comments from comment field from the parsed comments
+    //     parsedComments = removeSubStrings(parsedComments, testCommentsTextList);
+    //     parsedComments = removeSubStrings(parsedComments, oldTestCommentsTextList);
+    //     parsedComments = removeSubStrings(parsedComments, skipReasonTextList);
+    //     parsedComments = removeSubStrings(parsedComments, oldSkipReasonTextList);
 
-                String newSubSummary;
-                if(newSummaryIndexEnd == null || newSummaryIndexEnd == -1){
-                    newSubSummary = newSummary.substring(newSummaryIndexStart);
-                } else {
-                    newSubSummary = newSummary.substring(newSummaryIndexStart, newSummaryIndexEnd);
-                }
+    //     parsedComments = cleanString(parsedComments);
 
-                Integer index = newSubSummary.indexOf(':');
-                String summaryKey = cleanString(newSubSummary.substring(0, index));
-                String summaryValue = cleanString(newSubSummary.substring(index));
+    //     System.debug('parsedComments: ' + parsedComments);
+    //     return parsedComments;
+    // }
 
-                summaryMap.put(summaryKey, summaryValue);
-            }
-        }
-        return summaryMap;
-    }
+    // public static String removeSubStrings(String parsedComments, String[] toRemove){
+    //     for(String subText : toRemove){
+    //         if(subText != null && String.isNotBlank(subText)){
+    //             parsedComments = parsedComments.replaceAll(subText, '');
+    //         }
+    //     }
 
-    public static String cleanString(String toClean){
-        toClean = toClean.stripHtmlTags();
-        toClean = toclean.normalizeSpace();
-        System.debug('toClean: ' + toClean);
-        if(toClean != null && String.isNotEmpty(toClean)){
-            System.debug('toClean length: ' + toClean.length());
-            Boolean isAlphanumeric = false;
+    //     return parsedComments;
+    // }
 
-            while(!isAlphanumeric){
-                if(toClean == null){
-                    isAlphanumeric = true;
-                }
-                else if(toClean.length() == 1){                    
-                    toClean = toClean.isAlphanumeric() ? toClean : null;
-                } else {
-                    isAlphanumeric = toClean.substring(0, 1).isAlphanumeric();
-                    if(!isAlphanumeric){
-                        toClean = toClean.subString(1);
-                    }
-                }
-            }
-        }
-        return toClean;
-    }
+    // public static String addParsedComments(Set<String> parsedComments){
+    //     String summary = null;
+    //     String[] parsedList = new List<String>(parsedComments);
+
+    //     if(parsedList != null && !parsedList.isEmpty()){
+    //         summary = cleanString(string.join(parsedList, ', '));
+    //     }
+    //     return summary;
+    // }
+
+    // public static Map<String, String> parseSummaryList(String newSummary, String[] summaryList){
+    //     Map<String, String> summaryMap = new Map<String, String>();
+
+    //     if(String.isNotEmpty(newSummary)){        
+    //         for(Integer i = 0; i < summaryList.size(); i++){
+    //             Integer newSummaryIndexStart = newSummary.indexOf(summaryList[i]);
+    //             if(i == 0 && newSummaryIndexStart > 0){
+    //                 String preText = newSummary.substring(0, newSummaryIndexStart);
+    //                 preText = cleanString(preText);
+    //                 System.debug('preText: ' + preText);
+    //                 summaryMap.put('preText', preText);
+    //             }
+    //             if(newSummaryIndexStart == -1) continue;
+    //             Integer newSummaryIndexEnd = i + 1 >= summaryList.size() ? null : newSummary.indexOf(summaryList[i+1]);
+
+    //             String newSubSummary;
+    //             if(newSummaryIndexEnd == null || newSummaryIndexEnd == -1){
+    //                 newSubSummary = newSummary.substring(newSummaryIndexStart);
+    //             } else {
+    //                 newSubSummary = newSummary.substring(newSummaryIndexStart, newSummaryIndexEnd);
+    //             }
+
+    //             Integer index = newSubSummary.indexOf(':');
+    //             String summaryKey = cleanString(newSubSummary.substring(0, index));
+    //             String summaryValue = cleanString(newSubSummary.substring(index));
+
+    //             summaryMap.put(summaryKey, summaryValue);
+    //         }
+    //     }
+    //     return summaryMap;
+    // }
+
+    // public static String cleanString(String toClean){
+    //     toClean = toClean.stripHtmlTags();
+    //     toClean = toclean.normalizeSpace();
+    //     String[] toCleanList = toClean.split(',');
+    //     Set<String> toCleanSet = new Set<String>(toCleanList);
+    //     toCleanSet.remove('');
+    //     toCleanSet.remove(null);
+    //     toClean = string.join(new List<String>(toCleanSet), ', ');
+    //     if(toClean != null && String.isNotEmpty(toClean)){
+    //         Boolean isAlphanumeric = false;
+
+    //         while(!isAlphanumeric){
+    //             if(toClean == null){
+    //                 isAlphanumeric = true;
+    //             }
+    //             else if(toClean.length() == 1){                    
+    //                 toClean = toClean.isAlphanumeric() ? toClean : null;
+    //             } else {
+    //                 isAlphanumeric = toClean.substring(0, 1).isAlphanumeric();
+    //                 if(!isAlphanumeric){
+    //                     toClean = toClean.subString(1);
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     return toClean;
+    // }
 }

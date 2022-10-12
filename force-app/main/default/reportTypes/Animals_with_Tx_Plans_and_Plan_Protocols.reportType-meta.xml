@@ -12,7 +12,7 @@
         <outerJoin>false</outerJoin>
         <relationship>Treatment_Plan__r</relationship>
     </join>
-    <label>Animals with Tx Plans and Plan Protocols</label>
+    <label>Animals with Treatment Plans and Plan Protocols</label>
     <sections>
         <columns>
             <checkedByDefault>false</checkedByDefault>
@@ -1317,6 +1317,36 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Walking_Notes__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Petpoint_AAH_Id__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Playgroup_Priority_Number__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>PG_Priority_Minus_This_Week__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Behavior_Concern_Notes__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Walking_Equipment_Notes__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>In_Kennel_Socialization__c</field>
             <table>Animal__c</table>
         </columns>
         <masterLabel>Animals</masterLabel>

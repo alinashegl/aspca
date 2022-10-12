@@ -12,11 +12,6 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>No Walks</fullName>
-                <default>false</default>
-                <label>No Walks</label>
-            </value>
-            <value>
                 <fullName>Terrace Walks</fullName>
                 <default>false</default>
                 <label>Terrace Walks</label>
@@ -52,9 +47,9 @@
                 <label>No Handle</label>
             </value>
             <value>
-                <fullName>None Specified</fullName>
-                <default>true</default>
-                <label>None Specified</label>
+                <fullName>Monster Park Approved</fullName>
+                <default>false</default>
+                <label>Monster Park Approved</label>
             </value>
         </valueSetDefinition>
     </valueSet>

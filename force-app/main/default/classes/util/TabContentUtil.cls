@@ -33,6 +33,7 @@ public with sharing class TabContentUtil {
     @AuraEnabled public Boolean muzzledSameSexDog3 { get; set; }
     @AuraEnabled public Boolean muzzledOppositeSexDog3 { get; set; }
     @AuraEnabled public Boolean isLocked { get; set; }
+    @AuraEnabled public Boolean tempLock { get; set; }
 
     public TabContentUtil(
             String id,
@@ -96,6 +97,7 @@ public with sharing class TabContentUtil {
         this.muzzledSameSexDog3 = muzzledSameSexDog3;
         this.muzzledOppositeSexDog3 = muzzledOppositeSexDog3;
         this.isLocked = isLocked;
+        this.tempLock = tempLock;
     }
 
     public TabContentUtil(
@@ -159,6 +161,7 @@ public with sharing class TabContentUtil {
         this.muzzledSameSexDog3 = muzzledSameSexDog3;
         this.muzzledOppositeSexDog3 = muzzledOppositeSexDog3;
         this.isLocked = false;
+        this.tempLock = true;
     }
 
     public TabContentUtil() {}

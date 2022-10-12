@@ -6,5 +6,9 @@
         <description>Is the record locked</description>
         <fieldName>isLocked</fieldName>
     </lightningMessageFields>
+    <lightningMessageFields>
+        <description>Is the record temporarily locked</description>
+        <fieldName>isTempLocked</fieldName>
+    </lightningMessageFields>
     <masterLabel>BehaviorLockMessage</masterLabel>
 </LightningMessageChannel>

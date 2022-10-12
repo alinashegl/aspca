@@ -377,12 +377,13 @@
                 cmp.set('v.IsDogFighting', response[attr].IsDogFighting);
                 cmp.set('v.IsDogOnly', response[attr].IsDogOnly);
                 cmp.set('v.IsPuppy', response[attr].IsPuppy);
-                let isLocked = response[attr].isLocked;
-                cmp.set('v.isLocked', isLocked);
 
-                if(isLocked == false){
-                    alert('You are going to edit this evaluation - are you sure you want to proceed?');
-                }
+                let tempLock = response[attr].tempLock;
+                let permLock = response[attr].isLocked;
+
+                cmp.set("v.isLocked", tempLock || permLock);
+                cmp.set('v.isTempLock', tempLock);
+                cmp.set('v.isPermLock', permLock);
 
                 if (response[attr].IsAdult) {
                     if (response[attr].IsDogOnly) {
@@ -927,5 +928,19 @@
             default:
         }
         return subTests;
-    }
+    },
+    handleMessage : function(cmp, message, helper) {
+        let tempLock = message.getParam('isTempLocked');
+        let permLock = message.getParam('isLocked');
+
+        if(tempLock == false && cmp.get("v.isPermLock") == false){
+            alert('You are going to edit this evaluation - are you sure you want to proceed?');
+            cmp.set("v.isLocked", false);
+        }
+
+        else if(permLock != undefined){
+            cmp.set("v.isPermLock", permLock);
+            cmp.set("v.isLocked", permLock);
+        }
+    },
 });

@@ -105,23 +105,10 @@ public with sharing class playgroupSessionLWCController {
     @AuraEnabled (cacheable=true)
     public static playgroupAnimalInfo getAnimalInfo(Id playgroupAnimalId){
         try {
-            playgroupAnimalInfo info = new playgroupAnimalInfo();
-            info.animal = getAnimalPlaygroupById(playgroupAnimalId);
-            info.animalContacts = getAnimalContacts(playgroupAnimalId);
-            return info;
+            return new playgroupAnimalInfo(playgroupAnimalId);
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }
-    }
-
-    public static Animal_Playgroup__c getAnimalPlaygroupById(Id playgroupAnimalId){
-        return [SELECT Id, Animal__c, Animal_Name__c, Play_Rating__c FROM Animal_Playgroup__c WHERE Id =: playgroupAnimalId LIMIT 1];
-
-    }
-
-    public static Playgroup_Contact__c[] getAnimalContacts(Id playgroupAnimalId){
-        Playgroup_Contact__c[] contactList = [SELECT Id, Contact__r.Name, Novel_Not_Novel__c FROM Playgroup_Contact__c WHERE Playgroup__c =: playgroupAnimalId AND Novel_Not_Novel__c != 'PG Leader' ORDER BY Contact__r.Name ASC];
-        return !contactList.isEmpty() ? contactList : null;
     }
 
     public class playgroupSessionInfo{
@@ -130,8 +117,38 @@ public with sharing class playgroupSessionLWCController {
         @AuraEnabled public Contact[] playgroupContacts {get; set;}
     }
 
-    public class playgroupAnimalInfo{
-        @AuraEnabled public Animal_Playgroup__c animal {get; set;}
-        @AuraEnabled public Playgroup_Contact__c[] animalContacts {get; set;}
+    public class PlaygroupAnimalInfo{
+        @AuraEnabled public Playgroup_Contact__c[] animalContacts {get; set;}        
+        @AuraEnabled public String animalName;
+        @AuraEnabled public String playStyleNotes;
+        @AuraEnabled public String dogPGNotes;
+        @AuraEnabled public String playRating;
+
+        public PlaygroupAnimalInfo(Id playgroupAnimalId){
+            Animal_Playgroup__c apg = [
+                SELECT 
+                    Id,
+                    Animal_Name__c, 
+                    Play_Rating__c,
+                    Playgroup_Individual_Notes__c,
+                    Animal__r.Play_Style_Notes__c                
+                FROM Animal_Playgroup__c 
+                WHERE Id =: playgroupAnimalId 
+                LIMIT 1
+            ];
+            
+            this.animalName = apg.Animal_Name__c;
+            this.playStyleNotes = apg.Animal__r.Play_Style_Notes__c;
+            this.dogPGNotes = apg.Playgroup_Individual_Notes__c;
+            this.playRating = apg.Play_Rating__c;
+
+            this.animalContacts = [
+                SELECT Id, Contact__r.Name, Novel_Not_Novel__c 
+                FROM Playgroup_Contact__c 
+                WHERE Playgroup__c =: playgroupAnimalId 
+                AND Novel_Not_Novel__c != 'PG Leader' 
+                ORDER BY Contact__r.Name ASC
+            ];
+        }        
     }
 }
