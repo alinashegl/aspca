@@ -99,41 +99,32 @@ export default class VkDatatableUsage extends LightningElement {
         this.error = '';
         getAnimals()
         .then(resData=>{
-            let data = resData.plans;
+            let data = resData.animals;
             let playPauseReasons = resData.playPauseReasons;
             console.log('ppp'+playPauseReasons);
             this.anms = [];
             for(let i=0; i<data.length; i++){
                 let obj = {...data[i]};
-                if(data[i].hasOwnProperty('Animal__r')){
-                    if(data[i].Animal__r.hasOwnProperty('Animal_Name__c')){
-                        obj.anmName = data[i].Animal__r.Animal_Name__c;
-                        obj.Animal_Name__c = data[i].Animal__r.Animal_Name__c;
-                    }
-                    if(data[i].Animal__r.hasOwnProperty('Animal_Name_Id__c')){
-                        obj.Animal_Name_Id__c = data[i].Animal__r.Animal_Name_Id__c;
-                    }
-                    if(data[i].Animal__r.hasOwnProperty('Shelter_Color_Coding__c')){
-                        obj.Shelter_Color_Coding__c = data[i].Animal__r.Shelter_Color_Coding__c;
-                    }
-                    if(data[i].Animal__r.hasOwnProperty('Meets_Adoptability_Date__c')){
-                        obj.Meets_Adoptability_Date__c = data[i].Animal__r.Meets_Adoptability_Date__c;
-                    }
-                    if(data[i].Animal__r.hasOwnProperty('Playgroup_Priority_Level__c')){
-                        obj.Playgroup_Priority_Level__c = data[i].Animal__r.Playgroup_Priority_Level__c;
-                    }
-                    if(data[i].Animal__r.hasOwnProperty('Behavior_Summary_Change_Date__c')){
-                        obj.Behavior_Summary_Change_Date__c = data[i].Animal__r.Behavior_Summary_Change_Date__c;
-                    }
-                    if(data[i].Animal__r.hasOwnProperty('Behavior_Case_Worker__r')){
-                        obj.behName = data[i].Animal__r.Behavior_Case_Worker__r.Name;
-                        obj.Behavior_Case_Worker__c = data[i].Animal__r.Behavior_Case_Worker__r.Id;
-                    }
-                    if(playPauseReasons.hasOwnProperty(data[i].Animal__c)){
-                        obj.Play_Pause_Reason = (playPauseReasons[data[i].Animal__c]).join(';');
-                    }
-                    
-                }    
+                
+                if(data[i].hasOwnProperty('Animal_Name__c')){
+                    obj.anmName = data[i].Animal_Name_Id__c;
+                    obj.Animal__c = data[i].Id;
+                    obj.Animal_Name__c = data[i].Animal_Name__c;
+                }
+                if(data[i].hasOwnProperty('Treatment_Plan__r') && data[i].Treatment_Plan__r.length > 0 && data[i].Treatment_Plan__r[0].hasOwnProperty('Treatment_Priority__c')){
+                    obj.Treatment_Priority__c = data[i].Treatment_Plan__r[0].Treatment_Priority__c;
+                }
+                if(data[i].hasOwnProperty('Treatment_Plan__r') && data[i].Treatment_Plan__r.length > 0 && data[i].Treatment_Plan__r[0].hasOwnProperty('Enrichment_Priority__c')){
+                    obj.Enrichment_Priority__c = data[i].Treatment_Plan__r[0].Enrichment_Priority__c;
+                }
+                if(data[i].hasOwnProperty('Behavior_Case_Worker__r')){
+                    obj.behName = data[i].Behavior_Case_Worker__r.Name;
+                    obj.Behavior_Case_Worker__c = data[i].Behavior_Case_Worker__r.Id;
+                }
+                if(playPauseReasons.hasOwnProperty(data[i].Id)){
+                    obj.Play_Pause_Reason = (playPauseReasons[data[i].Id]).join(';');
+                }
+
                 this.anms.push(obj);
             }
             this.showTable = true;
@@ -158,9 +149,6 @@ export default class VkDatatableUsage extends LightningElement {
         for(let i=0;i<recs.length;i++){
             if(recs[i].hasOwnProperty('anmName')){
                 delete recs[i]['anmName'];
-                delete recs[i]['Animal_Name__c'];
-                delete recs[i]['Animal_Name_Id__c'];
-                delete recs[i]['Behavior_Summary_Change_Date__c'];
             }
 
             if(recs[i].hasOwnProperty('behName')){
@@ -168,27 +156,26 @@ export default class VkDatatableUsage extends LightningElement {
                 delete recs[i]['behName'];
             }
 
-            if(recs[i].hasOwnProperty('Animal__r')){
-                if(recs[i].hasOwnProperty('Shelter_Color_Coding__c')){
-                    recs[i].Animal__r.Shelter_Color_Coding__c = recs[i]['Shelter_Color_Coding__c'];
-                    delete recs[i]['Shelter_Color_Coding__c'];
+            if(recs[i].hasOwnProperty('Play_Pause_Reason')){
+                delete recs[i]['Play_Pause_Reason'];
+            }
+
+            if(recs[i].hasOwnProperty('Treatment_Plan__r') && recs[i].Treatment_Plan__r.length > 0){
+                if(recs[i].hasOwnProperty('Treatment_Priority__c')){
+                    recs[i].Treatment_Plan__r[0].Treatment_Priority__c = recs[i]['Treatment_Priority__c'];
+                    delete recs[i]['Treatment_Priority__c'];
                 }
 
-                if(recs[i].hasOwnProperty('Behavior_Summary_Change_Date__c')){
-                    recs[i].Animal__r.Behavior_Summary_Change_Date__c = recs[i]['Behavior_Summary_Change_Date__c'];
-                    delete recs[i]['Behavior_Summary_Change_Date__c'];
+                if(recs[i].hasOwnProperty('Enrichment_Priority__c')){
+                    recs[i].Treatment_Plan__r[0].Enrichment_Priority__c = recs[i]['Enrichment_Priority__c'];
+                    delete recs[i]['Enrichment_Priority__c'];
                 }
-                if(recs[i].hasOwnProperty('Playgroup_Priority_Level__c')){
-                    recs[i].Animal__r.Playgroup_Priority_Level__c = recs[i]['Playgroup_Priority_Level__c'];
-                    delete recs[i]['Playgroup_Priority_Level__c'];
-                }
-                if(recs[i].hasOwnProperty('Meets_Adoptability_Date__c')){
-                    recs[i].Animal__r.Meets_Adoptability_Date__c = recs[i]['Meets_Adoptability_Date__c'];
-                    delete recs[i]['Meets_Adoptability_Date__c'];
-                }
-                if(recs[i].hasOwnProperty('Play_Pause_Reason')){
-                    delete recs[i]['Play_Pause_Reason'];
-                }
+
+                let temp = this.rewriteSubquery(recs[i].Treatment_Plan__r);
+                delete recs[i].Treatment_Plan__r;
+                recs[i].Treatment_Plan__r = temp;
+            } else {
+                recs[i].Treatment_Plan__r = this.rewriteSubquery([]);
             }
         }
         updateRecords({recsString: JSON.stringify(recs)})
@@ -201,4 +188,16 @@ export default class VkDatatableUsage extends LightningElement {
             this.isLoading = false;
         });
     }
+
+    rewriteSubquery(array) {
+        if (array && !array.hasOwnProperty('records')) {
+            var tempArray = array;
+            array = {
+                totalSize: tempArray.length,
+                done: true,
+                records: tempArray
+            }
+        }
+        return array;
+    };
 }
