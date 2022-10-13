@@ -548,14 +548,14 @@ public without sharing class TestDataFactory {
                     Animal_Name__c = 'Doggo123',
                     Shelter_Location2__c = 'MRC',
                     Current_Location__c = 'MRC',
-                    Current_Recent_Shelter_Location__c = 'CRC/MRC',
+                    Current_Recent_Shelter_Location__c = 'CRC-MRC',
                     Play_Category__c = 'Unspecified'
         );
         insert a;
         
-        User u = createUserWithProfile('ASPCA - Behavior (CRC)');
-        u.Location__c = u.Division = a.Current_Recent_Shelter_Location__c;
-        insert u;
+        // User u = createUserWithProfile('ASPCA - Behavior (CRC)');
+        // u.Location__c = u.Division = a.Current_Recent_Shelter_Location__c;
+        // insert u;
         
         return a;
     }
@@ -573,9 +573,9 @@ public without sharing class TestDataFactory {
                   Animal_Age__c = 8,
                   Gender__c = 'MN',
                   Animal_Name__c = name,
-                  Shelter_Location2__c = 'MRC',
-                  Current_Location__c = 'MRC',
-                  Current_Recent_Shelter_Location__c = 'MRC'
+                  Shelter_Location2__c = 'MRC - CRC',
+                  Current_Location__c = 'CRC',
+                  Current_Recent_Shelter_Location__c = 'CRC'
       );
       insert a;
       return a;
