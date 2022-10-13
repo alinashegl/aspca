@@ -548,14 +548,14 @@ public without sharing class TestDataFactory {
                     Animal_Name__c = 'Doggo123',
                     Shelter_Location2__c = 'MRC',
                     Current_Location__c = 'MRC',
-                    Current_Recent_Shelter_Location__c = 'CRC/MRC',
+                    Current_Recent_Shelter_Location__c = 'CRC-MRC',
                     Play_Category__c = 'Unspecified'
         );
         insert a;
         
-        User u = createUserWithProfile('ASPCA - Behavior (CRC)');
-        u.Location__c = u.Division = a.Current_Recent_Shelter_Location__c;
-        insert u;
+        // User u = createUserWithProfile('ASPCA - Behavior (CRC)');
+        // u.Location__c = u.Division = a.Current_Recent_Shelter_Location__c;
+        // insert u;
         
         return a;
     }
@@ -573,9 +573,9 @@ public without sharing class TestDataFactory {
                   Animal_Age__c = 8,
                   Gender__c = 'MN',
                   Animal_Name__c = name,
-                  Shelter_Location2__c = 'MRC',
-                  Current_Location__c = 'MRC',
-                  Current_Recent_Shelter_Location__c = 'MRC'
+                  Shelter_Location2__c = 'MRC - CRC',
+                  Current_Location__c = 'CRC',
+                  Current_Recent_Shelter_Location__c = 'CRC'
       );
       insert a;
       return a;
@@ -1042,12 +1042,21 @@ public without sharing class TestDataFactory {
             new Play_Pause__c(
                 Animal__c = a.Id,
                 Type__c = 'Behavioral',
-                End_Date__c = System.today(),
                 Play_Pause_Reason__c = 'Needs a Break',
-                Start_Date__c = System.today())
+                Start_Date__c = System.today(),
+                End_Date__c = Date.today().addDays(7))
         };
         insert playPauses;
         return playPauses;
+    }
+
+    public static Play_Pause__c createPlayPause(Id animalId, String type, String reason) {
+      return new Play_Pause__c(
+        Animal__c = animalId,
+        Type__c = type,
+        Play_Pause_Reason__c = reason,
+        Start_Date__c = System.today()
+      );
     }
 
     public static Playgroup_Session__c createPlaygroupSessionWithAnimals() {
