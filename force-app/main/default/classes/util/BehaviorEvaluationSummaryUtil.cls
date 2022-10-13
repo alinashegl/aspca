@@ -1,4 +1,5 @@
 public class BehaviorEvaluationSummaryUtil {
+    public static Boolean skipTrigger = false;
     private static final Boolean COMPARE_NUMBERS = true;
     private static final String PUPPY_TYPE = 'puppy';
     private static final String ADULT_TYPE = 'Adult Animal';
@@ -240,6 +241,7 @@ public class BehaviorEvaluationSummaryUtil {
     }
 
     public static void handleInsert(List<Behavior_Evaluation__c> triggerNew) {
+        if (skipTrigger) return;
         //Prepopulate sections in summary field
         //Since this could have multiple types per insert and there might need to be more
         //than one type per set, get all values and split out into map by type
@@ -255,6 +257,7 @@ public class BehaviorEvaluationSummaryUtil {
     }
 
     public static void handleAfterInsert(List<Behavior_Evaluation__c> triggerNew){
+        if (skipTrigger) return;
         Behavior_Evaluation_Summary__c[] summaries = new Behavior_Evaluation_Summary__c[0];
         for (Behavior_Evaluation__c b : triggerNew) {
             if (b.Evaluation_Subtype__c != null) {
@@ -319,7 +322,9 @@ public class BehaviorEvaluationSummaryUtil {
 
 
     public static void handleBeforeUpdate(List<Behavior_Evaluation__c> triggerNew, Map<Id, Behavior_Evaluation__c> oldMap){
+        if (skipTrigger) return;
         handleSummaryUpdate(triggerNew);
+        handleSkipDogTests(triggerNew, oldMap);
     }
 
     public static void handleSummaryUpdate(List<Behavior_Evaluation__c> triggerNew){
@@ -352,7 +357,31 @@ public class BehaviorEvaluationSummaryUtil {
         }
     }
 
+    public static void handleSkipDogTests(List<Behavior_Evaluation__c> triggerNew, Map<Id, Behavior_Evaluation__c> oldMap){
+        for (Behavior_Evaluation__c b : triggerNew) {
+            Boolean skipDogTests = false;
+            Behavior_Evaluation__c oldRecord = oldMap.get(b.Id);
+            if (oldRecord.Overall_Evaluation_Grade__c == null && b.Overall_Evaluation_Grade__c == 'D - Dog Aggression') {
+                //Automates skipping dog tests
+                ConfigTypeWrapper configInfos = getConfigInfo(b.Evaluation_Subtype__c);
+                Test_Config__mdt[] configs = new Test_Config__mdt[0];
+                if(configInfos.commentSkipFieldsMap.containsKey('Opposite Sex Dog')){
+                    configs.addAll(configInfos.commentSkipFieldsMap.get('Opposite Sex Dog'));
+                }
+
+                if(configInfos.commentSkipFieldsMap.containsKey('Same Sex Dog')){
+                    configs.addAll(configInfos.commentSkipFieldsMap.get('Same Sex Dog'));
+                }
+
+                for(Test_Config__mdt config : configs){
+                    b.put(config.Test_Skip_Reason_Field__c, 'Skipped due to risk to the helper dog');
+                }
+            } 
+        }
+    }
+
     public static void handleAfterUpdate(List<Behavior_Evaluation__c> triggerNew, Map<Id, Behavior_Evaluation__c> triggerOldMap) {
+        if (skipTrigger) return;
         LogHistory.LogHistory(triggerOldMap, triggerNew);
     }
 

@@ -944,11 +944,11 @@
                             </lightning:layout>
                         </lightning:tab>
                         <aura:if isTrue="{!v.IsDogFighting}">
-                            <lightning:tab label="Fake Dog Interaction" id="fdit">
+                            <lightning:tab label="Model Dog Interaction" id="fdit">
                                 <lightning:layout multipleRows="true">
                                     <lightning:layoutItem size="12">
                                         <div class="slds-align_absolute-center" style="height:3rem">
-                                            <h1 class="tabHeader">Fake Dog Interaction</h1>
+                                            <h1 class="tabHeader">Model Dog Interaction</h1>
                                         </div>
                                         <br></br>
                                         <aura:iteration items="{!v.fakeDogInteractionTest}" var="variable">
