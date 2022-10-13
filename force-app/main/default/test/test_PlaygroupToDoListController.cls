@@ -139,4 +139,123 @@ public with sharing class test_PlaygroupToDoListController {
         System.assertEquals(playSession.Playgroup_Leader__c, editSession.Playgroup_Leader__c);
         System.assertEquals(2, editSession.Animal_Playgroups__r.size());
     }
+
+    //playpause query filter tests
+    @isTest 
+    static void playpauseQueryFilterTests(){
+        Animal__c[] animalsToUpdate = new Animal__c[0];
+        Play_Pause__c[] playPauses = new Play_Pause__c[0];
+        //No play pause - should be on todo list
+        Animal__c noPP = TestDataFactory.createAnimalWithName('noPP');
+        noPP.Play_Category__c = 'Juvenile';
+        animalsToUpdate.add(noPP);
+
+        //Only in heat Play pause - should be on todo list
+        Animal__c inHeat = TestDataFactory.createAnimalWithName('inHeat');
+        inHeat.Play_Category__c = 'Juvenile';
+        animalsToUpdate.add(inHeat);
+
+        Play_Pause__c inHeatPP = TestDataFactory.createPlayPause(inHeat.Id,'Medical','In Heat');
+        playPauses.add(inHeatPP);
+
+        //only has medical and end play pause is true - should be on to do list
+        Animal__c surgery = TestDataFactory.createAnimalWithName('surgery');
+        surgery.Play_Category__c = 'Juvenile';
+        animalsToUpdate.add(surgery);
+
+        Play_Pause__c surgeryPP = TestDataFactory.createPlayPause(surgery.Id,'Medical','Surgery');
+        surgeryPP.End_Play_Pause__c = true;
+        surgeryPP.End_Date__c = Date.today();
+        playPauses.add(surgeryPP);
+
+        //only has medical and end play pause is false - should not be on to do list
+        Animal__c medical = TestDataFactory.createAnimalWithName('medical');
+        medical.Play_Category__c = 'Juvenile';
+        animalsToUpdate.add(medical);
+
+        Play_Pause__c medicalPP = TestDataFactory.createPlayPause(medical.Id,'Medical','Surgery');
+        playPauses.add(medicalPP);
+
+        //only has behavioral and end play pause is true - should be on to do list
+        Animal__c behavioral = TestDataFactory.createAnimalWithName('behavior');
+        behavioral.Play_Category__c = 'Juvenile';
+        animalsToUpdate.add(behavioral);
+
+        Play_Pause__c behavioralPP = TestDataFactory.createPlayPause(behavioral.Id,'Behavioral','Needs a Break');
+        behavioralPP.End_Play_Pause__c = true;
+        behavioralPP.End_Date__c = Date.today();
+        playPauses.add(behavioralPP);
+
+        //only has behavioral and end play pause is false - should not be on to do list
+        Animal__c behavioralActive = TestDataFactory.createAnimalWithName('behavioralActive');
+        behavioralActive.Play_Category__c = 'Juvenile';
+        animalsToUpdate.add(behavioralActive);
+
+        Play_Pause__c behavioralActivePP = TestDataFactory.createPlayPause(behavioralActive.Id,'Behavioral','Needs a Break');
+        behavioralActivePP.End_Date__c = date.today().addDays(7);
+        playPauses.add(behavioralActivePP);
+
+        update animalsToUpdate;
+        insert playPauses;
+
+        test.startTest();
+            Animal__c[] animals = PlaygroupToDoListController.getPlaygroupAnimals(null);
+            Set<Id> animalIds = new Set<Id>();
+            for(Animal__c animal : animals){
+                animalIds.add(animal.Id);
+            }
+            System.assertEquals(false, animals.isEmpty());
+            System.assertEquals(true, animalIds.contains(noPP.Id), 'Dog without play pause should be on list');
+            System.assertEquals(true, animalIds.contains(inHeat.Id), 'Dog with only In Heat play pause should be on list');
+            System.assertEquals(true, animalIds.contains(surgery.Id), 'Dog with ended medical play pause shoud be on list');
+            System.assertEquals(false, animalIds.contains(medical.Id), 'Dog with active medical play pause shoud not be on list');
+            System.assertEquals(true, animalIds.contains(behavioral.Id), 'Dog with ended behavioral play pause shoud be on list');            
+            System.assertEquals(false, animalIds.contains(behavioralActive.Id), 'Dog with active behavioral play pause shoud not be on list');
+        test.stopTest();
+    }
+
+    @isTest 
+    static void playpauseQueryFilterWithMultiplePlayPausesTests(){
+        Animal__c[] animalsToUpdate = new Animal__c[0];
+        Play_Pause__c[] playPauses = new Play_Pause__c[0];
+
+        //Active In heat and Ended Medical - should be on list
+        Animal__c inHeat = TestDataFactory.createAnimalWithName('inHeat');
+        inHeat.Play_Category__c = 'Juvenile';
+        animalsToUpdate.add(inHeat);
+
+        Play_Pause__c inHeatPP = TestDataFactory.createPlayPause(inHeat.Id,'Medical','In Heat');
+        playPauses.add(inHeatPP);
+
+        Play_Pause__c surgeryPP = TestDataFactory.createPlayPause(inHeat.Id,'Medical','Surgery');
+        surgeryPP.End_Play_Pause__c = true;
+        surgeryPP.End_Date__c = Date.today();
+        playPauses.add(surgeryPP);
+
+        //Active In heat and Medical - should not be on list
+        Animal__c medical = TestDataFactory.createAnimalWithName('medical');
+        medical.Play_Category__c = 'Juvenile';
+        animalsToUpdate.add(medical);
+
+        Play_Pause__c inHeatPP1 = TestDataFactory.createPlayPause(medical.Id,'Medical','In Heat');
+        playPauses.add(inHeatPP1);
+
+        Play_Pause__c medicalPP = TestDataFactory.createPlayPause(medical.Id,'Medical','Surgery');
+        playPauses.add(medicalPP);
+
+        update animalsToUpdate;
+        insert playPauses;
+
+        test.startTest();
+            Animal__c[] animals = PlaygroupToDoListController.getPlaygroupAnimals(null);
+            Set<Id> animalIds = new Set<Id>();
+            for(Animal__c animal : animals){
+                animalIds.add(animal.Id);
+            }
+            System.assertEquals(true, animalIds.contains(inHeat.Id), 'Dog with only In Heat play pause should be on list');
+            System.assertEquals(false, animalIds.contains(medical.Id), 'Dog with active medical play pause shoud not be on list');
+        test.stopTest();
+
+
+    }
 }

@@ -69,6 +69,9 @@
         //console.log('Footer is Executing!!!');
         var params = { key: 0};
         this.sendRequest(cmp, 'c.getSkipReasons', params, 'skipReasons');
+        if(cmp.get('v.skipVal.value') != null){
+            cmp.set('v.skipDisplay', cmp.get('v.skipVal.value'));
+        }
     } ,
     handleChange: function(cmp, event)
     {
@@ -78,7 +81,8 @@
     {
         let skipVal = cmp.get("v.IsSkipped");
         if(skipVal){
-            cmp.set('v.showModal', true);
+            cmp.set('v.skipReason', cmp.get('v.skipReasons')[0].value);
+            cmp.set('v.showModal', true);            
         } else {
             cmp.set('v.skipReason', null);
             this.putSkipReason(cmp, event);
@@ -92,6 +96,7 @@
     handleCancel: function(cmp, event)
     {
         cmp.set('v.IsSkipped', false);
+        cmp.set('v.skipReason', null);
         this.processingProcess(cmp, 'handleModal');
     } ,
     handleNewSkip: function(cmp, event)
@@ -102,6 +107,7 @@
     putSkipReason : function(cmp, event)
     {
        var reason = cmp.get('v.skipReason');
+       cmp.set('v.skipDisplay', reason);
        //var r = cmp.find('reasons').get('v.value');
        var apiName = cmp.get('v.skipVal');
        var recordId = cmp.get('v.recordId');
@@ -214,21 +220,16 @@
             function(response) {
                 console.log('PROMISE RESPONSE', response[a.id]);
                 $A.get('e.force:refreshView').fire();
-                cmp.find('lib').showToast({
-                            'title': 'Success' ,
-                            'message': 'Test Comments Were Saved Successfully, Proceed to the Next Tab to see the' +
-                            ' Change' ,
-                            'variant': 'success'
-                        });
             }
         ).catch(
             function(error) {
                 console.log(error)
+                cmp.find('lib').showToast({
+                    'title': 'Failure' ,
+                    'message': 'Test Comments did not save successfully: ' + error,
+                    'variant': 'success'
+                });
             }
         );
-
-        //this.sendValues(cmp, recordId, apiName.id, val);
-
-
     }
 });

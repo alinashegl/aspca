@@ -42,7 +42,17 @@
                             <td width="10%" style="vertical-align:top;"><strong>Does Not Walk on a Leash Notes:</strong></td>
                             <td width="90%" colspan="10">{!animal.Does_Not_Walk_on_a_Leash_Notes__c}</td>
                         </tr>
-                        <hr />
+                        <tr class="line">
+                            <td class="line"></td>
+                            <td class="line"></td>
+                            <td class="line"></td>
+                            <td class="line"></td>
+                            <td class="line"></td>
+                            <td class="line"></td>
+                            <td class="line"></td>
+                            <td class="line"></td>
+                            <td class="line"></td>
+                        </tr> 
                     </tbody>
                 </apex:repeat>
             </table>

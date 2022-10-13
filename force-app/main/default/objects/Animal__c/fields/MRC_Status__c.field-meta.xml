@@ -2,7 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>MRC_Status__c</fullName>
     <externalId>false</externalId>
-    <label>MRC Status</label>
+    <label>MRC Candidate Status</label>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
     <trackHistory>false</trackHistory>
@@ -20,6 +20,11 @@
                 <fullName>MRC Accepted</fullName>
                 <default>false</default>
                 <label>Accepted</label>
+            </value>
+            <value>
+                <fullName>MRC Waitlist</fullName>
+                <default>false</default>
+                <label>Waitlist</label>
             </value>
             <value>
                 <fullName>MRC Declined</fullName>

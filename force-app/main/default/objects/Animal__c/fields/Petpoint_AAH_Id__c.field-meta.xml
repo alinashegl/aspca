@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Petpoint_AAH_Id__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(ISBLANK(Petpoint_ID__c),AAH_ID__c,Petpoint_ID__c)</formula>
+    <label>Petpoint/AAH Id</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

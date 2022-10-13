@@ -136,4 +136,24 @@ private class test_BehaviorEvaluationPageController {
             true, false, false, false, false, false, eWFC2, false, false, 'puppyHousing', false, false, false, false, false);
         Test.stopTest();
     }
+
+    @isTest
+    static void wrapperTestCoverageWithIsLocked() {
+        Test.startTest();
+        EvaluationWrapper.ListItems eWLI1 = new EvaluationWrapper.ListItems();
+        EvaluationWrapper.Options eWO1 = new EvaluationWrapper.Options();
+        EvaluationWrapper.FieldContents eWFC1 = new EvaluationWrapper.FieldContents();
+        EvaluationWrapper eW1 = new EvaluationWrapper();
+        TabContentUtil tCU1 = new TabContentUtil();
+        EvaluationWrapper.ListItems eWLI2 = new EvaluationWrapper.ListItems('label', 'value');
+        EvaluationWrapper.Options eWO2 = new EvaluationWrapper.Options('label', 'longDesc', 'pleApiName', true);
+        EvaluationWrapper.FieldContents eWFC2 = new EvaluationWrapper.FieldContents('id', eWO2);
+        List<EvaluationWrapper.Options> eWOL = new List<EvaluationWrapper.Options>{eWO2};
+        EvaluationWrapper eW2 = new EvaluationWrapper('id', 'label', false, eWFC2, eWOL, eWOL, eWOL,
+            eWOL, eWOL, eWOL, eWFC2, 1, false, 'parentTestApiName', eW1, eW1, eW1, eW1);
+        TabContentUtil tCU2 = new TabContentUtil('id', 'label', 'name', 'breed', 'color', 'caseNumber',
+            'animalId', 'animalAge', 'animalSex', 'location', System.today(), eWOL, eWOL, 'behaviorSummary',
+            true, false, false, false, false, false, eWFC2, false, false, 'puppyHousing', false, false, false, false, false, true);
+        Test.stopTest();
+    }
 }

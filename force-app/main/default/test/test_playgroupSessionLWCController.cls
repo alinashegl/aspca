@@ -36,6 +36,7 @@ private class test_playgroupSessionLWCController {
         Contact c = testDataFactory.createContact();
 
         Playgroup_Session__c session = new Playgroup_Session__c(
+            Population__c = 'MRC',
             Playgroup_Location__c = 'MRC Indoor Play Yard',
             Playgroup_Leader__c = c.Id
         );
@@ -93,10 +94,11 @@ private class test_playgroupSessionLWCController {
         Playgroup_Session__c session = TestDataFactory.createPlaygroupSessionWithAnimals();
         Playgroup_Contact__c[] initialCons = [SELECT Id, Contact__c FROM Playgroup_Contact__c WHERE Playgroup__r.Playgroup_Session__c =: session.Id];
         Set<Id> conIds = new Set<Id>();
+
         for(Playgroup_Contact__c pc : initialCons){
             conIds.add(pc.Id);
         }
-        // List<Id> conIdList = new List<Id>(conids);
+
         Contact c1 = testDataFactory.createContact();
         Contact c2 = testDataFactory.createContact();
         session.Contact_Ids__c = c1.Id + ',' + c2.Id + ',' + string.join(new List<Id>(conids),',');
@@ -153,7 +155,8 @@ private class test_playgroupSessionLWCController {
         Animal_playgroup__c[] animalPlaygroups = [SELECT Id FROM Animal_playgroup__c WHERE Playgroup_Session__c =: session.Id];
 
         test.startTest();
-        Playgroup_Contact__c[] pgContacts = playgroupSessionLWCController.getAnimalContacts(animalPlaygroups[0].Id);
+        playgroupSessionLWCController.PlaygroupAnimalInfo animalInfo = new playgroupSessionLWCController.PlaygroupAnimalInfo(animalPlaygroups[0].Id);
+        Playgroup_Contact__c[] pgContacts = animalInfo.animalContacts;
         test.stopTest();
 
         System.assert(!pgContacts.isEmpty(), 'Should have returned contacts, instead returned: ' + pgContacts);
@@ -168,10 +171,11 @@ private class test_playgroupSessionLWCController {
         }
 
         test.startTest();
-        Playgroup_Contact__c[] pgContacts = playgroupSessionLWCController.getAnimalContacts(initialCons[0].Playgroup__c);
+        playgroupSessionLWCController.PlaygroupAnimalInfo animalInfo = new playgroupSessionLWCController.PlaygroupAnimalInfo(initialCons[0].Playgroup__c);
+        Playgroup_Contact__c[] pgContacts = animalInfo.animalContacts;
         test.stopTest();
 
-        System.assertEquals(null, pgContacts, 'Should have returned an emtpylist, instead returned: ' + pgContacts);
+        System.assertEquals(true, pgContacts.isEmpty(), 'Should have returned an empty list, instead returned: ' + pgContacts);
     }
 
     @isTest 
@@ -208,9 +212,7 @@ private class test_playgroupSessionLWCController {
         test.stopTest();
 
         System.assertNotEquals(null, info, 'Should have returned playgroup animal info, but was null');
-        System.assertNotEquals(null, info.animal, 'Should have returned an Animal Playgroup record, but was null');
+        System.assertNotEquals(null, info.animalName, 'Should have returned an Animal Name, but was null');
         System.assertNotEquals(null, info.animalContacts, 'Should have returned animal contacts, but was null');
-
     }
-
 }

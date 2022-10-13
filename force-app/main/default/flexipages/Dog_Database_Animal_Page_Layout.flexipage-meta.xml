@@ -27,6 +27,13 @@
                         </valueListItems>
                         <valueListItems>
                             <value>CustomButton.Animal__c.Create_Animal_Cage_Card</value>
+                            <visibilityRule>
+                                <criteria>
+                                    <leftValue>{!$User.Profile.Name}</leftValue>
+                                    <operator>NE</operator>
+                                    <rightValue>ASPCA - Behavior (ARC/CARE)</rightValue>
+                                </criteria>
+                            </visibilityRule>
                         </valueListItems>
                         <valueListItems>
                             <value>Animal__c.Create_Daily_Enrichment</value>
@@ -39,6 +46,9 @@
                         </valueListItems>
                         <valueListItems>
                             <value>CustomButton.Animal__c.Animal_Placement</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>CustomButton.Animal__c.Upload_Photo_LEX</value>
                         </valueListItems>
                     </valueList>
                 </componentInstanceProperties>
@@ -122,24 +132,40 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Estimated_Date_of_Birth__c</fieldItem>
                 <identifier>RecordEstimated_Date_of_Birth_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Current_Animal_Age_Formatted__c</fieldItem>
                 <identifier>RecordCurrent_Animal_Age_Formatted__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Animal_Age__c</fieldItem>
                 <identifier>RecordAnimal_Age_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Animal_Age_Units__c</fieldItem>
                 <identifier>RecordAnimal_Age_Units_cField</identifier>
             </fieldInstance>
@@ -166,6 +192,10 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Case_Type__c</fieldItem>
                 <identifier>RecordCase_Type__cField</identifier>
             </fieldInstance>
@@ -206,30 +236,50 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Markings__c</fieldItem>
                 <identifier>RecordMarkings__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Forensic_Status__c</fieldItem>
                 <identifier>RecordForensic_Status_cField2</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Charge_Animal__c</fieldItem>
                 <identifier>RecordCharge_Animal_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Forensic_Hold_Release_Date__c</fieldItem>
                 <identifier>RecordForensic_Hold_Release_Date_cField2</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Forensic_Hold_Released_By__c</fieldItem>
                 <identifier>RecordForensic_Hold_Released_By_cField1</identifier>
             </fieldInstance>
@@ -413,6 +463,10 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.MRC_Decline_Reason__c</fieldItem>
                 <identifier>RecordMRC_Decline_Reason_cField1</identifier>
             </fieldInstance>
@@ -429,6 +483,10 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.BRC_Decline_Reason__c</fieldItem>
                 <identifier>RecordBRC_Decline_Reason_cField2</identifier>
             </fieldInstance>
@@ -455,20 +513,12 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.BRC_ID__c</fieldItem>
                 <identifier>RecordBRC_ID_cField1</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Petpoint_ID__c</fieldItem>
-                <identifier>RecordPetpoint_ID_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.AAH_ID__c</fieldItem>
-                <identifier>RecordAAH_ID_cField2</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-7bb7e173-8e35-42e8-bb80-b8d39a3ada43</name>
@@ -487,6 +537,10 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Handling_Instructions__c</fieldItem>
                 <identifier>RecordHandling_Instructions_cField1</identifier>
             </fieldInstance>
@@ -513,12 +567,20 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Walking_Status__c</fieldItem>
                 <identifier>RecordWalking_Status_cField2</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Walking_Equipment__c</fieldItem>
                 <identifier>RecordWalking_Equipment_cField2</identifier>
             </fieldInstance>
@@ -596,6 +658,10 @@
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Box_Folder__c</fieldItem>
                 <identifier>RecordBox_Folder_cField2</identifier>
             </fieldInstance>
@@ -612,6 +678,10 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Evaluation_Type__c</fieldItem>
                 <identifier>RecordEvaluation_Type_cField1</identifier>
             </fieldInstance>
@@ -628,36 +698,60 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Grade_Change_Reason__c</fieldItem>
                 <identifier>RecordGrade_Change_Reason_cField2</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Current_Behavior_Grade_Initials__c</fieldItem>
                 <identifier>RecordCurrent_Behavior_Grade_Initials__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Current_Behavior_Grade_Change_Date__c</fieldItem>
                 <identifier>RecordCurrent_Behavior_Grade_Change_Date__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Behavior_Summary_Change_Date__c</fieldItem>
                 <identifier>RecordBehavior_Summary_Change_Date__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Behavior_Summary__c</fieldItem>
                 <identifier>RecordBehavior_Summary__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Behavior_Summary_Initials__c</fieldItem>
                 <identifier>RecordBehavior_Summary_Initials__cField</identifier>
             </fieldInstance>
@@ -678,24 +772,40 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Storm_Distress_Anxiety__c</fieldItem>
                 <identifier>RecordStorm_Distress_Anxiety_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Storm_Distress_Anxiety_Notes__c</fieldItem>
                 <identifier>RecordStorm_Distress_Anxiety_Notes_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Confirmed_Helper_Dog__c</fieldItem>
                 <identifier>RecordConfirmed_Helper_Dog_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Potential_Helper_Dog__c</fieldItem>
                 <identifier>RecordPotential_Helper_Dog_cField</identifier>
             </fieldInstance>
@@ -773,6 +883,10 @@
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Controlled_Food_Program__c</fieldItem>
                 <identifier>RecordControlled_Food_Program__cField</identifier>
             </fieldInstance>
@@ -799,6 +913,10 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Meets_Adoptability_Date__c</fieldItem>
                 <identifier>RecordMeets_Adoptability_Date__cField</identifier>
             </fieldInstance>
@@ -809,24 +927,40 @@
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Treatment_Start_Date__c</fieldItem>
                 <identifier>RecordTreatment_Start_Date__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Number_of_Treatments__c</fieldItem>
                 <identifier>RecordNumber_of_Treatments_cField2</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Days_in_Treatment__c</fieldItem>
                 <identifier>RecordDays_in_Treatment_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.no_of_weeks_in_treatment__c</fieldItem>
                 <identifier>Recordno_of_weeks_in_treatment_cField</identifier>
             </fieldInstance>
@@ -980,18 +1114,30 @@
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Playgroup_Priority_Level__c</fieldItem>
                 <identifier>RecordPlaygroup_Priority_Level_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Play_Category__c</fieldItem>
                 <identifier>RecordPlay_Category__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Play_Style_Notes__c</fieldItem>
                 <identifier>RecordPlay_Style_Notes_cField1</identifier>
             </fieldInstance>
@@ -1002,18 +1148,30 @@
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Number_of_Playgroups__c</fieldItem>
                 <identifier>RecordNumber_of_Playgroups__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Does_Not_Walk_on_a_Leash__c</fieldItem>
                 <identifier>RecordDoes_Not_Walk_on_a_Leash_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Does_Not_Walk_on_a_Leash_Notes__c</fieldItem>
                 <identifier>RecordDoes_Not_Walk_on_a_Leash_Notes_cField1</identifier>
             </fieldInstance>
@@ -1091,42 +1249,70 @@
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Source_Shelter_ID__c</fieldItem>
                 <identifier>RecordSource_Shelter_ID_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Original_Animal_Name__c</fieldItem>
                 <identifier>RecordOriginal_Animal_Name_cField2</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Animal_Status__c</fieldItem>
                 <identifier>RecordAnimal_Status_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Current_Weight_in_kgs_Num__c</fieldItem>
                 <identifier>RecordCurrent_Weight_in_kgs_Num_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Current_Weight_in_lbs_Num__c</fieldItem>
                 <identifier>RecordCurrent_Weight_in_lbs_Num_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Seizure_Surrender_Date__c</fieldItem>
                 <identifier>RecordSeizure_Surrender_Date_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Scene_Location__c</fieldItem>
                 <identifier>RecordScene_Location_cField1</identifier>
             </fieldInstance>
@@ -1137,42 +1323,70 @@
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Disposition_Status__c</fieldItem>
                 <identifier>RecordDisposition_Status_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Intake_Type__c</fieldItem>
                 <identifier>RecordIntake_Type_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Disaster_Hold_Type__c</fieldItem>
                 <identifier>RecordDisaster_Hold_Type_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Microchip_Results__c</fieldItem>
                 <identifier>RecordMicrochip_Results_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Microchip_Number__c</fieldItem>
                 <identifier>RecordMicrochip_Number_cField2</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Extra_Enrichment__c</fieldItem>
                 <identifier>RecordExtra_Enrichment_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Extra_Enrichment_Notes__c</fieldItem>
                 <identifier>RecordExtra_Enrichment_Notes_cField1</identifier>
             </fieldInstance>
@@ -1446,78 +1660,130 @@
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Original_Animal_Name__c</fieldItem>
                 <identifier>RecordOriginal_Animal_Name_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Animal_Name__c</fieldItem>
                 <identifier>RecordAnimal_Name_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Type_of_Animal__c</fieldItem>
                 <identifier>RecordType_of_Animal_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Breed__c</fieldItem>
                 <identifier>RecordBreed_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Gender__c</fieldItem>
                 <identifier>RecordGender_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Current_Animal_Age_Formatted__c</fieldItem>
                 <identifier>RecordCurrent_Animal_Age_Formatted_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Animal_Age__c</fieldItem>
                 <identifier>RecordAnimal_Age_cField2</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Animal_Age_Units__c</fieldItem>
                 <identifier>RecordAnimal_Age_Units_cField2</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Intake_Date_Time__c</fieldItem>
                 <identifier>RecordIntake_Date_Time_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Case_Number__c</fieldItem>
                 <identifier>RecordCase_Number_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Case_Type__c</fieldItem>
                 <identifier>RecordCase_Type_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Forensic_Status__c</fieldItem>
                 <identifier>RecordForensic_Status_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Forensic_Hold_Release_Date__c</fieldItem>
                 <identifier>RecordForensic_Hold_Release_Date_cField1</identifier>
             </fieldInstance>
@@ -1528,6 +1794,10 @@
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Photo2__c</fieldItem>
                 <identifier>RecordPhoto2_cField1</identifier>
             </fieldInstance>
@@ -1544,36 +1814,60 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Color__c</fieldItem>
                 <identifier>RecordColor_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Secondary_Color__c</fieldItem>
                 <identifier>RecordSecondary_Color_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Markings__c</fieldItem>
                 <identifier>RecordMarkings_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.AAH_ID__c</fieldItem>
                 <identifier>RecordAAH_ID_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Petpoint_ID__c</fieldItem>
                 <identifier>RecordPetpoint_ID_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Microchip_Number__c</fieldItem>
                 <identifier>RecordMicrochip_Number_cField1</identifier>
             </fieldInstance>
@@ -1620,6 +1914,10 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.FM_Record_Status__c</fieldItem>
                 <identifier>RecordFM_Record_Status_cField2</identifier>
             </fieldInstance>
@@ -1723,84 +2021,120 @@
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Box_Folder__c</fieldItem>
                 <identifier>RecordBox_Folder_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Evaluation_Due_Date__c</fieldItem>
                 <identifier>RecordEvaluation_Due_Date_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Current_Behavior_Grade__c</fieldItem>
                 <identifier>RecordCurrent_Behavior_Grade_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Grade_Change_Reason__c</fieldItem>
                 <identifier>RecordGrade_Change_Reason_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Current_Behavior_Grade_Initials__c</fieldItem>
                 <identifier>RecordCurrent_Behavior_Grade_Initials_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Current_Behavior_Grade_Change_Date__c</fieldItem>
                 <identifier>RecordCurrent_Behavior_Grade_Change_Date_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Behavior_Summary_Change_Date__c</fieldItem>
                 <identifier>RecordBehavior_Summary_Change_Date_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Behavior_Summary__c</fieldItem>
                 <identifier>RecordBehavior_Summary_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Behavior_Summary_Initials__c</fieldItem>
                 <identifier>RecordBehavior_Summary_Initials_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Behavior_Medication_Flag__c</fieldItem>
-                <identifier>RecordBehavior_Medication_Flag_cField1</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Behavior_Medication_Notes__c</fieldItem>
-                <identifier>RecordBehavior_Medication_Notes_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Important_Notes_ARC_CARE__c</fieldItem>
                 <identifier>RecordImportant_Notes_ARC_CARE_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Handling_Instructions__c</fieldItem>
                 <identifier>RecordHandling_Instructions_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.PPE_DOH__c</fieldItem>
                 <identifier>RecordPPE_DOH_cField</identifier>
             </fieldInstance>
@@ -1811,92 +2145,122 @@
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Evaluation_Date__c</fieldItem>
                 <identifier>RecordEvaluation_Date_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Behavior_Concerns__c</fieldItem>
-                <identifier>RecordBehavior_Concerns_cField1</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Walking_Equipment__c</fieldItem>
-                <identifier>RecordWalking_Equipment_cField1</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Walking_Status__c</fieldItem>
-                <identifier>RecordWalking_Status_cField1</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Walking_Notes__c</fieldItem>
-                <identifier>RecordWalking_Notes_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Volunteer_Reading_Okay__c</fieldItem>
-                <identifier>RecordVolunteer_Reading_Okay_cField1</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.BRC_Status__c</fieldItem>
                 <identifier>RecordBRC_Status_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.BRC_Decline_Reason__c</fieldItem>
                 <identifier>RecordBRC_Decline_Reason_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Confirmed_Helper_Dog__c</fieldItem>
                 <identifier>RecordConfirmed_Helper_Dog_cField2</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Potential_Helper_Dog__c</fieldItem>
                 <identifier>RecordPotential_Helper_Dog_cField2</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Approved_for_bath__c</fieldItem>
                 <identifier>RecordApproved_for_bath_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Muzzle_needed_for_bath__c</fieldItem>
                 <identifier>RecordMuzzle_needed_for_bath_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Special_instructions_for_bath__c</fieldItem>
                 <identifier>RecordSpecial_instructions_for_bath_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Approved_for_Revolution__c</fieldItem>
                 <identifier>RecordApproved_for_Revolution_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Special_instructions_for_Revolution__c</fieldItem>
                 <identifier>RecordSpecial_instructions_for_Revolution_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Behavior_Medication_Flag__c</fieldItem>
+                <identifier>RecordBehavior_Medication_Flag_cField1</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Behavior_Medication_Notes__c</fieldItem>
+                <identifier>RecordBehavior_Medication_Notes_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-1c2d9594-eea1-42f4-b0ca-0b6c49f7bf0d</name>
@@ -1946,18 +2310,30 @@
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Treatment_Start_Date__c</fieldItem>
                 <identifier>RecordTreatment_Start_Date_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.no_of_weeks_in_treatment__c</fieldItem>
                 <identifier>Recordno_of_weeks_in_treatment_cField2</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Meets_Adoptability_Date__c</fieldItem>
                 <identifier>RecordMeets_Adoptability_Date_cField1</identifier>
             </fieldInstance>
@@ -1968,12 +2344,20 @@
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Number_of_Treatments__c</fieldItem>
                 <identifier>RecordNumber_of_Treatments_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Days_in_Treatment__c</fieldItem>
                 <identifier>RecordDays_in_Treatment_cField2</identifier>
             </fieldInstance>
@@ -2127,12 +2511,20 @@
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Playgroup_Priority_Level__c</fieldItem>
                 <identifier>RecordPlaygroup_Priority_Level_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Play_Category__c</fieldItem>
                 <identifier>RecordPlay_Category_cField1</identifier>
             </fieldInstance>
@@ -2143,12 +2535,20 @@
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Number_of_Playgroups__c</fieldItem>
                 <identifier>RecordNumber_of_Playgroups_cField1</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Play_Style_Notes__c</fieldItem>
                 <identifier>RecordPlay_Style_Notes_cField2</identifier>
             </fieldInstance>
@@ -2225,6 +2625,135 @@
     </flexiPageRegions>
     <flexiPageRegions>
         <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Behavior_Concerns__c</fieldItem>
+                <identifier>RecordBehavior_Concerns_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Behavior_Concern_Notes__c</fieldItem>
+                <identifier>RecordBehavior_Concern_Notes_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Volunteer_Reading_Okay__c</fieldItem>
+                <identifier>RecordVolunteer_Reading_Okay_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.In_Kennel_Socialization__c</fieldItem>
+                <identifier>RecordIn_Kennel_Socialization_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <name>Facet-94d55216-8028-4f64-8df5-878dc0e55786</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Walking_Status__c</fieldItem>
+                <identifier>RecordWalking_Status_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Walking_Notes__c</fieldItem>
+                <identifier>RecordWalking_Notes_cField2</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Walking_Equipment__c</fieldItem>
+                <identifier>RecordWalking_Equipment_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Walking_Equipment_Notes__c</fieldItem>
+                <identifier>RecordWalking_Equipment_Notes_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <name>Facet-892063a9-acff-4f82-8b02-48ac6f315c60</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-94d55216-8028-4f64-8df5-878dc0e55786</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:column</componentName>
+                <identifier>flexipage_column9</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-892063a9-acff-4f82-8b02-48ac6f315c60</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:column</componentName>
+                <identifier>flexipage_column10</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-d86a7cdb-df3c-40a3-ac07-2c247c350979</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>columns</name>
+                    <value>Facet-d86a7cdb-df3c-40a3-ac07-2c247c350979</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>label</name>
+                </componentInstanceProperties>
+                <componentName>flexipage:fieldSection</componentName>
+                <identifier>flexipage_fieldSection5</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-931d2e58-6f8b-4047-9dc7-16a3010748e0</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
                     <name>active</name>
@@ -2282,6 +2811,20 @@
                 </componentInstanceProperties>
                 <componentName>flexipage:tab</componentName>
                 <identifier>flexipage_tab5</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-931d2e58-6f8b-4047-9dc7-16a3010748e0</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Kennel Card</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tab</componentName>
+                <identifier>flexipage_tab</identifier>
             </componentInstance>
         </itemInstances>
         <name>Facet-4028f5e9-24ba-4e89-937a-933a217ba27d</name>
