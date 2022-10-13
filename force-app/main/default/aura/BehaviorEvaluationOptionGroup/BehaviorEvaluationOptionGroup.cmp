@@ -13,6 +13,11 @@
     <lightning:notificationsLibrary aura:id="lib" />
     <lightning:overlayLibrary aura:id="overlayLib" />
 
+    <lightning:messageChannel 
+        type="EvalSummaryUpdateChannel__c"
+        aura:id="evalSummaryUpdateMessage"
+    />
+
     <table class="slds-box slds-p-top_medium" width="100%">
         <div class="grid-container">
             <div class="grid-item">{!v.image}</div>
