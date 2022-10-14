@@ -7,12 +7,14 @@ private class test_ScheduleAnimalFoster {
         Facility_Outcome__c loc1 = new Facility_Outcome__c(
             Animal__c = animal1.Id,
             Facility_or_Outcome__c = 'Facility',
-            Facility_Outcome__c = 'Foster Home'
+            Facility_Outcome__c = 'Foster Home',
+            End_Date__c = date.today().addDays(14)
         );
         Facility_Outcome__c loc2 = new Facility_Outcome__c(
             Animal__c = animal2.Id,
             Facility_or_Outcome__c = 'Facility',
-            Facility_Outcome__c = 'Foster Home'
+            Facility_Outcome__c = 'Foster Home',
+            End_Date__c = date.today().addDays(14)
         );
         insert new Facility_Outcome__c[]{loc1, loc2};
         
@@ -35,7 +37,9 @@ private class test_ScheduleAnimalFoster {
         insert genericContact;
 
         animal1.Behavior_Case_Worker__c = con.Id;
+        animal1.Current_Location__c = 'Foster Home';
         animal2.Behavior_Case_Worker__c = con.Id;
+        animal2.Current_Location__c = 'Foster Home';
         update new Animal__c[]{animal1, animal2};
     }
 
@@ -59,7 +63,7 @@ private class test_ScheduleAnimalFoster {
 
         /*
         this assert loop takes into account the number of days on the custom meta data records may change.
-        it also takes into account the day of the week the test is ran to make sure only those tasks need through the
+        it also takes into account the day of the week the test is ran to make sure only those tasks needed through the
         following tuesday are created
         */
         

@@ -186,4 +186,73 @@ public class AnimalTriggerTest {
         }
         return null;
     }
+
+    @isTest 
+    static void updateAnimalForNewMRCDailyCare(){
+        Contact con = TestDataFactory.createContact();
+        Animal__c anim = TestDataFactory.createAnimal();
+        TestDataFactory.createDailyCare();
+
+        Animal__c oldAnim = new Animal__c(
+            Id = anim.Id,
+            Current_Location__c = 'ARC'
+        );
+
+        test.startTest();
+            AnimalTriggerHandler.updateHandler(
+                new Animal__c[]{anim},
+                new Map<Id, Animal__c>{anim.Id => oldAnim}
+            );
+        test.stopTest();
+
+        Animal_Daily_Care__c[] adcs = [SELECT Id FROM Animal_Daily_Care__c WHERE Animal__c = :anim.Id];
+        System.assertEquals(true, !adcs.isEmpty(), 'Should have returned an Animal Daily Care but was empty');
+    }
+
+    @isTest 
+    static void updateAnimalToUpdateMRCDailyCare(){
+        TestDataFactory.createDailyCareWithAnimalDailyCares(1);
+        Animal__c anim = [SELECT 
+            Id, 
+            Current_Location__c, 
+            Name, 
+            Shelter_Color_Coding__c,
+            Play_Style_Notes__c,
+            Designated_Handler_Reason__c 
+            FROM Animal__c 
+            LIMIT 1
+        ];
+        anim.Current_Location__c = BehaviorUtil.MRC;
+        anim.Handling_Instructions__c = 'new instructions';
+        update anim;
+
+        Animal__c oldAnim = new Animal__c(
+            Id = anim.Id,
+            Current_Location__c = BehaviorUtil.MRC
+        );
+
+        test.startTest();
+            AnimalTriggerHandler.updateHandler(
+                new Animal__c[]{anim},
+                new Map<Id, Animal__c>{anim.Id => oldAnim}
+            );
+        test.stopTest();
+
+        Animal_Daily_Care__c[] adcs = [SELECT Id, Handling_Instructions__c FROM Animal_Daily_Care__c WHERE Animal__c = :anim.Id];
+        System.assertEquals('new instructions', adcs[0].Handling_Instructions__c, 'Handling instructions on Daily Care should have been updated');
+    }
+
+    @isTest 
+    static void newAnimalForMRCDailyCare(){
+        TestDataFactory.createDailyCare();
+        Animal__c anim = TestDataFactory.CreateAnimal();
+        anim.Current_Location__c = BehaviorUtil.MRC;
+
+        test.startTest();
+            AnimalTriggerHandler.reviewForMRCDailyCare(new Animal__c[]{anim});
+        test.stopTest();
+
+        Animal_Daily_Care__c[] adcs = [SELECT Id FROM Animal_Daily_Care__c WHERE Animal__c = :anim.Id];
+        System.assertEquals(true, !adcs.isEmpty(), 'Should have returned an Animal Daily Care but was empty');
+    }
 }

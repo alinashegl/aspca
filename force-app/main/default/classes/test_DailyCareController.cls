@@ -158,7 +158,9 @@ private class test_DailyCareController {
         Animal__c mrc2 = TestDataFactory.createAnimalWithName('mrc2');
         Animal__c arc = TestDataFactory.createAnimalWithName('ARC');
         arc.Current_Location__c = 'ARC';
-        update arc;
+        mrc1.Current_Location__c = BehaviorUtil.MRC;
+        mrc2.Current_Location__c = BehaviorUtil.MRC;
+        update new Animal__c[]{mrc1, mrc2, arc};
 
         test.startTest();
             Animal__c[] mrcDogs = DailyCareController.getActiveMRCDogs();

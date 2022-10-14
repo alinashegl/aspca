@@ -6,9 +6,6 @@ public with sharing class AnimalTriggerHandler {
         if (!Trigger.isExecuting) { return; }
         Trigger_Config__c config = Trigger_Config__c.getInstance();
         if (config != null  && config.Animal_Trigger_Enabled__c == false) { return; }
-        if (Trigger.isUpdate && Trigger.isBefore ) {
-            beforeUpdateHandler();
-        }
     }
     
     public static void insertHandler(){
@@ -60,11 +57,6 @@ public with sharing class AnimalTriggerHandler {
         }  
     }*/
 
-    public static void beforeUpdateHandler() {
-        Map<Id, SObject> toUpdate = Trigger.newMap;
-
-    }
-
     public static void onBeforeUpdateHandler(List<Animal__c> anms, Map<Id, Animal__c> oldAnms){
         if(alreadyRan == true) return;
         Animal__c[] brcMrcApprovedAnimals = new Animal__c[0];
@@ -107,7 +99,7 @@ public with sharing class AnimalTriggerHandler {
         }
         System.debug(conroles);
         insert conroles;
-        if(RecursiveTriggerHandler.isFirstTime){
+        if(RecursiveTriggerHandler.isFirstTime && !test.isRunningTest()){
             RecursiveTriggerHandler.isFirstTime = false;
             LogHistory.LogHistory(oldAnms, anms);
         }
@@ -260,6 +252,7 @@ public with sharing class AnimalTriggerHandler {
         update adcs;
     }
 
+    @testVisible
     private static void reviewForMRCDailyCare(Animal__c[] animals){
         Animal_Daily_Care__c[] newAdcs = new Animal_Daily_Care__c[0];
         for(Animal__c anim : animals){
