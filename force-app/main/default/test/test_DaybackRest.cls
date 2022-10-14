@@ -246,62 +246,6 @@ private class test_DaybackRest {
         System.assert(infos.isEmpty(), 'Should have returned an empty list, instead was: ' + infos);
     }
 
-    // @isTest 
-    // static void prepContactResourcesCRCSuccess(){
-    //     User thisUser = [SELECT Id FROM User WHERE Id = :UserInfo.getUserId()];
-    //     User[] userList = new User[0];
-
-    //     //need to use runAs to avoid mixed DML error
-    //     System.runAs (thisUser) {
-    //         userList = prepUsersForTests();
-    //         userList[3].Location__c = LOCATION_CRC_MRC;
-    //         System.debug('userList: ' + userList);
-    //         insert userList;
-
-    //         assignPermissionSetsToUser(userList[3].Id, new String[]{'Behavior_Team', 'CRC_Manager'});
-    //         insertContacts(userList);
-    //     }
-
-    //     DaybackRest.ResourceInfo[] infos = new DaybackRest.ResourceInfo[0];
-
-    //     test.startTest();
-    //         System.runAs(userList[3]){
-    //             infos =  DaybackRest.prepContactResources();
-    //         }
-    //     test.stopTest();
-
-    //     System.assert(!infos.isEmpty(), 'Should have returned contacts instead was empty');
-    //     //Should have 5 becuase 3 MRC and 2 CRC contacts were created, both should be returned
-    //     System.assertEquals(5, infos.size());
-        
-    // }
-
-    // @isTest 
-    // static void prepContactResourcesCRCNoContacts(){
-    //     User thisUser = [SELECT Id FROM User WHERE Id = :UserInfo.getUserId()];
-    //     User[] userList = new User[0];
-
-    //     //need to use runAs to avoid mixed DML error
-    //     System.runAs (thisUser) {
-    //         userList = prepUsersForTests();
-    //         userList[3].Location__c = LOCATION_CRC_MRC;
-    //         System.debug('userList: ' + userList);
-    //         insert userList;
-
-    //         assignPermissionSetsToUser(userList[3].Id, new String[]{'Behavior_Team', 'CRC_Manager'});
-    //     }
-
-    //     DaybackRest.ResourceInfo[] infos = new DaybackRest.ResourceInfo[0];
-
-    //     test.startTest();
-    //         System.runAs(userList[3]){
-    //             infos =  DaybackRest.prepContactResources();
-    //         }
-    //     test.stopTest();
-
-    //     System.assert(infos.isEmpty(), 'Should have returned an empty list, instead was: ' + infos);
-    // }
-
     @isTest 
     static void getAnimalListAllSuccess(){
         User thisUser = [SELECT Id FROM User WHERE Id = :UserInfo.getUserId()];
@@ -443,11 +387,7 @@ private class test_DaybackRest {
         System.assert(!response.folderInfos.isEmpty(), 'Should have returned folder info instead was empty');
         System.assert(!response.folders.isEmpty(), 'Should have returned a list of folders instead was empty');
         System.assert(!response.genResources.isEmpty(), 'Should have returned a list of generic resources instead was empty');
-        System.assertEquals('default', response.sfObject);
-
-        //Should have 5 becuase 3 MRC and 2 CRC contacts were created, both should be returned
-        // System.assertEquals(5, infos.size());
-        
+        System.assertEquals('default', response.sfObject);        
     }
 
     private static User[] prepUsersForTests(){
@@ -489,7 +429,7 @@ private class test_DaybackRest {
         }
 
         //MRC Animals
-        location = 'MRC';
+        location = BehaviorUtil.MRC;
         for(integer i = 0; i < 2; i ++){
             toInsert.add(new Animal__c(
                 Current_Location__c = location,

@@ -40,7 +40,7 @@ public with sharing class test_PlaygroupToDoListController {
     @isTest
     static void getPlaygroupAnimalsBehaviorPause() {
         Animal__c a = TestDataFactory.createAnimal();
-        Animal__c a1 = new Animal__c(Id=a.Id, Current_Recent_Shelter_Location__c = 'CRC-MRC', Type_of_Animal__c = 'Dog',
+        Animal__c a1 = new Animal__c(Id=a.Id, Current_Recent_Shelter_Location__c = BehaviorUtil.MRC, Type_of_Animal__c = 'Dog',
                                      Play_Category__c = 'PG Re-Eval', Current_Location__c = 'Test');
         update a1;
         List<Play_Pause__c> playPauses = TestDataFactory.createPlayPauses(a);

@@ -73,13 +73,14 @@ public with sharing class Util {
         String[] locations = new String[0];
         if(location != null){
             if(location.contains('ARC') || location.contains('CARE')){
-                locations.addAll(new String[]{'ARC','CARE'});
+                locations.addAll(BehaviorUtil.ARC_CARE);
             }
             else if(location.contains('MRC')|| location.contains('CRC')){
-                locations.addAll(new String[]{'MRC','CRC'});
+                locations.addAll(BehaviorUtil.CRC_MRC);
             }
             else if(location == 'All'){
-                locations.addAll(new String[]{'ARC','CARE','MRC','CRC'});
+                locations.addAll(BehaviorUtil.ARC_CARE);
+                locations.addAll(BehaviorUtil.CRC_MRC);
             }
         }
         return locations;

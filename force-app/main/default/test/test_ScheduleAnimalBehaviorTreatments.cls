@@ -20,7 +20,7 @@ private class test_ScheduleAnimalBehaviorTreatments {
         animalARC.Current_Recent_Shelter_Location__c = 'ARC';
 
         Animal__c animalCRC = TestDataFactory.createAnimalWithName('animalCRC');
-        animalCRC.Current_Recent_Shelter_Location__c = 'CRC-MRC';
+        animalCRC.Current_Recent_Shelter_Location__c = BehaviorUtil.MRC;
 
         Animal__c animalMRC = TestDataFactory.createAnimalWithName('animalMRC');
         animalMRC.Current_Recent_Shelter_Location__c = 'CRC';

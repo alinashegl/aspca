@@ -11,7 +11,7 @@ public class test_PlaygroupToDoPdfController {
         update u;
 
         PageReference toDoPdf = Page.PlaygroupToDoPdf;
-        toDoPdf.getParameters().put('location', 'CRC-MRC');
+        toDoPdf.getParameters().put('location', BehaviorUtil.MRC);
         Test.setCurrentPage(toDoPdf);
 
         Test.startTest();

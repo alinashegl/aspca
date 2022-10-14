@@ -479,7 +479,7 @@ public with sharing class TreatmentSessionLWCController {
             this.protocolNotes = sp.Protocol_Notes__c;
             this.managerReviewNotes = sp.Manager_Review_Notes__c;
             this.boxLink = sp.ProtocolId__r.Protocol_Box_Link__c;
-            this.isNonMRC = sp.TreatmentSessionId__r?.Animal__r?.Current_Recent_Shelter_Location__c.toUpperCase().contains('CRC-MRC');
+            this.isNonMRC = sp.TreatmentSessionId__r?.Animal__r?.Current_Recent_Shelter_Location__c.toUpperCase().contains(BehaviorUtil.MRC);
 
             Plan_Protocol__c[] pp = [SELECT Id, Protocol_Notes__c FROM Plan_Protocol__c WHERE Treatment_Plan__c = :sp.TreatmentSessionId__r.Treatment_Plan__c AND Protocol__c = :sp.ProtocolId__c LIMIT 1];
             if(!pp.isEmpty()){

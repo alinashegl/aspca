@@ -11,7 +11,7 @@ public class CRCAnimalDogListController {
         List<Animal__c> objList = new List<Animal__c>();
         for(Animal__c obj : objs){
             if((String.isNotBlank(obj.Current_Location__c)) && 
-               (obj.Current_Location__c.equalsIgnoreCase('CRC - CRC') ||obj.Current_Location__c.equalsIgnoreCase('CRC-MRC') || 
+               (obj.Current_Location__c.equalsIgnoreCase('CRC - CRC') ||obj.Current_Location__c.equalsIgnoreCase(BehaviorUtil.MRC) || 
                obj.Current_Location__c.equalsIgnoreCase('CRC- MRC') || obj.Current_Location__c.equalsIgnoreCase('CRC'))){
                 objList.add(obj);
             }

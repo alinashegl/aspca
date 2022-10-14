@@ -74,7 +74,7 @@ public with sharing class AnimalTriggerHandler {
             System.debug('oldAnimal: ' + oldAnimal);
             if(
                 a.Type_of_Animal__c == 'Dog' &&
-                ((a.MRC_Status__c == 'MRC Accepted' && oldAnimal.MRC_Status__c != 'MRC Accepted' && a.Current_Recent_Shelter_Location__c != 'CRC-MRC') ||
+                ((a.MRC_Status__c == 'MRC Accepted' && oldAnimal.MRC_Status__c != 'MRC Accepted' && a.Current_Recent_Shelter_Location__c != BehaviorUtil.MRC) ||
                 (a.BRC_Status__c == 'BRC Accepted' && oldAnimal.MRC_Status__c != 'BRC Accepted' && a.Current_Recent_Shelter_Location__c != 'BRC'))
             ){
                 brcMrcApprovedAnimals.add(a);
@@ -227,7 +227,7 @@ public with sharing class AnimalTriggerHandler {
         //this list is for animals that have had certain updates that need to be pushed to the current animal daily care.
         Animal__c[] updatedAnimals = new Animal__c[0];
         for(Animal__c anim : animals){
-            if(anim.Current_Location__c == 'MRC' && anim.Final_Outcome__c == null){
+            if(anim.Current_Location__c == BehaviorUtil.MRC && anim.Final_Outcome__c == null){
                 Animal__c oldAnim = oldAnimals.get(anim.Id);
                 if(oldAnim.Current_Location__c != anim.Current_Location__c){
                     newAdcs.add(prepADC(anim));
@@ -263,7 +263,7 @@ public with sharing class AnimalTriggerHandler {
     private static void reviewForMRCDailyCare(Animal__c[] animals){
         Animal_Daily_Care__c[] newAdcs = new Animal_Daily_Care__c[0];
         for(Animal__c anim : animals){
-            if(anim.Current_Location__c == 'MRC' && anim.Final_Outcome__c == null){
+            if(anim.Current_Location__c == BehaviorUtil.MRC && anim.Final_Outcome__c == null){
                 newAdcs.add(
                     prepADC(anim)
                 );
