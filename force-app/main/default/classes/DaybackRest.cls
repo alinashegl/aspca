@@ -3,6 +3,7 @@ global with sharing class DaybackRest {
     public static Set<String> folderNames = new Set<String>();
     public static String sfObject;
     public static String[] locationGroup = BehaviorUtil.locationGroup;
+    public static String[] userLocationGroup = BehaviorUtil.userLocationGroup;
     public static String userLocation = BehaviorUtil.userLocation;
 
     @HttpGet
@@ -104,7 +105,7 @@ global with sharing class DaybackRest {
             WHERE Active__c = true
             AND Is_Generic_Contact__c = false
             AND Contact_Type__c = 'Behavior Case Worker'
-            AND User_Location__c IN: locationGroup
+            AND User_Location__c IN: userLocationGroup
             ORDER BY LastName, FirstName
         ];
     }

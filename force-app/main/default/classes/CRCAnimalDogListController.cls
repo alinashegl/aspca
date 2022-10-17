@@ -20,11 +20,11 @@ public class CRCAnimalDogListController {
         System.debug('objList:'+objList.size());
         
         Set<Id> animalSet = new Set<Id>();
-        
+
         for(Animal__c an : objList){
             animalSet.add(an.Id);
         }
-        
+
         List<Play_Pause__c> playPauses = [Select Animal__c, Play_Pause_Reason__c from Play_Pause__c where Animal__c in : animalSet AND End_Play_Pause__c != true]; 
 		Map<Id, Set<String>> playPauseReasonByAnimal = new Map<Id, Set<String>>();
         for(Play_Pause__c pp : playPauses){
