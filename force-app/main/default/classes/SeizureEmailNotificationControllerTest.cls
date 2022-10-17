@@ -13,7 +13,8 @@ public class SeizureEmailNotificationControllerTest {
           Problem_Behavior__c = 'Fear of People - Mild'
         );
         insert plan;
-        Contact con = createGenericContact(anim.Current_Recent_Shelter_Location__c);
+        TestDataFactory.insertUsers();
+        Contact con = createGenericContact('CRC/MRC');
 		anim.Behavior_Case_Worker__c = con.Id;
         anim.Email_Notification__c = true;
         update anim;

@@ -71,12 +71,13 @@ public with sharing class ScheduleAnimalBRCMRC {
     private static Animal__c[] getAnimals(Id[] animalIds){
         Date tempEndDate = Date.today().addDays(-7);
         String recordTypeName = AutoScheduleTasksUtil.MRC_BRC_FOLLOW_UP_TASK_RECORD_TYPE_NAME;
+        String location = BehaviorUtil.MRC;
         String queryString = 'SELECT Id, BRC_Status__c, MRC_Status__c, Animal_Name_Id__c, Current_Recent_Shelter_Location__c, ' +
             'Behavior_Case_Worker__c, Behavior_Case_Worker__r.Is_Generic_Contact__c, ' +
             'Behavior_Case_Worker__r.Name, ' +
             '(SELECT Id, ActivityDate FROM Activities__r WHERE Record_Type__c =: recordTypeName AND ActivityDate != null ORDER BY ActivityDate DESC LIMIT 1) ' +
             'FROM Animal__c ' +
-            'WHERE (BRC_Status__c = \'BRC Accepted\' OR MRC_Status__c = \'MRC Accepted\')and (Current_Recent_Shelter_Location__c != \'BRC\' AND Current_Recent_Shelter_Location__c != \'MRC\')' + 
+            'WHERE (BRC_Status__c = \'BRC Accepted\' OR MRC_Status__c = \'MRC Accepted\')and (Current_Recent_Shelter_Location__c != \'BRC\' AND Current_Recent_Shelter_Location__c != :location)' + 
             'AND Active_Animal__c = true';
 
         if(animalIds != null){
