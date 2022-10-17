@@ -21,15 +21,19 @@ public with sharing class PlaygroupToDoListController {
             (SELECT Id FROM Medical_Conditions__r
                 WHERE Medical_Condition__c = 'Babesia'
                 AND Date_Diagnosed__c <= TODAY
-                AND (Date_Resolved__c = null OR Date_Resolved__c > TODAY) LIMIT 1),
+                AND (Date_Resolved__c = null OR Date_Resolved__c > TODAY) LIMIT 1
+            ),
             (SELECT Id FROM Play_Pauses__r
                 WHERE Type__c = 'Medical'
                 AND Play_Pause_Reason__c = 'In Heat'
-                AND Start_Date__c <= TODAY
-                AND (End_Date__c = null OR End_Date__c > TODAY) LIMIT 1),
+                AND End_Play_Pause__c = FALSE
+                AND (Start_Date__c = null OR Start_Date__c <= TODAY) 
+                LIMIT 1
+            ),
             (SELECT Id FROM Animal_Playgroups__r
                 WHERE Playgroup_Session__r.Playgroup_Date_Time__c >= TODAY
-                AND Playgroup_Session__r.Playgroup_Date_Time__c < TOMORROW LIMIT 1)
+                AND Playgroup_Session__r.Playgroup_Date_Time__c < TOMORROW LIMIT 1
+            )
             FROM Animal__c
             WHERE Active_Animal__c = true
             AND Type_of_Animal__c = 'Dog'
