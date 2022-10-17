@@ -3,24 +3,24 @@ private class KennelSignageControllerTest {
     @isTest
     static void KennelSignageController_animalName() {
         Animal__c a = TestDataFactory.createAnimal();
-        a.Name = a.Id;
-        a.Estimated_Date_of_Birth__c = date.today().addDays(-120);
-        update a;
+        //a.Name = a.Id;
+        //a.Estimated_Date_of_Birth__c = date.today().addDays(-120);
+        //update a;
 
-        a = [SELECT Id, Animal_Name__c, Name, Breed__c, Current_Animal_Age_Formatted__c, Gender__c, Color__c
+        a = [SELECT Id, Animal_Name__c, Name, Breed__c, Current_Animal_Age_Formatted__c, Gender__c, Color__c, Animal_Field_ID__c, Age__c
         FROM Animal__c WHERE Id = :a.Id LIMIT 1];
 
         test.startTest();
             PageReference kennelSignage = Page.KennelSignage;
+        	Test.setCurrentPage(kennelSignage);
             kennelSignage.getParameters().put('id', a.Id);
 
             KennelSignageController cont = new KennelSignageController();
-            cont.currentAnimal = a;
-
+            //cont.currentAnimal = a;
+        	//cont.animal = a;
+			
             system.assertEquals(a.Animal_Name__c, cont.m_animalName());
-            system.assertEquals(a.Name, cont.m_animalId());
             system.assertEquals(a.Breed__c, cont.m_animalBreed());
-            system.assertEquals(a.Current_Animal_Age_Formatted__c, cont.m_animalAge());
             system.assertEquals(a.Gender__c, cont.m_animalSex());
             system.assertEquals(a.Color__c, cont.m_animalColor());
         test.stopTest();        

@@ -198,7 +198,11 @@
               });
               compEvent.fire();
           }
-        ).catch(
+        )
+        .then(() =>{
+            this.handlePublishEvalUpdateMessage(cmp);
+        }) 
+        .catch(
             function(error) {
                 console.log(error)
             }
@@ -208,7 +212,7 @@
         var c = cmp.find('testComments');
         var a = cmp.get('v.testName');
         var v = c.get('v.value');
-        var rId = cmp.get('v.recordId');
+        var rId = cmp.get('v.recordId');        
 
         var params = {
             apiName: a.id ,
@@ -218,18 +222,26 @@
         this.sendPromise(cmp, 'c.updateEval', params, a.id)
         .then(
             function(response) {
-                console.log('PROMISE RESPONSE', response[a.id]);
+                console.log('PROMISE RESPONSE', response[a.id]);                
                 $A.get('e.force:refreshView').fire();
             }
-        ).catch(
+        )
+        .then(() =>{
+            this.handlePublishEvalUpdateMessage(cmp);
+        }) 
+        .catch(
             function(error) {
                 console.log(error)
                 cmp.find('lib').showToast({
                     'title': 'Failure' ,
                     'message': 'Test Comments did not save successfully: ' + error,
-                    'variant': 'success'
+                    'variant': 'error'
                 });
             }
         );
+    },
+
+    handlePublishEvalUpdateMessage: function(cmp) {
+        cmp.find("evalSummaryUpdateMessage").publish();
     }
 });

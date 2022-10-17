@@ -22,6 +22,12 @@
         <aura:attribute name="evalObj" type="Object"/>
     </aura:method>
     <aura:registerEvent name="skipSaveEvt" type="c:skipSaveEvent"/>
+
+    <lightning:messageChannel 
+        type="EvalSummaryUpdateChannel__c"
+        aura:id="evalSummaryUpdateMessage"
+    />
+
     <table>
         <tr>
             <td style="width:auto">

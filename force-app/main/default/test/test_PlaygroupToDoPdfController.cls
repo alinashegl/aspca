@@ -11,16 +11,14 @@ public class test_PlaygroupToDoPdfController {
         update u;
 
         PageReference toDoPdf = Page.PlaygroupToDoPdf;
-        toDoPdf.getParameters().put('location', 'MRC');
+        toDoPdf.getParameters().put('location', BehaviorUtil.MRC);
         Test.setCurrentPage(toDoPdf);
 
         Test.startTest();
         PlaygroupToDoPdfController controller = new PlaygroupToDoPdfController();
         List<Animal__c> animals = controller.getAnimals();
-        String location = controller.getLocation();
         Test.stopTest();
         
         System.assertEquals(1, animals.size());
-        System.assertEquals('MRC', location);
     }
 }

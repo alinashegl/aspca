@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Behavior_Evaluation__c</fullName>
+    <externalId>false</externalId>
+    <label>Behavior Evaluation</label>
+    <referenceTo>Behavior_Evaluation__c</referenceTo>
+    <relationshipLabel>Behavior Evaluation Summaries</relationshipLabel>
+    <relationshipName>Behavior_Evaluation_Summaries</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

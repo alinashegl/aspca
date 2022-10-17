@@ -6,14 +6,11 @@ public with sharing class AnimalTriggerHandler {
         if (!Trigger.isExecuting) { return; }
         Trigger_Config__c config = Trigger_Config__c.getInstance();
         if (config != null  && config.Animal_Trigger_Enabled__c == false) { return; }
-        if (Trigger.isUpdate && Trigger.isBefore ) {
-            beforeUpdateHandler();
-        }
     }
     
     public static void insertHandler(){
         reviewForMRCDailyCare((Animal__c[])Trigger.new);
-        CaseContactRole conrole = new CaseContactRole();
+/*        CaseContactRole conrole = new CaseContactRole();
         for (Animal__c a : (List<Animal__c>)Trigger.new){
             List<CaseContactRole> curroles = [SELECT Id from CaseContactRole WHERE CasesId =: a.Case__c AND ContactId =: a.Discharged_to_Contact__c AND Role = 'Animal Discharge Contact'];
             if (a.Discharged_to_Contact__c != null){
@@ -33,37 +30,32 @@ public with sharing class AnimalTriggerHandler {
                 
             }
 
-        }  
+        }  */
     }
     
-    public static void insertHandlerBefore(){
+/*    public static void insertHandlerBefore(){
         string initials = '';
         for (Animal__c a : (List<Animal__c>)Trigger.new){
             if (a.Gender__c == null){
                 a.Gender__c = 'Unknown';
             }
             
-//            if (a.Age__c == null){
-//                a.Age__c = 'Unknown At Intake';
-//            }
+            if (a.Age__c == null){
+                a.Age__c = 'Unknown At Intake';
+            }
             
             if (a.Color__c == null){
                 a.Color__c = 'Unspecified';
             }
             
-            if (a.Name.contains('Form')){
-                initials = UserInfo.getFirstName().substring(0,1) + UserInfo.getLastName().substring(0,1);
-                a.Team__c = initials;
-            }           
+//            if (a.Name.contains('Form')){
+//                initials = UserInfo.getFirstName().substring(0,1) + UserInfo.getLastName().substring(0,1);
+//                a.Team__c = initials;
+//            }           
             
      
         }  
-    }
-
-    public static void beforeUpdateHandler() {
-        Map<Id, SObject> toUpdate = Trigger.newMap;
-
-    }
+    }*/
 
     public static void onBeforeUpdateHandler(List<Animal__c> anms, Map<Id, Animal__c> oldAnms){
         if(alreadyRan == true) return;
@@ -74,7 +66,7 @@ public with sharing class AnimalTriggerHandler {
             System.debug('oldAnimal: ' + oldAnimal);
             if(
                 a.Type_of_Animal__c == 'Dog' &&
-                ((a.MRC_Status__c == 'MRC Accepted' && oldAnimal.MRC_Status__c != 'MRC Accepted' && a.Current_Recent_Shelter_Location__c != 'MRC') ||
+                ((a.MRC_Status__c == 'MRC Accepted' && oldAnimal.MRC_Status__c != 'MRC Accepted' && a.Current_Recent_Shelter_Location__c != BehaviorUtil.MRC) ||
                 (a.BRC_Status__c == 'BRC Accepted' && oldAnimal.MRC_Status__c != 'BRC Accepted' && a.Current_Recent_Shelter_Location__c != 'BRC'))
             ){
                 brcMrcApprovedAnimals.add(a);
@@ -107,7 +99,7 @@ public with sharing class AnimalTriggerHandler {
         }
         System.debug(conroles);
         insert conroles;
-        if(RecursiveTriggerHandler.isFirstTime){
+        if(RecursiveTriggerHandler.isFirstTime && !test.isRunningTest()){
             RecursiveTriggerHandler.isFirstTime = false;
             LogHistory.LogHistory(oldAnms, anms);
         }
@@ -173,7 +165,7 @@ public with sharing class AnimalTriggerHandler {
         try {
             //make sure we're not creating duplicate tasks
             System.debug('**createBrcMrcTasks');
-            Map<Id, Animal__c> queriedAnimals = new Map<Id, Animal__c>([
+            /*Map<Id, Animal__c> queriedAnimals = new Map<Id, Animal__c>([
                 SELECT Id, (
                     SELECT Id, ActivityDate, Record_Type__c 
                     FROM Activities__r 
@@ -182,11 +174,24 @@ public with sharing class AnimalTriggerHandler {
                     LIMIT 1
                 ) 
                 FROM Animal__c WHERE Id IN: animals]
-            );
+            );*/
+            
+            Map<Id, Task> mrcbrcTaskByAnimal = new Map<Id, Task>();
+            List<task> taskList = [SELECT Id, ActivityDate, Record_Type__c, Animal__c FROM Task 
+                                   WHERE Record_Type__c =: AutoScheduleTasksUtil.MRC_BRC_FOLLOW_UP_TASK_RECORD_TYPE_NAME 
+                                   AND Animal__c IN: animals
+                                   ORDER BY ActivityDate ASC];
+            
+            for(Task t : taskList){
+                mrcbrcTaskByAnimal.put(t.Animal__c, t);
+            }
+            
             Task[] toInsert = new Task[0];
             for(Animal__c anim : animals){
-                if(!queriedAnimals.get(anim.Id).Activities__r.isEmpty()){
-                    if(queriedAnimals.get(anim.Id).Activities__r[0].ActivityDate < date.today()){
+                //if(!queriedAnimals.get(anim.Id).Activities__r.isEmpty()){
+                    //if(queriedAnimals.get(anim.Id).Activities__r[0].ActivityDate < date.today()){
+                if(mrcbrcTaskByAnimal.containsKey(anim.Id)){
+                    if(mrcbrcTaskByAnimal.get(anim.Id).ActivityDate < date.today()){
                         toInsert.add(ScheduleAnimalBRCMRC.prepTask(anim, date.today().addDays(14), false));
                     }
                 }
@@ -214,7 +219,7 @@ public with sharing class AnimalTriggerHandler {
         //this list is for animals that have had certain updates that need to be pushed to the current animal daily care.
         Animal__c[] updatedAnimals = new Animal__c[0];
         for(Animal__c anim : animals){
-            if(anim.Current_Location__c == 'MRC' && anim.Final_Outcome__c == null){
+            if(anim.Current_Location__c == BehaviorUtil.MRC && anim.Final_Outcome__c == null){
                 Animal__c oldAnim = oldAnimals.get(anim.Id);
                 if(oldAnim.Current_Location__c != anim.Current_Location__c){
                     newAdcs.add(prepADC(anim));
@@ -247,10 +252,11 @@ public with sharing class AnimalTriggerHandler {
         update adcs;
     }
 
+    @testVisible
     private static void reviewForMRCDailyCare(Animal__c[] animals){
         Animal_Daily_Care__c[] newAdcs = new Animal_Daily_Care__c[0];
         for(Animal__c anim : animals){
-            if(anim.Current_Location__c == 'MRC' && anim.Final_Outcome__c == null){
+            if(anim.Current_Location__c == BehaviorUtil.MRC && anim.Final_Outcome__c == null){
                 newAdcs.add(
                     prepADC(anim)
                 );

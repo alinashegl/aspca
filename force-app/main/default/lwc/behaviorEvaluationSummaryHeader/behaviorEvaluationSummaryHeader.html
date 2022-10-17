@@ -39,4 +39,11 @@
             <c-error-panel errors={error} type='inlineMessage' friendly-message='Error updating evaluation'></c-error-panel>
         </template>
     </div>
+
+    <div>
+        <c-behavior-evaluation-summary
+            record-id={recordId}
+            is-locked={lockFields}
+        ></c-behavior-evaluation-summary>
+    </div>
 </template>

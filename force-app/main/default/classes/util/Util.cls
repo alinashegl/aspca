@@ -70,18 +70,6 @@ public with sharing class Util {
 
     //translates a single location to a list of related locations
     public static String[] translateLocation(String location){
-        String[] locations = new String[0];
-        if(location != null){
-            if(location.contains('ARC') || location.contains('CARE')){
-                locations.addAll(new String[]{'ARC','CARE'});
-            }
-            else if(location.contains('MRC')|| location.contains('CRC')){
-                locations.addAll(new String[]{'MRC','CRC'});
-            }
-            else if(location == 'All'){
-                locations.addAll(new String[]{'ARC','CARE','MRC','CRC'});
-            }
-        }
-        return locations;
+        return BehaviorUtil.getLocationGroup(location);
     }
 }

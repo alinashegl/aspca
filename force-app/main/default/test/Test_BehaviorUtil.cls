@@ -27,34 +27,37 @@ private class Test_BehaviorUtil {
     }
 
     @isTest
-    static void getLocationGroup_FromString() {
+    static void getLocationGroup_FromCRCMRCString() {
         String[] locations = BehaviorUtil.getLocationGroup('CRC/MRC');
         System.assert(locations.contains('CRC'));
-        System.assert(locations.contains('MRC'));
+        System.assert(locations.contains('CRC-MRC'));
         System.assert(!locations.contains('ARC'));
-        System.assert(!locations.contains('CARE'));
+        System.assert(!locations.contains('CARE'));        
+    }
 
-        // locations = BehaviorUtil.getLocationGroup('MRC');
-        // System.assert(locations.contains('CRC'));
-        // System.assert(locations.contains('MRC'));
-        // System.assert(!locations.contains('ARC'));
-        // System.assert(!locations.contains('CARE'));
-
-        locations = BehaviorUtil.getLocationGroup('ARC/CARE');
+    @isTest 
+    static void getLocationGroup_FromARCCAREString() {
+        String[] locations = BehaviorUtil.getLocationGroup('ARC/CARE');
         System.assert(locations.contains('ARC'));
         System.assert(locations.contains('CARE'));
         System.assert(!locations.contains('CRC'));
-        System.assert(!locations.contains('MRC'));
+        System.assert(!locations.contains('CRC-MRC'));
+    }
 
-        locations = BehaviorUtil.getLocationGroup('ALL');
+    @isTest 
+    static void getLocationGroup_FromAllString() {
+        String[] locations = BehaviorUtil.getLocationGroup('ALL');
         System.assert(locations.contains('ARC'));
         System.assert(locations.contains('CARE'));
         System.assert(locations.contains('CRC'));
-        System.assert(locations.contains('ARC'));
+        System.assert(locations.contains('CRC-MRC'));
+    }
 
-        locations = BehaviorUtil.getLocationGroup(null);
+    @isTest 
+    static void getLocationGroup_FromNullString() {
+        String[] locations = BehaviorUtil.getLocationGroup(null);
         System.assert(locations.contains('CRC'));
-        System.assert(locations.contains('MRC'));
+        System.assert(locations.contains('CRC-MRC'));
         System.assert(!locations.contains('ARC'));
         System.assert(!locations.contains('CARE'));
     }
@@ -67,7 +70,7 @@ private class Test_BehaviorUtil {
 
         String[] locations = BehaviorUtil.getLocationGroup();
         System.assert(locations.contains('CRC'));
-        System.assert(locations.contains('MRC'));
+        System.assert(locations.contains('CRC-MRC'));
         System.assert(!locations.contains('ARC'));
         System.assert(!locations.contains('CARE'));
     }
@@ -82,7 +85,7 @@ private class Test_BehaviorUtil {
         System.assert(locations.contains('ARC'));
         System.assert(locations.contains('CARE'));
         System.assert(!locations.contains('CRC'));
-        System.assert(!locations.contains('MRC'));
+        System.assert(!locations.contains('CRC-MRC'));
     }
 
     @isTest
@@ -96,7 +99,7 @@ private class Test_BehaviorUtil {
         System.assert(locations.contains('ARC'));
         System.assert(locations.contains('CARE'));
         System.assert(locations.contains('CRC'));
-        System.assert(locations.contains('ARC'));
+        System.assert(locations.contains('CRC-MRC'));
     }
 
     @isTest
@@ -107,7 +110,7 @@ private class Test_BehaviorUtil {
 
         String[] locations = BehaviorUtil.getLocationGroup();
         System.assert(locations.contains('CRC'));
-        System.assert(locations.contains('MRC'));
+        System.assert(locations.contains('CRC-MRC'));
         System.assert(!locations.contains('ARC'));
         System.assert(!locations.contains('CARE'));
     }
@@ -120,7 +123,7 @@ private class Test_BehaviorUtil {
 
         String[] locations = BehaviorUtil.locationGroup;
         System.assert(locations.contains('CRC'));
-        System.assert(locations.contains('MRC'));
+        System.assert(locations.contains('CRC-MRC'));
         System.assert(!locations.contains('ARC'));
         System.assert(!locations.contains('CARE'));
     }
