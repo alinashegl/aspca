@@ -1,4 +1,7 @@
 public with sharing class BehaviorUtil {
+    public final static String MRC = 'CRC-MRC';
+    public final static String[] CRC_MRC = new String[]{'CRC', MRC};
+    public final static String[] ARC_CARE = new String[]{'ARC', 'CARE', 'ARC/CARE'};
     public static String[] locationGroup{
         get{
             if(locationGroup == null){
@@ -22,18 +25,36 @@ public with sharing class BehaviorUtil {
         }
     }
 
+    public static String[] userLocationGroup{
+        get{
+            if(userLocationGroup == null){
+                if(userLocation == 'ALL'){
+                    return new String[]{'All','CRC/MRC','ARC/CARE'};
+                } else {
+                    return new String[]{userLocation};
+                }
+            } else {
+                return userLocationGroup;
+            }
+        }
+    }
+
     public static String[] getLocationGroup(){
         return getLocationGroup(userLocation);
     }
 
     public static String[] getLocationGroup(String location){
-        String[] tempLocationGroup = new String[]{'CRC', 'MRC', 'CRC/MRC'};
+        String[] tempLocationGroup = new String[0];
             String tempLocation = location;
             if(tempLocation == 'All'){
-                tempLocationGroup = new String[]{'ARC', 'CARE', 'ARC/CARE', 'CRC', 'MRC', 'CRC/MRC'};
+                tempLocationGroup.addAll(ARC_CARE);
+                tempLocationGroup.addAll(CRC_MRC);
             }
-            if(tempLocation == 'ARC/CARE'){
-                tempLocationGroup = new String[]{'ARC', 'CARE', 'ARC/CARE'};
+             else if(tempLocation == 'ARC/CARE'){
+                tempLocationGroup = ARC_CARE;
+            }
+            else {
+                tempLocationGroup = CRC_MRC;
             }
         return tempLocationGroup;
     }

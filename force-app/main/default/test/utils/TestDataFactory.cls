@@ -547,7 +547,7 @@ public without sharing class TestDataFactory {
                     Gender__c = 'MN',
                     Animal_Name__c = 'Doggo123',
                     Shelter_Location2__c = 'MRC',
-                    Current_Location__c = 'MRC',
+                    Current_Location__c = 'CRC-MRC',
                     Current_Recent_Shelter_Location__c = 'CRC-MRC',
                     Play_Category__c = 'Unspecified'
         );

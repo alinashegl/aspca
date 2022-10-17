@@ -37,7 +37,7 @@ public with sharing class MRCTreatmentPlansReportLWCController {
                 (SELECT Id FROM Play_Pauses__r WHERE (End_Date__c = null OR End_Date__c >= TODAY) LIMIT 1)
                 FROM Animal__c 
                 WHERE Type_of_Animal__c = 'Dog'
-                AND Current_Location__c IN ('MRC','CRC')
+                AND Current_Location__c IN (:BehaviorUtil.MRC,'CRC')
                 AND Active_Animal__c = true
             ];
         } catch (Exception e) {
@@ -92,7 +92,7 @@ public with sharing class MRCTreatmentPlansReportLWCController {
             SELECT Id, Text__c 
             FROM Generic_Data__c 
             WHERE Species__c = 'Dog'
-            AND Location__c = 'MRC'
+            AND Location__c = 'CRC-MRC'
             AND Name = 'MRC TOM'
             LIMIT 1
         ];

@@ -228,7 +228,7 @@ private class Test_MRCTxPlansReportLWCController {
     static void getTipOfMonth_Success(){
         Generic_Data__c gd = new Generic_Data__c(
             Species__c = 'Dog',
-            Location__c = 'MRC',
+            Location__c = BehaviorUtil.MRC,
             Name = 'MRC TOM',
             Text__c = 'tip of month'
         );
