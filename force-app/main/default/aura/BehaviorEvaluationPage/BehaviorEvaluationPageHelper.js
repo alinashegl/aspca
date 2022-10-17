@@ -929,6 +929,7 @@
         }
         return subTests;
     },
+
     handleMessage : function(cmp, message, helper) {
         let tempLock = message.getParam('isTempLocked');
         let permLock = message.getParam('isLocked');
@@ -943,4 +944,8 @@
             cmp.set("v.isLocked", permLock);
         }
     },
+
+    handlePublishEvalUpdateMessage: function(cmp, event, helper) {
+        cmp.find("evalSummaryUpdateMessage").publish();
+    }
 });

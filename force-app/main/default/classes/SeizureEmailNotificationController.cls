@@ -1,6 +1,6 @@
 public class SeizureEmailNotificationController { 
     public static void handleSeizureEmailNotificationSchedular(){
-        String[] locations = new String[]{'CRC','MRC','CRC/MRC'};
+        String[] locations = BehaviorUtil.CRC_MRC;
         Map<Id, List<Animal__c>> animalsRec = new  Map<Id, List<Animal__c>>();
 
         List<Animal__c> lstAnimals =[
