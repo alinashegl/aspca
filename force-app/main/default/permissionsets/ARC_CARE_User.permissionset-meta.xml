@@ -818,6 +818,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Animal__c.Behavior_Concern_Notes__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Animal__c.Behavior_Concerns__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -939,6 +944,16 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Animal__c.Current_Animal_Age_Formatted__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Animal__c.Current_Animal_Status_Date__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Animal__c.Current_Animal_Status__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1337,7 +1352,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Animal__c.Foster_Name__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -1354,6 +1369,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Animal__c.Grade_Change__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Animal__c.HLE_Civicore_ID__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1629,6 +1649,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Animal__c.Placement_Recommendations__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Animal__c.Placement_Status__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -4344,6 +4369,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Treatment_Plan__c.Treatment_Priority__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Treatment_Session__c.ASPCA_Animal_Name__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
