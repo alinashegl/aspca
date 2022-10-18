@@ -598,7 +598,6 @@
             <label>MRC Candidate</label>
         </rules>
     </decisions>
-    <description>Removed Evaluation date logic</description>
     <formulas>
         <name>BRCFollowupDescription</name>
         <dataType>String</dataType>
@@ -613,11 +612,6 @@
         <name>EvaluationDescription</name>
         <dataType>String</dataType>
         <expression>&quot;Evaluation Due for: &quot;+{!$Record.Animal_Name_Id__c} +&quot; (&quot;+{!$Record.Current_Recent_Shelter_Location__c}+&quot;)&quot;</expression>
-    </formulas>
-    <formulas>
-        <name>EvaluationDueDate</name>
-        <dataType>Date</dataType>
-        <expression>TODAY() + 4</expression>
     </formulas>
     <formulas>
         <name>MRC2ndReminderDate</name>
