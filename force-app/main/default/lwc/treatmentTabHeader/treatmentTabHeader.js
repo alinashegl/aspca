@@ -10,6 +10,7 @@ export default class TreatmentTabHeader extends NavigationMixin(LightningElement
     showModal = false;
     showNewSessionModal = false;
     showNewTreatmentModal = false;
+    hidecustomScheduleEdit = true;
     error;
     @api showTreatmentPlanButton;
     @api showTreatmentSessionButton;
@@ -36,6 +37,7 @@ export default class TreatmentTabHeader extends NavigationMixin(LightningElement
         this.showModal = false;
         this.showNewTreatmentModal = false;
         this.showNewSessionModal = false;
+        this.hidecustomScheduleEdit = true;
     }
     
     handleSubmit(event){
@@ -51,6 +53,7 @@ export default class TreatmentTabHeader extends NavigationMixin(LightningElement
         if(this.customLookupNewId != undefined){
             fields.AssignedTreatmentBundleId__c = this.customLookupNewId;
         }
+        this.hidecustomScheduleEdit = true;
         this.template.querySelector('lightning-record-edit-form').submit(fields);
     }
 
@@ -123,5 +126,9 @@ export default class TreatmentTabHeader extends NavigationMixin(LightningElement
 
     get customLookupDisplayFields(){
         return 'Name';
+    }
+
+    handleEditButton(event){
+        this.hidecustomScheduleEdit = false;
     }
 }
