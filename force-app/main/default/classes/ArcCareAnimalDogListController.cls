@@ -2,9 +2,9 @@ public class ArcCareAnimalDogListController {
     @AuraEnabled
     public static List<Animal__c> getRecords() {
         List<Animal__c> objs = [Select Id, Name, Animal_Name__c, Animal_Name_Id__c, Petpoint_ID__c,AAH_ID__c, Gender__c, Evaluation_Status__c, Current_Location__c, 
-                Hold_Status_ARC_CARE__c, Behavior_Case_Worker__c, Behavior_Case_Worker__r.Name, Walking_Status__c, 
+                Hold_Status_ARC_CARE__c, Behavior_Case_Worker__c, Behavior_Case_Worker__r.Name, Walking_Status__c,Type_of_Animal__c, 
                 Walking_Notes__c, PPE_DOH__c, Important_Notes_ARC_CARE__c FROM Animal__c 
-                WHERE Active_Animal__c = true AND Location_Filter__c = true
+                WHERE Active_Animal__c = true AND Location_Filter__c = true AND Type_of_Animal__c = 'Dog'
                 ORDER BY CreatedDate ];
         
         List<Animal__c> objList = new List<Animal__c>();
