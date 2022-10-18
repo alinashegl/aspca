@@ -3,10 +3,10 @@ public class CRCAnimalDogListController {
     public static CRCDogListResult getRecords() {
         List<Animal__c> objs = [SELECT Id, Shelter_Color_Coding__c, Behavior_Summary_Change_Date__c,
                                 Name, Animal_Name__c, Animal_Name_Id__c,Meets_Adoptability_Date__c, 
-                                Playgroup_Priority_Level__c, Current_Location__c,
+                                Playgroup_Priority_Level__c, Current_Location__c,Type_of_Animal__c,
                                 Behavior_Case_Worker__c, Behavior_Case_Worker__r.Name,
                                 (Select Id, Animal__c, Treatment_Priority__c, Enrichment_Priority__c FROM Treatment_Plan__r where IsActive__c = true)
-                                from Animal__c where Active_Animal__c = true AND Location_Filter__c = true];
+                                from Animal__c where Active_Animal__c = true AND Location_Filter__c = true AND Type_of_Animal__c = 'Dog'];
         
         List<Animal__c> objList = new List<Animal__c>();
         for(Animal__c obj : objs){
