@@ -85,7 +85,24 @@
                                 <div class="slds-col slds-size_1-of-1"> 
                                     <lightning-input-field field-name="Enrichment_Activities__c"></lightning-input-field>
                                 </div>
+                                <template if:true={hidecustomScheduleEdit}>
+                                    <div class="slds-col slds-has-flexi-truncate slds-size_1-of-3">
+                                        <div class="slds-clearfix slds-border_bottom">
+                                            <lightning-output-field field-name="Custom_Schedule__c"></lightning-output-field>
+                                            <lightning-button-icon class="slds-float_right" variant="bare"
+                                            icon-name="utility:edit" size="medium" alternative-text="edit" 
+                                            onclick={handleEditButton}>
+                                        </lightning-button-icon>
+                                        </div> 
+                                    </div>
+                                </template>
+                                <template if:false={hidecustomScheduleEdit}>
+                                    <div class="slds-col slds-size_1-of-1"> 
+                                        <lightning-input-field field-name="Custom_Schedule__c"></lightning-input-field>
+                                    </div>
+                                </template>
                             </div>
+
                             <template if:true={error}>
                                 <div class="slds-align_absolute-center">
                                     <c-error-panel errors={error} type='inlineMessage' friendly-message='Error Creating Treatment Plan'></c-error-panel>
