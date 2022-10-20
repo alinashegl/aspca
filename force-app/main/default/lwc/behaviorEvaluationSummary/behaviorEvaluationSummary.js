@@ -1,4 +1,4 @@
-import { LightningElement, api, wire} from 'lwc';
+import { LightningElement, api, wire, track} from 'lwc';
 import getConfigList from '@salesforce/apex/BehaviorEvaluationSummaryUtil.getConfigList';
 import updateBehaviorEvalSummary from '@salesforce/apex/BehaviorEvaluationSummaryUtil.updateBehaviorEvalSummary';
 
@@ -8,8 +8,9 @@ import EVAL_SUMMARY_UPDATED_CHANNEL from '@salesforce/messageChannel/EvalSummary
 
 export default class BehaviorEvaluationSummary extends LightningElement {
     @api recordId;
-    configList;
+    @track configList = [];
     @api isLocked;
+    ranOnce = false;
 
     showSpinner = false;
     error;
@@ -17,15 +18,22 @@ export default class BehaviorEvaluationSummary extends LightningElement {
 
     disableSaveSummary = true;
 
-    @wire(getConfigList, { recordId : '$recordId' })
-    response(result) {
-        if(result.data){
-            this.configList = result.data.templateList;
+    connectedCallback(){
+        if(!this.ranOnce){
+            getConfigList({recordId : this.recordId})
+            .then(result => {
+                if(result){
+                    this.configList = result.templateList;
+                }
+            })
+            .catch(error => {
+                this.error = error;
+                this.errorMessage = 'Error retreiving summary list';
+            }).finally(()=>{
+                this.ranOnce = true;
+                this.subscribeToMessageChannel();
+            });
         }
-    }
-
-    connectedCallback() {
-        this.subscribeToMessageChannel();
     }
 
     handleSaveSummary(){
@@ -66,7 +74,8 @@ export default class BehaviorEvaluationSummary extends LightningElement {
     }
 
     handleMessage(message){
-        window.console.log('lwc we got here');
-        this.disableSaveSummary = true;
+        if(message.isUpdated){
+            this.disableSaveSummary = true;
+        }
     }
 }

@@ -83,4 +83,8 @@
      handleMessage : function(component, message, helper) {
         helper.handleMessage(component, message);
     },
+
+    handleEvalUpdateMessage : function(component, message, helper) {
+        helper.handleEvalUpdateMessage(component, message);
+    },
 });
