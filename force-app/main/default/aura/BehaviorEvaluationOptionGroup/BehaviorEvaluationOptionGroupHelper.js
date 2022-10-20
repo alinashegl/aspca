@@ -89,6 +89,7 @@
     } ,
 
     sendRequest : function(cmp, methodName, params) {
+        this.handlePublishEvalSaveStartMessage(cmp);
         var action = cmp.get(methodName);
         action.setParams(params);
         action.setCallback(this, function(response) {
@@ -111,7 +112,18 @@
         $A.enqueueAction(action);
     },
 
+
+    handlePublishEvalSaveStartMessage: function(cmp) {
+        var payload = {
+            startSave: true
+        };
+        cmp.find("evalSummaryUpdateMessage").publish(payload);
+    },
+
     handlePublishEvalUpdateMessage: function(cmp) {
-        cmp.find("evalSummaryUpdateMessage").publish();
+        var payload = {
+            isUpdated: true
+        };
+        cmp.find("evalSummaryUpdateMessage").publish(payload);
     }
 });
