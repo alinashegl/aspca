@@ -416,7 +416,7 @@ public class BehaviorEvaluationSummaryUtil {
         }
     }
 
-    @AuraEnabled (cacheable=true)
+    @AuraEnabled
     public static SummaryDisplay getConfigList(Id recordId){
         try {
             Behavior_Evaluation__c ba = [
