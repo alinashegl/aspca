@@ -182,6 +182,7 @@
 
         var mName = methodName;
 		var comp = cmp;
+        this.handlePublishEvalSaveStartMessage(cmp);
         this.sendPromise(cmp, mName, params, params[apiName])
         .then(
           function(response) {
@@ -216,6 +217,7 @@
             values: v ,
             recordId: rId
         };
+        this.handlePublishEvalSaveStartMessage(cmp);
         this.sendPromise(cmp, 'c.updateEval', params, a.id)
         .then(
             function(response) {
@@ -236,6 +238,13 @@
                 });
             }
         );
+    },
+
+    handlePublishEvalSaveStartMessage: function(cmp) {
+        var payload = {
+            startSave: true
+        };
+        cmp.find("evalSummaryUpdateMessage").publish(payload);
     },
 
     handlePublishEvalUpdateMessage: function(cmp) {
