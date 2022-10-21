@@ -133,6 +133,7 @@ export default class VkDatatableUsage extends LightningElement {
                     obj.behName = data[i].Behavior_Case_Worker__r.Name;
                 }
                 obj.petpint = (data[i].hasOwnProperty('Petpoint_ID__c') && data[i].Petpoint_ID__c) ? data[i].Petpoint_ID__c : (data[i].hasOwnProperty('AAH_ID__c') ? data[i].AAH_ID__c : '');
+                obj.Petpoint_ID__c = obj.petpint;
                 obj.anmName = data[i].Animal_Name_Id__c;
                 this.anms.push(obj);
             }
