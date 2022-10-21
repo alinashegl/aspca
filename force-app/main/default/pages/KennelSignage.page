@@ -65,7 +65,24 @@
                                     </apex:inputCheckbox>
                                 </apex:column>
                             </apex:dataTable>
+                        
+                        <apex:panelGroup >Behavior Concerns Notes: 
+                            <div style="height: 100px">
+                                {!behConcernNotes}
+                            </div>
+                        </apex:panelGroup>
+                        <apex:panelGroup >Walking Equipment Notes: 
+                            <div style="height: 100px">
+                                {!walkingEqpNotes}
+                            </div>
+                        </apex:panelGroup>
+                        <apex:panelGroup >Walking Status Notes: 
+                            <div style="height: 100px">
+                                {!walkingStatusNotes}
+                            </div>
+                        </apex:panelGroup>
                     </apex:panelGrid>
+                    
                 </apex:panelGroup>
                 <apex:panelGroup >
                     <apex:panelGrid width="100%" columns="2">
@@ -77,12 +94,12 @@
                         </apex:outputText>
                     </apex:panelGrid>
                 </apex:panelGroup>
-                <apex:panelGroup style="text-align: center">
+                <!--<apex:panelGroup style="text-align: center">
                     <apex:outputText style="text-align: center">
                        ______________________________Evaluations Placeholder____________________________________
                                           
                     </apex:outputText>
-                </apex:panelGroup>
+                </apex:panelGroup>-->
                 <apex:panelGroup style="text-align: center">
                     
                     <div style="text-align:center;">

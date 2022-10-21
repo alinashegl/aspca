@@ -31,6 +31,9 @@ public with sharing class KennelSignageController {
             m_VolunteerReadingOkay();
             m_animalPetpointId();
             m_behaviorEvaluationSummary();
+            m_animalBehaviorConernNotes();
+            m_animalWalkingEqpNotes();
+            m_animalWalkingStatus();
             //iBehaviorConcerns();
         }
 
@@ -52,6 +55,9 @@ public with sharing class KennelSignageController {
     public String animalColor { get; set; }
     public String petpointid {get; set;}
     public String behaviorEvaluationSummary {get; set;}
+    public String walkingEqpNotes {get; set;}
+    public String walkingStatusNotes {get; set;}
+    public String behConcernNotes {get; set;}
 
     public String m_animalName(){
         String defaultName = 'Default';
@@ -162,7 +168,7 @@ public with sharing class KennelSignageController {
             behaviorConcerns.add(new behaviorConcern(label, isSelected));
             System.debug('Entry isActive value =====> ' + isSelected);
         }
-        behaviorConcerns.add(new behaviorConcern('Behavior Conern Notes: '+(currentAnimal.Behavior_Concern_Notes__c != null ?currentAnimal.Behavior_Concern_Notes__c:''), false));
+        //behaviorConcerns.add(new behaviorConcern('Behavior Conern Notes: '+(currentAnimal.Behavior_Concern_Notes__c != null ?currentAnimal.Behavior_Concern_Notes__c:''), false));
         
         return behaviorConcerns;
     }
@@ -204,7 +210,7 @@ public with sharing class KennelSignageController {
             //System.debug('Walking Equipment -> ' + entry);
             walkingEquipments.add(new walkingEquipment(label, isSelected));
         }
-        walkingEquipments.add(new walkingEquipment('Walking Equipment Notes: '+(currentAnimal.Walking_Equipment_Notes__c != null ?currentAnimal.Walking_Equipment_Notes__c:''), false));
+        //walkingEquipments.add(new walkingEquipment('Walking Equipment Notes: '+(currentAnimal.Walking_Equipment_Notes__c != null ?currentAnimal.Walking_Equipment_Notes__c:''), false));
         return walkingEquipments;
     }
     public PageReference showWE() {
@@ -245,10 +251,44 @@ public with sharing class KennelSignageController {
             System.debug('Walking Status -> ' + entry);
             walkingStatuses.add(new walkingStatus(label, isSelected));
         }
-        walkingStatuses.add(new walkingStatus('Behavior Conern Notes: '+(currentAnimal.Walking_Notes__c != null ?currentAnimal.Walking_Notes__c:''), false));
+        //walkingStatuses.add(new walkingStatus('Walking Status Notes: '+(currentAnimal.Walking_Notes__c != null ?currentAnimal.Walking_Notes__c:''), false));
 
         return walkingStatuses;
     }
+
+    public String m_animalWalkingStatus(){
+        String defaultValue = '';
+
+        walkingStatusNotes = currentAnimal.Walking_Notes__c;
+
+        if (walkingStatusNotes == null) {
+            walkingStatusNotes = defaultValue;
+        }
+        return walkingStatusNotes;
+    }
+    
+    public String m_animalBehaviorConernNotes(){
+        String defaultValue = '';
+
+        behConcernNotes = currentAnimal.Behavior_Concern_Notes__c;
+
+        if (behConcernNotes == null) {
+            behConcernNotes = defaultValue;
+        }
+        return behConcernNotes;
+    }
+        
+    public String m_animalWalkingEqpNotes(){
+        String defaultValue = '';
+
+        walkingEqpNotes = currentAnimal.Walking_Equipment_Notes__c;
+
+        if (walkingEqpNotes == null) {
+            walkingEqpNotes = defaultValue;
+        }
+        return walkingEqpNotes;
+    }
+    
     public PageReference showWS() {
         for (walkingStatus status : walkingStatuses) {
             System.debug(status.value + '=======>' + status.isSelected);
