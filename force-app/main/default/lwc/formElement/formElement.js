@@ -263,4 +263,15 @@ export default class FormElement extends LightningElement {
         let obj ={rowIndex: this.rowIndex, colIndex: this.colIndex, actionName: actionName};
         this.dispatchEvent(new CustomEvent('action', {detail: obj}));
     }
+
+    handleComboPillRemove(event){
+        let obj = {};
+        if(this.isTableElement){
+            obj.rowIndex = this.rowIndex;
+            obj.colIndex = this.colIndex; 
+            obj.name = this.name;
+            obj.value = '';
+        }
+        this.dispatchEvent(new CustomEvent('valuechange', {detail: obj}));
+    }
 }

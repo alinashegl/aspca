@@ -1,5 +1,5 @@
 import { LightningElement, wire } from 'lwc';
-//import getBehCaseWorkers from '@salesforce/apex/CRCAnimalDogListController.getBehCaseWorkers';
+import getBehCaseWorkers from '@salesforce/apex/ArcCareAnimalDogListController.getBehCaseWorkers';
 import getAnimals from '@salesforce/apex/CRCAnimalDogListController.getRecords';
 import updateRecords from '@salesforce/apex/CRCAnimalDogListController.saveRecords';
 
@@ -57,8 +57,11 @@ const columns = [
     {label: 'Shelter Color Coding', fieldName: 'Shelter_Color_Coding__c', type: 'picklist', options: SHELTERCOLOROPTIONS, sortable: true, resizable: true, editable: true},
     {label: 'Meets Adoptability Date', fieldName: 'Meets_Adoptability_Date__c',type: 'date', editable: true, disabled: false},
     {label: 'Playgroup Priority Level', fieldName: 'Playgroup_Priority_Level__c', type: 'picklist', options: PLAYGROUPPRIORITYOPTIONS, sortable: true, resizable: true, editable: true},
-    {label: 'Behavior Case Worker', fieldName: 'Behavior_Case_Worker__c', type: 'link', linkLabel: 'behName'}, 
-    {label: 'Behavior Summary Change Date', fieldName: 'Behavior_Summary_Change_Date__c',type: 'date', editable: false, disabled: true},
+    //{label: 'Behavior Case Worker', fieldName: 'Behavior_Case_Worker__c', type: 'link', linkLabel: 'behName'}, 
+    {label: 'Behavior Case Worker', fieldName: 'Behavior_Case_Worker__c', type: 'lookup', linkLabel: 'behName',
+     sortable: true, resizable: true, editable: true,sortBy: 'behName', title:'Click to view Behavior Case Worker', iconName:'standard:contact'},
+    
+    {label: 'Behavior Summary Change Date', fieldName: 'Behavior_Summary_Change_Date__c',type: 'date', editable: true, disabled: false},
     {label: 'Play Pause Reason', fieldName: 'Play_Pause_Reason',type: 'text', editable: false, disabled: true},
     
 ];
@@ -73,7 +76,7 @@ export default class VkDatatableUsage extends LightningElement {
     isLoading = true;
     loadMessage = 'Loading...';
 
-    /*@wire(getBehCaseWorkers)
+    @wire(getBehCaseWorkers)
     wAccs({error,data}){
         if(data){
             let contacts = [];
@@ -86,10 +89,6 @@ export default class VkDatatableUsage extends LightningElement {
         }else{
             this.error = error;
         }       
-    }*/
-
-    connectedCallback(){
-        this.getAnimals_();
     }
 
     getAnimals_(){
@@ -152,7 +151,7 @@ export default class VkDatatableUsage extends LightningElement {
             }
 
             if(recs[i].hasOwnProperty('behName')){
-                delete recs[i]['Behavior_Case_Worker__c'];
+                //delete recs[i]['Behavior_Case_Worker__c'];
                 delete recs[i]['behName'];
             }
 
