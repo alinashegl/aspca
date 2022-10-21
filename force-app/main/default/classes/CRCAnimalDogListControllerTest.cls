@@ -8,7 +8,7 @@ public class CRCAnimalDogListControllerTest {
         List<Treatment_Plan__c> planList = new List<Treatment_Plan__c>();
         for(Integer i = 1; i <= 5; i++){
             Animal__c a = TestDataFactory.createAnimalWithName('anm' + i);
-            a.Current_Location__c = 'CRC - CRC';
+            a.Current_Location__c = 'CRC-MRC';
             animals.add(a);
             playPauses.addAll(TestDataFactory.createPlayPauses(a));
             
