@@ -14,11 +14,11 @@ public class FacilityOutcomeUtil {
         }
     }
 
-    public static void handleEvaluationProcess(Set<Id> animalIds, Set<Id> foIds){
+    public static void handleEvaluationProcess(Set<Id> animalIds, List<Facility_Outcome__c> foIds){
         //query the animals and their child facility/outcome records
         Animal__c[] toUpdate = new Animal__c[0];
         Task[] tasksToInsert = new Task[0];
-        Date evalDueDate = Date.today().addDays(4);
+        Date evalDueDate = (!foIds.isEmpty() ? foIds[0].Start_Date__c : Date.today()).addDays(4);
         Id taskRecordTypeId = Util.getRecordTypeId('Task',AutoScheduleTasksUtil.EVALUATION_RECORD_TYPE_NAME);
         for(Animal__c dog : [
             SELECT Id, Evaluation_Due_Date__c, Behavior_Case_Worker__c,
