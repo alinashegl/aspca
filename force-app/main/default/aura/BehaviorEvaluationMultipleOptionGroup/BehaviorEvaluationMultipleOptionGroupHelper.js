@@ -231,12 +231,14 @@
     } ,
 
     sendRequest : function(cmp, methodName, params) {
+        this.handlePublishEvalSaveStartMessage(cmp);
         var action = cmp.get(methodName);
         action.setParams(params);
         action.setCallback(this, function(response) {
             var state = response.getState();
             var result = response.getReturnValue();
             if(state == 'SUCCESS') {
+                this.handlePublishEvalUpdateMessage(cmp);
                 return result;
             }else if (state == 'ERROR') {
                 let err = response.getError();
@@ -244,6 +246,19 @@
             }
         });
         $A.enqueueAction(action);
-    }
+    },
 
+    handlePublishEvalSaveStartMessage: function(cmp) {
+        var payload = {
+            startSave: true
+        };
+        cmp.find("evalSummaryUpdateMessage").publish(payload);
+    },
+
+    handlePublishEvalUpdateMessage: function(cmp) {
+        var payload = {
+            isUpdated: true
+        };
+        cmp.find("evalSummaryUpdateMessage").publish(payload);
+    }
 });

@@ -139,8 +139,7 @@ public with sharing  class service_BehaviorEvaluation extends service_Base{
         System.debug(testFields);
         for (SObjectField field : testFields) {
             Map<String, SObjectField> fieldMap = SObjectFieldMapHelper.fieldMap('Behavior_Evaluation__c');
-            try {
-                System.debug(evaluation.get(field));
+            try {                
                 if (MetadataUtil.skipField(String.valueOf(field)) != null) {
                     String skipField = MetadataUtil.skipField(String.valueOf(field));
                     System.debug('###Skip Field ===> ' + skipField );
@@ -214,14 +213,14 @@ public with sharing  class service_BehaviorEvaluation extends service_Base{
             fields.add(Behavior_Evaluation__c.Puppy_Play_Tug_P1__c);
             fields.add(Behavior_Evaluation__c.Puppy_Play_Tug_P2__c);
             fields.add(Behavior_Evaluation__c.Puppy_Play_Tag__c);
-            fields.add(Behavior_Evaluation__c.Resource_Guarding_P1_Touch_Body__c);
-            fields.add(Behavior_Evaluation__c.Resource_Guarding_P1_Touch_Neck__c);
-            fields.add(Behavior_Evaluation__c.Resource_Guarding_P1_Touch_Face__c);
-            fields.add(Behavior_Evaluation__c.Resource_Guarding_P1_Push_Face__c);
-            fields.add(Behavior_Evaluation__c.Resource_Guarding_P2_Touch_Body__c);
-            fields.add(Behavior_Evaluation__c.Resource_Guarding_P2_Touch_Neck__c);
-            fields.add(Behavior_Evaluation__c.Resource_Guarding_P2_Touch_Face__c);
-            fields.add(Behavior_Evaluation__c.Resource_Guarding_P2_Push_Face__c);
+            fields.add(Behavior_Evaluation__c.Puppy_Resource_Guarding_P1_Touch_Body__c);
+            fields.add(Behavior_Evaluation__c.Puppy_Resource_Guarding_P1_Touch_Neck__c);
+            fields.add(Behavior_Evaluation__c.Puppy_Resource_Guarding_P1_Touch_Face__c);
+            fields.add(Behavior_Evaluation__c.Puppy_Resource_Guarding_P1_Push_Face__c);
+            fields.add(Behavior_Evaluation__c.Puppy_Resource_Guarding_P2_Touch_Body__c);
+            fields.add(Behavior_Evaluation__c.Puppy_Resource_Guarding_P2_Touch_Neck__c);
+            fields.add(Behavior_Evaluation__c.Puppy_Resource_Guarding_P2_Touch_Face__c);
+            fields.add(Behavior_Evaluation__c.Puppy_Resource_Guarding_P2_Push_Face__c);
             fields.add(Behavior_Evaluation__c.Puppy_Child_Doll_P1__c);
             fields.add(Behavior_Evaluation__c.Puppy_Child_Doll_P2__c);
             fields.add(Behavior_Evaluation__c.Puppy_Dog_Interaction_P1__c);
