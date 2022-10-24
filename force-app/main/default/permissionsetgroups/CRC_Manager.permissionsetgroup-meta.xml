@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSetGroup xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>CRC/MRC Data Entry and CRC/MRC Caseworker and CRC/MRC Manager</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>CRC Manager</label>
+    <permissionSets>CRC_MRC_Caseworker</permissionSets>
+    <permissionSets>CRC_MRC_Data_Entry</permissionSets>
+    <permissionSets>CRC_MRC_Manager</permissionSets>
+    <status>Updated</status>
+</PermissionSetGroup>
