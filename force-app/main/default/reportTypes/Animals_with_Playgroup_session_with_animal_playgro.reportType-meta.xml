@@ -5,10 +5,6 @@
     <deployed>true</deployed>
     <description>Animals with Playgroup session with animal playgro</description>
     <join>
-        <join>
-            <outerJoin>false</outerJoin>
-            <relationship>Playgroup_Sessions__r</relationship>
-        </join>
         <outerJoin>false</outerJoin>
         <relationship>Animal_Playgroups__r</relationship>
     </join>
@@ -1319,6 +1315,51 @@
             <field>Walking_Notes__c</field>
             <table>Animal__c</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Petpoint_AAH_Id__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Playgroup_Priority_Number__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>PG_Priority_Minus_This_Week__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Behavior_Concern_Notes__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Walking_Equipment_Notes__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>In_Kennel_Socialization__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Treatment_Plan__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>NYPD_Case__c</field>
+            <table>Animal__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>All_Problem_Behaviors__c</field>
+            <table>Animal__c</table>
+        </columns>
         <masterLabel>Animals</masterLabel>
     </sections>
     <sections>
@@ -1398,83 +1439,5 @@
             <table>Animal__c.Animal_Playgroups__r</table>
         </columns>
         <masterLabel>Animal Playgroups</masterLabel>
-    </sections>
-    <sections>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Id</field>
-            <table>Animal__c.Animal_Playgroups__r.Playgroup_Sessions__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Owner</field>
-            <table>Animal__c.Animal_Playgroups__r.Playgroup_Sessions__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>true</checkedByDefault>
-            <field>Name</field>
-            <table>Animal__c.Animal_Playgroups__r.Playgroup_Sessions__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>CreatedDate</field>
-            <table>Animal__c.Animal_Playgroups__r.Playgroup_Sessions__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>CreatedBy</field>
-            <table>Animal__c.Animal_Playgroups__r.Playgroup_Sessions__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>LastModifiedDate</field>
-            <table>Animal__c.Animal_Playgroups__r.Playgroup_Sessions__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>LastModifiedBy</field>
-            <table>Animal__c.Animal_Playgroups__r.Playgroup_Sessions__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>LastActivityDate</field>
-            <table>Animal__c.Animal_Playgroups__r.Playgroup_Sessions__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Playgroup_Date_Time__c</field>
-            <table>Animal__c.Animal_Playgroups__r.Playgroup_Sessions__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Playgroup_Leader__c</field>
-            <table>Animal__c.Animal_Playgroups__r.Playgroup_Sessions__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Playgroup_Location__c</field>
-            <table>Animal__c.Animal_Playgroups__r.Playgroup_Sessions__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Playgroup_Notes__c</field>
-            <table>Animal__c.Animal_Playgroups__r.Playgroup_Sessions__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Contact_Ids__c</field>
-            <table>Animal__c.Animal_Playgroups__r.Playgroup_Sessions__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Population__c</field>
-            <table>Animal__c.Animal_Playgroups__r.Playgroup_Sessions__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Playgroup_Date__c</field>
-            <table>Animal__c.Animal_Playgroups__r.Playgroup_Sessions__r</table>
-        </columns>
-        <masterLabel>Playgroup Sessions</masterLabel>
     </sections>
 </ReportType>

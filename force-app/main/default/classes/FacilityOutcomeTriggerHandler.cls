@@ -1,7 +1,7 @@
 public with sharing class FacilityOutcomeTriggerHandler {
     private static List<Id> fosterIdList = new List<Id>();
     private static Set<Id> animalIdsForEvalProcess = new Set<Id>();
-    private static Set<Id> foIdsForEvalProcess = new Set<Id>();
+    private static List<Facility_Outcome__c> foIdsForEvalProcess = new List<Facility_Outcome__c>();
 
     public static void afterInsert(Facility_Outcome__c[] newRecords){
         for (Facility_Outcome__c foInsert : newRecords) {
@@ -16,7 +16,7 @@ public with sharing class FacilityOutcomeTriggerHandler {
             //if is ARC/CARE facility outcome add to animalIdsForEvalProcess            
             if(FacilityOutcomeUtil.EVAL_PROCESS_OUTCOME_OPTIONS.contains(foInsert.Facility_Outcome__c)){
                 animalIdsForEvalProcess.add(foInsert.Animal__c);
-                foIdsForEvalProcess.add(foInsert.Id);
+                foIdsForEvalProcess.add(foInsert);
             }
         }
     }

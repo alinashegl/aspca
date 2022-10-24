@@ -4275,6 +4275,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Treatment_Plan__c.All_Problem_Behaviors__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Treatment_Plan__c.Animal__c</field>
         <readable>true</readable>
