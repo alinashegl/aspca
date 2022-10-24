@@ -109,6 +109,11 @@
             <field>Num_of_Treatment_Sessions__c</field>
             <table>Treatment_Plan__c</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>All_Problem_Behaviors__c</field>
+            <table>Treatment_Plan__c</table>
+        </columns>
         <masterLabel>Treatment Plans</masterLabel>
     </sections>
     <sections>
