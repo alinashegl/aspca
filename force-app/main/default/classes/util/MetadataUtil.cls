@@ -4,7 +4,18 @@
 
 public with sharing class MetadataUtil {
 
-    public static Map<String, Test_Config__mdt> mapOfPicklistAndMetadata() {
+    public static Map<String, Test_Config__mdt> mapOfPicklistAndMetadata{
+        get{
+            if (mapOfPicklistAndMetadata == null){
+                mapOfPicklistAndMetadata = getMapOfPicklistAndMetadata();
+            } 
+
+            return mapOfPicklistAndMetadata;
+        }
+        set;
+    }
+
+    public static Map<String, Test_Config__mdt> getMapOfPicklistAndMetadata() {
         Map<String, Test_Config__mdt> configMap = Test_Config__mdt.getAll();
         Map<String, Test_Config__mdt> nStrings = new Map<String, Test_Config__mdt>();
 
@@ -22,7 +33,7 @@ public with sharing class MetadataUtil {
 
     public static String commentField(String field) {
         //System.debug('@@@@@@@@@@@@@@@@@@@@Executing Comment Field Method');
-        Map<String, Test_Config__mdt> configMap = mapOfPicklistAndMetadata();
+        Map<String, Test_Config__mdt> configMap = mapOfPicklistAndMetadata;
 
         String commentField = '';
 
@@ -44,7 +55,7 @@ public with sharing class MetadataUtil {
 
     public static String skipField(String field) {
        // System.debug('Executing Skip Field Method');
-        Map<String, Test_Config__mdt> configMap = mapOfPicklistAndMetadata();
+        Map<String, Test_Config__mdt> configMap = mapOfPicklistAndMetadata;
 
         String skipField = '';
 
