@@ -1,8 +1,6 @@
 public with sharing class service_Validation
 {
     public static void proccessRequest(Map<String, Object> config, Map<String, Object> response) {
-            System.debug('config: ' + JSON.serializePretty(config));
-            System.debug('response: ' + JSON.serializePretty(response));
             // response.put('status', AppConfig.STATUS.get('error'));
             response.put('status', 'error');
             
