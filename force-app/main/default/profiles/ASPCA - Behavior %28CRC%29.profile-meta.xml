@@ -184,6 +184,10 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>DataDisplayController</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>DateTimeUtility</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -288,6 +292,10 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>NavItemController</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>ObservationController</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -305,6 +313,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>OutOfOfficeControllerTest</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>PicklistHelper</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -1032,6 +1044,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Animal__c.Age__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Animal__c.All_Problem_Behaviors__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -2051,6 +2068,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Animal__c.NYPD_Case__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Animal__c.NYPD_Complaint__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -2502,6 +2524,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Animal__c.Transport_Date__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Animal__c.Treatment_Plan__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -5425,6 +5452,11 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>true</editable>
+        <field>Treatment_Plan__c.All_Problem_Behaviors__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>false</editable>
         <field>Treatment_Plan__c.Animal__c</field>
         <readable>false</readable>
@@ -5976,6 +6008,10 @@
     <tabVisibilities>
         <tab>Research_Study__c</tab>
         <visibility>Hidden</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>SM_QoL_Survey__c</tab>
+        <visibility>DefaultOff</visibility>
     </tabVisibilities>
     <tabVisibilities>
         <tab>Session_Protocol__c</tab>

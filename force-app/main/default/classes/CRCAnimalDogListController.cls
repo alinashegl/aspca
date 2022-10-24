@@ -47,11 +47,37 @@ public class CRCAnimalDogListController {
         System.debug(recsString);
         List<Animal__c> animals = (List<Animal__c>) JSON.deserialize(recsString, List<Animal__c>.class);
         List<Treatment_Plan__c> treatmentPlanList = new List<Treatment_Plan__c>();
+        Map<Id, Id> animalBehCaseWorkerMap = new Map<Id, Id>();
         for(Animal__c anm: animals){
             system.debug(anm.Treatment_Plan__r); 
             if(anm.Treatment_Plan__r.size() > 0){ 
                 treatmentPlanList.add(anm.Treatment_Plan__r);
             }
+            if(anm.Behavior_Case_Worker__c != null){
+                animalBehCaseWorkerMap.put(anm.Id, anm.Behavior_Case_Worker__c);
+            }
+        }
+
+        List<BehaviorCaseWorker__c> behCaseWorkers =  [SELECT Id, Animal__c, CaseWorker__c, EndDate__c, StartDate__c FROM BehaviorCaseWorker__c where Animal__c IN : animalBehCaseWorkerMap.keySet()];
+        Map<Id, Set<Id>> behAnmMap = new Map<Id, Set<Id>>();
+        set<Id> caseWorkers = new Set<Id>();
+        for(BehaviorCaseWorker__c b : behCaseWorkers){
+            caseWorkers.add(b.CaseWorker__c);
+            behAnmMap.put(b.Animal__c, caseWorkers);
+        }
+        List<BehaviorCaseWorker__c> newCaseWorkers = new List<BehaviorCaseWorker__c>();
+        for(Id anmId : animalBehCaseWorkerMap.keySet()){
+            if(!behAnmMap.containsKey(anmId) || (behAnmMap.containsKey(anmId) && !(behAnmMap.get(anmId).contains(animalBehCaseWorkerMap.get(anmId))))){
+                BehaviorCaseWorker__c bcw = new BehaviorCaseWorker__c();
+                bcw.Animal__c = anmId;
+                bcw.StartDate__c = System.today();
+                bcw.CaseWorker__c = animalBehCaseWorkerMap.get(anmId);
+                newCaseWorkers.add(bcw);
+            }
+        }
+
+        if(!newCaseWorkers.isEmpty()){
+            insert newCaseWorkers;
         }
         
         update treatmentPlanList;

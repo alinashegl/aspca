@@ -1666,16 +1666,7 @@
                             <value>Treatment_Priority__c</value>
                         </valueListItems>
                         <valueListItems>
-                            <value>Problem_Behavior_Aggression__c</value>
-                        </valueListItems>
-                        <valueListItems>
-                            <value>Problem_Behavior_Arousal__c</value>
-                        </valueListItems>
-                        <valueListItems>
-                            <value>Problem_Behavior_Fear__c</value>
-                        </valueListItems>
-                        <valueListItems>
-                            <value>Problem_Behavior_Miscellaneous__c</value>
+                            <value>All_Problem_Behaviors__c</value>
                         </valueListItems>
                         <valueListItems>
                             <value>Enrichment_Priority__c</value>
@@ -2164,6 +2155,16 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.Current_Behavior_Grade_Initials__c</fieldItem>
                 <identifier>RecordCurrent_Behavior_Grade_Initials__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Meets_Adoptability_Date__c</fieldItem>
+                <identifier>RecordMeets_Adoptability_Date_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -2814,16 +2815,6 @@
                 <identifier>RecordFeeding_Notes__cField</identifier>
             </fieldInstance>
         </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Meets_Adoptability_Date__c</fieldItem>
-                <identifier>RecordMeets_Adoptability_Date__cField</identifier>
-            </fieldInstance>
-        </itemInstances>
         <name>Facet-22f0ecff-c012-42b5-aab4-e3d5d0e054f6</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -2969,16 +2960,7 @@
                             <value>Treatment_Priority__c</value>
                         </valueListItems>
                         <valueListItems>
-                            <value>Problem_Behavior_Aggression__c</value>
-                        </valueListItems>
-                        <valueListItems>
-                            <value>Problem_Behavior_Arousal__c</value>
-                        </valueListItems>
-                        <valueListItems>
-                            <value>Problem_Behavior_Fear__c</value>
-                        </valueListItems>
-                        <valueListItems>
-                            <value>Problem_Behavior_Miscellaneous__c</value>
+                            <value>All_Problem_Behaviors__c</value>
                         </valueListItems>
                         <valueListItems>
                             <value>Enrichment_Priority__c</value>
