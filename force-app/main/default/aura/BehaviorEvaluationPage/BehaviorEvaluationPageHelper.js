@@ -945,7 +945,16 @@
         }
     },
 
-    handlePublishEvalUpdateMessage: function(cmp, event, helper) {
-        cmp.find("evalSummaryUpdateMessage").publish();
-    }
+    handleEvalUpdateMessage : function(cmp, message) {
+        let isUpdated = message.getParam('isUpdated');
+        let isStartSave = message.getParam('startSave');
+
+        if(isUpdated == true){
+            cmp.set("v.workingSpinner", false);
+        }
+
+        else if(isStartSave == true){
+            cmp.set("v.workingSpinner", true);
+        }
+    },
 });
