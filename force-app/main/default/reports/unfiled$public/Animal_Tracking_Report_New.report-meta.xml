@@ -33,7 +33,7 @@
     </columns>
     <columns>
         <aggregateTypes>Sum</aggregateTypes>
-        <field>Animal__c$Number_of_Weeks_in_Treatment__c</field>
+        <field>Animal__c$no_of_weeks_in_treatment__c</field>
     </columns>
     <columns>
         <field>Animal__c$Current_Recent_Shelter_Location__c</field>
@@ -45,7 +45,7 @@
             <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>contains</operator>
-            <value>CRC,MRC</value>
+            <value>CRC,CRC-MRC</value>
         </criteriaItems>
     </filter>
     <format>Tabular</format>

@@ -18,7 +18,7 @@
     <formulas>
         <name>GenerateGenericCaseworkerValue</name>
         <dataType>String</dataType>
-        <expression>IF({!$Record.Current_Recent_Shelter_Location__c} = &quot;MRC&quot;, &quot;MRC&quot;, 
+        <expression>IF({!$Record.Current_Recent_Shelter_Location__c} = &quot;CRC-MRC&quot;, &quot;CRC-MRC&quot;, 
 IF({!$Record.Current_Recent_Shelter_Location__c} = &quot;CRC&quot;, &quot;CRC&quot;,
 &quot;ARC/CARE&quot;))</expression>
     </formulas>

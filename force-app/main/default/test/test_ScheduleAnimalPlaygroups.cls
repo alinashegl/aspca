@@ -24,7 +24,7 @@ private class test_ScheduleAnimalPlaygroups {
 
         Animal__c animalMRC = TestDataFactory.createAnimalWithName('animalMRC');
         animalMRC.Playgroup_Priority_Level__c = 'Daily – 7 days';
-        animalMRC.Current_Recent_Shelter_Location__c = 'MRC';
+        animalMRC.Current_Recent_Shelter_Location__c = 'CRC-MRC';
 
         User u = [SELECT Id FROM User Where Profile.Name = 'System Administrator' AND isActive = true LIMIT 1];
         Contact con = TestDataFactory.createContact();

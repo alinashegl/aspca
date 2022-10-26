@@ -565,26 +565,6 @@
                 <identifier>RecordDesignated_Handler_Medical_Reason__cField</identifier>
             </fieldInstance>
         </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Walking_Status__c</fieldItem>
-                <identifier>RecordWalking_Status_cField2</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Walking_Equipment__c</fieldItem>
-                <identifier>RecordWalking_Equipment_cField2</identifier>
-            </fieldInstance>
-        </itemInstances>
         <name>Facet-ecbbe17d-d9b6-4685-9331-7738ee36684f</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -1066,16 +1046,7 @@
                             <value>Treatment_Priority__c</value>
                         </valueListItems>
                         <valueListItems>
-                            <value>Problem_Behavior_Aggression__c</value>
-                        </valueListItems>
-                        <valueListItems>
-                            <value>Problem_Behavior_Arousal__c</value>
-                        </valueListItems>
-                        <valueListItems>
-                            <value>Problem_Behavior_Fear__c</value>
-                        </valueListItems>
-                        <valueListItems>
-                            <value>Problem_Behavior_Miscellaneous__c</value>
+                            <value>All_Problem_Behaviors__c</value>
                         </valueListItems>
                         <valueListItems>
                             <value>Enrichment_Priority__c</value>
@@ -2929,16 +2900,7 @@
                             <value>Treatment_Priority__c</value>
                         </valueListItems>
                         <valueListItems>
-                            <value>Problem_Behavior_Aggression__c</value>
-                        </valueListItems>
-                        <valueListItems>
-                            <value>Problem_Behavior_Arousal__c</value>
-                        </valueListItems>
-                        <valueListItems>
-                            <value>Problem_Behavior_Fear__c</value>
-                        </valueListItems>
-                        <valueListItems>
-                            <value>Problem_Behavior_Miscellaneous__c</value>
+                            <value>All_Problem_Behaviors__c</value>
                         </valueListItems>
                         <valueListItems>
                             <value>Enrichment_Priority__c</value>

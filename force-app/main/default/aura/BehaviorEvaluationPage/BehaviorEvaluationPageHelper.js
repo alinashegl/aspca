@@ -929,6 +929,7 @@
         }
         return subTests;
     },
+
     handleMessage : function(cmp, message, helper) {
         let tempLock = message.getParam('isTempLocked');
         let permLock = message.getParam('isLocked');
@@ -941,6 +942,19 @@
         else if(permLock != undefined){
             cmp.set("v.isPermLock", permLock);
             cmp.set("v.isLocked", permLock);
+        }
+    },
+
+    handleEvalUpdateMessage : function(cmp, message) {
+        let isUpdated = message.getParam('isUpdated');
+        let isStartSave = message.getParam('startSave');
+
+        if(isUpdated == true){
+            cmp.set("v.workingSpinner", false);
+        }
+
+        else if(isStartSave == true){
+            cmp.set("v.workingSpinner", true);
         }
     },
 });

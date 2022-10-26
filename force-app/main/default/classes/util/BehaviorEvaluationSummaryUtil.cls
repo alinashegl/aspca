@@ -1,4 +1,5 @@
 public class BehaviorEvaluationSummaryUtil {
+    public static Boolean skipTrigger = false;
     private static final Boolean COMPARE_NUMBERS = true;
     private static final String PUPPY_TYPE = 'puppy';
     private static final String ADULT_TYPE = 'Adult Animal';
@@ -126,12 +127,12 @@ public class BehaviorEvaluationSummaryUtil {
     }
 
     public class ConfigTypeWrapper {
-        public String summaryTemplate;
-        public String[] templateList;
-        public String[] templateParentList;
-        public Map<String, String[]> parentToTemplateListMap;
-        public Map<String, Test_Config__mdt[]> commentSkipFieldsMap;
-
+        @AuraEnabled public String summaryTemplate;
+        @AuraEnabled public Map<String, Test_Config__mdt> templateMap;
+        @AuraEnabled public String[] templateList;
+        @AuraEnabled public String[] templateParentList;
+        @AuraEnabled public Map<String, String[]> parentToTemplateListMap;
+        @AuraEnabled public Map<String, Test_Config__mdt[]> commentSkipFieldsMap;
     }
 
     public static ConfigTypeWrapper getConfigInfo(String type){
@@ -139,6 +140,7 @@ public class BehaviorEvaluationSummaryUtil {
         Set<String> parentConfigSet = new Set<String>();
         Map<String, String[]> parentToTemplateListMap = new Map<String, String[]>();
         Map<String, Test_Config__mdt[]> configMap = new Map<String, Test_Config__mdt[]>();
+        Map<String, Test_Config__mdt> nameToConfigMap = new Map<String, Test_Config__mdt>();
 
         Test_Config__mdt[] testConfigList = new Test_Config__mdt[0];
         if(type == ADULT_TYPE){
@@ -169,6 +171,7 @@ public class BehaviorEvaluationSummaryUtil {
                 if (!configNameSet.contains(testName)) {
                     configNameSet.add(testName);
                     configSummary.add(new SummaryWrapper(Integer.valueOf(t.Test_Display_Order__c), '<p><b>' + testName + ':</b>&nbsp;</p>'));
+                    nameToConfigMap.put(testName, t);
                 }
             }
             
@@ -208,6 +211,7 @@ public class BehaviorEvaluationSummaryUtil {
         }
 
         configInfo.summaryTemplate = summaryString;
+        configInfo.templateMap = nameToConfigMap;
         configInfo.templateList = new List<String>(configNameSet);
         configInfo.templateParentList = new List<String>(parentConfigSet);
         configInfo.commentSkipFieldsMap = configMap;
@@ -237,6 +241,7 @@ public class BehaviorEvaluationSummaryUtil {
     }
 
     public static void handleInsert(List<Behavior_Evaluation__c> triggerNew) {
+        if (skipTrigger) return;
         //Prepopulate sections in summary field
         //Since this could have multiple types per insert and there might need to be more
         //than one type per set, get all values and split out into map by type
@@ -251,7 +256,132 @@ public class BehaviorEvaluationSummaryUtil {
         }
     }
 
+    public static void handleAfterInsert(List<Behavior_Evaluation__c> triggerNew){
+        if (skipTrigger) return;
+        Behavior_Evaluation_Summary__c[] summaries = new Behavior_Evaluation_Summary__c[0];
+        for (Behavior_Evaluation__c b : triggerNew) {
+            if (b.Evaluation_Subtype__c != null) {
+                ConfigTypeWrapper configInfos = getConfigInfos(b.Evaluation_Subtype__c);
+                summaries.add(new Behavior_Evaluation_Summary__c(
+                    Behavior_Evaluation__c = b.Id,
+                    Test_Name__c = 'General Comments',
+                    Display_Order__c = 0
+                ));
+
+                Integer i = 1;
+                for(String test : configInfos.templateMap.keySet()){
+                    Test_Config__mdt config = configInfos.templateMap.get(test);
+                    summaries.add(new Behavior_Evaluation_Summary__c(
+                        Behavior_Evaluation__c = b.Id,
+                        Test_Name__c = test,
+                        Display_Order__c = Decimal.valueOf(config.Test_Display_Order__c),
+                        ConfigId__c = config.Id
+                    ));
+                }
+            }
+        }
+        insert summaries;
+    }
+
+    @AuraEnabled
+    public static void handleSummaryUpdate(Id evalId){
+        handleSummaryUpdate(new Id[]{evalId});
+    }
+
+    public static void handleSummaryUpdate(Id[] evalIds){
+        Behavior_Evaluation__c[] evaluations = [
+            SELECT Id,
+            (
+                SELECT Id, Test_Name__c, Summary_Comments__c, Display_Order__c, ConfigId__c
+                FROM Behavior_Evaluation_Summaries__r
+                ORDER BY Display_Order__c ASC
+            )
+            FROM Behavior_Evaluation__c 
+            WHERE Id IN :evalIds
+        ];
+    
+        for(Behavior_Evaluation__c eval : evaluations){
+            if(eval.Behavior_Evaluation_Summaries__r.isEmpty()){
+                continue;
+            }
+            String evalSummary = '';
+    
+            for(Behavior_Evaluation_Summary__c summary : eval.Behavior_Evaluation_Summaries__r){
+                Test_Config__mdt config = Test_Config__mdt.getInstance(summary.ConfigId__c);
+                if(summary.Summary_Comments__c != null){
+                }
+                    evalSummary += '<p><b>' + summary.Test_Name__c + ':</b>&nbsp;';
+                    evalSummary += summary.Summary_Comments__c == null ? '</p>' : summary.Summary_Comments__c + '</p>';
+            }
+    
+            eval.Behavior_Evaluation_Summary__c = evalSummary;
+        }
+
+        update evaluations;
+    }
+
+
+    public static void handleBeforeUpdate(List<Behavior_Evaluation__c> triggerNew, Map<Id, Behavior_Evaluation__c> oldMap){
+        if (skipTrigger) return;
+        handleSummaryUpdate(triggerNew);
+        handleSkipDogTests(triggerNew, oldMap);
+    }
+
+    public static void handleSummaryUpdate(List<Behavior_Evaluation__c> triggerNew){
+        Map<Id, Behavior_Evaluation__c> evaluationsMap = new Map<Id, Behavior_Evaluation__c>([
+            SELECT Id,
+            (
+                SELECT Id, Test_Name__c, Summary_Comments__c, Display_Order__c, ConfigId__c
+                FROM Behavior_Evaluation_Summaries__r
+                ORDER BY Display_Order__c ASC
+            )
+            FROM Behavior_Evaluation__c 
+            WHERE Id IN :triggerNew
+        ]);
+    
+        for(Behavior_Evaluation__c eval : triggerNew){
+            if(!evaluationsMap.containsKey(eval.Id) || evaluationsMap.get(eval.Id).Behavior_Evaluation_Summaries__r.isEmpty()){
+                continue;
+            }
+            String evalSummary = '';
+    
+            for(Behavior_Evaluation_Summary__c summary : evaluationsMap.get(eval.Id).Behavior_Evaluation_Summaries__r){
+                Test_Config__mdt config = Test_Config__mdt.getInstance(summary.ConfigId__c);
+                if(summary.Summary_Comments__c != null){
+                }
+                    evalSummary += '<p><b>' + summary.Test_Name__c + ':</b>&nbsp;';
+                    evalSummary += summary.Summary_Comments__c == null ? '</p>' : summary.Summary_Comments__c + '</p>';
+            }
+    
+            eval.Behavior_Evaluation_Summary__c = evalSummary;
+        }
+    }
+
+    public static void handleSkipDogTests(List<Behavior_Evaluation__c> triggerNew, Map<Id, Behavior_Evaluation__c> oldMap){
+        for (Behavior_Evaluation__c b : triggerNew) {
+            Boolean skipDogTests = false;
+            Behavior_Evaluation__c oldRecord = oldMap.get(b.Id);
+            if (oldRecord.Overall_Evaluation_Grade__c == null && b.Overall_Evaluation_Grade__c == 'D - Dog Aggression') {
+                //Automates skipping dog tests
+                ConfigTypeWrapper configInfos = getConfigInfo(b.Evaluation_Subtype__c);
+                Test_Config__mdt[] configs = new Test_Config__mdt[0];
+                if(configInfos.commentSkipFieldsMap.containsKey('Opposite Sex Dog')){
+                    configs.addAll(configInfos.commentSkipFieldsMap.get('Opposite Sex Dog'));
+                }
+
+                if(configInfos.commentSkipFieldsMap.containsKey('Same Sex Dog')){
+                    configs.addAll(configInfos.commentSkipFieldsMap.get('Same Sex Dog'));
+                }
+
+                for(Test_Config__mdt config : configs){
+                    b.put(config.Test_Skip_Reason_Field__c, 'Skipped due to risk to the helper dog');
+                }
+            } 
+        }
+    }
+
     public static void handleAfterUpdate(List<Behavior_Evaluation__c> triggerNew, Map<Id, Behavior_Evaluation__c> triggerOldMap) {
+        if (skipTrigger) return;
         LogHistory.LogHistory(triggerOldMap, triggerNew);
     }
 
@@ -277,268 +407,165 @@ public class BehaviorEvaluationSummaryUtil {
         return configInfos;
     }
 
-    // public static void handleUpdateLegacy(List<Behavior_Evaluation__c> triggerNew, Map<Id, Behavior_Evaluation__c> triggerOldMap) {
-    //     //List of picklist fields/values that have a value category of 4
-    //     Map<String, String[]> highValueMap = getHighValueCategoryMap();
+    @AuraEnabled
+    public static void updateBehaviorEvalSummary(Id recordId){
+        try {
+            handleSummaryUpdate(new Id[]{recordId});
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
 
-    //     for (Behavior_Evaluation__c b : triggerNew) {
-    //         ConfigTypeWrapper configInfos = getConfigInfo(b.Evaluation_Subtype__c);
+    @AuraEnabled
+    public static SummaryDisplay getConfigList(Id recordId){
+        try {
+            Behavior_Evaluation__c ba = [
+                SELECT Id, Evaluation_Subtype__c, IsLocked__c,
+                (
+                    SELECT Id, Test_Name__c, Summary_Comments__c, Display_Order__c 
+                    FROM Behavior_Evaluation_Summaries__r
+                    ORDER BY Display_Order__c ASC
+                )
+                FROM Behavior_Evaluation__c 
+                WHERE Id = :recordId LIMIT 1];        
+            return new SummaryDisplay(ba);
 
-    //         Map<String, Test_Config__mdt[]> commentFieldsMap = configInfos.commentSkipFieldsMap;
-    //         String[] summaryList = configInfos.templateList;
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
 
-    //         String[] parentSummaryList = configInfos.templateParentList;
+    public class SummaryDisplay{
+        @AuraEnabled public SummaryTestInfo[] templateList;
+        @AuraEnabled public Boolean isLocked;
 
-    //         Map<String, String[]> parentSummaryMap = configInfos.parentToTemplateListMap;
+        public SummaryDisplay(Behavior_Evaluation__c ba){
+            this.templateList = new SummaryTestInfo[0];
+            for(Behavior_Evaluation_Summary__c summary : ba.Behavior_Evaluation_Summaries__r){
+                templateList.add(new SummaryTestInfo(summary));
+            }
+            this.isLocked = ba.IsLocked__c;
+        }
+    }
 
-    //         Boolean skipDogTests = false;
-    //         Behavior_Evaluation__c oldRecord = triggerOldMap.get(b.Id);
-    //         if (oldRecord.Overall_Evaluation_Grade__c == null && b.Overall_Evaluation_Grade__c == 'D - Dog Aggression') {
-    //             //Automates skipping dog tests
-    //             skipDogTests = true;
-    //         }            
+    public class SummaryTestInfo{
+        @AuraEnabled public Id testId;
+        @AuraEnabled public String testName;
+        @AuraEnabled public String summaryComments;
+        @AuraEnabled public String testComments;
 
-    //         Map<String, CommentSkipWrapper[]> commentMap = new Map<String, CommentSkipWrapper[]>();
-    //         Map<String, Set<String>> parsedCommentsMap = new Map<String, Set<String>>();
+        public SummaryTestInfo(Behavior_Evaluation_Summary__c summary){
+            this.testId = summary.Id;
+            this.testName = summary.Test_Name__c;
+            this.summaryComments = summary.Summary_Comments__c;
+        }
+    }
 
-    //         Map<String, String> summaryDiffMap = parseSummaryList(b.Behavior_Evaluation_Summary__c, summaryList);
+    public static void populateEvaluationSummaries(Id[] animalIds, Integer count){
+        String query = 'SELECT Id, Evaluation_Subtype__c,Behavior_Evaluation_Summary__c ' + 
+            'FROM Behavior_Evaluation__c '+
+            'WHERE Evaluation_Subtype__c != null '+
+            'AND Id NOT IN( '+
+                'SELECT Behavior_Evaluation__c FROM Behavior_Evaluation_Summary__c '+
+            ')';
 
-    //         String[] doNotDuplicateCustomComments = new String[]{'Same_Sex', 'Opposite_Sex'};
-
-    //         for(String parentSummaryTitle : parentSummaryMap.keySet()){
-    //             System.debug('parentSummaryTitle: ' + parentSummaryTitle);
-    //             Boolean skipSubsequentParts = false;
-    //             String skipReason = null;
-                
-    //             for(String summaryTitle : parentSummaryMap.get(parentSummaryTitle)){
-    //                 System.debug('summaryTitle: ' + summaryTitle);
-    //                 CommentSkipWrapper[] commentList = new CommentSkipWrapper[0];
-
-    //                 Test_Config__mdt p1Config = commentFieldsMap.get(summaryTitle)[0];
-    //                 String currentFieldApi = p1Config.Test_Skip_Reason_Field__c;
-
-    //                 //if skipping p1, skip the others for the same reason
-    //                 if(currentFieldApi.contains('P1')){
-    //                     if(oldRecord.get(currentFieldApi) == null && b.get(currentFieldApi) != null){
-    //                         skipSubsequentParts = true;
-    //                         skipReason = (String) b.get(currentFieldApi);
-    //                     }
-    //                 }                    
-
-    //                 if(commentFieldsMap.containsKey(summaryTitle)){
-    //                     String parsedComments = summaryDiffMap.containsKey(summaryTitle) ? summaryDiffMap.get(summaryTitle) : null;
-    //                     parsedComments = parseSummaryComments(parsedComments, b, oldRecord, commentFieldsMap.get(summaryTitle));
-    //                     parsedCommentsMap.put(summaryTitle, new Set<String>{parsedComments});
-
-    //                     for(Test_Config__mdt config : commentFieldsMap.get(summaryTitle)){
-    //                         System.debug('config: ' + config.DeveloperName);
-    //                         if (skipDogTests) {
-    //                             if (summaryTitle.startsWith('Same Sex') || summaryTitle.startsWith('Opposite Sex') || summaryTitle.startsWith('Same_Sex') || summaryTitle.startsWith('Opposite_Sex')) {
-    //                                 b.put(config.Test_Skip_Reason_Field__c, 'Skipped due to risk to the helper dog');
-    //                             }
-    //                         }
-    //                         else if(skipSubsequentParts && b.get(config.Test_Skip_Reason_Field__c) == null){
-    //                             b.put(config.Test_Skip_Reason_Field__c, skipReason);
-    //                         }
-
-    //                         String picklistString = (string) b.get(config.Picklist_API_Name__c);
-    //                         String[] highValueSelections = new String[0];
-    //                         if(picklistString != null){
-    //                             String[] picklistSelections = picklistString.split(';');
-    //                             String[] highValueList = highValueMap.containsKey(config.Picklist_API_Name__c) ? highValueMap.get(config.Picklist_API_Name__c) : null;
-    //                             if(highValueList != null){
-    //                                 for(String selection : picklistSelections){
-    //                                     if(highValueList.contains(selection)){
-    //                                         highValueSelections.add(selection);
-    //                                     }
-    //                                 }
-    //                             }
-    //                         }
-                            
-    //                         String testCommentsText = (string) b.get(config.Test_Comment_Field_Name__c);
-    //                         String skipReasonText = (string) b.get(config.Test_Skip_Reason_Field__c);
-
-    //                         commentList.add(new CommentSkipWrapper(
-    //                             config.Test_Name__c,
-    //                             testCommentsText, 
-    //                             skipReasonText,
-    //                             !highValueSelections.isEmpty() ? string.join(highValueSelections, ';') : null
-    //                         ));
-
-    //                         //unskip if score was added
-    //                         if(oldRecord.get(config.Picklist_API_Name__c) == null && b.get(config.Picklist_API_Name__c) != null){
-    //                             System.debug('**setting skip field to null');
-    //                             b.put(config.Test_Skip_Reason_Field__c, null);
-    //                         }
-    //                     }
-    //                     commentMap.put(summaryTitle, commentList);
-    //                 }
-    //             }
-    //         }
-
-    //         String[] summaryCommentList = new String[0];
+        if(animalIds != null && !animalIds.isEmpty()){
+            query += ' AND Animal__c IN :animalIds';
+        }
             
-    //         if(summaryDiffMap.containsKey('preText')){
-    //             summaryCommentList.add('<p>' + summaryDiffMap.get('preText') + '</p>');
-    //         }
+        if(count != null && count > 0){
+            query += ' LIMIT :count';
+        }
 
-    //         for(String testName: summaryList){
-    //             System.debug('testName: ' + testName);
-    //             System.debug('heap size: ' + system.Limits.getHeapSize());
-    //             String summary = '<p><b>' + testName + ':</b>&nbsp;';
-    //             String[] tempCommentList = new String[0];
-    //             if(commentMap.containsKey(testName)){                    
-    //                 for(CommentSkipWrapper comments : commentMap.get(testName)){
-    //                     if(comments.commentField != null) {
-    //                         System.debug('comments.commentField: ' + comments.commentField);
-    //                         tempCommentList.add(comments.commentField);
-    //                     }
+        Behavior_Evaluation__c[] evals = database.query(query);
 
-    //                     if(comments.skipField != null) {
-    //                         System.debug('comments.skipField: ' + comments.skipField);
-    //                         tempCommentList.add(comments.skipField);
-    //                     }
+        Behavior_Evaluation_Summary__c[] summaries = new Behavior_Evaluation_Summary__c[0];
+        for (Behavior_Evaluation__c eval : evals) {
+            if (eval.Evaluation_Subtype__c != null) {
+                ConfigTypeWrapper configInfos = getConfigInfos(eval.Evaluation_Subtype__c);
+                Map<String, String> parsedMap = parseSummary(configInfos.templateList, eval.Behavior_Evaluation_Summary__c);
+                summaries.add(new Behavior_Evaluation_Summary__c(
+                    Behavior_Evaluation__c = eval.Id,
+                    Test_Name__c = 'General Comments',
+                    Display_Order__c = 0,
+                    Summary_Comments__c = parsedMap.containsKey('preText') ? parsedMap.get('preText') : null
+                ));
 
-    //                     if(comments.highValueField != null) {
-    //                         System.debug('comments.highValueField: ' + comments.highValueField);
-    //                         tempCommentList.add(comments.highValueField);
-    //                     }
+                Integer i = 1;
+                for(String test : configInfos.templateList){
+                    Test_Config__mdt config = configInfos.templateMap.get(test);
+                    summaries.add(new Behavior_Evaluation_Summary__c(
+                        Behavior_Evaluation__c = eval.Id,
+                        Test_Name__c = test,
+                        Display_Order__c = Decimal.valueOf(config.Test_Display_Order__c),
+                        ConfigId__c = config.Id,
+                        Summary_Comments__c = parsedMap.containsKey(test) ? parsedMap.get(test) : null
+                    ));
+                }
+            }
+        }
+        insert summaries;
+    }
 
-    //                     if(String.isNotBlank(comments.summaryField)) {
-    //                         System.debug('comments.summaryField: ' + comments.summaryField);
-    //                         tempCommentList.add(comments.summaryField);
-    //                     }   
-    //                 }
-    //             }
+    private static Map<String, String> parseSummary(String[] summaryList, String newSummary){
+        // ConfigTypeWrapper configInfos = getConfigInfo(evalSubtype);
+        // String[] summaryList = configInfos.templateList;
 
+        Map<String, String> summaryMap = new Map<String, String>();
+        if(String.isNotEmpty(newSummary)){        
+            for(Integer i = 0; i < summaryList.size(); i++){
+                Integer newSummaryIndexStart = newSummary.indexOf(summaryList[i]);
+                if(i == 0 && newSummaryIndexStart > 0){
+                    String preText = newSummary.substring(0, newSummaryIndexStart);
+                    preText = cleanString(preText);
+                    System.debug('preText: ' + preText);
+                    summaryMap.put('preText', preText);
+                }
+                if(newSummaryIndexStart == -1) continue;
+                Integer newSummaryIndexEnd = i + 1 >= summaryList.size() ? null : newSummary.indexOf(summaryList[i+1]);
 
-    //             if(parsedCommentsMap.containsKey(testName)){
-    //                 String parsedComments = addParsedComments(parsedCommentsMap.get(testName));
-    //                 if(parsedComments != null && String.isNotBlank(parsedComments)){
-    //                     tempCommentList.add(parsedComments);
-    //                 }
-    //             }
+                String newSubSummary;
+                if(newSummaryIndexEnd == null || newSummaryIndexEnd == -1){
+                    newSubSummary = newSummary.substring(newSummaryIndexStart);
+                } else {
+                    newSubSummary = newSummary.substring(newSummaryIndexStart, newSummaryIndexEnd);
+                }
 
-    //             if(!tempCommentList.isEmpty()){
-    //                 System.debug('tempCommentList: ' + tempCommentList);
-    //                 summary += string.join(tempCommentList, ', ');
-    //             }
+                Integer index = newSubSummary.indexOf(':');
+                String summaryKey = cleanString(newSubSummary.substring(0, index));
+                String summaryValue = cleanString(newSubSummary.substring(index));
 
-    //             summary += '<p>';
-    //             System.debug('summary: ' + summary);
-    //             summaryCommentList.add(summary);
-    //         }
+                summaryMap.put(summaryKey, summaryValue);
+            }
+        }
+        return summaryMap;
+    }
 
-    //         b.Behavior_Evaluation_Summary__c = String.join(summaryCommentList, '');
-    //     }
-    // }
+    public static String cleanString(String toClean){
+        toClean = toClean.stripHtmlTags();
+        toClean = toclean.normalizeSpace();
+        String[] toCleanList = toClean.split(',');
+        Set<String> toCleanSet = new Set<String>(toCleanList);
+        toCleanSet.remove('');
+        toCleanSet.remove(null);
+        toClean = string.join(new List<String>(toCleanSet), ', ');
+        if(toClean != null && String.isNotEmpty(toClean)){
+            Boolean isAlphanumeric = false;
 
-    // public static String parseSummaryComments(String parsedComments, Behavior_Evaluation__c b, Behavior_Evaluation__c oldB, Test_Config__mdt[] configs){
-    //     if(parsedComments == null && string.isBlank(parsedComments)){
-    //         return parsedComments;
-    //     }
-
-    //     String[] testCommentsTextList = new String[0];
-    //     String[] oldTestCommentsTextList = new String[0];
-    //     String[] skipReasonTextList = new String[0];
-    //     String[] oldSkipReasonTextList = new String[0];
-
-    //     for(Test_Config__mdt config : configs){
-    //         testCommentsTextList.add((string) b.get(config.Test_Comment_Field_Name__c));
-    //         oldTestCommentsTextList.add((string) oldB.get(config.Test_Comment_Field_Name__c));
-    //         skipReasonTextList.add((string) b.get(config.Test_Skip_Reason_Field__c));
-    //         oldSkipReasonTextList.add((string) oldB.get(config.Test_Skip_Reason_Field__c));
-    //     }
-        
-    //     // clear skip reason and comments from comment field from the parsed comments
-    //     parsedComments = removeSubStrings(parsedComments, testCommentsTextList);
-    //     parsedComments = removeSubStrings(parsedComments, oldTestCommentsTextList);
-    //     parsedComments = removeSubStrings(parsedComments, skipReasonTextList);
-    //     parsedComments = removeSubStrings(parsedComments, oldSkipReasonTextList);
-
-    //     parsedComments = cleanString(parsedComments);
-
-    //     System.debug('parsedComments: ' + parsedComments);
-    //     return parsedComments;
-    // }
-
-    // public static String removeSubStrings(String parsedComments, String[] toRemove){
-    //     for(String subText : toRemove){
-    //         if(subText != null && String.isNotBlank(subText)){
-    //             parsedComments = parsedComments.replaceAll(subText, '');
-    //         }
-    //     }
-
-    //     return parsedComments;
-    // }
-
-    // public static String addParsedComments(Set<String> parsedComments){
-    //     String summary = null;
-    //     String[] parsedList = new List<String>(parsedComments);
-
-    //     if(parsedList != null && !parsedList.isEmpty()){
-    //         summary = cleanString(string.join(parsedList, ', '));
-    //     }
-    //     return summary;
-    // }
-
-    // public static Map<String, String> parseSummaryList(String newSummary, String[] summaryList){
-    //     Map<String, String> summaryMap = new Map<String, String>();
-
-    //     if(String.isNotEmpty(newSummary)){        
-    //         for(Integer i = 0; i < summaryList.size(); i++){
-    //             Integer newSummaryIndexStart = newSummary.indexOf(summaryList[i]);
-    //             if(i == 0 && newSummaryIndexStart > 0){
-    //                 String preText = newSummary.substring(0, newSummaryIndexStart);
-    //                 preText = cleanString(preText);
-    //                 System.debug('preText: ' + preText);
-    //                 summaryMap.put('preText', preText);
-    //             }
-    //             if(newSummaryIndexStart == -1) continue;
-    //             Integer newSummaryIndexEnd = i + 1 >= summaryList.size() ? null : newSummary.indexOf(summaryList[i+1]);
-
-    //             String newSubSummary;
-    //             if(newSummaryIndexEnd == null || newSummaryIndexEnd == -1){
-    //                 newSubSummary = newSummary.substring(newSummaryIndexStart);
-    //             } else {
-    //                 newSubSummary = newSummary.substring(newSummaryIndexStart, newSummaryIndexEnd);
-    //             }
-
-    //             Integer index = newSubSummary.indexOf(':');
-    //             String summaryKey = cleanString(newSubSummary.substring(0, index));
-    //             String summaryValue = cleanString(newSubSummary.substring(index));
-
-    //             summaryMap.put(summaryKey, summaryValue);
-    //         }
-    //     }
-    //     return summaryMap;
-    // }
-
-    // public static String cleanString(String toClean){
-    //     toClean = toClean.stripHtmlTags();
-    //     toClean = toclean.normalizeSpace();
-    //     String[] toCleanList = toClean.split(',');
-    //     Set<String> toCleanSet = new Set<String>(toCleanList);
-    //     toCleanSet.remove('');
-    //     toCleanSet.remove(null);
-    //     toClean = string.join(new List<String>(toCleanSet), ', ');
-    //     if(toClean != null && String.isNotEmpty(toClean)){
-    //         Boolean isAlphanumeric = false;
-
-    //         while(!isAlphanumeric){
-    //             if(toClean == null){
-    //                 isAlphanumeric = true;
-    //             }
-    //             else if(toClean.length() == 1){                    
-    //                 toClean = toClean.isAlphanumeric() ? toClean : null;
-    //             } else {
-    //                 isAlphanumeric = toClean.substring(0, 1).isAlphanumeric();
-    //                 if(!isAlphanumeric){
-    //                     toClean = toClean.subString(1);
-    //                 }
-    //             }
-    //         }
-    //     }
-    //     return toClean;
-    // }
+            while(!isAlphanumeric){
+                if(toClean == null){
+                    isAlphanumeric = true;
+                }
+                else if(toClean.length() == 1){                    
+                    toClean = toClean.isAlphanumeric() ? toClean : null;
+                } else {
+                    isAlphanumeric = toClean.substring(0, 1).isAlphanumeric();
+                    if(!isAlphanumeric){
+                        toClean = toClean.subString(1);
+                    }
+                }
+            }
+        }
+        return toClean;
+    }
 }

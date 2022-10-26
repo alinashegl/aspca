@@ -2,7 +2,7 @@
 public with sharing class test_PlaygroupToDoListController {
     @isTest
     static void getPlaygroupAnimalsSuccess() {
-        Animal__c a = TestDataFactory.createAnimal();
+        Animal__c a = TestDataFactory.createAnimalWithName('Willow');
         a.Play_Category__c = 'Small Mellow';
         update a;
 
@@ -11,7 +11,7 @@ public with sharing class test_PlaygroupToDoListController {
         update u;
         
         Test.startTest();
-        List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals('MRC');
+        List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals();
         Test.stopTest();
 
         List<Animal__c> animals = [SELECT Id, Shelter_Location2__c, Play_Category__c FROM Animal__c WHERE Id = :a.Id];
@@ -32,7 +32,7 @@ public with sharing class test_PlaygroupToDoListController {
         Animal__c a1 = new Animal__c(id = a.id, Current_Location__c = 'Boarding', Play_Category__c = 'Unevaluated');
         update a1;
         Test.startTest();
-        List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals('MRC');
+        List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals();
         Test.stopTest();
         System.assertEquals(0, playgroupAnimals.size());
     }
@@ -40,12 +40,12 @@ public with sharing class test_PlaygroupToDoListController {
     @isTest
     static void getPlaygroupAnimalsBehaviorPause() {
         Animal__c a = TestDataFactory.createAnimal();
-        Animal__c a1 = new Animal__c(Id=a.Id, Current_Recent_Shelter_Location__c = 'MRC', Type_of_Animal__c = 'Dog',
+        Animal__c a1 = new Animal__c(Id=a.Id, Current_Recent_Shelter_Location__c = BehaviorUtil.MRC, Type_of_Animal__c = 'Dog',
                                      Play_Category__c = 'PG Re-Eval', Current_Location__c = 'Test');
         update a1;
         List<Play_Pause__c> playPauses = TestDataFactory.createPlayPauses(a);
         Test.startTest();
-        List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals('MRC');
+        List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals();
         Test.stopTest();
         System.assertEquals(0, playgroupAnimals.size());
     }
@@ -56,7 +56,7 @@ public with sharing class test_PlaygroupToDoListController {
         Animal__c a1 = new Animal__c(id = a.id, Current_Location__c = 'Boarding');
         update a1;
         Test.startTest();
-        List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals('Not MRC');
+        List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals();
         Test.stopTest();
         System.assertEquals(0, playgroupAnimals.size());
     }
@@ -67,7 +67,7 @@ public with sharing class test_PlaygroupToDoListController {
         Animal__c a1 = new Animal__c(id = a.id, Current_Location__c = 'Boarding', Play_Category__c = 'Unevaluated');
         update a1;
         Test.startTest();
-        List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals('MRC');
+        List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals();
         Test.stopTest();
         System.assertEquals(0, playgroupAnimals.size());
     }
@@ -199,7 +199,7 @@ public with sharing class test_PlaygroupToDoListController {
         insert playPauses;
 
         test.startTest();
-            Animal__c[] animals = PlaygroupToDoListController.getPlaygroupAnimals(null);
+            Animal__c[] animals = PlaygroupToDoListController.getPlaygroupAnimals();
             Set<Id> animalIds = new Set<Id>();
             for(Animal__c animal : animals){
                 animalIds.add(animal.Id);
@@ -247,7 +247,7 @@ public with sharing class test_PlaygroupToDoListController {
         insert playPauses;
 
         test.startTest();
-            Animal__c[] animals = PlaygroupToDoListController.getPlaygroupAnimals(null);
+            Animal__c[] animals = PlaygroupToDoListController.getPlaygroupAnimals();
             Set<Id> animalIds = new Set<Id>();
             for(Animal__c animal : animals){
                 animalIds.add(animal.Id);

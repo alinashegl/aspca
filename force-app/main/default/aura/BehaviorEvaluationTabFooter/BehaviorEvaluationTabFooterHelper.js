@@ -186,6 +186,7 @@
 
         //this.sendRequest(cmp, 'c.updateEval', params);
 		var comp = cmp;
+        this.handlePublishEvalSaveStartMessage(cmp);
         this.sendPromise(cmp, mName, params, params[apiName])
         .then(
           function(response) {
@@ -198,38 +199,62 @@
               });
               compEvent.fire();
           }
-        ).catch(
+        )
+        .then(() =>{
+            this.handlePublishEvalUpdateMessage(cmp);
+        }) 
+        .catch(
             function(error) {
                 console.log(error)
             }
         );
     } ,
+
     putComments : function (cmp, event) {
         var c = cmp.find('testComments');
         var a = cmp.get('v.testName');
         var v = c.get('v.value');
-        var rId = cmp.get('v.recordId');
+        var rId = cmp.get('v.recordId');        
 
         var params = {
             apiName: a.id ,
             values: v ,
             recordId: rId
         };
+        this.handlePublishEvalSaveStartMessage(cmp);
         this.sendPromise(cmp, 'c.updateEval', params, a.id)
         .then(
             function(response) {
-                console.log('PROMISE RESPONSE', response[a.id]);
+                console.log('PROMISE RESPONSE', response[a.id]);                
                 $A.get('e.force:refreshView').fire();
             }
-        ).catch(
+        )
+        .then(() =>{
+            this.handlePublishEvalUpdateMessage(cmp);
+        }) 
+        .catch(
             function(error) {
                 console.log(error)
                 cmp.find('lib').showToast({
                     'title': 'Failure' ,
                     'message': 'Test Comments did not save successfully: ' + error,
-                    'variant': 'success'
+                    'variant': 'error'
                 });
             }
         );
+    },
+
+    handlePublishEvalSaveStartMessage: function(cmp) {
+        var payload = {
+            startSave: true
+        };
+        cmp.find("evalSummaryUpdateMessage").publish(payload);
+    },
+
+    handlePublishEvalUpdateMessage: function(cmp) {
+        var payload = {
+            isUpdated: true
+        };
+        cmp.find("evalSummaryUpdateMessage").publish(payload);
     }
 });

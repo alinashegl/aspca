@@ -83,6 +83,7 @@
     <aura:attribute name="MuzzleSSD3" type="Boolean" />
     <aura:attribute name="MuzzleOSD3" type="Boolean" />
     <aura:attribute name="spinner" type="boolean" default="false"/>
+    <aura:attribute name="workingSpinner" type="boolean" default="false"/>    
     <aura:attribute name="isLocked" type="boolean" default="true"/>
     <aura:attribute name="isTempLock" type="boolean" default="true"/>
     <aura:attribute name="isPermLock" type="boolean" default="true"/>
@@ -120,6 +121,12 @@
         scope="APPLICATION"
     />
 
+    <lightning:messageChannel 
+        type="EvalSummaryUpdateChannel__c"
+        onMessage="{!c.handleEvalUpdateMessage}" 
+        scope="APPLICATION"
+    />
+
         <lightning:tabset variant="vertical" selectedTabId="{!v.tabId}" aura:id="tabs">
             <lightning:recordEditForm class="slds-grid slds-theme_shade" objectApiName="Behavior_Evaluation__c"
                                       recordId="{!v.recordId}">
@@ -141,13 +148,20 @@
                 </lightning:buttonGroup>-->
                 <aura:if isTrue="{!!v.spinner}">
                     <lightning:layout >
-                        <lightning:layoutItem size="6">
+                        <lightning:layoutItem size="4">
                             <div class="slds-float_left">
                                 <lightning:button name="prevTab" value="Previous Tab" label="Previous Tab" onclick="{!c.handleClick}"
                                                   class="float"/>
                             </div>
                         </lightning:layoutItem>
-                        <lightning:layoutItem size="6">
+                        <lightning:layoutItem size="4">
+                            <aura:if isTrue="{!v.workingSpinner}">
+                                <div class="slds-align_absolute-center">
+                                    <lightning:icon iconName="utility:spinner" alternativeText="working" title="working" size="medium" class="float"/>
+                                </div>
+                            </aura:if>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem size="4">
                             <div class="slds-float_right">
                                 <lightning:button class="float" name="nextTab" value="Next Tab" label="Next Tab" onclick="{!c.handleClick}"/>
                             </div>
@@ -944,11 +958,11 @@
                             </lightning:layout>
                         </lightning:tab>
                         <aura:if isTrue="{!v.IsDogFighting}">
-                            <lightning:tab label="Fake Dog Interaction" id="fdit">
+                            <lightning:tab label="Model Dog Interaction" id="fdit">
                                 <lightning:layout multipleRows="true">
                                     <lightning:layoutItem size="12">
                                         <div class="slds-align_absolute-center" style="height:3rem">
-                                            <h1 class="tabHeader">Fake Dog Interaction</h1>
+                                            <h1 class="tabHeader">Model Dog Interaction</h1>
                                         </div>
                                         <br></br>
                                         <aura:iteration items="{!v.fakeDogInteractionTest}" var="variable">
@@ -2128,7 +2142,12 @@
                         </lightning:layoutItem>
                         <lightning:layoutItem size="4">
                             <div class="slds-align_absolute-center">
-                                <lightning:button class="slds-float_right" type="submit" label="Save and Complete Evaluation" variant="destructive" onclick="{!c.refresh}" disabled="{!v.isLocked}"/>
+                                <aura:if isTrue="{!v.workingSpinner}">
+                                    <lightning:icon iconName="utility:spinner" alternativeText="working" title="working" size="medium" class="float"/>
+                                </aura:if>
+                                <aura:if isTrue="{!!v.workingSpinner}">
+                                    <lightning:button class="slds-float_right" type="submit" label="Save and Complete Evaluation" variant="destructive" onclick="{!c.refresh}" disabled="{!v.isLocked}"/>
+                                </aura:if>
                             </div>
                         </lightning:layoutItem>
                         <lightning:layoutItem size="4">
