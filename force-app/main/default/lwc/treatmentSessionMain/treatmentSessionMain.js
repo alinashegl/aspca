@@ -89,6 +89,6 @@ export default class TreatmentSessionMain extends NavigationMixin(LightningEleme
     get modifySessionLabel(){
         return this.showModifySession ? 
         (this.activeSession ? 'Return to Session' :'Protocol List')
-        : 'Modify Session';
+        : 'Skip or Add Protocol';
     }
 }

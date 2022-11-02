@@ -170,7 +170,7 @@ public class BehaviorEvaluationSummaryUtil {
                 testName = testName.replace(' P1', '').replace(' P2', '').replace(' P3', '');
                 if (!configNameSet.contains(testName)) {
                     configNameSet.add(testName);
-                    configSummary.add(new SummaryWrapper(Integer.valueOf(t.Test_Display_Order__c), '<p><b>' + testName + ':</b>&nbsp;</p>'));
+                    configSummary.add(new SummaryWrapper(Integer.valueOf(t.Test_Display_Order__c), '<b>' + testName + ':</b>&nbsp;<br>'));
                     nameToConfigMap.put(testName, t);
                 }
             }
