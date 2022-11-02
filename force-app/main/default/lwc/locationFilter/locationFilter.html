@@ -1,0 +1,17 @@
+<template>
+    <lightning-card>
+        <div>
+            <template for:each={animalLocations} for:item='loc'>
+                <lightning-button
+                    key={loc.label} 
+                    class="slds-p-right_small"
+                    variant={loc.variant}
+                    label={loc.label}
+                    title={loc.label}
+                    onclick={handleOnclick}
+                    data-type={loc.label}
+                ></lightning-button>
+            </template>
+        </div>
+    </lightning-card>
+</template>

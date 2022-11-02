@@ -70,7 +70,7 @@ export default class PlaygroupSessionAnimal extends LightningElement {
 
             contactList = result.data.animalContacts;
             if(result.data != null){
-                window.console.log('animal response: ', result.data.animalName);
+                window.console.log('animal response: ', result.data);
                 this.playRatingValue = result.data.playRating;
                 this.animalInfo = result.data;
             }
