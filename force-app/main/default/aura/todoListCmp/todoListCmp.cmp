@@ -1,17 +1,34 @@
 <aura:component implements="flexipage:availableForAllPageTypes,force:appHostable" controller="HomeBannerLWCController">
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
     <aura:attribute name="isVisible" type="Boolean" default="false"/>
+    <aura:attribute name="locations" type="String"/>
+
+    <lightning:messageChannel 
+        type="LocationFilterChannel__c"
+        onMessage="{!c.handleLocationFilterMessage}" 
+        scope="APPLICATION"
+    />
+
     <lightning:card title = "To Do List" iconName = "standard:task">
         <aura:set attribute="actions">
             <c:todoList/>
             <c:OutOfOffice/>
         </aura:set>
+        <aura:set attribute="footer">
+            <c:locationFilter
+                applicationType="ToDoList"
+            />
+        </aura:set>
     </lightning:card>
     <div class="slds-p-top_small">
-        <c:playgroupToDoList/>
+        <c:playgroupToDoList
+        locations="{!v.locations}"
+        />
     </div>
     <div class="slds-p-top_small">
-        <c:treatmentPriorityToDoList/>
+        <c:treatmentPriorityToDoList
+        locations="{!v.locations}"
+        />
     </div>
     <aura:if isTrue="{!v.isVisible}">
         <div class="slds-p-top_small">

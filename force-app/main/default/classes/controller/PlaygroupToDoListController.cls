@@ -2,22 +2,22 @@ public with sharing class PlaygroupToDoListController {
     static String[] locationsToExclude = new String[]{
         'Board and Train',
         'Boarding',
-        'Field Temp Shelter',
         'Foster Home',
         'Partner Hospital',
         'Response Partner'
     };
 
     @AuraEnabled(cacheable=true)
-    public static List<Animal__c> getPlaygroupAnimals(String location) {
-        return getPlaygroupAnimals();
+    public static List<Animal__c> getPlaygroupAnimals(String locations) {
+        return getPlaygroupAnimals(locations.split(','));
     }
 
     @AuraEnabled(cacheable=true)
-    public static List<Animal__c> getPlaygroupAnimals() {
+    public static List<Animal__c> getPlaygroupAnimals(String[] locationsFilter) {
         Animal__c[] animals = [
             SELECT Id, Name, Animal_Name__c, Gender__c, Shelter_Location__c, Playgroup_Priority_Level__c, Play_Style_Notes__c,
             Play_Category__c, Shelter_Color_Coding__c, Number_of_Playgroups__c, Does_Not_Walk_on_a_Leash__c, Does_Not_Walk_on_a_Leash_Notes__c,
+            Current_Location__c,
             (SELECT Id FROM Medical_Conditions__r
                 WHERE Medical_Condition__c = 'Babesia'
                 AND Date_Diagnosed__c <= TODAY
@@ -49,7 +49,15 @@ public with sharing class PlaygroupToDoListController {
             )
             ORDER BY Id            
         ];
-        return animals;
+        Animal__c[] animalList = new Animal__c[0];
+        if(locationsFilter != null && !locationsFilter.isEmpty()){
+            for(Animal__c anim : animals){
+                if(locationsFilter.contains(anim.Current_Location__c)){
+                    animalList.add(anim);
+                }
+            }
+        }
+        return animalList;
     }
     //Neha
     @AuraEnabled(cacheable=true)

@@ -10,12 +10,11 @@ import editPlaygroup from '@salesforce/apex/PlaygroupToDoListController.editPlay
 import getUserLocation from '@salesforce/apex/PlaygroupToDoListController.getUserLocation';
 import getReportId from '@salesforce/apex/PlaygroupToDoListController.getReportId';
 
-
 export default class PlaygroupToDoList extends NavigationMixin(LightningElement) {
     @track errorMsg;
     @track reportID;
+    @api locations;
     
-    location;
     //exposed properties for "copy playgroup" and "edit playgroup"
     @api
     sessionId;
@@ -122,8 +121,10 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
         return this.action === 'new';
     }
 
-    @wire(getPlaygroupAnimals, { location: '$location'})
+    // @wire(getPlaygroupAnimals, { location: '$location'})
+    @wire(getPlaygroupAnimals, { locations: '$locations'})
     wiredPlaygroupAnimals(result) {
+        // window.console.log('wiredPlaygroupAnimals result: ', JSON.stringify(result));
         this.playgroupAnimals = result;
         if (result.data) {
             this.playgroupAnimalsData = result.data;
@@ -141,12 +142,14 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
             }
         }
         else if (result.error) {
+            window.console.log('error: ', result.error);
             const evt = new ShowToastEvent({
                 title: 'Error',
-                message: result.error,
+                message: 'wiredPlaygroupAnimals error',
                 variant: 'error',
             });
             this.dispatchEvent(evt);
+            // message: result.error == null ? 'wiredPlaygroupAnimals error' : result.error,
         }
     }
 
@@ -158,6 +161,10 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
             if (this.sessionId && this.animalsToAdd.length !== 0) {
                 this.toggleSelections();
             }
+        }
+
+        if(this.locations == null){
+            this.locations = 'CRC,CRC-MRC';
         }
 
         //only execute if location is not set
@@ -512,5 +519,12 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
 
     handleCancel() {
         this.dispatchEvent(new CustomEvent('cancel'));
+    }
+
+    @api
+    refresh(filterList){
+        window.console.log('filterList: ', filterList);
+        this.locationsFilter = filterList;
+        refreshApex(this.playgroupAnimals);
     }
 }

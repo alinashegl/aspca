@@ -11,5 +11,9 @@
             }
     	});
         $A.enqueueAction(action);
+    },
+
+    handleLocationFilterMessage : function(cmp, message){
+        cmp.set("v.locations",message.getParam('locations'));
     }
 })
