@@ -88,6 +88,10 @@
                 <behavior>Readonly</behavior>
                 <field>LastModifiedById</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>All_Problem_Behaviors__c</field>
+            </layoutItems>
         </layoutColumns>
         <style>OneColumn</style>
     </layoutSections>
@@ -135,6 +139,18 @@
     </relatedLists>
     <relatedLists>
         <relatedList>RelatedEntityHistoryList</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <fields>NAME</fields>
+        <fields>Type_of_Animal__c</fields>
+        <fields>Breed__c</fields>
+        <fields>Thumbnail__c</fields>
+        <fields>Intake_Date_Time__c</fields>
+        <fields>Intake_BCS__c</fields>
+        <fields>Current_Weight_in_kgs_Num__c</fields>
+        <fields>Current_Weight_in_lbs_Num__c</fields>
+        <fields>CREATEDBY_USER</fields>
+        <relatedList>Animal__c.Treatment_Plan__c</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>

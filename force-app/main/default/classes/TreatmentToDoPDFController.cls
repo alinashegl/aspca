@@ -25,8 +25,12 @@ public class TreatmentToDoPDFController {
                              , Protocol_Name__c
                              FROM Plan_Protocols__r
                              WHERE IsRemoved__c = False)
-                          FROM Treatment_Plan__c WHERE Animal__r.Location_Filter__c = true
-                    									AND IsActive__c = TRUE
+                          FROM Treatment_Plan__c 
+                                      WHERE Animal__r.Location_Filter__c = true
+                                      AND  Animal__r.Active_Animal__c = true
+                                      AND IsActive__c = TRUE
+                                      AND Treatment_Priority__c != null
+                                      AND Treatment_Priority__c != 'No Treatment'
                           								/*AND Animal__r.Shelter_Location2__c =: key*/]){
 
                             TreatmentPlanWithProtocols tPlan = new TreatmentPlanWithProtocols();
