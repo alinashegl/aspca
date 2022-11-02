@@ -7,7 +7,7 @@
                     <div class="slds-p-left_small">
                         Session Protocols ({activeProtocols.length})
                         <lightning-button variant="Neutral" label={startSessionLabel} title="Start Session" onclick={handleStartSession} class="slds-m-left_x-small"></lightning-button>
-                        <lightning-button variant="Neutral" label={modifySessionLabel} title="Modify Session" onclick={handleModifySession} class="slds-m-left_x-small"></lightning-button>                    <template if:true={showTogglefields}>
+                        <lightning-button variant="Neutral" label={modifySessionLabel} title="Skip or Add Protocol" onclick={handleModifySession} class="slds-m-left_x-small"></lightning-button>                    <template if:true={showTogglefields}>
                             <lightning-button variant="Neutral" label="Toggle Fields" title="Toggle Fields" onclick={handleToggleFields} class="slds-m-left_x-small"></lightning-button>
                         </template>
                     </div>

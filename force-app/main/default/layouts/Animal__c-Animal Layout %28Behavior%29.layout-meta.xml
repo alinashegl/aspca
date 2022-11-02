@@ -140,6 +140,34 @@
                 <behavior>Edit</behavior>
                 <field>In_Kennel_Socialization__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Treatment_Plan__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>NYPD_Case__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>All_Problem_Behaviors__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Enrichment_Priority__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Enrichment_Priority_Number__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Number_of_Enrichments__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Enrichment_Priority_Minus_This_Week__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -242,16 +270,12 @@
     <relatedLists>
         <excludeButtons>MassChangeOwner</excludeButtons>
         <excludeButtons>New</excludeButtons>
-        <fields>NAME</fields>
         <fields>Playgroup_Session__c</fields>
-        <fields>Animal_Name__c</fields>
         <fields>Play_Rating__c</fields>
         <fields>Playgroup_Session_Notes__c</fields>
         <fields>Playgroup_Individual_Notes__c</fields>
         <fields>Common_Playgroup_Notes__c</fields>
         <relatedList>Animal_Playgroup__c.Animal__c</relatedList>
-        <sortField>NAME</sortField>
-        <sortOrder>Desc</sortOrder>
     </relatedLists>
     <relatedLists>
         <excludeButtons>MassChangeOwner</excludeButtons>
@@ -497,10 +521,7 @@
         <fields>NAME</fields>
         <fields>IsActive__c</fields>
         <fields>Treatment_Priority__c</fields>
-        <fields>Problem_Behavior_Aggression__c</fields>
-        <fields>Problem_Behavior_Arousal__c</fields>
-        <fields>Problem_Behavior_Fear__c</fields>
-        <fields>Problem_Behavior_Miscellaneous__c</fields>
+        <fields>All_Problem_Behaviors__c</fields>
         <fields>Enrichment_Priority__c</fields>
         <fields>Enrichment_Activities__c</fields>
         <fields>LAST_UPDATE</fields>
