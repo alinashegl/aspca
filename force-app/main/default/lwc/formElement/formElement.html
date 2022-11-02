@@ -92,6 +92,7 @@
                 <div if:true={isPicklist}>
                     <lightning-combobox class="inpElm" value={_value} options={_options} variant="label-hidden"
                         onchange={sendValue}></lightning-combobox>
+                        <lightning-pill label={_value} onremove={handleComboPillRemove} if:true={_value}></lightning-pill>
                 </div>
                 <div if:true={isMultiSelect}>
                     <c-mutli-select-picklist class="inpElm" values={_options} required={isRequired} value="_value"

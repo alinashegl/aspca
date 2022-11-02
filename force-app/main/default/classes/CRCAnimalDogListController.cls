@@ -60,10 +60,13 @@ public class CRCAnimalDogListController {
 
         List<BehaviorCaseWorker__c> behCaseWorkers =  [SELECT Id, Animal__c, CaseWorker__c, EndDate__c, StartDate__c FROM BehaviorCaseWorker__c where Animal__c IN : animalBehCaseWorkerMap.keySet()];
         Map<Id, Set<Id>> behAnmMap = new Map<Id, Set<Id>>();
-        set<Id> caseWorkers = new Set<Id>();
         for(BehaviorCaseWorker__c b : behCaseWorkers){
-            caseWorkers.add(b.CaseWorker__c);
-            behAnmMap.put(b.Animal__c, caseWorkers);
+            if(behAnmMap.containsKey(b.Animal__c)){
+                behAnmMap.get(b.Animal__c).add(b.CaseWorker__c);
+            }
+            else {
+                behAnmMap.put(b.Animal__c, new Set<Id>{b.CaseWorker__c});
+            }
         }
         List<BehaviorCaseWorker__c> newCaseWorkers = new List<BehaviorCaseWorker__c>();
         for(Id anmId : animalBehCaseWorkerMap.keySet()){
