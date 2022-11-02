@@ -125,6 +125,7 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
 
     @wire(getPlaygroupAnimals, { locationsFilter: '$locationsFilter'})
     wiredPlaygroupAnimals(result) {
+        // window.console.log('wiredPlaygroupAnimals result: ', JSON.stringify(result));
         this.playgroupAnimals = result;
         if (result.data) {
             this.playgroupAnimalsData = result.data;

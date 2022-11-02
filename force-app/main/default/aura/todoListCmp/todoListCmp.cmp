@@ -19,6 +19,11 @@
                 applicationType="ToDoList"
             />
         </aura:set>
+        <aura:set attribute="footer">
+            <c:locationFilter
+                applicationType="ToDoList"
+            />
+        </aura:set>
     </lightning:card>
     
     <div class="slds-p-top_small">
