@@ -1,4 +1,4 @@
-import { LightningElement, track, wire } from 'lwc';
+import { LightningElement, track, api } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { refreshApex } from '@salesforce/apex';
@@ -6,6 +6,8 @@ import FORM_FACTOR from '@salesforce/client/formFactor';
 import getAnimalTreatments from '@salesforce/apex/TreatmentToDoListController.getAnimalTreatments';
 
 export default class TreatmentPriorityToDoList extends NavigationMixin(LightningElement) {
+    @api
+    locationsFilter;
     @track
     addedSort = [];
     @track
@@ -75,7 +77,7 @@ export default class TreatmentPriorityToDoList extends NavigationMixin(Lightning
 
     connectedCallback(){
         if(this.animalTreatments == null || this.animalTreatments == undefined){
-            getAnimalTreatments({})
+            getAnimalTreatments({locationsFilter : this.locationsFilter})
             .then((result) => {
                 this.animalTreatments = result;
                 if (result) {
@@ -277,7 +279,7 @@ export default class TreatmentPriorityToDoList extends NavigationMixin(Lightning
 
     handleUpdate() {
         this.resetFilterValues()
-        getAnimalTreatments({})
+        getAnimalTreatments({locationsFilter : this.locationsFilter})
             .then((result) => {
                 this.animalTreatments = result;
                 if (result) {
