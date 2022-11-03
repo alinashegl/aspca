@@ -7,7 +7,10 @@ import LOCATION_FILTER_CHANNEL from '@salesforce/messageChannel/LocationFilterCh
 export default class LocationFilter extends LightningElement {
     @api applicationType
     @track animalLocations = [];
+    hasLocations = true;
     locationString;
+    error;
+    errorMessage;
 
     @wire(MessageContext)
     messageContext;
@@ -16,12 +19,20 @@ export default class LocationFilter extends LightningElement {
     response(result){
         if(result.data){
             result.data.forEach(element => {
-                let tempLoc = {...element};
-                tempLoc.variant = 'brand';
-                tempLoc.selected = true;
-                this.animalLocations.push(tempLoc);
+                if(element['configFound'] != null){
+                    this.hasLocations = element['configFound'];
+                } else{
+                    let tempLoc = {...element};
+                    tempLoc.variant = 'brand';
+                    tempLoc.selected = true;
+                    this.animalLocations.push(tempLoc);
+                }
             });
             this.prepLocationsString();
+        }
+        else if(result.error){
+            this.error = result.error;
+            this.errorMessage = 'Error retrieving animal locations.';
         }
     }
 
@@ -41,10 +52,13 @@ export default class LocationFilter extends LightningElement {
         let locations =  this.animalLocations.map(a => a.selected ? a.value : null).filter(function (el) {
             return el != null;
         });
+        if(!this.hasLocations && locations == ''){
+            locations = 'All';
+        }
         this.locationString = locations.toString();
-        window.console.log('this.locations: ', this.locationString);
-        
-        const payload = { locations: this.locationString };
+        const payload = { locations: this.locationString};
+
+        window.console.log('payload: ', payload);
         publish(this.messageContext, LOCATION_FILTER_CHANNEL, payload);
     }
 }
