@@ -14,6 +14,7 @@
     },
 
     handleLocationFilterMessage : function(cmp, message){
+        window.console.log('message recieved: ', JSON.stringify(message));
         cmp.set("v.locations",message.getParam('locations'));
     }
 })

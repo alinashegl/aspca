@@ -14,47 +14,47 @@ public with sharing class PlaygroupToDoListController {
 
     @AuraEnabled(cacheable=true)
     public static List<Animal__c> getPlaygroupAnimals(String[] locationsFilter) {
-        Animal__c[] animals = [
-            SELECT Id, Name, Animal_Name__c, Gender__c, Shelter_Location__c, Playgroup_Priority_Level__c, Play_Style_Notes__c,
-            Play_Category__c, Shelter_Color_Coding__c, Number_of_Playgroups__c, Does_Not_Walk_on_a_Leash__c, Does_Not_Walk_on_a_Leash_Notes__c,
-            Current_Location__c,
-            (SELECT Id FROM Medical_Conditions__r
-                WHERE Medical_Condition__c = 'Babesia'
-                AND Date_Diagnosed__c <= TODAY
-                AND (Date_Resolved__c = null OR Date_Resolved__c > TODAY) LIMIT 1
-            ),
-            (SELECT Id FROM Play_Pauses__r
-                WHERE Type__c = 'Medical'
-                AND Play_Pause_Reason__c = 'In Heat'
-                AND End_Play_Pause__c = FALSE
-                AND (Start_Date__c = null OR Start_Date__c <= TODAY) 
-                LIMIT 1
-            ),
-            (SELECT Id FROM Animal_Playgroups__r
-                WHERE Playgroup_Session__r.Playgroup_Date_Time__c >= TODAY
-                AND Playgroup_Session__r.Playgroup_Date_Time__c < TOMORROW LIMIT 1
-            )
-            FROM Animal__c
-            WHERE Active_Animal__c = true
-            AND Type_of_Animal__c = 'Dog'
-            AND Current_Location__c NOT IN :locationsToExclude
-            AND Play_Category__c NOT IN ('Unevaluated', 'DO NOT PLAY', '')
-            AND Location_Filter__c = true
-            AND Id NOT IN (
-                SELECT Animal__c 
-                FROM Play_Pause__c 
-                WHERE (Play_Pause_Reason__c != 'In Heat' 
-                AND End_Play_Pause__c = FALSE
-                AND (Start_Date__c = null OR Start_Date__c <= TODAY))
-            )
-            ORDER BY Id            
-        ];
         Animal__c[] animalList = new Animal__c[0];
-        if(locationsFilter != null && !locationsFilter.isEmpty()){
-            for(Animal__c anim : animals){
-                if(locationsFilter.contains(anim.Current_Location__c)){
-                    animalList.add(anim);
-                }
+        Animal__c[] animals = new Animal__c[0];
+            animals = [
+                SELECT Id, Name, Animal_Name__c, Gender__c, Shelter_Location__c, Playgroup_Priority_Level__c, Play_Style_Notes__c,
+                Play_Category__c, Shelter_Color_Coding__c, Number_of_Playgroups__c, Does_Not_Walk_on_a_Leash__c, Does_Not_Walk_on_a_Leash_Notes__c,
+                Current_Location__c,
+                (SELECT Id FROM Medical_Conditions__r
+                    WHERE Medical_Condition__c = 'Babesia'
+                    AND Date_Diagnosed__c <= TODAY
+                    AND (Date_Resolved__c = null OR Date_Resolved__c > TODAY) LIMIT 1
+                ),
+                (SELECT Id FROM Play_Pauses__r
+                    WHERE Type__c = 'Medical'
+                    AND Play_Pause_Reason__c = 'In Heat'
+                    AND End_Play_Pause__c = FALSE
+                    AND (Start_Date__c = null OR Start_Date__c <= TODAY) 
+                    LIMIT 1
+                ),
+                (SELECT Id FROM Animal_Playgroups__r
+                    WHERE Playgroup_Session__r.Playgroup_Date_Time__c >= TODAY
+                    AND Playgroup_Session__r.Playgroup_Date_Time__c < TOMORROW LIMIT 1
+                )
+                FROM Animal__c
+                WHERE Active_Animal__c = true
+                AND Type_of_Animal__c = 'Dog'
+                AND Current_Location__c NOT IN :locationsToExclude
+                AND Play_Category__c NOT IN ('Unevaluated', 'DO NOT PLAY', '')
+                AND Location_Filter__c = true
+                AND Id NOT IN (
+                    SELECT Animal__c 
+                    FROM Play_Pause__c 
+                    WHERE (Play_Pause_Reason__c != 'In Heat' 
+                    AND End_Play_Pause__c = FALSE
+                    AND (Start_Date__c = null OR Start_Date__c <= TODAY))
+                )
+                ORDER BY Id            
+            ];
+        
+        for(Animal__c anim : animals){
+            if(locationsFilter[0] == 'All' || locationsFilter.contains(anim.Current_Location__c)){
+                animalList.add(anim);
             }
         }
         return animalList;

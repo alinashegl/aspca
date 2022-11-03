@@ -46,6 +46,10 @@ export default class LocationFilter extends LightningElement {
             this.error = result.error;
             this.errorMessage = 'Error retrieving animal locations.';
         }
+        else if(result.error){
+            this.error = result.error;
+            this.errorMessage = 'Error retrieving animal locations.';
+        }
     }
 
     handleOnclick(event){

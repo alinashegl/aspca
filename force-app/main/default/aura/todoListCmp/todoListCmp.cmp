@@ -20,14 +20,15 @@
             />
         </aura:set>
     </lightning:card>
+    
     <div class="slds-p-top_small">
         <c:playgroupToDoList
-        locations="{!v.locations}"
+            locations="{!v.locations}"
         />
     </div>
     <div class="slds-p-top_small">
         <c:treatmentPriorityToDoList
-        locations="{!v.locations}"
+            locations="{!v.locations}"
         />
     </div>
     <aura:if isTrue="{!v.isVisible}">
