@@ -1,6 +1,9 @@
 public class TreatmentToDoPDFController {
     public List<TreatmentPlanWithProtocols> treatmentPlansWithProtocols{get;set;}
     public TreatmentToDoPDFController (){
+        String locationsFilter = ApexPages.currentPage()?.getparameters()?.get('locations');
+        Boolean useFilter = Boolean.valueOf(ApexPages.currentPage()?.getparameters()?.get('useFilter'));
+
         TreatmentPlanWithProtocols[] treatmentPlanList = new TreatmentPlanWithProtocols[0];
         for(Treatment_Plan__c plan : [SELECT Id
                           , Name
@@ -33,19 +36,19 @@ public class TreatmentToDoPDFController {
                                       AND Treatment_Priority__c != 'No Treatment'
                           								/*AND Animal__r.Shelter_Location2__c =: key*/]){
 
-                            TreatmentPlanWithProtocols tPlan = new TreatmentPlanWithProtocols();
-                            tPlan.treatmentPlan = plan;
+            TreatmentPlanWithProtocols tPlan = new TreatmentPlanWithProtocols();
+            tPlan.treatmentPlan = plan;
 
-                            List<String> protocolNames = new List<String>();
-                            for(Plan_Protocol__c protocolObj : plan.Plan_Protocols__r){
-                                protocolNames.add(protocolObj.Protocol_Name__c);
-                            }
-                            tPlan.protocols = string.join(protocolNames, '; ');
+            List<String> protocolNames = new List<String>();
+            for(Plan_Protocol__c protocolObj : plan.Plan_Protocols__r){
+                protocolNames.add(protocolObj.Protocol_Name__c);
+            }
+            tPlan.protocols = string.join(protocolNames, '; ');
 
-                            treatmentPlanList.add(tPlan);
-                          }
+            treatmentPlanList.add(tPlan);
+        }
 
-                          treatmentPlansWithProtocols = treatmentPlanList;
+        treatmentPlansWithProtocols = treatmentPlanList;
     }
 
     public class TreatmentPlanWithProtocols{
