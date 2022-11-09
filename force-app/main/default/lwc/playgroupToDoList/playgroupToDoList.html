@@ -1,5 +1,8 @@
 <template>
     <lightning-card>
+        <template if:true={error}>
+            <c-error-panel errors={error} type='inlineMessage' friendly-message={errorMessage} class="slds-var-p-left_small"></c-error-panel>
+        </template>
         <lightning-accordion allow-multiple-sections-open="true">
             <lightning-accordion-section title="Playgroup To Do List" label="Playgroup To Do List" name="playgroupToDoList">
                 <div class="slds-var-p-left_small">

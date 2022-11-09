@@ -1,10 +1,8 @@
 public with sharing class LocationFilterController {
     @AuraEnabled(cacheable=true)
-    public static List<Map<String, Object>> getAnimalLocations(String applicationType){
+    public static Map<String, Object> getAnimalLocations(String applicationType){
         try {
-            UserAppInfo userAppInfo = [SELECT Id, AppDefinitionId FROM UserAppInfo WHERE UserId = :UserInfo.getUserId() LIMIT 1];
-            AppDefinition appDefinition = [SELECT DurableId, Label FROM AppDefinition Where DurableId = :userAppInfo.AppDefinitionId LIMIT 1];
-            String currentApp = appDefinition.Label;
+            String currentApp = getUsersCurrentApp();
 
             Animal_Location_Config__mdt[] locConfigs = new Animal_Location_Config__mdt[0];
             User u = [SELECT Id, Location__c FROM User WHERE Id = :UserInfo.getUserId() LIMIT 1];
@@ -17,22 +15,59 @@ public with sharing class LocationFilterController {
                     AND App_Name__c = :currentApp
                 ];
             }
-            String locations = !locConfigs.isempty() && locConfigs[0].Animal_Locations__c != null ? '{"locs":' + locConfigs[0].Animal_Locations__c + '}' : null;
 
-            List<Map<String, Object>> myMaps = new List<Map<String, Object>>();
-            myMaps.add(new Map<String, Object>{'configFound' => (object) locations != null});
+            Map<String, Object> returnMap = new Map<String, Object>();
+            returnMap.put('hasConfigWithLocations', (Object) false);
+            returnMap.put('showAllLocations', (Object) false);
 
-            if(locations != null){
-                Map<String, Object> m = (Map<String, Object>) JSON.deserializeUntyped(locations);            
-                List<Object> myMapObjects = (List<Object>) m.get('locs');
-                for (Object obj : myMapObjects) {
-                    myMaps.add((Map<String, Object>)obj);
+            if(!locConfigs.isEmpty()){
+                Animal_Location_Config__mdt config = locConfigs[0];
+                
+                String locations = config.Animal_Locations__c != null ? config.Animal_Locations__c : null;
+
+                if(locations != null){
+                    returnMap.put('hasConfigWithLocations', (Object) true);
+                    if(isValidList(locations)){
+                        locations = '{"locs":' + locations + '}';
+                        Map<String, Object> m = (Map<String, Object>) JSON.deserializeUntyped(locations);            
+                        List<Object> myMapObjects = (List<Object>) m.get('locs');
+                        Map<String, Object> locMap = new Map<String, Object>();
+                        
+                        returnMap.put('locations', (Object) myMapObjects);
+                    } else {       
+                        List<Object> myMapObjects = new List<Object>();
+                        myMapObjects.add(locations);
+                        returnMap.put('locations', (Object) myMapObjects);
+                    }
+                } else {
+                    returnMap.put('showAllLocations', (Object) true);
                 }
+            } else {
+                returnMap.put('hasConfigWithLocations', (Object) false);
             }
+            System.debug('returnMap: ' + returnMap);
             
-            return myMaps;
+            return returnMap;
         } catch (Exception e) {
+            System.debug('error getting locations: ' + e.getMessage());
+            System.debug(e.getStackTraceString());
             throw new AuraHandledException(e.getMessage());
         }
+    }
+
+    private static Boolean isValidList(String st){
+        return st.substring(0,1) == '[';
+    }
+
+    private static String getUsersCurrentApp(){
+        String currentApp;
+        if(test.isRunningTest()){
+            currentApp = null;
+        } else {
+            UserAppInfo userAppInfo = [SELECT Id, AppDefinitionId FROM UserAppInfo WHERE UserId = :UserInfo.getUserId() LIMIT 1];
+            AppDefinition appDefinition = [SELECT DurableId, Label FROM AppDefinition Where DurableId = :userAppInfo.AppDefinitionId LIMIT 1];
+           currentApp = appDefinition.Label;
+        }
+        return currentApp;
     }
 }

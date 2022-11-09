@@ -1,37 +1,8 @@
 public with sharing class TreatmentToDoListController {
-    @AuraEnabled
+    @AuraEnabled(cacheable=true)
     public static List<Treatment_Plan__c> getAnimalTreatments(String locationsFilter) {
-        return getAnimalTreatments(
-            String.isNotBlank(locationsFilter) ?
-            locationsFilter.split(',') :
-            null);
-    }
+        Treatment_Plan__c[] treatmentPlans = new QueryTreatmentPlansForList(locationsFilter).treatmentPlanList;
 
-    @AuraEnabled
-    public static List<Treatment_Plan__c> getAnimalTreatments(String[] locationsFilter) {
-        List<Treatment_Plan__c> treatmentPlanList = [SELECT Id, Name, Treatment_Priority__c, Animal__c, IsActive__c,
-                Animal__r.Animal_Name__c, Animal__r.Name, Animal__r.Location__c, Animal__r.Number_of_Treatments__c,
-                Animal__r.Gender__c, Animal__r.Current_Animal_Age_Estimate__c, Animal__r.Current_Behavior_Grade__c, Animal__r.Shelter_Location__c,
-                AssignedTreatmentBundleId__c, AssignedTreatmentBundleId__r.Name, Shelter_Color_Code__c, Animal__r.Behavior_Case_Worker__r.Name,
-                Animal__r.Current_Location__c
-                FROM Treatment_Plan__c
-                WHERE Animal__r.Location_Filter__c = true
-                AND  Animal__r.Active_Animal__c = true
-                AND IsActive__c = TRUE
-                AND Treatment_Priority__c != null
-                AND Treatment_Priority__c != 'No Treatment'
-                ORDER BY Id];
-
-        Treatment_Plan__c[] treatmentPlans = new Treatment_Plan__c[0];
-        if(locationsFilter != null && !locationsFilter.isEmpty()){
-            for(Treatment_Plan__c tPlan : treatmentPlanList){
-                if(locationsFilter.contains(tPlan.Animal__r.Current_Location__c)){
-                    treatmentPlans.add(tPlan);
-                }
-            }
-        } else {
-            treatmentPlans = treatmentPlanList;
-        }
         return treatmentPlans;
     }
 
@@ -51,5 +22,54 @@ public with sharing class TreatmentToDoListController {
         sObject sObj = Schema.getGlobalDescribe().get(describeResult.getName()).newSObject();
         sObj = record.clone();
         return sObj;
+    }
+
+    public class QueryTreatmentPlansForList{
+        public Treatment_Plan__c[] treatmentPlanList;
+
+        public String treatmentPlanSelect = 'SELECT Id, Name, Treatment_Priority__c, Animal__c, IsActive__c, ' +
+            'Animal__r.Animal_Name__c, Animal__r.Name, Animal__r.Location__c, Animal__r.Number_of_Treatments__c, ' +
+            'Animal__r.Gender__c, Animal__r.Current_Animal_Age_Estimate__c, Animal__r.Current_Behavior_Grade__c, Animal__r.Shelter_Location__c, ' +
+            'AssignedTreatmentBundleId__c, AssignedTreatmentBundleId__r.Name, Shelter_Color_Code__c, Animal__r.Behavior_Case_Worker__r.Name, ' +
+            'Animal__r.Current_Location__c, Preferred_Motivators__c, Plan_Notes__c, Animal__r.Shelter_Location2__c, '+ 
+            'Animal__r.Shelter_Color_Coding__c ';
+        
+        public String treatmentQueryChildProtocols = ',(SELECT Id, Protocol_Name__c ' +
+            'FROM Plan_Protocols__r ' +
+            'WHERE IsRemoved__c = False) ';
+
+        public String treatmentQueryFrom = 'FROM Treatment_Plan__c ' +
+            'WHERE Animal__r.Location_Filter__c = true ' +
+            'AND  Animal__r.Active_Animal__c = true ' +
+            'AND IsActive__c = TRUE ' +
+            'AND Treatment_Priority__c != null ' +
+            'AND Treatment_Priority__c != \'No Treatment\' ';
+
+        public QueryTreatmentPlansForList(String locationsFilter){
+            String query = treatmentPlanSelect + treatmentQueryFrom;
+            AnimalLocationFilterUtil filterInfo = new AnimalLocationFilterUtil(locationsFilter);
+
+            if(filterInfo.useFilter == true){
+                String[] locationsList = filterInfo.locationList;
+                query += 'AND Animal__r.Current_Location__c IN :locationsList ';
+            }
+
+            query += 'ORDER BY Id';
+
+            this.treatmentPlanList = Database.query(query); 
+        }
+
+        public QueryTreatmentPlansForList(String locationsFilter, Boolean useFilter){
+            String query = treatmentPlanSelect + treatmentQueryChildProtocols + treatmentQueryFrom;
+            
+            if(useFilter == true){
+                String[] locationsList = locationsFilter.split(',');
+                query += 'AND Animal__r.Current_Location__c IN :locationsList ';
+            }
+
+            query += 'ORDER BY Id';
+
+            this.treatmentPlanList = Database.query(query);
+        }
     }
 }

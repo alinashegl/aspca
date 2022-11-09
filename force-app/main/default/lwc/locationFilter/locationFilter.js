@@ -3,14 +3,18 @@ import getAnimalLocations from '@salesforce/apex/LocationFilterController.getAni
 
 import { publish, MessageContext } from 'lightning/messageService';
 import LOCATION_FILTER_CHANNEL from '@salesforce/messageChannel/LocationFilterChannel__c';
+import SystemModstamp from '@salesforce/schema/ANH__AutoNumberConfigurationSetting__c.SystemModstamp';
 
 export default class LocationFilter extends LightningElement {
     @api applicationType
     @track animalLocations = [];
     hasLocations = true;
+
+    animalLocationsWireResponse;
     locationString;
     error;
     errorMessage;
+
 
     @wire(MessageContext)
     messageContext;
@@ -18,17 +22,25 @@ export default class LocationFilter extends LightningElement {
     @wire(getAnimalLocations, {applicationType : '$applicationType'})
     response(result){
         if(result.data){
-            result.data.forEach(element => {
-                if(element['configFound'] != null){
-                    this.hasLocations = element['configFound'];
+            this.animalLocationsWireResponse = result.data;
+            window.console.log("result.data: ", JSON.stringify(result.data));
+            if(result.data.locations != null){
+                if(result.data.locations.length > 1){
+                    result.data.locations.forEach(element => {
+                        let tempLoc = {...element};
+                        tempLoc.variant = 'brand';
+                        tempLoc.selected = true;
+                        this.animalLocations.push(tempLoc);
+                    });
+                    this.prepLocationsString();
                 } else{
-                    let tempLoc = {...element};
-                    tempLoc.variant = 'brand';
-                    tempLoc.selected = true;
-                    this.animalLocations.push(tempLoc);
+                    this.publishLocationString(result.data.locations);
                 }
-            });
-            this.prepLocationsString();
+            } else {
+                this.publishLocationString(null);
+            }
+            
+            // };
         }
         else if(result.error){
             this.error = result.error;
@@ -52,16 +64,37 @@ export default class LocationFilter extends LightningElement {
         let locations =  this.animalLocations.map(a => a.selected ? a.value : null).filter(function (el) {
             return el != null;
         });
-        if(!this.hasLocations && locations == ''){
-            locations = 'All';
-        }
-        this.locationString = locations.toString();
+        this.publishLocationString(locations);
+    }
+
+    publishLocationString(locations){
+        let locationsMap = {...this.animalLocationsWireResponse};
+        locationsMap.locations = locations != null ? locations.toString() : null;
+        const tempLocationString = JSON.stringify(locationsMap);
+
+        this.locationString = tempLocationString;
+        window.console.log('this.locationString: ', this.locationString);        
+
         const payload = { locations: this.locationString};
 
         window.console.log('payload: ', payload);
-        publish(this.messageContext, LOCATION_FILTER_CHANNEL, payload);
+        if(this.hasAccess){
+            publish(this.messageContext, LOCATION_FILTER_CHANNEL, payload);
+        }
     }
+
+    get hasAccess(){
+        return this.animalLocationsWireResponse.showAllLocations || this.animalLocationsWireResponse.hasConfigWithLocations;
+    }
+
+    get showLocations(){
+        return this.animalLocations != undefined && this.animalLocations.length > 1;
+    }
+
+
 }
+
+
 
 /*
 to subscirbe LWC:
