@@ -9,6 +9,13 @@ private  class test_TreatmentToDoPDFController {
         //create treatment plan, pan protocols, animal, etc
         TestDataFactory.createPlanProtocols(2);
 
+        PageReference toDoPdf = Page.TreatmentToDoPDF;
+        toDoPdf.getParameters().put('locations', 'CRC,CRC-MRC,ARC,CARE,ARC-CARE');
+        toDoPdf.getParameters().put('useFilter', 'true');
+        Test.setCurrentPage(toDoPdf);
+
+        Animal__c[] anims = [SELECT Id, Name FROM Animal__c];
+
         test.startTest();
         TreatmentToDoPDFController pdfController = new TreatmentToDoPDFController();
         TreatmentToDoPDFController.TreatmentPlanWithProtocols[] plansWithProtocols = pdfController.treatmentPlansWithProtocols;
@@ -21,6 +28,10 @@ private  class test_TreatmentToDoPDFController {
 
     @isTest
     static void TreatmentToDoPDFController_noData(){
+        PageReference toDoPdf = Page.TreatmentToDoPDF;
+        toDoPdf.getParameters().put('locations', 'CRC,CRC-MRC');
+        toDoPdf.getParameters().put('useFilter', 'true');
+        Test.setCurrentPage(toDoPdf);
 
         test.startTest();
         TreatmentToDoPDFController pdfController = new TreatmentToDoPDFController();

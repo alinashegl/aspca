@@ -9,9 +9,11 @@ public with sharing class test_PlaygroupToDoListController {
         User u = [SELECT Id, Location__c FROM User WHERE Id = :UserInfo.getUserId() LIMIT 1];
         u.Location__c = 'All';
         update u;
+
+        String locationsFilter = prepLocationsFilter(true, false, 'CRC,CRC-MRC');
         
         Test.startTest();
-        List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals();
+        List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals(locationsFilter);
         Test.stopTest();
 
         List<Animal__c> animals = [SELECT Id, Shelter_Location2__c, Play_Category__c FROM Animal__c WHERE Id = :a.Id];
@@ -31,8 +33,11 @@ public with sharing class test_PlaygroupToDoListController {
         Animal__c a = TestDataFactory.createAnimal();
         Animal__c a1 = new Animal__c(id = a.id, Current_Location__c = 'Boarding', Play_Category__c = 'Unevaluated');
         update a1;
+
+        String locationsFilter = prepLocationsFilter(true, false, 'CRC,CRC-MRC');
+
         Test.startTest();
-        List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals();
+        List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals(locationsFilter);
         Test.stopTest();
         System.assertEquals(0, playgroupAnimals.size());
     }
@@ -44,8 +49,11 @@ public with sharing class test_PlaygroupToDoListController {
                                      Play_Category__c = 'PG Re-Eval', Current_Location__c = 'Test');
         update a1;
         List<Play_Pause__c> playPauses = TestDataFactory.createPlayPauses(a);
+
+        String locationsFilter = prepLocationsFilter(true, false, 'CRC,CRC-MRC');
+
         Test.startTest();
-        List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals();
+        List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals(locationsFilter);
         Test.stopTest();
         System.assertEquals(0, playgroupAnimals.size());
     }
@@ -55,8 +63,11 @@ public with sharing class test_PlaygroupToDoListController {
         Animal__c a = TestDataFactory.createAnimal();
         Animal__c a1 = new Animal__c(id = a.id, Current_Location__c = 'Boarding');
         update a1;
+
+        String locationsFilter = prepLocationsFilter(true, false, 'CRC,CRC-MRC');
+
         Test.startTest();
-        List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals();
+        List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals(locationsFilter);
         Test.stopTest();
         System.assertEquals(0, playgroupAnimals.size());
     }
@@ -66,8 +77,11 @@ public with sharing class test_PlaygroupToDoListController {
         Animal__c a = TestDataFactory.createAnimal();
         Animal__c a1 = new Animal__c(id = a.id, Current_Location__c = 'Boarding', Play_Category__c = 'Unevaluated');
         update a1;
+
+        String locationsFilter = prepLocationsFilter(true, false, 'CRC,CRC-MRC');
+
         Test.startTest();
-        List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals();
+        List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals(locationsFilter);
         Test.stopTest();
         System.assertEquals(0, playgroupAnimals.size());
     }
@@ -198,8 +212,10 @@ public with sharing class test_PlaygroupToDoListController {
         update animalsToUpdate;
         insert playPauses;
 
+        String locationsFilter = prepLocationsFilter(true, false, 'CRC,CRC-MRC');
+
         test.startTest();
-            Animal__c[] animals = PlaygroupToDoListController.getPlaygroupAnimals();
+            Animal__c[] animals = PlaygroupToDoListController.getPlaygroupAnimals(locationsFilter);
             Set<Id> animalIds = new Set<Id>();
             for(Animal__c animal : animals){
                 animalIds.add(animal.Id);
@@ -246,8 +262,10 @@ public with sharing class test_PlaygroupToDoListController {
         update animalsToUpdate;
         insert playPauses;
 
+        String locationsFilter = prepLocationsFilter(true, false, 'CRC,CRC-MRC');
+
         test.startTest();
-            Animal__c[] animals = PlaygroupToDoListController.getPlaygroupAnimals();
+            Animal__c[] animals = PlaygroupToDoListController.getPlaygroupAnimals(locationsFilter);
             Set<Id> animalIds = new Set<Id>();
             for(Animal__c animal : animals){
                 animalIds.add(animal.Id);
@@ -255,7 +273,15 @@ public with sharing class test_PlaygroupToDoListController {
             System.assertEquals(true, animalIds.contains(inHeat.Id), 'Dog with only In Heat play pause should be on list');
             System.assertEquals(false, animalIds.contains(medical.Id), 'Dog with active medical play pause shoud not be on list');
         test.stopTest();
+    }
 
+    private static String prepLocationsFilter(Boolean hasConfig, Boolean showAll, String locations){
+        Map<String, Object> locationsFilterMap = new Map<String, Object>{
+            'hasConfigWithLocations' => (Object) hasConfig,
+            'showAllLocations' => (Object) showAll,
+            'locations' => (Object) locations
+        };
 
+        return JSON.serialize(locationsFilterMap);
     }
 }

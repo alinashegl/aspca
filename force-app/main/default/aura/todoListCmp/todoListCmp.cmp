@@ -23,12 +23,12 @@
     
     <div class="slds-p-top_small">
         <c:playgroupToDoList
-            locations="{!v.locations}"
+            locationsFilter="{!v.locations}"
         />
     </div>
     <div class="slds-p-top_small">
         <c:treatmentPriorityToDoList
-            locations="{!v.locations}"
+            locationsFilter="{!v.locations}"
         />
     </div>
     <aura:if isTrue="{!v.isVisible}">

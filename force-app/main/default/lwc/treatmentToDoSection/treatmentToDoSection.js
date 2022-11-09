@@ -114,6 +114,10 @@ export default class TreatmentToDoSection extends NavigationMixin(LightningEleme
         return ' IsMaster__c = false';
     }
 
+    get isBehCaseWorker(){
+        return this.animalTreatment.Animal__r.hasOwnProperty('Behavior_Case_Worker__r');
+    }
+
     handleReset() {
         this.isEdit = false;
     }

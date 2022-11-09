@@ -1,4 +1,4 @@
-import { LightningElement, track, api } from 'lwc';
+import { LightningElement, track, api, wire } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { refreshApex } from '@salesforce/apex';
@@ -27,6 +27,9 @@ export default class TreatmentPriorityToDoList extends NavigationMixin(Lightning
     sortDirectionValue = 'ASC';
     filterFieldValue;
     filterValueValue;
+
+    error;
+    errorMessage;
 
     get sortFieldOptions() {
         return [
@@ -75,31 +78,17 @@ export default class TreatmentPriorityToDoList extends NavigationMixin(Lightning
         return FORM_FACTOR === 'Small';
     }
 
-    connectedCallback(){
-        if(this.animalTreatments == null || this.animalTreatments == undefined){
-            getAnimalTreatments({locationsFilter : this.locationsFilter})
-            .then((result) => {
-                this.animalTreatments = result;
-                if (result) {
-                    this.animalTreatmentsData = result;
-                    this.animalTreatmentsData.forEach(element => {
-                        element.isBehCaseWorker = false;
-                        if(element.Animal__r.hasOwnProperty('Behavior_Case_Worker__r')){
-                            element.isBehCaseWorker = true;
-                        }
-                    });
-                    this.sortFilterData();
-                }
-                else if (result.error) {
-                    const evt = new ShowToastEvent({
-                        title: 'Error',
-                        message: result.error,
-                        variant: 'error',
-                    });
-                    this.dispatchEvent(evt);
-                }
-            });
-        }    
+    @wire(getAnimalTreatments, {locationsFilter : '$locationsFilter'})
+    wiredAnimalTreatments(result) {
+        this.animalTreatments = result;
+        if(result.data){
+            this.animalTreatmentsData = [...result.data];
+            this.sortFilterData();
+        }
+        else if (result.error) {
+            this.error = result.error;
+            this.errorMessage = 'Error retreiving Treatment To Do List';
+        }
     }
 
     optionsFieldLabel(fieldValue, fieldOptions) {
@@ -178,6 +167,7 @@ export default class TreatmentPriorityToDoList extends NavigationMixin(Lightning
 
     sortFilterData() {
         this.animalTreatmentSortFilter = Array.from(this.animalTreatmentsData ?? []);
+
         if (this.filterActive) {
             //handle filtering of data
             for (let i = 0; i < this.addedFilter.length; i++) {
@@ -255,7 +245,12 @@ export default class TreatmentPriorityToDoList extends NavigationMixin(Lightning
     }
 
     handlePdf() {
-        let url = '/apex/TreatmentToDoPdf';
+        const locFilterObj = JSON.parse(this.locationsFilter);
+        const locations = locFilterObj['locations'];
+        const hasConfigWithLocations = locFilterObj['hasConfigWithLocations']
+        const useFilter = hasConfigWithLocations && locations != null;
+
+        let url = '/apex/TreatmentToDoPdf?locations=' + locations + '&useFilter=' + useFilter;
         this[NavigationMixin.Navigate]({
             type: 'standard__webPage',
             attributes: {
@@ -279,22 +274,10 @@ export default class TreatmentPriorityToDoList extends NavigationMixin(Lightning
 
     handleUpdate() {
         this.resetFilterValues()
-        getAnimalTreatments({locationsFilter : this.locationsFilter})
-            .then((result) => {
-                this.animalTreatments = result;
-                if (result) {
-                    this.animalTreatmentsData = result;
-                    console.table(this.animalTreatmentsData);
-                    this.sortFilterData();
-                }
-                else if (result.error) {
-                    const evt = new ShowToastEvent({
-                        title: 'Error',
-                        message: result.error,
-                        variant: 'error',
-                    });
-                    this.dispatchEvent(evt);
-                }
-            });
+        
+        refreshApex(this.animalTreatments)
+        .then(() => {
+            this.sortFilterData();
+        });
     }
 }
