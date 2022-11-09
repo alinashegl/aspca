@@ -6,9 +6,6 @@ public with sharing class AnimalTriggerHandler {
         if (!Trigger.isExecuting) { return; }
         Trigger_Config__c config = Trigger_Config__c.getInstance();
         if (config != null  && config.Animal_Trigger_Enabled__c == false) { return; }
-        if (Trigger.isUpdate && Trigger.isBefore ) {
-            beforeUpdateHandler();
-        }
     }
     
     public static void insertHandler(){
@@ -60,11 +57,6 @@ public with sharing class AnimalTriggerHandler {
         }  
     }*/
 
-    public static void beforeUpdateHandler() {
-        Map<Id, SObject> toUpdate = Trigger.newMap;
-
-    }
-
     public static void onBeforeUpdateHandler(List<Animal__c> anms, Map<Id, Animal__c> oldAnms){
         if(alreadyRan == true) return;
         Animal__c[] brcMrcApprovedAnimals = new Animal__c[0];
@@ -74,7 +66,7 @@ public with sharing class AnimalTriggerHandler {
             System.debug('oldAnimal: ' + oldAnimal);
             if(
                 a.Type_of_Animal__c == 'Dog' &&
-                ((a.MRC_Status__c == 'MRC Accepted' && oldAnimal.MRC_Status__c != 'MRC Accepted' && a.Current_Recent_Shelter_Location__c != 'MRC') ||
+                ((a.MRC_Status__c == 'MRC Accepted' && oldAnimal.MRC_Status__c != 'MRC Accepted' && a.Current_Recent_Shelter_Location__c != BehaviorUtil.MRC) ||
                 (a.BRC_Status__c == 'BRC Accepted' && oldAnimal.MRC_Status__c != 'BRC Accepted' && a.Current_Recent_Shelter_Location__c != 'BRC'))
             ){
                 brcMrcApprovedAnimals.add(a);
@@ -107,7 +99,7 @@ public with sharing class AnimalTriggerHandler {
         }
         System.debug(conroles);
         insert conroles;
-        if(RecursiveTriggerHandler.isFirstTime){
+        if(RecursiveTriggerHandler.isFirstTime && !test.isRunningTest()){
             RecursiveTriggerHandler.isFirstTime = false;
             LogHistory.LogHistory(oldAnms, anms);
         }
@@ -227,7 +219,7 @@ public with sharing class AnimalTriggerHandler {
         //this list is for animals that have had certain updates that need to be pushed to the current animal daily care.
         Animal__c[] updatedAnimals = new Animal__c[0];
         for(Animal__c anim : animals){
-            if(anim.Current_Location__c == 'MRC' && anim.Final_Outcome__c == null){
+            if(anim.Current_Location__c == BehaviorUtil.MRC && anim.Final_Outcome__c == null){
                 Animal__c oldAnim = oldAnimals.get(anim.Id);
                 if(oldAnim.Current_Location__c != anim.Current_Location__c){
                     newAdcs.add(prepADC(anim));
@@ -260,10 +252,11 @@ public with sharing class AnimalTriggerHandler {
         update adcs;
     }
 
+    @testVisible
     private static void reviewForMRCDailyCare(Animal__c[] animals){
         Animal_Daily_Care__c[] newAdcs = new Animal_Daily_Care__c[0];
         for(Animal__c anim : animals){
-            if(anim.Current_Location__c == 'MRC' && anim.Final_Outcome__c == null){
+            if(anim.Current_Location__c == BehaviorUtil.MRC && anim.Final_Outcome__c == null){
                 newAdcs.add(
                     prepADC(anim)
                 );

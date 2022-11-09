@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customPermissions>
+        <enabled>true</enabled>
+        <name>Lock_Unlock_Behavior_Eval</name>
+    </customPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>Bundle_Entry__c.Entry_Label__c</field>
