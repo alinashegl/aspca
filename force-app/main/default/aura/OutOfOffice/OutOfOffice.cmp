@@ -10,15 +10,15 @@
     <lightning:notificationsLibrary aura:id="notificationsLibrary"/>
     
     
-       <!-- <lightning:card>
-            <aura:set attribute="actions">-->
+        <lightning:card>
+            <aura:set attribute="actions">
                 <lightning:button variant="brand"
                                   label="Out of Office"
                                   title="Out of Office"
                                   onclick="{! c.openModel }" 
                                   class="slds-var-m-left_x-small"/>
-           <!-- </aura:set>
-        </lightning:card>-->
+            </aura:set>
+        </lightning:card>
         <!--Use aura:if tag to display/hide popup based on isModalOpen value-->  
         <aura:if isTrue="{!v.isModalOpen}">
             
