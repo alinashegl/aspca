@@ -26,3 +26,13 @@ public with sharing class AnimalLocationFilterUtil {
             !this.locationList.isEmpty();
     }    
 }
+
+    public AnimalLocationFilterUtil(Map<String, Object> locationsFilterMap){
+        String locationsString = (String) locationsFilterMap.get('locations');
+        this.locationList = locationsString != null ? locationsString.split(',') : null;
+        this.useFilter = 
+            (Boolean) locationsFilterMap.get('hasConfigWithLocations') &&
+            this.locationList != null && 
+            !this.locationList.isEmpty();
+    }
+}
