@@ -3,22 +3,7 @@ import getBehCaseWorkers from '@salesforce/apex/ArcCareAnimalDogListController.g
 import getAnimals from '@salesforce/apex/ArcCareAnimalDogListController.getRecords';
 import updateRecords from '@salesforce/apex/ArcCareAnimalDogListController.saveRecords';
 import getPicklistValue from '@salesforce/apex/ArcCareAnimalDogListController.getPicklistValue';
-
-const GENDEROPTIONS = [
-    { label: 'MI', value: 'MI' },
-    { label: 'FI', value: 'FI' },
-    { label: 'FS', value: 'FS' },
-    { label: 'FU', value: 'FU' },
-    { label: 'MN', value: 'MN' },
-    { label: 'MU', value: 'MU' },
-    { label: 'Unknown', value: 'Unknown' },
-    { label: '(Unknown)', value: '(Unknown)' },
-    { label: 'Stallion', value: 'Stallion' },
-    { label: 'Mare', value: 'Mare' },
-    { label: 'Gelding', value: 'Gelding' },
-    { label: 'Colt (<3 years)', value: 'Colt (<3 years)' },
-    { label: 'Filly (<3 years)', value: 'Filly (<3 years)' }
-];
+import getAnimalGender from '@salesforce/apex/ArcCareAnimalDogListController.getAnimalGender';
 
 const EVALSTATUSOPTIONS = [
     {value: 'Complete', label: 'Complete'},
@@ -26,25 +11,6 @@ const EVALSTATUSOPTIONS = [
     {value: 'Incomplete', label: 'Incomplete'},
     {value: 'Needs Dog-Dog', label: 'Needs Dog-Dog'},
     {value: 'N/A', label: 'N/A'}
-];
-
-const HOLDSTATUSOPTIONS = [
-    {value: 'RTA', label: 'RTA', selected: false},
-    {value: 'RTO', label: 'RTO', selected: false},
-    {value: 'Legal', label: 'Legal', selected: false},
-    {value: 'Medical', label: 'Medical', selected: false},
-    {value: 'Behavior', label: 'Behavior', selected: false},
-    {value: 'Forensic', label: 'Forensic', selected: false}
-];
-
-const WALKINGSTATUSOPTIONS = [
-    {value: 'None Specified', label: 'None Specified', selected: false},
-    {value: 'No Walks', label: 'No Walks', selected: false},
-    {value: 'Terrace Walks', label: 'Terrace Walks', selected: false},
-    {value: 'Inside Walks', label: 'Inside Walks', selected: false},
-    {value: 'Outside Walks', label: 'Outside Walks', selected: false},
-    {value: '2 person Walks', label: '2 person Walks', selected: false},
-    {value: 'Ok to take the Stairs', label: 'Ok to take the Stairs', selected: false}
 ];
 
 const PPEOPTIONS = [
@@ -56,20 +22,20 @@ const PPEOPTIONS = [
 
  const columns = [
     {label: 'ASPCA Animal Name', fieldName: 'Animal_Name__c',type: 'text', editable: false, disabled: true, sortable: true},
-    {label: 'Animal Name/Id', fieldName: 'Id', type: 'link', linkLabel: 'anmName'}, 
+    {label: 'Animal Name/Id', fieldName: 'Id', type: 'link', linkLabel: 'anmName', sortable: true}, 
     {label: 'Petpoint/AAH Id', fieldName: 'Petpoint_ID__c',linkLabel: 'petpint', type: 'text', editable: false, disabled: true, sortable: true},
      //sortable: true, sortBy: 'anmName', resizable: true, title:'Click to view Animal', target:'_blank', editable: true},
-    {label: 'Sex', fieldName: 'Gender__c', type: 'picklist', options: GENDEROPTIONS, sortable: true, resizable: true,editable: true},
+    {label: 'Sex', fieldName: 'Gender__c', type: 'picklist', sortable: true, resizable: true,editable: true},
     {label: 'Evaluation Status', fieldName: 'Evaluation_Status__c', type: 'picklist', options: EVALSTATUSOPTIONS, sortable: true, resizable: true, editable: true},
-    {label: 'Current Location', fieldName: 'Current_Location__c',type: 'text', disabled: true},
+    {label: 'Current Location', fieldName: 'Current_Location__c',type: 'text', disabled: true, sortable: true},
     {label: 'Hold Status ARC/CARE', fieldName: 'Hold_Status_ARC_CARE__c', type: 'multi-select', sortable: true, resizable: true, editable: true},
     // {label: 'Hold Status ARC/CARE', fieldName: 'Hold_Status_ARC_CARE__c', type: 'multi-select', options: HOLDSTATUSOPTIONS, sortable: true, resizable: true, editable: true},
     {label: 'Behavior Case Worker', fieldName: 'Behavior_Case_Worker__c', type: 'lookup', linkLabel: 'behName',
      sortable: true, resizable: true, editable: true,sortBy: 'behName', title:'Click to view Behavior Case Worker', iconName:'standard:contact'},
     {label: 'Walking Status', fieldName: 'Walking_Status__c', type: 'multi-select', sortable: true, resizable: true, editable: true},
-    {label: 'Walking Notes', fieldName: 'Walking_Notes__c',type: 'textArea', resizable: true, editable: true, disabled: false},
+    {label: 'Walking Notes', fieldName: 'Walking_Notes__c',type: 'textArea', resizable: true, editable: true, disabled: false, sortable: true},
     {label: 'PPE/DOH', fieldName: 'PPE_DOH__c', type: 'picklist', options: PPEOPTIONS, sortable: true, resizable: true,editable: true},
-    {label: 'Important Notes ARC/CARE', fieldName: 'Important_Notes_ARC_CARE__c',type: 'textArea', resizable: true, editable: true},
+    {label: 'Important Notes ARC/CARE', fieldName: 'Important_Notes_ARC_CARE__c',type: 'textArea', resizable: true, editable: true, sortable: true},
     
 ];
 const PAGESIZEOPTIONS = [5,10,20,40];
@@ -96,6 +62,15 @@ export default class VkDatatableUsage extends LightningElement {
         }else{
             this.error = error;
         }       
+    }
+
+    @wire(getAnimalGender)
+    wGetGenders({error, data}){
+        if(data){
+            this.columns[3].options = data;
+        }else{
+            this.error = error;
+        } 
     }
 
     connectedCallback(){
@@ -143,7 +118,7 @@ export default class VkDatatableUsage extends LightningElement {
         .catch(error=>{
             this.error = JSON.stringify(error);
             this.showTable = true;
-            this.isLoading = false;
+            this.isLoading = true;
         });       
     }
 
