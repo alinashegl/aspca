@@ -1,56 +1,11 @@
 public with sharing class PlaygroupToDoListController {
-    static String[] locationsToExclude = new String[]{
-        'Board and Train',
-        'Boarding',
-        'Field Temp Shelter',
-        'Foster Home',
-        'Partner Hospital',
-        'Response Partner'
-    };
-
     @AuraEnabled(cacheable=true)
-    public static List<Animal__c> getPlaygroupAnimals(String location) {
-        return getPlaygroupAnimals();
+    public static List<Animal__c> getPlaygroupAnimals(String locationsFilter) {
+        Animal__c[] animalList = new QueryAnimalsForList(locationsFilter).animalList;
+        
+        return animalList;
     }
 
-    @AuraEnabled(cacheable=true)
-    public static List<Animal__c> getPlaygroupAnimals() {
-        Animal__c[] animals = [
-            SELECT Id, Name, Animal_Name__c, Gender__c, Shelter_Location__c, Playgroup_Priority_Level__c, Play_Style_Notes__c,
-            Play_Category__c, Shelter_Color_Coding__c, Number_of_Playgroups__c, Does_Not_Walk_on_a_Leash__c, Does_Not_Walk_on_a_Leash_Notes__c,
-            (SELECT Id FROM Medical_Conditions__r
-                WHERE Medical_Condition__c = 'Babesia'
-                AND Date_Diagnosed__c <= TODAY
-                AND (Date_Resolved__c = null OR Date_Resolved__c > TODAY) LIMIT 1
-            ),
-            (SELECT Id FROM Play_Pauses__r
-                WHERE Type__c = 'Medical'
-                AND Play_Pause_Reason__c = 'In Heat'
-                AND End_Play_Pause__c = FALSE
-                AND (Start_Date__c = null OR Start_Date__c <= TODAY) 
-                LIMIT 1
-            ),
-            (SELECT Id FROM Animal_Playgroups__r
-                WHERE Playgroup_Session__r.Playgroup_Date_Time__c >= TODAY
-                AND Playgroup_Session__r.Playgroup_Date_Time__c < TOMORROW LIMIT 1
-            )
-            FROM Animal__c
-            WHERE Active_Animal__c = true
-            AND Type_of_Animal__c = 'Dog'
-            AND Current_Location__c NOT IN :locationsToExclude
-            AND Play_Category__c NOT IN ('Unevaluated', 'DO NOT PLAY', '')
-            AND Location_Filter__c = true
-            AND Id NOT IN (
-                SELECT Animal__c 
-                FROM Play_Pause__c 
-                WHERE (Play_Pause_Reason__c != 'In Heat' 
-                AND End_Play_Pause__c = FALSE
-                AND (Start_Date__c = null OR Start_Date__c <= TODAY))
-            )
-            ORDER BY Id            
-        ];
-        return animals;
-    }
     //Neha
     @AuraEnabled(cacheable=true)
     public static Id getReportId(){
@@ -117,14 +72,14 @@ public with sharing class PlaygroupToDoListController {
         }
     }
 
-    @AuraEnabled 
-    public static String getUserLocation(){
-        try {
-            return [SELECT Location__c FROM User WHERE Id =: UserInfo.getUserId() LIMIT 1].Location__c;
-        } catch (Exception e) {
-            throw new AuraHandledException(e.getMessage());
-        }
-    }
+    // @AuraEnabled 
+    // public static String getUserLocation(){
+    //     try {
+    //         return [SELECT Location__c FROM User WHERE Id =: UserInfo.getUserId() LIMIT 1].Location__c;
+    //     } catch (Exception e) {
+    //         throw new AuraHandledException(e.getMessage());
+    //     }
+    // }
 
     private static void handleDeleteAnimalPlaygroups(Id sessionId, Id[] animalsToAdd){
         //first delete the playgroup contacts
@@ -249,6 +204,86 @@ public with sharing class PlaygroupToDoListController {
                 }
             }
             insert pgContacts;
+        }
+    }
+
+    public class QueryAnimalsForList{
+        public Animal__c[] animalList;
+
+        public String[] locationsToExclude = new String[]{
+            'Board and Train',
+            'Boarding',
+            'Foster Home',
+            'Partner Hospital',
+            'Response Partner'
+        };        
+
+        public String animalSelect = 'SELECT Id, Name, Animal_Name__c, Gender__c, Shelter_Location__c, Playgroup_Priority_Level__c, Play_Style_Notes__c,' +
+            'Play_Category__c, Shelter_Color_Coding__c, Number_of_Playgroups__c, Does_Not_Walk_on_a_Leash__c, Does_Not_Walk_on_a_Leash_Notes__c,' +
+            'Current_Location__c,';
+        
+        public String medicalConditions = '(SELECT Id FROM Medical_Conditions__r ' +
+                'WHERE Medical_Condition__c = \'Babesia\' ' + 
+                'AND Date_Diagnosed__c <= TODAY ' + 
+                'AND (Date_Resolved__c = null OR Date_Resolved__c > TODAY) LIMIT 1 ' +
+            '),';
+
+        public String inHeatPlayPause = '(SELECT Id FROM Play_Pauses__r ' + 
+                'WHERE Type__c = \'Medical\' ' +
+                'AND Play_Pause_Reason__c = \'In Heat\' ' +
+                'AND End_Play_Pause__c = FALSE ' +
+                'AND (Start_Date__c = null OR Start_Date__c <= TODAY) ' +
+                'LIMIT 1 ' +
+            '), ';
+
+        public String playgroups = '(SELECT Id FROM Animal_Playgroups__r ' +
+                'WHERE Playgroup_Session__r.Playgroup_Date_Time__c >= TODAY ' +
+                'AND Playgroup_Session__r.Playgroup_Date_Time__c < TOMORROW LIMIT 1 ' +
+            ') ';
+
+        public String animalWhere = 'FROM Animal__c ' +
+            'WHERE Active_Animal__c = true ' +
+            'AND Type_of_Animal__c = \'Dog\' ' +
+            'AND Play_Category__c NOT IN (\'Unevaluated\', \'DO NOT PLAY\', \'\') ' +
+            'AND Location_Filter__c = true ' +
+            'AND Id NOT IN ( ' +
+                'SELECT Animal__c ' +
+                'FROM Play_Pause__c ' +
+                'WHERE (Play_Pause_Reason__c != \'In Heat\' ' +
+                'AND End_Play_Pause__c = FALSE ' +
+                'AND (Start_Date__c = null OR Start_Date__c <= TODAY)) ' +
+            ') ';
+
+        public QueryAnimalsForList(String locationsFilter){
+            String query = animalSelect + medicalConditions + inHeatPlayPause + playgroups + animalWhere;
+            String[] excludeLocations = this.locationsToExclude;
+
+            AnimalLocationFilterUtil filterInfo = new AnimalLocationFilterUtil(locationsFilter);
+
+            if(filterInfo.useFilter == true){
+                String[] locationsList = filterInfo.locationList;
+                query += 'AND Current_Location__c IN :locationsList ';
+            } else {
+                query += 'AND Current_Location__c NOT IN :excludeLocations ';
+            }
+            query += 'ORDER BY Id';
+
+            this.animalList = Database.query(query);            
+        }
+
+        public QueryAnimalsForList(String locationsFilter, Boolean useFilter){
+            String query = animalSelect + medicalConditions + inHeatPlayPause + playgroups + animalWhere;            
+            String[] excludeLocations = this.locationsToExclude;
+
+            if(useFilter == true){
+                String[] locationsList = locationsFilter.split(',');
+                query += 'AND Current_Location__c IN :locationsList ';
+            } else {
+                query += 'AND Current_Location__c NOT IN :excludeLocations ';
+            }
+            query += 'ORDER BY Id';
+
+            this.animalList = Database.query(query);   
         }
     }
 }

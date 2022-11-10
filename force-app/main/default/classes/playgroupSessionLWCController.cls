@@ -25,7 +25,7 @@ public with sharing class playgroupSessionLWCController {
 
     @testVisible
     private static Animal_Playgroup__c[] animalPlaygroups (Id sessionId){
-        return [SELECT Id, Animal__c, Animal_Name__c FROM Animal_Playgroup__c WHERE Playgroup_Session__c =: sessionId ORDER BY Animal_Name__c ASC];
+        return [SELECT Id, Animal__c, Animal_Name__c, Animal__r.Current_Location__c FROM Animal_Playgroup__c WHERE Playgroup_Session__c =: sessionId ORDER BY Animal_Name__c ASC];
     }
 
     @testVisible

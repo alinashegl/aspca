@@ -63,6 +63,7 @@ export default class BehaviorEvaluationSummary extends LightningElement {
     // implicitly during the component descruction lifecycle.
     @wire(MessageContext)
     messageContext;
+    subscription = null;
 
     // Encapsulate logic for LMS subscribe.
     subscribeToMessageChannel() {
