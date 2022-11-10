@@ -5,6 +5,7 @@ public class TreatmentToDoPDFController {
         Boolean useFilter = Boolean.valueOf(ApexPages.currentPage()?.getparameters()?.get('useFilter'));
 
         TreatmentPlanWithProtocols[] treatmentPlanList = new TreatmentPlanWithProtocols[0];
+
         for(Treatment_Plan__c plan : new TreatmentToDoListController.QueryTreatmentPlansForList(locationsFilter, useFilter).treatmentPlanList){
 
             TreatmentPlanWithProtocols tPlan = new TreatmentPlanWithProtocols();
