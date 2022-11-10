@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>App_Name__c</fullName>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>The app that the filter should be applied to</inlineHelpText>
+    <label>App Name</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>ARC/CARE Dog Database</fullName>
+                <default>true</default>
+                <label>ARC/CARE Dog Database</label>
+            </value>
+            <value>
+                <fullName>CRC Dog Database</fullName>
+                <default>false</default>
+                <label>CRC Dog Database</label>
+            </value>
+            <value>
+                <fullName>ASPCA FIR Lightning</fullName>
+                <default>false</default>
+                <label>ASPCA FIR Lightning</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

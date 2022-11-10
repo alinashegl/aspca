@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>CRC ToDoList</label>
+    <protected>false</protected>
+    <values>
+        <field>Animal_Locations__c</field>
+        <value xsi:type="xsd:string">[{&quot;label&quot;:&quot;CRC&quot;,&quot;value&quot;:&quot;CRC,CRC-MRC&quot;},
+{&quot;label&quot;:&quot;Field Temp Shelter&quot;,&quot;value&quot;:&quot;Field Temp Shelter&quot;}]</value>
+    </values>
+    <values>
+        <field>App_Name__c</field>
+        <value xsi:type="xsd:string">CRC Dog Database</value>
+    </values>
+    <values>
+        <field>Application_Type__c</field>
+        <value xsi:type="xsd:string">ToDoList</value>
+    </values>
+    <values>
+        <field>User_Location__c</field>
+        <value xsi:type="xsd:string">CRC/MRC</value>
+    </values>
+</CustomMetadata>

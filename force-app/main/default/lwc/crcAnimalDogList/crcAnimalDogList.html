@@ -2,6 +2,9 @@
     <c-spinner if:true={isLoading} variant="brand" message={loadMessage}></c-spinner>
     <lightning-card title="CRC Active Dogs List">
         <div if:true={error} class="slds-var-p-around_small slds-text-color_error">{error}</div>
+        <div class="slds-align_absolute-center">
+            <c-location-filter application-type="CRCActiveAnimalList"></c-location-filter>
+        </div>
         <c-vk-datatable if:true={showTable}
             columns={columns} 
             records={anms}
@@ -11,5 +14,8 @@
             onrowselection={handleRowSelection} 
             onsave={saveRecords}>
         </c-vk-datatable>
+        <template if:false={anms}>
+            No records found!
+        </template>
     </lightning-card>
 </template>
