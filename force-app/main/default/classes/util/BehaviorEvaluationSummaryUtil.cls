@@ -308,10 +308,10 @@ public class BehaviorEvaluationSummaryUtil {
     
             for(Behavior_Evaluation_Summary__c summary : eval.Behavior_Evaluation_Summaries__r){
                 Test_Config__mdt config = Test_Config__mdt.getInstance(summary.ConfigId__c);
-                if(summary.Summary_Comments__c != null){
+                if(summary.Test_Name__c != 'General Comments'){
+                    evalSummary += '<p><b>' + summary.Test_Name__c + ':</b>&nbsp;';
                 }
-                    evalSummary += '<b>' + summary.Test_Name__c + ':</b>&nbsp;';
-                    evalSummary += summary.Summary_Comments__c == null ? '<br>' : summary.Summary_Comments__c + '<br>';
+                evalSummary += summary.Summary_Comments__c == null ? '</p>' : summary.Summary_Comments__c + '</p>';
             }
     
             eval.Behavior_Evaluation_Summary__c = evalSummary;
@@ -347,10 +347,10 @@ public class BehaviorEvaluationSummaryUtil {
     
             for(Behavior_Evaluation_Summary__c summary : evaluationsMap.get(eval.Id).Behavior_Evaluation_Summaries__r){
                 Test_Config__mdt config = Test_Config__mdt.getInstance(summary.ConfigId__c);
-                if(summary.Summary_Comments__c != null){
+                if(summary.Test_Name__c != 'General Comments'){
+                    evalSummary += '<p><b>' + summary.Test_Name__c + ':</b>&nbsp;';
                 }
-                    evalSummary += '<b>' + summary.Test_Name__c + ':</b> &nbsp;';
-                    evalSummary += summary.Summary_Comments__c == null ? '<br>' : summary.Summary_Comments__c + '<br>';
+                evalSummary += summary.Summary_Comments__c == null ? '</p>' : summary.Summary_Comments__c + '</p>';
             }
     
             eval.Behavior_Evaluation_Summary__c = evalSummary;
