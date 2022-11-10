@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>All_ToDoList</label>
+    <protected>false</protected>
+    <values>
+        <field>Animal_Locations__c</field>
+        <value xsi:type="xsd:string">[{"label":"CRC","value":"CRC,CRC-MRC"},
+{"label":"ARC/CARE","value":"ARC/CARE, ARC,CARE"},
+{"label":"Field Temp Shelter","value":"Field Temp Shelter"}]</value>
+    </values>
+    <values>
+        <field>App_Name__c</field>
+        <value xsi:type="xsd:string">ASPCA FIR Lightning</value>
+    </values>
+    <values>
+        <field>Application_Type__c</field>
+        <value xsi:type="xsd:string">ToDoList</value>
+    </values>
+    <values>
+        <field>User_Location__c</field>
+        <value xsi:type="xsd:string">All</value>
+    </values>
+</CustomMetadata>

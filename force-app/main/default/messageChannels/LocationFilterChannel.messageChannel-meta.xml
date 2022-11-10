@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Message channel for passing updates to location filters so the other components on the page can update accordingly.</description>
+    <isExposed>true</isExposed>
+    <lightningMessageFields>
+        <description>Locations in a comma separated list</description>
+        <fieldName>locations</fieldName>
+    </lightningMessageFields>
+    <masterLabel>LocationFilterMessage</masterLabel>
+</LightningMessageChannel>

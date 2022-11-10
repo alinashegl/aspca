@@ -7,15 +7,14 @@ import getPlaygroupAnimals from '@salesforce/apex/PlaygroupToDoListController.ge
 import createPlaygroup from '@salesforce/apex/PlaygroupToDoListController.createPlaygroup';
 import copyPlaygroupSession from '@salesforce/apex/PlaygroupToDoListController.copyPlaygroupSession';
 import editPlaygroup from '@salesforce/apex/PlaygroupToDoListController.editPlaygroup';
-import getUserLocation from '@salesforce/apex/PlaygroupToDoListController.getUserLocation';
+// import getUserLocation from '@salesforce/apex/PlaygroupToDoListController.getUserLocation';
 import getReportId from '@salesforce/apex/PlaygroupToDoListController.getReportId';
-
 
 export default class PlaygroupToDoList extends NavigationMixin(LightningElement) {
     @track errorMsg;
     @track reportID;
+    @api locationsFilter;
     
-    location;
     //exposed properties for "copy playgroup" and "edit playgroup"
     @api
     sessionId;
@@ -50,6 +49,9 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
     filterValueValue;
     hasRendered = false;
 
+    error;
+    errorMessage;
+
     get actionLabel() {
         return this.optionsFieldLabel(this.action, this.actionLabels);
     }
@@ -61,10 +63,9 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
             var Url='/'+this.reportID;
             window.open(Url, "_blank");
         })
-
-            .catch(error => {
-                this.errorMsg = error;
-            })
+        .catch(error => {
+            this.errorMsg = error;
+        })
     }
 
     get sortFieldOptions() {
@@ -122,7 +123,7 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
         return this.action === 'new';
     }
 
-    @wire(getPlaygroupAnimals, { location: '$location'})
+    @wire(getPlaygroupAnimals, { locationsFilter: '$locationsFilter'})
     wiredPlaygroupAnimals(result) {
         this.playgroupAnimals = result;
         if (result.data) {
@@ -141,12 +142,9 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
             }
         }
         else if (result.error) {
-            const evt = new ShowToastEvent({
-                title: 'Error',
-                message: result.error,
-                variant: 'error',
-            });
-            this.dispatchEvent(evt);
+            window.console.log('error: ', result.error);
+            this.error = result.error;
+            this.errorMessage = 'Error retreiving Playgroup To Do List';
         }
     }
 
@@ -160,22 +158,22 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
             }
         }
 
-        //only execute if location is not set
-        if(this.location == undefined || this.location == null){
-            getUserLocation()
-            .then((response) => {
-                this.location = response;
-            })
-            .catch((result) => {
-                window.console.log('result: ', JSON.stringify(result));
-                const evt = new ShowToastEvent({
-                    title: 'Error',
-                    message: result,
-                    variant: 'error',
-                });
-                this.dispatchEvent(evt);
-            })
-        }
+        // //only execute if location is not set
+        // if(this.location == undefined || this.location == null){
+        //     getUserLocation()
+        //     .then((response) => {
+        //         this.location = response;
+        //     })
+        //     .catch((result) => {
+        //         window.console.log('result: ', JSON.stringify(result));
+        //         const evt = new ShowToastEvent({
+        //             title: 'Error',
+        //             message: result,
+        //             variant: 'error',
+        //         });
+        //         this.dispatchEvent(evt);
+        //     })
+        // }
     }
 
     handleClick(event) {
@@ -383,7 +381,12 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
     }
 
     handlePdf() {
-        let url = '/apex/PlaygroupToDoPdf?location=' + this.location;
+        const locFilterObj = JSON.parse(this.locationsFilter);
+        const locations = locFilterObj['locations'];
+        const hasConfigWithLocations = locFilterObj['hasConfigWithLocations']
+        const useFilter = hasConfigWithLocations && locations != null;
+        let url = '/apex/PlaygroupToDoPdf?locations=' + locations + '&useFilter=' + useFilter;
+        window.console.log('url: ', url);
         this[NavigationMixin.Navigate]({
             type: 'standard__webPage',
             attributes: {
@@ -513,4 +516,11 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
     handleCancel() {
         this.dispatchEvent(new CustomEvent('cancel'));
     }
+
+    // @api
+    // refresh(filterList){
+    //     window.console.log('filterList: ', filterList);
+    //     this.locationsFilter = filterList;
+    //     refreshApex(this.playgroupAnimals);
+    // }
 }
