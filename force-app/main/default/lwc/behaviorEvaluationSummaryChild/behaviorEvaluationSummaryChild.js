@@ -59,7 +59,9 @@ export default class BehaviorEvaluationSummaryChild extends LightningElement {
     }
 
     get lockedDisplay() {
-        return this.record.testName + ': ' + this.unlockedDisplay;
+        return this.record.testName != 'General Comments' ? 
+            this.record.testName + ': ' + this.unlockedDisplay :
+            this.unlockedDisplay;
     }
 
     get unlockedDisplay() {
@@ -68,6 +70,10 @@ export default class BehaviorEvaluationSummaryChild extends LightningElement {
 
     get useTextArea(){
         return this.summaryText.length > this.textAreaFloor;
+    }
+
+    get showTestName(){
+        return this.record.testName != 'General Comments';
     }
 
 }

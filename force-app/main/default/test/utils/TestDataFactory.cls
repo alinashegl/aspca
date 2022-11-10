@@ -671,7 +671,8 @@ public without sharing class TestDataFactory {
           Description__c = 'Test', 
           Animal__c = a.Id, 
           AssignedTreatmentBundleId__c = planBundle.Id,
-          Problem_Behavior__c = 'Fear of People - Mild'
+          Problem_Behavior__c = 'Fear of People - Mild',
+          Treatment_Priority__c = 'High – 5 days'
         );
         insert plan;
         return plan;
