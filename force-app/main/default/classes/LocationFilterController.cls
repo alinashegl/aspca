@@ -2,9 +2,7 @@ public with sharing class LocationFilterController {
     @AuraEnabled(cacheable=true)
     public static Map<String, Object> getAnimalLocations(String applicationType){
         try {
-            UserAppInfo userAppInfo = [SELECT Id, AppDefinitionId FROM UserAppInfo WHERE UserId = :UserInfo.getUserId() LIMIT 1];
-            AppDefinition appDefinition = [SELECT DurableId, Label FROM AppDefinition Where DurableId = :userAppInfo.AppDefinitionId LIMIT 1];
-            String currentApp = appDefinition.Label;
+            String currentApp = getUsersCurrentApp();
 
             Animal_Location_Config__mdt[] locConfigs = new Animal_Location_Config__mdt[0];
             User u = [SELECT Id, Location__c FROM User WHERE Id = :UserInfo.getUserId() LIMIT 1];
@@ -51,11 +49,25 @@ public with sharing class LocationFilterController {
             
             return returnMap;
         } catch (Exception e) {
+            System.debug('error getting locations: ' + e.getMessage());
+            System.debug(e.getStackTraceString());
             throw new AuraHandledException(e.getMessage());
         }
     }
 
     private static Boolean isValidList(String st){
         return st.substring(0,1) == '[';
+    }
+
+    private static String getUsersCurrentApp(){
+        String currentApp;
+        if(test.isRunningTest()){
+            currentApp = null;
+        } else {
+            UserAppInfo userAppInfo = [SELECT Id, AppDefinitionId FROM UserAppInfo WHERE UserId = :UserInfo.getUserId() LIMIT 1];
+            AppDefinition appDefinition = [SELECT DurableId, Label FROM AppDefinition Where DurableId = :userAppInfo.AppDefinitionId LIMIT 1];
+           currentApp = appDefinition.Label;
+        }
+        return currentApp;
     }
 }
