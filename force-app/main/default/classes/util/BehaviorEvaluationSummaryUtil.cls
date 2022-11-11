@@ -170,7 +170,7 @@ public class BehaviorEvaluationSummaryUtil {
                 testName = testName.replace(' P1', '').replace(' P2', '').replace(' P3', '');
                 if (!configNameSet.contains(testName)) {
                     configNameSet.add(testName);
-                    configSummary.add(new SummaryWrapper(Integer.valueOf(t.Test_Display_Order__c), '<p><b>' + testName + ':</b>&nbsp;</p>'));
+                    configSummary.add(new SummaryWrapper(Integer.valueOf(t.Test_Display_Order__c), '<b>' + testName + ':</b>&nbsp;<br>'));
                     nameToConfigMap.put(testName, t);
                 }
             }
@@ -308,10 +308,11 @@ public class BehaviorEvaluationSummaryUtil {
     
             for(Behavior_Evaluation_Summary__c summary : eval.Behavior_Evaluation_Summaries__r){
                 Test_Config__mdt config = Test_Config__mdt.getInstance(summary.ConfigId__c);
-                if(summary.Summary_Comments__c != null){
+
+                if(summary.Test_Name__c != 'General Comments'){
+                    evalSummary += '<b>' + summary.Test_Name__c + ':</b>&nbsp;';
                 }
-                    evalSummary += '<p><b>' + summary.Test_Name__c + ':</b>&nbsp;';
-                    evalSummary += summary.Summary_Comments__c == null ? '</p>' : summary.Summary_Comments__c + '</p>';
+                evalSummary += summary.Summary_Comments__c == null ? '<br>' : summary.Summary_Comments__c + '<br>';
             }
     
             eval.Behavior_Evaluation_Summary__c = evalSummary;
@@ -347,10 +348,10 @@ public class BehaviorEvaluationSummaryUtil {
     
             for(Behavior_Evaluation_Summary__c summary : evaluationsMap.get(eval.Id).Behavior_Evaluation_Summaries__r){
                 Test_Config__mdt config = Test_Config__mdt.getInstance(summary.ConfigId__c);
-                if(summary.Summary_Comments__c != null){
+                if(summary.Test_Name__c != 'General Comments'){
+                    evalSummary += '<b>' + summary.Test_Name__c + ':</b>&nbsp;';
                 }
-                    evalSummary += '<p><b>' + summary.Test_Name__c + ':</b>&nbsp;';
-                    evalSummary += summary.Summary_Comments__c == null ? '</p>' : summary.Summary_Comments__c + '</p>';
+                evalSummary += summary.Summary_Comments__c == null ? '<br>' : summary.Summary_Comments__c + '<br>';
             }
     
             eval.Behavior_Evaluation_Summary__c = evalSummary;

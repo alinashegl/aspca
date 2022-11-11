@@ -3,6 +3,7 @@ import FORM_FACTOR from '@salesforce/client/formFactor'
 import { NavigationMixin } from "lightning/navigation";
 import { refreshApex } from '@salesforce/apex';
 import getPlaygroupSessionInfo from '@salesforce/apex/playgroupSessionLWCController.getPlaygroupSessionInfo';
+import Setting from '@salesforce/schema/TenantUsageEntitlement.Setting';
 
 export default class PlaygroupSessionMain extends NavigationMixin(LightningElement) {
     @api recordId;
@@ -10,6 +11,7 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
     showSpinner = true;
     animals = [];
     playgroupContacts = [];
+    locations;
 
     toggleDropdown = false;
     showToDoList = false;
@@ -38,6 +40,7 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
             this.sessionPlaygroupLeader = result.data.playgroupSession.Playgroup_Leader__c;
             if(result.data.animalPlaygroups){
                 this.animals = result.data.animalPlaygroups;
+                this.setLocations();
             }
             if(result.data.playgroupContacts){
                 this.playgroupContacts = result.data.playgroupContacts;
@@ -164,6 +167,26 @@ export default class PlaygroupSessionMain extends NavigationMixin(LightningEleme
 
     handleContactEvent(){
         this.refresh = !this.refresh;
+    }
+
+    setLocations(){
+        window.console.log('set locations animals: ', this.animals)
+        let locations = new Set();
+        this.animals.forEach(animal => {
+            window.console.log('animal: ', animal);
+            if(animal.Animal__r.Current_Location__c == 'CRC' || animal.Animal__r.Current_Location__c == 'CRC-MRC'){
+                locations.add('CRC');
+                locations.add('CRC-MRC');
+            } 
+            else if(animal.Animal__r.Current_Location__c == 'Field Temp Shelter'){
+                locations.add('Field Temp Shelter');
+            }
+        });
+
+        window.console.log('locations: ', locations);
+        let locationsString = [...locations].join(',');
+        window.console.log('locationsString: ', locationsString);
+        this.locations = locationsString;
     }
 
     get customLookupLeaderDeviceSize(){
