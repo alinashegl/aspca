@@ -116,7 +116,7 @@ export default class VkDatatableUsage extends LightningElement {
             this.columns[7].options = contacts;
             if(!this.subscription){
                 this.subscribeMC();
-            } else {
+            } else {                
                 this.getAnimals_(this.receivedMessage);
             }
             
@@ -130,7 +130,7 @@ export default class VkDatatableUsage extends LightningElement {
         this.loadMessage = 'Loading...';
         this.isLoading = true;
         this.error = '';
-        let location = filter.locations ? filter.locations : null;
+        let location = filter && filter.locations ? filter.locations : null;
         getAnimals({locationsFilter: location})
         .then(resData=>{
             let data = resData.animals;
