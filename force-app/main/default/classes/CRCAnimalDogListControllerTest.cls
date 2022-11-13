@@ -2,13 +2,17 @@
 public class CRCAnimalDogListControllerTest {
 
     @testSetup
-    static void setupData(){
+    static void setupData(){ 
         List<Animal__c> animals = new List<Animal__c>();
         List<Play_Pause__c> playPauses = new List<Play_Pause__c>();
         List<Treatment_Plan__c> planList = new List<Treatment_Plan__c>();
+        Contact behCaseWorker = TestDataFactory.createBehaviorCaseWorkerContact();
         for(Integer i = 1; i <= 5; i++){
             Animal__c a = TestDataFactory.createAnimalWithName('anm' + i);
             a.Current_Location__c = 'CRC-MRC';
+            if(i < 3){
+            a.Behavior_Case_Worker__c = behCaseWorker.Id;
+            }
             animals.add(a);
             playPauses.addAll(TestDataFactory.createPlayPauses(a));
             
@@ -33,7 +37,8 @@ public class CRCAnimalDogListControllerTest {
     
     @isTest
     static void testRecords(){
-        CRCAnimalDogListController.CRCDogListResult objs = CRCAnimalDogListController.getRecords();
+        String locations = '{"hasConfigWithLocations":true,"showAllLocations":false,"locations":"CRC,CRC-MRC,CRC- MRC,Field Temp Shelter"}';
+        CRCAnimalDogListController.CRCDogListResult objs = CRCAnimalDogListController.getRecords(locations);
         System.assertNotEquals(objs, null);
         String result = CRCAnimalDogListController.saveRecords(JSON.serialize(objs.animals));
         System.assertEquals('success', result);

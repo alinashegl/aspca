@@ -3,8 +3,8 @@
     <actionCalls>
         <name>Behavior_Grade_Change_Notification_Initial</name>
         <label>Animal__c.Behavior_Grade_Change_Notification_Initial</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
+        <locationX>176</locationX>
+        <locationY>455</locationY>
         <actionName>Animal__c.Behavior_Grade_Change_Notification_Initial</actionName>
         <actionType>emailAlert</actionType>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -25,6 +25,12 @@ Workflow rule description: This rule is run whenever &quot;Current Behavior Grad
     </formulas>
     <label>Behavior Grade Change - Initial</label>
     <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
         <name>CanvasMode</name>
         <value>
             <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
@@ -36,8 +42,8 @@ Workflow rule description: This rule is run whenever &quot;Current Behavior Grad
 Clear the text value from &quot;Preliminary Behavior Grade&quot;</description>
         <name>mainUpdate</name>
         <label>mainUpdate</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
+        <locationX>176</locationX>
+        <locationY>335</locationY>
         <connector>
             <targetReference>Behavior_Grade_Change_Notification_Initial</targetReference>
         </connector>
@@ -53,7 +59,7 @@ Clear the text value from &quot;Preliminary Behavior Grade&quot;</description>
         <inputReference>$Record</inputReference>
     </recordUpdates>
     <start>
-        <locationX>0</locationX>
+        <locationX>50</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>mainUpdate</targetReference>

@@ -1,5 +1,5 @@
 @isTest
-public class ArcCareAnimalDogListControllerTest {
+public class ArcCareAnimalDogListControllerTest { 
 
     @testSetup
     static void setupData(){
@@ -36,5 +36,17 @@ public class ArcCareAnimalDogListControllerTest {
         
         List<Contact> contacts = ArcCareAnimalDogListController.getBehCaseWorkers();
         System.assertNotEquals(contacts, null);
+    }
+    
+    @isTest
+    static void testgetPicklistValue(){
+        List<ArcCareAnimalDogListController.Option> options = ArcCareAnimalDogListController.getPicklistValue('Gender__c');
+        System.assertNotEquals(options, null);
+    }
+    
+    @isTest
+    static void testgetAnimalGender(){
+        List<ArcCareAnimalDogListController.Option> options = ArcCareAnimalDogListController.getAnimalGender();
+        System.assertNotEquals(options, null);
     }
 }
