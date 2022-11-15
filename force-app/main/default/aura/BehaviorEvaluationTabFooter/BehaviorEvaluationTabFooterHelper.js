@@ -108,12 +108,9 @@
     {
        var reason = cmp.get('v.skipReason');
        cmp.set('v.skipDisplay', reason);
-       //var r = cmp.find('reasons').get('v.value');
        var apiName = cmp.get('v.skipVal');
        var recordId = cmp.get('v.recordId');
-       //console.log('Skip Reason => ', r);
        console.log('###VARIABLE', reason);
-       //console.log('Skip API Name ---> ' + JSON.stringify(apiName.id));
        this.processingProcess(cmp, 'handleModal');
        this.sendValues(cmp, recordId, apiName.id, reason, 'c.updateEval');
        $A.get('e.force:refreshView').fire();
@@ -126,8 +123,6 @@
                     var state = response.getState();
                     var result = response.getReturnValue();
                     if(state == 'SUCCESS') {
-                        //console.log('@@ SUCCESS action ==> ' + action);
-                        //console.log('@@@@ This ' + JSON.stringify(action) + ' Has this result =====> ' + JSON.stringify(result));
                         this.setVal(cmp, attr, result);
                         return result;
                     }else if (state == 'ERROR') {
@@ -181,12 +176,7 @@
         };
 
         var mName = methodName;
-
-        //alert(JSON.stringify(params['apiName']));
-
-        //this.sendRequest(cmp, 'c.updateEval', params);
 		var comp = cmp;
-        this.handlePublishEvalSaveStartMessage(cmp);
         this.sendPromise(cmp, mName, params, params[apiName])
         .then(
           function(response) {
@@ -221,7 +211,6 @@
             values: v ,
             recordId: rId
         };
-        this.handlePublishEvalSaveStartMessage(cmp);
         this.sendPromise(cmp, 'c.updateEval', params, a.id)
         .then(
             function(response) {
@@ -242,13 +231,6 @@
                 });
             }
         );
-    },
-
-    handlePublishEvalSaveStartMessage: function(cmp) {
-        var payload = {
-            startSave: true
-        };
-        cmp.find("evalSummaryUpdateMessage").publish(payload);
     },
 
     handlePublishEvalUpdateMessage: function(cmp) {
