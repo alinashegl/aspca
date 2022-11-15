@@ -164,12 +164,17 @@ private class Test_MRCTxPlansReportLWCController {
     @isTest
     static void getMRCDogs_Success(){
         String[] dogNames = new String[]{'fido','willow','mika'};
+        Animal__c[] dogs = new Animal__c[0];
         for(String name : dogNames){
             Animal__c dog = TestDataFactory.createAnimalWithName(name);
+            dog.Current_Location__c = BehaviorUtil.MRC;
+            dogs.add(dog);
         }
 
+        update dogs;
+
         test.startTest();
-            Animal__c[] dogs = MRCTreatmentPlansReportLWCController.getMRCDogs();
+            dogs = MRCTreatmentPlansReportLWCController.getMRCDogs();
         test.stopTest();
 
         System.assert(!dogs.isEmpty(), 'Should have returned a list of dogs, but was empty');
