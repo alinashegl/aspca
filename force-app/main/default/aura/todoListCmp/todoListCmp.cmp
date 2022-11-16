@@ -12,7 +12,7 @@
     <lightning:card title = "To Do List" iconName = "standard:task">
         <aura:set attribute="actions">
             <c:todoList/>
-            <c:OutOfOffice/>
+          
         </aura:set>
         <aura:set attribute="footer">
             <c:locationFilter

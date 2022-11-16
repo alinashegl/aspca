@@ -215,7 +215,8 @@ public with sharing class PlaygroupToDoListController {
             'Boarding',
             'Foster Home',
             'Partner Hospital',
-            'Response Partner'
+            'Response Partner',
+            ''
         };        
 
         public String animalSelect = 'SELECT Id, Name, Animal_Name__c, Gender__c, Shelter_Location__c, Playgroup_Priority_Level__c, Play_Style_Notes__c,' +
@@ -246,6 +247,7 @@ public with sharing class PlaygroupToDoListController {
             'AND Type_of_Animal__c = \'Dog\' ' +
             'AND Play_Category__c NOT IN (\'Unevaluated\', \'DO NOT PLAY\', \'\') ' +
             'AND Location_Filter__c = true ' +
+            'AND Current_Location__c != null ' + 
             'AND Id NOT IN ( ' +
                 'SELECT Animal__c ' +
                 'FROM Play_Pause__c ' +

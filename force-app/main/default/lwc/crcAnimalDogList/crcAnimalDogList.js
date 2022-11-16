@@ -2,6 +2,8 @@ import { LightningElement, wire } from 'lwc';
 import getBehCaseWorkers from '@salesforce/apex/ArcCareAnimalDogListController.getBehCaseWorkers';
 import getAnimals from '@salesforce/apex/CRCAnimalDogListController.getRecords';
 import updateRecords from '@salesforce/apex/CRCAnimalDogListController.saveRecords';
+import LOCATION_FILTER_MC from "@salesforce/messageChannel/LocationFilterChannel__c";
+import { subscribe, MessageContext, APPLICATION_SCOPE } from 'lightning/messageService';
 
 const TREATMENTPRIORITYOPTIONS = [
     { label: 'No Treatment', value: 'No Treatment' },
@@ -51,18 +53,18 @@ const PLAYGROUPPRIORITYOPTIONS = [
 
 const columns = [
     {label: 'ASPCA Animal Name', fieldName: 'Animal_Name__c',type: 'text', editable: false, disabled: true},
-    {label: 'Animal Name/Id', fieldName: 'Animal__c', type: 'link', linkLabel: 'anmName'}, 
+    {label: 'Animal Name/Id', fieldName: 'Animal__c', type: 'link', linkLabel: 'anmName', sortable: true, sortBy: 'anmName'}, 
     {label: 'Treatment Priority', fieldName: 'Treatment_Priority__c', type: 'picklist', options: TREATMENTPRIORITYOPTIONS, sortable: true, resizable: true,editable: true},
     {label: 'Enrichment Priority', fieldName: 'Enrichment_Priority__c', type: 'picklist', options: ENRICHMENTPRIORITYOPTIONS, sortable: true, resizable: true, editable: true},
     {label: 'Shelter Color Coding', fieldName: 'Shelter_Color_Coding__c', type: 'picklist', options: SHELTERCOLOROPTIONS, sortable: true, resizable: true, editable: true},
-    {label: 'Meets Adoptability Date', fieldName: 'Meets_Adoptability_Date__c',type: 'date', editable: true, disabled: false},
+    {label: 'Meets Adoptability Date', fieldName: 'Meets_Adoptability_Date__c',type: 'date', editable: true, disabled: false, sortable: true},
     {label: 'Playgroup Priority Level', fieldName: 'Playgroup_Priority_Level__c', type: 'picklist', options: PLAYGROUPPRIORITYOPTIONS, sortable: true, resizable: true, editable: true},
     //{label: 'Behavior Case Worker', fieldName: 'Behavior_Case_Worker__c', type: 'link', linkLabel: 'behName'}, 
     {label: 'Behavior Case Worker', fieldName: 'Behavior_Case_Worker__c', type: 'lookup', linkLabel: 'behName',
      sortable: true, resizable: true, editable: true,sortBy: 'behName', title:'Click to view Behavior Case Worker', iconName:'standard:contact'},
     
-    {label: 'Behavior Summary Change Date', fieldName: 'Behavior_Summary_Change_Date__c',type: 'date', editable: true, disabled: false},
-    {label: 'Play Pause Reason', fieldName: 'Play_Pause_Reason',type: 'text', editable: false, disabled: true},
+    {label: 'Behavior Summary Change Date', fieldName: 'Behavior_Summary_Change_Date__c',type: 'date', editable: true, disabled: false, sortable: true},
+    {label: 'Play Pause Reason', fieldName: 'Play_Pause_Reason',type: 'text', editable: false, disabled: true, sortable: true},
     
 ];
 const PAGESIZEOPTIONS = [5,10,20,40];
@@ -75,6 +77,33 @@ export default class VkDatatableUsage extends LightningElement {
     pageSizeOptions = PAGESIZEOPTIONS;
     isLoading = true;
     loadMessage = 'Loading...';
+    searchKey = '';
+    receivedMessage;
+    subscription = null;
+
+    connectedCallback(){
+        this.subscribeMC();
+    }
+
+    @wire(MessageContext)
+    messageContext;
+    
+	subscribeMC() {
+		if (this.subscription) {
+			return;
+		}
+		this.subscription = subscribe(
+			this.messageContext,
+			LOCATION_FILTER_MC, ( message ) => {
+				this.handleMessage( message );
+			},
+			{scope: APPLICATION_SCOPE});
+	}
+
+	unsubscribeMC() {
+		unsubscribe( this.subscription );
+		this.subscription = null;
+	}
 
     @wire(getBehCaseWorkers)
     wAccs({error,data}){
@@ -85,18 +114,24 @@ export default class VkDatatableUsage extends LightningElement {
                 contacts.push(obj);
             }
             this.columns[7].options = contacts;
-            this.getAnimals_();
+            if(!this.subscription){
+                this.subscribeMC();
+            } else {                
+                this.getAnimals_(this.receivedMessage);
+            }
+            
         }else{
             this.error = error;
         }       
     }
 
-    getAnimals_(){
+    getAnimals_(filter){
         this.showTable = false;
         this.loadMessage = 'Loading...';
         this.isLoading = true;
         this.error = '';
-        getAnimals()
+        let location = filter && filter.locations ? filter.locations : null;
+        getAnimals({locationsFilter: location})
         .then(resData=>{
             let data = resData.animals;
             let playPauseReasons = resData.playPauseReasons;
@@ -179,7 +214,7 @@ export default class VkDatatableUsage extends LightningElement {
         }
         updateRecords({recsString: JSON.stringify(recs)})
         .then(response=>{
-            if(response==='success') this.getAnimals_();
+            if(response==='success') this.getAnimals_(this.receivedMessage);
         })
         .catch(error=>{
             console.log('recs save error***'+error);
@@ -199,4 +234,13 @@ export default class VkDatatableUsage extends LightningElement {
         }
         return array;
     };
+
+	handleMessage( message ) {
+
+		this.receivedMessage = message;
+		
+		if(this.receivedMessage){
+			this.getAnimals_(this.receivedMessage);
+		}
+	}
 }

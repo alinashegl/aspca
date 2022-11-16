@@ -10,7 +10,8 @@ public class ArcCareAnimalDogListController {
         List<Animal__c> objList = new List<Animal__c>();
         for(Animal__c obj : objs){
             if(obj.Current_Location__c != null && (obj.Current_Location__c.equalsIgnoreCase('ARC') || 
-              obj.Current_Location__c.equalsIgnoreCase('CARE'))){
+              obj.Current_Location__c.equalsIgnoreCase('CARE') || obj.Current_Location__c.equalsIgnoreCase('AAH') ||
+              obj.Current_Location__c.equalsIgnoreCase('Foster Home') || obj.Current_Location__c.equalsIgnoreCase('Partner Hospital'))){
                 objList.add(obj);
             }
         }
@@ -68,6 +69,65 @@ public class ArcCareAnimalDogListController {
         }
 
         return 'success';
+    }
+    
+    @AuraEnabled(cacheable=true)
+    public static List<option> getAnimalGender(){
+        Map<String, List<String>> result = getGlobalPickList('Animal__c', 'Type_of_Animal__c', 'Gender__c' );
+        List<Option> options = new List<Option>();
+        for(String pick: result.get('Dog')){
+            Option op = new Option();
+            op.label = op.value = pick;
+            options.add(op);
+        }
+        return options;
+    }
+    
+    public static Map<String, List<String>> getGlobalPickList(String objectName, String controllingField, String dependentField )  {
+        Map<String, List<String>> controllingInfo = new Map<String, List<String>>() ;
+        Schema.SObjectType objType = Schema.getGlobalDescribe().get(objectName);
+        Schema.DescribeSObjectResult  describeResult = objType.getDescribe ();
+        Schema.DescribeFieldResult  controllingFieldInfo = describeResult.fields.getMap().get(controllingField).getDescribe() ;
+        Schema.DescribeFieldResult  dependentFieldInfo = describeResult.fields.getMap().get(dependentField).getDescribe() ;
+        List<Schema.PicklistEntry> controllingValues = controllingFieldInfo.getPicklistValues();
+        List<Schema.PicklistEntry> dependentValues = dependentFieldInfo.getPicklistValues();
+        for (Schema.PicklistEntry currControllingValue  :  controllingValues)  {
+            controllingInfo.put (currControllingValue.getLabel() , new List<String>( ) ) ;
+        }
+        
+        for  (Schema.PicklistEntry  currDependentValue  :  dependentValues)  {
+            String  jsonString  =  JSON.serialize(currDependentValue) ;
+            MyPickListInfo  info  =  (MyPickListInfo)  JSON.deserialize(jsonString, MyPickListInfo.class);
+            String hexString  =  EncodingUtil.convertToHex (EncodingUtil.base64Decode (info.validFor)).toUpperCase ( ) ;
+            Integer  baseCount  =  0;
+            for (Integer curr  :  hexString.getChars ( ) )  {
+                Integer  val  =  0;
+                if  (curr  >=  65) {
+                    val  =  curr  -  65  +  10;
+                }  else  {
+                    val  =  curr  -  48;
+                }
+                if  ((val & 8)  ==  8)  {
+                    controllingInfo.get (controllingValues[baseCount  +  0].getLabel( ) ).add (currDependentValue.getLabel( ) ) ;
+                }
+                if  ((val & 4)  ==  4)  {
+                    controllingInfo.get (controllingValues[baseCount  +  1].getLabel( ) ).add (currDependentValue.getLabel( ) ) ;
+                }
+                if  ((val & 2)  ==  2)  {
+                    controllingInfo.get (controllingValues[baseCount  +  2].getLabel( ) ).add (currDependentValue.getLabel( ) ) ;
+                }
+                
+                if  ((val & 1)  ==  1)  {
+                    controllingInfo.get (controllingValues[baseCount  +  3].getLabel( ) ).add (currDependentValue.getLabel( ) ) ;
+                }
+                baseCount  +=  4;
+            }   
+        }
+        return controllingInfo;
+    }
+    
+    public class MyPickListInfo {
+        public String validFor;
     }
     
     @AuraEnabled(cacheable=true)
