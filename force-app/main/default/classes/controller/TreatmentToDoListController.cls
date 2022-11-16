@@ -41,7 +41,7 @@ public with sharing class TreatmentToDoListController {
         public String treatmentQueryFrom = 'FROM Treatment_Plan__c ' +
             'WHERE Animal__r.Location_Filter__c = true ' +
             'AND Animal__r.Current_Location__c != null ' +
-            'AND  Animal__r.Active_Animal__c = true ' +
+            'AND Animal__r.Active_Animal__c = true ' +
             'AND IsActive__c = TRUE ' +
             'AND Treatment_Priority__c != null ' +
             'AND Treatment_Priority__c != \'No Treatment\' ';
