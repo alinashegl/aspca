@@ -180,8 +180,8 @@ global with sharing class DaybackRest {
 
     private static GenericResource mrcGenericResource(){
         GenericResource resource = new GenericResource();
-        resource.id = 'MRC BehaviorMgmt';
-        resource.name = 'MRC BehaviorMgmt';
+        resource.id = 'CRC-MRC BehaviorMgmt';
+        resource.name = 'CRC-MRC BehaviorMgmt';
         resource.nameSafe = 'mrc';
         resource.shortName = 'mrc';
         resource.statusSelected = 'default';
