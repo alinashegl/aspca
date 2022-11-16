@@ -15,7 +15,8 @@ export default class PlayCategoryPicklist extends LightningElement {
         {label: 'PG Re-Eval', value: 'PG Re-Eval'},
         {label: 'Playgroup Eligible', value: 'Playgroup Eligible'},
         {label: 'Foster Playgroup Eligible', value: 'Foster Playgroup Eligible'},
-        {label: 'DO NOT PLAY', value: 'DO NOT PLAY'}
+        {label: 'DO NOT PLAY', value: 'DO NOT PLAY'},
+        {label: 'New/Unknown', value: 'New/Unknown'}
     ]
 
     @wire(getRecord, { recordId: '$recordId', fields: [ANIMAL_ID_FIELD, ANIMAL_PLAY_CATEGORY]})
