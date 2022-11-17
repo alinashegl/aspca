@@ -23,14 +23,14 @@ public class AutoScheduleTasksUtil {
 
     public static final String[] dogPopulations {
         get{
-            if(Test.isRunningTest()){
+            // if(Test.isRunningTest()){
                 dogPopulations = new String[0];
                 dogPopulations.addAll(BehaviorUtil.ARC_CARE);
                 dogPopulations.addAll(BehaviorUtil.CRC_MRC);
-            }
-            else {
-                dogPopulations = BehaviorUtil.ARC_CARE;
-            }
+            // }
+            // else {
+            //     dogPopulations = BehaviorUtil.ARC_CARE;
+            // }
             return dogPopulations;
         }
         set;
