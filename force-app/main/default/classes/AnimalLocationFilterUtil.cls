@@ -7,8 +7,16 @@ public with sharing class AnimalLocationFilterUtil {
     public AnimalLocationFilterUtil(String locationsFilter){
         System.debug('util locationsFilter: ' + locationsFilter);
         if(locationsFilter != null && String.isNotEmpty(locationsFilter)){
-            Map<String, Object> locationsFilterMap = (Map<String, Object>) JSON.deserializeUntyped(locationsFilter);
-            this.handleMapFilter(locationsFilterMap);
+
+            if(isValidMap(locationsFilter)){
+                Map<String, Object> locationsFilterMap = (Map<String, Object>) JSON.deserializeUntyped(locationsFilter);
+                this.handleMapFilter(locationsFilterMap);
+            } else {
+                Map<String, Object> locationsFilterMap = new Map<String, Object> {
+                    'locations' => 
+                    locationStringToObjectList(locationsFilter)
+                };
+            }            
         }
     }
 
