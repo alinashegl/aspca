@@ -68,7 +68,7 @@ export default class TreatmentByDogSelection extends LightningElement {
     }
 
     selectedALL(){
-        this.selectedLocations = ["ARC","CARE","ARC/CARE","CRC","CRC-MRC"];
+        this.selectedLocations = ["ARC","CARE","CRC","CRC-MRC"];
     }
 
     handleLocationToggle(event){
