@@ -27,7 +27,13 @@ public with sharing class TreatmentByDogLWCController {
     public static DogWrapper[] getDogList(String[] selectedLocations, String filterText){
         try {
             DogWrapper[] dogs = new DogWrapper[0];
-            String query = 'SELECT Id, Animal_Name_Id__c, Current_Location__c FROM Animal__c WHERE Current_Location__c IN: selectedLocations AND Active_Animal__c = true';
+            String query = 
+                'SELECT Id, Animal_Name_Id__c, Current_Location__c ' +
+                'FROM Animal__c ' +
+                'WHERE Current_Location__c IN: selectedLocations ' +
+                'AND Type_of_Animal__c = \'Dog\' ' +
+                'AND Active_Animal__c = true ' +
+                'AND Location_Filter__c = true';
             if(filterText != null){
                 query += ' AND Animal_Name_Id__c LIKE \'%' + filterText + '%\'';
             }
@@ -85,8 +91,11 @@ public with sharing class TreatmentByDogLWCController {
             FROM Task 
             WHERE RecordTypeId =: recordTypeId
             AND Animal__c IN: dogIds
+            AND Medication__r.Behavior_Medication__c = true
+            AND Status != 'Completed'
             AND ((IsRecurrence = true AND RecurrenceEndDateOnly >= TODAY)
             OR (RecurrenceActivityId = null AND ActivityDate >= TODAY))
+
         ]){
             if(dogToMedicationMap.containsKey(t.Animal__c)){
                 dogToMedicationMap.get(t.Animal__c).add(t.Medication__r.Name);
