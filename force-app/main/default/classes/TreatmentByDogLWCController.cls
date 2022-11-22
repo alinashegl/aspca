@@ -246,8 +246,11 @@ public with sharing class TreatmentByDogLWCController {
         @AuraEnabled public String medications {get;set;}
         @AuraEnabled public String txPriority {get;set;}
         @AuraEnabled public TxProtocolWrapper[] txProtocols {get;set;}
+        @AuraEnabled public Boolean hideMedications {get;set;}
 
         public DogInfoWrapper(Animal__c dog){
+            User u = [SELECT Id, Location__c FROM User WHERE Id = :userInfo.getUserId() LIMIT 1];
+            
             this.id = dog.Id;
             this.name = dog.Animal_Name_Id__c;
             this.gender = dog.Gender__c;
@@ -256,6 +259,7 @@ public with sharing class TreatmentByDogLWCController {
             this.location = dog.Current_Location__c;
             this.evalGrade = dog.Current_Behavior_Grade__c;
             this.txPriority = !dog.Treatment_Plan__r.isEmpty() ? dog.Treatment_Plan__r[0].Treatment_Priority__c : null;
+            this.hideMedications = u.Location__c == 'ARC/CARE';
         }
     }
 
@@ -312,12 +316,16 @@ public with sharing class TreatmentByDogLWCController {
         @AuraEnabled public String name;
         @AuraEnabled public String location;
         @AuraEnabled public Boolean selected;
+        @AuraEnabled public String link;
 
         public DogWrapper(Animal__c dog){
             this.id = dog.Id;
             this.name = dog.Animal_Name_Id__c;
             this.location = dog.Current_Location__c;
             this.selected = false;
+            this.link = URL.getSalesforceBaseUrl().toExternalForm() + '/' + dog.Id;
         }
+
+
     }    
 }

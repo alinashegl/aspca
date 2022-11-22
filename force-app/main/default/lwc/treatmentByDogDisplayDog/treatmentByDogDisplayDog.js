@@ -1,14 +1,28 @@
 import { LightningElement, api, wire } from 'lwc';
+import { NavigationMixin } from 'lightning/navigation';
 import getDogInfo from '@salesforce/apex/TreatmentByDogLWCController.getDogInfo';
 
-export default class TreatmentByDogDisplayDog extends LightningElement {
+export default class TreatmentByDogDisplayDog extends NavigationMixin(LightningElement) {
     @api dogId;
     dog;
     showSpinner = true;
+    url;
 
     showActiveNotRemoved = true;
     showActiveRemoved = true;
     showHistorical = false;
+
+    connectedCallback() {
+        this.recordPageRef = {
+            type: 'standard__recordPage',
+            attributes: {
+                recordId: this.dogId,
+                actionName: 'view',
+            }
+        };
+        this[NavigationMixin.GenerateUrl](this.recordPageRef)
+            .then(url => this.url = url);
+    }
 
     @wire(getDogInfo, {recordId: '$dogId'})
     response(result){
