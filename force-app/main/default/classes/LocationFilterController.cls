@@ -27,18 +27,8 @@ public with sharing class LocationFilterController {
 
                 if(locations != null){
                     returnMap.put('hasConfigWithLocations', (Object) true);
-                    if(isValidList(locations)){
-                        locations = '{"locs":' + locations + '}';
-                        Map<String, Object> m = (Map<String, Object>) JSON.deserializeUntyped(locations);            
-                        List<Object> myMapObjects = (List<Object>) m.get('locs');
-                        Map<String, Object> locMap = new Map<String, Object>();
-                        
-                        returnMap.put('locations', (Object) myMapObjects);
-                    } else {       
-                        List<Object> myMapObjects = new List<Object>();
-                        myMapObjects.add(locations);
-                        returnMap.put('locations', (Object) myMapObjects);
-                    }
+                    AnimalLocationFilterUtil util = new AnimalLocationFilterUtil();
+                    returnMap.put('locations', util.locationStringToObjectList(locations));
                 } else {
                     returnMap.put('showAllLocations', (Object) true);
                 }
@@ -53,10 +43,6 @@ public with sharing class LocationFilterController {
             System.debug(e.getStackTraceString());
             throw new AuraHandledException(e.getMessage());
         }
-    }
-
-    private static Boolean isValidList(String st){
-        return st.substring(0,1) == '[';
     }
 
     private static String getUsersCurrentApp(){
