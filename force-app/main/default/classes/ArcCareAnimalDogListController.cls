@@ -34,6 +34,22 @@ public class ArcCareAnimalDogListController {
     }
     
     @AuraEnabled
+    public static List<Option> getPicklistValue(String objectname, String fieldname){
+        SObjectType sObjType = ((SObject) Type.forName(objectname).newInstance()).getSObjectType();
+        Schema.DescribeSObjectResult objSchema = sObjType.getDescribe();
+        Map<String, Schema.SObjectField> fieldMap = objSchema.fields.getmap();
+        List<Schema.Picklistentry>fld =fieldmap.get(fieldname).getDescribe().getpicklistValues();
+        List<Option> optionList = new List<Option>();
+        for(Schema.Picklistentry pl : fld){
+            Option op = new Option();
+            op.value = pl.getValue();
+            op.label = pl.getValue();
+            optionList.add(op);
+        }
+        return optionList;
+    }
+    
+    @AuraEnabled
     public static String saveRecords(String recsString) {
         System.debug(recsString);
         List<Animal__c> recs2Save = (List<Animal__c>) JSON.deserialize(recsString, List<Animal__c>.class);

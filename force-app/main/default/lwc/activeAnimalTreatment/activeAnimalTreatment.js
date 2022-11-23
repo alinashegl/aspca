@@ -36,7 +36,7 @@ export default class ActiveAnimalTreatment extends LightningElement {
     ];
 
     @track error;
-    @track gridData ;
+    @track gridData = [];
     @track expandRows;
     @wire(getAnmialTreatement)
     wiredData({

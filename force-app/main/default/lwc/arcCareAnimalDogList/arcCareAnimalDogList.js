@@ -5,36 +5,18 @@ import updateRecords from '@salesforce/apex/ArcCareAnimalDogListController.saveR
 import getPicklistValue from '@salesforce/apex/ArcCareAnimalDogListController.getPicklistValue';
 import getAnimalGender from '@salesforce/apex/ArcCareAnimalDogListController.getAnimalGender';
 
-const EVALSTATUSOPTIONS = [
-    {value: 'Complete', label: 'Complete'},
-    {value: 'Pending', label: 'Pending'},
-    {value: 'Incomplete', label: 'Incomplete'},
-    {value: 'Needs Dog-Dog', label: 'Needs Dog-Dog'},
-    {value: 'N/A', label: 'N/A'}
-];
-
-const PPEOPTIONS = [
-    {value: 'Yes – ACC/CIRDC', label: 'Yes – ACC/CIRDC'},
-    {value: 'Yes – Parasites', label: 'Yes – Parasites'},
-    {value: 'Yes – Other', label: 'Yes – Other'},
-    {value: 'DOH Hold', label: 'DOH Hold'},
-];
-
  const columns = [
     {label: 'ASPCA Animal Name', fieldName: 'Animal_Name__c',type: 'text', editable: false, disabled: true, sortable: true},
     {label: 'Animal Name/Id', fieldName: 'Id', type: 'link', linkLabel: 'anmName', sortable: true}, 
     {label: 'Petpoint/AAH Id', fieldName: 'Petpoint_ID__c',linkLabel: 'petpint', type: 'text', editable: false, disabled: true, sortable: true},
-     //sortable: true, sortBy: 'anmName', resizable: true, title:'Click to view Animal', target:'_blank', editable: true},
     {label: 'Sex', fieldName: 'Gender__c', type: 'picklist', sortable: true, resizable: true,editable: true},
-    {label: 'Evaluation Status', fieldName: 'Evaluation_Status__c', type: 'picklist', options: EVALSTATUSOPTIONS, sortable: true, resizable: true, editable: true},
+    {label: 'Evaluation Status', fieldName: 'Evaluation_Status__c', type: 'picklist', sortable: true, resizable: true, editable: true},
     {label: 'Current Location', fieldName: 'Current_Location__c',type: 'text', disabled: true, sortable: true},
     {label: 'Hold Status ARC/CARE', fieldName: 'Hold_Status_ARC_CARE__c', type: 'multi-select', sortable: true, resizable: true, editable: true},
-    // {label: 'Hold Status ARC/CARE', fieldName: 'Hold_Status_ARC_CARE__c', type: 'multi-select', options: HOLDSTATUSOPTIONS, sortable: true, resizable: true, editable: true},
-    {label: 'Behavior Case Worker', fieldName: 'Behavior_Case_Worker__c', type: 'lookup', linkLabel: 'behName',
-     sortable: true, resizable: true, editable: true,sortBy: 'behName', title:'Click to view Behavior Case Worker', iconName:'standard:contact'},
+    {label: 'Behavior Case Worker', fieldName: 'Behavior_Case_Worker__c', type: 'lookup', linkLabel: 'behName', sortable: true, resizable: true, editable: true,sortBy: 'behName', title:'Click to view Behavior Case Worker', iconName:'standard:contact'},
     {label: 'Walking Status', fieldName: 'Walking_Status__c', type: 'multi-select', sortable: true, resizable: true, editable: true},
     {label: 'Walking Notes', fieldName: 'Walking_Notes__c',type: 'textArea', resizable: true, editable: true, disabled: false, sortable: true},
-    {label: 'PPE/DOH', fieldName: 'PPE_DOH__c', type: 'picklist', options: PPEOPTIONS, sortable: true, resizable: true,editable: true},
+    {label: 'PPE/DOH', fieldName: 'PPE_DOH__c', type: 'picklist', sortable: true, resizable: true,editable: true},
     {label: 'Important Notes ARC/CARE', fieldName: 'Important_Notes_ARC_CARE__c',type: 'textArea', resizable: true, editable: true, sortable: true},
     
 ];
@@ -76,10 +58,13 @@ export default class VkDatatableUsage extends LightningElement {
     connectedCallback(){
         this.getWalkingStatus();
         this.getHoldStatus();
+        this.getPPEDOHStatus();
+        this.getEvaluationStatus();
     }
 
     getWalkingStatus(){
         getPicklistValue({
+            objectname: 'Animal__c',
             fieldname : 'Walking_Status__c'
         }).then(data=>{
             this.columns[8].options = data;
@@ -88,11 +73,30 @@ export default class VkDatatableUsage extends LightningElement {
 
     getHoldStatus(){
         getPicklistValue({
+            objectname: 'Animal__c',
             fieldname : 'Hold_Status_ARC_CARE__c'
         }).then(data=>{
             this.columns[6].options = data;
         })
     }
+
+    getEvaluationStatus(){
+        getPicklistValue({
+            objectname: 'Animal__c',
+            fieldname : 'Evaluation_Status__c'
+        }).then(data=>{
+            this.columns[4].options = data;
+        })
+    }
+
+    getPPEDOHStatus(){
+        getPicklistValue({
+            objectname: 'Animal__c',
+            fieldname : 'PPE_DOH__c'
+        }).then(data=>{
+            this.columns[10].options = data;
+        })
+    }	
 
     getAnimals_(){
         this.showTable = false;
