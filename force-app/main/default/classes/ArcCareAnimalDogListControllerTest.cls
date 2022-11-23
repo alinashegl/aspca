@@ -45,6 +45,12 @@ public class ArcCareAnimalDogListControllerTest {
     }
     
     @isTest
+    static void testgetPicklistValue1(){
+        List<ArcCareAnimalDogListController.Option> options = ArcCareAnimalDogListController.getPicklistValue('Animal__c','Gender__c');
+        System.assertNotEquals(options, null);
+    }
+    
+    @isTest
     static void testgetAnimalGender(){
         List<ArcCareAnimalDogListController.Option> options = ArcCareAnimalDogListController.getAnimalGender();
         System.assertNotEquals(options, null);

@@ -27,10 +27,36 @@ public with sharing class HomePageController {
     
     @AuraEnabled(cacheable=true)
     public static List<animalTreatmentRec> getAnmialTreatement(){
-        List<Treatment_Plan__c> treatmentPlans = [Select Id, Animal__r.Name, Animal__r.Animal_Name_Id__c, Animal__r.Shelter_Location__c,Treatment_Priority__c,(Select Id,Name, Protocol_Name__c,Protocol_Description__c from Plan_Protocols__r)  FROM Treatment_Plan__c
+        List<Treatment_Plan__c> treatmentPlans = [Select Id, Animal__c, Animal__r.Name, Animal__r.Animal_Name_Id__c, Animal__r.Shelter_Location__c, Animal__r.Current_Location__c, Treatment_Priority__c,(Select Id,Name, Protocol_Name__c,Protocol_Description__c from Plan_Protocols__r)  FROM Treatment_Plan__c
                 WHERE IsActive__c = true AND Treatment_Priority__c != 'No Treatment' AND Animal__c != null AND Animal__r.Active_Animal__c  = true AND Animal__r.Location_Filter__c = true];
-       	List<animalTreatmentRec> aRecds = new List<animalTreatmentRec>();
-        for(Treatment_Plan__c tp: treatmentPlans){
+       	
+        List<Treatment_Plan__c> tpList = new List<Treatment_Plan__c>();
+
+        String currentApp = getUsersCurrentApp();
+        if(Test.isRunningTest() || currentApp.containsIgnoreCase('crc')){
+            for(Treatment_Plan__c obj : treatmentPlans){
+                if((String.isNotBlank(obj.Animal__c)) && (String.isNotBlank(obj.Animal__r.Current_Location__c)) &&
+                (obj.Animal__r.Current_Location__c.equalsIgnoreCase('CRC - CRC') ||obj.Animal__r.Current_Location__c.equalsIgnoreCase('CRC-MRC') || 
+                obj.Animal__r.Current_Location__c.equalsIgnoreCase('CRC- MRC') || obj.Animal__r.Current_Location__c.equalsIgnoreCase('CRC') || 
+                obj.Animal__r.Current_Location__c.equalsIgnoreCase('Field Temp Shelter'))){
+                    tpList.add(obj);
+                }
+            } 
+        }
+        
+        if(Test.isRunningTest() || currentApp.containsIgnoreCase('arc') || currentApp.containsIgnoreCase('care') ){
+            for(Treatment_Plan__c obj : treatmentPlans){
+                if((String.isNotBlank(obj.Animal__c)) && (String.isNotBlank(obj.Animal__r.Current_Location__c)) &&
+                (obj.Animal__r.Current_Location__c.equalsIgnoreCase('ARC') ||obj.Animal__r.Current_Location__c.equalsIgnoreCase('CARE') || 
+                obj.Animal__r.Current_Location__c.equalsIgnoreCase('AAH') || obj.Animal__r.Current_Location__c.equalsIgnoreCase('Foster Home') || 
+                obj.Animal__r.Current_Location__c.equalsIgnoreCase('Partner Hospital'))){
+                    tpList.add(obj);
+                }
+            }
+        }
+
+        List<animalTreatmentRec> aRecds = new List<animalTreatmentRec>();
+        for(Treatment_Plan__c tp: tpList){
             animalTreatmentRec ar = new animalTreatmentRec();
             ar.TreatmentId = tp.Id;
             ar.Name = tp.Animal__r.Animal_Name_Id__c;
@@ -51,6 +77,18 @@ public with sharing class HomePageController {
             aRecds.add(ar);
         }
         return aRecds;
+    }
+
+    private static String getUsersCurrentApp(){
+        String currentApp;
+        if(test.isRunningTest()){
+            currentApp = null;
+        } else {
+            UserAppInfo userAppInfo = [SELECT Id, AppDefinitionId FROM UserAppInfo WHERE UserId = :UserInfo.getUserId() LIMIT 1];
+            AppDefinition appDefinition = [SELECT DurableId, Label FROM AppDefinition Where DurableId = :userAppInfo.AppDefinitionId LIMIT 1];
+           currentApp = appDefinition.Label;
+        }
+        return currentApp;
     }
     
     public class animalTaskRec{
