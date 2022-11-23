@@ -49,7 +49,7 @@
             <template for:each={dogList} for:item='dog'>
                 <div class="slds-grid slds-var-m-top_x-small" key={dog.id}>
                     <div class="slds-size_3-of-6">
-                        {dog.name}
+                        <a href={dog.link}>{dog.name}</a>
                     </div>
                     <div class="slds-size_2-of-6">
                         {dog.location}
