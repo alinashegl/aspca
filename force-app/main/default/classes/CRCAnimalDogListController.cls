@@ -12,7 +12,7 @@ public class CRCAnimalDogListController {
         
         if(filterInfo.useFilter == true){
             String[] locationsList = filterInfo.locationList;
-            query += ' AND Current_Location__c IN :locationsList ';
+            query += 'AND Current_Location__c != null AND Current_Location__c IN :locationsList ';
         }
         
         List<Animal__c> objs = Database.query(query);
