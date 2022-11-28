@@ -28,7 +28,7 @@
                     <td>Name:</td>
                     <td>{!behEval.Animal_Name__c}</td>
                     <td>ID #:</td>
-                    <td>{!behEval.Animal_ID__c}</td>
+                    <td>{!IF(ISBLANK(TRIM(behEval.Animal__r.Petpoint_ID__c)),IF(ISBLANK(TRIM(behEval.Animal__r.AAH_ID__c)),behEval.Animal__r.Name,behEval.Animal__r.AAH_ID__c),behEval.Animal__r.Petpoint_ID__c)}</td>
                     <td></td>
                     <td></td>
                 </tr>
