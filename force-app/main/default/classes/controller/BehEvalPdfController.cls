@@ -71,7 +71,10 @@ public class BehEvalPdfController {
                 Potential_Issue_Fear__c,
                 Potential_Issue_High_Arousal__c,
                 Potential_Issue_Other__c,
-                Potential_Issue_Other_Notes__c
+                Potential_Issue_Other_Notes__c,
+                Animal__r.Petpoint_ID__c,
+                Animal__r.AAH_ID__c,
+                Animal__r.Name
         FROM Behavior_Evaluation__c
         WHERE Id = :ApexPages.currentPage().getParameters().get('Id')];
         
