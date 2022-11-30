@@ -103,6 +103,7 @@ public class AnimalDiscoverPDFController {
                 IsRemoved__c,
                 Review_Complete__c,
                 TreatmentSessionId__r.Session_Date__c,
+                TreatmentSessionId__r.Session_Notes__c,
                 Name,
                 IsSkipped__c,
                 Status__c,
