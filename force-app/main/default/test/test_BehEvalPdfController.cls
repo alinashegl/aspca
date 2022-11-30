@@ -15,7 +15,6 @@ public with sharing class test_BehEvalPdfController {
         System.assertEquals(behE.Evaluation_Subtype__c, behController.behEval.Evaluation_Subtype__c);
         System.assertEquals(null, behController.paramForensic);
         System.assertEquals(2, behController.potentBehIssue.size());
-        System.assert(behController.summary.contains('Dog Interaction:'));
         System.assert(behController.evaluation.size() > 0);
     }
 
@@ -34,7 +33,6 @@ public with sharing class test_BehEvalPdfController {
         System.assertEquals(behE.Evaluation_Subtype__c, behController.behEval.Evaluation_Subtype__c);
         System.assertEquals(true, behController.paramForensic);
         System.assertEquals(2, behController.potentBehIssue.size());
-        System.assert(behController.summary.contains('Dog Interaction:'));
         System.assert(behController.evaluation.size() > 0);
     }
 
@@ -52,7 +50,6 @@ public with sharing class test_BehEvalPdfController {
         System.assertEquals(behE.Evaluation_Subtype__c, behController.behEval.Evaluation_Subtype__c);
         System.assertEquals(null, behController.paramForensic);
         System.assertEquals(2, behController.potentBehIssue.size());
-        System.assert(behController.summary.contains('Same Sex:'));
         System.assert(behController.evaluation.size() > 0);
     }
 
@@ -89,7 +86,6 @@ public with sharing class test_BehEvalPdfController {
         System.assertEquals(behE.Evaluation_Subtype__c, behController.behEval.Evaluation_Subtype__c);
         System.assertEquals(null, behController.paramForensic);
         System.assertEquals(2, behController.potentBehIssue.size());
-        System.assert(behController.summary.contains('Same Sex:'));
         System.assert(behController.evaluation.size() > 0);
     }
 
@@ -126,7 +122,6 @@ public with sharing class test_BehEvalPdfController {
         System.assertEquals(behE.Evaluation_Subtype__c, behController.behEval.Evaluation_Subtype__c);
         System.assertEquals(null, behController.paramForensic);
         System.assertEquals(2, behController.potentBehIssue.size());
-        System.assert(behController.summary.contains('Same Sex:'));
         System.assert(behController.evaluation.size() > 0);
     }
 
