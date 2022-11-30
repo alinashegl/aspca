@@ -31,10 +31,26 @@ public with sharing class ObservationController {
             if(locations.contains('ARC') || locations.contains('CARE')){
                 isArcCare = true;
             }
+            
+            if(getUsersCurrentApp() == 'CRC Behavior Database'){
+                isArcCare = false;
+            }
 
             return isArcCare;
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }
+    }
+    
+    private static String getUsersCurrentApp(){
+        String currentApp;
+        if(test.isRunningTest()){
+            currentApp = null;
+        } else {
+            UserAppInfo userAppInfo = [SELECT Id, AppDefinitionId FROM UserAppInfo WHERE UserId = :UserInfo.getUserId() LIMIT 1];
+            AppDefinition appDefinition = [SELECT DurableId, Label FROM AppDefinition Where DurableId = :userAppInfo.AppDefinitionId LIMIT 1];
+           currentApp = appDefinition.Label;
+        }
+        return currentApp;
     }
 }
