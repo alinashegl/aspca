@@ -1,5 +1,5 @@
 public with sharing class LocationFilterController {
-    @AuraEnabled(cacheable=true)
+    @AuraEnabled
     public static Map<String, Object> getAnimalLocations(String applicationType){
         try {
             String currentApp = getUsersCurrentApp();

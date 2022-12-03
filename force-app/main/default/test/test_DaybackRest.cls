@@ -17,7 +17,7 @@ private class test_DaybackRest {
             }
         test.stopTest();
 
-        System.assertEquals(5, locationGroup.size(), 'Becuase Location is All, should return a list of 5 groups (ARC, CARE, ARC/CARE, CRC, And CRC-MRC), instead was: ' + locationGroup);
+        System.assertEquals(4, locationGroup.size(), 'Becuase Location is All, should return a list of 4 groups (ARC, CARE, CRC, And CRC-MRC), instead was: ' + locationGroup);
     }
 
     @isTest
@@ -33,7 +33,7 @@ private class test_DaybackRest {
             }
         test.stopTest();
 
-        System.assertEquals(3, locationGroup.size(), 'Becuase Location is ARC/CARE, should return a list of 3 groups (ARC, CARE, ARC/CARE), instead was: ' + locationGroup);
+        System.assertEquals(2, locationGroup.size(), 'Becuase Location is ARC/CARE, should return a list of 2 groups (ARC, CARE), instead was: ' + locationGroup);
     }
 
     @isTest

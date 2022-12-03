@@ -8,7 +8,7 @@
                 if(result){
                     component.set("v.isVisible", result.mrcTodoList);
                 }
-            }
+            }            
     	});
         $A.enqueueAction(action);
     },

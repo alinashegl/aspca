@@ -52,6 +52,7 @@ public with sharing class TreatmentToDoListController {
 
             if(filterInfo.useFilter == true){
                 String[] locationsList = filterInfo.locationList;
+                System.debug('locationsList: ' + locationsList);
                 query += 'AND Animal__r.Current_Location__c IN :locationsList ';
             }
 
