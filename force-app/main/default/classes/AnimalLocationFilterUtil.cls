@@ -31,7 +31,7 @@ public with sharing class AnimalLocationFilterUtil {
         //need to check if obj is a string or list of strings
         if(obj instanceOf String){
             String locationsString = (String) locationsFilterMap.get('locations');
-            locationsString = removeLeadingTrailingBlankSpaces(locationsString);
+            locationsString = trimBlankSpaces(locationsString);
             this.locationList = locationsString != null ? locationsString.split(',') : null;
         }
         else if(obj instanceOf String[]) {
@@ -47,7 +47,7 @@ public with sharing class AnimalLocationFilterUtil {
     }
 
     public Object[] locationStringToObjectList(String locations){
-        locations = removeLeadingTrailingBlankSpaces(locations);
+        locations = trimBlankSpaces(locations);
         Object[] locationsObjList;
         if(isValidList(locations)){
             locations = '{"locs":' + locations + '}';
@@ -68,7 +68,7 @@ public with sharing class AnimalLocationFilterUtil {
         return st != null && st.substring(0,1) == '{';
     }
 
-    private String removeLeadingTrailingBlankSpaces(String locations){
+    private String trimBlankSpaces(String locations){
         String[] locationList = new String[0];
         
         for(String st : locations.split(',')){
