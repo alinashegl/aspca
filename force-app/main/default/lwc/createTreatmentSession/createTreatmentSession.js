@@ -17,6 +17,7 @@ export default class CreateTreatmentSession extends NavigationMixin(LightningEle
     whereClause = 'Active__c = true AND Contact_Type__c = \'Behavior Case Worker\'';
     error;
     errorMessage;
+    isSaveDisabled = true;
 
     get hasPlan(){
         return  this.planId != undefined && this.planId != null;
@@ -43,7 +44,11 @@ export default class CreateTreatmentSession extends NavigationMixin(LightningEle
     }
 
     customLookupEvent(event){
+        this.isSaveDisabled = true;
         this.customLookupContactId = event.detail.data.recordId;
+        if(this.customLookupContactId){
+            this.isSaveDisabled = false;
+        }
     }
 
     handleCustomLookupExpandSearch(event){

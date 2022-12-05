@@ -199,6 +199,14 @@ export default class CustomLookup extends LightningElement {
         .finally( ()=>{
             this.showRecent = true;
             this.isLoading = false;
+            const selectedEvent = new CustomEvent('lookup', {
+                detail: {  
+                    data : {
+                        recordId        : null
+                    }
+                }
+            });
+            this.dispatchEvent(selectedEvent);
         });
     }
 
