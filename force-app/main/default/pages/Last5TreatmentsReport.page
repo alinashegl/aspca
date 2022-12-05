@@ -34,7 +34,7 @@
                     <tbody>
                         <apex:repeat value="{!sProtocolsMap[sessions]}" var="protocols">
                             <tr class="spaceUnder" style="vertical-align:top;">
-                                <td width="10%"><apex:outputText value="{0,date,MM/dd/yyyy}"><apex:param value="{!protocols.sProto.Session_Date__c}" /></apex:outputText></td>
+                                <td width="10%"><apex:outputText value="{0,date,MM/dd/yyyy}"><apex:param value="{!protocols.sProto.TreatmentSessionId__r.Session_Date__c}" /></apex:outputText></td>
                                 <td width="10%">{!protocols.sProto.Overall_Score__c}</td>
                                 <td width="10%">{!protocols.aggressiveWorst.score}</td>
                                 <td width="10%">{!protocols.arousalBest.score}</td>
