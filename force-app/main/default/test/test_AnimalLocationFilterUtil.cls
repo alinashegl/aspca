@@ -48,7 +48,6 @@ private class test_AnimalLocationFilterUtil {
         Test.stopTest();
 
         System.assertEquals(false, locList.isEmpty(), 'Should have returned a list of objects, but was empty');
-        // System.assertEquals(null, util.locationList, 'Should have returned an empty list');
     }
 
     @isTest
@@ -60,7 +59,16 @@ private class test_AnimalLocationFilterUtil {
         Test.stopTest();
 
         System.assertEquals(false, locList.isEmpty(), 'Should have returned a list of objects, but was empty');
-        // System.assertEquals(null, util.locationList, 'Should have returned an empty list');
+    }
+
+    @isTest
+    static void locationListFromLocationString() {
+        String locations = '\'CRC\',\'CRC-MRC\'';
+        Test.startTest();
+        AnimalLocationFilterUtil util = new AnimalLocationFilterUtil(locations);
+        Test.stopTest();
+
+        System.assertEquals(new String[]{'\'CRC\'','\'CRC-MRC\''}, util.locationList, 'Should have converted the string of locations to a list, but was: ' + util.locationList);
     }
 
     private static Map<String, Object> prepLocationsFilter(Boolean hasConfig, Boolean showAll, String locations){
@@ -69,8 +77,6 @@ private class test_AnimalLocationFilterUtil {
             'showAllLocations' => (Object) showAll,
             'locations' => (Object) locations
         };
-
-        // return JSON.serialize(locationsFilterMap);
         return locationsFilterMap;
     }
 }

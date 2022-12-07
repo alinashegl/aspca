@@ -12,10 +12,12 @@ public with sharing class AnimalLocationFilterUtil {
                 Map<String, Object> locationsFilterMap = (Map<String, Object>) JSON.deserializeUntyped(locationsFilter);
                 this.handleMapFilter(locationsFilterMap);
             } else {
-                Map<String, Object> locationsFilterMap = new Map<String, Object> {
-                    'locations' => 
-                    locationStringToObjectList(locationsFilter)
-                };
+                this.locationList = new String[0];
+                String locations = trimBlankSpaces(locationsFilter);
+                for(String loc : locations.split(',')){
+                    this.locationList.add(loc);
+                }
+                this.useFilter = this.locationList != null && !this.locationList.isEmpty();
             }            
         }
     }
