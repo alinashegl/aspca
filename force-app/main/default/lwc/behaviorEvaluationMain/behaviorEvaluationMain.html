@@ -1,3 +1,113 @@
 <template>
-    here we go {recordId}
+    <lightning-card>
+        <lightning-tabset variant="vertical" class="tabsetCss" >
+            <template for:each={tabs} for:item="tab">
+                <div key={tab.id}>
+                    <lightning-tab 
+                        class="class1" 
+                        end-icon-name={tab.icon} 
+                        label={tab.label}
+                        data-id={tab.id}
+                    > 
+                        demo label1 
+                        <lightning-button 
+                            variant="Neutral" 
+                            label="Complete" 
+                            title="skipAndRemove" 
+                            onclick={handleComplete}
+                            data-id={tab.id}
+                            class="slds-m-left_x-small"
+                        ></lightning-button>
+
+                        <lightning-button 
+                            variant="Neutral" 
+                            label="Skip" 
+                            title="skipAndRemove" 
+                            onclick={handleSkip}
+                            data-id={tab.id}
+                            class="slds-m-left_x-small"
+                        ></lightning-button>
+
+                        <c-behavior-evaluation-tab
+                            tab={tab}
+                        ></c-behavior-evaluation-tab>                        
+                    </lightning-tab>
+                </div>
+            </template>
+        </lightning-tabset>
+   </lightning-card>
+
+    <!-- <div class="slds-vertical-tabs">
+        <ul class="slds-vertical-tabs__nav" role="tablist" aria-orientation="vertical">
+
+            <li class="slds-vertical-tabs__nav-item slds-is-active" title="Opportunities" role="presentation">
+            <a class="slds-vertical-tabs__link" href="#" role="tab" tabindex="0" aria-selected="true" aria-controls="slds-vertical-tabs-0" id="slds-vertical-tabs-0__nav">
+                <span class="slds-vertical-tabs__left-icon">
+                <span class="slds-icon_container slds-icon-standard-opportunity" title="Description of icon when needed">
+                    <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                    <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#opportunity"></use>
+                    </svg>
+                </span>
+                </span>
+                <span class="slds-truncate" title="Opportunities">Opportunities</span>
+                <span class="slds-vertical-tabs__right-icon"></span>
+            </a>
+            </li>
+
+          <li class="slds-vertical-tabs__nav-item" title="Cases" role="presentation">
+            <a class="slds-vertical-tabs__link" href="#" role="tab" tabindex="-1" aria-selected="false" aria-controls="slds-vertical-tabs-1" id="slds-vertical-tabs-1__nav">
+              <span class="slds-vertical-tabs__left-icon">
+                <span class="slds-icon_container slds-icon-standard-case" title="Description of icon when needed">
+                  <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                    <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#case"></use>
+                  </svg>
+                </span>
+              </span>
+              <span class="slds-truncate" title="Cases">Cases</span>
+              <span class="slds-vertical-tabs__right-icon">
+                <span class="slds-icon_container slds-icon-utility-error" title="This tab has an error">
+                    <lightning-icon icon-name="utility:error" variant="Error" size="x-small"></lightning-icon>
+                </span>
+              </span>
+            </a>
+          </li>
+          <li class="slds-vertical-tabs__nav-item" title="Accounts" role="presentation">
+            <a class="slds-vertical-tabs__link" href="#" role="tab" tabindex="-1" aria-selected="false" aria-controls="slds-vertical-tabs-2" id="slds-vertical-tabs-2__nav">
+              <span class="slds-vertical-tabs__left-icon">
+                <span class="slds-icon_container slds-icon-standard-account" title="Description of icon when needed">
+                  <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                    <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"></use>
+                  </svg>
+                </span>
+              </span>
+              <span class="slds-truncate" title="Accounts">Accounts</span>
+              <span class="slds-vertical-tabs__right-icon"></span>
+            </a>
+          </li>
+        </ul>
+        <div class="slds-vertical-tabs__content slds-show" id="slds-vertical-tabs-0" role="tabpanel" aria-labelledby="slds-vertical-tabs-0__nav">
+          <div class="slds-text-longform">
+            <h3 class="slds-text-heading_medium">Tab Title</h3>
+            <p>Content for Tab 1</p>
+            <p>Lorem ipsum dolor...</p>
+            <p>Lorem ipsum dolor...</p>
+          </div>
+        </div>
+        <div class="slds-vertical-tabs__content slds-hide" id="slds-vertical-tabs-1" role="tabpanel" aria-labelledby="slds-vertical-tabs-1__nav">
+          <div class="slds-text-longform">
+            <h3 class="slds-text-heading_medium">Tab Title</h3>
+            <p>Content for Tab 1</p>
+            <p>Lorem ipsum dolor...</p>
+            <p>Lorem ipsum dolor...</p>
+          </div>
+        </div>
+        <div class="slds-vertical-tabs__content slds-hide" id="slds-vertical-tabs-2" role="tabpanel" aria-labelledby="slds-vertical-tabs-2__nav">
+          <div class="slds-text-longform">
+            <h3 class="slds-text-heading_medium">Tab Title</h3>
+            <p>Content for Tab 1</p>
+            <p>Lorem ipsum dolor...</p>
+            <p>Lorem ipsum dolor...</p>
+          </div>
+        </div>
+      </div> -->
 </template>
