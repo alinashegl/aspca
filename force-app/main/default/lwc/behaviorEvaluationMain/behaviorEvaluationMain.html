@@ -1,15 +1,60 @@
 <template>
-    <lightning-card>
-        <lightning-tabset variant="vertical" class="tabsetCss" >
-            <template for:each={tabs} for:item="tab">
-                <div key={tab.id}>
-                    <lightning-tab 
-                        class="class1" 
-                        end-icon-name={tab.icon} 
-                        label={tab.label}
-                        data-id={tab.id}
-                    > 
-                        demo label1 
+    <lightning-tabset variant="vertical" active-tab-value={activeTab} class="tabsetCss">
+
+        <template for:each={tabs} for:item="tab">
+            <lightning-tab 
+                label={tab.label} 
+                key={tab.id} 
+                value={tab.label}
+                end-icon-name={tab.iconName} 
+                data-id={tab.id} 
+                class="class1"
+            >
+                <lightning-layout>
+                    <lightning-layout-item size="4">
+                        <div class="slds-float_left">
+                            <lightning-button 
+                                name="prevTab" 
+                                value="Previous Tab" 
+                                label="Previous Tab" 
+                                onclick={handlePrevious}
+                                class="float"
+                                data-id={tab.id}
+                            >
+                            </lightning-button>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="4">
+                        <template if:true={workingSpinner}>
+                            <div class="slds-align_absolute-center">
+                            <lightning-icon 
+                                icon-name="utility:spinner" 
+                                alternative-text="working" 
+                                size="medium" 
+                                title="working"
+                                class="float"
+                            >
+                            </lightning-icon>
+                            </div>
+                        </template>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="4">
+                        <div class="slds-float_right">
+                            <lightning-button 
+                                class="float" 
+                                name="nextTab" 
+                                value="Next Tab" 
+                                label="Next Tab" 
+                                onclick={handleNext}
+                                data-id={tab.id}
+                            >
+                        </lightning-button>
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+                
+                <lightning-layout multiple-rows="true">
+                    <lightning-layout-item size="6">
                         <lightning-button 
                             variant="Neutral" 
                             label="Complete" 
@@ -18,7 +63,8 @@
                             data-id={tab.id}
                             class="slds-m-left_x-small"
                         ></lightning-button>
-
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6">
                         <lightning-button 
                             variant="Neutral" 
                             label="Skip" 
@@ -27,87 +73,103 @@
                             data-id={tab.id}
                             class="slds-m-left_x-small"
                         ></lightning-button>
-
-                        <c-behavior-evaluation-tab
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12">
+                            <c-behavior-evaluation-tab
                             tab={tab}
-                        ></c-behavior-evaluation-tab>                        
-                    </lightning-tab>
-                </div>
-            </template>
+                        ></c-behavior-evaluation-tab>                           
+                    </lightning-layout-item>
+                </lightning-layout> 
+            </lightning-tab>
+        </template>
+    </lightning-tabset>
+
+    <!-- <lightning-card>
+        <lightning-tabset variant="vertical" class="tabsetCss" >
+            <lightning-record-edit-form 
+                class="slds-grid slds-theme_shade" 
+                object-api-name="Behavior_Evaluation__c"
+                record-id={recordId}
+            >            
+                <lightning-layout class="slds-grid_align-spread">
+                    <lightning-layout-item size="4">
+                        <div class="slds-float_left">
+                            <lightning-button 
+                                name="prevTab" 
+                                value="Previous Tab" 
+                                label="Previous Tab" 
+                                onclick={handleClick}
+                                class="float">
+                            </lightning-button>
+                        </div>
+                    </lightning-layout-item>
+                    
+                        <lightning-layout-item size="4">
+                        <template if:true={workingSpinner}>
+                            <div class="slds-align_absolute-center">
+                            <lightning-icon 
+                                icon-name="utility:spinner" 
+                                alternative-text="working" 
+                                size="medium" 
+                                title="working"
+                                class="float"
+                            >
+                            </lightning-icon>
+                            </div>
+                        </template>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="4">
+                        <div class="slds-float_right">
+                            <lightning-button 
+                                class="float" 
+                                name="nextTab" 
+                                value="Next Tab" 
+                                label="Next Tab" 
+                                onclick={handleClick}>
+                        </lightning-button>
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+            <div>
+                <template for:each={tabs} for:item="tab">
+                    <div key={tab.id}>
+                        <lightning-tab 
+                            class="class1" 
+                            end-icon-name={tab.iconName} 
+                            label={tab.label}
+                            data-id={tab.id}
+                        > 
+                        <lightning-layout multiple-rows="true">
+                            <lightning-layout-item size="12">
+                                demo label1 
+                                <lightning-button 
+                                    variant="Neutral" 
+                                    label="Complete" 
+                                    title="skipAndRemove" 
+                                    onclick={handleComplete}
+                                    data-id={tab.id}
+                                    class="slds-m-left_x-small"
+                                ></lightning-button>
+
+                                <lightning-button 
+                                    variant="Neutral" 
+                                    label="Skip" 
+                                    title="skipAndRemove" 
+                                    onclick={handleSkip}
+                                    data-id={tab.id}
+                                    class="slds-m-left_x-small"
+                                ></lightning-button>
+
+                                <c-behavior-evaluation-tab
+                                    tab={tab}
+                                ></c-behavior-evaluation-tab>   
+                            </lightning-layout-item>
+                        </lightning-layout>                     
+                        </lightning-tab>
+                    </div>
+                </template>
+            </div>
+            </lightning-record-edit-form>
         </lightning-tabset>
-   </lightning-card>
-
-    <!-- <div class="slds-vertical-tabs">
-        <ul class="slds-vertical-tabs__nav" role="tablist" aria-orientation="vertical">
-
-            <li class="slds-vertical-tabs__nav-item slds-is-active" title="Opportunities" role="presentation">
-            <a class="slds-vertical-tabs__link" href="#" role="tab" tabindex="0" aria-selected="true" aria-controls="slds-vertical-tabs-0" id="slds-vertical-tabs-0__nav">
-                <span class="slds-vertical-tabs__left-icon">
-                <span class="slds-icon_container slds-icon-standard-opportunity" title="Description of icon when needed">
-                    <svg class="slds-icon slds-icon_small" aria-hidden="true">
-                    <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#opportunity"></use>
-                    </svg>
-                </span>
-                </span>
-                <span class="slds-truncate" title="Opportunities">Opportunities</span>
-                <span class="slds-vertical-tabs__right-icon"></span>
-            </a>
-            </li>
-
-          <li class="slds-vertical-tabs__nav-item" title="Cases" role="presentation">
-            <a class="slds-vertical-tabs__link" href="#" role="tab" tabindex="-1" aria-selected="false" aria-controls="slds-vertical-tabs-1" id="slds-vertical-tabs-1__nav">
-              <span class="slds-vertical-tabs__left-icon">
-                <span class="slds-icon_container slds-icon-standard-case" title="Description of icon when needed">
-                  <svg class="slds-icon slds-icon_small" aria-hidden="true">
-                    <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#case"></use>
-                  </svg>
-                </span>
-              </span>
-              <span class="slds-truncate" title="Cases">Cases</span>
-              <span class="slds-vertical-tabs__right-icon">
-                <span class="slds-icon_container slds-icon-utility-error" title="This tab has an error">
-                    <lightning-icon icon-name="utility:error" variant="Error" size="x-small"></lightning-icon>
-                </span>
-              </span>
-            </a>
-          </li>
-          <li class="slds-vertical-tabs__nav-item" title="Accounts" role="presentation">
-            <a class="slds-vertical-tabs__link" href="#" role="tab" tabindex="-1" aria-selected="false" aria-controls="slds-vertical-tabs-2" id="slds-vertical-tabs-2__nav">
-              <span class="slds-vertical-tabs__left-icon">
-                <span class="slds-icon_container slds-icon-standard-account" title="Description of icon when needed">
-                  <svg class="slds-icon slds-icon_small" aria-hidden="true">
-                    <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"></use>
-                  </svg>
-                </span>
-              </span>
-              <span class="slds-truncate" title="Accounts">Accounts</span>
-              <span class="slds-vertical-tabs__right-icon"></span>
-            </a>
-          </li>
-        </ul>
-        <div class="slds-vertical-tabs__content slds-show" id="slds-vertical-tabs-0" role="tabpanel" aria-labelledby="slds-vertical-tabs-0__nav">
-          <div class="slds-text-longform">
-            <h3 class="slds-text-heading_medium">Tab Title</h3>
-            <p>Content for Tab 1</p>
-            <p>Lorem ipsum dolor...</p>
-            <p>Lorem ipsum dolor...</p>
-          </div>
-        </div>
-        <div class="slds-vertical-tabs__content slds-hide" id="slds-vertical-tabs-1" role="tabpanel" aria-labelledby="slds-vertical-tabs-1__nav">
-          <div class="slds-text-longform">
-            <h3 class="slds-text-heading_medium">Tab Title</h3>
-            <p>Content for Tab 1</p>
-            <p>Lorem ipsum dolor...</p>
-            <p>Lorem ipsum dolor...</p>
-          </div>
-        </div>
-        <div class="slds-vertical-tabs__content slds-hide" id="slds-vertical-tabs-2" role="tabpanel" aria-labelledby="slds-vertical-tabs-2__nav">
-          <div class="slds-text-longform">
-            <h3 class="slds-text-heading_medium">Tab Title</h3>
-            <p>Content for Tab 1</p>
-            <p>Lorem ipsum dolor...</p>
-            <p>Lorem ipsum dolor...</p>
-          </div>
-        </div>
-      </div> -->
+   </lightning-card> -->
 </template>

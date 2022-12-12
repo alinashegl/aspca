@@ -4,18 +4,19 @@ import getEvalTests from '@salesforce/apex/BehaviorEvaluationLWCController.getEv
 
 export default class BehaviorEvaluationMain extends LightningElement {
     @api recordId;
-    evalTests;
+    // evalTests;
     @track tabs = [];
-
+    activeTab;
+    
     error;
     errorMessage;
 
     @wire(getEvalTests, {evalId : '$recordId'}) 
     response(result) {
         if(result.data){
-            this.evalTests = result.data;
-            this.tabs = [...result.data.tabList];
-            // this.addIcons();
+            // this.evalTests = result.data;
+            this.tabs = JSON.parse(JSON.stringify(result.data.tabList));
+            this.activeTab = this.tabs[0].label;
         }
         else if(result.error){
             this.errorMessage = 'Error retrieving the evaluation and tests:';
@@ -23,41 +24,34 @@ export default class BehaviorEvaluationMain extends LightningElement {
         }
     }
 
-    addIcons(){
-        this.tabs.forEach(tab => {            
-            let tabIcon  = this.template.querySelector('[data-id="' +tab.id+ '"]');
-            let tabIconId = tabIcon.getAttribute("aria-labelledby");
-            this.addColorToIcon(tab.id, tab.status);
-
-            const firstStyleCss = document.createElement('style');
-            firstStyleCss.innerText = ` .tabsetCss #${tabIconId} .slds-icon-utility-warning svg {
-                                    fill:orange !important;
-                                    }
-                                `;
-            if (this.template.querySelector('lightning-tabset') != null) {
-                this.template.querySelector('lightning-tabset').appendChild(firstStyleCss);
-            }
+    renderedCallback(){
+        this.tabs.forEach(tab => {
+            let tabId = tab.id;
+            tabId = tabId.replace(/['"]+/g, '');
+            //cannot add color when value parameter is added to tab????
+            // this.addColorToIcon(tabId, tab.status);
         });
     }
 
     handleComplete(event){
         let tabId = event.target.dataset.id;
-        window.console.log('tabid: ', tabId);
         tabId = tabId.replace(/['"]+/g, '');
 
         var foundIndex = this.tabs.findIndex(x => x.id == tabId);
-        this.tabs[foundIndex].icon = "utility:success";
-        this.addColorToIcon(tabId, "complete");
+        this.tabs[foundIndex].iconName = "utility:success";
+
+        //cannot add color when value parameter is added to tab????
+        // this.addColorToIcon(tabId, "complete");
     }
 
     handleSkip(event){
         let tabId = event.target.dataset.id;
-        window.console.log('tabid: ', tabId);
         tabId = tabId.replace(/['"]+/g, '');
 
         var foundIndex = this.tabs.findIndex(x => x.id == tabId);
-        this.tabs[foundIndex].icon = "utility:error";
-        this.addColorToIcon(tabId, "skip");
+        this.tabs[foundIndex].iconName = "utility:error";
+        //cannot add color when value parameter is added to tab????
+        // this.addColorToIcon(tabId, "skip");
     }
 
     addColorToIcon(tabId, status){
@@ -90,7 +84,6 @@ export default class BehaviorEvaluationMain extends LightningElement {
 
     handleButtonClick(event){
         let info = event.target.dataset.id;
-        window.console.log('tabid: ', info);
         info = info.replace(/['"]+/g, '');
         this.isComplete = true;
         this.tabs[0].icon = "utility:success";
@@ -105,9 +98,29 @@ export default class BehaviorEvaluationMain extends LightningElement {
         if (this.template.querySelector('lightning-tabset') != null) {
             this.template.querySelector('lightning-tabset').appendChild(firstStyleCss);
         }
-
     }
 
+    activeTab = this.tabs
+
+    handleNext(event){
+        let tabId = event.target.dataset.id;
+        var foundIndex = this.tabs.findIndex(x => x.id == tabId);
+        if(foundIndex < this.tabs.length - 1){
+            this.activeTab = this.tabs[foundIndex + 1].label;
+        } else {
+            this.activeTab = this.tabs[0].label;
+        }
+    }
+
+    handlePrevious(event){
+        let tabId = event.target.dataset.id;
+        var foundIndex = this.tabs.findIndex(x => x.id == tabId);
+        if(foundIndex > 0){
+            this.activeTab = this.tabs[foundIndex - 1].label;
+        } else {
+            this.activeTab = this.tabs[this.tabs.length -1].label;
+        }
+    }
     
 
 }

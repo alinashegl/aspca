@@ -1,3 +1,46 @@
 <template>
-tab goes here: {tab.label}
+<lightning-layout multiple-rows="true">
+        <lightning-layout-item size="12">
+            <div class="slds-align_absolute-center" style="height:3rem">
+                <h1 class="tabHeader">Header: {tab.label}</h1>
+            </div>
+            <br></br>
+            <template for:each={tabs} for:item="tab">
+
+            </template>
+            <!-- <aura:iteration items="{!v.behaviorInKennelTest}" var="variable">
+                <table>
+                    <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
+                                                    index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
+                    </c:BehaviorEvaluationOptionGroup>
+                    &nbsp;
+                    <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
+                                                    index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
+                    </c:BehaviorEvaluationOptionGroup>
+                    &nbsp;
+                    <c:BehaviorEvaluationOptionGroup options="{#variable.mAlertOptions}"
+                                                    index="{!index}"  recordId="{!v.recordId}" isLocked="{!v.isLocked}">
+                    </c:BehaviorEvaluationOptionGroup>
+                    <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
+                    &nbsp;
+                        <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
+                                                        index="{!index}"
+                                                        recordId="{!v.recordId}" isLocked="{!v.isLocked}">
+                        </c:BehaviorEvaluationOptionGroup>
+                    </aura:if>
+                </table>
+            </aura:iteration> -->
+        </lightning-layout-item>
+        <lightning-layout-item size="12" padding="around-small">
+            <lightning-layout >
+                Footer
+                <!-- <aura:iteration items="{!v.behaviorInKennelTest}" var="variable">
+                    <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
+                                                IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}" isLocked="{!v.isLocked}"
+                                                skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
+                </aura:iteration> -->
+            </lightning-layout>
+        </lightning-layout-item>
+    </lightning-layout>
+
 </template>

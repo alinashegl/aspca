@@ -1,43 +1,22 @@
-import { LightningElement, api } from 'lwc';
-// import getEvalSummary from '@salesforce/apex/BehaviorEvaluationLWCController.getEvalSummary';
+import { LightningElement, api, wire } from 'lwc';
+import getEvalConfig from '@salesforce/apex/BehaviorEvaluationLWCController.getEvalConfig';
 
 
 export default class BehaviorEvaluationTab extends LightningElement {
     @api tab;
+    config;
 
-    // renderedCallback(){
-    //     let tabIcon  = this.template.querySelector('[data-id="' +this.tab.label+ '"]');
-    //     let tabIconId = tabIcon.getAttribute("aria-labelledby");
+    error;
+    errorMessage;
 
-    //     const firstStyleCss = document.createElement('style');
-    //     firstStyleCss.innerText = ` .tabsetCss #${firstIconId} .slds-icon-utility-error svg {
-    //                             fill:red !important;
-    //                             }
-    //                         `;
-    //     if (this.template.querySelector('lightning-tabset') != null) {
-    //         this.template.querySelector('lightning-tabset').appendChild(firstStyleCss);
-    //     }
-    // }
-
-    // handleButtonClick(event){
-    //     this.isComplete = true;
-
-    //     let tabIcon  = this.template.querySelector('[data-id="' +this.tab.label+ '"]');
-    //     let tabIconId = tabIcon.getAttribute("aria-labelledby");
-    //     const firstStyleCss = document.createElement('style');
-    //     firstStyleCss.innerText = ` .tabsetCss #${tabIconId} .slds-icon-utility-success svg {
-    //                             fill:green !important;
-    //                             }
-    //                         `;
-    //     if (this.template.querySelector('lightning-tabset') != null) {
-    //         this.template.querySelector('lightning-tabset').appendChild(firstStyleCss);
-    //     }
-
-    // }
-
-    // isComplete = false;
-
-    // get iconName(){
-    //     return this.isComplete ? "utility:success" : "utility:eror";
-    // }
+    @wire(getEvalConfig, {recordId : '$tab.id'}) 
+    response(result) {
+        if(result.data){
+            this.config = result.data;
+        }
+        else if(result.error){
+            this.errorMessage = 'Error retrieving the evaluation and tests:';
+            this.error = result.error;
+        }
+    }
 }
