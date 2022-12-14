@@ -56,6 +56,18 @@ export default class TreatmentToDoSection extends NavigationMixin(LightningEleme
             .then(url => this.urlBundle = url);
         this.customLookupNewId = this.animalTreatment.AssignedTreatmentBundleId__c;
         this.treatmentPriority = this.animalTreatment.Treatment_Priority__c;
+
+
+    }
+
+    get protocolList(){
+        let protoList = [];
+        if(this.animalTreatment != undefined && this.animalTreatment.Plan_Protocols__r != undefined){
+            this.animalTreatment.Plan_Protocols__r.forEach(proto => {
+                protoList.push(proto.Protocol_Name__c);
+            });            
+        }
+        return protoList.join("; ");
     }
 
     get treatmentCount() {
