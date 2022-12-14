@@ -9,7 +9,7 @@ const DELAY = 200;
 
 export default class TreatmentByDogSelection extends NavigationMixin(LightningElement) {
     userLocation = [];
-    dogList = [];
+    @track dogList = [];
     connectedCallbackRan = false;
     error;
     showSpinner = true;
@@ -31,15 +31,26 @@ export default class TreatmentByDogSelection extends NavigationMixin(LightningEl
                 this.userLocation = result;
                 this.selectedLocations = result;
                 let locDisplay = [];
+
                 result.forEach(loc => {
-                    locDisplay.push ({
-                        location: loc,
-                        selected: true
-                    })
+                    if(loc == 'CRC'){
+                        locDisplay.push ({
+                            location: loc,
+                            selected: true
+                        })
+                    }
+                    else {
+                        locDisplay.push ({
+                            location: loc,
+                            selected: false
+                        })
+                    }
                 });
                 window.console.log('locationsDisplay: ', JSON.stringify(locDisplay));
                 window.console.log('result: ', JSON.stringify(result));
                 this.locationsDisplay = locDisplay;
+                this.updateLocationFilter();
+
             }) 
             .catch(error => {
                 this.error = error;
@@ -83,7 +94,12 @@ export default class TreatmentByDogSelection extends NavigationMixin(LightningEl
     handleLocationToggle(event){
         let loc = this.locationsDisplay.find(location => location.location == event.target.dataset.loc);
         loc.selected = !loc.selected;
+        this.updateLocationFilter();
+        const element = this.template.querySelector("[data-name='selectAll']");
+        element.checked = false;
+    }
 
+    updateLocationFilter(){
         let updatedLocations = [];
         this.locationsDisplay.forEach(loc => {
             if(loc.selected){
@@ -95,8 +111,6 @@ export default class TreatmentByDogSelection extends NavigationMixin(LightningEl
 
     handleToggleChange(event){
         const evt = event.target;
-        window.console.log("selectedDog: ", evt.dataset.id);
-        window.console.log("checked: ", evt.checked);
         let dog = this.dogList.find(dog => dog.id == evt.dataset.id);
 
         if(this.selectedDogs.includes(dog.id)){
@@ -121,5 +135,25 @@ export default class TreatmentByDogSelection extends NavigationMixin(LightningEl
                 this.filterText = searchKey;
             }
         }, DELAY);
+    }
+
+    handeSelectAllClick(event){
+        const checked = event.target.checked;                   
+        this.dogList.forEach(dog => {
+            dog.selected = checked;
+
+            // let dog = this.dogList.find(dog => dog.id == evt.dataset.id);
+
+            if(checked == true && !this.selectedDogs.includes(dog.id)){
+                this.selectedDogs.push(dog.id);
+                const payload = { recordId: dog.id, isSelected: checked};
+                publish(this.messageContext, DOG_SELECTED_CHANNEL, payload);
+            } 
+            else if(checked == false && this.selectedDogs.includes(dog.id)){
+                this.selectedDogs = this.selectedDogs.filter(item => item !== dog.id);
+                const payload = { recordId: dog.id, isSelected: checked};
+                publish(this.messageContext, DOG_SELECTED_CHANNEL, payload);
+            }
+        });
     }
 }

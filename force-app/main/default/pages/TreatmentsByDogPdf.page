@@ -57,7 +57,7 @@
                             <b>TX Priority:</b> 
                         </td>
                         <td>
-                            <b>Medications:</b> 
+                            <b>Behavior Medications:</b> 
                         </td>
                     </tr>
                     <tr>
@@ -89,34 +89,67 @@
                 </table>
                 <br/>
                 <apex:outputPanel rendered="{!record.txProtocols.size!=0}">
-                            <apex:repeat value="{!record.txProtocols}" var="protocolWrapper">
-                    <div style="page-break-after:avoid;">
-                        <table class="c_table" cellspacing="0">
-                                <tr>
-                                    <td width="20%">
-                                        <b>{!UPPER(protocolWrapper.name )}</b>
-                                    </td>
-                                    <td width="20%">
-                                        {!protocolWrapper.category}
-                                    </td>
-                                </tr>
-                                <apex:outputPanel rendered="{!protocolWrapper.historicalSessionProtocols.size!=0}">
+                    <apex:repeat value="{!record.txProtocols}" var="protocolWrapper">
+                        <div style="page-break-after:avoid;">
+                            <b>{!UPPER(protocolWrapper.name )}: </b> {!protocolWrapper.category}
+                            <table class="c_table" cellspacing="0">
                                     <tr>
-                                        <apex:repeat value="{!protocolWrapper.historicalSessionProtocols}" var="treatment">
-                                            <td>  
-                                                {!treatment.txDateFormatted} ({!treatment.colorText}) <br/>
-                                                {!treatment.score}                                                    
-                                            </td>
-                                        </apex:repeat>
+                                        <td width="15%">
+                                            <b>Date</b>
+                                        </td>
+                                        <td width="15%">
+                                            <b>Overall Score</b>                                            
+                                        </td>
+                                        <td width="15%">
+                                            <b>Fear Best</b>                                            
+                                        </td>
+                                        <td width="15%">
+                                            <b>Fear Worst</b>                                            
+                                        </td>
+                                        <td width="15%">
+                                            <b>Arousal Best</b>                                            
+                                        </td>
+                                        <td width="15%">
+                                            <b>Arousal Worst</b>                                            
+                                        </td>
                                     </tr>
-                                </apex:outputPanel>
-                                <br/>
-                        </table>
-                    </div>
-                            </apex:repeat>
+                                    <apex:outputPanel rendered="{!protocolWrapper.historicalSessionProtocols.size!=0}">
+                                        <apex:repeat value="{!protocolWrapper.historicalSessionProtocols}" var="treatment">
+                                            <tr>
+                                                <td>  
+                                                    {!treatment.txDateFormatted} ({!treatment.colorText})
+                                                </td>
+                                                <td>
+                                                    {!treatment.score}  
+                                                </td>
+                                                <td>
+                                                    {!treatment.score}  
+                                                </td>
+                                                <td>
+                                                    {!treatment.score}  
+                                                </td>
+                                                <td>
+                                                    {!treatment.score}  
+                                                </td>
+                                                <td>
+                                                    {!treatment.score}  
+                                                </td>                                            
+                                            </tr>
+                                            <tr>
+                                                <td colspan="6">
+                                                    <b>Protocol Notes: </b> {!treatment.protocolNotes}
+                                                </td>
+                                            </tr>
+                                            <br/>
+                                        </apex:repeat>
+                                    </apex:outputPanel>
+                                    <br/>
+                            </table>
+                        </div>
+                    </apex:repeat>
                 </apex:outputPanel>
-        </div>
-                        <apex:variable var="cnt" value="{!cnt+1}"/>
-            </apex:repeat>
+            </div>
+            <apex:variable var="cnt" value="{!cnt+1}"/>
+        </apex:repeat>
     </body>
 </apex:page>

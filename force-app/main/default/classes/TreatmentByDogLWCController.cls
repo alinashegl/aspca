@@ -224,10 +224,17 @@ public with sharing class TreatmentByDogLWCController {
     }
 
      private static Session_Protocol__c[] getSessionProtocols(Id[] dogIds){
+        String[] protoScales = new String[]{
+            'Fear Best',
+            'Fear Worst',
+            'Arousal Best',
+            'Arousal Worst'
+        };
         return [
             SELECT Id, Protocol_Name__c, isRemoved__c, Overall_Score__c, Overall_Score_Number__c, Overall_Score_Color__c, TreatmentSessionId__r.Treatment_Plan__c,
             TreatmentSessionId__c, TreatmentSessionId__r.Session_Date__c, ProtocolId__c, ProtocolId__r.Protocol_Categories__c, TreatmentSessionId__r.Animal__c,
-            TreatmentSessionId__r.Treatment_Plan__r.IsActive__c
+            TreatmentSessionId__r.Treatment_Plan__r.IsActive__c,Protocol_Notes__c,
+            (SELECT Id, Protocol_Scale_Name__c,Protocol_Score__c FROM Session_Protocol_Scales__r WHERE Protocol_Scale_Name__c IN :protoScales)
             FROM Session_Protocol__c
             WHERE TreatmentSessionId__r.Animal__c IN :dogIds
             AND Overall_Score__c != null
@@ -294,6 +301,7 @@ public with sharing class TreatmentByDogLWCController {
         @AuraEnabled public String colorText {get;set;}
         @AuraEnabled public Date txDate {get;set;}
         @AuraEnabled public String txDateFormatted {get;set;}
+        @AuraEnabled public String protocolNotes {get;set;}
 
         public TreatmentWrapper(Session_Protocol__c sp){
             this.id = sp.Id;
@@ -308,6 +316,7 @@ public with sharing class TreatmentByDogLWCController {
             if(sp.TreatmentSessionId__r.Session_Date__c != null){
                 this.txDateFormatted = (String) sp.TreatmentSessionId__r.Session_Date__c.format();
             }
+            this.protocolNotes = sp.Protocol_Notes__c;
         }
     }
 
