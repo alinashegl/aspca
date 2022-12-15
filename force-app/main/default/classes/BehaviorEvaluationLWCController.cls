@@ -14,6 +14,7 @@ public with sharing class BehaviorEvaluationLWCController {
                 FROM Behavior_Evaluation_Summary__c
                 WHERE Behavior_Evaluation__c = : evalId
                 AND Display_Order__c > 0
+                AND ConfigId__c != null
                 ORDER BY Display_Order__c ASC
                 LIMIT 4
             ];
@@ -35,13 +36,55 @@ public with sharing class BehaviorEvaluationLWCController {
     }
 
     @AuraEnabled (cacheable=true)
-    public static Test_Config__mdt getEvalConfig(Id recordId){
+    public static EvalConfig getEvalConfig(Id recordId){
         try {
-            return Test_Config__mdt.getInstance(recordId);
+            EvalConfig configInfo = new EvalConfig();
+            configInfo.testConfig = Test_Config__mdt.getInstance(recordId);
+            configInfo.pdListOfLists = prepPicklistDescriptions(recordId);
+            
+            System.debug('configInfo.testConfig: ' + configINfo.testConfig.DeveloperName);
+            // System.debug('picklistDescriptions: ' + picklistDescriptions);
+            return configInfo;
         } catch (Exception e) {
+            System.debug('Error: ' + e.getStackTraceString());
             throw new AuraHandledException(e.getMessage());
         }
     }
+
+    private static List<Picklist_Description_Config__mdt[]> prepPicklistDescriptions(Id recordId){
+        Picklist_Description_Config__mdt[] picklistDescriptions = [
+            SELECT Id, DeveloperName, MasterLabel, Field_API_Name__c, Field_Description__c, Field_Value__c, Object_API_Name__c, Picklist_Order__c, Value_Category__c, Test_Config__c
+            FROM Picklist_Description_Config__mdt
+            WHERE Test_Config__c = :recordId
+            ORDER BY Value_Category__c ASC, Picklist_Order__c ASC
+        ];
+
+        Map<String, Picklist_Description_Config__mdt[]> pdMap = new Map<String, Picklist_Description_Config__mdt[]>();
+
+        for(Picklist_Description_Config__mdt pd : picklistDescriptions){
+            if(pdMap.containsKey(pd.Value_Category__c)){
+                pdMap.get(pd.Value_Category__c).add(pd);
+            } else {
+                pdMap.put(pd.Value_Category__c, new Picklist_Description_Config__mdt[]{pd});
+            }
+        }
+
+        List<Picklist_Description_Config__mdt[]> pdListOfLists = new List<Picklist_Description_Config__mdt[]>();
+        for(String i : pdMap.keySet()){
+            pdListOfLists.add(pdMap.get(i));
+        }
+        return pdListOfLists;
+    }
+
+    public class EvalConfig {
+        @AuraEnabled public Test_Config__mdt testConfig;
+        @AuraEnabled public List<Picklist_Description_Config__mdt[]> pdListOfLists;
+
+    }
+
+    // public class PicklistDescriptions{
+    //     @AuraEnabled public Test_Config__mdt testConfig;
+    // }
 
     public class EvalSummaryInfo{
         @AuraEnabled public Behavior_Evaluation__c eval;

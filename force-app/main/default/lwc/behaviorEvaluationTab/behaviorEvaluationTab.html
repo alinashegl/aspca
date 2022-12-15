@@ -5,9 +5,19 @@
                 <h1 class="tabHeader">Header: {tab.label}</h1>
             </div>
             <br></br>
-            <template for:each={tabs} for:item="tab">
-
+            <template if:true={picklists}>
+                <template for:each={picklists} for:item="category">
+                    <div key={category.id}>
+                        Selection:
+                        <template for:each={category} for:item="pd">
+                            <div key={pd.id}>
+                                {pd.Field_Value__c} - {pd.Field_Description__c}
+                            </div>
+                        </template>
+                    </div>
+                </template>                
             </template>
+
             <!-- <aura:iteration items="{!v.behaviorInKennelTest}" var="variable">
                 <table>
                     <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"

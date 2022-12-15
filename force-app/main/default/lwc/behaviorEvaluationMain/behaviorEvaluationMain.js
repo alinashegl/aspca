@@ -16,6 +16,7 @@ export default class BehaviorEvaluationMain extends LightningElement {
         if(result.data){
             // this.evalTests = result.data;
             this.tabs = JSON.parse(JSON.stringify(result.data.tabList));
+            window.console.log('tabs: ', JSON.stringify(this.tabs));
             this.activeTab = this.tabs[0].label;
         }
         else if(result.error){

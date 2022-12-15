@@ -1,6 +1,6 @@
 <template>
     <lightning-tabset variant="vertical" active-tab-value={activeTab} class="tabsetCss">
-
+<template if:true={tabs}>
         <template for:each={tabs} for:item="tab">
             <lightning-tab 
                 label={tab.label} 
@@ -77,11 +77,13 @@
                     <lightning-layout-item size="12">
                             <c-behavior-evaluation-tab
                             tab={tab}
+                            config-id={tab.testSummary.ConfigId__c}
                         ></c-behavior-evaluation-tab>                           
                     </lightning-layout-item>
                 </lightning-layout> 
             </lightning-tab>
         </template>
+    </template>
     </lightning-tabset>
 
     <!-- <lightning-card>
