@@ -1,4 +1,4 @@
-import { LightningElement, track, wire } from 'lwc';
+import { LightningElement, track, wire, api } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
 import getUserLocation from '@salesforce/apex/TreatmentByDogLWCController.getUserLocation';
 import getDogList from '@salesforce/apex/TreatmentByDogLWCController.getDogList';
@@ -18,6 +18,10 @@ export default class TreatmentByDogSelection extends NavigationMixin(LightningEl
     filterText = '';
     selectedDogs = [];
 
+    @api appName;
+    @api allowedLocationsString;
+    allowedLocationsList;
+
     @wire(MessageContext)
     messageContext;
 
@@ -26,24 +30,27 @@ export default class TreatmentByDogSelection extends NavigationMixin(LightningEl
     connectedCallback(){
         if(!this.connectedCallbackRan ){
             this.connectedCallbackRan = true;
+            this.allowedLocationsList = this.allowedLocationsString.split(",");
             getUserLocation()
             .then((result) => {
                 this.userLocation = result;
-                this.selectedLocations = result;
+                // this.selectedLocations = result;
                 let locDisplay = [];
 
                 result.forEach(loc => {
-                    if(loc == 'CRC'){
-                        locDisplay.push ({
-                            location: loc,
-                            selected: true
-                        })
-                    }
-                    else {
-                        locDisplay.push ({
-                            location: loc,
-                            selected: false
-                        })
+                    if(this.allowedLocationsList.includes(loc)){
+                        if(this.appName == 'CRC Dog Database' && loc == 'CRC'){
+                            locDisplay.push ({
+                                location: loc,
+                                selected: true
+                            })
+                        }
+                        else {
+                            locDisplay.push ({
+                                location: loc,
+                                selected: false
+                            })
+                        }
                     }
                 });
                 window.console.log('locationsDisplay: ', JSON.stringify(locDisplay));
