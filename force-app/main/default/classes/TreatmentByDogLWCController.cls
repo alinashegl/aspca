@@ -1,14 +1,4 @@
 public with sharing class TreatmentByDogLWCController {
-    public DogInfoWrapper[] dogInfoWrapperList {get; set;}
-    public String dogList{get;set;}
-
-    public TreatmentByDogLWCController(){        
-        dogList = apexpages.currentpage().getparameters().get('dogList');
-        Id[] dogList = dogList.split(',');
-        System.debug('dogList: ' + dogList);
-        dogInfoWrapperList = getDogInfo(dogList);        
-    }
-
     @AuraEnabled
     public static string[] getUserLocation(){
         try {
@@ -50,13 +40,20 @@ public with sharing class TreatmentByDogLWCController {
     }
 
     @AuraEnabled(cacheable=true)
-    public static DogInfoWrapper getDogInfo(Id recordId){
-        return getDogInfo(new Id[]{recordId})[0];
+    public static DogInfoWrapper getDogInfo(Id dogId, String appName){
+        if(dogId != null){
+            return getDogInfo(new Id[]{dogId}, appName)[0];
+        } else {
+            return null;
+        }
     }
 
     @testVisible
-    private static DogInfoWrapper[] getDogInfo(Id[] dogIds){
-        Map<Id, Set<String>>  medicationsByDogMap = getDogMedications(dogIds);
+    private static DogInfoWrapper[] getDogInfo(Id[] dogIds, String appName){
+        Map<Id, Set<String>>  medicationsByDogMap = new Map<Id, Set<String>>();
+        if(appName == 'CRC Dog Database'){
+            medicationsByDogMap = getDogMedications(dogIds);
+        }
         DogInfoWrapper[] dogInfos = new DogInfoWrapper[0];
         Map<Id, Map<String, TxProtocolWrapper>> treatmentsByDogMap = getDogTreatments(dogIds);
 
@@ -224,17 +221,10 @@ public with sharing class TreatmentByDogLWCController {
     }
 
      private static Session_Protocol__c[] getSessionProtocols(Id[] dogIds){
-        String[] protoScales = new String[]{
-            'Fear Best',
-            'Fear Worst',
-            'Arousal Best',
-            'Arousal Worst'
-        };
         return [
             SELECT Id, Protocol_Name__c, isRemoved__c, Overall_Score__c, Overall_Score_Number__c, Overall_Score_Color__c, TreatmentSessionId__r.Treatment_Plan__c,
             TreatmentSessionId__c, TreatmentSessionId__r.Session_Date__c, ProtocolId__c, ProtocolId__r.Protocol_Categories__c, TreatmentSessionId__r.Animal__c,
-            TreatmentSessionId__r.Treatment_Plan__r.IsActive__c,Protocol_Notes__c,
-            (SELECT Id, Protocol_Scale_Name__c,Protocol_Score__c FROM Session_Protocol_Scales__r WHERE Protocol_Scale_Name__c IN :protoScales)
+            TreatmentSessionId__r.Treatment_Plan__r.IsActive__c
             FROM Session_Protocol__c
             WHERE TreatmentSessionId__r.Animal__c IN :dogIds
             AND Overall_Score__c != null
@@ -253,7 +243,6 @@ public with sharing class TreatmentByDogLWCController {
         @AuraEnabled public String medications {get;set;}
         @AuraEnabled public String txPriority {get;set;}
         @AuraEnabled public TxProtocolWrapper[] txProtocols {get;set;}
-        @AuraEnabled public Boolean hideMedications {get;set;}
 
         public DogInfoWrapper(Animal__c dog){
             User u = [SELECT Id, Location__c FROM User WHERE Id = :userInfo.getUserId() LIMIT 1];
@@ -266,7 +255,6 @@ public with sharing class TreatmentByDogLWCController {
             this.location = dog.Current_Location__c;
             this.evalGrade = dog.Current_Behavior_Grade__c;
             this.txPriority = !dog.Treatment_Plan__r.isEmpty() ? dog.Treatment_Plan__r[0].Treatment_Priority__c : null;
-            this.hideMedications = u.Location__c == 'ARC/CARE';
         }
     }
 
@@ -301,7 +289,6 @@ public with sharing class TreatmentByDogLWCController {
         @AuraEnabled public String colorText {get;set;}
         @AuraEnabled public Date txDate {get;set;}
         @AuraEnabled public String txDateFormatted {get;set;}
-        @AuraEnabled public String protocolNotes {get;set;}
 
         public TreatmentWrapper(Session_Protocol__c sp){
             this.id = sp.Id;
@@ -316,7 +303,6 @@ public with sharing class TreatmentByDogLWCController {
             if(sp.TreatmentSessionId__r.Session_Date__c != null){
                 this.txDateFormatted = (String) sp.TreatmentSessionId__r.Session_Date__c.format();
             }
-            this.protocolNotes = sp.Protocol_Notes__c;
         }
     }
 

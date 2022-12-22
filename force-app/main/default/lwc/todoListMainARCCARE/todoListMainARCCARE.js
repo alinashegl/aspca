@@ -1,28 +1,16 @@
 import { LightningElement, wire } from 'lwc';
-import getToDoListVisibility from '@salesforce/apex/HomeBannerLWCController.getToDoListVisibility';
 import { subscribe, MessageContext } from 'lightning/messageService';
 import LOCATION_FILTER_CHANNEL from '@salesforce/messageChannel/LocationFilterChannel__c';
 
-export default class TodoListMainCRCMRC extends LightningElement {
-    locations;
-    isVisible = false; 
+
+export default class TodoListMainARCCARE extends LightningElement {    locations;
     error;
     errorMessage;
-    appName = 'CRC Dog Database';
-    appURL = 'Treatments_By_Dog_CRC';
+    appName = 'ARC/CARE Dog Database';
+    appURL = 'Treatments_By_Dog_ARC_CARE';
 
     connectedCallback(){
         this.subscribeToMessageChannel();
-        getToDoListVisibility()
-        .then((result) => {
-            if(result){
-                this.isVisible = result.mrcTodoList;
-            }
-            else if(result.error){
-                this.error = result.error;
-                this.errorMessage = 'Error retrieving animal locations.';
-            }
-        });
     }
 
     // By using the MessageContext @wire adapter, unsubscribe will be called
@@ -41,7 +29,7 @@ export default class TodoListMainCRCMRC extends LightningElement {
     }
 
     handleMessage(message){
-        window.console.log('todolistMainCRC, ' + message.locations);
+        window.console.log('todolistMainARC, ' + message.locations);
         this.locations = message.locations;
     }
 }

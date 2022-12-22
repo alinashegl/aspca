@@ -13,9 +13,6 @@
             >
             </c-location-filter>
         </div>
-        <template if:true={error}>
-            <c-error-panel errors={error} type='inlineMessage' friendly-message={errorMessage}></c-error-panel>
-        </template>
     </lightning-card>
 
     <div class="slds-p-top_small">
@@ -30,9 +27,4 @@
         >
         </c-treatment-priority-to-do-list>
     </div>
-    <template if:true={isVisible}>
-        <div class="slds-p-top_small">
-            <c-daily-care-main></c-daily-care-main>
-        </div>
-    </template>
 </template>

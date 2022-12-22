@@ -1,4 +1,4 @@
-<apex:page controller="TreatmentByDogLWCController" sidebar="false" showHeader="false" readOnly="true" applyHtmlTag="false"
+<apex:page controller="TreatmentsByDogPDFController" sidebar="false" showHeader="false" readOnly="true" applyHtmlTag="false"
            cache="true" renderAs="advanced_pdf" docType="html-5.0" standardStylesheets="false">
     
     <head>
@@ -32,123 +32,143 @@
     <body>
         <apex:variable var="cnt" value="{!0}" />
             <apex:repeat value="{!dogInfoWrapperList}" var="record">
-        <div style="{!if(cnt < 1, 'page-break-before:avoid;','page-break-before:always;')}">
-                <table class="c_table" bgcolor="silver">
-                    <tr>
-                        <td>
-                            <b>Name:</b> 
-                        </td>
-                        <td>
-                            <b>Sex:</b> 
-                        </td>
-                        <td>
-                            <b>Breed:</b> 
-                        </td>
-                        <td>
-                            <b>Age:</b> 
-                        </td>
-                        <td>
-                            <b>Location:</b> 
-                        </td>
-                        <td>
-                            <b>Eval Grade:</b> 
-                        </td>
-                        <td>
-                            <b>TX Priority:</b> 
-                        </td>
-                        <td>
-                            <b>Behavior Medications:</b> 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            {!record.name}
-                        </td>
-                        <td>
-                            {!record.gender}
-                        </td>
-                        <td>
-                            {!record.breed}
-                        </td>
-                        <td>
-                            {!record.age}
-                        </td>
-                        <td>
-                            {!record.location}
-                        </td>
-                        <td>
-                            {!record.evalGrade}
-                        </td>
-                        <td>
-                            {!record.txPriority}
-                        </td>
-                        <td>
-                            {!record.medications}
-                        </td>
-                    </tr>
-                </table>
-                <br/>
-                <apex:outputPanel rendered="{!record.txProtocols.size!=0}">
-                    <apex:repeat value="{!record.txProtocols}" var="protocolWrapper">
-                        <div style="page-break-after:avoid;">
-                            <b>{!UPPER(protocolWrapper.name )}: </b> {!protocolWrapper.category}
-                            <table class="c_table" cellspacing="0">
-                                    <tr>
-                                        <td width="15%">
-                                            <b>Date</b>
-                                        </td>
-                                        <td width="15%">
-                                            <b>Overall Score</b>                                            
-                                        </td>
-                                        <td width="15%">
-                                            <b>Fear Best</b>                                            
-                                        </td>
-                                        <td width="15%">
-                                            <b>Fear Worst</b>                                            
-                                        </td>
-                                        <td width="15%">
-                                            <b>Arousal Best</b>                                            
-                                        </td>
-                                        <td width="15%">
-                                            <b>Arousal Worst</b>                                            
-                                        </td>
-                                    </tr>
-                                    <apex:outputPanel rendered="{!protocolWrapper.historicalSessionProtocols.size!=0}">
-                                        <apex:repeat value="{!protocolWrapper.historicalSessionProtocols}" var="treatment">
-                                            <tr>
-                                                <td>  
-                                                    {!treatment.txDateFormatted} ({!treatment.colorText})
+                <div style="{!if(cnt < 1, 'page-break-before:avoid;','page-break-before:always;')}">
+                    <table class="c_table" bgcolor="silver">
+                        <tr>
+                            <td>
+                                <b>Name:</b> 
+                            </td>
+                            <td>
+                                <b>Sex:</b> 
+                            </td>
+                            <td>
+                                <b>Breed:</b> 
+                            </td>
+                            <td>
+                                <b>Age:</b> 
+                            </td>
+                            <td>
+                                <b>Location:</b> 
+                            </td>
+                            <td>
+                                <b>Eval Grade:</b> 
+                            </td>
+                            <td>
+                                <b>TX Priority:</b> 
+                            </td>
+                            <apex:outputText rendered="{!isCRCApp=true}">
+                                <td>
+                                    <b>Behavior Medications:</b> 
+                                </td>
+                            </apex:outputText>
+                        </tr>
+                        <tr>
+                            <td>
+                                {!record.name}
+                            </td>
+                            <td>
+                                {!record.gender}
+                            </td>
+                            <td>
+                                {!record.breed}
+                            </td>
+                            <td>
+                                {!record.age}
+                            </td>
+                            <td>
+                                {!record.location}
+                            </td>
+                            <td>
+                                {!record.evalGrade}
+                            </td>
+                            <td>
+                                {!record.txPriority}
+                            </td>
+                            <apex:outputText rendered="{!isCRCApp=true}">
+                                <td>
+                                    {!record.medications}
+                                </td>
+                            </apex:outputText>
+                        </tr>
+                    </table>
+                    <br/>
+                    <apex:outputPanel rendered="{!record.txProtocols.size!=0}">
+                        <apex:repeat value="{!record.txProtocols}" var="protocolWrapper">
+                            <div style="page-break-after:avoid;">
+                                <b>{!UPPER(protocolWrapper.name )}: </b> {!protocolWrapper.category}
+                                <table class="c_table" cellspacing="0">
+                                        <tr>
+                                            <td width="10%">
+                                                <b>Date</b>
+                                            </td>
+                                            <td width="10%">
+                                                <b>Overall Score</b>
+                                            </td>
+                                            <apex:outputText rendered="{!isCRCApp=true}">
+                                                <td width="10%" >
+                                                    <b>Agressive Worst</b>
                                                 </td>
-                                                <td>
-                                                    {!treatment.score}  
+                                                <td width="10%">
+                                                    <b>Agression Movement</b>
                                                 </td>
-                                                <td>
-                                                    {!treatment.score}  
-                                                </td>
-                                                <td>
-                                                    {!treatment.score}  
-                                                </td>
-                                                <td>
-                                                    {!treatment.score}  
-                                                </td>
-                                                <td>
-                                                    {!treatment.score}  
-                                                </td>                                            
-                                            </tr>
-                                            <tr>
-                                                <td colspan="6">
-                                                    <b>Protocol Notes: </b> {!treatment.protocolNotes}
-                                                </td>
-                                            </tr>
-                                            <br/>
-                                        </apex:repeat>
-                                    </apex:outputPanel>
-                                    <br/>
-                            </table>
-                        </div>
-                    </apex:repeat>
-                </apex:outputPanel>
-            </div>
+                                            </apex:outputText>
+                                            <td width="10%">
+                                                <b>Arousal Best</b>
+                                            </td>
+                                            <td width="10%">
+                                                <b>Arousal Worst</b>
+                                            </td>
+                                            <td width="10%">
+                                                <b>Fear Best</b>
+                                            </td>
+                                            <td width="10%">
+                                                <b>Fear Worst</b>
+                                            </td>
+                                        </tr>
+                                        <apex:outputPanel rendered="{!protocolWrapper.sessionProtocols.size!=0}">
+                                            <apex:repeat value="{!protocolWrapper.sessionProtocols}" var="treatment">
+                                                <tr>
+                                                    <td width="10%">
+                                                        {!treatment.txDateFormatted} ({!treatment.colorText})
+                                                    </td>
+                                                    <td width="10%">
+                                                        {!treatment.score}
+                                                    </td>
+                                                    <apex:outputText rendered="{!isCRCApp=true}">
+                                                        <td width="10%">
+                                                            {!treatment.agressionMovement}
+                                                        </td>   
+                                                        <td width="10%">
+                                                            {!treatment.agressiveBest}
+                                                        </td>
+                                                    </apex:outputText>
+                                                    <td width="10%">
+                                                        {!treatment.arousalBest}
+                                                    </td>
+                                                    <td width="10%">
+                                                        {!treatment.arousalWorst}
+                                                    </td>
+                                                    <td width="10%">
+                                                        {!treatment.fearBest}
+                                                    </td>
+                                                    <td width="10%">
+                                                        {!treatment.fearWorst}
+                                                    </td>                              
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="6">
+                                                        <b>Protocol Notes: </b> {!treatment.protocolNotes}
+                                                    </td>
+                                                </tr>
+                                                <br/>
+                                            </apex:repeat>
+                                        </apex:outputPanel>
+                                        <br/>
+                                </table>
+                            </div>
+                        </apex:repeat>
+                    </apex:outputPanel>
+                </div>
             <apex:variable var="cnt" value="{!cnt+1}"/>
         </apex:repeat>
     </body>

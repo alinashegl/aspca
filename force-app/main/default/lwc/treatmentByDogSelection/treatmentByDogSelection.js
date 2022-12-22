@@ -34,7 +34,6 @@ export default class TreatmentByDogSelection extends NavigationMixin(LightningEl
             getUserLocation()
             .then((result) => {
                 this.userLocation = result;
-                // this.selectedLocations = result;
                 let locDisplay = [];
 
                 result.forEach(loc => {
@@ -53,8 +52,6 @@ export default class TreatmentByDogSelection extends NavigationMixin(LightningEl
                         }
                     }
                 });
-                window.console.log('locationsDisplay: ', JSON.stringify(locDisplay));
-                window.console.log('result: ', JSON.stringify(result));
                 this.locationsDisplay = locDisplay;
                 this.updateLocationFilter();
 
@@ -75,7 +72,6 @@ export default class TreatmentByDogSelection extends NavigationMixin(LightningEl
         this.wireResponse = result;
         if(result.data ){
             let tempDogList = JSON.parse(JSON.stringify(result.data));
-            window.console.log("dogs: ", JSON.stringify(tempDogList));
             tempDogList.forEach(dog => {
                 if(this.selectedDogs.includes(dog.id)){
                     dog.selected = true;
@@ -127,7 +123,8 @@ export default class TreatmentByDogSelection extends NavigationMixin(LightningEl
         }
         
         
-        const payload = { recordId: dog.id, isSelected: evt.checked};
+        const payload = { recordId: dog.id, isSelected: evt.checked, appName: this.appName};
+        window.console.log('payload: ', payload);
         publish(this.messageContext, DOG_SELECTED_CHANNEL, payload);
         
     }
@@ -149,16 +146,14 @@ export default class TreatmentByDogSelection extends NavigationMixin(LightningEl
         this.dogList.forEach(dog => {
             dog.selected = checked;
 
-            // let dog = this.dogList.find(dog => dog.id == evt.dataset.id);
-
             if(checked == true && !this.selectedDogs.includes(dog.id)){
                 this.selectedDogs.push(dog.id);
-                const payload = { recordId: dog.id, isSelected: checked};
+                const payload = { recordId: dog.id, isSelected: checked, appName: this.appName};
                 publish(this.messageContext, DOG_SELECTED_CHANNEL, payload);
-            } 
+            }
             else if(checked == false && this.selectedDogs.includes(dog.id)){
                 this.selectedDogs = this.selectedDogs.filter(item => item !== dog.id);
-                const payload = { recordId: dog.id, isSelected: checked};
+                const payload = { recordId: dog.id, isSelected: checked, appName: this.appName};
                 publish(this.messageContext, DOG_SELECTED_CHANNEL, payload);
             }
         });

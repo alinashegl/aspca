@@ -7,7 +7,7 @@ private class test_LocationFilterController {
         update u;
 
         Test.startTest();
-        Map<String, Object> locations = LocationFilterController.getAnimalLocations('ForTests');
+        Map<String, Object> locations = LocationFilterController.getAnimalLocations('ForTests', null);
         Test.stopTest();
 
         System.assertEquals(false, locations.isEmpty(), 'should have returned a map, but was empty');
@@ -21,7 +21,7 @@ private class test_LocationFilterController {
         update u;
 
         Test.startTest();
-        Map<String, Object> locations = LocationFilterController.getAnimalLocations('ForTests');
+        Map<String, Object> locations = LocationFilterController.getAnimalLocations('ForTests', null);
         Test.stopTest();
 
         System.assertEquals(false, locations.isEmpty(), 'should have returned a map, but was empty');
@@ -35,7 +35,7 @@ private class test_LocationFilterController {
         update u;
 
         Test.startTest();
-        Map<String, Object> locations = LocationFilterController.getAnimalLocations('NoAppType');
+        Map<String, Object> locations = LocationFilterController.getAnimalLocations('NoAppType', null);
         Test.stopTest();
 
         System.assertEquals(null, locations.get('locations'), 'should have returned an empty map, but was: ' + locations);
