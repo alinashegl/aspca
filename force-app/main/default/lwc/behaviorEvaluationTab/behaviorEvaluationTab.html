@@ -1,54 +1,37 @@
 <template>
-<lightning-layout multiple-rows="true">
+    <lightning-layout multiple-rows="true">
         <lightning-layout-item size="12">
             <div class="slds-align_absolute-center" style="height:3rem">
                 <h1 class="tabHeader">Header: {tab.label}</h1>
             </div>
             <br></br>
             <template if:true={picklists}>
-                <template for:each={picklists} for:item="category">
-                    <div key={category.id}>
-                        Selection:
+                <table class="slds-box slds-p-top_medium" width="100%">
+                    
+                    <template for:each={picklists} for:item="category">
                         <template for:each={category} for:item="pd">
-                            <div key={pd.id}>
-                                {pd.Field_Value__c} - {pd.Field_Description__c}
-                            </div>
+                            <tr key={pd.Id} class="spaceUnder" align="left">
+                                <td  class="float slds-theme_shade">
+                                    <lightning-input
+                                        name={pd.Name}
+                                        type="checkbox-button"
+                                        variant="label-hidden"
+                                    ></lightning-input>
+                                </td>
+                                <td  style="vertical-align: top" align="left">
+                                    <strong> {pd.Field_Value__c}</strong>
+                                    &nbsp;- {pd.Field_Description__c}
+                                </td>
+                            </tr>
                         </template>
-                    </div>
-                </template>                
+                    </template>     
+                    
+                </table>           
             </template>
-
-            <!-- <aura:iteration items="{!v.behaviorInKennelTest}" var="variable">
-                <table>
-                    <c:BehaviorEvaluationOptionGroup options="{!variable.mNotConcerningOptions}"
-                                                    index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
-                    </c:BehaviorEvaluationOptionGroup>
-                    &nbsp;
-                    <c:BehaviorEvaluationOptionGroup options="{!variable.mRedFlagOptions}"
-                                                    index="{!index}" recordId="{!v.recordId}" isLocked="{!v.isLocked}" >
-                    </c:BehaviorEvaluationOptionGroup>
-                    &nbsp;
-                    <c:BehaviorEvaluationOptionGroup options="{#variable.mAlertOptions}"
-                                                    index="{!index}"  recordId="{!v.recordId}" isLocked="{!v.isLocked}">
-                    </c:BehaviorEvaluationOptionGroup>
-                    <aura:if isTrue="{!not(empty(variable.mInconclusiveOptions))}">
-                    &nbsp;
-                        <c:BehaviorEvaluationOptionGroup options="{!variable.mInconclusiveOptions}"
-                                                        index="{!index}"
-                                                        recordId="{!v.recordId}" isLocked="{!v.isLocked}">
-                        </c:BehaviorEvaluationOptionGroup>
-                    </aura:if>
-                </table>
-            </aura:iteration> -->
         </lightning-layout-item>
         <lightning-layout-item size="12" padding="around-small">
             <lightning-layout >
                 Footer
-                <!-- <aura:iteration items="{!v.behaviorInKennelTest}" var="variable">
-                    <c:BehaviorEvaluationTabFooter testName="{!variable.testComments}"
-                                                IsSkipped="{!variable.isSkipped}" recordId="{!v.recordId}" isLocked="{!v.isLocked}"
-                                                skipVal="{!variable.skipField}" aura:id="behEvalTabFooter"/>
-                </aura:iteration> -->
             </lightning-layout>
         </lightning-layout-item>
     </lightning-layout>

@@ -4,3 +4,21 @@
 .class2{
     --lwc-colorTextIconDefault: red;
 } 
+
+.container-bottom-border {
+    border-bottom: 1px solid black;
+}
+
+.navigation-container {
+    border-right: 1px solid black;
+    padding-bottom: var(--lwc-varSpacingVerticalSmall,0.75rem);
+}
+
+
+.navigation-display-error{
+    --lwc-colorTextDefault: red;
+}
+
+.container-max-width {
+    max-width: 600px;
+}

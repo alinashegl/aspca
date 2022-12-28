@@ -1,15 +1,31 @@
 <template>
-    <lightning-tabset variant="vertical" active-tab-value={activeTab} class="tabsetCss">
-<template if:true={tabs}>
-        <template for:each={tabs} for:item="tab">
-            <lightning-tab 
-                label={tab.label} 
-                key={tab.id} 
-                value={tab.label}
-                end-icon-name={tab.iconName} 
-                data-id={tab.id} 
-                class="class1"
-            >
+    <lightning-card>
+        <template if:true={selectedNavItem}>
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-5 slds-grid slds-grid_vertical navigation-container">
+                <lightning-vertical-navigation selected-item={selectedNavItem} onselect={handleNavigationSelect} shadded>
+                    <template for:each={tabs} for:item="tab">       
+                        <div key={tab.id} class="slds-grid">
+                            <div class="slds-col slds-size_5-of-6 container-bottom-border">
+                                <lightning-vertical-navigation-item 
+                                    label={tab.label} 
+                                    name={tab.label}
+                                    >    
+                                </lightning-vertical-navigation-item>
+                            </div>
+                            <div class="slds-col slds-size_1-of-6 slds-var-p-top_small container-bottom-border">
+                                <lightning-icon
+                                    icon-name={tab.iconName}
+                                    size="x-small"
+                                    variant={tab.status}
+                                    >
+                                </lightning-icon>
+                            </div>
+                        </div>                        
+                    </template>
+                </lightning-vertical-navigation>
+            </div>
+            <div class="slds-col slds-size_4-of-5">
                 <lightning-layout>
                     <lightning-layout-item size="4">
                         <div class="slds-float_left">
@@ -19,7 +35,6 @@
                                 label="Previous Tab" 
                                 onclick={handlePrevious}
                                 class="float"
-                                data-id={tab.id}
                             >
                             </lightning-button>
                         </div>
@@ -46,13 +61,11 @@
                                 value="Next Tab" 
                                 label="Next Tab" 
                                 onclick={handleNext}
-                                data-id={tab.id}
                             >
                         </lightning-button>
                         </div>
                     </lightning-layout-item>
                 </lightning-layout>
-                
                 <lightning-layout multiple-rows="true">
                     <lightning-layout-item size="6">
                         <lightning-button 
@@ -60,7 +73,6 @@
                             label="Complete" 
                             title="skipAndRemove" 
                             onclick={handleComplete}
-                            data-id={tab.id}
                             class="slds-m-left_x-small"
                         ></lightning-button>
                     </lightning-layout-item>
@@ -70,108 +82,20 @@
                             label="Skip" 
                             title="skipAndRemove" 
                             onclick={handleSkip}
-                            data-id={tab.id}
                             class="slds-m-left_x-small"
                         ></lightning-button>
                     </lightning-layout-item>
-                    <lightning-layout-item size="12">
-                            <c-behavior-evaluation-tab
-                            tab={tab}
-                            config-id={tab.testSummary.ConfigId__c}
-                        ></c-behavior-evaluation-tab>                           
-                    </lightning-layout-item>
-                </lightning-layout> 
-            </lightning-tab>
-        </template>
-    </template>
-    </lightning-tabset>
-
-    <!-- <lightning-card>
-        <lightning-tabset variant="vertical" class="tabsetCss" >
-            <lightning-record-edit-form 
-                class="slds-grid slds-theme_shade" 
-                object-api-name="Behavior_Evaluation__c"
-                record-id={recordId}
-            >            
-                <lightning-layout class="slds-grid_align-spread">
-                    <lightning-layout-item size="4">
-                        <div class="slds-float_left">
-                            <lightning-button 
-                                name="prevTab" 
-                                value="Previous Tab" 
-                                label="Previous Tab" 
-                                onclick={handleClick}
-                                class="float">
-                            </lightning-button>
-                        </div>
-                    </lightning-layout-item>
                     
-                        <lightning-layout-item size="4">
-                        <template if:true={workingSpinner}>
-                            <div class="slds-align_absolute-center">
-                            <lightning-icon 
-                                icon-name="utility:spinner" 
-                                alternative-text="working" 
-                                size="medium" 
-                                title="working"
-                                class="float"
-                            >
-                            </lightning-icon>
-                            </div>
-                        </template>
-                    </lightning-layout-item>
-                    <lightning-layout-item size="4">
-                        <div class="slds-float_right">
-                            <lightning-button 
-                                class="float" 
-                                name="nextTab" 
-                                value="Next Tab" 
-                                label="Next Tab" 
-                                onclick={handleClick}>
-                        </lightning-button>
-                        </div>
-                    </lightning-layout-item>
                 </lightning-layout>
-            <div>
-                <template for:each={tabs} for:item="tab">
-                    <div key={tab.id}>
-                        <lightning-tab 
-                            class="class1" 
-                            end-icon-name={tab.iconName} 
-                            label={tab.label}
-                            data-id={tab.id}
-                        > 
-                        <lightning-layout multiple-rows="true">
-                            <lightning-layout-item size="12">
-                                demo label1 
-                                <lightning-button 
-                                    variant="Neutral" 
-                                    label="Complete" 
-                                    title="skipAndRemove" 
-                                    onclick={handleComplete}
-                                    data-id={tab.id}
-                                    class="slds-m-left_x-small"
-                                ></lightning-button>
-
-                                <lightning-button 
-                                    variant="Neutral" 
-                                    label="Skip" 
-                                    title="skipAndRemove" 
-                                    onclick={handleSkip}
-                                    data-id={tab.id}
-                                    class="slds-m-left_x-small"
-                                ></lightning-button>
-
-                                <c-behavior-evaluation-tab
-                                    tab={tab}
-                                ></c-behavior-evaluation-tab>   
-                            </lightning-layout-item>
-                        </lightning-layout>                     
-                        </lightning-tab>
-                    </div>
+                <template if:true={activeTab}>
+                    selectedTab: {activeTab.label}
+                    <c-behavior-evaluation-tab
+                        tab={activeTab.id}
+                        config-id={activeTab.testSummary.ConfigId__c}
+                    ></c-behavior-evaluation-tab>
                 </template>
             </div>
-            </lightning-record-edit-form>
-        </lightning-tabset>
-   </lightning-card> -->
+        </div>
+    </template>
+    </lightning-card>
 </template>
