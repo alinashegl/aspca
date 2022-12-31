@@ -5,17 +5,18 @@ import getEvalConfig from '@salesforce/apex/BehaviorEvaluationLWCController.getE
 export default class BehaviorEvaluationTab extends LightningElement {
     @api tab;
     @api configId;
+    @api evalId;
     config;
     @track picklists = [];
 
     error;
     errorMessage;
 
-    @wire(getEvalConfig, {recordId : '$configId'}) 
+    @wire(getEvalConfig, {recordId : '$configId', evalId : '$evalId'}) 
     response(result) {
         if(result.data){
             this.config = result.data.testConfig;
-            this.picklists = result.data.pdListOfLists;
+            this.picklists = result.data.pdListOfListsWithSelections;
         }
         else if(result.error){
             this.errorMessage = 'Error retrieving the evaluation and tests:';

@@ -90,6 +90,7 @@
                 <template if:true={activeTab}>
                     selectedTab: {activeTab.label}
                     <c-behavior-evaluation-tab
+                        eval-id={recordId}
                         tab={activeTab.id}
                         config-id={activeTab.testSummary.ConfigId__c}
                     ></c-behavior-evaluation-tab>

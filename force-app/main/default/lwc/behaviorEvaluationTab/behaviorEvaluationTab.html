@@ -1,4 +1,7 @@
 <template>
+    <template if:true={error}>
+        <c-error-panel errors={error} type='inlineMessage' friendly-message={errorMessage}></c-error-panel>
+    </template>
     <lightning-layout multiple-rows="true">
         <lightning-layout-item size="12">
             <div class="slds-align_absolute-center" style="height:3rem">
@@ -9,6 +12,7 @@
                 <table class="slds-box slds-p-top_medium" width="100%">
                     
                     <template for:each={picklists} for:item="category">
+                        <br key={category.id}>
                         <template for:each={category} for:item="pd">
                             <tr key={pd.Id} class="spaceUnder" align="left">
                                 <td  class="float slds-theme_shade">
@@ -16,11 +20,12 @@
                                         name={pd.Name}
                                         type="checkbox-button"
                                         variant="label-hidden"
+                                        checked={pd.selected}
                                     ></lightning-input>
                                 </td>
                                 <td  style="vertical-align: top" align="left">
-                                    <strong> {pd.Field_Value__c}</strong>
-                                    &nbsp;- {pd.Field_Description__c}
+                                    <strong> {pd.pDescriptionConfig.Field_Value__c}</strong>
+                                    &nbsp;- {pd.pDescriptionConfig.Field_Description__c}
                                 </td>
                             </tr>
                         </template>
