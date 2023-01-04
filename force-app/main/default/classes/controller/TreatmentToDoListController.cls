@@ -57,7 +57,7 @@ public with sharing class TreatmentToDoListController {
                 query += 'AND Animal__r.Current_Location__c IN :locationsList ';
             }
 
-            query += 'ORDER BY Id';
+            query += 'ORDER BY Animal__r.Animal_Name__c ASC';
 
             this.treatmentPlanList = Database.query(query); 
         }
@@ -70,7 +70,7 @@ public with sharing class TreatmentToDoListController {
                 query += 'AND Animal__r.Current_Location__c IN :locationsList ';
             }
 
-            query += 'ORDER BY Id';
+            query += 'ORDER BY Animal__r.Animal_Name__c ASC';
 
             this.treatmentPlanList = Database.query(query);
         }
