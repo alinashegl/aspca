@@ -1,0 +1,30 @@
+<template>
+    <lightning-card title="To Do List" icon-name="standard:task">
+        <p slot="actions">
+            <c-todo-list
+                app-url={appURL}
+                app-name={appName}
+            ></c-todo-list>
+        </p>
+        <div slot="footer">
+            <c-location-filter
+                application-type="ToDoList"
+                app-name={appName}
+            >
+            </c-location-filter>
+        </div>
+    </lightning-card>
+
+    <div class="slds-p-top_small">
+        <c-playgroup-to-do-list
+            locations-filter={locations}
+        >
+        </c-playgroup-to-do-list>
+    </div>
+    <div class="slds-p-top_small">
+        <c-treatment-priority-to-do-list
+            locations-filter={locations}
+        >
+        </c-treatment-priority-to-do-list>
+    </div>
+</template>

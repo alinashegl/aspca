@@ -1,9 +1,11 @@
 public with sharing class LocationFilterController {
     @AuraEnabled
-    public static Map<String, Object> getAnimalLocations(String applicationType){
+    public static Map<String, Object> getAnimalLocations(String applicationType, String currentApp){
         try {
-            String currentApp = getUsersCurrentApp();
-
+            //this is used as a back up in case for some reason the current app is null
+            if(currentApp == null){
+                currentApp = getUsersCurrentApp();
+            }
             Animal_Location_Config__mdt[] locConfigs = new Animal_Location_Config__mdt[0];
             User u = [SELECT Id, Location__c FROM User WHERE Id = :UserInfo.getUserId() LIMIT 1];
             if(u.Location__c != null){
@@ -52,7 +54,7 @@ public with sharing class LocationFilterController {
         } else {
             UserAppInfo userAppInfo = [SELECT Id, AppDefinitionId FROM UserAppInfo WHERE UserId = :UserInfo.getUserId() LIMIT 1];
             AppDefinition appDefinition = [SELECT DurableId, Label FROM AppDefinition Where DurableId = :userAppInfo.AppDefinitionId LIMIT 1];
-           currentApp = appDefinition.Label;
+            currentApp = appDefinition.Label;
         }
         return currentApp;
     }

@@ -1246,4 +1246,25 @@ public without sharing class TestDataFactory {
       insert t;
       return t;
     }
+
+    public static task createBehaviorMedicationTask(Id animalId){
+      Id recordTypeId = Util.getRecordTypeId('Task',AutoScheduleTasksUtil.TREATMENT_TASK_RECORD_TYPE_NAME);
+
+      Medication_Drug__c drug = new Medication_Drug__c(
+        Name = 'testDrug',
+        Behavior_Medication__c = true
+      ); 
+
+      insert drug;
+
+      Task t = new Task(
+        Animal__c = animalId,
+        RecordTypeId = recordTypeId,
+        ActivityDate = date.today().addDays(2),
+        Medication__c = drug.Id
+      );
+
+      insert t;
+      return t;
+    }
 }
