@@ -47,15 +47,17 @@ public with sharing class TreatmentToDoListController {
             'AND Treatment_Priority__c != \'No Treatment\' ';
 
         public QueryTreatmentPlansForList(String locationsFilter){
-            String query = treatmentPlanSelect + treatmentQueryFrom;
+            // String query = treatmentPlanSelect + treatmentQueryFrom;
+            String query = treatmentPlanSelect + treatmentQueryChildProtocols + treatmentQueryFrom;
             AnimalLocationFilterUtil filterInfo = new AnimalLocationFilterUtil(locationsFilter);
 
             if(filterInfo.useFilter == true){
                 String[] locationsList = filterInfo.locationList;
+                System.debug('locationsList: ' + locationsList);
                 query += 'AND Animal__r.Current_Location__c IN :locationsList ';
             }
 
-            query += 'ORDER BY Id';
+            query += 'ORDER BY Animal__r.Animal_Name__c ASC';
 
             this.treatmentPlanList = Database.query(query); 
         }
@@ -68,7 +70,7 @@ public with sharing class TreatmentToDoListController {
                 query += 'AND Animal__r.Current_Location__c IN :locationsList ';
             }
 
-            query += 'ORDER BY Id';
+            query += 'ORDER BY Animal__r.Animal_Name__c ASC';
 
             this.treatmentPlanList = Database.query(query);
         }

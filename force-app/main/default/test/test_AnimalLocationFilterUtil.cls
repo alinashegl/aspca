@@ -40,14 +40,43 @@ private class test_AnimalLocationFilterUtil {
         System.assertEquals(null, util.locationList, 'Should have returned an empty list');
     }
 
+    @isTest
+    static void locationStringToObjectListFromString() {
+        Test.startTest();
+        AnimalLocationFilterUtil util = new AnimalLocationFilterUtil();
+        Object[] locList = util.locationStringToObjectList('CRC,CRC-MRC');
+        Test.stopTest();
+
+        System.assertEquals(false, locList.isEmpty(), 'Should have returned a list of objects, but was empty');
+    }
+
+    @isTest
+    static void locationStringToObjectListFromList() {
+        Test.startTest();
+        AnimalLocationFilterUtil util = new AnimalLocationFilterUtil();
+        Object[] locList = util.locationStringToObjectList('[{"label":"CRC","value":"CRC,CRC-MRC"},' +
+        '{"label":"Field Temp Shelter","value":"Field Temp Shelter"}]');
+        Test.stopTest();
+
+        System.assertEquals(false, locList.isEmpty(), 'Should have returned a list of objects, but was empty');
+    }
+
+    @isTest
+    static void locationListFromLocationString() {
+        String locations = '\'CRC\',\'CRC-MRC\'';
+        Test.startTest();
+        AnimalLocationFilterUtil util = new AnimalLocationFilterUtil(locations);
+        Test.stopTest();
+
+        System.assertEquals(new String[]{'\'CRC\'','\'CRC-MRC\''}, util.locationList, 'Should have converted the string of locations to a list, but was: ' + util.locationList);
+    }
+
     private static Map<String, Object> prepLocationsFilter(Boolean hasConfig, Boolean showAll, String locations){
         Map<String, Object> locationsFilterMap = new Map<String, Object>{
             'hasConfigWithLocations' => (Object) hasConfig,
             'showAllLocations' => (Object) showAll,
             'locations' => (Object) locations
         };
-
-        // return JSON.serialize(locationsFilterMap);
         return locationsFilterMap;
     }
 }

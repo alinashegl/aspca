@@ -1,9 +1,11 @@
 public with sharing class LocationFilterController {
-    @AuraEnabled(cacheable=true)
-    public static Map<String, Object> getAnimalLocations(String applicationType){
+    @AuraEnabled
+    public static Map<String, Object> getAnimalLocations(String applicationType, String currentApp){
         try {
-            String currentApp = getUsersCurrentApp();
-
+            //this is used as a back up in case for some reason the current app is null
+            if(currentApp == null){
+                currentApp = getUsersCurrentApp();
+            }
             Animal_Location_Config__mdt[] locConfigs = new Animal_Location_Config__mdt[0];
             User u = [SELECT Id, Location__c FROM User WHERE Id = :UserInfo.getUserId() LIMIT 1];
             if(u.Location__c != null){
@@ -27,18 +29,8 @@ public with sharing class LocationFilterController {
 
                 if(locations != null){
                     returnMap.put('hasConfigWithLocations', (Object) true);
-                    if(isValidList(locations)){
-                        locations = '{"locs":' + locations + '}';
-                        Map<String, Object> m = (Map<String, Object>) JSON.deserializeUntyped(locations);            
-                        List<Object> myMapObjects = (List<Object>) m.get('locs');
-                        Map<String, Object> locMap = new Map<String, Object>();
-                        
-                        returnMap.put('locations', (Object) myMapObjects);
-                    } else {       
-                        List<Object> myMapObjects = new List<Object>();
-                        myMapObjects.add(locations);
-                        returnMap.put('locations', (Object) myMapObjects);
-                    }
+                    AnimalLocationFilterUtil util = new AnimalLocationFilterUtil();
+                    returnMap.put('locations', util.locationStringToObjectList(locations));
                 } else {
                     returnMap.put('showAllLocations', (Object) true);
                 }
@@ -55,10 +47,6 @@ public with sharing class LocationFilterController {
         }
     }
 
-    private static Boolean isValidList(String st){
-        return st.substring(0,1) == '[';
-    }
-
     private static String getUsersCurrentApp(){
         String currentApp;
         if(test.isRunningTest()){
@@ -66,7 +54,7 @@ public with sharing class LocationFilterController {
         } else {
             UserAppInfo userAppInfo = [SELECT Id, AppDefinitionId FROM UserAppInfo WHERE UserId = :UserInfo.getUserId() LIMIT 1];
             AppDefinition appDefinition = [SELECT DurableId, Label FROM AppDefinition Where DurableId = :userAppInfo.AppDefinitionId LIMIT 1];
-           currentApp = appDefinition.Label;
+            currentApp = appDefinition.Label;
         }
         return currentApp;
     }

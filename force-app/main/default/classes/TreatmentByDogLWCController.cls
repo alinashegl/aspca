@@ -1,14 +1,4 @@
 public with sharing class TreatmentByDogLWCController {
-    public DogInfoWrapper[] dogInfoWrapperList {get; set;}
-    public String dogList{get;set;}
-
-    public TreatmentByDogLWCController(){        
-        dogList = apexpages.currentpage().getparameters().get('dogList');
-        Id[] dogList = dogList.split(',');
-        System.debug('dogList: ' + dogList);
-        dogInfoWrapperList = getDogInfo(dogList);        
-    }
-
     @AuraEnabled
     public static string[] getUserLocation(){
         try {
@@ -27,7 +17,13 @@ public with sharing class TreatmentByDogLWCController {
     public static DogWrapper[] getDogList(String[] selectedLocations, String filterText){
         try {
             DogWrapper[] dogs = new DogWrapper[0];
-            String query = 'SELECT Id, Animal_Name_Id__c, Current_Location__c FROM Animal__c WHERE Current_Location__c IN: selectedLocations AND Active_Animal__c = true';
+            String query = 
+                'SELECT Id, Animal_Name_Id__c, Current_Location__c ' +
+                'FROM Animal__c ' +
+                'WHERE Current_Location__c IN: selectedLocations ' +
+                'AND Type_of_Animal__c = \'Dog\' ' +
+                'AND Active_Animal__c = true ' +
+                'AND Location_Filter__c = true';
             if(filterText != null){
                 query += ' AND Animal_Name_Id__c LIKE \'%' + filterText + '%\'';
             }
@@ -44,13 +40,20 @@ public with sharing class TreatmentByDogLWCController {
     }
 
     @AuraEnabled(cacheable=true)
-    public static DogInfoWrapper getDogInfo(Id recordId){
-        return getDogInfo(new Id[]{recordId})[0];
+    public static DogInfoWrapper getDogInfo(Id dogId, String appName){
+        if(dogId != null){
+            return getDogInfo(new Id[]{dogId}, appName)[0];
+        } else {
+            return null;
+        }
     }
 
     @testVisible
-    private static DogInfoWrapper[] getDogInfo(Id[] dogIds){
-        Map<Id, Set<String>>  medicationsByDogMap = getDogMedications(dogIds);
+    private static DogInfoWrapper[] getDogInfo(Id[] dogIds, String appName){
+        Map<Id, Set<String>>  medicationsByDogMap = new Map<Id, Set<String>>();
+        if(appName == 'CRC Dog Database'){
+            medicationsByDogMap = getDogMedications(dogIds);
+        }
         DogInfoWrapper[] dogInfos = new DogInfoWrapper[0];
         Map<Id, Map<String, TxProtocolWrapper>> treatmentsByDogMap = getDogTreatments(dogIds);
 
@@ -85,8 +88,11 @@ public with sharing class TreatmentByDogLWCController {
             FROM Task 
             WHERE RecordTypeId =: recordTypeId
             AND Animal__c IN: dogIds
+            AND Medication__r.Behavior_Medication__c = true
+            AND Status != 'Completed'
             AND ((IsRecurrence = true AND RecurrenceEndDateOnly >= TODAY)
             OR (RecurrenceActivityId = null AND ActivityDate >= TODAY))
+
         ]){
             if(dogToMedicationMap.containsKey(t.Animal__c)){
                 dogToMedicationMap.get(t.Animal__c).add(t.Medication__r.Name);
@@ -239,6 +245,8 @@ public with sharing class TreatmentByDogLWCController {
         @AuraEnabled public TxProtocolWrapper[] txProtocols {get;set;}
 
         public DogInfoWrapper(Animal__c dog){
+            User u = [SELECT Id, Location__c FROM User WHERE Id = :userInfo.getUserId() LIMIT 1];
+            
             this.id = dog.Id;
             this.name = dog.Animal_Name_Id__c;
             this.gender = dog.Gender__c;
@@ -303,12 +311,16 @@ public with sharing class TreatmentByDogLWCController {
         @AuraEnabled public String name;
         @AuraEnabled public String location;
         @AuraEnabled public Boolean selected;
+        @AuraEnabled public String link;
 
         public DogWrapper(Animal__c dog){
             this.id = dog.Id;
             this.name = dog.Animal_Name_Id__c;
             this.location = dog.Current_Location__c;
             this.selected = false;
+            this.link = URL.getSalesforceBaseUrl().toExternalForm() + '/' + dog.Id;
         }
+
+
     }    
 }

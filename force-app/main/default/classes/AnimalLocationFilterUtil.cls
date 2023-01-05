@@ -7,8 +7,18 @@ public with sharing class AnimalLocationFilterUtil {
     public AnimalLocationFilterUtil(String locationsFilter){
         System.debug('util locationsFilter: ' + locationsFilter);
         if(locationsFilter != null && String.isNotEmpty(locationsFilter)){
-            Map<String, Object> locationsFilterMap = (Map<String, Object>) JSON.deserializeUntyped(locationsFilter);
-            this.handleMapFilter(locationsFilterMap);
+
+            if(isValidMap(locationsFilter)){
+                Map<String, Object> locationsFilterMap = (Map<String, Object>) JSON.deserializeUntyped(locationsFilter);
+                this.handleMapFilter(locationsFilterMap);
+            } else {
+                this.locationList = new String[0];
+                String locations = trimBlankSpaces(locationsFilter);
+                for(String loc : locations.split(',')){
+                    this.locationList.add(loc);
+                }
+                this.useFilter = this.locationList != null && !this.locationList.isEmpty();
+            }            
         }
     }
 
@@ -18,11 +28,58 @@ public with sharing class AnimalLocationFilterUtil {
 
     private void handleMapFilter(Map<String, Object> locationsFilterMap){
         if(locationsFilterMap.isEmpty()) return;
-        String locationsString = (String) locationsFilterMap.get('locations');
-        this.locationList = locationsString != null ? locationsString.split(',') : null;
-        this.useFilter = 
-            (Boolean) locationsFilterMap.get('hasConfigWithLocations') &&
-            this.locationList != null && 
-            !this.locationList.isEmpty();
-    }    
+        Object obj = locationsFilterMap.get('locations');
+
+        //need to check if obj is a string or list of strings
+        if(obj instanceOf String){
+            String locationsString = (String) locationsFilterMap.get('locations');
+            locationsString = trimBlankSpaces(locationsString);
+            this.locationList = locationsString != null ? locationsString.split(',') : null;
+        }
+        else if(obj instanceOf String[]) {
+            this.locationList = (String[]) obj;
+        }
+
+        if(locationsFilterMap.get('hasConfigWithLocations') != null){
+            this.useFilter = 
+                    (Boolean) locationsFilterMap.get('hasConfigWithLocations') &&
+                    this.locationList != null && 
+                    !this.locationList.isEmpty();
+        }
+    }
+
+    public Object[] locationStringToObjectList(String locations){
+        locations = trimBlankSpaces(locations);
+        Object[] locationsObjList;
+        if(isValidList(locations)){
+            locations = '{"locs":' + locations + '}';
+            Map<String, Object> m = (Map<String, Object>) JSON.deserializeUntyped(locations);            
+            locationsObjList = (List<Object>) m.get('locs');
+        } else {       
+            locationsObjList = new Object[0];
+            locationsObjList.add(locations);
+        }
+        return locationsObjList;
+    }
+
+    public Boolean isValidList(String st){
+        return st != null && st.substring(0,1) == '[';
+    }
+
+    public Boolean isValidMap(String st){
+        return st != null && st.substring(0,1) == '{';
+    }
+
+    private String trimBlankSpaces(String locations){
+        String[] locationList = new String[0];
+        
+        for(String st : locations.split(',')){
+            st = st.trim();
+            locationList.add(st);
+        }
+
+        return locationList != null && !locationList.isEmpty() ? 
+            locations = String.join(locationList,','):
+            null;
+    }
 }

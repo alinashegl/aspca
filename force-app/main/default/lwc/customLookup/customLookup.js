@@ -127,7 +127,6 @@ export default class CustomLookup extends LightningElement {
 
     //set the field values based on the response from querying the record
     currentRecordResponse(result){
-        // this.currentRecordId = result.Id;
         let returnedRecord = result;
         let record = {
             FIELD1 : returnedRecord[this.field],
@@ -200,6 +199,14 @@ export default class CustomLookup extends LightningElement {
         .finally( ()=>{
             this.showRecent = true;
             this.isLoading = false;
+            const selectedEvent = new CustomEvent('lookup', {
+                detail: {  
+                    data : {
+                        recordId        : null
+                    }
+                }
+            });
+            this.dispatchEvent(selectedEvent);
         });
     }
 
@@ -256,7 +263,7 @@ export default class CustomLookup extends LightningElement {
         this.searchRecords = allResult;
     }
 
-    //When a record is selected from the dopdown, set it as the selected record, and close the dropdown
+    //When a record is selected from the dropdown, set it as the selected record, and close the dropdown
     handleSelect(event){
         this.showRecent = false;
         this.showExpandedSearch = false;

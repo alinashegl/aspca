@@ -12,7 +12,7 @@ public class Last5TreatmentsController {
                 FROM Treatment_Session__c
                 WHERE Treatment_Plan__r.IsActive__c = true
                 AND Treatment_Plan__r.Animal__c = :animalId
-                ORDER BY CreatedDate DESC
+                ORDER BY Session_Date__c DESC
                 LIMIT 5
             ];
             for(Session_protocol__c sp : [
@@ -25,6 +25,7 @@ public class Last5TreatmentsController {
                 )
                 FROM Session_Protocol__c
                 WHERE TreatmentSessionId__c IN :sessions
+                ORDER BY TreatmentSessionId__r.Session_Date__c DESC
             ]){
                 if(sProtocolsMap.containsKey(sp.Protocol_Name__c)){
                     sProtocolsMap.get(sp.Protocol_Name__c).add(new SessionProtocol(sp));

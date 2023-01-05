@@ -118,8 +118,16 @@
                     </template>
                 </div>
             </div>
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                <label class="slds-form-element__legend slds-form-element__label">Assigned Protocols:</label>
+                <div class="slds-form-element__static">
+                    <template if:true={isBehCaseWorker}>
+                        <span>{protocolList}</span>
+                    </template>
+                </div>
+            </div>
             <lightning-button-stateful
-                label-when-off="Show protocols"
+                label-when-off="Edit protocols"
                 label-when-on="Hide protocols"
                 icon-name-when-off="utility:add"
                 icon-name-when-on="utility:dash"

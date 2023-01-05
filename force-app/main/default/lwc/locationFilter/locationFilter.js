@@ -7,6 +7,7 @@ import SystemModstamp from '@salesforce/schema/ANH__AutoNumberConfigurationSetti
 
 export default class LocationFilter extends LightningElement {
     @api applicationType
+    @api appName
     @track animalLocations = [];
     hasLocations = true;
 
@@ -19,33 +20,33 @@ export default class LocationFilter extends LightningElement {
     @wire(MessageContext)
     messageContext;
 
-    @wire(getAnimalLocations, {applicationType : '$applicationType'})
-    response(result){
-        if(result.data){
-            this.animalLocationsWireResponse = result.data;
-            window.console.log("result.data: ", JSON.stringify(result.data));
-            if(result.data.locations != null){
-                if(result.data.locations.length > 1){
-                    result.data.locations.forEach(element => {
-                        let tempLoc = {...element};
-                        tempLoc.variant = 'brand';
-                        tempLoc.selected = true;
-                        this.animalLocations.push(tempLoc);
-                    });
-                    this.prepLocationsString();
-                } else{
-                    this.publishLocationString(result.data.locations);
-                }
-            } else {
-                this.publishLocationString(null);
+    connectedCallback(){
+        window.console.log("locationFilter connectedCallback()");
+        getAnimalLocations({applicationType : this.applicationType, currentApp : this.appName})
+        .then((result) => {
+            if(result){
+                this.animalLocationsWireResponse = result;
+                if(result.locations != null){
+                    if(result.locations.length > 1){
+                        result.locations.forEach(element => {
+                            let tempLoc = {...element};
+                            tempLoc.variant = 'brand';
+                            tempLoc.selected = true;
+                            this.animalLocations.push(tempLoc);
+                        });
+                        this.prepLocationsString();
+                    } else{
+                        this.publishLocationString(result.locations);
+                    }
+                } else {
+                    this.publishLocationString(null);
+                }                
             }
-            
-            // };
-        }
-        else if(result.error){
-            this.error = result.error;
-            this.errorMessage = 'Error retrieving animal locations.';
-        }
+            else if(result.error){
+                this.error = result.error;
+                this.errorMessage = 'Error retrieving animal locations.';
+            }
+        });
     }
 
     handleOnclick(event){
@@ -84,7 +85,8 @@ export default class LocationFilter extends LightningElement {
     }
 
     get hasAccess(){
-        return this.animalLocationsWireResponse.showAllLocations || this.animalLocationsWireResponse.hasConfigWithLocations;
+        return this.animalLocationsWireResponse != undefined && (
+            this.animalLocationsWireResponse.showAllLocations || this.animalLocationsWireResponse.hasConfigWithLocations);
     }
 
     get showLocations(){

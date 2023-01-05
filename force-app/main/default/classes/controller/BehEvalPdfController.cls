@@ -71,7 +71,10 @@ public class BehEvalPdfController {
                 Potential_Issue_Fear__c,
                 Potential_Issue_High_Arousal__c,
                 Potential_Issue_Other__c,
-                Potential_Issue_Other_Notes__c
+                Potential_Issue_Other_Notes__c,
+                Animal__r.Petpoint_ID__c,
+                Animal__r.AAH_ID__c,
+                Animal__r.Name
         FROM Behavior_Evaluation__c
         WHERE Id = :ApexPages.currentPage().getParameters().get('Id')];
         
@@ -115,7 +118,9 @@ public class BehEvalPdfController {
                                                         FROM Picklist_Description_Configs__r)
                                                     FROM Test_Config__mdt
                                                     WHERE IsPuppy__c = true
-                                                    AND Test_Name__c != null];
+                                                    AND Test_Name__c != null
+                                                    ORDER BY Test_Display_Order__c
+                                    ];
             }
             when 'Adult Animal' {
                 testConfigMetadata = [SELECT MasterLabel, Test_Display_Order__c, Test_Name__c, Test_Description__c, IsPuppy__c, IsAdult__c, IsDogFighting__c, IsDogOnly__c,
@@ -124,7 +129,9 @@ public class BehEvalPdfController {
                                                         FROM Picklist_Description_Configs__r)
                                                     FROM Test_Config__mdt
                                                     WHERE IsAdult__c = true
-                                                    AND Test_Name__c != null];
+                                                    AND Test_Name__c != null
+                                                    ORDER BY Test_Display_Order__c
+                                    ];
             }
             when 'Dog Fighting' {
                 testConfigMetadata = [SELECT MasterLabel, Test_Display_Order__c, Test_Name__c, Test_Description__c, IsPuppy__c, IsAdult__c, IsDogFighting__c, IsDogOnly__c,
@@ -133,7 +140,9 @@ public class BehEvalPdfController {
                                                         FROM Picklist_Description_Configs__r)
                                                     FROM Test_Config__mdt
                                                     WHERE IsDogFighting__c = true
-                                                    AND Test_Name__c != null];
+                                                    AND Test_Name__c != null
+                                                    ORDER BY Test_Display_Order__c
+                                    ];
             }
             when 'Dog/Dog Only' {
                 testConfigMetadata = [SELECT MasterLabel, Test_Display_Order__c, Test_Name__c, Test_Description__c, IsPuppy__c, IsAdult__c, IsDogFighting__c, IsDogOnly__c,
@@ -142,7 +151,9 @@ public class BehEvalPdfController {
                                                         FROM Picklist_Description_Configs__r)
                                                     FROM Test_Config__mdt
                                                     WHERE IsDogOnly__c = true
-                                                    AND Test_Name__c != null];
+                                                    AND Test_Name__c != null
+                                                    ORDER BY Test_Display_Order__c
+                                    ];
             }
         }
         
@@ -281,7 +292,22 @@ public class BehEvalPdfController {
                         }
                     }
                 }
-                evaluationMap.put(config.Test_Description__c, new EvaluationGroup(Integer.valueOf(config.Test_Display_Order__c), config.Test_Description__c, config.Test_Header_Description__c, /*config.Test_Type_Description__c, */opField, (String)evalFields.get(config.Test_Skip_Reason_Field__c), (String)evalFields.get(config.Test_Comment_Field_Name__c), vG0, vG1, vG2, vG3, vG4));
+                evaluationMap.put(
+                    config.Test_Description__c, 
+                    new EvaluationGroup(
+                        Integer.valueOf(config.Test_Display_Order__c), 
+                        config.Test_Description__c, 
+                        config.Test_Header_Description__c, /*config.Test_Type_Description__c, */
+                        opField, 
+                        (String)evalFields.get(config.Test_Skip_Reason_Field__c), 
+                        (String)evalFields.get(config.Test_Comment_Field_Name__c), 
+                        vG0, 
+                        vG1, 
+                        vG2, 
+                        vG3, 
+                        vG4
+                    )
+                );
             }
         }
         evaluation = evaluationMap.values();
@@ -357,7 +383,19 @@ public class BehEvalPdfController {
             private set;
         }
         public EvaluationGroup() {}
-        public EvaluationGroup(Integer groupOrder, String groupValue, String headerValue, OptionalField optionalValue, String skipValue, String commentValue, List<ValueGroup> valueGroup0, List<ValueGroup> valueGroup1, List<ValueGroup> valueGroup2, List<ValueGroup> valueGroup3, List<ValueGroup> valueGroup4) {
+        public EvaluationGroup(
+            Integer groupOrder, 
+            String groupValue, 
+            String headerValue, 
+            OptionalField optionalValue, 
+            String skipValue, 
+            String commentValue, 
+            List<ValueGroup> valueGroup0, 
+            List<ValueGroup> valueGroup1, 
+            List<ValueGroup> valueGroup2, 
+            List<ValueGroup> valueGroup3, 
+            List<ValueGroup> valueGroup4
+        ) {
             this.groupOrder = groupOrder;
             this.groupValue = groupValue;
             this.headerValue = headerValue;

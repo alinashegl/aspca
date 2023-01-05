@@ -3,7 +3,14 @@
     <fullName>Grade_Reason_cannot_be_blank</fullName>
     <active>true</active>
     <description>Grade Reason cannot be blank if when a Current Behavior Grade is changed</description>
-    <errorConditionFormula>OR(AND( ISBLANK( Grade_Change_Reason__c ) , ISCHANGED( Current_Behavior_Grade__c ), PRIORVALUE(Current_Behavior_Grade__c ) != NULL), AND( NOT(ISCHANGED( Grade_Change_Reason__c )) , ISCHANGED( Current_Behavior_Grade__c ), PRIORVALUE(Current_Behavior_Grade__c ) != NULL ))</errorConditionFormula>
+    <errorConditionFormula>OR(AND( ISBLANK( Grade_Change_Reason__c ) ,
+ISCHANGED( Current_Behavior_Grade__c ),
+PRIORVALUE(Current_Behavior_Grade__c ) != NULL ,
+NOT(ISBLANK(TEXT(Current_Behavior_Grade__c)))),
+AND( NOT(ISCHANGED( Grade_Change_Reason__c )) ,
+ISCHANGED( Current_Behavior_Grade__c ),
+PRIORVALUE(Current_Behavior_Grade__c ) != NULL ,
+NOT(ISBLANK(TEXT(Current_Behavior_Grade__c)))))</errorConditionFormula>
     <errorDisplayField>Grade_Change_Reason__c</errorDisplayField>
     <errorMessage>Grade Reason cannot be blank if when a Current Behavior Grade is changed</errorMessage>
 </ValidationRule>

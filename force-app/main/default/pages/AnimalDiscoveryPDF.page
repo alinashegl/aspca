@@ -349,16 +349,38 @@
                 </thead>
                 <tbody>
                     <apex:repeat value="{!aTreatmentSession}" var="treatment">
+                        <apex:repeat value="{!treatment[0]}" var="treat">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th style="border-top:thin #D4D4D4 solid;">Session Date</th>
+                                        <th style="border-top:thin #D4D4D4 solid;">Overall Session Notes</th>
+                                    </tr>
+                                </thead>
+                                <tbod>
+                                    <tr>
+                                        <td>
+                                            <apex:outputText value="{0, date, MM/dd/yy}">
+                                                <apex:param value="{!treat.sProto.Session_Date__c}" />
+                                            </apex:outputText>
+                                        </td>
+                                        <td>
+                                            {!treat.sProto.TreatmentSessionId__r.Session_Notes__c}
+                                        </td>
+                                    </tr>
+                                </tbod>
+                            </table>
+                        </apex:repeat>
                         <apex:repeat value="{!treatment}" var="treat">
                             <thead>
                                 <tr>
-                                    <th style="border-top:thin #D4D4D4 solid;">Name</th>
+                                    <th  style="border-top:thin #D4D4D4 solid;">Name</th>
                                     <!-- <th  style="border-top:thin #D4D4D4 solid;">Status</th> -->
-                                    <th style="border-top:thin #D4D4D4 solid;">Fear-Best</th>
-                                    <th style="border-top:thin #D4D4D4 solid;">Fear - Worst</th>
-                                    <th style="border-top:thin #D4D4D4 solid;">Aggressive - Worst</th>
-                                    <th style="border-top:thin #D4D4D4 solid;">Arousal - Best</th>
-                                    <th style="border-top:thin #D4D4D4 solid;">Arousal - Worst</th>
+                                    <th  style="border-top:thin #D4D4D4 solid;">Fear-Best</th>
+                                    <th  style="border-top:thin #D4D4D4 solid;">Fear - Worst</th>
+                                    <th  style="border-top:thin #D4D4D4 solid;">Aggressive - Worst</th>
+                                    <th  style="border-top:thin #D4D4D4 solid;">Arousal - Best</th>
+                                    <th  style="border-top:thin #D4D4D4 solid;">Arousal - Worst</th>
                                 </tr>
                             </thead>
                             <tr style="page-break-inside:avoid">
@@ -380,7 +402,7 @@
                                     <table>
                                         <thead>
                                             <tr>
-                                                <th>Session Date</th>
+                                                <!--<th>Session Date</th>-->
                                                 <th>Social - Best</th>
                                                 <th>Overall Score</th>
                                                 <th>Needs Review</th>
@@ -389,11 +411,11 @@
                                         </thead>
                                         <tbod>
                                             <tr>
-                                                <td>
+                                                <!--<td>
                                                     <apex:outputText value="{0, date, MM/dd/yy}">
                                                         <apex:param value="{!treat.sProto.Session_Date__c}" />
                                                     </apex:outputText>
-                                                </td>
+                                                </td>-->
                                                 <td>{!treat.socialBest.score}</td>
                                                 <td>{!treat.sProto.Overall_Score__c}</td>
                                                 <td>{!treat.sProto.Needs_Review__c}</td>

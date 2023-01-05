@@ -1,4 +1,4 @@
-import { LightningElement } from 'lwc';
+import { LightningElement, api } from 'lwc';
 //import NoHeader from '@salesforce/resourceUrl/NoHeader';
 //import { loadStyle } from 'lightning/platformResourceLoader';
 import getButtonsInfo from '@salesforce/apex/HomeBannerLWCController.getButtonsInfo';
@@ -6,10 +6,12 @@ import { NavigationMixin } from 'lightning/navigation';
 
 export default class TodoList extends NavigationMixin(LightningElement) {
     toDisplay;
+    @api appName;
+    @api appUrl;
     
     connectedCallback(){
         //loadStyle(this, NoHeader);
-        if(this.toDisplay == undefined){
+        if(this.toDisplay == undefined && this.appName == 'CRC Dog Database'){
             window.console.log('inConnectedCallback');
             getButtonsInfo()
             .then((result) => {
@@ -23,7 +25,7 @@ export default class TodoList extends NavigationMixin(LightningElement) {
     }
 
     handleLaunchTreatmentByDogs(){
-        this.handleNavigation('/lightning/n/Treatments_By_Dog');
+        this.handleNavigation('/lightning/n/' + this.appUrl);
     }
 
     handleNavigation(url){

@@ -10,18 +10,22 @@ private class Test_TreatmentByDogLWCController {
             test.startTest();
                 String[] locations = TreatmentByDogLWCController.getUserLocation();
                 System.assert(locations.contains('CRC'));
-                System.assert(locations.contains('MRC'));
+                System.assert(locations.contains('CRC-MRC'));
             test.stopTest();
         }
     }
 
     @isTest 
     static void getDogList_Success(){
+        User u = [SELECT Id, Location__c FROM User WHERE Id =: userInfo.getUserId()];
+        u.Location__c = 'CRC/MRC';
+        update u;
+
         Animal__c willow = TestDataFactory.createAnimalWithName('willow');
         Animal__c fido = TestDataFactory.createAnimalWithName('fido');
 
         test.startTest();
-            TreatmentByDogLWCController.DogWrapper[] dogs = TreatmentByDogLWCController.getDogList(new String[]{'MRC'});
+            TreatmentByDogLWCController.DogWrapper[] dogs = TreatmentByDogLWCController.getDogList(new String[]{'CRC','CRC-MRC'});
         test.stopTest();
 
         System.assertEquals(2, dogs.size());
@@ -48,12 +52,12 @@ private class Test_TreatmentByDogLWCController {
 
         update protocols;
 
-        Animal__c willlow = [SELECT Id FROM Animal__c LIMIT 1];
+        Animal__c willow = [SELECT Id FROM Animal__c LIMIT 1];
 
-        TestDataFactory.createMedicationTask(willlow.Id);
+        TestDataFactory.createBehaviorMedicationTask(willow.Id);
 
         test.startTest();
-            TreatmentByDogLWCController.DogInfoWrapper dog = TreatmentByDogLWCController.getDogInfo(willlow.Id);
+            TreatmentByDogLWCController.DogInfoWrapper dog = TreatmentByDogLWCController.getDogInfo(willow.Id, 'CRC Dog Database');
         test.stopTest();
 
         System.assertNotEquals(null, dog);
@@ -65,7 +69,7 @@ private class Test_TreatmentByDogLWCController {
         Animal__c fido = TestDataFactory.createAnimalWithName('fido');
 
         test.startTest();
-            TreatmentByDogLWCController.DogInfoWrapper[] dogs = TreatmentByDogLWCController.getDogInfo(new Id[]{willow.Id, fido.Id});
+            TreatmentByDogLWCController.DogInfoWrapper[] dogs = TreatmentByDogLWCController.getDogInfo(new Id[]{willow.Id, fido.Id},  'CRC Dog Database');
         test.stopTest();
 
         System.assertEquals(2, dogs.size());
@@ -77,7 +81,7 @@ private class Test_TreatmentByDogLWCController {
         Animal__c fido = TestDataFactory.createAnimalWithName('fido');
 
         test.startTest();
-            TreatmentByDogLWCController.DogInfoWrapper[] dogs = TreatmentByDogLWCController.getDogInfo(new Id[0]);
+            TreatmentByDogLWCController.DogInfoWrapper[] dogs = TreatmentByDogLWCController.getDogInfo(new Id[0], null);
         test.stopTest();
 
         System.assertEquals(0, dogs.size());
@@ -86,9 +90,20 @@ private class Test_TreatmentByDogLWCController {
     @isTest 
     static void getDogMedications_Success(){
         Animal__c willow = TestDataFactory.createAnimalWithName('willow');
-        TestDataFactory.createMedicationTask(willow.Id);
+        Task willowTask = TestDataFactory.createMedicationTask(willow.Id);
+        Medication_Drug__c md1 = new Medication_Drug__c(
+            Id = willowTask.Medication__c,
+            Behavior_Medication__c = true
+        );
+
         Animal__c fido = TestDataFactory.createAnimalWithName('fido');
-        TestDataFactory.createMedicationTask(fido.Id);
+        Task fidoTask = TestDataFactory.createMedicationTask(fido.Id);
+        Medication_Drug__c md2 = new Medication_Drug__c(
+            Id = fidoTask.Medication__c,
+            Behavior_Medication__c = true
+        );
+
+        update new Medication_Drug__c[]{md1, md2};
 
         test.startTest();
             Map<Id, Set<String>> dogMedicationMap = TreatmentByDogLWCController.getDogMedications(new Id[]{willow.Id, fido.Id});

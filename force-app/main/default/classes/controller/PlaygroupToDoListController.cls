@@ -2,7 +2,6 @@ public with sharing class PlaygroupToDoListController {
     @AuraEnabled(cacheable=true)
     public static List<Animal__c> getPlaygroupAnimals(String locationsFilter) {
         Animal__c[] animalList = new QueryAnimalsForList(locationsFilter).animalList;
-        
         return animalList;
     }
 
@@ -71,15 +70,6 @@ public with sharing class PlaygroupToDoListController {
             throw new AuraHandledException(e.getMessage());
         }
     }
-
-    // @AuraEnabled 
-    // public static String getUserLocation(){
-    //     try {
-    //         return [SELECT Location__c FROM User WHERE Id =: UserInfo.getUserId() LIMIT 1].Location__c;
-    //     } catch (Exception e) {
-    //         throw new AuraHandledException(e.getMessage());
-    //     }
-    // }
 
     private static void handleDeleteAnimalPlaygroups(Id sessionId, Id[] animalsToAdd){
         //first delete the playgroup contacts
@@ -268,7 +258,7 @@ public with sharing class PlaygroupToDoListController {
             } else {
                 query += 'AND Current_Location__c NOT IN :excludeLocations ';
             }
-            query += 'ORDER BY Id';
+            query += 'ORDER BY Animal_Name__c ASC';
 
             this.animalList = Database.query(query);            
         }
@@ -283,7 +273,7 @@ public with sharing class PlaygroupToDoListController {
             } else {
                 query += 'AND Current_Location__c NOT IN :excludeLocations ';
             }
-            query += 'ORDER BY Id';
+            query += 'ORDER BY Animal_Name__c ASC';
 
             this.animalList = Database.query(query);   
         }

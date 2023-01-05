@@ -124,6 +124,7 @@ export default class PlaygroupSessionContacts extends LightningElement {
         this.showAnimalList = false;
         this.customLookupClearSelection = !this.customLookupClearSelection;
         this.isDuplicateContact = false;
+        this.customLookupNewId = null;
     }
 
     handleToggleChange(event){

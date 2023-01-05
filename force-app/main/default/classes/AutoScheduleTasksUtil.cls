@@ -23,13 +23,10 @@ public class AutoScheduleTasksUtil {
 
     public static final String[] dogPopulations {
         get{
-            if(Test.isRunningTest()){
+            if(dogPopulations == null){
                 dogPopulations = new String[0];
                 dogPopulations.addAll(BehaviorUtil.ARC_CARE);
                 dogPopulations.addAll(BehaviorUtil.CRC_MRC);
-            }
-            else {
-                dogPopulations = BehaviorUtil.ARC_CARE;
             }
             return dogPopulations;
         }
@@ -124,7 +121,7 @@ public class AutoScheduleTasksUtil {
     public static Map<String, Contact> getGenericContacts(){
         Map<String, Contact> contactMap = new Map<String, Contact>();
         for(Contact con : [
-            SELECT Id, Name, User__c, User_Location__c
+            SELECT Id, Name, FirstName, User__c, User_Location__c
             FROM Contact
             WHERE Is_Generic_Contact__c = TRUE
             AND Active__c = true
@@ -135,8 +132,11 @@ public class AutoScheduleTasksUtil {
                 contactMap.put('CARE', con);    
             } 
             else if(con.User_Location__c == 'CRC/MRC'){
-                contactMap.put('CRC', con);
-                contactMap.put(BehaviorUtil.MRC, con);
+                if(con.FirstName.contains('MRC')){
+                    contactMap.put(BehaviorUtil.MRC, con);
+                } else {
+                    contactMap.put('CRC', con);
+                }                
             } else {
                 contactMap.put(con.User_Location__c, con);
             }

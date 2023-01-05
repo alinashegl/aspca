@@ -1,7 +1,7 @@
 public with sharing class BehaviorUtil {
     public final static String MRC = 'CRC-MRC';
     public final static String[] CRC_MRC = new String[]{'CRC', MRC};
-    public final static String[] ARC_CARE = new String[]{'ARC', 'CARE', 'ARC/CARE'};
+    public final static String[] ARC_CARE = new String[]{'ARC', 'CARE'};
     public static String[] locationGroup{
         get{
             if(locationGroup == null){

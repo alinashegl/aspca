@@ -39,7 +39,10 @@
                 </div>
                 <div class="slds-size_1-of-6 slds-align-bottom">
                     <template if:true={showSpinner}>
-                        <lightning-icon icon-name="utility:spinner" alternative-text="Loading" title="Loading" size="small" class="slds-var-p-around_small"></lightning-icon>
+                        <lightning-icon icon-name="utility:spinner" alternative-text="Loading" title="Loading" size="small" class="slds-var-p-around_small slds-var-p-top_xx-small"></lightning-icon>
+                    </template>
+                    <template if:false={showSpinner}>
+                        Select All <lightning-input type="checkbox-button" label="Select All" name="selectAll" onchange={handeSelectAllClick} data-name="selectAll" class="slds-var-p-left_small slds-var-p-top_xxx-small"></lightning-input>
                     </template>
                 </div>
             </div>
@@ -49,7 +52,7 @@
             <template for:each={dogList} for:item='dog'>
                 <div class="slds-grid slds-var-m-top_x-small" key={dog.id}>
                     <div class="slds-size_3-of-6">
-                        {dog.name}
+                        <a href={dog.link}>{dog.name}</a>
                     </div>
                     <div class="slds-size_2-of-6">
                         {dog.location}

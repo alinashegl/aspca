@@ -1,4 +1,4 @@
-import { LightningElement, track, wire} from 'lwc';
+import { LightningElement, track, wire, api} from 'lwc';
 import getDogInfo from '@salesforce/apex/TreatmentByDogLWCController.getDogInfo';
 import { NavigationMixin } from 'lightning/navigation';
 
@@ -8,18 +8,7 @@ import DOG_SELECTED_CHANNEL from '@salesforce/messageChannel/DogSelectedChannel_
 
 export default class TreatmentByDogReportMain extends NavigationMixin(LightningElement) {
     @track dogList = [];
-    recordId;
-
-    @wire(getDogInfo, {recordId: '$recordId'})
-    response(result){
-        if(result.data){
-            this.dogList.push(result.data);
-        } else if(result.error){
-            this.error = result.error;
-            window.console.log('error: ', result.error);
-            this.showSpinner = false;
-        }
-    }
+    appName;
 
     // By using the MessageContext @wire adapter, unsubscribe will be called
     // implicitly during the component descruction lifecycle.
@@ -41,6 +30,7 @@ export default class TreatmentByDogReportMain extends NavigationMixin(LightningE
         const dogId = message.recordId;
         window.console.log("dogId: ", dogId);
         window.console.log("isSelected: ", message.isSelected);
+        window.console.log('appName: ', message.appName);
         if(message.isSelected){
             this.dogList.push(dogId);
         }
@@ -50,50 +40,22 @@ export default class TreatmentByDogReportMain extends NavigationMixin(LightningE
                 this.dogList.splice(index, 1);
             }
         }
+
+        if(message.appName != undefined && message.appName != null){
+            this.appName = message.appName;
+        }
     }
 
     exportAsPdf() {
         this[NavigationMixin.GenerateUrl]({
             type: 'standard__webPage',
             attributes: {
-                url: '/apex/TreatmentsByDogPdf?dogList=' + this.dogList
+                url: '/apex/TreatmentsByDogPdf?dogList=' + this.dogList + '&appName=' + this.appName
             }
         }).then(generatedUrl => {
             window.open(generatedUrl);
         });
     }
-
-    // exportAsPdf() {
-    //     this[NavigationMixin.GenerateUrl]({
-    //         type: 'standard__webPage',
-    //         attributes: {
-    //             url: '/apex/TreatmentsByDogPdf'
-    //         },
-    //         state: {
-    //             c__dogList: this.dogList
-    //         }
-    //     }).then(generatedUrl => {
-    //         window.open(generatedUrl);
-    //     });
-    // }
-
-    // handleMessage(message) {
-    //     // this.recordId = message.recordId;
-    //     const dogId = message.recordId;
-    //     window.console.log("dogId: ", dogId);
-    //     window.console.log("isSelected: ", message.isSelected);
-    //     if(message.isSelected){
-    //         this.recordId = dogId;
-    //     }
-    //      else {
-    //         // const index = this.dogList.Id.indexOf(recordId);
-    //         const index = this.dogList.findIndex(dog => dog.Id === dogId);
-    //         window.console.log('index: ', index);
-    //         if (index > -1) {
-    //             this.dogList.splice(index, 1);
-    //         }
-    //     }
-    // }
 
     // Standard lifecycle hooks used to sub/unsub to message channel
     connectedCallback() {
