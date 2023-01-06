@@ -951,12 +951,10 @@
 
         if(isUpdated == true){
             cmp.set("v.workingSpinner", false);
-            cmp.set("v.isLocked", false);
         }
 
         else if(isStartSave == true){
             cmp.set("v.workingSpinner", true);
-            cmp.set("v.isLocked", true);
         }
     },
 });
