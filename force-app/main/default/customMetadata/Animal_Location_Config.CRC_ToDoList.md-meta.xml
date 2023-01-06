@@ -4,12 +4,13 @@
     <protected>false</protected>
     <values>
         <field>Animal_Locations__c</field>
-        <value xsi:type="xsd:string">[{"label":"CRC","value":"CRC,CRC-MRC"},
-{"label":"Field Temp Shelter","value":"Field Temp Shelter"}]</value>
+        <value xsi:type="xsd:string">[{&quot;label&quot;:&quot;CRC&quot;,&quot;value&quot;:&quot;CRC,CRC-MRC,CRC- MRC&quot;},
+{&quot;label&quot;:&quot;Field Temp Shelter&quot;,&quot;value&quot;:&quot;Field Temp Shelter&quot;},
+{&quot;label&quot;:&quot;Foster Home/Board and Train&quot;,&quot;value&quot;:&quot;Foster Home,Board and Train&quot;}]</value>
     </values>
     <values>
         <field>App_Name__c</field>
-        <value xsi:type="xsd:string">CRC Dog Database</value>
+        <value xsi:type="xsd:string">CRC Behavior Database</value>
     </values>
     <values>
         <field>Application_Type__c</field>
