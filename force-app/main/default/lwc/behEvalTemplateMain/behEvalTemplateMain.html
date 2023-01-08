@@ -1,0 +1,11 @@
+<template>
+    <template if:true={tabs}>
+        <template for:each={tabs} for:item="tab">
+            <c-beh-eval-tab-template
+                key={tab.Id}
+                tab={tab}
+            >
+            </c-beh-eval-tab-template>
+        </template>
+    </template>
+</template>
