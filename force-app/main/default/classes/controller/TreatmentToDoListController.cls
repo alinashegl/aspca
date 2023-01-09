@@ -47,7 +47,8 @@ public with sharing class TreatmentToDoListController {
             'AND Treatment_Priority__c != \'No Treatment\' ';
 
         public QueryTreatmentPlansForList(String locationsFilter){
-            String query = treatmentPlanSelect + treatmentQueryFrom;
+            // String query = treatmentPlanSelect + treatmentQueryFrom;
+            String query = treatmentPlanSelect + treatmentQueryChildProtocols + treatmentQueryFrom;
             AnimalLocationFilterUtil filterInfo = new AnimalLocationFilterUtil(locationsFilter);
 
             if(filterInfo.useFilter == true){
