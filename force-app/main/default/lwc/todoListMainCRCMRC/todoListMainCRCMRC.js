@@ -8,7 +8,7 @@ export default class TodoListMainCRCMRC extends LightningElement {
     isVisible = false; 
     error;
     errorMessage;
-    appName = 'CRC Dog Database';
+    appName = 'CRC Behavior Database';
     appURL = 'Treatments_By_Dog_CRC';
 
     connectedCallback(){
