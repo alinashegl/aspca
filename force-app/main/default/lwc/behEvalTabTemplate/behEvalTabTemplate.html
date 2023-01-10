@@ -1,3 +1,81 @@
 <template>
-    tab: {tab.Label__c}
+    <template if:true={tabId}>
+        <lightning-record-edit-form
+            object-api-name="Beh_Eval_Tab_Template__c"
+            record-id={tabId}
+        >
+            <lightning-layout multiple-rows="true">
+                <!-- Hidden fields -->
+                <lightning-layout-item size="12">
+                    <h2>
+                        Hidden fields
+                    </h2>
+                </lightning-layout-item>
+                <lightning-layout-item size="2">
+                    <lightning-input-field field-name={nameField}> </lightning-input-field>
+                </lightning-layout-item>
+                <lightning-layout-item size="2">
+                    <lightning-input-field field-name={displayOrderField}> </lightning-input-field>
+                </lightning-layout-item>
+                <lightning-layout-item size="2">
+                    <lightning-input-field field-name={displayNameField}> </lightning-input-field>
+                </lightning-layout-item>
+                <lightning-layout-item size="2">
+                    <lightning-input-field field-name={hasNestedTabsField}> </lightning-input-field>
+                </lightning-layout-item>
+                <lightning-layout-item size="2">
+                    <lightning-input-field field-name={allowPublicCommentsField}> </lightning-input-field>
+                </lightning-layout-item>
+                <lightning-layout-item size="2"></lightning-layout-item>
+
+                <!-- Label -->
+                <lightning-layout-item size="4" class="slds-m-top_small"></lightning-layout-item>
+                <lightning-layout-item size="4">
+                    <lightning-input-field field-name={labelField}> </lightning-input-field>
+                </lightning-layout-item>
+                <lightning-layout-item size="4"></lightning-layout-item>
+                
+                <!-- Description -->
+                <lightning-layout-item size="4"></lightning-layout-item>
+                <lightning-layout-item size="4" class="slds-grid_align-center">
+                    <lightning-input-field field-name={descriptionField}> </lightning-input-field>
+                </lightning-layout-item>
+                <lightning-layout-item size="4"></lightning-layout-item>
+
+                <!-- section and options -->
+                <template if:true={activitySections}>
+                    <lightning-layout-item size="12">
+                        <template for:each={activitySections} for:item="section">
+                            <div key={section.id} class="slds-box slds-m-around_small">
+                                <template for:each={section} for:item="activity">
+                                    <c-beh-eval-tab-activity
+                                        key={activity.Id}
+                                        activity-id={activity.Id}
+                                    >
+                                    </c-beh-eval-tab-activity>
+                                </template>
+                            </div>
+                        </template>
+                    </lightning-layout-item>
+                </template>
+
+                <!-- skipped fields -->
+                <lightning-layout-item size="12">
+                    <lightning-input-field field-name={skipReasonsField}> </lightning-input-field>
+                </lightning-layout-item>
+                <lightning-layout-item size="2">
+                    <lightning-input-field field-name={skipSubsequentField}> </lightning-input-field>
+                </lightning-layout-item>
+
+
+                <lightning-layout-item size="12">
+                    <div class="slds-var-m-top_medium">
+                        <lightning-button variant="brand" type="submit" label="Save">
+                        </lightning-button>
+                    </div>
+                </lightning-layout-item>
+                
+            </lightning-layout>
+        </lightning-record-edit-form>
+    </template>
 </template>

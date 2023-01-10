@@ -1,0 +1,27 @@
+<template>
+    <template if:true={activityId}>
+        <lightning-record-edit-form
+            object-api-name="Beh_Eval_Tab_Activitiy__c"
+            record-id={activityId}
+        >
+            <lightning-layout multiple-rows="true" class="slds-grid_vertical-align-center">
+                <lightning-layout-item size="2">
+                    <lightning-output-field field-name={labelField}> </lightning-output-field>
+                </lightning-layout-item>
+                <lightning-layout-item size="2">
+                    <lightning-input-field field-name={sectionField}> </lightning-input-field>
+                </lightning-layout-item>
+                <lightning-layout-item size="2">
+                    <lightning-input-field field-name={orderField}> </lightning-input-field>
+                </lightning-layout-item>
+                <!-- <lightning-layout-item size="2">
+                    <lightning-input-field field-name={requiredField}> </lightning-input-field>
+                </lightning-layout-item> -->
+                <lightning-layout-item size="2">
+                    <lightning-button variant="brand" type="submit" label="Save">
+                    </lightning-button>
+                </lightning-layout-item>
+            </lightning-layout>
+        </lightning-record-edit-form>
+    </template>
+</template>

@@ -1,5 +1,5 @@
 <template>
-    <template if:true={tabs}>
+    <!-- <template if:true={tabs}>
         <template for:each={tabs} for:item="tab">
             <c-beh-eval-tab-template
                 key={tab.Id}
@@ -7,5 +7,40 @@
             >
             </c-beh-eval-tab-template>
         </template>
+    </template> -->
+
+
+
+    <lightning-card>
+        <template if:true={selectedNavItem}>
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-5 slds-grid slds-grid_vertical navigation-container">
+                <lightning-vertical-navigation selected-item={selectedNavItem} onselect={handleNavigationSelect} shadded>
+                    <template for:each={tabs} for:item="tab">       
+                        <div key={tab.id} class="slds-grid">
+                            <div class="slds-col slds-size_5-of-6 container-bottom-border">
+                                <lightning-vertical-navigation-item 
+                                    label={tab.Label__c} 
+                                    name={tab.Id}
+                                    >    
+                                </lightning-vertical-navigation-item>
+                            </div>
+                            <div class="slds-col slds-size_1-of-6 slds-var-p-top_small container-bottom-border">
+                                ({tab.Display_Order__c})
+                            </div>
+                        </div>                        
+                    </template>
+                </lightning-vertical-navigation>
+            </div>
+            <div class="slds-col slds-size_4-of-5">
+                <template if:true={activeTab}>
+                    <c-beh-eval-tab-template
+                        tab-id={activeTab.Id}
+                    >
+                    </c-beh-eval-tab-template>
+                </template>
+            </div>
+        </div>
     </template>
+    </lightning-card>
 </template>
