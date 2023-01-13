@@ -113,7 +113,7 @@ public without sharing class LogHistory {
     }
     
     private static Map<String, Set<String>> objectFieldMap = new Map<String, Set<String>>{
-        'animal__c' => new Set<String> {'handling_instructions__c', 'shelter_color_coding__c', 'play_style_notes__c','designated_handler_reason__c','current_behavior_grade__c','grade_change_reason__c','behavior_summary__c'},  
+        'animal__c' => new Set<String> {'animal_age_units_changed_date__c', 'handling_instructions__c', 'shelter_color_coding__c', 'play_style_notes__c','designated_handler_reason__c','current_behavior_grade__c','grade_change_reason__c','behavior_summary__c'},  
         'behavior_evaluation__c' => new Set<String> {'overall_evaluation_grade__c','grade_change_reason__c'}
     };    
         

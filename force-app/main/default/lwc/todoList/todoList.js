@@ -11,7 +11,7 @@ export default class TodoList extends NavigationMixin(LightningElement) {
     
     connectedCallback(){
         //loadStyle(this, NoHeader);
-        if(this.toDisplay == undefined && this.appName == 'CRC Dog Database'){
+        if(this.toDisplay == undefined && this.appName == 'CRC Behavior Database'){
             window.console.log('inConnectedCallback');
             getButtonsInfo()
             .then((result) => {

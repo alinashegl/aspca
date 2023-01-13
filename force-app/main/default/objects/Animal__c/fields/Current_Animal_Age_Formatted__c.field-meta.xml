@@ -2,7 +2,62 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Current_Animal_Age_Formatted__c</fullName>
     <externalId>false</externalId>
-    <formula>if(NOT(ISBLANK(Estimated_Date_of_Birth__c)),(TEXT(FLOOR( (TODAY() - Estimated_Date_of_Birth__c)/365)) &amp;&apos; Years&apos; &amp; &apos; &apos; &amp; TEXT(FLOOR(MOD( (TODAY() - Estimated_Date_of_Birth__c),365)/30)) &amp;&apos; Months&apos;), IF(NOT(ISBLANK(Animal_Age__c)) &amp;&amp; NOT(ISBLANK(TEXT(Animal_Age_Units__c))), IF(TEXT(Animal_Age_Units__c) = &apos;Days&apos;, TEXT(FLOOR( (TODAY() - (DATEVALUE(CreatedDate) + Animal_Age__c))/365)) &amp;&apos; Years&apos; &amp; &apos; &apos; &amp; TEXT(FLOOR(MOD( (TODAY() - (DATEVALUE(CreatedDate) + Animal_Age__c)),365)/30)) &amp;&apos; Months&apos;,  IF(TEXT(Animal_Age_Units__c) = &apos;Weeks&apos;,TEXT(FLOOR( (TODAY() - (DATEVALUE(CreatedDate) + ( 7* Animal_Age__c)))/365)) &amp;&apos; Years&apos; &amp; &apos; &apos; &amp; TEXT(FLOOR(MOD( (TODAY() - (DATEVALUE(CreatedDate) + ( 7* Animal_Age__c))),365)/30)) &amp;&apos; Months&apos; , IF(TEXT(Animal_Age_Units__c) = &apos;Months&apos;, TEXT(FLOOR( (TODAY() - ADDMONTHS(DATEVALUE(CreatedDate), Animal_Age__c))/365)) &amp;&apos; Years&apos; &amp; &apos; &apos; &amp; TEXT(FLOOR(MOD( (TODAY() -ADDMONTHS(DATEVALUE(CreatedDate), Animal_Age__c)),365)/30)) &amp;&apos; Months&apos;,  IF(TEXT(Animal_Age_Units__c) = &apos;Years&apos;, TEXT(FLOOR( (TODAY() - (ADDMONTHS(DATEVALUE(CreatedDate), 12)))/365)) &amp;&apos; Years&apos; &amp; &apos; &apos; &amp; TEXT(FLOOR(MOD((TODAY() - ADDMONTHS(DATEVALUE(CreatedDate), 12)),365)/30)) &amp;&apos; Months&apos;,&quot;&quot;) )) ) ,&quot;&quot;))</formula>
+    <formula>IF( ISNULL( Today_Test__c ) ,
+IF(NOT(ISBLANK(Estimated_Date_of_Birth__c)),
+    TEXT(FLOOR(( (TODAY() - Estimated_Date_of_Birth__c) / 365)))
+    &amp;&apos; Years&apos; &amp; &apos; &apos; &amp;
+    TEXT(FLOOR( (MOD( (TODAY() - Estimated_Date_of_Birth__c),365)/30))) &amp;&apos; Months&apos;,
+    IF(NOT(ISBLANK(Animal_Age__c)) &amp;&amp; NOT(ISBLANK(TEXT(Animal_Age_Units__c))),
+        IF(TEXT(Animal_Age_Units__c) = &apos;Days&apos;,
+            TEXT(FLOOR(( (TODAY() - (Animal_Age_Units_Changed_Date__c - Animal_Age__c))/365)))
+            &amp;&apos; Years&apos; &amp; &apos; &apos;
+            &amp; TEXT(FLOOR((MOD( (TODAY() - (Animal_Age_Units_Changed_Date__c - Animal_Age__c)),365)/30))) &amp;&apos; Months&apos;,
+        IF(TEXT(Animal_Age_Units__c) = &apos;Weeks&apos;,
+            TEXT(FLOOR(( (TODAY() - (Animal_Age_Units_Changed_Date__c - ( 7* Animal_Age__c)))/365)))
+            &amp;&apos; Years&apos; &amp; &apos; &apos;
+            &amp; TEXT(FLOOR((MOD( (TODAY() - (Animal_Age_Units_Changed_Date__c - ( 7* Animal_Age__c))),365)/30))) &amp;&apos; Months&apos; ,
+        IF(TEXT(Animal_Age_Units__c) = &apos;Months&apos;,
+            IF(Animal_Age__c &lt; 12,
+                &apos;0 Years &apos; &amp; TEXT(FLOOR(Animal_Age__c)) &amp; &apos; Months&apos;,
+                TEXT(FLOOR( (TODAY()  - ADDMONTHS(Animal_Age_Units_Changed_Date__c, -1 * Animal_Age__c))/365))
+                &amp;&apos; Years&apos; &amp; &apos; &apos;
+                &amp; TEXT(FLOOR( MOD( (TODAY()  - (ADDMONTHS(Animal_Age_Units_Changed_Date__c, -1 * Animal_Age__c))),365)/30)) &amp;&apos; Months&apos;),
+        IF(TEXT(Animal_Age_Units__c) = &apos;Years&apos;,
+            TEXT(FLOOR(( (TODAY() - (ADDMONTHS(Animal_Age_Units_Changed_Date__c, -12 * Animal_Age__c)))/365)))
+            &amp;&apos; Years&apos; &amp; &apos; &apos;
+            &amp; TEXT(FLOOR( MOD( (TODAY()- (ADDMONTHS(Animal_Age_Units_Changed_Date__c, -12 * Animal_Age__c))),365) / 30)) &amp;&apos; Months&apos;,
+        &quot;&quot;)))) ,
+    &quot;&quot;)
+),
+
+IF(NOT(ISBLANK(Estimated_Date_of_Birth__c)),
+    TEXT(FLOOR(( (Today_Test__c  - Estimated_Date_of_Birth__c) / 365)))
+    &amp;&apos; Years&apos; &amp; &apos; &apos; &amp;
+    TEXT(FLOOR( (MOD( (Today_Test__c  - Estimated_Date_of_Birth__c),365)/30))) &amp;&apos; Months&apos;,
+    IF(NOT(ISBLANK(Animal_Age__c)) &amp;&amp; NOT(ISBLANK(TEXT(Animal_Age_Units__c))),
+        IF(TEXT(Animal_Age_Units__c) = &apos;Days&apos;,
+            TEXT(FLOOR(( (Today_Test__c  - (Animal_Age_Units_Changed_Date__c - Animal_Age__c))/365)))
+            &amp;&apos; Years&apos; &amp; &apos; &apos;
+            &amp; TEXT(FLOOR((MOD( (Today_Test__c  - (Animal_Age_Units_Changed_Date__c - Animal_Age__c)),365)/30))) &amp;&apos; Months&apos;,
+        IF(TEXT(Animal_Age_Units__c) = &apos;Weeks&apos;,
+            TEXT(FLOOR(( (Today_Test__c  - (Animal_Age_Units_Changed_Date__c - ( 7* Animal_Age__c)))/365)))
+            &amp;&apos; Years&apos; &amp; &apos; &apos;
+            &amp; TEXT(FLOOR((MOD( (Today_Test__c  - (Animal_Age_Units_Changed_Date__c - ( 7* Animal_Age__c))),365)/30))) &amp;&apos; Months&apos; ,
+        IF(TEXT(Animal_Age_Units__c) = &apos;Months&apos;,
+            IF(Animal_Age__c &lt; 12,
+                &apos;0 Years &apos; &amp; TEXT(FLOOR(Animal_Age__c)) &amp; &apos; Months&apos;,
+                TEXT(FLOOR( (Today_Test__c  - ADDMONTHS(Animal_Age_Units_Changed_Date__c, -1 * Animal_Age__c))/365))
+                &amp;&apos; Years&apos; &amp; &apos; &apos;
+                &amp; TEXT(FLOOR( MOD( (Today_Test__c  - (ADDMONTHS(Animal_Age_Units_Changed_Date__c, -1 * Animal_Age__c))),365)/30)) &amp;&apos; Months&apos;),
+        IF(TEXT(Animal_Age_Units__c) = &apos;Years&apos;,
+            TEXT(FLOOR(( (Today_Test__c  - (ADDMONTHS(Animal_Age_Units_Changed_Date__c, -12 * Animal_Age__c)))/365)))
+            &amp;&apos; Years&apos; &amp; &apos; &apos;
+            &amp; TEXT(FLOOR( MOD( (Today_Test__c  - (ADDMONTHS(Animal_Age_Units_Changed_Date__c, -12 * Animal_Age__c))),365) / 30)) &amp;&apos; Months&apos;,
+        &quot;&quot;)))) ,
+    &quot;&quot;)
+)
+
+)</formula>
     <label>Current Animal Age</label>
     <required>false</required>
     <trackHistory>false</trackHistory>
