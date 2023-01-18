@@ -34,9 +34,9 @@ public with sharing class CustomLookupLWCController {
     }
 
     @AuraEnabled (cacheable=true)
-    public static SObject[] getRecentlyViewedRecords(String objectAPI, String whereClause){
+    public static SObject[] getRecentlyViewedRecords(String objectAPI, String whereClause, String[] fields){
         try {
-            SObject[] objList = getRecordList(objectAPI, whereClause);
+            SObject[] objList = getRecordList(objectAPI, whereClause, fields);
 
             return objList;
         } catch (Exception e) {
@@ -45,15 +45,21 @@ public with sharing class CustomLookupLWCController {
     }
 
     //gets the list of recently viewed records for that objecta nd then queries the actual records based on the ids
-    private static SObject[] getRecordList(String objectAPI, String whereClause){
+    private static SObject[] getRecordList(String objectAPI, String whereClause, String[] fields){
         Set<Id> recordIds = getRecentlyViewedIds(objectAPI);
-        SObject[] recentlyViewed = queryRecords(objectAPI, recordIds, whereClause);
+        SObject[] recentlyViewed = queryRecords(objectAPI, recordIds, whereClause, fields);
 
         return recentlyViewed;
     }
 
-    private static SObject[] queryRecords(String objectAPI, Set<Id> recordIds, String whereClause){
-        String fields = fieldsToQuery(objectAPI);
+    private static SObject[] queryRecords(String objectAPI, Set<Id> recordIds, String whereClause, String[] fieldList){
+        String fields;
+        if(fieldList.isEmpty() || fieldList == null){
+            fields = fieldsToQuery(objectAPI);
+        } else {
+            fields = String.join(fieldList, ',');
+        }
+
         Id[] recIds = new Id[0];
         recIds.addAll(recordIds);
 
