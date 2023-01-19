@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
     <customButtons>Upload_Photo</customButtons>
+    <customButtons>Create_Animal_Cage_Card</customButtons>
+    <customButtons>Medical_Discharge</customButtons>
+    <customButtons>Vaccine_Certification</customButtons>
     <excludeButtons>ChangeOwnerOne</excludeButtons>
     <excludeButtons>ChangeRecordType</excludeButtons>
-    <excludeButtons>Delete</excludeButtons>
-    <excludeButtons>IsotopeSubscription</excludeButtons>
     <excludeButtons>Submit</excludeButtons>
     <layoutSections>
         <customLabel>false</customLabel>
         <detailHeading>false</detailHeading>
-        <editHeading>false</editHeading>
+        <editHeading>true</editHeading>
         <label>Information</label>
         <layoutColumns>
             <layoutItems>
@@ -17,104 +18,76 @@
                 <field>Name</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>Case_Type__c</field>
+                <behavior>Edit</behavior>
+                <field>AAH_ID__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>FM_ID__c</field>
+                <field>Animal_Name__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>FM_Age__c</field>
+                <field>Original_Animal_Name__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Required</behavior>
+                <field>Animal_Status__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>FM_Breed__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>FM_Animal_Status__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>FM_Deceased_Reason__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Placement_Recommendations__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Approved_for_bath__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Muzzle_needed_for_bath__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Special_instructions_for_bath__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Approved_for_Revolution__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Special_instructions_for_Revolution__c</field>
+                <field>Shelter_Location__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>
-                <field>User_Location__c</field>
+                <field>Current_Weight_in_lbs_Num__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>
-                <field>Location_Filter__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Storm_Distress_Anxiety__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Storm_Distress_Anxiety_Notes__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>FM_Legacy_Status__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>FM_Color__c</field>
+                <field>Current_Weight_in_kgs_Num__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>
-                <field>Evaluation_Dog_Dog_Testing_Date__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>Active_Animal__c</field>
+                <field>Current_Animal_Age_Formatted__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Foster_Duration__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>Foster_Count__c</field>
+                <field>Behavior_Placement_Status__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Days_in_Treatment__c</field>
+                <field>Current_Location__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>FM_Record_Status__c</field>
+                <field>Current_Location_Date__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Walking_Notes__c</field>
+                <field>Current_Recent_Shelter_Location__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Current_Recent_Shelter_Location_Date__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Initial_Outcome__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Initial_Outcome_Date__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Final_Outcome__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Final_Outcome_Date__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Foster_Name__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>
@@ -130,14 +103,6 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Behavior_Concern_Notes__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Walking_Equipment_Notes__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
                 <field>In_Kennel_Socialization__c</field>
             </layoutItems>
             <layoutItems>
@@ -147,10 +112,6 @@
             <layoutItems>
                 <behavior>Readonly</behavior>
                 <field>NYPD_Case__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>All_Problem_Behaviors__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>
@@ -184,19 +145,42 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Animal_Name__c</field>
+                <field>Microchip_Number__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Walking_Equipment__c</field>
+                <field>Microchip_Results__c</field>
+            </layoutItems>
+        </layoutColumns>
+        <style>TwoColumnsTopToBottom</style>
+    </layoutSections>
+    <layoutSections>
+        <customLabel>true</customLabel>
+        <detailHeading>true</detailHeading>
+        <editHeading>true</editHeading>
+        <label>Picture</label>
+        <layoutColumns>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Photo2__c</field>
+            </layoutItems>
+        </layoutColumns>
+        <layoutColumns/>
+        <style>TwoColumnsLeftToRight</style>
+    </layoutSections>
+    <layoutSections>
+        <customLabel>true</customLabel>
+        <detailHeading>true</detailHeading>
+        <editHeading>true</editHeading>
+        <label>Animal Signalment</label>
+        <layoutColumns>
+            <layoutItems>
+                <behavior>Required</behavior>
+                <field>Type_of_Animal__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Walking_Status__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Volunteer_Reading_Okay__c</field>
+                <field>Breed__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -204,58 +188,143 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>PPE_DOH__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Petpoint_ID__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Evaluation_Status__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Hold_Status_ARC_CARE__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Important_Notes_ARC_CARE__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Type_of_Animal__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
                 <field>Age__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Animal_Age__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Animal_Age_Units__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Animal_Age_Units_Changed_Date__c</field>
+                <field>Estimated_Date_of_Birth__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>
-                <field>Current_Animal_Age_Formatted__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>Current_Animal_Age_Estimate__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Today_Test__c</field>
+                <field>Intake_BCS__c</field>
             </layoutItems>
         </layoutColumns>
-        <style>TwoColumnsTopToBottom</style>
+        <layoutColumns>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Color__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Secondary_Color__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Tertiary_Color__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Markings__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Equine_Body_Pattern__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Equine_Leg_Marking__c</field>
+            </layoutItems>
+        </layoutColumns>
+        <style>TwoColumnsLeftToRight</style>
+    </layoutSections>
+    <layoutSections>
+        <customLabel>true</customLabel>
+        <detailHeading>true</detailHeading>
+        <editHeading>true</editHeading>
+        <label>Forensic Details</label>
+        <layoutColumns>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Forensic_Status__c</field>
+            </layoutItems>
+        </layoutColumns>
+        <layoutColumns>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Forensic_Hold_Release_Date__c</field>
+            </layoutItems>
+        </layoutColumns>
+        <style>TwoColumnsLeftToRight</style>
+    </layoutSections>
+    <layoutSections>
+        <customLabel>true</customLabel>
+        <detailHeading>true</detailHeading>
+        <editHeading>true</editHeading>
+        <label>Intake Details</label>
+        <layoutColumns>
+            <layoutItems>
+                <behavior>Required</behavior>
+                <field>Intake_Date_Time__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Seizure_Surrender_Date__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Shelter_Location2__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Scene_Location__c</field>
+            </layoutItems>
+        </layoutColumns>
+        <layoutColumns>
+            <layoutItems>
+                <behavior>Required</behavior>
+                <field>Intake_Type__c</field>
+            </layoutItems>
+        </layoutColumns>
+        <style>TwoColumnsLeftToRight</style>
+    </layoutSections>
+    <layoutSections>
+        <customLabel>true</customLabel>
+        <detailHeading>true</detailHeading>
+        <editHeading>true</editHeading>
+        <label>Behavior Details</label>
+        <layoutColumns>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Behavior_Case_Worker__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>BRC_Status__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Preliminary_Behavior_Grade__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Current_Behavior_Grade__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Evaluation_Date__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Evaluation_Re_Test__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Grade_Change__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Behavior_Concern_Notes__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Walking_Equipment_Notes__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>All_Problem_Behaviors__c</field>
+            </layoutItems>
+        </layoutColumns>
+        <style>OneColumn</style>
     </layoutSections>
     <layoutSections>
         <customLabel>false</customLabel>
@@ -294,49 +363,13 @@
             <sortOrder>0</sortOrder>
         </platformActionListItems>
         <platformActionListItems>
-            <actionName>Animal__c.Dog_Behavior_Profile</actionName>
-            <actionType>QuickAction</actionType>
+            <actionName>Upload_Photo_LEX</actionName>
+            <actionType>CustomButton</actionType>
             <sortOrder>1</sortOrder>
-        </platformActionListItems>
-        <platformActionListItems>
-            <actionName>Animal__c.Refresh_Dog_Schedule</actionName>
-            <actionType>QuickAction</actionType>
-            <sortOrder>2</sortOrder>
-        </platformActionListItems>
-        <platformActionListItems>
-            <actionName>Generate_Kennel_Card</actionName>
-            <actionType>CustomButton</actionType>
-            <sortOrder>3</sortOrder>
-        </platformActionListItems>
-        <platformActionListItems>
-            <actionName>Create_Animal_Cage_Card</actionName>
-            <actionType>CustomButton</actionType>
-            <sortOrder>4</sortOrder>
-        </platformActionListItems>
-        <platformActionListItems>
-            <actionName>Animal__c.Create_Daily_Enrichment</actionName>
-            <actionType>QuickAction</actionType>
-            <sortOrder>5</sortOrder>
-        </platformActionListItems>
-        <platformActionListItems>
-            <actionName>Animal_Discover</actionName>
-            <actionType>CustomButton</actionType>
-            <sortOrder>6</sortOrder>
-        </platformActionListItems>
-        <platformActionListItems>
-            <actionName>New_Incident_Report</actionName>
-            <actionType>CustomButton</actionType>
-            <sortOrder>7</sortOrder>
-        </platformActionListItems>
-        <platformActionListItems>
-            <actionName>Animal_Placement</actionName>
-            <actionType>CustomButton</actionType>
-            <sortOrder>8</sortOrder>
         </platformActionListItems>
     </platformActionList>
     <relatedLists>
         <excludeButtons>MassChangeOwner</excludeButtons>
-        <excludeButtons>New</excludeButtons>
         <fields>NAME</fields>
         <fields>Date__c</fields>
         <fields>Test_Name__c</fields>
@@ -348,23 +381,9 @@
         <sortOrder>Desc</sortOrder>
     </relatedLists>
     <relatedLists>
-        <excludeButtons>MassChangeOwner</excludeButtons>
-        <excludeButtons>New</excludeButtons>
-        <fields>Playgroup_Session__c</fields>
-        <fields>Other_Dogs__c</fields>
-        <fields>Play_Rating__c</fields>
-        <fields>Playgroup_Session_Notes__c</fields>
-        <fields>Playgroup_Individual_Notes__c</fields>
-        <fields>Common_Playgroup_Notes__c</fields>
-        <relatedList>Animal_Playgroup__c.Animal__c</relatedList>
-    </relatedLists>
-    <relatedLists>
-        <excludeButtons>MassChangeOwner</excludeButtons>
-        <excludeButtons>New</excludeButtons>
         <fields>NAME</fields>
         <fields>Notes__c</fields>
         <fields>Enrichment_Coordinator__c</fields>
-        <fields>Shelter_Color_Code__c</fields>
         <fields>DE_Date__c</fields>
         <relatedList>Daily_Enrichment__c.Animal__c</relatedList>
         <sortField>DE_Date__c</sortField>
@@ -372,25 +391,12 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
-        <fields>Exam_Type__c</fields>
-        <fields>Exam_Date_Time__c</fields>
+        <fields>Forensic_Exam_Type__c</fields>
+        <fields>Forensic_Exam_Date_Time__c</fields>
         <fields>Assessment__c</fields>
         <fields>Treatment_Instructions__c</fields>
         <fields>Doctor__c</fields>
         <relatedList>Animal_Exam_Sheet__c.Animal__c</relatedList>
-        <sortField>Exam_Date_Time__c</sortField>
-        <sortOrder>Desc</sortOrder>
-    </relatedLists>
-    <relatedLists>
-        <fields>NAME</fields>
-        <fields>Contact.CNTC_FIRST_NAME</fields>
-        <fields>Contact.NAME</fields>
-        <fields>StartDate__c</fields>
-        <fields>EndDate__c</fields>
-        <fields>CREATEDBY_USER</fields>
-        <relatedList>BehaviorCaseWorker__c.Animal__c</relatedList>
-        <sortField>StartDate__c</sortField>
-        <sortOrder>Desc</sortOrder>
     </relatedLists>
     <relatedLists>
         <excludeButtons>MassChangeOwner</excludeButtons>
@@ -416,14 +422,13 @@
         <sortOrder>Desc</sortOrder>
     </relatedLists>
     <relatedLists>
-        <customButtons>Task.New_Task</customButtons>
+        <excludeButtons>NewEvent</excludeButtons>
         <excludeButtons>NewTask</excludeButtons>
         <fields>TASK.SUBJECT</fields>
-        <fields>ACTIVITY.TASK</fields>
-        <fields>Medication__c</fields>
-        <fields>Medicine__c</fields>
         <fields>Dosage__c</fields>
+        <fields>Frequency_Of_Treatment__c</fields>
         <fields>TASK.DUE_DATE</fields>
+        <fields>Medication__c</fields>
         <fields>TASK.STATUS</fields>
         <fields>CORE.USERS.FULL_NAME</fields>
         <relatedList>RelatedActivityList</relatedList>
@@ -458,14 +463,22 @@
         <excludeButtons>MassChangeOwner</excludeButtons>
         <excludeButtons>New</excludeButtons>
         <fields>NAME</fields>
-        <fields>Animal_Exam_Sheet__c</fields>
         <fields>Date_Administered__c</fields>
-        <fields>Doctor__c</fields>
         <fields>Vaccine_Preventative__c</fields>
+        <fields>Doctor__c</fields>
+        <fields>Animal_Exam_Sheet__c</fields>
         <fields>Route__c</fields>
         <fields>Notes__c</fields>
         <relatedList>Vaccine_and_Preventative__c.Animal__c</relatedList>
         <sortField>Date_Administered__c</sortField>
+        <sortOrder>Desc</sortOrder>
+    </relatedLists>
+    <relatedLists>
+        <fields>NAME</fields>
+        <fields>Contact_Date__c</fields>
+        <fields>Foster_Notes__c</fields>
+        <relatedList>Foster_Note__c.Animal__c</relatedList>
+        <sortField>Contact_Date__c</sortField>
         <sortOrder>Desc</sortOrder>
     </relatedLists>
     <relatedLists>
@@ -478,8 +491,6 @@
         <relatedList>Quarantine__c.Animal__c</relatedList>
     </relatedLists>
     <relatedLists>
-        <customButtons>New_Evidence_Animal</customButtons>
-        <excludeButtons>New</excludeButtons>
         <fields>NAME</fields>
         <fields>Case__c</fields>
         <fields>Evidence_Category__c</fields>
@@ -491,9 +502,9 @@
         <fields>NAME</fields>
         <fields>Medical_Condition__c</fields>
         <fields>Date_Diagnosed__c</fields>
-        <fields>Being_Treated__c</fields>
-        <fields>Details__c</fields>
         <fields>Date_Resolved__c</fields>
+        <fields>Details__c</fields>
+        <fields>Being_Treated__c</fields>
         <relatedList>Medical_Conditions__c.Animal__c</relatedList>
     </relatedLists>
     <relatedLists>
@@ -522,6 +533,8 @@
         <sortOrder>Desc</sortOrder>
     </relatedLists>
     <relatedLists>
+        <excludeButtons>MassChangeOwner</excludeButtons>
+        <excludeButtons>New</excludeButtons>
         <fields>NAME</fields>
         <fields>Likes__c</fields>
         <fields>Triggers__c</fields>
@@ -530,12 +543,12 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
-        <fields>Date__c</fields>
+        <fields>Procedure_Date__c</fields>
         <fields>Procedure__c</fields>
         <fields>Status__c</fields>
         <fields>Notes__c</fields>
         <fields>Approved_by_Legal__c</fields>
-        <fields>Procedure_Date__c</fields>
+        <fields>Date__c</fields>
         <fields>Forensics_Due_Date__c</fields>
         <fields>Editor__c</fields>
         <relatedList>Procedure__c.Animal__c</relatedList>
@@ -559,15 +572,67 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
-        <fields>Observation_Type__c</fields>
-        <fields>Observation_Notes__c</fields>
-        <fields>Observation_Date__c</fields>
-        <fields>Observation_Reported_By__c</fields>
-        <relatedList>Observation__c.Animal__c</relatedList>
+        <fields>Legal_Status__c</fields>
+        <fields>Status_Date__c</fields>
+        <relatedList>Legal_Status__c.Animal__c</relatedList>
+        <sortField>Status_Date__c</sortField>
+        <sortOrder>Desc</sortOrder>
+    </relatedLists>
+    <relatedLists>
+        <excludeButtons>MassChangeOwner</excludeButtons>
+        <fields>NAME</fields>
+        <fields>Facility_or_Outcome__c</fields>
+        <fields>Facility_Outcome__c</fields>
+        <fields>Start_Date__c</fields>
+        <fields>End_Date__c</fields>
+        <fields>Location_Duration__c</fields>
+        <relatedList>Facility_Outcome__c.Animal__c</relatedList>
+        <sortField>Start_Date__c</sortField>
+        <sortOrder>Desc</sortOrder>
+    </relatedLists>
+    <relatedLists>
+        <fields>NAME</fields>
+        <relatedList>Additional_Dog_Present__c.Additional_Dog__c</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <excludeButtons>MassChangeOwner</excludeButtons>
+        <excludeButtons>New</excludeButtons>
+        <fields>Playgroup_Session__c</fields>
+        <fields>Other_Dogs__c</fields>
+        <fields>Play_Rating__c</fields>
+        <fields>Playgroup_Session_Notes__c</fields>
+        <fields>Playgroup_Individual_Notes__c</fields>
+        <fields>Common_Playgroup_Notes__c</fields>
+        <relatedList>Animal_Playgroup__c.Animal__c</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <fields>NAME</fields>
+        <relatedList>Behavior_Assessment__c.Animal__c</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <excludeButtons>MassChangeOwner</excludeButtons>
+        <fields>NAME</fields>
+        <fields>Contact.CNTC_FIRST_NAME</fields>
+        <fields>Contact.NAME</fields>
+        <fields>StartDate__c</fields>
+        <fields>EndDate__c</fields>
+        <fields>CREATEDBY_USER</fields>
+        <relatedList>BehaviorCaseWorker__c.Animal__c</relatedList>
+        <sortField>StartDate__c</sortField>
+        <sortOrder>Desc</sortOrder>
+    </relatedLists>
+    <relatedLists>
+        <fields>NAME</fields>
+        <fields>Evaluation_Subtype__c</fields>
+        <fields>Evaluation_Date__c</fields>
+        <fields>Overall_Evaluation_Grade__c</fields>
+        <fields>Behavior_Evaluation_Summary__c</fields>
+        <relatedList>Behavior_Evaluation__c.Animal__c</relatedList>
         <sortField>NAME</sortField>
         <sortOrder>Desc</sortOrder>
     </relatedLists>
     <relatedLists>
+        <excludeButtons>MassChangeOwner</excludeButtons>
         <fields>NAME</fields>
         <fields>Capture_Date__c</fields>
         <fields>Initials__c</fields>
@@ -578,23 +643,55 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
-        <fields>Contact_Date__c</fields>
-        <fields>Initials__c</fields>
-        <fields>Foster_Notes__c</fields>
-        <relatedList>Foster_Note__c.Animal__c</relatedList>
-        <sortField>Contact_Date__c</sortField>
+        <relatedList>EntityHistory__c.Animal__c</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <excludeButtons>MassChangeOwner</excludeButtons>
+        <excludeButtons>New</excludeButtons>
+        <fields>NAME</fields>
+        <fields>Report_Date__c</fields>
+        <fields>Incident_Date_Time__c</fields>
+        <fields>Incident_Description__c</fields>
+        <fields>Person_Involved__c</fields>
+        <fields>Damage_Done_by_the_Dog__c</fields>
+        <fields>Other_Damage_Done_by_the_Dog__c</fields>
+        <fields>Additional_Comments__c</fields>
+        <relatedList>Incidents__c.Animal__c</relatedList>
+        <sortField>NAME</sortField>
         <sortOrder>Desc</sortOrder>
     </relatedLists>
     <relatedLists>
+        <excludeButtons>MassChangeOwner</excludeButtons>
         <fields>NAME</fields>
-        <fields>Facility_or_Outcome__c</fields>
-        <fields>Facility_Outcome__c</fields>
+        <fields>Observation_Type__c</fields>
+        <fields>Observation_Notes__c</fields>
+        <fields>Observation_Date__c</fields>
+        <fields>Observation_Reported_By__c</fields>
+        <relatedList>Observation__c.Animal__c</relatedList>
+        <sortField>NAME</sortField>
+        <sortOrder>Desc</sortOrder>
+    </relatedLists>
+    <relatedLists>
+        <excludeButtons>MassChangeOwner</excludeButtons>
+        <fields>NAME</fields>
+        <fields>Type__c</fields>
+        <fields>Play_Pause_Reason__c</fields>
         <fields>Start_Date__c</fields>
         <fields>End_Date__c</fields>
-        <fields>Location_Duration__c</fields>
-        <relatedList>Facility_Outcome__c.Animal__c</relatedList>
-        <sortField>Start_Date__c</sortField>
+        <fields>End_Play_Pause__c</fields>
+        <relatedList>Play_Pause__c.Animal__c</relatedList>
+        <sortField>NAME</sortField>
         <sortOrder>Desc</sortOrder>
+    </relatedLists>
+    <relatedLists>
+        <excludeButtons>MassChangeOwner</excludeButtons>
+        <fields>NAME</fields>
+        <fields>ASPCA_Animal_Name__c</fields>
+        <fields>Case__c</fields>
+        <fields>Case_Type__c</fields>
+        <fields>Post_Placement_F_U_survey__c</fields>
+        <fields>Study_Animal_Box_URL__c</fields>
+        <relatedList>Research_Animal__c.Animal__c</relatedList>
     </relatedLists>
     <relatedLists>
         <excludeButtons>MassChangeOwner</excludeButtons>
@@ -624,64 +721,13 @@
         <sortField>NAME</sortField>
         <sortOrder>Desc</sortOrder>
     </relatedLists>
-    <relatedLists>
-        <excludeButtons>MassChangeOwner</excludeButtons>
-        <fields>NAME</fields>
-        <fields>Evaluation_Subtype__c</fields>
-        <fields>Evaluation_Date__c</fields>
-        <fields>Overall_Evaluation_Grade__c</fields>
-        <fields>Behavior_Evaluation_Summary__c</fields>
-        <relatedList>Behavior_Evaluation__c.Animal__c</relatedList>
-        <sortField>NAME</sortField>
-        <sortOrder>Desc</sortOrder>
-    </relatedLists>
-    <relatedLists>
-        <excludeButtons>MassChangeOwner</excludeButtons>
-        <excludeButtons>New</excludeButtons>
-        <fields>NAME</fields>
-        <relatedList>Additional_Dog_Present__c.Additional_Dog__c</relatedList>
-    </relatedLists>
-    <relatedLists>
-        <fields>NAME</fields>
-        <fields>Type__c</fields>
-        <fields>Play_Pause_Reason__c</fields>
-        <fields>Start_Date__c</fields>
-        <fields>End_Date__c</fields>
-        <fields>End_Play_Pause__c</fields>
-        <relatedList>Play_Pause__c.Animal__c</relatedList>
-    </relatedLists>
-    <relatedLists>
-        <excludeButtons>MassChangeOwner</excludeButtons>
-        <excludeButtons>New</excludeButtons>
-        <fields>NAME</fields>
-        <fields>Report_Date__c</fields>
-        <fields>Incident_Date_Time__c</fields>
-        <fields>Incident_Description__c</fields>
-        <fields>Person_Involved__c</fields>
-        <fields>Damage_Done_by_the_Dog__c</fields>
-        <fields>Other_Damage_Done_by_the_Dog__c</fields>
-        <fields>Additional_Comments__c</fields>
-        <relatedList>Incidents__c.Animal__c</relatedList>
-        <sortField>NAME</sortField>
-        <sortOrder>Desc</sortOrder>
-    </relatedLists>
-    <relatedLists>
-        <excludeButtons>MassChangeOwner</excludeButtons>
-        <fields>NAME</fields>
-        <fields>ASPCA_Animal_Name__c</fields>
-        <fields>Case__c</fields>
-        <fields>Case_Type__c</fields>
-        <fields>Post_Placement_F_U_survey__c</fields>
-        <fields>Study_Animal_Box_URL__c</fields>
-        <relatedList>Research_Animal__c.Animal__c</relatedList>
-    </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>
     <showInteractionLogPanel>false</showInteractionLogPanel>
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h6u000000Eome</masterLabel>
+        <masterLabel>00h6e00000ZchZj</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>

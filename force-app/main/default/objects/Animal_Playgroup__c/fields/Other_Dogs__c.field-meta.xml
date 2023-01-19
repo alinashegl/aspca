@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Handler_Initials__c</fullName>
+    <fullName>Other_Dogs__c</fullName>
     <externalId>false</externalId>
-    <label>Handler Name</label>
-    <length>55</length>
-    <required>true</required>
+    <label>Other Dogs</label>
+    <required>false</required>
     <trackTrending>false</trackTrending>
-    <type>Text</type>
-    <unique>false</unique>
+    <type>TextArea</type>
 </CustomField>

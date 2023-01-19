@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Days_in_Treatment__c</fullName>
+    <fullName>Num_of_Enrichments__c</fullName>
+    <description>Count of enrichments provided to animals during the current week,</description>
     <externalId>false</externalId>
-    <label># of Treatment Sessions</label>
+    <label># of Enrichments</label>
     <precision>18</precision>
     <required>false</required>
     <scale>0</scale>

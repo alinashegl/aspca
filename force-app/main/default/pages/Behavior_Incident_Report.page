@@ -58,6 +58,13 @@
                     <td width="50%">{!inc.Person_Involved__c}</td>
                     <td width="50%">{!inc.Witnesses__c}</td>
                 </tr>
+                <tr>
+                    <td width="50%"><strong>Position/Title</strong></td>
+                    <td></td>
+                </tr>
+                <tr class="one">
+                    <td width="50%">{!inc.Position_Title__c}</td>
+                </tr>
                 <tr><td></td></tr>
                 <tr><td></td></tr>
             </table>
