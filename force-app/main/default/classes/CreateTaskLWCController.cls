@@ -44,7 +44,7 @@ public with sharing class CreateTaskLWCController {
     public static string insertTask(Task task){
         try {
             System.debug('task: ' + task);
-            Animal__c dog = [SELECT Id, Current_Recent_Shelter_Location__c FROM Animal__c WHERE Id = :task.Animal__c LIMIT 1];
+            Animal__c dog = [SELECT Id, Current_Recent_Shelter_Location__c, Animal_Name_Id__c FROM Animal__c WHERE Id = :task.Animal__c LIMIT 1];
             Contact genericCon;
             if(dog.Current_Recent_Shelter_Location__c != null){
                 genericCon = AutoScheduleTasksUtil.genericContactMap.get(dog.Current_Recent_Shelter_Location__c);
@@ -53,6 +53,11 @@ public with sharing class CreateTaskLWCController {
             task.WhatId = task.Animal__c;
             task.OwnerId = genericCon != null && genericCon.User__c != null ? genericCon.User__c : UserInfo.getUserId();
             task.Species__c = 'Dog';
+
+            if(task.RecordTypeId == (Util.getRecordTypeId('Task', 'General_Task'))){
+                Contact con = [SELECT Id, Name FROM Contact WHERE Id = :task.WhoId LIMIT 1];
+                task.Assigned_Resources__c = dog.Animal_Name_Id__c + ';' + con.Name;
+            }
             insert task;
             return URL.getSalesforceBaseUrl().toExternalForm() + '/' + task.Id;
         } catch (Exception e) {

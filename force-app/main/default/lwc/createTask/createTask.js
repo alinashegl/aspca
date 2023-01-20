@@ -43,10 +43,8 @@ export default class CreateTask extends NavigationMixin(LightningElement) {
 
     @wire(getRecordInfo, {recordId : '$recordId'})
     response(result){
-        window.console.log("getRecordInfo");
         if(result.data){
             this.info = result.data;
-            window.console.log("this.info: ", JSON.stringify(this.info));
             if(this.info.animal){
                 this.customLookupValueDogId = this.info.animal.Id;
             }
