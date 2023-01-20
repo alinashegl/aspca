@@ -369,6 +369,13 @@
         </platformActionListItems>
     </platformActionList>
     <relatedLists>
+        <fields>NAME</fields>
+        <fields>Appointment_Details__c</fields>
+        <fields>Appointment_Location__c</fields>
+        <fields>Appointment_Date_Time__c</fields>
+        <relatedList>Foster_Appointment__c.Animal__c</relatedList>
+    </relatedLists>
+    <relatedLists>
         <excludeButtons>MassChangeOwner</excludeButtons>
         <fields>NAME</fields>
         <fields>Date__c</fields>
