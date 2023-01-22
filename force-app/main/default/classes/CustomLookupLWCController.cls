@@ -40,6 +40,8 @@ public with sharing class CustomLookupLWCController {
 
             return objList;
         } catch (Exception e) {
+            System.debug('error: ' + e.getMessage());
+            System.debug('stackTrace: ' + e.getStackTraceString());
             throw new AuraHandledException(e.getMessage());
         }
     }
@@ -54,7 +56,7 @@ public with sharing class CustomLookupLWCController {
 
     private static SObject[] queryRecords(String objectAPI, Set<Id> recordIds, String whereClause, String[] fieldList){
         String fields;
-        if(fieldList.isEmpty() || fieldList == null){
+        if(fieldList == null || fieldList.isEmpty()){
             fields = fieldsToQuery(objectAPI);
         } else {
             fields = String.join(fieldList, ',');
