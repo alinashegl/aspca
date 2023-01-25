@@ -141,6 +141,22 @@
                 <behavior>Edit</behavior>
                 <field>Color_Handling_Code_Reason__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Primary_Breed__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Secondary_Breed__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Breeds_Combined__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Current_Behavior_Status_Change_Date__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -384,6 +400,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>All_Problem_Behaviors__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Current_Behavior_Status_Notes__c</field>
             </layoutItems>
         </layoutColumns>
         <style>OneColumn</style>
@@ -652,6 +672,10 @@
     </platformActionList>
     <relatedLists>
         <fields>NAME</fields>
+        <relatedList>Medical_Note__c.Animal__c</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <fields>NAME</fields>
         <fields>Contact.CNTC_FIRST_NAME</fields>
         <fields>Contact.NAME</fields>
         <fields>StartDate__c</fields>
@@ -739,6 +763,10 @@
         <fields>Playgroup_Individual_Notes__c</fields>
         <fields>Common_Playgroup_Notes__c</fields>
         <relatedList>Animal_Playgroup__c.Animal__c</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <fields>NAME</fields>
+        <relatedList>Foster_Appointment__c.Animal__c</relatedList>
     </relatedLists>
     <relatedLists>
         <excludeButtons>MassChangeOwner</excludeButtons>

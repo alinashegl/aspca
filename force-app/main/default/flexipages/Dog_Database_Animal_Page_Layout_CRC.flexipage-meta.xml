@@ -1073,6 +1073,36 @@
                 <identifier>RecordMeets_Adoptability_Date_cField</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Behavior_Placement_Status__c</fieldItem>
+                <identifier>RecordBehavior_Placement_Status_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Current_Behavior_Status_Notes__c</fieldItem>
+                <identifier>RecordCurrent_Behavior_Status_Notes_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Current_Behavior_Status_Change_Date__c</fieldItem>
+                <identifier>RecordCurrent_Behavior_Status_Change_Date_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-0e4ad15a-202e-41de-ab60-adf4bbb665ca</name>
         <type>Facet</type>
     </flexiPageRegions>

@@ -137,6 +137,22 @@
                 <behavior>Edit</behavior>
                 <field>Color_Handling_Code_Reason__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Primary_Breed__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Secondary_Breed__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Breeds_Combined__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Current_Behavior_Status_Change_Date__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -322,6 +338,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>All_Problem_Behaviors__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Current_Behavior_Status_Notes__c</field>
             </layoutItems>
         </layoutColumns>
         <style>OneColumn</style>
