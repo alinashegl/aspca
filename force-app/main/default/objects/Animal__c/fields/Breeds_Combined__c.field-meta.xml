@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Breed__c</fullName>
+    <fullName>Breeds_Combined__c</fullName>
     <externalId>false</externalId>
-    <formula>Animal__r.Breeds_Combined__c</formula>
-    <label>Breed</label>
+    <formula>IF(ISBLANK(TEXT(Primary_Breed__c)),  Breed__c, (TEXT(Primary_Breed__c) &amp; &quot; / &quot; &amp;  TEXT(Secondary_Breed__c)))</formula>
+    <label>Breeds</label>
     <required>false</required>
     <trackHistory>false</trackHistory>
-    <trackTrending>false</trackTrending>
     <type>Text</type>
     <unique>false</unique>
 </CustomField>

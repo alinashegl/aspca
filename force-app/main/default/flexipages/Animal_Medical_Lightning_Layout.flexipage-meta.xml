@@ -651,6 +651,26 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
+                <fieldItem>Record.Current_Behavior_Status_Notes__c</fieldItem>
+                <identifier>RecordCurrent_Behavior_Status_Notes_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Current_Behavior_Status_Change_Date__c</fieldItem>
+                <identifier>RecordCurrent_Behavior_Status_Change_Date_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Behavior_Case_Worker__c</fieldItem>
                 <identifier>RecordBehavior_Case_Worker__cField</identifier>
             </fieldInstance>
@@ -1365,7 +1385,7 @@
                     <name>actionNames</name>
                     <valueList>
                         <valueListItems>
-                            <value>Animal__c.New_Task_Flow</value>
+                            <value>CustomButton.Animal__c.New_Task_Hack</value>
                         </valueListItems>
                     </valueList>
                 </componentInstanceProperties>
@@ -1599,6 +1619,32 @@
                 </componentInstanceProperties>
                 <componentName>force:relatedListSingleContainer</componentName>
                 <identifier>force_relatedListSingleContainer8</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>parentFieldApiName</name>
+                    <value>Animal__c.Id</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>relatedListApiName</name>
+                    <value>Play_Pauses__r</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>relatedListComponentOverride</name>
+                    <value>NONE</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>rowsToDisplay</name>
+                    <value>10</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>showActionBar</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentName>force:relatedListSingleContainer</componentName>
+                <identifier>force_relatedListSingleContainer21</identifier>
             </componentInstance>
         </itemInstances>
         <name>Facet-623d0866-c934-4913-a78f-e3b97858861f</name>
