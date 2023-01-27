@@ -7,6 +7,14 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
+                <componentInstanceProperties>
+                    <name>allowedLocationsString</name>
+                    <value>ARC,CARE</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>appName</name>
+                    <value>ARC/CARE Dog Database</value>
+                </componentInstanceProperties>
                 <componentName>treatmentByDogSelection</componentName>
                 <identifier>c_treatmentByDogSelection1</identifier>
             </componentInstance>

@@ -2,7 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Behavior_Placement_Status__c</fullName>
     <externalId>false</externalId>
-    <label>Behavior Placement Status</label>
+    <label>Current Behavior Status</label>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
     <trackHistory>false</trackHistory>
@@ -12,34 +12,59 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Ready for Placement</fullName>
-                <default>false</default>
-                <label>Ready for Placement</label>
-            </value>
-            <value>
                 <fullName>Behavior Hold</fullName>
                 <default>false</default>
                 <label>Behavior Hold</label>
             </value>
             <value>
-                <fullName>Rehab Candidate</fullName>
+                <fullName>Needs Evaluation</fullName>
                 <default>false</default>
-                <label>Rehab Candidate</label>
+                <label>Needs Evaluation</label>
             </value>
             <value>
-                <fullName>Placement Partner OK - Foster-based Rescue</fullName>
+                <fullName>Behavior Reassessment</fullName>
                 <default>false</default>
-                <label>Placement Partner OK - Foster-based Rescue</label>
+                <label>Behavior Reassessment</label>
+            </value>
+            <value>
+                <fullName>Cleared – Placement Summary Complete</fullName>
+                <default>false</default>
+                <label>Cleared – Placement Summary Complete</label>
+            </value>
+            <value>
+                <fullName>Cleared – Placement Summary Needed</fullName>
+                <default>false</default>
+                <label>Cleared – Placement Summary Needed</label>
             </value>
             <value>
                 <fullName>Placement Partner OK - Foster</fullName>
                 <default>false</default>
+                <isActive>false</isActive>
                 <label>Placement Partner OK - Foster</label>
+            </value>
+            <value>
+                <fullName>Placement Partner OK - Foster-based Rescue</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Placement Partner OK - Foster-based Rescue</label>
             </value>
             <value>
                 <fullName>Placement Partner OK - Shelter with Behavior Dept.</fullName>
                 <default>false</default>
+                <isActive>false</isActive>
                 <label>Placement Partner OK - Shelter with Behavior Dept.</label>
+            </value>
+            <value>
+                <fullName>Ready for Placement</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Ready for Placement</label>
+            </value>
+            <value>
+                <fullName>Rehab Candidate</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Rehab Candidate</label>
             </value>
         </valueSetDefinition>
     </valueSet>

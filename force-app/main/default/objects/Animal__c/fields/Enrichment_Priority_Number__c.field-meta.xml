@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Enrichment_Priority_Number__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(Enrichment_Priority__c=&apos;Daily – 7 days&apos;, 7, IF(Enrichment_Priority__c=&apos;High – 5 days&apos;, 5, IF(Enrichment_Priority__c=&apos;Low – 3 days&apos;, 3, 0)))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Enrichment Priority Number</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

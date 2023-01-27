@@ -4,6 +4,7 @@ import getDogInfo from '@salesforce/apex/TreatmentByDogLWCController.getDogInfo'
 
 export default class TreatmentByDogDisplayDog extends NavigationMixin(LightningElement) {
     @api dogId;
+    @api appName;
     dog;
     showSpinner = true;
     url;
@@ -24,7 +25,7 @@ export default class TreatmentByDogDisplayDog extends NavigationMixin(LightningE
             .then(url => this.url = url);
     }
 
-    @wire(getDogInfo, {recordId: '$dogId'})
+    @wire(getDogInfo, {dogId: '$dogId', appName: '$appName'})
     response(result){
         if(result.data){
             this.dog = result.data;
@@ -92,5 +93,9 @@ export default class TreatmentByDogDisplayDog extends NavigationMixin(LightningE
 
     get showCurrentProtocols(){
         return this.showActiveNotRemoved || this.showHistorical;
+    }
+
+    get isCRC(){
+        return this.appName == 'CRC Dog Database';
     }
 }

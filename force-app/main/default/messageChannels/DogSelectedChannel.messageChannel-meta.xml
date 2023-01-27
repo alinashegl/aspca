@@ -10,5 +10,9 @@
         <description>Is true if selected/ false if removed</description>
         <fieldName>isSelected</fieldName>
     </lightningMessageFields>
+    <lightningMessageFields>
+        <description>Name of app</description>
+        <fieldName>appName</fieldName>
+    </lightningMessageFields>
     <masterLabel>DogSelectedMessage</masterLabel>
 </LightningMessageChannel>

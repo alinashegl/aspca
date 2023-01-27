@@ -52,12 +52,12 @@ private class Test_TreatmentByDogLWCController {
 
         update protocols;
 
-        Animal__c willlow = [SELECT Id FROM Animal__c LIMIT 1];
+        Animal__c willow = [SELECT Id FROM Animal__c LIMIT 1];
 
-        TestDataFactory.createMedicationTask(willlow.Id);
+        TestDataFactory.createBehaviorMedicationTask(willow.Id);
 
         test.startTest();
-            TreatmentByDogLWCController.DogInfoWrapper dog = TreatmentByDogLWCController.getDogInfo(willlow.Id);
+            TreatmentByDogLWCController.DogInfoWrapper dog = TreatmentByDogLWCController.getDogInfo(willow.Id, 'CRC Dog Database');
         test.stopTest();
 
         System.assertNotEquals(null, dog);
@@ -69,7 +69,7 @@ private class Test_TreatmentByDogLWCController {
         Animal__c fido = TestDataFactory.createAnimalWithName('fido');
 
         test.startTest();
-            TreatmentByDogLWCController.DogInfoWrapper[] dogs = TreatmentByDogLWCController.getDogInfo(new Id[]{willow.Id, fido.Id});
+            TreatmentByDogLWCController.DogInfoWrapper[] dogs = TreatmentByDogLWCController.getDogInfo(new Id[]{willow.Id, fido.Id},  'CRC Dog Database');
         test.stopTest();
 
         System.assertEquals(2, dogs.size());
@@ -81,7 +81,7 @@ private class Test_TreatmentByDogLWCController {
         Animal__c fido = TestDataFactory.createAnimalWithName('fido');
 
         test.startTest();
-            TreatmentByDogLWCController.DogInfoWrapper[] dogs = TreatmentByDogLWCController.getDogInfo(new Id[0]);
+            TreatmentByDogLWCController.DogInfoWrapper[] dogs = TreatmentByDogLWCController.getDogInfo(new Id[0], null);
         test.stopTest();
 
         System.assertEquals(0, dogs.size());

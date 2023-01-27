@@ -7,6 +7,7 @@ import SystemModstamp from '@salesforce/schema/ANH__AutoNumberConfigurationSetti
 
 export default class LocationFilter extends LightningElement {
     @api applicationType
+    @api appName
     @track animalLocations = [];
     hasLocations = true;
 
@@ -21,7 +22,7 @@ export default class LocationFilter extends LightningElement {
 
     connectedCallback(){
         window.console.log("locationFilter connectedCallback()");
-        getAnimalLocations({applicationType : this.applicationType})
+        getAnimalLocations({applicationType : this.applicationType, currentApp : this.appName})
         .then((result) => {
             if(result){
                 this.animalLocationsWireResponse = result;

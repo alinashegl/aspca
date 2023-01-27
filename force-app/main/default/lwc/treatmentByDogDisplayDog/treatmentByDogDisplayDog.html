@@ -50,7 +50,7 @@
                     </div>
                     {dog.txPriority}
                 </div>
-                <template if:false={dog.hideMedications}>
+                <template if:true={isCRC}>
                     <div class="slds-size_2-of-12 slds-var-m-left_x-small">
                         <div>
                             <b>Behavior Medications:</b>

@@ -49,7 +49,6 @@
             <controllingFieldValue>Goat</controllingFieldValue>
             <controllingFieldValue>Reptile</controllingFieldValue>
             <controllingFieldValue>Rabbit</controllingFieldValue>
-            <controllingFieldValue>Cat</controllingFieldValue>
             <controllingFieldValue>Dog</controllingFieldValue>
             <controllingFieldValue>Equine</controllingFieldValue>
             <controllingFieldValue>Exotic</controllingFieldValue>
@@ -65,7 +64,6 @@
             <controllingFieldValue>Cow</controllingFieldValue>
             <controllingFieldValue>Reptile</controllingFieldValue>
             <controllingFieldValue>Rabbit</controllingFieldValue>
-            <controllingFieldValue>Cat</controllingFieldValue>
             <controllingFieldValue>Dog</controllingFieldValue>
             <controllingFieldValue>Exotic</controllingFieldValue>
             <controllingFieldValue>Fowl</controllingFieldValue>
@@ -81,9 +79,6 @@
             <controllingFieldValue>Cow</controllingFieldValue>
             <controllingFieldValue>Reptile</controllingFieldValue>
             <controllingFieldValue>Rabbit</controllingFieldValue>
-            <controllingFieldValue>Cat</controllingFieldValue>
-            <controllingFieldValue>Dog</controllingFieldValue>
-            <controllingFieldValue>Equine</controllingFieldValue>
             <controllingFieldValue>Exotic</controllingFieldValue>
             <controllingFieldValue>Fowl</controllingFieldValue>
             <controllingFieldValue>Other</controllingFieldValue>
@@ -100,6 +95,7 @@
             <controllingFieldValue>Rabbit</controllingFieldValue>
             <controllingFieldValue>Cat</controllingFieldValue>
             <controllingFieldValue>Dog</controllingFieldValue>
+            <controllingFieldValue>Equine</controllingFieldValue>
             <controllingFieldValue>Exotic</controllingFieldValue>
             <controllingFieldValue>Fowl</controllingFieldValue>
             <controllingFieldValue>Other</controllingFieldValue>
@@ -112,6 +108,7 @@
         <valueSettings>
             <controllingFieldValue>Cow</controllingFieldValue>
             <controllingFieldValue>Reptile</controllingFieldValue>
+            <controllingFieldValue>Cat</controllingFieldValue>
             <controllingFieldValue>Dog</controllingFieldValue>
             <controllingFieldValue>Exotic</controllingFieldValue>
             <controllingFieldValue>Fowl</controllingFieldValue>
@@ -140,7 +137,7 @@
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Reptile</controllingFieldValue>
-            <controllingFieldValue>Cat</controllingFieldValue>
+            <controllingFieldValue>Dog</controllingFieldValue>
             <controllingFieldValue>Exotic</controllingFieldValue>
             <controllingFieldValue>Fowl</controllingFieldValue>
             <controllingFieldValue>Other</controllingFieldValue>
@@ -160,6 +157,7 @@
         <valueSettings>
             <controllingFieldValue>Rabbit</controllingFieldValue>
             <controllingFieldValue>Cat</controllingFieldValue>
+            <controllingFieldValue>Dog</controllingFieldValue>
             <controllingFieldValue>Exotic</controllingFieldValue>
             <controllingFieldValue>Fowl</controllingFieldValue>
             <controllingFieldValue>Other</controllingFieldValue>
@@ -167,7 +165,6 @@
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Cat</controllingFieldValue>
-            <controllingFieldValue>Dog</controllingFieldValue>
             <controllingFieldValue>Exotic</controllingFieldValue>
             <controllingFieldValue>Fowl</controllingFieldValue>
             <controllingFieldValue>Other</controllingFieldValue>
@@ -175,31 +172,20 @@
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Cat</controllingFieldValue>
-            <valueName>Calico</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Cat</controllingFieldValue>
-            <valueName>Hairless</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Cat</controllingFieldValue>
-            <valueName>Seal</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Cat</controllingFieldValue>
-            <valueName>Tabby</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Cat</controllingFieldValue>
-            <valueName>Tortoise shell</valueName>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Cream</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Dog</controllingFieldValue>
-            <valueName>Beige</valueName>
+            <valueName>Agouti</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Dog</controllingFieldValue>
-            <valueName>Brindle</valueName>
+            <valueName>Apricot</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Blue Dilute</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Dog</controllingFieldValue>
@@ -209,7 +195,7 @@
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Dog</controllingFieldValue>
-            <valueName>Charcoal</valueName>
+            <valueName>Champagne</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Dog</controllingFieldValue>
@@ -217,15 +203,43 @@
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Dog</controllingFieldValue>
-            <valueName>Cream</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Dog</controllingFieldValue>
             <valueName>Fawn</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Dog</controllingFieldValue>
-            <valueName>Golden</valueName>
+            <valueName>Gold</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Lemon</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Liver</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Mahogany</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Pepper and Salt</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Rust</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Sable</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Seal</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Wheaten</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Equine</controllingFieldValue>
@@ -237,6 +251,10 @@
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Equine</controllingFieldValue>
+            <valueName>Blanket</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Equine</controllingFieldValue>
             <valueName>Blue roan</valueName>
         </valueSettings>
         <valueSettings>
@@ -245,7 +263,11 @@
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Equine</controllingFieldValue>
-            <valueName>Chestnut/Sorrel</valueName>
+            <valueName>Cremello</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Equine</controllingFieldValue>
+            <valueName>Dark Bay</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Equine</controllingFieldValue>
@@ -253,7 +275,7 @@
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Equine</controllingFieldValue>
-            <valueName>Grulla</valueName>
+            <valueName>Leopard</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Equine</controllingFieldValue>
@@ -265,15 +287,11 @@
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Equine</controllingFieldValue>
+            <valueName>Pinto</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Equine</controllingFieldValue>
             <valueName>Red roan</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Equine</controllingFieldValue>
-            <valueName>Roan</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Equine</controllingFieldValue>
-            <valueName>Sorrel</valueName>
         </valueSettings>
     </valueSet>
 </CustomField>
