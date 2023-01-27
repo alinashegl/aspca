@@ -6,7 +6,7 @@ import LOCATION_FILTER_CHANNEL from '@salesforce/messageChannel/LocationFilterCh
 export default class TodoListMainARCCARE extends LightningElement {    locations;
     error;
     errorMessage;
-    appName = 'ARC/CARE Dog Database';
+    appName = 'ARC/CARE Behavior Database';
     appURL = 'Treatments_By_Dog_ARC_CARE';
 
     connectedCallback(){

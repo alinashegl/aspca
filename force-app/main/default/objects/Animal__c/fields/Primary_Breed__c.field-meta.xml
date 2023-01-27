@@ -1,0 +1,1511 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Primary_Breed__c</fullName>
+    <externalId>false</externalId>
+    <label>Primary Breed</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Type_of_Animal__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Afghan Hound</fullName>
+                <default>false</default>
+                <label>Afghan Hound</label>
+            </value>
+            <value>
+                <fullName>Airedale Terrier</fullName>
+                <default>false</default>
+                <label>Airedale Terrier</label>
+            </value>
+            <value>
+                <fullName>Akita</fullName>
+                <default>false</default>
+                <label>Akita</label>
+            </value>
+            <value>
+                <fullName>American Pit Bull Terrier</fullName>
+                <default>false</default>
+                <label>American Pit Bull Terrier</label>
+            </value>
+            <value>
+                <fullName>American Staffordshire Terrier</fullName>
+                <default>false</default>
+                <label>American Staffordshire Terrier</label>
+            </value>
+            <value>
+                <fullName>Anatolian Shepherd</fullName>
+                <default>false</default>
+                <label>Anatolian Shepherd</label>
+            </value>
+            <value>
+                <fullName>Argentine Dogo</fullName>
+                <default>false</default>
+                <label>Argentine Dogo</label>
+            </value>
+            <value>
+                <fullName>Australian Cattle Dog / Heeler</fullName>
+                <default>false</default>
+                <label>Australian Cattle Dog / Heeler</label>
+            </value>
+            <value>
+                <fullName>Australian Kelpie</fullName>
+                <default>false</default>
+                <label>Australian Kelpie</label>
+            </value>
+            <value>
+                <fullName>Australian Koolie</fullName>
+                <default>false</default>
+                <label>Australian Koolie</label>
+            </value>
+            <value>
+                <fullName>Australian Shepherd</fullName>
+                <default>false</default>
+                <label>Australian Shepherd</label>
+            </value>
+            <value>
+                <fullName>Australian Shepherd, Miniature</fullName>
+                <default>false</default>
+                <label>Australian Shepherd, Miniature</label>
+            </value>
+            <value>
+                <fullName>Basenji</fullName>
+                <default>false</default>
+                <label>Basenji</label>
+            </value>
+            <value>
+                <fullName>Basset Hound</fullName>
+                <default>false</default>
+                <label>Basset Hound</label>
+            </value>
+            <value>
+                <fullName>Beagle</fullName>
+                <default>false</default>
+                <label>Beagle</label>
+            </value>
+            <value>
+                <fullName>Bearded Collie</fullName>
+                <default>false</default>
+                <label>Bearded Collie</label>
+            </value>
+            <value>
+                <fullName>Belgian Laekenois</fullName>
+                <default>false</default>
+                <label>Belgian Laekenois</label>
+            </value>
+            <value>
+                <fullName>Belgian Malinois</fullName>
+                <default>false</default>
+                <label>Belgian Malinois</label>
+            </value>
+            <value>
+                <fullName>Belgian Sheepdog</fullName>
+                <default>false</default>
+                <label>Belgian Sheepdog</label>
+            </value>
+            <value>
+                <fullName>Belgian Tervuren</fullName>
+                <default>false</default>
+                <label>Belgian Tervuren</label>
+            </value>
+            <value>
+                <fullName>Bernese Mountain Dog</fullName>
+                <default>false</default>
+                <label>Bernese Mountain Dog</label>
+            </value>
+            <value>
+                <fullName>Bichon Frise</fullName>
+                <default>false</default>
+                <label>Bichon Frise</label>
+            </value>
+            <value>
+                <fullName>Black-Mouth Cur</fullName>
+                <default>false</default>
+                <label>Black-Mouth Cur</label>
+            </value>
+            <value>
+                <fullName>Bloodhound</fullName>
+                <default>false</default>
+                <label>Bloodhound</label>
+            </value>
+            <value>
+                <fullName>Boerboel</fullName>
+                <default>false</default>
+                <label>Boerboel</label>
+            </value>
+            <value>
+                <fullName>Border Collie</fullName>
+                <default>false</default>
+                <label>Border Collie</label>
+            </value>
+            <value>
+                <fullName>Border Terrier</fullName>
+                <default>false</default>
+                <label>Border Terrier</label>
+            </value>
+            <value>
+                <fullName>Borzoi</fullName>
+                <default>false</default>
+                <label>Borzoi</label>
+            </value>
+            <value>
+                <fullName>Boston Terrier</fullName>
+                <default>false</default>
+                <label>Boston Terrier</label>
+            </value>
+            <value>
+                <fullName>Bouvier des Flandres</fullName>
+                <default>false</default>
+                <label>Bouvier des Flandres</label>
+            </value>
+            <value>
+                <fullName>Boxer</fullName>
+                <default>false</default>
+                <label>Boxer</label>
+            </value>
+            <value>
+                <fullName>Brittany</fullName>
+                <default>false</default>
+                <label>Brittany</label>
+            </value>
+            <value>
+                <fullName>Brussels Griffon</fullName>
+                <default>false</default>
+                <label>Brussels Griffon</label>
+            </value>
+            <value>
+                <fullName>Bull Terrier</fullName>
+                <default>false</default>
+                <label>Bull Terrier</label>
+            </value>
+            <value>
+                <fullName>Bulldog, Alapaha Blue Blood</fullName>
+                <default>false</default>
+                <label>Bulldog, Alapaha Blue Blood</label>
+            </value>
+            <value>
+                <fullName>Bulldog, American</fullName>
+                <default>false</default>
+                <label>Bulldog, American</label>
+            </value>
+            <value>
+                <fullName>Bulldog, English</fullName>
+                <default>false</default>
+                <label>Bulldog, English</label>
+            </value>
+            <value>
+                <fullName>Bulldog, French</fullName>
+                <default>false</default>
+                <label>Bulldog, French</label>
+            </value>
+            <value>
+                <fullName>Bullmastiff</fullName>
+                <default>false</default>
+                <label>Bullmastiff</label>
+            </value>
+            <value>
+                <fullName>Cairn Terrier</fullName>
+                <default>false</default>
+                <label>Cairn Terrier</label>
+            </value>
+            <value>
+                <fullName>Cane Corso</fullName>
+                <default>false</default>
+                <label>Cane Corso</label>
+            </value>
+            <value>
+                <fullName>Carolina Dog</fullName>
+                <default>false</default>
+                <label>Carolina Dog</label>
+            </value>
+            <value>
+                <fullName>Catahoula Leopard dog</fullName>
+                <default>false</default>
+                <label>Catahoula Leopard dog</label>
+            </value>
+            <value>
+                <fullName>Caucasian Mountain Dog</fullName>
+                <default>false</default>
+                <label>Caucasian Mountain Dog</label>
+            </value>
+            <value>
+                <fullName>Cavalier King Charles Spaniel</fullName>
+                <default>false</default>
+                <label>Cavalier King Charles Spaniel</label>
+            </value>
+            <value>
+                <fullName>Chesapeake Bay Retriever</fullName>
+                <default>false</default>
+                <label>Chesapeake Bay Retriever</label>
+            </value>
+            <value>
+                <fullName>Chihuahua</fullName>
+                <default>false</default>
+                <label>Chihuahua</label>
+            </value>
+            <value>
+                <fullName>Chinese Crested</fullName>
+                <default>false</default>
+                <label>Chinese Crested</label>
+            </value>
+            <value>
+                <fullName>Chinook</fullName>
+                <default>false</default>
+                <label>Chinook</label>
+            </value>
+            <value>
+                <fullName>Chow Chow</fullName>
+                <default>false</default>
+                <label>Chow Chow</label>
+            </value>
+            <value>
+                <fullName>Cocker Spaniel, American</fullName>
+                <default>false</default>
+                <label>Cocker Spaniel, American</label>
+            </value>
+            <value>
+                <fullName>Cocker Spaniel, English</fullName>
+                <default>false</default>
+                <label>Cocker Spaniel, English</label>
+            </value>
+            <value>
+                <fullName>Collie, Rough or Smooth</fullName>
+                <default>false</default>
+                <label>Collie, Rough or Smooth</label>
+            </value>
+            <value>
+                <fullName>Coonhound</fullName>
+                <default>false</default>
+                <label>Coonhound</label>
+            </value>
+            <value>
+                <fullName>Corgi, Cardigan Welsh</fullName>
+                <default>false</default>
+                <label>Corgi, Cardigan Welsh</label>
+            </value>
+            <value>
+                <fullName>Corgi, Pembroke Welsh</fullName>
+                <default>false</default>
+                <label>Corgi, Pembroke Welsh</label>
+            </value>
+            <value>
+                <fullName>Coton de Tulear</fullName>
+                <default>false</default>
+                <label>Coton de Tulear</label>
+            </value>
+            <value>
+                <fullName>Dachshund, Miniature</fullName>
+                <default>false</default>
+                <label>Dachshund, Miniature</label>
+            </value>
+            <value>
+                <fullName>Dachshund, Standard</fullName>
+                <default>false</default>
+                <label>Dachshund, Standard</label>
+            </value>
+            <value>
+                <fullName>Dalmatian</fullName>
+                <default>false</default>
+                <label>Dalmatian</label>
+            </value>
+            <value>
+                <fullName>Doberman Pinscher</fullName>
+                <default>false</default>
+                <label>Doberman Pinscher</label>
+            </value>
+            <value>
+                <fullName>Dogue de Bordeaux</fullName>
+                <default>false</default>
+                <label>Dogue de Bordeaux</label>
+            </value>
+            <value>
+                <fullName>Dutch Shepherd</fullName>
+                <default>false</default>
+                <label>Dutch Shepherd</label>
+            </value>
+            <value>
+                <fullName>English Mastiff</fullName>
+                <default>false</default>
+                <label>English Mastiff</label>
+            </value>
+            <value>
+                <fullName>English Setter</fullName>
+                <default>false</default>
+                <label>English Setter</label>
+            </value>
+            <value>
+                <fullName>Eskimo, American</fullName>
+                <default>false</default>
+                <label>Eskimo, American</label>
+            </value>
+            <value>
+                <fullName>Feist</fullName>
+                <default>false</default>
+                <label>Feist</label>
+            </value>
+            <value>
+                <fullName>Fila Brasileiro</fullName>
+                <default>false</default>
+                <label>Fila Brasileiro</label>
+            </value>
+            <value>
+                <fullName>Flat-Coated Retriever</fullName>
+                <default>false</default>
+                <label>Flat-Coated Retriever</label>
+            </value>
+            <value>
+                <fullName>Fox Terrier, Smooth</fullName>
+                <default>false</default>
+                <label>Fox Terrier, Smooth</label>
+            </value>
+            <value>
+                <fullName>German Shepherd</fullName>
+                <default>false</default>
+                <label>German Shepherd</label>
+            </value>
+            <value>
+                <fullName>German Shorthaired or Wirehaired Pointer</fullName>
+                <default>false</default>
+                <label>German Shorthaired or Wirehaired Pointer</label>
+            </value>
+            <value>
+                <fullName>Golden Retriever</fullName>
+                <default>false</default>
+                <label>Golden Retriever</label>
+            </value>
+            <value>
+                <fullName>Gordon Setter</fullName>
+                <default>false</default>
+                <label>Gordon Setter</label>
+            </value>
+            <value>
+                <fullName>Great Dane</fullName>
+                <default>false</default>
+                <label>Great Dane</label>
+            </value>
+            <value>
+                <fullName>Great Pyrenees</fullName>
+                <default>false</default>
+                <label>Great Pyrenees</label>
+            </value>
+            <value>
+                <fullName>Greater Swiss Mountain Dog</fullName>
+                <default>false</default>
+                <label>Greater Swiss Mountain Dog</label>
+            </value>
+            <value>
+                <fullName>Greyhound</fullName>
+                <default>false</default>
+                <label>Greyhound</label>
+            </value>
+            <value>
+                <fullName>Groenendael</fullName>
+                <default>false</default>
+                <label>Groenendael</label>
+            </value>
+            <value>
+                <fullName>Havanese</fullName>
+                <default>false</default>
+                <label>Havanese</label>
+            </value>
+            <value>
+                <fullName>Hound Type</fullName>
+                <default>false</default>
+                <label>Hound Type</label>
+            </value>
+            <value>
+                <fullName>Hound, Blue or Red Tick</fullName>
+                <default>false</default>
+                <label>Hound, Blue or Red Tick</label>
+            </value>
+            <value>
+                <fullName>Hovawart</fullName>
+                <default>false</default>
+                <label>Hovawart</label>
+            </value>
+            <value>
+                <fullName>Husky, Alaskan or Siberian</fullName>
+                <default>false</default>
+                <label>Husky, Alaskan or Siberian</label>
+            </value>
+            <value>
+                <fullName>Irish Setter</fullName>
+                <default>false</default>
+                <label>Irish Setter</label>
+            </value>
+            <value>
+                <fullName>Irish Wolfhound</fullName>
+                <default>false</default>
+                <label>Irish Wolfhound</label>
+            </value>
+            <value>
+                <fullName>Italian Greyhound</fullName>
+                <default>false</default>
+                <label>Italian Greyhound</label>
+            </value>
+            <value>
+                <fullName>Jack Russell Terrier</fullName>
+                <default>false</default>
+                <label>Jack Russell Terrier</label>
+            </value>
+            <value>
+                <fullName>Japanese Chin</fullName>
+                <default>false</default>
+                <label>Japanese Chin</label>
+            </value>
+            <value>
+                <fullName>Keeshond</fullName>
+                <default>false</default>
+                <label>Keeshond</label>
+            </value>
+            <value>
+                <fullName>Korean Jindo</fullName>
+                <default>false</default>
+                <label>Korean Jindo</label>
+            </value>
+            <value>
+                <fullName>Labradoodle</fullName>
+                <default>false</default>
+                <label>Labradoodle</label>
+            </value>
+            <value>
+                <fullName>Labrador Retriever</fullName>
+                <default>false</default>
+                <label>Labrador Retriever</label>
+            </value>
+            <value>
+                <fullName>Leonberger</fullName>
+                <default>false</default>
+                <label>Leonberger</label>
+            </value>
+            <value>
+                <fullName>Lhasa Apso</fullName>
+                <default>false</default>
+                <label>Lhasa Apso</label>
+            </value>
+            <value>
+                <fullName>Malamute</fullName>
+                <default>false</default>
+                <label>Malamute</label>
+            </value>
+            <value>
+                <fullName>Maltese</fullName>
+                <default>false</default>
+                <label>Maltese</label>
+            </value>
+            <value>
+                <fullName>Mastiff</fullName>
+                <default>false</default>
+                <label>Mastiff</label>
+            </value>
+            <value>
+                <fullName>Mexican Hairless- Xoloitzcuintli</fullName>
+                <default>false</default>
+                <label>Mexican Hairless- Xoloitzcuintli</label>
+            </value>
+            <value>
+                <fullName>Miniature Pinscher</fullName>
+                <default>false</default>
+                <label>Miniature Pinscher</label>
+            </value>
+            <value>
+                <fullName>Mixed Breed, Large &gt; 45 lbs</fullName>
+                <default>false</default>
+                <label>Mixed Breed, Large &gt; 45 lbs</label>
+            </value>
+            <value>
+                <fullName>Mixed Breed, Medium 25 - 45 lbs</fullName>
+                <default>false</default>
+                <label>Mixed Breed, Medium 25 - 45 lbs</label>
+            </value>
+            <value>
+                <fullName>Mixed Breed, Small &lt; 25 lbs</fullName>
+                <default>false</default>
+                <label>Mixed Breed, Small &lt; 25 lbs</label>
+            </value>
+            <value>
+                <fullName>Mudi</fullName>
+                <default>false</default>
+                <label>Mudi</label>
+            </value>
+            <value>
+                <fullName>Neapolitan Mastiff</fullName>
+                <default>false</default>
+                <label>Neapolitan Mastiff</label>
+            </value>
+            <value>
+                <fullName>Newfoundland</fullName>
+                <default>false</default>
+                <label>Newfoundland</label>
+            </value>
+            <value>
+                <fullName>Norfolk Terrier</fullName>
+                <default>false</default>
+                <label>Norfolk Terrier</label>
+            </value>
+            <value>
+                <fullName>Norwegian Elkhound</fullName>
+                <default>false</default>
+                <label>Norwegian Elkhound</label>
+            </value>
+            <value>
+                <fullName>Norwich Terrier</fullName>
+                <default>false</default>
+                <label>Norwich Terrier</label>
+            </value>
+            <value>
+                <fullName>Nova Scotia Duck Tolling Retriever</fullName>
+                <default>false</default>
+                <label>Nova Scotia Duck Tolling Retriever</label>
+            </value>
+            <value>
+                <fullName>Old English Sheepdog</fullName>
+                <default>false</default>
+                <label>Old English Sheepdog</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>Papillon</fullName>
+                <default>false</default>
+                <label>Papillon</label>
+            </value>
+            <value>
+                <fullName>Parson Russell Terrier</fullName>
+                <default>false</default>
+                <label>Parson Russell Terrier</label>
+            </value>
+            <value>
+                <fullName>Patterdale Terrier</fullName>
+                <default>false</default>
+                <label>Patterdale Terrier</label>
+            </value>
+            <value>
+                <fullName>Pekingese</fullName>
+                <default>false</default>
+                <label>Pekingese</label>
+            </value>
+            <value>
+                <fullName>Perro de Presa Canario</fullName>
+                <default>false</default>
+                <label>Perro de Presa Canario</label>
+            </value>
+            <value>
+                <fullName>Pit Bull Terrier Type</fullName>
+                <default>false</default>
+                <label>Pit Bull Terrier Type</label>
+            </value>
+            <value>
+                <fullName>Plott Hound</fullName>
+                <default>false</default>
+                <label>Plott Hound</label>
+            </value>
+            <value>
+                <fullName>Pomeranian</fullName>
+                <default>false</default>
+                <label>Pomeranian</label>
+            </value>
+            <value>
+                <fullName>Poodle, Miniature</fullName>
+                <default>false</default>
+                <label>Poodle, Miniature</label>
+            </value>
+            <value>
+                <fullName>Poodle, Standard</fullName>
+                <default>false</default>
+                <label>Poodle, Standard</label>
+            </value>
+            <value>
+                <fullName>Poodle, Toy</fullName>
+                <default>false</default>
+                <label>Poodle, Toy</label>
+            </value>
+            <value>
+                <fullName>Poodle Type</fullName>
+                <default>false</default>
+                <label>Poodle Type</label>
+            </value>
+            <value>
+                <fullName>Portuguese Water Dog</fullName>
+                <default>false</default>
+                <label>Portuguese Water Dog</label>
+            </value>
+            <value>
+                <fullName>Pug</fullName>
+                <default>false</default>
+                <label>Pug</label>
+            </value>
+            <value>
+                <fullName>Puggle</fullName>
+                <default>false</default>
+                <label>Puggle</label>
+            </value>
+            <value>
+                <fullName>Puli</fullName>
+                <default>false</default>
+                <label>Puli</label>
+            </value>
+            <value>
+                <fullName>Pumi</fullName>
+                <default>false</default>
+                <label>Pumi</label>
+            </value>
+            <value>
+                <fullName>Rat Terrier</fullName>
+                <default>false</default>
+                <label>Rat Terrier</label>
+            </value>
+            <value>
+                <fullName>Retriever Type</fullName>
+                <default>false</default>
+                <label>Retriever Type</label>
+            </value>
+            <value>
+                <fullName>Rhodesian Ridgeback</fullName>
+                <default>false</default>
+                <label>Rhodesian Ridgeback</label>
+            </value>
+            <value>
+                <fullName>Rottweiler</fullName>
+                <default>false</default>
+                <label>Rottweiler</label>
+            </value>
+            <value>
+                <fullName>Royal Bahamian Potcake</fullName>
+                <default>false</default>
+                <label>Royal Bahamian Potcake</label>
+            </value>
+            <value>
+                <fullName>Saint Bernard</fullName>
+                <default>false</default>
+                <label>Saint Bernard</label>
+            </value>
+            <value>
+                <fullName>Saluki</fullName>
+                <default>false</default>
+                <label>Saluki</label>
+            </value>
+            <value>
+                <fullName>Samoyed</fullName>
+                <default>false</default>
+                <label>Samoyed</label>
+            </value>
+            <value>
+                <fullName>Schipperke</fullName>
+                <default>false</default>
+                <label>Schipperke</label>
+            </value>
+            <value>
+                <fullName>Schnauzer, Giant</fullName>
+                <default>false</default>
+                <label>Schnauzer, Giant</label>
+            </value>
+            <value>
+                <fullName>Schnauzer, Miniature</fullName>
+                <default>false</default>
+                <label>Schnauzer, Miniature</label>
+            </value>
+            <value>
+                <fullName>Schnauzer, Standard</fullName>
+                <default>false</default>
+                <label>Schnauzer, Standard</label>
+            </value>
+            <value>
+                <fullName>Scottish Terrier</fullName>
+                <default>false</default>
+                <label>Scottish Terrier</label>
+            </value>
+            <value>
+                <fullName>Shar-Pei, Chinese</fullName>
+                <default>false</default>
+                <label>Shar-Pei, Chinese</label>
+            </value>
+            <value>
+                <fullName>Shepherd Type</fullName>
+                <default>false</default>
+                <label>Shepherd Type</label>
+            </value>
+            <value>
+                <fullName>Shetland Sheepdog</fullName>
+                <default>false</default>
+                <label>Shetland Sheepdog</label>
+            </value>
+            <value>
+                <fullName>Shiba Inu</fullName>
+                <default>false</default>
+                <label>Shiba Inu</label>
+            </value>
+            <value>
+                <fullName>Shih Tzu</fullName>
+                <default>false</default>
+                <label>Shih Tzu</label>
+            </value>
+            <value>
+                <fullName>Silken Windhound</fullName>
+                <default>false</default>
+                <label>Silken Windhound</label>
+            </value>
+            <value>
+                <fullName>Silky Terrier</fullName>
+                <default>false</default>
+                <label>Silky Terrier</label>
+            </value>
+            <value>
+                <fullName>Soft Coated Wheaten Terrier</fullName>
+                <default>false</default>
+                <label>Soft Coated Wheaten Terrier</label>
+            </value>
+            <value>
+                <fullName>Spaniel type</fullName>
+                <default>false</default>
+                <label>Spaniel type</label>
+            </value>
+            <value>
+                <fullName>Spanish Water Dog</fullName>
+                <default>false</default>
+                <label>Spanish Water Dog</label>
+            </value>
+            <value>
+                <fullName>Spitz</fullName>
+                <default>false</default>
+                <label>Spitz</label>
+            </value>
+            <value>
+                <fullName>Springer Spaniel, English</fullName>
+                <default>false</default>
+                <label>Springer Spaniel, English</label>
+            </value>
+            <value>
+                <fullName>Staffordshire Bull Terrier</fullName>
+                <default>false</default>
+                <label>Staffordshire Bull Terrier</label>
+            </value>
+            <value>
+                <fullName>Tibetan Spaniel</fullName>
+                <default>false</default>
+                <label>Tibetan Spaniel</label>
+            </value>
+            <value>
+                <fullName>Tibetan Terrier</fullName>
+                <default>false</default>
+                <label>Tibetan Terrier</label>
+            </value>
+            <value>
+                <fullName>Tosa Inu</fullName>
+                <default>false</default>
+                <label>Tosa Inu</label>
+            </value>
+            <value>
+                <fullName>Toy Fox Terrier</fullName>
+                <default>false</default>
+                <label>Toy Fox Terrier</label>
+            </value>
+            <value>
+                <fullName>Treeing Walker Coonhound</fullName>
+                <default>false</default>
+                <label>Treeing Walker Coonhound</label>
+            </value>
+            <value>
+                <fullName>Vizsla, Smooth or Wire Haired</fullName>
+                <default>false</default>
+                <label>Vizsla, Smooth or Wire Haired</label>
+            </value>
+            <value>
+                <fullName>Weimaraner</fullName>
+                <default>false</default>
+                <label>Weimaraner</label>
+            </value>
+            <value>
+                <fullName>Welsh Terrier</fullName>
+                <default>false</default>
+                <label>Welsh Terrier</label>
+            </value>
+            <value>
+                <fullName>West Highland Terrier</fullName>
+                <default>false</default>
+                <label>West Highland Terrier</label>
+            </value>
+            <value>
+                <fullName>Whippet</fullName>
+                <default>false</default>
+                <label>Whippet</label>
+            </value>
+            <value>
+                <fullName>Yorkshire Terrier</fullName>
+                <default>false</default>
+                <label>Yorkshire Terrier</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Afghan Hound</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Airedale Terrier</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Akita</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>American Pit Bull Terrier</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>American Staffordshire Terrier</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Anatolian Shepherd</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Argentine Dogo</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Australian Cattle Dog / Heeler</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Australian Kelpie</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Australian Koolie</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Australian Shepherd</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Australian Shepherd, Miniature</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Basenji</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Basset Hound</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Beagle</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Bearded Collie</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Belgian Laekenois</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Belgian Malinois</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Belgian Sheepdog</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Belgian Tervuren</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Bernese Mountain Dog</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Bichon Frise</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Black-Mouth Cur</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Bloodhound</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Boerboel</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Border Collie</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Border Terrier</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Borzoi</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Boston Terrier</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Bouvier des Flandres</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Boxer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Brittany</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Brussels Griffon</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Bull Terrier</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Bulldog, Alapaha Blue Blood</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Bulldog, American</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Bulldog, English</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Bulldog, French</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Bullmastiff</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Cairn Terrier</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Cane Corso</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Carolina Dog</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Catahoula Leopard dog</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Caucasian Mountain Dog</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Cavalier King Charles Spaniel</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Chesapeake Bay Retriever</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Chihuahua</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Chinese Crested</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Chinook</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Chow Chow</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Cocker Spaniel, American</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Cocker Spaniel, English</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Collie, Rough or Smooth</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Coonhound</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Corgi, Cardigan Welsh</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Corgi, Pembroke Welsh</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Coton de Tulear</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Dachshund, Miniature</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Dachshund, Standard</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Dalmatian</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Doberman Pinscher</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Dogue de Bordeaux</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Dutch Shepherd</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>English Mastiff</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>English Setter</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Eskimo, American</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Feist</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Fila Brasileiro</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Flat-Coated Retriever</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Fox Terrier, Smooth</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>German Shepherd</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>German Shorthaired or Wirehaired Pointer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Golden Retriever</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Gordon Setter</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Great Dane</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Great Pyrenees</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Greater Swiss Mountain Dog</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Greyhound</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Groenendael</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Havanese</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Hound Type</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Hound, Blue or Red Tick</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Hovawart</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Husky, Alaskan or Siberian</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Irish Setter</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Irish Wolfhound</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Italian Greyhound</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Jack Russell Terrier</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Japanese Chin</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Keeshond</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Korean Jindo</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Labradoodle</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Labrador Retriever</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Leonberger</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Lhasa Apso</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Malamute</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Maltese</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Mastiff</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Mexican Hairless- Xoloitzcuintli</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Miniature Pinscher</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Mixed Breed, Large &gt; 45 lbs</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Mixed Breed, Medium 25 - 45 lbs</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Mixed Breed, Small &lt; 25 lbs</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Mudi</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Neapolitan Mastiff</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Newfoundland</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Norfolk Terrier</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Norwegian Elkhound</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Norwich Terrier</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Nova Scotia Duck Tolling Retriever</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Old English Sheepdog</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Other</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Papillon</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Parson Russell Terrier</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Patterdale Terrier</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Pekingese</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Perro de Presa Canario</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Pit Bull Terrier Type</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Plott Hound</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Pomeranian</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Poodle, Miniature</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Poodle, Standard</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Poodle, Toy</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Poodle Type</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Portuguese Water Dog</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Pug</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Puggle</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Puli</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Pumi</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Rat Terrier</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Retriever Type</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Rhodesian Ridgeback</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Rottweiler</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Royal Bahamian Potcake</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Saint Bernard</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Saluki</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Samoyed</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Schipperke</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Schnauzer, Giant</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Schnauzer, Miniature</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Schnauzer, Standard</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Scottish Terrier</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Shar-Pei, Chinese</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Shepherd Type</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Shetland Sheepdog</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Shiba Inu</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Shih Tzu</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Silken Windhound</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Silky Terrier</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Soft Coated Wheaten Terrier</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Spaniel type</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Spanish Water Dog</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Spitz</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Springer Spaniel, English</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Staffordshire Bull Terrier</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Tibetan Spaniel</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Tibetan Terrier</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Tosa Inu</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Toy Fox Terrier</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Treeing Walker Coonhound</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Vizsla, Smooth or Wire Haired</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Weimaraner</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Welsh Terrier</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>West Highland Terrier</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Whippet</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Yorkshire Terrier</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

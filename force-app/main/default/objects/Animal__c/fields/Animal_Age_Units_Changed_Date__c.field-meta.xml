@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Animal_Age_Units_Changed_Date__c</fullName>
+    <defaultValue>TODAY()</defaultValue>
+    <description>The last date the animal age fields that are based on units (rather than estimated DOB) have been updated.</description>
+    <externalId>false</externalId>
+    <label>Animal Age Units Changed Date</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Date</type>
+</CustomField>

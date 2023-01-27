@@ -2,7 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Location_Filter__c</fullName>
     <externalId>false</externalId>
-    <formula>IF((AND(User_Location__c = &quot;All&quot;, OR(Current_Recent_Shelter_Location__c=&quot;ARC&quot;, Current_Recent_Shelter_Location__c=&quot;CARE&quot;, Current_Recent_Shelter_Location__c=&quot;CRC&quot;, Current_Recent_Shelter_Location__c=&quot;CRC-MRC&quot;))),TRUE,(IF((AND(User_Location__c=&quot;CRC/MRC&quot;, OR(Current_Recent_Shelter_Location__c=&quot;CRC&quot;, Current_Recent_Shelter_Location__c=&quot;CRC-MRC&quot;))),TRUE,(IF((AND(User_Location__c=&quot;ARC/CARE&quot;, OR(Current_Recent_Shelter_Location__c=&quot;ARC&quot;, Current_Recent_Shelter_Location__c=&quot;CARE&quot;))),TRUE,(FALSE))))))</formula>
+    <formula>IF((AND(User_Location__c = &quot;All&quot;, OR(Current_Recent_Shelter_Location__c=&quot;ARC&quot;, Current_Recent_Shelter_Location__c=&quot;CARE&quot;, Current_Recent_Shelter_Location__c=&quot;AAH&quot;, Current_Recent_Shelter_Location__c=&quot;CRC&quot;, Current_Recent_Shelter_Location__c=&quot;CRC-MRC&quot;))),TRUE,(IF((AND(User_Location__c=&quot;CRC/MRC&quot;, OR(Current_Recent_Shelter_Location__c=&quot;CRC&quot;, Current_Recent_Shelter_Location__c=&quot;CRC-MRC&quot;))),TRUE,(IF((AND(User_Location__c=&quot;ARC/CARE&quot;, OR(Current_Recent_Shelter_Location__c=&quot;ARC&quot;, Current_Recent_Shelter_Location__c=&quot;CARE&quot;, Current_Recent_Shelter_Location__c=&quot;AAH&quot;))),TRUE,(FALSE))))))</formula>
     <label>Location Filter</label>
     <trackHistory>false</trackHistory>
     <type>Checkbox</type>
