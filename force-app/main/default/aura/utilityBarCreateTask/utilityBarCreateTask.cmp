@@ -1,0 +1,3 @@
+<aura:component implements="force:hasRecordId,flexipage:availableForAllPageTypes" access="global">
+    <c:createTask recordId="{!v.recordId}"></c:createTask>
+</aura:component>

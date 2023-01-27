@@ -8,6 +8,15 @@
         <type>Flexipage</type>
         <pageOrSobjectType>standard-home</pageOrSobjectType>
     </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Dog_Database_Animal_Page_Layout_ARC_CARE</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+        <pageOrSobjectType>Animal__c</pageOrSobjectType>
+    </actionOverrides>
     <brand>
         <headerColor>#79BDE8</headerColor>
         <logo>AspcaOrg</logo>
@@ -18,10 +27,10 @@
     <formFactors>Large</formFactors>
     <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
     <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
-    <label>ARC/CARE Dog Database</label>
+    <label>ARC/CARE Behavior Database</label>
     <navType>Standard</navType>
     <tabs>standard-home</tabs>
-    <tabs>To_Do_List</tabs>
+    <tabs>To_Do_List_ARCCARE</tabs>
     <tabs>dbk__DayBack</tabs>
     <tabs>Animal__c</tabs>
     <tabs>standard-report</tabs>
@@ -29,7 +38,7 @@
     <tabs>Treatment_Session__c</tabs>
     <tabs>Protocol__c</tabs>
     <tabs>standard-Case</tabs>
-    <tabs>Treatments_By_Dog</tabs>
+    <tabs>Treatments_By_Dog_ARC_CARE</tabs>
     <tabs>Treatment_Bundle__c</tabs>
     <uiType>Lightning</uiType>
 </CustomApplication>

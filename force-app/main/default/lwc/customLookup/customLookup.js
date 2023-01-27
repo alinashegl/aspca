@@ -66,6 +66,14 @@ export default class CustomLookup extends LightningElement {
         this.editRecord = true;
     }
 
+    @api
+    reset(){
+        window.console.log('reset');
+        this.selectedRecord = undefined;
+        this.searchKey = '';
+        this.editRecord = true;
+    }
+
     formFactor = FORM_FACTOR;
     errors;
 
@@ -186,7 +194,7 @@ export default class CustomLookup extends LightningElement {
     handleQueryRecentlyViewed(){
         //the click event listener is triggered on each click, if the clicks outside of specific areas the dropdown closes
         document.addEventListener('click', this._handler = this.close.bind(this));
-        getRecentlyViewedRecords({objectAPI: this.objName, whereClause: this.whereClause})
+        getRecentlyViewedRecords({objectAPI: this.objName, whereClause: this.whereClause, fields: this.fields})
         .then((result) =>{
             if(result && result.length > 0){
                 this.handleResponse(result);
@@ -474,6 +482,16 @@ export default class CustomLookup extends LightningElement {
 
     get showErrors(){
         return this.errors != undefined && this.errors != null;
+    }
+
+    get searchResultField1Class(){
+        return this.field2 ? 'slds-col slds-size_1-of-1 slds-large-size_1-of-3' :
+            'slds-col slds-size_1-of-1 slds-large-size_1-of-2';
+    }
+
+    get serachResultFieldsClass(){
+        return this.field2 ? 'slds-col slds-size_1-of-1 slds-large-size_1-of-3' :
+            'slds-col slds-size_1-of-1 slds-large-size_1-of-2';
     }
 }
 
