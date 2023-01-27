@@ -258,7 +258,7 @@ public with sharing class PlaygroupToDoListController {
             } else {
                 query += 'AND Current_Location__c NOT IN :excludeLocations ';
             }
-            query += 'ORDER BY Id';
+            query += 'ORDER BY Animal_Name__c ASC';
 
             this.animalList = Database.query(query);            
         }
@@ -273,7 +273,7 @@ public with sharing class PlaygroupToDoListController {
             } else {
                 query += 'AND Current_Location__c NOT IN :excludeLocations ';
             }
-            query += 'ORDER BY Id';
+            query += 'ORDER BY Animal_Name__c ASC';
 
             this.animalList = Database.query(query);   
         }

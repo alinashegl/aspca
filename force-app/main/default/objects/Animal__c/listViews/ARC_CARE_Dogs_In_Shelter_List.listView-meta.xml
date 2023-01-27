@@ -3,6 +3,7 @@
     <fullName>ARC_CARE_Dogs_In_Shelter_List</fullName>
     <columns>Animal_Name__c</columns>
     <columns>NAME</columns>
+    <columns>Petpoint_AAH_Id__c</columns>
     <columns>Gender__c</columns>
     <columns>Evaluation_Status__c</columns>
     <columns>Current_Location__c</columns>
@@ -21,7 +22,7 @@
     <filters>
         <field>Current_Location__c</field>
         <operation>contains</operation>
-        <value>ARC,CARE</value>
+        <value>ARC,CARE,Partner Hospital,Foster,AAH</value>
     </filters>
     <label>ARC/CARE Dogs In Shelter List</label>
 </ListView>

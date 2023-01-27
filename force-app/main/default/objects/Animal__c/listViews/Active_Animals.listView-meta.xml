@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ListView xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Active_Animals</fullName>
+    <booleanFilter>1 AND 2 and 3</booleanFilter>
     <columns>Photo2__c</columns>
     <columns>NAME</columns>
     <columns>Animal_Name__c</columns>
@@ -23,6 +24,11 @@
         <field>Active_Animal__c</field>
         <operation>equals</operation>
         <value>1</value>
+    </filters>
+    <filters>
+        <field>CREATED_DATE</field>
+        <operation>lessThan</operation>
+        <value>10/2/2022 12:00 AM</value>
     </filters>
     <label>Active Animals</label>
 </ListView>

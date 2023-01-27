@@ -149,19 +149,18 @@
     <enableHistory>true</enableHistory>
     <enableLicensing>false</enableLicensing>
     <enableReports>true</enableReports>
-    <enableSearch>false</enableSearch>
+    <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
-    <label>Additional Dog Present</label>
+    <label>Medical Note</label>
     <nameField>
-        <displayFormat>{00}</displayFormat>
-        <label>Additional Dog ID</label>
+        <displayFormat>MN-{00000}</displayFormat>
+        <label>Medical Note ID</label>
         <trackHistory>false</trackHistory>
         <type>AutoNumber</type>
     </nameField>
-    <pluralLabel>Additional Dogs Present</pluralLabel>
+    <pluralLabel>Medical Notes</pluralLabel>
     <searchLayouts></searchLayouts>
-    <sharingModel>ReadWrite</sharingModel>
-    <startsWith>Vowel</startsWith>
+    <sharingModel>ControlledByParent</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>

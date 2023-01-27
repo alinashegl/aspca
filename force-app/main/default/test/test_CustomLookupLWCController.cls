@@ -113,7 +113,7 @@ private class test_CustomLookupLWCController {
         String whereClause = 'Industry = \'Agriculture\'';
 
         test.startTest();
-            SObject[] objsReturned = CustomLookupLWCController.getRecentlyViewedRecords('Account', whereClause);
+            SObject[] objsReturned = CustomLookupLWCController.getRecentlyViewedRecords('Account', whereClause, null);
         test.stopTest();
 
         System.assert(objsReturned != null);
@@ -132,7 +132,7 @@ private class test_CustomLookupLWCController {
         String whereClause = 'Industry = \'Banking\'';
 
         test.startTest();
-            SObject[] objsReturned = CustomLookupLWCController.getRecentlyViewedRecords('Account', whereClause);
+            SObject[] objsReturned = CustomLookupLWCController.getRecentlyViewedRecords('Account', whereClause, null);
         test.stopTest();
 
         System.assert(objsReturned != null);
@@ -153,7 +153,7 @@ private class test_CustomLookupLWCController {
         String error;
         test.startTest();
         try{
-            SObject[] objsReturned = CustomLookupLWCController.getRecentlyViewedRecords('Account', whereClause);
+            SObject[] objsReturned = CustomLookupLWCController.getRecentlyViewedRecords('Account', whereClause, null);
         } catch (exception e){
             error = e.getMessage();
         }

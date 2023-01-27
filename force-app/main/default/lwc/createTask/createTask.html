@@ -1,0 +1,152 @@
+<template>
+    <template if:true={error}>
+        <c-error-panel errors={error} type='inlineMessage' friendly-message={errorMessage}></c-error-panel>
+    </template>
+    <template if:true={showSpinner}>
+        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+    </template>
+    <lightning-layout multiple-rows="true" class="slds-p-around_small">
+        <lightning-layout-item 
+            flexibility="auto" 
+            size={customLookupDogSize}
+        >
+            <div class="slds-form-element slds-p-right_xx-small">
+                <div class="slds-form-element__static">
+                    <label class="slds-form-element__label" for="form-element-01">Dog</label>
+                    <c-custom-lookup
+                        obj-name="Animal__c"
+                        icon-name="custom:custom47"
+                        placeholder="Search Dogs..." 
+                        fields={customLookupFieldsDog}
+                        display-fields={customLookupDisplayFieldsDog}
+                        value-id={customLookupValueDogId}
+                        label-name='Dog'
+                        field-to-query="Animal_Name_Id__c"
+                        onlookup={customLookupEventDog}
+                        where-clause={customLookupWhereClauseDog}
+                        onexpandfield={handleCustomLookupExpandSearchDog}
+                    >
+                    </c-custom-lookup>
+                </div>
+            </div>
+        </lightning-layout-item>
+        <lightning-layout-item 
+            flexibility="auto" 
+            size={customLookupContacteSize}
+        >
+            <div class="slds-form-element slds-p-left_xx-small">
+                <div class="slds-form-element__static">
+                    <label class="slds-form-element__label" for="form-element-01">Name</label>
+                    <c-custom-lookup
+                        obj-name="Contact"
+                        icon-name="standard:contact"
+                        placeholder="Search Contacts..." 
+                        fields={customLookupFieldsContact}
+                        display-fields={customLookupDisplayFieldsContact}
+                        value-id={customLookupValueContactId}
+                        label-name='Name'
+                        onlookup={customLookupEventContact}
+                        where-clause={customLookupWhereClauseContact}
+                        onexpandfield={handleCustomLookupExpandSearchContact}
+                    >
+                    </c-custom-lookup>
+                </div>
+            </div>
+        </lightning-layout-item>
+
+        <lightning-layout-item size="6">
+            <div class="slds-form-element slds-p-right_xx-small">
+                <div class="slds-form-element__static">
+                    <lightning-combobox
+                            name={statusField.fieldApiName}
+                            value={statusValue}
+                            onchange={handleStatusChange}
+                            options={statusOptions}
+                            label="Status"
+                            required
+                    ></lightning-combobox>
+                </div>
+            </div>
+        </lightning-layout-item>
+
+        <lightning-layout-item size="6">
+            <div class="slds-form-element slds-p-left_xx-small">
+                <div class="slds-form-element__static">
+                    <lightning-combobox
+                            name={subjectField.fieldApiName}
+                            options={subjectOptions}
+                            onchange={handleSubjectChange}
+                            required
+                            label="Subject"
+                            value={subjectValue}
+                    ></lightning-combobox>
+                </div>
+            </div>
+        </lightning-layout-item>
+
+        <lightning-layout-item size="6">
+            <div class="slds-form-element slds-p-right_xx-small">
+                <div class="slds-form-element__static">
+                    <lightning-combobox
+                            name={recordTypeField.fieldApiName}
+                            options={recordTypeOptions}
+                            onchange={handleRecordTypeChange}
+                            value={recordTypeValue}
+                            required
+                            label="Record Type"
+                    ></lightning-combobox>
+                </div>
+            </div>
+        </lightning-layout-item>
+
+        <lightning-layout-item size="6">
+            <div class="slds-form-element slds-p-left_xx-small">
+                <div class="slds-form-element__static">
+                    <lightning-input 
+                        type="date" 
+                        name={activityDateField.fieldApiName} 
+                        label="Due Date"
+                        required
+                        value={dueDateValue}
+                        onchage={handleDueDateChange}
+                        class="datefield"
+                    ></lightning-input> 
+                </div>
+            </div>
+        </lightning-layout-item>
+
+        <lightning-layout-item size="12">
+            <lightning-input 
+                type="text" 
+                name={descriptionField.fieldApiName}
+                label="Comments"
+                value={commentsValue}
+                onblur={handleCommentsBlue}
+            ></lightning-input> 
+        </lightning-layout-item>
+    </lightning-layout>
+
+    <footer role="contentinfo"  class="slds-p-around_large">
+        <!-- LAYOUT GRID -->
+        <div class="slds-grid slds-grid_align-spread">
+            <lightning-button
+                variant="neutral"
+                label="Cancel"
+                onclick={handleCancel}
+                class="slds-p-left_small"
+            ></lightning-button>
+            <lightning-button
+                variant="brand"
+                label="Save"
+                onclick={handleSave}
+                class="slds-p-right_small"
+                disabled={disableSaveButton}
+            ></lightning-button>
+        </div>
+        <template if:true={taskLink}>
+            <h2>
+                <a href={taskLink}>Task</a> successfully created
+            </h2>
+        </template>
+      </footer>
+</template>

@@ -29,5 +29,10 @@
         <operation>equals</operation>
         <value>1</value>
     </filters>
+    <filters>
+        <field>Evaluation_Count__c</field>
+        <operation>equals</operation>
+        <value>0</value>
+    </filters>
     <label>Dogs Needing Evaluations</label>
 </ListView>

@@ -500,7 +500,7 @@
                                         <h1 class="tabHeader">Play Tug - Part 1</h1>
                                     </div>
                                     <div class="slds-align_absolute-center">
-                                        <p class="tabDesc">Tester enticed dog to tug (on loose leash)</p>
+                                        <p class="tabDesc">Tester entices dog to tug (on loose leash)</p>
                                     </div>
                                     <br></br>
                                     <aura:iteration items="{!v.playTestPart1}" var="variable">
@@ -545,7 +545,7 @@
                                         <h1 class="tabHeader">Play Tug - Part 2</h1>
                                     </div>
                                     <div class="slds-align_absolute-center">
-                                        <p class="tabDesc">Tester dropped toy</p>
+                                        <p class="tabDesc">Tester drops toy</p>
                                     </div>
                                     <br></br>
                                     <aura:iteration items="{!v.playTestPart2}" var="variable">
@@ -775,14 +775,14 @@
                                 </lightning:layoutItem>
                             </lightning:layout>
                         </lightning:tab>
-                        <lightning:tab label="Child Doll - Part 1" id="tdt1">
+                        <lightning:tab label="Toddler Doll - Part 1" id="tdt1">
                             <lightning:layout multipleRows="true">
                                 <lightning:layoutItem size="12">
                                     <div class="slds-align_absolute-center" style="height:3rem">
-                                        <h1 class="tabHeader">Child Doll - Part 1</h1>
+                                        <h1 class="tabHeader">Toddler Doll - Part 1</h1>
                                     </div>
                                     <div class="slds-align_absolute-center">
-                                        <p class="tabDesc">Approached and greeted</p>
+                                        <p class="tabDesc">Approach and greet</p>
                                     </div>
                                     <br></br>
                                     <aura:iteration items="{!v.toddlerDollTestPart1}" var="variable">
@@ -820,11 +820,11 @@
                                 </lightning:layoutItem>
                             </lightning:layout>
                         </lightning:tab>
-                        <lightning:tab label="Child Doll - Part 2" id="tdt2">
+                        <lightning:tab label="Toddler Doll - Part 2" id="tdt2">
                             <lightning:layout multipleRows="true">
                                 <lightning:layoutItem size="12">
                                     <div class="slds-align_absolute-center" style="height:3rem">
-                                        <h1 class="tabHeader">Child Doll - Part 2</h1>
+                                        <h1 class="tabHeader">Toddler Doll - Part 2</h1>
                                     </div>
                                     <div class="slds-align_absolute-center">
                                         <p class="tabDesc">Trapped and "hugged" by doll</p>
@@ -872,7 +872,7 @@
                                         <h1 class="tabHeader">Scolding Person - Part 1</h1>
                                     </div>
                                     <div class="slds-align_absolute-center">
-                                        <p class="tabDesc">Approached, shouted, gestured</p>
+                                        <p class="tabDesc">Approach, shout, gesture</p>
                                     </div>
                                     <br></br>
                                     <aura:iteration items="{!v.scoldingPersonTestP1}" var="variable">
@@ -919,7 +919,7 @@
                                         <h1 class="tabHeader">Scolding Person - Part 2</h1>
                                     </div>
                                     <div class="slds-align_absolute-center">
-                                        <p class="tabDesc">Apologized - switched to friendly behavior</p>
+                                        <p class="tabDesc">Apologize - switch to friendly behavior</p>
                                     </div>
                                     <br></br>
                                     <aura:iteration items="{!v.scoldingPersonTestP2}" var="variable">
@@ -1451,7 +1451,7 @@
                                     <h1 class="tabHeader">Social Behavior - Part 1: Tester Solicits Interaction</h1>
                                 </div>
                                 <div class="slds-align_absolute-center">
-                                    <p class="tabDesc">Place the puppy in the center of testing space and walk 4-5 feet away. Kneel down or sit on the floor. Call the puppy in a friendly voice and gently clap your hands or tap floor to entice the puppy to come. If the puppy comes to you, praise and touch the puppy. If the puppy does not come keep calling. Continue for 1 minute.</p>
+                                    <p class="tabDesc">Place the puppy in the center of testing space and walk 4-5 feet away. Kneel down or sit on the floor. Call the puppy in a friendly voice and gently clap your hands or tap floor to entice the puppy to come. If the puppy comes to you, praise and touch the puppy. If the puppy does not come, keep calling. Continue for 1 minute.</p>
                                 </div>
                                 <br></br>
                                 <aura:iteration items="{!v.puppySocialBehaviorPart1}" var="variable">
@@ -1495,7 +1495,7 @@
                                     <h1 class="tabHeader">Social Behavior - Part 2: Tester Invites Puppy To Follow</h1>
                                 </div>
                                 <div class="slds-align_absolute-center">
-                                    <p class="tabDesc">Place puppy in the center of testing space. Stand next to the puppy, turn to the side and crouch a little. While palling your leg and saying, "Here, puppy, come on," encourage them to follow, move a few steps away. If puppy follows, repeat two more times, changing directions each time. If they don't return then try again two more times.</p>
+                                    <p class="tabDesc">Place puppy in the center of testing space. Stand next to the puppy, turn to the side and crouch a little. While patting your leg and saying, "Here, puppy, come on," encourage them to follow, move a few steps away. If puppy follows, repeat two more times, changing directions each time. If they don't return then try again two more times.</p>
                                 </div>
                                 <br></br>
                                 <aura:iteration items="{!v.puppySocialBehaviorPart2}" var="variable">
@@ -1540,7 +1540,7 @@
                                 </div>
                                 <div class="slds-align_absolute-center">
                                     <p class="tabDesc">Sit on floor and interest puppy in tug toy. Wave it in
-                                        puppy's and/or wiggle it on floor in front of puppy. When puppy grabs it,
+                                        puppy's face and/or wiggle it on floor in front of puppy. When puppy grabs it,
                                         tug with enough force to stimulate a game.</p>
                                 </div>
                                 <br></br>
@@ -1629,7 +1629,7 @@
                                     <h1 class="tabHeader">Play Tag: Off Leash or on Very Loose Leash</h1>
                                 </div>
                                 <div class="slds-align_absolute-center">
-                                    <p class="tabDesc">Ask the puppy in friendly voice "Do you wanna play?" Assume a partly crouched, bouncy, playful posture. Move away from puppy, encouraging puppy to join game. Use 2 fingers to point at rear flank, saying, "Wanna play?" Only lag point while moving away from puppy. Attempt tag/point 3 times unless puppy becomes fearful. If puppy mouths hard, tester should yelp.</p>
+                                    <p class="tabDesc">Ask the puppy in friendly voice "Do you wanna play?" Assume a partly crouched, bouncy, playful posture. Move away from puppy, encouraging puppy to join game. Use 2 fingers to point at rear flank, saying, "Wanna play?" Only tag\point while moving away from puppy. Attempt tag/point 3 times unless puppy becomes fearful. If puppy mouths hard, tester should yelp.</p>
                                 </div>
                                 <br></br>
                                 <aura:iteration items="{!v.puppyPlayTestTag}" var="variable">
@@ -1673,7 +1673,7 @@
                                     <h1 class="tabHeader">Restraint</h1>
                                 </div>
                                 <div class="slds-align_absolute-center">
-                                    <p class="tabDesc">Sit on the floor with legs outstretched. Pick up puppy and hold puppy in one of two ways (a) so they are reclined against your torso, supported between your body and your arm and facing away from you or (b) so they are lying on their back, supported between your legs, with rear legs next to your body and their head farthest away. If sitting up, support their rear with the hand of the arm cradling them and their torso with your opposite hand. If lying down, place one hand on either shoulder to provide balance and to keep them from getting up. Hold the puppy in this position for 3 minutes. If they struggle, hold  more firmly, re-position if necessary. If they are relaxed, talk soothingly to them and use your fingers to massage them gently. Briefly handle the body (foot cars, tail, belly, genitalia). Only release when they are relaxed, and at least not actively struggling. If puppy becomes uncontrollably frightened or aggressive, discontinue.</p>
+                                    <p class="tabDesc">Sit on the floor with legs outstretched. Pick up puppy and hold puppy in one of two ways: (a) so they are reclined against your torso, supported between your body and your arm and facing away from you or (b) so they are lying on their back, supported between your legs, with rear legs next to your body and their head farthest away. If sitting up, support their rear with the hand of the arm cradling them and their torso with your opposite hand. If lying down, place one hand on either shoulder to provide balance and to keep them from getting up. Hold the puppy in this position for 3 minutes. If they struggle, hold more firmly, re-position if necessary. If they are relaxed, talk soothingly to them and use your fingers to massage them gently. Briefly handle the body (feet, tail, belly, genitalia). Only release when they are relaxed, and at least not actively struggling. If puppy becomes uncontrollably frightened or aggressive, discontinue.</p>
                                 </div>
                                 <br></br>
                                 <aura:iteration items="{!v.puppyRestraint}" var="variable">
@@ -1717,7 +1717,7 @@
                                     <h1 class="tabHeader">Resource Guarding - Part 1: Food Bowl</h1>
                                 </div>
                                 <div class="slds-align_absolute-center">
-                                    <p class="tabDesc">Have assistant hold puppy's leash, or tether puppy. Place bowl of food (kibble + canned food mix) in front of puppy Once puppy is engaged in eating, approach then:
+                                    <p class="tabDesc">Have assistant hold puppy's leash, or tether puppy. Place bowl of food (kibble + canned food mix) in front of puppy. Once puppy is engaged in eating, approach then:
                                         <br></br>1. Stroke puppy's back and say curiously, "Hey, whatcha got there?
                                         <br></br>2. Touch collar and say curiously, "Hey, whatcha got there?"
                                         <br></br>3. Touch puppy's muzzle while he's eating and say, "Hey, whatcha got there?"
@@ -1793,7 +1793,7 @@
                                     <h1 class="tabHeader">Resource Guarding - Part 2: Chew</h1>
                                 </div>
                                 <div class="slds-align_absolute-center">
-                                    <p class="tabDesc">Assistant continues to hold leash. Give puppy a pig's ear. Once dog is engaged in chewing approach then
+                                    <p class="tabDesc">Assistant continues to hold leash. Give puppy a pig's ear. Once dog is engaged in chewing approach then:
                                         <br></br>1. Stroke puppy's back and say curiously, "Hey, whatcha got there?"
                                         <br></br>2. Touch collar and say curiously, "Hey, whatcha got there?"
                                         <br></br>3. Touch puppy's muzzle and say curiously, "Hey, whatcha got there?"
@@ -1861,14 +1861,14 @@
                             </lightning:layoutItem>
                         </lightning:layout>
                     </lightning:tab>
-                    <lightning:tab label="Child Doll - Part 1" id="pcd1">
+                    <lightning:tab label="Toddler Doll - Part 1" id="pcd1">
                         <lightning:layout multipleRows="true">
                             <lightning:layoutItem size="12">
                                 <div class="slds-align_absolute-center" style="height:3rem">
-                                    <h1 class="tabHeader">Child Doll - Part 1: Approach and Greet</h1>
+                                    <h1 class="tabHeader">Toddler Doll - Part 1: Approach and Greet</h1>
                                 </div>
                                 <div class="slds-align_absolute-center">
-                                    <p class="tabDesc">While handler holds leash and distracts puppy, assistant places doll's feet on ground at opposite end of room. Puppy is then permitted to observe while the assistant walks' doll directly toward puppy, saying cheerfully child's voice. "Ohl A doggie! I love doggies! Can I say Hi?" Do not make noises with doll's feet. When 3 feel from puppy, doll stops and allows puppy to approach if he/she desires. After a few seconds doll is make to pop upwards 3 inches while saying "Oooh!" as though slightly startled.</p>
+                                    <p class="tabDesc">While assistant holds leash and distracts puppy, tester places doll's feet on ground at opposite end of room. Puppy is then permitted to observe while the tester 'walks' doll directly toward puppy, saying cheerfully in a child’s voice, "Oh! A doggie! I love doggies! Can I say Hi?"...After a few seconds, make doll pop upwards 3 inches while saying "Oooh!" as though slightly startled.</p>
                                 </div>
                                 <br></br>
                                 <aura:iteration items="{!v.puppyChildDollPart1}" var="variable">
@@ -1905,14 +1905,14 @@
                             </lightning:layoutItem>
                         </lightning:layout>
                     </lightning:tab>
-                    <lightning:tab label="Child Doll - Part 2" id="pcd2">
+                    <lightning:tab label="Toddler Doll - Part 2" id="pcd2">
                         <lightning:layout multipleRows="true">
                             <lightning:layoutItem size="12">
                                 <div class="slds-align_absolute-center" style="height:3rem">
-                                    <h1 class="tabHeader">Child Doll - Part 2: Cornered and Loomed Over by Doll</h1>
+                                    <h1 class="tabHeader">Toddler Doll - Part 2: Cornered and Loomed Over by Doll</h1>
                                 </div>
                                 <div class="slds-align_absolute-center">
-                                    <p class="tabDesc">Handler shortened the leash and/or used the wall or her leg to keep the puppy in place while the doll approached with both arms extended, saying "Can I hug you?". Assistant then attempts to make the doll bend slightly over the puppy for 1 full second. Doll then turned and walked away, across the room. Do not make noises with the doll's feet.</p>
+                                    <p class="tabDesc">Assistant shortens leash and/or uses wall or their leg to keep puppy in place while doll approaches with both arms extended, saying, "Can I hug you?". Tester then attempts to make doll bend slightly over puppy for 1 full second. Doll then turns and walks away, across the room. Do not make noises with doll's feet.</p>
                                 </div>
                                 <br></br>
                                 <aura:iteration items="{!v.puppyChildDollPart2}" var="variable">
@@ -1956,7 +1956,7 @@
                                     <h1 class="tabHeader">Dog Interaction - Part 1: Interaction with Littermate</h1>
                                 </div>
                                 <div class="slds-align_absolute-center">
-                                    <p class="tabDesc">Placed another puppy from the same litter in the center of the testing space. Observe interactions for 2 minutes</p>
+                                    <p class="tabDesc">Place another puppy from the same litter in the center of the testing space. Observe interactions for 2 minutes.</p>
                                 </div>
                                 <br></br>
                                 <table class="slds-align_absolute-center">

@@ -21,6 +21,7 @@ public class Behavior_Incident_Report_Controller {
                     , Number_of_bites__c
                     , Other_Damage_Done_by_the_Dog__c
                     , Person_Involved__c
+                    , Position_Title__c
                     , Please_explain_why_you_think_so__c
                     , Report_Date__c
                     , Specific_Target_of_Dog_s_Behavior__c
