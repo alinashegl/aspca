@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Last_Playgroup_Session__c</fullName>
+    <description>Get the last date each animal has received a Playgroup Session</description>
+    <externalId>false</externalId>
+    <label>Last Playgroup Session</label>
+    <summarizedField>Animal_Playgroup__c.Last_Playgroup_Session__c</summarizedField>
+    <summaryForeignKey>Animal_Playgroup__c.Animal__c</summaryForeignKey>
+    <summaryOperation>max</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

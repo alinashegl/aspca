@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Last_Out_of_Kennel_Activity__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+    AND(
+        ISBLANK(Last_Enrichment_Session__c),
+        ISBLANK(Last_Playgroup_Session__c),
+        ISBLANK(Last_Treatment_Session__c)
+    ),
+    NULL,
+    DATE(1900, 01, 01) +
+    MAX(
+        BLANKVALUE(
+            Last_Enrichment_Session__c, 
+            DATE(1900, 01, 01)
+        ) - DATE(1900, 01, 01),
+        BLANKVALUE(
+            Last_Playgroup_Session__c,
+            DATE(1900, 01, 01)
+        ) - DATE(1900, 01, 01),
+        BLANKVALUE(
+            Last_Treatment_Session__c,
+            DATE(1900, 01, 01)
+        ) - DATE(1900, 01, 01)
+    )
+)</formula>
+    <label>Last Out of Kennel Activity</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Date</type>
+</CustomField>

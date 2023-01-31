@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Last_Treatment_Session__c</fullName>
+    <externalId>false</externalId>
+    <label>Last Treatment Session</label>
+    <summarizedField>Treatment_Session__c.Session_Date__c</summarizedField>
+    <summaryForeignKey>Treatment_Session__c.Treatment_Plan__c</summaryForeignKey>
+    <summaryOperation>max</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>
