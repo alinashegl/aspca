@@ -65,8 +65,11 @@ public without sharing class LogHistory {
     
     @AuraEnabled(cacheable=true)
     public static List<EntityHistory__c> getAnimalHistory(String recordId, String searchKey, String dateFilter, String sortBy, String sortDirection) {
+
+        // Escape single-quotes in string; make string comma-separated for multiple fields
+        String excludeFieldsFromList = '\'Animal Age Units Changed Date\'';
         
-        String query = 'SELECT Id, RecordName__c, OwnerId, IsDeleted, Name, CreatedDate, CreatedBy.Name, FieldName__c, NewValue__c, OldValue__c, ObjectId__c, ObjectName__c FROM EntityHistory__c WHERE ObjectName__c = \'Animal\'';
+        String query = 'SELECT Id, RecordName__c, OwnerId, IsDeleted, Name, CreatedDate, CreatedBy.Name, FieldName__c, NewValue__c, OldValue__c, ObjectId__c, ObjectName__c FROM EntityHistory__c WHERE ObjectName__c = \'Animal\' AND FieldName__c NOT IN (' + excludeFieldsFromList + ')';
         
         if ( recordId != null && recordId != '' ) {
             query += ' AND ObjectId__c = \''+recordId+'\'';
