@@ -4,6 +4,10 @@
         <aggregateTypes>Sum</aggregateTypes>
         <field>Animal__c$Days_in_Treatment__c</field>
     </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Animal__c$Number_of_Playgroup_Sessions__c</field>
+    </columns>
     <description>ARC &amp; CARE - Number of treatment sessions &amp; playgroups grouped by caseworker. All time.</description>
     <filter>
         <criteriaItems>
