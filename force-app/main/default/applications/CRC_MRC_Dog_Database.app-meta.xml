@@ -8,6 +8,15 @@
         <type>Flexipage</type>
         <pageOrSobjectType>standard-home</pageOrSobjectType>
     </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Dog_Database_Animal_Page_Layout_CRC</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+        <pageOrSobjectType>Animal__c</pageOrSobjectType>
+    </actionOverrides>
     <brand>
         <headerColor>#79BDE8</headerColor>
         <logo>AspcaOrg</logo>
@@ -18,8 +27,17 @@
     <formFactors>Large</formFactors>
     <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
     <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
     <label>CRC Behavior Database</label>
     <navType>Standard</navType>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Dog_Database_Animal_Page_Layout_CRC</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Animal__c</pageOrSobjectType>
+        <type>Flexipage</type>
+        <profile>Admin</profile>
+    </profileActionOverrides>
     <profileActionOverrides>
         <actionName>View</actionName>
         <content>Dog_Database_Animal_Page_Layout_CRC</content>
@@ -52,14 +70,6 @@
         <type>Flexipage</type>
         <profile>ASPCA - Shelters/Medical</profile>
     </profileActionOverrides>
-    <profileActionOverrides>
-        <actionName>View</actionName>
-        <content>Dog_Database_Animal_Page_Layout_CRC</content>
-        <formFactor>Large</formFactor>
-        <pageOrSobjectType>Animal__c</pageOrSobjectType>
-        <type>Flexipage</type>
-        <profile>Admin</profile>
-    </profileActionOverrides>
     <tabs>standard-home</tabs>
     <tabs>To_Do_List_CRC</tabs>
     <tabs>dbk__DayBack</tabs>
@@ -73,4 +83,5 @@
     <tabs>MRC_Treatment_Plan_Report</tabs>
     <tabs>Daily_MBS_Round__c</tabs>
     <uiType>Lightning</uiType>
+    <utilityBar>CRC_Behavior_Database_UtilityBar</utilityBar>
 </CustomApplication>

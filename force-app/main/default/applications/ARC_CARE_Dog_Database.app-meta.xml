@@ -27,6 +27,7 @@
     <formFactors>Large</formFactors>
     <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
     <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
     <label>ARC/CARE Behavior Database</label>
     <navType>Standard</navType>
     <tabs>standard-home</tabs>
@@ -41,4 +42,5 @@
     <tabs>Treatments_By_Dog_ARC_CARE</tabs>
     <tabs>Treatment_Bundle__c</tabs>
     <uiType>Lightning</uiType>
+    <utilityBar>ARC_CARE_Behavior_Database_UtilityBar</utilityBar>
 </CustomApplication>
