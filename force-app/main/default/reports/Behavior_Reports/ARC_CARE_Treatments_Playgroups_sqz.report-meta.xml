@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Animal__c$Days_in_Treatment__c</field>
+    </columns>
+    <description>ARC &amp; CARE - Number of treatment sessions &amp; playgroups grouped by caseworker. All time.</description>
+    <filter>
+        <criteriaItems>
+            <column>Animal__c$Current_Recent_Shelter_Location__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>ARC,CARE</value>
+        </criteriaItems>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Animal__c$Behavior_Case_Worker__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>ARC CARE Treatments &amp; Playgroups</name>
+    <params>
+        <name>co</name>
+        <value>0</value>
+    </params>
+    <reportType>Animals_with_Treatment_Sessions__c</reportType>
+    <scope>organization</scope>
+    <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Animal__c$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>
