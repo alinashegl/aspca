@@ -1,0 +1,64 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Animal__c",
+                "referenceId": "Animal__cRef1"
+            },
+            "Name": "Willow",
+            "Breed__c": "Malamute",
+            "Gender__c": "FI",
+            "Intake_Date_Time__c": null,
+            "Intake_Type__c": "Seized",
+            "Type_of_Animal__c": "Dog",
+            "Animal_Name__c": "Willow",
+            "Current_Location__c": "ARC",
+            "Current_Recent_Shelter_Location__c": "ARC",
+            "Confirmed_Helper_Dog__c": true,
+            "Play_Category__c": "Big Active",
+            "Playgroup_Priority_Level__c": "Daily – 7 days",
+            "Potential_Helper_Dog__c": false,
+            "Case": "@CaseRef1"
+        },
+        {
+            "attributes": {
+                "type": "Animal__c",
+                "referenceId": "Animal__cRef2"
+            },
+            "Name": "Mika",
+            "Breed__c": "Lab",
+            "Gender__c": "FI",
+            "Intake_Date_Time__c": null,
+            "Intake_Type__c": "Seized",
+            "Type_of_Animal__c": "Dog",
+            "Animal_Name__c": "Mika",
+            "Current_Location__c": "CRC",
+            "Current_Recent_Shelter_Location__c": "CRC",
+            "Confirmed_Helper_Dog__c": true,
+            "Play_Category__c": "Juvenile",
+            "Playgroup_Priority_Level__c": "Daily – 7 days",
+            "Potential_Helper_Dog__c": false,
+            "Case": "@CaseRef1"
+        },
+        {
+            "attributes": {
+                "type": "Animal__c",
+                "referenceId": "Animal__cRef3"
+            },
+            "Name": "AJ",
+            "Breed__c": "Retriever",
+            "Gender__c": "MI",
+            "Intake_Date_Time__c": null,
+            "Intake_Type__c": "Seized",
+            "Type_of_Animal__c": "Dog",
+            "Animal_Name__c": "AJ",
+            "Current_Location__c": "CRC",
+            "Current_Recent_Shelter_Location__c": "CRC-MRC",
+            "Confirmed_Helper_Dog__c": true,
+            "Play_Category__c": "Big Mellow",
+            "Playgroup_Priority_Level__c": "Daily – 7 days",
+            "Potential_Helper_Dog__c": false,
+            "Case": "@CaseRef1"
+        }
+    ]
+}
