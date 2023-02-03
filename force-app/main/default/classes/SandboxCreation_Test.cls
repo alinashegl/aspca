@@ -31,7 +31,7 @@ public with sharing class SandboxCreation_Test {
         Test.startTest();
         Test.testSandboxPostCopyScript(
             new SandboxCreation(), UserInfo.getOrganizationId(),
-                UserInfo.getOrganizationId(), UserInfo.getOrganizationName(), true);
+                UserInfo.getOrganizationId(), UserInfo.getOrganizationName());
         Test.stopTest();
 
         Integer invalidCount = 0;
