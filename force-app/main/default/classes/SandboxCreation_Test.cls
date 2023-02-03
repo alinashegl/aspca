@@ -23,11 +23,20 @@ public with sharing class SandboxCreation_Test {
         insert newUsers;
     }
     
+    
+    //Execute test script with RunAsAutoProcUser set to true
     @isTest
     static void updateAdminEmails_Test() {
+
+        Test.startTest();
+        Test.testSandboxPostCopyScript(
+            new SandboxCreation(), UserInfo.getOrganizationId(),
+                UserInfo.getOrganizationId(), UserInfo.getOrganizationName(), true);
+        Test.stopTest();
+
         Integer invalidCount = 0;
         Integer validCount = 0;
-        SandboxCreation.updateAdminEmails();
+                    
         User[] newUsers = [Select Username, Email, IsActive, ProfileId FROM User WHERE Alias like 'zzz%'];
         System.assertEquals(3, newUsers.size(), 'Expecting 3 users');
         for (User u : newUsers) {
