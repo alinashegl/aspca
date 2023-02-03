@@ -14,6 +14,7 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
     @track errorMsg;
     @track reportID;
     @api locationsFilter;
+    @api appName;
     
     //exposed properties for "copy playgroup" and "edit playgroup"
     @api
@@ -123,7 +124,7 @@ export default class PlaygroupToDoList extends NavigationMixin(LightningElement)
         return this.action === 'new';
     }
 
-    @wire(getPlaygroupAnimals, { locationsFilter: '$locationsFilter'})
+    @wire(getPlaygroupAnimals, { locationsFilter: '$locationsFilter', appName: '$appName'})
     wiredPlaygroupAnimals(result) {
         this.playgroupAnimals = result;
         if (result.data) {
