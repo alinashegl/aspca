@@ -1,6 +1,10 @@
-public with sharing class SandboxCreation {
+global class SandboxCreation implements SandboxPostCopy {
+    global SandboxCreation() {
 
-    public static void updateAdminEmails() {
+        
+    }
+
+    global void runApexClass(SandboxContext context) {
 
         Id adminProfileId = [SELECT Id FROM Profile 
                             WHERE Name = 'System Administrator'
@@ -18,5 +22,5 @@ public with sharing class SandboxCreation {
         }  
 
         update adminUsers;
-    }  
-}
+    } 
+} 
