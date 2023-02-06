@@ -50,6 +50,7 @@ public with sharing class ScheduleBoardAndTrainTask {
             'AND Type_of_Animal__c = \'Dog\' ' +
             'AND Current_Recent_Shelter_Location__c IN: dogPopulations ' +
             'AND Active_Animal__c = true ' +
+            'AND Final_Outcome__c = null ' +
             'AND Id IN ( SELECT Animal__c ' +
                 'FROM Facility_Outcome__c ' +
                 'WHERE Facility_Outcome__c = \'Board and Train\' ' +

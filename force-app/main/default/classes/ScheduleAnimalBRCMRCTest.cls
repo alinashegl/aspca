@@ -64,4 +64,22 @@ public class ScheduleAnimalBRCMRCTest {
         Task[] completedTasks = [SELECT Id FROM Task WHERE Status = 'Completed'];
         System.assertEquals(1, completedTasks.size());
     }
+
+    @isTest 
+    static void excludeAnimalWithFinalOutcome(){
+        Animal__c dog = [SELECT Id, Final_Outcome__c FROM Animal__c WHERE Name = 'TestBRCMRC' LIMIT 1];
+
+        //query should return the dog before adding the final outcome
+        Animal__c[] dogs = ScheduleAnimalBRCMRC.getAnimals(new Id[]{dog.Id});
+        System.assertEquals(false, dogs.isEmpty(), 'Should have returned the dog but was empty');
+
+        dog.Final_Outcome__c = 'Adopted';
+        update dog;
+
+        test.startTest();
+            dogs = ScheduleAnimalBRCMRC.getAnimals(new Id[]{dog.Id});
+        test.stopTest();
+
+        System.assertEquals(true, dogs.isEmpty(), 'Should not have returned any dogs, but returned: ' + dogs);
+    }
 }

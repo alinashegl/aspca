@@ -68,6 +68,7 @@ public with sharing class ScheduleAnimalBRCMRC {
     }
 
     // once the date field is created that needs to be added in the query and that will be considered as reminder startdate
+    @testVisible
     private static Animal__c[] getAnimals(Id[] animalIds){
         Date tempEndDate = Date.today().addDays(-7);
         String recordTypeName = AutoScheduleTasksUtil.MRC_BRC_FOLLOW_UP_TASK_RECORD_TYPE_NAME;
@@ -78,7 +79,8 @@ public with sharing class ScheduleAnimalBRCMRC {
             '(SELECT Id, ActivityDate FROM Activities__r WHERE Record_Type__c =: recordTypeName AND ActivityDate != null ORDER BY ActivityDate DESC LIMIT 1) ' +
             'FROM Animal__c ' +
             'WHERE (BRC_Status__c = \'BRC Accepted\' OR MRC_Status__c = \'MRC Accepted\')and (Current_Recent_Shelter_Location__c != \'BRC\' AND Current_Recent_Shelter_Location__c != :location)' + 
-            'AND Active_Animal__c = true';
+            'AND Active_Animal__c = true ' +
+            'AND Final_Outcome__c = null';
 
         if(animalIds != null){
             queryString += ' AND Id IN: animalIds';

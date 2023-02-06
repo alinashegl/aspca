@@ -33,6 +33,7 @@ public with sharing class ScheduleAnimalBehaviorTreatments {
     }
 
     //queries and returns a list of Treatment_Plan__c's, will query for specific animals if the animalIds param is not null
+    @testVisible
     private static Treatment_Plan__c[] queryTreatmentPlans(Id[] animalIds){
         String[] dogPopulations = AutoScheduleTasksUtil.dogPopulations;
         String queryString = 'SELECT Id, Custom_Schedule__c, Treatment_Priority__c, Animal__c, ' +
@@ -43,7 +44,8 @@ public with sharing class ScheduleAnimalBehaviorTreatments {
             'WHERE Animal__r.Current_Recent_Shelter_Location__c IN: dogPopulations ' +
             'AND IsActive__c = TRUE ' +
             'AND Treatment_Priority__c NOT IN (\'No Treatment\', \'\') ' +
-            'AND Animal__r.Type_of_Animal__c = \'Dog\'';
+            'AND Animal__r.Type_of_Animal__c = \'Dog\' ' +
+            'AND Animal__r.Final_Outcome__c = null';
         if(animalIds != null){
             queryString += ' AND Animal__c IN: animalIds';
         }

@@ -2,19 +2,22 @@
 private class test_ScheduleAnimalBehaviorTreatments {
     @TestSetUp
     static void testSetup(){
-        User[] users = [SELECT Id, Location__c FROM User WHERE Profile.Name = 'System Administrator' AND isActive = true LIMIT 3];
-        System.assertEquals(true, users.size() >= 3, 'should have returned a list of users greater than 3, but was: ' + users.size());
+        User cU = [SELECT Id, Location__c FROM User WHERE Id = :UserInfo.getUserId() LIMIT 1];
+        cU.Location__c = 'All';
+        update cU;
 
-        User uMRC = users[0];
-        uMRC.Location__c = 'CRC/MRC';
+        User[] userList = TestDataFactory.createUsersWithoutInserting(4);
+        User u = userList[3];
+        u.Location__c = 'All';
 
-        User uCRC = users[1];
-        uCRC.Location__c = 'CRC/MRC';
+        Contact[] genericContacts = TestDataFactory.createGenericContacts(userList);
 
-        User uARC = users[2];
-        uMRC.Location__c = 'ARC/CARE';
+        Contact con = TestDataFactory.createContact();
+        con.User__c = u.Id;
+        con.Contact_Type__c = 'Behavior Case Worker';
+        con.Email = 'testEmail@testEmail.com';
+        update con;
 
-        update users;
 
         Animal__c animalARC = TestDataFactory.createAnimalWithName('animalARC');
         animalARC.Current_Recent_Shelter_Location__c = 'ARC';
@@ -42,32 +45,6 @@ private class test_ScheduleAnimalBehaviorTreatments {
 
         insert new Treatment_Plan__c[]{arcPlan, crcPlan, mrcPlan};
         System.debug('arcPlan = ' + arcPlan);
-
-        User u = [SELECT Id FROM User Where Profile.Name = 'System Administrator' AND isActive = true LIMIT 1];
-        Contact con = TestDataFactory.createContact();
-        con.User__c = u.Id;
-        con.Contact_Type__c = 'Behavior Case Worker';
-        con.Email = 'testEmail@testEmail.com';
-        update con;
-
-        Contact genericContactMRC = new Contact(
-            LastName = 'genericContactMRC',
-            Is_Generic_Contact__c = true,
-            User__c = uMRC.Id
-        );
-
-        Contact genericContactCRC = new Contact(
-            LastName = 'genericContactCRC',
-            Is_Generic_Contact__c = true,
-            User__c = uCRC.Id
-        );
-
-        Contact genericContactARC = new Contact(
-            LastName = 'genericContactARC',
-            Is_Generic_Contact__c = true,
-            User__c = uARC.Id
-        );
-        insert new Contact[]{genericContactMRC, genericContactARC, genericContactCRC};
 
         animalARC.Behavior_Case_Worker__c = con.Id;
         animalCRC.Behavior_Case_Worker__c = con.Id;
@@ -194,6 +171,24 @@ private class test_ScheduleAnimalBehaviorTreatments {
             }
         }
     }
+
+    @isTest 
+    static void excludeAnimalWithFinalOutcome(){
+        Animal__c dog = [SELECT Id, Final_Outcome__c FROM Animal__c WHERE Animal_Name__c = 'animalCRC' LIMIT 1];
+
+        //query should return the dog before adding the final outcome
+        Treatment_Plan__c[] plans = ScheduleAnimalBehaviorTreatments.queryTreatmentPlans(new Id[]{dog.Id});
+        System.assertEquals(false, plans.isEmpty(), 'Should have returned the treatment plan for the dog but was empty');
+
+        dog.Final_Outcome__c = 'Adopted';
+        update dog;
+
+        test.startTest();
+            plans = ScheduleAnimalBehaviorTreatments.queryTreatmentPlans(new Id[]{dog.Id});
+        test.stopTest();
+
+        System.assertEquals(true, plans.isEmpty(), 'Should not have returned any treatment plansf or the dog, but returned: ' + plans);
+    }    
 
     //need to calculate the number of tasks needed from today through tuesday
     private static Integer taskCount(Treatment_Plan__c plan){

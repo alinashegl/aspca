@@ -1267,4 +1267,52 @@ public without sharing class TestDataFactory {
       insert t;
       return t;
     }
+
+    public static Contact[] createGenericContacts(User[] userList){
+      Contact[] genericContacts = new Contact[0];
+
+      if(users.isEmpty()){
+        userList = createUsersWithoutInserting(3);
+      }
+
+      if(userList.size() >= 3){
+
+        User uMRC = userList[0];
+        uMRC.Location__c = 'CRC/MRC';
+
+        User uCRC = userList[1];
+        uCRC.Location__c = 'CRC/MRC';
+
+        User uARC = userList[2];
+        uARC.Location__c = 'ARC/CARE';
+
+        insert userList;
+
+
+        genericContacts.add(new Contact(
+              FirstName = 'MRC',
+              LastName = 'genericContactMRC',
+              Is_Generic_Contact__c = true,
+              User__c = userList[0].Id
+          ));
+
+          genericContacts.add(new Contact(
+              FirstName = 'CRC',
+              LastName = 'genericContactCRC',
+              Is_Generic_Contact__c = true,
+              User__c = userList[1].Id
+          ));
+
+          genericContacts.add(new Contact(
+              FirstName = 'ARC',
+              LastName = 'genericContactARC',
+              Is_Generic_Contact__c = true,
+              User__c = userList[2].Id
+          ));
+          
+          insert genericContacts;
+      }
+
+        return genericContacts;
+    }
 }

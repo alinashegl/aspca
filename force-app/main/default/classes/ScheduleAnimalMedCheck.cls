@@ -120,6 +120,7 @@ public with sharing class ScheduleAnimalMedCheck {
             'FROM Task WHERE RecordType.Name = \'Treatments\' ' +
             'AND Animal__r.Type_of_Animal__c = \'Dog\' ' +
             'AND Animal__r.Current_Recent_Shelter_Location__c IN: dogPopulations ' +
+            'AND Animal__r.Final_Outcome__c = null ' +
             'AND Medication__r.Behavior_Medication__c = true ' +
             'AND ((IsRecurrence = true AND RecurrenceEndDateOnly >= : tempEndDate) ' +
             'OR (RecurrenceActivityId = null AND ActivityDate >= : tempEndDate))';

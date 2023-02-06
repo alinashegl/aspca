@@ -25,6 +25,7 @@ public with sharing class ScheduleAnimalPlaygroups {
     }
 
     //queries and returns a list of animals, will query specific animals if the animalIds param is not null
+    @testVisible
     private static Animal__c[] queryAnimals(Id[] animalIds){
         String[] dogPopulations = AutoScheduleTasksUtil.dogPopulations;
         String queryString = 'SELECT Id, Playgroup_Priority_Level__c, Shelter_Location2__c, Animal_Name_Id__c, Current_Recent_Shelter_Location__c, Current_Location__c, ' +
@@ -33,7 +34,8 @@ public with sharing class ScheduleAnimalPlaygroups {
             'WHERE Playgroup_Priority_Level__c != null ' +
             'AND Current_Recent_Shelter_Location__c IN: dogPopulations ' +
             'AND Active_Animal__c = true ' +
-            'AND Type_of_Animal__c = \'Dog\'';
+            'AND Type_of_Animal__c = \'Dog\' ' +
+            'AND Final_Outcome__c = null';
         if(animalIds != null){
             queryString += ' AND Id IN: animalIds';
         }

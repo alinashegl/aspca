@@ -2,17 +2,11 @@
 private class test_ScheduleAnimalPlaygroups {
     @TestSetUp
     static void testSetup(){
-        User[] userList = TestDataFactory.createUsersWithoutInserting(3);
-        User uMRC = userList[0];
-        uMRC.Location__c = 'CRC/MRC';
+        User cU = [SELECT Id, Location__c FROM User WHERE Id = :UserInfo.getUserId() LIMIT 1];
+        cU.Location__c = 'All';
+        update cU;
 
-        User uCRC = userList[1];
-        uCRC.Location__c = 'CRC/MRC';
-
-        User uARC = userList[2];
-        uARC.Location__c = 'ARC/CARE';
-
-        insert userList;
+        Contact[] genericContacts = TestDataFactory.createGenericContacts(null);
 
         Animal__c animalARC = TestDataFactory.createAnimalWithName('animalARC');
         animalARC.Playgroup_Priority_Level__c = 'Low – 2 days';
@@ -32,25 +26,6 @@ private class test_ScheduleAnimalPlaygroups {
         con.Contact_Type__c = 'Behavior Case Worker';
         con.Email = 'testEmail@testEmail.com';
         update con;
-
-        Contact genericContactMRC = new Contact(
-            LastName = 'genericContactMRC',
-            Is_Generic_Contact__c = true,
-            User__c = uMRC.Id
-        );
-
-        Contact genericContactCRC = new Contact(
-            LastName = 'genericContactCRC',
-            Is_Generic_Contact__c = true,
-            User__c = uCRC.Id
-        );
-
-        Contact genericContactARC = new Contact(
-            LastName = 'genericContactARC',
-            Is_Generic_Contact__c = true,
-            User__c = uARC.Id
-        );
-        insert new Contact[]{genericContactMRC, genericContactARC, genericContactCRC};
 
         animalARC.Behavior_Case_Worker__c = con.Id;
         animalCRC.Behavior_Case_Worker__c = con.Id;
@@ -129,6 +104,24 @@ private class test_ScheduleAnimalPlaygroups {
                 System.assertEquals(0, count);
             }
         }
+    }
+
+    @isTest 
+    static void excludeAnimalWithFinalOutcome(){
+        Animal__c dog = [SELECT Id, Final_Outcome__c FROM Animal__c WHERE Animal_Name__c = 'animalCRC' LIMIT 1];
+
+        //query should return the dog before adding the final outcome
+        Animal__c[] dogs = ScheduleAnimalPlaygroups.queryAnimals(new Id[]{dog.Id});
+        System.assertEquals(false, dogs.isEmpty(), 'Should have returned the dog but was empty');
+
+        dog.Final_Outcome__c = 'Adopted';
+        update dog;
+
+        test.startTest();
+            dogs = ScheduleAnimalPlaygroups.queryAnimals(new Id[]{dog.Id});
+        test.stopTest();
+
+        System.assertEquals(true, dogs.isEmpty(), 'Should not have returned any dogs, but returned: ' + dogs);
     }
 
     //need to calculate the number of tasks needed from today through tuesday

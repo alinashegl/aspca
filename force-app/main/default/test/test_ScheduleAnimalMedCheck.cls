@@ -1,5 +1,31 @@
 @isTest
 private class test_ScheduleAnimalMedCheck {
+    @TestSetup
+    static void testSetup(){
+        User cU = [SELECT Id, Location__c FROM User WHERE Id = :UserInfo.getUserId() LIMIT 1];
+        cU.Location__c = 'All';
+        update cU;
+
+        Animal__c animal1 = TestDataFactory.createAnimalWithName('anim1');
+        Animal__c animal2 = TestDataFactory.createAnimalWithName('anim2');
+
+        User[] userList = TestDataFactory.createUsersWithoutInserting(4);
+        User u = userList[3];
+        u.Location__c = 'All';
+
+        Contact[] genericContacts = TestDataFactory.createGenericContacts(userList);
+
+        Contact con = TestDataFactory.createContact();
+        con.User__c = u.Id;
+        con.Contact_Type__c = 'Behavior Case Worker';
+        con.Email = 'testEmail@testEmail.com';
+        update con;
+
+        animal1.Behavior_Case_Worker__c = con.Id;
+        animal2.Behavior_Case_Worker__c = con.Id;
+        update new Animal__c[]{animal1, animal2};
+    }
+
     @isTest
     static void checkDayOfWeekToInteger() {
         test.startTest();
@@ -20,11 +46,9 @@ private class test_ScheduleAnimalMedCheck {
 
     @isTest
     static void getTreatmentTasksSuccess(){
-        Animal__c anim1 = TestDataFactory.createAnimalWithName('anim1');
-        Task treatmentTask1 = insertTask(false, anim1);
-
-        Animal__c anim2 = TestDataFactory.createAnimalWithName('anim2');
-        Task treatmentTask2 = insertTask(true, anim2);
+        Animal__c[] dogs = [SELECT Id FROM Animal__c];
+        insertTask(false, dogs[0]);
+        insertTask(true, dogs[1]);
 
         test.startTest();
             Task[] taskList = ScheduleAnimalMedCheck.getTreatmentTasks(null);
@@ -45,12 +69,7 @@ private class test_ScheduleAnimalMedCheck {
 
     @isTest
     static void prepTaskSuccess(){
-        Animal__c anim = TestDataFactory.createAnimalWithName('anim');
-        User u = TestDataFactory.createUserWithProfile('ASPCA - Behavior (CRC)');
-        u.Division = anim.Current_Recent_Shelter_Location__c;
-        u.Location__c = 'CRC/MRC';
-        insert u;
-        createGenericContact(anim);
+        Animal__c anim = [SELECT Id FROM Animal__c WHERE Name = 'anim1' LIMIT 1];
         Task treatmentTask = insertTask(false, anim);
         treatmentTask = [SELECT Id, Animal__c, Animal__r.Animal_Name_ID__c, Animal__r.Behavior_Case_Worker__r.Is_Generic_Contact__c, Animal__r.Current_Recent_Shelter_Location__c, Animal_Exam_Sheet_Lookup__c, Medication__c FROM Task WHERE Id =: treatmentTask.Id LIMIT 1];
 
@@ -63,12 +82,8 @@ private class test_ScheduleAnimalMedCheck {
 
     @isTest
     static void prepTaskNoTreatmentTask(){
-        Animal__c anim = TestDataFactory.createAnimalWithName('anim');
-        User u = TestDataFactory.createUserWithProfile('ASPCA - Behavior (CRC)');
-        u.Division = anim.Current_Recent_Shelter_Location__c;
-        u.Location__c = 'CRC/MRC';
-        insert u;
-        createGenericContact(anim);
+        Animal__c anim = [SELECT Id FROM Animal__c WHERE Name = 'anim1' LIMIT 1];
+        
         test.startTest();
             Task[] newTasks = ScheduleAnimalMedCheck.prepTask(null, new Date[]{date.today().addDays(3)});
         test.stopTest();
@@ -78,12 +93,7 @@ private class test_ScheduleAnimalMedCheck {
 
     @isTest
     static void calculateTaskDateNotRecurringSuccess(){
-        Animal__c anim = TestDataFactory.createAnimalWithName('anim');
-        User u = TestDataFactory.createUserWithProfile('ASPCA - Behavior (CRC)');
-        u.Division = anim.Current_Recent_Shelter_Location__c;
-        u.Location__c = 'CRC/MRC';
-        insert u;
-        createGenericContact(anim);
+        Animal__c anim = [SELECT Id FROM Animal__c WHERE Name = 'anim1' LIMIT 1];
         Task treatmentTask = insertTask(false, anim);
         treatmentTask = [SELECT Id, IsRecurrence, RecurrenceStartDateOnly, ActivityDate FROM Task WHERE Id =: treatmentTask.Id LIMIT 1];
 
@@ -97,12 +107,7 @@ private class test_ScheduleAnimalMedCheck {
 
     @isTest
     static void calculateTaskDateRecurringSuccess(){
-        Animal__c anim = TestDataFactory.createAnimalWithName('anim');
-        User u = TestDataFactory.createUserWithProfile('ASPCA - Behavior (CRC)');
-        u.Division = anim.Current_Recent_Shelter_Location__c;
-        u.Location__c = 'CRC/MRC';
-        insert u;
-        createGenericContact(anim);
+        Animal__c anim = [SELECT Id FROM Animal__c WHERE Name = 'anim1' LIMIT 1];
         Task treatmentTask = insertTask(true, anim);
         treatmentTask = [SELECT Id, IsRecurrence, RecurrenceStartDateOnly, ActivityDate FROM Task WHERE Id =: treatmentTask.Id LIMIT 1];
 
@@ -116,21 +121,8 @@ private class test_ScheduleAnimalMedCheck {
 
     @isTest
     static void scheduleMedCheckSuccess(){        
-        Animal__c anim1 = TestDataFactory.createAnimalWithName('anim1');
-        Task treatmentTask1 = insertTask(false, anim1);
-        User u = TestDataFactory.createUserWithProfile('ASPCA - Behavior (CRC)');
-        u.Division = anim1.Current_Recent_Shelter_Location__c;
-        u.Location__c = 'CRC/MRC';
-        insert u;
-        createGenericContact(anim1);
-
-        Animal__c anim2 = TestDataFactory.createAnimalWithName('anim2');
-        User u2 = TestDataFactory.createUserWithProfile('ASPCA - Behavior (CRC)');
-        u2.Division = anim2.Current_Recent_Shelter_Location__c;
-        u2.Location__c = 'CRC/MRC';
-        insert u2;
+        Animal__c anim2 = [SELECT Id FROM Animal__c WHERE Name = 'anim2' LIMIT 1];
         Task treatmentTask2 = insertTask(true, anim2);
-        createGenericContact(anim2);
 
         test.startTest();
             Task[] taskList = ScheduleAnimalMedCheck.scheduleMedCheck(null);
@@ -150,27 +142,17 @@ private class test_ScheduleAnimalMedCheck {
 
     @isTest
     static void scheduleMedCheckSpecificDogSuccess(){        
-        Animal__c anim1 = TestDataFactory.createAnimalWithName('anim1');
+        Animal__c anim1 = [SELECT Id FROM Animal__c WHERE Name = 'anim1' LIMIT 1];
         Task treatmentTask1 = insertTask(false, anim1);
-        User u = TestDataFactory.createUserWithProfile('ASPCA - Behavior (CRC)');
-        u.Division = anim1.Current_Recent_Shelter_Location__c;
-        u.Location__c = 'CRC/MRC';
-        insert u;
-        createGenericContact(anim1);
 
-        Animal__c anim2 = TestDataFactory.createAnimalWithName('anim2');
-        User u2 = TestDataFactory.createUserWithProfile('ASPCA - Behavior (CRC)');
-        u2.Division = anim2.Current_Recent_Shelter_Location__c;
-        u2.Location__c = 'CRC/MRC';
-        insert u2;
+        Animal__c anim2 = [SELECT Id FROM Animal__c WHERE Name = 'anim2' LIMIT 1];
         Task treatmentTask2 = insertTask(true, anim2);
-        createGenericContact(anim2);
 
         test.startTest();
             Task[] toInsert = ScheduleAnimalMedCheck.scheduleMedCheck(new Id[]{anim1.Id});
         test.stopTest();
 
-        system.assert(!toInsert.isEmpty());
+        system.assertEquals(false, toInsert.isEmpty(), 'Should have returned a list of tasks but was empty');
 
         //one task for anim1 and no tasks for anim2 should be created
         Map<Id, Task[]> taskMap = new Map<Id, Task[]>();
@@ -186,6 +168,29 @@ private class test_ScheduleAnimalMedCheck {
 
         System.assertEquals(1, taskMap.get(anim1.Id).size());
         System.assert(!taskMap.containsKey(anim2.Id));
+    }
+
+
+    @isTest
+    static void excludeAnimalWithFinalOutcome(){        
+        Animal__c anim1 = [SELECT Id, Final_Outcome__c FROM Animal__c WHERE Name = 'anim1' LIMIT 1];
+        Task treatmentTask1 = insertTask(false, anim1);
+        
+        Animal__c anim2 = [SELECT Id, Final_Outcome__c FROM Animal__c WHERE Name = 'anim2' LIMIT 1];
+        Task treatmentTask2 = insertTask(true, anim2);
+
+        Task[] treatmentTasks = ScheduleAnimalMedCheck.getTreatmentTasks(new Id[]{anim1.Id, anim2.Id});
+        System.assertEquals(false, treatmentTasks.isEmpty(), 'Should have returned a list of treatment tasks but was empty');
+
+        anim1.Final_Outcome__c = 'Adopted';
+        anim2.Final_Outcome__c = 'Adopted';
+        update new Animal__c[]{anim1,anim2};
+
+        test.startTest();
+        treatmentTasks= ScheduleAnimalMedCheck.getTreatmentTasks(new Id[]{anim1.Id, anim2.Id});
+        test.stopTest();
+
+        system.assertEquals(true, treatmentTasks.isEmpty(), 'Should not have returned any tasks, but returned: ' + treatmentTasks);
     }
 
     private static void createGenericContact(Animal__c anim){

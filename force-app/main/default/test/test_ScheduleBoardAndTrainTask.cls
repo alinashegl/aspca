@@ -2,31 +2,24 @@
 private class test_ScheduleBoardAndTrainTask {
     @TestSetup
     static void testSetup(){
+        User cU = [SELECT Id, Location__c FROM User WHERE Id = :UserInfo.getUserId() LIMIT 1];
+        cU.Location__c = 'All';
+        update cU;
+
         Animal__c animal1 = TestDataFactory.createAnimalWithName('test1');
         Animal__c animal2 = TestDataFactory.createAnimalWithName('test2');
 
-        User[] userList = TestDataFactory.createUsersWithoutInserting(2);
-        User u = userList[0];
+        User[] userList = TestDataFactory.createUsersWithoutInserting(4);
+        User u = userList[3];
         u.Location__c = 'All';
 
-        User u2 = userList[1];
-        u2.Location__c = 'CRC/MRC';
-
-        insert userList;
-
+        Contact[] genericContacts = TestDataFactory.createGenericContacts(userList);
 
         Contact con = TestDataFactory.createContact();
         con.User__c = u.Id;
         con.Contact_Type__c = 'Behavior Case Worker';
         con.Email = 'testEmail@testEmail.com';
         update con;
-
-        Contact genericContact = new Contact(
-            LastName = 'generic',
-            Is_Generic_Contact__c = true,
-            User__c = u2.Id
-        );
-        insert genericContact;
 
         animal1.Behavior_Case_Worker__c = con.Id;
         animal2.Behavior_Case_Worker__c = con.Id;
@@ -43,7 +36,6 @@ private class test_ScheduleBoardAndTrainTask {
             Facility_Outcome__c = 'Board and Train'
         );
         insert new Facility_Outcome__c[]{loc1, loc2};
-        
     }
 
     @isTest
@@ -257,6 +249,24 @@ private class test_ScheduleBoardAndTrainTask {
                 system.assert(!taskMap.containsKey(loc.Animal__c));
             }
         }
+    }
+
+    @isTest 
+    static void excludeAnimalWithFinalOutcome(){
+        Animal__c dog = [SELECT Id, Final_Outcome__c FROM Animal__c WHERE Animal_Name__c = 'test1' LIMIT 1];
+
+        //query should return the dog before adding the final outcome
+        Animal__c[] dogs = ScheduleBoardAndTrainTask.getAnimals(new Id[]{dog.Id});
+        System.assertEquals(false, dogs.isEmpty(), 'Should have returned the dog but was empty');
+
+        dog.Final_Outcome__c = 'Adopted';
+        update dog;
+
+        test.startTest();
+            dogs = ScheduleBoardAndTrainTask.getAnimals(new Id[]{dog.Id});
+        test.stopTest();
+
+        System.assertEquals(true, dogs.isEmpty(), 'Should not have returned any dogs, but returned: ' + dogs);
     }
 
     //need to calculate the number of tasks needed from today through tuesday
