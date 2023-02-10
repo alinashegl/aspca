@@ -1,19 +1,22 @@
 @isTest
 public with sharing class test_PlaygroupToDoListController {
+    @TestSetup
+    static void setupData(){
+        User u = [SELECT Id, Location__c FROM User WHERE Id = :UserInfo.getUserId() LIMIT 1];
+        u.Location__c = 'All';
+        update u;
+    }
+
     @isTest
     static void getPlaygroupAnimalsSuccess() {
         Animal__c a = TestDataFactory.createAnimalWithName('Willow');
         a.Play_Category__c = 'Small Mellow';
         update a;
 
-        User u = [SELECT Id, Location__c FROM User WHERE Id = :UserInfo.getUserId() LIMIT 1];
-        u.Location__c = 'All';
-        update u;
-
         String locationsFilter = prepLocationsFilter(true, false, 'CRC,CRC-MRC');
         
         Test.startTest();
-        List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals(locationsFilter);
+        List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals(locationsFilter, null);
         Test.stopTest();
 
         List<Animal__c> animals = [SELECT Id, Shelter_Location2__c, Play_Category__c FROM Animal__c WHERE Id = :a.Id];
@@ -37,7 +40,7 @@ public with sharing class test_PlaygroupToDoListController {
         String locationsFilter = prepLocationsFilter(true, false, 'CRC,CRC-MRC');
 
         Test.startTest();
-        List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals(locationsFilter);
+        List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals(locationsFilter, null);
         Test.stopTest();
         System.assertEquals(0, playgroupAnimals.size());
     }
@@ -53,7 +56,7 @@ public with sharing class test_PlaygroupToDoListController {
         String locationsFilter = prepLocationsFilter(true, false, 'CRC,CRC-MRC');
 
         Test.startTest();
-        List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals(locationsFilter);
+        List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals(locationsFilter, null);
         Test.stopTest();
         System.assertEquals(0, playgroupAnimals.size());
     }
@@ -67,7 +70,7 @@ public with sharing class test_PlaygroupToDoListController {
         String locationsFilter = prepLocationsFilter(true, false, 'CRC,CRC-MRC');
 
         Test.startTest();
-        List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals(locationsFilter);
+        List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals(locationsFilter, null);
         Test.stopTest();
         System.assertEquals(0, playgroupAnimals.size());
     }
@@ -81,7 +84,7 @@ public with sharing class test_PlaygroupToDoListController {
         String locationsFilter = prepLocationsFilter(true, false, 'CRC,CRC-MRC');
 
         Test.startTest();
-        List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals(locationsFilter);
+        List<Animal__c> playgroupAnimals = PlaygroupToDoListController.getPlaygroupAnimals(locationsFilter, null);
         Test.stopTest();
         System.assertEquals(0, playgroupAnimals.size());
     }
@@ -215,12 +218,12 @@ public with sharing class test_PlaygroupToDoListController {
         String locationsFilter = prepLocationsFilter(true, false, 'CRC,CRC-MRC');
 
         test.startTest();
-            Animal__c[] animals = PlaygroupToDoListController.getPlaygroupAnimals(locationsFilter);
+            Animal__c[] animals = PlaygroupToDoListController.getPlaygroupAnimals(locationsFilter, null);
             Set<Id> animalIds = new Set<Id>();
             for(Animal__c animal : animals){
                 animalIds.add(animal.Id);
             }
-            System.assertEquals(false, animals.isEmpty());
+            System.assertEquals(false, animals.isEmpty(), 'Should have returned a list of animals, but was empty');
             System.assertEquals(true, animalIds.contains(noPP.Id), 'Dog without play pause should be on list');
             System.assertEquals(true, animalIds.contains(inHeat.Id), 'Dog with only In Heat play pause should be on list');
             System.assertEquals(true, animalIds.contains(surgery.Id), 'Dog with ended medical play pause shoud be on list');
@@ -265,7 +268,7 @@ public with sharing class test_PlaygroupToDoListController {
         String locationsFilter = prepLocationsFilter(true, false, 'CRC,CRC-MRC');
 
         test.startTest();
-            Animal__c[] animals = PlaygroupToDoListController.getPlaygroupAnimals(locationsFilter);
+            Animal__c[] animals = PlaygroupToDoListController.getPlaygroupAnimals(locationsFilter, null);
             Set<Id> animalIds = new Set<Id>();
             for(Animal__c animal : animals){
                 animalIds.add(animal.Id);
@@ -273,6 +276,20 @@ public with sharing class test_PlaygroupToDoListController {
             System.assertEquals(true, animalIds.contains(inHeat.Id), 'Dog with only In Heat play pause should be on list');
             System.assertEquals(false, animalIds.contains(medical.Id), 'Dog with active medical play pause shoud not be on list');
         test.stopTest();
+    }
+
+    @isTest 
+    static void userFilterForLocations(){
+
+        Animal__c a = TestDataFactory.createAnimal();
+        a.Play_Category__c = 'Small Mellow';
+        update a;
+
+        Test.startTest();
+        Animal__c[] animals = new PlaygroupToDoListController.QueryAnimalsForList('CRC,CRC-MRC', true).animalList;
+        Test.stopTest();
+        
+        System.assertEquals(1, animals.size());
     }
 
     private static String prepLocationsFilter(Boolean hasConfig, Boolean showAll, String locations){

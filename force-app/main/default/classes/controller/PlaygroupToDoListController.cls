@@ -1,7 +1,12 @@
 public with sharing class PlaygroupToDoListController {
     @AuraEnabled(cacheable=true)
-    public static List<Animal__c> getPlaygroupAnimals(String locationsFilter) {
-        Animal__c[] animalList = new QueryAnimalsForList(locationsFilter).animalList;
+    public static List<Animal__c> getPlaygroupAnimals(String locationsFilter, String appName) {
+        Animal__c[] animalList = new Animal__c[0];
+        if(appName != null && appName.contains('ARC/CARE')){
+            animalList = new QueryAnimalsForList(locationsFilter, 'ARC/CARE').animalList;
+        } else {
+            animalList = new QueryAnimalsForList(locationsFilter).animalList;
+        }
         return animalList;
     }
 
@@ -236,18 +241,17 @@ public with sharing class PlaygroupToDoListController {
             'WHERE Active_Animal__c = true ' +
             'AND Type_of_Animal__c = \'Dog\' ' +
             'AND Play_Category__c NOT IN (\'Unevaluated\', \'DO NOT PLAY\', \'\') ' +
-            'AND Location_Filter__c = true ' +
             'AND Current_Location__c != null ' + 
             'AND Id NOT IN ( ' +
                 'SELECT Animal__c ' +
                 'FROM Play_Pause__c ' +
                 'WHERE (Play_Pause_Reason__c != \'In Heat\' ' +
                 'AND End_Play_Pause__c = FALSE ' +
-                'AND (Start_Date__c = null OR Start_Date__c <= TODAY)) ' +
-            ') ';
+                'AND (Start_Date__c = null OR Start_Date__c <= TODAY))) ';
 
         public QueryAnimalsForList(String locationsFilter){
             String query = animalSelect + medicalConditions + inHeatPlayPause + playgroups + animalWhere;
+            query += 'AND Location_Filter__c = true ';
             String[] excludeLocations = this.locationsToExclude;
 
             AnimalLocationFilterUtil filterInfo = new AnimalLocationFilterUtil(locationsFilter);
@@ -264,7 +268,9 @@ public with sharing class PlaygroupToDoListController {
         }
 
         public QueryAnimalsForList(String locationsFilter, Boolean useFilter){
-            String query = animalSelect + medicalConditions + inHeatPlayPause + playgroups + animalWhere;            
+            String query = animalSelect + medicalConditions + inHeatPlayPause + playgroups + animalWhere;
+            query += 'AND Location_Filter__c = true ';
+
             String[] excludeLocations = this.locationsToExclude;
 
             if(useFilter == true){
@@ -276,6 +282,33 @@ public with sharing class PlaygroupToDoListController {
             query += 'ORDER BY Animal_Name__c ASC';
 
             this.animalList = Database.query(query);   
+        }
+
+        public QueryAnimalsForList(String locationsFilter, String appName){
+
+            String[] excludeLocations = this.locationsToExclude;
+            AnimalLocationFilterUtil filterInfo = new AnimalLocationFilterUtil(locationsFilter);
+
+            String query = animalSelect + medicalConditions + inHeatPlayPause + playgroups + animalWhere;
+
+            if(filterInfo.useFilter == true){
+                //include/exclude specific locations
+                String[] locationsList = filterInfo.locationList;
+                query += ' AND ((Current_Location__c IN :locationsList ';
+            } else {
+                query += ' AND ((Current_Location__c NOT IN :excludeLocations ';
+            }
+
+            //add play category
+            query += 'AND Location_Filter__c = true AND Play_Category__c NOT IN (\'Unevaluated\', \'DO NOT PLAY\', \'\')) ';
+
+            //include Foster Playgroup Eligible
+            query += 'OR (Current_Location__c = \'Foster Home\' AND Play_Category__c = \'Foster Playgroup Eligible\')) ';
+
+            //sort it
+            query += 'ORDER BY Animal_Name__c ASC';
+
+            this.animalList = Database.query(query); 
         }
     }
 }

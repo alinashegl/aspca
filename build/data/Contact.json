@@ -1,0 +1,205 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Contact",
+                "referenceId": "ContactRef1"
+            },
+            "FirstName": "Tom",
+            "LastName": "Haverford",
+            "Contact_Type__c": "Behavior Case Worker",
+            "Is_Generic_Contact__c": false,
+            "WeeklyOff__c": "Friday;Saturday",
+            "ReportsToId": "@ContactManagerRef1"
+        },
+        {
+            "attributes": {
+                "type": "Contact",
+                "referenceId": "ContactRef2"
+            },
+            "FirstName": "Ron",
+            "LastName": "Swanson",
+            "Contact_Type__c": "Behavior Case Worker",
+            "Is_Generic_Contact__c": false,
+            "WeeklyOff__c": "Friday;Saturday",
+            "ReportsToId": "@ContactManagerRef1"
+        },
+        {
+            "attributes": {
+                "type": "Contact",
+                "referenceId": "ContactRef3"
+            },
+            "FirstName": "Andy",
+            "LastName": "Dwyer",
+            "Contact_Type__c": "Behavior Case Worker",
+            "Is_Generic_Contact__c": false,
+            "WeeklyOff__c": "Friday;Saturday",
+            "ReportsToId": "@ContactManagerRef1"
+        },
+        {
+            "attributes": {
+                "type": "Contact",
+                "referenceId": "ContactRef4"
+            },
+            "FirstName": "Chris",
+            "LastName": "Traeger",
+            "Contact_Type__c": "Behavior Case Worker",
+            "Is_Generic_Contact__c": false,
+            "WeeklyOff__c": "Friday;Saturday",
+            "ReportsToId": "@ContactManagerRef1"
+        },
+        {
+            "attributes": {
+                "type": "Contact",
+                "referenceId": "ContactRef5"
+            },
+            "FirstName": "Ben",
+            "LastName": "Wyatt",
+            "Contact_Type__c": "Behavior Case Worker",
+            "Is_Generic_Contact__c": false,
+            "WeeklyOff__c": "Friday;Saturday",
+            "ReportsToId": "@ContactManagerRef1"
+        },
+        {
+            "attributes": {
+                "type": "Contact",
+                "referenceId": "ContactRef6"
+            },
+            "FirstName": "Dwight",
+            "LastName": "Schrute",
+            "Contact_Type__c": "Behavior Case Worker",
+            "Is_Generic_Contact__c": false,
+            "WeeklyOff__c": "Monday;Tuesday",
+            "ReportsToId": "@ContactManagerRef3"
+        },
+        {
+            "attributes": {
+                "type": "Contact",
+                "referenceId": "ContactRef7"
+            },
+            "FirstName": "Jim",
+            "LastName": "Halpert",
+            "Contact_Type__c": "Behavior Case Worker",
+            "Is_Generic_Contact__c": false,
+            "WeeklyOff__c": "Monday;Tuesday",
+            "ReportsToId": "@ContactManagerRef3"
+        },
+        {
+            "attributes": {
+                "type": "Contact",
+                "referenceId": "ContactRef8"
+            },
+            "FirstName": "Pam",
+            "LastName": "Beesly",
+            "Contact_Type__c": "Behavior Case Worker",
+            "Is_Generic_Contact__c": false,
+            "WeeklyOff__c": "Monday;Sunday",
+            "ReportsToId": "@ContactManagerRef3"
+        },
+        {
+            "attributes": {
+                "type": "Contact",
+                "referenceId": "ContactRef9"
+            },
+            "FirstName": "Kevin",
+            "LastName": "Malone",
+            "Contact_Type__c": "Behavior Case Worker",
+            "Is_Generic_Contact__c": false,
+            "WeeklyOff__c": "Monday;Tuesday",
+            "ReportsToId": "@ContactManagerRef3"
+        },
+        {
+            "attributes": {
+                "type": "Contact",
+                "referenceId": "ContactRef11"
+            },
+            "FirstName": "CRC",
+            "LastName": "BehaviorMgmt",
+            "Contact_Type__c": "Behavior Case Worker",
+            "Is_Generic_Contact__c": true,
+            "WeeklyOff__c": null
+        },
+        {
+            "attributes": {
+                "type": "Contact",
+                "referenceId": "ContactRef12"
+            },
+            "FirstName": "MRC",
+            "LastName": "BehaviorMgmt",
+            "Contact_Type__c": "Behavior Case Worker",
+            "Is_Generic_Contact__c": true,
+            "WeeklyOff__c": null
+        },
+        {
+            "attributes": {
+                "type": "Contact",
+                "referenceId": "ContactRef13"
+            },
+            "FirstName": "ARC/CARE",
+            "LastName": "BehaviorMgmt",
+            "Contact_Type__c": "Behavior Case Worker",
+            "Is_Generic_Contact__c": true,
+            "WeeklyOff__c": null
+        },
+        {
+            "attributes": {
+                "type": "Contact",
+                "referenceId": "ContactRef14"
+            },
+            "FirstName": "Angela",
+            "LastName": "Martin",
+            "Contact_Type__c": "Behavior Case Worker",
+            "Is_Generic_Contact__c": false,
+            "WeeklyOff__c": "Thursday;Friday",
+            "ReportsToId": "@ContactManagerRef2"
+        },
+        {
+            "attributes": {
+                "type": "Contact",
+                "referenceId": "ContactRef15"
+            },
+            "FirstName": "Stanley",
+            "LastName": "Hudson",
+            "Contact_Type__c": "Behavior Case Worker",
+            "Is_Generic_Contact__c": false,
+            "WeeklyOff__c": "Thursday;Friday",
+            "ReportsToId": "@ContactManagerRef2"
+        },
+        {
+            "attributes": {
+                "type": "Contact",
+                "referenceId": "ContactRef16"
+            },
+            "FirstName": "Oscar",
+            "LastName": "Martinez",
+            "Contact_Type__c": "Behavior Case Worker",
+            "Is_Generic_Contact__c": false,
+            "WeeklyOff__c": "Thursday;Friday",
+            "ReportsToId": "@ContactManagerRef2"
+        },
+        {
+            "attributes": {
+                "type": "Contact",
+                "referenceId": "ContactRef17"
+            },
+            "FirstName": "Darryl",
+            "LastName": "Philbin",
+            "Contact_Type__c": "Behavior Case Worker",
+            "Is_Generic_Contact__c": false,
+            "WeeklyOff__c": "Thursday;Friday",
+            "ReportsToId": "@ContactManagerRef2"
+        },
+        {
+            "attributes": {
+                "type": "Contact",
+                "referenceId": "ContactRef18"
+            },
+            "FirstName": "Ann",
+            "LastName": "Perkins",
+            "Contact_Type__c": "Behavior Case Worker",
+            "Is_Generic_Contact__c": false,
+            "WeeklyOff__c": "Thursday;Friday",
+            "ReportsToId": "@ContactManagerRef2"
+        }
+    ]
+}
